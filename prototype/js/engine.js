@@ -265,6 +265,8 @@
     createState, computeStats, targetsFor, reachableTiles, resolveTurn, isThreat,
   };
 
+  // Always set the global (the browser bundle wraps this file as CommonJS),
+  // and also export it for Node tools.
+  root.Engine = Engine;
   if (typeof module !== 'undefined' && module.exports) module.exports = Engine;
-  else root.Engine = Engine;
 })(typeof window !== 'undefined' ? window : globalThis);

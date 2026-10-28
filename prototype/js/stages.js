@@ -85,6 +85,8 @@
     },
   ];
 
+  // Always set the global (the browser bundle wraps this file as CommonJS),
+  // and also export it for Node tools.
+  root.STAGES = STAGES;
   if (typeof module !== 'undefined' && module.exports) module.exports = STAGES;
-  else root.STAGES = STAGES;
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -7,30 +7,46 @@ A turn-based tile placement game with roguelite runs. You place a fixed army of 
 
 ## Play the prototype
 
-**Single-file build:** open `prototype/tile-defense.html` in any browser, or host or send that one file as a shareable link. It has no dependencies, works offline, and fits a phone screen.
-
-After editing the source, rebuild it:
-
-```bash
-node prototype/build.mjs
-```
-
-`prototype/index.html` is the development page: it loads `style.css` and `js/*.js` separately, and `build.mjs` inlines them into `tile-defense.html`.
+**Online:** https://claude.ai/artifact/1ifNch1Wk52wrNVw2fzVsh (claude.ai artifact; sign-in required, share it from the page's Share menu).
 
 The prototype starts on **Stage 9: The Iron Line**. Stages 6 and 12 are also available, to compare an easier stage with a "you can't win in one turn" stage.
+
+## Web build (Vite + Capacitor)
+
+```bash
+cd prototype
+npm install
+```
+
+```bash
+npm run dev                          # hot reload on http://localhost:5173
+```
+
+```bash
+npm run build && npm run preview     # production build on http://localhost:4173
+```
+
+```bash
+npm run single                       # dist/tile-defense.html, one self-contained file for the artifact
+```
+
+- **On an Android phone in Chrome:** connect over USB, run `adb reverse tcp:4173 tcp:4173`, then open `http://localhost:4173` on the phone.
+- **As an installed app (Capacitor):** run `npx cap add android` once (needs Android Studio), then `npm run android` to build, sync and open Android Studio, and press Run.
+- **Updating the artifact:** run `npm run single` and republish `prototype/dist/tile-defense.html` to the same artifact URL.
 
 ## Project layout
 
 ```
-docs/GAME_DESIGN.md     Gameplay design document
-prototype/index.html    Development page (loads the files below)
-prototype/build.mjs     Inlines everything into tile-defense.html
-prototype/tile-defense.html  Self-contained build to open or share
-prototype/style.css     Placeholder styling
-prototype/js/engine.js  Rules engine (pure logic, shared with tools)
-prototype/js/stages.js  Stage definitions
-prototype/js/ui.js      Rendering, input and turn playback
-tools/solve.js          Balancing solver: finds strong placements per stage
+docs/GAME_DESIGN.md                  Gameplay design document
+prototype/index.html                 Page markup (Vite entry)
+prototype/main.js                    Loads the stylesheet and scripts in order
+prototype/style.css                  Placeholder styling
+prototype/js/engine.js               Rules engine (pure logic, shared with tools)
+prototype/js/stages.js               Stage definitions
+prototype/js/ui.js                   Rendering, input and turn playback
+prototype/scripts/single-file.mjs    Packs the build into one HTML fragment
+prototype/capacitor.config.json      Capacitor app settings
+tools/solve.js                       Balancing solver: finds strong placements per stage
 ```
 
 ## Balancing a stage
