@@ -1,13 +1,13 @@
 # Tile Defense: Gameplay Design Document
 
 > Working title. Art style, setting and platform are not decided yet. This document covers **gameplay only**.
-> Status: v0.1, with a gameplay prototype in `prototype/`.
+> Status: v0.2, with a gameplay prototype in `prototype/`. v0.2 adds the progression design (sections 9–19).
 
 ---
 
 ## 1. One-line pitch
 
-A turn-based placement puzzle with roguelite runs. You arrange a small, fixed army of cards on a grid to destroy the enemies in front of you. Most stages are settled in one or two turns, your HP carries over from stage to stage, and permanent upgrades let each new run go further.
+A turn-based placement puzzle with roguelite expeditions. You arrange a small squad of units on a grid to destroy the enemies in front of you; most battles are settled in one or two turns. Each run sets out from Camp across a large world map, choosing its own fights until HP runs out. Early runs end after a few battles, and permanent progress (new units, equipment, Camp upgrades) lets every run reach further into the map.
 
 ## 2. Design pillars
 
@@ -16,28 +16,30 @@ A turn-based placement puzzle with roguelite runs. You arrange a small, fixed ar
 3. **HP is the long-term resource.** HP never regenerates by itself, so a sloppy win now costs you stages later.
 4. **Short stages.** Each stage is designed to finish in 1–2 turns, and enemies enrage to punish dragging a fight out.
 5. **Depth comes from content, not rules.** New cards and enemies add depth. The core rules stay the same all game.
+6. **Every run makes progress.** Even a short run banks loot and Souls and reveals more of the map. Reach is the main measure of getting stronger.
 
 ---
 
 ## 3. Core loop
 
 ```
- ┌───────────── RUN ─────────────────────────────────────────────┐
+ ┌───────────── RUN (expedition) ────────────────────────────────┐
  │                                                               │
- │   Stage ──► Place army ──► Fight ──► Enemies left? ──yes──┐   │
- │     ▲                                     │               │   │
- │     │                                     no              │   │
- │     │                                     ▼               │   │
- │     └──── Reward (card / upgrade / heal) ◄─ Stage clear   │   │
- │                                                           │   │
- │              (rearrange, enemies enraged) ◄───────────────┘   │
+ │   Camp ──► Choose a node on the world map ──► Battle          │
+ │                ▲                                │             │
+ │                │      Place squad ──► Fight ──► Enemies left? │
+ │                │          ▲                  yes │    │ no    │
+ │                │          └──(rearrange, enrage)─┘    ▼       │
+ │                └──── Reward (heal / upgrade / relic) ◄ Clear  │
  │                                                               │
- │   HP reaches 0 ──► Run over ──► Earn Souls                     │
+ │   HP 0 (defeat) or Return to Camp (retreat) ──► Run over      │
  └───────────────────────────────────────────────────────────────┘
-                     │
+                     │  items, Souls, Crystals, map revealed
                      ▼
-        Meta upgrades (permanent) ──► Next run
+   Permanent progress (roster, equipment, Camp, map unlocks) ──► Next run reaches further
 ```
+
+Sections 9–19 describe progression in detail.
 
 ---
 
@@ -118,6 +120,8 @@ Each turn has four phases, always in this order:
 
 ### 6.5 Starter card list
 
+These are the **common units** every player starts with (see section 12 for rarer units).
+
 | Card | Role | Base value | Pattern | Range | Notes |
 |---|---|---|---|---|---|
 | Swordsman 🗡️ | Attacker | ⚔3 | ↑ | 1 | High damage, but must stand in the front row |
@@ -157,7 +161,7 @@ Each enemy shows **♥ HP** and **⚔ ATK**. ATK doubles as the telegraph: it's 
 - **Explosions** are separate hits. They are affected by armor and do not overkill.
 - **Order matters:** an enemy destroyed by an earlier attacker can't be hit again, and later Straight attacks move on to the next enemy in that column.
 
-### 7.2 Later enemies (Act 3+)
+### 7.2 Later enemies (outer regions)
 
 | Enemy | Rule |
 |---|---|
@@ -171,20 +175,22 @@ Each enemy shows **♥ HP** and **⚔ ATK**. ATK doubles as the telegraph: it's 
 
 ## 8. Stage design
 
-### 8.1 Difficulty curve
+### 8.1 Difficulty by danger
 
-| Act | Stages | Expected turns | Player goal | What's new |
-|---|---|---|---|---|
-| **1: Learn** | 1–5 | 1 | Find the obvious placement | One mechanic per stage: attack, range, +, ×, Shield |
-| **2: Think** | 6–15 | 1–2 | Find the clever one-turn clear | Barrels, armor, back-row enemies, overkill |
-| **3: Survive** | 16+ | 2 (a one-turn clear is usually impossible) | **Minimize damage** | Healer, Summoner, Splitter. A boss every 10 stages |
+Difficulty depends on a node's **danger rating**, which rises with distance from Camp and with the region (section 10).
+
+| Danger | Expected turns | Player goal | What's new |
+|---|---|---|---|
+| **☠ Learn** (near Camp) | 1 | Find the obvious placement | One mechanic per battle: attack, range, +, ×, Shield |
+| **☠☠ to ☠☠☠ Think** | 1–2 | Find the clever one-turn clear | Barrels, armor, back-row enemies, overkill |
+| **☠☠☠☠+ Survive** | 2 (a one-turn clear is usually impossible) | **Minimize damage** | Healer, Summoner, Splitter. Region bosses |
 
 ### 8.2 Stage design rules
 
-- Every stage is **handcrafted** (or drawn from a handcrafted pool) and validated by the solver (`tools/solve.js`).
-- Act 1: the solution is visually obvious.
-- Act 2: a one-turn, zero-damage solution **must exist**, but random placements should almost never find it.
-- Act 3: a one-turn clear should **not** exist. The best line should cost a small amount of HP (1–4), while a careless line costs 3–4× that.
+- Ordinary battles are built from **templates** (enemy layouts plus placement rules for barrels and armor) scaled by danger. Elites and bosses are **handcrafted**. Everything is validated by the solver (`tools/solve.js`).
+- ☠: the solution is visually obvious.
+- ☠☠–☠☠☠: a one-turn, zero-damage solution **must exist**, but random placements should almost never find it.
+- ☠☠☠☠+: a one-turn clear should **not** exist. The best line should cost a small amount of HP (1–4), while a careless line costs 3–4× that.
 - Total enemy ATK should be clearly higher than the hero's expected HP at that point, so ignoring the board is always fatal.
 
 ### 8.3 Prototype stages (for reference)
@@ -197,35 +203,298 @@ Each enemy shows **♥ HP** and **⚔ ATK**. ATK doubles as the telegraph: it's 
 
 ---
 
-## 9. The run (in-run progression)
+## 9. Progression overview
 
-- **Starting army:** Swordsman, Archer, Drummer, Shield (🛡2). That's 4 cards.
-- **Starting HP:** 20.
-- **After each stage**, pick **1 of 3** rewards:
-  - 🆕 **New card** from the unlocked pool.
-  - ⬆️ **Upgrade** a card: +1 ATK, +1 range, +1 block, or a stronger supporter (+1 → +2, ×2 → ×3 for rare upgrades).
-  - ❤️ **Heal 3–5 HP**. This is rare (roughly every 3–4 stages) and always competes with power, so it's a real choice.
-- The army grows from 4 to about 10–12 cards by the late game. The board has 15 tiles, so space becomes a constraint later.
-- **HP never regenerates automatically.**
-- **Stage rating:** ★★★ for no damage, ★★ for 3 or less, ★ for a clear. Stars feed the Soul payout.
+Progression runs on three nested loops:
 
-## 10. Meta progression (between runs)
+```
+ BATTLE   (1–2 turns)        a placement puzzle on the 5×5 board
+    │  win → gold, loot, stars
+    ▼
+ RUN      (an expedition from Camp; ends when HP runs out or you return)
+    │  choose encounters on the world map · rewards after battles · relics · shops
+    │  run ends → items kept, Souls, Crystals, map revealed, achievements
+    ▼
+ ACCOUNT  (permanent)
+    roster (gacha) · equipment · Camp upgrades · heroes · map unlocks · Heat
+    └─► you reach further into the map on the next run
+```
 
-When a run ends, you earn **Souls ✦** for stages cleared, bosses defeated and stars earned.
+**Principles**
 
-| Tree | Example upgrades |
-|---|---|
-| ❤️ Hero | +2 max HP per level · start each stage with a 1-point barrier · one revive per run |
-| ⚔️ Army | Starting attackers +1 ATK · start with a 5th card · starting Shield +1 |
-| 🃏 Unlocks | Add new cards to the reward pool (Mage, Spearman, Echo Bell…) |
-| 🎁 Rewards | 4 reward choices instead of 3 · heals appear more often · one reward re-roll per stage |
-| 🗺️ Board | Unlock a 6th column or a 4th player row |
-
-**Target pacing:** a first run ends around stage 8–12. With steady upgrades, players should reach Act 3 after 3–5 runs and beat the first boss after about 8–10 runs.
+1. **Reach is the main measure of progress.** The clearest sign that you got stronger is that you reached somewhere new on the map.
+2. **Every run makes permanent progress**, even a run that ends after two battles. Short early runs are expected, not a failure.
+3. **Progress adds options more than numbers.** New units, effects, routes and rules come before bigger stats. Where numbers do grow, enemies scale with distance, so battles stay puzzles.
+4. **Numbers stay whole.** Every buff is a whole number on a specific card type (see 13.2), so the board always shows the exact value the puzzle needs.
 
 ---
 
-## 11. UX requirements
+## 10. The world map and runs
+
+Inspired by incremental exploration games such as *Our Ascent*, *Hero's Quest* and *InflationRPG*: the map is large, a run only gets part of the way across it, and progress between runs pushes your reach further each time.
+
+### 10.1 Structure
+
+- **One large, persistent world map**, made of encounter nodes connected by paths, spreading out from the **Camp** at its centre (or one edge).
+- The map is divided into **regions** (Goblin Woods, Iron Keep, Sunken Crypt, …). Each region has its own enemy set, encounter pool, boss and loot table.
+- Every node shows a **danger rating** (☠ to ☠☠☠☠☠) that depends on its distance from Camp and its region. Rewards rise with danger.
+- Unexplored parts of the map are under **fog**. Nodes you have seen stay revealed permanently.
+
+### 10.2 A run (an expedition)
+
+1. Choose a **hero**, a **squad** from your roster (section 12) and your **equipment** (section 13).
+2. Start at Camp, or at an unlocked **waypoint** (10.5), with full HP.
+3. **Move freely.** From your current node you can travel to any connected, revealed node. You choose which fights to take, which way to go and how deep to push. Nothing forces you down a fixed path.
+4. Each node is cleared once per run. Taking easy nodes near Camp is safe but pays little, so you are always pulled outward.
+5. HP carries from battle to battle and never regenerates on its own. Camp-style nodes, relics and some rewards can heal.
+6. **The run ends** when your HP reaches 0 (defeat) or when you choose **Return to Camp** (retreat).
+
+### 10.3 Ending a run
+
+| Ending | Items found | Souls ✦ | Notes |
+|---|---|---|---|
+| **Retreat** (choose to return) | Kept | 100% | Safe banking: a push-your-luck decision |
+| **Defeat** (HP 0) | Kept | 75% | Still always progress |
+
+- Revealed map, defeated bosses, unlocked waypoints and achievements are always kept.
+- **Gold** and **relics** belong to the run and are lost either way.
+- The results screen shows the path you took and your **furthest reach**, with the previous best drawn as a ghost line, so progress is visible even on a short run.
+
+### 10.4 Expected reach
+
+| Stage of the game | Typical run |
+|---|---|
+| First runs | 2–4 battles, near Camp only. The map is mostly fog. |
+| After a few hours | Clears the first region and attempts its boss. |
+| Mid game | Chains 2–3 regions, starts from a waypoint, farms specific bosses. |
+| Late game | Full map, hidden regions, Heat levels, endless tower. |
+
+Early unlocks should come quickly (one meaningful unlock almost every run) so short runs feel rewarding.
+
+### 10.5 Expanding your reach
+
+| Unlock | How | Effect |
+|---|---|---|
+| **Waypoints** | Reach one during a run | Later runs can start there (encounters near it become your new "easy" ring) |
+| **Gates and bridges** | Defeat a region boss | The next region opens **from the next run** |
+| **Keys** | Elite or boss drops | Open locked paths and hidden regions |
+| **Scouting** | Camp upgrade or equipment | Reveal more of the fog around you, so you can plan routes |
+| **Secret paths** | Events, 3-star clears, beating a boss in a specific way | Shortcuts and hidden nodes |
+| **Map expansion** | Account milestones | New outer regions are added to the map (like new floors in *The Binding of Isaac*) |
+
+### 10.6 Encounter types
+
+| Node | What it offers |
+|---|---|
+| ⚔ Battle | A normal stage from the region's pool |
+| 💀 Elite | A harder stage with a guaranteed item drop |
+| 👑 Boss | A fixed, handcrafted fight with signature loot. Unlocks the next region |
+| 💰 Treasure | Free loot, sometimes guarded |
+| 🛒 Shop | Spend gold on relics, heals and unit upgrades |
+| 🔥 Shrine | Heal **or** upgrade a unit (one choice) |
+| ❓ Event | A short text choice with a risk and a reward |
+| 🗝 Secret | Hidden until found |
+| 🚩 Waypoint | Unlocks a new starting point |
+
+- **Landmarks** (bosses, shrines, waypoints, gates) are fixed, so the map becomes familiar and players can plan routes.
+- **Ordinary nodes re-roll each run** from the region's pool, so each run's route is different.
+
+---
+
+## 11. In-run progression
+
+- **After each battle, choose 1 of 3:**
+  - ❤️ **Heal** some HP.
+  - ⬆️ **Upgrade** a unit for this run: +1 ATK, +1 range, +1 block, or a stronger supporter (+1 → +2).
+  - 💠 **Relic**: a run-only effect.
+- **Relics** give each run its own identity, even with the same squad. They bend rules rather than adding stats:
+  - "Barrels explode twice."
+  - "Supporters also boost diagonally."
+  - "+1 ATK for every enemy killed by overkill this run."
+  - "The first Shield each battle blocks double."
+- **Gold** is earned in battles and spent at shops. It resets when the run ends.
+- **Stage rating:** ★★★ for no damage, ★★ for 3 or less, ★ for a clear. A ★★★ clear gives an extra loot roll, rewarding a well-solved puzzle.
+- **Bounties:** each run offers 1–3 optional goals ("Win 3 battles without Shields", "Kill a boss with overkill") that pay Crystals.
+
+---
+
+## 12. Roster and squad (gacha)
+
+### 12.1 The roster
+
+- New units are pulled from a **gacha** after runs, using **Crystals 💎**.
+- Rarity changes **what a unit does**, not only its numbers:
+
+| Rarity | Example |
+|---|---|
+| Common | Archer ⚔2 ↑ R4 |
+| Rare | Longbowman ⚔2 ↑ R5, ignores armor |
+| Epic | Storm Mage ⚔2 ↖↑↗, chains to one more enemy |
+| Legendary | Phoenix Archer ⚔3 ⇈ R5, revives once per run |
+
+- **Duplicates** add stars (★1–★5), each a small upgrade. ★5 unlocks a **unit perk**.
+- **Pity:** a guaranteed Epic every 30 pulls. A **Recruitment Office** trades unwanted duplicates for a unit of your choice, so bad luck never locks out a strategy.
+- The common units from section 6.5 are the starting roster. Every region must be beatable with common units.
+- **Unit mastery:** units gain XP when used. Mastery levels unlock small perks and skins, rewarding players who stick with favourites.
+
+### 12.2 The squad (what you bring on a run)
+
+- Each unit costs **Command Points** by rarity: Common 1, Rare 2, Epic 3, Legendary 4.
+- The cap starts at **8** and grows with Camp upgrades and milestones.
+- The choice "one Legendary or two Rares" is a real decision, so rarity always has a trade-off.
+- Rule: the squad must include **at least one supporter**.
+- **Traits:** every unit has a trait tag (Order, Wild, Arcane, Undead). Bringing 2/4/6 units of one trait gives a squad bonus, which makes squad-building a puzzle of its own.
+
+### 12.3 Monetization note
+
+If the gacha ever takes real money, loot-box rules vary by country and need checking early. As an earn-only system it can be generous.
+
+---
+
+## 13. Equipment
+
+### 13.1 Slots
+
+| Slot | Buffs |
+|---|---|
+| Weapon | Attackers |
+| Armor | Shields and hero HP |
+| Banner | Supporters |
+| Ring ×2 | Anything |
+
+Equipment drops randomly from enemies (more often from elites and bosses) and is **kept between runs**.
+
+### 13.2 Rarity and stats
+
+| Rarity | Contents |
+|---|---|
+| Common | 1 main effect |
+| Rare | Main effect + 1 substat |
+| Epic | Main effect + 2 substats |
+| Legendary | Main effect + 2 substats + 1 **unique effect** |
+
+- **Stats are whole numbers aimed at a card type**, for example "+1 ATK to Archers", "Shields block +1", "+1 range to Spearmen", "+2 max HP". This keeps the board readable (see 22, open question 7, for the alternative).
+- **Unique effects change rules**, for example "Overkill also carries sideways", "Barrels explode for 4" or "Your first War Horn gives ×3". These are what players farm bosses for.
+- **Item level** depends on the danger of the node it dropped from, so pushing further always finds better items.
+
+### 13.3 Sets
+
+Items can belong to sets. Example: **Wolfpack**. With 2 pieces, Banners also boost diagonally. With 4 pieces, every attacker next to a Banner gets +1 ATK.
+
+### 13.4 Forge
+
+- **Salvage** unwanted items into **Dust ⚒**.
+- Spend Dust to **re-roll** one substat or **level up** an item.
+- This keeps the inventory clean and gives every drop some value.
+
+### 13.5 Boss farming
+
+- Each boss has 2–3 signature Legendaries.
+- **Bad-luck protection:** each kill without the item raises the drop chance.
+- **Boss tokens:** every kill gives a token, and a fixed number of tokens buys the item directly. Farming always moves you forward.
+
+---
+
+## 14. Camp, heroes and achievements
+
+### 14.1 Camp upgrades (spend Souls ✦)
+
+| Track | Examples |
+|---|---|
+| Survival | +2 max HP per level · a 1-point barrier at the start of each battle · one revive per run |
+| Command | +1 Command Point per level |
+| Fortune | More Souls · better item drop rate · more starting gold |
+| Choice | 4 reward choices instead of 3 · one reward re-roll per run |
+| Scouting | Larger fog reveal radius · see node contents before travelling |
+| Board | Unlock a 6th column or a 4th player row (late game) |
+
+Upgrade costs rise steeply and tracks have caps, so Camp upgrades support progress without replacing skill. The Camp screen grows visually as it is upgraded (more tents, a forge, a banner hall).
+
+### 14.2 Heroes
+
+- Choose one hero per run. Each has a **passive** and an **ability usable once per battle**.
+- Examples: **Marshal** (swap two units mid-turn), **Pyromancer** (ignite one barrel), **Quartermaster** (+1 reward choice).
+- Heroes are unlocked through milestones or pulled from the gacha.
+
+### 14.3 Achievements
+
+| Kind | Example | Reward |
+|---|---|---|
+| Milestones | Reach a region · beat the first boss | Unlocks: regions, slots, Command Points |
+| Feats | Clear a battle with one attacker · a chain of 4 barrels | Crystals, cosmetics |
+| Bestiary | Defeat 50 Knights | A small themed bonus, e.g. +1 damage against Knights |
+| Codex | Find secrets, bosses and events | Lore entries |
+
+Permanent buffs from achievements are small and themed. Most rewards are currency, unlocks and cosmetics.
+
+---
+
+## 15. Difficulty (Heat)
+
+- After beating the final boss, players can turn on **Heat modifiers**. Each modifier adds Heat points, and Heat multiplies rewards and item level.
+
+| Modifier | Heat |
+|---|---|
+| Enemies +1 HP | 1 |
+| Enrage gives +2 instead of +1 | 2 |
+| Heals are 50% weaker | 1 |
+| Enemies start with 1 armor | 3 |
+| Command Point cap −2 | 2 |
+| The board loses a column | 4 |
+
+- **Descend:** a harder version of the whole map (new game plus), combinable with Heat.
+
+---
+
+## 16. Extra modes
+
+| Mode | Description |
+|---|---|
+| **Daily expedition** | Everyone gets the same map, squad, hero and relics. A leaderboard ranks reach and damage taken. Pure puzzle skill. |
+| **Endless tower** | Floors get harder forever. The end-game use for all your equipment. |
+
+---
+
+## 17. Currencies
+
+| Currency | Earned from | Spent on | Kept? |
+|---|---|---|---|
+| 🪙 Gold | Battles during a run | Shops during the run | Lost when the run ends |
+| ✦ Souls | End of run (reach, danger, stars) | Camp upgrades | Kept |
+| 💎 Crystals | Bosses, achievements, bounties | Gacha | Kept |
+| ⚒ Dust | Salvaging items and duplicate units | Forge | Kept |
+
+Four currencies is the maximum; more starts to confuse players.
+
+---
+
+## 18. Pacing (first hours)
+
+| Runs | What the player experiences |
+|---|---|
+| 1–3 | 2–4 battles per run near Camp. Learns the map, rewards and relics. First Camp upgrades and first 10-pull. |
+| 4–8 | Clears Goblin Woods and beats its boss. The Iron Keep gate opens. Equipment slots unlock, and the first Epic unit arrives. |
+| 9–15 | Starts from waypoints and chains 2 regions. Traits start to matter. Farms the Keep boss for a set piece. |
+| 15+ | Hidden regions, secrets, the final boss, then Heat, Descend, the daily expedition and the endless tower. |
+
+---
+
+## 19. Progression risks
+
+| Risk | Mitigation |
+|---|---|
+| Permanent power makes puzzles trivial | Enemy stats scale with danger. Permanent buffs are capped or small. Most progress adds options. |
+| Gacha luck decides who wins | Pity, the Recruitment Office and Command Point costs. Every region can be beaten with common units. |
+| Grinding feels slow | Bad-luck protection, boss tokens, quick early unlocks, and Heat multiplying rewards. |
+| Short early runs feel like failure | Every run banks loot and Souls, and the results screen shows new reach against a ghost of the previous best. |
+| Too many stats on items | Whole numbers on specific card types, at most 3 substats, and one rule-changing effect on Legendaries. |
+| Handmade stages run out | Build battles from **templates** (enemy layouts plus placement rules for barrels and armor), scaled by danger and checked by the solver. Bosses and elites stay handmade. |
+| Players farm the safe nodes near Camp | Each node clears once per run, and rewards scale with danger. |
+
+
+---
+
+## 20. UX requirements
 
 - **Live final numbers:** placed cards always show their boosted ATK and range. Boosted values are highlighted.
 - **Idle supporters are dimmed**, so the player immediately sees a wasted placement.
@@ -236,7 +505,7 @@ When a run ends, you earn **Souls ✦** for stages cleared, bosses defeated and 
 
 ---
 
-## 12. Balancing levers
+## 21. Balancing levers
 
 | Lever | Effect |
 |---|---|
@@ -245,28 +514,37 @@ When a run ends, you earn **Souls ✦** for stages cleared, bosses defeated and 
 | Enrage amount (+1 per turn) | How strongly the game pushes stages to 1–2 turns |
 | Shield block value | How forgiving partial clears are |
 | Heal frequency and amount | Run length |
+| Danger growth per distance | How far a run reaches at each level of account power |
+| Souls and Crystals per run | Speed of permanent progress |
+| Command Point cap | Squad size and how much rarity matters |
+| Drop rates and bad-luck protection | How grindy boss farming feels |
 | Number of free tiles vs. army size | Placement pressure in late runs |
 
 ---
 
-## 13. Open questions
+## 22. Open questions
 
 1. Should enemies ever **move or change rows** between turns, or stay static for readability?
 2. Should a stage be allowed to give a **bonus for a one-turn clear** (extra Souls or an extra reward), beyond the stars?
 3. Should **Barrels** ever attack, or stay pure board hazards?
 4. Should there be a **turn limit** (for example, 3 turns), or is enrage enough pressure?
 5. Should the card order be **front→back, left→right**, or should cards fire in an order the player chooses (more depth, less simple)?
-6. Map structure: a linear sequence of stages, or branching paths (elite stages, shops, events)?
+6. ~~Map structure~~ Decided in v0.2: one persistent world map with free movement (section 10).
+7. **Number scale:** keep small whole numbers with targeted buffs (current plan), or multiply every number by 10 (Archer ⚔20, Goblin ♥30) so percentage and fractional-feeling buffs (+4 = "+0.4") work while numbers stay readable?
+8. Should movement on the map also cost **supplies** (a second limit besides HP, as in *InflationRPG*'s step limit), or is HP enough?
+9. Can the player **re-fight** a cleared node in the same run, or is each node strictly once per run?
+10. How much should **retreating** pay compared with defeat (currently 100% vs 75% of Souls)?
+11. Should the gacha ever take **real money**, or stay earn-only?
 
 ---
 
-## 14. Prototype scope (current)
+## 23. Prototype scope (current)
 
 The prototype in `prototype/` tests **only the core placement gameplay**:
 
 - 3 mid-run stages (6, 9 and 12), each with a preset army and carried-over HP
-- All rules in sections 4–7 except the Act 3+ enemies
+- All rules in sections 4–7 except the outer-region enemies (7.2)
 - The live boost display, idle supporters, reach and target preview, threat forecast, animated playback and battle log
-- **Not included:** rewards, run map, meta progression, art or audio
+- **Not included:** rewards, the world map, progression systems (sections 9–19), art or audio
 
 See the README for how to run it.
