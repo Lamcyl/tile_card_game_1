@@ -7,13 +7,15 @@ A turn-based tile placement game with roguelite runs. You place a fixed army of 
 
 ## Play the prototype
 
-It's plain HTML and JavaScript with no build step. Either open `prototype/index.html` in a browser, or serve the folder:
+**Single-file build:** open `prototype/tile-defense.html` in any browser, or host or send that one file as a shareable link. It has no dependencies, works offline, and fits a phone screen.
+
+After editing the source, rebuild it:
 
 ```bash
-python3 -m http.server 8000 --directory prototype
+node prototype/build.mjs
 ```
 
-Then open http://localhost:8000.
+`prototype/index.html` is the development page: it loads `style.css` and `js/*.js` separately, and `build.mjs` inlines them into `tile-defense.html`.
 
 The prototype starts on **Stage 9: The Iron Line**. Stages 6 and 12 are also available, to compare an easier stage with a "you can't win in one turn" stage.
 
@@ -21,7 +23,9 @@ The prototype starts on **Stage 9: The Iron Line**. Stages 6 and 12 are also ava
 
 ```
 docs/GAME_DESIGN.md     Gameplay design document
-prototype/index.html    Prototype page
+prototype/index.html    Development page (loads the files below)
+prototype/build.mjs     Inlines everything into tile-defense.html
+prototype/tile-defense.html  Self-contained build to open or share
 prototype/style.css     Placeholder styling
 prototype/js/engine.js  Rules engine (pure logic, shared with tools)
 prototype/js/stages.js  Stage definitions
