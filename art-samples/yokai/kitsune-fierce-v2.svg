@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+<path id="tl" d="M0 0 Q-24 -40 -14 -80 Q-8 -96 0 -104 Q8 -96 14 -80 Q24 -40 0 0 Z"/>
+<path id="fl" d="M0 16 Q-18 8 -13 -8 Q-8 -18 -2 -34 Q4 -20 12 -12 Q20 6 0 16 Z"/>
+</defs>
+<!-- nine tails -->
+<g transform="translate(128 210) rotate(-76) scale(1.15 1.000)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(76) scale(1.15 1.000)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(-57) scale(1.15 1.192)"><use href="#tl" fill="#9a948b" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(57) scale(1.15 1.192)"><use href="#tl" fill="#9a948b" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(-38) scale(1.15 1.365)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(38) scale(1.15 1.365)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(-19) scale(1.15 1.500)"><use href="#tl" fill="#9a948b" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(19) scale(1.15 1.500)"><use href="#tl" fill="#9a948b" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(0) scale(1.15 1.558)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<!-- crouched body on all fours -->
+<ellipse cx="128" cy="198" rx="60" ry="32" fill="#1b1a1a"/>
+<ellipse cx="128" cy="199" rx="54" ry="27" fill="#9a948b"/>
+<ellipse cx="128" cy="196" rx="54" ry="26" fill="#d4cec3"/>
+<!-- haunches and hind paws -->
+<path d="M76 190 Q56 196 58 216 Q60 228 78 228 L100 228 L104 200 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M180 190 Q200 196 198 216 Q196 228 178 228 L156 228 L152 200 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M56 222 Q62 214 80 216 L84 231 L58 231 Z M200 222 Q194 214 176 216 L172 231 L198 231 Z" fill="#1b1a1a"/>
+<!-- planted front legs and claws -->
+<path d="M92 160 L118 160 Q116 190 112 216 L96 216 Q94 190 92 160 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M138 160 L164 160 Q162 190 160 216 L144 216 Q140 190 138 160 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M95 192 Q104 196 114 192 L112 216 L96 216 Z M142 192 Q152 196 161 192 L160 216 L144 216 Z" fill="#55514c"/>
+<ellipse cx="104" cy="222" rx="22" ry="9" fill="#55514c" stroke="#1b1a1a" stroke-width="5"/>
+<ellipse cx="152" cy="222" rx="22" ry="9" fill="#55514c" stroke="#1b1a1a" stroke-width="5"/>
+<path d="M88 226 L82 232 L94 230 Z M101 229 L99 235 L108 230 Z M114 228 L116 234 L121 228 Z M135 228 L134 234 L142 229 Z M148 229 L150 235 L157 229 Z M162 228 L170 232 L168 226 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="1.5" stroke-linejoin="round"/>
+<g transform="translate(128 118) scale(.74) translate(-128 -112)">
+<!-- head with spiky cheek fur -->
+<path d="M58 112 L38 120 L56 128 L36 142 L62 144 L56 158 L84 154 Q104 172 128 172 Q152 172 172 154 L200 158 L194 144 L220 142 L200 128 L218 120 L198 112 Q198 62 128 58 Q58 62 58 112 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M64 112 L50 120 L64 126 L50 138 L68 140 L66 150 L88 148 Q106 164 128 164 Q150 164 168 148 L190 150 L188 140 L206 138 L192 126 L206 120 L192 112 Q192 68 128 64 Q64 68 64 112 Z" fill="#9a948b"/>
+<path d="M64 112 L50 120 L64 126 L50 138 L68 140 L66 148 L88 146 Q106 158 128 158 Q150 158 168 146 L190 148 L188 140 L206 138 L192 126 L206 120 L192 112 Q192 68 128 64 Q64 68 64 112 Z" fill="#f6f2e9"/>
+<!-- tall ears -->
+<path d="M70 82 Q56 38 76 12 Q108 30 120 66 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M186 82 Q200 38 180 12 Q148 30 136 66 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M78 70 Q72 44 80 26 Q98 42 106 64 Z M178 70 Q184 44 176 26 Q158 42 150 64 Z" fill="#1b1a1a"/>
+<!-- sly eyes -->
+<path d="M66 100 L118 112 L116 100 L74 86 Z M190 100 L138 112 L140 100 L182 86 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M74 108 L118 112 Q110 122 94 120 Q80 116 74 108 Z M182 108 L138 112 Q146 122 162 120 Q176 116 182 108 Z" fill="#1b1a1a"/>
+<path d="M92 112 Q100 110 106 113 M164 112 Q156 110 150 113" stroke="#f6f2e9" stroke-width="3" fill="none" stroke-linecap="round"/>
+<circle cx="102" cy="114" r="2" fill="#c8352b"/><circle cx="154" cy="114" r="2" fill="#c8352b"/>
+<path d="M128 68 Q120 80 128 92 Q136 80 128 68 Z" fill="#c8352b"/>
+<!-- nose + grin -->
+<path d="M116 126 Q128 120 140 126 Q134 136 128 136 Q122 136 116 126 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M92 138 Q128 150 164 138 Q158 162 128 164 Q98 162 92 138 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M100 141 L106 154 L112 144 Z M144 144 L150 154 L156 141 Z M120 146 L124 156 L128 147 Z M128 147 L132 156 L136 146 Z" fill="#f6f2e9"/>
+</g>
+<!-- fox fire -->
+<g transform="translate(38 40) scale(1.2)">
+<use href="#fl" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<use href="#fl" fill="#9a948b" transform="translate(0 4) scale(.55)"/>
+</g>
+</svg>
