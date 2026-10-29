@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+<path id="tk" d="M-9 -34 L9 -34 L9 -26 Q10 -18 20 -10 Q30 2 26 16 Q22 32 0 32 Q-22 32 -26 16 Q-30 2 -20 -10 Q-10 -18 -9 -26 Z"/>
+</defs>
+<!-- puffed tail with spikes -->
+<path d="M190 210 L222 214 L214 200 L236 194 L220 182 L240 170 L216 164 L226 148 L204 156 L200 138 L184 164 Z" fill="#9a948b" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M210 160 Q222 170 214 180 M200 176 Q216 184 208 196" stroke="#1b1a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
+<!-- straw hat behind head -->
+<path d="M40 70 Q128 -4 216 70 Q128 90 40 70 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M64 66 Q128 14 192 66 Q128 80 64 66 Z" fill="#f6f2e9"/>
+<path d="M80 64 Q128 28 176 64 M96 58 Q128 38 160 58 M56 72 Q128 88 200 72" stroke="#9a948b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<!-- tokkuri on ground -->
+<g transform="translate(36 202) rotate(-6) scale(.9)">
+<use href="#tk" fill="#d4cec3" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M-18 -4 Q-22 8 -18 20" stroke="#f6f2e9" stroke-width="4" fill="none" stroke-linecap="round"/>
+<rect x="-13" y="2" width="26" height="22" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3"/>
+<rect x="-5" y="7" width="10" height="12" fill="#c8352b"/>
+<path d="M-9 -34 L9 -34" stroke="#1b1a1a" stroke-width="7" stroke-linecap="round"/>
+</g>
+<!-- feet -->
+<path d="M64 224 Q70 208 100 210 Q118 214 118 226 Q118 234 106 234 L74 234 Q62 234 64 224 Z" fill="#55514c" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M192 224 Q186 208 156 210 Q138 214 138 226 Q138 234 150 234 L182 234 Q194 234 192 224 Z" fill="#55514c" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<!-- puffed belly with fur tufts -->
+<path d="M128 126 L146 132 L164 130 L170 144 L188 148 L186 164 L200 176 L190 190 L196 206 L178 212 L168 226 L146 222 L128 232 L110 222 L88 226 L78 212 L60 206 L66 190 L56 176 L70 164 L68 148 L86 144 L92 130 L110 132 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<ellipse cx="128" cy="180" rx="64" ry="48" fill="#9a948b"/>
+<ellipse cx="128" cy="176" rx="64" ry="47" fill="#d4cec3"/>
+<ellipse cx="128" cy="182" rx="46" ry="34" fill="#f6f2e9"/>
+<circle cx="128" cy="190" r="3.5" fill="#1b1a1a"/>
+<path d="M92 170 Q84 184 96 200 M164 170 Q172 184 160 200" stroke="#9a948b" stroke-width="3" fill="none" stroke-linecap="round"/>
+<!-- sound waves off the belly drum -->
+<path d="M182 188 Q196 198 190 212 M192 180 Q214 196 204 218" stroke="#55514c" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+<path d="M74 188 Q60 198 66 212 M64 180 Q42 196 52 218" stroke="#55514c" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+<!-- left fist on belly -->
+<path d="M80 150 Q62 160 66 178 Q82 190 96 178 Q96 164 100 154 Z" fill="#55514c" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="86" cy="186" r="11" fill="#55514c" stroke="#1b1a1a" stroke-width="4"/>
+<path d="M80 182 L92 182 M81 188 L91 188" stroke="#9a948b" stroke-width="2" stroke-linecap="round"/>
+<!-- right arm raised, drumming -->
+<path d="M170 148 Q196 138 200 108 L218 112 Q216 154 180 166 Z" fill="#55514c" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="210" cy="104" r="13" fill="#55514c" stroke="#1b1a1a" stroke-width="4.5"/>
+<path d="M203 98 L217 98 M203 105 L217 105" stroke="#9a948b" stroke-width="2" stroke-linecap="round"/>
+<path d="M232 84 L242 72 M240 98 L252 94 M224 76 L226 62" stroke="#1b1a1a" stroke-width="3.5" stroke-linecap="round"/>
+<!-- ears -->
+<path d="M70 62 L62 28 L96 44 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M186 62 L194 28 L160 44 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M72 54 L68 38 L84 46 Z M184 54 L188 38 L172 46 Z" fill="#9a948b"/>
+<!-- head -->
+<path d="M64 100 L52 108 L62 114 L56 126 L72 124 Q92 146 128 146 Q164 146 184 124 L200 126 L194 114 L204 108 L192 100 Q196 52 128 48 Q60 52 64 100 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M70 98 L60 106 L68 110 L64 120 L76 118 Q94 138 128 138 Q162 138 180 118 L192 120 L188 110 L196 106 L186 98 Q190 56 128 54 Q66 56 70 98 Z" fill="#9a948b"/>
+<path d="M70 96 L60 106 L68 110 L64 118 L76 116 Q94 132 128 132 Q162 132 180 116 L192 118 L188 110 L196 106 L186 96 Q190 56 128 54 Q66 56 70 96 Z" fill="#d4cec3"/>
+<!-- eye masks and slanted brows -->
+<path d="M70 76 Q82 70 108 90 Q122 100 114 116 Q90 118 76 104 Q66 90 70 76 Z" fill="#55514c" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M186 76 Q174 70 148 90 Q134 100 142 116 Q166 118 180 104 Q190 90 186 76 Z" fill="#55514c" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M76 86 L118 104 L116 94 L82 78 Z M180 86 L138 104 L140 94 L174 78 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M84 102 L118 104 Q110 114 98 113 Q88 110 84 102 Z M172 102 L138 104 Q146 114 158 113 Q168 110 172 102 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="106" cy="106" rx="3.5" ry="5" fill="#1b1a1a"/><ellipse cx="150" cy="106" rx="3.5" ry="5" fill="#1b1a1a"/>
+<circle cx="105" cy="103.5" r="1.3" fill="#c8352b"/><circle cx="149" cy="103.5" r="1.3" fill="#c8352b"/>
+<ellipse cx="128" cy="124" rx="28" ry="15" fill="#f6f2e9"/>
+<ellipse cx="128" cy="113" rx="8.5" ry="5.5" fill="#1b1a1a"/>
+<!-- mischievous grin -->
+<path d="M98 122 Q128 142 158 122 Q154 146 128 148 Q102 146 98 122 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M106 128 L111 138 L116 130 Z M140 130 L145 138 L150 128 Z" fill="#f6f2e9"/>
+<path d="M118 141 Q128 136 138 141 Q128 148 118 141 Z" fill="#c8352b"/>
+<!-- leaf -->
+<g transform="translate(128 64) rotate(10) scale(.85)">
+<path d="M0 6 Q-22 -4 -20 -22 Q-8 -34 0 -50 Q8 -34 20 -22 Q22 -4 0 6 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M0 6 L0 -42 M0 -10 L-10 -20 M0 -10 L10 -20 M0 -24 L-7 -32 M0 -24 L7 -32" stroke="#1b1a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</g>
+</svg>
