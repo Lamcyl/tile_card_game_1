@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.s{stroke:#1b1a1a;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}</style>
 <path class="s d" stroke-width="7" d="M70 190 L50 232 L100 232 L112 196Z"/><path class="s d" stroke-width="7" d="M186 190 L206 232 L156 232 L144 196Z"/>
-<path class="s l" stroke-width="6" d="M44 232 L108 232 L108 238 L44 238Z" style="display:none"/>
+
 <path class="s m" stroke-width="8" d="M58 146 L198 146 L176 198 L80 198Z"/>
 <path class="d" d="M84 178 L172 178 L176 198 L80 198Z"/>
 <path class="s l" stroke-width="7" d="M88 194 L168 194 L184 232 L128 222 L72 232Z"/>

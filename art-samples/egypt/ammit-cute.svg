@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.s{stroke:#1b1a1a;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}</style>
+<g transform="translate(6 12) scale(.94)">
 <path class="s m" stroke-width="7" d="M232 156 Q248 150 244 128 Q232 136 226 146Z"/>
 <path class="s d" stroke-width="6" d="M112 186 L118 224 Q122 232 134 232 L146 232 Q144 222 138 218 L134 186Z"/>
 <path class="s d" stroke-width="6" d="M176 192 L174 226 Q176 232 186 232 L210 232 L206 192Z"/>
@@ -13,7 +14,7 @@
 <path class="s n" stroke-width="3" d="M94 218 L94 230M106 218 L106 230M160 220 L160 230M174 220 L174 230M208 220 L208 230M222 220 L222 230"/>
 <g transform="translate(0,-16)">
 <path class="s d" stroke-width="6" d="M81 134 L100 125 L81 115 L102 115 L89 98 L108 107 L101 85 L116 101 L118 79 L125 100 L135 79 L134 102 L150 88 L142 108 L162 102 L147 117 L168 119 L148 128 L167 138 L146 138 L159 155 L140 146 L146 168 L132 151 L130 174 L122 152 L112 172 L113 150Z"/>
-<circle class="m" cx="124" cy="126" r="28" style="display:none"/>
+
 <path class="s d" stroke-width="7" d="M24 146 L92 154 Q112 170 84 170 Q44 164 26 154 Q16 150 24 146Z"/>
 <path class="v" d="M44 150 Q64 146 84 154 Q70 160 44 156Z"/>
 <path class="s m" stroke-width="7" d="M124 124 Q122 98 92 98 Q56 104 28 118 Q12 124 16 136 Q18 146 34 146 L96 152 Q120 154 124 124Z"/>
@@ -23,5 +24,6 @@
 <circle class="s l" stroke-width="5" cx="22" cy="124" r="7"/><circle class="i" cx="20" cy="123" r="2.5"/>
 <ellipse class="l" cx="108" cy="136" rx="8" ry="5"/><circle class="d" cx="52" cy="108" r="3"/><circle class="d" cx="68" cy="104" r="3"/>
 <circle class="s p" stroke-width="5" cx="92" cy="106" r="15"/><ellipse class="i" cx="91" cy="108" rx="9.5" ry="10.5"/><circle class="p" cx="87" cy="103" r="4"/><circle class="p" cx="95" cy="112" r="2"/>
+</g>
 </g>
 </svg>

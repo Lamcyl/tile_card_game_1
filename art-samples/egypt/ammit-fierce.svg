@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.s{stroke:#1b1a1a;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}</style>
-<g transform="rotate(7 214 230)">
+<g transform="translate(6 12) scale(.94) rotate(7 214 230)">
 <path class="s m" stroke-width="7" d="M232 150 Q252 130 244 104 Q236 114 226 124Z"/>
 <path class="s d" stroke-width="6" d="M112 186 L118 224 Q122 232 134 232 L146 232 Q144 222 138 218 L134 186Z"/>
 <path class="s d" stroke-width="6" d="M176 192 L174 226 Q176 232 186 232 L210 232 L206 192Z"/>
@@ -11,11 +11,11 @@
 <path class="s l" stroke-width="7" d="M86 186 L84 224 Q84 232 96 232 L122 232 Q128 222 118 216 L116 186Z"/>
 <path class="s m" stroke-width="7" d="M150 194 L148 226 Q150 232 162 232 L192 232 L190 196Z"/>
 <path class="s m" stroke-width="7" d="M196 196 L196 226 Q198 232 210 232 L236 232 Q236 216 226 206 L222 196Z"/>
-<path class="p" d="M88 232 L86 240 L94 232Z M100 232 L100 241 L108 232Z M112 232 L114 240 L120 232Z" style="display:none"/><path class="s n" stroke-width="3" d="M94 218 L94 230M106 218 L106 230M160 220 L160 230M174 220 L174 230M208 220 L208 230M222 220 L222 230"/>
+<path class="s n" stroke-width="3" d="M94 218 L94 230M106 218 L106 230M160 220 L160 230M174 220 L174 230M208 220 L208 230M222 220 L222 230"/>
 <g transform="translate(0,-14)">
 <path class="s d" stroke-width="6" d="M72 131 L96 120 L73 107 L99 109 L83 87 L106 99 L100 72 L116 94 L121 67 L127 94 L142 71 L137 98 L159 85 L145 107 L170 105 L148 119 L172 128 L147 131 L166 150 L141 141 L151 167 L132 148 L132 176 L121 151 L110 176 L111 148Z"/>
-<circle class="m" cx="122" cy="122" r="30" style="display:none"/>
-<path class="s d" stroke-width="7" d="M156 150 Q124 164 116 190 L84 200 L78 214 L110 208 L150 196Z" style="display:none"/>
+
+
 <path class="s i" stroke-width="7" d="M26 106 L100 116 L134 132 L24 138Z"/>
 <path class="v" d="M34 134 Q70 124 112 130 L126 136 Q80 148 34 138Z"/>
 <path class="s m" stroke-width="8" d="M138 134 L26 140 Q8 142 10 160 Q18 178 44 172 L128 160 Q150 154 138 134Z"/>

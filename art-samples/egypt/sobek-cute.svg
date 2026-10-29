@@ -6,7 +6,7 @@
 <path class="s n" stroke-width="3" d="M104 194 L98 224M118 194 L116 224M142 194 L144 224M156 194 L162 224"/>
 <path class="s g" stroke-width="3" d="M122 192 L138 192 L134 212 L126 212Z"/>
 <ellipse class="s m" stroke-width="6" cx="84" cy="176" rx="12" ry="15"/>
-<g><path class="s i" stroke-width="3" d="M188 150 Q172 150 176 166 Q180 180 192 168 Q206 150 188 150Z" style="display:none"/></g>
+<g></g>
 <ellipse class="s m" stroke-width="6" cx="176" cy="176" rx="12" ry="15"/>
 <path class="s n" stroke-width="7" d="M196 160 L196 214"/><path class="s n" stroke-width="7" d="M180 172 L212 172"/><path class="s n" stroke-width="7" d="M196 160 Q180 140 196 134 Q212 140 196 160"/>
 <path class="s p" stroke-width="6" d="M84 142 Q130 120 176 142 Q184 178 130 188 Q76 178 84 142Z"/>
@@ -15,7 +15,7 @@
 <path class="s m" stroke-width="7" d="M40 116 L122 130 Q134 158 104 154 Q62 146 42 130 Q32 122 40 116Z"/>
 <path class="d" d="M60 142 Q96 156 118 150 Q124 144 122 138 Q96 148 60 142Z"/>
 <path class="s m" stroke-width="7" d="M178 106 Q184 70 146 64 Q122 62 106 76 Q72 82 40 92 Q22 96 24 108 Q26 120 46 122 L118 130 Q134 148 162 142 Q184 132 178 106Z"/>
-<path class="l" d="M52 112 Q84 118 118 124 Q112 118 88 110 Q70 108 52 112Z" opacity="0"/>
+
 <path class="p" d="M52 121 L58 130 L64 122Z M72 123 L78 132 L84 124Z M92 125 L98 133 L104 126Z"/>
 <path class="s n" stroke-width="3" d="M52 121 L58 130 L64 122M72 123 L78 132 L84 124M92 125 L98 133 L104 126"/>
 <path class="i" d="M44 118 Q82 128 118 128 Q132 132 142 120 Q134 138 118 134 Q80 134 44 124Z"/>

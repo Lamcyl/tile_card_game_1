@@ -11,6 +11,6 @@
 <circle class="s p" stroke-width="5" cx="158" cy="68" r="19"/><ellipse class="i" cx="156" cy="70" rx="11" ry="13"/><circle class="p" cx="151" cy="64" r="4.5"/><circle class="p" cx="160" cy="75" r="2"/>
 <circle class="i" cx="122" cy="92" r="2.5"/><circle class="i" cx="134" cy="92" r="2.5"/>
 <path class="s n" stroke-width="3" d="M112 102 Q128 112 144 102"/>
-<path class="v" d="M124 108 L128 124 L132 108 L138 118 L132 108 L128 112Z" style="display:none"/>
+
 <path class="v" d="M124 110 L120 126 L126 118 L128 126 L130 118 L136 126 L132 110Z"/>
 </svg>
