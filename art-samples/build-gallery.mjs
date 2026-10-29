@@ -1,29 +1,66 @@
-// Builds yokai-gallery.html from the SVGs in ./yokai: node art-samples/build-yokai-gallery.mjs
+// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt
+// Only the original drawings (<slug>-cute.svg and <slug>-fierce.svg) are shown.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 
-const dir = new URL('./yokai/', import.meta.url);
-const NAMES = {
-  oni: ['Oni', 'Horned ogre with an iron club'],
-  kappa: ['Kappa', 'River imp with a water dish on its head'],
-  tengu: ['Karasu-tengu', 'Crow-headed mountain spirit'],
-  kitsune: ['Kitsune', 'Many-tailed fox spirit'],
-  tanuki: ['Tanuki', 'Shape-shifting raccoon dog'],
-  bakeneko: ['Bakeneko', 'Two-tailed ghost cat'],
-  'kasa-obake': ['Kasa-obake', 'One-eyed hopping umbrella'],
-  'chochin-obake': ['Chōchin-obake', 'Paper lantern ghost'],
-  'hitotsume-kozo': ['Hitotsume-kozō', 'One-eyed child monk'],
-  nurikabe: ['Nurikabe', 'Living wall'],
-  'yuki-onna': ['Yuki-onna', 'Snow woman'],
-  rokurokubi: ['Rokurokubi', 'Woman with a stretching neck'],
-  jorogumo: ['Jorōgumo', 'Spider woman'],
-  gashadokuro: ['Gashadokuro', 'Giant skeleton'],
-  kodama: ['Kodama', 'Tree spirit'],
-  raijin: ['Raijin', 'Thunder god with drums'],
-  komainu: ['Komainu', 'Lion-dog shrine guardian'],
-  baku: ['Baku', 'Dream-eating tapir'],
-  kamaitachi: ['Kamaitachi', 'Sickle-clawed weasel'],
-  orochi: ['Yamata no Orochi', 'Eight-headed serpent'],
+const SETS = {
+  yokai: {
+    title: 'Yokai Sketchbook', heading: 'Yokai sketchbook', seal: '妖怪',
+    intro: 'Twenty Japanese yokai in black-and-white ink, chibi style.',
+    names: {
+      oni: ['Oni', 'Horned ogre with an iron club'],
+      kappa: ['Kappa', 'River imp with a water dish on its head'],
+      tengu: ['Karasu-tengu', 'Crow-headed mountain spirit'],
+      kitsune: ['Kitsune', 'Many-tailed fox spirit'],
+      tanuki: ['Tanuki', 'Shape-shifting raccoon dog'],
+      bakeneko: ['Bakeneko', 'Two-tailed ghost cat'],
+      'kasa-obake': ['Kasa-obake', 'One-eyed hopping umbrella'],
+      'chochin-obake': ['Chōchin-obake', 'Paper lantern ghost'],
+      'hitotsume-kozo': ['Hitotsume-kozō', 'One-eyed child monk'],
+      nurikabe: ['Nurikabe', 'Living wall'],
+      'yuki-onna': ['Yuki-onna', 'Snow woman'],
+      rokurokubi: ['Rokurokubi', 'Woman with a stretching neck'],
+      jorogumo: ['Jorōgumo', 'Spider woman'],
+      gashadokuro: ['Gashadokuro', 'Giant skeleton'],
+      kodama: ['Kodama', 'Tree spirit'],
+      raijin: ['Raijin', 'Thunder god with drums'],
+      komainu: ['Komainu', 'Lion-dog shrine guardian'],
+      baku: ['Baku', 'Dream-eating tapir'],
+      kamaitachi: ['Kamaitachi', 'Sickle-clawed weasel'],
+      orochi: ['Yamata no Orochi', 'Eight-headed serpent'],
+    },
+  },
+  egypt: {
+    title: 'Egyptian Sketchbook', heading: 'Egyptian sketchbook', seal: '𓂀',
+    intro: 'Twenty Egyptian gods and monsters in the same black-and-white ink, chibi style as the yokai.',
+    names: {
+      anubis: ['Anubis', 'Jackal-headed guide of the dead'],
+      ra: ['Ra', 'Falcon-headed sun god'],
+      bastet: ['Bastet', 'Cat goddess'],
+      sekhmet: ['Sekhmet', 'Lioness war goddess'],
+      thoth: ['Thoth', 'Ibis-headed god of wisdom'],
+      sobek: ['Sobek', 'Crocodile god'],
+      set: ['Set', 'God of chaos and storms'],
+      apep: ['Apep', 'Giant chaos serpent'],
+      ammit: ['Ammit', 'Devourer of the dead'],
+      osiris: ['Osiris', 'Mummified king of the underworld'],
+      sphinx: ['Sphinx', 'Lion with a human head'],
+      mummy: ['Mummy', 'Bandaged undead'],
+      khepri: ['Khepri', 'Scarab that rolls the sun'],
+      serket: ['Serket', 'Scorpion goddess'],
+      taweret: ['Taweret', 'Hippo protector goddess'],
+      bes: ['Bes', 'Dwarf protector god'],
+      bennu: ['Bennu', 'Heron phoenix'],
+      wadjet: ['Wadjet', 'Cobra goddess'],
+      ushabti: ['Ushabti', 'Little servant statue'],
+      isis: ['Isis', 'Winged goddess of magic'],
+    },
+  },
 };
+const setName = process.argv[2] || 'yokai';
+const SET = SETS[setName];
+if (!SET) throw new Error('Unknown set: ' + setName + ' (use ' + Object.keys(SETS).join(' or ') + ')');
+const dir = new URL('./' + setName + '/', import.meta.url);
+const NAMES = SET.names;
 
 const files = readdirSync(dir).filter((f) => f.endsWith('.svg'));
 const svg = (f) => readFileSync(new URL(f, dir), 'utf8').replace(/<\?xml[^>]*>/, '').replace(/<!--[\s\S]*?-->/g, '').trim();
@@ -41,7 +78,7 @@ const cards = Object.entries(NAMES).map(([slug, [name, desc]]) => {
     '<div class="pair">' + cell('cute') + cell('fierce') + '</div></article>';
 }).join('\n');
 
-const page = `<title>Yokai Sketchbook</title>
+const page = `<title>${SET.title}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,13 +120,13 @@ const page = `<title>Yokai Sketchbook</title>
 </style>
 <div class="wrap">
   <header class="top">
-    <h1>Yokai sketchbook <span class="seal">妖怪</span></h1>
-    <p>Twenty Japanese yokai in black-and-white ink, chibi style. Each has a <b>cute</b> and a <b>fierce</b> version, plus small board-tile previews. Tell me the numbers you like (for example "3 fierce, 5 cute") and I'll refine those.</p>
+    <h1>${SET.heading} <span class="seal">${SET.seal}</span></h1>
+    <p>${SET.intro} Each has a <b>cute</b> and a <b>fierce</b> version, plus small board-tile previews. Tell me the numbers you like (for example "3 fierce, 5 cute") and I'll refine those.</p>
   </header>
   <section class="grid">
 ${cards}
   </section>
   <p class="note">Drawn as hand-written vector art by AI agents, as concept sketches for choosing a direction.</p>
 </div>`;
-writeFileSync(new URL('./yokai-gallery.html', import.meta.url), page);
-console.log('yokai-gallery.html', files.length + ' SVGs', Math.round(page.length / 1024) + ' kB');
+writeFileSync(new URL('./' + setName + '-gallery.html', import.meta.url), page);
+console.log(setName + '-gallery.html', files.length + ' SVGs', Math.round(page.length / 1024) + ' kB');

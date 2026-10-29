@@ -19,5 +19,5 @@ Every version is kept as a backup; the **chosen** column is the current pick.
 
 Not chosen (kept for reference): oni, kappa, bakeneko, kasa-obake, rokurokubi, jorogumo, gashadokuro, kodama, baku (cute and fierce each).
 
-Galleries: `../yokai-gallery.html` (all 20, built by `../build-yokai-gallery.mjs`) and
+Galleries: `../yokai-gallery.html` (all 20, built by `node ../build-gallery.mjs yokai`) and
 `../yokai-picks.html` (chosen designs with before/after, built by `../build-yokai-picks.mjs`).
