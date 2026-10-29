@@ -540,11 +540,21 @@ Four currencies is the maximum; more starts to confuse players.
 
 ## 23. Prototype scope (current)
 
-The prototype in `prototype/` tests **only the core placement gameplay**:
+The prototype in `prototype/` has two pages.
 
-- 3 mid-run stages (6, 9 and 12), each with a preset army and carried-over HP
-- All rules in sections 4–7 except the outer-region enemies (7.2)
-- The live boost display, idle supporters, reach and target preview, threat forecast, animated playback and battle log
-- **Not included:** rewards, the world map, progression systems (sections 9–19), art or audio
+**World map game (`index.html`)**: tests short runs on a persistent map.
+
+- **World:** 5 regions with 2 sub-areas each (Greenvale, Azure Coast, Sunscorch, Frostveil, Ember Peaks), 78 spots and 87 paths. Each sub-area has its own enemy theme and a boss.
+- **Unlocks:** each boss reveals the next sub-area. The Old Oak Wood boss opens both the coast and the desert, which lead on to the ice and volcano regions.
+- **Runs:** start at Camp. You can fight any spot next to your trail, and HP carries over. Treasure caches and healing springs appear along the way. After each battle you choose 1 of 3 run rewards (heal, +1 ATK/range/block/boost).
+- **Ending a run:** Return to Camp keeps 100% of Souls; a defeat keeps 75%.
+- **Camp:** Souls buy upgrades (Vitality, Command, Drill, Bulwark, Fortune) and recruits. Bosses unlock new recruits. The squad is limited by slots.
+- **Battles:** generated from the spot's level and sub-area theme. Level 1 fights are small, and bosses are usually two-turn fights.
+- **Saving:** progress is saved in the browser. Prototype tools give +100 Souls or reset progress.
+- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player. Current targets: a fresh account dies after about 5 battles (perfect play), and each boss needs a few runs of upgrades.
+
+**Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
+
+**Not included yet:** equipment, gacha pulls (recruits are bought directly), relics, heroes, Heat, waypoints and secrets, art and audio.
 
 See the README for how to run it.

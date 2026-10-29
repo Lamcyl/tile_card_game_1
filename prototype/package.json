@@ -6,7 +6,7 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview --host",
-    "single": "vite build && node scripts/single-file.mjs",
+    "single": "vite build --mode single && node scripts/single-file.mjs",
     "android": "vite build && cap sync android && cap open android"
   },
   "devDependencies": {

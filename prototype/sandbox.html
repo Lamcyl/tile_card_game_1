@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Tile Defense Sandbox</title>
+</head>
+<body>
+  <header class="top">
+    <h1>Tile Defense <small>gameplay prototype</small></h1>
+    <nav id="stage-select" aria-label="Choose stage"></nav>
+  </header>
+
+  <main class="layout">
+    <section class="play">
+      <div class="stage-info">
+        <div>
+          <h2 id="stage-title"></h2>
+          <p id="stage-hint" class="hint"></p>
+        </div>
+        <div class="turn-box">
+          <div>Turn <strong id="turn">1</strong></div>
+          <div class="muted">Damage taken: <strong id="damage">0</strong></div>
+        </div>
+      </div>
+
+      <div id="arena" class="arena">
+        <div id="board" class="board"></div>
+        <div class="threat-wrap">
+          <div class="threat-label">If nothing dies, you take:</div>
+          <div id="threat" class="threat"></div>
+        </div>
+        <div id="hero" class="hero">
+          <span class="hero-icon">🧙</span>
+          <div class="hp-bar"><div id="hp-fill" class="hp-fill"></div></div>
+          <span id="hp-text" class="hp-text"></span>
+        </div>
+        <div id="fx" class="fx"></div>
+      </div>
+
+      <div id="message" class="message"></div>
+
+      <div class="controls">
+        <button id="fight" class="primary">⚔ Fight</button>
+        <button id="clear">Return all</button>
+        <button id="retry">Retry stage</button>
+        <button id="speed" title="Animation speed">Speed 1×</button>
+      </div>
+
+      <div class="hand-wrap">
+        <div class="hand-label">Your army <span class="muted">(drag onto your tiles, or tap a card then a tile)</span></div>
+        <div id="hand" class="hand"></div>
+      </div>
+    </section>
+
+    <aside class="side">
+      <details open>
+        <summary>How to play</summary>
+        <ol class="rules">
+          <li><b>Enemies</b> sit at the top. Each shows <b>♥ HP</b> and <b>⚔ ATK</b> (the damage it deals you).</li>
+          <li><b>Place your whole army</b> on the bottom 3 rows, then press <b>Fight</b>.</li>
+          <li><b>Attackers</b> fire upward, front row first, left to right. <b>R</b> is how many tiles up they reach.</li>
+          <li><b>Supporters</b> boost the attacker their arrow points at. All <b>+</b> bonuses apply first, then <b>×</b>.</li>
+          <li><b>Survivors</b> hit your hero for their ATK. A <b>Shield</b> absorbs damage in its column.</li>
+          <li>Survivors <b>enrage</b> (+1 ⚔) at the end of each turn. Rearrange and fight again.</li>
+        </ol>
+        <div class="legend">
+          <div><b>↑</b> Straight: first enemy in its column</div>
+          <div><b>⇈</b> Pierce: every enemy in its column</div>
+          <div><b>↖↑↗</b> Spread: first enemy in 3 columns</div>
+          <div><b>Overkill</b>: extra damage from a straight or spread hit carries to the enemy behind</div>
+          <div><b>🛢️ Barrel</b>: explodes for 2 damage to neighbours. Doesn't need to be destroyed.</div>
+          <div><b>🛡 Armor</b>: every hit deals that much less</div>
+          <div><b>★</b> Upgraded card</div>
+        </div>
+      </details>
+      <details open>
+        <summary>Battle log</summary>
+        <div id="log" class="log"></div>
+      </details>
+    </aside>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-box" id="modal-box"></div>
+  </div>
+
+  <script type="module" src="./sandbox.js"></script>
+</body>
+</html>

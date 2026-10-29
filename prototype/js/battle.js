@@ -1,0 +1,335 @@
+// Battle screen for the world map game: placement input and animated
+// turn playback, built on the rules engine. Battle.start() opens a fight
+// and calls onEnd(finalState) once it is won or lost.
+(function () {
+  'use strict';
+  const E = window.Engine;
+  const root = document.getElementById('battle');
+  const $ = (sel) => root.querySelector(sel);
+
+  const PATTERN_GLYPH = { straight: '↑', pierce: '⇈', spread: '↖↑↗' };
+  const PATTERN_TEXT = {
+    straight: 'hits the first enemy in its column',
+    pierce: 'hits every enemy in its column',
+    spread: 'hits the first enemy in its column and both neighbouring columns',
+  };
+  const SPEEDS = [1, 2, 4];
+
+  const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null };
+
+  // Board cells are built once; their contents are redrawn on every render.
+  (function buildBoard() {
+    const board = $('#b-board');
+    for (let r = 0; r < E.ROWS; r++) {
+      for (let c = 0; c < E.COLS; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell row-' + r + (r < 2 ? ' enemy-zone' : ' player-zone');
+        cell.dataset.key = E.key(r, c);
+        board.appendChild(cell);
+      }
+    }
+  })();
+
+  const cellEl = (k) => root.querySelector('.cell[data-key="' + k + '"]');
+  const cardById = (id) => game.army.find((c) => c.id === id);
+  const tileOf = (id) => Object.keys(game.placement).find((k) => game.placement[k] === id) || null;
+  const current = () => game.view || game.state;
+
+  function start(opts) {
+    game.army = opts.army;
+    game.state = E.createState(opts.stage);
+    game.view = null;
+    game.selected = null;
+    game.busy = false;
+    game.onEnd = opts.onEnd;
+    // Keep the player's last layout for cards that are still in the squad.
+    const kept = {};
+    for (const [k, id] of Object.entries(opts.placement || {})) if (cardById(id)) kept[k] = id;
+    game.placement = kept;
+    $('#b-name').textContent = opts.title;
+    $('#b-sub').textContent = opts.subtitle;
+    $('#b-msg').textContent = Object.keys(kept).length ? 'Your last layout is ready. Adjust it, then press Fight.' : 'Place your squad, then press Fight.';
+    root.hidden = false;
+    render();
+  }
+  const placement = () => Object.assign({}, game.placement);
+
+  // ---------- Rendering ----------
+
+  function render() {
+    const s = current();
+    const stats = E.computeStats(game.placement, game.army);
+    $('#b-turn').textContent = s.turn;
+    $('#b-hpfill').style.width = (100 * s.hp / s.maxHp) + '%';
+    $('#b-hptext').textContent = s.hp + ' / ' + s.maxHp;
+
+    const focusKey = game.hover && game.placement[game.hover] ? game.hover : (game.selected && tileOf(game.selected)) || null;
+    const reach = new Set(), willHit = new Set(), boostTargets = new Set();
+    if (focusKey && stats[focusKey] && !game.busy) {
+      const st = stats[focusKey];
+      if (st.type.role === 'attacker') {
+        E.reachableTiles(st).forEach((k) => reach.add(k));
+        E.targetsFor(st, s.enemies).forEach((e) => willHit.add(E.key(e.row, e.col)));
+      } else if (st.type.role === 'support') st.boosts.forEach((k) => boostTargets.add(k));
+    }
+    for (let r = 0; r < E.ROWS; r++) {
+      for (let c = 0; c < E.COLS; c++) {
+        const k = E.key(r, c);
+        const cell = cellEl(k);
+        cell.classList.toggle('reach', reach.has(k));
+        cell.classList.toggle('will-hit', willHit.has(k));
+        cell.classList.toggle('boost-target', boostTargets.has(k));
+        cell.classList.toggle('can-drop', r >= 2 && !!game.selected && !game.busy);
+        if (r < 2) {
+          const e = s.enemies.find((en) => en.alive && en.row === r && en.col === c);
+          cell.innerHTML = e ? enemyHTML(e) : '';
+        } else {
+          const id = game.placement[k];
+          cell.innerHTML = id ? cardHTML(cardById(id), stats[k], k) : '';
+        }
+      }
+    }
+    const hand = game.army.filter((c) => !tileOf(c.id));
+    $('#b-hand').innerHTML = hand.length
+      ? hand.map((c) => '<div class="slot">' + cardHTML(c, null, 'hand') + '</div>').join('')
+      : '<div class="hand-empty">Whole squad placed. Drop a card here to take it back.</div>';
+    renderThreat(s, stats);
+    $('#b-fight').disabled = game.busy || s.status !== 'playing';
+    $('#b-clear').disabled = game.busy || s.status !== 'playing';
+    $('#b-speed').textContent = game.speed + '×';
+  }
+
+  function renderThreat(s, stats) {
+    let total = 0;
+    const cols = [];
+    for (let c = 0; c < E.COLS; c++) {
+      const incoming = s.enemies.filter((e) => E.isThreat(e) && e.col === c).reduce((n, e) => n + e.atk, 0);
+      const block = E.PLAYER_ROWS.map((r) => stats[E.key(r, c)]).filter((st) => st && st.type.role === 'defender').reduce((n, st) => n + st.block, 0);
+      const dmg = Math.max(0, incoming - block);
+      total += dmg;
+      cols.push(incoming === 0 ? '<div class="muted">–</div>' : '<div class="' + (dmg ? 'dmg' : 'safe') + '">' + (dmg ? '−' + dmg : '✓') + '</div>');
+    }
+    $('#b-threat').innerHTML = cols.join('');
+    $('#b-threat-total').textContent = total;
+    $('#b-threat-total').className = total ? 'dmg' : 'safe';
+  }
+
+  function enemyHTML(e) {
+    const t = E.ENEMY_TYPES[e.type];
+    if (t.barrel) {
+      return '<div class="enemy barrel" title="' + t.name + ': explodes for ' + t.blast + ' damage to every adjacent enemy when destroyed. It does not attack.">' +
+        '<div class="e-icon">' + t.icon + '</div><div class="e-stats"><span class="hp">♥' + e.hp + '</span><span class="atk">💥' + t.blast + '</span></div></div>';
+    }
+    return '<div class="enemy' + (t.boss ? ' boss' : '') + '" title="' + t.name + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' +
+      (e.armor ? ', armor ' + e.armor : '') + '">' +
+      (e.armor ? '<span class="badge">🛡' + e.armor + '</span>' : '') + (t.boss ? '<span class="crown">👑</span>' : '') +
+      '<div class="e-icon">' + t.icon + '</div>' +
+      '<div class="e-stats"><span class="hp">♥' + e.hp + '</span><span class="atk">⚔' + e.atk + '</span></div></div>';
+  }
+
+  function cardHTML(card, st, from) {
+    const t = E.CARD_TYPES[card.type];
+    let main = '', sub = '', desc = t.name + ': ', extra = '';
+    if (t.role === 'attacker') {
+      const atk = st ? st.atk : E.cardStat(card, 'atk');
+      const range = st ? st.range : E.cardStat(card, 'range');
+      main = '<span class="' + (st && st.atk !== st.baseAtk ? 'boosted' : '') + '">⚔' + atk + '</span>';
+      sub = '<span>' + PATTERN_GLYPH[t.pattern] + '</span><span class="' + (st && st.rangeBonus ? 'boosted' : '') + '">R' + range + '</span>';
+      desc += atk + ' damage, ' + PATTERN_TEXT[t.pattern] + ', reaches ' + range + ' tile(s) up';
+    } else if (t.role === 'support') {
+      const amount = E.cardStat(card, 'amount');
+      main = t.effect === 'atk' ? '+' + amount : t.effect === 'mult' ? '×' + amount : 'R+' + amount;
+      sub = t.target === 'up' ? '<span>↑ above</span>' : '<span>✚ around</span>';
+      desc += (t.effect === 'atk' ? '+' + amount + ' ATK' : t.effect === 'mult' ? '×' + amount + ' damage' : '+' + amount + ' range') +
+        ' to the ' + (t.target === 'up' ? 'attacker directly above it' : 'attackers on all 4 sides');
+      if (t.effect === 'mult') extra = ' mult';
+      if (st && st.boosts.length === 0) extra += ' idle';
+    } else {
+      const block = st ? st.block : E.cardStat(card, 'block');
+      main = '🛡' + block;
+      sub = '<span>column</span>';
+      desc += 'absorbs up to ' + block + ' damage in its column each turn';
+    }
+    const cls = 'card role-' + t.role + extra + (game.selected === card.id ? ' selected' : '');
+    return '<div class="' + cls + '" data-card="' + card.id + '" data-from="' + from + '" title="' + desc + '">' +
+      '<div class="c-top"><span>' + t.icon + '</span>' + (card.upgraded ? '<span class="up">★</span>' : '') + '</div>' +
+      '<div class="c-main">' + main + '</div><div class="c-sub">' + sub + '</div></div>';
+  }
+
+  // ---------- Placement input (drag, or tap a card then a tile) ----------
+
+  function placeCard(id, k) {
+    const from = tileOf(id);
+    const occupant = game.placement[k];
+    if (occupant === id) return;
+    if (from) delete game.placement[from];
+    game.placement[k] = id;
+    if (occupant && from) game.placement[from] = occupant;
+  }
+  function returnCard(id) { const from = tileOf(id); if (from) delete game.placement[from]; }
+
+  let drag = null;
+  function dropTargetAt(x, y) {
+    const el = document.elementFromPoint(x, y);
+    if (!el || !root.contains(el)) return null;
+    return el.closest('.cell.player-zone') || el.closest('#b-hand');
+  }
+  root.addEventListener('pointerdown', (ev) => {
+    if (game.busy || !game.state || game.state.status !== 'playing' || ev.button > 0) return;
+    if (!ev.target.closest('#b-board, #b-hand')) return;
+    const card = ev.target.closest('[data-card]');
+    drag = { id: card ? card.dataset.card : null, el: card, x0: ev.clientX, y0: ev.clientY, ghost: null, over: null };
+    if (card) ev.preventDefault();
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp, { once: true });
+  });
+  function onPointerMove(ev) {
+    if (!drag || !drag.id) return;
+    if (!drag.ghost && Math.hypot(ev.clientX - drag.x0, ev.clientY - drag.y0) > 6) {
+      const r = drag.el.getBoundingClientRect();
+      drag.ghost = drag.el.cloneNode(true);
+      drag.ghost.classList.add('ghost');
+      drag.ghost.style.width = r.width + 'px';
+      drag.ghost.style.height = r.height + 'px';
+      document.body.appendChild(drag.ghost);
+      drag.el.classList.add('dragging');
+    }
+    if (!drag.ghost) return;
+    drag.ghost.style.left = (ev.clientX - drag.ghost.offsetWidth / 2) + 'px';
+    drag.ghost.style.top = (ev.clientY - drag.ghost.offsetHeight / 2) + 'px';
+    const over = dropTargetAt(ev.clientX, ev.clientY);
+    if (over !== drag.over) {
+      if (drag.over) drag.over.classList.remove('drop-hover');
+      if (over) over.classList.add('drop-hover');
+      drag.over = over;
+    }
+  }
+  function onPointerUp(ev) {
+    window.removeEventListener('pointermove', onPointerMove);
+    const d = drag; drag = null;
+    if (!d) return;
+    if (d.over) d.over.classList.remove('drop-hover');
+    const target = dropTargetAt(ev.clientX, ev.clientY);
+    if (d.ghost) {
+      d.ghost.remove();
+      if (target && target.id === 'b-hand') returnCard(d.id);
+      else if (target) placeCard(d.id, target.dataset.key);
+      game.selected = null;
+    } else if (d.id) {
+      const tappedTile = d.el.dataset.from !== 'hand' ? d.el.dataset.from : null;
+      if (game.selected === d.id) game.selected = null;
+      else if (game.selected && tappedTile) { placeCard(game.selected, tappedTile); game.selected = null; }
+      else game.selected = d.id;
+    } else if (game.selected && target) {
+      if (target.id === 'b-hand') returnCard(game.selected);
+      else placeCard(game.selected, target.dataset.key);
+      game.selected = null;
+    } else game.selected = null;
+    render();
+  }
+  $('#b-board').addEventListener('pointerover', (ev) => {
+    if (drag && drag.ghost) return;
+    const cell = ev.target.closest && ev.target.closest('.cell');
+    const k = cell ? cell.dataset.key : null;
+    if (k !== game.hover) { game.hover = k; if (!game.busy) render(); }
+  });
+  $('#b-board').addEventListener('pointerleave', () => { game.hover = null; if (!game.busy && game.state) render(); });
+
+  // ---------- Turn playback ----------
+
+  const sleep = (ms) => new Promise((res) => setTimeout(res, ms / game.speed));
+  function centerOf(el) {
+    const a = $('#b-arena').getBoundingClientRect(), r = el.getBoundingClientRect();
+    return { x: r.left - a.left + r.width / 2, y: r.top - a.top + r.height / 2 };
+  }
+  function floatText(el, text, cls) {
+    const p = centerOf(el), f = document.createElement('div');
+    f.className = 'float ' + (cls || ''); f.textContent = text;
+    f.style.left = p.x + 'px'; f.style.top = p.y + 'px'; f.style.animationDuration = (900 / game.speed) + 'ms';
+    $('#b-fx').appendChild(f);
+    setTimeout(() => f.remove(), 900 / game.speed + 50);
+  }
+  async function projectile(fromEl, toEl, cls) {
+    const a = centerOf(fromEl), b = centerOf(toEl), p = document.createElement('div');
+    p.className = 'projectile ' + (cls || ''); p.style.left = a.x + 'px'; p.style.top = a.y + 'px';
+    const ms = 220 / game.speed; p.style.transitionDuration = ms + 'ms';
+    $('#b-fx').appendChild(p);
+    p.getBoundingClientRect();
+    p.style.transform = 'translate(' + (b.x - a.x) + 'px,' + (b.y - a.y) + 'px)';
+    await new Promise((res) => setTimeout(res, ms));
+    p.remove();
+  }
+  function flash(el, cls, ms) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); setTimeout(() => el.classList.remove(cls), ms / game.speed); }
+  const enemyCell = (view, id) => { const e = view.enemies.find((en) => en.id === id); return cellEl(E.key(e.row, e.col)); };
+
+  async function fight() {
+    if (game.busy || game.state.status !== 'playing') return;
+    if (!Object.keys(game.placement).length) { $('#b-msg').textContent = 'Place at least one card first.'; return; }
+    game.busy = true; game.selected = null;
+    const before = game.state;
+    const stats = E.computeStats(game.placement, game.army);
+    const { state, events } = E.resolveTurn(before, game.placement, game.army);
+    game.view = E.clone(before);
+    $('#b-msg').textContent = '';
+    render();
+    for (const ev of events) await playEvent(ev, game.view, stats);
+    game.state = state; game.view = null; game.busy = false;
+    render();
+    if (state.status === 'playing') {
+      $('#b-msg').textContent = 'Turn ' + state.turn + ': you lost ' + (before.hp - state.hp) + ' HP and the survivors enraged (+1 ⚔). Rearrange and fight again.';
+    } else {
+      $('#b-msg').textContent = state.status === 'cleared' ? 'Victory!' : 'Your hero has fallen.';
+      await sleep(700);
+      game.onEnd(state);
+    }
+  }
+
+  async function playEvent(ev, view, stats) {
+    if (ev.t === 'fire') {
+      const el = cellEl(ev.key);
+      el.classList.add('firing');
+      if (!ev.targets.length) { floatText(el, 'no target', 'info'); await sleep(420); }
+      else await Promise.all(ev.targets.map((id) => projectile(el, enemyCell(view, id))));
+      el.classList.remove('firing');
+    } else if (ev.t === 'hit') {
+      const e = view.enemies.find((en) => en.id === ev.id), el = enemyCell(view, ev.id);
+      e.hp = ev.hp;
+      flash(el, 'shake', 300);
+      floatText(el, '−' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' 🛡' : ''), 'dmg');
+      if (ev.killed) e.alive = false;
+      render(); await sleep(300);
+    } else if (ev.t === 'overkill') {
+      const from = enemyCell(view, ev.from);
+      floatText(from, 'Overkill ' + ev.amount + '!', 'info');
+      await projectile(from, enemyCell(view, ev.id));
+    } else if (ev.t === 'explode') {
+      const el = enemyCell(view, ev.id);
+      flash(el, 'boom-flash', 450); floatText(el, '💥', 'boom'); await sleep(360);
+    } else if (ev.t === 'strike') {
+      const el = enemyCell(view, ev.id), hero = $('#b-hero');
+      const target = ev.blocked && ev.shields.length ? cellEl(ev.shields[0]) : hero;
+      await projectile(el, target, 'enemy-shot');
+      if (ev.blocked) {
+        ev.shields.forEach((k) => flash(cellEl(k), 'shield-flash', 400));
+        floatText(cellEl(ev.shields[0]), 'Blocked ' + ev.blocked, 'block');
+        if (ev.dmg) await projectile(cellEl(ev.shields[0]), hero, 'enemy-shot');
+      }
+      if (ev.dmg) { flash(hero, 'hurt', 350); floatText(hero, '−' + ev.dmg + ' ♥', 'dmg'); }
+      view.hp = ev.hp; render(); await sleep(340);
+    } else if (ev.t === 'enrage') {
+      if (!ev.ids.length) return;
+      ev.ids.forEach((id) => { view.enemies.find((en) => en.id === id).atk += 1; const el = enemyCell(view, id); flash(el, 'rage', 500); floatText(el, '+1 ⚔', 'info'); });
+      render(); await sleep(560);
+    }
+  }
+
+  $('#b-fight').addEventListener('click', fight);
+  $('#b-clear').addEventListener('click', () => { game.placement = {}; game.selected = null; render(); });
+  $('#b-speed').addEventListener('click', () => { game.speed = SPEEDS[(SPEEDS.indexOf(game.speed) + 1) % SPEEDS.length]; render(); });
+
+  window.Battle = {
+    start, placement, hide: () => { root.hidden = true; },
+    // Current fight, read by automated tests.
+    debug: () => ({ state: game.state, army: game.army }),
+  };
+})();
