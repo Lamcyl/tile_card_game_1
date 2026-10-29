@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+<g id="sf" stroke="#55514c" stroke-width="3" stroke-linecap="round" fill="none"><path d="M0-11V11M-10-6L10 6M-10 6L10-6"/></g>
+</defs>
+<!-- blizzard swirl -->
+<path d="M30 60C80 20 190 30 226 80C240 110 210 140 176 128M44 150C20 120 40 84 90 74M232 190C190 214 110 220 70 196" fill="none" stroke="#d4cec3" stroke-width="12" stroke-linecap="round"/>
+<path d="M44 66C90 30 190 40 220 84C232 108 212 128 186 122M226 186C190 208 118 214 78 196" fill="none" stroke="#9a948b" stroke-width="3" stroke-linecap="round"/>
+<!-- whipping hair -->
+<path d="M96 70C130 20 200 40 244 20C220 50 200 60 190 70C220 74 238 90 250 110C216 100 196 100 176 100C210 112 226 134 232 156C204 140 184 134 160 130L150 100Z" fill="#1b1a1a"/>
+<path d="M120 60C150 44 190 52 224 38M170 108C196 108 220 114 238 128" stroke="#55514c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M96 120L60 166L84 158L74 200L104 150Z" fill="#1b1a1a"/>
+<!-- kimono -->
+<path d="M78 228L92 152Q120 166 152 152L170 228Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M82 194L166 194L168 210L80 210Z" fill="#55514c" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M104 154L122 196L144 154" fill="none" stroke="#1b1a1a" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M150 222L168 222M88 222L110 222" stroke="#9a948b" stroke-width="3"/>
+<!-- flared sleeves raised -->
+<path d="M96 158C60 160 30 150 14 116C40 118 52 108 70 100C80 116 96 124 106 140Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M30 124C50 134 70 136 90 134" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M150 158C190 160 222 156 240 130C214 134 200 126 184 120C174 134 160 138 148 144Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M222 138C202 146 184 146 166 142" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- head -->
+<circle cx="124" cy="104" r="44" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="7"/>
+<path d="M80 104C76 56 168 48 170 100C158 94 150 84 142 78C140 92 130 90 124 80C116 92 104 92 98 82C92 90 86 96 80 104Z" fill="#1b1a1a"/>
+<path d="M80 104L72 150L88 130Z M168 104L176 140L162 124Z" fill="#1b1a1a"/>
+<!-- eyes -->
+<path d="M94 106L120 112L118 124L98 120Z" fill="#1b1a1a"/><path d="M154 106L128 112L130 124L150 120Z" fill="#1b1a1a"/>
+<path d="M102 114L108 116" stroke="#f6f2e9" stroke-width="3.5" stroke-linecap="round"/><path d="M146 114L140 116" stroke="#f6f2e9" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M90 98L122 110M158 98L128 110" stroke="#1b1a1a" stroke-width="5" stroke-linecap="round"/>
+<path d="M112 138C120 134 130 134 138 138" fill="none" stroke="#1b1a1a" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M118 138L121 146L124 138Z" fill="#1b1a1a"/>
+<circle cx="94" cy="130" r="4" fill="#9a948b"/><circle cx="154" cy="130" r="4" fill="#9a948b"/>
+<!-- cold breath -->
+<path d="M126 146C140 154 150 164 170 160C190 156 196 170 216 164" fill="none" stroke="#9a948b" stroke-width="4" stroke-linecap="round"/>
+<use href="#sf" x="40" y="60"/><use href="#sf" x="214" y="206"/><use href="#sf" x="30" y="196"/>
+<circle cx="236" cy="150" r="3" fill="#55514c"/><circle cx="20" cy="86" r="3" fill="#55514c"/><circle cx="196" cy="48" r="3" fill="#f6f2e9"/>
+</svg>

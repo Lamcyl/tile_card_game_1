@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<!-- web -->
+<g fill="none" stroke="#9a948b" stroke-width="2.5" stroke-linecap="round"><path d="M12 12L100 60M12 12L60 100M12 12L12 70M12 12L70 12"/><path d="M30 14Q34 34 14 30M52 16Q58 50 16 52M76 40Q82 72 40 76"/><path d="M244 12L156 60M244 12L196 100M244 12L244 70M244 12L186 12"/><path d="M226 14Q222 34 242 30M204 16Q198 50 240 52M180 40Q174 72 216 76"/></g>
+<!-- legs back -->
+<g fill="none" stroke="#1b1a1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+<path d="M92 180L56 150L30 192L24 224"/><path d="M90 196L50 196L38 226"/><path d="M164 180L200 150L226 192L232 224"/><path d="M166 196L206 196L218 226"/>
+<path d="M98 208L74 216L66 232"/><path d="M158 208L182 216L190 232"/><path d="M104 160L76 130L54 140"/><path d="M152 160L180 130L202 140"/>
+</g>
+<!-- abdomen -->
+<ellipse cx="128" cy="190" rx="50" ry="40" fill="#9a948b" stroke="#1b1a1a" stroke-width="7"/>
+<path d="M92 214C112 232 144 232 164 214C150 224 106 224 92 214Z" fill="#55514c"/>
+<path d="M128 160L112 176L128 192L144 176Z" fill="#1b1a1a"/><circle cx="108" cy="204" r="6" fill="#d4cec3"/><circle cx="148" cy="204" r="6" fill="#d4cec3"/><circle cx="128" cy="214" r="5" fill="#d4cec3"/>
+<!-- torso -->
+<path d="M100 164L106 120Q128 130 150 120L156 164Q128 176 100 164Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M102 148L154 148L154 158L102 158Z" fill="#55514c"/>
+<path d="M114 122L128 150L142 122" fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M106 126C84 128 76 148 82 160C92 162 102 152 106 140Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M150 126C172 124 184 108 176 98C166 96 156 108 152 118Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<!-- hair back -->
+<path d="M82 68C80 16 176 16 174 68L182 124L162 112L94 112L74 124Z" fill="#1b1a1a"/>
+<!-- head -->
+<circle cx="128" cy="72" r="40" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="7"/>
+<path d="M88 70C86 30 170 30 168 70C160 54 150 48 142 58C134 44 116 46 110 58C100 54 92 60 88 70Z" fill="#1b1a1a"/>
+<path d="M88 70L84 100L96 88Z M168 70L172 100L160 88Z" fill="#1b1a1a"/>
+<ellipse cx="112" cy="80" rx="7.5" ry="10" fill="#1b1a1a"/><ellipse cx="144" cy="80" rx="7.5" ry="10" fill="#1b1a1a"/>
+<circle cx="109" cy="76" r="3.2" fill="#f6f2e9"/><circle cx="141" cy="76" r="3.2" fill="#f6f2e9"/><circle cx="115" cy="84" r="1.6" fill="#f6f2e9"/><circle cx="147" cy="84" r="1.6" fill="#f6f2e9"/>
+<circle cx="97" cy="94" r="5" fill="#9a948b"/><circle cx="159" cy="94" r="5" fill="#9a948b"/>
+<path d="M120 96C124 102 132 102 136 96" fill="none" stroke="#1b1a1a" stroke-width="3.5" stroke-linecap="round"/>
+<!-- ornaments -->
+<path d="M156 40L186 22" stroke="#55514c" stroke-width="3" stroke-linecap="round"/><circle cx="188" cy="21" r="8" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3.5"/><circle cx="188" cy="21" r="3" fill="#c8352b"/>
+<path d="M100 40L72 24" stroke="#55514c" stroke-width="3" stroke-linecap="round"/><path d="M72 24L66 14M72 24L60 24M72 24L64 32" stroke="#1b1a1a" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

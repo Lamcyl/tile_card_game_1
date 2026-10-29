@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<!-- kanabo resting on shoulder -->
+<g transform="rotate(14 180 210)">
+<path d="M173 120 L187 120 L189 218 Q180 224 171 218 Z" fill="#55514c" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M164 126 Q156 76 166 46 Q180 30 196 46 Q206 76 196 126 Q180 134 164 126 Z" fill="#9a948b" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M170 60 Q166 90 172 118 Q174 90 176 56 Z" fill="#d4cec3"/>
+<path d="M164 62 L152 56 L164 74 Z M165 92 L152 90 L165 104 Z M196 62 L208 56 L196 74 Z M196 92 L208 90 L196 104 Z M180 38 L180 22 L188 40 Z M174 112 L162 118 L176 122 Z M190 112 L200 118 L188 122 Z" fill="#1b1a1a"/>
+<circle cx="181" cy="70" r="5" fill="#1b1a1a"/><circle cx="181" cy="98" r="5" fill="#1b1a1a"/>
+</g>
+<!-- legs/feet -->
+<ellipse cx="100" cy="220" rx="21" ry="10" fill="#1b1a1a"/><ellipse cx="100" cy="218" rx="18" ry="7.5" fill="#d4cec3"/>
+<ellipse cx="156" cy="220" rx="21" ry="10" fill="#1b1a1a"/><ellipse cx="156" cy="218" rx="18" ry="7.5" fill="#d4cec3"/>
+<!-- body -->
+<ellipse cx="128" cy="184" rx="50" ry="38" fill="#1b1a1a"/>
+<ellipse cx="128" cy="185" rx="44" ry="32" fill="#9a948b"/>
+<ellipse cx="128" cy="181" rx="43" ry="29" fill="#d4cec3"/>
+<ellipse cx="128" cy="176" rx="24" ry="16" fill="#f6f2e9" opacity="0"/>
+<!-- tiger loincloth -->
+<path d="M84 196 Q128 214 172 196 L170 210 L158 218 L148 210 L138 222 L128 210 L118 222 L108 210 L98 218 L86 210 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M96 200 L104 202 L100 210 Z M114 204 L124 206 L118 216 Z M134 206 L144 205 L140 216 Z M152 203 L162 200 L158 210 Z" fill="#1b1a1a"/>
+<path d="M84 196 Q128 214 172 196" fill="none" stroke="#1b1a1a" stroke-width="5" stroke-linecap="round"/>
+<!-- left arm -->
+<path d="M84 160 Q62 172 66 194 Q78 200 88 190 Q92 176 96 166 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="72" cy="196" r="10" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4"/>
+<!-- right arm + fist on club -->
+<path d="M170 158 Q190 160 190 180 Q180 192 168 184 Q160 172 160 164 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="188" cy="176" r="12" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5"/>
+<path d="M184 170 L184 182 M191 170 L191 182" stroke="#1b1a1a" stroke-width="2" stroke-linecap="round"/>
+<!-- hair -->
+<path d="M62 100 L44 74 L70 80 L62 48 L90 64 L96 32 L116 56 L128 26 L140 56 L160 32 L166 64 L194 48 L186 80 L212 74 L194 100 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<!-- head -->
+<ellipse cx="128" cy="102" rx="66" ry="57" fill="#1b1a1a"/>
+<ellipse cx="128" cy="103" rx="60" ry="51" fill="#9a948b"/>
+<ellipse cx="128" cy="99" rx="59" ry="49" fill="#d4cec3"/>
+<!-- tiny horns -->
+<path d="M101 58 Q96 40 104 30 Q112 42 114 56 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M155 58 Q160 40 152 30 Q144 42 142 56 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<!-- face -->
+<path d="M86 92 Q98 84 112 90 Q100 88 86 92 Z M170 92 Q158 84 144 90 Q156 88 170 92 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="102" cy="108" rx="10" ry="12.5" fill="#1b1a1a"/>
+<ellipse cx="154" cy="108" rx="10" ry="12.5" fill="#1b1a1a"/>
+<circle cx="98.5" cy="103" r="4.2" fill="#f6f2e9"/><circle cx="106" cy="113" r="2" fill="#f6f2e9"/>
+<circle cx="150.5" cy="103" r="4.2" fill="#f6f2e9"/><circle cx="158" cy="113" r="2" fill="#f6f2e9"/>
+<circle cx="80" cy="124" r="6" fill="#9a948b"/><circle cx="176" cy="124" r="6" fill="#9a948b"/>
+<path d="M124 118 Q128 122 132 118" stroke="#1b1a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M112 128 Q128 142 144 128 Q128 134 112 128 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M117 130 L121 137 L124 132 Z M139 130 L135 137 L132 132 Z" fill="#f6f2e9"/>
+</svg>

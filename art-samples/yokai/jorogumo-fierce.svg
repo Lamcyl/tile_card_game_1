@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<!-- web strands -->
+<g fill="none" stroke="#9a948b" stroke-width="2.5" stroke-linecap="round"><path d="M244 8L150 70M244 8L206 120M244 8L244 90M12 8L100 66M12 8L50 120M12 8L12 90"/><path d="M226 12Q220 44 244 46M200 24Q190 72 240 74M30 12Q36 44 12 46M56 24Q66 72 16 74"/><path d="M96 238L60 250M160 238L196 250"/></g>
+<!-- legs raised -->
+<g fill="none" stroke="#1b1a1a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+<path d="M88 184L40 160L16 100L20 60"/><path d="M168 184L216 160L240 100L236 60"/>
+<path d="M84 200L30 204L14 170"/><path d="M172 200L226 204L242 170"/>
+<path d="M96 160L56 120L72 70"/><path d="M160 160L200 120L184 70"/>
+<path d="M98 214L62 226L48 244"/><path d="M158 214L194 226L208 244"/>
+</g>
+<g fill="#1b1a1a"><path d="M20 60L12 40L26 52Z"/><path d="M236 60L244 40L230 52Z"/><path d="M72 70L66 50L80 60Z"/><path d="M184 70L190 50L176 60Z"/></g>
+<!-- abdomen -->
+<path d="M128 150C60 150 70 232 128 232C186 232 196 150 128 150Z" fill="#9a948b" stroke="#1b1a1a" stroke-width="7" stroke-linejoin="round"/>
+<path d="M82 208C100 236 156 236 174 208C158 224 98 224 82 208Z" fill="#55514c"/>
+<path d="M128 164L108 188L128 214L148 188Z" fill="#1b1a1a"/><path d="M128 180L123 188L128 196L133 188Z" fill="#c8352b"/>
+<path d="M92 190L98 204M164 190L158 204" stroke="#1b1a1a" stroke-width="4" stroke-linecap="round"/>
+<!-- torso -->
+<path d="M100 160L106 118Q128 128 150 118L156 160Q128 172 100 160Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M102 144L154 144L154 154L102 154Z" fill="#55514c"/>
+<path d="M114 120L128 146L142 120" fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<!-- claw arms -->
+<path d="M106 124C80 118 66 100 70 84C80 88 100 92 108 108Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M150 124C176 118 190 100 186 84C176 88 156 92 148 108Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M70 84L60 70M72 86L56 80M76 88L66 96M186 84L196 70M184 86L200 80M180 88L190 96" stroke="#1b1a1a" stroke-width="3.5" stroke-linecap="round"/>
+<!-- hair wild -->
+<path d="M80 70C70 10 186 10 176 70L196 108L170 100L186 134L158 108L98 108L72 134L86 100L60 108Z" fill="#1b1a1a"/>
+<!-- head -->
+<circle cx="128" cy="72" r="40" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="7"/>
+<path d="M88 70C84 30 172 30 168 70C162 56 156 52 148 50C140 62 130 56 126 46C118 60 108 58 104 50C96 54 92 60 88 70Z" fill="#1b1a1a"/>
+<path d="M88 70L82 100L96 88Z M168 70L174 100L160 88Z" fill="#1b1a1a"/>
+<path d="M96 68L124 82L120 90L100 82Z M160 68L132 82L136 90L156 82Z" fill="#1b1a1a"/>
+<path d="M102 76L108 80M154 76L148 80" stroke="#f6f2e9" stroke-width="3" stroke-linecap="round"/>
+<path d="M92 66L124 80M164 66L132 80" stroke="#1b1a1a" stroke-width="5" stroke-linecap="round"/>
+<path d="M106 98C118 94 138 94 150 98C146 108 138 112 128 112C118 112 110 108 106 98Z" fill="#1b1a1a"/>
+<path d="M110 98L114 108L118 98M138 98L142 108L146 98" fill="#f6f2e9" stroke="#f6f2e9" stroke-width="1" stroke-linejoin="round"/>
+
+<circle cx="96" cy="94" r="4" fill="#9a948b"/><circle cx="160" cy="94" r="4" fill="#9a948b"/>
+<!-- ornaments -->
+<path d="M158 38L188 20" stroke="#55514c" stroke-width="3" stroke-linecap="round"/><circle cx="190" cy="19" r="8" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3.5"/><circle cx="190" cy="19" r="3" fill="#1b1a1a"/>
+<path d="M98 38L68 22" stroke="#55514c" stroke-width="3" stroke-linecap="round"/><path d="M68 22L60 10M68 22L56 20M68 22L58 32" stroke="#1b1a1a" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

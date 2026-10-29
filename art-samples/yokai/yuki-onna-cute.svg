@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+<g id="sf" stroke="#55514c" stroke-width="3" stroke-linecap="round" fill="none"><path d="M0-11V11M-10-6L10 6M-10 6L10-6"/><path d="M-3-9L0-5L3-9M-3 9L0 5L3 9" stroke-width="2"/></g>
+</defs>
+<!-- hair back -->
+<path d="M72 100C62 40 100 34 128 34C156 34 194 40 184 100L196 214L158 196L158 150L98 150L98 196L60 214Z" fill="#1b1a1a"/>
+<path d="M78 120L70 196M178 120L186 196" stroke="#55514c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<!-- kimono -->
+<path d="M80 228L90 152Q128 172 166 152L176 228Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M90 228L98 170Q128 188 158 170L166 228Z" fill="#d4cec3" opacity="0"/>
+<path d="M82 196L174 196L172 212L84 212Z" fill="#9a948b" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M108 154L128 198L148 154" fill="none" stroke="#1b1a1a" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M86 220L170 220" stroke="#55514c" stroke-width="3"/>
+<!-- sleeves/arms -->
+<path d="M86 156C62 160 58 190 66 204C80 206 92 196 98 176Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M170 154C190 150 206 140 196 124C186 118 170 128 160 144Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="188" cy="130" r="6" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3"/>
+<path d="M70 200C76 206 88 204 94 196" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- head -->
+<circle cx="128" cy="102" r="46" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="7"/>
+<path d="M82 100C80 52 176 52 174 100C164 82 152 74 142 86C132 70 112 74 104 88C94 84 88 90 82 100Z" fill="#1b1a1a"/>
+<path d="M82 100C84 118 84 126 90 134L84 140L78 100Z" fill="#1b1a1a"/>
+<path d="M174 100C172 118 172 126 166 134L172 140L178 100Z" fill="#1b1a1a"/>
+<ellipse cx="108" cy="112" rx="8" ry="10" fill="#1b1a1a"/><ellipse cx="148" cy="112" rx="8" ry="10" fill="#1b1a1a"/>
+<circle cx="105" cy="108" r="3.2" fill="#f6f2e9"/><circle cx="145" cy="108" r="3.2" fill="#f6f2e9"/>
+<circle cx="111" cy="116" r="1.6" fill="#f6f2e9"/><circle cx="151" cy="116" r="1.6" fill="#f6f2e9"/>
+<circle cx="92" cy="128" r="5" fill="#9a948b"/><circle cx="164" cy="128" r="5" fill="#9a948b"/>
+<ellipse cx="130" cy="130" rx="5" ry="4.5" fill="#1b1a1a"/>
+<!-- frost puff -->
+<g fill="#d4cec3" stroke="#55514c" stroke-width="3"><circle cx="206" cy="124" r="10"/><circle cx="220" cy="108" r="13"/><circle cx="214" cy="88" r="8"/></g>
+<path d="M200 122C208 114 214 116 218 108M214 92C220 90 222 96 218 98" fill="none" stroke="#9a948b" stroke-width="2.5" stroke-linecap="round"/>
+<use href="#sf" x="44" y="66"/><use href="#sf" x="214" y="170" transform="translate(0 0)"/><use href="#sf" x="36" y="150"/>
+<circle cx="228" cy="60" r="3" fill="#9a948b"/><circle cx="30" cy="106" r="3" fill="#9a948b"/><circle cx="196" cy="206" r="3" fill="#9a948b"/>
+</svg>
