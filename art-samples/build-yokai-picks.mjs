@@ -6,7 +6,7 @@ const dir = new URL('./yokai/', import.meta.url);
 // [number, slug, name, variant, feedback that was applied]
 const PICKS = [
   [3, 'tengu', 'Karasu-tengu', 'fierce', 'Feet redone; head reshaped to read more like a crow.'],
-  [4, 'kitsune', 'Kitsune', 'fierce', 'No arms: on all fours with the nine tails fanned.'],
+  [4, 'kitsune', 'Kitsune', 'fierce', 'v3: three-quarter pounce crouch with a real body, bent legs and all nine tails from one base. Shown next to v2.'],
   [5, 'tanuki', 'Tanuki', 'fierce', 'Clear ink outline restored around the body.'],
   [8, 'chochin-obake', 'Chōchin-obake', 'fierce', 'Right side cleaned up; mouth made unambiguous.'],
   [9, 'hitotsume-kozo', 'Hitotsume-kozō', 'fierce', 'One clean outline around the head.'],
@@ -23,14 +23,17 @@ const tiles = (s) => '<span class="tiles"><span class="tile">' + s + '</span><sp
 
 const cards = PICKS.map(([num, slug, name, variant, fix]) => {
   const base = slug + '-' + variant;
-  const v2 = base + '-v2.svg';
+  // Show the newest refinement next to the version it replaced.
+  let n = 2; while (existsSync(new URL(base + '-v' + (n + 1) + '.svg', dir))) n++;
+  const v2 = base + '-v' + n + '.svg';
+  const prev = n > 2 ? base + '-v' + (n - 1) + '.svg' : base + '.svg';
   const hasV2 = fix && existsSync(new URL(v2, dir));
   const fig = (file, label) => {
     const s = svg(file);
     return '<figure><div class="art">' + s + '</div><figcaption>' + label + tiles(s) + '</figcaption></figure>';
   };
   const body = hasV2
-    ? '<div class="pair">' + fig(base + '.svg', 'Before') + fig(v2, 'Refined') + '</div><p class="fix">' + fix + '</p>'
+    ? '<div class="pair">' + fig(prev, 'Before') + fig(v2, 'Refined') + '</div><p class="fix">' + fix + '</p>'
     : '<div class="single">' + fig(base + '.svg', fix ? 'Refinement pending' : 'Approved as is') + '</div>';
   return '<article class="card' + (hasV2 ? ' wide' : '') + '"><header><span class="num">' + num + '</span><div><h2>' + name + '</h2><p>' + variant + '</p></div></header>' + body + '</article>';
 }).join('\n');
