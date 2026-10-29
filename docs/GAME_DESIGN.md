@@ -558,3 +558,42 @@ The prototype in `prototype/` has two pages.
 **Not included yet:** equipment, gacha pulls (recruits are bought directly), relics, heroes, Heat, waypoints and secrets, art and audio.
 
 See the README for how to run it.
+
+---
+
+## 24. Planned changes (from the first world map playtest)
+
+These are agreed directions, **not implemented yet**. Numbers are starting points for tuning.
+
+### 24.1 Faster early progression, slower later
+
+- **First runs should last 8–10 battles** (currently about 5 with perfect play). Make the first sub-area gentler and give it more Level 1–2 spots.
+- **Front-load progression:** cheap, frequent unlocks early; upgrade costs and enemy growth rise more steeply from the second region onward.
+- **Guaranteed upgrade after the first run:** the first run always pays at least enough Souls for the cheapest Camp upgrade (with a first-run bonus if needed). The results screen points straight to it.
+
+### 24.2 Run rewards: range is a rare, mid-game upgrade
+
+- Remove **+1 range** from the common after-battle rewards. Extra range on an Archer is too strong early.
+- Range becomes a **rare** reward that appears only from the second region onward, or comes from equipment.
+
+### 24.3 Guaranteed first equipment drop
+
+- The first or second battle of the **first run** always drops a piece of equipment (for example, *Rusty Sword: +1 ATK to Swordsmen*).
+- That moment introduces equipment and the equip screen (section 13).
+
+### 24.4 More choice on the map
+
+- Each spot should offer **3–5 fights to choose from**, not 1–2. The node graph needs more connections and more spots per sub-area.
+
+### 24.5 Battle limit per run ("Supplies")
+
+- Each run has a **Supplies** counter that works as a countdown, for example starting at 10.
+  - Winning an ordinary battle costs **1** Supply.
+  - Beating a boss **adds** Supplies (for example +5), so a strong run can chain into the next region.
+- The starting amount is **upgradeable at Camp**.
+- When Supplies reach 0, the run ends as a safe return (full Souls kept).
+- **All battles in every unlocked sub-area are open to choose from**, with no walking or adjacency limit. Supplies, not distance, limit a run.
+  - Early on, players spend Supplies on easy fights to grow during the run.
+  - In the mid to late game, players can **go straight for a boss** and spend their Supplies where they matter.
+- This replaces the "fight a spot next to your trail" rule (10.2), and makes waypoints (10.5) optional.
+- Open question: should spots in already-conquered sub-areas cost less, or give less?
