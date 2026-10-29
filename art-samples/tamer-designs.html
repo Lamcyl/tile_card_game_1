@@ -1,0 +1,621 @@
+<title>Tamer & Monster Designs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+  /* Layout: a scrolling design sheet. Roles and a board preview first, then one band per faction:
+     the tamer card beside its five monster cards. Art boxes use fixed pastel faction colours. */
+  :root {
+    --bg: #f6f4f0;
+    --surface: #ffffff;
+    --surface-2: #efebe4;
+    --fg: #2b2433;
+    --muted: #6d6576;
+    --line: #e2ddd5;
+    --accent: #6b4fd8;
+    --display: "Fredoka", "Nunito", system-ui, sans-serif;
+    --body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #16131c; --surface: #211d29; --surface-2: #2b2635; --fg: #f1edf7; --muted: #aaa1b7; --line: #362f42; --accent: #b3a0ff; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --bg: #16131c; --surface: #211d29; --surface-2: #2b2635; --fg: #f1edf7; --muted: #aaa1b7; --line: #362f42; --accent: #b3a0ff; color-scheme: dark; }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg); font: 15px/1.5 var(--body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding-block: 28px 56px; display: grid; gap: 40px; }
+  h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(28px, 4.5vw, 40px); line-height: 1.1; }
+  h2 { font-size: 24px; }
+  h3 { font-size: 17px; }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+  header { display: grid; gap: 10px; max-width: 70ch; }
+  .eyebrow { font: 700 12px var(--body); text-transform: uppercase; letter-spacing: .08em; color: var(--accent); }
+  section { display: grid; gap: 16px; }
+  .sec-head { display: grid; gap: 4px; max-width: 70ch; }
+
+  /* Roles */
+  .roles { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+  .role { display: flex; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; }
+  .glyph { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font: 700 14px var(--display); color: #fff; }
+  .role b { display: block; font-family: var(--display); font-weight: 600; }
+  .role span { font-size: 12px; color: var(--muted); }
+  .g-atk { background: #d0563f; } .g-sup { background: #3f72c4; } .g-mult { background: #c98a1b; } .g-def { background: #687485; }
+
+  /* Board preview */
+  .preview { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: center; }
+  @media (max-width: 720px) { .preview { grid-template-columns: minmax(0, 1fr); } }
+  .board { display: grid; grid-template-columns: repeat(5, 62px); gap: 3px; padding: 10px; background: #2a2433; border-radius: 16px; justify-self: center; }
+  .tile { width: 62px; height: 62px; border-radius: 10px; position: relative; display: grid; place-items: center; }
+  .tile.e { background: #4a3036; } .tile.p { background: #2f4140; } .tile.row2 { margin-top: 6px; }
+  .tile svg { width: 50px; height: 50px; }
+  .tile .num { position: absolute; bottom: 2px; right: 3px; font: 700 13px var(--display); color: #fff; text-shadow: 0 1px 2px #000; }
+  .tile .badge { position: absolute; top: 2px; left: 2px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 6px; font: 700 10px/18px var(--display); color: #fff; text-align: center; }
+  .tile .hp { position: absolute; bottom: 2px; left: 3px; font: 700 11px var(--display); color: #ff8a9a; text-shadow: 0 1px 2px #000; }
+  .tile .atk { position: absolute; bottom: 2px; right: 3px; font: 700 11px var(--display); color: #ffd36b; text-shadow: 0 1px 2px #000; }
+  .notes { display: grid; gap: 10px; }
+  .notes li { margin-bottom: 4px; }
+  .notes ul { margin: 0; padding-left: 18px; }
+
+  /* Evolution */
+  .evo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
+  .evo figure { margin: 0; display: grid; justify-items: center; gap: 4px; }
+  .evo .art { width: 120px; height: 120px; border-radius: 16px; background: #e3f4d6; }
+  .evo figcaption { font: 600 14px var(--display); text-align: center; }
+  .evo figcaption small { display: block; font: 600 12px var(--body); color: var(--muted); }
+  .evo .arrow { font: 600 22px var(--display); color: var(--muted); }
+
+  /* Faction bands */
+  .faction { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 18px; display: grid; gap: 16px; }
+  .f-head { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; justify-content: space-between; }
+  .f-head .tag { font: 700 12px var(--body); text-transform: uppercase; letter-spacing: .08em; padding: 3px 10px; border-radius: 999px; color: #fff; }
+  .f-body { display: grid; grid-template-columns: minmax(220px, 280px) minmax(0, 1fr); gap: 16px; }
+  @media (max-width: 760px) { .f-body { grid-template-columns: minmax(0, 1fr); } }
+  .tamer { border-radius: 16px; padding: 14px; display: grid; gap: 8px; align-content: start; }
+  .tamer .art { width: 100%; max-width: 220px; aspect-ratio: 1; justify-self: center; }
+  .tamer h3 { font-size: 20px; }
+  .tamer .kind { font-size: 13px; font-weight: 700; opacity: .8; }
+  .tamer dl { margin: 0; display: grid; gap: 6px; font-size: 13px; }
+  .tamer dt { font-weight: 800; }
+  .tamer dd { margin: 0; }
+  .mons { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; align-content: start; }
+  @media (max-width: 1000px) { .mons { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); } }
+  .mon { min-width: 0; background: var(--surface-2); border-radius: 14px; padding: 8px; display: grid; gap: 4px; align-content: start; }
+  .mon .art { width: 100%; aspect-ratio: 1; border-radius: 10px; }
+  .mon .name { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 6px; }
+  .mon .name b { font: 600 16px var(--display); }
+  .mon .stars { color: #e3a21a; font-size: 12px; letter-spacing: 1px; white-space: nowrap; }
+  .mon .chip { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; font-size: 12px; font-weight: 800; }
+  .mon .chip i { white-space: nowrap; font-style: normal; border-radius: 6px; padding: 1px 6px; color: #fff; font-family: var(--display); font-weight: 600; }
+  .mon p { font-size: 12.5px; color: var(--muted); }
+  .closing { max-width: 70ch; display: grid; gap: 8px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .mon .art svg, .tamer .art svg { transition: transform .2s ease; }
+    .mon:hover .art svg, .tamer:hover .art svg { transform: translateY(-3px) scale(1.03); }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Character concepts</div>
+    <h1>Tamers and their monsters</h1>
+    <p class="muted">Five factions, one for each region. Each faction has a <b>tamer</b> (the hero you pick for a run) and <b>five monsters</b> (the units you place on the board). Every board role from the current rules is covered. Tell me which factions, tamers and monsters you like, and what to change.</p>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <h2>Board roles, renamed for monsters</h2>
+      <p class="muted">Same rules as now; only the names change. The coloured badge stays on every monster so the puzzle is always readable.</p>
+    </div>
+    <div class="roles" id="roles"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>How it reads on the board</h2>
+      <p class="muted">Actual phone tile size (62 px). Wild Ember monsters on top, a mixed team below.</p>
+    </div>
+    <div class="preview">
+      <div class="board" id="board"></div>
+      <div class="notes">
+        <ul>
+          <li><b>Badge</b> (top left) shows the role. <b>Number</b> (bottom right) is the final attack after boosts.</li>
+          <li>Wild monsters show <span style="color:#d9475a;font-weight:800">♥ HP</span> and <span style="color:#c98a1b;font-weight:800">⚔ attack</span> instead.</li>
+          <li>Here Emberling doubles Narwhee above it (3 × 2 = 6), and Bloomcap boosts its neighbour Podpop (2 + 1 = 3).</li>
+          <li>Simple, round silhouettes with big eyes stay recognisable at this size; thin details don't.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Duplicates evolve a monster</h2>
+      <p class="muted">Each evolution raises its stats and changes its look: a bigger body, more thorns, a leafy crown.</p>
+    </div>
+    <div class="evo" id="evo"></div>
+  </section>
+
+  <div id="factions" style="display:grid;gap:28px"></div>
+
+  <section class="closing">
+    <h2>What to tell me</h2>
+    <p class="muted">Which factions and characters you like or dislike, whether the tamers should look older or younger, cuter or cooler, and whether the monsters should stay cute or get fiercer as they evolve. These are vector mock-ups for choosing a direction; final art would be illustrated in the chosen style.</p>
+  </section>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  // ---------- Colour and SVG helpers ----------
+  function shade(hex, amt) {
+    const n = parseInt(hex.slice(1), 16); let r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+    const t = amt < 0 ? 0 : 255, p = Math.abs(amt);
+    r = Math.round((t - r) * p + r); g = Math.round((t - g) * p + g); b = Math.round((t - b) * p + b);
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  }
+  let gid = 0;
+  function art(draw, bg) {
+    const c = {
+      defs: '',
+      g(base, sw) {
+        const id = 'g' + (++gid);
+        c.defs += '<radialGradient id="' + id + '" cx="35%" cy="28%" r="85%"><stop offset="0" stop-color="' + shade(base, 0.38) + '"/><stop offset="1" stop-color="' + base + '"/></radialGradient>';
+        return 'fill="url(#' + id + ')" stroke="' + shade(base, -0.55) + '" stroke-width="' + (sw || 2.6) + '" stroke-linejoin="round"';
+      },
+    };
+    const inner = draw(c);
+    return '<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+      (bg ? '<rect width="120" height="120" rx="14" fill="' + bg + '"/>' : '') +
+      '<defs>' + c.defs + '</defs><ellipse cx="60" cy="108" rx="32" ry="6" fill="rgba(40,30,50,.16)"/>' + inner + '</svg>';
+  }
+  const INK = '#2b2140';
+  function face(x, y, o) {
+    o = o || {}; const s = o.s || 1, gap = (o.gap || 9) * s, ec = o.eye || INK;
+    let h = '';
+    for (const dx of [-gap, gap]) {
+      h += '<ellipse cx="' + (x + dx) + '" cy="' + y + '" rx="' + 4.6 * s + '" ry="' + 5.8 * s + '" fill="' + ec + '"/>' +
+        '<circle cx="' + (x + dx - 1.5 * s) + '" cy="' + (y - 2.2 * s) + '" r="' + 1.9 * s + '" fill="#fff"/>' +
+        '<circle cx="' + (x + dx + 1.4 * s) + '" cy="' + (y + 1.8 * s) + '" r="' + 0.9 * s + '" fill="#fff"/>';
+    }
+    if (o.blush !== false) for (const dx of [-gap - 5 * s, gap + 5 * s]) h += '<ellipse cx="' + (x + dx) + '" cy="' + (y + 6 * s) + '" rx="' + 3.6 * s + '" ry="' + 2.2 * s + '" fill="#ff8fa3" opacity=".55"/>';
+    const my = o.my || y + 8 * s, m = o.mouth || 'smile', st = 'fill="none" stroke="' + INK + '" stroke-width="2" stroke-linecap="round"';
+    if (m === 'smile' || m === 'fang') h += '<path d="M' + (x - 3 * s) + ' ' + my + ' Q' + x + ' ' + (my + 3.5 * s) + ' ' + (x + 3 * s) + ' ' + my + '" ' + st + '/>';
+    if (m === 'fang') h += '<path d="M' + (x + 0.6 * s) + ' ' + (my + 1.4 * s) + ' l' + 1.3 * s + ' ' + 3 * s + ' l' + 1.3 * s + ' ' + -2.8 * s + 'Z" fill="#fff" stroke="' + INK + '" stroke-width="1"/>';
+    if (m === 'w') h += '<path d="M' + (x - 4 * s) + ' ' + my + ' Q' + (x - 2 * s) + ' ' + (my + 3 * s) + ' ' + x + ' ' + my + ' Q' + (x + 2 * s) + ' ' + (my + 3 * s) + ' ' + (x + 4 * s) + ' ' + my + '" ' + st + '/>';
+    if (m === 'open') h += '<ellipse cx="' + x + '" cy="' + (my + 1.6 * s) + '" rx="' + 3.2 * s + '" ry="' + 3.6 * s + '" fill="#7a2b3b"/><ellipse cx="' + x + '" cy="' + (my + 3.2 * s) + '" rx="' + 2 * s + '" ry="' + 1.3 * s + '" fill="#ff8fa3"/>';
+    if (m === 'roar') h += '<path d="M' + (x - 6 * s) + ' ' + (my - 1) + ' Q' + x + ' ' + (my + 11 * s) + ' ' + (x + 6 * s) + ' ' + (my - 1) + 'Z" fill="#7a2b3b" stroke="' + INK + '" stroke-width="1.6"/><path d="M' + (x - 4.5 * s) + ' ' + (my - 0.5) + ' l1.5 3 l1.5 -3 M' + (x + 1.5 * s) + ' ' + (my - 0.5) + ' l1.5 3 l1.5 -3" fill="#fff"/>';
+    return h;
+  }
+  const leaf = (c, x, y, len, ang, col) => '<g transform="translate(' + x + ' ' + y + ') rotate(' + ang + ')"><path d="M0 0 Q' + len * 0.5 + ' ' + -len * 0.4 + ' ' + len + ' 0 Q' + len * 0.5 + ' ' + len * 0.4 + ' 0 0Z" ' + c.g(col, 2) + '/><path d="M2 0 L' + len * 0.8 + ' 0" stroke="' + shade(col, -0.5) + '" stroke-width="1.3" opacity=".5"/></g>';
+  const flame = (c, x, y, h, ang, col) => '<g transform="translate(' + x + ' ' + y + ') rotate(' + ang + ')"><path d="M0 0 Q' + -h * 0.5 + ' ' + -h * 0.35 + ' 0 ' + -h + ' Q' + h * 0.5 + ' ' + -h * 0.35 + ' 0 0Z" ' + c.g(col || '#ff8a3d', 2) + '/><path d="M0 -2 Q' + -h * 0.22 + ' ' + -h * 0.25 + ' 0 ' + -h * 0.55 + ' Q' + h * 0.22 + ' ' + -h * 0.25 + ' 0 -2Z" fill="#ffe28a"/></g>';
+  const spark = (x, y, r, col) => '<path d="M' + x + ' ' + (y - r) + ' Q' + x + ' ' + y + ' ' + (x + r) + ' ' + y + ' Q' + x + ' ' + y + ' ' + x + ' ' + (y + r) + ' Q' + x + ' ' + y + ' ' + (x - r) + ' ' + y + ' Q' + x + ' ' + y + ' ' + x + ' ' + (y - r) + 'Z" fill="' + col + '"/>';
+
+  // ---------- Monsters ----------
+  const M = {};
+  // Verdant
+  M.bramblepup = (c, st) => {
+    st = st || 1; const G = '#7cc463', D = '#58a547', k = [0, 0.86, 1, 1.08][st];
+    let s = '<g transform="translate(60 70) scale(' + k + ') translate(-60 -70)">';
+    s += leaf(c, 82, 84, 26, -35, D);
+    s += '<ellipse cx="62" cy="84" rx="27" ry="19" ' + c.g(G) + '/>';
+    s += '<ellipse cx="46" cy="101" rx="8" ry="5" ' + c.g(G) + '/><ellipse cx="77" cy="101" rx="8" ry="5" ' + c.g(G) + '/>';
+    if (st >= 2) for (const a of [-70, -40, -12, 16, 44, 72]) s += '<path transform="rotate(' + a + ' 56 54)" d="M50 34 L56 ' + (st >= 3 ? 10 : 18) + ' L62 34Z" ' + c.g(st >= 3 ? '#3f8a3a' : D, 2) + '/>';
+    s += leaf(c, 40, 44, 24, 150, D) + leaf(c, 72, 44, 24, 30, D);
+    s += '<circle cx="56" cy="54" r="23" ' + c.g(G) + '/>';
+    s += '<ellipse cx="56" cy="64" rx="11" ry="8" fill="#eaf8d9"/><ellipse cx="56" cy="60" rx="3.6" ry="2.6" fill="' + INK + '"/>';
+    s += face(56, 49, { gap: 9, my: 66, mouth: st >= 2 ? 'fang' : 'smile' });
+    if (st === 1) s += leaf(c, 56, 32, 15, -100, '#9be07a');
+    if (st >= 3) for (const [x, y, col] of [[40, 30, '#ff8fb1'], [56, 22, '#ffd85e'], [72, 30, '#ff8fb1']]) s += '<circle cx="' + x + '" cy="' + y + '" r="6" ' + c.g(col, 2) + '/><circle cx="' + x + '" cy="' + y + '" r="2" fill="#fff6c9"/>';
+    return s + '</g>';
+  };
+  M.podpop = (c) => {
+    const G = '#8fd36a';
+    let s = '<g transform="rotate(-24 86 46)"><rect x="66" y="37" width="44" height="18" rx="9" ' + c.g('#5aa548') + '/>';
+    for (const x of [76, 88, 100]) s += '<circle cx="' + x + '" cy="46" r="4.5" fill="#c8f0a0" stroke="#3f7a35" stroke-width="1.5"/>';
+    s += '</g><ellipse cx="54" cy="80" rx="34" ry="23" ' + c.g(G) + '/><ellipse cx="54" cy="88" rx="20" ry="11" fill="#eafad9"/>';
+    for (const x of [38, 68]) s += '<circle cx="' + x + '" cy="56" r="12" ' + c.g(G) + '/><circle cx="' + x + '" cy="55" r="7.5" fill="#fff"/><ellipse cx="' + (x + 1) + '" cy="56" rx="3.6" ry="4.6" fill="' + INK + '"/><circle cx="' + (x - 0.5) + '" cy="54" r="1.4" fill="#fff"/>';
+    s += '<path d="M44 78 Q49 82 54 78 Q59 82 64 78" fill="none" stroke="' + INK + '" stroke-width="2" stroke-linecap="round"/>';
+    s += '<ellipse cx="30" cy="80" rx="4" ry="2.4" fill="#ff8fa3" opacity=".55"/><ellipse cx="78" cy="80" rx="4" ry="2.4" fill="#ff8fa3" opacity=".55"/>';
+    s += '<ellipse cx="32" cy="101" rx="9" ry="5" ' + c.g(G) + '/><ellipse cx="78" cy="101" rx="9" ry="5" ' + c.g(G) + '/>';
+    return s;
+  };
+  M.thornstag = (c) => {
+    const G = '#d1a46e';
+    let s = '<path d="M50 40 Q46 18 56 2 Q60 22 58 40Z" ' + c.g('#58a547', 2) + '/>';
+    for (const x of [46, 58, 72, 82]) s += '<rect x="' + x + '" y="88" width="7" height="16" rx="3" ' + c.g(shade(G, -0.15), 2) + '/>';
+    s += '<ellipse cx="66" cy="84" rx="26" ry="15" ' + c.g(G) + '/>';
+    for (const [x, y] of [[62, 78], [74, 82], [68, 90], [80, 86]]) s += '<circle cx="' + x + '" cy="' + y + '" r="2.4" fill="#fff6e6"/>';
+    s += leaf(c, 36, 50, 18, 200, shade(G, -0.1)) + leaf(c, 70, 46, 18, -20, shade(G, -0.1));
+    s += '<circle cx="53" cy="58" r="19" ' + c.g(G) + '/><ellipse cx="53" cy="67" rx="9" ry="6" fill="#fff3e2"/><ellipse cx="53" cy="64" rx="3" ry="2" fill="' + INK + '"/>';
+    s += face(53, 55, { gap: 8, my: 70, s: 0.9 });
+    s += leaf(c, 44, 74, 12, 160, '#6cbf5a') + leaf(c, 62, 74, 12, 20, '#6cbf5a');
+    return s;
+  };
+  M.bloomcap = (c) => {
+    let s = '';
+    for (const [x, y, r] of [[18, 40, 3], [100, 34, 3.5], [96, 70, 2.5], [22, 74, 2.5], [60, 10, 2.5]]) s += '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="#ffe27a" opacity=".85"/>';
+    s += spark(14, 58, 6, '#ffd24a') + spark(106, 52, 5, '#ffd24a');
+    s += '<path d="M42 58 Q38 98 48 104 L72 104 Q82 98 78 58Z" ' + c.g('#fff1dc') + '/>';
+    s += '<ellipse cx="38" cy="84" rx="6" ry="4" ' + c.g('#fff1dc', 2) + '/><ellipse cx="82" cy="84" rx="6" ry="4" ' + c.g('#fff1dc', 2) + '/>';
+    s += '<path d="M20 60 Q20 18 60 18 Q100 18 100 60 Q60 72 20 60Z" ' + c.g('#ff7fa0') + '/>';
+    for (const [x, y, r] of [[40, 36, 6], [62, 28, 7], [82, 42, 5], [50, 52, 4], [74, 56, 4]]) s += '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="#fff6f0"/>';
+    s += face(60, 76, { gap: 8, s: 0.95 });
+    return s;
+  };
+  M.mossback = (c) => {
+    let s = '<ellipse cx="34" cy="100" rx="9" ry="6" ' + c.g('#b9d98a') + '/><ellipse cx="88" cy="100" rx="9" ry="6" ' + c.g('#b9d98a') + '/>';
+    s += '<circle cx="20" cy="76" r="14" ' + c.g('#b9d98a') + '/>' + face(20, 74, { gap: 5, s: 0.72 });
+    s += '<path d="M28 92 Q26 40 66 38 Q106 40 104 92Z" ' + c.g('#6f9e48') + '/>';
+    s += '<path d="M48 90 L50 62 L66 52 L82 62 L84 90 M50 62 L36 60 M82 62 L96 62 M66 52 L66 40" fill="none" stroke="#3e6a2c" stroke-width="2" opacity=".6"/>';
+    s += '<path d="M28 92 Q66 100 104 92" fill="none" stroke="#3e6a2c" stroke-width="3"/>';
+    for (const [x, y] of [[44, 44], [58, 38], [76, 40], [90, 50]]) s += '<path d="M' + (x - 6) + ' ' + (y + 2) + ' Q' + x + ' ' + (y - 8) + ' ' + (x + 6) + ' ' + (y + 2) + 'Z" fill="#8cc95e"/>';
+    s += '<rect x="70" y="26" width="5" height="10" rx="2" fill="#fff1dc"/><path d="M64 28 Q72 16 81 28Z" ' + c.g('#ff7b5c', 2) + '/>';
+    return s;
+  };
+  // Tide
+  M.bubblefin = (c) => {
+    let s = '<path d="M80 60 L108 42 L102 62 L108 82Z" ' + c.g('#3b95e0') + '/>';
+    s += '<path d="M46 36 Q60 18 72 36Z" ' + c.g('#3b95e0') + '/>';
+    s += '<circle cx="56" cy="62" r="28" ' + c.g('#62b9ff') + '/><path d="M34 74 Q56 92 78 74 Q56 84 34 74Z" fill="#dff1ff"/>';
+    s += '<path d="M64 66 Q76 64 74 78 Q66 74 64 66Z" ' + c.g('#3b95e0', 2) + '/>';
+    s += face(48, 58, { gap: 8, mouth: 'open' });
+    for (const [x, y, r] of [[18, 46, 7], [12, 30, 4.5], [22, 18, 3]]) s += '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="rgba(255,255,255,.6)" stroke="#58a8e8" stroke-width="2"/><circle cx="' + (x - r * 0.35) + '" cy="' + (y - r * 0.35) + '" r="' + r * 0.25 + '" fill="#fff"/>';
+    return s;
+  };
+  M.narwhee = (c) => {
+    let s = '<path d="M90 70 Q108 58 112 50 Q112 66 104 72 Q112 78 112 92 Q104 84 90 78Z" ' + c.g('#7aa6e0') + '/>';
+    s += '<path d="M18 72 Q18 44 54 44 Q92 44 96 68 Q98 92 64 92 L40 92 Q18 90 18 72Z" ' + c.g('#8fb7ea') + '/>';
+    s += '<path d="M26 80 Q50 96 86 82 Q60 90 26 80Z" fill="#e6f1ff"/>';
+    s += '<path d="M30 52 L6 14 L38 48Z" ' + c.g('#fff4d6', 2) + '/><path d="M12 22 L22 26 M17 31 L27 35 M22 40 L31 43" stroke="#c9a76a" stroke-width="1.5"/>';
+    s += face(44, 66, { gap: 8, mouth: 'w' });
+    s += '<path d="M62 84 Q74 96 80 86" ' + c.g('#7aa6e0', 2) + '/>';
+    return s;
+  };
+  M.jellypop = (c) => {
+    let s = '';
+    for (const [x, d] of [[40, 8], [52, -6], [64, 6], [76, -8]]) s += '<path d="M' + x + ' 62 Q' + (x + d) + ' 76 ' + x + ' 88 Q' + (x - d) + ' 98 ' + x + ' 106" fill="none" stroke="#b089f0" stroke-width="5" stroke-linecap="round"/>';
+    s += '<path d="M24 62 Q24 22 60 22 Q96 22 96 62 Q60 70 24 62Z" ' + c.g('#c9a3ff') + ' opacity=".95"/>';
+    s += '<path d="M36 36 Q46 28 56 30" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/>';
+    s += face(60, 48, { gap: 9 });
+    for (const [x, y, a] of [[18, 92, -30], [104, 92, 30], [60, 116, 0]]) s += '<path transform="translate(' + x + ' ' + y + ') rotate(' + a + ')" d="M0 -6 Q4 0 0 4 Q-4 0 0 -6Z" fill="#7cc8ff"/>';
+    return s;
+  };
+  M.coralotl = (c) => {
+    let s = '<path d="M84 84 Q108 80 110 96 Q96 92 84 94Z" ' + c.g('#ffb3c7') + '/>';
+    s += '<ellipse cx="62" cy="84" rx="26" ry="16" ' + c.g('#ffbfd0') + '/>';
+    s += '<ellipse cx="44" cy="100" rx="7" ry="4" ' + c.g('#ffbfd0') + '/><ellipse cx="78" cy="100" rx="7" ry="4" ' + c.g('#ffbfd0') + '/>';
+    for (const side of [-1, 1]) for (const [dy, len] of [[-14, 20], [-4, 22], [6, 18]]) {
+      const x0 = 60 + side * 20, y0 = 54 + dy;
+      s += '<path d="M' + x0 + ' ' + y0 + ' Q' + (x0 + side * len * 0.6) + ' ' + (y0 - 8) + ' ' + (x0 + side * len) + ' ' + (y0 - 4) + '" fill="none" stroke="#ff6f91" stroke-width="5" stroke-linecap="round"/>';
+      s += '<circle cx="' + (x0 + side * len) + '" cy="' + (y0 - 4) + '" r="3.5" fill="#ff9ab4"/>';
+    }
+    s += '<circle cx="60" cy="56" r="24" ' + c.g('#ffbfd0') + '/>' + face(60, 56, { gap: 10, mouth: 'w' });
+    s += '<path d="M92 20 L92 36 M92 20 L102 17 L102 32" fill="none" stroke="#3b95e0" stroke-width="2.5"/><circle cx="89" cy="37" r="3.5" fill="#3b95e0"/><circle cx="99" cy="33" r="3.5" fill="#3b95e0"/>';
+    return s;
+  };
+  M.shellby = (c) => {
+    let s = '<circle cx="74" cy="58" r="30" ' + c.g('#f3a85d') + '/>';
+    s += '<path d="M74 58 m0 -4 a4 4 0 1 1 -4 4 a8 8 0 1 1 8 8 a14 14 0 1 1 -14 -14 a20 20 0 1 1 20 20" fill="none" stroke="#b86a2a" stroke-width="2.5"/>';
+    s += '<ellipse cx="44" cy="82" rx="24" ry="16" ' + c.g('#ff7b6b') + '/>';
+    for (const x of [30, 40, 50]) s += '<path d="M' + x + ' 94 l-4 10" stroke="#c94f42" stroke-width="3.5" stroke-linecap="round"/>';
+    s += '<path d="M24 74 l-6 -10 M38 70 l0 -12" stroke="#c94f42" stroke-width="3"/>';
+    s += '<circle cx="16" cy="62" r="8" ' + c.g('#ff7b6b') + '/><path d="M10 56 L16 62 L8 64Z" fill="#fff3ea"/><circle cx="38" cy="56" r="6" ' + c.g('#ff7b6b') + '/>';
+    s += face(44, 80, { gap: 7, s: 0.85 });
+    return s;
+  };
+  // Dune
+  function fox(c, o) {
+    let s = '';
+    if (o.tail === 'crystal') {
+      for (const [x, y, a, col] of [[82, 74, -40, '#bfe6ff'], [90, 66, -15, '#e2f6ff'], [92, 82, -60, '#9fd6f5']]) s += '<path transform="translate(' + x + ' ' + y + ') rotate(' + a + ')" d="M0 0 L8 -26 L16 0 L8 6Z" ' + c.g(col, 2) + '/>';
+    } else s += '<path d="M78 86 Q112 82 106 52 Q98 70 80 74Z" ' + c.g(o.body) + '/><path d="M100 60 Q106 52 106 52 Q108 66 98 70Z" fill="#fff8ee"/>';
+    s += '<ellipse cx="62" cy="86" rx="22" ry="16" ' + c.g(o.body) + '/><ellipse cx="62" cy="92" rx="12" ry="8" fill="#fff8ee"/>';
+    s += '<ellipse cx="50" cy="102" rx="7" ry="4.5" ' + c.g(o.body) + '/><ellipse cx="74" cy="102" rx="7" ry="4.5" ' + c.g(o.body) + '/>';
+    const big = o.ears === 'huge';
+    s += '<path d="M40 50 L' + (big ? 22 : 32) + ' ' + (big ? 6 : 20) + ' L56 40Z" ' + c.g(o.body) + '/><path d="M42 46 L' + (big ? 28 : 35) + ' ' + (big ? 16 : 27) + ' L52 41Z" fill="' + o.inner + '"/>';
+    s += '<path d="M76 50 L' + (big ? 94 : 84) + ' ' + (big ? 6 : 20) + ' L60 40Z" ' + c.g(o.body) + '/><path d="M74 46 L' + (big ? 88 : 81) + ' ' + (big ? 16 : 27) + ' L64 41Z" fill="' + o.inner + '"/>';
+    s += '<circle cx="58" cy="58" r="21" ' + c.g(o.body) + '/><path d="M46 64 Q58 80 70 64 Q64 70 58 70 Q52 70 46 64Z" fill="#fff8ee"/><ellipse cx="58" cy="66" rx="3" ry="2" fill="' + INK + '"/>';
+    s += face(58, 56, { gap: 8, my: 71, mouth: o.mouth || 'smile' });
+    if (o.gem) s += '<circle cx="58" cy="42" r="4.5" fill="' + o.gem + '" stroke="' + shade(o.gem, -0.5) + '" stroke-width="1.5"/>';
+    return s;
+  }
+  M.fennix = (c) => {
+    let s = '';
+    for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4; s += '<path d="M' + (58 + Math.cos(a) * 8) + ' ' + (42 + Math.sin(a) * 8) + ' L' + (58 + Math.cos(a) * 12) + ' ' + (42 + Math.sin(a) * 12) + '" stroke="#ffcf3f" stroke-width="2" stroke-linecap="round"/>'; }
+    return fox(c, { body: '#f2b45c', inner: '#ffd6c2', ears: 'huge', gem: '#ffcf3f', mouth: 'fang' }) + s;
+  };
+  M.spinelet = (c) => {
+    let s = '';
+    for (const [x, y, a] of [[18, 40, -40], [60, 4, 0], [102, 40, 40]]) s += '<path transform="translate(' + x + ' ' + y + ') rotate(' + a + ')" d="M0 -8 L2 6 L-2 6Z" fill="#8a6a3c"/>';
+    s += '<path d="M32 68 Q20 66 22 50 Q24 44 30 48 Q28 60 36 62Z" ' + c.g('#6cc070') + '/><path d="M88 62 Q100 62 98 46 Q96 40 90 44 Q92 56 84 58Z" ' + c.g('#6cc070') + '/>';
+    s += '<path d="M36 104 L36 52 Q36 26 60 26 Q84 26 84 52 L84 104Z" ' + c.g('#6cc070') + '/>';
+    s += '<path d="M48 34 L48 102 M72 34 L72 102" stroke="#4e9e54" stroke-width="2" opacity=".6"/>';
+    for (const [x, y] of [[40, 46], [42, 76], [80, 50], [78, 84], [60, 96], [50, 60], [70, 66]]) s += '<path d="M' + x + ' ' + y + ' l3 -3 M' + x + ' ' + y + ' l-3 -3" stroke="#f4f0dc" stroke-width="1.6"/>';
+    s += '<circle cx="60" cy="24" r="8" ' + c.g('#ff7fa0', 2) + '/><circle cx="60" cy="24" r="3" fill="#ffe27a"/>';
+    s += face(60, 56, { gap: 9 });
+    return s;
+  };
+  M.sandsnek = (c) => {
+    let s = '<ellipse cx="60" cy="96" rx="36" ry="11" ' + c.g('#d9ae55') + '/><ellipse cx="62" cy="82" rx="27" ry="10" ' + c.g('#e6be66') + '/>';
+    s += '<path d="M36 96 L44 86 M58 98 L64 86 M78 96 L84 86" stroke="#a87b32" stroke-width="2.5" opacity=".7"/>';
+    s += '<path d="M60 34 L52 14 L60 6 L68 14Z" ' + c.g('#b78850', 2) + '/><path d="M54 18 L66 12 M53 24 L67 18" stroke="#7a5528" stroke-width="1.5"/>';
+    s += '<circle cx="60" cy="54" r="21" ' + c.g('#ecc673') + '/>' + face(60, 54, { gap: 8, my: 64 });
+    s += '<path d="M60 66 l0 8 l-3 4 M60 74 l3 4" fill="none" stroke="#e8505b" stroke-width="2" stroke-linecap="round"/>';
+    return s;
+  };
+  M.hootsun = (c) => {
+    let s = '<path d="M34 40 L30 22 L46 34Z" ' + c.g('#b97f48', 2) + '/><path d="M86 40 L90 22 L74 34Z" ' + c.g('#b97f48', 2) + '/>';
+    s += '<path d="M28 66 Q16 80 30 94Z" ' + c.g('#a86f3c', 2) + '/><path d="M92 66 Q104 80 90 94Z" ' + c.g('#a86f3c', 2) + '/>';
+    s += '<ellipse cx="60" cy="68" rx="32" ry="34" ' + c.g('#c98f55') + '/><ellipse cx="60" cy="82" rx="18" ry="18" fill="#f7e4c8"/>';
+    for (const [x, y] of [[54, 78], [66, 78], [60, 88]]) s += '<path d="M' + (x - 3) + ' ' + y + ' q3 3 6 0" fill="none" stroke="#c9a77a" stroke-width="1.5"/>';
+    s += '<path d="M36 52 L84 52" stroke="#7a5528" stroke-width="3"/>';
+    for (const x of [46, 74]) s += '<circle cx="' + x + '" cy="54" r="12" fill="#3a2a4a" stroke="#ffcf3f" stroke-width="4"/><path d="M' + (x - 6) + ' 50 l5 -4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>';
+    s += '<path d="M56 64 L64 64 L60 72Z" fill="#ffb03b" stroke="#8a5a1a" stroke-width="1.5"/>';
+    s += '<path d="M48 102 l-3 5 M52 102 l0 6 M68 102 l0 6 M72 102 l3 5" stroke="#ffb03b" stroke-width="3" stroke-linecap="round"/>';
+    return s;
+  };
+  M.scarablet = (c) => {
+    let s = '';
+    for (const [x1, y1, x2, y2] of [[30, 70, 16, 80], [30, 84, 16, 98], [90, 70, 104, 80], [90, 84, 104, 98]]) s += '<path d="M' + x1 + ' ' + y1 + ' L' + x2 + ' ' + y2 + '" stroke="#1d5e5a" stroke-width="4" stroke-linecap="round"/>';
+    s += '<path d="M50 30 Q40 14 34 16 M70 30 Q80 14 86 16" fill="none" stroke="#1d5e5a" stroke-width="3" stroke-linecap="round"/>';
+    s += '<circle cx="60" cy="40" r="15" ' + c.g('#23827c') + '/>' + face(60, 40, { gap: 6, s: 0.8, blush: false });
+    s += '<ellipse cx="60" cy="76" rx="33" ry="28" ' + c.g('#2fa39a') + '/><path d="M60 50 L60 104" stroke="#1d5e5a" stroke-width="2.5"/>';
+    s += '<circle cx="60" cy="74" r="9" fill="#ffcf3f" stroke="#a87b1a" stroke-width="2"/>';
+    for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4; s += '<path d="M' + (60 + Math.cos(a) * 11) + ' ' + (74 + Math.sin(a) * 11) + ' L' + (60 + Math.cos(a) * 15) + ' ' + (74 + Math.sin(a) * 15) + '" stroke="#ffcf3f" stroke-width="2"/>'; }
+    s += '<path d="M40 60 Q46 54 52 56" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/>';
+    return s;
+  };
+  // Frost
+  M.snowpuff = (c) => {
+    let s = '<ellipse cx="44" cy="30" rx="8" ry="22" transform="rotate(-14 44 30)" ' + c.g('#f4f8ff') + '/><ellipse cx="44" cy="31" rx="3.5" ry="15" transform="rotate(-14 44 31)" fill="#ffc6d6"/>';
+    s += '<ellipse cx="76" cy="30" rx="8" ry="22" transform="rotate(14 76 30)" ' + c.g('#f4f8ff') + '/><ellipse cx="76" cy="31" rx="3.5" ry="15" transform="rotate(14 76 31)" fill="#ffc6d6"/>';
+    s += '<circle cx="60" cy="72" r="30" ' + c.g('#f6f9ff') + '/>';
+    s += '<path d="M34 70 Q60 82 86 70 L86 78 Q60 90 34 78Z" ' + c.g('#e8505b', 2) + '/><path d="M72 78 L76 96 L82 94 L78 78Z" ' + c.g('#e8505b', 2) + '/>';
+    s += face(60, 60, { gap: 9 }) + '<ellipse cx="60" cy="64" rx="2.5" ry="1.8" fill="#ff8fa3"/>';
+    s += '<ellipse cx="46" cy="101" rx="8" ry="4.5" ' + c.g('#f4f8ff') + '/><ellipse cx="74" cy="101" rx="8" ry="4.5" ' + c.g('#f4f8ff') + '/>';
+    s += '<path d="M98 30 L98 46 M98 30 L108 27 L108 42" fill="none" stroke="#5fb6d9" stroke-width="2.5"/><circle cx="95" cy="47" r="3.5" fill="#5fb6d9"/><circle cx="105" cy="43" r="3.5" fill="#5fb6d9"/>';
+    return s;
+  };
+  M.frostfang = (c) => {
+    let s = '<path d="M78 84 Q106 80 104 58 Q96 72 80 76Z" ' + c.g('#9fb7d9') + '/>';
+    s += '<ellipse cx="62" cy="86" rx="23" ry="16" ' + c.g('#9fb7d9') + '/><ellipse cx="50" cy="102" rx="7" ry="4.5" ' + c.g('#9fb7d9') + '/><ellipse cx="74" cy="102" rx="7" ry="4.5" ' + c.g('#9fb7d9') + '/>';
+    for (const [x, y, a] of [[36, 66, -60], [44, 74, -30], [60, 78, 0], [76, 74, 30], [84, 66, 60]]) s += '<path transform="translate(' + x + ' ' + y + ') rotate(' + a + ')" d="M-5 0 L0 -16 L5 0 L0 4Z" ' + c.g('#d6f1ff', 1.8) + '/>';
+    s += '<path d="M40 48 L34 20 L54 38Z" ' + c.g('#9fb7d9') + '/><path d="M76 48 L82 20 L62 38Z" ' + c.g('#9fb7d9') + '/>';
+    s += '<circle cx="58" cy="56" r="21" ' + c.g('#a9c0e0') + '/><path d="M46 62 Q58 78 70 62 Q64 68 58 68 Q52 68 46 62Z" fill="#eef5ff"/><ellipse cx="58" cy="64" rx="3" ry="2" fill="' + INK + '"/>';
+    s += face(58, 54, { gap: 8, my: 69, mouth: 'fang', eye: '#2b4a7a' });
+    return s;
+  };
+  M.icicub = (c) => {
+    let s = '<circle cx="60" cy="78" r="26" ' + c.g('#f4f8ff') + '/>';
+    s += '<circle cx="42" cy="30" r="8" ' + c.g('#f4f8ff') + '/><circle cx="76" cy="30" r="8" ' + c.g('#f4f8ff') + '/><circle cx="42" cy="30" r="3.5" fill="#ffc6d6"/><circle cx="76" cy="30" r="3.5" fill="#ffc6d6"/>';
+    s += '<circle cx="59" cy="46" r="20" ' + c.g('#f6f9ff') + '/><ellipse cx="59" cy="54" rx="8" ry="5.5" fill="#e6eef8"/><ellipse cx="59" cy="51" rx="3" ry="2" fill="' + INK + '"/>';
+    s += face(59, 43, { gap: 7.5, my: 57, s: 0.9 });
+    s += '<rect x="34" y="66" width="52" height="38" rx="7" ' + c.g('#9fdcf5') + ' opacity=".92"/><path d="M42 74 L54 74 M42 80 L48 80" stroke="#fff" stroke-width="3" stroke-linecap="round"/>';
+    s += '<ellipse cx="36" cy="80" rx="7" ry="6" ' + c.g('#f4f8ff', 2) + '/><ellipse cx="84" cy="80" rx="7" ry="6" ' + c.g('#f4f8ff', 2) + '/>';
+    return s;
+  };
+  M.glimmermoth = (c) => {
+    let s = '';
+    for (const [d, top] of [[-1, true], [1, true], [-1, false], [1, false]]) {
+      const pts = top ? [[60, 56], [60 + d * 40, 22], [60 + d * 48, 52]] : [[60, 66], [60 + d * 36, 92], [60 + d * 16, 96]];
+      s += '<path d="M' + pts.map((p) => p.join(' ')).join(' L') + 'Z" ' + c.g(top ? '#c8e9ff' : '#ffd1ec', 2) + ' opacity=".95"/>';
+      s += '<path d="M' + pts[0][0] + ' ' + pts[0][1] + ' L' + ((pts[1][0] + pts[2][0]) / 2) + ' ' + ((pts[1][1] + pts[2][1]) / 2) + '" stroke="#fff" stroke-width="2" opacity=".8"/>';
+    }
+    s += '<ellipse cx="60" cy="72" rx="9" ry="17" ' + c.g('#e3dcff') + '/>';
+    s += '<path d="M56 36 Q48 20 40 18 M64 36 Q72 20 80 18" fill="none" stroke="#7a6aa8" stroke-width="2.5" stroke-linecap="round"/>';
+    s += '<circle cx="60" cy="46" r="12" ' + c.g('#efeaff') + '/>' + face(60, 46, { gap: 5, s: 0.7 });
+    s += spark(24, 76, 6, '#9fdcf5') + spark(98, 80, 5, '#ffc6e6') + spark(92, 14, 4, '#9fdcf5');
+    return s;
+  };
+  M.prismfox = (c) => fox(c, { body: '#eef6ff', inner: '#bfe6ff', tail: 'crystal', gem: '#7fd3ff' });
+  // Ember
+  M.emberling = (c) => {
+    let s = '<path d="M76 66 Q102 40 108 56 Q98 58 100 68 Q90 64 84 76Z" ' + c.g('#c84a3a') + '/>';
+    s += '<path d="M84 92 Q104 96 104 80" fill="none" stroke="#e8613f" stroke-width="8" stroke-linecap="round"/>' + flame(c, 104, 80, 18, 20);
+    s += '<ellipse cx="64" cy="84" rx="23" ry="19" ' + c.g('#ff7a45') + '/><ellipse cx="62" cy="90" rx="13" ry="10" fill="#ffe0b3"/>';
+    s += '<ellipse cx="52" cy="102" rx="7" ry="4.5" ' + c.g('#ff7a45') + '/><ellipse cx="76" cy="102" rx="7" ry="4.5" ' + c.g('#ff7a45') + '/>';
+    s += '<path d="M40 38 L34 22 L48 34Z" ' + c.g('#ffe0b3', 2) + '/><path d="M68 34 L76 18 L76 36Z" ' + c.g('#ffe0b3', 2) + '/>';
+    s += '<circle cx="54" cy="54" r="22" ' + c.g('#ff8350') + '/>' + face(54, 50, { gap: 8, my: 61, mouth: 'roar' });
+    s += flame(c, 18, 68, 16, -100, '#ffb33d');
+    return s;
+  };
+  M.cinderkit = (c) => {
+    let s = '<path d="M80 90 Q100 92 98 72" fill="none" stroke="#e8743f" stroke-width="7" stroke-linecap="round"/>' + flame(c, 98, 72, 20, 10);
+    s += '<ellipse cx="62" cy="86" rx="22" ry="16" ' + c.g('#ff9a5a') + '/><ellipse cx="50" cy="102" rx="7" ry="4.5" ' + c.g('#ff9a5a') + '/><ellipse cx="74" cy="102" rx="7" ry="4.5" ' + c.g('#ff9a5a') + '/>';
+    s += '<path d="M40 46 L36 22 L54 36Z" ' + c.g('#ff9a5a') + '/><path d="M76 46 L80 22 L62 36Z" ' + c.g('#ff9a5a') + '/>';
+    s += flame(c, 37, 24, 12, -15, '#ffb33d') + flame(c, 79, 24, 12, 15, '#ffb33d');
+    s += '<circle cx="58" cy="56" r="21" ' + c.g('#ffa466') + '/>' + face(58, 54, { gap: 8, mouth: 'w' });
+    s += '<path d="M40 60 l-12 -2 M40 64 l-11 2 M76 60 l12 -2 M76 64 l11 2" stroke="' + INK + '" stroke-width="1.4" opacity=".6"/>';
+    return s;
+  };
+  M.salamandy = (c) => {
+    let s = '<path d="M92 86 Q114 90 108 72 Q104 82 92 80Z" ' + c.g('#ffb347') + '/>';
+    s += '<ellipse cx="66" cy="84" rx="30" ry="14" ' + c.g('#ffb347') + '/>';
+    for (const [x, y] of [[60, 78], [74, 82], [84, 78]]) s += '<circle cx="' + x + '" cy="' + y + '" r="3.5" fill="#e8504b"/>';
+    s += '<ellipse cx="50" cy="98" rx="7" ry="4" ' + c.g('#ffb347') + '/><ellipse cx="82" cy="98" rx="7" ry="4" ' + c.g('#ffb347') + '/>';
+    s += '<circle cx="40" cy="68" r="17" ' + c.g('#ffc15e') + '/>' + face(40, 66, { gap: 7, s: 0.9, mouth: 'open' });
+    s += '<circle cx="14" cy="46" r="9" ' + c.g('#ff7a2f', 2) + '/>' + flame(c, 14, 50, 22, -20, '#ffb33d');
+    return s;
+  };
+  M.flarebat = (c) => {
+    let s = '';
+    for (const d of [-1, 1]) {
+      s += '<path d="M' + (60 + d * 14) + ' 58 Q' + (60 + d * 40) + ' 26 ' + (60 + d * 52) + ' 40 Q' + (60 + d * 44) + ' 52 ' + (60 + d * 50) + ' 64 Q' + (60 + d * 38) + ' 62 ' + (60 + d * 38) + ' 74 Q' + (60 + d * 26) + ' 66 ' + (60 + d * 16) + ' 72Z" ' + c.g('#ff8a3d') + '/>';
+      s += '<path d="M' + (60 + d * 20) + ' 60 Q' + (60 + d * 36) + ' 44 ' + (60 + d * 44) + ' 46" fill="none" stroke="#ffe28a" stroke-width="3" stroke-linecap="round"/>';
+    }
+    s += '<path d="M48 48 L44 30 L56 42Z" ' + c.g('#7b4a8e') + '/><path d="M72 48 L76 30 L64 42Z" ' + c.g('#7b4a8e') + '/>';
+    s += '<circle cx="60" cy="62" r="19" ' + c.g('#8a56a0') + '/>' + face(60, 60, { gap: 7, s: 0.9, mouth: 'fang', eye: '#ffd24a' });
+    s += '<path d="M54 84 l-2 8 M66 84 l2 8" stroke="#7b4a8e" stroke-width="3" stroke-linecap="round"/>';
+    return s;
+  };
+  M.magmole = (c) => {
+    let s = '<path d="M18 102 Q16 40 60 38 Q104 40 102 102Z" ' + c.g('#6e5148') + '/>';
+    for (const p of ['M30 70 L44 56 L58 60 L52 78Z', 'M62 52 L80 50 L90 66 L72 72Z', 'M36 86 L54 82 L60 98 L38 100Z', 'M70 80 L90 78 L94 98 L74 100Z']) s += '<path d="' + p + '" ' + c.g('#8f8a86', 2) + '/>';
+    s += '<path d="M44 66 L52 70 M80 58 L76 66 M48 90 L52 94 M82 86 L80 94" stroke="#ff8a3d" stroke-width="2.5" stroke-linecap="round"/>';
+    s += '<ellipse cx="60" cy="56" rx="22" ry="14" fill="#8c6a60"/>' + face(60, 52, { gap: 9, s: 0.75, my: 64 });
+    s += '<ellipse cx="60" cy="60" rx="6" ry="4.5" fill="#ff9aa8" stroke="#a8505e" stroke-width="1.5"/>';
+    for (const d of [-1, 1]) s += '<path d="M' + (60 + d * 30) + ' 96 l' + d * 8 + ' 6 M' + (60 + d * 26) + ' 98 l' + d * 6 + ' 8" stroke="#f0e6d8" stroke-width="3" stroke-linecap="round"/>';
+    return s;
+  };
+  M.barrel = (c) => '<path d="M38 30 Q30 66 38 102 L82 102 Q90 66 82 30Z" ' + c.g('#9a6a3a') + '/><path d="M33 50 L87 50 M32 82 L88 82" stroke="#4a3a2a" stroke-width="5"/>' + flame(c, 60, 30, 16, 0, '#ffb33d');
+
+  // ---------- Tamers (chibi heroes) ----------
+  function chibi(c, o) {
+    const skin = o.skin || '#ffe1cc', out = shade(o.hair, -0.5);
+    let s = '';
+    if (o.acc === 'leafhood' || o.acc === 'furhood') s += '<circle cx="60" cy="46" r="37" ' + c.g(o.hood) + '/>';
+    if (o.style === 'long') s += '<path d="M28 48 Q22 100 38 110 L82 110 Q98 100 92 48Z" ' + c.g(o.hair) + '/>';
+    if (o.style === 'ponytail') s += '<path d="M84 30 Q118 40 106 92 Q100 68 86 56Z" ' + c.g(o.hair) + '/>';
+    if (o.acc === 'veil') s += '<path d="M24 46 Q18 98 34 112 L86 112 Q102 98 96 46 Q96 12 60 12 Q24 12 24 46Z" ' + c.g(o.veil) + '/>';
+    // Body and outfit.
+    s += '<ellipse cx="38" cy="98" rx="7" ry="10" ' + c.g(o.outfit, 2) + '/><ellipse cx="82" cy="98" rx="7" ry="10" ' + c.g(o.outfit, 2) + '/>';
+    s += '<path d="M40 114 Q38 82 60 80 Q82 82 80 114Z" ' + c.g(o.outfit) + '/>';
+    s += '<path d="M48 82 L60 96 L72 82" fill="none" stroke="' + o.trim + '" stroke-width="4" stroke-linejoin="round"/>';
+    if (o.acc === 'sailor') s += '<path d="M44 82 L60 98 L76 82 L72 92 L60 104 L48 92Z" fill="#2d4a8a"/><path d="M56 98 L60 108 L64 98" fill="#e8505b"/>';
+    if (o.acc === 'flameclip') s += '<path d="M42 84 Q60 94 78 84 L78 90 Q60 100 42 90Z" ' + c.g('#ff8a3d', 2) + '/><path d="M70 90 L76 106 L82 104 L76 88Z" ' + c.g('#ff8a3d', 2) + '/>';
+    // Head and face.
+    s += '<circle cx="60" cy="48" r="29" fill="' + skin + '" stroke="' + shade(skin, -0.45) + '" stroke-width="2.5"/>';
+    for (const x of [48.5, 71.5]) {
+      s += '<ellipse cx="' + x + '" cy="54" rx="5.6" ry="7.2" fill="' + o.eye + '"/><ellipse cx="' + x + '" cy="56" rx="3.4" ry="4.4" fill="' + shade(o.eye, -0.45) + '"/>';
+      s += '<circle cx="' + (x - 2) + '" cy="51" r="2.2" fill="#fff"/><circle cx="' + (x + 1.8) + '" cy="57.5" r="1" fill="#fff"/>';
+      s += '<path d="M' + (x - 6.5) + ' 47.5 Q' + x + ' 44 ' + (x + 6.5) + ' 47.5" fill="none" stroke="' + INK + '" stroke-width="2" stroke-linecap="round"/>';
+    }
+    s += '<ellipse cx="42" cy="62" rx="4" ry="2.4" fill="#ff8fa3" opacity=".5"/><ellipse cx="78" cy="62" rx="4" ry="2.4" fill="#ff8fa3" opacity=".5"/>';
+    s += '<path d="M57 65 Q60 67.5 63 65" fill="none" stroke="' + INK + '" stroke-width="1.8" stroke-linecap="round"/>';
+    // Front hair.
+    const bangs = o.style === 'spiky'
+      ? 'M30 52 Q26 26 42 16 L44 4 L54 14 L62 2 L68 14 L80 6 L80 20 Q94 28 90 52 L86 42 Q80 36 74 44 Q68 34 60 44 Q52 34 46 44 Q40 36 34 44Z'
+      : o.style === 'short'
+        ? 'M30 54 Q26 20 60 18 Q94 20 90 54 L88 44 Q82 32 74 42 Q70 30 62 40 Q56 30 48 42 Q40 34 34 46Z'
+        : 'M30 56 Q28 18 60 18 Q92 18 90 56 L86 44 Q80 32 74 42 Q68 30 60 40 Q52 30 46 42 Q40 32 34 44Z';
+    s += '<path d="' + bangs + '" ' + c.g(o.hair) + '/>';
+    if (o.style === 'long' || o.style === 'ponytail') s += '<path d="M31 50 Q28 70 34 82 L38 60Z M89 50 Q92 70 86 82 L82 60Z" fill="' + o.hair + '" stroke="' + out + '" stroke-width="2"/>';
+    // Accessories.
+    if (o.acc === 'leafhood') { s += '<path d="M24 58 Q22 12 60 10 Q98 12 96 58" fill="none" stroke="' + shade(o.hood, -0.2) + '" stroke-width="7" stroke-linecap="round"/>' + leaf(c, 36, 18, 22, -130, '#6cbf5a') + leaf(c, 84, 18, 22, -50, '#6cbf5a'); }
+    if (o.acc === 'sailor') s += '<path d="M38 24 Q38 6 60 6 Q82 6 82 24Z" fill="#ffffff" stroke="#9aa8c0" stroke-width="2.5"/><rect x="38" y="18" width="44" height="7" fill="#2d4a8a"/><ellipse cx="60" cy="26" rx="30" ry="6" fill="#ffffff" stroke="#9aa8c0" stroke-width="2.5"/><circle cx="60" cy="13" r="3" fill="#ffcf3f"/>';
+    if (o.acc === 'veil') s += '<path d="M32 30 Q60 22 88 30" fill="none" stroke="#ffcf3f" stroke-width="3.5"/><path d="M60 24 L55 31 L60 38 L65 31Z" fill="#3fbfb0" stroke="#a87b1a" stroke-width="1.5"/>';
+    if (o.acc === 'furhood') s += '<path d="M22 60 Q20 10 60 8 Q100 10 98 60" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/><path d="M84 56 L88 64 L84 72 L80 64Z" fill="#9fdcf5" stroke="#4a8ab0" stroke-width="1.5"/>';
+    if (o.acc === 'flameclip') s += flame(c, 84, 30, 16, 30, '#ff8a3d') + flame(c, 90, 36, 11, 55, '#ffb33d');
+    return s;
+  }
+
+  // ---------- Content ----------
+  const ROLES = [
+    { id: 'striker', name: 'Striker', was: 'Swordsman', glyph: '⚔', cls: 'g-atk', rule: '⚔3 · ↑ first enemy · reach 1 (front row)' },
+    { id: 'shooter', name: 'Shooter', was: 'Archer', glyph: '➶', cls: 'g-atk', rule: '⚔2 · ↑ first enemy · reach 4' },
+    { id: 'piercer', name: 'Piercer', was: 'Spearman', glyph: '⇈', cls: 'g-atk', rule: '⚔2 · ⇈ whole column · reach 3' },
+    { id: 'splasher', name: 'Splasher', was: 'Mage', glyph: '⋔', cls: 'g-atk', rule: '⚔1 · ↖↑↗ three columns · reach 3' },
+    { id: 'cheerer', name: 'Cheerer', was: 'Drummer', glyph: '+1', cls: 'g-sup', rule: '+1 ATK to the monster above' },
+    { id: 'totem', name: 'Totem', was: 'Banner', glyph: '✚', cls: 'g-sup', rule: '+1 ATK to all 4 neighbours' },
+    { id: 'roarer', name: 'Roarer', was: 'War Horn', glyph: '×2', cls: 'g-mult', rule: '×2 damage to the monster above' },
+    { id: 'scout', name: 'Scout', was: 'Spyglass', glyph: '◎', cls: 'g-sup', rule: '+1 reach to the monster above' },
+    { id: 'guardian', name: 'Guardian', was: 'Shield', glyph: '⛨', cls: 'g-def', rule: 'Blocks damage in its column' },
+  ];
+  const ROLE_BY = Object.fromEntries(ROLES.map((r) => [r.id, r]));
+
+  const FACTIONS = [
+    { id: 'verdant', name: 'Verdant', region: 'Greenvale · meadows and forest', color: '#4f9a3e', bg: '#e3f4d6', tamerBg: '#d4ecc2',
+      tamer: { name: 'Fern', kind: 'Ranger · starting tamer', art: { hair: '#8a5a3a', style: 'ponytail', eye: '#3f8a4a', outfit: '#5aa548', trim: '#f4e3b0', acc: 'leafhood', hood: '#6cb85a' },
+        passive: 'Verdant monsters standing next to each other get +1 ATK.', ability: 'Overgrow: one enemy is rooted and skips its strike (once per battle).' },
+      mons: [
+        { id: 'bramblepup', name: 'Bramblepup', role: 'striker', stars: 1, stat: '⚔3 ↑ R1', text: 'A leafy puppy that chews through goblin shields. Grows thorns as it evolves.' },
+        { id: 'podpop', name: 'Podpop', role: 'shooter', stars: 1, stat: '⚔2 ↑ R4', text: 'A frog that fires peas from the pod on its back.' },
+        { id: 'thornstag', name: 'Thornstag', role: 'piercer', stars: 2, stat: '⚔2 ⇈ R3', text: 'Its single thorn antler skewers a whole column.' },
+        { id: 'bloomcap', name: 'Bloomcap', role: 'totem', stars: 2, stat: '+1 ✚', text: 'Its glowing spores cheer up every neighbour.' },
+        { id: 'mossback', name: 'Mossback', role: 'guardian', stars: 1, stat: '⛨ 3', text: 'A walking garden. Nothing gets past the shell.' },
+      ] },
+    { id: 'tide', name: 'Tide', region: 'Azure Coast · beach and coral', color: '#2f84c9', bg: '#dcefff', tamerBg: '#cbe4fb',
+      tamer: { name: 'Marin', kind: 'Navigator', art: { hair: '#2d4a8a', style: 'short', eye: '#2f84c9', outfit: '#f4f8ff', trim: '#2d4a8a', acc: 'sailor' },
+        passive: 'Splasher hits from Tide monsters also hit the enemy behind.', ability: 'Turn the tide: swap two of your monsters in the middle of a turn.' },
+      mons: [
+        { id: 'bubblefin', name: 'Bubblefin', role: 'shooter', stars: 2, stat: '⚔2 ↑ R5', text: 'Its bubbles float all the way to the back row.' },
+        { id: 'narwhee', name: 'Narwhee', role: 'piercer', stars: 3, stat: '⚔3 ⇈ R3', text: 'Charges horn-first through both enemy rows.' },
+        { id: 'jellypop', name: 'Jellypop', role: 'splasher', stars: 1, stat: '⚔1 ↖↑↗ R3', text: 'Stings three columns at once.' },
+        { id: 'coralotl', name: 'Coralotl', role: 'cheerer', stars: 1, stat: '+1 ↑', text: 'Waves its coral frills, and the monster above hits harder.' },
+        { id: 'shellby', name: 'Shellby', role: 'guardian', stars: 2, stat: '⛨ 3', text: 'Hides in a spiral shell bigger than itself.' },
+      ] },
+    { id: 'dune', name: 'Dune', region: 'Sunscorch · desert and temple', color: '#c98a1b', bg: '#fbedd2', tamerBg: '#f6e0b6',
+      tamer: { name: 'Sahra', kind: 'Temple scholar', art: { hair: '#3a2a3a', style: 'long', eye: '#3fbfb0', outfit: '#e8b85a', trim: '#3fbfb0', acc: 'veil', veil: '#f3e2bf', skin: '#e9b98f' },
+        passive: 'Dune monsters in the back row get +1 reach.', ability: 'Mirage: the next enemy strike hits a decoy instead of you.' },
+      mons: [
+        { id: 'fennix', name: 'Fennix', role: 'striker', stars: 2, stat: '⚔3 ↑ R1', text: 'Ears that hear the sun rise. Its first hit each battle deals +2.' },
+        { id: 'spinelet', name: 'Spinelet', role: 'splasher', stars: 1, stat: '⚔1 ↖↑↗ R3', text: 'Shoots needles in a fan.' },
+        { id: 'sandsnek', name: 'Sandsnek', role: 'piercer', stars: 1, stat: '⚔2 ⇈ R3', text: 'Drills through sand and armour alike.' },
+        { id: 'hootsun', name: 'Hootsun', role: 'scout', stars: 2, stat: 'R+1 ↑', text: 'Its sun goggles see one row further.' },
+        { id: 'scarablet', name: 'Scarablet', role: 'guardian', stars: 1, stat: '⛨ 2', text: 'Its polished shell bounces 1 damage back.' },
+      ] },
+    { id: 'frost', name: 'Frost', region: 'Frostveil · snowfields and glacier', color: '#3d9bc4', bg: '#e2f4fb', tamerBg: '#d0ecf7',
+      tamer: { name: 'Corin', kind: 'Frost warden', art: { hair: '#9fc4ea', style: 'spiky', eye: '#4a8ab0', outfit: '#4a7fb5', trim: '#ffffff', acc: 'furhood', hood: '#4a7fb5' },
+        passive: 'Enemies hit by Frost monsters don’t enrage.', ability: 'Blizzard: no enemy enrages this turn.' },
+      mons: [
+        { id: 'snowpuff', name: 'Snowpuff', role: 'cheerer', stars: 1, stat: '+1 ↑', text: 'A fluffball that cheers by thumping its feet.' },
+        { id: 'frostfang', name: 'Frostfang', role: 'striker', stars: 2, stat: '⚔3 ↑ R1', text: 'Ice crystals grow in its mane.' },
+        { id: 'icicub', name: 'Icicub', role: 'guardian', stars: 2, stat: '⛨ 4', text: 'Found a block of ice and refuses to let go of it.' },
+        { id: 'glimmermoth', name: 'Glimmermoth', role: 'splasher', stars: 2, stat: '⚔2 ↖↑↗ R3', text: 'Crystal wing dust freezes three columns.' },
+        { id: 'prismfox', name: 'Prismfox', role: 'shooter', stars: 3, stat: '⚔3 ↑ R4', text: 'Its crystal tail focuses light into a beam.' },
+      ] },
+    { id: 'ember', name: 'Ember', region: 'Ember Peaks · ash and lava', color: '#d9502c', bg: '#ffe1d4', tamerBg: '#ffd2bf',
+      tamer: { name: 'Kaela', kind: 'Flame duelist', art: { hair: '#d9442c', style: 'ponytail', eye: '#ff9a2f', outfit: '#3a2a3a', trim: '#ffb33d', acc: 'flameclip' },
+        passive: 'Overkill damage from Ember monsters is doubled.', ability: 'Ignite: blow up one barrel instantly.' },
+      mons: [
+        { id: 'emberling', name: 'Emberling', role: 'roarer', stars: 4, stat: '×2 ↑', text: 'A baby dragon. Its roar doubles the fire of the monster in front.' },
+        { id: 'cinderkit', name: 'Cinderkit', role: 'striker', stars: 1, stat: '⚔3 ↑ R1', text: 'Its tail is always on fire. So is its temper.' },
+        { id: 'salamandy', name: 'Salamandy', role: 'shooter', stars: 1, stat: '⚔2 ↑ R4', text: 'Spits fireballs, then naps on warm rocks.' },
+        { id: 'flarebat', name: 'Flarebat', role: 'splasher', stars: 2, stat: '⚔1 ↖↑↗ R3', text: 'Scatters embers from its flame wings.' },
+        { id: 'magmole', name: 'Magmole', role: 'guardian', stars: 2, stat: '⛨ 3', text: 'Digs through lava. Its armour is cooled rock.' },
+      ] },
+  ];
+  const BG_BY = {}; FACTIONS.forEach((f) => f.mons.forEach((m) => { BG_BY[m.id] = f.bg; }));
+
+  // ---------- Render ----------
+  const $ = (s) => document.querySelector(s);
+  $('#roles').innerHTML = ROLES.map((r) => '<div class="role"><span class="glyph ' + r.cls + '">' + r.glyph + '</span><div><b>' + r.name + '</b><span>was ' + r.was + ' · ' + r.rule + '</span></div></div>').join('');
+
+  const stars = (n) => '★'.repeat(n) + '<span style="opacity:.3">' + '★'.repeat(4 - n) + '</span>';
+  const roleColor = (r) => ({ 'g-atk': '#d0563f', 'g-sup': '#3f72c4', 'g-mult': '#c98a1b', 'g-def': '#687485' })[ROLE_BY[r].cls];
+
+  $('#factions').innerHTML = FACTIONS.map((f) =>
+    '<article class="faction" aria-labelledby="f-' + f.id + '">' +
+      '<div class="f-head"><h2 id="f-' + f.id + '">' + f.name + '</h2><span class="tag" style="background:' + f.color + '">' + f.region + '</span></div>' +
+      '<div class="f-body">' +
+        '<div class="tamer" style="background:' + f.tamerBg + ';color:#2b2433">' +
+          '<div class="art">' + art((c) => chibi(c, f.tamer.art)) + '</div>' +
+          '<div><h3>' + f.tamer.name + '</h3><div class="kind">' + f.tamer.kind + '</div></div>' +
+          '<dl><div><dt>Passive</dt><dd>' + f.tamer.passive + '</dd></div><div><dt>Ability</dt><dd>' + f.tamer.ability + '</dd></div></dl>' +
+        '</div>' +
+        '<div class="mons">' + f.mons.map((m) =>
+          '<div class="mon"><div class="art">' + art((c) => M[m.id](c), f.bg) + '</div>' +
+            '<div class="name"><b>' + m.name + '</b><span class="stars" aria-label="' + m.stars + ' star rarity">' + stars(m.stars) + '</span></div>' +
+            '<span class="chip"><i style="background:' + roleColor(m.role) + '">' + ROLE_BY[m.role].glyph + ' ' + ROLE_BY[m.role].name + '</i>' + m.stat + '</span>' +
+            '<p>' + m.text + '</p></div>').join('') +
+        '</div>' +
+      '</div>' +
+    '</article>').join('');
+
+  // Evolution line.
+  const EVO = [['Bramblepup', '★ · ⚔3'], ['Bramblehound', '★★ · ⚔4'], ['Thornwolf', '★★★ · ⚔5, first hit +2']];
+  $('#evo').innerHTML = EVO.map((e, i) => (i ? '<span class="arrow" aria-hidden="true">→</span>' : '') +
+    '<figure><div class="art">' + art((c) => M.bramblepup(c, i + 1)) + '</div><figcaption>' + e[0] + '<small>' + e[1] + '</small></figcaption></figure>').join('');
+
+  // Board preview: wild Ember monsters on top, a mixed team below.
+  const enemy = { '0,1': ['flarebat', 4, 2], '0,3': ['magmole', 7, 3], '1,0': ['cinderkit', 4, 3], '1,2': ['salamandy', 5, 2], '1,3': ['barrel', 1, 0], '1,4': ['cinderkit', 3, 2] };
+  const team = {
+    '2,0': ['bramblepup', 'striker', '3'], '2,2': ['narwhee', 'piercer', '6'], '2,3': ['podpop', 'shooter', '3'],
+    '3,2': ['emberling', 'roarer', '×2'], '3,3': ['bloomcap', 'totem', '+1'], '4,1': ['jellypop', 'splasher', '1'], '4,3': ['mossback', 'guardian', '3'],
+  };
+  let board = '';
+  for (let r = 0; r < 5; r++) for (let col = 0; col < 5; col++) {
+    const k = r + ',' + col, e = enemy[k], t = team[k];
+    let inner = '';
+    if (e) inner = art((c) => M[e[0]](c)) + (e[0] === 'barrel' ? '<span class="atk">💥2</span>' : '<span class="hp">♥' + e[1] + '</span><span class="atk">⚔' + e[2] + '</span>');
+    if (t) inner = art((c) => M[t[0]](c)) + '<span class="badge" style="background:' + roleColor(t[1]) + '">' + ROLE_BY[t[1]].glyph + '</span><span class="num">' + t[2] + '</span>';
+    board += '<div class="tile ' + (r < 2 ? 'e' : 'p') + (r === 2 ? ' row2' : '') + '"' + (t ? ' title="' + t[0] + '"' : '') + '>' + inner + '</div>';
+  }
+  $('#board').innerHTML = board;
+})();
+</script>
