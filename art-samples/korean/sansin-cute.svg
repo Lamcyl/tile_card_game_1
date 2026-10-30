@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute sansin: tiny mountain god with a cloud of white beard riding his round, goggle-eyed minhwa tiger -->
+<path d="M206 196 Q250 200 246 156 Q244 132 224 132" fill="none" stroke-width="20"/><path d="M206 196 Q250 200 246 156 Q244 132 224 132" fill="none" stroke="#d4cec3" stroke-width="12"/>
+<path d="M240 178 L250 172 M242 158 L252 156 M232 140 L240 134" fill="none" stroke-width="4"/>
+<path d="M38 176 Q50 140 120 142 Q196 140 214 178 Q222 218 190 228 L62 228 Q32 218 38 176Z" fill="#d4cec3"/>
+<path d="M112 144 L120 162 M138 144 L144 164 M164 148 L168 168 M188 158 L190 176 M204 184 L196 192" fill="none" stroke-width="5"/>
+<ellipse cx="190" cy="226" rx="24" ry="9" fill="#d4cec3"/><path d="M178 230 l0 6 M190 232 l0 6 M202 230 l0 6" fill="none" stroke-width="3"/>
+<ellipse cx="108" cy="226" rx="24" ry="9" fill="#d4cec3"/>
+<!-- sansin robe, staff -->
+<path d="M180 150 L188 44" fill="none" stroke-width="12"/><path d="M180 150 L188 44" fill="none" stroke="#9a948b" stroke-width="5"/>
+<path d="M188 46 Q176 24 194 22 Q210 24 202 40" fill="none" stroke-width="12"/><path d="M188 46 Q176 24 194 22 Q210 24 202 40" fill="none" stroke="#9a948b" stroke-width="5"/>
+<path d="M200 38 L204 56 L196 54Z" fill="#c8352b" stroke-width="3"/>
+<path d="M92 108 Q132 98 170 108 L184 156 Q134 168 80 156Z" fill="#55514c"/>
+<path d="M112 108 L132 150 L152 108" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M92 150 Q134 160 178 150" fill="none" stroke="#c8352b" stroke-width="6"/>
+<circle cx="180" cy="128" r="9" fill="#f6f2e9"/>
+<!-- tiger head -->
+<circle cx="34" cy="158" r="14" fill="#d4cec3"/><circle cx="92" cy="156" r="14" fill="#d4cec3"/>
+<circle cx="34" cy="160" r="6" fill="#9a948b" stroke="none"/><circle cx="92" cy="158" r="6" fill="#9a948b" stroke="none"/>
+<ellipse cx="62" cy="190" rx="44" ry="38" fill="#d4cec3"/>
+<path d="M54 156 L54 168 M62 154 L62 170 M70 156 L70 168" fill="none" stroke-width="4"/>
+<path d="M22 186 L34 188 M24 198 L36 196 M102 186 L90 188 M100 198 L88 196" fill="none" stroke-width="4"/>
+<ellipse cx="62" cy="204" rx="22" ry="16" fill="#f6f2e9"/>
+<circle cx="42" cy="180" r="10" fill="#f6f2e9" stroke-width="3"/><circle cx="82" cy="180" r="10" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="44" cy="181" r="5" fill="#1b1a1a" stroke="none"/><circle cx="80" cy="181" r="5" fill="#1b1a1a" stroke="none"/>
+<path d="M54 194 Q62 190 70 194 Q66 202 62 202 Q58 202 54 194Z" fill="#1b1a1a" stroke-width="2"/>
+<path d="M62 202 L62 208 M52 210 Q62 218 72 210" fill="none" stroke-width="3"/>
+<path d="M58 212 Q62 224 68 212Z" fill="#c8352b" stroke-width="2.5"/>
+<!-- sansin head -->
+<path d="M84 60 Q84 24 132 22 Q180 24 180 60Z" fill="#1b1a1a"/>
+<path d="M88 52 Q132 60 176 52" fill="none" stroke="#9a948b" stroke-width="3"/>
+<ellipse cx="132" cy="88" rx="38" ry="34" fill="#f6f2e9"/>
+<path d="M62 62 Q132 78 202 62 Q196 50 132 48 Q68 50 62 62Z" fill="#1b1a1a"/>
+<path d="M100 86 Q108 78 118 86 M146 86 Q156 78 164 86" fill="none" stroke-width="3.5"/>
+<path d="M96 76 Q86 96 100 100 M168 76 Q178 96 164 100" fill="none" stroke="#9a948b" stroke-width="5"/>
+<path d="M92 100 Q90 144 114 160 Q132 172 150 160 Q174 144 172 100 Q156 122 132 114 Q108 122 92 100Z" fill="#f6f2e9"/>
+<path d="M116 122 Q114 140 120 152 M132 122 L132 160 M148 122 Q150 140 144 152" fill="none" stroke="#9a948b" stroke-width="3"/>
+<ellipse cx="132" cy="102" rx="9" ry="7" fill="#f6f2e9" stroke-width="3"/>
+<path d="M112 112 Q122 104 132 112 Q142 104 152 112 Q142 120 132 114 Q122 120 112 112Z" fill="#f6f2e9" stroke-width="3"/>
+<ellipse cx="106" cy="100" rx="7" ry="4" fill="#c8352b" stroke="none" opacity=".6"/><ellipse cx="158" cy="100" rx="7" ry="4" fill="#c8352b" stroke="none" opacity=".6"/>
+</svg>
