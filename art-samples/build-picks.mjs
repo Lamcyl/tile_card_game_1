@@ -21,8 +21,8 @@ const SETS = {
   egypt: { title: 'Egyptian Picks', picks: [
   [1, 'anubis', 'Anubis', 'fierce', null],
   [2, 'ra', 'Ra', 'fierce', null],
-  [3, 'bastet', 'Bastet', 'fierce', 'Raised right arm redrawn: clean shoulder join, slight elbow bend, clear clawed paw.'],
-  [16, 'bes', 'Bes', 'fierce', 'Body made one stocky shape: barrel chest, belly, kilt and short bowed legs.'],
+  [3, 'bastet', 'Bastet', 'fierce', 'v3: the raised arm is now one thick shape that continues from the shoulder in front of the collar, so it no longer looks cut off. Shown next to v2.'],
+  [16, 'bes', 'Bes', 'fierce', 'v3: fiercer body: square shoulders, angular muscular chest, thick arms with a clenched fist, wider lower stance, dark spotted kilt with a jagged hem. Shown next to v2.'],
   [17, 'bennu', 'Bennu', 'fierce', null],
   [18, 'wadjet', 'Wadjet', 'cute', null],
   [18, 'wadjet', 'Wadjet', 'fierce', null],

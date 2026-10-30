@@ -7,8 +7,8 @@ Every version is kept; the **chosen** column is the current pick.
 |---|---|---|
 | 1 | Anubis | `anubis-fierce.svg` |
 | 2 | Ra | `ra-fierce.svg` |
-| 3 | Bastet | `bastet-fierce-v2.svg` (arm fixed; original `bastet-fierce.svg` kept) |
-| 16 | Bes | `bes-fierce-v2.svg` (body fixed; original `bes-fierce.svg` kept) |
+| 3 | Bastet | `bastet-fierce-v3.svg` (attached, thicker arm; `bastet-fierce.svg` and `-v2` kept) |
+| 16 | Bes | `bes-fierce-v3.svg` (fierce muscular body; `bes-fierce.svg` and `-v2` kept) |
 | 17 | Bennu | `bennu-fierce.svg` |
 | 18 | Wadjet | `wadjet-cute.svg` and `wadjet-fierce.svg` |
 | 20 | Isis | `isis-fierce.svg` |
