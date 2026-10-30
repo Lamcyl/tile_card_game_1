@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- tiny skeleton king floating, hugging his golden egg -->
+<!-- cape -->
+<path d="M58 150 Q128 118 198 150 L218 226 L184 212 L158 238 L128 216 L98 238 L72 212 L38 226Z" fill="#55514c"/>
+<path d="M82 164 L72 210 M174 164 L184 210 M128 170 V210" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+<!-- robe -->
+<path d="M92 150 Q128 136 164 150 L170 206 Q128 222 86 206Z" fill="#d4cec3"/>
+<path d="M92 192 Q128 208 164 192" fill="none" stroke="#c9a23a" stroke-width="5"/>
+<!-- skull -->
+<path d="M68 100 Q64 46 128 42 Q192 46 188 100 Q188 120 174 128 L170 148 Q128 160 86 148 L82 128 Q68 120 68 100Z" fill="#f6f2e9"/>
+<!-- sockets -->
+<ellipse cx="100" cy="98" rx="17" ry="19" fill="#1b1a1a"/><ellipse cx="156" cy="98" rx="17" ry="19" fill="#1b1a1a"/>
+<circle cx="95" cy="91" r="5.5" fill="#f6f2e9" stroke="none"/><circle cx="151" cy="91" r="5.5" fill="#f6f2e9" stroke="none"/>
+<circle cx="106" cy="106" r="2.5" fill="#f6f2e9" stroke="none"/><circle cx="162" cy="106" r="2.5" fill="#f6f2e9" stroke="none"/>
+<path d="M128 114 L120 128 L136 128Z" fill="#1b1a1a" stroke-width="3"/>
+<!-- teeth -->
+<path d="M96 138 Q128 146 160 138" fill="none" stroke-width="3"/>
+<path d="M108 140 V152 M118 142 V154 M128 143 V155 M138 142 V154 M148 140 V152" fill="none" stroke-width="2.5"/>
+<path d="M76 70 L90 84 L82 92" fill="none" stroke-width="2.5"/>
+<!-- crown -->
+<path d="M74 62 L80 24 L102 44 L128 12 L154 44 L176 24 L182 62 Q128 46 74 62Z" fill="#c9a23a"/>
+<circle cx="128" cy="30" r="5" fill="#f6f2e9" stroke-width="2.5"/>
+<!-- egg -->
+<ellipse cx="128" cy="186" rx="19" ry="25" fill="#c9a23a"/>
+<path d="M114 180 L122 186 L118 194 L128 200" fill="none" stroke-width="2.5"/>
+<!-- hands -->
+<path d="M100 194 Q98 176 110 172 Q116 182 112 198Z M156 194 Q158 176 146 172 Q140 182 144 198Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M104 178 L112 182 M152 178 L144 182" fill="none" stroke-width="2.5"/>
+</svg>

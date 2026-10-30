@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce morana: sweeping scythe strike, cloak a blizzard, effigy staff at her side -->
+<!-- blizzard streaks -->
+<path d="M150 214 L250 206 M170 232 L254 230 M130 196 L234 180" stroke="#d4cec3" stroke-width="5" fill="none"/>
+<!-- effigy staff -->
+<path d="M36 252 L36 70" stroke-width="9" fill="none"/><path d="M36 252 L36 70" stroke-width="4" stroke="#9a948b" fill="none"/>
+<path d="M12 114 L60 108" stroke-width="12" fill="none"/><path d="M12 114 L60 108" stroke-width="6" stroke="#d4cec3" fill="none"/>
+<path d="M12 114 L4 108 M12 114 L2 120 M60 108 L70 104 M60 108 L70 114" stroke-width="3" fill="none"/>
+<circle cx="36" cy="92" r="15" fill="#d4cec3"/>
+<path d="M26 88 L46 88 M26 96 L46 96" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<path d="M24 122 L18 160 L36 170 L54 160 L48 122Z" fill="#d4cec3"/>
+<path d="M20 150 L12 168 M36 162 L36 178 M52 150 L60 168" stroke-width="3" fill="none"/>
+<path d="M26 120 L48 122 L50 130 L24 128Z" fill="#c8352b" stroke-width="3"/>
+<path d="M36 106 Q18 100 14 78 M36 106 Q52 98 60 82" stroke="#c8352b" stroke-width="3.5" fill="none"/>
+<!-- cloak billowing right -->
+<path d="M96 120 L150 112 Q220 132 252 196 L226 190 L240 238 L208 216 L196 252 L168 224 L140 246 L124 212 L98 230 L86 190Z" fill="#d4cec3"/>
+<path d="M150 124 Q196 150 226 190 M140 150 Q172 176 196 214 M120 160 Q140 196 140 236" stroke="#9a948b" stroke-width="3" fill="none"/>
+<path d="M92 128 L152 118 L170 138 L110 166Z" fill="#f6f2e9"/>
+<path d="M100 150 L160 136" stroke="#c8352b" stroke-width="5" fill="none"/>
+<!-- legs peeking -->
+<path d="M92 214 L112 206 L116 246 L92 248Z" fill="#55514c"/>
+<path d="M78 244 L120 244 L122 252 L76 252Z" fill="#1b1a1a"/>
+<!-- scythe handle sweeping -->
+<path d="M64 216 L196 22" stroke-width="10" fill="none"/><path d="M64 216 L196 22" stroke-width="4.5" stroke="#9a948b" fill="none"/>
+<!-- blade -->
+<path d="M190 30 Q252 30 248 100 Q244 120 232 130 Q238 90 214 62 Q204 52 184 52Z" fill="#f6f2e9"/>
+<path d="M240 100 Q242 70 214 54" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<path d="M200 36 L194 42" stroke="#c8352b" stroke-width="6" fill="none"/>
+<!-- sleeved arms on handle -->
+<path d="M104 128 L132 150 L120 166 L92 146Z" fill="#d4cec3"/>
+<path d="M98 160 L120 166 L100 204 L76 192Z" fill="#d4cec3"/>
+<circle cx="126" cy="152" r="12" fill="#f6f2e9"/>
+<circle cx="86" cy="204" r="12" fill="#f6f2e9"/>
+<!-- hair streaming -->
+<path d="M82 66 Q80 28 120 24 L150 6 L146 34 L192 30 L156 58 L206 70 L146 80 L176 104 L120 94 Q92 92 82 66Z" fill="#1b1a1a"/>
+<path d="M140 46 L172 40 M132 66 L180 70" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<!-- head -->
+<path d="M70 82 Q72 42 110 40 Q146 42 150 82 Q150 118 110 130 Q72 118 70 82Z" fill="#f6f2e9"/>
+<path d="M70 76 Q90 50 110 56 Q132 50 150 76 Q132 66 118 78 Q108 62 96 76 Q82 64 70 76Z" fill="#1b1a1a"/>
+<!-- ice crown -->
+<path d="M76 56 L70 24 L92 46 L100 12 L112 44 L130 14 L132 46 L152 28 L146 58Z" fill="#f6f2e9"/>
+<path d="M100 22 L102 38 M130 24 L130 40" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<!-- eyes hollow with vermilion -->
+<path d="M78 84 L104 88 L100 100 Q86 102 78 94Z" fill="#1b1a1a"/><path d="M142 84 L116 88 L120 100 Q134 102 142 94Z" fill="#1b1a1a"/>
+<circle cx="92" cy="94" r="3" fill="#c8352b" stroke="none"/><circle cx="128" cy="94" r="3" fill="#c8352b" stroke="none"/>
+<path d="M74 78 L106 88 M146 78 L114 88" stroke-width="4.5" fill="none"/>
+<path d="M92 112 Q110 106 128 112" fill="none" stroke-width="3.5"/>
+<path d="M98 111 L100 118 M110 109 L110 117 M122 111 L120 118" stroke-width="2.5" fill="none"/>
+<path d="M110 100 L106 110 L112 108" fill="none" stroke-width="2.5"/>
+</svg>

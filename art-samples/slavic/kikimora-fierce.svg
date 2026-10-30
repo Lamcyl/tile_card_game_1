@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- kikimora stalking: a gaunt bird-legged crone crouched in the reeds, spindle levelled like a spear -->
+<!-- reeds back -->
+<g fill="none" stroke-width="3.5"><path d="M214 246 Q216 190 232 140"/><path d="M226 246 Q232 200 250 170"/><path d="M200 246 Q198 210 206 176"/></g>
+<path d="M232 140 L236 124 L226 138Z M250 170 L254 154 L244 168Z" fill="#9a948b" stroke-width="3"/>
+<ellipse cx="120" cy="246" rx="110" ry="9" fill="#d4cec3" stroke="none"/>
+<!-- hair strands streaming back -->
+<g fill="none" stroke-linecap="round">
+<path d="M100 54 Q150 14 214 22 Q240 22 250 36" stroke="#1b1a1a" stroke-width="16"/><path d="M100 54 Q150 14 214 22 Q240 22 250 36" stroke="#55514c" stroke-width="8"/>
+<path d="M112 66 Q170 40 226 66 Q244 76 242 94" stroke="#1b1a1a" stroke-width="16"/><path d="M112 66 Q170 40 226 66 Q244 76 242 94" stroke="#55514c" stroke-width="8"/>
+<path d="M118 78 Q176 80 206 110 Q220 126 240 120" stroke="#1b1a1a" stroke-width="14"/><path d="M118 78 Q176 80 206 110 Q220 126 240 120" stroke="#55514c" stroke-width="6"/>
+</g>
+<path d="M170 30 L176 12 L184 28Z M214 66 L226 54 L228 70Z" fill="#9a948b" stroke-width="3"/>
+<!-- far leg -->
+<g fill="none"><path d="M156 170 Q126 184 118 206 Q124 220 150 226" stroke="#1b1a1a" stroke-width="15"/><path d="M156 170 Q126 184 118 206 Q124 220 150 226" stroke="#d4cec3" stroke-width="7"/></g>
+<path d="M150 226 L116 238 M150 226 L120 246 M150 226 L168 244" fill="none" stroke-width="4.5"/>
+<!-- torso, gaunt and bent -->
+<path d="M96 108 Q124 98 150 116 Q176 140 168 184 L142 190 Q138 150 100 134Z" fill="#d4cec3"/>
+<path d="M118 126 L132 138 M126 120 L142 134 M134 122 L148 136 M140 152 L150 156" stroke-width="2.5" fill="none"/>
+<!-- ragged shawl/skirt -->
+<path d="M96 108 Q150 104 178 150 L200 196 L176 186 L178 214 L158 192 L146 214 L136 188 L118 206 L124 168 Q110 140 90 128Z" fill="#55514c"/>
+<path d="M104 112 Q140 112 168 146" fill="none" stroke="#c8352b" stroke-width="4" stroke-dasharray="6 5"/>
+<!-- near leg -->
+<g fill="none"><path d="M168 176 Q196 190 196 212 Q184 226 170 228" stroke="#1b1a1a" stroke-width="16"/><path d="M168 176 Q196 190 196 212 Q184 226 170 228" stroke="#d4cec3" stroke-width="8"/></g>
+<path d="M170 228 L142 238 M170 228 L146 246 M170 228 L190 244" fill="none" stroke-width="4.5"/>
+<path d="M142 238 l-6 3 M146 246 l-6 2 M190 244 l5 3" stroke-width="3" fill="none"/>
+<!-- spindle spear -->
+<path d="M150 70 L8 232" stroke="#1b1a1a" stroke-width="12" fill="none"/><path d="M150 70 L8 232" stroke="#9a948b" stroke-width="5" fill="none"/>
+<path d="M8 232 L0 246 L16 238Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M52 180 L60 188 M60 172 L70 180 M68 164 L78 172 M76 156 L86 164 M84 148 L94 156" stroke="#c8352b" stroke-width="5" fill="none"/>
+<ellipse cx="108" cy="124" rx="16" ry="6" transform="rotate(-48 108 124)" fill="#d4cec3"/>
+<!-- arms -->
+<g fill="none"><path d="M118 112 Q124 146 110 160" stroke="#1b1a1a" stroke-width="14"/><path d="M118 112 Q124 146 110 160" stroke="#d4cec3" stroke-width="6"/>
+<path d="M132 112 Q166 100 150 76" stroke="#1b1a1a" stroke-width="14"/><path d="M132 112 Q166 100 150 76" stroke="#d4cec3" stroke-width="6"/></g>
+<path d="M104 158 L96 172 M110 162 L106 176 M116 160 L116 174 M104 156 L94 158" stroke-width="4" fill="none"/>
+<path d="M150 74 L142 62 M154 72 L152 58 M158 74 L162 62" stroke-width="4" fill="none"/>
+<!-- head -->
+<path d="M62 60 Q74 28 112 34 Q146 44 144 82 Q138 112 104 112 Q70 108 62 60Z" fill="#f6f2e9"/>
+<path d="M70 52 Q96 22 126 38 Q108 44 96 56 L82 66Z" fill="#55514c"/>
+<!-- long beak nose -->
+<path d="M72 76 L20 104 Q22 114 34 114 L74 100Z" fill="#d4cec3"/>
+<path d="M30 106 L70 94" stroke-width="2.5" fill="none"/>
+<!-- eye -->
+<path d="M82 62 L128 76 L120 92 Q96 94 84 80Z" fill="#1b1a1a"/>
+<circle cx="104" cy="80" r="6" fill="#c8352b" stroke="none"/><path d="M104 74 L104 86" stroke-width="2.5"/>
+<path d="M84 52 L124 70" stroke-width="5" fill="none"/>
+<!-- grin -->
+<path d="M76 102 Q104 118 130 100" fill="#1b1a1a" stroke-width="3.5"/>
+<path d="M82 104 L86 110 L92 106 L98 114 L104 108 L110 114 L116 106 L124 108" fill="#f6f2e9" stroke-width="2"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce perun: wind-up lunge, axe overhead, lightning behind, eagle diving -->
+<path d="M214 0 L172 66 L198 70 L148 150 L172 154 L128 232 L230 118 L198 112 L240 50 L214 46 L250 0Z" fill="#c9a23a"/>
+<path d="M18 240 Q128 228 246 240 L238 250 Q128 246 26 250Z" fill="#d4cec3" stroke-width="3"/>
+<!-- back leg -->
+<path d="M152 190 L200 214 L214 238 L184 242 L180 226 L136 212Z" fill="#55514c"/>
+<path d="M180 232 L218 232 L220 246 L178 246Z" fill="#1b1a1a"/>
+<!-- front leg -->
+<path d="M126 192 L82 204 L74 238 L104 240 L108 222 L146 216Z" fill="#55514c"/>
+<path d="M68 232 L110 232 L112 246 L66 246Z" fill="#1b1a1a"/>
+<!-- haft -->
+<path d="M50 190 L174 34" stroke-width="13" fill="none"/>
+<path d="M50 190 L174 34" stroke-width="6" fill="none" stroke="#9a948b"/>
+<!-- axe head -->
+<path d="M160 52 L158 14 Q196 4 226 26 Q240 56 220 82 Q196 76 176 62Z" fill="#d4cec3"/>
+<path d="M222 32 Q232 54 216 76" fill="none" stroke="#c9a23a" stroke-width="5"/>
+<!-- cape -->
+<path d="M172 118 Q226 100 250 150 Q222 140 204 156 Q238 184 212 204 Q196 170 170 168Z" fill="#c9a23a"/>
+<path d="M186 130 Q222 130 236 148" fill="none" stroke-width="2.5"/>
+<!-- torso -->
+<path d="M112 128 L172 118 L184 190 L122 202Z" fill="#f6f2e9"/>
+<path d="M120 182 L182 172 L184 190 L122 202Z" fill="#c9a23a"/>
+<path d="M126 140 L136 152 L146 138 L156 150 L166 136" fill="none" stroke="#c9a23a" stroke-width="3"/>
+<!-- arms to haft -->
+<path d="M122 136 L92 126 L84 142 L124 160Z" fill="#f6f2e9"/>
+<circle cx="86" cy="134" r="12" fill="#f6f2e9"/>
+<path d="M120 156 L80 170 L84 186 L126 176Z" fill="#f6f2e9"/>
+<circle cx="64" cy="176" r="12" fill="#f6f2e9"/>
+<!-- head -->
+<path d="M114 80 Q118 40 154 40 Q190 44 190 80 Q186 116 150 122 Q116 116 114 80Z" fill="#f6f2e9"/>
+<!-- beard streaming -->
+<path d="M120 100 Q108 130 126 150 Q140 164 124 184 Q162 176 168 146 Q192 128 190 96 Q168 124 140 110Z" fill="#d4cec3"/>
+<path d="M142 132 L136 146 M156 128 L152 148" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<!-- hair -->
+<path d="M112 80 Q110 32 154 32 Q196 34 192 82 Q172 58 152 66 Q128 56 112 80Z" fill="#d4cec3"/>
+<path d="M112 70 L96 52 L120 54 L112 32 L136 44" fill="#c9a23a"/>
+<path d="M118 66 Q152 52 188 66" fill="none" stroke="#c9a23a" stroke-width="6"/>
+<!-- eyes -->
+<path d="M120 86 L146 88 L144 98 Q130 102 120 94Z" fill="#1b1a1a"/><path d="M188 86 L160 88 L162 98 Q176 102 188 94Z" fill="#1b1a1a"/>
+<path d="M126 92 L138 93 M182 92 L168 93" stroke="#c9a23a" stroke-width="3.5"/>
+<path d="M116 78 L148 88 M192 78 L158 88" stroke-width="5" fill="none"/>
+<path d="M134 108 Q154 102 176 108 Q172 122 154 122 Q138 122 134 108Z" fill="#1b1a1a" stroke-width="3"/>
+<path d="M140 108 L144 115 L148 107 M160 107 L164 115 L168 108" fill="#f6f2e9" stroke-width="2"/>
+<!-- eagle -->
+<path d="M14 58 Q40 40 70 46 L58 58 L86 60 L64 72 L48 66 L26 82 L32 66Z" fill="#9a948b"/>
+<path d="M70 46 L88 56 L68 62Z" fill="#c9a23a" stroke-width="3"/>
+<path d="M44 52 L36 34 M54 50 L50 30" stroke-width="3" fill="none"/>
+<circle cx="66" cy="54" r="2.4" fill="#1b1a1a" stroke="none"/>
+</svg>

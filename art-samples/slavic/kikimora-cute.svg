@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- kikimora perched on a giant spindle like a mischievous bird, thread unspooling -->
+<ellipse cx="128" cy="248" rx="60" ry="6" fill="#d4cec3" stroke="none"/>
+<!-- spindle -->
+<path d="M124 156 L132 156 L131 246 L125 246Z" fill="#9a948b"/>
+<path d="M108 214 L128 176 L148 214Z" fill="#d4cec3"/>
+<path d="M112 206 L144 206 M116 198 L140 198 M120 190 L136 190 M123 182 L133 182" fill="none" stroke="#c8352b" stroke-width="3.5"/>
+<ellipse cx="128" cy="218" rx="30" ry="9" fill="#9a948b"/>
+<path d="M104 218 Q128 226 152 218" fill="none" stroke-width="2.5"/>
+<!-- trailing thread to yarn ball -->
+<path d="M148 214 Q196 214 204 232 Q206 242 218 238" fill="none" stroke="#c8352b" stroke-width="3.5"/>
+<circle cx="224" cy="232" r="14" fill="#d4cec3"/><path d="M214 226 Q224 220 234 228 M212 234 Q224 228 236 236 M216 242 Q226 238 232 242" fill="none" stroke="#c8352b" stroke-width="2.5"/>
+<!-- bird legs gripping -->
+<g fill="none"><path d="M114 152 Q110 168 122 168" stroke-width="4"/><path d="M142 152 Q146 168 134 168" stroke-width="4"/></g>
+<path d="M122 164 L108 166 M122 168 L110 176 M122 168 L124 178 M134 164 L148 166 M134 168 L146 176 M134 168 L132 178" fill="none" stroke-width="4"/>
+<!-- tail ragged -->
+<path d="M96 138 L70 168 L100 156 L96 184 L116 160 L128 186 L140 160 L160 184 L158 156 L186 168 L160 138Z" fill="#9a948b"/>
+<!-- body -->
+<path d="M94 128 Q94 100 128 100 Q162 100 162 128 Q164 160 128 164 Q92 160 94 128Z" fill="#d4cec3"/>
+<path d="M104 130 q6 -6 12 0 q6 -6 12 0 q6 -6 12 0 M108 146 q6 -6 12 0 q6 -6 12 0" fill="none" stroke="#c8352b" stroke-width="3"/>
+<!-- wing arms -->
+<path d="M96 116 Q64 118 60 146 Q76 140 84 150 Q92 136 98 138Z" fill="#9a948b"/>
+<path d="M160 116 Q188 112 196 90 Q180 94 176 84 Q164 96 158 100Z" fill="#9a948b"/>
+<path d="M66 144 L72 134 M74 142 L80 132" stroke-width="2.5" fill="none"/>
+<path d="M188 92 L184 82 M180 94 L178 84" stroke-width="2.5" fill="none"/>
+<!-- head -->
+<path d="M82 74 Q80 28 130 26 Q180 28 178 76 Q176 112 130 114 Q84 112 82 74Z" fill="#f6f2e9"/>
+<!-- wild hair tufts -->
+<path d="M80 66 L58 44 L82 48 L66 22 L96 38 L98 10 L118 34 L134 6 L146 32 L170 12 L168 38 L196 28 L180 52 L202 62 L178 70 Q170 38 130 38 Q90 38 80 66Z" fill="#55514c"/>
+<!-- feather -->
+<path d="M150 22 Q160 -2 190 -2 Q184 22 160 30Z" fill="#c8352b" stroke-width="3"/><path d="M152 26 L184 0" stroke-width="2" fill="none"/>
+<!-- eyes sideways glance -->
+<ellipse cx="108" cy="78" rx="13" ry="15" fill="#f6f2e9" stroke-width="3"/><ellipse cx="152" cy="78" rx="13" ry="15" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="113" cy="80" r="8" fill="#1b1a1a"/><circle cx="157" cy="80" r="8" fill="#1b1a1a"/>
+<circle cx="115" cy="77" r="2.5" fill="#f6f2e9" stroke="none"/><circle cx="159" cy="77" r="2.5" fill="#f6f2e9" stroke="none"/>
+<path d="M92 66 Q104 50 120 58 M168 64 L142 68" stroke-width="3.5" fill="none"/>
+<!-- beak nose -->
+<path d="M122 84 Q146 88 142 106 Q132 112 124 100Z" fill="#d4cec3"/>
+<path d="M128 94 Q136 96 138 102" fill="none" stroke-width="2"/>
+<!-- grin -->
+<path d="M96 104 Q112 118 130 112" fill="none" stroke-width="3.5"/>
+<ellipse cx="94" cy="96" rx="7" ry="4" fill="#c8352b" stroke="none" opacity=".55"/><ellipse cx="170" cy="96" rx="7" ry="4" fill="#c8352b" stroke="none" opacity=".55"/>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- domovoi: a fluffball house-guardian snuggling a loaf in a wooden bowl -->
+<ellipse cx="128" cy="240" rx="100" ry="9" fill="#d4cec3" stroke="none"/>
+<g transform="translate(0 -14)">
+<path d="M202.0 118.0 Q216.3 134.8 196.4 144.8 Q202.8 165.8 180.3 167.5 Q178.0 189.5 156.3 182.7 Q145.6 202.3 128.0 188.0 Q110.4 202.3 99.7 182.7 Q78.0 189.5 75.7 167.5 Q53.2 165.8 59.6 144.8 Q39.7 134.8 54.0 118.0 Q39.7 101.2 59.6 91.2 Q53.2 70.2 75.7 68.5 Q78.0 46.5 99.7 53.3 Q110.4 33.7 128.0 48.0 Q145.6 33.7 156.3 53.3 Q178.0 46.5 180.3 68.5 Q202.8 70.2 196.4 91.2 Q216.3 101.2 202.0 118.0Z" fill="#9a948b"/>
+<path d="M74 70 q6 -10 14 -2 M168 62 q8 -10 14 0 M60 120 q-4 -8 4 -12 M196 118 q6 -8 -2 -12 M100 40 q4 -8 12 -2 M146 38 q6 -8 12 0" fill="none" stroke-width="2.5"/>
+<!-- face -->
+<ellipse cx="128" cy="116" rx="46" ry="38" fill="#f6f2e9"/>
+<!-- fringe locks over brow -->
+<path d="M80 98 Q84 62 128 60 Q172 62 176 98 L162 82 L152 100 L140 78 L128 100 L116 78 L104 100 L94 82Z" fill="#9a948b"/>
+<!-- eyes -->
+<ellipse cx="108" cy="112" rx="8" ry="10" fill="#1b1a1a"/><ellipse cx="148" cy="112" rx="8" ry="10" fill="#1b1a1a"/>
+<circle cx="105" cy="108" r="3" fill="#f6f2e9" stroke="none"/><circle cx="145" cy="108" r="3" fill="#f6f2e9" stroke="none"/>
+<ellipse cx="92" cy="128" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".55"/><ellipse cx="164" cy="128" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".55"/>
+<!-- bulb nose -->
+<ellipse cx="128" cy="126" rx="12" ry="10" fill="#d4cec3"/>
+<!-- moustache and beard -->
+<path d="M90 140 Q108 126 128 140 Q148 126 166 140 Q160 156 148 154 L142 168 L128 160 L114 168 L108 154 Q96 156 90 140Z" fill="#d4cec3"/>
+<path d="M118 150 Q128 156 138 150" fill="none" stroke-width="2.5"/>
+</g>
+<!-- bowl -->
+<path d="M26 174 Q30 238 128 238 Q226 238 230 174Z" fill="#9a948b"/>
+<path d="M26 174 Q128 192 230 174 Q226 164 128 164 Q34 164 26 174Z" fill="#d4cec3"/>
+<path d="M44 196 L58 208 L72 196 L86 208 L100 196 L114 208 L128 196 L142 208 L156 196 L170 208 L184 196 L198 208 L212 196" fill="none" stroke="#c8352b" stroke-width="4"/>
+<!-- loaf -->
+<path d="M64 190 Q60 156 128 154 Q196 156 192 190 Q188 206 128 208 Q68 206 64 190Z" fill="#d4cec3"/>
+<path d="M98 162 L108 184 M128 160 L128 190 M158 162 L148 184" fill="none" stroke-width="2.5"/>
+<!-- little hands hugging loaf -->
+<ellipse cx="74" cy="178" rx="13" ry="10" fill="#f6f2e9"/><ellipse cx="182" cy="178" rx="13" ry="10" fill="#f6f2e9"/>
+<path d="M66 174 L68 182 M74 172 L76 182 M190 174 L188 182 M182 172 L180 182" stroke-width="2" fill="none"/>
+<!-- feet over rim -->
+<ellipse cx="94" cy="218" rx="14" ry="9" fill="#f6f2e9"/><ellipse cx="162" cy="218" rx="14" ry="9" fill="#f6f2e9"/>
+<path d="M88 214 L88 222 M96 213 L96 222 M156 213 L156 222 M164 214 L164 222" stroke-width="2" fill="none"/>
+</svg>

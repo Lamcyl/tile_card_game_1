@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- vodyanoy floating on his back in the pond, belly up, little carp on his tummy -->
+<ellipse cx="128" cy="226" rx="116" ry="12" fill="#d4cec3" stroke="none"/>
+<g transform="translate(0 -18)">
+<!-- legs up at right -->
+<g fill="none"><path d="M196 168 Q226 150 228 112" stroke="#1b1a1a" stroke-width="30"/><path d="M196 168 Q226 150 228 112" stroke="#9a948b" stroke-width="22"/>
+<path d="M206 184 Q244 176 248 140" stroke="#1b1a1a" stroke-width="28"/><path d="M206 184 Q244 176 248 140" stroke="#9a948b" stroke-width="20"/></g>
+<!-- webbed feet -->
+<path d="M228 112 L212 82 Q222 80 226 92 Q228 78 238 80 Q238 92 236 100 Q246 88 252 92 Q248 106 238 118Z" fill="#9a948b" stroke-width="3.5"/>
+<path d="M248 140 L238 112 Q248 112 250 124 Q256 116 256 118 L256 140Z" fill="#9a948b" stroke-width="3.5"/>
+<!-- belly -->
+<path d="M96 130 Q110 96 160 96 Q214 100 222 164 Q226 196 190 200 L120 200 Q92 190 96 130Z" fill="#9a948b"/>
+<path d="M150 112 q8 -6 16 0 M174 118 q8 -6 16 0 M198 134 q8 -6 14 0 M200 160 q8 -6 14 0 M180 176 q8 -6 16 0 M152 184 q8 -6 16 0 M120 176 q8 -6 14 0" fill="none" stroke-width="2.5"/>
+<!-- tummy pale -->
+<ellipse cx="156" cy="152" rx="40" ry="34" fill="#d4cec3"/>
+<!-- fish -->
+<g transform="translate(166 138) rotate(-8)"><path d="M-22 0 Q-6 -16 14 -8 L30 -18 L26 0 L30 18 L14 8 Q-6 16 -22 0Z" fill="#c8352b"/><circle cx="-10" cy="-2" r="3" fill="#1b1a1a" stroke="none"/><path d="M-2 -8 Q2 0 -2 8 M6 -6 Q10 0 6 6" fill="none" stroke-width="2"/></g>
+<!-- head -->
+<path d="M26 126 Q20 70 76 62 Q140 62 148 120 Q150 170 86 172 Q34 170 26 126Z" fill="#9a948b"/>
+<!-- beard over chest -->
+<path d="M34 138 Q34 168 56 186 L48 214 L72 196 L84 222 L98 194 L118 212 L118 184 L136 176 Q150 150 142 130 Q120 148 86 146 Q56 148 34 138Z" fill="#d4cec3"/>
+<path d="M60 160 q6 10 4 22 M86 162 q6 12 2 26 M112 160 q-2 12 4 20" fill="none" stroke-width="2.5"/>
+<!-- reeds/duckweed in beard -->
+<path d="M76 196 Q70 176 80 170 Q92 178 84 196Z" fill="#f6f2e9" stroke-width="3"/>
+<!-- bulging eyes -->
+<circle cx="52" cy="76" r="20" fill="#9a948b"/><circle cx="112" cy="70" r="20" fill="#9a948b"/>
+<circle cx="52" cy="76" r="14" fill="#f6f2e9" stroke-width="3"/><circle cx="112" cy="70" r="14" fill="#f6f2e9" stroke-width="3"/>
+<ellipse cx="55" cy="78" rx="8" ry="9" fill="#1b1a1a" stroke="none"/><ellipse cx="115" cy="72" rx="8" ry="9" fill="#1b1a1a" stroke="none"/>
+<circle cx="52" cy="73" r="3" fill="#f6f2e9" stroke="none"/><circle cx="112" cy="67" r="3" fill="#f6f2e9" stroke="none"/>
+<!-- nostrils, wide smile -->
+<path d="M78 108 L80 108 M90 106 L92 106" stroke-width="3.5"/>
+<path d="M44 118 Q86 142 130 112" fill="none" stroke-width="4"/>
+<ellipse cx="42" cy="124" rx="7" ry="4" fill="#c8352b" stroke="none" opacity=".5"/><ellipse cx="128" cy="120" rx="7" ry="4" fill="#c8352b" stroke="none" opacity=".5"/>
+<!-- lily pad hat -->
+<path d="M52 58 Q86 24 128 44 Q122 62 98 62 L90 50Z" fill="#d4cec3"/><path d="M90 50 Q96 40 100 36" fill="none" stroke-width="2.5"/>
+<!-- arm resting on belly -->
+<g fill="none"><path d="M112 176 Q122 190 142 184" stroke="#1b1a1a" stroke-width="24"/><path d="M112 176 Q122 190 142 184" stroke="#9a948b" stroke-width="16"/></g>
+<path d="M142 176 L158 170 M144 184 L162 184 M140 192 L156 198" stroke-width="3" fill="none"/>
+</g>
+<!-- front water -->
+<path d="M0 204 Q16 192 34 204 Q52 192 70 204 Q88 192 106 204 Q124 192 142 204 Q160 192 178 204 Q196 192 214 204 Q232 194 256 204 L256 256 L0 256Z" fill="#d4cec3"/>
+<path d="M24 226 Q44 218 64 226 M150 232 Q176 222 204 232" fill="none" stroke-width="3" stroke="#9a948b"/>
+<path d="M214 236 Q226 228 238 236" fill="none" stroke-width="3" stroke="#9a948b"/>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute morana: bell-shaped hooded girl in a snowdrift, hugging her straw effigy -->
+<!-- snow -->
+<path d="M10 240 Q20 214 56 218 Q90 200 128 214 Q170 202 204 218 Q240 214 248 240Z" fill="#f6f2e9"/>
+<path d="M40 232 Q60 226 78 232 M150 230 Q176 222 206 232" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+<!-- snowflakes -->
+<path d="M30 60 L30 84 M18 72 L42 72 M21 63 L39 81 M39 63 L21 81" stroke="#9a948b" stroke-width="3" fill="none"/>
+<path d="M226 40 L226 58 M217 49 L235 49 M220 43 L232 55 M232 43 L220 55" stroke="#9a948b" stroke-width="3" fill="none"/>
+<circle cx="214" cy="104" r="4" fill="#d4cec3" stroke-width="2.5"/><circle cx="44" cy="124" r="4" fill="#d4cec3" stroke-width="2.5"/>
+<!-- cloak bell -->
+<path d="M94 140 Q60 190 50 222 Q128 240 206 222 Q196 190 162 140Z" fill="#d4cec3"/>
+<path d="M62 204 Q128 226 194 204 L206 222 Q128 240 50 222Z" fill="#f6f2e9"/>
+<path d="M60 210 L68 218 L76 210 L84 220 L92 212 L100 222 L108 214 L116 224 L124 216 L132 224 L140 214 L148 222 L156 212 L164 220 L172 210 L180 218 L188 210 L196 216" fill="none" stroke="#c8352b" stroke-width="3"/>
+<path d="M104 160 L128 190 L152 160" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- sickle held at left -->
+<path d="M52 150 Q22 152 22 188 Q30 204 58 200 Q38 196 38 178 Q38 160 60 160Z" fill="#d4cec3" stroke-width="3.5"/>
+<path d="M58 160 L74 176" stroke-width="7" stroke="#1b1a1a" fill="none"/><path d="M58 160 L74 176" stroke-width="3" stroke="#9a948b" fill="none"/>
+<circle cx="80" cy="182" r="10" fill="#f6f2e9"/>
+<!-- straw effigy -->
+<path d="M156 150 L222 146" stroke-width="12" fill="none"/><path d="M156 150 L222 146" stroke-width="6" fill="none" stroke="#d4cec3"/>
+<path d="M156 150 L148 144 M156 150 L146 154 M222 146 L232 142 M222 146 L232 152" stroke-width="3" fill="none"/>
+<path d="M176 156 L172 214 L186 220 L200 214 L196 156Z" fill="#d4cec3"/>
+<path d="M174 206 L168 220 M186 212 L186 226 M198 206 L204 220" stroke-width="3" fill="none"/>
+<circle cx="189" cy="130" r="17" fill="#d4cec3"/>
+<path d="M178 126 L200 126 M178 134 L200 134" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<path d="M176 160 Q190 172 198 160 L198 168 Q190 180 176 168Z" fill="#c8352b" stroke-width="3"/>
+<!-- arms hugging effigy -->
+<path d="M156 168 Q150 154 168 158 L178 176 Q164 184 156 168Z" fill="#f6f2e9" stroke-width="3.5"/>
+<circle cx="172" cy="174" r="10" fill="#f6f2e9"/>
+<!-- hood -->
+<path d="M70 108 Q64 36 112 22 L128 4 L144 22 Q192 36 186 108 Q188 150 128 150 Q68 150 70 108Z" fill="#9a948b"/>
+<path d="M128 4 L124 14 M128 4 L132 14" stroke-width="3" fill="none"/>
+<path d="M78 70 Q90 56 100 66 Q104 56 116 62 M180 70 Q168 56 158 66 Q152 56 140 62" stroke="#d4cec3" stroke-width="4" fill="none"/>
+<!-- face -->
+<path d="M82 104 Q82 66 128 64 Q174 66 174 104 Q174 140 128 144 Q82 140 82 104Z" fill="#f6f2e9"/>
+<!-- hair fringe -->
+<path d="M82 98 Q82 64 128 62 Q174 64 174 98 Q156 76 140 90 Q128 70 116 90 Q100 76 82 98Z" fill="#1b1a1a"/>
+<!-- frost crown -->
+<path d="M96 66 L100 44 L110 58 L128 34 L146 58 L156 44 L160 66Z" fill="#f6f2e9" stroke-width="3.5"/>
+<circle cx="128" cy="52" r="4" fill="#c8352b" stroke="none"/>
+<!-- eyes -->
+<ellipse cx="108" cy="112" rx="8.5" ry="11" fill="#1b1a1a"/><ellipse cx="148" cy="112" rx="8.5" ry="11" fill="#1b1a1a"/>
+<circle cx="111" cy="107" r="3.4" fill="#f6f2e9" stroke="none"/><circle cx="151" cy="107" r="3.4" fill="#f6f2e9" stroke="none"/>
+<ellipse cx="92" cy="126" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".55"/><ellipse cx="164" cy="126" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".55"/>
+<path d="M122 128 Q128 133 134 128" fill="none" stroke-width="3"/>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute vila: perched on a tiny whirlwind, hair and wings caught in the wind -->
+<!-- whirlwind funnel -->
+<path d="M70 196 Q128 214 186 196 Q176 216 160 224 Q150 238 132 248 Q122 236 108 228 Q86 216 70 196Z" fill="#d4cec3"/>
+<path d="M82 204 Q128 222 176 204 M100 220 Q130 232 158 220" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M186 196 Q226 190 228 160 Q214 176 190 176" fill="#d4cec3" stroke-width="3"/>
+<path d="M70 196 Q30 196 26 166 Q40 180 66 178" fill="#d4cec3" stroke-width="3"/>
+<!-- wings -->
+<path d="M112 140 Q64 130 20 80 Q16 60 36 64 Q84 70 116 112Z" fill="#f6f2e9"/>
+<path d="M112 150 Q70 160 34 142 Q38 128 56 130 Q92 134 114 134Z" fill="#d4cec3"/>
+<path d="M144 140 Q192 130 236 80 Q240 60 220 64 Q172 70 140 112Z" fill="#f6f2e9"/>
+<path d="M144 150 Q186 160 222 142 Q218 128 200 130 Q164 134 142 134Z" fill="#d4cec3"/>
+<path d="M44 74 Q80 90 110 116 M214 74 Q178 90 148 116" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+<!-- wild hair behind -->
+<path d="M78 96 Q58 40 100 24 Q128 14 156 24 Q200 40 178 96 Q206 96 222 120 Q240 142 220 156 Q226 134 204 126 Q222 150 196 166 Q202 142 176 132 L80 132 Q60 150 64 176 Q44 150 66 118Z" fill="#55514c"/>
+<path d="M186 104 Q214 108 224 128 M70 124 Q54 144 62 164" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- body -->
+<path d="M108 146 L148 146 L158 196 Q128 204 98 196Z" fill="#f6f2e9"/>
+<path d="M100 182 L156 182 L158 196 Q128 204 98 196Z" fill="#c8352b"/>
+<path d="M104 190 L110 184 L116 190 L122 184 L128 190 L134 184 L140 190 L146 184 L152 190" fill="none" stroke="#f6f2e9" stroke-width="2.5"/>
+<path d="M118 150 L128 160 L138 150" fill="none" stroke="#c8352b" stroke-width="3"/>
+<!-- feet dangling into the wind -->
+<path d="M110 198 L108 214 Q98 218 100 224 Q114 224 120 214 L120 200Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M146 198 L148 214 Q158 218 156 224 Q142 224 136 214 L136 200Z" fill="#f6f2e9" stroke-width="3.5"/>
+<!-- arms -->
+<path d="M146 152 Q172 148 176 126 L188 130 Q186 164 148 168Z" fill="#f6f2e9"/>
+<circle cx="184" cy="122" r="10" fill="#f6f2e9"/>
+<path d="M110 152 Q88 160 86 176 L98 180 Q108 170 114 166Z" fill="#f6f2e9"/>
+<!-- head -->
+<circle cx="128" cy="100" r="48" fill="#f6f2e9"/>
+<!-- parted fringe wisps -->
+<path d="M82 98 Q80 58 118 52 Q104 70 108 84 Q92 82 82 98Z M174 98 Q176 58 138 52 Q152 70 148 84 Q164 82 174 98Z" fill="#55514c" stroke-width="3.5"/>
+<path d="M118 52 Q128 46 138 52 Q132 62 128 66 Q124 62 118 52Z" fill="#55514c" stroke-width="3.5"/>
+<!-- flower crown -->
+<path d="M88 66 Q128 40 168 66" fill="none" stroke="#9a948b" stroke-width="4"/>
+<circle cx="100" cy="56" r="8" fill="#c8352b" stroke-width="3"/><circle cx="128" cy="42" r="9" fill="#c8352b" stroke-width="3"/><circle cx="156" cy="56" r="8" fill="#c8352b" stroke-width="3"/>
+<circle cx="128" cy="42" r="3" fill="#f6f2e9" stroke="none"/><circle cx="100" cy="56" r="2.5" fill="#f6f2e9" stroke="none"/><circle cx="156" cy="56" r="2.5" fill="#f6f2e9" stroke="none"/>
+<!-- face -->
+<ellipse cx="106" cy="108" rx="9" ry="12" fill="#1b1a1a"/><ellipse cx="150" cy="108" rx="9" ry="12" fill="#1b1a1a"/>
+<circle cx="109" cy="103" r="3.5" fill="#f6f2e9" stroke="none"/><circle cx="153" cy="103" r="3.5" fill="#f6f2e9" stroke="none"/>
+<ellipse cx="90" cy="124" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".55"/><ellipse cx="166" cy="124" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".55"/>
+<path d="M120 124 Q128 134 136 124" fill="none" stroke-width="3"/>
+<path d="M82 108 L66 98 L84 124Z M174 108 L190 98 L172 124Z" fill="#f6f2e9" stroke-width="3"/>
+</svg>

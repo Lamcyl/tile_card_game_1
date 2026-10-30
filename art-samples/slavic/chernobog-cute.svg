@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute chernobog: a drifting teardrop of night with a tiny candle -->
+<!-- stars -->
+<path d="M36 50 L40 60 L50 64 L40 68 L36 78 L32 68 L22 64 L32 60Z" fill="#c9a23a" stroke-width="2.5"/>
+<path d="M214 34 L217 42 L225 45 L217 48 L214 56 L211 48 L203 45 L211 42Z" fill="#d4cec3" stroke-width="2.5"/>
+<circle cx="224" cy="132" r="4" fill="#9a948b" stroke-width="2"/><circle cx="26" cy="140" r="3.5" fill="#d4cec3" stroke-width="2"/>
+<!-- wispy tail -->
+<path d="M112 196 Q86 226 120 238 Q150 246 178 226 Q196 212 214 220 Q200 196 176 204Z" fill="#1b1a1a"/>
+<path d="M126 232 Q150 238 170 224" fill="none" stroke="#55514c" stroke-width="3"/>
+<!-- body cloak -->
+<path d="M82 120 Q54 168 56 206 Q70 214 82 204 Q96 218 112 206 Q128 220 144 206 Q160 218 174 204 Q186 214 200 206 Q202 168 174 120Z" fill="#1b1a1a"/>
+<path d="M76 176 Q70 196 76 204 M180 176 Q186 196 180 204" fill="none" stroke="#55514c" stroke-width="3"/>
+<path d="M96 196 Q104 204 112 196 M144 196 Q152 204 160 196" fill="none" stroke="#55514c" stroke-width="3"/>
+<!-- embroidery trim -->
+<path d="M62 192 Q128 214 196 192" fill="none" stroke="#c8352b" stroke-width="5"/>
+<path d="M76 198 L82 192 L88 198 M118 204 L124 198 L130 204 M166 198 L172 192 L178 198" fill="none" stroke="#f6f2e9" stroke-width="2.5"/>
+<!-- little arms and candle -->
+<path d="M82 150 Q62 160 70 178 Q84 180 92 166Z" fill="#1b1a1a"/>
+<path d="M174 150 Q194 160 186 178 Q172 180 164 166Z" fill="#1b1a1a"/>
+
+<rect x="64" y="164" width="14" height="24" rx="3" fill="#f6f2e9"/>
+<path d="M71 168 Q60 156 71 142 Q82 156 71 168Z" fill="#c8352b" stroke-width="3"/>
+<path d="M71 160 Q68 154 71 150 Q75 154 71 160Z" fill="#f6f2e9" stroke="none"/>
+<circle cx="71" cy="186" r="9" fill="#55514c" stroke-width="3"/><ellipse cx="186" cy="176" rx="10" ry="9" fill="#55514c" stroke-width="3"/>
+<!-- horns -->
+<path d="M76 74 Q44 66 46 34 Q62 46 84 56Z" fill="#f6f2e9"/>
+<path d="M180 74 Q212 66 210 34 Q194 46 172 56Z" fill="#f6f2e9"/>
+<path d="M54 46 L66 52 M202 46 L190 52" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<!-- head -->
+<path d="M60 108 Q56 50 128 46 Q200 50 196 108 Q198 156 128 160 Q58 156 60 108Z" fill="#1b1a1a"/>
+<path d="M72 78 Q84 58 108 54 M184 78 Q172 58 148 54" fill="none" stroke="#55514c" stroke-width="3.5"/>
+<!-- moon mark -->
+<path d="M122 62 Q110 74 122 88 Q112 74 122 62Z M134 62 Q146 74 134 88 Q144 74 134 62Z" fill="none"/>
+<path d="M128 62 Q112 66 114 80 Q122 72 128 74 Q134 72 142 80 Q144 66 128 62Z" fill="#d4cec3" stroke-width="2.5"/>
+<!-- eyes -->
+<ellipse cx="98" cy="112" rx="18" ry="20" fill="#f6f2e9"/><ellipse cx="158" cy="112" rx="18" ry="20" fill="#f6f2e9"/>
+<ellipse cx="100" cy="114" rx="10" ry="13" fill="#1b1a1a" stroke="none"/><ellipse cx="156" cy="114" rx="10" ry="13" fill="#1b1a1a" stroke="none"/>
+<circle cx="104" cy="108" r="4.5" fill="#f6f2e9" stroke="none"/><circle cx="160" cy="108" r="4.5" fill="#f6f2e9" stroke="none"/>
+<circle cx="97" cy="120" r="2.4" fill="#c8352b" stroke="none"/><circle cx="153" cy="120" r="2.4" fill="#c8352b" stroke="none"/>
+<path d="M116 138 Q128 148 140 138" fill="none" stroke="#f6f2e9" stroke-width="3.5"/>
+<ellipse cx="70" cy="136" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".6"/><ellipse cx="186" cy="136" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".6"/>
+</svg>

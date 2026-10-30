@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute perun: cross-legged on an oak stump, axe across lap, eaglet on his head -->
+<!-- stump -->
+<path d="M52 206 Q54 234 128 238 Q202 234 204 206 L198 196 L58 196Z" fill="#9a948b"/>
+<ellipse cx="128" cy="196" rx="72" ry="16" fill="#d4cec3"/>
+<path d="M92 196 Q128 204 164 196" fill="none" stroke-width="2.5" stroke="#9a948b"/>
+<path d="M70 214 L72 232 M96 222 L98 236 M160 224 L162 236 M186 214 L184 230" stroke="#55514c" stroke-width="3" fill="none"/>
+<path d="M26 206 Q10 190 28 180 Q38 196 26 206Z M38 194 Q44 172 62 178 Q58 196 38 194Z" fill="#d4cec3" stroke-width="3"/>
+<!-- legs -->
+<path d="M62 190 Q60 168 92 168 L150 172 Q168 182 134 194Z" fill="#55514c"/>
+<path d="M194 190 Q196 168 164 168 L106 172 Q88 182 122 194Z" fill="#55514c"/>
+<ellipse cx="70" cy="192" rx="18" ry="11" fill="#1b1a1a"/><ellipse cx="186" cy="192" rx="18" ry="11" fill="#1b1a1a"/>
+<!-- body -->
+<path d="M86 134 Q128 126 170 134 L178 184 Q128 198 78 184Z" fill="#f6f2e9"/>
+<path d="M80 172 Q128 186 176 172 L178 184 Q128 198 78 184Z" fill="#c9a23a"/>
+<!-- axe across lap -->
+<path d="M40 184 L212 158" stroke-width="10" fill="none"/>
+<path d="M40 184 L212 158" stroke-width="4.5" fill="none" stroke="#9a948b"/>
+<path d="M196 158 L224 128 Q248 150 232 192 L204 166Z" fill="#c9a23a"/>
+<path d="M226 138 Q240 156 230 180" fill="none" stroke-width="2.5"/>
+<!-- arms+hands -->
+<path d="M88 142 Q70 154 82 172 L98 168Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M168 142 Q190 150 160 164 L148 156Z" fill="#f6f2e9" stroke-width="3.5"/>
+<circle cx="90" cy="174" r="11" fill="#f6f2e9"/><circle cx="154" cy="166" r="11" fill="#f6f2e9"/>
+<!-- beard -->
+<path d="M82 112 Q76 168 128 184 Q180 168 174 112Z" fill="#d4cec3"/>
+<path d="M104 140 Q128 152 152 140 M112 156 Q128 164 144 156" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<!-- hair cap + locks -->
+<path d="M72 100 Q60 36 128 34 Q196 36 184 100 Q186 120 176 124 Q170 80 128 72 Q86 80 80 124 Q70 120 72 100Z" fill="#d4cec3"/>
+<!-- face -->
+<path d="M82 100 Q82 78 128 78 Q174 78 174 100 Q172 132 128 136 Q84 132 82 100Z" fill="#f6f2e9"/>
+<path d="M92 90 Q106 80 122 92 Q106 94 92 90Z M164 90 Q150 80 134 92 Q150 94 164 90Z" fill="#55514c" stroke-width="3"/>
+<ellipse cx="106" cy="106" rx="7" ry="9" fill="#1b1a1a"/><ellipse cx="150" cy="106" rx="7" ry="9" fill="#1b1a1a"/>
+<circle cx="108" cy="102" r="2.8" fill="#f6f2e9" stroke="none"/><circle cx="152" cy="102" r="2.8" fill="#f6f2e9" stroke="none"/>
+<ellipse cx="92" cy="120" rx="7" ry="4" fill="#c9a23a" stroke="none" opacity=".8"/><ellipse cx="164" cy="120" rx="7" ry="4" fill="#c9a23a" stroke="none" opacity=".8"/>
+<path d="M128 118 Q112 112 96 126 Q112 132 128 126 Q144 132 160 126 Q144 112 128 118Z" fill="#d4cec3" stroke-width="3.5"/>
+<path d="M120 140 Q128 146 136 140" fill="none" stroke-width="3"/>
+<!-- circlet with bolt -->
+<path d="M78 68 Q128 44 178 68" fill="none" stroke="#c9a23a" stroke-width="7"/>
+<path d="M124 50 L138 50 L130 62 L140 62 L120 80 L125 65 L116 65Z" fill="#c9a23a" stroke-width="3"/>
+<!-- eaglet -->
+<path d="M96 38 Q96 14 126 14 Q152 14 154 38 Q150 46 126 46 Q102 46 96 38Z" fill="#9a948b"/>
+<path d="M100 28 Q86 24 82 36 Q92 40 104 38Z" fill="#55514c" stroke-width="3"/>
+<path d="M148 24 L166 30 L150 36Z" fill="#c9a23a" stroke-width="3"/>
+<circle cx="140" cy="26" r="3.5" fill="#1b1a1a" stroke="none"/>
+<path d="M120 20 L124 26 L128 20 M110 24 L114 30" fill="none" stroke="#d4cec3" stroke-width="2.5"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- Zmey Gorynych: three heads erupting from a coiled body, wings flung wide, fire from the right head -->
+<defs>
+<g id="fh">
+<path d="M4 -16 Q-6 -44 -34 -50 Q-20 -34 -22 -16Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M-2 6 L52 8 L74 24 Q66 32 54 28 L28 28 Q6 30 -6 22Z" fill="#d4cec3"/>
+<path d="M-6 -20 Q24 -34 54 -24 L82 -14 Q90 -8 80 -2 L58 2 L48 8 L-2 8Z" fill="#d4cec3"/>
+<path d="M54 10 L60 22 L66 12Z M70 12 L72 22 L78 10Z" fill="#f6f2e9" stroke-width="2.5" transform="translate(-8 -2)"/>
+<path d="M28 -16 L50 -10 L40 -4Z" fill="#c8352b" stroke-width="3"/>
+<circle cx="72" cy="-8" r="2.5" fill="#1b1a1a" stroke="none"/>
+<path d="M20 -26 L26 -14 M34 -28 L38 -18" fill="none" stroke-width="2.5"/>
+</g>
+</defs>
+<!-- wings -->
+<path d="M104 180 L4 116 L30 120 L12 144 L42 146 L32 168 L64 164 L62 184Z" fill="#9a948b"/>
+<path d="M104 180 L30 120 M104 180 L42 146 M104 180 L64 164" fill="none" stroke-width="2.5"/>
+<path d="M150 180 L248 128 L228 140 L246 160 L216 162 L226 182 L190 178Z" fill="#9a948b"/>
+<path d="M150 180 L228 140 M150 180 L216 162" fill="none" stroke-width="2.5"/>
+<!-- tail -->
+<path d="M58 214 Q14 214 20 190 Q26 176 8 172" fill="none" stroke-width="20"/><path d="M58 214 Q14 214 20 190 Q26 176 8 172" fill="none" stroke="#d4cec3" stroke-width="12"/>
+<path d="M4 160 L18 172 L6 186 L-2 170Z" fill="#c8352b" stroke-width="3"/>
+<!-- necks -->
+<path d="M110 172 Q60 160 76 108 Q86 80 84 60" fill="none" stroke-width="28"/><path d="M110 172 Q60 160 76 108 Q86 80 84 60" fill="none" stroke="#d4cec3" stroke-width="20"/>
+<path d="M130 170 Q154 120 128 84 Q114 62 124 46" fill="none" stroke-width="28"/><path d="M130 170 Q154 120 128 84 Q114 62 124 46" fill="none" stroke="#d4cec3" stroke-width="20"/>
+<path d="M150 176 Q196 176 190 144 Q186 124 172 114" fill="none" stroke-width="28"/><path d="M150 176 Q196 176 190 144 Q186 124 172 114" fill="none" stroke="#d4cec3" stroke-width="20"/>
+<!-- body -->
+<path d="M52 206 Q46 160 110 156 Q176 152 196 196 Q204 226 176 232 L70 234 Q54 226 52 206Z" fill="#d4cec3"/>
+<path d="M84 204 H164 M86 218 H158" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M92 160 L100 144 L110 158 M120 156 L130 140 L140 156 M150 160 L160 146 L168 164" fill="#c8352b" stroke-width="3"/>
+<path d="M64 238 L84 238 L88 224 L68 224Z M150 238 L186 238 L190 224 L156 224Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M68 240 L62 248 M76 240 L74 250 M158 240 L152 248 M168 240 L166 250" fill="none" stroke-width="3.5"/>
+<!-- heads (draw order: back to front) -->
+<g transform="translate(86 58) scale(-0.72 0.72) rotate(14)"><use href="#fh"/>
+<path d="M60 14 Q70 22 66 40" fill="none" stroke="#9a948b" stroke-width="0"/></g>
+<g transform="translate(122 46) scale(0.72) rotate(-30)"><use href="#fh"/></g>
+<g transform="translate(172 114) scale(0.72) rotate(14)"><use href="#fh"/>
+<path d="M82 14 Q112 8 130 30 Q140 12 122 4 Q148 -2 150 16 Q154 36 128 48 Q104 44 82 30Z" fill="#c8352b" stroke-width="3.5"/>
+</g>
+</svg>

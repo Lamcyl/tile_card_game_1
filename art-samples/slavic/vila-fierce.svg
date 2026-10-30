@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce vila: stooping dive down-left, hair a thunderhead, wings swept up-back -->
+<!-- funnel below -->
+<path d="M10 214 Q60 196 110 214 Q70 226 40 244 Q36 230 10 214Z" fill="#d4cec3" stroke-width="3.5"/>
+<path d="M30 218 Q70 208 100 216" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- wings -->
+<path d="M150 112 L196 6 L192 44 L232 20 L214 62 L250 54 L212 98 L240 118 L178 134Z" fill="#f6f2e9"/>
+<path d="M156 118 L200 40 M166 124 L218 82 M172 130 L230 110" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M150 146 L206 160 L182 172 L214 196 L166 186 L178 214 L144 172Z" fill="#d4cec3"/>
+<!-- storm hair -->
+<path d="M92 78 Q86 36 130 34 L150 6 L158 40 L196 26 L180 58 L228 62 L176 86 L214 112 L150 108 Q112 104 92 78Z" fill="#55514c"/>
+<path d="M140 52 L180 58 M134 74 L190 86 M130 90 L168 102" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- body -->
+<path d="M112 132 L162 124 L184 168 L166 198 L120 170Z" fill="#f6f2e9"/>
+<path d="M120 164 L176 190 L166 198 L120 170Z" fill="#c8352b"/>
+<path d="M124 146 L172 176" stroke="#c8352b" stroke-width="3" fill="none"/>
+<!-- trailing legs, curved -->
+<path d="M168 190 Q196 196 214 224 L202 230 Q186 210 162 206Z" fill="#f6f2e9"/>
+<path d="M150 184 Q166 214 196 240 L184 244 Q154 224 140 192Z" fill="#f6f2e9"/>
+<!-- leading arm with claws -->
+<path d="M114 140 L68 170 L50 164 L62 186 L114 166Z" fill="#f6f2e9"/>
+<path d="M50 164 L32 154 M52 172 L26 176 M58 186 L36 200" fill="none" stroke-width="4"/>
+<!-- back arm with lightning -->
+<path d="M152 128 L184 104 L196 114 L166 146Z" fill="#f6f2e9"/>
+<path d="M190 106 L220 98 L206 124 L238 116 L196 170 L204 128 L184 134Z" fill="#c8352b"/>
+<!-- head -->
+<path d="M52 108 Q54 62 100 58 Q146 62 146 110 Q140 150 100 156 Q60 152 52 108Z" fill="#f6f2e9"/>
+<path d="M54 90 Q100 66 146 90" fill="none" stroke="#c8352b" stroke-width="8"/>
+<!-- hair swept over brow -->
+<path d="M52 90 Q54 56 100 54 Q142 56 148 94 Q128 80 112 92 Q100 72 84 90 Q66 80 52 90Z" fill="#55514c" stroke-width="3.5"/>
+<!-- eyes -->
+<path d="M58 106 L92 108 L88 118 Q68 122 58 114Z" fill="#1b1a1a"/><path d="M142 106 L112 108 L116 118 Q132 122 142 114Z" fill="#1b1a1a"/>
+<circle cx="80" cy="113" r="3" fill="#f6f2e9" stroke="none"/><circle cx="122" cy="113" r="3" fill="#f6f2e9" stroke="none"/>
+<path d="M56 100 L94 108 M144 100 L110 108" stroke-width="4" fill="none"/>
+<!-- shout -->
+<path d="M78 134 Q100 128 122 134 Q116 150 100 150 Q84 150 78 134Z" fill="#1b1a1a" stroke-width="3"/>
+<path d="M88 133 L92 141 L96 132" fill="#f6f2e9" stroke-width="2"/>
+<path d="M50 112 L28 102 L50 130Z" fill="#f6f2e9" stroke-width="3"/>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce veles: looming low-angle bust, ox horns, serpents rearing from the fur mantle -->
+<!-- serpents -->
+<path d="M40 236 Q4 210 26 184 Q50 164 28 148" fill="none" stroke-width="22"/>
+<path d="M40 236 Q4 210 26 184 Q50 164 28 148" fill="none" stroke-width="14" stroke="#d4cec3"/>
+<path d="M216 236 Q252 210 230 184 Q206 164 228 148" fill="none" stroke-width="22"/>
+<path d="M216 236 Q252 210 230 184 Q206 164 228 148" fill="none" stroke-width="14" stroke="#d4cec3"/>
+<path d="M16 206 L26 208 M36 178 L46 182 M240 206 L230 208 M220 178 L210 182" stroke-width="3" fill="none"/>
+<path d="M14 150 Q12 122 34 120 Q52 124 46 148 Q40 160 28 158Z" fill="#d4cec3"/>
+<path d="M242 150 Q244 122 222 120 Q204 124 210 148 Q216 160 228 158Z" fill="#d4cec3"/>
+<circle cx="26" cy="136" r="4" fill="#c8352b" stroke-width="2"/><circle cx="230" cy="136" r="4" fill="#c8352b" stroke-width="2"/>
+<path d="M22 156 L24 170 L30 158 M234 156 L232 170 L226 158" fill="#f6f2e9" stroke-width="2"/>
+<!-- fur mantle -->
+<path d="M26 256 L38 206 L24 190 L58 176 L74 154 L182 154 L198 176 L232 190 L218 206 L230 256Z" fill="#9a948b"/>
+<path d="M44 220 L58 206 L64 222 M200 220 L196 206 L212 222 M84 186 L96 172 L104 188 M152 186 L160 172 L172 188" fill="none" stroke="#55514c" stroke-width="3"/>
+<path d="M40 232 Q128 214 216 232" fill="none" stroke="#c8352b" stroke-width="8"/>
+<path d="M60 232 L68 224 L76 232 M108 224 L116 216 L124 224 M140 224 L148 216 L156 224 M180 232 L188 224 L196 232" fill="none" stroke="#f6f2e9" stroke-width="3"/>
+<!-- horns sweeping -->
+<path d="M70 92 Q6 100 8 44 Q10 18 30 4 Q26 36 44 54 Q64 70 92 66Z" fill="#f6f2e9"/>
+<path d="M186 92 Q250 100 248 44 Q246 18 226 4 Q230 36 212 54 Q192 70 164 66Z" fill="#f6f2e9"/>
+<path d="M14 70 L34 72 M18 50 L36 56 M26 32 L40 40 M242 70 L222 72 M238 50 L220 56 M230 32 L216 40" stroke="#9a948b" stroke-width="3" fill="none"/>
+<!-- head -->
+<path d="M66 96 Q70 56 128 54 Q186 56 190 96 Q192 150 128 168 Q64 150 66 96Z" fill="#f6f2e9"/>
+<!-- fur brow mane -->
+<path d="M62 100 L58 70 L80 74 L82 50 L104 62 L128 42 L152 62 L174 50 L176 74 L198 70 L194 100 L176 82 L158 96 L128 80 L98 96 L80 82Z" fill="#55514c"/>
+<!-- eyes -->
+<path d="M78 100 L116 108 L112 122 Q92 126 78 114Z" fill="#1b1a1a"/><path d="M178 100 L140 108 L144 122 Q164 126 178 114Z" fill="#1b1a1a"/>
+<path d="M90 112 L106 114 M166 112 L150 114" stroke="#c8352b" stroke-width="5"/>
+<!-- nose -->
+<path d="M120 116 L116 138 L128 142 L140 138 L136 116" fill="#d4cec3" stroke-width="3"/>
+<!-- beard & snarl -->
+<path d="M70 128 L86 142 L128 148 L170 142 L186 128 L190 158 L176 154 L180 192 L162 164 L156 210 L142 168 L128 202 L114 168 L100 210 L94 164 L76 192 L80 154 L66 158Z" fill="#9a948b"/>
+<path d="M102 150 L110 158 L118 150 L128 158 L138 150 L146 158 L154 150" fill="#f6f2e9" stroke-width="3"/>
+<!-- skull charm -->
+<circle cx="128" cy="222" r="11" fill="#f6f2e9"/><path d="M122 220 L124 226 M134 220 L132 226" stroke-width="3"/>
+</svg>

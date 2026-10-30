@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- the hut on chicken legs mid-stride, Baba Yaga snarling from the window -->
+<ellipse cx="110" cy="242" rx="90" ry="8" fill="#d4cec3" stroke="none"/>
+<!-- raised leg -->
+<path d="M160 150 L180 148 L206 178 L192 186Z" fill="#9a948b"/>
+<path d="M190 186 L204 172 L240 176 L244 188 L228 186 L242 202 L226 202 L214 194 L198 206Z" fill="#9a948b"/>
+<ellipse cx="168" cy="146" rx="20" ry="16" fill="#f6f2e9"/>
+<path d="M154 146 L160 156 M168 142 L172 154 M180 146 L182 154" fill="none" stroke-width="2.5"/>
+<!-- planted leg -->
+<path d="M84 150 L110 150 L106 208 L90 208Z" fill="#9a948b"/>
+<path d="M62 238 Q72 216 90 206 L108 206 Q122 216 138 236 L124 240 L102 226 L100 240 L84 240 L82 226 L70 240Z" fill="#9a948b"/>
+<ellipse cx="96" cy="146" rx="22" ry="17" fill="#f6f2e9"/>
+<path d="M80 146 L86 158 M96 142 L98 156 M110 146 L110 156" fill="none" stroke-width="2.5"/>
+<!-- hut body -->
+<g transform="rotate(-3 128 110)">
+<path d="M52 82 H206 V148 H52Z" fill="#d4cec3"/>
+<path d="M52 100 H206 M52 116 H88 M168 116 H206 M52 132 H88 M168 132 H206" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- roof -->
+<path d="M26 92 L130 22 L234 92 Z" fill="#55514c"/>
+<path d="M62 78 L100 52 M96 82 L130 58 M130 82 L160 62 M170 80 L198 62" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- skull on ridge -->
+<path d="M114 22 Q112 2 130 2 Q148 2 146 22 L140 28 H120Z" fill="#f6f2e9"/>
+<path d="M120 12 L126 16 L120 18Z M140 12 L134 16 L140 18Z M126 22 V27 M134 22 V27" fill="#1b1a1a" stroke-width="2.5"/>
+<!-- window glow -->
+<circle cx="130" cy="116" r="30" fill="#c8352b"/>
+<path d="M100 98 L84 90 L88 126 L100 130Z M160 98 L176 90 L172 126 L160 130Z" fill="#9a948b" stroke-width="3"/>
+<!-- face in window -->
+<path d="M108 108 Q108 90 130 90 Q152 90 152 108 Q152 126 140 134 L120 134 Q108 126 108 108Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M110 100 L126 108 L118 112Z M150 100 L134 108 L142 112Z" fill="#1b1a1a" stroke-width="2"/>
+<path d="M130 106 Q142 114 138 124 L130 122Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M114 124 L120 130 L126 126 L132 132 L138 126 L144 130 L148 124" fill="#1b1a1a" stroke-width="2.5"/>
+<path d="M108 94 L94 80 L112 88M152 94 L166 80 L148 88" fill="#d4cec3" stroke-width="3"/>
+<!-- chimney smoke -->
+</g>
+<path d="M200 70 Q216 56 206 42 Q222 34 214 18" fill="none" stroke="#9a948b" stroke-width="5"/>
+</svg>

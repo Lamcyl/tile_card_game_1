@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- Koschei striding out of a gale: cape streaming, skull thrust forward, claw reaching, sword dragged -->
+<!-- cape streaming to the right -->
+<path d="M96 96 L150 66 L212 40 L252 70 L228 92 L254 126 L222 140 L242 178 L200 176 L206 214 L160 190 L120 150Z" fill="#55514c"/>
+<path d="M150 90 L228 74 M140 124 L230 124 M136 150 L206 176" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- sword dragging behind -->
+<path d="M196 238 L120 172 L114 180 L190 246Z" fill="#d4cec3"/>
+<path d="M104 164 L128 182" fill="none" stroke="#1b1a1a" stroke-width="9"/>
+<!-- legs: bony, striding -->
+<path d="M96 170 L72 206 L40 226" fill="none" stroke-width="13"/><path d="M96 170 L72 206 L40 226" fill="none" stroke="#f6f2e9" stroke-width="6"/>
+<path d="M40 226 L22 240 M40 226 L18 228 M40 226 L28 214" fill="none" stroke-width="4"/>
+<path d="M118 176 L136 214 L170 236" fill="none" stroke-width="13"/><path d="M118 176 L136 214 L170 236" fill="none" stroke="#f6f2e9" stroke-width="6"/>
+<path d="M170 236 L190 232 M170 236 L186 246" fill="none" stroke-width="4"/>
+<!-- torso & tattered robe -->
+<path d="M70 118 Q104 102 138 116 L146 174 L126 190 L138 200 L112 194 L98 206 L86 188 L66 190 L76 164Z" fill="#1b1a1a"/>
+<path d="M82 124 Q104 116 128 124 L126 172 Q104 180 86 170Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M86 138 Q106 144 126 136 M86 152 Q106 158 126 150 M104 128 V176" fill="none" stroke-width="2.5"/>
+<path d="M72 184 L84 172 L92 190 L104 174 L114 192 L126 178" fill="none" stroke="#c8352b" stroke-width="3.5"/>
+<!-- reaching arm -->
+<path d="M72 128 L46 150 L24 128" fill="none" stroke-width="13"/><path d="M72 128 L46 150 L24 128" fill="none" stroke="#f6f2e9" stroke-width="6"/>
+<path d="M24 126 L6 100 M24 126 L4 116 M24 126 L10 134 M24 126 L18 94" fill="none" stroke-width="5"/>
+<circle cx="24" cy="128" r="9" fill="#f6f2e9"/>
+<!-- arm to sword -->
+<path d="M132 124 L146 150 L126 172" fill="none" stroke-width="13"/><path d="M132 124 L146 150 L126 172" fill="none" stroke="#f6f2e9" stroke-width="6"/>
+<!-- skull, jutting forward and down-left -->
+<g transform="rotate(-10 100 70)">
+<path d="M34 64 Q30 16 92 12 Q154 16 150 64 Q150 82 136 90 L130 110 Q92 122 58 110 L52 90 Q34 82 34 64Z" fill="#f6f2e9"/>
+<path d="M36 36 L30 0 L58 22 L74 -4 L92 18 L110 -4 L126 22 L154 0 L148 36 Q92 18 36 36Z" fill="#d4cec3"/>
+<path d="M34 32 Q92 12 150 32" fill="none" stroke="#c8352b" stroke-width="5"/>
+<path d="M48 52 L84 62 L80 80 Q60 86 50 72Z" fill="#1b1a1a"/><path d="M136 52 L100 62 L104 80 Q124 86 134 72Z" fill="#1b1a1a"/>
+<path d="M60 66 L76 69 L72 76 L62 74Z M124 66 L108 69 L112 76 L122 74Z" fill="#c8352b" stroke="none"/>
+<path d="M92 76 L84 92 L100 92Z" fill="#1b1a1a" stroke-width="3"/>
+<path d="M56 98 Q92 114 128 98" fill="none" stroke-width="3.5"/>
+<path d="M64 100 L68 112 L74 104 L78 114 L84 106 L92 116 L100 106 L106 114 L110 104 L116 112 L120 100" fill="#f6f2e9" stroke-width="2.5"/>
+<path d="M44 60 L54 72 L48 82" fill="none" stroke-width="2.5"/>
+</g>
+</svg>

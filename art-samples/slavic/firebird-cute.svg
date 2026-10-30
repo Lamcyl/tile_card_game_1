@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- plump Zhar-ptitsa perched on a bough, tail plumes curling like ribbons, gold eye-spots -->
+<path d="M26 220 Q120 238 240 210" fill="none" stroke-width="14"/><path d="M26 220 Q120 238 240 210" fill="none" stroke="#f6f2e9" stroke-width="6"/>
+<path d="M70 228 L76 224 M120 232 L126 228 M176 226 L182 220" fill="none" stroke-width="3"/>
+<!-- tail plumes -->
+<path d="M88 172 C54 172 24 150 22 112 C22 96 30 88 36 86 C42 112 64 130 98 144Z" fill="#d4cec3"/>
+<path d="M84 182 C50 194 10 188 8 164 C12 152 20 152 26 154 C42 170 70 168 96 164Z" fill="#d4cec3"/>
+<path d="M90 190 C68 214 34 226 14 214 C16 204 24 200 30 202 C52 208 78 200 100 186Z" fill="#d4cec3"/>
+<path d="M90 166 C60 150 40 120 36 92 M86 176 C60 180 36 172 22 160 M92 184 C70 202 44 210 28 206" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+<circle cx="36" cy="94" r="8" fill="#c9a23a" stroke-width="3"/><circle cx="16" cy="160" r="8" fill="#c9a23a" stroke-width="3"/><circle cx="22" cy="210" r="8" fill="#c9a23a" stroke-width="3"/>
+<circle cx="36" cy="94" r="2.5" fill="#1b1a1a" stroke="none"/><circle cx="16" cy="160" r="2.5" fill="#1b1a1a" stroke="none"/><circle cx="22" cy="210" r="2.5" fill="#1b1a1a" stroke="none"/>
+<!-- feet -->
+<path d="M126 204 V220 M156 204 V218 M118 222 L126 218 L136 224 M148 222 L156 218 L166 224" fill="none" stroke-width="4"/>
+<!-- body -->
+<path d="M90 152 Q88 114 134 112 Q182 114 186 158 Q186 206 136 208 Q94 206 90 152Z" fill="#f6f2e9"/>
+<path d="M124 174 Q146 164 170 176 Q172 200 146 204 Q122 200 124 174Z" fill="#c9a23a" stroke="none"/>
+<!-- wing -->
+<path d="M152 132 Q186 152 160 188 Q130 208 90 198 Q122 184 132 158 Q138 140 152 132Z" fill="#d4cec3"/>
+<path d="M118 188 L130 196 M132 176 L144 186 M142 160 L154 172" fill="none" stroke-width="3"/>
+<path d="M104 196 L116 206" fill="none" stroke="#c9a23a" stroke-width="3"/>
+<!-- head -->
+<circle cx="150" cy="84" r="34" fill="#f6f2e9"/>
+<path d="M130 56 Q112 30 82 28 Q104 44 114 68Z M146 50 Q138 18 110 8 Q130 28 130 60Z M160 52 Q170 22 148 2 Q154 30 142 52Z" fill="#c9a23a" stroke-width="3.5"/>
+<path d="M178 76 Q208 80 208 98 Q196 102 180 98Z" fill="#c9a23a" stroke-width="3.5"/>
+<path d="M182 96 L204 98" fill="none" stroke-width="2.5"/>
+<circle cx="162" cy="80" r="12" fill="#1b1a1a"/>
+<circle cx="158" cy="75" r="4.5" fill="#f6f2e9" stroke="none"/><circle cx="166" cy="84" r="2" fill="#f6f2e9" stroke="none"/>
+<circle cx="146" cy="100" r="6" fill="#d4cec3" stroke="none"/>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- Baba Yaga zooming along in her mortar, pestle trailing like a rudder; concept: side-on flight -->
+<path d="M8 112 H44 M2 144 H34 M14 176 H40" fill="none" stroke="#9a948b" stroke-width="4"/>
+<g transform="rotate(-10 128 160)">
+<!-- pestle -->
+<path d="M96 188 L34 212 Q18 212 14 224 Q20 238 36 232 L104 208Z" fill="#d4cec3"/>
+<path d="M30 218 L22 222" fill="none" stroke-width="2.5"/>
+<!-- mortar bowl -->
+<path d="M92 220 H164 L158 238 H98Z" fill="#55514c"/>
+<path d="M66 170 H190 L178 214 Q128 240 78 214Z" fill="#9a948b"/>
+<path d="M82 192 L94 202 L106 192 L118 202 L130 192 L142 202 L154 192 L166 202 L176 192" fill="none" stroke="#c8352b" stroke-width="3.5"/>
+<!-- dress / shoulders -->
+<path d="M84 154 Q128 128 174 154 L178 168 H80Z" fill="#55514c"/>
+<!-- head -->
+<path d="M84 98 Q82 56 130 54 Q178 56 180 98 Q182 124 170 134 Q152 158 124 148 Q86 134 84 98Z" fill="#f6f2e9"/>
+<!-- wild hair -->
+<path d="M84 100 L62 104 L80 114 L62 126 L88 124Z" fill="#d4cec3"/>
+<path d="M178 100 L196 106 L180 116 L192 128 L172 126Z" fill="#d4cec3"/>
+<!-- kerchief -->
+<path d="M80 92 Q74 46 130 42 Q186 46 182 92 Q154 70 130 74 Q106 70 80 92Z" fill="#c8352b"/>
+<path d="M92 66 L84 60 M108 56 L104 48" fill="none" stroke="#f6f2e9" stroke-width="3"/>
+<path d="M88 70 L58 46 L62 78 L40 80Z" fill="#c8352b"/>
+<!-- face -->
+<circle cx="112" cy="102" r="11" fill="#f6f2e9" stroke-width="3"/><circle cx="154" cy="102" r="11" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="115" cy="104" r="5" fill="#1b1a1a" stroke="none"/><circle cx="157" cy="104" r="5" fill="#1b1a1a" stroke="none"/>
+<path d="M98 88 L122 94 M170 88 L146 94" fill="none" stroke-width="4"/>
+<path d="M126 104 Q144 108 148 126 Q150 138 140 140 Q138 130 126 124Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M100 130 Q120 150 150 142" fill="none" stroke-width="3.5"/>
+<path d="M114 140 L118 130 L124 144Z" fill="#f6f2e9" stroke-width="2.5"/>
+<circle cx="96" cy="120" r="3" fill="#c8352b" stroke="none"/><circle cx="166" cy="120" r="3" fill="#c8352b" stroke="none"/>
+<!-- rim and hands -->
+<rect x="58" y="160" width="140" height="16" rx="7" fill="#d4cec3"/>
+<circle cx="84" cy="166" r="11" fill="#f6f2e9"/><circle cx="172" cy="166" r="11" fill="#f6f2e9"/>
+</g>
+</svg>

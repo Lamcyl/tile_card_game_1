@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- three-headed loaf of a dragon, three moods -->
+<defs>
+<g id="hd">
+<path d="M-26 -8 L-34 -34 L-14 -22Z M26 -8 L34 -34 L14 -22Z" fill="#f6f2e9" stroke-width="3.5"/>
+<circle cx="0" cy="0" r="28" fill="#d4cec3"/>
+<ellipse cx="0" cy="12" rx="17" ry="12" fill="#f6f2e9" stroke-width="3.5"/>
+<circle cx="-6" cy="12" r="2" fill="#1b1a1a" stroke="none"/><circle cx="6" cy="12" r="2" fill="#1b1a1a" stroke="none"/>
+</g>
+</defs>
+<!-- back wings -->
+<path d="M72 176 L16 120 L34 156 L8 160 L44 184Z" fill="#9a948b"/>
+<path d="M184 176 L240 120 L222 156 L248 160 L212 184Z" fill="#9a948b"/>
+<!-- tail -->
+<path d="M196 214 Q248 214 238 170 Q232 150 214 160" fill="none" stroke-width="22"/>
+<path d="M196 214 Q248 214 238 170 Q232 150 214 160" fill="none" stroke="#d4cec3" stroke-width="14"/>
+<path d="M206 152 L224 150 L222 168 L214 172Z" fill="#c8352b" stroke-width="3"/>
+<!-- necks -->
+<path d="M84 180 Q50 150 56 98" fill="none" stroke-width="30"/><path d="M84 180 Q50 150 56 98" fill="none" stroke="#d4cec3" stroke-width="22"/>
+<path d="M172 180 Q206 150 200 98" fill="none" stroke-width="30"/><path d="M172 180 Q206 150 200 98" fill="none" stroke="#d4cec3" stroke-width="22"/>
+<path d="M128 180 V84" fill="none" stroke-width="32"/><path d="M128 180 V84" fill="none" stroke="#d4cec3" stroke-width="24"/>
+<!-- body -->
+<ellipse cx="128" cy="198" rx="84" ry="44" fill="#d4cec3"/>
+<path d="M70 210 Q128 252 186 210 Q186 188 128 186 Q70 188 70 210Z" fill="#f6f2e9" stroke="none"/>
+<path d="M92 204 H164 M96 218 H160" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M60 236 Q60 220 78 224 Q92 228 90 238Z M166 238 Q164 228 180 224 Q198 220 196 236Z" fill="#f6f2e9" stroke-width="3.5"/>
+<!-- back spikes -->
+<path d="M110 156 L118 142 L126 158 M134 158 L142 142 L150 156" fill="#c8352b" stroke-width="3"/>
+<!-- heads -->
+<g transform="translate(56 86) rotate(-10)"><use href="#hd"/>
+<path d="M-18 -4 Q-12 -10 -6 -4 M6 -4 Q12 -10 18 -4" fill="none" stroke-width="3.5"/>
+<path d="M-6 26 Q0 30 6 26" fill="none" stroke-width="3"/><path d="M16 34 q4 -2 4 4" fill="none" stroke-width="0"/></g>
+<g transform="translate(128 62)"><use href="#hd" transform="scale(1.1)"/>
+<circle cx="-12" cy="-4" r="7" fill="#f6f2e9" stroke-width="3"/><circle cx="12" cy="-4" r="7" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="-11" cy="-3" r="3.5" fill="#1b1a1a" stroke="none"/><circle cx="13" cy="-3" r="3.5" fill="#1b1a1a" stroke="none"/>
+<path d="M-8 32 Q0 40 8 32" fill="#c8352b" stroke-width="3"/>
+<circle cx="-20" cy="10" r="4" fill="#c8352b" stroke="none"/><circle cx="20" cy="10" r="4" fill="#c8352b" stroke="none"/></g>
+<g transform="translate(200 86) rotate(10)"><use href="#hd"/>
+<path d="M-18 -8 L-6 -2 M18 -8 L6 -2" fill="none" stroke-width="4"/>
+<circle cx="-11" cy="0" r="3.5" fill="#1b1a1a" stroke="none"/><circle cx="11" cy="0" r="3.5" fill="#1b1a1a" stroke="none"/>
+<path d="M-8 28 L-4 24 L0 28 L4 24 L8 28" fill="none" stroke-width="3"/>
+<path d="M-4 38 q-8 8 0 14 q8 -6 0 -14z" fill="#c8352b" stroke-width="2.5"/></g>
+</svg>
