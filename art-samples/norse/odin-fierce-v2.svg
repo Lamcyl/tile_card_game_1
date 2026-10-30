@@ -15,7 +15,7 @@
 <!-- spear -->
 <path class="t" style="stroke-width:11" d="M26 168 L226 76"/>
 <path class="f" style="stroke:#9a948b;stroke-width:5" d="M26 168 L226 76"/>
-<path class="o" fill="#c9a23a" d="M0 -9 L38 0 L0 9 L6 0Z" transform="translate(222 78) rotate(-24.7)"/>
+<path class="o" fill="#c9a23a" d="M0 -9 L38 0 L0 9 L6 0Z" transform="translate(214 74) rotate(-24.7)"/>
 <path class="o" fill="#c9a23a" d="M0 -6 L-14 0 L0 6Z" transform="translate(26 168) rotate(-24.7)"/>
 <!-- arm -->
 <path class="t" style="stroke-width:22" d="M136 112 L170 124 L172 108"/>

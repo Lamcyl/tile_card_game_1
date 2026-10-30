@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.n{stroke:none}.t{fill:none;stroke:#1b1a1a;stroke-linecap:round;stroke-linejoin:round}.f{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<ellipse class="n" cx="128" cy="236" rx="110" ry="9" fill="#1b1a1a" opacity=".18"/>
+<!-- fox tail -->
+<path class="o" fill="#c8352b" d="M70 214 C40 226 8 214 8 180 C8 156 24 144 38 150 C26 164 30 186 52 192 C66 196 80 190 84 200Z"/>
+<path class="o" fill="#f6f2e9" d="M8 180 C8 156 24 144 38 150 C26 164 24 172 24 186 C14 192 8 188 8 180Z"/>
+<!-- legs kicked up -->
+<path class="t" style="stroke-width:24" d="M80 208 L60 180 L34 132"/>
+<path class="f" style="stroke:#55514c;stroke-width:16" d="M80 208 L60 180 L34 132"/>
+<path class="o" fill="#1b1a1a" d="M20 126 L46 120 L52 136 L28 144Z"/>
+<path class="t" style="stroke-width:24" d="M104 208 L84 172 L68 120"/>
+<path class="f" style="stroke:#55514c;stroke-width:16" d="M104 208 L84 172 L68 120"/>
+<path class="o" fill="#1b1a1a" d="M54 112 L82 108 L84 126 L58 130Z"/>
+<!-- body -->
+<path class="o" fill="#9a948b" d="M64 190 C70 170 120 168 144 176 L150 216 C120 228 80 226 66 214Z"/>
+<path class="n" fill="#c8352b" d="M90 178 L98 178 L104 222 L94 222Z"/>
+<path class="o" fill="#55514c" d="M64 212 L150 216 L150 224 L64 222Z" style="stroke-width:3"/>
+<!-- arms cradle -->
+<path class="t" style="stroke-width:22" d="M128 206 L142 206 L146 170"/>
+<path class="f" style="stroke:#9a948b;stroke-width:14" d="M128 206 L142 206 L146 170"/>
+<path class="t" style="stroke-width:22" d="M168 208 L190 208 L184 168"/>
+<path class="f" style="stroke:#9a948b;stroke-width:14" d="M168 208 L190 208 L184 168"/>
+<!-- horns -->
+<path class="o" fill="#d4cec3" d="M112 70 C94 66 76 46 84 12 C92 38 106 50 128 54Z"/>
+<path class="o" fill="#d4cec3" d="M196 70 C214 66 232 46 224 12 C216 38 202 50 180 54Z"/>
+<path class="o" fill="#c8352b" d="M85 22 C84 14 84 12 84 12 C86 20 90 28 94 34 C90 32 87 28 85 22Z" style="stroke-width:3"/>
+<!-- head -->
+<ellipse class="o" cx="154" cy="112" rx="62" ry="54" fill="#f6f2e9"/>
+<!-- hair -->
+<path class="o" fill="#1b1a1a" d="M94 104 C84 70 116 44 154 46 C196 44 222 74 212 106 C208 90 196 80 184 78 C176 92 166 94 156 90 C146 96 128 92 120 80 C106 84 98 94 94 104Z"/>
+<path class="o" fill="#55514c" d="M112 70 C130 52 180 52 198 70 L198 78 C170 66 138 66 112 78Z"/>
+<rect class="o" x="146" y="52" width="14" height="22" rx="3" fill="#c8352b" transform="translate(0 -2)"/>
+<path class="t" style="stroke-width:5" d="M96 102 C88 126 92 148 100 160"/>
+<!-- eyes sly -->
+<path class="o" fill="#f6f2e9" d="M118 112 C124 102 142 102 148 112 C142 120 124 120 118 112Z" style="stroke-width:3"/>
+<path class="o" fill="#f6f2e9" d="M164 112 C170 102 188 102 194 112 C188 120 170 120 164 112Z" style="stroke-width:3"/>
+<circle class="n" cx="138" cy="112" r="5.5" fill="#1b1a1a"/><circle class="n" cx="184" cy="112" r="5.5" fill="#1b1a1a"/>
+<path class="t" style="stroke-width:5" d="M114 106 C124 98 142 98 150 108"/>
+<path class="t" style="stroke-width:5" d="M162 108 C172 96 190 96 198 104"/>
+<!-- smirk -->
+<path class="o" fill="#1b1a1a" d="M138 134 C150 148 176 146 188 128 C176 134 150 136 138 134Z" style="stroke-width:3"/>
+<path class="n" fill="#f6f2e9" d="M176 135 L182 135 L180 142Z"/>
+<path class="t" style="stroke-width:3" d="M190 126 L194 122"/>
+<ellipse class="n" cx="114" cy="132" rx="8" ry="5" fill="#c8352b" opacity=".4"/>
+<ellipse class="n" cx="202" cy="128" rx="8" ry="5" fill="#c8352b" opacity=".4"/>
+<circle class="o" cx="148" cy="170" r="11" fill="#f6f2e9"/><circle class="o" cx="186" cy="170" r="11" fill="#f6f2e9"/>
+<!-- sparks -->
+<path class="o" fill="#c8352b" d="M226 150 L232 164 L246 168 L232 172 L226 186 L220 172 L206 168 L220 164Z" style="stroke-width:3"/>
+</svg>

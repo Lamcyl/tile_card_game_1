@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<!-- arms up -->
+<path d="M70 150L36 100M186 150L216 108" stroke-width="22"/><path d="M70 150L36 100M186 150L216 108" stroke="#d4cec3" stroke-width="12"/>
+<circle cx="34" cy="94" r="12" fill="#d4cec3"/><circle cx="218" cy="102" r="12" fill="#d4cec3"/>
+<path d="M28 84l-4-8M36 82l0-9M44 86l4-8" stroke-width="3.5"/><path d="M212 92l-4-8M220 90l0-9M228 94l4-8" stroke-width="3.5"/>
+<!-- body shroud -->
+<path d="M60 220c-4-50 4-90 68-90s72 40 68 90z" fill="#f6f2e9"/>
+<path d="M80 150l66 24M74 176l92 14M96 140l-20 50" stroke="#9a948b" stroke-width="3"/>
+<!-- head -->
+<path d="M62 92c-6-44 22-70 66-70s72 26 66 70c-4 30-26 44-66 44s-62-14-66-44z" fill="#d4cec3"/>
+<!-- helm -->
+<path d="M62 84c0-34 26-58 66-58s66 24 66 58c-14-10-32-14-66-14S76 74 62 84z" fill="#55514c"/>
+<path d="M128 26v44" stroke-width="7"/><path d="M62 84c14-10 28-14 66-14s52 4 66 14" stroke-width="6"/>
+<path d="M92 36l-4 22M164 36l4 22" stroke="#9a948b" stroke-width="3.5"/>
+<!-- eyes hollow with glow -->
+<ellipse cx="102" cy="104" rx="19" ry="21" fill="#1b1a1a"/><ellipse cx="156" cy="104" rx="19" ry="21" fill="#1b1a1a"/>
+<circle cx="104" cy="106" r="8" fill="#c8352b" stroke="none"/><circle cx="154" cy="106" r="8" fill="#c8352b" stroke="none"/>
+<circle cx="107" cy="102" r="2.5" fill="#f6f2e9" stroke="none"/><circle cx="157" cy="102" r="2.5" fill="#f6f2e9" stroke="none"/>
+<path d="M128 120l-6 10h12z" fill="#1b1a1a" stroke-width="3"/>
+<!-- stitched grin -->
+<path d="M100 136q28 14 58 0" stroke-width="4"/><path d="M110 134v8M122 138v8M134 138v8M146 135v8" stroke-width="3"/>
+<!-- grave mound -->
+<path d="M4 232c10-30 40-48 70-44l106 0c34 0 64 18 72 44z" fill="#9a948b"/>
+<path d="M0 232h256" stroke-width="5"/>
+<path d="M30 220q10-8 20 0M196 210q10-8 20 0" stroke="#55514c" stroke-width="3.5"/>
+<!-- sprout -->
+<path d="M214 216c0-14 4-22 10-28M224 188c-8-2-12 2-14 8 6 2 12 0 14-8z" stroke-width="3.5"/>
+<path d="M224 188c6-8 14-6 14 0-4 6-10 6-14 0z" fill="#c8352b" stroke-width="3.5"/>
+<!-- rock -->
+<path d="M40 232c0-14 8-20 18-20s16 8 16 20z" fill="#d4cec3" stroke-width="4"/>
+</svg>
