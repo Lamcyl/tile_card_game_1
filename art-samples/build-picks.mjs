@@ -1,10 +1,10 @@
-// Builds yokai-picks.html: the chosen designs, with before/after for refined ones.
-// node art-samples/build-yokai-picks.mjs
+// Builds <set>-picks.html: the chosen designs, with before/after for refined ones.
+// node art-samples/build-picks.mjs yokai|egypt
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
-const dir = new URL('./yokai/', import.meta.url);
-// [number, slug, name, variant, feedback that was applied]
-const PICKS = [
+// Per set: [number, slug, name, variant, feedback that was applied, optional "before" file]
+const SETS = {
+  yokai: { title: 'Yokai Picks', picks: [
   [3, 'tengu', 'Karasu-tengu', 'fierce', 'Feet redone; head reshaped to read more like a crow.'],
   [4, 'kitsune', 'Kitsune', 'fierce', 'v4: the v2 pose kept, with tapered front legs, a chest bib, and hind legs tucked under the haunches. Shown next to v2.', 'kitsune-fierce-v2.svg'],
   [5, 'tanuki', 'Tanuki', 'fierce', 'Clear ink outline restored around the body.'],
@@ -17,7 +17,23 @@ const PICKS = [
   [17, 'komainu', 'Komainu', 'fierce', null],
   [19, 'kamaitachi', 'Kamaitachi', 'fierce', 'Forelimbs redrawn as clean sickle arms.'],
   [20, 'orochi', 'Yamata no Orochi', 'fierce', null],
-];
+  ] },
+  egypt: { title: 'Egyptian Picks', picks: [
+  [1, 'anubis', 'Anubis', 'fierce', null],
+  [2, 'ra', 'Ra', 'fierce', null],
+  [3, 'bastet', 'Bastet', 'fierce', 'Raised right arm redrawn: clean shoulder join, slight elbow bend, clear clawed paw.'],
+  [16, 'bes', 'Bes', 'fierce', 'Body made one stocky shape: barrel chest, belly, kilt and short bowed legs.'],
+  [17, 'bennu', 'Bennu', 'fierce', null],
+  [18, 'wadjet', 'Wadjet', 'cute', null],
+  [18, 'wadjet', 'Wadjet', 'fierce', null],
+  [20, 'isis', 'Isis', 'fierce', null],
+  ] },
+};
+const setName = process.argv[2] || 'yokai';
+const SET = SETS[setName];
+if (!SET) throw new Error('Unknown set: ' + setName);
+const dir = new URL('./' + setName + '/', import.meta.url);
+const PICKS = SET.picks;
 const svg = (f) => readFileSync(new URL(f, dir), 'utf8').replace(/<\?xml[^>]*>/, '').replace(/<!--[\s\S]*?-->/g, '').trim();
 const tiles = (s) => '<span class="tiles"><span class="tile">' + s + '</span><span class="tile dark">' + s + '</span></span>';
 
@@ -38,7 +54,7 @@ const cards = PICKS.map(([num, slug, name, variant, fix, before]) => {
   return '<article class="card' + (hasV2 ? ' wide' : '') + '"><header><span class="num">' + num + '</span><div><h2>' + name + '</h2><p>' + variant + '</p></div></header>' + body + '</article>';
 }).join('\n');
 
-const page = `<title>Yokai Picks</title>
+const page = `<title>${SET.title}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,12 +95,12 @@ const page = `<title>Yokai Picks</title>
 </style>
 <div class="wrap">
   <header class="top">
-    <h1>Yokai picks</h1>
+    <h1>${SET.title.replace('Picks', 'picks')}</h1>
     <p>Your chosen designs. Refined ones show the original next to the new version, with the change that was made. Tell me what to adjust next, or which ones are final.</p>
   </header>
   <section class="grid">
 ${cards}
   </section>
 </div>`;
-writeFileSync(new URL('./yokai-picks.html', import.meta.url), page);
-console.log('yokai-picks.html', Math.round(page.length / 1024) + ' kB');
+writeFileSync(new URL('./' + setName + '-picks.html', import.meta.url), page);
+console.log(setName + '-picks.html', Math.round(page.length / 1024) + ' kB');
