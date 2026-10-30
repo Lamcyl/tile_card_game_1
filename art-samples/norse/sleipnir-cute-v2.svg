@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
 <ellipse cx="136" cy="226" rx="104" ry="9" fill="#1b1a1a" fill-opacity=".12" stroke="none"/>
-<path d="M82 168v50h13v-50z" fill="#9a948b"/><rect x="82" y="213" width="13" height="7" fill="#1b1a1a" stroke="none"/><path d="M114 168v50h13v-50z" fill="#9a948b"/><rect x="114" y="213" width="13" height="7" fill="#1b1a1a" stroke="none"/><path d="M146 168v50h13v-50z" fill="#9a948b"/><rect x="146" y="213" width="13" height="7" fill="#1b1a1a" stroke="none"/><path d="M178 168v50h13v-50z" fill="#9a948b"/><rect x="178" y="213" width="13" height="7" fill="#1b1a1a" stroke="none"/>
+<path d="M88 168v46q7 8 14 0v-46z" fill="#9a948b"/><path d="M88 210q7 8 14 0v-3h-14z" fill="#1b1a1a" stroke-width="2"/><path d="M124 168v46q7 8 14 0v-46z" fill="#9a948b"/><path d="M124 210q7 8 14 0v-3h-14z" fill="#1b1a1a" stroke-width="2"/><path d="M160 168v46q7 8 14 0v-46z" fill="#9a948b"/><path d="M160 210q7 8 14 0v-3h-14z" fill="#1b1a1a" stroke-width="2"/><path d="M196 168v46q7 8 14 0v-46z" fill="#9a948b"/><path d="M196 210q7 8 14 0v-3h-14z" fill="#1b1a1a" stroke-width="2"/>
 <!-- tail -->
 <path d="M206 124c30-12 44 10 34 34-4 10-14 14-22 8 10-4 14-16 6-24-6-6-14-2-20 2z" fill="#55514c"/>
 <!-- body -->
 <path d="M70 140c0-30 24-42 74-42s68 14 68 44c0 34-24 48-70 48s-72-18-72-50z" fill="#f6f2e9"/>
-<path d="M98 172v50h13v-50z" fill="#d4cec3"/><rect x="98" y="217" width="13" height="7" fill="#1b1a1a" stroke="none"/><path d="M130 172v50h13v-50z" fill="#d4cec3"/><rect x="130" y="217" width="13" height="7" fill="#1b1a1a" stroke="none"/><path d="M162 172v50h13v-50z" fill="#d4cec3"/><rect x="162" y="217" width="13" height="7" fill="#1b1a1a" stroke="none"/><path d="M194 172v50h13v-50z" fill="#d4cec3"/><rect x="194" y="217" width="13" height="7" fill="#1b1a1a" stroke="none"/><path d="M66 172v50h13v-50z" fill="#d4cec3"/><rect x="66" y="217" width="13" height="7" fill="#1b1a1a" stroke="none"/>
+<path d="M70 170v52q7 8 14 0v-52z" fill="#d4cec3"/><path d="M70 218q7 8 14 0v-3h-14z" fill="#1b1a1a" stroke-width="2"/><path d="M106 170v52q7 8 14 0v-52z" fill="#d4cec3"/><path d="M106 218q7 8 14 0v-3h-14z" fill="#1b1a1a" stroke-width="2"/><path d="M142 170v52q7 8 14 0v-52z" fill="#d4cec3"/><path d="M142 218q7 8 14 0v-3h-14z" fill="#1b1a1a" stroke-width="2"/><path d="M178 170v52q7 8 14 0v-52z" fill="#d4cec3"/><path d="M178 218q7 8 14 0v-3h-14z" fill="#1b1a1a" stroke-width="2"/>
 <!-- blanket -->
 <path d="M122 102c20-4 48-2 60 6l-4 46c-18 8-40 6-56-2z" fill="#c8352b" stroke-width="4"/>
 <path d="M146 116v28M146 124l12-8M146 134l12-8" stroke="#f6f2e9" stroke-width="4"/>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.n{stroke:none}.t{fill:none;stroke:#1b1a1a;stroke-linecap:round;stroke-linejoin:round}.f{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- cloak billowing -->
+<path class="o" fill="#55514c" d="M112 104 C76 108 40 140 4 190 L18 196 L12 218 L34 214 L40 240 L62 226 L78 250 L104 232 L150 250 L150 200 L146 120Z"/>
+<path class="n" fill="#1b1a1a" opacity=".3" d="M40 160 C70 140 96 130 112 130 L110 200 C90 190 66 180 40 160Z"/>
+<!-- legs -->
+<path class="o" fill="#55514c" d="M110 196 L84 222 L60 226 L56 242 L92 244 L126 214Z"/>
+<path class="o" fill="#55514c" d="M128 192 L160 200 L196 226 L206 244 L180 246 L146 224 L122 216Z"/>
+<path class="o" fill="#1b1a1a" d="M54 232 L94 234 L92 246 L56 244Z"/>
+<path class="o" fill="#1b1a1a" d="M188 234 L208 236 L208 246 L182 246Z"/>
+<!-- torso -->
+<path class="o" fill="#9a948b" d="M104 104 L148 108 C156 140 152 172 148 202 L108 200 C104 170 102 130 104 104Z"/>
+<path class="o" fill="#1b1a1a" d="M106 176 L150 178 L150 188 L106 186Z"/>
+<rect class="o" x="122" y="175" width="14" height="14" fill="#c9a23a"/>
+<!-- spear -->
+<path class="t" style="stroke-width:11" d="M26 168 L226 76"/>
+<path class="f" style="stroke:#9a948b;stroke-width:5" d="M26 168 L226 76"/>
+<path class="o" fill="#c9a23a" d="M0 -9 L38 0 L0 9 L6 0Z" transform="translate(222 78) rotate(-24.7)"/>
+<path class="o" fill="#c9a23a" d="M0 -6 L-14 0 L0 6Z" transform="translate(26 168) rotate(-24.7)"/>
+<!-- arm -->
+<path class="t" style="stroke-width:22" d="M136 112 L170 124 L172 108"/>
+<path class="f" style="stroke:#55514c;stroke-width:14" d="M136 112 L170 124 L172 108"/>
+<circle class="o" cx="174" cy="104" r="11" fill="#f6f2e9"/>
+<!-- beard windswept -->
+<path class="o" fill="#d4cec3" d="M110 96 C90 108 62 112 22 104 C44 118 64 124 86 128 C66 134 52 148 34 160 C74 160 110 152 134 130 L156 104Z"/>
+<path class="t" style="stroke-width:3" d="M96 116 C80 118 58 114 40 110 M100 130 C84 134 70 140 56 148"/>
+<!-- head -->
+<path class="o" fill="#f6f2e9" d="M100 80 C100 56 132 48 150 60 L174 82 L152 88 L154 106 C140 116 110 112 102 100Z"/>
+<!-- eye -->
+<path class="o" fill="#1b1a1a" d="M128 70 L158 80 L152 88 L130 82Z"/>
+<circle class="n" cx="144" cy="82" r="4" fill="#c9a23a"/>
+<path class="t" style="stroke-width:3" d="M106 76 L118 92 M112 74 L122 88"/>
+<path class="o" fill="#d4cec3" d="M120 98 C132 92 146 94 156 100 C146 108 130 108 120 98Z"/>
+<!-- hat -->
+<path class="o" fill="#55514c" d="M104 64 C100 34 112 12 138 8 C132 22 148 36 154 62Z"/>
+<path class="o" fill="#55514c" d="M62 74 C94 56 150 46 214 56 C184 62 164 66 150 72 C124 74 96 78 62 74Z"/>
+<path class="o" fill="#1b1a1a" d="M104 62 L154 60 L152 68 L104 70Z"/>
+<!-- ravens -->
+<defs><g id="rv">
+<path class="o" fill="#1b1a1a" d="M-8 -2 C-30 -20 -34 -32 -42 -44 C-26 -40 -16 -30 -8 -20Z" transform="translate(6 6)"/>
+<path class="o" fill="#1b1a1a" d="M-14 6 L-32 14 L-28 2Z"/>
+<path class="o" fill="#1b1a1a" d="M-16 4 C-10 -8 8 -8 18 -2 L32 -3 L21 4 C14 14 -4 14 -16 4Z"/>
+<path class="o" fill="#1b1a1a" d="M-2 -4 C-4 -24 8 -40 30 -48 C22 -32 24 -16 14 -4Z"/>
+<circle class="n" cx="16" cy="-1" r="2.2" fill="#c9a23a"/>
+</g></defs>
+<use href="#rv" transform="translate(54 56) rotate(-8)"/>
+<use href="#rv" transform="translate(214 168) scale(-1 1) rotate(8) scale(.8)"/>
+</svg>

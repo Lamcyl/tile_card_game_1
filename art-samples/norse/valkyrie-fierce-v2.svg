@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<g transform="translate(0 14)"><!-- speed lines -->
+<path d="M200 40l50-16M214 76l40-8M210 132l44 8" stroke="#9a948b" stroke-width="4"/>
+<!-- far wing -->
+<path d="M150 112C170 70 220 50 244 8 246 40 236 64 222 78c10-2 16-2 22-4-8 26-30 40-52 44 8 4 12 4 16 4-14 14-34 18-52 14z" fill="#9a948b"/>
+<!-- cape -->
+<path d="M140 118c30 6 60 24 84 50-34-2-60 4-84 20z" fill="#c8352b"/>
+<!-- near wing -->
+<path d="M128 122C130 70 170 24 214 6c-2 34-14 56-34 76 10-2 18-6 24-12-2 28-18 46-40 58 8 0 14-2 20-6-10 22-30 34-54 34z" fill="#d4cec3"/>
+<path d="M150 100c16-30 32-50 52-72M150 118c24-18 40-34 52-50M146 134c20-8 38-18 52-32" stroke="#55514c" stroke-width="3.5"/>
+<!-- back leg -->
+<path d="M122 166L196 196" stroke-width="16"/><path d="M122 166L196 196" stroke="#f6f2e9" stroke-width="7"/>
+<path d="M192 184l22 14-8 12-22-14z" fill="#55514c" stroke-width="4"/>
+<!-- front leg tucked -->
+<path d="M110 168L84 206 62 196" stroke-width="16"/><path d="M110 168L84 206 62 196" stroke="#f6f2e9" stroke-width="7"/>
+<path d="M54 186l16 -2 6 18-18 6z" fill="#55514c" stroke-width="4"/>
+<!-- torso -->
+<path d="M88 112c20-12 52-10 64 10l8 38c-18 14-48 12-66-2z" fill="#c8352b"/>
+<path d="M96 126h50M98 144h54" stroke="#1b1a1a" stroke-width="3.5"/>
+<!-- spear arm thrust forward -->
+<path d="M104 134L64 138" stroke-width="15"/><path d="M104 134L64 138" stroke="#f6f2e9" stroke-width="6"/>
+<path d="M10 148L130 124" stroke-width="7"/><path d="M10 148L130 124" stroke="#9a948b" stroke-width="2.5"/>
+<path d="M2 150l34-28 0 34z" fill="#f6f2e9" stroke-width="4" transform="rotate(-6 20 150)"/>
+<path d="M40 138l-2 22" stroke="#c8352b" stroke-width="6"/>
+<!-- head -->
+<path d="M66 70c-2-24 12-38 32-38 24 0 38 16 36 40-2 22-18 34-36 34-18 0-30-12-32-36z" fill="#f6f2e9"/>
+<!-- hair streaming -->
+<path d="M120 42c20 0 40 10 52 26-8 0-14-2-20-4 8 8 14 16 18 26-12-6-22-8-32-8 6 6 10 14 10 22-14-8-20-20-22-32z" fill="#55514c"/>
+<!-- helmet -->
+<path d="M64 62c2-24 16-34 36-34 18 0 34 10 36 34-16-10-30-12-44-10-10 2-20 4-28 10z" fill="#d4cec3"/>
+<path d="M78 34c-14-2-24-12-30-24 16 0 28 8 36 20z" fill="#f6f2e9"/>
+
+<!-- fierce eye -->
+<path d="M72 74l26 6-4 12-22-4z" fill="#c8352b" stroke-width="3.5"/>
+<path d="M68 66l34 10" stroke-width="7"/>
+<path d="M76 98c10-4 20-4 30 2" stroke-width="4"/><path d="M82 98l4 6 4-6M94 98l4 6 4-6" fill="#f6f2e9" stroke-width="2.5"/>
+</g></svg>

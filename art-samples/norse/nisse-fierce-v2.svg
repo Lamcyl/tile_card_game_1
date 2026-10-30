@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.s{stroke:#1b1a1a;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}</style>
+<ellipse class="i" cx="120" cy="240" rx="90" ry="7" opacity=".18"/>
+<!-- pitchfork behind -->
+<path class="n" stroke="#1b1a1a" stroke-width="13" stroke-linecap="round" d="M208 200 L234 66"/><path class="n" stroke="#9a948b" stroke-width="5" stroke-linecap="round" d="M208 200 L234 66"/>
+<path class="s m" d="M214 28 L214 62 Q232 76 252 62 L250 28 L242 56 L233 56 L233 20 L225 56 L218 56Z" transform="translate(-4 4)"/>
+<!-- legs -->
+<path class="s d" d="M64 200 L100 200 L104 232 L48 232 Q48 216 64 212Z"/><path class="s d" d="M144 200 L180 200 L190 232 L134 232Z"/>
+<!-- body: wide stocky -->
+<path class="s m" d="M44 130 Q30 176 56 206 Q120 218 184 206 Q210 176 196 130Z"/>
+<path class="v" d="M44 178 Q120 192 196 178 L192 192 Q120 206 48 192Z" stroke="#1b1a1a" stroke-width="3"/>
+<!-- left arm fist raised -->
+<path class="s m" d="M48 150 Q20 150 20 120 L20 100 L46 100 L52 124Z"/><circle class="s l" cx="30" cy="92" r="15"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3" d="M24 88 v10 M31 86 v12 M38 88 v10"/>
+<!-- right arm holding fork -->
+<path class="s m" d="M190 146 Q220 160 214 190 L196 184 L186 164Z"/><circle class="s l" cx="206" cy="196" r="14"/>
+<!-- beard: spiked forward -->
+<path class="s p" d="M54 112 L40 150 L66 142 L58 190 L90 164 L96 208 L120 170 L140 214 L150 168 L184 200 L178 152 L208 160 L196 112Z"/>
+<path class="n" stroke="#9a948b" stroke-width="3.5" stroke-linecap="round" d="M80 140 L84 170 M122 150 L124 180 M160 144 L160 172"/>
+<!-- mouth -->
+<path class="s i" d="M96 130 Q124 124 156 130 Q148 154 126 152 Q104 154 96 130Z"/>
+<path class="p" d="M102 130 L108 142 L114 129Z M138 129 L144 142 L150 130Z"/>
+<path class="v" d="M114 144 Q126 138 138 144 Q130 150 126 150 Q120 150 114 144Z"/>
+<!-- nose -->
+<path class="s l" d="M110 112 Q126 96 142 112 Q128 124 110 112Z"/>
+<!-- hat pulled low, dark, bent tip -->
+<path class="s d" d="M40 106 Q44 78 72 62 Q96 46 112 26 Q124 -6 168 0 Q192 4 200 26 Q188 28 180 40 Q170 56 190 70 Q212 88 212 106 Q126 90 40 106Z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" d="M70 80 Q96 60 116 40"/>
+<path class="s v" d="M38 100 Q126 82 214 100 L212 114 Q126 98 40 114Z"/>
+<!-- glowing eyes under brim -->
+<path class="s i" d="M58 112 Q84 102 112 110 L106 132 Q80 134 62 124Z" stroke-width="3"/><path class="s i" d="M144 110 Q172 102 196 112 L192 124 Q172 134 150 132Z" stroke-width="3"/>
+<path class="p" d="M70 114 L102 114 L98 126 Q82 128 72 122Z M154 114 L186 114 L182 122 Q170 128 158 126Z"/>
+<path class="v" d="M84 114 L98 114 L96 126 Q90 127 84 126Z M158 114 L172 114 L172 126 Q166 127 160 126Z"/>
+</svg>

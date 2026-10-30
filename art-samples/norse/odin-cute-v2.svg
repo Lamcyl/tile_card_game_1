@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
 <style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.n{stroke:none}.t{fill:none;stroke:#1b1a1a;stroke-linecap:round;stroke-linejoin:round}</style>
 <!-- spear -->
-<path class="t" style="stroke-width:11" d="M222 244 L204 36"/>
-<path class="t" style="stroke:#9a948b;stroke-width:5" d="M222 244 L204 36"/>
-<path class="o" fill="#c9a23a" d="M204 4 L214 30 L204 40 L194 30Z"/>
-<path class="o" fill="#c9a23a" d="M196 44 L212 44 L211 52 L197 52Z"/>
+<path class="t" style="stroke-width:11" d="M234 244 L222 30"/>
+<path class="t" style="stroke:#9a948b;stroke-width:5" d="M234 244 L222 30"/>
+<path class="o" fill="#c9a23a" d="M220 0 L230 24 L222 34 L212 24Z"/>
+<path class="o" fill="#c9a23a" d="M214 38 L230 38 L229 46 L215 46Z"/>
 <!-- cloak mound -->
 <path class="o" fill="#55514c" d="M30 242 C30 190 60 148 100 136 L156 136 C196 148 226 190 226 242Z"/>
 <path class="n" fill="#1b1a1a" opacity=".3" d="M30 242 C30 214 38 196 52 182 C56 206 70 226 84 242Z"/>
@@ -12,9 +12,9 @@
 <ellipse class="o" cx="100" cy="240" rx="20" ry="9" fill="#1b1a1a"/>
 <ellipse class="o" cx="158" cy="240" rx="20" ry="9" fill="#1b1a1a"/>
 <!-- hand on spear -->
-<path class="t" style="stroke-width:20" d="M186 182 L208 160"/>
-<path class="t" style="stroke:#55514c;stroke-width:12" d="M186 182 L208 160"/>
-<circle class="o" cx="209" cy="158" r="10" fill="#f6f2e9"/>
+<path class="t" style="stroke-width:20" d="M186 182 L226 160"/>
+<path class="t" style="stroke:#55514c;stroke-width:12" d="M186 182 L226 160"/>
+<circle class="o" cx="228" cy="158" r="10" fill="#f6f2e9"/>
 <!-- beard -->
 <path class="o" fill="#d4cec3" d="M76 118 C62 150 66 196 86 218 C100 230 114 222 128 232 C142 222 158 230 172 218 C192 196 196 150 180 118Z"/>
 <path class="t" style="stroke-width:3" d="M96 160 C100 178 98 196 104 210 M128 168 C130 190 126 208 128 224 M160 160 C156 178 158 196 152 210"/>
@@ -31,22 +31,23 @@
 <ellipse class="o" cx="130" cy="120" rx="8" ry="7" fill="#f6f2e9"/>
 <path class="o" fill="#d4cec3" d="M84 128 C100 116 118 126 128 134 C138 126 156 116 172 128 C160 146 140 144 128 140 C116 144 96 146 84 128Z"/>
 <path class="o" fill="#1b1a1a" d="M120 142 C122 152 134 152 136 142Z"/>
-<!-- hat -->
-<path class="o" fill="#55514c" d="M80 90 C82 52 108 30 140 34 C166 38 184 30 214 14 C204 34 196 50 176 58 C178 70 178 80 178 90Z"/>
+<g transform="translate(0 -12)">
+<path class="o" fill="#55514c" d="M80 90 C80 50 110 24 140 26 C166 28 188 34 200 58 C188 48 178 52 176 62 L178 90Z"/>
 <path class="o" fill="#1b1a1a" d="M82 78 L178 78 L178 90 L82 90Z"/>
 <rect class="o" x="120" y="76" width="16" height="16" fill="#c9a23a"/>
 <ellipse class="o" cx="128" cy="90" rx="96" ry="14" fill="#55514c" transform="rotate(-5 128 90)"/>
 <path class="n" fill="#9a948b" d="M50 90 C80 82 130 80 190 80 L196 84 C140 86 90 88 54 96Z" opacity=".5" transform="rotate(-5 128 90)"/>
+</g>
 <!-- ravens -->
-<g transform="translate(46 70)">
+<g transform="translate(46 62)">
 <path class="o" fill="#1b1a1a" d="M-16 6 C-18 -10 -2 -16 8 -10 L22 -12 L12 -4 C14 8 4 16 -6 14 L-24 20Z"/>
 <circle class="n" cx="6" cy="-6" r="2.5" fill="#f6f2e9"/>
 </g>
-<g transform="translate(206 70) scale(-1 1)">
+<g transform="translate(214 56) scale(-1 1)">
 <path class="o" fill="#1b1a1a" d="M-16 6 C-18 -10 -2 -16 8 -10 L22 -12 L12 -4 C14 8 4 16 -6 14 L-24 20Z"/>
 <circle class="n" cx="6" cy="-6" r="2.5" fill="#c9a23a"/>
 </g>
-<g transform="translate(222 168) scale(-1 1)">
+<g transform="translate(232 178) scale(-1 1)">
 <path class="o" fill="#1b1a1a" d="M-12 4 C-14 -8 -2 -12 6 -8 L18 -10 L10 -2 C12 8 4 12 -4 10 L-16 14Z"/>
 <circle class="n" cx="5" cy="-5" r="2" fill="#f6f2e9"/>
 </g>

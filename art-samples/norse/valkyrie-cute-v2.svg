@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<!-- wings -->
+<g id="w"><path d="M104 120C70 96 30 90 6 56c-2 30 6 54 20 64-8 2-14 0-20 0 12 22 36 34 62 34-6 6-12 8-20 10 24 8 50 4 66-12z" fill="#d4cec3"/>
+<path d="M30 96c20 6 40 14 62 28M24 124c24 4 44 8 66 12M40 148c16 0 32-4 48-8" stroke="#9a948b" stroke-width="3.5"/></g>
+<use href="#w" transform="translate(256 0) scale(-1 1)"/>
+<!-- spear -->
+<path d="M216 52V236" stroke-width="6"/>
+<path d="M216 16l-10 38h20z" fill="#f6f2e9"/>
+<path d="M208 56h16" stroke="#c8352b" stroke-width="6"/>
+<!-- legs -->
+<path d="M110 190v34M146 190v34" stroke-width="12"/><path d="M110 190v34M146 190v34" stroke="#f6f2e9" stroke-width="4"/>
+<path d="M96 226h28v8H96zM132 226h28v8h-28z" fill="#55514c" stroke-width="4"/>
+<!-- dress -->
+<path d="M100 144h56l16 52c-20 10-68 10-88 0z" fill="#c8352b"/>
+<path d="M112 150l16 14 16-14" stroke="#f6f2e9" stroke-width="3.5"/>
+<path d="M92 190q36 10 72 0" stroke="#f6f2e9" stroke-width="3.5"/>
+<!-- arms -->
+<path d="M102 152l-12 22M154 152l20-16" stroke-width="11"/><path d="M102 152l-12 22M154 152l20-16" stroke="#f6f2e9" stroke-width="3"/>
+<!-- shield -->
+<circle cx="86" cy="178" r="26" fill="#f6f2e9"/><circle cx="86" cy="178" r="17" fill="#d4cec3" stroke-width="3.5"/><circle cx="86" cy="178" r="6" fill="#c8352b" stroke-width="3.5"/>
+<path d="M174 136L216 130" stroke-width="5"/><circle cx="174" cy="136" r="7" fill="#f6f2e9" stroke-width="4"/>
+<!-- hair -->
+<path d="M72 96c-4-44 28-62 56-62s60 18 56 62c2 24-4 56-14 66l-4-40H90l-4 40c-10-10-16-42-14-66z" fill="#55514c"/>
+<!-- face -->
+<path d="M80 98c0-26 22-40 48-40s48 14 48 40c0 30-22 46-48 46S80 128 80 98z" fill="#f6f2e9"/>
+<!-- bangs -->
+<path d="M82 90c14-2 30-10 38-26 10 16 34 24 54 26-4-34-26-46-46-46S86 56 82 90z" fill="#55514c"/>
+<!-- eyes -->
+<ellipse cx="108" cy="106" rx="9" ry="12" fill="#1b1a1a" stroke="none"/><ellipse cx="148" cy="106" rx="9" ry="12" fill="#1b1a1a" stroke="none"/>
+<circle cx="111" cy="101" r="3.5" fill="#f6f2e9" stroke="none"/><circle cx="151" cy="101" r="3.5" fill="#f6f2e9" stroke="none"/>
+<circle cx="94" cy="124" r="7" fill="#c8352b" fill-opacity=".45" stroke="none"/><circle cx="162" cy="124" r="7" fill="#c8352b" fill-opacity=".45" stroke="none"/>
+<path d="M120 126q8 7 16 0" stroke-width="3.5"/>
+<!-- helmet -->
+<path d="M82 66c4-26 22-38 46-38s42 12 46 38c-18-10-30-12-46-12S100 56 82 66z" fill="#d4cec3"/>
+<path d="M82 66c18-10 30-12 46-12s28 2 46 12" stroke-width="6"/>
+<circle cx="128" cy="40" r="6" fill="#c8352b" stroke-width="3.5"/>
+<g id="hw"><path d="M80 62c-18 0-34-10-44-30 6 2 12 4 18 4-6-6-10-12-12-20 22 4 40 20 44 36z" fill="#f6f2e9"/></g>
+<use href="#hw" transform="translate(256 0) scale(-1 1)"/>
+</svg>

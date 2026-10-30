@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.s{stroke:#1b1a1a;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}</style>
+<ellipse class="i" cx="128" cy="238" rx="70" ry="7" opacity=".18"/>
+<!-- clogs -->
+<path class="s d" d="M80 220 Q80 208 100 208 L114 208 L114 232 L72 232 Q70 224 80 220Z"/><path class="s d" d="M176 220 Q176 208 156 208 L142 208 L142 232 L184 232 Q186 224 176 220Z"/>
+<!-- beard body -->
+<path class="s p" d="M60 120 Q44 170 72 216 Q128 236 184 216 Q212 170 196 120Z"/>
+<path class="n" stroke="#d4cec3" stroke-width="4" stroke-linecap="round" d="M84 150 Q88 180 100 200 M110 156 Q112 186 118 206 M146 156 Q144 186 138 206 M172 150 Q168 180 156 200"/>
+<!-- face bits -->
+<ellipse class="s l" cx="128" cy="130" rx="15" ry="13"/>
+<ellipse class="i" cx="92" cy="122" rx="5" ry="6"/><ellipse class="i" cx="164" cy="122" rx="5" ry="6"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3.5" stroke-linecap="round" d="M118 156 Q128 164 138 156"/>
+<ellipse class="v" cx="80" cy="136" rx="9" ry="6" opacity=".55"/><ellipse class="v" cx="176" cy="136" rx="9" ry="6" opacity=".55"/>
+<!-- hat -->
+<path class="s v" d="M48 122 Q50 92 70 74 Q90 52 128 32 Q166 -2 208 28 Q226 42 218 66 Q212 52 196 54 Q170 58 184 80 Q206 100 208 122 Q128 108 48 122Z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" d="M82 94 Q106 66 134 50 M70 112 Q80 90 96 84"/>
+<path class="s p" d="M46 118 Q128 102 210 118 L210 132 Q128 118 46 132Z" stroke-width="5"/>
+<circle class="s p" cx="218" cy="68" r="9"/>
+<!-- arms and bowl -->
+<path class="s d" d="M104 184 Q100 200 112 208 L144 208 Q156 200 152 184Z"/>
+<path class="p" d="M110 184 Q128 176 146 184 Q128 190 110 184Z" stroke="#1b1a1a" stroke-width="3"/>
+<circle class="s v" cx="128" cy="183" r="4" stroke-width="2.5"/>
+<ellipse class="s l" cx="96" cy="190" rx="11" ry="9"/><ellipse class="s l" cx="160" cy="190" rx="11" ry="9"/>
+</svg>

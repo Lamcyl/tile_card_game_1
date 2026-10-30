@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.s{stroke:#1b1a1a;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}.t{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
 <g class="t">
-<path stroke="#1b1a1a" stroke-width="40" d="M246 240 C170 262 100 240 120 206 C140 172 218 190 214 140 C210 106 160 120 150 96"/>
-<path stroke="#55514c" stroke-width="30" d="M246 240 C170 262 100 240 120 206 C140 172 218 190 214 140 C210 106 160 120 150 96"/>
-<path stroke="#d4cec3" stroke-width="24" stroke-dasharray="3 13" d="M246 240 C170 262 100 240 120 206 C140 172 218 190 214 140 C210 106 160 120 150 96"/>
+<path stroke="#1b1a1a" stroke-width="40" d="M222 224 C170 250 100 240 120 206 C140 172 218 190 214 140 C210 106 160 120 150 96"/>
+<path stroke="#55514c" stroke-width="30" d="M222 224 C170 250 100 240 120 206 C140 172 218 190 214 140 C210 106 160 120 150 96"/>
+<path stroke="#d4cec3" stroke-width="24" stroke-dasharray="3 13" d="M222 224 C170 250 100 240 120 206 C140 172 218 190 214 140 C210 106 160 120 150 96"/>
 </g>
 <!-- dorsal spikes (outer side) -->
-<path class="s v" d="M244 150 L258 132 L236 128Z M232 188 L248 192 L238 206Z M178 244 L186 258 L164 252Z M104 224 L88 232 L100 244Z M132 182 L136 166 L148 178Z M206 108 L206 90 L222 102Z M164 118 L156 130 L148 114Z"/>
+<path class="s v" d="M244 150 L258 132 L236 128Z M232 188 L248 192 L238 206Z M178 238 L186 250 L164 246Z M104 224 L88 232 L100 244Z M132 182 L136 166 L148 178Z M206 108 L206 90 L222 102Z M164 118 L156 130 L148 114Z"/>
 <!-- foreleg claws -->
 <path class="s l" d="M148 120 Q130 144 108 138 L98 148 L100 134 L88 132 L98 122 Q124 112 140 108Z"/>
 <!-- head -->
