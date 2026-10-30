@@ -7,12 +7,12 @@ Every version is kept; the **chosen** column is the current pick.
 |---|---|---|
 | 1 | Anubis | `anubis-fierce.svg` |
 | 2 | Ra | `ra-fierce.svg` |
-| 3 | Bastet | `bastet-fierce.svg` |
-| 16 | Bes | `bes-fierce.svg` |
+| 3 | Bastet | `bastet-fierce-v2.svg` (arm fixed; original `bastet-fierce.svg` kept) |
+| 16 | Bes | `bes-fierce-v2.svg` (body fixed; original `bes-fierce.svg` kept) |
 | 17 | Bennu | `bennu-fierce.svg` |
 | 18 | Wadjet | `wadjet-cute.svg` and `wadjet-fierce.svg` |
 | 20 | Isis | `isis-fierce.svg` |
 
 Not chosen (kept for reference): sekhmet, thoth, sobek, set, apep, ammit, osiris, sphinx, mummy, khepri, serket, taweret, ushabti, and the other cute variants.
 
-Gallery: `../egypt-gallery.html` (all 20, built by `node ../build-gallery.mjs egypt`).
+Galleries: `../egypt-gallery.html` (all 20, built by `node ../build-gallery.mjs egypt`) and `../egypt-picks.html` (chosen designs with before/after, built by `node ../build-picks.mjs egypt`).
