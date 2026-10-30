@@ -35,7 +35,7 @@
 <path d="M108 80 L100 92M148 80 L156 92" fill="none" stroke="#1b1a1a" stroke-width="0.1" stroke-linecap="round" stroke-linejoin="round"/>
 </g><path d="M92 74 Q74 52 88 34 Q96 44 100 38 Q92 18 110 8 Q112 22 120 26 Q124 12 128 6 Q132 12 136 26 Q144 22 146 8 Q164 18 156 38 Q160 44 168 34 Q182 52 164 74Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M100 72 Q86 54 96 42 Q100 48 106 44 Q100 28 112 18 Q116 30 124 30 Q128 20 132 30 Q140 30 144 18 Q156 28 150 44 Q156 48 160 42 Q170 54 156 72Z" fill="#55514c"/>
-<path d="M110 70 Q102 58 112 46 Q118 52 122 44 Q128 36 134 44 Q138 52 144 46 Q154 58 146 70Z" fill="#c8352b"/>
+<path d="M104 66 Q98 56 106 48 Q110 52 112 48 L112 66Z M152 66 Q158 56 150 48 Q146 52 144 48 L144 66Z" fill="#c8352b"/>
 <path d="M118 76 L118 46 L128 26 L138 46 L138 76Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M128 34 L128 74" fill="none" stroke="#9a948b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M98 76 L158 76 L158 86 L98 86Z" fill="#55514c" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
