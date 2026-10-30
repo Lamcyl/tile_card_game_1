@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute balam: sleeping jaguar cub curled round, head on paws, tail wrapped -->
+
+<path class="n" stroke="#1b1a1a" stroke-width="22" stroke-linecap="round" d="M208 186Q252 192 230 226Q190 248 124 232"/>
+<path class="n" stroke="#d4cec3" stroke-width="14" stroke-linecap="round" d="M208 186Q252 192 230 226Q190 248 124 232"/>
+<path class="n" stroke="#55514c" stroke-width="14" stroke-linecap="round" d="M146 240Q134 238 124 232"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" d="M236 200L246 204M222 238L228 246M196 244L198 250"/>
+<ellipse class="o l" cx="140" cy="176" rx="90" ry="52"/>
+<g class="t" stroke-width="2.5"><circle cx="178" cy="150" r="7"/><circle cx="206" cy="168" r="7"/><circle cx="160" cy="184" r="7"/><circle cx="196" cy="196" r="6"/><circle cx="228" cy="184" r="5"/></g>
+<g class="i"><circle cx="178" cy="150" r="2"/><circle cx="206" cy="168" r="2"/><circle cx="160" cy="184" r="2"/><circle cx="196" cy="196" r="2"/></g>
+<circle class="o l" cx="56" cy="74" r="18"/><circle class="o l" cx="154" cy="70" r="18"/>
+<circle class="d" cx="56" cy="76" r="9"/><circle class="d" cx="154" cy="72" r="9"/>
+<ellipse class="o l" cx="106" cy="118" rx="66" ry="54"/>
+<path class="t" d="M40 128L26 136L42 142M44 144L32 154L48 154M172 128L186 136L170 142M168 144L180 154L164 154"/>
+<path class="i" d="M96 70L100 90L106 74L112 90L116 70Q106 64 96 70Z"/>
+<g class="i"><circle cx="76" cy="86" r="3"/><circle cx="136" cy="86" r="3"/><circle cx="64" cy="108" r="2.5"/><circle cx="148" cy="108" r="2.5"/></g>
+<path class="o g" d="M106 70L116 82L106 94L96 82Z" transform="translate(0 6)"/>
+<ellipse class="o p" cx="106" cy="144" rx="26" ry="17"/>
+<path class="t" stroke-width="3.5" d="M66 122Q78 134 90 122M122 122Q134 134 146 122"/>
+<path class="i" d="M95 132L117 132L106 144Z"/>
+<path class="t" d="M106 144L106 150M106 150Q97 160 88 152M106 150Q115 160 124 152"/>
+<ellipse class="o p" cx="76" cy="182" rx="25" ry="15"/><ellipse class="o p" cx="128" cy="186" rx="25" ry="15"/>
+<path class="t" stroke-width="2.5" d="M68 176L68 190M78 174L78 192M88 176L88 190M120 180L120 194M130 178L130 196M140 180L140 194"/>
+
+</svg>

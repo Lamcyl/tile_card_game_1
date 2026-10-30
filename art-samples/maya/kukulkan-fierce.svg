@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.t{fill:none;stroke:#1b1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- tail plumes bottom right -->
+<path class="o m" d="M206 236Q250 226 252 180Q214 186 196 228Z"/><path class="o d" d="M200 238Q228 252 252 236Q240 214 208 224Z"/><path class="o l" d="M196 232Q192 196 222 176Q232 206 208 236Z"/>
+<path class="t" d="M204 232Q236 214 248 188M204 236Q226 242 246 236M202 226Q210 200 220 182" style="stroke-width:2"/>
+<g fill="none">
+<path class="o" style="stroke-width:46" d="M204 232C236 196 112 196 140 160C160 134 196 128 176 100C168 90 160 88 152 88"/>
+<path stroke="#d4cec3" style="stroke-width:38" stroke-linecap="round" d="M204 232C236 196 112 196 140 160C160 134 196 128 176 100C168 90 160 88 152 88"/>
+<path stroke="#55514c" style="stroke-width:38" stroke-dasharray="9 15" d="M196 220C230 198 112 196 140 160C160 134 196 128 176 100C168 90 160 88 152 88"/>
+</g>
+<!-- crest plumes sweeping back -->
+<path class="o d" d="M150 62Q170 14 232 8Q216 44 190 74Z"/>
+<path class="o m" d="M156 70Q196 40 248 56Q222 82 180 90Z"/>
+<path class="o l" d="M136 54Q132 14 164 -2Q176 24 156 58Z" transform="translate(0 6)"/>
+<path class="o v" d="M170 30Q196 20 220 18Q206 36 186 50Z"/>
+<path class="t" d="M154 66Q184 28 226 14M164 76Q204 58 240 58" style="stroke-width:2"/>
+<!-- head, snout left -->
+<path class="o p" d="M156 62C130 50 84 50 36 76C30 82 34 90 44 92L66 98L160 98Q176 80 156 62Z"/>
+<!-- open mouth -->
+<path class="o v" d="M66 98L160 98L168 118L60 118Z"/>
+<!-- lower jaw -->
+<path class="o l" d="M60 114L168 112Q170 138 140 150Q96 152 42 132Q36 122 60 114Z"/>
+<!-- fangs -->
+<path class="o p" d="M70 98L76 120L86 100M112 98L118 118L126 99M142 98L146 112L154 98" style="stroke-width:3"/>
+<path class="o p" d="M66 114L72 100L80 114M100 114L108 128L116 113" style="stroke-width:3"/>
+<!-- nostril + brow -->
+<circle class="i" cx="46" cy="82" r="3.500"/>
+<path class="o i" d="M138 64L98 62L90 74Q112 86 140 82Z"/><circle class="v" cx="110" cy="72" r="4"/>
+<path class="o l" d="M98 56L92 32L120 52Z"/>
+<path class="t" d="M60 70Q80 62 94 62M146 90L150 100" style="stroke-width:2.500"/>
+</svg>

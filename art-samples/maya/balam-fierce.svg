@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce balam: side-on pouncing jaguar mid-leap, jaws wide, tail whip -->
+
+<path class="n" stroke="#1b1a1a" stroke-width="20" stroke-linecap="round" d="M46 138Q6 128 16 88Q24 62 10 38"/><path class="n" stroke="#d4cec3" stroke-width="12" stroke-linecap="round" d="M46 138Q6 128 16 88Q24 62 10 38"/>
+<path class="n" stroke="#1b1a1a" stroke-width="12" stroke-linecap="round" d="M14 58Q8 48 10 38"/>
+<path class="n" stroke="#1b1a1a" stroke-width="22" stroke-linecap="round" d="M76 176Q60 204 66 226"/><path class="n" stroke="#9a948b" stroke-width="14" stroke-linecap="round" d="M76 176Q60 204 66 226"/>
+<path class="n" stroke="#1b1a1a" stroke-width="22" stroke-linecap="round" d="M104 170Q130 206 168 214"/><path class="n" stroke="#9a948b" stroke-width="14" stroke-linecap="round" d="M104 170Q130 206 168 214"/>
+<ellipse class="o l" cx="84" cy="146" rx="64" ry="36" transform="rotate(-16 84 146)"/>
+<g class="t" stroke-width="2.5"><circle cx="64" cy="138" r="7"/><circle cx="92" cy="128" r="7"/><circle cx="104" cy="152" r="6"/><circle cx="72" cy="164" r="6"/></g>
+<path class="n" stroke="#1b1a1a" stroke-width="24" stroke-linecap="round" d="M42 156Q52 192 30 218"/><path class="n" stroke="#d4cec3" stroke-width="16" stroke-linecap="round" d="M42 156Q52 192 30 218"/>
+<ellipse class="o p" cx="26" cy="226" rx="15" ry="8"/>
+<path class="t" stroke-width="2.5" d="M18 226L18 232M26 226L26 233M34 226L34 232"/>
+<path class="n" stroke="#1b1a1a" stroke-width="22" stroke-linecap="round" d="M116 154Q152 184 196 178"/><path class="n" stroke="#d4cec3" stroke-width="14" stroke-linecap="round" d="M116 154Q152 184 196 178"/>
+<path class="o p" d="M192 168Q214 170 220 182Q212 194 192 190Z"/>
+<path class="i" d="M216 176L234 184L216 186ZM214 188L228 198L210 192Z"/>
+<circle class="o l" cx="126" cy="38" r="15"/><circle class="d" cx="127" cy="40" r="7"/>
+<ellipse class="o l" cx="118" cy="124" rx="34" ry="30"/><path class="t" stroke-width="2.5" d="M92 112L104 118M90 130L102 132M96 146L108 142"/>
+<path class="i" d="M150 98L242 94L240 130L148 128Z"/>
+<path class="o v" d="M166 126Q196 112 230 124Q216 140 186 140Z"/>
+<path class="o l" d="M146 126Q184 118 214 124L240 132Q232 152 198 154Q156 154 142 140Z"/>
+<path class="o p" d="M208 124L214 108L222 126ZM180 122L184 110L192 122Z"/>
+<path class="o l" d="M112 96Q112 40 168 38Q216 40 242 84Q246 96 238 98L226 94L222 112L210 96L190 96Q160 106 144 98Q120 98 112 96Z"/>
+<path class="o p" d="M228 92L226 116L240 94ZM200 96L204 114L214 96Z"/>
+<path class="i" d="M230 78L246 86L242 96L232 94Z"/>
+<path class="o i" d="M156 60L200 70L194 84Q168 88 156 60Z"/><path class="v" d="M170 70L190 74L186 80Q176 80 170 70Z"/>
+<path class="t" stroke-width="5" d="M150 52L204 66"/>
+<g class="t" stroke-width="2.5"><circle cx="130" cy="72" r="6"/><circle cx="148" cy="86" r="5"/><circle cx="214" cy="68" r="4"/></g>
+<path class="i" d="M118 100L98 92L110 106L94 110L112 118Z"/>
+
+</svg>

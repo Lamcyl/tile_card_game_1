@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.t{fill:none;stroke:#1b1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
+<ellipse cx="128" cy="240" rx="100" ry="7" fill="#d4cec3"/>
+<!-- tail -->
+<path class="o m" d="M76 196C40 206 10 190 8 150C22 172 44 174 74 160Z"/>
+<!-- back legs -->
+<path class="o m" d="M64 206Q60 230 66 234L98 234Q102 230 96 206Z"/>
+<!-- body -->
+<path class="o m" d="M52 178C52 140 192 134 196 182C196 214 150 220 124 220C86 220 52 210 52 178Z"/>
+<path class="o l" d="M70 196C90 210 150 212 182 196C176 214 150 218 124 218C98 218 76 212 70 196Z"/>
+<path class="t" stroke="#55514c" stroke-width="2.500" d="M70 160L78 152L86 160L94 150L102 158"/>
+<!-- mountain on back -->
+<path class="o m" d="M44 152L86 88L102 98L134 22L160 76L178 66L206 152Z"/>
+<path class="o d" d="M134 22L160 76L178 66L206 152L150 152L148 96Z"/>
+<path class="o p" d="M134 22L116 62L126 58L134 72L146 56L152 62L160 76L146 56Z" fill="#f6f2e9"/>
+<path class="t" stroke-width="2.500" d="M88 94L82 128L96 152M124 80L120 118"/>
+<!-- tree -->
+<path class="o l" d="M64 124L72 100L80 124Z"/><path class="o i" d="M70 124L74 124L74 134L70 134Z"/>
+<!-- front legs -->
+<path class="o l" d="M128 204Q124 230 130 234L162 234Q166 230 160 204Z"/>
+<path class="o p" stroke-width="3" d="M70 234L70 240M80 234L80 240M90 234L90 240M134 234L134 240M144 234L144 240M154 234L154 240"/>
+<!-- head -->
+<path class="o l" d="M148 150C160 124 214 124 232 138C248 142 252 160 248 172C244 188 208 196 180 192C154 190 140 170 148 150Z"/>
+<path class="o p" d="M156 176C176 190 222 190 244 174C248 184 214 200 180 196C162 194 154 186 156 176Z"/>
+<path class="t" d="M190 168Q222 176 246 164"/>
+<path class="o p" stroke-width="2" d="M200 170L203 177L206 171M216 172L219 179L222 172M232 170L235 176L238 169"/>
+<circle class="o i" cx="238" cy="148" r="2.500"/><circle class="i" cx="226" cy="146" r="2.500"/>
+<ellipse class="v" cx="172" cy="172" rx="9" ry="5.500" opacity=".7"/>
+<!-- eye -->
+<circle class="o l" cx="176" cy="132" r="17"/><ellipse class="o i" cx="178" cy="134" rx="10" ry="12"/><circle class="p" cx="181" cy="129" r="4"/><circle class="p" cx="175" cy="139" r="1.800"/>
+<path class="t" d="M160 120Q176 112 192 122"/>
+</svg>

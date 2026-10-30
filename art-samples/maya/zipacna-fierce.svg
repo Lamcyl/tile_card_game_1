@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.t{fill:none;stroke:#1b1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- upright roaring croc giant, 3/4, head thrust forward-left, mountain on shoulders behind -->
+<!-- mountain -->
+<path class="o m" d="M96 150L112 96L134 108L168 12L196 74L218 56L252 150Z"/>
+<path class="o d" d="M168 12L196 74L218 56L252 150L190 150L186 90Z"/>
+<path class="o p" d="M168 12L148 56L160 50L168 66L182 48L190 56L196 74L182 48Z"/>
+<path class="t" stroke-width="2.500" d="M120 108L132 128L124 150M186 90L200 112L194 128L204 150"/>
+<path class="o v" stroke-width="3" d="M214 150L212 124L224 108" opacity="0"/>
+<!-- tail raised behind -->
+<path class="o m" d="M184 214C220 224 250 206 250 166C238 186 220 188 196 180Z"/>
+<!-- legs -->
+<path class="o d" d="M100 196L90 236L130 236L136 200Z"/><path class="o d" d="M154 196L156 236L194 236L190 192Z"/>
+<path class="o l" stroke-width="3" d="M90 236L82 244M104 236L100 246M118 236L118 246M156 236L156 246M170 236L172 246M184 236L190 244" opacity="0"/>
+<path class="o p" stroke-width="3" d="M90 236L84 244L96 240L102 246L112 240L120 246L128 238ZM156 238L156 246L168 240L174 246L182 240L190 246L194 236Z"/>
+<!-- torso -->
+<path class="o m" d="M96 120C90 156 96 200 128 208C170 214 202 196 200 150C198 116 150 100 96 120Z"/>
+<path class="o l" d="M104 134C100 164 108 192 128 198C150 200 160 184 158 150Z"/>
+<path class="t" stroke="#55514c" stroke-width="2.500" d="M108 150L148 146M108 166L152 162M112 182L150 178"/>
+<!-- osteoderm spikes on back -->
+<path class="o d" d="M198 134L214 126L204 148ZM202 160L220 156L204 176Z"/>
+<!-- arm raised bracing -->
+<path class="o m" d="M170 124C200 108 214 112 222 138C212 142 204 142 196 146Z"/>
+<path class="o p" stroke-width="3" d="M222 138L232 134L228 144L236 146L224 152Z"/>
+<!-- head: big, jaws gaping, facing left -->
+<path class="o m" d="M120 62C120 40 160 36 176 60C184 84 170 112 150 112L126 108Z"/>
+<!-- upper jaw -->
+<path class="o m" d="M150 56C120 42 70 52 12 84C8 94 16 100 24 100L130 108Q158 100 160 76Z"/>
+<!-- mouth interior -->
+<path class="o v" d="M24 100L130 108L156 120L40 136Z"/>
+<!-- lower jaw -->
+<path class="o l" d="M40 134L156 118Q166 140 146 154Q86 164 34 148Q30 138 40 134Z"/>
+<!-- teeth -->
+<path class="o p" stroke-width="2.500" d="M34 100L40 116L48 102M58 102L64 120L72 104M84 104L90 122L98 105M110 106L115 120L122 107M44 134L50 122L58 134M70 136L78 124L84 136M96 134L102 124L108 133"/>
+<!-- eye and brow -->
+<path class="o i" d="M104 56L142 56L148 74Q122 80 104 66Z"/><circle class="v" cx="128" cy="66" r="4.500"/>
+<circle class="i" cx="22" cy="86" r="3"/>
+<path class="o d" d="M86 66L96 54L104 68ZM62 66L70 56L78 70Z"/>
+<path class="t" stroke-width="2.500" d="M44 82Q64 76 86 78"/>
+</svg>

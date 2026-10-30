@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute kinich ahau: sun-flower head perched on a tiny pyramid, cheering -->
+<path class="o g" d="M120.0 54.6 L128.0 -2.0 L136.0 54.6Z" style="stroke-width:3"/>
+<path class="o g" d="M139.5 55.3 L160.1 26.4 L154.2 61.4Z" style="stroke-width:3"/>
+<path class="o g" d="M157.3 63.5 L203.0 29.0 L168.5 74.7Z" style="stroke-width:3"/>
+<path class="o g" d="M170.6 77.8 L205.6 71.9 L176.7 92.5Z" style="stroke-width:3"/>
+<path class="o g" d="M177.4 96.0 L234.0 104.0 L177.4 112.0Z" style="stroke-width:3"/>
+<path class="o g" d="M176.7 115.5 L205.6 136.1 L170.6 130.2Z" style="stroke-width:3"/>
+<path class="o g" d="M168.5 133.3 L203.0 179.0 L157.3 144.5Z" style="stroke-width:3"/>
+<path class="o g" d="M154.2 146.6 L160.1 181.6 L139.5 152.7Z" style="stroke-width:3"/>
+<path class="o g" d="M136.0 153.4 L128.0 210.0 L120.0 153.4Z" style="stroke-width:3"/>
+<path class="o g" d="M116.5 152.7 L95.9 181.6 L101.8 146.6Z" style="stroke-width:3"/>
+<path class="o g" d="M98.7 144.5 L53.0 179.0 L87.5 133.3Z" style="stroke-width:3"/>
+<path class="o g" d="M85.4 130.2 L50.4 136.1 L79.3 115.5Z" style="stroke-width:3"/>
+<path class="o g" d="M78.6 112.0 L22.0 104.0 L78.6 96.0Z" style="stroke-width:3"/>
+<path class="o g" d="M79.3 92.5 L50.4 71.9 L85.4 77.8Z" style="stroke-width:3"/>
+<path class="o g" d="M87.5 74.7 L53.0 29.0 L98.7 63.5Z" style="stroke-width:3"/>
+<path class="o g" d="M101.8 61.4 L95.9 26.4 L116.5 55.3Z" style="stroke-width:3"/>
+<!-- stepped pyramid -->
+<path class="o l" d="M40 252 L40 230 L66 230 L66 214 L190 214 L190 230 L216 230 L216 252Z"/>
+<path class="t" d="M66 230 L190 230 M52 241 L204 241" style="stroke:#9a948b"/>
+<g class="m"><rect x="118" y="218" width="20" height="10"/></g>
+<!-- body -->
+<path class="o p" d="M104 160 Q80 166 62 150 L70 134 Q86 146 110 146Z"/>
+<path class="o p" d="M152 160 Q176 166 194 150 L186 134 Q170 146 146 146Z"/>
+<circle class="o p" cx="64" cy="140" r="10"/><circle class="o p" cx="192" cy="140" r="10"/>
+<path class="o p" d="M104 148 L152 148 L158 192 L98 192Z"/>
+<path class="o g" d="M98 186 L158 186 L164 214 L92 214Z"/>
+<path class="t" d="M104 196 L112 204 L120 196 L128 204 L136 196 L144 204 L152 196" style="stroke-width:2.5"/>
+<ellipse class="o p" cx="110" cy="214" rx="14" ry="7"/><ellipse class="o p" cx="146" cy="214" rx="14" ry="7"/>
+<!-- head -->
+<circle class="o p" cx="128" cy="104" r="52"/>
+<g class="o l"><circle cx="76" cy="112" r="11"/><circle cx="180" cy="112" r="11"/></g><g class="i"><circle cx="76" cy="112" r="3.5"/><circle cx="180" cy="112" r="3.5"/></g>
+<path class="o i" d="M102 58 Q128 40 154 58 Q140 52 128 58 Q116 52 102 58Z"/>
+<!-- square eyes -->
+<rect class="o p" x="86" y="88" width="26" height="26" rx="4"/><rect class="o p" x="144" y="88" width="26" height="26" rx="4"/>
+<rect class="i" x="100" y="96" width="10" height="12"/><rect class="i" x="146" y="96" width="10" height="12"/>
+<rect class="p" x="103" y="98" width="3.5" height="3.5"/><rect class="p" x="149" y="98" width="3.5" height="3.5"/>
+<path class="t" d="M84 82 L112 80 M172 82 L144 80" style="stroke-width:3.5"/>
+<!-- nose -->
+<path class="o p" d="M120 114 Q116 128 124 130 Q128 132 132 130 Q140 128 136 114 Q128 108 120 114Z"/><path class="t" d="M122 126 L124 128 M134 126 L132 128" style="stroke-width:2.5"/>
+<g class="m" opacity=".7"><ellipse cx="86" cy="128" rx="9" ry="5"/><ellipse cx="170" cy="128" rx="9" ry="5"/></g>
+<!-- grin w/ filed T teeth -->
+<path class="o p" d="M94 138 Q128 170 162 138 Q128 148 94 138Z"/>
+<path class="o p" d="M118 145 L138 145 L138 150 L134 150 L134 157 L122 157 L122 150 L118 150Z" style="stroke-width:2.5"/>
+<path class="t" d="M94 138 Q128 148 162 138" style="stroke-width:3"/>
+</svg>

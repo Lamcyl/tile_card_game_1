@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce xtabay: ceiba tree-spirit rising on buttress roots, thorn cones, hair as black branches, clawed branch arms, red glow in hollow eyes -->
+
+<path class="n" stroke="#1b1a1a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" d="M128 40L128 8M112 44Q92 22 60 18M144 44Q164 22 196 18M104 56Q70 50 44 62M152 56Q186 50 212 62"/>
+<path class="n" stroke="#55514c" stroke-width="5" stroke-linecap="round" d="M128 40L128 10M112 44Q92 24 62 20M144 44Q164 24 194 20"/>
+<path class="o i" d="M92 56Q36 70 44 140Q50 196 24 240Q70 224 82 176Q94 126 100 96Z"/>
+<path class="o i" d="M164 56Q220 70 212 140Q206 196 232 240Q186 224 174 176Q162 126 156 96Z"/>
+<path class="t" stroke="#55514c" stroke-width="2.5" d="M62 90Q56 150 46 206M194 90Q200 150 210 206M80 110Q74 160 66 200M176 110Q182 160 190 200"/>
+<path class="o m" d="M26 250Q76 236 96 192L102 134L156 134L160 192Q180 236 230 250Z"/>
+<path class="t" stroke="#55514c" stroke-width="2.5" d="M70 246Q96 230 110 196M186 246Q160 230 146 196M128 150L128 220"/>
+<g class="o l" stroke-width="3"><path d="M106 168L94 160L108 154Z"/><path d="M150 174L162 168L150 162Z"/><path d="M112 196L100 194L110 186Z"/><path d="M146 200L158 198L148 190Z"/><path d="M128 178L120 170L136 170Z"/><path d="M118 150L110 140L126 142Z"/><path d="M142 150L148 140L134 142Z"/></g>
+<path class="n" stroke="#1b1a1a" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" d="M100 150Q60 150 40 118"/><path class="n" stroke="#9a948b" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" d="M100 150Q60 150 40 118"/>
+<path class="n" stroke="#1b1a1a" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" d="M156 150Q196 150 216 118"/><path class="n" stroke="#9a948b" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" d="M156 150Q196 150 216 118"/>
+<path class="o i" d="M40 120L28 94L40 98L42 84L50 100L54 112ZM216 120L228 94L216 98L214 84L206 100L202 112Z" transform="translate(0 0)"/>
+<path class="o p" d="M112 124L144 124L142 140L114 140Z"/>
+<ellipse class="o p" cx="128" cy="90" rx="30" ry="40"/>
+<path class="i" d="M98 76Q104 50 128 48Q152 50 158 76Q142 66 128 76Q114 66 98 76Z"/>
+<path class="i" d="M106 84L124 92L122 106Q110 104 106 84ZM150 84L132 92L134 106Q146 104 150 84Z"/>
+<path class="v" d="M112 92L120 96L119 101Q113 99 112 92ZM144 92L136 96L137 101Q143 99 144 92Z"/>
+<path class="t" stroke-width="2.5" d="M104 112Q108 124 120 128M152 112Q148 124 136 128"/>
+<path class="o i" d="M118 108L128 104L138 108L136 124Q128 132 120 124Z"/>
+<path class="v" d="M123 118Q128 122 133 118Q128 126 123 118Z"/>
+
+</svg>

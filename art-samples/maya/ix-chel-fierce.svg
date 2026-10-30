@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce ix chel: crescent-moon throne, rearing serpent crown, taut red threads in clawed hands -->
+<path class="o p" d="M6 22 Q2 150 128 170 Q254 150 250 22 Q226 112 128 118 Q30 112 6 22Z"/>
+<g class="l"><circle cx="36" cy="92" r="7"/><circle cx="220" cy="92" r="7"/><circle cx="66" cy="132" r="6"/><circle cx="190" cy="132" r="6"/></g>
+<!-- serpent -->
+<path class="n" stroke="#1b1a1a" stroke-width="24" stroke-linecap="round" d="M128 92 C90 70 90 40 128 38 C160 36 150 14 136 14"/>
+<path class="n" stroke="#9a948b" stroke-width="16" stroke-linecap="round" d="M128 92 C90 70 90 40 128 38 C160 36 150 14 136 14"/>
+<path class="t" d="M106 62 L114 58 M104 78 L114 76 M118 44 L122 52 M138 36 L136 44" style="stroke-width:3;stroke:#55514c"/>
+<path class="o m" d="M120 20 Q126 0 150 4 Q172 10 176 26 Q158 30 150 28 Q132 32 120 20Z"/>
+<path class="o p" d="M150 28 L176 26 L170 36 L150 33Z"/>
+<circle class="i" cx="140" cy="14" r="3.5"/><path class="t" d="M176 30 L196 38 L204 32 M196 38 L204 44" style="stroke-width:3;stroke:#c8352b"/>
+<!-- hair -->
+<path class="o i" d="M72 116 Q70 62 128 58 Q186 62 184 116 L190 176 Q176 168 170 148 L86 148 Q80 168 66 176Z"/>
+<path class="t" d="M80 96 L76 140 M176 96 L180 140 M96 70 L88 100" style="stroke-width:3;stroke:#9a948b"/>
+<!-- raised arms -->
+<path class="o d" d="M84 190 Q50 200 42 170 L26 168 L30 196 Q44 232 90 224Z"/>
+<path class="o d" d="M172 190 Q206 200 214 170 L230 168 L226 196 Q212 232 166 224Z"/>
+<!-- torso -->
+<path class="o d" d="M54 256 L62 214 Q76 184 108 172 L148 172 Q180 184 194 214 L202 256Z"/>
+<path class="o v" d="M108 172 L128 196 L148 172Z"/>
+<path class="t" d="M70 232 L80 222 L90 232 M166 232 L176 222 L186 232" style="stroke-width:3;stroke:#f6f2e9"/>
+<!-- face -->
+<path class="o p" d="M84 108 Q86 82 128 82 Q170 82 172 108 Q174 142 128 172 Q82 142 84 108Z"/>
+<path class="o v" d="M98 90 Q128 78 158 90 L158 97 Q128 87 98 97Z"/>
+<path class="i" d="M88 114 L118 122 L114 132 Q98 132 88 122Z"/><path class="i" d="M168 114 L138 122 L142 132 Q158 132 168 122Z"/>
+<path class="t" d="M98 122 L108 125 M158 122 L148 125" style="stroke-width:3;stroke:#f6f2e9"/>
+<path class="t" d="M92 140 Q100 148 108 146 M164 140 Q156 148 148 146 M123 102 L121 128 L128 132 L135 128 L133 102" style="stroke-width:2.5;stroke:#55514c"/>
+<path class="o i" d="M108 152 Q128 144 148 152 Q128 166 108 152Z"/><path class="p" d="M114 152 L118 158 L122 152 M134 152 L138 158 L142 152" stroke="#1b1a1a" stroke-width="2"/>
+<!-- thread -->
+<path class="t" d="M36 176 L220 176 M36 176 L128 214 L220 176" style="stroke-width:3.5;stroke:#c8352b"/>
+<!-- claws + hands -->
+<g class="o p"><circle cx="34" cy="178" r="15"/><circle cx="222" cy="178" r="15"/></g>
+<g class="o l" style="stroke-width:3" ><path d="M24 168 L16 150 L30 160 L32 144 L38 160 L48 150 L44 168Z"/><path d="M232 168 L240 150 L226 160 L224 144 L218 160 L208 150 L212 168Z"/></g>
+</svg>

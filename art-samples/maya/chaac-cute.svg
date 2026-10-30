@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute chaac: little rain god with a big curled nose, stone axe sparking gold, riding a raincloud -->
+<!-- drops -->
+<g class="g" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"><path d="M200 40Q210 56 200 62Q190 56 200 40Z"/><path d="M228 74Q236 86 228 92Q220 86 228 74Z"/><path d="M170 28Q178 40 170 46Q162 40 170 28Z"/><path d="M20 58Q28 70 20 76Q12 70 20 58Z"/></g>
+<!-- cloud -->
+<path class="o l" d="M30 232Q16 214 40 208Q42 190 66 196Q82 180 102 196Q122 184 140 198Q164 188 176 208Q204 206 206 224Q208 236 190 238H44Q34 238 30 232Z"/>
+<path class="t" d="M60 226H84M108 224H150M164 226H184" style="stroke-width:3;stroke:#9a948b"/>
+<!-- axe -->
+<path class="o" style="stroke:#1b1a1a;stroke-width:11;stroke-linecap:round" d="M52 208L52 84" fill="none"/><path class="n" style="stroke:#9a948b;stroke-width:5;stroke-linecap:round" d="M52 208L52 84"/>
+<path class="o m" d="M52 62L24 70Q16 92 28 108L52 100Z"/><path class="o p" d="M52 62L52 100L66 92L66 70Z"/>
+<path class="o g" d="M30 46L44 14L38 36L56 30L34 66L40 46Z" opacity="0" style="stroke-width:3"/>
+<path class="o g" d="M70 56L82 30L78 46L96 38L72 82L76 62Z" transform="translate(-6 -10)" style="stroke-width:3"/>
+<!-- body -->
+<path class="o l" d="M82 164Q76 210 108 214Q140 210 134 164Z"/>
+<path class="o p" d="M82 192L134 192L130 212L86 212Z"/><path class="o g" d="M82 180Q108 190 134 180L134 192Q108 202 82 192Z"/>
+<ellipse class="o l" cx="92" cy="218" rx="13" ry="7"/><ellipse class="o l" cx="126" cy="218" rx="13" ry="7"/>
+<path class="n" stroke="#1b1a1a" style="stroke-width:16;stroke-linecap:round" d="M86 170Q66 170 56 150"/><path class="n" style="stroke:#d4cec3;stroke-width:9;stroke-linecap:round" d="M86 170Q66 170 56 150"/>
+<path class="n" stroke="#1b1a1a" style="stroke-width:16;stroke-linecap:round" d="M132 170Q148 176 146 190"/><path class="n" style="stroke:#d4cec3;stroke-width:9;stroke-linecap:round" d="M132 170Q148 176 146 190"/>
+<!-- head -->
+<path class="o i" d="M70 92Q66 46 118 46Q166 46 168 92Q150 70 118 70Q88 70 70 92Z"/>
+<path class="o g" d="M76 70Q118 40 162 70L160 80Q118 56 78 82Z" style="stroke-width:3"/>
+<path class="o l" d="M132 106Q206 100 210 138Q208 160 186 152Q196 144 192 132Q188 122 132 128Z"/>
+<circle class="i" cx="198" cy="136" r="3"/>
+<ellipse class="o l" cx="118" cy="108" rx="50" ry="42"/>
+<circle class="o g" cx="72" cy="112" r="8" style="stroke-width:3"/>
+<circle class="o p" cx="134" cy="96" r="14" style="stroke-width:3"/><circle class="i" cx="138" cy="98" r="7"/><circle class="p" cx="140" cy="95" r="2.4"/>
+<path class="t" d="M120 84Q134 76 150 84" style="stroke-width:3"/>
+<path class="t" d="M118 108Q112 124 126 122" style="stroke-width:3"/>
+<path class="t" d="M126 140Q144 152 164 134"/><path class="o p" d="M140 146L144 158L150 148Z" style="stroke-width:2.5"/>
+<ellipse class="v" cx="106" cy="126" rx="9" ry="5" opacity=".6"/>
+<path class="t" d="M92 86Q100 80 108 86" style="stroke-width:2.5;stroke:#9a948b"/>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute alux: tiny sprite perched on stepped stone, huge straw hat, hugging a gold maize cob -->
+
+<path class="o l" d="M66 240L66 222L190 222L190 240Z"/><path class="o l" d="M86 222L86 204L170 204L170 222Z"/>
+<path class="t" stroke-width="2.5" d="M100 232L156 232"/>
+<path class="o p" d="M96 202Q96 164 128 158Q160 164 160 202Z"/>
+<path class="t" stroke="#c9a23a" stroke-width="5" d="M99 194L108 188L118 194L128 188L138 194L148 188L157 194"/>
+<path class="o p" d="M102 204L102 220L122 220L122 204ZM134 204L134 220L154 220L154 204Z"/><ellipse class="o l" cx="110" cy="222" rx="13" ry="6"/><ellipse class="o l" cx="146" cy="222" rx="13" ry="6"/>
+<path class="o l" d="M64 106L40 90L48 118Q52 128 64 128Z"/><path class="o l" d="M192 106L216 90L208 118Q204 128 192 128Z"/>
+<ellipse class="o p" cx="128" cy="116" rx="46" ry="42"/>
+<path class="o l" d="M44 78Q128 108 212 78Q212 66 186 62L70 62Q44 66 44 78Z"/>
+<path class="o l" d="M80 66Q82 22 128 20Q174 22 176 66Z"/>
+<path class="o g" d="M78 64Q128 78 178 64L176 52Q128 66 80 52Z"/>
+<path class="t" stroke-width="2" stroke="#9a948b" d="M62 74Q128 96 194 74M100 40L102 60M128 32L128 62M156 40L154 60"/>
+<ellipse class="i" cx="108" cy="112" rx="8" ry="10"/><ellipse class="i" cx="148" cy="112" rx="8" ry="10"/>
+<circle class="p" cx="111" cy="108" r="3"/><circle class="p" cx="151" cy="108" r="3"/>
+<ellipse class="m" cx="90" cy="130" rx="8" ry="5" opacity=".7"/><ellipse class="m" cx="166" cy="130" rx="8" ry="5" opacity=".7"/>
+<path class="t" stroke-width="3" d="M126 120L130 126L124 127"/>
+<path class="o i" d="M112 134Q128 150 144 134Q128 138 112 134Z"/><path class="p" d="M122 138L126 144L130 138Z"/>
+<ellipse class="o g" cx="128" cy="180" rx="11" ry="23"/>
+<path class="t" stroke-width="2" d="M122 166L134 166M121 176L135 176M121 186L135 186M123 196L133 196"/>
+<path class="o l" d="M112 184Q116 204 128 204Q140 204 144 184Q128 192 112 184Z"/>
+<ellipse class="o p" cx="108" cy="176" rx="9" ry="8"/><ellipse class="o p" cx="148" cy="176" rx="9" ry="8"/>
+
+</svg>

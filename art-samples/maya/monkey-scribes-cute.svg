@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute monkey scribes: Hun Batz painting, Hun Chuen on a stone step reading a codex -->
+<!-- stone step -->
+<path class="o l" d="M134 236V214H162V198H244V236Z"/><path class="t" d="M146 226H234M176 208H232" style="stroke-width:2.5;stroke:#9a948b"/>
+<!-- Chuen tail -->
+<path class="o n" style="stroke-width:14" d="M226 190Q256 170 244 140Q238 126 224 132"/><path class="n" style="stroke:#55514c;stroke-width:6;stroke-linecap:round" d="M226 190Q256 170 244 140Q238 126 224 132"/>
+<!-- Chuen body -->
+<path class="o d" d="M160 198Q152 150 196 144Q240 150 232 198Z"/>
+<ellipse class="m" cx="196" cy="176" rx="20" ry="22"/>
+<!-- codex -->
+<path class="o p" d="M164 164L196 172L228 164L228 198L196 206L164 198Z"/><path class="t" d="M196 172V206" style="stroke-width:2.5"/>
+<g class="g"><rect x="172" y="174" width="8" height="8" rx="2"/><rect x="184" y="180" width="6" height="6" rx="2"/><rect x="204" y="180" width="8" height="8" rx="2"/><rect x="216" y="174" width="6" height="6" rx="2"/></g>
+<path class="t" d="M172 190H186M206 192H220" style="stroke-width:2.5;stroke:#55514c"/>
+<ellipse class="o d" cx="162" cy="190" rx="9" ry="7"/><ellipse class="o d" cx="230" cy="190" rx="9" ry="7"/>
+<!-- Chuen head -->
+<ellipse class="o d" cx="196" cy="108" rx="40" ry="38"/>
+<circle class="o d" cx="156" cy="108" r="11"/><circle class="o d" cx="236" cy="108" r="11"/>
+<ellipse class="p" cx="196" cy="116" rx="26" ry="22"/>
+<path class="o i" d="M172 142Q196 172 220 142Q196 128 172 142Z" opacity="0"/>
+<path class="o g" d="M158 88Q196 66 234 88L232 98Q196 80 160 98Z"/>
+<circle class="i" cx="184" cy="110" r="5"/><circle class="i" cx="208" cy="110" r="5"/><circle class="p" cx="182" cy="108" r="2"/><circle class="p" cx="206" cy="108" r="2"/>
+<path class="o i" d="M190 122Q196 118 202 122Q200 128 196 128Q192 128 190 122Z" style="stroke-width:2" />
+<path class="t" d="M186 132Q196 138 206 132"/>
+<path class="o d" d="M174 134Q196 168 218 134Q196 146 174 134Z" style="stroke-width:3"/>
+<!-- Batz tail -->
+<path class="o n" style="stroke-width:14" d="M44 204Q6 214 12 170Q16 148 36 152"/><path class="n" style="stroke:#55514c;stroke-width:6;stroke-linecap:round" d="M44 204Q6 214 12 170Q16 148 36 152"/>
+<!-- Batz body -->
+<path class="o d" d="M42 236Q36 184 84 178Q132 184 126 236Z"/>
+<ellipse class="m" cx="84" cy="210" rx="24" ry="24"/>
+<ellipse class="o d" cx="62" cy="234" rx="14" ry="7"/><ellipse class="o d" cx="108" cy="234" rx="14" ry="7"/>
+<!-- brush arm & brush -->
+<path class="n" stroke="#1b1a1a" style="stroke-width:16;stroke-linecap:round" d="M112 196Q132 180 138 150"/><path class="n" style="stroke:#55514c;stroke-width:9;stroke-linecap:round" d="M112 196Q132 180 138 150"/>
+<path class="o p" d="M134 150L152 70" style="stroke-width:3;stroke-width:3"/>
+<path class="n" style="stroke:#1b1a1a;stroke-width:7;stroke-linecap:round" d="M138 146L150 78"/><path class="n" style="stroke:#d4cec3;stroke-width:3;stroke-linecap:round" d="M138 146L150 78"/>
+<path class="o g" d="M149 82Q140 62 156 42Q166 62 154 82Z" style="stroke-width:3"/>
+<path class="o n" d="M168 36Q182 28 190 40Q182 46 176 40" style="stroke-width:3" /><circle class="g" cx="196" cy="54" r="3"/>
+<!-- Batz head -->
+<ellipse class="o d" cx="80" cy="130" rx="42" ry="40"/>
+<circle class="o d" cx="38" cy="130" r="11"/><circle class="o d" cx="122" cy="130" r="11"/>
+<ellipse class="p" cx="80" cy="138" rx="27" ry="23"/>
+<path class="o g" d="M40 108Q80 86 120 108L118 118Q80 100 42 118Z"/>
+<path class="i" d="M62 134Q68 126 74 134Q68 140 62 134ZM86 134Q92 126 98 134Q92 140 86 134Z" opacity="0"/>
+<ellipse class="i" cx="66" cy="132" rx="6" ry="6.5"/><ellipse class="i" cx="94" cy="132" rx="6" ry="6.5"/><circle class="p" cx="64" cy="129" r="2.2"/><circle class="p" cx="92" cy="129" r="2.2"/>
+<path class="o i" d="M74 144Q80 139 86 144Q84 150 80 150Q76 150 74 144Z" style="stroke-width:2" />
+<path class="t" d="M68 156Q80 164 92 156"/>
+<path class="o d" d="M56 160Q80 196 104 160Q80 172 56 160Z" style="stroke-width:3"/>
+<path class="v" opacity="0"/>
+</svg>

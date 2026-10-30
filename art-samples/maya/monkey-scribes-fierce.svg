@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce monkey scribes: Hun Batz howls on high, Hun Chuen crouches with brush-spear and codex shield -->
+<!-- paint arc -->
+<path class="n" style="stroke:#c8352b;stroke-width:9;stroke-linecap:round" d="M18 64Q50 20 108 30"/>
+<path class="n" style="stroke:#c8352b;stroke-width:5;stroke-linecap:round" d="M22 82Q40 56 70 48"/>
+<!-- Batz tail -->
+<path class="o n" style="stroke-width:14" d="M214 214Q256 200 244 150Q240 130 222 136"/><path class="n" style="stroke:#55514c;stroke-width:6;stroke-linecap:round" d="M214 214Q256 200 244 150Q240 130 222 136"/>
+<!-- Batz body -->
+<path class="o d" d="M120 236L128 176Q150 150 184 156Q222 166 232 236Z"/>
+<path class="t" d="M150 188L156 200M176 180L180 194M204 190L206 206" style="stroke-width:3;stroke:#9a948b"/>
+<path class="n" stroke="#1b1a1a" style="stroke-width:18;stroke-linecap:round;stroke-linejoin:round" d="M214 176Q244 150 232 100"/><path class="n" style="stroke:#55514c;stroke-width:10;stroke-linecap:round;stroke-linejoin:round" d="M214 176Q244 150 232 100"/>
+<path class="o p" d="M232 108L212 42" style="stroke-width:3;stroke-width:3"/>
+<path class="n" style="stroke:#1b1a1a;stroke-width:8;stroke-linecap:round" d="M232 104L216 52"/><path class="n" style="stroke:#d4cec3;stroke-width:3.5;stroke-linecap:round" d="M232 104L216 52"/>
+<path class="o v" d="M213 54L204 30L224 38Z" style="stroke-width:3"/>
+<!-- Batz head, howling -->
+<path class="o d" d="M126 84L110 52L140 62L152 36L172 58L200 40L204 70L224 74L210 104Q206 130 180 140Q150 142 134 120Z"/>
+<path class="o d" d="M140 62L128 56ZM204 70L196 54Z" opacity="0"/>
+<path class="p" d="M142 92Q146 76 172 76Q198 76 198 98Q196 112 170 114Q146 112 142 92Z"/>
+<path class="o i" d="M146 108Q170 96 196 106Q198 140 172 152Q148 146 146 108Z"/>
+<path class="v" d="M154 114Q172 106 192 114Q190 134 172 142Q156 136 154 114Z"/>
+<path class="p" d="M148 108L154 122L160 108ZM180 106L186 120L192 108Z"/>
+<path class="o i" d="M150 90L172 96L168 84Z" opacity="0" style="stroke-width:3"/>
+<path class="i" d="M148 82L166 92L146 96ZM198 82L180 92L200 96Z"/>
+<path class="v" d="M154 90L164 92L158 95ZM186 92L194 90L190 95Z"/>
+<path class="o d" d="M150 144Q172 190 194 144Q172 158 150 144Z" style="stroke-width:3"/>
+<path class="t" d="M132 74L140 80M216 84L208 90" style="stroke-width:3;stroke:#9a948b"/>
+<!-- Chuen tail -->
+<path class="o n" style="stroke-width:14" d="M24 224Q-4 206 22 178"/><path class="n" style="stroke:#55514c;stroke-width:6;stroke-linecap:round" d="M24 224Q-4 206 22 178"/>
+<!-- Chuen body -->
+<path class="o d" d="M22 236L28 196Q54 172 86 186Q112 204 108 236Z"/>
+<!-- codex shield -->
+<path class="o p" d="M16 150L64 138L64 202L16 214Z"/><path class="o p" d="M64 138L100 148L100 206L64 202Z"/>
+<path class="t" d="M64 138V202" style="stroke-width:2.5"/>
+<g class="v"><rect x="26" y="160" width="10" height="10" rx="2"/><rect x="42" y="172" width="8" height="8" rx="2"/><rect x="74" y="160" width="10" height="10" rx="2"/></g>
+<path class="t" d="M26 186H48M74 178H90M76 190H92" style="stroke-width:3;stroke:#55514c"/>
+<!-- brush-spear arm -->
+<path class="n" stroke="#1b1a1a" style="stroke-width:16;stroke-linecap:round" d="M100 198Q118 176 124 160"/><path class="n" style="stroke:#55514c;stroke-width:8;stroke-linecap:round" d="M100 198Q118 176 124 160"/>
+<path class="n" style="stroke:#1b1a1a;stroke-width:7;stroke-linecap:round" d="M96 214L132 150"/><path class="n" style="stroke:#d4cec3;stroke-width:3;stroke-linecap:round" d="M96 214L132 150"/>
+<path class="o v" d="M128 154L136 112L146 150Z" style="stroke-width:3"/>
+<!-- Chuen head -->
+<path class="o d" d="M42 138L34 106L58 116L66 88L84 112L106 100L100 130Q104 156 74 164Q48 160 42 138Z"/>
+<path class="p" d="M52 128Q56 118 74 120Q92 122 92 134Q88 148 72 148Q54 146 52 128Z"/>
+<path class="i" d="M52 122L70 130L50 134ZM94 126L78 132L94 138Z"/><path class="v" d="M58 126L66 129L58 131ZM88 129L82 131L88 134Z"/>
+<path class="i" d="M60 144Q74 136 88 144Q74 154 60 144Z"/><path class="p" d="M64 144L67 148L70 143ZM76 143L79 148L82 144Z"/>
+<path class="o d" d="M56 158Q74 188 92 158Q74 168 56 158Z" style="stroke-width:3"/>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce chaac: storm-bringer in a lunging profile, lightning axe raised, long curled snout -->
+<!-- rain -->
+<g class="n" style="stroke:#9a948b;stroke-width:3;stroke-linecap:round"><path d="M16 14L10 38M44 6L36 32M120 6L114 28M236 20L230 44M244 70L240 88"/></g>
+<!-- lightning -->
+<path class="o v" d="M244 4L218 26L234 30L206 54L248 34L232 32L252 14Z" transform="translate(-8 0)"/>
+<!-- axe handle -->
+<path class="n" style="stroke:#1b1a1a;stroke-width:11;stroke-linecap:round" d="M150 150L180 96"/><path class="n" style="stroke:#9a948b;stroke-width:5;stroke-linecap:round" d="M150 150L180 96"/>
+<path class="o d" d="M180 98L158 70L204 52L226 84L204 102Z"/><path class="o m" d="M180 98L204 102L226 84L210 70Z"/>
+<path class="t" stroke="#c8352b" stroke-width="3" d="M184 76L204 68"/>
+<!-- legs -->
+<path class="n" style="stroke:#1b1a1a;stroke-width:24;stroke-linecap:round;stroke-linejoin:round" d="M108 172L84 208L54 216"/><path class="n" style="stroke:#d4cec3;stroke-width:17;stroke-linecap:round;stroke-linejoin:round" d="M108 172L84 208L54 216"/>
+<ellipse class="o i" cx="44" cy="218" rx="14" ry="7"/>
+<path class="n" style="stroke:#1b1a1a;stroke-width:24;stroke-linecap:round;stroke-linejoin:round" d="M134 174L170 192L186 222"/><path class="n" style="stroke:#d4cec3;stroke-width:17;stroke-linecap:round;stroke-linejoin:round" d="M134 174L170 192L186 222"/>
+<ellipse class="o i" cx="198" cy="228" rx="15" ry="7"/>
+<!-- torso -->
+<path class="o l" d="M92 112Q130 98 160 118L152 176L98 178Z"/>
+<path class="o p" d="M96 166L154 166L164 200L110 204Z"/><path class="o v" d="M96 162Q126 174 154 162L154 172Q126 184 96 172Z"/>
+<path class="t" stroke="#55514c" stroke-width="2.5" d="M112 192l6 8M128 190l6 10M144 190l6 8"/>
+<!-- arms -->
+<path class="n" style="stroke:#1b1a1a;stroke-width:19;stroke-linecap:round;stroke-linejoin:round" d="M148 126Q176 126 182 100"/><path class="n" style="stroke:#d4cec3;stroke-width:12;stroke-linecap:round;stroke-linejoin:round" d="M148 126Q176 126 182 100"/>
+<path class="n" style="stroke:#1b1a1a;stroke-width:19;stroke-linecap:round;stroke-linejoin:round" d="M100 128Q76 150 58 146"/><path class="n" style="stroke:#d4cec3;stroke-width:12;stroke-linecap:round;stroke-linejoin:round" d="M100 128Q76 150 58 146"/>
+<!-- head, profile facing left -->
+<path class="o i" d="M146 46L176 40L160 64Z"/>
+<path class="o l" d="M74 96Q36 100 20 80Q10 60 26 46Q42 44 40 60Q42 72 58 78Q70 80 76 80Z"/>
+<circle class="i" cx="29" cy="56" r="3"/>
+<path class="o l" d="M64 80Q66 50 108 50Q152 50 154 86Q154 122 122 128Q88 130 72 108Z"/>
+<path class="o i" d="M56 74Q50 24 108 22Q154 24 160 72Q140 50 108 54Q80 54 56 74Z"/>
+<path class="i" d="M70 72L124 78L120 90L96 94Q76 90 70 72Z"/><path class="v" d="M96 80L112 84L104 90Z"/>
+<path class="o g" stroke-width="3" cx="146" cy="96" d="M146 90a7 7 0 1 0 0.1 0Z"/>
+<path class="t" stroke-width="3.5" d="M74 106Q100 116 132 108"/>
+<path class="o p" stroke-width="3" d="M88 108L92 124L100 110ZM112 112L116 126L122 112Z"/>
+<path class="t" stroke="#9a948b" stroke-width="2.5" d="M126 62L134 72M118 58L122 66"/>
+</svg>

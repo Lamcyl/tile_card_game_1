@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.g{fill:#c9a23a}.v{fill:#c8352b}.t{fill:none;stroke:#1b1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
+<path class="o g" d="M245.5 109.8L209.7 123.4L227.6 157.2L189.8 151.1L188.3 189.3L158.6 165.1L138.2 197.5L124.6 161.7L90.8 179.6L96.9 141.8L58.7 140.3L82.9 110.6L50.5 90.2L86.3 76.6L68.4 42.8L106.2 48.9L107.7 10.7L137.4 34.9L157.8 2.5L171.4 38.3L205.2 20.4L199.1 58.2L237.3 59.7L213.1 89.4Z"/>
+<circle class="o p" cx="148" cy="100" r="58"/>
+<!-- tail -->
+<path class="o m" d="M160 200Q206 200 236 226Q190 240 150 220Z"/><path class="o d" d="M150 200Q186 214 196 238Q156 236 140 210Z"/>
+<path class="t" d="M162 206Q204 210 226 224M150 206Q176 218 188 232" style="stroke-width:2"/>
+<!-- feet -->
+<path d="M104 210L100 236M150 210L152 236" stroke="#1b1a1a" stroke-width="14" stroke-linecap="round"/><path d="M104 210L100 236M150 210L152 236" stroke="#9a948b" stroke-width="7" stroke-linecap="round"/>
+<path class="o m" d="M82 242Q98 230 116 242Q100 252 82 242ZM136 242Q152 230 170 242Q154 252 136 242Z"/>
+<!-- body -->
+<path class="o l" d="M66 124C62 56 198 52 200 130C202 196 172 222 128 222C84 222 62 186 66 124Z"/>
+<path class="o p" d="M80 150C84 190 104 208 128 208C152 208 168 190 170 160C140 176 104 172 80 150Z"/>
+<path class="t" d="M112 184Q120 190 128 184M128 184Q136 190 144 184M120 198Q128 204 136 198" style="stroke-width:2.500;stroke:#9a948b"/>
+<!-- wing -->
+<path class="o m" d="M170 132Q214 96 240 112Q244 150 226 176Q192 186 172 170Z"/>
+<path class="o d" d="M172 150Q206 120 236 130Q228 160 214 172Q190 176 172 168Z"/>
+<path class="t" d="M184 160Q210 140 232 130M186 170Q212 160 224 150" style="stroke-width:2"/>
+<!-- head cap -->
+<path class="o m" d="M72 100C72 56 134 46 168 70C176 80 172 92 166 96C140 78 100 80 72 100Z"/>
+<!-- face patch -->
+<path class="o p" d="M82 108C82 84 112 78 134 88C146 96 142 118 124 124C104 130 82 128 82 108Z"/>
+<path class="t" d="M110 114Q122 112 132 112" style="stroke-width:2;stroke:#9a948b"/>
+<ellipse class="o i" cx="112" cy="98" rx="11" ry="12"/><circle class="p" cx="115" cy="93" r="4.500"/><circle class="p" cx="109" cy="102" r="1.800"/>
+<path class="t" d="M98 82Q112 72 128 80" style="stroke-width:3"/>
+<ellipse cx="96" cy="118" rx="7" ry="4.500" fill="#c9a23a" opacity=".6"/>
+<!-- beak -->
+<path class="o i" d="M40 134C56 124 76 124 92 126L94 148C72 154 52 150 40 142Z"/>
+<path class="o l" d="M36 140C50 162 82 164 96 148L92 138C74 146 54 142 40 134Z"/>
+<path class="o p" d="M90 86C50 80 20 102 28 146C30 152 40 150 44 140C54 128 72 126 92 128Z"/>
+<path class="t" d="M44 104Q58 96 74 98" style="stroke-width:2.500;stroke:#9a948b"/>
+<path class="o g" d="M52 134L57 128L62 134L57 141ZM68 136L73 130L78 136L73 143ZM83 136L87 131L91 136L87 142Z" style="stroke-width:2.500"/>
+</svg>

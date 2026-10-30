@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute cadejo: white guardian pup sitting under a moon, broken chain collar -->
+<path class="o g" d="M40 150Q14 156 16 184Q18 208 44 214Q30 198 32 182Q34 164 40 150Z"/>
+<g class="g"><path d="M226 60l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/><path d="M60 52l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></g>
+<path class="o n" style="stroke-width:17" d="M158 216Q206 226 206 196Q204 178 220 176"/>
+<path class="n" style="stroke:#f6f2e9;stroke-width:9;stroke-linecap:round" stroke-linecap="round" d="M158 216Q206 226 206 196Q204 178 220 176"/>
+<path class="o p" d="M92 150Q80 226 128 232Q176 226 164 150Z"/>
+<path class="t" d="M112 190Q128 200 144 190M116 202Q128 210 140 202" style="stroke:#9a948b"/>
+<ellipse class="o p" cx="108" cy="228" rx="16" ry="10"/><ellipse class="o p" cx="148" cy="228" rx="16" ry="10"/>
+<path class="t" d="M104 228v6M112 228v6M144 228v6M152 228v6" style="stroke-width:2.5"/>
+<path class="o p" d="M76 78L62 24Q86 28 104 56Z"/><path class="o p" d="M178 70Q226 56 226 100Q222 118 190 104Z"/>
+<path class="l" d="M76 68L70 40Q84 44 94 58Z"/><path class="l" d="M192 78Q214 76 216 98Q208 104 196 98Z"/>
+<ellipse class="o p" cx="128" cy="106" rx="62" ry="50"/>
+<path class="t" d="M116 62L120 74M128 60V74M140 62L136 74" style="stroke-width:3;stroke:#9a948b"/>
+<ellipse class="l" cx="128" cy="130" rx="30" ry="20"/>
+<path class="o i" d="M114 116Q128 106 142 116Q138 128 128 128Q118 128 114 116Z"/>
+<path class="t" d="M128 128V136M114 136Q128 146 142 136"/><path class="o v" d="M122 141Q128 160 134 141Z" opacity="1" style="stroke-width:3"/>
+<path class="v" opacity="0"/>
+<g><circle class="g" cx="100" cy="100" r="16" opacity=".35"/><circle class="g" cx="156" cy="100" r="16" opacity=".35"/>
+<circle class="o g" cx="100" cy="100" r="11" style="stroke-width:3"/><circle class="o g" cx="156" cy="100" r="11" style="stroke-width:3"/>
+<ellipse class="i" cx="101" cy="101" rx="5" ry="7"/><ellipse class="i" cx="155" cy="101" rx="5" ry="7"/>
+<circle class="p" cx="98" cy="96" r="3"/><circle class="p" cx="152" cy="96" r="3"/></g>
+<ellipse class="v" opacity="0"/>
+<path class="o g" d="M90 154Q128 172 166 154L164 142Q128 158 92 142Z" style="stroke-width:3"/>
+<g class="o n" style="stroke-width:3" ><ellipse class="g" cx="128" cy="170" rx="7" ry="9"/><ellipse class="g" cx="136" cy="186" rx="5" ry="7" transform="rotate(25 136 186)"/></g>
+<path class="l" d="M80 118Q76 130 86 134Z" opacity="0"/>
+</svg>

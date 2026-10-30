@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.t{fill:none;stroke:#1b1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
+<g transform="rotate(180 128 128)">
+<!-- ears -->
+<path class="o d" d="M84 72L66 6L112 44Z"/><path class="o d" d="M172 72L190 6L144 44Z"/>
+<path class="v" d="M84 60L76 24L100 46Z"/><path class="v" d="M172 60L180 24L156 46Z"/>
+<!-- wrap cloak -->
+<path class="o m" d="M88 112Q60 130 62 170Q66 208 128 214Q190 208 194 170Q196 130 168 112Z"/>
+<path class="t" d="M128 128Q124 170 128 212M96 124Q80 160 98 200M160 124Q176 160 158 200" style="stroke-width:2.500"/>
+<path class="o l" d="M104 144Q128 160 152 144Q148 176 128 188Q108 176 104 144Z"/>
+<!-- feet -->
+<path class="o l" d="M104 212L100 236M112 212L112 238M120 212L124 236M136 212L132 236M144 212L148 238M152 212L156 236" style="stroke-width:5" />
+<!-- head -->
+<path class="o p" d="M80 82C80 46 176 46 176 82C176 118 150 128 128 128C106 128 80 118 80 82Z"/>
+<ellipse class="o i" cx="106" cy="86" rx="13" ry="15"/><ellipse class="o i" cx="150" cy="86" rx="13" ry="15"/>
+<circle class="p" cx="110" cy="80" r="5"/><circle class="p" cx="154" cy="80" r="5"/><circle class="p" cx="103" cy="92" r="2"/><circle class="p" cx="147" cy="92" r="2"/>
+<path class="o d" d="M128 98L118 108L128 114L138 108Z"/>
+<path class="t" d="M110 118Q128 130 146 118"/><path class="o p" d="M116 120L119 129L124 122M140 120L137 129L132 122Z" style="stroke-width:2.500"/>
+<ellipse class="v" cx="86" cy="104" rx="8" ry="5" opacity=".7"/><ellipse class="v" cx="170" cy="104" rx="8" ry="5" opacity=".7"/>
+<path class="t" d="M100 62Q106 56 114 60M142 60Q150 56 156 62" style="stroke-width:2.500" />
+</g>
+<!-- stone beam -->
+<path class="o l" d="M22 20L234 20L228 46L28 46Z"/>
+<path class="t" d="M52 28L52 38M86 28L86 38M170 28L170 38M204 28L204 38" style="stroke-width:2.500;stroke:#9a948b"/>
+<rect class="o m" x="112" y="26" width="32" height="14" rx="3"/>
+</svg>

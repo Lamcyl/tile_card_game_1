@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce sisimito: looming low-angle giant hoisting a thorny ceiba log overhead, tusks bared -->
+
+<path class="n" stroke="#1b1a1a" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" d="M58 70Q34 130 54 196"/><path class="n" stroke="#9a948b" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" d="M58 70Q34 130 54 196"/>
+<path class="n" stroke="#1b1a1a" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" d="M198 70Q222 130 202 196"/><path class="n" stroke="#9a948b" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" d="M198 70Q222 130 202 196"/>
+<path class="o m" d="M1.0 226.3L37.8 219.9L44.7 201.7L83.4 204.2L107.4 189.5L139.3 200.3L174.9 192.6L192.6 209.1L231.6 210.2L231.1 228.7L264.6 238.3L246.0 254.6L266.3 270.5L233.8 280.8L236.3 299.3L197.4 301.3L181.5 318.2L145.1 311.4L114.4 322.9L88.9 308.8L50.5 312.2L41.7 294.2L4.3 288.7L14.2 270.8L-13.6 257.7L12.8 244.0Z"/>
+<path class="o d" d="M204.4 141.2L189.0 152.3L194.7 169.7L175.8 173.9L173.4 192.0L154.3 188.7L144.3 204.4L128.3 194.0L112.4 204.5L102.2 188.9L83.2 192.4L80.6 174.4L61.7 170.3L67.2 152.8L51.7 141.9L64.3 128.0L54.8 112.1L72.4 104.2L70.7 86.1L90.1 85.6L96.4 68.4L114.4 75.4L127.6 62.0L141.0 75.3L158.9 68.1L165.4 85.3L184.8 85.6L183.3 103.8L200.9 111.4L191.6 127.4Z"/>
+<g transform="rotate(-4 128 52)">
+<path class="o l" d="M30 32L226 32L226 74L30 74Z"/>
+<ellipse class="o m" cx="26" cy="53" rx="12" ry="21"/><ellipse class="o p" cx="226" cy="53" rx="12" ry="21"/>
+<ellipse class="t" stroke-width="2" cx="226" cy="53" rx="6" ry="11"/>
+<path class="t" stroke-width="2.5" d="M44 44L110 44M130 62L210 62M60 64L96 64"/>
+<path class="o p" d="M70 32L78 14L88 32ZM170 32L178 14L188 32ZM120 32L128 12L136 32Z" stroke-width="3"/>
+<circle class="o m" cx="62" cy="54" r="21"/><circle class="o m" cx="194" cy="54" r="21"/>
+<path class="t" stroke-width="2.5" d="M50 50L76 50M52 60L74 60M182 50L206 50M182 60L204 60"/>
+</g>
+<ellipse class="o l" cx="128" cy="138" rx="42" ry="40"/>
+<path class="i" d="M82 120L128 136L174 120L170 108L128 120L86 108Z"/>
+<path class="i" d="M90 126L120 136L114 148Q96 148 90 126ZM166 126L136 136L142 148Q160 148 166 126Z"/>
+<path class="v" d="M98 133L116 138L113 144Q102 142 98 133ZM158 133L140 138L143 144Q154 142 158 133Z"/>
+<path class="i" d="M118 146L122 164L128 160L134 164L138 146Z"/>
+<path class="o i" d="M96 168Q128 154 160 168Q150 200 128 200Q106 200 96 168Z"/>
+<path class="o p" d="M100 168L106 190L114 168ZM142 168L150 190L156 168Z" stroke-width="3"/>
+<path class="p" d="M118 166L124 178L130 166ZM130 166L136 178L142 166Z"/>
+<path class="v" d="M114 190Q128 180 142 190Q128 196 114 190Z"/>
+
+</svg>

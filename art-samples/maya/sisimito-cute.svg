@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute sisimito: round shaggy ape strolling right, looking back over shoulder, feet turned backwards, holding a gold flower -->
+
+<path class="n" stroke="#1b1a1a" stroke-width="25" stroke-linecap="round" stroke-linejoin="round" d="M80 170Q54 176 46 196"/><path class="n" stroke="#9a948b" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" d="M80 170Q54 176 46 196"/>
+<circle class="o p" cx="44" cy="200" r="11"/>
+<path class="o m" d="M180.1 191.1L162.6 202.6L153.2 218.9L130.4 218.9L109.9 226.6L92.4 215.1L70.3 210.7L66.4 193.1L53.1 178.5L64.5 163.0L66.2 145.1L87.7 139.0L103.6 126.2L125.0 132.3L147.7 130.6L159.1 146.1L177.9 156.2L173.9 173.8Z"/>
+<path class="o m" d="M82 196L82 228Q82 234 90 234L100 234Q108 234 108 228L108 196Z"/><path class="o m" d="M152 196L152 228Q152 234 160 234L170 234Q178 234 178 228L178 196Z"/>
+<path class="o p" d="M108 226Q112 248 92 248L56 248Q42 248 42 240Q44 230 56 230Z"/><path class="t" stroke-width="2.5" d="M54 232L64 240M52 240L62 244"/><path class="o p" d="M178 226Q182 248 162 248L126 248Q112 248 112 240Q114 230 126 230Z"/><path class="t" stroke-width="2.5" d="M124 232L134 240M122 240L132 244"/>
+<path class="o m" d="M192.2 112.4L177.7 124.1L176.2 141.5L157.2 145.0L146.1 159.4L127.7 153.9L110.2 161.4L97.3 148.3L77.9 146.9L74.0 129.8L58.0 119.9L64.1 103.3L55.8 87.6L70.3 75.9L71.8 58.5L90.8 55.0L101.9 40.6L120.3 46.1L137.8 38.6L150.7 51.7L170.1 53.1L174.0 70.2L190.0 80.1L183.9 96.7Z"/>
+<ellipse class="o p" cx="112" cy="106" rx="38" ry="34"/>
+<path class="i" d="M72 84Q112 66 150 84L146 96Q112 84 78 96Z"/>
+<ellipse class="i" cx="94" cy="108" rx="9" ry="11"/><ellipse class="i" cx="130" cy="108" rx="9" ry="11"/>
+<circle class="p" cx="97" cy="104" r="3.5"/><circle class="p" cx="133" cy="104" r="3.5"/>
+<ellipse class="m" cx="74" cy="126" rx="8" ry="5" opacity=".6"/><ellipse class="m" cx="150" cy="126" rx="8" ry="5" opacity=".6"/>
+<path class="o i" d="M104 120Q112 124 120 120L116 126Q112 128 108 126Z"/>
+<path class="t" d="M98 132Q112 144 128 132"/>
+<path class="n" stroke="#1b1a1a" stroke-width="25" stroke-linecap="round" stroke-linejoin="round" d="M150 166Q180 172 192 180"/><path class="n" stroke="#9a948b" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" d="M150 166Q180 172 192 180"/>
+<circle class="o p" cx="198" cy="182" r="11"/>
+<path class="t" stroke-width="3" d="M200 176L212 148"/>
+<g class="o g" stroke-width="2.5"><circle cx="212" cy="132" r="8"/><circle cx="222" cy="142" r="8"/><circle cx="204" cy="142" r="8"/><circle cx="208" cy="124" r="8" opacity="0"/></g>
+<circle class="o p" cx="213" cy="139" r="6" stroke-width="2.5"/>
+
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute huay chivo: tiny goat-kid sorcerer in a hem-patterned cloak, swept horns, burning eyes, holding a candle flame -->
+
+<path class="o d" d="M90 150Q54 190 52 236L174 236Q174 190 142 150Z"/>
+<path class="n" stroke="#f6f2e9" stroke-width="5" stroke-linejoin="miter" d="M54 226L66 214L78 226L90 214L102 226L114 214L126 226L138 214L150 226L162 214L172 226"/>
+<path class="t" stroke="#9a948b" stroke-width="2.5" d="M100 170Q96 196 90 208M134 170Q138 196 142 208"/>
+<path class="o i" d="M86 238L86 246L104 246L104 238ZM122 238L122 246L140 246L140 238Z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="23" stroke-linecap="round" stroke-linejoin="round" d="M142 168Q170 184 190 164"/><path class="n" stroke="#d4cec3" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" d="M142 168Q170 184 190 164"/>
+<circle class="o l" cx="194" cy="160" r="9"/>
+<path class="o p" d="M188 148L200 148L200 160L188 160Z"/><path class="t" stroke-width="3" d="M194 148L194 143"/>
+<path class="o v" d="M194 142Q180 130 190 112Q194 122 202 114Q208 130 194 142Z"/><path class="p" d="M194 138Q188 130 194 124Q200 130 194 138Z"/>
+<path class="o l" d="M116 64Q94 12 148 12Q128 28 138 64Z"/><path class="o l" d="M148 62Q146 22 192 26Q172 36 172 64Z"/>
+<path class="t" stroke-width="2.5" d="M104 44L118 44M110 30L124 30M158 46L170 44"/>
+<path class="o l" d="M170 100L222 82L214 112Q196 122 174 116Z"/><path class="m" d="M178 100L208 92L204 106Q190 112 180 108Z"/>
+<path class="o l" d="M78 110L36 88L44 120Q58 132 80 124Z"/><path class="m" d="M72 110L48 98L52 114Q62 120 72 118Z"/>
+<ellipse class="o l" cx="124" cy="108" rx="50" ry="44"/>
+<ellipse class="o p" cx="124" cy="132" rx="30" ry="22"/>
+<path class="i" d="M114 126Q124 120 134 126Q132 134 124 134Q116 134 114 126Z"/>
+<path class="t" d="M124 134L124 142M114 145Q124 152 134 145"/>
+<path class="o l" d="M114 152Q124 176 134 152Z" stroke-width="3"/>
+<circle class="o v" cx="102" cy="100" r="13"/><circle class="o v" cx="146" cy="100" r="13"/>
+<circle class="i" cx="104" cy="102" r="6"/><circle class="i" cx="144" cy="102" r="6"/>
+<circle class="p" cx="106" cy="98" r="3"/><circle class="p" cx="146" cy="98" r="3"/>
+<path class="o v" d="M96 84Q92 70 100 62Q102 72 108 74ZM140 84Q136 70 144 62Q146 72 152 74Z" stroke-width="2.5"/>
+<ellipse class="m" cx="86" cy="124" rx="7" ry="4" opacity=".6"/><ellipse class="m" cx="162" cy="124" rx="7" ry="4" opacity=".6"/>
+
+</svg>

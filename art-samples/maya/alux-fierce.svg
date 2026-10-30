@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce alux: leaping sprite, cape flaring, obsidian blade raised, hat spinning away -->
+
+<g transform="rotate(-24 50 56)"><ellipse class="o l" cx="50" cy="62" rx="40" ry="10"/><path class="o l" d="M28 60Q28 28 50 28Q72 28 72 60Z"/><path class="o g" d="M29 52L71 52L72 60L28 60Z"/></g>
+<path class="o v" d="M128 128Q76 92 20 108Q50 132 36 164Q70 150 96 170L136 150Z"/>
+<path class="t" d="M46 122Q70 120 92 138M58 146Q78 144 98 156"/>
+<path class="n" stroke="#1b1a1a" stroke-width="20" stroke-linecap="round" d="M98 188Q66 204 40 214"/><path class="n" stroke="#d4cec3" stroke-width="12" stroke-linecap="round" d="M98 188Q66 204 40 214"/>
+<ellipse class="o p" cx="34" cy="218" rx="14" ry="7" transform="rotate(-10 34 218)"/>
+<ellipse class="o p" cx="118" cy="164" rx="40" ry="34" transform="rotate(-35 118 164)"/>
+<path class="o g" d="M96 144L136 190L128 198L88 154Z" transform="translate(-4 4)" opacity="0"/>
+<path class="n" stroke="#c9a23a" stroke-width="9" stroke-linecap="round" d="M100 178L136 168"/>
+<path class="t" d="M98 188Q92 198 98 204M114 190Q112 200 118 206" opacity="0"/>
+<path class="n" stroke="#1b1a1a" stroke-width="20" stroke-linecap="round" d="M122 184Q148 206 178 192"/><path class="n" stroke="#d4cec3" stroke-width="12" stroke-linecap="round" d="M122 184Q148 206 178 192"/>
+<ellipse class="o p" cx="186" cy="188" rx="14" ry="7" transform="rotate(-24 186 188)"/>
+<path class="n" stroke="#1b1a1a" stroke-width="19" stroke-linecap="round" d="M150 146Q190 156 218 136"/><path class="n" stroke="#f6f2e9" stroke-width="11" stroke-linecap="round" d="M150 146Q190 156 218 136"/>
+<circle class="o p" cx="224" cy="132" r="9"/>
+<path class="o i" d="M222 126L240 72L252 122L228 136Z"/><path class="n" stroke="#d4cec3" stroke-width="2" d="M238 86L242 114"/>
+<path class="o l" d="M110 92L74 70L90 106L86 122Z"/><path class="o l" d="M192 86L228 62L212 100Z"/>
+<ellipse class="o p" cx="150" cy="96" rx="48" ry="44" transform="rotate(10 150 96)"/>
+<path class="i" d="M104 84L96 52L118 68L124 36L142 62L158 30L168 62L190 48L186 78Q150 58 104 84Z"/>
+<path class="i" d="M110 98L146 106L142 116Q124 118 110 98ZM190 108L158 106L162 118Q178 120 190 108Z"/>
+<path class="v" d="M122 106L140 110L138 114Q128 114 122 106ZM176 110L162 110L164 114Q172 115 176 110Z"/>
+<path class="o p" d="M150 112L156 124L146 124Z" stroke-width="3"/>
+<path class="o i" d="M118 128Q150 114 184 130Q176 154 150 154Q126 152 118 128Z"/>
+<path class="p" d="M126 132L132 142L138 132ZM144 130L150 142L156 130ZM162 130L168 142L172 128Z"/>
+<path class="p" d="M134 150L142 144L148 152L156 144L164 150Z"/>
+
+</svg>
