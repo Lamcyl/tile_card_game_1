@@ -27,6 +27,20 @@ const SETS = {
   [18, 'wadjet', 'Wadjet', 'fierce', null],
   [20, 'isis', 'Isis', 'fierce', null],
   ] },
+  chinese: { title: 'Chinese Picks', picks: [
+  [1, 'long', 'Long', 'cute', 'Redrawn front-facing. Shown next to the original.'],
+  [1, 'long', 'Long', 'fierce', 'Redrawn front-facing. Shown next to the original.'],
+  [2, 'fenghuang', 'Fenghuang', 'cute', 'Redrawn front-facing. Shown next to the original.'],
+  [2, 'fenghuang', 'Fenghuang', 'fierce', 'Redrawn front-facing. Shown next to the original.'],
+  [4, 'baihu', 'Baihu', 'cute', 'Redrawn front-facing. Shown next to the original.'],
+  [4, 'baihu', 'Baihu', 'fierce', 'Redrawn front-facing. Shown next to the original.'],
+  [5, 'xuanwu', 'Xuanwu', 'cute', 'Redrawn front-facing. Shown next to the original.'],
+  [5, 'xuanwu', 'Xuanwu', 'fierce', 'Redrawn front-facing. Shown next to the original.'],
+  [14, 'kui', 'Kui', 'fierce', null],
+  [16, 'wukong', 'Sun Wukong', 'fierce', null],
+  [18, 'leigong', 'Lei Gong', 'fierce', null],
+  [20, 'nezha', 'Nezha', 'fierce', null],
+  ] },
 };
 const setName = process.argv[2] || 'yokai';
 const SET = SETS[setName];
