@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.n{stroke:none}.t{fill:none;stroke:#1b1a1a;stroke-linecap:round;stroke-linejoin:round}.f{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<g transform="rotate(-10 128 140)">
+<!-- wings -->
+<path class="o" fill="#9a948b" d="M0 0 C-15 -8 -15 -39 0 -56 C15 -39 15 -8 0 0Z" transform="translate(104 128) scale(1 1) rotate(-104)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-15 -8 -15 -53 0 -76 C15 -53 15 -8 0 0Z" transform="translate(104 128) scale(1 1) rotate(-88)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-15 -8 -15 -64 0 -92 C15 -64 15 -8 0 0Z" transform="translate(104 128) scale(1 1) rotate(-72)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-15 -8 -15 -70 0 -100 C15 -70 15 -8 0 0Z" transform="translate(104 128) scale(1 1) rotate(-56)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-15 -8 -15 -67 0 -96 C15 -67 15 -8 0 0Z" transform="translate(104 128) scale(1 1) rotate(-40)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-15 -8 -15 -56 0 -80 C15 -56 15 -8 0 0Z" transform="translate(104 128) scale(1 1) rotate(-24)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-15 -8 -15 -39 0 -56 C15 -39 15 -8 0 0Z" transform="translate(152 128) scale(-1 1) rotate(-104)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-15 -8 -15 -53 0 -76 C15 -53 15 -8 0 0Z" transform="translate(152 128) scale(-1 1) rotate(-88)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-15 -8 -15 -64 0 -92 C15 -64 15 -8 0 0Z" transform="translate(152 128) scale(-1 1) rotate(-72)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-15 -8 -15 -70 0 -100 C15 -70 15 -8 0 0Z" transform="translate(152 128) scale(-1 1) rotate(-56)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-15 -8 -15 -67 0 -96 C15 -67 15 -8 0 0Z" transform="translate(152 128) scale(-1 1) rotate(-40)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-15 -8 -15 -56 0 -80 C15 -56 15 -8 0 0Z" transform="translate(152 128) scale(-1 1) rotate(-24)"/>
+<!-- legs trailing -->
+<path class="o" fill="#f6f2e9" d="M108 170 L124 170 L120 214 L130 232 L112 236 L106 214Z"/>
+<path class="o" fill="#f6f2e9" d="M132 170 L148 170 L156 206 L172 222 L156 232 L142 214Z"/>
+</g>
+<!-- cats -->
+<g>
+<path class="o" fill="#d4cec3" d="M6 210 C6 190 26 176 48 182 L52 150 L66 186 L84 182 L100 148 L98 192 C108 206 100 232 80 238 C60 246 30 244 14 232 C8 226 6 218 6 210Z"/>
+<path class="n" fill="#1b1a1a" d="M26 204 L42 210 L40 214 L26 210Z M72 204 L88 200 L90 206 L74 210Z"/>
+<path class="n" fill="#c9a23a" d="M30 205 L38 208 L36 211 L30 209Z M76 203 L84 202 L84 205 L77 207Z"/>
+<path class="o" fill="#1b1a1a" d="M40 222 C52 216 66 216 80 222 C74 236 48 238 40 222Z" style="stroke-width:3"/>
+<path class="n" fill="#f6f2e9" d="M46 222 L52 222 L49 230Z M68 222 L74 222 L71 230Z"/>
+<path class="t" style="stroke-width:3" d="M16 214 L2 210 M16 222 L2 226"/>
+<path class="o" fill="#f6f2e9" d="M92 236 L110 226 L112 244 L96 250Z" style="stroke-width:3"/>
+</g>
+<g transform="translate(256 0) scale(-1 1)">
+<path class="o" fill="#d4cec3" d="M6 210 C6 190 26 176 48 182 L52 150 L66 186 L84 182 L100 148 L98 192 C108 206 100 232 80 238 C60 246 30 244 14 232 C8 226 6 218 6 210Z"/>
+<path class="n" fill="#1b1a1a" d="M26 204 L42 210 L40 214 L26 210Z M72 204 L88 200 L90 206 L74 210Z"/>
+<path class="n" fill="#c9a23a" d="M30 205 L38 208 L36 211 L30 209Z M76 203 L84 202 L84 205 L77 207Z"/>
+<path class="o" fill="#1b1a1a" d="M40 222 C52 216 66 216 80 222 C74 236 48 238 40 222Z" style="stroke-width:3"/>
+<path class="n" fill="#f6f2e9" d="M46 222 L52 222 L49 230Z M68 222 L74 222 L71 230Z"/>
+<path class="t" style="stroke-width:3" d="M16 214 L2 210 M16 222 L2 226"/>
+</g>
+<!-- body -->
+<g transform="rotate(-10 128 140)">
+<path class="o" fill="#55514c" d="M96 116 L160 116 L168 176 L88 176Z"/>
+<path class="o" fill="#d4cec3" d="M96 116 L160 116 L156 134 L100 134Z"/>
+<path class="o" fill="#c9a23a" d="M88 160 L168 160 L169 172 L87 172Z"/>
+<!-- sword arm -->
+<path class="t" style="stroke-width:20" d="M154 126 L186 142 L204 136"/>
+<path class="f" style="stroke:#f6f2e9;stroke-width:12" d="M154 126 L186 142 L204 136"/>
+<path class="o" fill="#d4cec3" d="M214 132 L214 120 L254 98 L250 110Z" style="stroke-width:3"/>
+<path class="o" fill="#c9a23a" d="M206 120 L214 114 L222 140 L214 144Z" style="stroke-width:3"/>
+<circle class="o" cx="206" cy="136" r="9" fill="#f6f2e9"/>
+<path class="t" style="stroke-width:20" d="M102 126 L72 140 L58 116"/>
+<path class="f" style="stroke:#f6f2e9;stroke-width:12" d="M102 126 L72 140 L58 116"/>
+<circle class="o" cx="56" cy="110" r="10" fill="#f6f2e9"/>
+<path class="t" style="stroke-width:3" d="M46 100 L42 92 M54 98 L52 88 M62 99 L64 90"/>
+<!-- hair streaming -->
+<path class="o" fill="#1b1a1a" d="M76 70 C60 40 90 22 128 24 C160 22 190 44 178 76 C188 60 220 56 232 36 C232 66 210 92 182 98 C190 110 182 120 170 118 L88 118 C70 116 66 104 76 70Z"/>
+<!-- face -->
+<path class="o" fill="#f6f2e9" d="M86 74 C90 52 166 52 172 74 C176 96 156 116 130 116 C104 116 82 98 86 74Z"/>
+<path class="o" fill="#1b1a1a" d="M84 74 C90 50 120 44 130 52 C142 44 168 52 174 74 C158 62 140 62 130 66 C118 62 98 62 84 74Z"/>
+<path class="o" fill="#c9a23a" d="M120 30 L130 4 L140 30Z" style="stroke-width:3"/>
+<path class="o" fill="#d4cec3" d="M96 52 L84 26 L110 46Z M162 52 L174 26 L148 46Z" style="stroke-width:3"/>
+<!-- eyes -->
+<path class="o" fill="#1b1a1a" d="M96 84 L122 90 L118 98 L100 94Z" style="stroke-width:3"/>
+<path class="o" fill="#1b1a1a" d="M162 84 L136 90 L140 98 L158 94Z" style="stroke-width:3"/>
+<path class="n" fill="#c9a23a" d="M106 88 L114 90 L112 94 L107 92Z M154 88 L146 90 L148 94 L153 92Z"/>
+<path class="t" style="stroke-width:5" d="M92 78 L124 86 M166 78 L134 86"/>
+<!-- battle cry -->
+<path class="o" fill="#1b1a1a" d="M114 102 C120 98 138 98 144 102 C144 112 138 116 129 116 C120 116 114 112 114 102Z" style="stroke-width:3"/>
+<path class="n" fill="#f6f2e9" d="M118 102 L140 102 L138 106 L120 106Z"/>
+<!-- necklace -->
+<path class="t" style="stroke:#c9a23a;stroke-width:4" d="M104 124 C116 142 142 142 154 124"/>
+<circle class="o" cx="129" cy="138" r="6" fill="#c9a23a" style="stroke-width:3"/>
+</g>
+</svg>

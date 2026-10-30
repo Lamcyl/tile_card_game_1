@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.n{stroke:none}.t{fill:none;stroke:#1b1a1a;stroke-linecap:round;stroke-linejoin:round}.f{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- big ragged cloak -->
+<path class="o" fill="#55514c" d="M28 252 L36 206 L22 196 C34 150 52 110 84 78 C90 36 140 10 184 30 C222 50 214 96 218 130 L240 170 L226 176 L250 252 L222 232 L208 252 L184 230 L160 252 L136 232 L114 252 L92 232 L68 252 L50 234Z"/>
+<path class="n" fill="#1b1a1a" opacity=".35" d="M36 206 C48 160 60 126 90 96 C100 140 100 200 112 250 L92 232 L68 252 L50 234 L28 252Z"/>
+<path class="t" style="stroke-width:3;stroke:#9a948b" d="M60 150 C74 170 80 200 84 226 M200 130 C208 170 206 200 214 226"/>
+<!-- spirit flame in left hand -->
+<path class="o" fill="#c8352b" d="M30 150 C16 130 34 118 30 98 C46 112 54 130 46 148 C42 142 40 140 36 140Z" style="stroke-width:3"/>
+<!-- living arm -->
+<path class="t" style="stroke-width:22" d="M96 156 L62 170 L40 158"/>
+<path class="f" style="stroke:#f6f2e9;stroke-width:14" d="M96 156 L62 170 L40 158"/>
+<path class="o" fill="#f6f2e9" d="M30 156 L28 146 L36 150 L38 142 L44 150 L50 146 L48 160 L38 168Z" style="stroke-width:3"/>
+<!-- ribcage torso -->
+<path class="o" fill="#1b1a1a" d="M104 140 L184 140 C190 176 176 206 160 230 L130 230 C112 206 98 176 104 140Z"/>
+<path class="t" style="stroke:#d4cec3;stroke-width:5" d="M144 142 L144 224"/>
+<path class="t" style="stroke:#d4cec3;stroke-width:4.5" d="M144 158 C128 156 118 160 112 166 M144 158 C160 156 170 160 176 166 M144 176 C126 174 118 180 114 188 M144 176 C162 174 172 180 176 188 M144 194 C130 194 122 200 120 208 M144 194 C158 194 166 200 168 208"/>
+<!-- skeleton arm reaching -->
+<path class="t" style="stroke-width:20" d="M176 150 L216 132 L228 92"/>
+<path class="f" style="stroke:#d4cec3;stroke-width:12" d="M176 150 L216 132 L228 92"/>
+<circle class="o" cx="216" cy="132" r="9" fill="#f6f2e9" style="stroke-width:3"/>
+<path class="o" fill="#f6f2e9" d="M218 92 L214 62 L220 60 L224 84 L226 52 L232 52 L232 84 L240 60 L246 62 L238 92 L242 78 L248 82 L240 100 L226 106Z" style="stroke-width:3"/>
+<!-- souls -->
+<g transform="translate(118 206) scale(.7)"><path class="o" fill="#f6f2e9" d="M0 30 L0 12 C0 -6 28 -6 28 12 L28 30 L22 24 L14 30 L6 24Z"/><circle class="n" cx="9" cy="14" r="3" fill="#1b1a1a"/><circle class="n" cx="19" cy="14" r="3" fill="#1b1a1a"/></g>
+<!-- hair living side -->
+<path class="o" fill="#1b1a1a" d="M82 90 C76 40 112 20 140 26 L140 118 C128 130 110 150 92 158 C104 138 78 120 82 90Z"/>
+<!-- head -->
+<path class="o" fill="#f6f2e9" d="M140 48 C104 48 90 82 100 106 C108 126 126 134 140 134Z"/>
+<path class="o" fill="#d4cec3" d="M140 48 C176 48 192 82 182 106 C176 120 164 130 154 134 L150 142 L140 140 L132 142 L132 134 L140 134Z"/>
+<!-- fringe -->
+<path class="o" fill="#1b1a1a" d="M140 40 C108 40 88 60 90 88 C96 70 114 60 140 60Z"/>
+<!-- brows/eyes -->
+<path class="o" fill="#1b1a1a" d="M96 80 L136 94 L134 100 L100 94Z" style="stroke-width:3"/>
+<path class="o" fill="#1b1a1a" d="M184 80 L144 94 L146 100 L180 94Z" style="stroke-width:3"/>
+<path class="o" fill="#1b1a1a" d="M104 98 C112 94 128 96 134 102 C128 110 112 110 104 98Z" style="stroke-width:3"/>
+<circle class="n" cx="115" cy="101" r="3" fill="#f6f2e9"/>
+<path class="o" fill="#1b1a1a" d="M146 98 C154 92 172 94 176 102 C172 112 154 112 146 98Z" style="stroke-width:3"/>
+<circle class="n" cx="161" cy="103" r="4.5" fill="#c8352b"/>
+<path class="t" style="stroke-width:3" d="M182 86 L172 96 L178 104"/>
+<!-- mouth snarl -->
+<path class="o" fill="#1b1a1a" d="M110 118 C124 112 156 112 170 118 C168 132 156 140 140 140 C124 140 112 132 110 118Z" style="stroke-width:3"/>
+<path class="n" fill="#f6f2e9" d="M114 118 L166 118 L164 124 L116 124Z"/>
+<path class="t" style="stroke-width:2.5" d="M120 118 L120 124 M128 117 L128 125 M136 116 L136 125 M144 116 L144 125 M152 117 L152 125 M160 118 L160 124"/>
+<path class="o" fill="#1b1a1a" d="M138 106 L142 106 L140 112Z" style="stroke-width:2"/>
+<!-- spiked bone crown -->
+<path class="o" fill="#f6f2e9" d="M104 52 L96 18 L120 40 L140 4 L160 40 L184 18 L176 52Z"/>
+<circle class="o" cx="140" cy="48" r="5" fill="#c8352b" style="stroke-width:3"/>
+</svg>

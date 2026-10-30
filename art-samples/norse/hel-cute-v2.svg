@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.n{stroke:none}.t{fill:none;stroke:#1b1a1a;stroke-linecap:round;stroke-linejoin:round}.f{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- glow -->
+<circle class="n" cx="44" cy="190" r="40" fill="#c8352b" opacity=".15"/>
+<!-- shroud tail -->
+<path class="o" fill="#55514c" d="M82 130 L160 130 C176 168 150 196 172 214 C186 226 210 224 224 206 C230 240 196 256 160 248 C150 252 142 244 134 250 C124 246 112 250 104 240 C86 220 76 170 82 130Z"/>
+<path class="n" fill="#1b1a1a" opacity=".3" d="M82 130 L104 130 C100 170 112 210 134 240 C108 240 90 210 82 176Z"/>
+<path class="t" style="stroke-width:3;stroke:#9a948b" d="M140 162 C146 190 160 206 178 218"/>
+<!-- tiny ghost -->
+<g transform="translate(196 150)">
+<path class="o" fill="#f6f2e9" d="M0 30 L0 12 C0 -6 28 -6 28 12 L28 30 L22 24 L14 30 L6 24Z"/>
+<circle class="n" cx="9" cy="14" r="2.5" fill="#1b1a1a"/><circle class="n" cx="19" cy="14" r="2.5" fill="#1b1a1a"/>
+<ellipse class="n" cx="14" cy="20" rx="2.5" ry="3" fill="#1b1a1a"/>
+</g>
+<!-- lantern arm -->
+<path class="t" style="stroke-width:20" d="M92 142 L62 150 L52 166"/>
+<path class="f" style="stroke:#f6f2e9;stroke-width:12" d="M92 142 L62 150 L52 166"/>
+<!-- lantern -->
+<path class="t" style="stroke-width:3" d="M48 166 L48 176"/>
+<path class="o" fill="#9a948b" d="M32 178 L64 178 L60 184 L36 184Z" style="stroke-width:3"/>
+<path class="o" fill="#f6f2e9" d="M36 184 L60 184 L62 212 L34 212Z" style="stroke-width:3"/>
+<path class="o" fill="#c8352b" d="M48 192 C58 198 56 208 48 208 C40 208 38 198 48 192Z" style="stroke-width:3"/>
+<path class="o" fill="#9a948b" d="M32 212 L64 212 L66 218 L30 218Z" style="stroke-width:3"/>
+<circle class="o" cx="50" cy="166" r="9" fill="#f6f2e9"/>
+<!-- skeleton hand waving -->
+<path class="t" style="stroke-width:16" d="M152 140 L178 128"/>
+<path class="f" style="stroke:#d4cec3;stroke-width:8" d="M152 140 L178 128"/>
+<path class="o" fill="#d4cec3" d="M176 122 L186 110 L190 112 L186 124 L196 116 L198 120 L188 130 L178 134Z" style="stroke-width:3"/>
+<!-- hair back -->
+<path class="o" fill="#1b1a1a" d="M64 94 C56 44 94 20 120 24 L120 124 C108 136 90 150 72 152 C80 138 62 120 64 94Z"/>
+<path class="o" fill="#d4cec3" d="M120 24 C152 20 184 46 176 96 C180 120 166 140 150 144 C146 130 138 126 120 124Z"/>
+<!-- face -->
+<path class="o" fill="#f6f2e9" d="M120 52 C80 52 70 92 82 112 C94 132 110 134 120 134Z"/>
+<path class="o" fill="#9a948b" d="M120 52 C158 52 172 92 160 112 C148 132 130 134 120 134Z"/>
+<path class="n" fill="#d4cec3" d="M122 60 C150 60 164 90 154 108 C146 124 134 128 122 128Z"/>
+<!-- fringe -->
+<path class="o" fill="#1b1a1a" d="M120 44 C86 44 66 64 70 94 C76 76 94 66 120 64Z"/>
+<path class="o" fill="#55514c" d="M120 44 C152 44 176 64 170 92 C162 76 144 66 120 64Z"/>
+<!-- left eye (living) -->
+<ellipse class="o" cx="98" cy="96" rx="11" ry="12" fill="#1b1a1a"/>
+<circle class="n" cx="101" cy="91" r="4" fill="#f6f2e9"/><circle class="n" cx="95" cy="100" r="2" fill="#f6f2e9"/>
+<!-- right eye (socket) -->
+<ellipse class="o" cx="142" cy="96" rx="12" ry="13" fill="#1b1a1a"/>
+<circle class="n" cx="142" cy="97" r="4.5" fill="#c8352b"/>
+<path class="t" style="stroke-width:3" d="M158 76 L150 86 L156 92"/>
+<!-- nose, mouth -->
+<path class="o" fill="#1b1a1a" d="M118 108 L124 108 L121 116Z" style="stroke-width:2"/>
+<path class="t" style="stroke-width:3.5" d="M92 120 C100 126 112 126 120 122"/>
+<path class="t" style="stroke-width:3.5" d="M120 122 C130 126 142 124 150 118"/>
+<path class="t" style="stroke-width:2.5" d="M128 123 L128 129 M136 124 L136 129 M144 122 L144 126"/>
+<ellipse class="n" cx="84" cy="112" rx="7" ry="4.5" fill="#c8352b" opacity=".35"/>
+<!-- bone crown -->
+<path class="o" fill="#f6f2e9" d="M92 40 L98 18 L108 34 L120 12 L132 34 L142 18 L148 40Z"/>
+<circle class="o" cx="98" cy="17" r="4" fill="#f6f2e9" style="stroke-width:3"/><circle class="o" cx="142" cy="17" r="4" fill="#f6f2e9" style="stroke-width:3"/>
+<circle class="o" cx="120" cy="11" r="4.5" fill="#c8352b" style="stroke-width:3"/>
+</svg>

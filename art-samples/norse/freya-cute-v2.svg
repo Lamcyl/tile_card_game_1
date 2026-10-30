@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.n{stroke:none}.t{fill:none;stroke:#1b1a1a;stroke-linecap:round;stroke-linejoin:round}.f{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- falcon wings -->
+<path class="o" fill="#9a948b" d="M0 0 C-13 -8 -13 -43 0 -62 C13 -43 13 -8 0 0Z" transform="translate(96 138) scale(1 1) rotate(-100)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-13 -8 -13 -53 0 -76 C13 -53 13 -8 0 0Z" transform="translate(96 138) scale(1 1) rotate(-80)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-13 -8 -13 -62 0 -88 C13 -62 13 -8 0 0Z" transform="translate(96 138) scale(1 1) rotate(-60)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-13 -8 -13 -60 0 -86 C13 -60 13 -8 0 0Z" transform="translate(96 138) scale(1 1) rotate(-40)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-13 -8 -13 -49 0 -70 C13 -49 13 -8 0 0Z" transform="translate(96 138) scale(1 1) rotate(-20)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-13 -8 -13 -43 0 -62 C13 -43 13 -8 0 0Z" transform="translate(142 138) scale(-1 1) rotate(-100)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-13 -8 -13 -53 0 -76 C13 -53 13 -8 0 0Z" transform="translate(142 138) scale(-1 1) rotate(-80)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-13 -8 -13 -62 0 -88 C13 -62 13 -8 0 0Z" transform="translate(142 138) scale(-1 1) rotate(-60)"/>
+<path class="o" fill="#d4cec3" d="M0 0 C-13 -8 -13 -60 0 -86 C13 -60 13 -8 0 0Z" transform="translate(142 138) scale(-1 1) rotate(-40)"/>
+<path class="o" fill="#9a948b" d="M0 0 C-13 -8 -13 -49 0 -70 C13 -49 13 -8 0 0Z" transform="translate(142 138) scale(-1 1) rotate(-20)"/>
+<!-- cat tail -->
+<path class="t" style="stroke-width:26" d="M52 214 C20 214 14 170 34 158"/>
+<path class="f" style="stroke:#d4cec3;stroke-width:18" d="M52 214 C20 214 14 170 34 158"/>
+<!-- big cat body -->
+<path class="o" fill="#d4cec3" d="M40 226 C30 180 70 150 120 150 C170 150 214 170 218 226Z"/>
+<path class="t" style="stroke-width:4" d="M70 166 L78 184 M96 156 L102 178 M62 200 L80 206 M200 176 L190 192"/>
+<ellipse class="o" cx="90" cy="236" rx="22" ry="10" fill="#d4cec3"/>
+<ellipse class="o" cx="176" cy="236" rx="22" ry="10" fill="#d4cec3"/>
+<!-- cat head -->
+<path class="o" fill="#d4cec3" d="M156 166 L152 128 L176 144 L210 144 L234 128 L232 168 C236 196 216 208 194 208 C170 208 154 194 156 166Z"/>
+<path class="o" fill="#f6f2e9" d="M164 140 L172 150 L162 154Z M224 140 L216 150 L226 154Z" style="stroke-width:2"/>
+<path class="t" style="stroke-width:4" d="M170 172 C174 166 182 166 186 172 M204 172 C208 166 216 166 220 172"/>
+<path class="o" fill="#1b1a1a" d="M190 180 L200 180 L195 187Z" style="stroke-width:2"/>
+<path class="t" style="stroke-width:3" d="M195 187 C190 194 184 194 182 190 M195 187 C200 194 206 194 208 190"/>
+<path class="t" style="stroke-width:2.5" d="M164 184 L148 180 M164 190 L148 192 M226 184 L242 180 M226 190 L242 192"/>
+<!-- Freya body -->
+<path class="o" fill="#f6f2e9" d="M82 130 L140 130 L152 178 L70 178Z"/>
+<path class="o" fill="#55514c" d="M70 166 L152 166 L154 180 L68 180Z"/>
+<!-- arm to cat -->
+<path class="t" style="stroke-width:20" d="M140 142 L164 154 L180 150"/>
+<path class="f" style="stroke:#f6f2e9;stroke-width:12" d="M140 142 L164 154 L180 150"/>
+<circle class="o" cx="186" cy="146" r="9" fill="#f6f2e9"/>
+<!-- hair back / braids -->
+<path class="o" fill="#1b1a1a" d="M66 80 C62 40 100 24 118 28 C150 24 176 50 168 90 L170 130 C160 140 154 130 150 120 L80 120 C72 134 62 134 62 120Z"/>
+<path class="o" fill="#55514c" d="M70 112 C60 134 66 152 78 160 C86 150 88 132 86 118Z"/>
+<path class="o" fill="#55514c" d="M164 112 C174 134 168 152 156 160 C148 150 146 132 148 118Z"/>
+<path class="o" fill="#c9a23a" d="M70 156 L84 156 L82 166 L72 166Z M148 156 L162 156 L160 166 L150 166Z" style="stroke-width:3"/>
+<!-- face -->
+<ellipse class="o" cx="118" cy="94" rx="40" ry="36" fill="#f6f2e9"/>
+<path class="o" fill="#1b1a1a" d="M78 90 C80 56 108 54 118 62 C130 54 154 58 158 90 C148 76 134 72 122 70 C106 74 90 76 78 90Z"/>
+<!-- falcon feathers head piece -->
+<path class="o" fill="#d4cec3" d="M96 44 C90 24 100 10 116 6 C112 22 118 34 118 48Z" style="stroke-width:3"/>
+<path class="o" fill="#9a948b" d="M116 46 C114 22 128 6 146 4 C140 20 146 34 140 50Z" style="stroke-width:3"/>
+<path class="o" fill="#c9a23a" d="M84 62 C100 52 138 52 152 62 L152 70 C138 62 100 62 84 70Z" style="stroke-width:3"/>
+<!-- eyes -->
+<ellipse class="o" cx="102" cy="98" rx="9" ry="10.5" fill="#1b1a1a"/>
+<ellipse class="o" cx="136" cy="98" rx="9" ry="10.5" fill="#1b1a1a"/>
+<circle class="n" cx="105" cy="94" r="3.5" fill="#f6f2e9"/><circle class="n" cx="139" cy="94" r="3.5" fill="#f6f2e9"/>
+<circle class="n" cx="100" cy="102" r="1.8" fill="#f6f2e9"/><circle class="n" cx="134" cy="102" r="1.8" fill="#f6f2e9"/>
+<path class="t" style="stroke-width:3" d="M92 90 L88 87 M146 90 L150 87"/>
+<ellipse class="n" cx="88" cy="112" rx="8" ry="5" fill="#c9a23a" opacity=".45"/>
+<ellipse class="n" cx="150" cy="112" rx="8" ry="5" fill="#c9a23a" opacity=".45"/>
+<path class="t" style="stroke-width:3.5" d="M112 114 C116 120 122 120 126 114"/>
+<!-- necklace -->
+<path class="t" style="stroke-width:7" d="M92 132 C106 148 132 148 146 132"/>
+<path class="t" style="stroke:#c9a23a;stroke-width:3.5" d="M92 132 C106 148 132 148 146 132"/>
+<circle class="o" cx="119" cy="145" r="6" fill="#c9a23a" style="stroke-width:3"/>
+<!-- kitten -->
+<g transform="translate(14 186)">
+<ellipse class="o" cx="22" cy="40" rx="24" ry="18" fill="#f6f2e9"/>
+<path class="o" fill="#f6f2e9" d="M4 26 L2 4 L18 12 L30 12 L44 4 L44 26 C48 40 36 48 24 48 C10 48 0 38 4 26Z"/>
+<path class="t" style="stroke-width:3" d="M12 26 C14 22 18 22 20 26 M28 26 C30 22 34 22 36 26"/>
+<path class="t" style="stroke-width:2.5" d="M20 33 C22 36 24 36 26 33"/>
+</g>
+</svg>
