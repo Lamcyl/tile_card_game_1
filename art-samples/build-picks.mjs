@@ -44,6 +44,14 @@ const SETS = {
   [6, 'jotunn', 'Jötunn', 'fierce-v2', null],
   [12, 'ravens', 'Huginn and Muninn', 'fierce', null],
   ] },
+  slavic: { title: 'Slavic Picks', picks: [
+  [7, 'vodyanoy', 'Vodyanoy', 'fierce', 'Cleaned up where the body meets the water: a clear waterline.'],
+  [13, 'alkonost', 'Alkonost', 'cute', null],
+  [17, 'perun', 'Perun', 'cute', null],
+  [18, 'veles', 'Veles', 'fierce', null],
+  [20, 'chernobog', 'Chernobog', 'cute', null],
+  [20, 'chernobog', 'Chernobog', 'fierce', null],
+  ] },
 };
 const setName = process.argv[2] || 'yokai';
 const SET = SETS[setName];
