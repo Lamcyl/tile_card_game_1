@@ -8,14 +8,13 @@
 <path class="o v" d="M70 200L186 200L188 208L176 206L164 214L146 204L128 214L110 204L92 214L80 206L68 208Z" opacity="0"/>
 <path class="t" stroke="#9a948b" stroke-width="2.5" d="M92 170L96 200M112 172L112 196M148 174L152 198M164 170L170 196"/>
 <g class="v"><path d="M84 190L100 190L100 196L84 196ZM156 190L172 190L172 196L156 196Z"/><path d="M90 184L94 190L90 196L86 190ZM162 184L166 190L162 196L158 190Z" fill="#1b1a1a"/></g>
-<path class="o p" d="M96 160Q70 168 64 190Q72 196 78 188Q84 176 100 172Z"/>
-<circle class="o p" cx="70" cy="192" r="7"/>
-<path d="M156 164Q172 176 170 194" fill="none" stroke="#1b1a1a" stroke-width="18" stroke-linecap="round"/><path d="M156 164Q172 176 170 194" fill="none" stroke="#f6f2e9" stroke-width="10" stroke-linecap="round"/>
-<path class="o p" d="M162 178L180 178L180 214L162 214Z" transform="translate(0 -6)"/>
-<path class="p" stroke="#1b1a1a" stroke-width="2.5" d="M164 172Q170 184 168 192"/>
-<path class="o v" d="M171 150Q182 164 178 172Q171 178 164 172Q160 164 171 150Z"/>
-<path class="p" d="M171 160Q176 166 173 170Q168 170 168 166Z"/>
-<circle class="o p" cx="171" cy="194" r="7"/>
+<path d="M94 166Q96 186 114 194" fill="none" stroke="#1b1a1a" stroke-width="19" stroke-linecap="round"/><path d="M94 166Q96 186 114 194" fill="none" stroke="#f6f2e9" stroke-width="11" stroke-linecap="round"/>
+<path d="M162 166Q160 186 142 194" fill="none" stroke="#1b1a1a" stroke-width="19" stroke-linecap="round"/><path d="M162 166Q160 186 142 194" fill="none" stroke="#f6f2e9" stroke-width="11" stroke-linecap="round"/>
+<path class="o p" d="M117 172L139 172L139 212L117 212Z"/>
+<path class="p" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round" d="M117 172Q122 186 126 176Q130 192 134 178L139 172Z"/>
+<path class="o v" d="M128 140Q142 156 138 166Q128 174 118 166Q114 156 128 140Z"/>
+<path class="p" d="M128 154Q134 160 131 165Q125 165 124 160Z"/>
+<circle class="o p" cx="114" cy="196" r="8"/><circle class="o p" cx="142" cy="196" r="8"/>
 <path class="i" d="M76 106Q70 56 128 52Q186 56 180 106L186 128Q170 124 164 112L92 112Q86 124 70 128Z" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
 <ellipse class="o l" cx="128" cy="104" rx="46" ry="42"/>
 <path class="o p" d="M82 96Q86 52 128 52Q170 52 174 96Q168 76 156 76L150 86L140 74L128 84L116 74L106 86L100 76Q88 76 82 96Z"/>
