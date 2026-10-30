@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute jowangshin: little hearth goddess popping out of the kitchen cauldron, flame topknot, offering a bowl of clear water -->
+<!-- hearth -->
+<path d="M30 246 L40 196 Q128 182 216 196 L226 246 Q128 254 30 246Z" fill="#9a948b"/>
+<path d="M62 232 Q58 208 78 206 L92 206 Q96 230 92 238Z" fill="#55514c" stroke-width="3"/>
+<path d="M164 238 Q160 206 176 206 L190 206 Q198 220 194 236Z" fill="#55514c" stroke-width="3"/>
+<path d="M104 242 Q102 214 128 208 Q154 214 152 242Z" fill="#1b1a1a"/>
+<path d="M114 242 Q106 224 124 214 Q122 228 130 226 Q132 222 134 216 Q148 226 142 242Z" fill="#c8352b" stroke-width="3"/>
+<path d="M122 242 Q120 232 128 228 Q136 234 134 242Z" fill="#f6f2e9" stroke-width="2.5"/>
+<!-- pot -->
+<path d="M50 150 Q40 192 66 200 Q128 210 190 200 Q216 192 206 150Z" fill="#1b1a1a"/>
+<path d="M60 160 Q56 184 74 190" fill="none" stroke="#55514c" stroke-width="4"/>
+<path d="M44 148 Q128 166 212 148 L214 160 Q128 180 42 160Z" fill="#55514c" stroke-width="4"/>
+<!-- body in pot -->
+<path d="M84 160 L90 128 Q128 118 166 128 L172 160Q128 170 84 160Z" fill="#f6f2e9"/>
+<path d="M112 124 L128 148 L144 124" fill="none" stroke-width="4"/>
+<path d="M118 138 Q128 152 138 138 Q132 160 128 160 Q124 160 118 138Z" fill="#c8352b" stroke-width="3"/>
+<!-- head -->
+<path d="M82 88 Q80 46 128 46 Q176 46 174 88 Q174 124 128 126 Q82 124 82 88Z" fill="#f6f2e9"/>
+<path d="M80 86 Q76 40 128 38 Q180 40 176 86 Q168 60 128 62 Q88 60 80 86Z" fill="#1b1a1a"/>
+<path d="M94 78 Q128 52 162 78" fill="none" stroke="#55514c" stroke-width="3"/>
+<path d="M98 100 Q106 92 114 100 M142 100 Q150 92 158 100" fill="none" stroke-width="4"/>
+<ellipse cx="94" cy="110" rx="9" ry="5" fill="#d4cec3" stroke="none"/><ellipse cx="162" cy="110" rx="9" ry="5" fill="#d4cec3" stroke="none"/>
+<path d="M120 110 Q128 118 136 110" fill="none" stroke-width="3.5"/>
+<!-- flame topknot -->
+<path d="M128 4 Q148 24 142 38 Q156 30 154 20 Q176 44 160 62 Q128 72 98 62 Q82 42 104 20 Q104 32 114 38 Q106 20 128 4Z" fill="#c8352b"/>
+<path d="M128 26 Q140 42 134 54 Q128 62 120 54 Q116 42 128 26Z" fill="#f6f2e9" stroke-width="3"/>
+<!-- bowl + hands -->
+<path d="M96 168 Q92 142 104 138 L122 150 Q110 160 112 170Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M160 168 Q164 142 152 138 L134 150 Q146 160 144 170Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M98 150 L158 150 Q156 176 128 178 Q100 176 98 150Z" fill="#f6f2e9"/>
+<ellipse cx="128" cy="150" rx="30" ry="7" fill="#d4cec3" stroke-width="3.5"/>
+<path d="M114 150 Q128 154 142 150" fill="none" stroke="#f6f2e9" stroke-width="2.5"/>
+<circle cx="104" cy="170" r="8" fill="#f6f2e9" stroke-width="3.5"/><circle cx="152" cy="170" r="8" fill="#f6f2e9" stroke-width="3.5"/>
+</svg>

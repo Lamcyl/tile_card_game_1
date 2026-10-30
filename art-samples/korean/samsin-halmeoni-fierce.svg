@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce samsin: radiant, wind-swept guardian grandmother, palm raised in a ward, newborn clutched to her chest -->
+<!-- halo rays -->
+<circle cx="128" cy="76" r="62" fill="#c9a23a"/>
+<path d="M196 18 L196 44 L174 30Z M60 18 L82 30 L60 44Z M232 76 L206 88 L206 64Z M24 76 L50 64 L50 88Z" fill="#c9a23a" stroke-width="3"/>
+<circle cx="128" cy="76" r="48" fill="none" stroke="#f6f2e9" stroke-width="4"/>
+<!-- wild hair -->
+<path d="M82 70 Q50 100 62 150 Q50 170 56 200 Q76 170 88 186 Q94 150 96 120Z M174 70 Q206 100 194 150 Q206 170 200 200 Q180 170 168 186 Q162 150 160 120Z" fill="#d4cec3"/>
+<path d="M70 120 Q64 150 70 176 M186 120 Q192 150 186 176" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- skirt -->
+<path d="M96 168 L164 168 Q222 196 240 244 Q130 254 14 244 Q34 196 96 168Z" fill="#f6f2e9"/>
+<path d="M104 190 Q84 216 62 240 M128 188 L128 248 M152 190 Q172 216 196 242 M110 178 Q112 210 108 244" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M92 176 Q128 188 164 176" fill="none" stroke="#c9a23a" stroke-width="6"/>
+<!-- body -->
+<path d="M90 134 Q128 120 166 134 L172 180 Q128 194 84 180Z" fill="#f6f2e9"/>
+<path d="M108 128 L128 166 L148 128" fill="none" stroke="#1b1a1a" stroke-width="4"/>
+<!-- left arm holding bundle -->
+<path d="M90 138 Q56 150 54 196 Q92 214 130 196 L110 160Z" fill="#f6f2e9"/>
+<path d="M60 190 Q92 204 124 192" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M92 190 Q96 168 118 166 Q136 168 138 188 Q134 210 112 210 Q94 208 92 190Z" fill="#c8352b"/>
+<path d="M98 184 Q116 194 134 184" fill="none" stroke="#f6f2e9" stroke-width="3"/>
+<circle cx="116" cy="174" r="9" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="132" cy="192" r="8" fill="#f6f2e9" stroke-width="3"/>
+<!-- right arm raised -->
+<path d="M160 140 Q196 140 214 108 L240 126 Q216 170 176 182Z" fill="#f6f2e9"/>
+<path d="M190 150 Q216 146 232 128" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M200 112 Q196 86 206 80 Q212 78 214 84 L216 70 Q222 64 226 70 L226 80 Q232 74 236 80 Q238 92 232 110 Q226 126 212 126Z" fill="#f6f2e9" stroke-width="3.5"/>
+<!-- head -->
+<path d="M90 74 Q92 38 128 38 Q164 38 166 74 Q170 112 128 120 Q86 112 90 74Z" fill="#f6f2e9"/>
+<path d="M86 78 Q84 30 128 26 Q172 30 170 78 Q158 52 128 54 Q98 52 86 78Z" fill="#d4cec3"/>
+<circle cx="128" cy="26" r="15" fill="#d4cec3"/><path d="M104 28 L152 24" stroke="#1b1a1a" stroke-width="9"/><path d="M104 28 L152 24" stroke="#c9a23a" stroke-width="4.5"/><path d="M86 52 L170 52" stroke="#c9a23a" stroke-width="5"/>
+<!-- stern face -->
+<path d="M96 70 L120 80 L118 86 L94 78Z M160 70 L136 80 L138 86 L162 78Z" fill="#55514c" stroke-width="2.5"/>
+<path d="M98 88 Q108 82 118 90 Q108 94 98 88Z M138 90 Q148 82 158 88 Q148 94 138 90Z" fill="#1b1a1a" stroke-width="2.5"/>
+<path d="M104 100 Q100 106 104 110 M152 100 Q156 106 152 110" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+<path d="M124 92 L122 104 L128 106" fill="none" stroke-width="2.5"/>
+<path d="M112 110 Q128 106 144 110" fill="none" stroke-width="3.5"/>
+</svg>

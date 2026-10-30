@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce yeomra: enthroned judge, pyramid silhouette, red face roaring, tablet slammed up like a verdict -->
+<!-- throne screen -->
+<path d="M36 244 L36 90 Q36 30 128 24 Q220 30 220 90 L220 244Z" fill="#55514c"/>
+<path d="M56 244 L56 96 Q56 52 128 48 Q200 52 200 96 L200 244" fill="none" stroke="#9a948b" stroke-width="4"/>
+<path d="M72 244 L72 104 Q72 70 128 66 Q184 70 184 104 L184 244" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- robe -->
+<path d="M20 244 Q30 196 80 164 L176 164 Q226 196 236 244 Q128 254 20 244Z" fill="#c8352b"/>
+<path d="M90 170 L128 244 L166 170" fill="none" stroke="#1b1a1a" stroke-width="4"/>
+<path d="M60 220 Q128 236 196 220" fill="none" stroke="#1b1a1a" stroke-width="3"/>
+<path d="M102 164 L128 196 L154 164Z" fill="#f6f2e9" stroke-width="3"/>
+<!-- left sleeve resting heavy -->
+<path d="M82 160 Q36 166 22 214 L62 232 Q78 200 100 188Z" fill="#1b1a1a"/>
+<path d="M34 214 L66 226" stroke="#c8352b" stroke-width="5" fill="none"/>
+<!-- right arm raised with tablet -->
+<path d="M170 164 Q216 150 226 106 L202 100 Q192 134 156 146Z" fill="#1b1a1a"/>
+<path d="M226 106 L238 20 L212 14 L200 100Z" fill="#f6f2e9"/>
+<path d="M208 34 L232 38 M206 50 L230 54" stroke="#9a948b" stroke-width="3" fill="none"/>
+<circle cx="213" cy="102" r="11" fill="#f6f2e9" stroke-width="3.5"/>
+<!-- beard -->
+<path d="M74 118 L56 132 L74 134 L62 156 L84 148 L90 170 L102 156 L128 186 L154 156 L166 170 L172 148 L194 156 L182 134 L200 132 L182 118 L170 140 Q128 120 86 140Z" fill="#55514c" stroke-width="3"/>
+<!-- head -->
+<path d="M70 98 Q68 54 128 52 Q188 54 186 98 Q190 150 128 158 Q66 150 70 98Z" fill="#c8352b"/>
+<!-- brows as flames -->
+<path d="M70 94 L74 68 L90 82 L96 62 L116 96 L90 104Z M186 94 L182 68 L166 82 L160 62 L140 96 L166 104Z" fill="#1b1a1a" stroke-width="3"/>
+<!-- bulging eyes -->
+<circle cx="102" cy="108" r="14" fill="#f6f2e9"/><circle cx="154" cy="108" r="14" fill="#f6f2e9"/>
+<circle cx="106" cy="110" r="6" fill="#1b1a1a" stroke="none"/><circle cx="150" cy="110" r="6" fill="#1b1a1a" stroke="none"/>
+<path d="M88 96 L116 108 M168 96 L140 108" fill="none" stroke-width="5"/>
+<path d="M124 112 L120 130 L128 134 L136 130 L132 112" fill="#9a948b" stroke-width="3"/>
+<!-- mouth + beard -->
+<path d="M96 138 Q128 126 160 138 Q150 164 128 166 Q106 164 96 138Z" fill="#1b1a1a"/>
+<path d="M104 140 L112 150 L120 140 M136 140 L144 150 L152 140" fill="#f6f2e9" stroke-width="2.5"/>
+<path d="M118 160 Q128 154 138 160 Q128 166 118 160Z" fill="#c8352b" stroke-width="2"/>
+<!-- hat with great wings -->
+<path d="M84 62 L88 20 Q128 4 168 20 L172 62 Q128 52 84 62Z" fill="#1b1a1a"/>
+<path d="M86 60 L22 54 Q8 36 14 14 L92 36Z M170 60 L234 54 Q248 36 242 14 L164 36Z" fill="#9a948b" stroke-width="3.5"/>
+<path d="M30 48 L84 54 M226 48 L172 54 M22 30 L88 42 M234 30 L168 42" stroke="#1b1a1a" stroke-width="2.5" fill="none"/>
+<path d="M88 40 Q128 28 168 40" fill="none" stroke="#c8352b" stroke-width="6"/>
+<path d="M112 14 Q128 8 144 14" fill="none" stroke="#55514c" stroke-width="3"/>
+</svg>

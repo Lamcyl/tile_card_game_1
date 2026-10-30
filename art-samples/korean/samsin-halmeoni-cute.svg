@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute samsin halmeoni: round grandma in a bell of white skirt, cradling a newborn while toddlers cling to her -->
+<!-- toddler left -->
+<path d="M20 244 Q14 204 40 196 Q62 196 64 244Z" fill="#d4cec3"/>
+<circle cx="42" cy="176" r="19" fill="#f6f2e9"/>
+<circle cx="42" cy="150" r="8" fill="#1b1a1a"/><path d="M34 156 L50 156" stroke="#c9a23a" stroke-width="3"/>
+<path d="M33 176 Q36 172 39 176 M46 176 Q49 172 52 176" fill="none" stroke-width="3"/><path d="M38 184 Q42 188 46 184" fill="none" stroke-width="3"/>
+<ellipse cx="30" cy="184" rx="4" ry="3" fill="#d4cec3" stroke="none"/><ellipse cx="54" cy="184" rx="4" ry="3" fill="#d4cec3" stroke="none"/>
+<!-- toddler right -->
+<path d="M236 244 Q242 208 220 202 Q196 204 194 244Z" fill="#d4cec3"/>
+<circle cx="216" cy="184" r="18" fill="#f6f2e9"/>
+<path d="M200 176 Q204 160 216 164 Q228 160 232 176 Q216 168 200 176Z" fill="#1b1a1a" stroke-width="3"/>
+<path d="M207 186 Q210 182 213 186 M220 186 Q223 182 226 186" fill="none" stroke-width="3"/><circle cx="216" cy="194" r="3" fill="#1b1a1a" stroke="none"/>
+<!-- skirt -->
+<path d="M96 168 L160 168 Q216 200 232 244 Q128 252 24 244 Q40 200 96 168Z" fill="#f6f2e9"/>
+<path d="M92 196 Q80 222 66 242 M128 196 L128 246 M164 196 Q176 222 190 242" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- top -->
+<path d="M92 134 Q128 120 164 134 L172 176 Q128 190 84 176Z" fill="#f6f2e9"/>
+<path d="M106 128 L128 168 L150 128" fill="none" stroke="#1b1a1a" stroke-width="4"/>
+<path d="M122 164 Q108 180 116 190 M134 164 Q146 180 140 190" fill="#c9a23a" stroke-width="3"/>
+<!-- sleeves/arms cradling -->
+<path d="M92 138 Q62 150 64 188 Q96 204 124 190 L108 160Z" fill="#f6f2e9"/>
+<path d="M164 138 Q194 150 192 188 Q160 204 132 190 L148 160Z" fill="#f6f2e9"/>
+<!-- baby bundle -->
+<path d="M100 184 Q104 164 128 162 Q152 164 156 184 Q152 210 128 212 Q104 210 100 184Z" fill="#c8352b"/>
+<path d="M108 178 Q128 188 148 178" fill="none" stroke="#f6f2e9" stroke-width="3"/>
+<circle cx="128" cy="172" r="12" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M122 172 Q125 169 128 172 M130 172 Q133 169 136 172" fill="none" stroke-width="2.5"/><path d="M126 177 Q128 179 130 177" fill="none" stroke-width="2"/>
+<path d="M82 196 Q98 214 124 200 M174 196 Q158 214 132 200" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- head -->
+<circle cx="128" cy="40" r="22" fill="#d4cec3"/>
+<path d="M104 30 Q128 14 152 30" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M92 46 L168 30" stroke="#c9a23a" stroke-width="6"/><circle cx="168" cy="30" r="6" fill="#c9a23a" stroke-width="3"/>
+<path d="M76 96 Q74 52 128 52 Q182 52 180 96 Q182 140 128 142 Q74 140 76 96Z" fill="#f6f2e9"/>
+<path d="M76 92 Q70 54 128 48 Q186 54 180 92 Q168 66 128 66 Q88 66 76 92Z" fill="#d4cec3"/>
+<path d="M90 108 Q102 96 114 108 M142 108 Q154 96 166 108" fill="none" stroke-width="4"/>
+<path d="M88 100 L94 102 M168 100 L162 102" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<ellipse cx="90" cy="120" rx="10" ry="6" fill="#d4cec3" stroke="none"/><ellipse cx="166" cy="120" rx="10" ry="6" fill="#d4cec3" stroke="none"/>
+<path d="M124 116 Q128 120 132 116" fill="none" stroke-width="3"/>
+<path d="M112 126 Q128 144 144 126 Q128 132 112 126Z" fill="#f6f2e9" stroke-width="3.5"/>
+</svg>
