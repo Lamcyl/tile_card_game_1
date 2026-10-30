@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute ungnyeo: bear-eared girl in hanbok hugging a giant garlic bulb, mugwort sprig in her hair -->
+<path d="M176 118 Q204 140 192 186" fill="none" stroke-width="20"/><path d="M176 118 Q204 140 192 186" fill="none" stroke="#1b1a1a" stroke-width="12"/>
+<path d="M184 178 L204 176 L202 196 L182 198Z" fill="#c8352b" stroke-width="3"/>
+<path d="M96 150 Q76 214 54 228 L202 228 Q180 212 160 150Z" fill="#55514c"/>
+<path d="M92 190 L84 226 M116 196 L112 228 M146 196 L150 228 M170 190 L180 226" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M98 140 Q130 132 160 140 L168 170 Q130 182 92 170Z" fill="#f6f2e9"/>
+<path d="M114 140 L130 164 L148 140" fill="none" stroke-width="3.5"/>
+<path d="M130 162 L120 182 L130 176 L142 184Z" fill="#c8352b" stroke-width="3"/>
+<path d="M98 140 Q78 160 82 186" fill="none" stroke-width="30"/><path d="M98 140 Q78 160 82 186" fill="none" stroke="#f6f2e9" stroke-width="22"/>
+<path d="M160 140 Q184 160 150 190" fill="none" stroke-width="30"/><path d="M160 140 Q184 160 150 190" fill="none" stroke="#f6f2e9" stroke-width="22"/>
+<path d="M118 160 Q74 176 70 206 Q72 232 106 230 Q140 228 142 202 Q140 176 118 160Z" fill="#f6f2e9"/>
+<path d="M118 162 Q116 150 124 142" fill="none" stroke-width="4"/>
+<path d="M92 184 Q86 206 98 224 M108 180 Q106 204 106 228 M124 188 Q130 208 120 226" fill="none" stroke="#9a948b" stroke-width="3"/>
+<circle cx="84" cy="186" r="12" fill="#d4cec3"/><circle cx="146" cy="190" r="12" fill="#d4cec3"/>
+<path d="M78 180 l-2 -5 M85 177 l0 -6 M92 180 l3 -5 M140 184 l-2 -5 M147 181 l0 -6 M154 184 l3 -5" fill="none" stroke-width="3"/>
+<circle cx="78" cy="56" r="19" fill="#d4cec3"/><circle cx="166" cy="56" r="19" fill="#d4cec3"/>
+<circle cx="78" cy="58" r="9" fill="#9a948b" stroke="none"/><circle cx="166" cy="58" r="9" fill="#9a948b" stroke="none"/>
+<ellipse cx="122" cy="94" rx="56" ry="46" fill="#d4cec3"/>
+<path d="M66 92 Q66 42 122 40 Q178 42 178 92 Q160 62 122 64 Q84 62 66 92Z" fill="#1b1a1a"/>
+<path d="M66 90 Q62 118 70 138 L80 134 Q76 112 84 90Z M178 90 Q182 118 174 138 L164 134 Q168 112 160 90Z" fill="#1b1a1a"/>
+<ellipse cx="122" cy="114" rx="24" ry="17" fill="#f6f2e9"/>
+<path d="M114 106 Q122 100 130 106 Q128 114 122 116 Q116 114 114 106Z" fill="#1b1a1a" stroke-width="2"/>
+<path d="M122 116 L122 122 M112 124 Q122 130 132 124" fill="none" stroke-width="3"/>
+<ellipse cx="94" cy="92" rx="9" ry="11" fill="#1b1a1a" stroke-width="2"/><ellipse cx="150" cy="92" rx="9" ry="11" fill="#1b1a1a" stroke-width="2"/>
+<circle cx="97" cy="87" r="3.5" fill="#f6f2e9" stroke="none"/><circle cx="153" cy="87" r="3.5" fill="#f6f2e9" stroke="none"/>
+<ellipse cx="80" cy="112" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".75"/><ellipse cx="164" cy="112" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".75"/>
+<path d="M62 70 L50 40 M62 70 L40 56 M62 70 L56 34" fill="none" stroke-width="0"/>
+<path d="M64 76 Q54 68 52 54 Q66 56 70 68Z M60 82 Q44 80 38 68 Q54 64 64 74Z M68 70 Q66 52 76 44 Q82 56 74 70Z" fill="#9a948b" stroke-width="3"/>
+</svg>
