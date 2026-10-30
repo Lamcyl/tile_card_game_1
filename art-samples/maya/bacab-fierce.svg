@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce bacab: straining sky-bearer, one knee down, spiked turtle shell taking the weight of a cracking sky slab -->
+<!-- sky slab -->
+<path d="M6 36 L250 14 L250 52 L6 78Z" fill="#d4cec3"/>
+<path d="M6 36 L250 14" stroke-width="5" fill="none"/>
+<path d="M14 54 L242 32" stroke="#9a948b" stroke-width="2" fill="none"/>
+<path d="M30 40 L50 38 L50 56 L30 58Z M72 36 L92 34 L92 52 L72 54Z M160 29 L180 27 L180 44 L160 46Z M202 25 L222 23 L222 40 L202 42Z" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="40" cy="48" r="4" fill="#c8352b" stroke-width="2"/><circle cx="82" cy="44" r="4" fill="#c8352b" stroke-width="2"/><circle cx="170" cy="37" r="4" fill="#c8352b" stroke-width="2"/><circle cx="212" cy="33" r="4" fill="#c8352b" stroke-width="2"/>
+<path d="M116 33 L124 26 L120 40 L132 36 L126 48 L136 54 L130 62 L134 72" fill="none" stroke="#c8352b" stroke-width="3"/>
+<path d="M132 70 L138 82 L146 70" fill="#d4cec3" stroke-width="3"/>
+<!-- rear leg -->
+<path d="M156 196 L190 232 L236 236" stroke-width="24" fill="none"/><path d="M156 196 L190 232 L236 236" stroke-width="16" stroke="#f6f2e9" fill="none"/>
+<path d="M226 226 L246 232 L246 244 L222 244Z" fill="#9a948b"/>
+<!-- shell -->
+<path d="M98 160 L88 143 L103 132 L99 113 L116 108 L119 89 L135 92 L144 77 L158 86 L172 77 L181 92 L197 89 L200 108 L217 113 L213 132 L228 143 L218 160 L220 194 Q158 214 96 194 Z" fill="#9a948b"/>
+<path d="M108 156 Q158 128 208 156 M114 190 Q158 164 204 190" fill="none" stroke="#55514c" stroke-width="3"/>
+<path d="M134 108 L158 98 L182 108 L180 136 L158 146 L136 136Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M108 156 L122 180 L114 192 M208 156 L196 180 L204 192" fill="none" stroke-width="3"/>
+<circle cx="158" cy="122" r="8" fill="#c8352b" stroke-width="3"/>
+<!-- far arm (behind head) -->
+<path d="M104 140 Q56 120 34 84" fill="none" stroke-width="22"/><path d="M104 140 Q56 120 34 84" fill="none" stroke-width="14" stroke="#d4cec3"/>
+<circle cx="30" cy="82" r="12" fill="#d4cec3"/>
+<!-- torso -->
+<path d="M96 128 Q120 112 146 130 L170 196 L124 208 Q100 180 96 128Z" fill="#f6f2e9"/>
+<path d="M112 150 Q126 160 142 150 M116 170 Q130 180 148 170" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M126 198 Q150 208 176 192 L180 206 Q150 224 124 214Z" fill="#c8352b"/>
+<!-- front leg -->
+<path d="M150 200 L100 200 L92 236" stroke-width="22" fill="none"/><path d="M150 200 L100 200 L92 236" stroke-width="16" stroke="#f6f2e9" fill="none"/>
+<path d="M70 230 Q90 224 112 232 L112 244 L70 244Z" fill="#9a948b"/>
+<!-- near arm up -->
+<path d="M112 140 Q132 108 110 76" fill="none" stroke-width="22"/><path d="M112 140 Q132 108 110 76" fill="none" stroke-width="14" stroke="#f6f2e9"/>
+<path d="M126 118 L136 120 M124 104 L134 104" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<circle cx="108" cy="76" r="13" fill="#f6f2e9"/><path d="M100 70 L116 74 M100 78 L116 82" stroke-width="2" fill="none"/>
+<!-- beard -->
+<path d="M42 164 Q28 190 46 210 L54 196 L62 220 L72 200 L82 216 L88 192 Q100 172 92 158Z" fill="#f6f2e9"/>
+<path d="M52 178 L56 194 M66 176 L68 198 M80 174 L82 194" stroke="#9a948b" stroke-width="2.5" fill="none"/>
+<!-- head -->
+<path d="M96 128 Q98 96 66 94 Q36 98 34 124 L20 138 L34 146 L32 156 L40 170 Q66 184 88 168 Q100 150 96 128Z" fill="#f6f2e9"/>
+<path d="M50 100 Q60 94 72 100 M54 108 Q66 102 80 110" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+<circle cx="92" cy="140" r="8" fill="#f6f2e9"/>
+<path d="M32 110 L72 108 L66 122 Q46 128 36 120Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M34 108 L76 100" stroke-width="6" fill="none"/>
+<path d="M40 118 L62 118 L58 126 Q48 128 42 124Z" fill="#c8352b" stroke-width="2"/>
+<circle cx="52" cy="122" r="3" fill="#1b1a1a" stroke="none"/>
+<path d="M34 158 L58 160 L56 170 L40 168Z" fill="#1b1a1a" stroke-width="3"/>
+<path d="M36 158 L40 166 L44 158 M48 160 L52 168 L56 160" fill="#f6f2e9" stroke-width="2"/>
+<path d="M24 142 L34 144" stroke-width="2.5"/>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute bacab: kindly old sky-bearer peeking out of a big turtle shell, holding the sky arch overhead -->
+<!-- sky arch -->
+<path d="M26 84 Q128 -14 230 84" fill="none" stroke-width="28"/>
+<path d="M26 84 Q128 -14 230 84" fill="none" stroke-width="20" stroke="#d4cec3"/>
+<path d="M40 70 Q128 -2 216 70" fill="none" stroke="#9a948b" stroke-width="2" stroke-dasharray="1 9"/>
+<circle cx="128" cy="35" r="11" fill="#c8352b" stroke-width="3"/><circle cx="128" cy="35" r="4" fill="#f6f2e9" stroke-width="2"/>
+<path d="M78 56 L81 49 L84 56 L91 59 L84 62 L81 69 L78 62 L71 59Z M172 56 L175 49 L178 56 L185 59 L178 62 L175 69 L172 62 L165 59Z" fill="#f6f2e9" stroke-width="2.5"/>
+<path d="M30 92 L26 112 M40 94 L42 116 M22 88 L14 104" stroke="#c8352b" stroke-width="4" fill="none"/>
+<path d="M226 92 L230 112 M216 94 L214 116 M234 88 L242 104" stroke="#c8352b" stroke-width="4" fill="none"/>
+<!-- arms -->
+<path d="M70 150 Q40 130 36 90" fill="none" stroke-width="20"/><path d="M70 150 Q40 130 36 90" fill="none" stroke-width="12" stroke="#f6f2e9"/>
+<path d="M186 150 Q216 130 220 90" fill="none" stroke-width="20"/><path d="M186 150 Q216 130 220 90" fill="none" stroke-width="12" stroke="#f6f2e9"/>
+<circle cx="36" cy="86" r="11" fill="#f6f2e9"/><circle cx="220" cy="86" r="11" fill="#f6f2e9"/>
+<!-- feet -->
+<path d="M52 200 Q36 214 46 232 Q72 240 86 222Z" fill="#d4cec3"/><path d="M48 224 L52 232 M58 228 L62 236 M68 230 L72 236" stroke-width="2.5" fill="none"/>
+<path d="M204 200 Q220 214 210 232 Q184 240 170 222Z" fill="#d4cec3"/><path d="M208 224 L204 232 M198 228 L194 236 M188 230 L184 236" stroke-width="2.5" fill="none"/>
+<!-- shell -->
+<path d="M34 196 Q28 100 128 94 Q228 100 222 196 Q128 214 34 196Z" fill="#9a948b"/>
+<path d="M44 196 Q128 212 212 196" fill="none" stroke-width="3"/>
+<path d="M149 128 L128 140 L107 128 L107 104 L128 92 L149 104Z" fill="#d4cec3" stroke-width="3"/><path d="M95 145 L76 156 L57 145 L57 123 L76 112 L95 123Z" fill="#d4cec3" stroke-width="3"/><path d="M199 145 L180 156 L161 145 L161 123 L180 112 L199 123Z" fill="#d4cec3" stroke-width="3"/><path d="M74 187 L58 196 L42 187 L42 169 L58 160 L74 169Z" fill="#d4cec3" stroke-width="3"/><path d="M214 187 L198 196 L182 187 L182 169 L198 160 L214 169Z" fill="#d4cec3" stroke-width="3"/><path d="M137 121 L128 126 L119 121 L119 111 L128 106 L137 111Z" fill="#c8352b" stroke-width="3"/>
+<!-- neck rings -->
+<path d="M84 190 Q128 214 172 190 L168 168 L88 168Z" fill="#d4cec3"/>
+<path d="M92 192 Q128 206 164 192" fill="none" stroke-width="2.5"/>
+<!-- beard -->
+<path d="M84 180 Q82 214 128 240 Q174 214 172 180Z" fill="#f6f2e9"/>
+<path d="M112 206 Q128 218 144 206 M122 220 L128 230 L134 220" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+<!-- head -->
+<ellipse cx="128" cy="150" rx="46" ry="40" fill="#f6f2e9"/>
+<circle cx="82" cy="152" r="9" fill="#f6f2e9"/><circle cx="174" cy="152" r="9" fill="#f6f2e9"/>
+<path d="M104 118 Q128 108 152 118 M110 126 Q128 120 146 126" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+<!-- brows -->
+<path d="M84 142 Q100 122 122 138 Q104 138 90 150Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M172 142 Q156 122 134 138 Q152 138 166 150Z" fill="#f6f2e9" stroke-width="3"/>
+<!-- eyes -->
+<path d="M94 154 Q103 146 112 154 M144 154 Q153 146 162 154" fill="none" stroke-width="4"/>
+<circle cx="126" cy="164" r="8" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="86" cy="168" r="6" fill="#c8352b" stroke="none" opacity=".75"/><circle cx="170" cy="168" r="6" fill="#c8352b" stroke="none" opacity=".75"/>
+<!-- moustache / smile -->
+<path d="M128 176 Q108 170 92 182 Q106 192 128 184 Q150 192 164 182 Q148 170 128 176Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M116 192 Q128 200 140 192" fill="none" stroke-width="3"/>
+</svg>
