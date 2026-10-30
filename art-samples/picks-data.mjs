@@ -1,0 +1,65 @@
+// The user's chosen designs per set, shared by build-picks.mjs and build-collection.mjs.
+// Per set: [number, slug, name, variant, feedback that was applied, optional "before" file]
+export const SETS = {
+  yokai: { title: 'Yokai Picks', picks: [
+  [3, 'tengu', 'Karasu-tengu', 'fierce', 'Feet redone; head reshaped to read more like a crow.'],
+  [4, 'kitsune', 'Kitsune', 'fierce', 'v4: the v2 pose kept, with tapered front legs, a chest bib, and hind legs tucked under the haunches. Shown next to v2.', 'kitsune-fierce-v2.svg'],
+  [5, 'tanuki', 'Tanuki', 'fierce', 'Clear ink outline restored around the body.'],
+  [8, 'chochin-obake', 'Chōchin-obake', 'fierce', 'Right side cleaned up; mouth made unambiguous.'],
+  [9, 'hitotsume-kozo', 'Hitotsume-kozō', 'fierce', 'One clean outline around the head.'],
+  [10, 'nurikabe', 'Nurikabe', 'cute', null],
+  [10, 'nurikabe', 'Nurikabe', 'fierce', null],
+  [11, 'yuki-onna', 'Yuki-onna', 'fierce', null],
+  [16, 'raijin', 'Raijin', 'fierce', 'Fiercer: broader, more muscular body and stance.'],
+  [17, 'komainu', 'Komainu', 'fierce', null],
+  [19, 'kamaitachi', 'Kamaitachi', 'fierce', 'Forelimbs redrawn as clean sickle arms.'],
+  [20, 'orochi', 'Yamata no Orochi', 'fierce', null],
+  ] },
+  egypt: { title: 'Egyptian Picks', picks: [
+  [1, 'anubis', 'Anubis', 'fierce', null],
+  [2, 'ra', 'Ra', 'fierce', null],
+  [16, 'bes', 'Bes', 'fierce', 'v3: fiercer body: square shoulders, angular muscular chest, thick arms with a clenched fist, wider lower stance, dark spotted kilt with a jagged hem. Shown next to v2.'],
+  [17, 'bennu', 'Bennu', 'fierce', null],
+  [18, 'wadjet', 'Wadjet', 'cute', null],
+  [18, 'wadjet', 'Wadjet', 'fierce', null],
+  [20, 'isis', 'Isis', 'fierce', null],
+  ] },
+  chinese: { title: 'Chinese Picks', picks: [
+  [14, 'kui', 'Kui', 'fierce', null],
+  [16, 'wukong', 'Sun Wukong', 'fierce', null],
+  [18, 'leigong', 'Lei Gong', 'fierce', null],
+  [20, 'nezha', 'Nezha', 'fierce', null],
+  ] },
+  greek: { title: 'Greek Picks', picks: [
+  [4, 'cerberus', 'Cerberus', 'fierce', null],
+  [10, 'siren', 'Siren', 'cute', null],
+  [13, 'talos', 'Talos', 'fierce', null],
+  [15, 'typhon', 'Typhon', 'fierce', null],
+  [18, 'hades', 'Hades', 'fierce', null],
+  ] },
+  norse: { title: 'Norse Picks', picks: [
+  [6, 'jotunn', 'Jötunn', 'fierce-v2', null],
+  [12, 'ravens', 'Huginn and Muninn', 'fierce', null],
+  ] },
+  slavic: { title: 'Slavic Picks', picks: [
+  [13, 'alkonost', 'Alkonost', 'cute', null],
+  [17, 'perun', 'Perun', 'cute', null],
+  [18, 'veles', 'Veles', 'fierce', null],
+  [20, 'chernobog', 'Chernobog', 'cute', null],
+  [20, 'chernobog', 'Chernobog', 'fierce', null],
+  ] },
+  maya: { title: 'Maya Picks', picks: [
+  [9, 'xtabay', 'Xtabay', 'cute', null],
+  [16, 'ix-chel', 'Ix Chel', 'cute', null],
+  [18, 'ah-puch', 'Ah Puch', 'fierce', null],
+  ] },
+  korean: { title: 'Korean Picks', picks: [
+  [9, 'dalgyal-gwisin', 'Dalgyal Gwisin', 'fierce', 'Arms redone into a natural reaching pose.'],
+  [16, 'jeoseung-saja', 'Jeoseung Saja', 'fierce', 'Both arms made the same size.'],
+  [6, 'samjok-o', 'Samjok-o', 'cute', null],
+  [6, 'samjok-o', 'Samjok-o', 'fierce', null],
+  [15, 'sansin', 'Sansin', 'fierce', null],
+  [19, 'jowangshin', 'Jowangshin', 'cute', null],
+  [20, 'jangseung', 'Jangseung', 'fierce', null],
+  ] },
+};
