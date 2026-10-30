@@ -10,8 +10,8 @@ Every version is kept; the **chosen** column is the current pick.
 | 18 | Lei Gong | `leigong-fierce.svg` |
 | 20 | Nezha | `nezha-fierce.svg` |
 
-Being redrawn front-facing (originals kept): Long (1), Fenghuang (2), Baihu (4), Xuanwu (5), as `<slug>-cute-v2.svg` and `<slug>-fierce-v2.svg`.
+Redrawn front-facing, awaiting the owner's choice (originals kept): Long (1), Fenghuang (2), Baihu (4), Xuanwu (5), as `<slug>-cute-v2.svg` and `<slug>-fierce-v2.svg`.
 
 Not chosen (kept for reference): qilin, nian, jiangshi, taotie, hundun, qiongqi, pixiu, baize, jingwei, shanxiao, zhongkui, yutu, and the other cute variants.
 
-Gallery: `../chinese-gallery.html` (all 20, built by `node ../build-gallery.mjs chinese`).
+Galleries: `../chinese-gallery.html` (all 20, built by `node ../build-gallery.mjs chinese`) and `../chinese-picks.html` (picks and front-facing redraws, built by `node ../build-picks.mjs chinese`).
