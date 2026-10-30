@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.s{stroke:#1b1a1a;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}</style>
+<path class="s d" stroke-width="5"  d="M176 168 Q214 140 240 112 Q238 150 218 170Z"/>
+<path class="s l" stroke-width="5"  d="M180 178 Q222 166 248 150 Q238 186 214 190Z"/>
+<path class="s l" stroke-width="5"  d="M178 150 Q204 116 226 90 Q228 130 206 154Z"/>
+<path class="s n" style="stroke:#1b1a1a" stroke-width="6" d="M112 196 L110 224 M146 198 L150 224"/>
+<path class="s n" style="stroke:#1b1a1a" stroke-width="5" d="M96 226 L110 224 L122 226 M138 226 L150 224 L162 226"/>
+<path class="s p" stroke-width="7"  d="M82 172 Q80 128 140 126 Q196 128 198 176 Q198 212 140 214 Q84 212 82 172Z"/>
+<path class="l"  d="M92 196 Q140 222 192 192 Q190 212 140 214 Q96 212 92 196Z"/>
+<path class="s l" stroke-width="5"  d="M132 160 Q164 142 196 156 Q206 178 180 196 Q146 200 132 160Z"/>
+<path class="s n" style="stroke:#9a948b" stroke-width="2.5" d="M148 170 Q166 166 182 172 M154 182 Q168 180 180 184"/>
+<path class="s l" stroke-width="5"  d="M108 54 Q110 24 140 14 Q132 34 130 54Z"/>
+<path class="s l" stroke-width="5"  d="M126 52 Q136 30 164 28 Q152 42 146 58Z"/>
+<path class="s v" stroke-width="3" d="M140 14 Q150 8 152 18 Q146 22 140 14Z"/>
+<circle class="s p" stroke-width="7" cx="112" cy="106" r="58"/>
+<path class="l"  d="M70 132 Q112 168 160 130 Q150 160 112 164 Q78 160 70 132Z"/>
+<path class="s m" stroke-width="5"  d="M62 100 L34 112 L62 126Z"/>
+<circle class="s d" stroke-width="5" cx="28" cy="116" r="15"/>
+<circle class="l" cx="23" cy="111" r="4"/>
+<ellipse class="i" cx="92" cy="102" rx="12" ry="14"/><circle class="p" cx="87.8" cy="97.1" r="5"/><circle class="p" cx="96.2" cy="107.6" r="2.4"/>
+<path class="i"  d="M70 88 Q90 76 118 86 L116 92 Q92 84 72 96Z"/>
+<circle fill="#9a948b" opacity=".55" cx="72" cy="128" r="2.6"/><circle fill="#9a948b" opacity=".55" cx="78" cy="131" r="2.6"/><circle fill="#9a948b" opacity=".55" cx="84" cy="128" r="2.6"/>
+<circle fill="#9a948b" opacity=".55" cx="116" cy="130" r="2.6"/><circle fill="#9a948b" opacity=".55" cx="122" cy="133" r="2.6"/><circle fill="#9a948b" opacity=".55" cx="128" cy="130" r="2.6"/>
+<path class="s n" style="stroke:#9a948b" stroke-width="4" d="M20 236 Q40 226 60 236 Q80 246 100 236 M180 236 Q200 226 220 236"/>
+</svg>
