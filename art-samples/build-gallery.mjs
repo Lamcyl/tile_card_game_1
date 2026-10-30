@@ -1,4 +1,4 @@
-// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese
+// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek
 // Only the original drawings (<slug>-cute.svg and <slug>-fierce.svg) are shown.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 
@@ -79,6 +79,32 @@ const SETS = {
       leigong: ['Lei Gong', 'Thunder god'],
       yutu: ['Yutu', 'Jade Rabbit of the moon'],
       nezha: ['Nezha', 'Child deity on fire wheels'],
+    },
+  },
+  greek: {
+    title: 'Greek Sketchbook', heading: 'Greek sketchbook', seal: 'ΜΥΘΟΣ',
+    intro: 'Twenty Greek monsters, beasts and gods in the same black-and-white ink, chibi style.',
+    names: {
+      medusa: ['Medusa', 'Gorgon with snake hair'],
+      cyclops: ['Cyclops', 'One-eyed giant smith'],
+      minotaur: ['Minotaur', 'Bull-headed giant of the labyrinth'],
+      cerberus: ['Cerberus', 'Three-headed hound of the underworld'],
+      hydra: ['Hydra', 'Many-headed water serpent'],
+      chimera: ['Chimera', 'Lion, goat and serpent in one'],
+      griffin: ['Griffin', 'Eagle-headed winged lion'],
+      pegasus: ['Pegasus', 'Winged horse'],
+      harpy: ['Harpy', 'Bird-woman of the storm winds'],
+      siren: ['Siren', 'Singer of the rocks'],
+      centaur: ['Centaur', 'Horse-bodied archer'],
+      satyr: ['Satyr', 'Goat-legged piper'],
+      talos: ['Talos', 'Bronze giant automaton'],
+      scylla: ['Scylla', 'Sea monster of the strait'],
+      typhon: ['Typhon', 'Father of monsters'],
+      zeus: ['Zeus', 'King of the gods'],
+      poseidon: ['Poseidon', 'God of the sea'],
+      hades: ['Hades', 'Lord of the underworld'],
+      athena: ['Athena', 'Goddess of wisdom and war'],
+      'nemean-lion': ['Nemean Lion', 'Lion with an unbreakable hide'],
     },
   },
 };
