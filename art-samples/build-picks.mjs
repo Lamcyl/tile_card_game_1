@@ -45,7 +45,6 @@ const SETS = {
   [12, 'ravens', 'Huginn and Muninn', 'fierce', null],
   ] },
   slavic: { title: 'Slavic Picks', picks: [
-  [7, 'vodyanoy', 'Vodyanoy', 'fierce', 'Simplified the bottom: boat removed, short beard, hands resting on one clean waterline.', 'vodyanoy-fierce.svg'],
   [13, 'alkonost', 'Alkonost', 'cute', null],
   [17, 'perun', 'Perun', 'cute', null],
   [18, 'veles', 'Veles', 'fierce', null],
