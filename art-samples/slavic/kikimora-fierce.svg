@@ -12,8 +12,8 @@
 </g>
 <path d="M170 30 L176 12 L184 28Z M214 66 L226 54 L228 70Z" fill="#9a948b" stroke-width="3"/>
 <!-- far leg -->
-<g fill="none"><path d="M156 170 Q126 184 118 206 Q124 220 150 226" stroke="#1b1a1a" stroke-width="15"/><path d="M156 170 Q126 184 118 206 Q124 220 150 226" stroke="#d4cec3" stroke-width="7"/></g>
-<path d="M150 226 L116 238 M150 226 L120 246 M150 226 L168 244" fill="none" stroke-width="4.5"/>
+<path d="M132 190 L122 212 L144 232" fill="none" stroke="#1b1a1a" stroke-width="10"/><path d="M132 190 L122 212 L144 232" fill="none" stroke="#d4cec3" stroke-width="3"/>
+<path d="M144 232 L118 240 M144 232 L124 248 M144 232 L158 246" fill="none" stroke-width="4.5"/>
 <!-- torso, gaunt and bent -->
 <path d="M96 108 Q124 98 150 116 Q176 140 168 184 L142 190 Q138 150 100 134Z" fill="#d4cec3"/>
 <path d="M118 126 L132 138 M126 120 L142 134 M134 122 L148 136 M140 152 L150 156" stroke-width="2.5" fill="none"/>
@@ -21,14 +21,13 @@
 <path d="M96 108 Q150 104 178 150 L200 196 L176 186 L178 214 L158 192 L146 214 L136 188 L118 206 L124 168 Q110 140 90 128Z" fill="#55514c"/>
 <path d="M104 112 Q140 112 168 146" fill="none" stroke="#c8352b" stroke-width="4" stroke-dasharray="6 5"/>
 <!-- near leg -->
-<g fill="none"><path d="M168 176 Q196 190 196 212 Q184 226 170 228" stroke="#1b1a1a" stroke-width="16"/><path d="M168 176 Q196 190 196 212 Q184 226 170 228" stroke="#d4cec3" stroke-width="8"/></g>
-<path d="M170 228 L142 238 M170 228 L146 246 M170 228 L190 244" fill="none" stroke-width="4.5"/>
-<path d="M142 238 l-6 3 M146 246 l-6 2 M190 244 l5 3" stroke-width="3" fill="none"/>
-<!-- spindle spear -->
-<path d="M150 70 L8 232" stroke="#1b1a1a" stroke-width="12" fill="none"/><path d="M150 70 L8 232" stroke="#9a948b" stroke-width="5" fill="none"/>
-<path d="M8 232 L0 246 L16 238Z" fill="#f6f2e9" stroke-width="3"/>
-<path d="M52 180 L60 188 M60 172 L70 180 M68 164 L78 172 M76 156 L86 164 M84 148 L94 156" stroke="#c8352b" stroke-width="5" fill="none"/>
-<ellipse cx="108" cy="124" rx="16" ry="6" transform="rotate(-48 108 124)" fill="#d4cec3"/>
+<path d="M168 196 L158 214 L180 232" fill="none" stroke="#1b1a1a" stroke-width="10"/><path d="M168 196 L158 214 L180 232" fill="none" stroke="#d4cec3" stroke-width="3"/>
+<path d="M180 232 L154 240 M180 232 L160 248 M180 232 L196 246" fill="none" stroke-width="4.5"/>
+<!-- spindle staff -->
+<path d="M170 30 L72 236" stroke="#1b1a1a" stroke-width="12" fill="none"/><path d="M170 30 L72 236" stroke="#9a948b" stroke-width="5" fill="none"/>
+<path d="M72 236 L66 250 L80 242Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M96 186 L108 192 M102 174 L114 180 M106 162 L118 168" stroke="#c8352b" stroke-width="5" fill="none"/>
+<ellipse cx="136" cy="102" rx="18" ry="6" transform="rotate(-64 136 102)" fill="#d4cec3"/>
 <!-- arms -->
 <g fill="none"><path d="M118 112 Q124 146 110 160" stroke="#1b1a1a" stroke-width="14"/><path d="M118 112 Q124 146 110 160" stroke="#d4cec3" stroke-width="6"/>
 <path d="M132 112 Q166 100 150 76" stroke="#1b1a1a" stroke-width="14"/><path d="M132 112 Q166 100 150 76" stroke="#d4cec3" stroke-width="6"/></g>
