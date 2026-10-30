@@ -20,7 +20,7 @@
 <g class="v"><rect x="56" y="178" width="10" height="10" rx="2"/><rect x="72" y="190" width="8" height="8" rx="2"/></g>
 <path class="t" stroke="#55514c" stroke-width="3" d="M56 204H82M104 190H116"/>
 <path class="n" stroke="#1b1a1a" style="stroke-width:21;stroke-linecap:round" d="M108 150Q84 172 100 196"/><path class="n" style="stroke:#d4cec3;stroke-width:14;stroke-linecap:round" d="M108 150Q84 172 100 196"/>
-<!-- head profile facing left -->
+<g transform="translate(-30 -30) scale(1.28)"><!-- head profile facing left -->
 <path class="o l" d="M80 106Q78 78 112 78Q150 78 152 108Q152 138 122 142Q104 144 100 136Q92 140 86 130Q76 126 80 106Z"/>
 <path class="o l" d="M80 104Q54 108 52 126Q64 130 82 124Z"/>
 <path class="o i" d="M96 92L122 98L118 108Q104 108 96 100Z"/><path class="v" d="M104 98L114 100L110 106Z"/>
@@ -29,4 +29,4 @@
 <path class="t" stroke-width="3.5" d="M84 128Q96 132 106 128"/>
 <path class="t" stroke="#55514c" stroke-width="2.5" d="M114 118L130 122M118 128L132 128"/>
 <path class="o m" d="M120 142Q150 140 150 118Q148 150 124 152Z" opacity="0"/>
-</svg>
+</g></svg>

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.t{fill:none;stroke:#1b1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
-<!-- toppling mountain behind -->
+<g transform="translate(10 10) scale(.9)"><!-- toppling mountain behind -->
 <g transform="rotate(16 190 190)">
 <path class="o m" d="M126 196L162 120L182 132L210 54L236 112L252 100L262 196Z"/>
 <path class="o d" d="M210 54L236 112L252 100L262 196L206 196L204 120Z"/>
@@ -36,4 +36,4 @@
 <path class="o i" d="M82 96Q114 106 150 94L146 104Q114 118 84 106Z"/>
 <path class="o p" stroke-width="3" d="M88 98L91 108L95 99M104 101L108 110L112 102M122 102L126 109L130 101M138 98L141 106L145 97"/>
 <path class="o p" stroke-width="3" d="M80 102L72 82L92 98ZM152 94L164 76L142 98Z"/>
-</svg>
+</g></svg>
