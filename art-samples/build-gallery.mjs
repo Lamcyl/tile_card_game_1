@@ -1,5 +1,6 @@
 // Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek|norse
-// Only the original drawings (<slug>-cute.svg and <slug>-fierce.svg) are shown.
+// Only the original drawings (<slug>-cute.svg and <slug>-fierce.svg) are shown, unless a round is given
+// (node build-gallery.mjs norse v2), which shows <slug>-<variant>-v2.svg where drawn and writes <set>-v2-gallery.html.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 
 const SETS = {
@@ -139,6 +140,7 @@ const SET = SETS[setName];
 if (!SET) throw new Error('Unknown set: ' + setName + ' (use ' + Object.keys(SETS).join(' or ') + ')');
 const dir = new URL('./' + setName + '/', import.meta.url);
 const NAMES = SET.names;
+const round = process.argv[3] || '';
 
 const files = readdirSync(dir).filter((f) => f.endsWith('.svg'));
 const svg = (f) => readFileSync(new URL(f, dir), 'utf8').replace(/<\?xml[^>]*>/, '').replace(/<!--[\s\S]*?-->/g, '').trim();
@@ -147,7 +149,8 @@ let n = 0;
 const cards = Object.entries(NAMES).map(([slug, [name, desc]]) => {
   n++;
   const cell = (variant) => {
-    const f = slug + '-' + variant + '.svg';
+    const redrawn = slug + '-' + variant + '-' + round + '.svg';
+    const f = round && files.includes(redrawn) ? redrawn : slug + '-' + variant + '.svg';
     if (!files.includes(f)) return '<div class="art missing">Not drawn</div>';
     const s = svg(f);
     return '<figure><div class="art">' + s + '</div><figcaption>' + variant + '<span class="tiles"><span class="tile">' + s + '</span><span class="tile dark">' + s + '</span></span></figcaption></figure>';
@@ -156,7 +159,7 @@ const cards = Object.entries(NAMES).map(([slug, [name, desc]]) => {
     '<div class="pair">' + cell('cute') + cell('fierce') + '</div></article>';
 }).join('\n');
 
-const page = `<title>${SET.title}</title>
+const page = `<title>${SET.title}${round ? ' ' + round.toUpperCase() : ''}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,7 +201,7 @@ const page = `<title>${SET.title}</title>
 </style>
 <div class="wrap">
   <header class="top">
-    <h1>${SET.heading} <span class="seal">${SET.seal}</span></h1>
+    <h1>${SET.heading}${round ? " (round 2)" : ""} <span class="seal">${SET.seal}</span></h1>
     <p>${SET.intro} Each has a <b>cute</b> and a <b>fierce</b> version, plus small board-tile previews. Tell me the numbers you like (for example "3 fierce, 5 cute") and I'll refine those.</p>
   </header>
   <section class="grid">
@@ -206,5 +209,6 @@ ${cards}
   </section>
   <p class="note">Drawn as hand-written vector art by AI agents, as concept sketches for choosing a direction.</p>
 </div>`;
-writeFileSync(new URL('./' + setName + '-gallery.html', import.meta.url), page);
-console.log(setName + '-gallery.html', files.length + ' SVGs', Math.round(page.length / 1024) + ' kB');
+const out = setName + (round ? '-' + round : '') + '-gallery.html';
+writeFileSync(new URL('./' + out, import.meta.url), page);
+console.log(out, files.length + ' SVGs', Math.round(page.length / 1024) + ' kB');
