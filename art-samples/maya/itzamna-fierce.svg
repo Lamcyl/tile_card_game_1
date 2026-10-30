@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce itzamna: towering first priest in profile, sun-ray headdress, glyph conjured above one raised hand -->
+<!-- sun-ray headdress -->
+<path class="o v" d="M122 78L58 36L84 76Z"/><path class="o v" d="M122 78L74 6L106 66Z"/>
+<path class="o p" d="M122 78L112 0L136 68Z"/><path class="o p" d="M122 78L160 4L156 72Z"/>
+<path class="o v" d="M122 78L188 20L174 82Z"/><path class="o l" d="M122 78L218 50L180 92Z"/>
+<path class="o g" d="M76 82Q122 62 176 84L172 98Q122 80 82 98Z"/>
+<!-- glyph conjured -->
+<g transform="translate(206 112)"><rect class="o p" x="-24" y="-24" width="48" height="48" rx="12" transform="rotate(8)"/><path class="t" stroke="#c8352b" stroke-width="5" d="M-10 -8Q0 -16 10 -8M-10 6Q0 -2 10 6M-2 -16V14" transform="rotate(8)"/></g>
+<!-- robe column -->
+<path class="o p" d="M68 240Q66 160 98 130L166 130Q192 160 196 240Z"/>
+<path class="t" stroke="#9a948b" stroke-width="3" d="M96 168L106 238M130 150L130 238M164 160L158 238"/>
+<path class="o v" d="M98 130L166 130L170 150L96 152Z"/>
+<path class="t" stroke="#f6f2e9" stroke-width="3" d="M108 142H126M138 142H156"/>
+<!-- raised arm -->
+<path class="n" stroke="#1b1a1a" style="stroke-width:21;stroke-linecap:round;stroke-linejoin:round" d="M160 150Q198 150 204 128"/><path class="n" style="stroke:#d4cec3;stroke-width:14;stroke-linecap:round;stroke-linejoin:round" d="M160 150Q198 150 204 128"/>
+<path class="n" style="stroke:#9a948b;stroke-width:3;stroke-linecap:round" d="M170 144Q186 144 198 132" opacity="0"/>
+<!-- codex held low-left -->
+<path class="o p" d="M44 168L92 160L98 214L50 224Z"/><path class="o l" d="M92 160L120 170L124 220L98 214Z"/><path class="t" stroke-width="2.5" d="M92 160L98 214"/>
+<g class="v"><rect x="56" y="178" width="10" height="10" rx="2"/><rect x="72" y="190" width="8" height="8" rx="2"/></g>
+<path class="t" stroke="#55514c" stroke-width="3" d="M56 204H82M104 190H116"/>
+<path class="n" stroke="#1b1a1a" style="stroke-width:21;stroke-linecap:round" d="M108 150Q84 172 100 196"/><path class="n" style="stroke:#d4cec3;stroke-width:14;stroke-linecap:round" d="M108 150Q84 172 100 196"/>
+<!-- head profile facing left -->
+<path class="o l" d="M80 106Q78 78 112 78Q150 78 152 108Q152 138 122 142Q104 144 100 136Q92 140 86 130Q76 126 80 106Z"/>
+<path class="o l" d="M80 104Q54 108 52 126Q64 130 82 124Z"/>
+<path class="o i" d="M96 92L122 98L118 108Q104 108 96 100Z"/><path class="v" d="M104 98L114 100L110 106Z"/>
+<path class="i" d="M90 86L130 92L130 84Q108 78 90 86Z"/>
+<path class="o g" stroke-width="3" d="M140 108a7 7 0 1 0 .1 0Z"/>
+<path class="t" stroke-width="3.5" d="M84 128Q96 132 106 128"/>
+<path class="t" stroke="#55514c" stroke-width="2.5" d="M114 118L130 122M118 128L132 128"/>
+<path class="o m" d="M120 142Q150 140 150 118Q148 150 124 152Z" opacity="0"/>
+</svg>

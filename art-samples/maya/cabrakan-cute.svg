@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.g{fill:#c9a23a}.t{fill:none;stroke:#1b1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
+<ellipse cx="116" cy="242" rx="92" ry="6" fill="#d4cec3"/>
+<!-- tiny toppling mountain -->
+<g transform="rotate(-24 40 70)"><path class="o m" d="M10 80L32 38L42 46L56 14L72 44L84 80Z"/><path class="o p" d="M56 14L46 36L54 34L58 42L66 32L72 44L64 28Z"/></g>
+<path class="t" stroke="#9a948b" stroke-width="2.500" d="M92 28Q102 22 110 28M84 44Q94 38 102 44"/>
+<!-- planted leg -->
+<path class="o m" d="M84 190L76 230L120 230L124 190Z"/><path class="o d" d="M70 228L128 228L130 240L66 240Z"/>
+<!-- raised leg, knee up -->
+<path class="o m" d="M136 188L176 178L194 206L170 216L146 206Z"/><path class="o d" d="M164 208L206 200L212 218L168 226Z"/>
+<!-- body -->
+<path class="o m" d="M68 128C60 160 76 198 120 200C170 200 190 168 180 128Z"/>
+<path class="o l" d="M88 146C86 168 100 184 124 184C148 184 160 168 158 146C140 156 106 156 88 146Z"/>
+<path class="o g" d="M76 186L172 186L170 204L78 204Z"/><path class="t" stroke-width="2.500" d="M96 188L96 202M118 188L118 202M140 188L140 202M158 188L158 202"/>
+<!-- arms up -->
+<path class="o m" d="M72 138C46 134 34 124 36 100L58 98C60 112 70 114 82 118Z"/>
+<circle class="o l" cx="44" cy="92" r="18"/><path class="t" stroke-width="2.500" d="M34 90L52 90M36 98L50 98"/>
+<path class="o m" d="M176 138C208 138 218 128 218 106L196 102C196 116 188 116 172 118Z"/>
+<circle class="o l" cx="208" cy="96" r="18"/><path class="t" stroke-width="2.500" d="M198 94L216 94M200 102L214 102"/>
+<!-- head -->
+<path class="o l" d="M70 82C66 40 188 40 184 82C184 120 156 138 126 138C96 138 72 120 70 82Z"/>
+<!-- stone hair tufts -->
+<path class="o d" d="M76 60L82 30L102 48L114 22L128 46L142 22L154 48L174 30L180 62Q128 40 76 60Z"/>
+<!-- ear spools -->
+<circle class="o g" cx="66" cy="96" r="9"/><circle class="o g" cx="188" cy="96" r="9"/>
+<!-- face: big wailing/stomping mouth -->
+<path class="o i" d="M96 82Q106 74 116 82M140 82Q150 74 160 82" opacity="0"/>
+<ellipse class="o i" cx="104" cy="88" rx="11" ry="13"/><ellipse class="o i" cx="152" cy="88" rx="11" ry="13"/>
+<circle class="p" cx="108" cy="83" r="4.500"/><circle class="p" cx="156" cy="83" r="4.500"/><circle class="p" cx="101" cy="94" r="1.800"/><circle class="p" cx="149" cy="94" r="1.800"/>
+<path class="t" stroke-width="3.500" d="M88 70L118 76M168 70L138 76"/>
+<path class="o i" d="M108 108Q128 100 148 108Q146 128 128 128Q110 128 108 108Z"/><path class="o p" stroke-width="2.500" d="M114 108L128 106L142 108L140 114Q128 110 116 114Z"/>
+<ellipse cx="82" cy="108" rx="8" ry="5" fill="#c9a23a" opacity=".6"/><ellipse cx="174" cy="108" rx="8" ry="5" fill="#c9a23a" opacity=".6"/>
+<!-- stomp cracks & pebbles -->
+<path class="t" stroke-width="3" d="M70 242L52 236L56 246L36 240"/>
+<path class="o m" stroke-width="3" d="M30 214L40 206L46 216L38 222ZM56 196L64 192L66 202L58 204Z"/>
+</svg>

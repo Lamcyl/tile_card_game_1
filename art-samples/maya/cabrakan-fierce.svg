@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.t{fill:none;stroke:#1b1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- toppling mountain behind -->
+<g transform="rotate(16 190 190)">
+<path class="o m" d="M126 196L162 120L182 132L210 54L236 112L252 100L262 196Z"/>
+<path class="o d" d="M210 54L236 112L252 100L262 196L206 196L204 120Z"/>
+<path class="o p" d="M210 54L196 92L206 86L212 98L224 84L236 112L224 84Z"/>
+</g>
+<path class="o v" d="M214 70L204 108L220 118L206 154L216 160L230 120L214 108L224 74Z" stroke-width="3"/>
+<path class="o m" d="M232 20L248 26L244 42L228 38ZM206 12L218 10L220 22L208 24Z" stroke-width="3"/>
+<!-- far arm raised, fist cocked -->
+<path class="o d" d="M170 96C204 88 220 70 218 46L246 50C250 84 226 112 184 124Z"/>
+<circle class="o m" cx="232" cy="38" r="22"/><path class="t" stroke-width="2.500" d="M216 34L246 34M218 44L244 44"/>
+<!-- legs -->
+<path class="o d" d="M108 186L94 234L142 234L146 188Z"/><path class="o d" d="M156 184L170 234L212 234L192 180Z"/>
+<path class="o l" d="M88 232L148 232L150 244L84 244ZM164 232L216 232L220 244L160 244Z"/>
+<!-- torso leaning -->
+<path class="o m" d="M70 112C60 142 82 188 112 194L190 186C202 150 190 108 170 90L90 84Z"/>
+<path class="o l" d="M96 118C98 154 120 176 150 172C170 166 174 136 160 110Z"/>
+<path class="t" stroke="#55514c" stroke-width="2.500" d="M112 128L150 126M114 144L156 142M122 160L156 158"/>
+<path class="o v" d="M96 176L186 170L188 190L102 196Z"/>
+<!-- planted arm + fist -->
+<path class="o d" d="M86 98C50 104 36 134 40 176L78 178C76 150 88 138 106 130Z"/>
+<circle class="o m" cx="52" cy="200" r="30"/><path class="t" stroke-width="2.500" d="M34 190L72 190M32 202L72 202M36 214L68 214"/>
+<!-- impact cracks -->
+<path class="o v" stroke-width="3" d="M22 232L8 218L16 214L2 200M82 236L116 244L100 250"/>
+<path class="o m" stroke-width="3" d="M8 170L18 160L24 170L14 178ZM70 150L80 144L84 154L74 158Z" opacity="0"/>
+<!-- head -->
+<path class="o l" d="M62 66C60 30 150 26 166 52C176 70 164 104 120 108C86 108 64 94 62 66Z"/>
+<!-- stone mane -->
+<path class="o d" d="M60 62L40 40L68 44L58 12L88 32L96 2L112 28L132 4L138 30L166 14L160 44L178 40L164 58Q112 22 60 62Z"/>
+<!-- brow, eyes -->
+<path class="o i" d="M68 66L110 74L106 88Q82 90 70 76ZM160 60L124 70L128 86Q150 86 160 74Z"/>
+<circle class="v" cx="94" cy="80" r="4.500"/><circle class="v" cx="140" cy="78" r="4.500"/>
+<!-- nose, tusk-teeth jaw -->
+<path class="o d" d="M114 76L108 94L120 96L126 90Z"/>
+<path class="o i" d="M82 96Q114 106 150 94L146 104Q114 118 84 106Z"/>
+<path class="o p" stroke-width="3" d="M88 98L91 108L95 99M104 101L108 110L112 102M122 102L126 109L130 101M138 98L141 106L145 97"/>
+<path class="o p" stroke-width="3" d="M80 102L72 82L92 98ZM152 94L164 76L142 98Z"/>
+</svg>

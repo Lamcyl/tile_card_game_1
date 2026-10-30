@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute itzamna: grandfatherly sky lord seated with a codex, toothless grin, enormous feather headdress -->
+<!-- headdress feathers -->
+<path class="o l" d="M128 74Q60 60 38 20Q82 22 128 74Z"/><path class="o l" d="M128 74Q196 60 218 20Q174 22 128 74Z"/>
+<path class="o p" d="M128 74Q82 54 76 6Q118 18 128 74Z"/><path class="o p" d="M128 74Q174 54 180 6Q138 18 128 74Z"/>
+<path class="o p" d="M128 74Q112 40 128 2Q144 40 128 74Z"/>
+<g class="g"><circle cx="38" cy="22" r="5"/><circle cx="218" cy="22" r="5"/><circle cx="76" cy="9" r="5"/><circle cx="180" cy="9" r="5"/><circle cx="128" cy="8" r="5"/></g>
+<path class="t" stroke="#9a948b" stroke-width="2.5" d="M128 68V26M118 62Q102 40 90 24M138 62Q154 40 166 24"/>
+<!-- robe -->
+<path class="o p" d="M48 238Q44 170 92 154L164 154Q212 170 208 238Z"/>
+<path class="t" stroke="#9a948b" stroke-width="3" d="M70 214Q128 226 186 214"/>
+<path class="o g" d="M92 154Q128 172 164 154L160 144Q128 160 96 144Z"/>
+<!-- sleeves -->
+<path class="o l" d="M80 168Q56 196 92 214L106 198Z"/><path class="o l" d="M176 168Q200 196 164 214L150 198Z"/>
+<!-- codex -->
+<path class="o p" d="M84 190L128 200L172 190L176 232L128 240L80 232Z"/><path class="t" stroke-width="2.5" d="M128 200V240"/>
+<g class="g"><rect x="94" y="204" width="10" height="10" rx="2"/><rect x="110" y="212" width="8" height="8" rx="2"/><rect x="140" y="212" width="10" height="10" rx="2"/><rect x="156" y="204" width="8" height="8" rx="2"/></g>
+<path class="t" stroke="#55514c" stroke-width="2.5" d="M94 226H116M140 228H162"/>
+<ellipse class="o l" cx="90" cy="206" rx="10" ry="8"/><ellipse class="o l" cx="166" cy="206" rx="10" ry="8"/>
+<!-- head -->
+<path class="o l" d="M76 92Q70 60 100 58L156 58Q188 60 180 92Q186 140 128 156Q70 140 76 92Z"/>
+<path class="o m" d="M80 98Q56 108 62 132Q70 118 80 126Z"/><path class="o m" d="M176 98Q200 108 194 132Q186 118 176 126Z"/>
+<circle class="o g" stroke-width="3" cx="78" cy="112" r="8"/><circle class="o g" stroke-width="3" cx="178" cy="112" r="8"/>
+<path class="o g" d="M82 70Q128 56 174 70L172 82Q128 68 84 84Z"/>
+<path class="t" stroke-width="3.5" d="M92 104Q104 94 116 104M140 104Q152 94 164 104"/>
+<path class="t" stroke="#55514c" stroke-width="2.5" d="M92 94Q104 86 116 94M140 94Q152 86 164 94M88 114l6 3M168 114l-6 3"/>
+<path class="o l" stroke-width="3.5" d="M122 106Q114 126 122 130Q128 134 134 130Q142 126 134 106"/>
+<path class="o v" opacity=".5" stroke="none" d="M86 124a9 6 0 1 0 .1 0ZM170 124a9 6 0 1 0 .1 0Z"/>
+<path class="t" stroke-width="3.5" d="M102 138Q128 156 154 138"/><path class="t" stroke-width="2.5" d="M110 144Q128 154 146 144" opacity="0"/>
+<path class="t" stroke="#55514c" stroke-width="2.5" d="M98 136l-4-4M158 136l4-4"/>
+</svg>
