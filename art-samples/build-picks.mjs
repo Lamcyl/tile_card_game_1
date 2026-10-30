@@ -56,6 +56,15 @@ const SETS = {
   [16, 'ix-chel', 'Ix Chel', 'cute', null],
   [18, 'ah-puch', 'Ah Puch', 'fierce', null],
   ] },
+  korean: { title: 'Korean Picks', picks: [
+  [9, 'dalgyal-gwisin', 'Dalgyal Gwisin', 'fierce', 'Arms redone into a natural reaching pose.'],
+  [16, 'jeoseung-saja', 'Jeoseung Saja', 'fierce', 'Both arms made the same size.'],
+  [6, 'samjok-o', 'Samjok-o', 'cute', null],
+  [6, 'samjok-o', 'Samjok-o', 'fierce', null],
+  [15, 'sansin', 'Sansin', 'fierce', null],
+  [19, 'jowangshin', 'Jowangshin', 'cute', null],
+  [20, 'jangseung', 'Jangseung', 'fierce', null],
+  ] },
 };
 const setName = process.argv[2] || 'yokai';
 const SET = SETS[setName];
