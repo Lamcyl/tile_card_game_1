@@ -1,4 +1,4 @@
-// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek|norse|slavic|maya
+// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek|norse|slavic|maya|korean
 // Only the original drawings (<slug>-cute.svg and <slug>-fierce.svg) are shown, unless a round is given
 // (node build-gallery.mjs norse v2), which shows <slug>-<variant>-v2.svg where drawn and writes <set>-v2-gallery.html.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -186,6 +186,32 @@ Object.assign(SETS, {
       'ah-puch': ['Ah Puch', 'Lord of death'],
       'buluc-chabtan': ['Buluc Chabtan', 'God of war'],
       bacab: ['Bacab', 'Turtle-shelled sky bearer'],
+    },
+  },
+  korean: {
+    title: 'Korean Sketchbook', heading: 'Korean sketchbook', seal: '한',
+    intro: 'Twenty goblins, beasts, ghosts and gods of Korean folklore in black-and-white ink, chibi style.',
+    names: {
+      dokkaebi: ['Dokkaebi', 'Goblin with a magic club'],
+      gumiho: ['Gumiho', 'Nine-tailed fox'],
+      haetae: ['Haetae', 'Lion-dog guardian of justice'],
+      bulgasari: ['Bulgasari', 'Iron-eating beast'],
+      imugi: ['Imugi', 'Serpent striving to become a dragon'],
+      'samjok-o': ['Samjok-o', 'Three-legged sun crow'],
+      bulgae: ['Bulgae', 'Fire dog that bites the sun'],
+      'jangsan-beom': ['Jangsan-beom', 'White tiger of Mount Jangsan'],
+      'dalgyal-gwisin': ['Dalgyal Gwisin', 'Faceless egg ghost'],
+      'cheonyeo-gwisin': ['Cheonyeo Gwisin', 'Maiden ghost in white'],
+      'mul-gwisin': ['Mul Gwisin', 'Water ghost'],
+      inmyeonjo: ['Inmyeonjo', 'Human-faced bird'],
+      yong: ['Yong', 'Korean dragon with a wish pearl'],
+      ungnyeo: ['Ungnyeo', 'Bear who became a woman'],
+      sansin: ['Sansin', 'Mountain god and his tiger'],
+      'jeoseung-saja': ['Jeoseung Saja', 'Grim reaper in a black gat'],
+      yeomra: ['Yeomra', 'King of the underworld'],
+      'samsin-halmeoni': ['Samsin Halmeoni', 'Grandmother goddess of birth'],
+      jowangshin: ['Jowangshin', 'Goddess of the hearth'],
+      jangseung: ['Jangseung', 'Village guardian totem poles'],
     },
   },
 });

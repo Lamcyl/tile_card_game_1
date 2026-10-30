@@ -51,6 +51,11 @@ const SETS = {
   [20, 'chernobog', 'Chernobog', 'cute', null],
   [20, 'chernobog', 'Chernobog', 'fierce', null],
   ] },
+  maya: { title: 'Maya Picks', picks: [
+  [9, 'xtabay', 'Xtabay', 'cute', null],
+  [16, 'ix-chel', 'Ix Chel', 'cute', null],
+  [18, 'ah-puch', 'Ah Puch', 'fierce', null],
+  ] },
 };
 const setName = process.argv[2] || 'yokai';
 const SET = SETS[setName];
