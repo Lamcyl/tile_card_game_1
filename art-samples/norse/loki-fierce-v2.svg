@@ -28,7 +28,7 @@
 <circle class="o" cx="82" cy="136" r="11" fill="#f6f2e9"/>
 <!-- horned helm back + hair -->
 <path class="o" fill="#d4cec3" d="M122 62 C100 56 76 30 82 2 C94 26 112 36 134 38Z"/>
-<path class="o" fill="#d4cec3" d="M214 56 C236 48 250 24 244 0 C234 22 216 30 200 34Z"/>
+<path class="o" fill="#d4cec3" d="M190 74 C226 66 252 34 244 2 C232 30 214 42 184 50Z"/>
 <path class="o" fill="#1b1a1a" d="M110 78 C90 66 74 70 56 56 C74 54 90 50 108 56 C96 44 86 34 70 28 C100 28 126 38 142 50 L196 56 L210 84 L182 120 L140 118Z"/>
 <!-- head -->
 <path class="o" fill="#f6f2e9" d="M120 84 C126 62 160 52 190 62 C208 70 214 88 206 108 C198 128 176 142 158 144 C144 140 124 118 120 84Z"/>
