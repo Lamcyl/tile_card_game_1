@@ -1,4 +1,4 @@
-// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek
+// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek|norse
 // Only the original drawings (<slug>-cute.svg and <slug>-fierce.svg) are shown.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 
@@ -105,6 +105,32 @@ const SETS = {
       hades: ['Hades', 'Lord of the underworld'],
       athena: ['Athena', 'Goddess of wisdom and war'],
       'nemean-lion': ['Nemean Lion', 'Lion with an unbreakable hide'],
+    },
+  },
+  norse: {
+    title: 'Norse Sketchbook', heading: 'Norse sketchbook', seal: 'ᚱᚢᚾ',
+    intro: 'Twenty Norse monsters, beings and gods in the same black-and-white ink, chibi style.',
+    names: {
+      fenrir: ['Fenrir', 'Monstrous chained wolf'],
+      jormungandr: ['Jörmungandr', 'World Serpent'],
+      sleipnir: ['Sleipnir', 'Eight-legged horse'],
+      valkyrie: ['Valkyrie', 'Winged chooser of the slain'],
+      draugr: ['Draugr', 'Undead barrow warrior'],
+      jotunn: ['Jötunn', 'Frost giant'],
+      surtr: ['Surtr', 'Fire giant with a flaming sword'],
+      troll: ['Troll', 'Mountain troll'],
+      dvergr: ['Dvergr', 'Dwarf smith'],
+      nidhogg: ['Níðhöggr', 'Dragon gnawing the world-tree roots'],
+      ratatoskr: ['Ratatoskr', 'Messenger squirrel of Yggdrasil'],
+      ravens: ['Huginn and Muninn', "Odin's ravens"],
+      kraken: ['Kraken', 'Giant sea monster'],
+      lindworm: ['Lindworm', 'Wingless serpent dragon'],
+      nisse: ['Nisse', 'House gnome'],
+      thor: ['Thor', 'God of thunder'],
+      odin: ['Odin', 'All-father'],
+      loki: ['Loki', 'Trickster god'],
+      freya: ['Freyja', 'Goddess with her cats'],
+      hel: ['Hel', 'Ruler of the realm of the dead'],
     },
   },
 };

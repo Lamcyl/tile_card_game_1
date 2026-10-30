@@ -33,6 +33,13 @@ const SETS = {
   [18, 'leigong', 'Lei Gong', 'fierce', null],
   [20, 'nezha', 'Nezha', 'fierce', null],
   ] },
+  greek: { title: 'Greek Picks', picks: [
+  [4, 'cerberus', 'Cerberus', 'fierce', null],
+  [10, 'siren', 'Siren', 'cute', null],
+  [13, 'talos', 'Talos', 'fierce', null],
+  [15, 'typhon', 'Typhon', 'fierce', null],
+  [18, 'hades', 'Hades', 'fierce', null],
+  ] },
 };
 const setName = process.argv[2] || 'yokai';
 const SET = SETS[setName];
