@@ -1,4 +1,4 @@
-// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt
+// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese
 // Only the original drawings (<slug>-cute.svg and <slug>-fierce.svg) are shown.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 
@@ -53,6 +53,32 @@ const SETS = {
       wadjet: ['Wadjet', 'Cobra goddess'],
       ushabti: ['Ushabti', 'Little servant statue'],
       isis: ['Isis', 'Winged goddess of magic'],
+    },
+  },
+  chinese: {
+    title: 'Chinese Sketchbook', heading: 'Chinese sketchbook', seal: '神獸',
+    intro: 'Twenty Chinese mythical beasts, monsters, gods and heroes in the same black-and-white ink, chibi style.',
+    names: {
+      long: ['Long', 'Chinese dragon chasing a pearl'],
+      fenghuang: ['Fenghuang', 'Chinese phoenix'],
+      qilin: ['Qilin', 'Hooved chimera of good omen'],
+      baihu: ['Baihu', 'White Tiger of the West'],
+      xuanwu: ['Xuanwu', 'Black Tortoise with a snake'],
+      nian: ['Nian', 'New Year beast'],
+      jiangshi: ['Jiangshi', 'Hopping vampire'],
+      taotie: ['Taotie', 'Gluttonous maw'],
+      hundun: ['Hundun', 'Faceless winged chaos'],
+      qiongqi: ['Qiongqi', 'Winged tiger'],
+      pixiu: ['Pixiu', 'Winged lion that hoards gold'],
+      baize: ['Bai Ze', 'Wise many-eyed beast'],
+      jingwei: ['Jingwei', 'Bird that fills the sea'],
+      kui: ['Kui', 'One-legged thunder ox'],
+      shanxiao: ['Shanxiao', 'One-legged mountain imp'],
+      wukong: ['Sun Wukong', 'The Monkey King'],
+      zhongkui: ['Zhong Kui', 'Demon queller'],
+      leigong: ['Lei Gong', 'Thunder god'],
+      yutu: ['Yutu', 'Jade Rabbit of the moon'],
+      nezha: ['Nezha', 'Child deity on fire wheels'],
     },
   },
 };
