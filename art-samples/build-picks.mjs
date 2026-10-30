@@ -41,8 +41,6 @@ const SETS = {
   [18, 'hades', 'Hades', 'fierce', null],
   ] },
   norse: { title: 'Norse Picks', picks: [
-  [1, 'fenrir', 'Fenrir', 'fierce', 'Kept the head; added a body braced against the chains.'],
-  [13, 'kraken', 'Kraken', 'fierce', 'Kept the head; new tentacle pose spreading out like a crown.'],
   [6, 'jotunn', 'Jötunn', 'fierce-v2', null],
   [12, 'ravens', 'Huginn and Muninn', 'fierce', null],
   ] },

@@ -1,4 +1,4 @@
-// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek|norse
+// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek|norse|slavic
 // Only the original drawings (<slug>-cute.svg and <slug>-fierce.svg) are shown, unless a round is given
 // (node build-gallery.mjs norse v2), which shows <slug>-<variant>-v2.svg where drawn and writes <set>-v2-gallery.html.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -135,6 +135,34 @@ const SETS = {
     },
   },
 };
+Object.assign(SETS, {
+  slavic: {
+    title: 'Slavic Sketchbook', heading: 'Slavic sketchbook', seal: 'Ж',
+    intro: 'Twenty spirits, monsters and gods of Slavic folklore in black-and-white ink, chibi style.',
+    names: {
+      'baba-yaga': ['Baba Yaga', 'Witch with a hut on chicken legs'],
+      koschei: ['Koschei', 'The Deathless sorcerer'],
+      zmey: ['Zmey Gorynych', 'Three-headed dragon'],
+      firebird: ['Firebird', 'Zhar-ptitsa, the glowing bird'],
+      leshy: ['Leshy', 'Lord of the forest'],
+      rusalka: ['Rusalka', 'Drowned river maiden'],
+      vodyanoy: ['Vodyanoy', 'Frog-bearded water spirit'],
+      domovoi: ['Domovoi', 'Hairy house guardian'],
+      kikimora: ['Kikimora', 'Mischievous swamp spirit'],
+      bannik: ['Bannik', 'Spirit of the bathhouse'],
+      poludnitsa: ['Poludnitsa', 'Noon witch of the fields'],
+      likho: ['Likho', 'One-eyed misfortune'],
+      alkonost: ['Alkonost', 'Bird with a maiden\'s face'],
+      upyr: ['Upyr', 'Slavic vampire'],
+      strzyga: ['Strzyga', 'Two-souled night demon'],
+      vila: ['Vila', 'Storm and mountain fairy'],
+      perun: ['Perun', 'God of thunder'],
+      veles: ['Veles', 'Horned god of the underworld'],
+      morana: ['Morana', 'Goddess of winter and death'],
+      chernobog: ['Chernobog', 'The black god'],
+    },
+  },
+});
 const setName = process.argv[2] || 'yokai';
 const SET = SETS[setName];
 if (!SET) throw new Error('Unknown set: ' + setName + ' (use ' + Object.keys(SETS).join(' or ') + ')');
