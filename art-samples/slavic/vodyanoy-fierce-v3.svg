@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- vodyanoy v3: head, short beard, two hands on a calm waterline -->
+<!-- water: one calm fill, one wavy line -->
+<path d="M6 206 Q26 198 46 206 Q66 214 86 206 Q106 198 126 206 Q146 214 166 206 Q186 198 206 206 Q226 214 250 206 Q254 238 214 248 Q128 256 42 248 Q2 238 6 206Z" fill="#d4cec3"/>
+<!-- arms to the hands -->
+<g fill="none"><path d="M46 126 Q18 164 34 196" stroke="#1b1a1a" stroke-width="36"/><path d="M46 126 Q18 164 34 196" stroke="#9a948b" stroke-width="28"/>
+<path d="M210 126 Q238 164 222 196" stroke="#1b1a1a" stroke-width="36"/><path d="M210 126 Q238 164 222 196" stroke="#9a948b" stroke-width="28"/></g>
+<path d="M22 150 q6 -6 12 0 M28 172 q6 -6 12 0 M234 150 q-6 -6 -12 0 M228 172 q-6 -6 -12 0" fill="none" stroke-width="2.5"/>
+<!-- head -->
+<path d="M44 92 Q44 52 80 46 Q128 34 176 46 Q212 52 212 92 Q218 136 184 146 Q128 160 72 146 Q38 136 44 92Z" fill="#9a948b"/>
+<path d="M92 50 q8 -8 16 0 M148 50 q8 -8 16 0 M120 66 q8 -8 16 0 M52 112 q8 -8 14 0 M190 112 q8 -8 14 0" fill="none" stroke-width="2.5"/>
+<!-- eyes -->
+<circle cx="74" cy="60" r="24" fill="#d4cec3"/><circle cx="182" cy="60" r="24" fill="#d4cec3"/>
+<circle cx="80" cy="66" r="12" fill="#c8352b" stroke-width="3"/><circle cx="176" cy="66" r="12" fill="#c8352b" stroke-width="3"/>
+<path d="M84 60 L84 72 M172 60 L172 72" stroke-width="3.5"/>
+<path d="M44 52 L100 72 L98 36Z" fill="#9a948b" stroke-width="3.5"/><path d="M212 52 L156 72 L158 36Z" fill="#9a948b" stroke-width="3.5"/>
+<path d="M118 92 L124 100 M138 92 L132 100" stroke-width="4"/>
+<!-- mouth -->
+<path d="M46 106 Q128 124 210 106 Q206 152 128 154 Q52 152 46 106Z" fill="#1b1a1a"/>
+<path d="M54 110 L60 130 L70 114 L78 138 L88 118 L98 140 L110 120 L128 124 L146 120 L158 140 L168 118 L178 138 L186 114 L196 130 L202 110" fill="#f6f2e9" stroke-width="2.5"/>
+<path d="M96 148 Q128 132 160 148 Q128 156 96 148Z" fill="#c8352b" stroke="none"/>
+<!-- beard, short -->
+<path d="M70 144 Q66 170 74 196 L88 178 L100 202 L114 180 L128 204 L142 180 L156 202 L168 178 L182 196 Q190 170 186 144 Q128 164 70 144Z" fill="#55514c"/>
+<path d="M92 160 L92 176 M128 166 L128 184 M164 160 L164 176" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- hands resting on the water -->
+<g fill="#9a948b" stroke-width="4"><path d="M10 192 Q36 176 60 192 L60 204 L10 204Z"/><path d="M246 192 Q220 176 196 192 L196 204 L246 204Z"/></g>
+<g fill="#f6f2e9" stroke-width="3"><path d="M14 202 L10 220 L26 206Z M30 204 L28 224 L42 206Z M46 204 L48 224 L58 204Z"/><path d="M242 202 L246 220 L230 206Z M226 204 L228 224 L214 206Z M210 204 L208 224 L198 204Z"/></g>
+<!-- the wavy waterline over the hands -->
+<path d="M6 206 Q26 198 46 206 Q66 214 86 206 Q106 198 126 206 Q146 214 166 206 Q186 198 206 206 Q226 214 250 206" fill="none" stroke-width="4"/>
+</svg>
