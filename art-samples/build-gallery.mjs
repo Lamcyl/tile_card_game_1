@@ -1,4 +1,4 @@
-// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek|norse|slavic
+// Builds <set>-gallery.html from the SVGs in ./<set>: node art-samples/build-gallery.mjs yokai|egypt|chinese|greek|norse|slavic|maya
 // Only the original drawings (<slug>-cute.svg and <slug>-fierce.svg) are shown, unless a round is given
 // (node build-gallery.mjs norse v2), which shows <slug>-<variant>-v2.svg where drawn and writes <set>-v2-gallery.html.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -160,6 +160,32 @@ Object.assign(SETS, {
       veles: ['Veles', 'Horned god of the underworld'],
       morana: ['Morana', 'Goddess of winter and death'],
       chernobog: ['Chernobog', 'The black god'],
+    },
+  },
+  maya: {
+    title: 'Maya Sketchbook', heading: 'Maya sketchbook', seal: 'K\'IN',
+    intro: 'Twenty gods, monsters and spirits of Maya myth in black-and-white ink, chibi style.',
+    names: {
+      kukulkan: ['Kukulkan', 'Feathered serpent'],
+      camazotz: ['Camazotz', 'Death bat of Xibalba'],
+      'vucub-caquix': ['Vucub Caquix', 'Seven Macaw, the false sun'],
+      zipacna: ['Zipacna', 'Crocodile giant'],
+      cabrakan: ['Cabrakan', 'Earthquake giant'],
+      balam: ['Balam', 'Jaguar guardian'],
+      alux: ['Alux', 'Little field sprite'],
+      sisimito: ['Sisimito', 'Hairy forest giant'],
+      xtabay: ['Xtabay', 'Ceiba-tree forest spirit'],
+      'huay-chivo': ['Huay Chivo', 'Goat-shaped sorcerer'],
+      cadejo: ['Cadejo', 'Spirit dog of the night road'],
+      'monkey-scribes': ['Hun Batz and Hun Chuen', 'Howler-monkey scribes'],
+      'hero-twins': ['Hunahpu and Xbalanque', 'The Hero Twins'],
+      chaac: ['Chaac', 'Rain god with a lightning axe'],
+      itzamna: ['Itzamna', 'Sky lord and first priest'],
+      'ix-chel': ['Ix Chel', 'Moon goddess with her rabbit'],
+      'kinich-ahau': ['Kinich Ahau', 'Sun god'],
+      'ah-puch': ['Ah Puch', 'Lord of death'],
+      'buluc-chabtan': ['Buluc Chabtan', 'God of war'],
+      bacab: ['Bacab', 'Turtle-shelled sky bearer'],
     },
   },
 });
