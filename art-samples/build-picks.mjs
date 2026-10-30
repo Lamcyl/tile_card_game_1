@@ -40,6 +40,12 @@ const SETS = {
   [15, 'typhon', 'Typhon', 'fierce', null],
   [18, 'hades', 'Hades', 'fierce', null],
   ] },
+  norse: { title: 'Norse Picks', picks: [
+  [1, 'fenrir', 'Fenrir', 'fierce', 'Kept the head; added a body braced against the chains.'],
+  [13, 'kraken', 'Kraken', 'fierce', 'Kept the head; new tentacle pose spreading out like a crown.'],
+  [6, 'jotunn', 'Jötunn', 'fierce-v2', null],
+  [12, 'ravens', 'Huginn and Muninn', 'fierce', null],
+  ] },
 };
 const setName = process.argv[2] || 'yokai';
 const SET = SETS[setName];
@@ -63,7 +69,7 @@ const cards = PICKS.map(([num, slug, name, variant, fix, before]) => {
   const body = hasV2
     ? '<div class="pair">' + fig(prev, 'Before') + fig(v2, 'Refined') + '</div><p class="fix">' + fix + '</p>'
     : '<div class="single">' + fig(base + '.svg', fix ? 'Refinement pending' : 'Approved as is') + '</div>';
-  return '<article class="card' + (hasV2 ? ' wide' : '') + '"><header><span class="num">' + num + '</span><div><h2>' + name + '</h2><p>' + variant + '</p></div></header>' + body + '</article>';
+  return '<article class="card' + (hasV2 ? ' wide' : '') + '"><header><span class="num">' + num + '</span><div><h2>' + name + '</h2><p>' + variant.replace(/-v\d+$/, '') + '</p></div></header>' + body + '</article>';
 }).join('\n');
 
 const page = `<title>${SET.title}</title>
