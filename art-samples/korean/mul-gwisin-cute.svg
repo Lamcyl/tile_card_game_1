@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute mul-gwisin: a droplet-shaped little ghost, bowl of wet hair, tiny waving pale hands -->
+<!-- back hair -->
+<path d="M72 112 Q62 46 128 44 Q194 46 184 112 L192 196 Q190 214 178 208 L170 134 L86 134 L78 208 Q66 214 64 196Z" fill="#1b1a1a"/>
+<!-- sleeves/arms -->
+<path d="M94 178 Q70 180 58 152" fill="none" stroke-width="17"/>
+<path d="M94 178 Q70 180 58 152" fill="none" stroke="#f6f2e9" stroke-width="9"/>
+<path d="M162 178 Q186 180 198 152" fill="none" stroke-width="17"/>
+<path d="M162 178 Q186 180 198 152" fill="none" stroke="#f6f2e9" stroke-width="9"/>
+<circle cx="56" cy="146" r="11" fill="#f6f2e9"/><circle cx="200" cy="146" r="11" fill="#f6f2e9"/>
+<path d="M50 138 L48 132 M56 135 L56 128 M62 138 L65 132 M194 138 L192 132 M200 135 L200 128 M206 138 L209 132" fill="none" stroke-width="3"/>
+<!-- robe tail -->
+<path d="M90 168 Q80 214 104 226 Q116 240 128 226 Q140 240 152 226 Q176 214 166 168Z" fill="#f6f2e9"/>
+<path d="M100 196 Q128 206 156 196" fill="none" stroke="#d4cec3" stroke-width="3"/>
+<!-- collar & ribbon -->
+<path d="M108 158 L128 184 L148 158Z" fill="#f6f2e9" stroke="none"/><path d="M108 158 L128 184 L148 158" fill="none" stroke-width="3"/>
+<path d="M128 184 L118 202 L128 196 L138 202Z" fill="#c8352b" stroke-width="3"/>
+<!-- face -->
+<ellipse cx="128" cy="116" rx="46" ry="42" fill="#f6f2e9"/>
+<!-- bangs, centre part, wet strands -->
+<path d="M80 112 Q78 64 128 60 Q178 64 176 112 Q168 90 150 84 Q140 100 128 78 Q116 100 106 84 Q88 90 80 112Z" fill="#1b1a1a"/>
+<path d="M82 108 Q74 150 84 196 Q92 200 94 190 Q90 150 98 112Z" fill="#1b1a1a"/>
+<path d="M174 108 Q182 150 172 196 Q164 200 162 190 Q166 150 158 112Z" fill="#1b1a1a"/>
+<!-- face features -->
+<ellipse cx="108" cy="124" rx="9" ry="11" fill="#1b1a1a" stroke-width="2"/><ellipse cx="148" cy="124" rx="9" ry="11" fill="#1b1a1a" stroke-width="2"/>
+<circle cx="111" cy="119" r="3.5" fill="#f6f2e9" stroke="none"/><circle cx="151" cy="119" r="3.5" fill="#f6f2e9" stroke="none"/>
+<circle cx="106" cy="128" r="1.6" fill="#f6f2e9" stroke="none"/><circle cx="146" cy="128" r="1.6" fill="#f6f2e9" stroke="none"/>
+<ellipse cx="94" cy="142" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".75"/><ellipse cx="162" cy="142" rx="8" ry="5" fill="#c8352b" stroke="none" opacity=".75"/>
+<path d="M120 144 Q128 152 136 144" fill="none" stroke-width="3"/>
+<!-- water drop crown -->
+<path d="M128 22 Q114 42 120 50 Q128 56 136 50 Q142 42 128 22Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M124 40 Q122 46 126 48" fill="none" stroke="#f6f2e9" stroke-width="2.5"/>
+<!-- drips from hair tips -->
+<path d="M70 206 Q64 216 70 222 Q76 216 70 206Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M186 206 Q180 216 186 222 Q192 216 186 206Z" fill="#d4cec3" stroke-width="3"/>
+</svg>

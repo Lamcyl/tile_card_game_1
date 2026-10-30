@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce yong: profile roar, antlered head, mane flaring, serpentine S body, claw clutching the yeouiju -->
+<path d="M132 50 Q160 38 180 54 Q164 58 168 70 Q190 70 198 88 Q174 86 174 100 L136 102Z" fill="#55514c" stroke-width="3"/>
+<path d="M140.1 73.6 L152.1 56.9 L154.0 72.8Z" fill="#55514c" stroke-width="3"/>
+<path d="M176.9 75.8 L195.1 66.1 L189.8 81.2Z" fill="#55514c" stroke-width="3"/>
+<path d="M206.4 95.6 L226.8 98.4 L213.6 107.6Z" fill="#55514c" stroke-width="3"/>
+<path d="M217.9 141.0 L231.4 156.5 L215.5 154.8Z" fill="#55514c" stroke-width="3"/>
+<path d="M206.6 170.9 L206.4 191.5 L195.7 179.6Z" fill="#55514c" stroke-width="3"/>
+<path d="M178.1 185.4 L166.4 202.3 L164.2 186.4Z" fill="#55514c" stroke-width="3"/>
+<path d="M144.0 183.0 L136.9 202.4 L130.7 187.6Z" fill="#55514c" stroke-width="3"/>
+<path d="M132.8 184.7 L137.3 204.8 L124.2 195.7Z" fill="#55514c" stroke-width="3"/>
+<path d="M99.6 191.3 L87.0 207.6 L102.8 204.9Z" fill="#55514c" stroke-width="3"/>
+<path d="M186 214 Q214 214 226 196 Q232 184 244 190 Q236 204 240 214 Q222 232 190 222Z" fill="#55514c" stroke-width="3"/>
+<path d="M124 96 Q190 80 200 128" fill="none" stroke-width="42"/>
+<path d="M200 128 Q206 176 150 168" fill="none" stroke-width="38"/>
+<path d="M150 168 Q100 176 120 206" fill="none" stroke-width="32"/>
+<path d="M120 206 Q146 226 190 214" fill="none" stroke-width="22"/>
+<path d="M124 96 Q190 80 200 128" fill="none" stroke="#d4cec3" stroke-width="34"/>
+<path d="M200 128 Q206 176 150 168" fill="none" stroke="#d4cec3" stroke-width="30"/>
+<path d="M150 168 Q100 176 120 206" fill="none" stroke="#d4cec3" stroke-width="24"/>
+<path d="M120 206 Q146 226 190 214" fill="none" stroke="#d4cec3" stroke-width="14"/>
+<path d="M176 88 Q182 96 176 104 M200 120 Q210 126 206 134 M196 160 Q196 168 188 170 M122 176 Q116 184 122 190 M128 214 Q138 222 150 218" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M176 92 L206 74" fill="none" stroke-width="22"/><path d="M176 92 L206 74" fill="none" stroke="#d4cec3" stroke-width="14"/><path d="M206 74 L220 66 M206 74 L222 76 M206 74 L214 86 " fill="none" stroke-width="5"/>
+<path d="M206 150 L232 166" fill="none" stroke-width="22"/><path d="M206 150 L232 166" fill="none" stroke="#d4cec3" stroke-width="14"/><path d="M232 166 L246 164 M232 166 L244 174 M232 166 L234 182 " fill="none" stroke-width="5"/>
+<path d="M112 196 L84 214" fill="none" stroke-width="22"/><path d="M112 196 L84 214" fill="none" stroke="#d4cec3" stroke-width="14"/><path d="M84 214 L74 212 M84 214 L78 224 M84 214 L90 228 " fill="none" stroke-width="5"/>
+<path d="M150 164 L96 158" fill="none" stroke-width="26"/><path d="M150 164 L96 158" fill="none" stroke="#d4cec3" stroke-width="18"/><path d="M96 158 L86 146 M96 158 L82 158 M96 158 L90 172 " fill="none" stroke-width="5"/>
+<circle cx="68" cy="164" r="22" fill="#c9a23a"/><path d="M54 156 Q58 144 70 142" fill="none" stroke="#f6f2e9" stroke-width="4"/><path d="M76 184 Q88 180 90 168" fill="none" stroke="#55514c" stroke-width="3"/>
+<path d="M96 158 L84 150 M96 158 L80 162 M96 158 L86 174" fill="none" stroke-width="5"/>
+<path d="M112 54 Q146 44 176 16 M140 40 Q146 22 164 14 M124 48 Q124 30 136 22" fill="none" stroke-width="14"/><path d="M112 54 Q146 44 176 16 M140 40 Q146 22 164 14 M124 48 Q124 30 136 22" fill="none" stroke="#f6f2e9" stroke-width="6"/>
+<path d="M30 100 L112 106 L104 136 L40 122Z" fill="#1b1a1a"/>
+<path d="M60 124 Q84 114 102 126 Q92 136 64 132Z" fill="#9a948b" stroke-width="3"/>
+<path d="M36 116 Q60 128 100 132 Q112 144 96 152 Q60 154 38 130Z" fill="#f6f2e9"/>
+<path d="M138 98 Q142 50 102 46 Q74 46 62 68 L28 80 Q10 84 12 98 L30 104 L108 110 Q130 108 138 98Z" fill="#f6f2e9"/>
+<circle cx="24" cy="90" r="3" fill="#1b1a1a" stroke="none"/>
+<path d="M34 104 L40 120 L47 105Z M62 108 L67 122 L73 108Z M44 120 L48 108 L53 122Z M76 130 L80 118 L86 132Z" fill="#f6f2e9" stroke-width="2.5"/>
+<path d="M72 66 L104 76 L98 90 Q80 90 72 78Z" fill="#c9a23a" stroke-width="3.5"/><path d="M88 72 L88 86" stroke-width="4" fill="none"/>
+<path d="M64 60 L110 74" fill="none" stroke-width="6"/>
+<path d="M114 80 Q124 96 120 104 M100 94 Q112 100 116 108" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M30 92 Q2 66 22 44 Q32 36 40 44" fill="none" stroke-width="3.5"/>
+<path d="M96 150 Q88 168 100 176" fill="none" stroke-width="0"/>
+</svg>

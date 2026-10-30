@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- cute inmyeonjo: round songbird with a gentle human face, gold crown, playing a pipe, fanned tail plumes -->
+<path d="M168 176Q207.7 141.4 226 92Q186.3 126.6 168 176Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M168 176Q213.7 158.5 244 120Q198.3 137.5 168 176Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M168 176Q210.8 176.4 246 152Q203.2 151.6 168 176Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M168 176Q200.9 191.9 236 182Q203.1 166.1 168 176Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M168 176Q184.2 201.1 214 204Q197.8 178.9 168 176Z" fill="#d4cec3" stroke-width="3"/>
+<circle cx="226" cy="92" r="5" fill="#c9a23a" stroke-width="2.5"/>
+<circle cx="244" cy="120" r="5" fill="#c9a23a" stroke-width="2.5"/>
+<circle cx="246" cy="152" r="5" fill="#c9a23a" stroke-width="2.5"/>
+<path d="M110 214 L108 232 M104 232 L116 232 M146 214 L148 232 M142 232 L154 232" fill="none" stroke-width="5"/>
+<path d="M64 150 Q56 214 124 218 Q190 214 184 152 Q160 128 124 130 Q88 128 64 150Z" fill="#f6f2e9"/>
+<path d="M112 192 Q120 200 128 192 M132 176 Q140 184 148 176 M152 194 Q160 202 168 194 M112 168 Q120 176 128 168" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M84 162Q53.5 155.4 30 176Q60.5 182.6 84 162Z" fill="#9a948b" stroke-width="3"/>
+<path d="M84 162Q52.4 169.0 38 198Q69.6 191.0 84 162Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M84 162Q60.2 181.4 62 212Q85.8 192.6 84 162Z" fill="#9a948b" stroke-width="3"/>
+<path d="M84 162Q74.2 190.1 92 214Q101.8 185.9 84 162Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M86 172 L120 126" fill="none" stroke-width="11"/><path d="M86 172 L120 126" fill="none" stroke="#c9a23a" stroke-width="5"/>
+<ellipse cx="124" cy="92" rx="48" ry="44" fill="#f6f2e9"/>
+<path d="M82 80 Q86 46 124 44 Q162 46 166 80 Q150 62 124 64 Q98 62 82 80Z" fill="#1b1a1a"/>
+<path d="M92 56 L96 30 L110 44 L124 22 L138 44 L152 30 L156 56Z" fill="#c9a23a"/>
+<circle cx="124" cy="40" r="4" fill="#1b1a1a" stroke-width="2"/>
+<path d="M96 96 Q102 86 112 96 M136 96 Q146 86 152 96" fill="none" stroke-width="4"/>
+<ellipse cx="92" cy="110" rx="8" ry="5" fill="#9a948b" stroke="none" opacity=".6"/><ellipse cx="156" cy="110" rx="8" ry="5" fill="#9a948b" stroke="none" opacity=".6"/>
+<ellipse cx="134" cy="116" rx="4" ry="5" fill="#1b1a1a" stroke-width="2"/>
+<path d="M186 58 Q200 50 202 66 Q200 78 190 74" fill="none" stroke-width="3.5"/>
+<path d="M212 38 Q222 34 224 46" fill="none" stroke-width="3"/>
+</svg>
