@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.n{stroke:none}</style>
+<!-- lightning -->
+<path class="o" fill="#c8352b" d="M236 8 L206 58 L224 56 L196 110 L246 46 L226 48 Z"/>
+<!-- cape -->
+<path class="o" fill="#55514c" d="M104 138 C70 134 36 156 14 204 C42 196 62 202 78 214 C96 200 116 190 126 170 Z"/>
+<path class="o" fill="#9a948b" d="M30 196 C48 192 62 196 74 208" fill-opacity="0"/>
+<!-- back arm + fist -->
+<path class="o" fill="none" style="stroke-width:18" d="M96 160 L66 140"/>
+<path fill="none" stroke="#f6f2e9" stroke-width="10" stroke-linecap="round" d="M96 160 L66 140"/>
+<circle class="o" cx="62" cy="136" r="11" fill="#f6f2e9"/>
+<!-- legs -->
+<path class="o" fill="#55514c" d="M92 188 L72 214 C62 218 60 232 70 234 L96 232 L112 196 Z"/>
+<path class="o" fill="#55514c" d="M120 190 L150 206 C162 206 168 220 158 226 L132 224 L108 204 Z"/>
+<path class="o" fill="#1b1a1a" d="M66 224 L98 224 L96 234 L68 236Z"/>
+<!-- torso -->
+<path class="o" fill="#9a948b" d="M92 138 C84 160 88 192 112 196 C138 196 144 164 132 136 Z"/>
+<path class="o" fill="#d4cec3" d="M96 176 L136 178 L136 188 L98 188 Z"/>
+<circle class="o" cx="116" cy="183" r="6" fill="#c8352b"/>
+<!-- hammer arm -->
+<path class="o" fill="none" style="stroke-width:18" d="M128 150 L158 170"/>
+<path fill="none" stroke="#f6f2e9" stroke-width="10" stroke-linecap="round" d="M128 150 L158 170"/>
+<!-- hammer -->
+<path class="o" fill="none" style="stroke-width:13" d="M150 182 L196 108"/>
+<path fill="none" stroke="#9a948b" stroke-width="6" stroke-linecap="round" d="M150 182 L196 108"/>
+<g transform="translate(204 92) rotate(32)">
+<rect class="o" x="-34" y="-22" width="68" height="44" rx="7" fill="#9a948b"/>
+<rect class="n" x="-28" y="-17" width="56" height="10" rx="4" fill="#d4cec3"/>
+<rect class="o" x="-8" y="-22" width="16" height="44" fill="#c8352b"/>
+</g>
+<circle class="o" cx="160" cy="173" r="11" fill="#f6f2e9"/>
+<!-- hair back -->
+<path class="o" fill="#c8352b" d="M64 76 C54 40 90 24 120 30 C152 24 182 46 174 84 C186 110 170 134 160 128 L76 130 C62 130 52 106 64 76Z"/>
+<!-- head -->
+<ellipse class="o" cx="118" cy="92" rx="50" ry="42" fill="#f6f2e9"/>
+<!-- fringe -->
+<path class="o" fill="#c8352b" d="M68 78 C74 52 100 44 118 52 C132 40 160 50 168 78 C150 70 140 64 128 62 C120 76 100 78 68 78Z"/>
+<!-- headband -->
+<path class="o" fill="#9a948b" d="M69 76 C100 82 140 82 168 74 L170 84 C140 92 100 92 68 86Z"/>
+<!-- eyes -->
+<path class="o" fill="#1b1a1a" d="M88 96 C88 86 106 86 106 96 C106 106 88 106 88 96Z"/>
+<path class="o" fill="#1b1a1a" d="M132 96 C132 86 150 86 150 96 C150 106 132 106 132 96Z"/>
+<circle class="n" cx="95" cy="93" r="3.5" fill="#f6f2e9"/><circle class="n" cx="139" cy="93" r="3.5" fill="#f6f2e9"/>
+<ellipse class="n" cx="84" cy="110" rx="8" ry="5" fill="#c8352b" opacity=".35"/>
+<ellipse class="n" cx="152" cy="110" rx="8" ry="5" fill="#c8352b" opacity=".35"/>
+<!-- beard -->
+<path class="o" fill="#c8352b" d="M70 110 C66 140 84 164 102 168 L118 176 L134 168 C154 164 170 140 166 110 C156 124 136 126 118 118 C100 126 80 124 70 110Z"/>
+<path class="o" fill="#c8352b" d="M92 112 C100 104 112 106 118 112 C124 106 136 104 144 112 C140 124 124 122 118 118 C112 122 96 124 92 112Z"/>
+<path class="o" fill="#1b1a1a" d="M106 130 C108 146 128 146 130 130 C124 134 112 134 106 130Z"/>
+<path class="n" fill="#f6f2e9" d="M112 133 L124 133 L123 137 L113 137Z"/>
+<rect class="o" x="108" y="168" width="20" height="7" rx="3" fill="#1b1a1a"/>
+</svg>

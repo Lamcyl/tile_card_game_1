@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.s{stroke:#1b1a1a;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}.t{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- outer tentacles rising -->
+<g class="t"><path stroke="#1b1a1a" stroke-width="34" d="M64 150 C10 150 14 100 40 84 C60 72 70 96 54 100"/><path stroke="#55514c" stroke-width="24" d="M64 150 C10 150 14 100 40 84 C60 72 70 96 54 100"/>
+<path stroke="#1b1a1a" stroke-width="34" d="M192 150 C246 150 242 100 216 84 C196 72 186 96 202 100"/><path stroke="#55514c" stroke-width="24" d="M192 150 C246 150 242 100 216 84 C196 72 186 96 202 100"/></g>
+<!-- ship -->
+<g transform="rotate(-10 128 218)"><path class="s l" d="M40 196 Q48 226 80 232 L176 232 Q208 226 216 196 L180 210 L76 210Z"/><path class="n" stroke="#1b1a1a" stroke-width="4" d="M60 214 L196 214"/><circle class="s v" cx="100" cy="222" r="5"/><circle class="s v" cx="128" cy="224" r="5"/><circle class="s v" cx="156" cy="222" r="5"/><path class="s d" d="M34 188 Q40 176 52 180 L44 200Z"/><path class="s" fill="none" d="M128 206 L134 150"/><path class="s p" d="M134 156 L174 168 L172 196 L130 200Z" opacity=".95"/><path class="v" d="M140 166 L166 174 L164 190 L138 192Z"/></g>
+<!-- head -->
+<path class="s d" d="M128 10 C74 10 54 56 58 96 C60 126 82 150 128 150 C174 150 196 126 198 96 C202 56 182 10 128 10Z"/>
+<path class="n" stroke="#9a948b" stroke-width="5" stroke-linecap="round" d="M128 18 V54 M100 24 L108 56 M156 24 L148 56"/>
+<path class="n" stroke="#1b1a1a" stroke-width="4" stroke-linecap="round" d="M84 30 Q70 50 70 70 M172 30 Q186 50 186 70"/>
+<!-- eyes -->
+<path class="s i" d="M66 88 Q96 70 122 92 Q112 118 84 116 Q64 108 66 88Z"/><path class="s i" d="M190 88 Q160 70 134 92 Q144 118 172 116 Q192 108 190 88Z"/>
+<path class="v" d="M76 90 Q96 80 114 94 Q106 108 88 108 Q74 102 76 90Z"/><path class="v" d="M180 90 Q160 80 142 94 Q150 108 168 108 Q182 102 180 90Z"/>
+<path class="i" d="M94 82 Q99 94 94 106 Q89 94 94 82Z M162 82 Q167 94 162 106 Q157 94 162 82Z"/>
+<path class="i" d="M60 76 L100 90 L98 80Z M196 76 L156 90 L158 80Z"/>
+<!-- beak and mouth -->
+<path class="s p" d="M112 118 L128 154 L144 118 Q128 112 112 118Z"/><path class="i" d="M120 126 L128 148 L136 126Z"/>
+<!-- front tentacles gripping ship -->
+<g class="t"><path stroke="#1b1a1a" stroke-width="30" d="M92 130 C60 170 120 176 150 200 C168 214 150 240 130 232"/><path stroke="#55514c" stroke-width="20" d="M92 130 C60 170 120 176 150 200 C168 214 150 240 130 232"/>
+<path stroke="#1b1a1a" stroke-width="30" d="M164 130 C196 170 140 180 112 200 C94 214 104 240 124 236"/><path stroke="#55514c" stroke-width="20" d="M164 130 C196 170 140 180 112 200 C94 214 104 240 124 236"/>
+<path stroke="#d4cec3" stroke-width="4" stroke-dasharray="0 11" d="M92 130 C60 170 120 176 150 200"/><path stroke="#d4cec3" stroke-width="4" stroke-dasharray="0 11" d="M164 130 C196 170 140 180 112 200"/>
+<path stroke="#d4cec3" stroke-width="4" stroke-dasharray="0 11" d="M64 150 C10 150 14 100 40 84"/><path stroke="#d4cec3" stroke-width="4" stroke-dasharray="0 11" d="M192 150 C246 150 242 100 216 84"/></g>
+<path class="n" stroke="#d4cec3" stroke-width="4" stroke-linecap="round" d="M14 214 q8 -6 14 0 M228 212 q8 -6 14 0 M30 238 q8 -6 14 0"/>
+</svg>

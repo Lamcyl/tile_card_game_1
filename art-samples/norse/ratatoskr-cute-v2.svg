@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.s{stroke:#1b1a1a;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}</style>
+<!-- branch -->
+<path class="s d" d="M20 226 Q80 212 140 220 T246 214 L246 236 Q190 240 140 238 T20 244Z"/>
+<path class="s l" d="M196 226 q10 -22 24 -6 q-8 8 -24 6z"/>
+<!-- tail -->
+<path class="s l" d="M150 214 C226 222 246 140 214 84 C196 52 150 38 118 58 C148 56 172 74 168 106 C164 146 128 168 128 204Z"/>
+<path class="n" stroke="#9a948b" stroke-width="4" stroke-linecap="round" d="M196 188 C220 160 226 124 212 96 M178 150 C194 130 194 108 182 90 M158 70 C172 70 180 76 184 84"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" d="M206 196 q14 -10 18 -22"/>
+<!-- body -->
+<ellipse class="s p" cx="108" cy="196" rx="40" ry="32"/>
+<ellipse class="p" cx="108" cy="204" rx="22" ry="20" fill="#d4cec3"/>
+<ellipse class="s l" cx="78" cy="226" rx="17" ry="9"/><ellipse class="s l" cx="132" cy="226" rx="17" ry="9"/>
+<!-- ears -->
+<path class="s p" d="M56 96 L52 52 L92 78Z"/><path class="s p" d="M160 96 L164 52 L124 78Z"/>
+<path class="v" d="M58 86 L56 58 L78 76Z"/><path class="v" d="M158 86 L162 58 L140 76Z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="4" stroke-linecap="round" d="M52 52 L46 34 M164 52 L170 34"/>
+<!-- head -->
+<ellipse class="s p" cx="108" cy="126" rx="64" ry="52"/>
+<path class="l" d="M84 160 Q108 178 132 160 Q108 150 84 160Z"/>
+<ellipse class="i" cx="80" cy="124" rx="12" ry="15"/><ellipse class="i" cx="136" cy="124" rx="12" ry="15"/>
+<circle class="p" cx="84" cy="118" r="5"/><circle class="p" cx="140" cy="118" r="5"/><circle class="p" cx="76" cy="130" r="2.4"/><circle class="p" cx="132" cy="130" r="2.4"/>
+<ellipse class="v" cx="58" cy="146" rx="9" ry="6" opacity=".55"/><ellipse class="v" cx="158" cy="146" rx="9" ry="6" opacity=".55"/>
+<path class="i" d="M100 144 q8 -6 16 0 q-2 8 -8 8 q-6 0 -8 -8z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3.5" stroke-linecap="round" d="M108 152 v4 M98 158 q10 8 10 0 q0 8 10 0"/>
+
+<!-- acorn held -->
+<ellipse class="s v" cx="108" cy="200" rx="14" ry="12"/>
+<path class="s d" d="M92 198 Q108 184 124 198 Q108 204 92 198Z"/>
+<path class="s l" d="M84 206 q-6 -12 8 -8 M132 206 q6 -12 -8 -8"/>
+</svg>

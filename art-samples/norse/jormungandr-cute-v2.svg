@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="128" cy="236" rx="80" ry="9" fill="#1b1a1a" fill-opacity=".12" stroke="none"/>
+<!-- sea waves -->
+<path d="M14 214q14-14 28 0t28 0 28 0 28 0 28 0 28 0 28 0 28 0" stroke="#9a948b" stroke-width="4"/>
+<!-- ring body: ink outline then fill -->
+<circle cx="128" cy="150" r="70" stroke-width="46"/>
+<circle cx="128" cy="150" r="70" stroke="#9a948b" stroke-width="37"/>
+<circle cx="128" cy="150" r="70" stroke="#d4cec3" stroke-width="16"/>
+<circle cx="128" cy="150" r="70" stroke="#55514c" stroke-width="3" stroke-dasharray="2 13"/>
+<!-- tail tip poking out near mouth -->
+<path d="M168 82c14-8 30-6 38 4" stroke-width="22"/>
+<path d="M168 82c14-8 30-6 38 4" stroke="#9a948b" stroke-width="13"/>
+<path d="M200 80c14-12 26-6 22 6" stroke-width="12"/><path d="M200 80c14-12 26-6 22 6" stroke="#9a948b" stroke-width="5"/>
+<!-- head -->
+<path d="M70 70c0-30 28-48 58-48s58 18 58 48c0 26-26 40-58 40s-58-14-58-40z" fill="#9a948b"/>
+<path d="M92 36c10-10 24-12 36-12M164 36c-8-6-16-10-26-12" stroke="#d4cec3" stroke-width="5"/>
+<path d="M92 56q-6-16 0-26M164 56q6-16 0-26" stroke="#55514c" stroke-width="0"/>
+<!-- horns / crest -->
+<path d="M92 36l-12-24 24 10zM164 36l12-24-24 10z" fill="#d4cec3"/>
+<!-- eyes -->
+<ellipse cx="102" cy="66" rx="13" ry="16" fill="#f6f2e9"/><ellipse cx="154" cy="66" rx="13" ry="16" fill="#f6f2e9"/>
+<circle cx="105" cy="68" r="8" fill="#1b1a1a" stroke="none"/><circle cx="151" cy="68" r="8" fill="#1b1a1a" stroke="none"/>
+<circle cx="108" cy="64" r="3" fill="#f6f2e9" stroke="none"/><circle cx="154" cy="64" r="3" fill="#f6f2e9" stroke="none"/>
+<circle cx="86" cy="86" r="7" fill="#c8352b" fill-opacity=".5" stroke="none"/><circle cx="170" cy="86" r="7" fill="#c8352b" fill-opacity=".5" stroke="none"/>
+<!-- mouth tiny with tongue -->
+<path d="M114 92q14 10 28 0" stroke-width="4"/>
+<path d="M128 98v14l-6 6M128 112l6 6" stroke="#c8352b" stroke-width="4"/>
+<circle cx="123" cy="86" r="1.5" fill="#1b1a1a"/><circle cx="133" cy="86" r="1.5" fill="#1b1a1a"/>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- baby wyrm coiled around a root, munching a tiny root-tip -->
+<path d="M118 0 C112 60 130 130 124 256 L158 256 C158 140 142 60 146 0Z" fill="#9a948b"/>
+<path d="M130 20 L134 100 M142 150 L140 230" stroke-width="3" fill="none"/>
+<path d="M130 190 C90 200 60 210 36 256 L72 256 C86 232 108 224 140 218Z" fill="#9a948b"/>
+<path d="M146 150 C176 160 206 176 220 256 L186 256 C178 210 162 192 140 186Z" fill="#9a948b"/>
+<!-- body coil around trunk -->
+<path d="M30 190 C20 150 100 130 160 146 C220 160 240 210 190 226 C150 238 80 226 70 206" fill="none" stroke-width="40"/>
+<path d="M30 190 C20 150 100 130 160 146 C220 160 240 210 190 226 C150 238 80 226 70 206" fill="none" stroke="#55514c" stroke-width="32"/>
+<path d="M40 196 C34 164 100 148 160 160 C206 170 220 200 188 212 C150 222 94 214 86 206" fill="none" stroke="#9a948b" stroke-width="12" stroke-dasharray="2 16"/>
+<!-- tail tip vermilion spade -->
+<path d="M62 212 L40 226 L50 200Z" fill="#c8352b"/>
+<!-- back crest spikes -->
+<path d="M88 134 L96 112 L108 134Z M122 132 L132 108 L142 134Z M160 144 L174 124 L180 148Z" fill="#c8352b" stroke-width="3"/>
+<!-- head big round -->
+<path d="M70 40 C50 80 56 150 120 150 C176 150 206 100 190 66 C176 30 100 16 70 40Z" fill="#55514c" transform="translate(0,-4)"/>
+<ellipse cx="124" cy="118" rx="50" ry="26" fill="#d4cec3" stroke="none"/>
+<path d="M96 40 L82 6 L116 30Z M156 36 L172 4 L184 44Z" fill="#f6f2e9"/>
+<ellipse cx="100" cy="82" rx="14" ry="17" fill="#f6f2e9"/><ellipse cx="156" cy="82" rx="14" ry="17" fill="#f6f2e9"/>
+<ellipse cx="102" cy="86" rx="9" ry="12" fill="#1b1a1a"/><ellipse cx="154" cy="86" rx="9" ry="12" fill="#1b1a1a"/>
+<circle cx="105" cy="81" r="3.5" fill="#f6f2e9" stroke="none"/><circle cx="157" cy="81" r="3.5" fill="#f6f2e9" stroke="none"/>
+<circle cx="112" cy="114" r="3" fill="#1b1a1a" stroke="none"/><circle cx="144" cy="114" r="3" fill="#1b1a1a" stroke="none"/>
+<path d="M104 128 Q128 148 152 128 Q128 136 104 128Z" fill="#c8352b" stroke-width="3"/>
+<path d="M112 130 L116 140 L122 133 M144 130 L140 140 L134 133" fill="#f6f2e9" stroke-width="2.5"/>
+<ellipse cx="80" cy="108" rx="8" ry="5" fill="#c8352b" stroke="none"/><ellipse cx="176" cy="108" rx="8" ry="5" fill="#c8352b" stroke="none"/>
+<!-- nibbled bits -->
+<circle cx="134" cy="172" r="3" fill="#9a948b" stroke-width="2.5"/><circle cx="154" cy="178" r="2.5" fill="#9a948b" stroke-width="2.5"/>
+</svg>

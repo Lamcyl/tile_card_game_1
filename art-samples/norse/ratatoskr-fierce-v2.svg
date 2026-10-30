@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.s{stroke:#1b1a1a;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}</style>
+<!-- trunk -->
+<path class="s d" d="M200 0 L256 0 L256 256 L214 256 Q196 190 206 140 Q190 70 200 0Z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" d="M228 20 Q222 70 232 120 M246 60 Q240 120 248 170 M216 190 Q222 220 228 250"/>
+<!-- spiky tail arcing over -->
+<path class="s l" d="M176 176 Q232 150 222 92 L236 80 L214 66 L222 46 L196 46 L192 20 L170 34 L156 8 L140 30 L112 18 L116 44 L88 44 L104 64 Q150 70 160 104 Q168 140 150 166Z"/>
+<path class="n" stroke="#9a948b" stroke-width="4" stroke-linecap="round" d="M196 140 Q212 110 204 76 M176 120 Q184 96 168 76 M150 60 L128 44"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" d="M210 128 q10 -16 4 -34"/>
+<!-- body diagonal -->
+<path class="s d" d="M100 150 Q150 130 190 168 Q200 200 176 214 Q130 214 96 186Z"/>
+<!-- hind leg gripping -->
+<path class="s l" d="M168 190 Q196 190 198 214 L206 224 L194 224 L190 232 L182 224 L170 226 Q150 214 168 190Z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" d="M190 232 L194 244 M182 226 L182 240 M198 222 L208 232"/>
+<!-- front arm raised with claws -->
+<path class="s l" d="M110 168 Q80 186 54 176 L40 188 L44 168 L28 170 L38 156 L26 150 Q60 142 90 150Z"/>
+<!-- head -->
+<path class="s p" d="M54 108 L40 48 L88 74 Q112 66 136 74 L152 38 L158 100 Q170 126 140 150 Q96 168 62 146 Q44 126 54 108Z"/>
+<path class="d" d="M48 72 L42 56 L66 66Z M146 76 L152 52 L152 84Z"/>
+<!-- mask lower -->
+<path class="l" d="M64 140 Q100 158 140 142 Q130 128 100 130 Q76 128 64 140Z"/>
+<!-- brows and eyes -->
+<path class="i" d="M66 98 L96 110 L92 100 L70 88Z M144 96 L116 110 L120 100 L140 86Z"/>
+<path class="v" d="M72 102 L90 108 L88 112 L72 108Z M140 102 L122 108 L124 112 L140 108Z"/>
+<circle class="i" cx="82" cy="108" r="1.5"/>
+<!-- snout/mouth -->
+<path class="s i" d="M72 130 Q104 122 134 130 Q120 164 104 160 Q84 162 72 130Z"/>
+<path class="v" d="M82 136 Q104 132 124 136 Q112 152 104 150 Q92 152 82 136Z"/>
+<path class="p" d="M78 130 L86 150 L92 132Z M130 130 L122 150 L116 132Z"/>
+<path class="i" d="M98 126 q6 -6 12 0 q-6 6 -12 0z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" d="M56 116 L40 112 M56 124 L38 128"/>
+</svg>

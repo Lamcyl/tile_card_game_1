@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.n{stroke:none}.t{fill:none;stroke:#1b1a1a;stroke-linecap:round;stroke-linejoin:round}.f{fill:none;stroke:#f6f2e9;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- sky bolt -->
+<path class="o" fill="#c8352b" d="M236 4 L196 62 L216 60 L180 122 L246 48 L224 50 Z"/>
+<!-- cape -->
+<path class="o" fill="#55514c" d="M104 126 C64 124 28 150 6 214 C38 198 62 212 92 200 L120 170Z"/>
+<path class="n" fill="#1b1a1a" opacity=".25" d="M30 190 L96 176 L92 200 C70 210 52 200 30 190Z"/>
+<!-- back leg -->
+<path class="o" fill="#55514c" d="M80 184 L100 206 L62 238 L36 238 C30 228 40 224 46 218Z"/>
+<path class="o" fill="#1b1a1a" d="M30 232 L66 232 L68 244 L32 246Z"/>
+<!-- front leg -->
+<path class="o" fill="#55514c" d="M112 186 L148 190 L170 208 L184 236 L156 238 L146 218 L112 208Z"/>
+<path class="o" fill="#1b1a1a" d="M150 234 L196 234 L198 246 L152 248Z"/>
+<!-- torso -->
+<path class="o" fill="#9a948b" d="M92 124 L150 126 C158 150 148 180 134 200 L82 196 C80 170 82 146 92 124Z"/>
+<path class="o" fill="#55514c" d="M84 184 L138 188 L134 202 L82 198Z"/>
+<path class="o" fill="#c8352b" d="M104 184 L118 186 L117 200 L103 199Z"/>
+<!-- fur mantle -->
+<path class="o" fill="#d4cec3" d="M80 128 L84 112 L98 122 L108 108 L120 120 L134 108 L142 122 L158 112 L162 130 L148 144 L88 146Z"/>
+<!-- front arm punching -->
+<path class="t" style="stroke-width:24" d="M142 138 L172 160 L196 150"/>
+<path class="f" style="stroke-width:16" d="M142 138 L172 160 L196 150"/>
+<!-- hammer + back arm -->
+<path class="t" style="stroke-width:14" d="M76 96 L46 56"/>
+<path class="f" style="stroke:#9a948b;stroke-width:7" d="M76 96 L46 56"/>
+<g transform="translate(40 44) rotate(-36)">
+<rect class="o" x="-38" y="-23" width="76" height="46" rx="8" fill="#9a948b"/>
+<rect class="n" x="-31" y="-18" width="62" height="9" rx="4" fill="#d4cec3"/>
+<rect class="o" x="-10" y="-23" width="20" height="46" fill="#c8352b"/>
+</g>
+<path class="t" style="stroke-width:24" d="M100 138 L72 126 L72 98"/>
+<path class="f" style="stroke:#9a948b;stroke-width:16" d="M100 138 L72 126 L72 98"/><path class="t" style="stroke-width:4" d="M66 118 L82 120"/>
+<circle class="o" cx="74" cy="96" r="13" fill="#f6f2e9"/>
+<circle class="o" cx="204" cy="150" r="14" fill="#f6f2e9"/>
+<path class="o" fill="#c8352b" d="M214 124 L226 138 L218 140 L234 158 L212 146 L218 144Z"/>
+<!-- hair streaming -->
+<path class="o" fill="#c8352b" d="M120 52 C96 34 56 40 18 72 L50 70 L8 100 L52 92 L30 124 L80 108 L104 112 L112 90Z"/>
+<!-- head profile -->
+<path class="o" fill="#f6f2e9" d="M102 74 C102 46 144 36 164 58 C170 66 174 74 188 88 L172 94 L176 126 C168 140 150 142 134 138 C112 134 100 118 102 74Z"/>
+<path class="o" fill="#c8352b" d="M104 70 C112 46 146 40 164 58 C150 56 126 60 110 82Z"/>
+<!-- eye + brow -->
+<path class="o" fill="#1b1a1a" d="M130 62 L170 70 L169 75 L132 68Z" style="stroke-width:3"/>
+<path class="o" fill="#1b1a1a" d="M138 76 L166 80 L160 88 L142 85Z" style="stroke-width:2"/>
+<path class="n" fill="#c8352b" d="M150 80 L159 82 L157 85 L151 84Z"/>
+<!-- roar -->
+<path class="o" fill="#1b1a1a" d="M176 98 L146 100 C144 116 154 126 176 124Z"/>
+<path class="n" fill="#f6f2e9" d="M172 100 L152 102 L156 110 L170 106Z"/>
+<path class="n" fill="#c8352b" d="M154 116 C160 112 168 112 174 118 C168 124 158 124 154 116Z"/>
+<!-- beard -->
+<path class="o" fill="#c8352b" d="M108 112 C112 134 130 142 150 140 L176 128 L168 148 L186 144 L166 166 L150 156 L152 176 L132 156 L118 172 L116 148 L102 140Z"/>
+</svg>

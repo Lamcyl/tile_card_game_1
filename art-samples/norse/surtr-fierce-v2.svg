@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- dynamic overhead slash with enormous flaming blade, side lunge -->
+<ellipse cx="116" cy="242" rx="84" ry="8" fill="#d4cec3" stroke="none"/>
+<!-- flame blade sweeping up and over -->
+<path d="M70 150 L34 60 C20 30 60 4 118 10 C176 16 214 50 232 98 C190 60 150 44 112 54 C84 60 66 78 56 100 L96 160Z" fill="#c8352b"/>
+<path d="M62 142 L30 70 C26 52 50 30 90 28 C60 44 52 70 66 100 L88 150Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M232 98 C226 70 214 56 206 46 C226 56 244 76 232 98Z" fill="#c8352b"/>
+<!-- hilt -->
+<path d="M56 164 L104 134 L112 148 L66 180Z" fill="#9a948b"/>
+<!-- legs lunge -->
+<path d="M96 236 L120 190 L150 196 L134 238Z" fill="#55514c"/>
+<path d="M170 236 L186 200 L214 204 L206 238Z" fill="#55514c"/>
+<path d="M80 240 L140 240 L138 228 L90 226Z M170 240 L220 240 L212 228Z" fill="#9a948b"/>
+<!-- torso -->
+<path d="M96 120 L176 108 L204 150 L182 204 L116 204 L100 160Z" fill="#55514c"/>
+<path d="M120 204 L112 150 L176 140 L186 204Z" fill="#9a948b" stroke-width="3"/>
+<path d="M118 160 L170 154" stroke="#c8352b" stroke-width="5"/>
+<!-- sword arm / fist -->
+<path d="M100 124 Q76 140 74 164" fill="none" stroke-width="22"/><path d="M100 124 Q76 140 74 164" fill="none" stroke="#9a948b" stroke-width="14"/>
+<circle cx="74" cy="168" r="14" fill="#55514c"/>
+<!-- back arm -->
+<path d="M196 130 Q232 150 224 190" fill="none" stroke-width="22"/><path d="M196 130 Q232 150 224 190" fill="none" stroke="#9a948b" stroke-width="14"/>
+<circle cx="224" cy="194" r="13" fill="#c8352b"/>
+<!-- head -->
+<path d="M110 60 Q150 40 190 62 L196 106 Q150 128 108 106Z" fill="#55514c"/>
+<!-- fire hair streaming back -->
+<path d="M108 66 C90 50 96 30 116 24 C112 40 130 46 140 34 C142 20 160 10 176 14 C168 28 184 36 196 28 C216 34 232 50 240 76 C216 68 204 72 196 82 L186 56 Q150 42 108 66Z" fill="#c8352b"/>
+<!-- horns -->
+<path d="M118 62 L96 40 L90 74Z M180 58 L206 40 L202 78Z" fill="#f6f2e9"/>
+<!-- face -->
+<path d="M116 84 L148 92 L146 104 Q128 106 116 96Z" fill="#c8352b"/>
+<path d="M178 84 L158 92 L160 104 Q174 104 180 96Z" fill="#c8352b"/>
+<path d="M116 112 L190 108 L186 124 L154 130 L118 122Z" fill="#1b1a1a"/>
+<path d="M126 114 L132 122 L138 113 L146 124 L152 112 L160 122 L168 111 L176 120" fill="#f6f2e9" stroke-width="2.5"/>
+<circle cx="40" cy="104" r="4" fill="#c8352b" stroke="none"/><circle cx="244" cy="126" r="3" fill="#c8352b" stroke="none"/>
+</svg>

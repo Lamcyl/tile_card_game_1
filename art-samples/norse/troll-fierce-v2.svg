@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- hunched knuckle-dragging troll hurling a boulder overhead -->
+<ellipse cx="120" cy="244" rx="100" ry="8" fill="#d4cec3" stroke="none"/>
+<!-- boulder -->
+<path d="M96 20 L144 6 L196 24 L212 62 L190 96 L136 104 L96 88 L82 50Z" fill="#9a948b"/>
+<path d="M144 6 L136 46 L196 24 M136 46 L190 96 M136 46 L96 88 M136 46 L82 50" fill="none" stroke-width="3"/>
+<path d="M150 14 L186 26 L170 44Z" fill="#d4cec3" stroke="none"/>
+<!-- back leg + front leg -->
+<path d="M150 236 L158 188 L206 176 L218 236Z" fill="#55514c"/>
+<path d="M46 238 L58 196 L110 190 L120 238Z" fill="#55514c"/>
+<path d="M40 242 L124 242 L118 226 L50 226Z M146 242 L226 242 L216 226 L150 226Z" fill="#9a948b"/>
+<path d="M54 232 l6 -8 M70 232 l6 -8 M96 232 l6 -8" stroke-width="2.5" fill="none"/>
+<!-- massive hump torso -->
+<path d="M52 150 C60 100 120 92 168 108 C212 124 226 164 208 196 L120 210 L66 200Z" fill="#9a948b"/>
+<path d="M84 128 L100 150 M128 118 L140 148 M170 130 L178 156 M100 180 L120 190" stroke-width="3" fill="none"/>
+<path d="M148 100 L172 70 L176 112Z M184 118 L218 98 L206 140Z" fill="#d4cec3"/>
+<!-- raised arm to boulder -->
+<path d="M172 128 C176 100 164 96 150 92" fill="none" stroke-width="30"/>
+<path d="M172 128 C176 100 164 96 150 92" fill="none" stroke="#9a948b" stroke-width="22"/>
+<circle cx="146" cy="92" r="16" fill="#d4cec3"/>
+<!-- dangling arm -->
+<path d="M72 150 C46 170 40 190 52 214" fill="none" stroke-width="30"/>
+<path d="M72 150 C46 170 40 190 52 214" fill="none" stroke="#9a948b" stroke-width="22"/>
+<circle cx="52" cy="218" r="17" fill="#d4cec3"/>
+<path d="M44 208 l4 8 M54 206 l2 10" stroke-width="2.5" fill="none"/>
+<!-- head hunched forward, low -->
+<path d="M28 104 C20 70 60 52 94 66 C124 78 126 124 100 140 C70 154 36 140 28 104Z" fill="#d4cec3"/>
+<path d="M88 66 L100 44 L112 72Z M64 58 L62 36 L78 60Z" fill="#9a948b"/>
+<path d="M36 80 L10 62 L34 96Z" fill="#9a948b"/>
+<!-- brow & eyes -->
+<path d="M40 88 L78 100 L70 110 L44 104Z" fill="#1b1a1a"/>
+<circle cx="56" cy="102" r="4" fill="#c8352b" stroke="none"/>
+<path d="M82 92 L108 100 L104 110 L84 108Z" fill="#1b1a1a"/>
+<circle cx="94" cy="103" r="3.5" fill="#c8352b" stroke="none"/>
+<!-- huge nose -->
+<path d="M62 106 C40 112 34 134 52 136 C66 138 72 120 66 110Z" fill="#9a948b"/>
+<!-- jaw w/ tusks -->
+<path d="M52 140 C70 150 100 146 112 130 L108 122 C90 134 70 132 52 128Z" fill="#1b1a1a"/>
+<path d="M62 136 L58 118 L70 134Z M98 138 L102 118 L90 136Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M214 70 l6 -12 M230 90 l12 -4" stroke="#c8352b" stroke-width="4" fill="none"/>
+</svg>

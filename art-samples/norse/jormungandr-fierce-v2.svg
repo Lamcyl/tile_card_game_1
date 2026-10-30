@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M0 240q16-14 32 0t32 0 32 0 32 0 32 0 32 0 32 0 32 0v16H0z" fill="#55514c"/>
+<path d="M-10 250c0-34 28-40 48-40s48 6 48 40" stroke-width="32"/><path d="M-10 250c0-34 28-40 48-40s48 6 48 40" stroke="#55514c" stroke-width="23"/>
+<path d="M170 250c0-34 28-40 48-40s48 6 48 40" stroke-width="32"/><path d="M170 250c0-34 28-40 48-40s48 6 48 40" stroke="#55514c" stroke-width="23"/>
+<path d="M170 96C222 112 214 156 154 166C92 176 60 200 100 240" stroke-width="50"/>
+<path d="M170 96C222 112 214 156 154 166C92 176 60 200 100 240" stroke="#9a948b" stroke-width="40"/>
+<path d="M170 96C222 112 214 156 154 166C92 176 60 200 100 240" stroke="#d4cec3" stroke-width="14"/>
+<path d="M170 96C222 112 214 156 154 166C92 176 60 200 100 240" stroke="#1b1a1a" stroke-width="40" stroke-dasharray="3 13" stroke-opacity=".3"/>
+<path d="M0 240q16-14 32 0t32 0 32 0 32 0 32 0 32 0 32 0 32 0" stroke="#1b1a1a" stroke-width="4" opacity=".0"/>
+<!-- tongue -->
+<path d="M70 96C50 96 34 90 14 80M40 94c-8 6-14 16-26 22" stroke="#c8352b" stroke-width="5"/>
+<!-- horns -->
+<path d="M150 42l-8-34 30 22zM178 52l16-30 8 38z" fill="#55514c"/>
+<!-- lower jaw -->
+<path d="M184 100L74 118C60 120 54 128 62 136c34 16 96 6 128-16z" fill="#9a948b"/>
+<!-- mouth interior -->
+<path d="M60 70L184 80V102L74 118z" fill="#1b1a1a"/>
+<path d="M76 114l8-18 8 14zM108 108l8-18 8 12zM140 104l8-16 8 12z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M84 124c4 8 10 10 16 8M130 124c-2 8-6 12-14 10" stroke-width="0"/>
+<!-- upper jaw -->
+<path d="M190 70C160 34 96 32 50 56c-6 6-2 14 10 16l124 10z" fill="#9a948b"/>
+<path d="M72 74l8 20 8-18zM104 78l8 20 8-18zM136 82l8 18 8-18z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M184 70c0 14 4 22 10 28" stroke-width="4"/>
+<circle cx="64" cy="58" r="3" fill="#1b1a1a" stroke="none"/><circle cx="76" cy="60" r="3" fill="#1b1a1a" stroke="none"/>
+<!-- eye -->
+<path d="M112 46l44 8-6 16-36-6z" fill="#c8352b" stroke-width="4"/>
+<ellipse cx="136" cy="58" rx="3" ry="8" fill="#1b1a1a" stroke="none"/>
+<path d="M104 38l58 14" stroke-width="8"/>
+</svg>

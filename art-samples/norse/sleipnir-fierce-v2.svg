@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<!-- flame tail -->
+<path d="M196 120c30-26 52-24 56-60-20 8-30 4-38 0 8 14-4 22-30 30z" fill="#55514c"/>
+<path d="M200 130c34-8 50 14 52 40-14-8-26-6-34-4 4 10-4 16-22 10z" fill="#55514c"/>
+<!-- rear legs, fanned (4) -->
+<path d="M170 150l50 40-8 10-56-30z" fill="#9a948b"/><path d="M212 190l16 14-14 8-12-12z" fill="#1b1a1a"/>
+<path d="M156 160l22 62-14 4-30-60z" fill="#9a948b"/><path d="M164 222h22l-4 10h-20z" fill="#1b1a1a"/>
+<!-- body -->
+<path d="M64 120c10-34 60-38 100-26 30 8 46 30 34 56-10 20-50 24-90 14-30-8-52-16-44-44z" fill="#d4cec3"/>
+<!-- rear legs 3,4 -->
+<path d="M140 168l-4 56h-18l8-58z" fill="#d4cec3"/><path d="M114 224h28v9h-28z" fill="#1b1a1a"/>
+<path d="M186 140l46 14-2 12-52-8z" fill="#d4cec3"/><path d="M228 152l16 4-2 12-14-2z" fill="#1b1a1a"/>
+<!-- front legs (4) reaching forward -->
+<path d="M82 144l-40 36 8 10 46-30z" fill="#9a948b"/><path d="M38 178l-14 14 10 8 14-14z" fill="#1b1a1a"/>
+<path d="M92 152l-30 44 12 8 32-40z" fill="#d4cec3"/><path d="M60 196l-14 18 12 8 14-16z" fill="#1b1a1a"/>
+<path d="M104 156l-10 56 16 4 12-54z" fill="#d4cec3"/><path d="M90 212l-4 20 18 4 6-20z" fill="#1b1a1a"/>
+<path d="M120 160l8 52 16-2-4-52z" fill="#9a948b"/><path d="M122 212l4 22 18-2-2-20z" fill="#1b1a1a"/>
+<!-- neck/head -->
+<path d="M56 130C52 90 52 54 86 40c24-8 40 10 36 40-2 18-8 40-6 58z" fill="#d4cec3"/>
+<!-- flame mane -->
+<path d="M98 34c4-14 16-22 14-32 14 8 16 20 12 30 8-4 14-12 22-12-4 12-4 22-12 30 10 0 18-4 26 0-8 10-14 18-26 20 8 6 12 14 20 20-14 0-26 0-34-10 2 14 2 24-4 34-6-14-14-24-18-40z" fill="#c8352b"/>
+<path d="M104 54c4-8 10-12 12-18 6 6 8 12 6 18 6-2 10-6 14-6-2 8-4 12-8 16z" fill="#f6f2e9" stroke-width="3"/>
+<!-- head: rearing with open mouth -->
+<path d="M30 82c0-20 24-34 46-34 18 0 30 14 26 34-2 10-10 16-20 16l-26 4c-14 0-26-8-26-20z" fill="#d4cec3"/>
+<path d="M28 90l6 22 16-10zM44 98l6 18 12-14z" fill="#1b1a1a"/>
+<path d="M36 92c8 10 26 12 38 2" fill="#1b1a1a" stroke-width="3"/>
+<path d="M34 92l4 8 4-6zM60 98l4-8 4 6z" fill="#f6f2e9" stroke-width="2.5"/>
+<path d="M82 52l6-22 14 20z" fill="#d4cec3"/>
+<path d="M62 62l30 8-6 12-28-4z" fill="#c8352b" stroke-width="4"/>
+<path d="M58 56l38 10" stroke-width="7"/>
+<path d="M32 72l6 4" stroke-width="4"/>
+<!-- rune on flank -->
+<path d="M128 122v28M128 122l16 12-16 12" stroke="#c8352b" stroke-width="6"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- tiny ember-bun with huge flame hair, toy flame sword -->
+<ellipse cx="120" cy="238" rx="64" ry="9" fill="#d4cec3" stroke="none"/>
+<!-- flame hair -->
+<path d="M128 8 C140 40 176 36 170 70 C198 56 216 90 202 118 C230 130 214 176 170 176 L86 176 C42 176 28 130 54 118 C40 90 60 56 86 70 C80 36 116 40 128 8Z" fill="#c8352b"/>
+<path d="M128 36 C134 56 156 58 152 78 C170 74 178 96 168 112 L88 112 C78 96 86 74 104 78 C100 58 122 56 128 36Z" fill="#f6f2e9" stroke-width="2.5" opacity="0"/>
+<!-- body -->
+<path d="M82 232 Q72 196 92 176 L164 176 Q184 196 174 232Z" fill="#55514c"/>
+<path d="M96 192 L160 192" stroke="#c8352b" stroke-width="5"/>
+<ellipse cx="100" cy="234" rx="18" ry="9" fill="#9a948b"/><ellipse cx="156" cy="234" rx="18" ry="9" fill="#9a948b"/>
+<!-- sword -->
+<path d="M190 214 L204 120 L218 214Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M204 120 C190 100 214 96 204 70 C226 90 232 110 220 128Z" fill="#c8352b"/>
+<path d="M186 214 H222" stroke-width="6"/><rect x="198" y="216" width="12" height="14" rx="3" fill="#9a948b"/>
+<path d="M172 190 Q184 196 196 206" fill="none" stroke-width="10" stroke="#55514c"/>
+<!-- face -->
+<ellipse cx="128" cy="130" rx="54" ry="46" fill="#55514c"/>
+<ellipse cx="128" cy="138" rx="42" ry="32" fill="#9a948b" stroke="none"/>
+<path d="M82 112 Q128 76 174 112" fill="#55514c" stroke="none"/>
+<ellipse cx="108" cy="130" rx="11" ry="14" fill="#1b1a1a"/><ellipse cx="148" cy="130" rx="11" ry="14" fill="#1b1a1a"/>
+<circle cx="111" cy="125" r="4.5" fill="#f6f2e9" stroke="none"/><circle cx="151" cy="125" r="4.5" fill="#f6f2e9" stroke="none"/>
+<path d="M94 112 L120 116 M162 112 L136 116" fill="none" stroke-width="4"/>
+<ellipse cx="88" cy="148" rx="8" ry="5" fill="#c8352b" stroke="none"/><ellipse cx="168" cy="148" rx="8" ry="5" fill="#c8352b" stroke="none"/>
+<path d="M116 150 Q128 162 140 150 Z" fill="#c8352b" stroke-width="3"/>
+<!-- little horns -->
+<path d="M84 96 L66 66 L100 86Z M172 96 L190 66 L156 86Z" fill="#f6f2e9"/>
+<!-- sparks -->
+<circle cx="40" cy="60" r="4" fill="#c8352b" stroke="none"/><circle cx="222" cy="52" r="3" fill="#c8352b" stroke="none"/><circle cx="30" cy="150" r="3" fill="#c8352b" stroke="none"/>
+</svg>

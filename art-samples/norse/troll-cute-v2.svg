@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- sleepy troll curled up like a mossy boulder, one eye peeking -->
+<ellipse cx="128" cy="236" rx="100" ry="11" fill="#d4cec3" stroke="none"/>
+<path d="M20 232 C10 160 50 96 128 96 C206 96 246 160 236 232Z" fill="#9a948b"/>
+<path d="M44 200 Q70 180 96 196 M160 150 Q190 140 206 170 M70 140 Q90 124 112 134" fill="none" stroke-width="3"/>
+<!-- moss -->
+<path d="M52 128 Q70 100 108 98 Q96 120 120 124 Q90 140 76 156 Q60 146 52 128Z" fill="#d4cec3"/>
+<path d="M150 98 Q190 96 212 130 Q190 124 184 140 Q170 112 150 98Z" fill="#d4cec3"/>
+<!-- tuft hair -->
+<path d="M110 100 L100 66 L122 86 L128 54 L136 86 L156 66 L148 100Z" fill="#55514c"/>
+<!-- face on front -->
+<path d="M62 168 C62 126 194 126 194 168 C194 214 62 214 62 168Z" fill="#d4cec3"/>
+<path d="M84 160 Q96 170 108 160 M148 150 Q160 140 172 150" fill="none" stroke-width="4.5"/>
+<circle cx="160" cy="160" r="8" fill="#1b1a1a"/><circle cx="162" cy="157" r="2.5" fill="#f6f2e9" stroke="none"/>
+<path d="M126 158 C110 166 112 192 128 192 C146 192 146 166 126 158Z" fill="#9a948b"/>
+<path d="M118 178 h4 M132 178 h4" stroke-width="3"/>
+<path d="M92 200 Q128 212 164 200" fill="none"/>
+<path d="M106 202 L110 214 L120 205 M150 202 L146 214 L136 205" fill="#f6f2e9" stroke-width="3"/>
+<ellipse cx="82" cy="182" rx="9" ry="5" fill="#d4cec3" stroke="none"/>
+<!-- ears -->
+<path d="M64 150 L22 126 L46 168Z M192 150 L234 126 L210 168Z" fill="#d4cec3"/>
+<!-- Z z as bubbles -->
+<path d="M214 70 h18 l-18 20 h18" fill="none" stroke="#c9a23a" stroke-width="6"/>
+<path d="M190 40 h11 l-11 12 h11" fill="none" stroke="#c9a23a" stroke-width="5"/>
+<!-- feet -->
+<ellipse cx="78" cy="232" rx="28" ry="10" fill="#d4cec3"/><ellipse cx="180" cy="232" rx="28" ry="10" fill="#d4cec3"/>
+</svg>

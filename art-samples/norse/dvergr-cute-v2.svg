@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- round dwarf, beard to the floor, hugging hammer; gold nugget -->
+<ellipse cx="128" cy="240" rx="86" ry="9" fill="#d4cec3" stroke="none"/>
+<!-- hammer behind -->
+<path d="M200 236 L212 96" stroke-width="14"/><path d="M200 236 L212 96" stroke="#9a948b" stroke-width="7"/>
+<path d="M182 62 L240 66 L238 108 L180 104Z" fill="#55514c"/>
+<path d="M190 70 L230 72" stroke="#d4cec3" stroke-width="4" fill="none"/>
+<!-- body -->
+<path d="M72 150 Q60 220 128 224 Q196 220 184 150Z" fill="#9a948b"/>
+<path d="M82 178 Q128 196 174 178" fill="none" stroke-width="7" stroke="#55514c"/>
+<rect x="116" y="176" width="24" height="18" rx="3" fill="#c9a23a" stroke-width="3"/>
+<!-- feet -->
+<ellipse cx="100" cy="234" rx="22" ry="9" fill="#55514c"/><ellipse cx="156" cy="234" rx="22" ry="9" fill="#55514c"/>
+<!-- big beard -->
+<path d="M52 110 C40 170 56 214 96 226 L128 232 L160 226 C200 214 216 170 204 110Z" fill="#d4cec3"/>
+<path d="M82 150 Q88 190 106 210 M128 160 L128 220 M174 150 Q168 190 150 210" fill="none" stroke-width="3"/>
+<!-- braids ends -->
+<circle cx="96" cy="222" r="6" fill="#c9a23a" stroke-width="3"/><circle cx="160" cy="222" r="6" fill="#c9a23a" stroke-width="3"/>
+<!-- hands on beard -->
+<circle cx="70" cy="176" r="12" fill="#f6f2e9"/><circle cx="186" cy="176" r="12" fill="#f6f2e9"/>
+<!-- head -->
+<ellipse cx="128" cy="100" rx="58" ry="46" fill="#f6f2e9"/>
+<!-- hat/ helm -->
+<path d="M68 90 C66 40 100 20 128 20 C156 20 190 40 188 90 Q128 66 68 90Z" fill="#55514c"/>
+<path d="M128 20 L128 8" stroke-width="5"/><circle cx="128" cy="8" r="6" fill="#c9a23a" stroke-width="3"/>
+<path d="M70 82 Q128 58 186 82" fill="none" stroke="#c9a23a" stroke-width="7"/>
+<!-- mustache + nose -->
+<ellipse cx="128" cy="112" rx="14" ry="12" fill="#d4cec3"/>
+<path d="M118 126 C90 116 74 138 90 142 C104 144 118 136 128 130 C138 136 152 144 166 142 C182 138 166 116 138 126Z" fill="#d4cec3"/>
+<!-- eyes -->
+<circle cx="102" cy="96" r="10" fill="#1b1a1a"/><circle cx="154" cy="96" r="10" fill="#1b1a1a"/>
+<circle cx="105" cy="92" r="4" fill="#f6f2e9" stroke="none"/><circle cx="157" cy="92" r="4" fill="#f6f2e9" stroke="none"/>
+<path d="M88 78 Q102 72 114 80 M142 80 Q154 72 168 78" fill="none" stroke-width="4"/>
+<ellipse cx="82" cy="110" rx="8" ry="5" fill="#d4cec3" stroke="none"/><ellipse cx="174" cy="110" rx="8" ry="5" fill="#d4cec3" stroke="none"/>
+<!-- sparkle -->
+<path d="M30 70 L34 82 L46 86 L34 90 L30 102 L26 90 L14 86 L26 82Z" fill="#c9a23a" stroke-width="3"/>
+</svg>

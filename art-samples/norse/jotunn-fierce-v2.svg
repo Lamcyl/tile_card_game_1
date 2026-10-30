@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- looming frost giant, shoulders hunched, ice-club, 3/4 -->
+<ellipse cx="120" cy="240" rx="90" ry="9" fill="#d4cec3" stroke="none"/>
+<!-- ice club -->
+<path d="M206 236 L218 120 L196 96 L222 76 L236 100 L246 84 L244 130 L232 236Z" fill="#d4cec3"/>
+<path d="M220 118 L230 150 M222 76 L228 106" fill="none" stroke-width="2.5"/>
+<!-- legs -->
+<path d="M70 236 L72 196 L110 196 L112 236Z" fill="#55514c"/><path d="M134 236 L136 196 L176 196 L176 236Z" fill="#55514c"/>
+<path d="M60 238 L116 238 L114 228 L64 228Z M130 238 L184 238 L180 228 L132 228Z" fill="#9a948b"/>
+<!-- torso massive -->
+<path d="M26 130 L58 100 L190 100 L226 130 L204 170 L186 204 L68 204 L48 170Z" fill="#9a948b"/>
+<path d="M58 100 L84 140 L128 124 L172 140 L190 100" fill="#d4cec3"/>
+<path d="M70 204 L186 204 L184 190 L72 190Z" fill="#55514c"/><rect x="118" y="188" width="20" height="18" fill="#c9a23a"/>
+<!-- shoulder spikes -->
+<path d="M26 130 L8 90 L46 106Z M226 130 L246 92 L206 106Z" fill="#f6f2e9"/>
+<!-- fists -->
+<circle cx="40" cy="178" r="22" fill="#d4cec3"/><circle cx="214" cy="170" r="22" fill="#d4cec3"/>
+<path d="M28 168 L50 170 M204 160 L226 162" fill="none" stroke-width="2.5"/>
+<!-- head low -->
+<path d="M70 46 Q128 28 186 46 L196 84 Q190 128 128 140 Q66 128 60 84Z" fill="#f6f2e9"/>
+<path d="M62 62 L44 18 L82 40 L96 6 L116 34 L128 0 L142 34 L162 6 L174 40 L212 18 L194 62 Q128 38 62 62Z" fill="#d4cec3"/>
+<path d="M62 74 Q128 54 194 74" fill="none" stroke="#c9a23a" stroke-width="7"/>
+<!-- angry eyes -->
+<path d="M80 86 L118 96 L112 108 Q92 112 80 100Z" fill="#1b1a1a"/><path d="M176 86 L138 96 L144 108 Q164 112 176 100Z" fill="#1b1a1a"/>
+<path d="M92 99 L106 101 M164 99 L150 101" stroke="#c9a23a" stroke-width="4"/>
+<path d="M124 100 L120 116 L128 118 L136 116 L132 100" fill="#d4cec3" stroke-width="3"/>
+<!-- beard & snarl -->
+<path d="M70 112 L88 124 L128 132 L168 124 L186 112 L194 140 L180 136 L184 176 L166 146 L158 196 L144 148 L128 186 L112 148 L98 196 L90 146 L72 176 L76 136 L62 140Z" fill="#d4cec3"/>
+<path d="M104 130 L112 138 L120 130 L128 138 L136 130 L144 138 L152 130" fill="#f6f2e9" stroke-width="3"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.s{stroke:#1b1a1a;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}.t{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<!-- tentacles: ink under, fill over -->
+<g class="t"><path stroke="#1b1a1a" stroke-width="30" d="M70 168 C30 190 24 230 56 226 C80 222 70 200 52 204"/><path stroke="#1b1a1a" stroke-width="30" d="M96 180 C86 214 100 240 118 238"/><path stroke="#1b1a1a" stroke-width="30" d="M160 180 C170 214 158 240 140 238"/><path stroke="#1b1a1a" stroke-width="30" d="M186 168 C214 150 236 120 218 96 C210 86 196 92 204 102"/>
+<path stroke="#9a948b" stroke-width="20" d="M70 168 C30 190 24 230 56 226 C80 222 70 200 52 204"/><path stroke="#9a948b" stroke-width="20" d="M96 180 C86 214 100 240 118 238"/><path stroke="#9a948b" stroke-width="20" d="M160 180 C170 214 158 240 140 238"/><path stroke="#9a948b" stroke-width="20" d="M186 168 C214 150 236 120 218 96 C210 86 196 92 204 102"/>
+<path stroke="#d4cec3" stroke-width="4" stroke-dasharray="0 11" d="M70 168 C30 190 24 230 56 226"/><path stroke="#d4cec3" stroke-width="4" stroke-dasharray="0 11" d="M186 168 C214 150 236 120 218 96"/></g>
+<!-- head -->
+<path class="s l" d="M128 14 C62 14 40 70 46 116 C50 150 84 176 128 176 C172 176 206 150 210 116 C216 70 194 14 128 14Z"/>
+<path class="n" stroke="#9a948b" stroke-width="5" stroke-linecap="round" d="M82 38 Q96 28 116 28 M70 56 Q74 50 80 46"/>
+<circle class="m" cx="96" cy="62" r="7"/><circle class="m" cx="130" cy="48" r="5"/><circle class="m" cx="160" cy="68" r="8"/><circle class="m" cx="182" cy="96" r="5"/><circle class="m" cx="72" cy="94" r="5"/>
+<!-- face -->
+<ellipse class="s p" cx="92" cy="124" rx="24" ry="27"/><ellipse class="s p" cx="164" cy="124" rx="24" ry="27"/>
+<ellipse class="i" cx="96" cy="128" rx="15" ry="19"/><ellipse class="i" cx="160" cy="128" rx="15" ry="19"/>
+<circle class="p" cx="101" cy="120" r="6"/><circle class="p" cx="165" cy="120" r="6"/><circle class="p" cx="91" cy="136" r="3"/><circle class="p" cx="155" cy="136" r="3"/>
+<ellipse class="v" cx="62" cy="152" rx="10" ry="6" opacity=".6"/><ellipse class="v" cx="194" cy="152" rx="10" ry="6" opacity=".6"/>
+<path class="n" stroke="#1b1a1a" stroke-width="4" stroke-linecap="round" d="M118 146 Q128 156 138 146"/>
+<!-- toy ship on tentacle -->
+<g transform="translate(14 -6) rotate(-14 204 70)"><path class="s p" d="M178 84 L232 84 Q224 98 210 98 L200 98 Q186 98 178 84Z"/><path class="s l" d="M205 84 L205 40 L226 76Z"/><path class="v" d="M207 48 L207 74 L220 74Z"/><path class="s" fill="none" d="M205 84 V36"/><path class="s v" d="M178 84 L170 76 L180 74Z"/></g>
+<!-- waves -->
+<path class="s p" d="M-6 232 Q16 214 38 232 T82 232 T126 232 T170 232 T214 232 T258 232 L262 262 L-6 262Z"/>
+<path class="n" stroke="#9a948b" stroke-width="4" stroke-linecap="round" d="M20 248 q12 -8 24 0 M120 250 q12 -8 24 0 M196 246 q12 -8 24 0"/>
+</svg>

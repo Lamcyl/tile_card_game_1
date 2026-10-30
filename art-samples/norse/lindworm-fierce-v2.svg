@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.s{stroke:#1b1a1a;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}.t{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<g class="t">
+<path stroke="#1b1a1a" stroke-width="40" d="M246 240 C170 262 100 240 120 206 C140 172 218 190 214 140 C210 106 160 120 150 96"/>
+<path stroke="#55514c" stroke-width="30" d="M246 240 C170 262 100 240 120 206 C140 172 218 190 214 140 C210 106 160 120 150 96"/>
+<path stroke="#d4cec3" stroke-width="24" stroke-dasharray="3 13" d="M246 240 C170 262 100 240 120 206 C140 172 218 190 214 140 C210 106 160 120 150 96"/>
+</g>
+<!-- dorsal spikes (outer side) -->
+<path class="s v" d="M244 150 L258 132 L236 128Z M232 188 L248 192 L238 206Z M178 244 L186 258 L164 252Z M104 224 L88 232 L100 244Z M132 182 L136 166 L148 178Z M206 108 L206 90 L222 102Z M164 118 L156 130 L148 114Z"/>
+<!-- foreleg claws -->
+<path class="s l" d="M148 120 Q130 144 108 138 L98 148 L100 134 L88 132 L98 122 Q124 112 140 108Z"/>
+<!-- head -->
+<path class="s d" d="M168 66 L196 26 L186 70Z M150 56 L160 18 L172 58Z"/>
+<path class="s d" d="M176 80 Q184 40 140 38 Q96 36 22 54 L16 66 L26 76 L18 88 L96 88 Q150 92 176 80Z"/>
+<!-- lower jaw open -->
+<path class="s d" d="M168 98 Q176 124 124 128 Q70 130 24 118 L16 108 L34 100 L28 90 L96 94 Q150 98 168 98Z"/>
+<path class="v" d="M32 92 L100 90 Q146 94 160 98 Q160 112 120 118 Q70 120 36 110 L38 100Z"/>
+<!-- teeth -->
+<path class="p" d="M34 90 L44 106 L52 90 Z M62 90 L72 106 L80 90Z M92 92 L100 108 L108 92Z M52 108 L58 94 L64 108Z M84 112 L90 96 L98 112Z M118 114 L124 100 L132 114Z"/>
+<path class="s p" d="M20 70 L30 60 L34 72Z" stroke-width="3"/>
+<path class="i" d="M36 62 q4 -4 8 0 q-4 4 -8 0z M22 80 q3 3 6 0z"/>
+<!-- eye -->
+<path class="s p" d="M82 56 L124 50 L120 70 L88 70Z"/>
+<path class="v" d="M100 52 L122 51 L120 68 L104 68Z"/>
+<path class="i" d="M110 54 L114 66 L111 66Z"/>
+<path class="i" d="M78 46 L128 42 L126 52 L82 58Z"/>
+<!-- frill -->
+<path class="n" stroke="#d4cec3" stroke-width="3" stroke-linecap="round" d="M156 64 L176 74 M158 78 L174 88"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- snowy sitting frost giant baby with icicle beard -->
+<ellipse cx="128" cy="236" rx="80" ry="10" fill="#d4cec3" stroke="none"/>
+<path d="M62 232 Q50 190 82 168 L174 168 Q206 190 194 232 Z" fill="#9a948b"/>
+<path d="M92 190 Q128 206 164 190" fill="none" stroke-width="3"/>
+<ellipse cx="82" cy="228" rx="26" ry="14" fill="#f6f2e9"/><ellipse cx="174" cy="228" rx="26" ry="14" fill="#f6f2e9"/>
+<path d="M66 224 Q70 218 76 224 M80 222 Q84 216 90 222 M166 222 Q172 216 176 224 M182 224 Q186 218 192 224" fill="none" stroke-width="2.5"/>
+<path d="M58 180 Q38 200 56 214 Q70 200 76 184Z" fill="#d4cec3"/><path d="M198 180 Q218 200 200 214 Q186 200 180 184Z" fill="#d4cec3"/>
+<!-- head -->
+<path d="M128 30 C70 30 40 70 46 116 C50 150 72 170 128 170 C184 170 206 150 210 116 C216 70 186 30 128 30Z" fill="#f6f2e9"/>
+<!-- ice shard hair -->
+<path d="M58 66 L52 28 L82 48 L92 14 L116 40 L128 8 L142 40 L166 14 L174 48 L204 28 L198 66 Q128 40 58 66Z" fill="#d4cec3"/>
+<path d="M92 14 L98 36 M128 8 L128 34 M166 14 L158 36" fill="none" stroke-width="2.5"/>
+<!-- gold circlet -->
+<path d="M62 70 Q128 46 194 70" fill="none" stroke="#c9a23a" stroke-width="8"/>
+<path d="M128 56 L120 44 L128 32 L136 44Z" fill="#c9a23a" stroke-width="3"/>
+<!-- face -->
+<ellipse cx="96" cy="108" rx="13" ry="16" fill="#1b1a1a"/><ellipse cx="160" cy="108" rx="13" ry="16" fill="#1b1a1a"/>
+<circle cx="100" cy="102" r="5" fill="#f6f2e9" stroke="none"/><circle cx="164" cy="102" r="5" fill="#f6f2e9" stroke="none"/>
+<circle cx="93" cy="114" r="2.5" fill="#f6f2e9" stroke="none"/><circle cx="157" cy="114" r="2.5" fill="#f6f2e9" stroke="none"/>
+<ellipse cx="72" cy="128" rx="11" ry="7" fill="#d4cec3" stroke="none"/><ellipse cx="184" cy="128" rx="11" ry="7" fill="#d4cec3" stroke="none"/>
+<path d="M120 124 Q128 134 136 124 Q128 120 120 124Z" fill="#9a948b" stroke-width="3"/>
+<path d="M114 138 Q128 150 142 138" fill="none"/>
+<!-- icicle beard -->
+<path d="M70 150 Q128 176 186 150 L190 176 L176 164 L172 204 L158 172 L148 214 L136 176 L128 198 L120 176 L108 214 L98 172 L84 204 L80 164 L66 176Z" fill="#d4cec3"/>
+<path d="M114 138 Q128 150 142 138" fill="none"/>
+</svg>

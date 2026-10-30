@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- huge dragon head from above-left, jaws clamped on gnarled root, serpentine neck S-curve -->
+<!-- roots -->
+<path d="M256 120 C210 130 170 150 130 150 L124 190 C170 186 220 170 256 160Z" fill="#9a948b"/>
+<path d="M256 190 C220 200 190 230 150 256 L190 256 C220 240 240 226 256 222Z" fill="#9a948b"/>
+<path d="M220 128 L214 150 M180 140 L174 170 M236 196 L226 214" stroke-width="3" fill="none"/>
+<!-- neck coil -->
+<path d="M20 256 C10 200 70 170 60 120 C54 84 100 62 120 78" fill="none" stroke-width="64"/>
+<path d="M20 256 C10 200 70 170 60 120 C54 84 100 62 120 78" fill="none" stroke="#55514c" stroke-width="56"/>
+<path d="M20 256 C10 200 70 170 60 120 C54 84 100 62 120 78" fill="none" stroke="#9a948b" stroke-width="30" stroke-dasharray="4 14"/>
+<!-- spines -->
+<path d="M36 164 L10 150 L34 140Z M58 112 L30 90 L62 84Z M92 70 L84 38 L112 60Z" fill="#c8352b"/>
+<!-- upper skull -->
+<path d="M84 74 C90 40 150 26 196 56 L240 116 L232 128 L150 118 L110 112 C90 106 80 92 84 74Z" fill="#55514c"/>
+<!-- lower jaw clamped on root -->
+<path d="M108 120 L150 122 L232 136 L226 158 L150 160 L112 148Z" fill="#55514c"/>
+<!-- teeth -->
+<path d="M150 118 L156 138 L164 120 L172 140 L182 122 L192 142 L204 126 L214 144 L226 130 L232 128 L232 136 L226 158 L214 144 L204 160 L192 144 L182 160 L172 144 L164 158 L156 142 L150 160Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M150 118 L232 128" stroke-width="4"/>
+<!-- horns -->
+<path d="M96 56 L58 14 L104 34Z M130 40 L132 0 L156 38Z" fill="#f6f2e9"/>
+<path d="M170 46 L200 14 L194 56Z" fill="#f6f2e9"/>
+<!-- eye -->
+<path d="M104 72 L156 82 L146 100 Q116 100 104 86Z" fill="#c8352b"/>
+<path d="M126 76 L136 78 L134 96 L126 92Z" fill="#1b1a1a" stroke-width="2.5"/>
+<path d="M98 70 L162 78" stroke-width="6"/>
+<!-- nostril + smoke -->
+<ellipse cx="214" cy="106" rx="5" ry="3" fill="#1b1a1a"/>
+<path d="M226 96 C240 84 226 70 240 58" fill="none" stroke="#d4cec3" stroke-width="6"/>
+<path d="M140 150 l-4 20 l8 -10 l4 18" stroke="#c8352b" stroke-width="3" fill="none"/>
+</svg>
