@@ -27,7 +27,10 @@ const cards = BOARDS.map(([slug, name, desc]) => {
   return '<article class="card"><header><span class="num">' + n + '</span><div><h2>' + name + '</h2><p>' + desc + '</p></div></header><div class="phone">' + art + '</div></article>';
 }).join('\n');
 
-const page = `<title>Board Designs</title>
+const page = `<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Board Designs</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
