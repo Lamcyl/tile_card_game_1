@@ -72,7 +72,7 @@
       maxHp: stage.heroMaxHp,
       turn: 1,
       damageTaken: 0,
-      // Rule flags from equipped Legendaries (Items.rules): spill, blast, opening, soften, sunder, stand, mend. Empty by default.
+      // Rule flags from equipped Legendaries and squad traits (Progress.rulesFor): spill, blast, opening, soften, sunder, stand, mend, revive. Empty by default.
       rules: Object.assign({}, stage.rules),
       status: 'playing', // 'playing' | 'cleared' | 'defeated'
       enemies: stage.enemies.map((e, i) => {
@@ -118,6 +118,9 @@
         key: k, r, c, card, type,
         baseAtk: cardStat(card, 'atk'),
         baseRange: cardStat(card, 'range'),
+        // WP10: a card may carry its own firing pattern and unit effects (fx: ignoreArmor, chain) from its roster entry.
+        pattern: card.pattern || type.pattern,
+        fx: card.fx || null,
         plus: 0, mult: 1, rangeBonus: 0,
         boostedBy: [], boosts: [],
       };
@@ -179,7 +182,7 @@
   // Which enemies an attacker would hit given the current board.
   function targetsFor(s, enemies) {
     const { r, c, range } = s;
-    const pattern = s.type.pattern;
+    const pattern = s.pattern || s.type.pattern;
     if (pattern === 'straight') {
       const e = firstInColumn(enemies, c, r, range);
       return e ? [e] : [];
@@ -205,7 +208,7 @@
 
   // Enemy tiles an attacker can reach at all (for range preview).
   function reachableTiles(s) {
-    const cols = s.type.pattern === 'spread' ? [s.c - 1, s.c, s.c + 1] : [s.c];
+    const cols = (s.pattern || s.type.pattern) === 'spread' ? [s.c - 1, s.c, s.c + 1] : [s.c];
     const out = [];
     for (const cc of cols) {
       if (cc < 0 || cc >= COLS) continue;
@@ -224,8 +227,8 @@
     return null;
   }
 
-  function dealDamage(state, e, amount, canCarry, events, source) {
-    const armor = source === 'explode' ? e.armor : Math.max(0, e.armor - ((state.rules && state.rules.sunder) || 0));
+  function dealDamage(state, e, amount, canCarry, events, source, ignoreArmor) {
+    const armor = ignoreArmor ? 0 : source === 'explode' ? e.armor : Math.max(0, e.armor - ((state.rules && state.rules.sunder) || 0));
     let dmg = Math.max(0, amount - armor);
     const warded = wardReason(state, e, amount);
     if (warded) dmg = 0;
@@ -317,9 +320,20 @@
       // Legendary rule "opening": the first shot that finds a target in the first turn deals double damage.
       const dmg = state.rules.opening && state.turn === 1 && !opened && targets.length ? (opened = true, s.atk * 2) : s.atk;
       events.push({ t: 'fire', key: s.key, atk: dmg, targets: targets.map((e) => e.id) });
+      const noArmor = !!(s.fx && s.fx.ignoreArmor); // Longbowman: arrows ignore armor
       for (const e of targets) {
         if (!e.alive) continue; // killed earlier in this same volley (e.g. by a blast)
-        dealDamage(state, e, dmg, s.type.pattern !== 'pierce', events, s.key);
+        dealDamage(state, e, dmg, s.pattern !== 'pierce', events, s.key, noArmor);
+      }
+      // Storm Mage: lightning leaps to one more enemy next to a struck one (lowest HP first), for the same damage.
+      if (s.fx && s.fx.chain && targets.length) {
+        const hit = new Set(targets.map((e) => e.id));
+        const next = state.enemies.filter((o) => o.alive && !hit.has(o.id) && !ENEMY_TYPES[o.type].barrel &&
+          targets.some((t) => Math.abs(t.row - o.row) + Math.abs(t.col - o.col) === 1)).sort((a, b) => a.hp - b.hp)[0];
+        if (next) {
+          events.push({ t: 'chain', key: s.key, from: targets[0].id, id: next.id });
+          dealDamage(state, next, dmg, false, events, s.key, noArmor);
+        }
       }
       if (!state.enemies.some(isThreat)) break;
     }
@@ -359,6 +373,10 @@
 
     // Legendary rule "stand": once per battle a lethal blow leaves 1 HP.
     if (state.hp <= 0 && state.rules.stand && !state.standUsed) { state.hp = 1; state.standUsed = true; events.push({ t: 'stand', hp: 1 }); }
+    // Phoenix Archer (rule "revive", once per run: the caller clears it afterwards via state.reviveUsed): rise again at half HP.
+    if (state.hp <= 0 && state.rules.revive && !state.reviveUsed) {
+      state.hp = Math.max(1, Math.ceil(state.maxHp / 2)); state.reviveUsed = true; events.push({ t: 'revive', hp: state.hp });
+    }
     if (state.hp <= 0) {
       state.status = 'defeated';
       events.push({ t: 'defeated' });

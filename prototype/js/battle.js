@@ -98,6 +98,8 @@
     else if (ev.t === 'move') log(nameOf(view, ev.id) + ' steps to column ' + (ev.to[1] + 1), 'bad');
     else if (ev.t === 'tide') log('The tide carries every enemy one column', 'bad');
     else if (ev.t === 'stand') log('Last Breath: you cling on at 1 HP!', 'good');
+    else if (ev.t === 'revive') log('Phoenix Rebirth: you rise again with ' + ev.hp + ' HP!', 'good');
+    else if (ev.t === 'chain') log('Lightning leaps to another enemy', 'hit');
     else if (ev.t === 'mend') log('Lifebloom heals ' + ev.amount + ' HP', 'good');
     else if (ev.t === 'enrage') { if (ev.ids.length) log('Survivors enrage: +1 ⚔', 'bad'); }
     else if (ev.t === 'cleared') log('Stage cleared!', 'good');
@@ -208,8 +210,9 @@
       const atk = st ? st.atk : E.cardStat(card, 'atk');
       const range = st ? st.range : E.cardStat(card, 'range');
       main = '<span class="' + (st && st.gazed ? 'gazed' : st && st.atk !== st.baseAtk ? 'boosted' : '') + '">⚔' + TXT + atk + '</span>';
-      sub = '<span>' + PATTERN_GLYPH[t.pattern] + '</span><span class="' + (st && st.rangeBonus ? 'boosted' : '') + '">R' + range + '</span>';
-      desc += atk + ' damage' + (st && st.gazed ? ' (weakened by a gaze)' : '') + ', ' + PATTERN_TEXT[t.pattern] + ', reaches ' + range + ' tile(s) up';
+      const pat = (st && st.pattern) || card.pattern || t.pattern;
+      sub = '<span>' + PATTERN_GLYPH[pat] + '</span><span class="' + (st && st.rangeBonus ? 'boosted' : '') + '">R' + range + '</span>';
+      desc += atk + ' damage' + (st && st.gazed ? ' (weakened by a gaze)' : '') + ', ' + PATTERN_TEXT[pat] + ', reaches ' + range + ' tile(s) up' + (card.fx && card.fx.ignoreArmor ? ', ignores armor' : '') + (card.fx && card.fx.chain ? ', lightning chains to one more enemy' : '');
     } else if (t.role === 'support') {
       const amount = E.cardStat(card, 'amount');
       main = t.effect === 'atk' ? '+' + amount : t.effect === 'mult' ? '×' + amount : 'R+' + amount;
@@ -225,10 +228,13 @@
       desc += 'absorbs up to ' + block + ' damage in its column each turn';
     }
     if (unit.name) desc = unit.name + ' · ' + desc;
+    const ro = window.Progress && Progress.ROSTER_BY[card.id];
+    if (ro && ro.rarity !== 'common') { extra += ' rar-' + ro.rarity; desc += ' (' + Progress.RARITY[ro.rarity].name + (ro.perk ? ': ' + ro.perk : '') + ')'; }
+    if (ro) desc += ' [' + Progress.TRAITS[ro.trait].name + ']';
     const cls = 'card role-' + t.role + extra + (game.selected === card.id ? ' selected' : '');
     const face = '<div class="c-art">' + (unit.url ? artImg(unit.url, unit.name || t.name) : '<span class="e-icon">' + t.icon + '</span>') + '</div>';
     const html = '<div class="' + cls + '" data-card="' + card.id + '" data-from="' + from + '" title="' + desc + '">' + face +
-      '<span class="c-role">' + t.name + '</span>' + (card.upgraded ? '<span class="up">★</span>' : '') +
+      '<span class="c-role">' + t.name + '</span>' + (ro ? '<span class="c-trait" aria-hidden="true">' + Progress.TRAITS[ro.trait].icon + '</span>' : '') + (card.upgraded ? '<span class="up">★</span>' : '') +
       '<div class="tags"><span class="tag main">' + main + '</span><span class="tag sub">' + sub + '</span></div></div>';
     return html;
   }
@@ -450,9 +456,9 @@
     } else if (ev.t === 'tide') {
       ev.moves.forEach((m) => { const e = view.enemies.find((en) => en.id === m.id); e.row = m.to[0]; e.col = m.to[1]; });
       render(); root.classList.add('tide-wash'); setTimeout(() => root.classList.remove('tide-wash'), 700 / game.speed); await sleep(520);
-    } else if (ev.t === 'stand' || ev.t === 'mend') {
+    } else if (ev.t === 'stand' || ev.t === 'mend' || ev.t === 'revive') {
       const hero = $('#b-hero'); view.hp = ev.hp; flash(hero, 'heal-flash', 500);
-      floatText(hero, ev.t === 'stand' ? 'Last Breath!' : '+' + ev.amount + ' ♥', 'heal'); render(); await sleep(480);
+      floatText(hero, ev.t === 'stand' ? 'Last Breath!' : ev.t === 'revive' ? 'Reborn! ' + ev.hp + ' ♥' : '+' + ev.amount + ' ♥', 'heal'); render(); await sleep(480);
     } else if (ev.t === 'enrage') {
       if (!ev.ids.length) return;
       ev.ids.forEach((id) => { view.enemies.find((en) => en.id === id).atk += 1; const el = enemyCell(view, id); flash(el, 'rage', 500); floatText(el, '+1 ⚔', 'info'); });

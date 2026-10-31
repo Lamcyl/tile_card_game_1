@@ -37,8 +37,8 @@ function bestPlacement(state, army, iters = 2500, restarts = 4) {
   }
   return best;
 }
-function fight(node, hp, maxHp, army, seed) {
-  const stage = Object.assign({ heroHp: hp, heroMaxHp: maxHp }, Gen.generateBattle(node, seed));
+function fight(node, hp, maxHp, army, seed, rules) {
+  const stage = Object.assign({ heroHp: hp, heroMaxHp: maxHp, rules: rules || {} }, Gen.generateBattle(node, seed));
   let st = Engine.createState(stage);
   while (st.status === 'playing' && st.turn <= 6) st = Engine.resolveTurn(st, bestPlacement(st, army), army).state;
   return st;
@@ -66,7 +66,7 @@ function playRun(save0) {
     const bossNode = fights.find((n) => n.type === 'boss'), normals = fights.filter((n) => n.type !== 'boss');
     const node = bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode);
     cleared.add(node.id);
-    const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed);
+    const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save));
     if (st.status !== 'cleared') return { wins, maxLv, souls: Math.round(souls * 0.75), bosses, items, end: 'died', diedAt: node.level, start: Progress.startSupplies(save0), save };
     hp = st.hp; wins++; maxLv = Math.max(maxLv, node.level); souls += Gen.soulsFor(node, Gen.starsFor(st.damageTaken || 0)) * Progress.soulRate(save);
     // Real WP8 drop logic (levels, substats, pity, elite guarantee, boss Legendaries); new items auto-equip into a free slot.
@@ -107,7 +107,7 @@ function campaign(maxRuns) {
     for (const b of save.bossesBeaten) { const reg = World.SUB_BY[b].region; if (!(reg in firstRun)) firstRun[reg] = r; }
     for (let guard = 0; guard < 20; guard++) { // shopping
       const opts = [];
-      for (const u of Progress.ROSTER) if (!u.start && !save.owned.includes(u.id) && Progress.recruitAvailable(save, u) && u.cost <= save.souls) opts.push({ cost: u.cost, buy: () => { save.owned.push(u.id); if (save.squad.length < Progress.slots(save)) save.squad.push(u.id); } });
+      for (const u of Progress.ROSTER) if (!u.start && !save.owned.includes(u.id) && Progress.recruitAvailable(save, u) && u.cost <= save.souls) opts.push({ cost: u.cost, buy: () => { save.owned.push(u.id); if (!Progress.canAdd(save, u.id)) save.squad.push(u.id); } });
       for (const id of order) { const c = Progress.upgradeCost(save, id); if (c !== null && c <= save.souls) opts.push({ cost: c, buy: () => { save.upgrades[id] = (save.upgrades[id] || 0) + 1; } }); }
       if (!opts.length) break; opts.sort((a, b) => a.cost - b.cost); save.souls -= opts[0].cost; opts[0].buy();
     }
@@ -115,7 +115,7 @@ function campaign(maxRuns) {
     if (save.bossesBeaten.length === World.SUBAREAS.length) break;
   }
   console.log('\nCampaign (' + maxRuns + ' runs max): battles per run ' + log.join(' '));
-  console.log('  final upgrades ' + JSON.stringify(save.upgrades) + ', squad ' + save.squad.length + ', owned ' + save.owned.length + ', items ' + save.items.length);
+  console.log('  final upgrades ' + JSON.stringify(save.upgrades) + ', squad ' + save.squad.length + ' (' + Progress.squadCp(save) + '/' + Progress.commandCap(save) + ' CP), owned ' + save.owned.length + ', items ' + save.items.length);
   console.log('  bosses beaten ' + save.bossesBeaten.length + '/' + World.SUBAREAS.length + ' (' + save.bossesBeaten.join(', ') + ')');
   console.log('  run in which a sub-area was first unlocked: ' + ['forest', 'beach', 'dunes', 'snow', 'ash', 'glacier', 'caldera'].map((u) => u + ' ' + (unlockRun[u] || '-')).join(', '));
   console.log('  run in which each region first had a boss beaten: ' + World.REGIONS.map((g) => g + ' ' + (firstRun[g] || '-')).join(', '));

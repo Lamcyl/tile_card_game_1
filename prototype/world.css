@@ -361,3 +361,31 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 .item.forge button { padding: 4px 8px; font-size: 12px; min-width: 44px; white-space: nowrap; }
 .item.forge .forge-btns { margin-top: 4px; display: flex; }
 .item.forge .forge-btns button { flex: 1; }
+
+/* WP10: rarity, Command Points and traits in the Squad / Recruit tabs. */
+.item.unit { border-left: 4px solid var(--rar, var(--rar-common)); }
+.item.unit.rar-legendary { background: var(--paper-grain), linear-gradient(90deg, rgba(122,63,143,.13), transparent 70%); }
+.item.unit.rar-epic { background: var(--paper-grain), linear-gradient(90deg, rgba(184,137,44,.14), transparent 70%); }
+.item.unit.rar-rare { background: var(--paper-grain), linear-gradient(90deg, rgba(63,95,143,.11), transparent 70%); }
+.unit .meta { display: flex; flex-wrap: wrap; gap: 4px; margin: 1px 0 2px; }
+.unit .chip { font-size: 11px; font-weight: 700; padding: 0 6px; border-radius: 9px; line-height: 1.6; background: rgba(43,42,53,.08); color: var(--ink-soft); white-space: nowrap; }
+.unit .chip.rar { background: var(--rar, var(--rar-common)); color: #f7f0de; }
+.unit .perk { font-size: 12px; color: var(--ink); font-style: italic; }
+.item button.cant { opacity: .55; }
+.squad-head { margin-bottom: 8px; }
+.cp-bar { position: relative; height: 24px; border-radius: 12px; border: 1.5px solid rgba(43,42,53,.4); background: rgba(43,42,53,.07); overflow: hidden; }
+.cp-bar i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, rgba(63,95,143,.45), rgba(63,95,143,.7)); }
+.cp-bar.over i { background: rgba(198,59,49,.6); }
+.cp-bar span { position: relative; display: block; text-align: center; font-size: 13px; line-height: 21px; }
+.squad-rule { margin: 6px 0 2px; font-size: 13px; font-weight: 700; }
+.squad-rule.bad { color: #b3322a; }
+.squad-rule.ok { color: #3f7a46; }
+.traits { margin: 8px 0 10px; display: grid; gap: 4px; }
+.traits h4 { margin: 0; font-size: 14px; }
+.traits h4 small { font-weight: 400; color: var(--muted); font-size: 11px; }
+.trait { display: grid; gap: 1px; padding: 4px 8px; border-radius: 6px; background: rgba(43,42,53,.05); font-size: 12px; opacity: .8; }
+.trait.on { opacity: 1; background: rgba(63,95,143,.1); }
+.trait b em { font-style: normal; color: var(--indigo); margin-left: 4px; }
+.trait span { color: var(--muted); }
+.trait span i { font-style: normal; font-weight: 800; display: inline-block; min-width: 14px; }
+.trait span.got { color: var(--ink); font-weight: 700; }

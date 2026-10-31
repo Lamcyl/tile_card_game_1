@@ -13,7 +13,8 @@ const UNITS = {
   banner1: ['komainu', 'Komainu'],
   horn1: ['siren', 'Siren'], horn2: ['alkonost', 'Alkonost'],
   spy1: ['samjok-o', 'Samjok-o'],
-  shield1: ['nurikabe', 'Nurikabe'], shield2: ['talos', 'Talos'],
+  shield1: ['nurikabe', 'Nurikabe'], shield2: ['talos', 'Talos'], ushabti1: ['ushabti', 'Ushabti'],
+  longbow1: ['draugr', 'Draugr Longbowman'], storm1: ['typhon', 'Typhon, Storm Mage'], phoenix1: ['firebird', 'Phoenix Archer'],
 };
 // Fallback drawing per card type, for cards without their own entry.
 const BY_TYPE = { swordsman: 'kamaitachi', archer: 'tengu', spearman: 'nezha', mage: 'kitsune', drummer: 'raijin', banner: 'komainu', horn: 'siren', spyglass: 'samjok-o', shield: 'nurikabe' };

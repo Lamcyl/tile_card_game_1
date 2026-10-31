@@ -356,6 +356,8 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
 | Epic | Storm Mage ⚔2 ↖↑↗, chains to one more enemy |
 | Legendary | Phoenix Archer ⚔3 ⇈ R5, revives once per run |
 
+*Implemented (WP10):* Longbowman (Draugr, Rare), Storm Mage (Typhon, Epic, chain hits the lowest-HP enemy next to a struck one for the same damage) and Phoenix Archer (revives at half max HP, once per run) exist and are bought with Crystals until the WP11 gacha; Wukong, Talos, Perun, Lei Gong and Ix Chel are Rare with +1 to their main number.
+
 - **Duplicates** add stars (★1–★5), each a small upgrade. ★5 unlocks a **unit perk**.
 - **Pity:** a guaranteed Epic every 30 pulls. A **Recruitment Office** trades unwanted duplicates for a unit of your choice, so bad luck never locks out a strategy.
 - The common units from section 6.5 are the starting roster. Every region must be beatable with common units.
@@ -366,8 +368,9 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
 - Each unit costs **Command Points** by rarity: Common 1, Rare 2, Epic 3, Legendary 4.
 - The cap starts at **8** and grows with Camp upgrades and milestones.
 - The choice "one Legendary or two Rares" is a real decision, so rarity always has a trade-off.
-- Rule: the squad must include **at least one supporter**.
+- Rule: the squad must include **at least one supporter** (and one attacker); Set out is blocked otherwise. *(Implemented, WP10: `Progress.squadProblem`.)*
 - **Traits:** every unit has a trait tag (Order, Wild, Arcane, Undead). Bringing 2/4/6 units of one trait gives a squad bonus, which makes squad-building a puzzle of its own.
+  - *Implemented (WP10):* the bonuses stack by step. **Order** 2: +2 max HP, 4: Shields block +1, 6: every enemy strike is weakened by 1. **Wild** 2: +10% Souls, 4: Wild attackers +1 ATK, 6: the first shot of a battle deals double damage. **Arcane** 2: +2 max HP, 4: Barrels explode for 3, 6: Arcane supporters +1 more and Mages +1 ATK. **Undead** 2: +4 max HP, 4: once per battle a lethal blow leaves 1 HP, 6: heal 1 HP every turn. The Command Point cap is 8 plus one per Command upgrade level (the upgrade now gives Command Points, not squad slots), and old saves are trimmed to fit it.
 
 ### 12.3 Monetization note
 

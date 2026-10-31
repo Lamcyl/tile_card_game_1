@@ -37,7 +37,7 @@ function check(tier, level, seed, role, effort) {
   const save = refSave(tier, level), army = Progress.buildArmy(save, {});
   const node = { id: 'v-' + tier + '-' + level + '-' + seed, type: 'battle', level, sub: SUB_FOR[tier], role };
   const gen = Gen.generateBattle(node, 'validate' + seed);
-  const stage = Object.assign({ heroHp: Progress.maxHp(save), heroMaxHp: Progress.maxHp(save) }, gen);
+  const stage = Object.assign({ heroHp: Progress.maxHp(save), heroMaxHp: Progress.maxHp(save), rules: Progress.rulesFor(save) }, gen);
   const state = Engine.createState(stage);
   const rec = { tier, level, seed, template: gen.template || '?', enemies: gen.enemies.length, fails: [] };
   const clear = Solve.oneTurnClear(state, army, effort.restarts, effort.iters);
@@ -86,7 +86,7 @@ function checkFight(node, effort, tries) {
   const save = bossSave(node), army = Progress.buildArmy(save, runMods(save, node));
   const maxHp = Progress.maxHp(save);
   const gen = Gen.generateBattle(node, 'validate-fight');
-  const state = Engine.createState(Object.assign({ heroHp: maxHp, heroMaxHp: maxHp }, gen));
+  const state = Engine.createState(Object.assign({ heroHp: maxHp, heroMaxHp: maxHp, rules: Progress.rulesFor(save) }, gen));
   const boss = node.type === 'boss';
   const rec = { id: node.id, level: node.level, boss, maxHp, fails: [], enemies: gen.enemies.length, hp: gen.enemies.reduce((n, e) => n + (e.type.endsWith('_barrel') ? 0 : e.hp), 0) };
   const clear = Solve.oneTurnClear(state, army, effort.restarts, effort.iters);

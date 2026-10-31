@@ -62,7 +62,7 @@
     } else {
       $('#hud').innerHTML =
         '<div class="hud-chip big" title="Souls: buy Camp upgrades and recruits">✦ ' + P.balance(save, 'souls') + ' <small>Souls</small></div>' +
-        '<div class="hud-chip cur crystals" title="Crystals: from first boss kills and bounties. Spent on recruits (coming soon).">💎 ' + P.balance(save, 'crystals') + '</div>' +
+        '<div class="hud-chip cur crystals" title="Crystals: from first boss kills and bounties. Spent on Rare, Epic and Legendary recruits.">💎 ' + P.balance(save, 'crystals') + '</div>' +
         '<div class="hud-chip cur dust" title="Dust: from salvaging gear. Spent in the Forge (coming soon).">⚒ ' + P.balance(save, 'dust') + '</div>';
     }
   }
@@ -156,12 +156,12 @@
 
   function campSheet() {
     const tabs = ['upgrades', 'squad', 'recruit', 'gear'];
-    let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad, then set out with 🎒 ' + P.startSupplies(save) + ' Supplies.</p></div>' +
+    let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad (Command Points, one supporter minimum), then set out with 🎒 ' + P.startSupplies(save) + ' Supplies.</p></div>' +
       '<button class="primary" data-act="start">Set out ➜</button></div>';
     html += '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
       '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
-      { upgrades: 'Upgrades', squad: 'Squad ' + save.squad.length + '/' + P.slots(save), recruit: 'Recruit', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
+      { upgrades: 'Upgrades', squad: 'Squad ' + P.squadCp(save) + '/' + P.commandCap(save) + ' CP', recruit: 'Recruit', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
     html += '<div class="list">';
     if (campTab === 'upgrades') {
       for (const u of P.UPGRADES) {
@@ -171,23 +171,32 @@
       }
       html += '<p class="muted small">Max HP ' + P.maxHp(save) + ' · Squad slots ' + P.slots(save) + ' · Start Supplies ' + P.startSupplies(save) + '</p>';
     } else if (campTab === 'squad') {
-      const army = P.buildArmy(save, {});
+      const army = P.buildArmy(save, {}), problem = P.squadProblem(save), cp = P.squadCp(save), cap = P.commandCap(save);
+      html += '<div class="squad-head"><div class="cp-bar' + (cp > cap ? ' over' : '') + '" role="meter" aria-valuenow="' + cp + '" aria-valuemax="' + cap + '"><i style="width:' + Math.min(100, 100 * cp / cap) + '%"></i><span>🎖️ Command Points <b>' + cp + ' / ' + cap + '</b></span></div>' +
+        '<p class="squad-rule ' + (problem ? 'bad' : 'ok') + '">' + (problem ? '⚠ ' + esc(problem) : '✔ Squad ready: an attacker and a supporter, ' + (cap - cp) + ' CP spare.') + '</p>' +
+        '<p class="muted small">Cost by rarity: Common 1 · Rare 2 · Epic 3 · Legendary 4. Buy Command to raise the cap.</p></div>';
+      html += traitPanel();
       for (const id of save.owned) {
         const inSquad = save.squad.includes(id), card = army.find((c) => c.id === id) || P.buildArmy(Object.assign({}, save, { squad: [id] }), {})[0];
-        html += '<div class="item">' + unitCell(id, '<span class="muted">' + statLine(card) + '</span>') +
-          '<button class="' + (inSquad ? 'on' : '') + '" data-squad="' + id + '">' + (inSquad ? 'In squad' : 'Add') + '</button></div>';
+        const blocked = !inSquad && P.canAdd(save, id);
+        html += '<div class="item unit ' + rarClassOf(id) + '">' + unitCell(id, unitMeta(id) + '<span class="muted">' + statLine(card) + '</span>' + unitPerk(id)) +
+          '<button class="' + (inSquad ? 'on' : blocked ? 'cant' : '') + '" data-squad="' + id + '" title="' + esc(blocked || '') + '">' + (inSquad ? 'In squad' : 'Add') + '</button></div>';
       }
     } else if (campTab === 'gear') {
       html += gearTab();
     } else {
+      let shown = 0;
       for (const u of P.ROSTER) {
         if (save.owned.includes(u.id) || u.start) continue;
-        const avail = P.recruitAvailable(save, u);
+        shown++;
+        const avail = P.recruitAvailable(save, u), gems = u.gems !== undefined;
         const need = Array.isArray(u.need) ? u.need : [u.need];
-        html += '<div class="item' + (avail ? '' : ' locked') + '">' + unitCell(u.id, '<span class="muted">' +
-          (avail ? describeType(u.type) : 'Defeat ' + need.map((b) => World.THEMES[b].boss[0]).join(' or ')) + '</span>') +
-          (avail ? '<button data-recruit="' + u.id + '"' + (save.souls < u.cost ? ' disabled' : '') + '>✦ ' + u.cost + '</button>' : '<span class="muted">🔒</span>') + '</div>';
+        const can = gems ? P.canSpend(save, 'crystals', u.gems) : save.souls >= u.cost;
+        html += '<div class="item unit ' + rarClassOf(u.id) + (avail ? '' : ' locked') + '">' + unitCell(u.id, unitMeta(u.id) + '<span class="muted">' +
+          (avail ? describeType(u.type, u) : 'Defeat ' + need.map((b) => World.THEMES[b].boss[0]).join(' or ')) + '</span>' + unitPerk(u.id)) +
+          (avail ? '<button data-recruit="' + u.id + '"' + (can ? '' : ' disabled') + '>' + (gems ? '💎 ' + u.gems : '✦ ' + u.cost) + '</button>' : '<span class="muted">🔒</span>') + '</div>';
       }
+      if (!shown) html += '<p class="muted">Everyone has joined you.</p>';
     }
     html += '</div><div class="tools"><span class="muted small">Prototype tools</span><button data-act="cheat">+100 ✦ 10 💎 10 ⚒</button><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset progress') + '</button></div>';
     return html;
@@ -255,13 +264,32 @@
     }
     return h;
   }
+  const rarClassOf = (id) => 'rar-' + P.ROSTER_BY[id].rarity;
+  // Rarity, Command Point cost and trait of a roster unit, as a small line of chips.
+  function unitMeta(id) {
+    const u = P.ROSTER_BY[id], tr = P.TRAITS[u.trait];
+    return '<span class="meta"><span class="chip rar">' + P.RARITY[u.rarity].name + '</span><span class="chip cp" title="Command Points">🎖️ ' + P.unitCp(id) + '</span><span class="chip trait" title="' + esc(tr.name + ' trait') + '">' + tr.icon + ' ' + tr.name + '</span></span>';
+  }
+  const unitPerk = (id) => (P.ROSTER_BY[id].perk ? '<span class="perk">' + esc(P.ROSTER_BY[id].perk) + '</span>' : '');
+  // Trait synergy panel: count per trait, active bonuses and the next step to reach.
+  function traitPanel() {
+    const counts = P.traitCounts(save);
+    return '<div class="traits"><h4>Traits <small>2 / 4 / 6 of a kind in the squad</small></h4>' + Object.keys(P.TRAITS).map((t) => {
+      const tr = P.TRAITS[t], n = counts[t] || 0;
+      return '<div class="trait' + (n >= 2 ? ' on' : '') + '"><b>' + tr.icon + ' ' + tr.name + ' <em>' + n + '</em></b>' + P.TRAIT_STEPS.map((st) =>
+        '<span class="' + (n >= st ? 'got' : '') + '"><i>' + st + '</i> ' + esc(tr.tiers[st].text) + '</span>').join('') + '</div>';
+    }).join('') + '</div>';
+  }
   function statLine(card) {
     const t = E.CARD_TYPES[card.type];
-    if (t.role === 'attacker') return '⚔' + card.atk + ' · ' + { straight: '↑ straight', pierce: '⇈ pierce', spread: '↖↑↗ spread' }[t.pattern] + ' · R' + card.range;
+    if (t.role === 'attacker') return '⚔' + card.atk + ' · ' + { straight: '↑ straight', pierce: '⇈ pierce', spread: '↖↑↗ spread' }[card.pattern || t.pattern] + ' · R' + card.range;
     if (t.role === 'support') return (t.effect === 'atk' ? '+' + card.amount + ' ATK' : t.effect === 'mult' ? '×' + card.amount + ' damage' : '+' + card.amount + ' range') + (t.target === 'up' ? ' to the card above' : ' to all neighbours');
     return '🛡 blocks ' + card.block + ' in its column';
   }
-  const describeType = (type) => statLine(Object.assign({ type }, cardDefaults(type)));
+  const describeType = (type, u) => {
+    const d = cardDefaults(type), st = (u && u.stats) || {};
+    return statLine(Object.assign({ type }, d, st.atk !== undefined ? { atk: st.atk + P.level(save, 'drill') } : {}, st.range !== undefined ? { range: st.range } : {}, st.amount !== undefined ? { amount: st.amount } : {}, st.pattern ? { pattern: st.pattern } : {}, st.block !== undefined ? { block: st.block + P.level(save, 'bulwark') } : {}));
+  };
   function cardDefaults(type) {
     const t = E.CARD_TYPES[type];
     if (t.role === 'attacker') return { atk: t.atk + P.level(save, 'drill'), range: t.range };
@@ -274,8 +302,8 @@
 
   // ---------- Actions ----------
   function startRun() {
-    const army = P.buildArmy(save, {});
-    if (!army.some((c) => E.CARD_TYPES[c.type].role === 'attacker')) { toast('Add at least one attacker to your squad.'); campTab = 'squad'; renderAll(); return; }
+    const problem = P.squadProblem(save);
+    if (problem) { toast(problem); campTab = 'squad'; sheetOpen = true; renderAll(); return; }
     const sup = P.startSupplies(save);
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: 'camp', cleared: ['camp'], path: ['camp'],
       bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, wins: 0, maxLevel: 0, mods: {}, placement: {}, unlockedNow: [], found: [] };
@@ -303,7 +331,7 @@
       r.cleared.push(id); r.souls += 10; persist(); renderAll();
       offerReward('Supply cache', 'You found ✦ 10 and some supplies. This cost no Supplies.', n); return;
     }
-    const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: Items.rules(save) }, Gen.generateBattle(n, r.seed));
+    const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: P.rulesFor(save, r) }, Gen.generateBattle(n, r.seed));
     WorldMap.setActive(false);
     document.body.classList.add('in-battle');
     Battle.start({
@@ -338,6 +366,7 @@
     r.placement = Battle.placement();
     Battle.hide(); document.body.classList.remove('in-battle'); WorldMap.setActive(true);
     r.hp = state.hp;
+    if (state.reviveUsed) r.reviveUsed = true; // Phoenix Archer: one rebirth per run
     if (state.status !== 'cleared') { persist(); endRun(true); return; }
     stars = stars || 1;
     const gained = Math.round(Gen.soulsFor(n, stars) * P.soulRate(save));
@@ -398,7 +427,7 @@
       if (t.role === 'attacker') {
         pool.push({ kind: 'atk', id: c.id, label: '+1 ATK · ' + unitTitle(c.id), icon: t.icon, card: c.id });
         // Range is a rare reward that only appears from the second region onward (design 24.2).
-        if (regionIdx >= 1 && (t.pattern !== 'straight' || t.range < 4) && R() < 0.4) pool.push({ kind: 'range', id: c.id, label: '+1 range · ' + unitTitle(c.id), icon: t.icon, card: c.id });
+        if (regionIdx >= 1 && ((c.pattern || t.pattern) !== 'straight' || c.range < 4) && R() < 0.4) pool.push({ kind: 'range', id: c.id, label: '+1 range · ' + unitTitle(c.id), icon: t.icon, card: c.id });
       } else if (t.role === 'defender') pool.push({ kind: 'block', id: c.id, label: '+1 block · ' + unitTitle(c.id), icon: t.icon, card: c.id });
       else if (t.effect !== 'mult') pool.push({ kind: 'amount', id: c.id, label: '+1 boost · ' + unitTitle(c.id), icon: t.icon, card: c.id });
     }
@@ -485,9 +514,9 @@
     }
     if (b.dataset.recruit) {
       const u = P.ROSTER_BY[b.dataset.recruit];
-      if (save.souls >= u.cost) {
-        save.souls -= u.cost; save.owned.push(u.id);
-        if (save.squad.length < P.slots(save)) save.squad.push(u.id);
+      if (!save.owned.includes(u.id) && P.recruitAvailable(save, u) && (u.gems !== undefined ? P.spend(save, 'crystals', u.gems) : P.spend(save, 'souls', u.cost))) {
+        save.owned.push(u.id);
+        if (!P.canAdd(save, u.id)) save.squad.push(u.id);
         persist(); toast(unitView(u.id).name + ' joined your roster.'); renderAll();
       }
       return;
@@ -526,8 +555,8 @@
     if (b.dataset.squad) {
       const id = b.dataset.squad, i = save.squad.indexOf(id);
       if (i >= 0) save.squad.splice(i, 1);
-      else if (save.squad.length < P.slots(save)) save.squad.push(id);
-      else toast('Squad is full. Buy Command at Camp for more slots.');
+      else if (!P.canAdd(save, id)) save.squad.push(id);
+      else toast(P.canAdd(save, id) + ' Buy Command at Camp for more.');
       persist(); renderAll(); return;
     }
     const act = b.dataset.act;
