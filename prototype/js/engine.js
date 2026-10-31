@@ -31,6 +31,14 @@
     barrel:  { name: 'Barrel',   icon: '🛢️', barrel: true, blast: 2 },
   };
 
+  // Special enemy rules (set per enemy as `kind`, so any themed creature can carry one).
+  const ENEMY_KINDS = {
+    healer:   { name: 'Healer',   badge: '✚', text: 'heals each adjacent enemy by 2 at the end of every turn it survives' },
+    splitter: { name: 'Splitter', badge: '⑂', text: 'splits into two 1-HP enemies when destroyed' },
+    summoner: { name: 'Summoner', badge: '⚑', text: 'calls a new minion into an empty enemy tile at the end of every turn it survives' },
+    bulwark:  { name: 'Bulwark',  badge: '⛨', text: 'blocks overkill and Pierce from reaching the enemy behind it' },
+  };
+
   const key = (r, c) => r + ',' + c;
   const parseKey = (k) => k.split(',').map(Number);
   const clone = (o) => JSON.parse(JSON.stringify(o));
@@ -60,6 +68,10 @@
           atk: t.barrel ? 0 : e.atk,
           armor: e.armor || 0,
           alive: true,
+          // Special rule: 'healer' | 'splitter' | 'summoner' | 'bulwark' (null for plain enemies).
+          // minion = { type, hp, atk } is what a Splitter / Summoner spawns.
+          kind: e.kind || null,
+          minion: e.minion || null,
         };
       }),
     };
@@ -143,9 +155,11 @@
       return e ? [e] : [];
     }
     if (pattern === 'pierce') {
-      return ENEMY_ROWS
+      const hit = ENEMY_ROWS
         .map((er) => (distance(r, er) <= range ? enemyAt(enemies, er, c) : null))
         .filter(Boolean);
+      // A Bulwark in the front row stops the shot there.
+      return hit[0] && hit[0].kind === 'bulwark' && hit[0].row === 1 ? [hit[0]] : hit;
     }
     if (pattern === 'spread') {
       const out = [];
@@ -184,11 +198,13 @@
     // Overkill: leftover damage carries to the enemy directly behind.
     if (canCarry && leftover > 0 && e.row === 1) {
       const behind = enemyAt(state.enemies, 0, e.col);
-      if (behind) {
+      if (behind && e.kind === 'bulwark') events.push({ t: 'bulwark', id: e.id, amount: leftover });
+      else if (behind) {
         events.push({ t: 'overkill', from: e.id, id: behind.id, amount: leftover });
         dealDamage(state, behind, leftover, false, events, 'overkill');
       }
     }
+    if (e.kind === 'splitter') splitInto(state, e, events);
     const type = ENEMY_TYPES[e.type];
     if (type.barrel) {
       events.push({ t: 'explode', id: e.id, amount: type.blast });
@@ -197,6 +213,26 @@
         if (n) dealDamage(state, n, type.blast, false, events, 'explode');
       }
     }
+  }
+
+  function spawn(state, src, row, col, hp, events, reason) {
+    const m = src.minion || { type: src.type, hp: 2, atk: 1 };
+    const t = ENEMY_TYPES[m.type];
+    const born = {
+      id: 'e' + state.enemies.length, type: m.type, row, col, hp, maxHp: hp,
+      atk: t && t.barrel ? 0 : (m.atk || 1), armor: 0, alive: true, kind: null, minion: null, spawned: true,
+    };
+    state.enemies.push(born);
+    events.push({ t: 'spawn', from: src.id, reason, enemy: clone(born) });
+    return born;
+  }
+
+  // Splitter: two 1-HP enemies, one in its own tile and one in an empty neighbouring enemy tile.
+  function splitInto(state, e, events) {
+    const spot = [[1 - e.row, e.col], [e.row, e.col - 1], [e.row, e.col + 1]]
+      .find(([r, c]) => c >= 0 && c < COLS && !enemyAt(state.enemies, r, c));
+    spawn(state, e, e.row, e.col, 1, events, 'split');
+    if (spot) spawn(state, e, spot[0], spot[1], 1, events, 'split');
   }
 
   const isThreat = (e) => e.alive && !ENEMY_TYPES[e.type].barrel;
@@ -255,12 +291,36 @@
     const raged = state.enemies.filter(isThreat);
     raged.forEach((e) => { e.atk += 1; });
     events.push({ t: 'enrage', ids: raged.map((e) => e.id) });
+
+    // Healers mend their neighbours, then Summoners call reinforcements (they act at the end of the turn).
+    for (const h of state.enemies.filter((e) => e.alive && e.kind === 'healer')) {
+      const healed = [];
+      for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+        const n = enemyAt(state.enemies, h.row + dr, h.col + dc);
+        if (!n || n.hp >= n.maxHp) continue;
+        const amount = Math.min(2, n.maxHp - n.hp);
+        n.hp += amount;
+        healed.push({ id: n.id, amount, hp: n.hp });
+      }
+      if (healed.length) events.push({ t: 'heal', id: h.id, targets: healed });
+    }
+    for (const sm of state.enemies.filter((e) => e.alive && e.kind === 'summoner')) {
+      let best = null;
+      for (const er of ENEMY_ROWS) {
+        for (let c = 0; c < COLS; c++) {
+          if (enemyAt(state.enemies, er, c)) continue;
+          const d = Math.abs(c - sm.col) + (er === sm.row ? 0 : 1);
+          if (!best || d < best.d) best = { d, r: er, c };
+        }
+      }
+      if (best) spawn(state, sm, best.r, best.c, (sm.minion && sm.minion.hp) || 2, events, 'summon');
+    }
     state.turn += 1;
     return { state, events };
   }
 
   const Engine = {
-    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, CARD_TYPES, ENEMY_TYPES,
+    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS,
     key, parseKey, clone, cardStat,
     createState, computeStats, targetsFor, reachableTiles, resolveTurn, isThreat,
   };

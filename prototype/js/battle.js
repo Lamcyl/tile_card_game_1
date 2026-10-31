@@ -52,7 +52,8 @@
     setBiome(opts.biome);
     $('#b-name').textContent = opts.title;
     $('#b-sub').textContent = opts.subtitle;
-    $('#b-msg').textContent = Object.keys(kept).length ? 'Your last layout is ready. Adjust it, then press Fight.' : 'Place your squad, then press Fight.';
+    const kinds = [...new Set(game.state.enemies.map((e) => e.kind).filter(Boolean))];
+    $('#b-msg').textContent = kinds.length ? kinds.map((k) => E.ENEMY_KINDS[k].badge + ' ' + E.ENEMY_KINDS[k].name + ': ' + E.ENEMY_KINDS[k].text + '.').join(' ') : Object.keys(kept).length ? 'Your last layout is ready. Adjust it, then press Fight.' : 'Place your squad, then press Fight.';
     root.hidden = false;
     render();
   }
@@ -67,7 +68,7 @@
     logEl.appendChild(line);
     logEl.scrollTop = logEl.scrollHeight;
   }
-  const nameOf = (view, id) => { const e = view.enemies.find((en) => en.id === id); return e ? E.ENEMY_TYPES[e.type].name : 'Enemy'; };
+  const nameOf = (view, id) => { const e = view.enemies.find((en) => en.id === id); return e ? E.ENEMY_TYPES[e.type].name + (e.kind ? ' ' + E.ENEMY_KINDS[e.kind].badge : '') : 'Enemy'; };
   const cardName = (key) => { const c = cardById(game.placement[key]); if (!c) return 'Unit'; const u = window.Art ? Art.unit(c) : null; return (u && u.name) || E.CARD_TYPES[c.type].name; };
   function logEvent(ev, view) {
     if (ev.t === 'fire') log(ev.targets.length ? cardName(ev.key) + ' fires for ⚔' + ev.atk : cardName(ev.key) + ' has no target in range', ev.targets.length ? '' : 'bad');
@@ -75,6 +76,9 @@
     else if (ev.t === 'overkill') log('&nbsp;&nbsp;Overkill: ' + ev.amount + ' carries to the ' + nameOf(view, ev.id));
     else if (ev.t === 'explode') log('&nbsp;&nbsp;Barrel explodes for ' + ev.amount + ' to its neighbours');
     else if (ev.t === 'strike') log(nameOf(view, ev.id) + ' attacks for ⚔' + ev.atk + (ev.blocked ? ', shield blocks ' + ev.blocked : '') + (ev.dmg ? ', you take ' + ev.dmg : ''), ev.dmg ? 'bad' : '');
+    else if (ev.t === 'bulwark') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' blocks the overkill (' + ev.amount + ' wasted)', 'bad');
+    else if (ev.t === 'spawn') log(ev.reason === 'split' ? '&nbsp;&nbsp;' + nameOf(view, ev.from) + ' splits: a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' appears' : nameOf(view, ev.from) + ' summons a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' (♥' + ev.enemy.hp + ' ⚔' + ev.enemy.atk + ')', 'bad');
+    else if (ev.t === 'heal') log(nameOf(view, ev.id) + ' heals ' + ev.targets.map((h) => nameOf(view, h.id) + ' +' + h.amount).join(', '), 'bad');
     else if (ev.t === 'enrage') { if (ev.ids.length) log('Survivors enrage: +1 ⚔', 'bad'); }
     else if (ev.t === 'cleared') log('Stage cleared!', 'good');
     else if (ev.t === 'defeated') log('Your hero has fallen.', 'bad');
@@ -165,8 +169,10 @@
       return '<div class="enemy barrel" title="' + t.name + ': explodes for ' + t.blast + ' damage to every adjacent enemy when destroyed. It does not attack.">' +
         face + '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">💥' + t.blast + '</span></div></div>';
     }
-    return '<div class="enemy' + (t.boss ? ' boss' : '') + '" title="' + t.name + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' +
+    const kind = e.kind ? E.ENEMY_KINDS[e.kind] : null;
+    return '<div class="enemy' + (t.boss ? ' boss' : '') + (kind ? ' kind-' + e.kind : '') + '" title="' + t.name + (kind ? ' (' + kind.name + ': ' + kind.text + ')' : '') + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' +
       (e.armor ? ', armor ' + e.armor : '') + '">' + face +
+      (kind ? '<span class="kind-badge" aria-label="' + kind.name + '">' + kind.badge + '</span>' : '') +
       (e.armor ? '<span class="tag armor">🛡' + TXT + e.armor + '</span>' : '') + (t.boss ? '<span class="crown">👑</span>' : '') +
       '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">⚔' + TXT + e.atk + '</span></div></div>';
   }
@@ -375,6 +381,25 @@
       }
       if (ev.dmg) { flash(hero, 'hurt', 350); floatText(hero, '−' + ev.dmg + ' ♥', 'dmg'); }
       view.hp = ev.hp; render(); await sleep(340);
+    } else if (ev.t === 'bulwark') {
+      floatText(enemyCell(view, ev.id), 'Blocked ⛨', 'info'); flash(enemyCell(view, ev.id), 'shake', 300); await sleep(420);
+    } else if (ev.t === 'spawn') {
+      view.enemies.push(E.clone(ev.enemy));
+      const el = enemyCell(view, ev.enemy.id);
+      render();
+      el.classList.remove('spawned'); void el.offsetWidth; el.classList.add('spawned');
+      floatText(el, ev.reason === 'split' ? 'Split!' : 'Summoned!', 'info');
+      setTimeout(() => el.classList.remove('spawned'), 600 / game.speed);
+      await sleep(480);
+    } else if (ev.t === 'heal') {
+      const src = enemyCell(view, ev.id);
+      flash(src, 'heal-flash', 500);
+      await Promise.all(ev.targets.map((h) => {
+        const n = view.enemies.find((en) => en.id === h.id); n.hp = h.hp;
+        floatText(enemyCell(view, h.id), '+' + h.amount + ' ♥', 'heal');
+        return projectile(src, enemyCell(view, h.id), 'heal-shot');
+      }));
+      render(); await sleep(260);
     } else if (ev.t === 'enrage') {
       if (!ev.ids.length) return;
       ev.ids.forEach((id) => { view.enemies.find((en) => en.id === id).atk += 1; const el = enemyCell(view, id); flash(el, 'rage', 500); floatText(el, '+1 ⚔', 'info'); });

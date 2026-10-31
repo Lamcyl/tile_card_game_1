@@ -13,6 +13,9 @@
   // Ordinary battles are picked from named templates by danger tier (World.danger of the node level).
   // `back` / `front` are the enemy rows (row 0 / row 1), one char per column; the layout is mirrored at random.
   //   b basic   w weak (60% HP)   t tough (140% HP, front row)   h heavy (about 2.2x HP, front row)   a armored (armor 1, 2 from Lv9)   x barrel (1 HP, blast 2)
+  //   Special rules (tier 4+, drawn as the sub-area's creature with a badge, see Engine.ENEMY_KINDS):
+  //   m Healer (heals neighbours by 2 each turn)   s Splitter (two 1-HP enemies when destroyed)
+  //   u Summoner (adds a minion each turn)   k Bulwark (armored; blocks overkill and Pierce to the tile behind)
   // hp / atk scale the level's base enemy stats for this template; lv limits the levels it can appear at.
   // Placement rules are encoded in the layouts: barrels sit next to enemies so one shot can chain; armor sits behind
   // a front enemy (so overkill is reduced) or beside a barrel; tier 1 layouts contain one idea each.
@@ -40,16 +43,21 @@
     { name: 'gatehouse',  tier: 4, lv: [10, 12], hp: 0.63, hp5: 0.62, atk: 0.8, back: '.b.b.', front: 'bxhxb' },
     { name: 'bastion',    tier: 4, lv: [10, 12], hp: 0.36, hp5: 0.32, atk: 0.8, back: 'b...b', front: 'ta.ht' },
     { name: 'warband',    tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.43, atk: 0.8, back: 'tb.bt', front: 'bxhxb' },
+    // Tier 4+ mechanics, one teaching template each.
+    { name: 'mender',     tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.4, atk: 0.8, back: 'b.m.b', front: '.tbt.', teach: 'healer' },
+    { name: 'brood',      tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.4, atk: 0.8, back: '.....', front: 'bsxsb', teach: 'splitter' },
+    { name: 'hive',       tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.4, atk: 0.8, back: 'b.u.b', front: 'tb.bt', teach: 'summoner' },
+    { name: 'bulwark',    tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.4, atk: 0.8, back: 'b.b.b', front: 'k.k.k', teach: 'bulwark' },
   ];
   // Tier 5 (Lv13+) reuses the Survive layouts with beefier enemies (the reference squad is stronger by then).
   TEMPLATES.filter((t) => t.tier === 4).forEach((t) => TEMPLATES.push(Object.assign({}, t, { tier: 5, lv: [13, 99], hp: t.hp5 || Math.round(t.hp * 90) / 100 })));
-  const MARK_OF_ROLE = { armored: 'a', barrel: 'x' };
+  const MARK_OF_ROLE = { armored: 'ak', barrel: 'x' };
 
   function pickTemplate(node, R) {
     const L = node.level, tier = World.danger(L);
     let pool = TEMPLATES.filter((t) => t.tier === tier && L >= t.lv[0] && L <= t.lv[1]);
     const mark = MARK_OF_ROLE[node.role];
-    if (mark) { const m = pool.filter((t) => (t.back + t.front).includes(mark)); if (m.length) pool = m; }
+    if (mark) { const m = pool.filter((t) => [...mark].some((ch) => (t.back + t.front).includes(ch))); if (m.length) pool = m; }
     if (!pool.length) pool = TEMPLATES.filter((t) => t.tier === tier);
     return pool[Math.floor(R() * pool.length)];
   }
@@ -68,14 +76,21 @@
         const ch = str[mirror ? 4 - i : i];
         if (ch === '.') continue;
         if (ch === 'x') { enemies.push({ type: sub + '_barrel', row, col: i, hp: 1 }); continue; }
-        let role = 'basic', hpMul = 1, atkAdd = 0, armor = 0;
+        let role = 'basic', hpMul = 1, atkAdd = 0, armor = 0, kind = null;
         if (ch === 'w') hpMul = 0.6;
         else if (ch === 't') { role = 'tough'; hpMul = 1.4; atkAdd = L >= 5 ? 1 : 0; }
         else if (ch === 'h') { role = 'tough'; hpMul = 2.2; atkAdd = 1; }
         else if (ch === 'a') { role = 'armored'; armor = L >= 9 ? 2 : 1; hpMul = 0.9; }
+        else if (ch === 'k') { role = 'armored'; armor = L >= 9 ? 2 : 1; hpMul = 1.1; kind = 'bulwark'; }
+        else if (ch === 'm') { hpMul = 0.8; kind = 'healer'; }
+        else if (ch === 's') { role = 'tough'; hpMul = 1; kind = 'splitter'; }
+        else if (ch === 'u') { hpMul = 0.9; kind = 'summoner'; }
         const hp = vary((2.2 + L * 0.95) * hpMul * ramp * t.hp * ease, R, t.tier >= 4 ? 0.06 : 0.12);
         const atk = Math.max(1, Math.round(vary(1.5 + L * 0.42, R, 0.2) * t.atk)) + atkAdd + rampAtk;
-        enemies.push({ type: sub + '_' + role, row, col: i, hp, atk, armor });
+        const en = { type: sub + '_' + role, row, col: i, hp, atk, armor };
+        if (kind) en.kind = kind;
+        if (kind === 'splitter' || kind === 'summoner') en.minion = { type: sub + '_basic', hp: kind === 'splitter' ? 1 : Math.max(2, Math.round(hp * 0.4)), atk: Math.max(1, Math.round(atk * 0.6)) };
+        enemies.push(en);
       }
     });
     // The spot's icon on the map is its lead creature: make sure that creature is in the fight.

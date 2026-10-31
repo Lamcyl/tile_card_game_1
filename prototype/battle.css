@@ -221,3 +221,21 @@
 .log-lines .good { color: var(--b-moss-deep); }
 .b-msg .stars { color: var(--b-gold); letter-spacing: 2px; font-size: 16px; text-shadow: 0 0 4px var(--b-paper); }
 .b-msg .stars i { font-style: normal; color: rgba(107, 95, 82, .35); }
+
+/* Special enemy rules (Healer, Splitter, Summoner, Bulwark) */
+.enemy .kind-badge { position: absolute; top: -5px; left: -4px; min-width: 20px; height: 20px; line-height: 18px; text-align: center; font: 800 13px var(--b-serif); color: #fbf4e2; background: #4d6a8a; border: 2px solid rgba(251, 244, 226, .95); border-radius: 50%; box-shadow: 0 1px 4px rgba(40, 30, 20, .5); z-index: 2; pointer-events: none; }
+.enemy.kind-healer .kind-badge { background: #3f8a58; }
+.enemy.kind-splitter .kind-badge { background: #b5701f; }
+.enemy.kind-summoner .kind-badge { background: #7a4a8a; }
+.enemy.kind-bulwark .kind-badge { background: #4d5a6a; }
+.enemy.kind-healer::after, .enemy.kind-summoner::after, .enemy.kind-splitter::after, .enemy.kind-bulwark::after { content: ""; position: absolute; inset: 0; border-radius: 12px; pointer-events: none; box-shadow: inset 0 0 0 2px var(--kind); }
+.enemy.kind-healer { --kind: rgba(63, 138, 88, .85); }
+.enemy.kind-splitter { --kind: rgba(181, 112, 31, .85); }
+.enemy.kind-summoner { --kind: rgba(122, 74, 138, .85); }
+.enemy.kind-bulwark { --kind: rgba(77, 90, 106, .95); }
+.float.heal { color: #2f7a48; font-size: 15px; }
+.projectile.heal-shot { background: radial-gradient(circle at 40% 40%, #9be0b0, #3f8a58 65%); box-shadow: 0 0 8px rgba(63, 138, 88, .8), 0 0 0 2px rgba(251, 244, 226, .8); }
+.heal-flash .enemy { animation: heal-pulse .5s; }
+.spawned .enemy { animation: spawn-pop .5s ease-out; }
+@keyframes heal-pulse { 50% { filter: brightness(1.25) saturate(1.3); transform: scale(1.06); } }
+@keyframes spawn-pop { from { transform: scale(.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
