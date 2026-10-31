@@ -29,10 +29,17 @@ const UNITS = [
   ['draugr', 'norse/draugr-fierce.svg'], ['valkyrie', 'norse/valkyrie-fierce.svg'], ['cyclops', 'greek/cyclops-fierce.svg'], ['dalgyal-gwisin', 'korean/dalgyal-gwisin-fierce-v2.svg'], ['hel', 'norse/hel-fierce.svg'],
   ['dokkaebi', 'korean/dokkaebi-fierce.svg'], ['oni', 'yokai/oni-fierce.svg'], ['cabrakan', 'maya/cabrakan-fierce.svg'], ['bulgae', 'korean/bulgae-fierce.svg'], ['surtr', 'norse/surtr-fierce.svg'],
   ['huay-chivo', 'maya/huay-chivo-fierce.svg'], ['minotaur', 'greek/minotaur-fierce.svg'], ['taotie', 'chinese/taotie-fierce.svg'], ['firebird', 'slavic/firebird-fierce.svg'], ['zmey', 'slavic/zmey-fierce.svg'],
+  // New sub-areas (Mirror Lake, Shipwreck Cove, Palm Oasis, Frozen Lake, Obsidian Ridge)
+  ['bannik', 'slavic/bannik-fierce.svg'], ['jorogumo', 'yokai/jorogumo-fierce.svg'], ['baku', 'yokai/baku-fierce.svg'], ['hitotsume-kozo', 'yokai/hitotsume-kozo-fierce-v2.svg'], ['medusa', 'greek/medusa-fierce.svg'],
+  ['harpy', 'greek/harpy-fierce.svg'], ['gashadokuro', 'yokai/gashadokuro-fierce.svg'], ['nemean-lion', 'greek/nemean-lion-fierce.svg'], ['cheonyeo-gwisin', 'korean/cheonyeo-gwisin-fierce.svg'], ['hydra', 'greek/hydra-fierce.svg'],
+  ['bes', 'egypt/bes-fierce.svg'], ['anubis', 'egypt/anubis-fierce.svg'], ['ammit', 'egypt/ammit-fierce.svg'], ['wadjet', 'egypt/wadjet-fierce.svg'], ['set', 'egypt/set-fierce.svg'],
+  ['nisse', 'norse/nisse-fierce-v2.svg'], ['lindworm', 'norse/lindworm-fierce.svg'], ['dvergr', 'norse/dvergr-fierce.svg'], ['ratatoskr', 'norse/ratatoskr-fierce.svg'], ['nidhogg', 'norse/nidhogg-fierce.svg'],
+  ['kui', 'chinese/kui-fierce.svg'], ['zipacna', 'maya/zipacna-fierce.svg'], ['hundun', 'chinese/hundun-fierce.svg'], ['pixiu', 'chinese/pixiu-fierce.svg'], ['vucub-caquix', 'maya/vucub-caquix-fierce.svg'],
 ];
 const THEME = ['overview', 'explore', 'battle'];
 
-rmSync(OUT, { recursive: true, force: true });
+rmSync(new URL('units/', OUT), { recursive: true, force: true }); // keep assets/battle (hand-made backdrops)
+rmSync(new URL('theme/', OUT), { recursive: true, force: true });
 mkdirSync(new URL('units/', OUT), { recursive: true });
 mkdirSync(new URL('theme/', OUT), { recursive: true });
 for (const [name, file] of UNITS) copyFileSync(new URL(file, SRC), new URL('units/' + name + '.svg', OUT));

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<!-- legs -->
+<path d="M96 196L92 232L72 232L74 224L82 222L84 196Z M160 196L164 232L184 232L182 224L174 222L172 196Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<!-- ribcage -->
+<path d="M70 150C70 190 96 206 128 206C160 206 186 190 186 150Z" fill="#55514c" stroke="#1b1a1a" stroke-width="7" stroke-linejoin="round"/>
+<path d="M128 150L128 210" stroke="#1b1a1a" stroke-width="10" stroke-linecap="round"/><path d="M128 150L128 210" stroke="#f6f2e9" stroke-width="4" stroke-linecap="round"/>
+<g fill="none" stroke-linecap="round">
+<path id="rb" d="M128 160C98 154 76 166 74 180M128 176C102 172 88 184 90 194M128 192C112 190 100 196 102 204M128 160C158 154 180 166 182 180M128 176C154 172 168 184 166 194M128 192C144 190 156 196 154 204" stroke="#1b1a1a" stroke-width="12"/>
+<path d="M128 160C98 154 76 166 74 180M128 176C102 172 88 184 90 194M128 192C112 190 100 196 102 204M128 160C158 154 180 166 182 180M128 176C154 172 168 184 166 194M128 192C144 190 156 196 154 204" stroke="#f6f2e9" stroke-width="5"/>
+</g>
+<path d="M92 208L128 218L164 208L164 222L128 230L92 222Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<!-- arms clawing -->
+<path d="M78 156L44 176L30 130" fill="none" stroke="#1b1a1a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M78 156L44 176L30 130" fill="none" stroke="#f6f2e9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M178 156L212 176L226 130" fill="none" stroke="#1b1a1a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M178 156L212 176L226 130" fill="none" stroke="#f6f2e9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g fill="#f6f2e9" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round">
+<path d="M22 134L10 104L26 120L24 94L34 118L40 98L40 126Z"/><path d="M234 134L246 104L230 120L232 94L222 118L216 98L216 126Z"/></g>
+<!-- skull large, jaw open -->
+<path d="M128 14C64 14 54 66 62 98C64 110 72 114 80 118L80 126L176 126L176 118C184 114 192 110 194 98C202 66 192 14 128 14Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="7" stroke-linejoin="round"/>
+<path d="M172 40C186 56 188 80 182 96" fill="none" stroke="#d4cec3" stroke-width="8" stroke-linecap="round"/>
+<path d="M104 18L112 40L122 24M140 20L146 34" fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round"/>
+<path d="M76 62L96 66L102 52" fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" opacity="0"/>
+<!-- sockets angry -->
+<path d="M72 66L112 82L106 106L80 100C68 92 66 78 72 66Z" fill="#1b1a1a"/>
+<path d="M184 66L144 82L150 106L176 100C188 92 190 78 184 66Z" fill="#1b1a1a"/>
+<circle cx="100" cy="92" r="3.2" fill="#c8352b"/>
+<path d="M160 90L162 96" stroke="#f6f2e9" stroke-width="3" stroke-linecap="round" opacity="0"/>
+<path d="M128 100L119 118L137 118Z" fill="#1b1a1a"/>
+<!-- jaw -->
+<path d="M78 120L82 150L96 160L128 164L160 160L174 150L178 120Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M88 124L168 124L164 142L92 142Z" fill="#1b1a1a"/>
+<path d="M92 124L98 138L104 124M108 124L114 140L120 124M124 124L128 140L132 124M136 124L142 140L148 124M152 124L158 138L164 124" fill="#f6f2e9" stroke="#f6f2e9" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M96 160L100 146L106 160M118 164L122 148L128 164M140 164L146 148L150 160" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M52 70L40 62M48 92L34 94M204 70L216 62M208 92L222 94" stroke="#9a948b" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

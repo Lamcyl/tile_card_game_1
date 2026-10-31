@@ -142,12 +142,12 @@
     caldera: { base: '#7a5e58', mid: '#957770', dark: '#4e3a38', rim: '#3c2c2c' },
   };
   const SEA = '#a9c6cb';
-  const MOUNTAINS = [[330, 600, 670, 1135], [445, 20, 555, 620]];
+  const MOUNTAINS = [[425, 860, 575, 1600], [440, 130, 560, 840]];
   const RIVERS = [
-    [[255, 1356], [330, 1370], [405, 1380], [470, 1372], [540, 1382], [620, 1374], [700, 1384], [780, 1370]],
-    [[494, 600], [472, 670], [512, 750], [482, 830], [516, 920], [490, 1005], [506, 1085]],
+    [[255, 2112], [330, 2118], [405, 2122], [470, 2116], [540, 2122], [620, 2116], [700, 2122], [780, 2112]],
+    [[494, 840], [472, 920], [512, 1010], [482, 1100], [516, 1200], [490, 1300], [506, 1400], [498, 1520], [502, 1625]],
   ];
-  const BRIDGE = { x: 500, y: 1377 };
+  const BRIDGE = { x: 500, y: 2118 };
   const landPaths = {};   // walkable ground per sub-area
   let lagoonPath = null;
   const islandPaths = [];
@@ -265,12 +265,13 @@
     const land = [];
     const mountainPaths = MOUNTAINS.map((b, i) => blob('mtn' + i, b, 30, 0.2));
     mountainPaths.forEach((p) => land.push({ path: p, pal: { base: '#aab7b0', mid: '#c8d2cc', dark: '#8c9aa0', rim: '#7a8794' }, id: 'mtn' }));
-    const order = ['glacier', 'caldera', 'snow', 'ash', 'temple', 'dunes', 'beach', 'forest', 'meadow'];
-    for (const id of order) {
-      const sub = World.SUB_BY[id];
-      const b = id === 'meadow' ? [sub.bounds[0], sub.bounds[1], sub.bounds[2], 1690] : sub.bounds;
+    // Land for every sub-area (the Coral Shallows are a lagoon on the sea, painted below). Palette comes from the sub-area's id or biome.
+    for (const sub of World.SUBAREAS.slice().reverse()) {
+      const id = sub.id;
+      if (id === 'coral') continue;
+      const b = id === 'meadow' ? [sub.bounds[0], sub.bounds[1], sub.bounds[2], World.CAMP.y + 15] : sub.bounds;
       landPaths[id] = blob(id, b, id === 'meadow' ? 40 : 46, 0.22);
-      land.push({ path: landPaths[id], pal: BIOME[id], id, b });
+      land.push({ path: landPaths[id], pal: BIOME[id] || BIOME[sub.biome] || BIOME.meadow, id, b });
     }
     // Coral: a lagoon wash on the sea, with small sand islets around each node.
     const coral = World.SUB_BY.coral;
@@ -389,14 +390,14 @@
     const Sn = S('snow'), sb = grow(Sn.bounds, 40);
     scatter('smound', landPaths.snow, sb, 30, 12, (p) => { soft(c, p.x, p.y + 3, 18 + p.r * 14, 6, '#9cb4c6', 0.38); soft(c, p.x, p.y, 16 + p.r * 12, 6, '#ffffff', 0.7); }, 28);
     scatter('spine', landPaths.snow, sb, 70, 14, (p) => pine(c, p.x, p.y, 8 + p.r * 5, p, '#3d6560', '#7fa8a0', true));
-    const Gl = S('glacier'), gb = grow(Gl.bounds, 40);
-    scatter('ice', landPaths.glacier, gb, 44, 12, (p) => {
+    const Gl = S('frozen'), gb = grow(Gl.bounds, 40);
+    scatter('ice', landPaths.frozen, gb, 44, 12, (p) => {
       const s = 7 + p.r * 11;
       c.globalAlpha = 0.85; c.fillStyle = '#9ec6e2'; c.beginPath(); c.moveTo(p.x, p.y - s * 1.9); c.lineTo(p.x + s * 0.55, p.y); c.lineTo(p.x - s * 0.55, p.y); c.closePath(); c.fill();
       c.fillStyle = '#ffffff'; c.globalAlpha = 0.7; c.beginPath(); c.moveTo(p.x, p.y - s * 1.9); c.lineTo(p.x - s * 0.55, p.y); c.lineTo(p.x - s * 0.08, p.y); c.closePath(); c.fill(); c.globalAlpha = 1;
       c.strokeStyle = rgba('#3d5a80', 0.55); c.lineWidth = 1; c.beginPath(); c.moveTo(p.x - s * 0.55, p.y); c.lineTo(p.x, p.y - s * 1.9); c.lineTo(p.x + s * 0.55, p.y); c.stroke();
     });
-    scatter('cracks', landPaths.glacier, grow(Gl.bounds, 30), 18, 8, (p) => { brush(c, [[p.x, p.y], [p.x + 8, p.y + 2 - p.r * 8], [p.x + 18, p.y + 2]], 1.5, '#5d86ab', 0.5); }, 28);
+    scatter('cracks', landPaths.frozen, grow(Gl.bounds, 30), 18, 8, (p) => { brush(c, [[p.x, p.y], [p.x + 8, p.y + 2 - p.r * 8], [p.x + 18, p.y + 2]], 1.5, '#5d86ab', 0.5); }, 28);
     // Ash & caldera.
     const A = S('ash'), ab = grow(A.bounds, 40);
     scatter('ashpool', landPaths.ash, ab, 20, 12, (p) => soft(c, p.x, p.y, 20 + p.r * 18, 8, '#5d5450', 0.3), 28);
@@ -664,17 +665,17 @@
       ctx.globalAlpha = 1;
     };
     // Sakura petals drift across the green lands.
-    for (const id of ['meadow', 'forest']) p(id, 14, (b, h, i) => {
+    for (const id of ['meadow', 'forest', 'lake']) p(id, 14, (b, h, i) => {
       const sp = 10 + (i * 7) % 12, x = b[0] + ((i * 97) % (b[2] - b[0])) + Math.sin(T * 0.7 + i) * 14;
       let y = (i * 53 + T * sp) % h; const yy = b[1] + y;
       ctx.globalAlpha = 0.8; ctx.fillStyle = i % 2 ? '#f0b6c2' : '#f8d5da';
       ctx.save(); ctx.translate(x + y * 0.25 % (b[2] - b[0]) * 0.1, yy); ctx.rotate(T + i); ctx.beginPath(); ctx.ellipse(0, 0, 2.6, 1.4, 0, 0, 7); ctx.fill(); ctx.restore();
     });
-    for (const id of ['snow', 'glacier']) p(id, 26, (b, h, i) => {
+    for (const id of ['snow', 'frozen', 'rime']) p(id, 26, (b, h, i) => {
       const sp = 12 + (i * 7) % 18, x = b[0] + ((i * 97) % (b[2] - b[0])) + Math.sin(T + i) * 8; let y = (i * 53 + T * sp) % h;
       ctx.globalAlpha = 0.85; ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.arc(x, b[1] + y, 1.8, 0, 7); ctx.fill();
     });
-    for (const id of ['ash', 'caldera']) p(id, 18, (b, h, i) => {
+    for (const id of ['ash', 'ridge', 'caldera']) p(id, 18, (b, h, i) => {
       const sp = 14 + (i * 7) % 20, x = b[0] + ((i * 97) % (b[2] - b[0])) + Math.sin(T + i) * 8; let y = (i * 53 - T * sp) % h; if (y < 0) y += h;
       ctx.globalAlpha = 0.75; ctx.fillStyle = id === 'ash' ? '#f0a45c' : '#ff7a3a'; ctx.beginPath(); ctx.arc(x, b[1] + y, 1.4, 0, 7); ctx.fill();
     });
@@ -749,7 +750,7 @@
     const sub = World.SUB_BY[n.sub], span = Math.max(1, sub.lv[1] - sub.lv[0]);
     return 1 + Math.round(clamp01((n.level - sub.lv[0]) / span) * 2);
   };
-  function roleOf(n) { return n.type === 'boss' ? 'boss' : n.type === 'elite' ? 'tough' : 'basic'; }
+  function roleOf(n) { return n.role || (n.type === 'boss' ? 'boss' : n.type === 'elite' ? 'tough' : 'basic'); }
   const nodeH = (n) => (n.type === 'boss' ? 112 : n.type === 'elite' ? 84 : n.type === 'camp' ? 46 : n.type === 'battle' ? 74 : 34);
 
   function nodeState(n) {

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- bannik prowling along the sauna bench, hunched, hair streaming like steam, switch trailing like a tail -->
+<!-- steam -->
+<g fill="none" stroke="#d4cec3" stroke-width="9"><path d="M150 40 Q130 24 150 10 Q170 -4 150 -16"/><path d="M214 70 Q236 56 220 40"/><path d="M20 30 Q4 20 16 6"/></g>
+<!-- bench -->
+<path d="M0 206 L256 206 L256 226 L0 226Z" fill="#d4cec3"/>
+<path d="M30 226 L30 252 L50 252 L50 226 M206 226 L206 252 L226 252 L226 226" fill="#9a948b"/>
+<path d="M40 214 L96 214 M130 216 L180 216" stroke-width="2.5" fill="none"/>
+<!-- switch tail -->
+<path d="M196 130 L240 80" stroke-width="7" fill="none"/>
+<path d="M232 90 L252 60 M236 86 L254 76 M226 98 L246 100 M238 84 L240 62" stroke-width="4" fill="none"/>
+<g stroke-width="3"><ellipse cx="248" cy="58" rx="12" ry="6" transform="rotate(-60 248 58)" fill="#d4cec3"/><ellipse cx="254" cy="76" rx="11" ry="6" fill="#9a948b"/><ellipse cx="248" cy="100" rx="12" ry="6" transform="rotate(30 248 100)" fill="#d4cec3"/><ellipse cx="240" cy="58" rx="9" ry="5" transform="rotate(-90 240 58)" fill="#9a948b"/></g>
+<!-- hind leg -->
+<g fill="none"><path d="M184 150 Q222 160 214 190 L214 200" stroke="#1b1a1a" stroke-width="30"/><path d="M184 150 Q222 160 214 190 L214 200" stroke="#9a948b" stroke-width="22"/></g>
+<path d="M200 204 L228 204 L226 194 Q214 188 202 196Z" fill="#9a948b" stroke-width="3.5"/><path d="M228 204 L240 206 M222 204 L234 210" stroke-width="3" fill="none"/>
+<!-- body with arched spine -->
+<path d="M70 140 Q96 92 150 100 Q206 108 206 154 Q196 186 150 176 Q110 178 80 176Z" fill="#9a948b"/>
+<path d="M110 112 Q124 130 112 150 M134 106 Q148 128 136 154 M158 108 Q172 128 162 150" fill="none" stroke-width="3"/>
+<path d="M92 124 L100 112 L108 124 M120 104 L128 92 L136 104 M150 100 L160 88 L168 102 M180 108 L192 98 L194 114" fill="#d4cec3" stroke-width="3"/>
+<!-- towel scrap -->
+<path d="M150 158 L204 150 L206 170 L190 188 L176 172 L160 186Z" fill="#f6f2e9"/><path d="M164 160 L196 154 M168 170 L200 164" stroke="#c8352b" stroke-width="4" fill="none"/>
+<!-- fore arms to bench -->
+<g fill="none"><path d="M94 150 Q62 176 66 200" stroke="#1b1a1a" stroke-width="22"/><path d="M94 150 Q62 176 66 200" stroke="#d4cec3" stroke-width="14"/>
+<path d="M120 156 Q116 184 120 204" stroke="#1b1a1a" stroke-width="22"/><path d="M120 156 Q116 184 120 204" stroke="#d4cec3" stroke-width="14"/></g>
+<path d="M54 202 Q66 192 80 202 L82 208 L52 208Z M110 204 Q122 194 134 204 L136 208 L108 208Z" fill="#d4cec3" stroke-width="3.5"/>
+<path d="M54 206 L46 222 M62 206 L58 224 M72 206 L72 224 M80 206 L84 222 M112 208 L106 224 M122 208 L122 226 M132 208 L138 224" stroke-width="4" fill="none"/>
+<!-- head hair -->
+<path d="M126.0 76.0 L154.1 91.6 L121.4 93.4 L139.4 119.6 L108.7 107.3 L113.0 139.1 L90.2 115.0 L80.0 146.0 L69.8 115.0 L47.0 139.1 L51.3 107.3 L20.6 119.6 L38.6 93.4 L5.9 91.6 L34.0 76.0 L5.9 60.4 L38.6 58.6 L20.6 32.4 L51.3 44.7 L47.0 12.9 L69.8 37.0 L80.0 6.0 L90.2 37.0 L113.0 12.9 L108.7 44.7 L139.4 32.4 L121.4 58.6 L154.1 60.4 L126.0 76.0Z" fill="#55514c"/>
+<!-- face -->
+<path d="M40 76 Q40 38 80 38 Q120 38 120 76 Q122 114 80 124 Q38 114 40 76Z" fill="#f6f2e9"/>
+<path d="M38 72 Q44 34 80 36 Q118 34 122 72 L108 56 L96 74 L80 52 L66 74 L52 56Z" fill="#55514c"/>
+<path d="M42 70 L72 82 L66 94 Q50 94 42 82Z" fill="#1b1a1a"/><path d="M118 70 L88 82 L94 94 Q110 94 118 82Z" fill="#1b1a1a"/>
+<circle cx="58" cy="86" r="4.5" fill="#c8352b" stroke="none"/><circle cx="102" cy="86" r="4.5" fill="#c8352b" stroke="none"/>
+<path d="M78 90 L74 102 L86 102Z" fill="#d4cec3" stroke-width="3"/>
+<path d="M54 106 Q80 98 106 106 Q100 126 80 126 Q60 126 54 106Z" fill="#1b1a1a"/>
+<path d="M60 108 L64 116 L70 108 L76 118 L82 108 L88 118 L94 108 L100 116" fill="#f6f2e9" stroke-width="2"/>
+<!-- sweat -->
+<path d="M126 70 Q132 82 126 90 Q120 82 126 70Z" fill="#f6f2e9" stroke-width="2.5"/>
+</svg>

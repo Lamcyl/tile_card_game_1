@@ -56,6 +56,15 @@
       const cell = take((f) => enemies.some((e) => Math.abs(e.row - f[0]) + Math.abs(e.col - f[1]) === 1));
       enemies.push({ type: sub + '_barrel', row: cell[0], col: cell[1], hp: 1 });
     }
+    // The spot's icon on the map is its lead creature: make sure that creature is in the fight.
+    if (node.role === 'armored' && !enemies.some((e) => e.type === sub + '_armored')) {
+      const e = enemies.find((x) => x.type === sub + '_basic') || enemies[0];
+      if (e) { e.type = sub + '_armored'; e.armor = Math.max(e.armor, 1); }
+    }
+    if (node.role === 'barrel' && !enemies.some((e) => e.type === sub + '_barrel') && free.length) {
+      const cell = take((f) => enemies.some((e) => Math.abs(e.row - f[0]) + Math.abs(e.col - f[1]) === 1));
+      enemies.push({ type: sub + '_barrel', row: cell[0], col: cell[1], hp: 1 });
+    }
     return { enemies };
   }
 

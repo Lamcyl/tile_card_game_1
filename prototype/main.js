@@ -9,5 +9,6 @@ import './js/art.js';
 import './js/progress.js';
 import './js/gen.js';
 import './js/battle.js';
+import './js/items.js';
 import './js/map.js';
 import './js/app.js';

@@ -11,10 +11,10 @@ A turn-based tile placement game with roguelite runs. You place a fixed army of 
 
 The prototype is the **world map game**:
 1. Set out from Camp.
-2. Choose fights on the map until your HP runs out, or return to Camp to bank your Souls.
+2. Fight any monster in an unlocked area, in any order. Each win costs 1 Supply (bosses give some back), and the run ends when HP or Supplies run out, or when you return to Camp to bank your Souls. Monsters drop gear you equip at Camp.
 3. Spend Souls on upgrades and recruits, then go further on the next run.
 
-Each sub-area has a boss that reveals the next area.
+The world has 5 regions with 3 sub-areas each. Each sub-area has a landmark and a boss that reveals the next area.
 
 The earlier three-stage battle tester is at `sandbox.html` (run it with `npm run dev` or `npm run preview`).
 
@@ -47,8 +47,9 @@ npm run single                       # dist/tile-defense.html, one self-containe
 docs/GAME_DESIGN.md                  Gameplay design document
 prototype/index.html                 World map game (Vite entry: main.js, world.css)
 prototype/js/engine.js               Battle rules engine (pure logic, shared with tools)
-prototype/js/world-data.js           Regions, sub-areas, enemy themes, map node graph
+prototype/js/world-data.js           Regions, sub-areas (landmarks, bounds), enemy themes, monster spots
 prototype/js/progress.js             Souls, Camp upgrades, roster, save file
+prototype/js/items.js                Equipment items, drop tables and their effects
 prototype/js/gen.js                  Battle generator (level + sub-area theme)
 prototype/js/map.js                  Painted world map, fog, paths, hero, panning
 prototype/js/battle.js               Battle screen (placement + animated turns)

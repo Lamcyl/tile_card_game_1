@@ -244,7 +244,7 @@ Inspired by incremental exploration games such as *Our Ascent*, *Hero's Quest* a
 
 1. Choose a **hero**, a **squad** from your roster (section 12) and your **equipment** (section 13).
 2. Start at Camp, or at an unlocked **waypoint** (10.5), with full HP.
-3. **Move freely.** From your current node you can travel to any connected, revealed node. You choose which fights to take, which way to go and how deep to push. Nothing forces you down a fixed path.
+3. **Move freely.** (Prototype: every spot of an unlocked sub-area is open at once and Supplies limit the run, see 24.5.) From your current node you can travel to any connected, revealed node. You choose which fights to take, which way to go and how deep to push. Nothing forces you down a fixed path.
 4. Each node is cleared once per run. Taking easy nodes near Camp is safe but pays little, so you are always pulled outward.
 5. HP carries from battle to battle and never regenerates on its own. Camp-style nodes, relics and some rewards can heal.
 6. **The run ends** when your HP reaches 0 (defeat) or when you choose **Return to Camp** (retreat).
@@ -544,18 +544,20 @@ The prototype in `prototype/` has two pages.
 
 **World map game (`index.html`)**: tests short runs on a persistent map.
 
-- **World:** 5 regions with 2 sub-areas each (Greenvale, Azure Coast, Sunscorch, Frostveil, Ember Peaks), 78 spots and 87 paths. Each sub-area has its own enemy theme and a boss.
-- **Unlocks:** each boss reveals the next sub-area. The Old Oak Wood boss opens both the coast and the desert, which lead on to the ice and volcano regions.
-- **Runs:** start at Camp. You can fight any spot next to your trail, and HP carries over. Treasure caches and healing springs appear along the way. After each battle you choose 1 of 3 run rewards (heal, +1 ATK/range/block/boost).
-- **Ending a run:** Return to Camp keeps 100% of Souls; a defeat keeps 75%.
-- **Camp:** Souls buy upgrades (Vitality, Command, Drill, Bulwark, Fortune) and recruits. Bosses unlock new recruits. The squad is limited by slots.
+- **World:** 5 regions with 3 sub-areas each (15 in total), 126 monster and event spots, no paths. Greenvale (Sunny Meadows, Old Oak Wood, Mirror Lake) sits above the Camp. Mirror Lake's boss opens the Azure Coast (Shell Beach, Coral Shallows, Shipwreck Cove) on the left and Sunscorch (Dune Sea, Palm Oasis, Buried Temple) on the right. Their last bosses open Frostveil (Snowdrift Plains, Frozen Lake, Rime Forest) and Ember Peaks (Ash Fields, Obsidian Ridge, Magma Caldera). Each sub-area has its own landmark, enemy theme and boss.
+- **Unlocks:** a sub-area's boss reveals the next sub-area of its region; the last boss of a region reveals the next region.
+- **Runs (free exploration):** start at Camp with 8 Supplies. Every monster in every unlocked sub-area (5 ordinary, 1-2 elites and the boss) can be fought at any time, in any order, once per run. HP carries over. Each sub-area may hold a healing spring or supply cache that costs no Supplies. After each battle you choose 1 of 3 run rewards (heal, +1 ATK/block/boost, and from the second region sometimes +1 range).
+- **Supplies:** a normal or elite win costs 1 Supply, a boss adds 4. At 0 the run ends as a safe return (all Souls kept).
+- **Items:** 169 permanent items; see 24.3.
+- **Ending a run:** Return to Camp or running out of Supplies keeps 100% of Souls; a defeat keeps 75%.
+- **Camp:** Souls buy upgrades (Vitality, Command, Drill, Bulwark, Fortune, Provisions) and recruits. Bosses unlock new recruits. The squad is limited by slots. The Gear tab equips up to 3 items.
 - **Battles:** generated from the spot's level and sub-area theme. Level 1 fights are small, and bosses are usually two-turn fights.
 - **Saving:** progress is saved in the browser. Prototype tools give +100 Souls or reset progress.
-- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player. Current targets: a fresh account dies after about 5 battles (perfect play), and each boss needs a few runs of upgrades.
+- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player. The simulated strong player now takes about 12 battles on a fresh account before dying or running out of Supplies (it clears Sunny Meadows and often Old Oak Wood); real players should land at the 8-10 battles of 24.1.
 
 **Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
 
-**Not included yet:** equipment, gacha pulls (recruits are bought directly), relics, heroes, Heat, waypoints and secrets, art and audio.
+**Not included yet:** equipment sets and the forge, gacha pulls (recruits are bought directly), relics, heroes, Heat, waypoints and secrets, art and audio.
 
 See the README for how to run it.
 
@@ -563,7 +565,7 @@ See the README for how to run it.
 
 ## 24. Planned changes (from the first world map playtest)
 
-These are agreed directions, **not implemented yet**. Numbers are starting points for tuning.
+These directions came out of the first playtest. Numbers are starting points for tuning. Status is noted per item.
 
 ### 24.1 Faster early progression, slower later
 
@@ -571,29 +573,33 @@ These are agreed directions, **not implemented yet**. Numbers are starting point
 - **Front-load progression:** cheap, frequent unlocks early; upgrade costs and enemy growth rise more steeply from the second region onward.
 - **Guaranteed upgrade after the first run:** the first run always pays at least enough Souls for the cheapest Camp upgrade (with a first-run bonus if needed). The results screen points straight to it.
 
-### 24.2 Run rewards: range is a rare, mid-game upgrade
+### 24.2 Run rewards: range is a rare, mid-game upgrade (implemented)
 
 - Remove **+1 range** from the common after-battle rewards. Extra range on an Archer is too strong early.
 - Range becomes a **rare** reward that appears only from the second region onward, or comes from equipment.
 
-### 24.3 Guaranteed first equipment drop
+### 24.3 Guaranteed first equipment drop and the item system (implemented)
 
 - The first or second battle of the **first run** always drops a piece of equipment (for example, *Rusty Sword: +1 ATK to Swordsmen*).
 - That moment introduces equipment and the equip screen (section 13).
+- **Implemented as follows.** Items (`js/items.js`) are permanent and give one passive effect: +ATK for a card type, +block for Shields, +amount for a support type, +max HP, +starting Supplies, +% Souls, or (rare, only from the second region on) +range for a card type. Rarity sets the strength: Common (+1 ATK, +1 block, +2 HP, +8% Souls), Rare (+2, +2, +4, +15%, +1 amount, +1 Supply, +1 range) and Epic (+3, +3, +6, +25%, +2 amount, +2 Supplies, +1 range). Up to 3 items are equipped in the Camp Gear tab; a new drop equips itself if a slot is free.
+- **Every monster spot has one unique item** that only it drops (named after its creature, for example "Alux's Plate"), plus shared items: three per sub-area and two per region, 169 items in all. A spot lists its unique item and three shared ones. Win chances: ordinary 25% / 7% / 4% (unique / sub-area / region), elite 40% / 12% / 7%, boss 35% / 18% / 10%. A boss's unique item (Epic) is guaranteed the first time it falls. At most one item drops per battle and owned items are skipped. The spot's sheet shows its drops, the unique one highlighted and owned ones ticked.
+- The first or second battle of the very first run always drops an item. Range as a run reward (24.2) now only appears from the second region onward, and only some of the time.
 
-### 24.4 More choice on the map
+### 24.4 More choice on the map (implemented as free exploration)
 
-- Each spot should offer **3–5 fights to choose from**, not 1–2. The node graph needs more connections and more spots per sub-area.
+- The node graph is gone. Every sub-area has 6-8 monster spots (4-5 ordinary, 1-2 elite, 1 boss), all open at once (see 24.5), plus at most one spring or cache.
 
-### 24.5 Battle limit per run ("Supplies")
+### 24.5 Battle limit per run ("Supplies") (implemented)
 
-- Each run has a **Supplies** counter that works as a countdown, for example starting at 10.
+- Each run has a **Supplies** counter that works as a countdown. It starts at 8 and the Camp upgrade **Provisions** adds +2 per level (4 levels). Equipped items can add more.
   - Winning an ordinary battle costs **1** Supply.
-  - Beating a boss **adds** Supplies (for example +5), so a strong run can chain into the next region.
-- The starting amount is **upgradeable at Camp**.
+  - Beating a boss **adds** 4 Supplies (it costs none), so a strong run can chain into the next region.
+- The HUD shows the counter during a run, and each spot's sheet states "Costs 1 Supply" or "Boss: +4 Supplies". Springs and caches cost nothing.
 - When Supplies reach 0, the run ends as a safe return (full Souls kept).
 - **All battles in every unlocked sub-area are open to choose from**, with no walking or adjacency limit. Supplies, not distance, limit a run.
   - Early on, players spend Supplies on easy fights to grow during the run.
   - In the mid to late game, players can **go straight for a boss** and spend their Supplies where they matter.
 - This replaces the "fight a spot next to your trail" rule (10.2), and makes waypoints (10.5) optional.
 - Open question: should spots in already-conquered sub-areas cost less, or give less?
+- Still open from 24.1: gentler first sub-area tuning and the guaranteed first-run upgrade.

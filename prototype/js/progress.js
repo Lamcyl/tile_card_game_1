@@ -16,8 +16,8 @@
     { id: 'mage1',   type: 'mage',      cost: 55, need: 'forest' },
     { id: 'sword2',  type: 'swordsman', cost: 60, need: 'forest' },
     { id: 'shield2', type: 'shield',    cost: 60, need: 'forest', block: 2 },
-    { id: 'spy1',    type: 'spyglass',  cost: 70, need: ['beach', 'dunes'] },
-    { id: 'drum2',   type: 'drummer',   cost: 80, need: ['beach', 'dunes'] },
+    { id: 'spy1',    type: 'spyglass',  cost: 70, need: 'lake' },
+    { id: 'drum2',   type: 'drummer',   cost: 80, need: 'lake' },
     { id: 'spear2',  type: 'spearman',  cost: 110, need: ['coral', 'temple'] },
     { id: 'horn2',   type: 'horn',      cost: 160, need: ['coral', 'temple'] },
     { id: 'mage2',   type: 'mage',      cost: 180, need: ['snow', 'ash'] },
@@ -31,12 +31,17 @@
     { id: 'drill',    name: 'Drill',     icon: '⚔️', desc: '+1 ATK to every attacker',        costs: [60, 150, 300] },
     { id: 'bulwark',  name: 'Bulwark',   icon: '🛡️', desc: '+1 block to every Shield',        costs: [30, 80, 160] },
     { id: 'fortune',  name: 'Fortune',   icon: '✦',  desc: '+20% Souls from battles',         costs: [40, 90, 160] },
+    { id: 'provisions', name: 'Provisions', icon: '🎒', desc: '+2 starting Supplies (battles per run)', costs: [20, 50, 100, 170] },
   ];
   const UPGRADE_BY = Object.fromEntries(UPGRADES.map((u) => [u.id, u]));
   const BASE_HP = 20;
   const BASE_SLOTS = 5;
+const BASE_SUPPLIES = 8;   // battles a fresh account can fight per run
+const SUPPLIES_PER_BOSS = 4; // a boss victory adds this many Supplies
+const Items = () => root.Items;
+const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range: {}, block: 0, hp: 0, supplies: 0, souls: 0 });
 
-  const SAVE_KEY = 'tile-defense-world-v1';
+  const SAVE_KEY = 'tile-defense-world-v2';
 
   function freshSave() {
     return {
@@ -50,6 +55,8 @@
       bestLevel: 0,
       bestPath: [],
       lastPath: [],
+      items: [],                // owned equipment item ids (permanent)
+      equipped: [],             // up to Items.SLOTS equipped item ids
       run: null,
     };
   }
@@ -57,7 +64,12 @@
   function load() {
     try {
       const raw = localStorage.getItem(SAVE_KEY);
-      if (raw) return Object.assign(freshSave(), JSON.parse(raw));
+      if (raw) {
+        const s = Object.assign(freshSave(), JSON.parse(raw));
+        s.unlocked = s.unlocked.filter((id) => root.World && root.World.SUB_BY[id]);
+        if (!s.unlocked.length) s.unlocked = ['meadow'];
+        return s;
+      }
     } catch (e) { /* storage unavailable: play without saving */ }
     return freshSave();
   }
@@ -70,9 +82,10 @@
   }
 
   const level = (s, id) => s.upgrades[id] || 0;
-  const maxHp = (s) => BASE_HP + 3 * level(s, 'vitality');
+  const maxHp = (s) => BASE_HP + 3 * level(s, 'vitality') + gear(s).hp;
   const slots = (s) => BASE_SLOTS + level(s, 'command');
-  const soulRate = (s) => 1 + 0.2 * level(s, 'fortune');
+  const soulRate = (s) => 1 + 0.2 * level(s, 'fortune') + gear(s).souls / 100;
+const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s).supplies;
   function upgradeCost(s, id) {
     const u = UPGRADE_BY[id]; const lv = level(s, id);
     return lv < u.costs.length ? u.costs[lv] : null;
@@ -85,6 +98,7 @@
 
   // The army handed to the battle engine: roster stats + Camp upgrades + run buffs.
   function buildArmy(s, mods) {
+    const g = gear(s);
     return s.squad.map((id) => {
       const def = ROSTER_BY[id];
       const t = Engine.CARD_TYPES[def.type];
@@ -92,14 +106,14 @@
       const card = { id, type: def.type };
       let upgraded = false;
       if (t.role === 'attacker') {
-        card.atk = t.atk + level(s, 'drill') + (m.atk || 0);
-        card.range = t.range + (m.range || 0);
+        card.atk = t.atk + level(s, 'drill') + (m.atk || 0) + (g.atk[def.type] || 0);
+        card.range = t.range + (m.range || 0) + (g.range[def.type] || 0);
         upgraded = card.atk !== t.atk || card.range !== t.range;
       } else if (t.role === 'defender') {
-        card.block = (def.block || t.block) + level(s, 'bulwark') + (m.block || 0);
+        card.block = (def.block || t.block) + level(s, 'bulwark') + (m.block || 0) + g.block;
         upgraded = card.block !== (def.block || t.block) || level(s, 'bulwark') > 0;
       } else if (t.role === 'support') {
-        card.amount = t.amount + (m.amount || 0);
+        card.amount = t.amount + (m.amount || 0) + (g.amount[def.type] || 0);
         upgraded = card.amount !== t.amount;
       }
       if (upgraded) card.upgraded = true;
@@ -108,8 +122,8 @@
   }
 
   const Progress = {
-    ROSTER, ROSTER_BY, UPGRADES, UPGRADE_BY, BASE_HP,
-    freshSave, load, save, reset, level, maxHp, slots, soulRate, upgradeCost, recruitAvailable, buildArmy,
+    ROSTER, ROSTER_BY, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, SUPPLIES_PER_BOSS,
+    freshSave, load, save, reset, level, maxHp, slots, soulRate, startSupplies, upgradeCost, recruitAvailable, buildArmy,
   };
   root.Progress = Progress;
   if (typeof module !== 'undefined' && module.exports) module.exports = Progress;
