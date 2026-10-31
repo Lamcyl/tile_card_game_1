@@ -14,8 +14,21 @@
   const run = () => save.run;
   const persist = () => P.save(save);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const cardName = (id) => E.CARD_TYPES[P.ROSTER_BY[id].type].name;
-  const cardIcon = (id) => E.CARD_TYPES[P.ROSTER_BY[id].type].icon;
+  // Creature art for a roster card: { img (html), name (creature or type name), role (type name) }.
+  function unitView(id) {
+    const type = P.ROSTER_BY[id].type, t = E.CARD_TYPES[type], a = window.Art.unit({ id, type });
+    const alt = a.name || t.name;
+    return {
+      img: a.url ? '<img src="' + a.url + '" alt="' + esc(alt) + '" draggable="false">' : esc(t.icon),
+      name: alt, role: t.name,
+    };
+  }
+  const unitTitle = (id) => { const v = unitView(id); return v.name === v.role ? v.name : v.name + ' · ' + v.role; };
+  const unitCell = (id, extra) => { const v = unitView(id); return '<span class="art">' + v.img + '</span><div class="grow"><b>' + esc(v.name) + '</b><span class="role">' + esc(v.role) + '</span>' + extra + '</div>'; };
+  function enemyChip(type) {
+    const url = window.Art.enemy(type), et = E.ENEMY_TYPES[type], nm = et.name || type;
+    return '<span class="enemy-chip" title="' + esc(nm) + '">' + (url ? '<img src="' + url + '" alt="' + esc(nm) + '" draggable="false">' : esc(et.icon)) + '</span>';
+  }
 
   // ---------- Map state ----------
   function frontier() {
@@ -92,7 +105,7 @@
       (isFight ? '<span class="lv" style="background:' + lvColor(n.level) + '">Lv' + n.level + '</span>' : '') + '</div>';
     if (isFight) {
       const preview = Gen.generateBattle(n, r ? r.seed : 'preview');
-      const icons = preview.enemies.map((e) => E.ENEMY_TYPES[e.type].icon).join(' ');
+      const icons = preview.enemies.map((e) => enemyChip(e.type)).join('');
       const souls = Math.round(Gen.soulsFor(n) * P.soulRate(save));
       body += '<p class="enemies">' + icons + '</p>';
       body += '<p class="muted">' + (n.type === 'boss'
@@ -134,7 +147,7 @@
       const army = P.buildArmy(save, {});
       for (const id of save.owned) {
         const inSquad = save.squad.includes(id), card = army.find((c) => c.id === id) || P.buildArmy(Object.assign({}, save, { squad: [id] }), {})[0];
-        html += '<div class="item"><span class="ic">' + cardIcon(id) + '</span><div class="grow"><b>' + cardName(id) + '</b><span class="muted">' + statLine(card) + '</span></div>' +
+        html += '<div class="item">' + unitCell(id, '<span class="muted">' + statLine(card) + '</span>') +
           '<button class="' + (inSquad ? 'on' : '') + '" data-squad="' + id + '">' + (inSquad ? 'In squad' : 'Add') + '</button></div>';
       }
     } else {
@@ -142,8 +155,8 @@
         if (save.owned.includes(u.id) || u.start) continue;
         const avail = P.recruitAvailable(save, u);
         const need = Array.isArray(u.need) ? u.need : [u.need];
-        html += '<div class="item' + (avail ? '' : ' locked') + '"><span class="ic">' + cardIcon(u.id) + '</span><div class="grow"><b>' + cardName(u.id) + '</b><span class="muted">' +
-          (avail ? describeType(u.type) : 'Defeat ' + need.map((b) => World.THEMES[b].boss[0]).join(' or ')) + '</span></div>' +
+        html += '<div class="item' + (avail ? '' : ' locked') + '">' + unitCell(u.id, '<span class="muted">' +
+          (avail ? describeType(u.type) : 'Defeat ' + need.map((b) => World.THEMES[b].boss[0]).join(' or ')) + '</span>') +
           (avail ? '<button data-recruit="' + u.id + '"' + (save.souls < u.cost ? ' disabled' : '') + '>✦ ' + u.cost + '</button>' : '<span class="muted">🔒</span>') + '</div>';
       }
     }
@@ -238,16 +251,16 @@
     for (const c of army) {
       const t = E.CARD_TYPES[c.type];
       if (t.role === 'attacker') {
-        pool.push({ kind: 'atk', id: c.id, label: '+1 ATK · ' + t.name, icon: t.icon });
-        if (t.pattern !== 'straight' || t.range < 4) pool.push({ kind: 'range', id: c.id, label: '+1 range · ' + t.name, icon: t.icon });
-      } else if (t.role === 'defender') pool.push({ kind: 'block', id: c.id, label: '+1 block · Shield', icon: t.icon });
-      else if (t.effect !== 'mult') pool.push({ kind: 'amount', id: c.id, label: '+1 boost · ' + t.name, icon: t.icon });
+        pool.push({ kind: 'atk', id: c.id, label: '+1 ATK · ' + unitTitle(c.id), icon: t.icon, card: c.id });
+        if (t.pattern !== 'straight' || t.range < 4) pool.push({ kind: 'range', id: c.id, label: '+1 range · ' + unitTitle(c.id), icon: t.icon, card: c.id });
+      } else if (t.role === 'defender') pool.push({ kind: 'block', id: c.id, label: '+1 block · ' + unitTitle(c.id), icon: t.icon, card: c.id });
+      else if (t.effect !== 'mult') pool.push({ kind: 'amount', id: c.id, label: '+1 boost · ' + unitTitle(c.id), icon: t.icon, card: c.id });
     }
     const picks = [];
     while (picks.length < 2 && pool.length) picks.push(pool.splice(Math.floor(R() * pool.length), 1)[0]);
     picks.push({ kind: 'heal', label: 'Heal 5 HP', icon: '❤️' });
     modal('<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p><p class="muted small">Choose one reward for this run:</p><div class="rewards">' +
-      picks.map((p, i) => '<button data-reward="' + i + '"><span class="ic">' + p.icon + '</span>' + esc(p.label) + '</button>').join('') + '</div>');
+      picks.map((p, i) => '<button data-reward="' + i + '"><span class="ic">' + (p.card ? unitView(p.card).img : p.icon) + '</span><span>' + esc(p.label) + '</span></button>').join('') + '</div>');
     $('#modal').onclick = (ev) => {
       const b = ev.target.closest('[data-reward]'); if (!b) return;
       const p = picks[Number(b.dataset.reward)];
@@ -304,7 +317,7 @@
       if (save.souls >= u.cost) {
         save.souls -= u.cost; save.owned.push(u.id);
         if (save.squad.length < P.slots(save)) save.squad.push(u.id);
-        persist(); toast(cardName(u.id) + ' joined your roster.'); renderAll();
+        persist(); toast(unitView(u.id).name + ' joined your roster.'); renderAll();
       }
       return;
     }

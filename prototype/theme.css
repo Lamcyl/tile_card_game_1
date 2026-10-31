@@ -1,21 +1,37 @@
-/* Shared design tokens for every screen. Colours keep their names and roles when re-themed. */
+/* Shared design tokens for every screen. Japanese watercolour: washi paper, ink, indigo/moss/ochre/rose,
+   vermilion seal accents. Names and roles are stable across themes; only values change. */
 :root {
-  --bg: #0e1117;
-  --panel: #1c2230;
-  --panel-2: #262e40;
-  --line: #3a4560;
-  --text: #eef1f7;
-  --muted: #9aa3b8;
-  --accent: #f2b134;
-  --hp: #e04f5f;
-  --good: #4cc38a;
-  --boost: #6ee7a8;
-  --enemy-zone: #2e2024;
-  --player-zone: #1f2a2a;
+  --bg: #efe6d2;
+  --panel: #f7f0e0;
+  --panel-2: #ece1c8;
+  --line: #b9a98a;
+  --text: #2b2a35;
+  --muted: #7a7260;
+  --accent: #c8352b;
+  --hp: #c8352b;
+  --good: #5d7a45;
+  --boost: #7f9a55;
+  --enemy-zone: #ead2c4;
+  --player-zone: #d9e0c9;
   --attacker: #b5473a;
-  --support: #3a6fb5;
-  --mult: #b58a2a;
-  --defender: #6b7280;
+  --support: #3f5f8f;
+  --mult: #b8892c;
+  --defender: #6f7a84;
   --cell: min(66px, calc((min(100vw, 480px) - 44px) / 5));
-  color-scheme: dark;
+
+  /* watercolour extras */
+  --paper: #f7f0e0;
+  --paper-deep: #e6d9bb;
+  --ink: #2b2a35;
+  --ink-soft: #4a4858;
+  --indigo: #3f5f8f;
+  --moss: #5d7a45;
+  --ochre: #b8892c;
+  --rose: #c98e86;
+  --vermilion: #c8352b;
+  --vermilion-deep: #9f2720;
+  --gold: #c9a23a;
+  --font-display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, "Times New Roman", serif;
+  --font-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
 }
