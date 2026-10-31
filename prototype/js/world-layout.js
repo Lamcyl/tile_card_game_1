@@ -1,18 +1,18 @@
-// World layout: the geography of the big, sparse overworld (see docs/WORLD_SPEC.md).
+// World layout: the geography of the compact, structured overworld (see docs/WORLD_SPEC.md).
 // Pure data + deterministic generation (no randomness at runtime, no DOM), so it also runs under node.
 // Provides: map size, camp, the 20 sub-areas (shape, landmark, entry, boss, elites, spots, poi), the terrain
-// features that map.js paints (rivers, bridges, cliffs, ridges, lakes, groves, roads, ruins ...) and blocked(x,y).
+// features that map.js paints (rivers, bridges, cliffs, ridges, lakes, groves, tree walls, roads, ruins ...) and blocked(x,y).
 // Extras for the renderer / tools: isLand, groundAt (biome index into BIOMES), subAt (sub-area id under a point),
 // grid() (the 20-unit rasters), findPath (A* on a 40-unit grid around blocked ground), outline / sound / extraLand.
 //
-// Scale: a 12000 x 9700 world; sub-areas are ~1700 units wide and their monster spots sit on a loose 3x3
-// lattice about 640 units apart. At the default exploration zoom a 390x844 phone shows ~400x866 world units,
-// i.e. only 1-2 monsters at a time.
+// Scale: a 6720 x 5980 world on a ~1000-unit lattice of walled "rooms" (sub-areas, ring radius ~440). Their monster spots sit on a
+// 3x3 lattice 320 units apart around the landmark; at the default exploration zoom a 390x844 phone shows ~400x866 world units
+// (about 400x520 above the bottom sheet), i.e. about 2 monsters at a time.
 (function (root) {
   'use strict';
-  const MAP_W = 12000, MAP_H = 9700;
+  const KW = 0.84;   // the whole design (drawn on a 1200-unit pitch) is compressed by this factor; sizes of props / lattices are not
+  const MAP_W = 6720, MAP_H = 5980;
   const G = 20, GW = MAP_W / G, GH = Math.ceil(MAP_H / G);       // fine raster (walk / land / ground)
-  const CAMP = { x: 6700, y: 9250 };
 
   // ---------- small utilities ----------
   function hash(s) { let h = 2166136261; for (const ch of String(s)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0) % 2147483646 + 1; }
@@ -113,39 +113,49 @@
   }
   const cellOf = (x, y) => { const gx = Math.floor(x / G), gy = Math.floor(y / G); return (gx < 0 || gy < 0 || gx >= GW || gy >= GH) ? -1 : gy * GW + gx; };
 
+
   // ---------- the 20 sub-areas ----------
+  // Each sub-area is a walled "room" about 1050 units across (ring radius RR) on a 1200-unit lattice. Its 8 spots sit on a 3x3
+  // lattice (SP = 320 apart) around the landmark in the middle. Rings of cliffs / tree lines / rivers / ridges bound every room, with
+  // gates only where the unlock route (and a few passes) leave it; roads link the spots, the gates and the neighbouring rooms.
   const REGIONS = ['Greenvale', 'Azure Coast', 'Sunscorch', 'Frostveil', 'Ember Peaks'];
+  const RR = 525 * KW, SP = 320, STUB = 440 * KW, GATE = 106, LS = 0.89;   // LS scales the local frame of the lattice / recipes (spots end up ~285 apart)
+  const COL = { A: 850 * KW, B: 2050 * KW, C: 3350 * KW, D: 4550 * KW, E: 5850 * KW, F: 7050 * KW }, ROW = [850 * KW, 2050 * KW, 3250 * KW, 4450 * KW, 5650 * KW];
+  const CAMP = { x: Math.round(4550 * KW), y: Math.round(6450 * KW) };
   // dir = unit vector from the area's centre toward the previous area (where the hero arrives from); to = where the boss should lie toward.
   const AREAS = [
-    { id: 'meadow', reg: 0, cx: 6920, cy: 8300, dir: [0, 1], to: [5120, 8400], lm: ['hill', 'Blossom Hill', 105], poi: 1 },
-    { id: 'forest', reg: 0, cx: 5120, cy: 8400, dir: [1, 0], to: [5120, 6600], lm: ['oak-grove', 'The Elder Oak', 112], poi: 1 },
-    { id: 'bamboo', reg: 0, cx: 5120, cy: 6600, dir: [0, 1], to: [6920, 6600], lm: ['bamboo-grove', 'Whispering Bamboo', 108], poi: 1 },
-    { id: 'lake', reg: 0, cx: 6920, cy: 6600, dir: [-1, 0], to: [9040, 6600], lm: ['lake', 'Mirror Lake', 190], poi: 1 },
-    { id: 'beach', reg: 1, cx: 3000, cy: 6600, dir: [1, 0], to: [1200, 6600], lm: ['lighthouse', 'Pearl Lighthouse', 118], poi: 1 },
-    { id: 'coral', reg: 1, cx: 1200, cy: 6600, dir: [1, 0], to: [1200, 4800], lm: ['reef-arch', 'Coral Arch', 116], poi: 0 },
-    { id: 'cove', reg: 1, cx: 1200, cy: 4800, dir: [0, 1], to: [3000, 4800], lm: ['shipwreck', 'The Wrecked Galleon', 116], poi: 1 },
-    { id: 'isles', reg: 1, cx: 3000, cy: 4800, dir: [-1, 0], to: [3000, 3000], lm: ['sea-stacks', 'The Mist Pillars', 116], poi: 1 },
-    { id: 'dunes', reg: 2, cx: 9040, cy: 6600, dir: [-1, 0], to: [10840, 6600], lm: ['giant-dune', 'Singing Dune', 118], poi: 1 },
-    { id: 'oasis', reg: 2, cx: 10840, cy: 6600, dir: [-1, 0], to: [10840, 4800], lm: ['oasis', 'Mirage Pool', 118], poi: 1 },
-    { id: 'canyon', reg: 2, cx: 10840, cy: 4800, dir: [0, 1], to: [9040, 4800], lm: ['mesa', 'Crimson Mesa', 116], poi: 1 },
-    { id: 'temple', reg: 2, cx: 9040, cy: 4800, dir: [1, 0], to: [9040, 3000], lm: ['pyramid', 'The Sunken Pyramid', 120], poi: 1 },
-    { id: 'snow', reg: 3, cx: 3000, cy: 3000, dir: [0, 1], to: [1200, 3000], lm: ['ice-peak', 'Whitecap Peak', 112], poi: 0 },
-    { id: 'frozen', reg: 3, cx: 1200, cy: 3000, dir: [1, 0], to: [1200, 1200], lm: ['frozen-lake', 'Glass Lake', 118], poi: 1 },
-    { id: 'rime', reg: 3, cx: 1200, cy: 1200, dir: [0, 1], to: [3000, 1200], lm: ['ice-forest', 'The Crystal Pines', 112], poi: 1 },
-    { id: 'glacier', reg: 3, cx: 3000, cy: 1200, dir: [-1, 0], to: [4000, 1500], lm: ['ice-palace', 'Glacier Throne', 118], poi: 1 },
-    { id: 'ash', reg: 4, cx: 9040, cy: 3000, dir: [0, 1], to: [10840, 3000], lm: ['burnt-grove', 'The Cinder Grove', 112], poi: 1 },
-    { id: 'ridge', reg: 4, cx: 10840, cy: 3000, dir: [-1, 0], to: [10840, 1200], lm: ['obsidian-ridge', 'The Glass Ridge', 116], poi: 0 },
-    { id: 'lavafall', reg: 4, cx: 10840, cy: 1200, dir: [0, 1], to: [9040, 1200], lm: ['lava-falls', 'Ember Falls', 118], poi: 0 },
-    { id: 'caldera', reg: 4, cx: 9040, cy: 1200, dir: [1, 0], to: [8000, 1500], lm: ['volcano', 'Mount Ember', 118], poi: 1 },
+    { id: 'meadow', reg: 0, cx: COL.D, cy: ROW[4], dir: [0, 1], to: [COL.C, ROW[4]], lm: ['hill', 'Blossom Hill', 84], poi: 1 },
+    { id: 'forest', reg: 0, cx: COL.C, cy: ROW[4], dir: [1, 0], to: [COL.C, ROW[3]], lm: ['oak-grove', 'The Elder Oak', 86], poi: 1 },
+    { id: 'bamboo', reg: 0, cx: COL.C, cy: ROW[3], dir: [0, 1], to: [COL.D, ROW[3]], lm: ['bamboo-grove', 'Whispering Bamboo', 84], poi: 1 },
+    { id: 'lake', reg: 0, cx: COL.D, cy: ROW[3], dir: [-1, 0], to: [COL.E, ROW[3]], lm: ['lake', 'Mirror Lake', 104], poi: 1 },
+    { id: 'beach', reg: 1, cx: COL.B, cy: ROW[3], dir: [1, 0], to: [COL.A, ROW[3]], lm: ['lighthouse', 'Pearl Lighthouse', 88], poi: 1 },
+    { id: 'coral', reg: 1, cx: COL.A, cy: ROW[3], dir: [1, 0], to: [COL.A, ROW[2]], lm: ['reef-arch', 'Coral Arch', 86], poi: 0 },
+    { id: 'cove', reg: 1, cx: COL.A, cy: ROW[2], dir: [0, 1], to: [COL.B, ROW[2]], lm: ['shipwreck', 'The Wrecked Galleon', 86], poi: 1 },
+    { id: 'isles', reg: 1, cx: COL.B, cy: ROW[2], dir: [-1, 0], to: [COL.B, ROW[1]], lm: ['sea-stacks', 'The Mist Pillars', 86], poi: 1 },
+    { id: 'dunes', reg: 2, cx: COL.E, cy: ROW[3], dir: [-1, 0], to: [COL.F, ROW[3]], lm: ['giant-dune', 'Singing Dune', 88], poi: 1 },
+    { id: 'oasis', reg: 2, cx: COL.F, cy: ROW[3], dir: [-1, 0], to: [COL.F, ROW[2]], lm: ['oasis', 'Mirage Pool', 88], poi: 1 },
+    { id: 'canyon', reg: 2, cx: COL.F, cy: ROW[2], dir: [0, 1], to: [COL.E, ROW[2]], lm: ['mesa', 'Crimson Mesa', 86], poi: 1 },
+    { id: 'temple', reg: 2, cx: COL.E, cy: ROW[2], dir: [1, 0], to: [COL.E, ROW[1]], lm: ['pyramid', 'The Sunken Pyramid', 90], poi: 1 },
+    { id: 'snow', reg: 3, cx: COL.B, cy: ROW[1], dir: [0, 1], to: [COL.A, ROW[1]], lm: ['ice-peak', 'Whitecap Peak', 84], poi: 0 },
+    { id: 'frozen', reg: 3, cx: COL.A, cy: ROW[1], dir: [1, 0], to: [COL.A, ROW[0]], lm: ['frozen-lake', 'Glass Lake', 88], poi: 1 },
+    { id: 'rime', reg: 3, cx: COL.A, cy: ROW[0], dir: [0, 1], to: [COL.B, ROW[0]], lm: ['ice-forest', 'The Crystal Pines', 84], poi: 1 },
+    { id: 'glacier', reg: 3, cx: COL.B, cy: ROW[0], dir: [-1, 0], to: [2900 * KW, 1300 * KW], lm: ['ice-palace', 'Glacier Throne', 88], poi: 1 },
+    { id: 'ash', reg: 4, cx: COL.E, cy: ROW[1], dir: [0, 1], to: [COL.F, ROW[1]], lm: ['burnt-grove', 'The Cinder Grove', 84], poi: 1 },
+    { id: 'ridge', reg: 4, cx: COL.F, cy: ROW[1], dir: [-1, 0], to: [COL.F, ROW[0]], lm: ['obsidian-ridge', 'The Glass Ridge', 86], poi: 0 },
+    { id: 'lavafall', reg: 4, cx: COL.F, cy: ROW[0], dir: [0, 1], to: [COL.E, ROW[0]], lm: ['lava-falls', 'Ember Falls', 88], poi: 0 },
+    { id: 'caldera', reg: 4, cx: COL.E, cy: ROW[0], dir: [1, 0], to: [5000 * KW, 1300 * KW], lm: ['volcano', 'Mount Ember', 90], poi: 1 },
   ];
   const AREA_BY = Object.fromEntries(AREAS.map((a) => [a.id, a]));
+  // [from, to]: the unlock / travel links (each area has exactly one link in which it is the 'to'); gates open where they cross a ring
+  const LINKS = [['camp', 'meadow'], ['meadow', 'forest'], ['forest', 'bamboo'], ['bamboo', 'lake'], ['bamboo', 'beach'], ['lake', 'dunes'], ['beach', 'coral'], ['coral', 'cove'], ['cove', 'isles'], ['isles', 'snow'],
+    ['snow', 'frozen'], ['frozen', 'rime'], ['rime', 'glacier'], ['dunes', 'oasis'], ['oasis', 'canyon'], ['canyon', 'temple'], ['temple', 'ash'], ['ash', 'ridge'], ['ridge', 'lavafall'], ['lavafall', 'caldera']];
   // Landmark footprints (blocked): [dx, dy, rx, ry] in landmark painter units, scaled by k = rx/58*1.1. null = walkable.
   const LM_FOOT = {
     'hill': [[0, 16, 40, 8]], 'oak-grove': [[0, 12, 24, 10]], 'bamboo-grove': [[0, 8, 30, 10]], lake: [[0, 0, 62, 42]], lighthouse: [[8, 20, 66, 18]], 'reef-arch': [[-52, 12, 16, 10], [52, 12, 16, 10]],
     shipwreck: [[0, 6, 62, 22]], 'giant-dune': [[0, 8, 46, 12]], oasis: [[0, 3, 66, 31]], pyramid: [[0, 6, 60, 26]], 'ice-peak': [[0, 10, 62, 22]], 'frozen-lake': null, 'ice-forest': null, 'burnt-grove': null,
     'obsidian-ridge': [[0, 22, 74, 12]], volcano: [[-14, 12, 66, 20]], 'sea-stacks': [[0, 8, 70, 26]], mesa: [[0, 6, 70, 24]], 'ice-palace': [[0, 8, 64, 22]], 'lava-falls': [[0, 12, 66, 26]],
   };
-  const SLOT = { a0: [-640, 600], a1: [0, 600], a2: [640, 600], b0: [-640, 0], b2: [640, 0], c0: [-640, -600], c1: [0, -600], c2: [640, -600] };
+  const SLOT = { a0: [-SP, SP], a1: [0, SP], a2: [SP, SP], b0: [-SP, 0], b2: [SP, 0], c0: [-SP, -SP], c1: [0, -SP], c2: [SP, -SP] };
   const VARS = [
     { spots: ['a1', 'a0', 'a2', 'b0', 'b2'], elite: ['c0'], boss: 'c1', poi: 'c2' },
     { spots: ['a1', 'a2', 'a0', 'b2', 'b0'], elite: ['c2'], boss: 'c1', poi: 'c0' },
@@ -155,7 +165,6 @@
 
   for (const A of AREAS) {
     const ex = A.dir[0], ey = A.dir[1], px0 = ey, py0 = -ex;
-    // choose the variant / mirror whose boss lies most toward the next area
     const want = [A.to[0] - A.cx, A.to[1] - A.cy], wl = Math.hypot(want[0], want[1]) || 1;
     let best = null;
     for (let v = 0; v < VARS.length; v++) for (const mir of [1, -1]) {
@@ -165,57 +174,70 @@
     }
     A.variant = best.v; A.mir = best.mir;
     const px = px0 * A.mir, py = py0 * A.mir;
-    A.p = (lx, ly) => [A.cx + lx * px + ly * ex, A.cy + lx * py + ly * ey];
+    A.p = (lx, ly) => [A.cx + LS * (lx * px + ly * ex), A.cy + LS * (lx * py + ly * ey)];
     A.pp = (arr) => arr.map((q) => A.p(q[0], q[1]));
-    A.rot = Math.atan2(py, px);   // angle of the local x axis in world space
+    A.rot = Math.atan2(py, px);
+    A.ports = [];
   }
+  // gates + entries from the links
+  const centerOf = (id) => (id === 'camp' ? [CAMP.x, CAMP.y - 130 * KW] : [AREA_BY[id].cx, AREA_BY[id].cy]);
+  const LINK_INFO = [];
+  for (const [a, b] of LINKS) {
+    const ca = centerOf(a), cb = centerOf(b), d = Math.hypot(cb[0] - ca[0], cb[1] - ca[1]), ax = [(cb[0] - ca[0]) / d, (cb[1] - ca[1]) / d], pe = [-ax[1], ax[0]], off = (hash(a + b) % 2 ? 150 : -150) * KW;
+    const B = AREA_BY[b], Aa = AREA_BY[a];
+    const info = { a, b, ax, pe, off };
+    if (Aa) { const g = [Aa.cx + ax[0] * RR + pe[0] * off, Aa.cy + ax[1] * RR + pe[1] * off], s = [Aa.cx + ax[0] * STUB + pe[0] * off, Aa.cy + ax[1] * STUB + pe[1] * off]; Aa.ports.push({ g: R2(g), stub: R2(s), to: b, n: ax }); info.sa = R2(s); }
+    const g = [B.cx - ax[0] * RR + pe[0] * off, B.cy - ax[1] * RR + pe[1] * off], s = [B.cx - ax[0] * STUB + pe[0] * off, B.cy - ax[1] * STUB + pe[1] * off];
+    B.ports.push({ g: R2(g), stub: R2(s), to: a, entry: true, n: [-ax[0], -ax[1]] }); B.entry = R2(s); info.sb = R2(s); info.gb = R2(g);
+    LINK_INFO.push(info);
+  }
+  // extra passes that open onto the central massif
+  const KP = (p) => R2([p[0] * KW, p[1] * KW]);
+  AREA_BY.lake.ports.push({ g: KP([4400, 3925]), stub: KP([4400, 4010]), to: 'massif' });
+  AREA_BY.snow.ports.push({ g: KP([2575, 1900]), stub: KP([2490, 1900]), to: 'massif' });
+  AREA_BY.ash.ports.push({ g: KP([5325, 1900]), stub: KP([5410, 1900]), to: 'massif' });
 
   // Sub-area shapes (the land the area owns; used for fog, hit tests and the ground colour)
   for (const A of AREAS) {
-    let sh;
-    if (A.id === 'meadow') sh = blobShape(A.cx, A.cy + 130, 810, 930, 'shape:meadow', 0.04);
-    else if (A.id === 'isles') sh = ellipsePoly(A.cx, A.cy, 1010, 880, 'shape:isles', 0.03, 44);
-    else sh = blobShape(A.cx, A.cy, 815, 815, 'shape:' + A.id, 0.07);
+    const sh = A.id === 'isles' ? ellipsePoly(A.cx, A.cy, 540 * KW, 530 * KW, 'shape:isles', 0.03, 44) : blobShape(A.cx, A.cy, 545 * KW, 545 * KW, 'shape:' + A.id, 0.05, 60);
     A.shape = sh.map(R2);
   }
 
   // ---------- nodes: spots, elites, boss, poi, entry, landmark ----------
   for (const A of AREAS) {
-    const R = rng('slots:' + A.id), V = VARS[A.variant], J = () => (R() - 0.5) * 120;
+    const R = rng('slots:' + A.id), V = VARS[A.variant], J = () => (R() - 0.5) * 64;
     const slot = (name) => { const s = SLOT[name]; return R2(A.p(s[0] + J(), s[1] + J())); };
-    A.entry = R2(A.p(-300, 810));
-    if (A.id === 'meadow') A.entry = R2(A.p(-260, 800));
-    const lmJ = [(R() - 0.5) * 70, (R() - 0.5) * 70];
-    const lm = A.lm, k = lm[2] / 58 * 1.1;
-    A.landmark = { x: rnd(A.cx + lmJ[0]), y: rnd(A.cy + lmJ[1]), rx: lm[2], ry: Math.round(lm[2] * 0.62), kind: lm[0], label: lm[1], k };
+    const lmJ = [(R() - 0.5) * 30, (R() - 0.5) * 30];
+    const lm = A.lm, lmr = lm[2] * 0.8, k = lmr / 58 * 1.1;
+    A.landmark = { x: rnd(A.cx + lmJ[0]), y: rnd(A.cy + lmJ[1]), rx: lmr, ry: Math.round(lmr * 0.62), kind: lm[0], label: lm[1], k };
     A.boss = slot(V.boss);
     A.elites = V.elite.map(slot);
     A.spots = V.spots.map(slot).sort((a, b) => dist(a, A.entry) - dist(b, A.entry));
     A.poiP = A.poi ? slot(V.poi) : null;
   }
   const PLACED = [];   // every position that must stay walkable: [x, y, r]
-  for (const A of AREAS) { for (const p of [A.boss, ...A.elites, ...A.spots, A.poiP, A.entry]) if (p) PLACED.push([p[0], p[1], 46]); }
+  for (const A of AREAS) { for (const p of [A.boss, ...A.elites, ...A.spots, A.poiP, A.entry]) if (p) PLACED.push([p[0], p[1], 46]); for (const q of A.ports) PLACED.push([q.stub[0], q.stub[1], 30]); }
   PLACED.push([CAMP.x, CAMP.y, 50]);
 
   // ---------- continent ----------
   const OUTLINE_RAW = [
-    [250, 520], [330, 330], [700, 270], [1500, 300], [2300, 260], [3100, 320], [3900, 270], [4800, 320], [5600, 260], [6400, 310], [7200, 260], [8000, 320], [8900, 270], [9700, 320], [10500, 270], [11300, 320], [11700, 500],
-    [11800, 1200], [11760, 2200], [11800, 3200], [11770, 4200], [11800, 5200], [11770, 6200], [11800, 7000], [11700, 7560],
-    [11300, 7760], [10900, 7700], [10300, 7810], [9800, 7720], [9200, 7810], [8700, 7730], [8300, 7860],
-    [8010, 8100], [7970, 8600], [8010, 9100], [7950, 9400], [7700, 9580], [7200, 9660], [6600, 9620], [6000, 9580], [5400, 9520], [4800, 9460], [4400, 9330],
-    [4180, 9000], [4130, 8300], [4200, 7900], [4120, 7770], [3800, 7750], [3300, 7810], [2800, 7730], [2300, 7810], [1800, 7710], [1300, 7800], [800, 7710], [450, 7520],
-    [300, 7000], [260, 6200], [300, 5400], [260, 4600], [300, 3800], [250, 3000], [290, 2200], [250, 1400], [260, 800],
+    [260, 420], [340, 230], [800, 170], [1500, 200], [2300, 160], [3100, 210], [3900, 170], [4700, 210], [5500, 170], [6300, 200], [7000, 170], [7600, 230], [7760, 420],
+    [7780, 1200], [7740, 2200], [7780, 3200], [7740, 4200], [7770, 4800], [7650, 5140],
+    [7200, 5200], [6600, 5130], [6000, 5190], [5500, 5130], [5270, 5170],
+    [5240, 5600], [5210, 6200], [5130, 6560], [4800, 6760], [4300, 6800], [3800, 6770], [3300, 6740],
+    [2900, 6600], [2710, 6150], [2700, 5500], [2740, 5210],
+    [2400, 5190], [1800, 5130], [1200, 5180], [600, 5120], [380, 5040],
+    [230, 4400], [260, 3500], [230, 2600], [270, 1700], [240, 900],
   ];
-  const OUTLINE = orient(wobble(OUTLINE_RAW, 150, 40, 'coast').map(R2), 1);
-  const SOUND = orient(ellipsePoly(3000, 4800, 1010, 880, 'sound', 0.05, 44).map(R2), -1);   // the inland Mist Sea (a hole)
-  const MASSIF = [[3960, 520], [4600, 440], [7400, 440], [8100, 560], [8110, 5200], [7900, 5640], [4300, 5640], [3990, 5200]];
+  const OUTLINE = orient(wobble(OUTLINE_RAW.map((p) => [p[0] * KW, p[1] * KW]), 130, 34, 'coast').map(R2), 1);
+  const SOUND = orient(ellipsePoly(COL.B, ROW[2], 545 * KW, 535 * KW, 'sound', 0.04, 44).map(R2), -1);   // the inland Mist Sea (a hole)
+  const MASSIF = [[2660, 360], [3300, 300], [5200, 300], [5250, 700], [5260, 3700], [5100, 3880], [2800, 3880], [2640, 3700]].map((p) => [p[0] * KW, p[1] * KW]);
 
+  let ABS = 1;   // while building the macro geography (absolute design coordinates) positions are compressed by KW
   const FE = [];                          // features
   const add = (f) => (FE.push(f), f);
   const extraLand = [];                   // islands + sandbars (polygons added to the land)
   const ROCKY = [];                       // [x, y, r] patches of bare mountain ground
-
-  // ---------- feature builders ----------
   function nearestOn(pts, x, y) {
     let best = null;
     for (let i = 0; i + 1 < pts.length; i++) {
@@ -225,7 +247,8 @@
     }
     return best;
   }
-  const river = (pts, w0, w1, style, extra) => add(Object.assign({ k: 'river', pts: pts.map(R2), w0, w1, style: style || 'water' }, extra));
+  const AP = (p) => R2([p[0] * ABS, p[1] * ABS]);
+  const river = (pts, w0, w1, style, extra) => add(Object.assign({ k: 'river', pts: pts.map(AP), w0, w1, style: style || 'water' }, extra));
   function bridgeOn(r, x, y, style, w) {
     const n = nearestOn(r.pts, x, y), rw = r.w0 + (r.w1 - r.w0) * n.f;
     return add({ k: 'bridge', x: rnd(n.x), y: rnd(n.y), a: n.ang + Math.PI / 2, len: Math.round(rw + 110), w: w || 36, style: style || 'wood', rw });
@@ -234,17 +257,17 @@
     const n = nearestOn(r.pts, x, y), rw = r.w0 + (r.w1 - r.w0) * n.f;
     return add({ k: 'ford', x: rnd(n.x), y: rnd(n.y), a: n.ang + Math.PI / 2, len: Math.round(rw + 100), w: 50 });
   }
-  const cliff = (pts, style, h) => add({ k: 'cliff', pts: pts.map(R2), style: style || 'rock', h: h || 34 });
-  const ridge = (pts, r, style) => add({ k: 'ridge', pts: pts.map(R2), r, style: style || 'rock' });
-  const lake = (x, y, rx, ry, style, rot, walk) => add({ k: 'lake', x: rnd(x), y: rnd(y), rx, ry, style: style || 'lake', rot: rot || 0, walk: !!walk });
-  const mesa = (x, y, rx, ry, h, style) => add({ k: 'mesa', x: rnd(x), y: rnd(y), rx, ry, h: h || 70, style: style || 'red' });
-  const grove = (x, y, rx, ry, tree, dens) => add({ k: 'grove', x: rnd(x), y: rnd(y), rx, ry, tree, dens: dens || 1 });
-  const ruin = (x, y, kind, s, a) => add({ k: 'ruin', x: rnd(x), y: rnd(y), kind, s: s || 1, a: a || 0 });
-  const shrine = (x, y, s) => add({ k: 'shrine', x: rnd(x), y: rnd(y), s: s || 1 });
-  const lanterns = (pts, n) => add({ k: 'lanterns', pts: pts.map(R2), n: n || 6 });
-  const field = (x, y, rx, ry, rot, crop) => add({ k: 'field', x: rnd(x), y: rnd(y), rx, ry, rot: rot || 0, crop: crop || 'rice' });
-  const stones = (x, y, r, n) => add({ k: 'stones', x: rnd(x), y: rnd(y), r, n: n || 7 });
-  const sea = (kind, x, y, s, f) => add({ k: kind, x: rnd(x), y: rnd(y), s: s || 1, f: f || 0 });
+  const cliff = (pts, style, h) => add({ k: 'cliff', pts: pts.map(AP), style: style || 'rock', h: h || 34 });
+  const ridge = (pts, r, style) => add({ k: 'ridge', pts: pts.map(AP), r, style: style || 'rock' });
+  const lake = (x, y, rx, ry, style, rot, walk) => add({ k: 'lake', x: rnd(x * ABS), y: rnd(y * ABS), rx: rx * (ABS < 1 ? 0.85 : 1), ry: ry * (ABS < 1 ? 0.85 : 1), style: style || 'lake', rot: rot || 0, walk: !!walk });
+  const mesa = (x, y, rx, ry, h, style) => add({ k: 'mesa', x: rnd(x * ABS), y: rnd(y * ABS), rx, ry, h: h || 70, style: style || 'red' });
+  const grove = (x, y, rx, ry, tree, dens) => add({ k: 'grove', x: rnd(x * ABS), y: rnd(y * ABS), rx: rx * (ABS < 1 ? 0.85 : 1), ry: ry * (ABS < 1 ? 0.85 : 1), tree, dens: dens || 1 });
+  const ruin = (x, y, kind, s, a) => add({ k: 'ruin', x: rnd(x * ABS), y: rnd(y * ABS), kind, s: s || 1, a: a || 0 });
+  const shrine = (x, y, s) => add({ k: 'shrine', x: rnd(x * ABS), y: rnd(y * ABS), s: s || 1 });
+  const lanterns = (pts, n) => add({ k: 'lanterns', pts: pts.map(AP), n: n || 6 });
+  const field = (x, y, rx, ry, rot, crop) => add({ k: 'field', x: rnd(x * ABS), y: rnd(y * ABS), rx: rx * (ABS < 1 ? 0.85 : 1), ry: ry * (ABS < 1 ? 0.85 : 1), rot: rot || 0, crop: crop || 'rice' });
+  const stones = (x, y, r, n) => add({ k: 'stones', x: rnd(x * ABS), y: rnd(y * ABS), r, n: n || 7 });
+  const sea = (kind, x, y, s, f) => add({ k: kind, x: rnd(x * ABS), y: rnd(y * ABS), s: s || 1, f: f || 0 });
   // A wall/ridge/river along a straight-ish line with gaps (passes) at the given coordinates along its axis.
   function wallLine(kind, a, b, gaps, opt) {
     opt = opt || {};
@@ -261,208 +284,214 @@
       if (kind === 'cliff') cliff(pts, opt.style, opt.h); else if (kind === 'ridge') ridge(pts, opt.r || 110, opt.style);
     }
   }
+  const wall = (pts, style, o) => add(Object.assign({ k: 'wall', pts: pts.map(R2), style }, o));
+  const prop = (x, y, kind, s, a) => add({ k: 'prop', x: rnd(x), y: rnd(y), kind, s: s || 1, a: a || 0 });
+  const gateF = (x, y, a, style) => add({ k: 'gate', x: rnd(x), y: rnd(y), a, style });
 
-  // ---------- macro geography ----------
-  function macro() {
-    // Great Divide: mountain walls along both sides of the central massif, with gates where the west/east regions open onto it
-    wallLine('ridge', [4040, 520], [4040, 5400], [3050], { r: 140, style: 'snow', gap: 190 });
-    wallLine('ridge', [8130, 560], [8130, 5300], [3050], { r: 140, style: 'ash', gap: 190 });
-    wallLine('ridge', [4300, 450], [7900, 450], [], { r: 110, style: 'snow' });
-    // The Green Escarpment: cliffs along the north of Greenvale with the Skyway pass and the forest-bamboo path
-    wallLine('cliff', [4330, 7490], [7790, 7430], [5150], { style: 'moss', h: 40, gap: 170 });
-    wallLine('cliff', [4300, 5650], [7790, 5660], [6400], { style: 'rock', h: 46, gap: 140 });
-    // Pilgrim ridge between Greenvale and the coast (pass for the beach road at y~6650)
-    wallLine('ridge', [4080, 5800], [4090, 7600], [6680], { r: 80, style: 'rock', gap: 150 });
-    // West-block borders
-    wallLine('cliff', [330, 5640], [2150, 5650], [1250], { style: 'rock', h: 30, gap: 130 });       // coral | cove
-    wallLine('cliff', [2100, 2250], [2100, 3750], [3000], { style: 'ice', h: 36, gap: 150 });       // snow | frozen
-    wallLine('cliff', [420, 2080], [2050, 2090], [1200], { style: 'ice', h: 36, gap: 150 });        // frozen | rime
-    wallLine('cliff', [2100, 420], [2100, 1950], [1250], { style: 'ice', h: 40, gap: 150 });        // rime | glacier
-    wallLine('cliff', [2250, 2080], [3850, 2090], [3100], { style: 'ice', h: 38, gap: 150 });       // glacier | snow
-    // East-block borders
-    wallLine('cliff', [8250, 5660], [9900, 5670], [9100], { style: 'red', h: 40, gap: 140 });       // dunes | temple
-    wallLine('cliff', [10000, 5660], [11650, 5670], [10840], { style: 'red', h: 44, gap: 140 });    // oasis | canyon
-    wallLine('cliff', [9940, 4000], [9940, 5500], [4800], { style: 'red', h: 44, gap: 150 });       // temple | canyon
-    wallLine('cliff', [8250, 3920], [11650, 3920], [9040, 10840], { style: 'ash', h: 40, gap: 150 }); // sunscorch | ember
-    wallLine('cliff', [9940, 2250], [9940, 3750], [3000], { style: 'obsidian', h: 38, gap: 150 });  // ash | ridge
-    wallLine('cliff', [8260, 2080], [9900, 2090], [9040], { style: 'ash', h: 36, gap: 150 });       // ash | caldera
-    // Hakusui river: Skyglass lake -> the escarpment (falls) -> Mirror Lake
-    const hak = river([[5900, 3590], [6060, 3900], [6300, 4300], [6720, 4660], [6640, 5080], [6880, 5420], [6930, 5700], [6935, 6000], [6925, 6330]], 26, 46, 'water', { fall: 5 });
-    bridgeOn(hak, 6640, 5040, 'stone');
-    // Kyokai wadi: border river east of Mirror Lake down to the south-east sea
-    const wadi = river([[8010, 5720], [7960, 6100], [8050, 6480], [7990, 6860], [8060, 7260], [8010, 7700]], 40, 70, 'water');
-    bridgeOn(wadi, 8010, 6640, 'wood', 40); fordOn(wadi, 8000, 6000); fordOn(wadi, 8040, 7200);
-    // Skyglass lake with a shrine island, the Skyway road is generated later
-    lake(5900, 3260, 560, 340, 'alpine', 0);
-    add({ k: 'islet', x: 5880, y: 3230, r: 70 });
-    add({ k: 'bridge', x: 5880, y: 3470, a: Math.PI / 2, len: 360, w: 34, style: 'stone', rw: 0 });
-    shrine(5880, 3200, 1.6);
-    ruin(5200, 4240, 'gate', 1.4, 0.3); ruin(6200, 4060, 'columns', 1.2); stones(5300, 2500, 90, 9); stones(6700, 2300, 80, 7);
-    ruin(6800, 1300, 'tower', 1.3); ruin(5200, 1500, 'wall', 1.3);
-    grove(5200, 3900, 220, 180, 'pine', 1); grove(6900, 3400, 240, 220, 'pine', 1); grove(5000, 1900, 300, 260, 'pine', 1.1); grove(6900, 1900, 280, 240, 'pine', 1); grove(6000, 800, 500, 120, 'pine', 0.9);
-    lake(7050, 2400, 200, 120, 'alpine', 0.3); lake(5100, 2850, 150, 90, 'alpine', -0.4);
-    river([[7050, 2520], [7080, 2900], [6820, 3300]], 18, 22, 'water');
-    // highland dressing: crags, terraces, a tarn chain, an alpine hanami meadow, a chasm
-    ridge([[4100, 1500], [4600, 1650], [5100, 1560], [5480, 1900]], 120, 'snow'); ridge([[8100, 1700], [7600, 1850], [7300, 1720], [7020, 1330]], 110, 'snow');
-    ridge([[4300, 4320], [4700, 4520], [5020, 4380]], 100, 'rock'); ridge([[7400, 4200], [7700, 4500], [7950, 4300]], 100, 'rock');
-    cliff([[4400, 3060], [4800, 3000], [5250, 3090]], 'rock', 38); cliff([[6650, 3850], [7000, 3930], [7450, 3840]], 'rock', 38); cliff([[6000, 2300], [6350, 2250], [6700, 2330]], 'moss', 34);
-    river([[7300, 4350], [7090, 4520], [6990, 4700]], 24, 28, 'chasm');
-    grove(4850, 3550, 260, 190, 'sakura', 0.6); grove(7200, 3200, 200, 160, 'round', 0.5); grove(5500, 2000, 200, 150, 'pine', 1.3);
-    field(6400, 2650, 210, 120, 0.2, 'flower'); field(5000, 2300, 160, 100, -0.3, 'flower');
-    lake(4700, 4000, 110, 70, 'alpine', 0.2); lake(7500, 3500, 120, 80, 'alpine', -0.2);
-    ruin(7300, 2900, 'hut', 1.1); ruin(4700, 2700, 'hut', 1); ruin(6500, 3000, 'statue', 1.2); stones(7000, 4300, 80, 8); shrine(6100, 4650, 1.2);
-    for (const [x, y, r] of [[5000, 2000, 240], [7200, 2000, 260], [4700, 3600, 200], [7600, 4100, 220], [6300, 1500, 280]]) ROCKY.push([x, y, r]);
-    // the mountain pass torii at both ends of the Skyway
-    add({ k: 'torii', x: 6450, y: 5560, s: 1.6, a: 0 });
-    // Frost gate / ember gate shrines
-    shrine(3990, 3000, 1.3); shrine(8140, 3000, 1.3);
-    // ocean dressing
-    for (const [x, y, s, f] of [[600, 8350, 1.2, 0], [1900, 8700, 1, 1], [3200, 8900, 1.1, 0], [2600, 8300, 1, 1], [9300, 8500, 1.2, 1], [10700, 8800, 1, 0], [9700, 9300, 1.1, 1], [3700, 9400, 1, 0], [200, 5000, 1.1, 1]]) sea('boat', x, y, s, f);
-    for (const [x, y, s] of [[200, 600, 24], [520, 140, 18], [1400, 120, 22], [2400, 90, 16], [3600, 140, 20], [5000, 120, 18], [6600, 100, 22], [140, 1300, 20], [90, 2100, 16], [160, 3200, 22], [8600, 130, 18], [9800, 110, 20]]) sea('floe', x, y, s);
-    for (const [x, y, s] of [[10400, 130, 12], [11300, 180, 16], [11700, 90, 10], [11880, 800, 12], [11890, 2000, 14]]) sea('lavarock', x, y, s);
-    for (const [x, y, s] of [[120, 7400, 9], [450, 7800, 8], [3100, 7950, 9], [2100, 8000, 8], [7850, 8000, 9], [9400, 7950, 8], [11100, 7950, 9], [120, 4200, 8], [160, 5700, 9], [11880, 4500, 8], [11860, 6100, 9]]) sea('stack', x, y, s);
-    // camp coast: jetty & boat are painted with the camp
+  // ---------- per-area ring walls: every room is bounded by a ring with gates where the routes leave ----------
+  // piece = ['cliff', style, h] | ['ridge', style, r] | ['river', style, w] | ['trees', kind] | ['hedge'] | ['fence'] | ['stone'] | ['reeds'] | ['coral'] | ['stacks'] | ['rocks']
+  const RING = {
+    meadow: [['hedge'], ['river', 'water', 22], ['trees', 'sakura'], ['fence'], ['trees', 'round']],
+    forest: [['trees', 'oak'], ['trees', 'pine'], ['cliff', 'moss', 34], ['trees', 'oak']],
+    bamboo: [['trees', 'bamboo'], ['trees', 'bamboo'], ['river', 'water', 22], ['trees', 'bamboo']],
+    lake: [['trees', 'willow'], ['river', 'marsh', 26], ['trees', 'round'], ['reeds'], ['trees', 'willow']],
+    beach: [['trees', 'palm'], ['cliff', 'sand', 28], ['river', 'tide', 22], ['trees', 'palm'], ['fence']],
+    coral: [['coral'], ['stacks'], ['coral'], ['rocks']],
+    cove: [['cliff', 'rock', 44], ['cliff', 'rock', 40], ['stacks'], ['cliff', 'rock', 44]],
+    dunes: [['cliff', 'sand', 34], ['trees', 'cactus'], ['cliff', 'sand', 30], ['rocks']],
+    oasis: [['trees', 'palm'], ['cliff', 'sand', 30], ['trees', 'palm'], ['river', 'water', 22]],
+    canyon: [['cliff', 'red', 52], ['ridge', 'red', 52], ['cliff', 'red', 50], ['cliff', 'red', 46]],
+    temple: [['stone'], ['cliff', 'sand', 28], ['stone'], ['trees', 'cactus']],
+    snow: [['cliff', 'ice', 40], ['trees', 'frost'], ['ridge', 'snow', 52], ['trees', 'frost']],
+    frozen: [['cliff', 'ice', 36], ['river', 'crack', 16], ['cliff', 'ice', 36], ['trees', 'frost']],
+    rime: [['trees', 'frost'], ['trees', 'crystal'], ['trees', 'frost'], ['cliff', 'ice', 32]],
+    glacier: [['cliff', 'ice', 44], ['river', 'crack', 18], ['ridge', 'snow', 52], ['cliff', 'ice', 44]],
+    ash: [['trees', 'burnt'], ['river', 'lava', 20], ['cliff', 'ash', 34], ['trees', 'burnt']],
+    ridge: [['cliff', 'obsidian', 46], ['trees', 'shard'], ['cliff', 'obsidian', 46], ['ridge', 'ash', 52]],
+    lavafall: [['river', 'lava', 26], ['cliff', 'ash', 36], ['river', 'lava', 26], ['trees', 'burnt']],
+    caldera: [['ridge', 'ash', 52], ['cliff', 'obsidian', 48], ['river', 'lava', 24], ['ridge', 'ash', 52]],
+  };
+  const GATE_STYLE = { meadow: 'torii', forest: 'torii', bamboo: 'torii', lake: 'torii', beach: 'posts', coral: 'posts', cove: 'posts', dunes: 'stone', oasis: 'stone', canyon: 'stone', temple: 'stone', snow: 'ice', frozen: 'ice', rime: 'ice', glacier: 'ice', ash: 'obsidian', ridge: 'obsidian', lavafall: 'obsidian', caldera: 'obsidian' };
+  function ringWalls(A) {
+    const spec = RING[A.id]; if (!spec) return;
+    const N = 84, ring = blobShape(A.cx, A.cy, RR, RR, 'shape:' + A.id, 0.05, N).map(R2), gates = A.ports.map((p) => p.g);
+    const open = ring.map((p) => gates.some((g) => dist(p, g) < GATE));
+    let start = open.indexOf(true), closedLoop = false; if (start < 0) { start = 0; closedLoop = true; }
+    const runs = []; let cur = null;
+    for (let i = 0; i < N; i++) {
+      const idx = (start + i) % N;
+      if (open[idx]) { if (cur) { runs.push(cur); cur = null; } } else (cur = cur || []).push(ring[idx]);
+    }
+    if (cur) runs.push(cur);
+    if (closedLoop && runs.length) runs[0].push(runs[0][0]);
+    const base = hash(A.id) % spec.length; let ri = 0;
+    for (const run of runs) {
+      const m = run.length, n = Math.max(1, Math.round(m * 50 / 430));
+      for (let i = 0; i < n; i++) {
+        const a = Math.floor(i * m / n), b = Math.min(m, Math.floor((i + 1) * m / n) + 1), pts = run.slice(a, b); if (pts.length < 2) continue;
+        const pc = spec[(base + ri++) % spec.length];
+        if (pc[0] === 'cliff') cliff(pts, pc[1], pc[2]); else if (pc[0] === 'ridge') ridge(pts, pc[2], pc[1]); else if (pc[0] === 'river') river(pts, pc[2], pc[2], pc[1]);
+        else if (pc[0] === 'trees') wall(pts, 'trees', { tree: pc[1] }); else wall(pts, pc[0], {});
+      }
+    }
+    for (const p of A.ports) {
+      if (p.to === 'massif' || A.id === 'isles') continue;
+      gateF(p.g[0], p.g[1], Math.atan2(p.n[0], -p.n[1]), GATE_STYLE[A.id] || 'posts');
+    }
   }
 
-  // ---------- per-area recipes (local frame: x across, y toward the entry; rows at y=-600/0/600, columns at x=-640/0/640) ----------
+  // ---------- macro geography: the central massif, the sea dressing ----------
+  function macro() {
+    ABS = KW;
+    // Great Divide: mountain walls along both sides of the central massif with passes where the west / east regions open onto it
+    wallLine('ridge', [2700, 400], [2700, 3850], [1900], { r: 100, style: 'snow', gap: 150, wob: 40 });
+    wallLine('ridge', [5240, 400], [5240, 3850], [1900], { r: 100, style: 'ash', gap: 150, wob: 40 });
+    wallLine('ridge', [2800, 380], [5150, 380], [], { r: 90, style: 'snow', wob: 40 });
+    // the escarpment along the south of the massif with the Skyway pass above Mirror Lake
+    wallLine('cliff', [2840, 3850], [5100, 3860], [4400], { style: 'rock', h: 44, gap: 130 });
+    // Skyglass tarn with a shrine island, reached by the Skyway
+    lake(3950, 960, 470, 230, 'alpine', 0);
+    add({ k: 'islet', x: rnd(3950 * KW), y: rnd(940 * KW), r: 52 });
+    add({ k: 'bridge', x: rnd(3950 * KW), y: rnd(1160 * KW), a: Math.PI / 2, len: 170, w: 30, style: 'stone', rw: 0 });
+    shrine(3950, 912, 1.5);
+    ruin(4400, 3700, 'gate', 1.2, 0); torii(4400, 3790, 1.5);
+    ruin(3300, 2600, 'columns', 1.1); ruin(4950, 1350, 'tower', 1.1); ruin(3100, 3150, 'hut', 1); ruin(5000, 3200, 'hut', 1); ruin(3350, 1550, 'wall', 1.1, 0.2);
+    stones(3200, 1800, 70, 8); stones(4850, 2600, 70, 7); stones(3700, 3500, 60, 6); shrine(4400, 2050, 1.1);
+    grove(3150, 2750, 200, 150, 'pine', 1.2); grove(4900, 2800, 170, 140, 'pine', 1.1); grove(3150, 1250, 170, 130, 'pine', 1.2); grove(4850, 1050, 180, 130, 'pine', 1.1);
+    grove(3250, 3400, 150, 100, 'sakura', 0.7); grove(5000, 3450, 140, 100, 'round', 0.7); grove(3650, 2250, 130, 110, 'frost', 1);
+    ridge([[2950, 1500], [3300, 1650], [3650, 1580]], 80, 'snow'); ridge([[4850, 1700], [4650, 1950], [4900, 2150]], 80, 'ash'); ridge([[3050, 2300], [3350, 2200]], 75, 'rock');
+    cliff([[3500, 3050], [3800, 3000], [4100, 3080]], 'rock', 36); cliff([[4600, 2400], [4900, 2330], [5100, 2420]], 'moss', 32);
+    lake(3250, 2350, 100, 62, 'alpine', 0.2); lake(5000, 2250, 90, 56, 'alpine', -0.2);
+    river([[4100, 2800], [4250, 3050], [4420, 3300]], 20, 24, 'chasm');
+    field(3700, 3380, 150, 80, 0.2, 'flower'); field(4750, 3550, 120, 70, -0.2, 'flower');
+    for (const [x, y, r] of [[3150, 1500, 200], [4850, 1600, 200], [3100, 2500, 180], [4800, 2300, 200], [3950, 600, 260]]) ROCKY.push([x * KW, y * KW, r * 0.8]);
+    shrine(2650, 1900, 1.2); shrine(5290, 1900, 1.2);
+    // ocean dressing
+    for (const [x, y, s, f] of [[500, 5600, 1.2, 0], [1400, 5800, 1, 1], [2200, 5700, 1.1, 0], [3500, 7000, 1, 1], [5900, 5800, 1.2, 1], [6800, 5900, 1, 0], [7500, 5700, 1.1, 1], [4300, 7050, 1, 0], [150, 3300, 1.1, 1], [3000, 7100, 1, 0]]) sea('boat', x, y, s, f);
+    for (const [x, y, s] of [[200, 560, 22], [520, 90, 18], [1400, 80, 22], [2400, 70, 16], [3600, 90, 20], [5000, 80, 18], [140, 1500, 20], [90, 2400, 16], [160, 3700, 20], [6400, 100, 18], [4300, 100, 20]]) sea('floe', x, y, s);
+    for (const [x, y, s] of [[6700, 90, 12], [7400, 120, 16], [7700, 60, 10], [7880, 800, 12], [7890, 2000, 14]]) sea('lavarock', x, y, s);
+    for (const [x, y, s] of [[120, 4900, 9], [450, 5300, 8], [2100, 5400, 9], [3000, 6800, 9], [5200, 5400, 8], [7500, 5400, 9], [7860, 4500, 8], [100, 3400, 8], [7880, 3300, 9], [2650, 6600, 8]]) sea('stack', x, y, s);
+    ABS = 1;
+  }
+  const torii = (x, y, s) => add({ k: 'torii', x: rnd(x * ABS), y: rnd(y * ABS), s: s || 1.4, a: 0 });
+
+  // ---------- per-area interiors (local frame: x across, y toward the entry; lattice rows at y=-320/0/320, columns at x=-320/0/320) ----------
   const RECIPES = {
     meadow(A) {
       const p = A.p, pp = A.pp;
-      const r = river(pp([[-900, -330], [-640, -290], [-300, -350], [100, -300], [520, -340], [900, -310]]), 24, 30, 'water');
-      bridgeOn(r, ...p(-330, -330), 'wood'); bridgeOn(r, ...p(360, -320), 'stone');
-      field(...p(-330, 330), 215, 125, A.rot, 'rice'); grove(...p(330, 320), 200, 140, 'sakura', 0.8);
-      lake(...p(-340, -80), 74, 46, 'pond', A.rot);
-      lanterns(pp([[44, 520], [44, 215]]), 6); add({ k: 'torii', x: rnd(p(0, 320)[0]), y: rnd(p(0, 320)[1]), s: 1.7, a: 0 });
-      ruin(...p(-570, 400), 'hut', 1.2); ruin(...p(520, -90), 'hut', 1); grove(...p(520, 60), 120, 90, 'round', 0.6);
+      const r = river(pp([[-500, -165], [-250, -150], [0, -175], [250, -150], [500, -165]]), 20, 24, 'water');
+      bridgeOn(r, ...p(-320, -160), 'wood'); bridgeOn(r, ...p(320, -160), 'stone');
+      field(...p(-170, 200), 95, 58, A.rot, 'rice'); grove(...p(175, 200), 85, 62, 'sakura', 0.9); lake(...p(-175, -250), 52, 30, 'pond', A.rot);
+      ruin(...p(190, -250), 'hut', 1); lanterns(pp([[0, 460], [0, 360]]), 4);
     },
     forest(A) {
       const p = A.p, pp = A.pp;
-      const r = river(pp([[310, -900], [300, -600], [350, -150], [320, 350], [340, 900]]), 22, 26, 'water');
-      bridgeOn(r, ...p(330, -300), 'log'); bridgeOn(r, ...p(330, 300), 'wood');
-      grove(...p(-330, -300), 230, 170, 'pine', 1.4); grove(...p(-330, 300), 230, 170, 'oak', 1.2); grove(...p(-40, 330), 130, 90, 'pine', 1);
-      ruin(...p(480, -300), 'gate', 1.3, A.rot); shrine(...p(480, 300), 1); stones(...p(-330, 20), 70, 7);
-      cliff(pp([[-420, -150], [-330, -90], [-240, -140]]), 'moss', 22);
+      grove(...p(-170, -170), 85, 65, 'pine', 1.3); grove(...p(170, 170), 85, 65, 'oak', 1.3); grove(...p(-170, 170), 70, 55, 'oak', 1.1);
+      ruin(...p(175, -175), 'gate', 1.0, A.rot); shrine(...p(0, 440), 0.9); stones(...p(0, -440), 55, 6);
+      cliff(pp([[-290, -170], [-180, -140], [-60, -175]]), 'moss', 22);
     },
     bamboo(A) {
       const p = A.p, pp = A.pp;
-      const r = river(pp([[-900, 340], [-520, 300], [0, 335], [500, 290], [900, 320]]), 22, 24, 'water');
-      bridgeOn(r, ...p(-330, 310), 'wood'); bridgeOn(r, ...p(330, 300), 'stone'); fordOn(r, ...p(0, 330));
-      grove(...p(-330, -300), 220, 160, 'bamboo', 1.5); grove(...p(330, -300), 220, 160, 'bamboo', 1.5); grove(...p(0, -190), 90, 60, 'bamboo', 1);
-      field(...p(330, -20), 130, 85, A.rot, 'tea'); shrine(...p(-330, -30), 1); lanterns(pp([[-330, -190], [-330, 60]]), 5);
-      stones(...p(-40, 440), 50, 5);
+      const r = river(pp([[-500, 170], [-250, 150], [0, 180], [250, 150], [500, 170]]), 20, 22, 'water');
+      bridgeOn(r, ...p(-320, 160), 'wood'); bridgeOn(r, ...p(320, 160), 'stone');
+      grove(...p(-170, -170), 85, 62, 'bamboo', 1.5); grove(...p(170, -170), 85, 62, 'bamboo', 1.5);
+      field(...p(-175, 250), 80, 46, A.rot, 'tea'); shrine(...p(185, 250), 0.9); lanterns(pp([[0, 460], [0, 340]]), 4);
     },
     lake(A) {
-      const p = A.p, pp = A.pp, L = A.landmark;
-      // outflow stream south-west of the lake to the escarpment falls
-      const r = river([[L.x - 190, L.y + 120], [L.x - 250, L.y + 340], [L.x - 330, L.y + 640], [L.x - 300, L.y + 830]], 20, 24, 'water', { fall: 3 });
-      bridgeOn(r, L.x - 310, L.y + 460, 'wood');
-      grove(...p(-330, 300), 200, 140, 'willow', 0.9); grove(...p(330, -300), 190, 130, 'willow', 0.9); grove(...p(330, 300), 190, 130, 'round', 0.8);
-      lake(...p(-330, -300), 100, 64, 'marsh', A.rot); ruin(...p(-420, 100), 'hut', 1.1); stones(...p(330, 20), 70, 7);
-      shrine(...p(-100, 400), 1);
+      const p = A.p, pp = A.pp;
+      grove(...p(-190, 190), 75, 55, 'willow', 0.9); grove(...p(190, 190), 75, 55, 'round', 0.9); lake(...p(-190, -190), 62, 40, 'marsh', A.rot);
+      ruin(...p(190, -190), 'hut', 1.0); stones(...p(0, -440), 55, 6); shrine(...p(0, 440), 0.9);
     },
     beach(A) {
       const p = A.p, pp = A.pp;
-      grove(...p(320, 300), 200, 130, 'palm', 1.1); grove(...p(320, -300), 200, 130, 'palm', 0.9); lake(...p(-320, 300), 110, 70, 'tide', A.rot);
-      ruin(...p(-480, -110), 'village', 1, A.rot); lanterns(pp([[-330, -200], [-330, -30]]), 4); stones(...p(-20, 340), 60, 6);
-      add({ k: 'jetty', x: 3040, y: 7715, a: Math.PI / 2 });
-      const r = river(pp([[-900, -340], [-500, -300], [0, -350], [500, -300], [900, -330]]), 16, 20, 'tide');
-      bridgeOn(r, ...p(-330, -320), 'wood'); bridgeOn(r, ...p(330, -320), 'wood');
+      const r = river(pp([[-500, -165], [-250, -150], [0, -175], [250, -150], [500, -165]]), 16, 18, 'tide');
+      bridgeOn(r, ...p(-320, -160), 'wood'); bridgeOn(r, ...p(320, -160), 'wood');
+      grove(...p(175, 190), 80, 58, 'palm', 1.1); lake(...p(-175, 195), 66, 40, 'tide', A.rot); ruin(...p(-190, -250), 'village', 0.8, A.rot); stones(...p(190, -250), 50, 5);
+      lanterns(pp([[0, 460], [0, 360]]), 3);
+      add({ k: 'jetty', x: rnd(2140 * KW), y: rnd(5085 * KW), a: Math.PI / 2 });
     },
     coral(A) {
       const p = A.p;
-      for (const [x, y] of [[-320, -300], [320, -300], [-320, 300], [320, 300]]) { lake(...p(x, y), 190, 125, 'deep', A.rot); add({ k: 'reef', x: rnd(p(x, y)[0]), y: rnd(p(x, y)[1]), rx: 160, ry: 100 }); }
-      for (const [x, y] of [[0, -300], [0, 300]]) sea('shell', ...p(x, y), 1, 0);
-      lake(...p(-860, 100), 120, 60, 'deep', A.rot); lake(...p(860, -120), 120, 60, 'deep', A.rot);
+      for (const [x, y] of [[-165, -165], [165, -165], [-165, 165], [165, 165]]) { lake(...p(x, y), 92, 72, 'deep', A.rot); add({ k: 'reef', x: rnd(p(x, y)[0]), y: rnd(p(x, y)[1]), rx: 76, ry: 56 }); }
+      for (const [x, y] of [[0, -170], [0, 170], [-170, 0], [170, 0]]) sea('shell', ...p(x, y), 1, 0);
     },
     cove(A) {
       const p = A.p, pp = A.pp;
-      cliff(pp([[-900, -420], [-600, -380], [-300, -440], [-100, -420]]), 'rock', 40); cliff(pp([[260, -350], [560, -390], [900, -420]]), 'rock', 40);
-      lake(...p(-330, 330), 130, 80, 'tide', A.rot); lake(...p(330, 80), 90, 55, 'tide', A.rot);
-      ruin(...p(330, 330), 'hut', 1); stones(...p(-330, -120), 60, 5); grove(...p(480, -250), 110, 80, 'palm', 0.7);
-      sea('stack', 220, 4400, 12); sea('stack', 250, 5250, 10); sea('stack', 140, 4800, 14);
+      cliff(pp([[-480, -170], [-380, -150], [-250, -190]]), 'rock', 34); cliff(pp([[200, -170], [330, -150], [480, -180]]), 'rock', 34);
+      lake(...p(-175, 195), 78, 48, 'tide', A.rot); lake(...p(175, -200), 56, 36, 'tide', A.rot);
+      ruin(...p(190, 195), 'hut', 0.9); stones(...p(-190, -250), 50, 5); grove(...p(0, 440), 70, 40, 'palm', 0.7);
     },
     isles(A) { islesRecipe(A); },
-    snow(A) {
-      const p = A.p, pp = A.pp;
-      cliff(pp([[-900, -340], [-620, -310], [-420, -350]]), 'ice', 32); cliff(pp([[-150, -330], [150, -350], [330, -320]]), 'ice', 32); cliff(pp([[600, -340], [900, -320]]), 'ice', 32);
-      grove(...p(-330, 300), 220, 150, 'frost', 1.4); grove(...p(330, 300), 200, 150, 'frost', 1.3); grove(...p(330, -60), 150, 100, 'frost', 1);
-      shrine(...p(-330, -40), 1); stones(...p(-30, 330), 70, 7); lake(...p(-60, -200), 90, 50, 'ice', A.rot);
-    },
-    frozen(A) {
-      const p = A.p, pp = A.pp;
-      const c1 = river(pp([[-900, -240], [-620, -300], [-120, -330], [380, -280], [900, -320]]), 14, 14, 'crack');
-      bridgeOn(c1, ...p(-340, -300), 'ice', 40); bridgeOn(c1, ...p(420, -290), 'ice', 40);
-      const c2 = river(pp([[330, 900], [310, 600], [350, 220]]), 14, 14, 'crack'); bridgeOn(c2, ...p(320, 500), 'ice', 40);
-      lake(...p(-330, 320), 150, 95, 'hole', A.rot); lake(...p(340, -70), 90, 60, 'hole', A.rot); ruin(...p(-440, -90), 'hut', 1.1); ruin(...p(500, 330), 'hut', 1);
-      grove(...p(-330, -60), 90, 70, 'frost', 0.8);
-    },
-    rime(A) {
-      const p = A.p;
-      grove(...p(-330, -300), 240, 170, 'frost', 1.8); grove(...p(330, -300), 240, 170, 'frost', 1.8); grove(...p(-330, 300), 240, 170, 'crystal', 1.2); grove(...p(330, 300), 240, 170, 'frost', 1.8);
-      ruin(...p(0, 330), 'hall', 1.2, A.rot); stones(...p(330, 10), 60, 6); stones(...p(-330, 10), 60, 6);
-    },
-    glacier(A) {
-      const p = A.p, pp = A.pp;
-      cliff(pp([[-900, 330], [-600, 300], [-380, 350]]), 'ice', 40); cliff(pp([[-120, 340], [200, 320], [420, 350]]), 'ice', 40); cliff(pp([[700, 330], [940, 340]]), 'ice', 40);
-      const c = river(pp([[-900, -320], [-600, -290], [-100, -340], [400, -290], [900, -320]]), 16, 16, 'crack');
-      bridgeOn(c, ...p(-320, -320), 'ice', 44); bridgeOn(c, ...p(380, -300), 'ice', 44);
-      grove(...p(-330, 20), 130, 100, 'frost', 0.9); grove(...p(330, 40), 130, 100, 'crystal', 1); stones(...p(0, 330), 60, 6); lake(...p(0, -170), 90, 55, 'ice', A.rot);
-      sea('berg', 1400, 150, 1.3); sea('berg', 3000, 120, 1.1);
-    },
     dunes(A) {
       const p = A.p, pp = A.pp;
-      const r = river(pp([[330, -900], [300, -600], [360, -150], [320, 350], [350, 900]]), 38, 44, 'dry');
-      fordOn(r, ...p(330, -300)); fordOn(r, ...p(330, 300));
-      ruin(...p(-330, 300), 'nomad', 1.1, A.rot); grove(...p(-330, -300), 180, 120, 'cactus', 0.9); grove(...p(470, -300), 140, 100, 'cactus', 0.7);
-      stones(...p(-330, 20), 60, 6); ruin(...p(500, 330), 'columns', 1);
+      const r = river(pp([[-170, -500], [-150, -250], [-190, 0], [-150, 250], [-170, 500]]), 30, 34, 'dry');
+      fordOn(r, ...p(-170, -320)); fordOn(r, ...p(-170, 320));
+      ruin(...p(190, 190), 'nomad', 1.0, A.rot); grove(...p(190, -190), 80, 56, 'cactus', 0.9); grove(...p(-290, 200), 60, 40, 'cactus', 0.8); ruin(...p(-250, -190), 'columns', 0.9); stones(...p(0, 440), 50, 5);
     },
     oasis(A) {
       const p = A.p;
-      grove(...p(-330, -300), 220, 150, 'palm', 1.3); grove(...p(330, 300), 220, 150, 'palm', 1.3); lake(...p(330, -300), 110, 70, 'oasis', A.rot); lake(...p(-330, 300), 90, 55, 'oasis', A.rot);
-      ruin(...p(-110, 340), 'columns', 1.1); grove(...p(0, -250), 70, 45, 'palm', 0.8); ruin(...p(540, 60), 'nomad', 1, A.rot);
+      lake(...p(-185, -185), 70, 44, 'oasis', A.rot); lake(...p(185, 185), 62, 40, 'oasis', A.rot); grove(...p(185, -185), 80, 55, 'palm', 1.2); grove(...p(-185, 185), 80, 55, 'palm', 1.2);
+      ruin(...p(0, 440), 'columns', 0.9); ruin(...p(0, -440), 'nomad', 0.9, A.rot);
     },
     canyon(A) {
       const p = A.p, pp = A.pp;
-      mesa(...p(-330, -300), 200, 125, 80); mesa(...p(340, 300), 190, 120, 70); mesa(...p(-300, 330), 120, 80, 50);
-      cliff(pp([[260, -400], [520, -350], [820, -400]]), 'red', 44); cliff(pp([[-900, 70], [-640, 120], [-440, 80]]), 'red', 40);
-      const c = river(pp([[300, -240], [380, 20], [320, 150]]), 28, 28, 'chasm'); bridgeOn(c, ...p(350, -60), 'rope', 36);
-      ruin(...p(500, 330), 'columns', 1); stones(...p(-30, -300), 60, 6);
+      const c = river(pp([[-500, -170], [-250, -150], [0, -180], [250, -150], [500, -170]]), 24, 24, 'chasm'); bridgeOn(c, ...p(-320, -160), 'rope', 34); bridgeOn(c, ...p(320, -160), 'rope', 34);
+      mesa(...p(-175, 215), 85, 54, 70); mesa(...p(185, 215), 80, 50, 62); mesa(...p(185, -260), 60, 38, 46);
+      ruin(...p(-190, -260), 'columns', 0.9); stones(...p(0, -450), 50, 5);
     },
     temple(A) {
       const p = A.p, pp = A.pp;
-      lanterns(pp([[-60, 520], [-60, 190]]), 0);
-      for (const t of [0.15, 0.4, 0.65]) ruin(...p(-70, 560 - 400 * t), 'statue', 1.1, 0);
-      ruin(...p(330, -300), 'wall', 1.3, A.rot); ruin(...p(-330, -300), 'obelisk', 1.2); ruin(...p(-330, 300), 'columns', 1.4); ruin(...p(330, 300), 'hall', 1.1, A.rot);
-      stones(...p(330, 20), 60, 7); cliff(pp([[-560, -80], [-420, -50], [-250, -90]]), 'sand', 24);
+      for (const t of [0.2, 0.55]) ruin(...p(-70, 450 - 250 * t), 'statue', 1.0, 0);
+      ruin(...p(190, -190), 'wall', 1.1, A.rot); ruin(...p(-190, -190), 'obelisk', 1.1); ruin(...p(-190, 190), 'columns', 1.2); ruin(...p(190, 190), 'hall', 0.9, A.rot);
+      cliff(pp([[-100, -440], [0, -420], [100, -445]]), 'sand', 22);
+    },
+    snow(A) {
+      const p = A.p, pp = A.pp;
+      grove(...p(-180, 190), 80, 58, 'frost', 1.4); grove(...p(185, -185), 80, 58, 'frost', 1.3); shrine(...p(185, 195), 0.9); lake(...p(-185, -185), 55, 34, 'ice', A.rot);
+      stones(...p(0, 440), 55, 6); cliff(pp([[-300, -170], [-190, -150], [-90, -180]]), 'ice', 26);
+    },
+    frozen(A) {
+      const p = A.p, pp = A.pp;
+      const c1 = river(pp([[-500, -170], [-250, -150], [0, -180], [250, -150], [500, -170]]), 14, 14, 'crack');
+      bridgeOn(c1, ...p(-320, -160), 'ice', 40); bridgeOn(c1, ...p(320, -160), 'ice', 40);
+      lake(...p(-175, 195), 78, 46, 'hole', A.rot); lake(...p(180, 190), 55, 34, 'hole', A.rot); ruin(...p(-190, -255), 'hut', 0.9); grove(...p(190, -255), 55, 36, 'frost', 0.8);
+    },
+    rime(A) {
+      const p = A.p;
+      grove(...p(-175, -175), 90, 62, 'frost', 1.8); grove(...p(175, -175), 90, 62, 'crystal', 1.3); grove(...p(-175, 175), 90, 62, 'crystal', 1.3); grove(...p(175, 175), 90, 62, 'frost', 1.8);
+      ruin(...p(0, 450), 'hall', 1.0, A.rot); stones(...p(0, -440), 50, 5);
+    },
+    glacier(A) {
+      const p = A.p, pp = A.pp;
+      const c = river(pp([[-500, -170], [-250, -150], [0, -180], [250, -150], [500, -170]]), 16, 16, 'crack');
+      bridgeOn(c, ...p(-320, -160), 'ice', 42); bridgeOn(c, ...p(320, -160), 'ice', 42);
+      grove(...p(-185, 190), 75, 55, 'frost', 1); grove(...p(185, 190), 75, 55, 'crystal', 1); lake(...p(-185, -255), 55, 34, 'ice', A.rot); stones(...p(185, -255), 50, 5);
+      sea('berg', 1400 * KW, 130 * KW, 1.3); sea('berg', 2700 * KW, 100 * KW, 1.1);
     },
     ash(A) {
       const p = A.p, pp = A.pp;
-      const c = river(pp([[-900, -310], [-600, -280], [-100, -330], [400, -290], [900, -320]]), 18, 20, 'lava');
-      bridgeOn(c, ...p(-320, -300), 'obsidian', 38); bridgeOn(c, ...p(390, -300), 'obsidian', 38);
-      grove(...p(-330, 300), 220, 150, 'burnt', 1.2); grove(...p(330, 300), 200, 140, 'burnt', 1.0); grove(...p(330, -60), 120, 90, 'burnt', 0.9); ruin(...p(-440, -60), 'hut', 1);
-      cliff(pp([[-50, 160], [120, 200], [250, 170]]), 'ash', 28);
+      const c = river(pp([[-500, -170], [-250, -150], [0, -180], [250, -150], [500, -170]]), 18, 20, 'lava');
+      bridgeOn(c, ...p(-320, -160), 'obsidian', 38); bridgeOn(c, ...p(320, -160), 'obsidian', 38);
+      grove(...p(-185, 190), 80, 56, 'burnt', 1.2); grove(...p(185, 190), 75, 52, 'burnt', 1.0); ruin(...p(-190, -255), 'hut', 0.9); grove(...p(190, -255), 55, 38, 'burnt', 0.9);
     },
     ridge(A) {
       const p = A.p, pp = A.pp;
-      cliff(pp([[-900, -400], [-600, -360], [-380, -420]]), 'obsidian', 44); cliff(pp([[-100, -380], [180, -420], [400, -370]]), 'obsidian', 44); cliff(pp([[650, -400], [920, -370]]), 'obsidian', 44);
-      const c = river(pp([[-330, 900], [-300, 600], [-350, 200]]), 16, 18, 'lava'); bridgeOn(c, ...p(-320, 480), 'obsidian', 36);
-      grove(...p(330, 300), 200, 150, 'shard', 1.2); grove(...p(330, -60), 130, 90, 'shard', 1); grove(...p(-330, -100), 100, 70, 'crystal', 0.9);
-      lake(...p(330, -300), 90, 55, 'lava', A.rot); stones(...p(-30, 330), 60, 6);
+      const c = river(pp([[-500, 170], [-250, 150], [0, 180], [250, 150], [500, 170]]), 16, 18, 'lava');
+      bridgeOn(c, ...p(-320, 160), 'obsidian', 36); bridgeOn(c, ...p(320, 160), 'obsidian', 36);
+      grove(...p(-185, -190), 80, 56, 'shard', 1.2); grove(...p(185, -190), 80, 56, 'shard', 1.0); lake(...p(185, 255), 52, 32, 'lava', A.rot); stones(...p(-190, 255), 50, 5);
     },
     lavafall(A) {
       const p = A.p, pp = A.pp;
-      const c = river(pp([[-900, 310], [-640, 290], [-200, 340], [300, 290], [900, 320]]), 30, 34, 'lava');
-      bridgeOn(c, ...p(-330, 310), 'obsidian', 40); bridgeOn(c, ...p(330, 300), 'obsidian', 40);
-      lake(...p(-330, -300), 140, 90, 'lava', A.rot); lake(...p(330, -300), 120, 80, 'lava', A.rot);
-      grove(...p(0, -330), 80, 60, 'burnt', 0.7); stones(...p(0, 440), 60, 5); ruin(...p(-440, 20), 'tower', 1);
+      const c = river(pp([[-500, 170], [-250, 150], [0, 180], [250, 150], [500, 170]]), 26, 30, 'lava');
+      bridgeOn(c, ...p(-320, 160), 'obsidian', 40); bridgeOn(c, ...p(320, 160), 'obsidian', 40);
+      lake(...p(-185, -190), 78, 50, 'lava', A.rot); lake(...p(185, -190), 66, 44, 'lava', A.rot); grove(...p(0, 440), 60, 40, 'burnt', 0.7); ruin(...p(-190, 255), 'tower', 0.9);
     },
     caldera(A) {
       const p = A.p, pp = A.pp, L = A.landmark;
-      const r = river(pp([[-900, 330], [-640, 300], [-330, 340], [330, 300], [700, 340], [900, 310]]), 26, 30, 'lava');
-      bridgeOn(r, ...p(-330, 320), 'obsidian', 40); bridgeOn(r, ...p(330, 310), 'obsidian', 40);
-      lake(...p(330, -300), 130, 85, 'lava', A.rot); lake(...p(-330, -300), 110, 70, 'lava', A.rot);
-      river([[L.x + 40, L.y + 110], [L.x + 120, L.y + 240], [L.x + 90, L.y + 290]], 16, 22, 'lava');
-      grove(...p(-330, 60), 120, 90, 'burnt', 0.9); stones(...p(330, 40), 60, 6);
+      const r = river(pp([[-500, -170], [-250, -150], [0, -180], [250, -150], [500, -170]]), 22, 26, 'lava');
+      bridgeOn(r, ...p(-320, -160), 'obsidian', 38); bridgeOn(r, ...p(320, -160), 'obsidian', 38);
+      lake(...p(-185, 190), 66, 42, 'lava', A.rot); lake(...p(185, 190), 66, 42, 'lava', A.rot); grove(...p(0, 440), 60, 40, 'burnt', 0.8); stones(...p(0, -440), 50, 5);
+      river([[L.x + 30, L.y + 80], [L.x + 80, L.y + 150], [L.x + 70, L.y + 190]], 12, 16, 'lava');
     },
   };
 
@@ -470,41 +499,47 @@
   function islesRecipe(A) {
     const nodes = [A.entry, ...A.spots, ...A.elites, A.boss].concat(A.poiP ? [A.poiP] : []);
     const L = A.landmark, islands = [];
-    const isl = (p, rx, ry, name, tag) => { const poly = orient(ellipsePoly(p[0], p[1], rx, ry, 'isle:' + name, 0.14, 26).map(R2), 1); extraLand.push({ poly, biome: 'isles' }); islands.push({ p, rx, ry, tag }); return poly; };
-    nodes.forEach((p, i) => isl(p, p === A.boss ? 300 : 230, p === A.boss ? 190 : 150, 'n' + i, i));
-    isl([L.x, L.y + 10], 260, 160, 'lm', 'lm');
-    // link: chain from the entry to the nearest unvisited island; every 2nd link is a rope bridge when the gap is wide
+    const isl = (p, rx, ry, name, tag) => { const poly = orient(ellipsePoly(p[0], p[1], rx, ry, 'isle:' + name, 0.12, 24).map(R2), 1); extraLand.push({ poly, biome: 'isles' }); islands.push({ p, rx, ry, tag }); return poly; };
+    nodes.forEach((p, i) => (p === A.entry ? isl(p, 72, 52, 'n' + i, i) : isl(p, p === A.boss ? 150 : 105, p === A.boss ? 100 : 76, 'n' + i, i)));
+    isl([L.x, L.y + 10], 140, 90, 'lm', 'lm');
     const rest = islands.slice(1), order = [islands[0]];
     while (rest.length) { const last = order[order.length - 1]; rest.sort((a, b) => dist(a.p, last.p) - dist(b.p, last.p)); order.push(rest.shift()); }
-    const link = (a, b, i, forceBridge) => {
-      const d = dist(a.p, b.p), ux = (b.p[0] - a.p[0]) / d, uy = (b.p[1] - a.p[1]) / d;
-      const bridge = forceBridge || (i % 2 === 1 && d > 520);
+    const link = (a, b, i) => {
+      const d = dist(a.p, b.p), ux = (b.p[0] - a.p[0]) / d, uy = (b.p[1] - a.p[1]) / d, bridge = i % 2 === 1 && d > 270;
       if (!bridge) { extraLand.push({ poly: orient(strip(a.p, b.p, 62, 'bar' + i).map(R2), 1), biome: 'isles' }); return; }
-      const edge = (o, sx) => Math.min(o.rx, o.ry) * 0.7 + 0.3 * (1 / Math.hypot(ux / o.rx, uy / o.ry)) * 0.5 + 0 * sx;
-      const ra = 1 / Math.hypot(ux / a.rx, uy / a.ry) * 0.62, rb = 1 / Math.hypot(ux / b.rx, uy / b.ry) * 0.62;
-      const s = [a.p[0] + ux * ra, a.p[1] + uy * ra], e = [b.p[0] - ux * rb, b.p[1] - uy * rb]; void edge;
+      const ra = 1 / Math.hypot(ux / a.rx, uy / a.ry) * 0.7, rb = 1 / Math.hypot(ux / b.rx, uy / b.ry) * 0.7;
+      const s = [a.p[0] + ux * ra, a.p[1] + uy * ra], e = [b.p[0] - ux * rb, b.p[1] - uy * rb];
       add({ k: 'bridge', x: rnd((s[0] + e[0]) / 2), y: rnd((s[1] + e[1]) / 2), a: Math.atan2(uy, ux), len: Math.round(dist(s, e)), w: 30, style: 'rope', rw: 0 });
     };
     for (let i = 0; i + 1 < order.length; i++) link(order[i], order[i + 1], i);
-    // landmark island hangs off the nearest island; every island also gets a second link to its nearest neighbour (loops)
     const lmI = islands[islands.length - 1];
-    for (const isle of islands) { if (isle === lmI) continue; const near = islands.filter((o) => o !== isle).sort((a, b) => dist(a.p, isle.p) - dist(b.p, isle.p))[0]; if (dist(near.p, isle.p) < 700 && isle.tag !== 'lm') extraLand.push({ poly: orient(strip(isle.p, near.p, 58, 'loop' + isle.tag).map(R2), 1), biome: 'isles' }); }
-    // shore links: west to Shipwreck Cove, north to the snow plains
-    extraLand.push({ poly: orient(strip([A.entry[0] - 170, A.entry[1]], [A.entry[0] - 330, A.entry[1] + 10], 60, 'cove').map(R2), 1), biome: 'isles' });
-    const north = islands.reduce((m, i) => (i.p[1] < m.p[1] ? i : m), islands[0]);
-    extraLand.push({ poly: orient(strip(north.p, [north.p[0] - 60, 3960], 62, 'snowlink').map(R2), 1), biome: 'isles' });
-    add({ k: 'bridge', x: rnd(north.p[0] - 40), y: 4020, a: Math.PI / 2, len: 160, w: 34, style: 'ice', rw: 0 });
-    A.boatSpots = [[A.cx - 380, A.cy + 520], [A.cx + 520, A.cy - 40]];
-    sea('boat', A.cx - 100, A.cy + 760, 1, 0);
-    sea('stack', L.x - 220, L.y - 130, 11); sea('stack', L.x + 250, L.y + 80, 10); sea('stack', A.cx + 560, A.cy + 520, 9);
+    for (const isle of islands) { if (isle === lmI) continue; const near = islands.filter((o) => o !== isle).sort((a, b) => dist(a.p, isle.p) - dist(b.p, isle.p))[0]; if (dist(near.p, isle.p) < 420 && isle.tag !== 'lm') extraLand.push({ poly: orient(strip(isle.p, near.p, 58, 'loop' + isle.tag).map(R2), 1), biome: 'isles' }); }
+    for (const l of LINK_INFO) {
+      if (l.b === 'isles') { const G = AREA_BY[l.a].ports.find((q) => q.to === 'isles').g; extraLand.push({ poly: orient(strip(A.entry, G, 62, 'cove').map(R2), 1), biome: 'isles' }); }
+      if (l.a === 'isles') { const G = AREA_BY.snow.ports.find((q) => q.to === 'isles').g, nearI = islands.slice().sort((p, q) => dist(p.p, G) - dist(q.p, G))[0]; extraLand.push({ poly: orient(strip(nearI.p, G, 62, 'snowlink').map(R2), 1), biome: 'isles' }); }
+    }
+    sea('boat', A.cx - 300, A.cy + 480, 0.9, 0); sea('stack', L.x - 190, L.y - 150, 10); sea('stack', L.x + 200, L.y + 150, 9); sea('stack', A.cx + 470, A.cy + 360, 8); sea('stack', A.cx - 480, A.cy - 340, 8);
+  }
+
+  // props scattered next to the spots: signposts, crates, wells, bones ...
+  const PROPS = { meadow: ['sign', 'hay', 'well', 'crates'], forest: ['sign', 'stump', 'crates'], bamboo: ['sign', 'well', 'crates'], lake: ['sign', 'crates', 'boatprop'], beach: ['sign', 'crates', 'boatprop', 'barrel'], coral: ['barrel', 'crates'], cove: ['crates', 'barrel', 'bones', 'sign'],
+    isles: ['barrel'], dunes: ['bones', 'crates', 'sign'], oasis: ['sign', 'crates', 'well'], canyon: ['bones', 'sign', 'crates'], temple: ['bones', 'crates'], snow: ['sign', 'crates', 'stump'], frozen: ['crates', 'sign'], rime: ['sign', 'stump'], glacier: ['crates', 'bones'],
+    ash: ['bones', 'sign', 'crates'], ridge: ['crates', 'bones'], lavafall: ['sign', 'bones'], caldera: ['bones', 'sign'] };
+  function placeProps(A) {
+    const kinds = PROPS[A.id] || ['crates'], R = rng('props:' + A.id), nodes = [A.entry, ...A.spots, ...A.elites, A.boss];
+    nodes.forEach((n, i) => {
+      if (i === 0) { prop(n[0] + (R() < 0.5 ? -48 : 48), n[1] + 16, 'sign', 1); return; }
+      if (R() < 0.45) { const a = R() * 6.28, kd = kinds[Math.floor(R() * kinds.length)]; prop(n[0] + Math.cos(a) * 66, n[1] + Math.sin(a) * 30 + 12, kd, 0.9 + R() * 0.3, a); }
+    });
   }
 
   // ---------- build ----------
   let built = false, roads = [];
+  const WALL_R = { trees: 21, hedge: 15, fence: 8, stone: 12, reeds: 14, coral: 19, stacks: 22, rocks: 17 };
   function build() {
     if (built) return; built = true;
     macro();
-    for (const A of AREAS) RECIPES[A.id](A);
+    for (const A of AREAS) { RECIPES[A.id](A); ringWalls(A); placeProps(A); }
     // --- land raster ---
     fillPoly(land, OUTLINE, 1);
     fillPoly(land, SOUND, 0);
@@ -513,13 +548,13 @@
     const sites = AREAS.map((A) => [A.cx, A.cy, BIO[A.id]]);
     for (let gy = 0; gy < GH; gy++) for (let gx = 0; gx < GW; gx++) {
       const i = gy * GW + gx; if (!land[i]) continue;
-      const X0 = (gx + 0.5) * G, Y0 = (gy + 0.5) * G, x = X0 + 150 * Math.sin(Y0 / 270 + X0 / 1100) + 80 * Math.sin(Y0 / 120 + 1), y = Y0 + 150 * Math.sin(X0 / 310 + 2) + 80 * Math.sin(X0 / 140); let bd = 1e18, bi = 1;
+      const X0 = (gx + 0.5) * G, Y0 = (gy + 0.5) * G, x = X0 + 90 * Math.sin(Y0 / 270 + X0 / 1100) + 50 * Math.sin(Y0 / 120 + 1), y = Y0 + 90 * Math.sin(X0 / 310 + 2) + 50 * Math.sin(X0 / 140); let bd = 1e18, bi = 1;
       for (const s of sites) { const d = (s[0] - x) * (s[0] - x) + (s[1] - y) * (s[1] - y); if (d < bd) { bd = d; bi = s[2]; } }
       ground[i] = bi;
     }
     fillPoly(ground, MASSIF, BIO.high);
     for (const [x, y, r] of ROCKY) stampEllipse(ground, x, y, r, r * 0.7, BIO.mtn);
-    for (const f of FE) if (f.k === 'ridge') stampLine(ground, f.pts, f.r * 1.5, BIO.mtn);
+    for (const f of FE) if (f.k === 'ridge') stampLine(ground, f.pts, f.r * 1.2, BIO.mtn);
     AREAS.forEach((A, k) => { fillPoly(subR, A.shape, k + 1); if (A.id !== 'isles') fillPoly(ground, A.shape, BIO[A.id]); });
     for (const e of extraLand) fillPoly(ground, e.poly, BIO[e.biome]);
     for (let i = 0; i < GW * GH; i++) if (!land[i]) ground[i] = 0;
@@ -529,6 +564,7 @@
       if (f.k === 'river') { if (f.style === 'dry') continue; const wd = f.style === 'crack' ? 8 : 0; stampLine(blk, f.pts, (t) => (f.w0 + (f.w1 - f.w0) * t) / 2 + 6 + wd, 1); }
       else if (f.k === 'cliff') stampLine(blk, f.pts, 15, 1);
       else if (f.k === 'ridge') stampLine(blk, f.pts, f.r * 0.85, 1);
+      else if (f.k === 'wall') stampLine(blk, f.pts, WALL_R[f.style] || 14, 1);
       else if (f.k === 'lake') { if (!f.walk) stampEllipse(blk, f.x, f.y, f.rx + 8, f.ry + 8, 1, f.rot); }
       else if (f.k === 'mesa') stampEllipse(blk, f.x, f.y, f.rx, f.ry, 1);
     }
@@ -537,12 +573,13 @@
       if (f.k === 'bridge') stampRect(blk, f.x, f.y, f.len, Math.max(60, f.w + 24), f.a, 0);
       else if (f.k === 'ford') stampRect(blk, f.x, f.y, f.len, Math.max(70, f.w + 20), f.a, 0);
     }
-    // the camp, shrines and nodes keep a small walkable clearing (checked against the design in tools)
+    // the camp, spots and gates keep a small walkable clearing (checked against the design in tools)
     LAYOUT.violations = [];
     for (const [x, y, r] of PLACED) { const i = cellOf(x, y); if (i < 0 || blk[i]) LAYOUT.violations.push([x, y]); stampEllipse(blk, x, y, r, r * 0.8, 0); }
+    // gates are always open
+    for (const A of AREAS) for (const q of A.ports) stampEllipse(blk, q.g[0], q.g[1], 62, 62, 0);
     makeRoads();
   }
-
   // ---------- path finding on a coarse grid (also used by map.js for tap-to-walk) ----------
   const CG = 40, CW = MAP_W / CG, CH = Math.ceil(MAP_H / CG);
   let cpass = null;
@@ -608,29 +645,32 @@
     return out;
   }
 
-  // ---------- roads and trails (A* between the nodes of each area, and between areas) ----------
+
+  // ---------- roads and trails (A* between the spots of each area, the gates, and between areas) ----------
   function makeRoads() {
+    const densify = (P) => { const o = [P[0]]; for (let i = 0; i + 1 < P.length; i++) { const a = P[i], b = P[i + 1], m = Math.max(1, Math.ceil(dist(a, b) / 120)); for (let k = 1; k <= m; k++) o.push([a[0] + (b[0] - a[0]) * k / m, a[1] + (b[1] - a[1]) * k / m]); } return o; };
     const add2 = (a, b, style, w, name) => {
-      let P = findPath(a[0], a[1], b[0], b[1], { limit: 60000 }); if (!P) return null;
+      let P = findPath(a[0], a[1], b[0], b[1], { limit: 60000 }); if (!P) { LAYOUT.roadFails.push([a, b, name]); return null; }
       P = smoothPath(simplifyLOS(P).length > 1 ? densify(simplifyLOS(P)) : P, 2);
       roads.push({ k: 'road', pts: P.map(R2), w, style, name }); return P;
     };
-    const densify = (P) => { const o = [P[0]]; for (let i = 0; i + 1 < P.length; i++) { const a = P[i], b = P[i + 1], m = Math.max(1, Math.ceil(dist(a, b) / 120)); for (let k = 1; k <= m; k++) o.push([a[0] + (b[0] - a[0]) * k / m, a[1] + (b[1] - a[1]) * k / m]); } return o; };
-    const STYLE = { meadow: 'dirt', forest: 'dirt', bamboo: 'stone', lake: 'dirt', beach: 'sand', coral: null, cove: 'sand', isles: null, dunes: 'sand', oasis: 'sand', canyon: 'sand', temple: 'sand', snow: 'snow', frozen: 'snow', rime: 'snow', glacier: 'snow', ash: 'ash', ridge: 'ash', lavafall: 'ash', caldera: 'ash' };
-    const links = [['camp', AREA_BY.meadow.entry], [AREA_BY.meadow.boss, AREA_BY.forest.entry], [AREA_BY.forest.boss, AREA_BY.bamboo.entry], [AREA_BY.bamboo.boss, AREA_BY.lake.entry], [AREA_BY.lake.boss, AREA_BY.dunes.entry], [AREA_BY.bamboo.boss, AREA_BY.beach.entry],
-      [AREA_BY.beach.boss, AREA_BY.coral.entry], [AREA_BY.coral.boss, AREA_BY.cove.entry], [AREA_BY.dunes.boss, AREA_BY.oasis.entry], [AREA_BY.oasis.boss, AREA_BY.canyon.entry], [AREA_BY.canyon.boss, AREA_BY.temple.entry], [AREA_BY.temple.boss, AREA_BY.ash.entry],
-      [AREA_BY.snow.boss, AREA_BY.frozen.entry], [AREA_BY.frozen.boss, AREA_BY.rime.entry], [AREA_BY.rime.boss, AREA_BY.glacier.entry], [AREA_BY.ash.boss, AREA_BY.ridge.entry], [AREA_BY.ridge.boss, AREA_BY.lavafall.entry], [AREA_BY.lavafall.boss, AREA_BY.caldera.entry]];
-    for (const [a, b] of links) { const A0 = a === 'camp' ? [CAMP.x, CAMP.y] : a; add2(A0, b, 'main', 26, 'road'); }
-    add2([6400, 5730], [6920, 6000], 'main', 24, 'skyway'); add2([6400, 5730], [6080, 4700], 'main', 22, 'skyway'); add2([6080, 4700], [5900, 3620], 'main', 22, 'skyway');
-    add2([4000, 6680], [3800, 6680], 'main', 24, 'pass'); add2([3860, 3040], [4300, 3040], 'main', 20, 'pass'); add2([8240, 3040], [7900, 3040], 'main', 20, 'pass');
+    LAYOUT.roadFails = [];
+    const STYLE = { meadow: 'dirt', forest: 'dirt', bamboo: 'stone', lake: 'plank', beach: 'plank', coral: 'sand', cove: 'plank', isles: null, dunes: 'sand', oasis: 'sand', canyon: 'sand', temple: 'stone', snow: 'snow', frozen: 'snow', rime: 'snow', glacier: 'snow', ash: 'ash', ridge: 'ash', lavafall: 'ash', caldera: 'ash' };
+    // links between rooms: stub to stub through the gates
+    for (const l of LINK_INFO) {
+      const A0 = l.a === 'camp' ? [CAMP.x, CAMP.y] : l.sa;
+      add2(A0, l.sb, 'main', 24, 'road');
+    }
+    // up the Skyway onto the massif
+    const sky = [[4400, 4010], [4400, 3600], [4260, 3150], [4400, 2600], [4400, 2050], [4250, 1600], [3950, 1260]].map((p) => [p[0] * KW, p[1] * KW]);
+    for (let i = 0; i + 1 < sky.length; i++) add2(sky[i], sky[i + 1], 'main', 22, 'skyway');
+    add2([2490 * KW, 1900 * KW], [4400 * KW, 2050 * KW], 'main', 20, 'pass'); add2([5410 * KW, 1900 * KW], [4400 * KW, 2050 * KW], 'main', 20, 'pass');
     for (const A of AREAS) {
       const st = STYLE[A.id]; if (!st) continue;
-      const nodes = [...A.spots, ...A.elites].concat(A.poiP ? [A.poiP] : []), order = []; let cur = A.entry; const rest = nodes.slice();
-      while (rest.length) { rest.sort((p, q) => dist(p, cur) - dist(q, cur)); cur = rest.shift(); order.push(cur); }
-      let prev = A.entry; for (const n of order) { add2(prev, n, st, 11, 'trail'); prev = n; }
-      add2(prev, A.boss, st, 11, 'trail');
-      // spur to the landmark foot
-      const L = A.landmark, near = nodes.concat([A.entry]).sort((p, q) => dist(p, [L.x, L.y]) - dist(q, [L.x, L.y]))[0], d = dist(near, [L.x, L.y]), tgt = [L.x + (near[0] - L.x) / d * (L.rx * 1.5 + 30), L.y + (near[1] - L.y) / d * (L.ry * 2 + 40)];
+      const nodes = [...A.spots, ...A.elites, A.boss].concat(A.poiP ? [A.poiP] : []);
+      for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) if (dist(nodes[i], nodes[j]) < 430) add2(nodes[i], nodes[j], st, 12, 'trail');
+      for (const q of A.ports) { const near = nodes.concat([]).sort((p, r) => dist(p, q.stub) - dist(r, q.stub)); add2(q.stub, near[0], st, 12, 'trail'); if (dist(near[1], q.stub) < 330) add2(q.stub, near[1], st, 12, 'trail'); }
+      const L = A.landmark, near = nodes.slice().sort((p, q) => dist(p, [L.x, L.y]) - dist(q, [L.x, L.y]))[0], d = dist(near, [L.x, L.y]), tgt = [L.x + (near[0] - L.x) / d * (L.rx * 1.3 + 24), L.y + (near[1] - L.y) / d * (L.ry * 1.9 + 34)];
       add2(near, tgt, st, 9, 'spur');
     }
   }
@@ -641,7 +681,7 @@
     const sh = A.shape, b = bboxOf(sh);
     subareas[A.id] = {
       bounds: b.map(rnd), shape: sh, landmark: A.landmark, entry: A.entry, boss: A.boss, elites: A.elites, spots: A.spots, poi: A.poiP,
-      region: REGIONS[A.reg], regionIndex: A.reg, center: [A.cx, A.cy],
+      region: REGIONS[A.reg], regionIndex: A.reg, center: [A.cx, A.cy], gates: A.ports.map((q) => q.g),
     };
   }
   const LAYOUT = {
@@ -656,7 +696,7 @@
     outline: OUTLINE, sound: SOUND, extraLand, massif: MASSIF, landmarkFoot: LM_FOOT,
     findPath, smoothPath, simplifyLOS,
     util: { rng, hash, inPoly, fillPoly, stampEllipse, stampRect, stampLine, bboxOf, wobble, dist },
-    version: 3,
+    version: 4,
   };
   root.WorldLayout = LAYOUT;
   if (typeof module !== 'undefined' && module.exports) module.exports = LAYOUT;

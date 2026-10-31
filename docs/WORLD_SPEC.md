@@ -1,4 +1,4 @@
-# World spec (v3: large, sparse free-exploration map)
+# World spec (v3: structured free-exploration map)
 
 Shared contract between the world **content** (js/world-data.js, items, enemies, balance) and the world **layout + painting** (js/world-layout.js, js/map.js).
 
@@ -31,7 +31,7 @@ Five regions, four sub-areas each (20). Every sub-area has its own boss and **6â
 
 ## Scale
 
-The map is **much larger and sparse**: at the default exploration zoom, one phone screen shows only **1â€“2 enemies**. Spots are spaced widely (roughly a screen apart), with terrain features in between: rivers with bridges and fords, lakes, cliffs and ridges, forests, roads and trails, ruins, shrines and other set dressing. Zooming out (the overview) shows the whole world.
+The map is **structured and dense**: each sub-area is an enclosed room (about 1000 units across, walled by cliffs, tree lines, rivers or shorelines, with gates where routes leave). At the default exploration zoom a phone screen shows about **2 enemies** (spots ~285 units apart), with terrain features in between: rivers with bridges and fords, lakes, cliffs and ridges, forests, roads and trails, ruins, shrines and other set dressing. Zooming out (the overview) shows the whole world.
 
 ## Layout contract: `window.WorldLayout` (js/world-layout.js, loaded before world-data.js)
 
