@@ -200,7 +200,7 @@
     WorldMap.setActive(false);
     document.body.classList.add('in-battle');
     Battle.start({
-      title: nodeTitle(n), subtitle: World.SUB_BY[n.sub].name + ' · Lv' + n.level, stage,
+      title: nodeTitle(n), subtitle: World.SUB_BY[n.sub].name + ' · Lv' + n.level, stage, biome: World.SUB_BY[n.sub].biome,
       army: P.buildArmy(save, r.mods), placement: r.placement,
       onEnd: (state) => battleOver(n, state),
     });
