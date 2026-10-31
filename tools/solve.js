@@ -96,18 +96,39 @@ function draw(placement, army) {
   return rows.join('\n');
 }
 
-const only = process.argv[2];
-for (const stage of STAGES) {
-  if (only && stage.id !== only) continue;
-  const state = Engine.createState(stage);
-  const result = solve(state, stage.army);
-  console.log(`\n== Stage ${stage.number}: ${stage.name} (HP ${stage.heroHp}) ==`);
-  console.log(`best total damage: ${result.total}, turns: ${result.line.length}`);
-  let s = state;
-  result.line.forEach((p, i) => {
-    const out = Engine.resolveTurn(s, p, stage.army).state;
-    console.log(` turn ${i + 1}: took ${s.hp - out.hp}, status ${out.status}`);
-    console.log(draw(p, stage.army));
-    s = out;
-  });
+
+// Is there a placement that clears the whole battle this turn (so 0 damage)? Anneals with restarts.
+function oneTurnClear(state, army, restarts = 12, iters = 1500) {
+  for (let k = 0; k < restarts; k++) {
+    const r = anneal(state, army, iters);
+    if (score(state, r.placement, army).s.status === 'cleared') return r.placement;
+  }
+  return null;
+}
+
+// Share of uniformly random placements that clear this turn ("how obvious is it").
+function randomClearRate(state, army, n = 200) {
+  let ok = 0;
+  for (let i = 0; i < n; i++) if (Engine.resolveTurn(state, randomPlacement(army), army).state.status === 'cleared') ok++;
+  return ok / n;
+}
+
+module.exports = { anneal, solve, score, oneTurnClear, randomClearRate, randomPlacement, draw };
+
+if (require.main === module) {
+  const only = process.argv[2];
+  for (const stage of STAGES) {
+    if (only && stage.id !== only) continue;
+    const state = Engine.createState(stage);
+    const result = solve(state, stage.army);
+    console.log(`\n== Stage ${stage.number}: ${stage.name} (HP ${stage.heroHp}) ==`);
+    console.log(`best total damage: ${result.total}, turns: ${result.line.length}`);
+    let s = state;
+    result.line.forEach((p, i) => {
+      const out = Engine.resolveTurn(s, p, stage.army).state;
+      console.log(` turn ${i + 1}: took ${s.hp - out.hp}, status ${out.status}`);
+      console.log(draw(p, stage.army));
+      s = out;
+    });
+  }
 }
