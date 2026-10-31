@@ -7,12 +7,12 @@
   function shuffle(a, R) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   const vary = (v, R, spread) => Math.max(1, Math.round(v * (1 - spread + R() * spread * 2)));
 
-  const RAMP_HP = 0.10, RAMP_ATK = 0.5;
+  const RAMP_HP = 0.12, RAMP_ATK = 0.6;
   function generateBattle(node, runSeed) {
     const R = World.rng(runSeed + ':' + node.id);
     const L = node.level;
     // From the second region on, enemies grow faster than the squad's early upgrades (design 24.1).
-    const ramp = L > 5 ? 1 + RAMP_HP * (L - 5) : 1, rampAtk = L > 5 ? Math.floor((L - 5) * RAMP_ATK) : 0;
+    const ramp = L > 7 ? 1 + RAMP_HP * (L - 7) : 1, rampAtk = L > 7 ? Math.floor((L - 7) * RAMP_ATK) : 0;
     const sub = node.sub;
     const enemies = [];
     const free = [];

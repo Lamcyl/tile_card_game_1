@@ -553,7 +553,7 @@ The prototype in `prototype/` has two pages.
 - **Camp:** Souls buy upgrades (Vitality, Command, Drill, Bulwark, Fortune, Provisions) and recruits. Bosses unlock new recruits. The squad is limited by slots. The Gear tab equips up to 3 items.
 - **Battles:** generated from the spot's level and sub-area theme. Level 1 fights are small, and bosses are usually two-turn fights.
 - **Saving:** progress is saved in the browser. Prototype tools give +100 Souls or reset progress.
-- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player. The simulated strong player now takes about SIMFRESH battles on a fresh account before dying or running out of Supplies (it clears Sunny Meadows and often Old Oak Wood); real players should land at the 8-10 battles of 24.1.
+- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player. The simulated strong player now takes about 9 battles on a fresh account (it usually clears Sunny Meadows and dies at the Lv4 boss; the boss is beaten in about half of the first runs); real players should land at the 8-10 battles of 24.1. Enemy growth ramps up from Lv8 (HP +12% and about +0.6 ATK per level above 7). With greedy Camp shopping (`node tools/sim-runs.js 1 campaign 45`) the strong simulated player beats Greenvale in about 4 runs, reaches Sunscorch after about 16 and has not opened Frostveil or Ember Peaks after 45 runs; real players are slower.
 
 **Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
 

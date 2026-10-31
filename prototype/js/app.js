@@ -214,7 +214,7 @@
     busy = true; selected = null; sheetOpen = true; renderAll();
     // Short hops are walked; far ones just move the hero there.
     const from = World.byId[r.pos] || World.CAMP;
-    if (Math.hypot(from.x - n.x, from.y - n.y) < 260) await WorldMap.walk([id]); else { WorldMap.placeToken(id); WorldMap.focus(n.x, n.y); }
+    if (Math.hypot(from.x - n.x, from.y - n.y) < 1600) await WorldMap.walk([id]); else { WorldMap.placeToken(id); WorldMap.focus(n.x, n.y); }
     r.pos = id; r.path.push(id);
     busy = false;
     if (n.type === 'shrine') {
