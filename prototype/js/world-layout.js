@@ -703,16 +703,18 @@
   // Deterministic (own rng stream), so the existing node positions are untouched. Computed lazily on first read.
   const EXTRA = {};
   function placeExtras(id) {
-    const A = AREA_BY[id], out = { shop: null, event: null }, R = rng('extras:' + id);
+    const A = AREA_BY[id], out = { shop: null, event: null, wp: null, secret: null }, R = rng('extras:' + id);
     const taken = [A.boss, ...A.elites, ...A.spots, A.entry].concat(A.poiP ? [A.poiP] : []);
     const L = A.landmark;
     let gap = 150;
     const clear = (p) => taken.every((q) => dist(p, q) >= gap) && A.ports.every((q) => dist(p, q.stub) >= 110) && dist(p, [L.x, L.y]) >= Math.max(L.rx, L.ry) * 1.5 + 60;
-    for (const kind of ['shop', 'event']) {
+    // WP14: 'wp' (a waypoint shrine) is sought on a ring around the entry gate, 'secret' (a hidden cache) far from everything, off the trails.
+    for (const kind of ['shop', 'event', 'wp', 'secret']) {
       let best = null;
       for (let t = 0; t < 900 && !best; t++) {
-        gap = t < 300 ? 150 : t < 600 ? 125 : 105;
-        const ang = R() * 6.2832, rad = 110 + R() * 380, p = R2([A.cx + Math.cos(ang) * rad, A.cy + Math.sin(ang) * rad]);
+        gap = kind === 'secret' ? (t < 450 ? 160 : t < 700 ? 130 : 105) : t < 300 ? 150 : t < 600 ? 125 : 105;
+        const ang = R() * 6.2832, rad = kind === 'wp' ? 90 + R() * 200 : 110 + R() * 380, cx = kind === 'wp' ? A.entry[0] : A.cx, cy = kind === 'wp' ? A.entry[1] : A.cy;
+        const p = R2([cx + Math.cos(ang) * rad, cy + Math.sin(ang) * rad]);
         if (LAYOUT.subAt(p[0], p[1]) !== id || LAYOUT.blocked(p[0], p[1]) || !clear(p)) continue;
         // keep the 60 units around it walkable too, so the marker is not wedged against a cliff
         if ([[60, 0], [-60, 0], [0, 60], [0, -60]].some((d) => LAYOUT.blocked(p[0] + d[0], p[1] + d[1]))) continue;
@@ -724,7 +726,7 @@
     return out;
   }
   for (const id of Object.keys(subareas)) {
-    for (const kind of ['shop', 'event']) Object.defineProperty(subareas[id], kind, { enumerable: true, get() { return (EXTRA[id] || (EXTRA[id] = placeExtras(id)))[kind]; } });
+    for (const kind of ['shop', 'event', 'wp', 'secret']) Object.defineProperty(subareas[id], kind, { enumerable: true, get() { return (EXTRA[id] || (EXTRA[id] = placeExtras(id)))[kind]; } });
   }
   root.WorldLayout = LAYOUT;
   if (typeof module !== 'undefined' && module.exports) module.exports = LAYOUT;

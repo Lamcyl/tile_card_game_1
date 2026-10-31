@@ -72,7 +72,7 @@
     const L = (LAYOUT && LAYOUT.subareas && LAYOUT.subareas[d.id]) || placeholderSub(i);
     return {
       id: d.id, region: d.region, name: d.name, biome: d.biome, lv: d.lv, bossLv: d.bossLv, unlocks: d.unlocks, from: d.from, poi: d.poi,
-      bounds: L.bounds, shape: L.shape || null, entry: L.entry, boss: L.boss, elites: L.elites || [], spots: L.spots || [], poiPos: L.poi || null, shopPos: L.shop || null, eventPos: L.event || null,
+      bounds: L.bounds, shape: L.shape || null, entry: L.entry, boss: L.boss, elites: L.elites || [], spots: L.spots || [], poiPos: L.poi || null, shopPos: L.shop || null, eventPos: L.event || null, wpPos: L.wp || null, secretPos: L.secret || null,
       landmark: Object.assign({}, L.landmark, { kind: d.lm[0], label: d.lm[1] }),
       regionIndex: REGIONS.indexOf(d.region),
     };
@@ -140,6 +140,9 @@
       // WP13: a roadside Shop in every second sub-area and an Event (a short vignette) in every sub-area. Both are free of Supplies.
       if (sub.shopPos && SHOPS.includes(sub.id)) add(sub.id + '-shop', sub.shopPos, 'shop', sub.lv[0]);
       if (sub.eventPos) add(sub.id + '-event', sub.eventPos, 'event', sub.lv[0]);
+      // WP14: a Wayshrine (waypoint) near each sub-area's entry and a hidden Sealed Cache (secret: invisible until the hero walks close or a scout finds it; needs a key).
+      if (sub.wpPos) add(sub.id + '-wp', sub.wpPos, 'waypoint', sub.lv[0]);
+      if (sub.secretPos) add(sub.id + '-secret', sub.secretPos, 'secret', sub.lv[1]);
       add(sub.id + '-boss', sub.boss, 'boss', sub.bossLv, 'boss');
     }
     const byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
@@ -149,7 +152,12 @@
 
   // Danger rating in skulls (design 8.1): Lv1-3 = 1, 4-6 = 2, 7-9 = 3, 10-12 = 4, 13+ = 5.
   const danger = (level) => Math.max(1, Math.min(5, Math.ceil(level / 3)));
-  const WORLD = Object.assign(buildWorld(), { danger, MAP_W, MAP_H, SUBAREAS, SUB_BY, REGIONS, THEMES, CAMP, hash, rng, NORMAL_ROLES });
+  // WP14 scouting: a monster spot (ordinary or elite) within `sightRadius` of where the hero has stood is revealed for good; farther ones stay
+  // faint silhouettes. Hidden secrets are found within `secretRadius`. Camp "Scouting" levels widen both. MAX_KEYS = keys carried per run.
+  const sightRadius = (lv) => 380 + 150 * (lv || 0);
+  const secretRadius = (lv) => 130 + 50 * (lv || 0);
+  const FOGGED = ['battle', 'elite'];
+  const WORLD = Object.assign(buildWorld(), { sightRadius, secretRadius, FOGGED, MAX_KEYS: 3, SCOUT_GOLD: 6, danger, MAP_W, MAP_H, SUBAREAS, SUB_BY, REGIONS, THEMES, CAMP, hash, rng, NORMAL_ROLES });
   root.World = WORLD;
   if (typeof module !== 'undefined' && module.exports) module.exports = WORLD;
 })(typeof window !== 'undefined' ? window : globalThis);
