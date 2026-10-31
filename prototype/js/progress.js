@@ -157,6 +157,7 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
         if (!HERO_BY[s.hero] || !heroUnlocked(s, s.hero)) s.hero = 'marshal';
         s.squad = s.squad.filter((id) => ROSTER_BY[id] && s.owned.includes(id));
         fitSquad(s);       // WP10: old saves counted slots; Rare units now cost more Command Points
+        if (root.Journal) root.Journal.normalize(s); // WP17: old saves have no journal
         if (root.Items) root.Items.migrate(s); // WP8: old saves have a flat `equipped` list and no item levels
         return s;
       }

@@ -468,6 +468,8 @@ Gacha-pulled heroes and the Marshal's literal swap are not implemented.
 
 Permanent buffs from achievements are small and themed. Most rewards are currency, unlocks and cosmetics.
 
+*Prototype (WP17):* the Journal button in the Camp sheet opens Feats, Bestiary and Codex. Feats (milestones, feats, collection) pay small Crystal/Dust sums at once; the Bestiary counts meetings and kills per creature (100 entries, silhouettes until met) and the Codex lists bosses, enemy rules and relics met. Milestones do not unlock slots or Command Points and the Bestiary gives no combat bonus (such as +1 damage vs Knights): both would change the rules or pacing, so only currency rewards are implemented.
+
 ---
 
 ## 15. Difficulty (Heat)
@@ -502,7 +504,7 @@ Permanent buffs from achievements are small and themed. Most rewards are currenc
 |---|---|---|---|
 | 🪙 Gold | Battles during a run | Shops during the run | Lost when the run ends |
 | ✦ Souls | End of run (reach, danger, stars) | Camp upgrades | Kept |
-| 💎 Crystals | First boss kill of each sub-area (3, +1 per region; paid at once), bounties (paid at run end), achievements (later) | Gacha | Kept |
+| 💎 Crystals | First boss kill of each sub-area (3, +1 per region; paid at once), bounties (paid at run end), achievements (small sums, WP17) | Gacha | Kept |
 | ⚒ Dust | Salvaging items and duplicate units (no source yet; Camp's prototype cheat adds some) | Forge | Kept |
 
 Four currencies is the maximum; more starts to confuse players.

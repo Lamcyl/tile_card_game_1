@@ -72,7 +72,7 @@ Each package targets a mostly distinct file set so they can run one after anothe
 | 14 | Map expansion: waypoints, keys, secrets, scouting | M14, M15 | world-data.js, world-layout.js, map.js, progress.js, app.js | L |
 | 15 | Heroes | M1 | engine.js, progress.js, app.js, battle.js | L |
 | 16 | Camp upgrade tracks and Camp visuals | M27 | progress.js, engine.js, app.js, battle.js, map.js | L |
-| 17 | Achievements and bestiary | M22 | achievements.js, progress.js, app.js | M |
+| 17 | Achievements and bestiary (DONE) | M22 | achievements.js, progress.js, app.js | M |
 | 18 | Heat, Descend, pacing pass | M28, M29 | engine.js, gen.js, progress.js, app.js, sim-runs.js | M |
 
 ### Briefs
@@ -143,6 +143,8 @@ Each package targets a mostly distinct file set so they can run one after anothe
 *Done (WP16):* five new Camp tracks (`Progress.UPGRADES`): **Ward** (2 lv, barrier +1/level soaks the first damage each battle, engine `rules.barrier`/`state.barrier`), **Second Wind** (1 lv, revive at half HP; `rules.revive` is now a count so it stacks with the Phoenix Archer, run tally `run.reviveUsed`), **Choice** (Lv1 4th reward choice, stacks with Quartermaster to 5; Lv2 one reward re-roll per run, `run.rerolls`), **Purse** (3 lv, +5 starting Gold each), **Board** (1 lv, 600 Souls: a **4th player row** via rule `deepRow`, `Engine.rowsFor/playerRowsFor`; a 6th column was skipped as too invasive for gen templates/boss-defs; `battle.js` rebuilds the board and shrinks cells). The Camp is now a painted inline-SVG scene (`campScene` in app.js, structures appear per track) with grouped track list; done in the sheet, not in `map.js`. `sim-runs.js` shops the new tracks greedily (`NOTRACKS=1` ablation). Fresh-account pacing unchanged (new tracks are Souls sinks, SEED=1 profile 13.3 battles before and after).
 
 **WP17 Achievements and bestiary.** Add `achievements.js`: milestones (unlock slots and Command Points), feats (clear with one attacker, 4-barrel chain), bestiary counters with small themed bonuses (+1 damage vs Knights after 50 kills), and a codex of bosses and events. Add an Achievements tab with Crystal rewards.
+
+*Done (WP17):* `js/achievements.js` (`window.Journal`, data in `save.journal`, old saves normalised in `Progress.load`): 23 feats paid in Crystals/Dust the moment they are reached, a Bestiary of all 100 creatures (met/defeated counters, silhouettes until met, art, lore, rule text) and a Codex (20 bosses, enemy rules, relics), opened from the "📖 Journal" button in the Camp sheet (no extra tab); tracked in `battleOver`/`endRun` in app.js. Combat bonuses for kill counts (e.g. +1 damage vs Knights) were deliberately left out so no rules change.
 
 **WP18 Heat, Descend, final pacing.** After the final boss unlock Heat modifiers (the six listed, with point values and reward multiplier) and Descend (harder whole map). Wire into engine and `gen.js`, then run the campaign simulation and adjust unlock cadence to match section 18 pacing.
 

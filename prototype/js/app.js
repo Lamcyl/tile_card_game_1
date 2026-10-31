@@ -247,11 +247,11 @@
       html += '<div class="start-at" aria-label="Start position"><small>🚩 Start at</small>' + ['camp'].concat(save.waypoints).map((id) =>
         '<button class="' + (save.startAt === id ? 'on' : '') + '" data-start="' + id + '">' + (id === 'camp' ? '⛺ Camp' : esc(World.SUB_BY[id].name)) + '</button>').join('') + '</div>';
     }
-    html += campScene(save) + heroPicker();
-    html += '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
+    let bar = '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
       '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
-    html += '<button class="journal-btn' + (journalView ? ' on' : '') + '" data-jv="' + (journalView ? 'close' : 'ach') + '">' + (journalView ? '← Back to Camp' : '📖 Journal <small>' + Journal.doneCount(save) + '/' + Journal.LIST.length + ' feats · ' + Journal.seenCount(save) + '/' + Journal.creatures().length + ' creatures</small>') + '</button>';
-    if (journalView) return html + journalTab() + toolsRow();
+    const jbtn = '<button class="journal-btn' + (journalView ? ' on' : '') + '" data-jv="' + (journalView ? 'close' : 'ach') + '">' + (journalView ? '← Back to Camp' : '📖 Journal <small>' + Journal.doneCount(save) + '/' + Journal.LIST.length + ' feats · ' + Journal.seenCount(save) + '/' + Journal.creatures().length + ' creatures</small>') + '</button>';
+    if (journalView) return html + jbtn + bar + journalTab() + toolsRow();
+    html += campScene(save) + heroPicker() + bar + jbtn;
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
       { upgrades: 'Camp', squad: 'Squad ' + P.squadCp(save) + '/' + P.commandCap(save), recruit: 'Recruit', summon: 'Summon', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
     html += '<div class="list">';
@@ -522,7 +522,7 @@
     const startId = save.startAt !== 'camp' && save.waypoints.includes(save.startAt) ? save.startAt + '-wp' : 'camp'; // WP14: begin at a lit Wayshrine
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: startId, cleared: ['camp'], path: [startId], keys: 0,
       bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: P.startGold(save), rerolls: P.rewardRerolls(save), reviveUsed: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
-    selected = null; confirmReturn = false; persist();
+    selected = null; confirmReturn = false; journalView = null; persist();
     WorldMap.placeToken(startId);
     if (startId === 'camp') { const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]); } else WorldMap.focus(World.byId[startId].x, World.byId[startId].y);
     toast('Expedition started' + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Supplies and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
@@ -601,7 +601,7 @@
     Battle.hide(); document.body.classList.remove('in-battle'); WorldMap.setActive(true);
     r.hp = state.hp;
     { // WP17 journal: creatures met and defeated, then feats (no rule changes)
-      const won = state.status === 'cleared', placed = new Set(Object.values(r.placement || {}).filter((id) => P.ROSTER_BY[id] && P.roleOf && P.roleOf(id) === 'attacker')).size;
+      const won = state.status === 'cleared', placed = new Set(Object.values(r.placement || {}).filter((id) => P.ROSTER_BY[id] && E.CARD_TYPES[P.ROSTER_BY[id].type].role === 'attacker')).size;
       Journal.record(save, state, won, n, report, placed); for (const id of r.relics || []) Journal.noteRelic(save, id);
     }
     if (state.reviveUsed) r.reviveUsed = (Number(r.reviveUsed) || 0) + state.reviveUsed; // revives spent (Phoenix Archer, Second Wind): once per run each
@@ -651,7 +651,7 @@
     let keyNote = '';
     if ((boss || n.type === 'elite') && (r.keys || 0) < World.MAX_KEYS) { r.keys = (r.keys || 0) + 1; keyNote = ' · 🗝 <b>+1 Key</b> (opens a hidden Sealed Cache)'; }
     const supLine = '<p class="supply-line">🎒 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left' + keyNote + '.</p>';
-    const featHtml = ''; const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
+    const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
       checkFeats(true) + (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'No free slot: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
     persist(); renderAll();
     if (r.supplies <= 0) { outOfSupplies(title, text, extra); return; }
@@ -801,6 +801,7 @@
     save.souls += earned; save.runs += 1;
     const bl = r.bounties || [], bountyCrystals = Bounties.collect(bl);
     P.earn(save, 'crystals', bountyCrystals); save.bountiesDone = (save.bountiesDone || 0) + bl.filter((b) => b.done).length;
+    for (const id of r.relics || []) Journal.noteRelic(save, id);
     save.bestLevel = Math.max(save.bestLevel, r.maxLevel);
     save.lastPath = r.path.slice();
     if (newBest) { save.prevBestPath = prevBestPath; save.bestPath = r.path.slice(); }
@@ -811,6 +812,7 @@
       if (cheap) { if (save.souls < cheap.cost) { bonus = cheap.cost - save.souls; save.souls += bonus; } pointAt = cheap.id; }
     }
     save.run = null; selected = null; confirmReturn = false;
+    const featHtml = checkFeats(true);
     persist();
     const unlockedNames = r.unlockedNow.map((u) => World.SUB_BY[u].name);
     const found = (r.found || []).map((id) => Items.BY_ID[id]);
@@ -826,7 +828,7 @@
       '<p class="reach">Furthest reach: <b>Lv' + r.maxLevel + '</b> · ' + (prevBest ? 'previous best <b>Lv' + prevBest + '</b>' : 'your first expedition') + '. ' +
       (newBest ? 'A new record! ' : '') + '<span class="muted">The map at Camp now draws your last route (red) and best reach (gold) as faint ghost lines' + (newBest && prevBestPath.length > 1 ? ', with the old best in grey' : '') + '.</span></p>' +
       (bl.length ? '<h4 class="route-h">Bounties</h4>' + bountyList(bl) + '<p class="bounty-sum">' + (bountyCrystals || r.crystalsNow ? '💎 +' + (bountyCrystals + (r.crystalsNow || 0)) + ' Crystals' + (r.crystalsNow ? ' (' + r.crystalsNow + ' from a first boss kill)' : '') : 'No bounty finished this time.') + '</p>' : '') +
-      (found.length ? '<p>Items found: <b>' + found.map((it) => esc(it.name)).join(', ') + '</b>. Equip them in Camp ▸ Gear.</p>' : '') +
+      featHtml + (found.length ? '<p>Items found: <b>' + found.map((it) => esc(it.name)).join(', ') + '</b>. Equip them in Camp ▸ Gear.</p>' : '') +
       (unlockedNames.length ? '<p>New areas revealed: <b>' + esc(unlockedNames.join(', ')) + '</b></p>' : '') +
       (cheap ? '<p class="first-run">Your Souls already cover your first upgrade: <b>' + cheap.icon + ' ' + esc(cheap.name) + '</b> (' + esc(cheap.desc) + ') for ✦ ' + P.upgradeCost(save, cheap.id) + '.</p>' : '<p class="muted small">Spend Souls at Camp on upgrades and recruits, then set out again to reach further.</p>') +
       ((r.gold || 0) > 0 ? '<p class="muted small">🪙 ' + r.gold + ' unspent Gold stayed behind: Gold only lasts for one expedition.</p>' : '') +
@@ -853,7 +855,9 @@
     const b = ev.target.closest('button'); if (!b) return;
     if (b.id === 'sheet-toggle') { sheetOpen = !sheetOpen; renderSheet(); return; }
     if (!b.dataset.salvage) confirmSalvage = null;
-    if (b.dataset.tab) { campTab = b.dataset.tab; sheetOpen = true; renderSheet(); return; }
+    if (b.dataset.jv) { journalView = b.dataset.jv === 'close' ? null : b.dataset.jv; renderSheet(); const l = $('#sheet'); l.scrollTop = 0; return; }
+    if (b.dataset.region) { bestRegion = Number(b.dataset.region); renderSheet(); return; }
+    if (b.dataset.tab) { journalView = null; campTab = b.dataset.tab; sheetOpen = true; renderSheet(); return; }
     if (b.dataset.hero) {
       const h = P.HERO_BY[b.dataset.hero];
       if (!P.heroUnlocked(save, h.id)) { toast(h.name + ' is locked: ' + h.lock + '.'); return; }
@@ -870,7 +874,7 @@
       if (!save.owned.includes(u.id) && P.recruitAvailable(save, u) && (u.gems !== undefined ? P.spend(save, 'crystals', u.gems) : P.spend(save, 'souls', u.cost))) {
         save.owned.push(u.id);
         if (!P.canAdd(save, u.id)) save.squad.push(u.id);
-        persist(); toast(unitView(u.id).name + ' joined your roster.'); renderAll();
+        persist(); toast(unitView(u.id).name + ' joined your roster.'); renderAll(); checkFeats(false);
       }
       return;
     }
@@ -879,7 +883,7 @@
       if (!res) { toast('Not enough Crystals.'); return; }
       const ups = res.filter((r) => r.starUp).length, news = res.filter((r) => r.isNew).length;
       summonMsg = news + ' new, ' + ups + ' star-up' + (ups === 1 ? '' : 's') + '.';
-      persist(); renderAll(); showSummon(res); return;
+      persist(); renderAll(); showSummon(res); checkFeats(false); return;
     }
     if (b.dataset.office) {
       const res = P.officeTrade(save, b.dataset.office);
