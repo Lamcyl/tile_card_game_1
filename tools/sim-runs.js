@@ -1,6 +1,7 @@
 // Balancing helper for the world map: plays whole runs with a strong
 // (search-based) player and reports how far each run gets.
-// Usage: node tools/sim-runs.js [runs]
+// Usage: node tools/sim-runs.js [runs]            profiles at fixed progress points
+//        node tools/sim-runs.js 1 campaign [maxRuns]   consecutive runs with greedy Camp shopping
 'use strict';
 const Engine = require('../prototype/js/engine.js');
 const World = require('../prototype/js/world-data.js');
@@ -50,14 +51,17 @@ function playRun(save0) {
   let hp = Progress.maxHp(save), supplies = Progress.startSupplies(save), cleared = new Set(), wins = 0, maxLv = 0, souls = 0, bosses = 0, items = 0, wonFirst = [];
   for (;;) {
     if (supplies <= 0) return { wins, maxLv, souls, bosses, items, end: 'supplies', start: Progress.startSupplies(save0), save };
-    const open = World.nodes.filter((n) => n.type !== 'camp' && !cleared.has(n.id) && save.unlocked.includes(n.sub));
+    // Sub-areas whose boss already fell are skipped (nothing new there); fights are taken lowest level first,
+    // the boss when Supplies run low (<= 2) or when nothing else is left in the frontier.
+    const open = World.nodes.filter((n) => n.type !== 'camp' && !cleared.has(n.id) && save.unlocked.includes(n.sub) && !save.bossesBeaten.includes(n.sub));
     const pois = open.filter((n) => n.type === 'shrine' || n.type === 'treasure');
     const fights = open.filter((n) => !pois.includes(n)).sort((a, b) => (a.type === 'boss') - (b.type === 'boss') || a.level - b.level);
     const spring = pois.find((n) => n.type === 'shrine'); // heal when below 60% HP
     if (spring && hp < Progress.maxHp(save) * 0.6) { cleared.add(spring.id); hp = Math.min(Progress.maxHp(save), hp + 8); continue; }
     const cache = pois.find((n) => n.type === 'treasure'); if (cache) { cleared.add(cache.id); souls += 10; continue; }
     if (!fights.length) return { wins, maxLv, souls, bosses, items, end: 'cleared', start: Progress.startSupplies(save0), save };
-    const node = fights[0];
+    const bossNode = fights.find((n) => n.type === 'boss'), normals = fights.filter((n) => n.type !== 'boss');
+    const node = bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode);
     cleared.add(node.id);
     const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed);
     if (st.status !== 'cleared') return { wins, maxLv, souls: Math.round(souls * 0.75), bosses, items, end: 'died', diedAt: node.level, start: Progress.startSupplies(save0), save };
@@ -78,12 +82,41 @@ const profiles = {
   'fresh account': Progress.freshSave(),
   'after ~5 runs (HP+6, spear, archer2)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 2 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1'] }),
   'meadow boss beaten (HP+9, 6 slots, horn, Provisions 1)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 3, command: 1, provisions: 1 }, unlocked: ['meadow', 'forest'], bossesBeaten: ['meadow'], squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1'] }),
+  'Greenvale done (HP+15, 7 slots, Drill 1, Provisions 2)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 5, command: 2, drill: 1, bulwark: 1, provisions: 2 }, unlocked: ['meadow', 'forest', 'bamboo', 'lake', 'beach', 'dunes'], bossesBeaten: ['meadow', 'forest', 'bamboo', 'lake'], squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1'] }),
 };
-const N = Number(process.argv[2] || 6);
-console.log('World: ' + World.SUBAREAS.length + ' sub-areas, ' + World.nodes.filter((n) => n.type !== 'camp').length + ' spots (free exploration), ' + Items.ALL.length + ' items');
-for (const [name, save] of Object.entries(profiles)) {
-  const res = []; for (let i = 0; i < N; i++) res.push(playRun(save));
-  const avg = (f) => (res.reduce((n, r) => n + f(r), 0) / N).toFixed(1);
-  console.log(`\n${name} (start Supplies ${res[0].start}): battles won ${avg((r) => r.wins)}, bosses ${avg((r) => r.bosses)}, items ${avg((r) => r.items)}, deepest level ${avg((r) => r.maxLv)}, souls ${avg((r) => r.souls)}`);
-  console.log('  ' + res.map((r) => (r.end === 'died' ? 'died at Lv' + r.diedAt : r.end === 'supplies' ? 'out of Supplies' : 'cleared all') + ' after ' + r.wins).join(' | '));
+
+// Campaign: play consecutive runs, spending Souls greedily on the cheapest useful Camp upgrade or recruit,
+// and report in which run each region's first boss fell.
+function campaign(maxRuns) {
+  let save = Progress.freshSave(); const firstRun = {}, log = [];
+  const order = ['vitality', 'provisions', 'command', 'drill', 'fortune', 'bulwark'];
+  for (let r = 1; r <= maxRuns; r++) {
+    const res = playRun(save); const before = save.bossesBeaten.length;
+    save = res.save; save.runs++; save.souls += Math.round(res.souls); save.run = null; save.equipped = save.equipped.slice(0, Items.SLOTS);
+    for (const b of save.bossesBeaten) { const reg = World.SUB_BY[b].region; if (!(reg in firstRun)) firstRun[reg] = r; }
+    for (let guard = 0; guard < 20; guard++) { // shopping
+      const opts = [];
+      for (const u of Progress.ROSTER) if (!u.start && !save.owned.includes(u.id) && Progress.recruitAvailable(save, u) && u.cost <= save.souls) opts.push({ cost: u.cost, buy: () => { save.owned.push(u.id); if (save.squad.length < Progress.slots(save)) save.squad.push(u.id); } });
+      for (const id of order) { const c = Progress.upgradeCost(save, id); if (c !== null && c <= save.souls) opts.push({ cost: c, buy: () => { save.upgrades[id] = (save.upgrades[id] || 0) + 1; } }); }
+      if (!opts.length) break; opts.sort((a, b) => a.cost - b.cost); save.souls -= opts[0].cost; opts[0].buy();
+    }
+    log.push(res.wins + (res.end === 'died' ? 'x@' + res.diedAt : '') + (res.bosses ? 'B' + res.bosses : ''));
+    if (save.bossesBeaten.length === World.SUBAREAS.length) break;
+  }
+  console.log('\nCampaign (' + maxRuns + ' runs max): battles per run ' + log.join(' '));
+  console.log('  final upgrades ' + JSON.stringify(save.upgrades) + ', squad ' + save.squad.length + ', owned ' + save.owned.length + ', items ' + save.items.length);
+  console.log('  bosses beaten ' + save.bossesBeaten.length + '/' + World.SUBAREAS.length + ' (' + save.bossesBeaten.join(', ') + ')');
+  console.log('  run in which each region first had a boss beaten: ' + World.REGIONS.map((g) => g + ' ' + (firstRun[g] || '-')).join(', '));
 }
+
+const N = Number(process.argv[2] || 6);
+const nodes = World.nodes.filter((n) => n.type !== 'camp');
+console.log('World: ' + World.SUBAREAS.length + ' sub-areas, ' + nodes.length + ' spots (free exploration; ' + nodes.filter((n) => ['battle', 'elite', 'boss'].includes(n.type)).length + ' monster spots), ' + Items.ALL.length + ' items' + (typeof window === 'undefined' && !globalThis.WorldLayout ? ' [placeholder layout]' : ''));
+if (process.argv[3] !== 'campaign') {
+  for (const [name, save] of Object.entries(profiles)) {
+    const res = []; for (let i = 0; i < N; i++) res.push(playRun(save));
+    const avg = (f) => (res.reduce((n, r) => n + f(r), 0) / N).toFixed(1);
+    console.log(`\n${name} (start Supplies ${res[0].start}): battles won ${avg((r) => r.wins)}, bosses ${avg((r) => r.bosses)}, items ${avg((r) => r.items)}, deepest level ${avg((r) => r.maxLv)}, souls ${avg((r) => r.souls)}`);
+    console.log('  ' + res.map((r) => (r.end === 'died' ? 'died at Lv' + r.diedAt : r.end === 'supplies' ? 'out of Supplies' : 'cleared all') + ' after ' + r.wins).join(' | '));
+  }
+} else campaign(Number(process.argv[4] || 40));

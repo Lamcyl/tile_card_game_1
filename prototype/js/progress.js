@@ -16,10 +16,10 @@
     { id: 'mage1',   type: 'mage',      cost: 55, need: 'forest' },
     { id: 'sword2',  type: 'swordsman', cost: 60, need: 'forest' },
     { id: 'shield2', type: 'shield',    cost: 60, need: 'forest', block: 2 },
-    { id: 'spy1',    type: 'spyglass',  cost: 70, need: 'lake' },
-    { id: 'drum2',   type: 'drummer',   cost: 80, need: 'lake' },
-    { id: 'spear2',  type: 'spearman',  cost: 110, need: ['coral', 'temple'] },
-    { id: 'horn2',   type: 'horn',      cost: 160, need: ['coral', 'temple'] },
+    { id: 'spy1',    type: 'spyglass',  cost: 70, need: 'bamboo' },
+    { id: 'drum2',   type: 'drummer',   cost: 80, need: 'bamboo' },
+    { id: 'spear2',  type: 'spearman',  cost: 110, need: ['coral', 'oasis'] },
+    { id: 'horn2',   type: 'horn',      cost: 160, need: ['coral', 'oasis'] },
     { id: 'mage2',   type: 'mage',      cost: 180, need: ['snow', 'ash'] },
   ];
   const ROSTER_BY = Object.fromEntries(ROSTER.map((u) => [u.id, u]));
@@ -41,7 +41,7 @@ const SUPPLIES_PER_BOSS = 4; // a boss victory adds this many Supplies
 const Items = () => root.Items;
 const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range: {}, block: 0, hp: 0, supplies: 0, souls: 0 });
 
-  const SAVE_KEY = 'tile-defense-world-v2';
+  const SAVE_KEY = 'tile-defense-world-v3';
 
   function freshSave() {
     return {

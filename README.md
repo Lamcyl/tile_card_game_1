@@ -14,7 +14,7 @@ The prototype is the **world map game**:
 2. Fight any monster in an unlocked area, in any order. Each win costs 1 Supply (bosses give some back), and the run ends when HP or Supplies run out, or when you return to Camp to bank your Souls. Monsters drop gear you equip at Camp.
 3. Spend Souls on upgrades and recruits, then go further on the next run.
 
-The world has 5 regions with 3 sub-areas each. Each sub-area has a landmark and a boss that reveals the next area.
+The world is a large, sparse map of 5 regions with 4 sub-areas each (20 in all, see `docs/WORLD_SPEC.md`). Each sub-area has a landmark, 6-7 enemies including its own boss, and the boss reveals the next area.
 
 The earlier three-stage battle tester is at `sandbox.html` (run it with `npm run dev` or `npm run preview`).
 
@@ -47,7 +47,8 @@ npm run single                       # dist/tile-defense.html, one self-containe
 docs/GAME_DESIGN.md                  Gameplay design document
 prototype/index.html                 World map game (Vite entry: main.js, world.css)
 prototype/js/engine.js               Battle rules engine (pure logic, shared with tools)
-prototype/js/world-data.js           Regions, sub-areas (landmarks, bounds), enemy themes, monster spots
+prototype/js/world-layout.js         Map geometry (WorldLayout): sub-area shapes, spot positions, terrain features
+prototype/js/world-data.js           Regions, sub-areas, levels, unlocks, enemy themes; builds the monster spots from the layout
 prototype/js/progress.js             Souls, Camp upgrades, roster, save file
 prototype/js/items.js                Equipment items, drop tables and their effects
 prototype/js/gen.js                  Battle generator (level + sub-area theme)

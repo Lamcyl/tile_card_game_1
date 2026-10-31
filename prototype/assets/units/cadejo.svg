@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce cadejo: black night-road hound stalking low, chain streaming behind, red eyes -->
+<!-- legs -->
+<g fill="none" stroke="#1b1a1a" stroke-linecap="round" stroke-linejoin="round"><path style="stroke-width:17" d="M84 146L66 184L44 204"/><path style="stroke-width:17" d="M112 150L106 190L86 208"/><path style="stroke-width:19" d="M190 140L214 176L194 208"/><path style="stroke-width:17" d="M162 148L150 188L170 208"/></g>
+<g class="i"><ellipse cx="40" cy="206" rx="12" ry="7"/><ellipse cx="82" cy="210" rx="12" ry="7"/><ellipse cx="190" cy="210" rx="12" ry="7"/><ellipse cx="172" cy="210" rx="12" ry="7"/></g>
+<g class="t" style="stroke-width:2.5;stroke:#9a948b" ><path d="M34 214h8M76 218h8M184 218h8M166 218h8"/></g>
+<!-- tail -->
+<path class="i" d="M208 112Q246 112 250 154Q236 134 214 140Z"/>
+<!-- body -->
+<path class="i" d="M60 136Q62 100 108 96Q160 88 198 102Q226 112 220 140Q200 160 160 154Q120 160 92 152Q64 152 60 136Z"/>
+<path class="t" d="M128 110Q140 124 134 138M160 108Q172 122 164 136M188 114Q196 126 190 136M100 124L112 134" style="stroke-width:3;stroke:#55514c"/>
+<path class="t" d="M112 92Q160 82 196 98" style="stroke-width:3;stroke:#9a948b"/>
+<!-- mane spikes -->
+<path class="i" d="M62 112L54 74L80 92L86 52L106 86L126 56L130 90L156 80L146 106Z"/>
+<path class="t" d="M86 60L94 84M126 64L124 84" style="stroke-width:3;stroke:#55514c"/>
+<!-- ears -->
+<path class="i" d="M104 90L122 50L132 94Z"/><path class="i" d="M84 92L90 54L110 90Z"/>
+<!-- mouth -->
+<path class="v" d="M24 122L92 124L82 142L36 134Z"/>
+<path class="i" stroke="#55514c" stroke-width="3" d="M24 128Q50 158 88 144L96 126L60 124Z"/>
+<path class="p" d="M34 134L40 124L46 138ZM56 142L62 130L68 146ZM74 142L80 132L84 143Z"/>
+<path class="i" stroke="#55514c" stroke-width="3" d="M102 90Q78 80 50 96L14 112L18 122Q52 126 92 122Q112 120 114 104Z"/>
+<path class="p" d="M26 122L32 134L38 122ZM44 124L50 136L56 124ZM62 124L68 135L74 124ZM80 124L85 132L90 123Z"/>
+<circle class="v" cx="24" cy="112" r="4.5"/>
+<path class="v" d="M52 96L94 94L90 110Q70 110 50 102Z"/><path class="i" d="M74 96L82 96L84 108L76 108Z"/>
+<path class="t" d="M46 90L76 86M28 104L40 100" style="stroke-width:3;stroke:#9a948b"/>
+<!-- collar + chain -->
+<path class="o m" d="M98 98L120 90L128 112L104 122Z" style="stroke-width:3"/>
+<ellipse class="o m" cx="112.0" cy="112.0" rx="8" ry="6" transform="rotate(-65 112.0 112.0)" style="stroke-width:3"/><ellipse class="o l" cx="121.0" cy="95.0" rx="8" ry="4.5" transform="rotate(-59 121.0 95.0)" style="stroke-width:3"/><ellipse class="o m" cx="131.1" cy="80.3" rx="8" ry="6" transform="rotate(-52 131.1 80.3)" style="stroke-width:3"/><ellipse class="o l" cx="142.2" cy="68.0" rx="8" ry="4.5" transform="rotate(-44 142.2 68.0)" style="stroke-width:3"/><ellipse class="o m" cx="154.5" cy="58.1" rx="8" ry="6" transform="rotate(-34 154.5 58.1)" style="stroke-width:3"/><ellipse class="o l" cx="167.8" cy="50.5" rx="8" ry="4.5" transform="rotate(-25 167.8 50.5)" style="stroke-width:3"/><ellipse class="o m" cx="182.2" cy="45.3" rx="8" ry="6" transform="rotate(-15 182.2 45.3)" style="stroke-width:3"/><ellipse class="o l" cx="197.7" cy="42.5" rx="8" ry="4.5" transform="rotate(-6 197.7 42.5)" style="stroke-width:3"/><ellipse class="o m" cx="214.3" cy="42.1" rx="8" ry="6" transform="rotate(2 214.3 42.1)" style="stroke-width:3"/><ellipse class="o l" cx="232.0" cy="44.0" rx="8" ry="4.5" transform="rotate(10 232.0 44.0)" style="stroke-width:3"/>
+</svg>

@@ -544,16 +544,16 @@ The prototype in `prototype/` has two pages.
 
 **World map game (`index.html`)**: tests short runs on a persistent map.
 
-- **World:** 5 regions with 3 sub-areas each (15 in total), 126 monster and event spots, no paths. Greenvale (Sunny Meadows, Old Oak Wood, Mirror Lake) sits above the Camp. Mirror Lake's boss opens the Azure Coast (Shell Beach, Coral Shallows, Shipwreck Cove) on the left and Sunscorch (Dune Sea, Palm Oasis, Buried Temple) on the right. Their last bosses open Frostveil (Snowdrift Plains, Frozen Lake, Rime Forest) and Ember Peaks (Ash Fields, Obsidian Ridge, Magma Caldera). Each sub-area has its own landmark, enemy theme and boss.
+- **World:** 5 regions with 4 sub-areas each (20 in total) on a large, sparse map (a phone screen shows only 1-2 enemies; terrain features fill the space between). The exact geometry is the `WorldLayout` contract in `docs/WORLD_SPEC.md`. Greenvale (Sunny Meadows, Old Oak Wood, Bamboo Valley, Mirror Lake) sits above the Camp. Mirror Lake's boss opens the Azure Coast (Shell Beach, Coral Shallows, Shipwreck Cove, Mist Isles) and Sunscorch (Dune Sea, Palm Oasis, Red Canyon, Buried Temple). Mist Isles' boss opens Frostveil (Snowdrift Plains, Frozen Lake, Rime Forest, Glacier Throne) and Buried Temple's boss opens Ember Peaks (Ash Fields, Obsidian Ridge, Ember Falls, Magma Caldera). Each sub-area has its own landmark, enemy theme and boss, and **6-7 enemies including the boss** (4-5 ordinary, 1 elite, 1 boss), plus 0-1 spring or cache. About 140 monster spots in total. Levels rise from Lv1 (Sunny Meadows) to Lv13-15 (Glacier Throne, Magma Caldera).
 - **Unlocks:** a sub-area's boss reveals the next sub-area of its region; the last boss of a region reveals the next region.
-- **Runs (free exploration):** start at Camp with 8 Supplies. Every monster in every unlocked sub-area (5 ordinary, 1-2 elites and the boss) can be fought at any time, in any order, once per run. HP carries over. Each sub-area may hold a healing spring or supply cache that costs no Supplies. After each battle you choose 1 of 3 run rewards (heal, +1 ATK/block/boost, and from the second region sometimes +1 range).
+- **Runs (free exploration):** start at Camp with 8 Supplies. Every monster in every unlocked sub-area (4-5 ordinary, 1 elite and the boss) can be fought at any time, in any order, once per run. HP carries over. Each sub-area may hold a healing spring or supply cache that costs no Supplies. After each battle you choose 1 of 3 run rewards (heal, +1 ATK/block/boost, and from the second region sometimes +1 range).
 - **Supplies:** a normal or elite win costs 1 Supply, a boss adds 4. At 0 the run ends as a safe return (all Souls kept).
-- **Items:** 169 permanent items; see 24.3.
+- **Items:** 210 permanent items (140 unique, 60 sub-area, 10 region); see 24.3.
 - **Ending a run:** Return to Camp or running out of Supplies keeps 100% of Souls; a defeat keeps 75%.
 - **Camp:** Souls buy upgrades (Vitality, Command, Drill, Bulwark, Fortune, Provisions) and recruits. Bosses unlock new recruits. The squad is limited by slots. The Gear tab equips up to 3 items.
 - **Battles:** generated from the spot's level and sub-area theme. Level 1 fights are small, and bosses are usually two-turn fights.
 - **Saving:** progress is saved in the browser. Prototype tools give +100 Souls or reset progress.
-- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player. The simulated strong player now takes about 12 battles on a fresh account before dying or running out of Supplies (it clears Sunny Meadows and often Old Oak Wood); real players should land at the 8-10 battles of 24.1.
+- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player. The simulated strong player now takes about SIMFRESH battles on a fresh account before dying or running out of Supplies (it clears Sunny Meadows and often Old Oak Wood); real players should land at the 8-10 battles of 24.1.
 
 **Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
 
@@ -583,12 +583,12 @@ These directions came out of the first playtest. Numbers are starting points for
 - The first or second battle of the **first run** always drops a piece of equipment (for example, *Rusty Sword: +1 ATK to Swordsmen*).
 - That moment introduces equipment and the equip screen (section 13).
 - **Implemented as follows.** Items (`js/items.js`) are permanent and give one passive effect: +ATK for a card type, +block for Shields, +amount for a support type, +max HP, +starting Supplies, +% Souls, or (rare, only from the second region on) +range for a card type. Rarity sets the strength: Common (+1 ATK, +1 block, +2 HP, +8% Souls), Rare (+2, +2, +4, +15%, +1 amount, +1 Supply, +1 range) and Epic (+3, +3, +6, +25%, +2 amount, +2 Supplies, +1 range). Up to 3 items are equipped in the Camp Gear tab; a new drop equips itself if a slot is free.
-- **Every monster spot has one unique item** that only it drops (named after its creature, for example "Alux's Plate"), plus shared items: three per sub-area and two per region, 169 items in all. A spot lists its unique item and three shared ones. Win chances: ordinary 25% / 7% / 4% (unique / sub-area / region), elite 40% / 12% / 7%, boss 35% / 18% / 10%. A boss's unique item (Epic) is guaranteed the first time it falls. At most one item drops per battle and owned items are skipped. The spot's sheet shows its drops, the unique one highlighted and owned ones ticked.
+- **Every monster spot has one unique item** that only it drops (named after its creature, for example "Alux's Plate"), plus shared items: three per sub-area and two per region, 210 items in all (140 unique ones). A spot lists its unique item and three shared ones. Win chances: ordinary 25% / 7% / 4% (unique / sub-area / region), elite 40% / 12% / 7%, boss 35% / 18% / 10%. A boss's unique item (Epic) is guaranteed the first time it falls. At most one item drops per battle and owned items are skipped. The spot's sheet shows its drops, the unique one highlighted and owned ones ticked.
 - The first or second battle of the very first run always drops an item. Range as a run reward (24.2) now only appears from the second region onward, and only some of the time.
 
 ### 24.4 More choice on the map (implemented as free exploration)
 
-- The node graph is gone. Every sub-area has 6-8 monster spots (4-5 ordinary, 1-2 elite, 1 boss), all open at once (see 24.5), plus at most one spring or cache.
+- The node graph is gone. Every sub-area has 6-7 monster spots (4-5 ordinary, 1 elite, 1 boss), all open at once (see 24.5), plus at most one spring or cache.
 
 ### 24.5 Battle limit per run ("Supplies") (implemented)
 

@@ -7,9 +7,12 @@
   function shuffle(a, R) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   const vary = (v, R, spread) => Math.max(1, Math.round(v * (1 - spread + R() * spread * 2)));
 
+  const RAMP_HP = 0.10, RAMP_ATK = 0.5;
   function generateBattle(node, runSeed) {
     const R = World.rng(runSeed + ':' + node.id);
     const L = node.level;
+    // From the second region on, enemies grow faster than the squad's early upgrades (design 24.1).
+    const ramp = L > 5 ? 1 + RAMP_HP * (L - 5) : 1, rampAtk = L > 5 ? Math.floor((L - 5) * RAMP_ATK) : 0;
     const sub = node.sub;
     const enemies = [];
     const free = [];
@@ -26,11 +29,11 @@
     if (node.type === 'boss') {
       // Boss in the front centre, minions around it. Usually a two-turn fight.
       const cell = [1, 2]; free.splice(free.findIndex((f) => f[0] === 1 && f[1] === 2), 1);
-      add('boss', 10 + L * 4, 3 + Math.floor(L * 0.6), L >= 7 ? 1 : 0, cell);
+      add('boss', Math.round((10 + L * 4) * ramp), 3 + Math.floor(L * 0.6) + rampAtk, L >= 7 ? 1 : 0, cell);
       const minions = Math.min(7, 1 + Math.floor(L / 2));
       for (let i = 0; i < minions; i++) {
         const role = R() < 0.3 && L >= 4 ? 'armored' : 'basic';
-        add(role, vary(2 + L * 0.95, R, 0.3), vary(1.4 + L * 0.42, R, 0.3), role === 'armored' ? 1 : 0, take(() => true));
+        add(role, vary((2 + L * 0.95) * ramp, R, 0.3), vary(1.4 + L * 0.42, R, 0.3) + rampAtk, role === 'armored' ? 1 : 0, take(() => true));
       }
       if (L >= 3) add('barrel', 1, 0, 0, take((f) => f[0] === 1));
       return { enemies };
@@ -45,8 +48,8 @@
       if (L >= 3 && roll < 0.22) { role = 'armored'; armor = L >= 9 ? 2 : 1; hpMul = 0.9; }
       else if (roll < 0.45) { role = 'tough'; hpMul = 1.4; atkAdd = L >= 5 ? 1 : 0; }
       if (elite && i === 0) { role = 'tough'; hpMul = 2.2; atkAdd = 1; }
-      const hp = vary((2.2 + L * 0.95) * hpMul, R, 0.3);
-      const atk = vary(1.5 + L * 0.42, R, 0.35) + atkAdd;
+      const hp = vary((2.2 + L * 0.95) * hpMul * ramp, R, 0.3);
+      const atk = vary(1.5 + L * 0.42, R, 0.35) + atkAdd + rampAtk;
       // Tough enemies prefer the front row, basic ones spread out.
       add(role, hp, atk, armor, take((f) => (role === 'tough' ? f[0] === 1 : true)));
     }

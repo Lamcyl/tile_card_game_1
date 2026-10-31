@@ -32,22 +32,27 @@
   const PLURAL = { swordsman: 'Swordsmen', spearman: 'Spearmen', spyglass: 'Spyglasses' };
   const plural = (t) => PLURAL[t] || Engine.CARD_TYPES[t].name + 's';
 
-  // Shared items: [name, effect, rarity]. Effect = kind or kind:cardType. Three per sub-area, two per region.
+  // Shared items: [name, effect, rarity]. Effect = kind or kind:cardType. Three per sub-area, two per region (20 sub-areas, 5 regions).
   const SUB_SHARED = {
     meadow:  [['Clover Wristband', 'atk:swordsman', 'common'], ['Dewdrop Pendant', 'hp', 'common'], ['Sunflower Pennant', 'amount:banner', 'rare']],
     forest:  [['Acorn Charm', 'souls', 'common'], ['Oak Bark Bracer', 'block', 'common'], ['Woodcutter\'s Axe-Head', 'atk:spearman', 'rare']],
+    bamboo:  [['Bamboo Shoot Pendant', 'hp', 'common'], ['Jade Leaf Quill', 'atk:archer', 'common'], ['Panda-Hide Wrap', 'block', 'rare']],
     lake:    [['Heron Feather Quill', 'atk:archer', 'common'], ['Lakeside Reed Cloak', 'hp', 'common'], ['Mirror Shard Lens', 'amount:spyglass', 'rare']],
     beach:   [['Conch Charm', 'atk:mage', 'common'], ['Driftwood Shield Rim', 'block', 'common'], ['Sea-Glass Sigil', 'range:mage', 'rare']],
     coral:   [['Pink Coral Bead', 'souls', 'common'], ['Reefstone Plate', 'block', 'common'], ['Pearl Diver\'s Satchel', 'supplies', 'rare']],
     cove:    [['Rusted Cutlass Edge', 'atk:swordsman', 'common'], ['Barnacle Hide', 'hp', 'common'], ['Sea Chest Key', 'supplies', 'rare']],
+    isles:   [['Mistwalker Charm', 'atk:mage', 'common'], ['Sea-Stack Pebble', 'souls', 'common'], ['Fogbell Prism', 'amount:spyglass', 'rare']],
     dunes:   [['Sand-Etched Dagger', 'atk:swordsman', 'common'], ['Dune Silk Wrap', 'hp', 'common'], ['Caravan Water Flask', 'supplies', 'rare']],
     oasis:   [['Date Palm Charm', 'souls', 'common'], ['Lotus Pool Bead', 'hp', 'common'], ['Reed Sandal Drumskin', 'amount:drummer', 'rare']],
+    canyon:  [['Red Rock Spearhead', 'atk:spearman', 'common'], ['Canyon Clay Plate', 'block', 'common'], ['Echo Drumskin', 'amount:drummer', 'rare']],
     temple:  [['Scarab Amulet', 'souls', 'common'], ['Sandstone Tablet Plate', 'block', 'common'], ['Gilded Lotus Lens', 'amount:spyglass', 'rare']],
     snow:    [['Snowshoe Cord', 'hp', 'common'], ['Icicle Arrowhead', 'atk:archer', 'common'], ['Hide-Lined Mantle', 'block', 'rare']],
     frozen:  [['Skate Blade Edge', 'atk:swordsman', 'common'], ['Ice-Fisher\'s Bead', 'souls', 'common'], ['Glass Lake Sigil', 'range:spearman', 'rare']],
     rime:    [['Rime-Pine Charm', 'atk:mage', 'common'], ['Crystal Bough Plate', 'block', 'common'], ['Hoarfrost Pennant', 'amount:banner', 'rare']],
+    glacier: [['Frost Throne Splinter', 'atk:swordsman', 'common'], ['Palace Ice Locket', 'hp', 'common'], ['Winter Queen\'s Ration Tin', 'supplies', 'rare']],
     ash:     [['Cinder Brand', 'atk:swordsman', 'common'], ['Ash-Wrapped Talisman', 'souls', 'common'], ['Charred Bone Rim', 'block', 'rare']],
     ridge:   [['Obsidian Flake Arrowhead', 'atk:archer', 'common'], ['Glassforged Plate', 'block', 'common'], ['Volcanic Glass Sigil', 'range:spearman', 'rare']],
+    lavafall:[['Ember Spray Charm', 'atk:mage', 'common'], ['Cooled Lava Plate', 'block', 'common'], ['Steamveil Sigil', 'range:swordsman', 'rare']],
     caldera: [['Magma Core Lantern', 'atk:mage', 'common'], ['Emberheart Locket', 'hp', 'common'], ['Phoenix Ash Satchel', 'supplies', 'rare']],
   };
   const REGION_SHARED = {

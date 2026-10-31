@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce buluc chabtan: low lunge in profile, spear levelled, snarling face split by the black war stripe, plumes streaming back -->
+<defs><clipPath id="fh"><path d="M150 72 Q150 28 108 26 Q72 28 68 60 L50 80 L66 90 L62 100 L70 120 L86 132 L128 128 Q150 112 150 72Z"/></clipPath></defs>
+<!-- plumes -->
+<path d="M130 40 Q180 4 250 20 Q212 32 190 56 Q160 62 138 56Z" fill="#c8352b"/>
+<path d="M134 56 Q190 36 252 64 Q214 70 192 84 Q162 84 142 74Z" fill="#f6f2e9"/>
+<path d="M142 72 Q192 70 248 106 Q208 104 184 112 Q158 104 148 92Z" fill="#9a948b"/>
+<path d="M150 40 Q190 30 226 26 M156 66 Q196 56 232 62 M160 90 Q196 88 232 100" fill="none" stroke-width="2"/>
+<!-- rear leg -->
+<path d="M172 178 L226 232" stroke-width="22" fill="none"/><path d="M172 178 L226 232" stroke-width="14" stroke="#f6f2e9" fill="none"/>
+<path d="M214 226 L244 228 L246 244 L222 244Z" fill="#9a948b"/>
+<!-- sash -->
+<path d="M176 172 Q214 160 244 176 Q222 186 212 200 Q200 190 178 190Z" fill="#c8352b"/>
+<!-- torso -->
+<path d="M142 118 Q164 108 180 124 L196 178 Q170 192 142 184Z" fill="#d4cec3"/>
+<path d="M152 130 Q166 156 190 140 L194 156 Q168 174 150 150Z" fill="#f6f2e9" stroke-width="3"/><circle cx="168" cy="150" r="5" fill="#c8352b" stroke-width="2"/>
+<path d="M140 176 Q168 190 198 176 L198 190 Q168 204 140 190Z" fill="#c8352b"/>
+<!-- front leg -->
+<path d="M152 186 L116 206 L112 236" stroke-width="22" fill="none"/><path d="M152 186 L116 206 L112 236" stroke-width="14" stroke="#f6f2e9" fill="none"/>
+<path d="M94 230 Q112 224 130 232 L132 244 L92 244Z" fill="#9a948b"/>
+<!-- spear -->
+<path d="M26 124 L246 188" stroke-width="10" fill="none"/>
+<path d="M26 124 L246 188" stroke-width="4" stroke="#9a948b" fill="none"/>
+<path d="M30 126 L50 108 L2 116 L22 138Z" fill="#f6f2e9"/>
+<path d="M34 126 L8 118" stroke-width="2" fill="none"/>
+<path d="M54 130 L46 154 M58 132 L60 160 M62 134 L72 158" stroke="#c8352b" stroke-width="4" fill="none"/>
+<!-- rear arm -->
+<path d="M170 132 Q206 142 192 174" stroke-width="18" fill="none"/><path d="M170 132 Q206 142 192 174" stroke-width="10" stroke="#f6f2e9" fill="none"/>
+<circle cx="190" cy="176" r="10" fill="#f6f2e9"/>
+<!-- shield arm + shield -->
+<path d="M146 132 L120 152" stroke-width="18" fill="none"/><path d="M146 132 L120 152" stroke-width="10" stroke="#f6f2e9" fill="none"/>
+<circle cx="84" cy="198" r="34" fill="#55514c"/>
+<circle cx="84" cy="198" r="26" fill="#d4cec3" stroke-width="3"/>
+<path d="M84 172 L96 190 L112 198 L96 206 L84 224 L72 206 L56 198 L72 190Z" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="84" cy="198" r="7" fill="#c8352b" stroke-width="3"/>
+<circle cx="112" cy="148" r="12" fill="#f6f2e9"/>
+<path d="M104 146 L120 150 M104 152 L118 156" stroke-width="2" fill="none"/>
+<!-- head -->
+<path d="M150 72 Q150 28 108 26 Q72 28 68 60 L50 80 L66 90 L62 100 L70 120 L86 132 L128 128 Q150 112 150 72Z" fill="#f6f2e9"/>
+<g clip-path="url(#fh)"><path d="M90 20 L110 20 L96 140 L76 140Z" fill="#1b1a1a"/></g>
+<path d="M150 72 Q150 28 108 26 Q72 28 68 60 L50 80 L66 90 L62 100 L70 120 L86 132 L128 128 Q150 112 150 72Z" fill="none"/>
+<!-- headband -->
+<path d="M70 52 Q112 30 150 50 L150 62 Q112 44 72 66Z" fill="#c8352b" stroke-width="3"/>
+<!-- ear spool -->
+<circle cx="132" cy="94" r="10" fill="#9a948b"/><circle cx="132" cy="94" r="4" fill="#f6f2e9" stroke-width="2"/>
+<!-- eye -->
+<path d="M72 74 L106 70 L102 88 Q86 92 74 84Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M82 74 L104 71 L102 84 Q90 88 82 82Z" fill="#c8352b" stroke="none"/>
+<circle cx="90" cy="79" r="4" fill="#1b1a1a" stroke="none"/>
+<path d="M66 66 L110 60" stroke-width="6" fill="none"/>
+<path d="M66 92 L88 98" stroke-width="3" fill="none"/>
+<!-- snarl -->
+<path d="M64 104 L96 104 L114 110 L106 124 L84 130 L70 118Z" fill="#1b1a1a" stroke-width="3"/>
+<path d="M66 104 L72 118 L78 104 M82 104 L88 114 L94 104 M100 106 L104 114 L108 108" fill="#f6f2e9" stroke-width="2"/><path d="M70 122 L78 114 L86 126 L94 114 L100 122" fill="#f6f2e9" stroke-width="2"/>
+</svg>

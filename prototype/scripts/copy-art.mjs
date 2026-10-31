@@ -35,6 +35,12 @@ const UNITS = [
   ['bes', 'egypt/bes-fierce.svg'], ['anubis', 'egypt/anubis-fierce.svg'], ['ammit', 'egypt/ammit-fierce.svg'], ['wadjet', 'egypt/wadjet-fierce.svg'], ['set', 'egypt/set-fierce.svg'],
   ['nisse', 'norse/nisse-fierce-v2.svg'], ['lindworm', 'norse/lindworm-fierce.svg'], ['dvergr', 'norse/dvergr-fierce.svg'], ['ratatoskr', 'norse/ratatoskr-fierce.svg'], ['nidhogg', 'norse/nidhogg-fierce.svg'],
   ['kui', 'chinese/kui-fierce.svg'], ['zipacna', 'maya/zipacna-fierce.svg'], ['hundun', 'chinese/hundun-fierce.svg'], ['pixiu', 'chinese/pixiu-fierce.svg'], ['vucub-caquix', 'maya/vucub-caquix-fierce.svg'],
+  // New sub-areas (Bamboo Valley, Mist Isles, Red Canyon, Glacier Throne, Ember Falls)
+  ['shanxiao', 'chinese/shanxiao-fierce.svg'], ['baihu', 'chinese/baihu-fierce.svg'], ['baize', 'chinese/baize-fierce.svg'], ['nian', 'chinese/nian-fierce.svg'], ['qiongqi', 'chinese/qiongqi-fierce.svg'],
+  ['ungnyeo', 'korean/ungnyeo-fierce.svg'], ['griffin', 'greek/griffin-fierce.svg'], ['chimera', 'greek/chimera-fierce.svg'], ['inmyeonjo', 'korean/inmyeonjo-fierce.svg'], ['typhon', 'greek/typhon-fierce.svg'],
+  ['cadejo', 'maya/cadejo-fierce.svg'], ['balam', 'maya/balam-fierce.svg'], ['buluc-chabtan', 'maya/buluc-chabtan-fierce.svg'], ['bennu', 'egypt/bennu-fierce.svg'], ['ah-puch', 'maya/ah-puch-fierce.svg'],
+  ['jotunn', 'norse/jotunn-fierce.svg'], ['sleipnir', 'norse/sleipnir-fierce.svg'], ['koschei', 'slavic/koschei-fierce.svg'], ['domovoi', 'slavic/domovoi-fierce.svg'], ['morana', 'slavic/morana-fierce.svg'],
+  ['gumiho', 'korean/gumiho-fierce.svg'], ['cerberus', 'greek/cerberus-fierce.svg'], ['jowangshin', 'korean/jowangshin-fierce.svg'], ['fenghuang', 'chinese/fenghuang-fierce.svg'], ['loki', 'norse/loki-fierce.svg'],
 ];
 const THEME = ['overview', 'explore', 'battle'];
 

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce jowangshin: hearth goddess in a mane of blazing hair, water bowl in one hand, a living flame on the other palm -->
+<!-- hair flame, big -->
+<path d="M128 4 Q150 30 142 50 Q166 26 158 6 Q196 34 186 72 Q214 56 208 36 Q238 84 206 124 Q214 150 180 182 L76 182 Q42 150 50 124 Q18 84 48 36 Q42 56 70 72 Q60 34 98 6 Q90 26 114 50 Q106 30 128 4Z" fill="#1b1a1a"/>
+<path d="M128 36 Q146 60 138 78 Q158 60 152 46 Q184 76 172 108 Q168 132 128 138 Q88 132 84 108 Q72 76 104 46 Q98 60 118 78 Q110 60 128 36Z" fill="#c8352b" stroke-width="3.5"/>
+<!-- skirt -->
+<path d="M82 170 L174 170 Q214 204 224 244 Q128 254 32 244 Q42 204 82 170Z" fill="#1b1a1a"/>
+<path d="M54 226 Q128 238 202 226 M90 180 Q70 206 62 238 M166 180 Q186 206 194 238 M128 184 L128 244" fill="none" stroke="#55514c" stroke-width="3"/>
+<path d="M78 190 Q128 206 178 190" fill="none" stroke="#c8352b" stroke-width="7"/>
+<!-- torso -->
+<path d="M92 140 Q128 130 164 140 L172 186 Q128 200 84 186Z" fill="#f6f2e9"/>
+<path d="M110 134 L128 172 L146 134" fill="none" stroke-width="4"/>
+<path d="M84 178 Q128 196 172 178" fill="none" stroke="#c8352b" stroke-width="7"/>
+<!-- left arm w/ bowl (viewer left) -->
+<path d="M94 144 Q60 152 44 130 L60 112 Q70 130 98 124Z" fill="#f6f2e9"/>
+<path d="M18 96 L84 96 Q80 136 51 138 Q22 136 18 96Z" fill="#f6f2e9"/>
+<ellipse cx="51" cy="96" rx="33" ry="8" fill="#9a948b" stroke-width="3.5"/>
+<path d="M36 96 Q51 100 66 96" fill="none" stroke="#f6f2e9" stroke-width="2.5"/>
+<path d="M32 148 Q36 134 50 136 L66 132 Q70 146 56 154Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M60 90 Q66 78 72 90" fill="#f6f2e9" stroke-width="2.5"/>
+<!-- right arm with flame -->
+<path d="M162 144 Q196 152 212 130 L196 112 Q186 130 158 124Z" fill="#f6f2e9"/>
+<path d="M186 132 Q198 146 216 140 L226 126 Q216 112 198 122Z" fill="#f6f2e9" stroke-width="3"/>
+<path d="M206 118 Q176 90 206 56 Q202 76 218 82 Q214 52 230 36 Q252 70 238 100 Q234 118 218 124Z" fill="#c8352b"/>
+<path d="M218 118 Q206 100 222 78 Q222 92 232 96 Q236 108 226 118Z" fill="#f6f2e9" stroke-width="3"/>
+<!-- head -->
+<path d="M92 84 Q92 52 128 52 Q164 52 164 84 Q168 120 128 128 Q88 120 92 84Z" fill="#f6f2e9"/>
+<path d="M90 80 Q92 46 128 46 Q164 46 166 80 Q154 64 128 66 Q102 64 90 80Z" fill="#1b1a1a"/>
+<path d="M96 80 L122 92 L118 100 Q106 100 96 90Z M160 80 L134 92 L138 100 Q150 100 160 90Z" fill="#1b1a1a" stroke-width="3"/>
+<circle cx="110" cy="94" r="3.5" fill="#c8352b" stroke="none"/><circle cx="146" cy="94" r="3.5" fill="#c8352b" stroke="none"/>
+<path d="M92 76 L110 84 M164 76 L146 84" stroke="#1b1a1a" stroke-width="5" fill="none"/>
+<path d="M126 100 L124 108 L130 108" fill="none" stroke-width="2.5"/>
+<path d="M112 116 Q128 108 144 116 Q128 124 112 116Z" fill="#1b1a1a" stroke-width="3"/>
+<path d="M118 114 L121 118 L124 113 M132 113 L135 118 L138 114" fill="#f6f2e9" stroke-width="1.5"/>
+</svg>
