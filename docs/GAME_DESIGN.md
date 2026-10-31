@@ -237,7 +237,7 @@ Inspired by incremental exploration games such as *Our Ascent*, *Hero's Quest* a
 
 - **One large, persistent world map**, made of encounter nodes connected by paths, spreading out from the **Camp** at its centre (or one edge).
 - The map is divided into **regions** (Goblin Woods, Iron Keep, Sunken Crypt, …). Each region has its own enemy set, encounter pool, boss and loot table.
-- Every node shows a **danger rating** (☠ to ☠☠☠☠☠) that depends on its distance from Camp and its region. Rewards rise with danger.
+- Every node shows a **danger rating** (☠ to ☠☠☠☠☠) that depends on its distance from Camp and its region. Rewards rise with danger. *(Prototype: skulls are derived from level: Lv1-3 = 1, 4-6 = 2, 7-9 = 3, 10-12 = 4, 13+ = 5, shown on sheets and above map monsters.)*
 - Unexplored parts of the map are under **fog**. Nodes you have seen stay revealed permanently.
 
 ### 10.2 A run (an expedition)
@@ -258,7 +258,7 @@ Inspired by incremental exploration games such as *Our Ascent*, *Hero's Quest* a
 
 - Revealed map, defeated bosses, unlocked waypoints and achievements are always kept.
 - **Gold** and **relics** belong to the run and are lost either way.
-- The results screen shows the path you took and your **furthest reach**, with the previous best drawn as a ghost line, so progress is visible even on a short run.
+- The results screen shows the path you took and your **furthest reach**, with the previous best drawn as a ghost line, so progress is visible even on a short run. *(Implemented: the route, reach vs best, and ghost lines on the Camp map; furthest reach = deepest level, ties broken by longer route.)*
 
 ### 10.4 Expected reach
 
@@ -313,7 +313,7 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
   - "+1 ATK for every enemy killed by overkill this run."
   - "The first Shield each battle blocks double."
 - **Gold** is earned in battles and spent at shops. It resets when the run ends.
-- **Stage rating:** ★★★ for no damage, ★★ for 3 or less, ★ for a clear. A ★★★ clear gives an extra loot roll, rewarding a well-solved puzzle.
+- **Stage rating:** ★★★ for no damage, ★★ for 3 or less, ★ for a clear. A ★★★ clear gives an extra loot roll, rewarding a well-solved puzzle. Souls scale with the rating (prototype: ×1 / ×1.15 / ×1.3). *(Implemented.)*
 - **Bounties:** each run offers 1–3 optional goals ("Win 3 battles without Shields", "Kill a boss with overkill") that pay Crystals.
 
 ---
@@ -571,7 +571,7 @@ These directions came out of the first playtest. Numbers are starting points for
 
 - **First runs should last 8–10 battles** (currently about 5 with perfect play). Make the first sub-area gentler and give it more Level 1–2 spots.
 - **Front-load progression:** cheap, frequent unlocks early; upgrade costs and enemy growth rise more steeply from the second region onward.
-- **Guaranteed upgrade after the first run:** the first run always pays at least enough Souls for the cheapest Camp upgrade (with a first-run bonus if needed). The results screen points straight to it.
+- **Guaranteed upgrade after the first run:** the first run always pays at least enough Souls for the cheapest Camp upgrade (with a first-run bonus if needed). The results screen points straight to it. *(Implemented: top-up to the cheapest Camp upgrade, with a "Go to Upgrades" button.)*
 
 ### 24.2 Run rewards: range is a rare, mid-game upgrade (implemented)
 

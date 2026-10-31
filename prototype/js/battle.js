@@ -43,6 +43,7 @@
     game.busy = false;
     game.onEnd = opts.onEnd;
     logEl.innerHTML = '';
+    { const collapse = window.innerHeight < 900; $('#b-log').classList.toggle('collapsed', collapse); $('#b-log-toggle').setAttribute('aria-expanded', String(!collapse)); } // short screens keep the Fight button in view
     log('Fight begins: place your squad.', 'turn');
     // Keep the player's last layout for cards that are still in the squad.
     const kept = {};

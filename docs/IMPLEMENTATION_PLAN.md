@@ -56,8 +56,8 @@ Each package targets a mostly distinct file set so they can run one after anothe
 
 | WP | Name | Items | Main files | Size |
 |---|---|---|---|---|
-| 1 | Battle feedback: stars and log | M3, M4 | battle.js, battle.css, index.html, small hook in app.js and gen.js | S |
-| 2 | Danger skulls and results/ghost path | M8, M5, M6 | app.js, map.js, style.css, progress.js | M |
+| 1 | Battle feedback: stars and log (DONE) | M3, M4 | battle.js, battle.css, index.html, small hook in app.js and gen.js | S |
+| 2 | Danger skulls and results/ghost path (DONE) | M8, M5, M6 | app.js, map.js, style.css, progress.js | M |
 | 3 | Pacing tuning of early game | M7 | world-layout.js, world-data.js, gen.js, tools/sim-runs.js | M |
 | 4 | Battle templates and solver validation | M9 | gen.js, tools/solve.js, tools/validate-gen.js | L |
 | 5 | New enemy mechanics | M10 | engine.js, world-data.js, battle.js | L |
@@ -79,7 +79,11 @@ Each package targets a mostly distinct file set so they can run one after anothe
 
 **WP1 Battle feedback.** In `battle.js` compute the rating on clear (3 stars if `damageTaken` is 0, 2 if at most 3, else 1) and show it in the victory banner. Pass `stars` back through `onEnd`; in `battleOver` (app.js, minimal edit) give 3-star clears one extra `Items.rollDrop` and scale `Gen.soulsFor` by stars. Add a scrolling text battle log panel to the world battle screen (port the sandbox `ui.js` log: shot, hit, overkill, explosion, strike, enrage lines) with a collapse toggle. No rules change.
 
+*Done:* stars in the victory banner (`Gen.starsFor`), 3 stars gives a second `rollDrop` and Souls x1 / x1.15 / x1.3 for 1 / 2 / 3 stars; collapsible battle log under the controls (collapsed by default on screens under 900px high).
+
 **WP2 Danger skulls and results screen.** Add a `danger(level)` helper (Lv1-3 = 1 skull, 4-6 = 2, 7-9 = 3, 10-12 = 4, 13+ = 5) and show skulls on node sheets and map markers alongside Lv. Rebuild the end-of-run modal: show the route, furthest reach vs previous best, update `bestPath` (never written today), and draw `lastPath` and `bestPath` as a faint ghost polyline on the map when back at Camp. Add the first-run guarantee: if `save.runs === 0` top Souls up to the cheapest Camp upgrade cost, and add a button on the results screen that jumps to the Upgrades tab.
+
+*Done:* `World.danger(level)` drives skulls on sheets and map pips (`map.js` `lvlDifficulty` now uses it); results modal with route, reach vs previous best, `bestPath`/`prevBestPath` saved, ghost lines drawn at Camp by `drawGhostPaths` in `map.js`; first run tops Souls up to the cheapest upgrade (`Progress.cheapestUpgrade`) with a "Go to Upgrades" button that pulses the buy button.
 
 **WP3 Early pacing.** Using `tools/sim-runs.js`, retune the first sub-area to get 8-10 battles on a fresh account: add Lv1-2 spots to Sunny Meadows in `world-layout.js` (the contract allows 4-5 ordinary spots, so extend only if the spec is updated), soften early curves in `gen.js`, and make upgrade costs and enemy ramp steeper from region 2. Update the numbers quoted in design section 23 after measuring.
 

@@ -2117,6 +2117,7 @@
       ctx.stroke(); ctx.setLineDash([]);
     };
     ctx.save(); ctx.globalAlpha = 0.5;
+    if (JSON.stringify(st.save.lastPath) === JSON.stringify(st.save.bestPath)) one(st.save.prevBestPath, '#7d8794', 4, 10); // the record this run just beat
     one(st.save.bestPath, '#b8892e', 5, 12);
     if (st.save.lastPath !== st.save.bestPath && JSON.stringify(st.save.lastPath) !== JSON.stringify(st.save.bestPath)) one(st.save.lastPath, VERM, 3.5, 9);
     ctx.restore();

@@ -81,7 +81,7 @@
   }
 
   // Danger rating (design 8.1) as skulls, the same rating the map draws above each monster.
-  const skulls = (level) => { const d = World.danger(level); return '<span class="skulls d' + d + '" title="Danger ' + d + ' of 5" aria-label="Danger ' + d + ' of 5">' + '☠'.repeat(d) + '</span>'; };
+  const skulls = (level) => { const d = World.danger(level); return '<span class="skulls d' + d + '" title="Danger ' + d + ' of 5" aria-label="Danger ' + d + ' of 5">' + '☠︎'.repeat(d) + '</span>'; };
 
   const rarClass = (it) => 'rar-' + it.rarity;
   const itemIcon = (it) => '<span class="ic">' + esc(Items.icon(it)) + '</span>';
