@@ -313,7 +313,7 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
   - "+1 ATK for every enemy killed by overkill this run."
   - "The first Shield each battle blocks double."
 - **Gold** is earned in battles and spent at shops. It resets when the run ends.
-- **Stage rating:** ★★★ for no damage, ★★ for 3 or less, ★ for a clear. A ★★★ clear gives an extra loot roll, rewarding a well-solved puzzle. Souls scale with the rating (prototype: ×1 / ×1.15 / ×1.3). *(Implemented.)*
+- **Stage rating:** ★★★ for no damage, ★★ for 3 or less, ★ for a clear. A ★★★ clear gives an extra loot roll, rewarding a well-solved puzzle. Souls scale with the rating (prototype: ×1 / ×1.25 / ×1.5). *(Implemented.)*
 - **Bounties:** each run offers 1–3 optional goals ("Win 3 battles without Shields", "Kill a boss with overkill") that pay Crystals.
 
 ---
@@ -553,7 +553,7 @@ The prototype in `prototype/` has two pages.
 - **Camp:** Souls buy upgrades (Vitality, Command, Drill, Bulwark, Fortune, Provisions) and recruits. Bosses unlock new recruits. The squad is limited by slots. The Gear tab equips up to 3 items.
 - **Battles:** generated from the spot's level and sub-area theme. Level 1 fights are small, and bosses are usually two-turn fights.
 - **Saving:** progress is saved in the browser. Prototype tools give +100 Souls or reset progress.
-- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player. The simulated strong player now takes about 9 battles on a fresh account (it usually clears Sunny Meadows and dies at the Lv4 boss; the boss is beaten in about half of the first runs); real players should land at the 8-10 battles of 24.1. Enemy growth ramps up from Lv8 (HP +12% and about +0.6 ATK per level above 7). With greedy Camp shopping (`node tools/sim-runs.js 1 campaign 45`) the strong simulated player beats Greenvale in about 4 runs, reaches Sunscorch after about 16 and has not opened Frostveil or Ember Peaks after 45 runs; real players are slower.
+- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player (Souls use the real star multipliers). On a fresh account it fights about 10 battles (6 if it dies to the Lv4 boss, 11-16 once the boss falls); real players should land at the 8-10 battles of 24.1. Sunny Meadows spots are Lv 1,1,1,2,2 with a Lv4 boss (2 minions); Old Oak Wood is Lv 3-4. Enemy growth ramps up from Lv8 (HP +7% and about +0.35 ATK per level above 7); Camp upgrades and recruits cost more from the second tier on, and Vitality, Drill, Bulwark and Fortune gained one more level. With greedy Camp shopping (`node tools/sim-runs.js 1 campaign 45`) the strong simulated player beats Greenvale in 3-6 runs, Azure Coast and Sunscorch in 4-8, and unlocks Frostveil around run 15-30 (Ember Peaks is slower, often beyond run 45); real players are slower.
 
 **Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
 
@@ -602,4 +602,4 @@ These directions came out of the first playtest. Numbers are starting points for
   - In the mid to late game, players can **go straight for a boss** and spend their Supplies where they matter.
 - This replaces the "fight a spot next to your trail" rule (10.2), and makes waypoints (10.5) optional.
 - Open question: should spots in already-conquered sub-areas cost less, or give less?
-- Still open from 24.1: gentler first sub-area tuning and the guaranteed first-run upgrade.
+- 24.1 is tuned (WP3): gentler first sub-area, steeper costs and enemy ramp from region 2.

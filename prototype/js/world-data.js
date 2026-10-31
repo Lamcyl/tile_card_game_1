@@ -22,12 +22,12 @@
     { id: 'beach',   region: 'Azure Coast', name: 'Shell Beach',      biome: 'beach',   lm: ['lighthouse', 'Pearl Lighthouse'],    lv: [5, 6], bossLv: 7,  unlocks: ['coral'],         from: 'lake',   poi: 'treasure' },
     { id: 'coral',   region: 'Azure Coast', name: 'Coral Shallows',   biome: 'coral',   lm: ['reef-arch', 'Coral Arch'],           lv: [6, 7], bossLv: 8,  unlocks: ['cove'],          from: 'beach',  poi: 'shrine' },
     { id: 'cove',    region: 'Azure Coast', name: 'Shipwreck Cove',   biome: 'beach',   lm: ['shipwreck', 'The Wrecked Galleon'],  lv: [7, 8], bossLv: 9,  unlocks: ['isles'],         from: 'coral',  poi: 'treasure' },
-    { id: 'isles',   region: 'Azure Coast', name: 'Mist Isles',       biome: 'coral',   lm: ['sea-stacks', 'The Needle Stacks'],   lv: [8, 9], bossLv: 10, unlocks: ['snow'],          from: 'cove',   poi: 'shrine' },
+    { id: 'isles',   region: 'Azure Coast', name: 'Mist Isles',       biome: 'coral',   lm: ['sea-stacks', 'The Needle Stacks'],   lv: [8, 9], bossLv: 9,  unlocks: ['snow'],          from: 'cove',   poi: 'shrine' },
     // Sunscorch
     { id: 'dunes',   region: 'Sunscorch',   name: 'Dune Sea',         biome: 'dunes',   lm: ['giant-dune', 'Singing Dune'],        lv: [5, 6], bossLv: 7,  unlocks: ['oasis'],         from: 'lake',   poi: 'shrine' },
     { id: 'oasis',   region: 'Sunscorch',   name: 'Palm Oasis',       biome: 'dunes',   lm: ['oasis', 'Mirage Pool'],              lv: [6, 7], bossLv: 8,  unlocks: ['canyon'],        from: 'dunes',  poi: 'shrine' },
     { id: 'canyon',  region: 'Sunscorch',   name: 'Red Canyon',       biome: 'dunes',   lm: ['mesa', 'Crimson Mesa'],              lv: [7, 8], bossLv: 9,  unlocks: ['temple'],        from: 'oasis',  poi: 'treasure' },
-    { id: 'temple',  region: 'Sunscorch',   name: 'Buried Temple',    biome: 'temple',  lm: ['pyramid', 'The Sunken Pyramid'],     lv: [8, 9], bossLv: 10, unlocks: ['ash'],           from: 'canyon', poi: 'treasure' },
+    { id: 'temple',  region: 'Sunscorch',   name: 'Buried Temple',    biome: 'temple',  lm: ['pyramid', 'The Sunken Pyramid'],     lv: [8, 9], bossLv: 9,  unlocks: ['ash'],           from: 'canyon', poi: 'treasure' },
     // Frostveil
     { id: 'snow',    region: 'Frostveil',   name: 'Snowdrift Plains', biome: 'snow',    lm: ['ice-peak', 'Whitecap Peak'],         lv: [9, 10], bossLv: 11, unlocks: ['frozen'],        from: 'isles',  poi: 'shrine' },
     { id: 'frozen',  region: 'Frostveil',   name: 'Frozen Lake',      biome: 'glacier', lm: ['frozen-lake', 'Glass Lake'],         lv: [10, 11], bossLv: 12, unlocks: ['rime'],          from: 'snow',   poi: 'treasure' },
