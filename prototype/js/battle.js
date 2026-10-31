@@ -46,6 +46,7 @@
     const kept = {};
     for (const [k, id] of Object.entries(opts.placement || {})) if (cardById(id)) kept[k] = id;
     game.placement = kept;
+    setBiome(opts.biome);
     $('#b-name').textContent = opts.title;
     $('#b-sub').textContent = opts.subtitle;
     $('#b-msg').textContent = Object.keys(kept).length ? 'Your last layout is ready. Adjust it, then press Fight.' : 'Place your squad, then press Fight.';
@@ -53,6 +54,16 @@
     render();
   }
   const placement = () => Object.assign({}, game.placement);
+
+  // Painted backdrop and stream style follow the biome of the fight.
+  const STREAM_BY_BIOME = { meadow: 'water', forest: 'water', beach: 'sea', coral: 'sea', dunes: 'sand', temple: 'sand', snow: 'ice', glacier: 'ice', ash: 'lava', caldera: 'lava' };
+  function setBiome(biome) {
+    const b = STREAM_BY_BIOME[biome] ? biome : 'meadow';
+    root.dataset.biome = b;
+    root.dataset.stream = STREAM_BY_BIOME[b];
+    const u = window.Art && Art.battleBackdrop ? Art.battleBackdrop(b) : null;
+    root.style.backgroundImage = u ? 'url("' + u + '")' : '';
+  }
 
   // ---------- Rendering ----------
 
@@ -91,7 +102,7 @@
     }
     const hand = game.army.filter((c) => !tileOf(c.id));
     $('#b-hand').innerHTML = hand.length
-      ? hand.map((c) => '<div class="slot">' + cardHTML(c, null, 'hand') + '</div>').join('')
+      ? hand.map(handSlotHTML).join('')
       : '<div class="hand-empty">Whole squad placed. Drop a card here to take it back.</div>';
     renderThreat(s, stats);
     $('#b-fight').disabled = game.busy || s.status !== 'playing';
@@ -114,47 +125,59 @@
     $('#b-threat-total').className = total ? 'dmg' : 'safe';
   }
 
+  const TXT = '︎'; // force text (not emoji) glyph rendering for stat symbols
+  const artImg = (url, alt) => '<img src="' + url + '" alt="' + alt + '" draggable="false">';
+
   function enemyHTML(e) {
     const t = E.ENEMY_TYPES[e.type];
+    const art = window.Art ? Art.enemy(e.type) : null;
+    const face = '<div class="c-art">' + (art ? artImg(art, t.name) : '<span class="e-icon">' + t.icon + '</span>') + '</div>';
     if (t.barrel) {
       return '<div class="enemy barrel" title="' + t.name + ': explodes for ' + t.blast + ' damage to every adjacent enemy when destroyed. It does not attack.">' +
-        '<div class="e-icon">' + t.icon + '</div><div class="e-stats"><span class="hp">♥' + e.hp + '</span><span class="atk">💥' + t.blast + '</span></div></div>';
+        face + '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">💥' + t.blast + '</span></div></div>';
     }
     return '<div class="enemy' + (t.boss ? ' boss' : '') + '" title="' + t.name + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' +
-      (e.armor ? ', armor ' + e.armor : '') + '">' +
-      (e.armor ? '<span class="badge">🛡' + e.armor + '</span>' : '') + (t.boss ? '<span class="crown">👑</span>' : '') +
-      '<div class="e-icon">' + t.icon + '</div>' +
-      '<div class="e-stats"><span class="hp">♥' + e.hp + '</span><span class="atk">⚔' + e.atk + '</span></div></div>';
+      (e.armor ? ', armor ' + e.armor : '') + '">' + face +
+      (e.armor ? '<span class="tag armor">🛡' + TXT + e.armor + '</span>' : '') + (t.boss ? '<span class="crown">👑</span>' : '') +
+      '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">⚔' + TXT + e.atk + '</span></div></div>';
   }
 
   function cardHTML(card, st, from) {
     const t = E.CARD_TYPES[card.type];
+    const unit = window.Art ? Art.unit(card) : { url: null, name: null };
     let main = '', sub = '', desc = t.name + ': ', extra = '';
     if (t.role === 'attacker') {
       const atk = st ? st.atk : E.cardStat(card, 'atk');
       const range = st ? st.range : E.cardStat(card, 'range');
-      main = '<span class="' + (st && st.atk !== st.baseAtk ? 'boosted' : '') + '">⚔' + atk + '</span>';
+      main = '<span class="' + (st && st.atk !== st.baseAtk ? 'boosted' : '') + '">⚔' + TXT + atk + '</span>';
       sub = '<span>' + PATTERN_GLYPH[t.pattern] + '</span><span class="' + (st && st.rangeBonus ? 'boosted' : '') + '">R' + range + '</span>';
       desc += atk + ' damage, ' + PATTERN_TEXT[t.pattern] + ', reaches ' + range + ' tile(s) up';
     } else if (t.role === 'support') {
       const amount = E.cardStat(card, 'amount');
       main = t.effect === 'atk' ? '+' + amount : t.effect === 'mult' ? '×' + amount : 'R+' + amount;
-      sub = t.target === 'up' ? '<span>↑ above</span>' : '<span>✚ around</span>';
+      sub = t.target === 'up' ? '<span>↑</span>' : '<span>✚</span>';
       desc += (t.effect === 'atk' ? '+' + amount + ' ATK' : t.effect === 'mult' ? '×' + amount + ' damage' : '+' + amount + ' range') +
         ' to the ' + (t.target === 'up' ? 'attacker directly above it' : 'attackers on all 4 sides');
       if (t.effect === 'mult') extra = ' mult';
       if (st && st.boosts.length === 0) extra += ' idle';
     } else {
       const block = st ? st.block : E.cardStat(card, 'block');
-      main = '🛡' + block;
-      sub = '<span>column</span>';
+      main = '🛡' + TXT + block;
+      sub = '<span>↕</span>';
       desc += 'absorbs up to ' + block + ' damage in its column each turn';
     }
+    if (unit.name) desc = unit.name + ' · ' + desc;
     const cls = 'card role-' + t.role + extra + (game.selected === card.id ? ' selected' : '');
-    return '<div class="' + cls + '" data-card="' + card.id + '" data-from="' + from + '" title="' + desc + '">' +
-      '<div class="c-top"><span>' + t.icon + '</span>' + (card.upgraded ? '<span class="up">★</span>' : '') + '</div>' +
-      '<div class="c-main">' + main + '</div><div class="c-sub">' + sub + '</div></div>';
+    const face = '<div class="c-art">' + (unit.url ? artImg(unit.url, unit.name || t.name) : '<span class="e-icon">' + t.icon + '</span>') + '</div>';
+    const html = '<div class="' + cls + '" data-card="' + card.id + '" data-from="' + from + '" title="' + desc + '">' + face +
+      '<span class="c-role">' + t.name + '</span>' + (card.upgraded ? '<span class="up">★</span>' : '') +
+      '<div class="tags"><span class="tag main">' + main + '</span><span class="tag sub">' + sub + '</span></div></div>';
+    return html;
   }
+  const handSlotHTML = (c) => {
+    const t = E.CARD_TYPES[c.type], u = window.Art ? Art.unit(c) : { name: null };
+    return '<div class="slot">' + cardHTML(c, null, 'hand') + '<div class="c-name">' + (u.name || t.name) + '</div></div>';
+  };
 
   // ---------- Placement input (drag, or tap a card then a tile) ----------
 
