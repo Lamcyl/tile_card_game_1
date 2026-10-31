@@ -4,6 +4,7 @@ import './theme.css';
 import './world.css';
 import './battle.css';
 import './js/engine.js';
+import './js/world-layout.js';
 import './js/world-data.js';
 import './js/art.js';
 import './js/progress.js';
