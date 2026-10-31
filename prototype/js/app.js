@@ -2,7 +2,7 @@
 // battles, rewards and end-of-run results.
 (function () {
   'use strict';
-  const Events = window.Events, Relics = window.Relics, Bounties = window.Bounties, E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items;
+  const Events = window.Events, Relics = window.Relics, Bounties = window.Bounties, E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items, Journal = window.Journal;
   const $ = (s) => document.querySelector(s);
   let save = P.load();
   let selected = null;
@@ -10,6 +10,7 @@
   let sheetOpen = true;
   let busy = false;
   let confirmReset = false, confirmReturn = false, confirmSalvage = null, gearFilter = 'all', gearView = 'gear';
+  let journalView = null, bestRegion = 0; // WP17: null = Camp tabs, else 'ach' | 'bestiary' | 'codex'
   let pointAt = null; // upgrade id the results screen points to (first-run guarantee)
 
   const run = () => save.run;
@@ -249,6 +250,8 @@
     html += campScene(save) + heroPicker();
     html += '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
       '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
+    html += '<button class="journal-btn' + (journalView ? ' on' : '') + '" data-jv="' + (journalView ? 'close' : 'ach') + '">' + (journalView ? '← Back to Camp' : '📖 Journal <small>' + Journal.doneCount(save) + '/' + Journal.LIST.length + ' feats · ' + Journal.seenCount(save) + '/' + Journal.creatures().length + ' creatures</small>') + '</button>';
+    if (journalView) return html + journalTab() + toolsRow();
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
       { upgrades: 'Camp', squad: 'Squad ' + P.squadCp(save) + '/' + P.commandCap(save), recruit: 'Recruit', summon: 'Summon', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
     html += '<div class="list">';
@@ -294,8 +297,76 @@
     } else if (campTab === 'summon') {
       html += summonTab();
     }
-    html += '</div><div class="tools"><span class="muted small">Prototype tools</span><button data-act="cheat">+100 ✦ 30 💎 10 ⚒</button><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset progress') + '</button></div>';
-    return html;
+    return html + '</div>' + toolsRow();
+  }
+  const toolsRow = () => '<div class="tools"><span class="muted small">Prototype tools</span><button data-act="cheat">+100 ✦ 30 💎 10 ⚒</button><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset progress') + '</button></div>';
+
+  // ---------- Journal (WP17): Achievements, Bestiary, Codex ----------
+  function journalTab() {
+    const views = [['ach', 'Feats'], ['bestiary', 'Bestiary'], ['codex', 'Codex']];
+    let h = '<div class="jtabs">' + views.map(([id, nm]) => '<button class="' + (journalView === id ? 'on' : '') + '" data-jv="' + id + '">' + nm + '</button>').join('') + '</div><div class="list journal">';
+    if (journalView === 'ach') h += achList(); else if (journalView === 'bestiary') h += bestiaryList(); else h += codexList();
+    return h + '</div>';
+  }
+  function achList() {
+    let h = '<p class="muted small">Rewards are paid the moment a feat is reached. ' + Journal.doneCount(save) + ' of ' + Journal.LIST.length + ' done.</p>', group = '';
+    for (const a of Journal.LIST) {
+      if (a.group !== group) { group = a.group; h += '<h4 class="track-h">' + group + '</h4>'; }
+      const ok = Journal.done(save, a.id), v = Journal.progress(save, a);
+      h += '<div class="item ach' + (ok ? ' got' : '') + '"><span class="ic">' + (ok ? '✔' : '◌') + '</span><div class="grow"><b>' + esc(a.name) + '</b><span class="muted">' + esc(a.desc) + '</span>' +
+        (ok ? '' : '<span class="ach-bar" role="meter" aria-valuenow="' + v + '" aria-valuemax="' + a.goal + '"><i style="width:' + (100 * v / a.goal) + '%"></i></span>') + '</div>' +
+        '<span class="ach-rw">' + (ok ? 'Done' : v + '/' + a.goal) + '<small>' + Journal.rewardText(a.reward) + '</small></span></div>';
+    }
+    return h;
+  }
+  function bestiaryList() {
+    const j = Journal.J(save), subs = World.SUBAREAS.filter((x) => x.region === World.REGIONS[bestRegion]);
+    let h = '<div class="chips">' + World.REGIONS.map((rg, i) => {
+      const n = World.SUBAREAS.filter((x) => x.region === rg).reduce((t, x) => t + Journal.ROLES.filter((r) => j.seen[Journal.keyOf(x.id, r)] > 0).length, 0);
+      return '<button class="' + (bestRegion === i ? 'on' : '') + '" data-region="' + i + '">' + esc(rg) + '<small>' + n + '/20</small></button>';
+    }).join('') + '</div>';
+    for (const sub of subs) {
+      h += '<h4 class="track-h">' + esc(sub.name) + '</h4>';
+      for (const c of Journal.creatures().filter((x) => x.sub === sub.id)) {
+        const seen = j.seen[c.key] > 0, url = window.Art.enemy(c.key), role = Journal.ROLE[c.role], boss = c.role === 'boss';
+        const bd = boss && window.BossDefs ? window.BossDefs.BOSSES[sub.id] : null;
+        const rule = boss ? (bd ? bd.intro : '') : role.text;
+        h += '<div class="item beast' + (seen ? '' : ' unseen') + (boss ? ' boss' : '') + '"><span class="art">' + (url ? '<img src="' + url + '" alt="' + (seen ? esc(c.name) : 'Unknown creature') + '" draggable="false">' : esc(c.icon)) + '</span><div class="grow">' +
+          (seen ? '<b>' + esc(c.name) + ' <small>' + role.name + '</small></b><span class="muted">' + esc(c.lore) + '</span><span class="rule">' + esc(rule) + '</span>' +
+            '<span class="tally">Met ' + j.seen[c.key] + '× · defeated ' + (j.kills[c.key] || 0) + '</span>' : '<b>? ? ?</b><span class="muted">' + role.name + ' of ' + esc(sub.name) + '. Meet it in battle to learn more.</span>') + '</div></div>';
+      }
+    }
+    return h;
+  }
+  function codexList() {
+    const j = Journal.J(save);
+    let h = '<h4 class="track-h">Bosses</h4>';
+    for (const sub of World.SUBAREAS) {
+      const bd = window.BossDefs.BOSSES[sub.id], n = j.bosses[sub.id] || 0, known = n > 0 || j.seen[Journal.keyOf(sub.id, 'boss')] > 0;
+      const g = bd.gimmick ? E.ENEMY_GIMMICKS[bd.gimmick] : bd.kind ? E.ENEMY_KINDS[bd.kind] : null;
+      h += '<div class="item codex' + (known ? '' : ' unseen') + '"><div class="grow">' + (known ? '<b>' + esc(bd.name) + ' <small>' + esc(sub.name) + '</small></b>' +
+        (g ? '<span class="rule">' + g.badge + ' ' + esc(g.name) + '</span>' : '') + '<span class="muted">' + esc(bd.intro) + '</span><span class="tally">' + (n ? 'Defeated ' + n + '×' : 'Not yet defeated') + '</span>' :
+        '<b>? ? ?</b><span class="muted">Guards ' + esc(sub.name) + ' (' + esc(sub.region) + ').</span>') + '</div></div>';
+    }
+    h += '<h4 class="track-h">Rules met in battle</h4>';
+    const rules = Object.assign({}, E.ENEMY_KINDS, E.ENEMY_GIMMICKS);
+    for (const k of Object.keys(rules)) {
+      const r = rules[k], got = j.rules[k];
+      h += '<div class="item codex rule-row' + (got ? '' : ' unseen') + '"><span class="ic">' + (got ? r.badge : '?') + '</span><div class="grow">' + (got ? '<b>' + esc(r.name) + '</b><span class="muted">It ' + esc(r.text.replace('{n}', 'N')) + '.</span>' : '<b>? ? ?</b><span class="muted">Not met yet.</span>') + '</div></div>';
+    }
+    h += '<h4 class="track-h">Relics <small>' + Object.keys(j.relics).length + '/' + Relics.LIST.length + '</small></h4>';
+    for (const rel of Relics.LIST) {
+      const got = j.relics[rel.id];
+      h += '<div class="item codex rule-row' + (got ? '' : ' unseen') + '"><span class="ic">' + (got ? esc(rel.glyph) : '?') + '</span><div class="grow">' + (got ? '<b>' + esc(rel.name) + ' <small>' + esc(rel.myth) + '</small></b><span class="muted">' + esc(rel.text) + '</span>' : '<b>? ? ?</b><span class="muted">Found on an expedition, in a reward choice, Shrine or event.</span>') + '</div></div>';
+    }
+    return h;
+  }
+  // Pay out any feats reached; returns an HTML block for the results modal (and toasts when there is none to show).
+  function checkFeats(inModal) {
+    const got = Journal.check(save); if (!got.length) return '';
+    persist();
+    if (!inModal) toast('🏆 ' + got.map((g) => g.a.name + ' (' + Journal.rewardText(g.a.reward) + ')').join(' · '));
+    return '<div class="ach-done">' + got.map((g) => '<p>🏆 Feat: <b>' + esc(g.a.name) + '</b> · ' + Journal.rewardText(g.a.reward) + '</p>').join('') + '</div>';
   }
   // Stat lines of an owned item: main effect, substats and (Legendary) the unique rule.
   function itemLines(it) {
@@ -529,8 +600,12 @@
     r.placement = Battle.placement();
     Battle.hide(); document.body.classList.remove('in-battle'); WorldMap.setActive(true);
     r.hp = state.hp;
+    { // WP17 journal: creatures met and defeated, then feats (no rule changes)
+      const won = state.status === 'cleared', placed = new Set(Object.values(r.placement || {}).filter((id) => P.ROSTER_BY[id] && P.roleOf && P.roleOf(id) === 'attacker')).size;
+      Journal.record(save, state, won, n, report, placed); for (const id of r.relics || []) Journal.noteRelic(save, id);
+    }
     if (state.reviveUsed) r.reviveUsed = (Number(r.reviveUsed) || 0) + state.reviveUsed; // revives spent (Phoenix Archer, Second Wind): once per run each
-    if (state.status !== 'cleared') { persist(); endRun(true); return; }
+    if (state.status !== 'cleared') { Journal.check(save); persist(); endRun(true); return; }
     stars = stars || 1;
     const gained = Math.round(Gen.soulsFor(n, stars) * P.soulRate(save));
     P.addXp(save, save.squad, n.type === 'boss' ? 2 : 1); // WP11 unit mastery
@@ -576,8 +651,8 @@
     let keyNote = '';
     if ((boss || n.type === 'elite') && (r.keys || 0) < World.MAX_KEYS) { r.keys = (r.keys || 0) + 1; keyNote = ' · 🗝 <b>+1 Key</b> (opens a hidden Sealed Cache)'; }
     const supLine = '<p class="supply-line">🎒 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left' + keyNote + '.</p>';
-    const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
-      (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'No free slot: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
+    const featHtml = ''; const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
+      checkFeats(true) + (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'No free slot: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
     persist(); renderAll();
     if (r.supplies <= 0) { outOfSupplies(title, text, extra); return; }
     offerReward(title, text, n, extra);
