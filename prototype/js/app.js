@@ -205,6 +205,16 @@
       '<button class="wide' + (confirmReturn ? ' danger' : '') + '" data-act="return">' + (confirmReturn ? 'Tap again to end the run and return' : '🏕 Return to Camp') + '</button>';
   }
 
+  // WP15: hero chips (brushed-seal monograms stand in for portraits) and the chosen hero's passive and ability.
+  const sealHTML = (h, cls) => '<span class="hero-seal ' + (cls || '') + '" style="--hero-hue:' + h.hue + '" aria-hidden="true">' + h.glyph + '</span>';
+  function heroPicker() {
+    const cur = P.heroOf(save), ab = E.HERO_ABILITIES[cur.ability];
+    return '<div class="hero-pick" aria-label="Hero"><div class="hero-chips">' + P.HEROES.map((h) => {
+      const ok = P.heroUnlocked(save, h.id);
+      return '<button class="hero-chip' + (cur.id === h.id ? ' on' : '') + (ok ? '' : ' locked') + '" data-hero="' + h.id + '" aria-pressed="' + (cur.id === h.id) + '" title="' + esc(ok ? h.name : h.lock) + '">' + sealHTML(h) + '<span>' + h.name + (ok ? '' : ' 🔒') + '</span></button>';
+    }).join('') + '</div><p class="hero-text"><b>' + esc(cur.name) + '</b> · Passive: ' + esc(cur.passive) + '. Ability (once per battle): <b>' + ab.icon + ' ' + esc(ab.name) + '</b>, ' + esc(ab.text.charAt(0).toLowerCase() + ab.text.slice(1)) + '</p></div>';
+  }
+
   function campSheet() {
     const tabs = ['upgrades', 'squad', 'recruit', 'summon', 'gear'];
     let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad (Command Points, one supporter minimum), then set out with 🎒 ' + P.startSupplies(save) + ' Supplies.</p></div>' +
@@ -213,6 +223,7 @@
       html += '<div class="start-at" aria-label="Start position"><small>🚩 Start at</small>' + ['camp'].concat(save.waypoints).map((id) =>
         '<button class="' + (save.startAt === id ? 'on' : '') + '" data-start="' + id + '">' + (id === 'camp' ? '⛺ Camp' : esc(World.SUB_BY[id].name)) + '</button>').join('') + '</div>';
     }
+    html += heroPicker();
     html += '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
       '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
@@ -456,12 +467,12 @@
       offerReward('Supply cache', 'You found ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + gold + ' and some supplies. This cost no Supplies.', n); return;
     }
     if (n.guarded) n = guardOf(n); // a guarded cache: beat its guard first (battleOver opens the chest)
-    const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: P.rulesFor(save, r) }, Gen.generateBattle(n, r.seed));
+    const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: P.rulesFor(save, r) }, P.heroStage(save), Gen.generateBattle(n, r.seed));
     WorldMap.setActive(false);
     document.body.classList.add('in-battle');
     Battle.start({
       title: nodeTitle(n), subtitle: World.SUB_BY[n.sub].name + ' · Lv' + n.level, stage, biome: World.SUB_BY[n.sub].biome,
-      army: P.buildArmy(save, r.mods), placement: r.placement, relics: r.relics || [],
+      army: P.buildArmy(save, r.mods), hero: P.heroOf(save), placement: r.placement, relics: r.relics || [],
       onEnd: (state, stars, report) => battleOver(n, state, stars, report),
     });
   }
@@ -661,7 +672,7 @@
     const picks = [];
     // WP12: a relic takes the place of one upgrade when the run offers one (always after elites and bosses).
     const relic = Relics.offer(r.relics, R, node ? node.type : 'battle');
-    while (picks.length < (relic ? 1 : 2) && pool.length) picks.push(pool.splice(Math.floor(R() * pool.length), 1)[0]);
+    while (picks.length < (relic ? 1 : 2) + (P.heroOf(save).choices || 0) && pool.length) picks.push(pool.splice(Math.floor(R() * pool.length), 1)[0]);
     if (relic) picks.push({ kind: 'relic', id: relic.id, label: relic.name + ': ' + relic.text, icon: relicIcon(relic) });
     picks.push({ kind: 'heal', label: 'Heal 5 HP', icon: '❤️' });
     modal('<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p>' + (extra || '') + '<p class="muted small">Choose one reward for this run:</p><div class="rewards">' +
@@ -739,6 +750,11 @@
     if (b.id === 'sheet-toggle') { sheetOpen = !sheetOpen; renderSheet(); return; }
     if (!b.dataset.salvage) confirmSalvage = null;
     if (b.dataset.tab) { campTab = b.dataset.tab; sheetOpen = true; renderSheet(); return; }
+    if (b.dataset.hero) {
+      const h = P.HERO_BY[b.dataset.hero];
+      if (!P.heroUnlocked(save, h.id)) { toast(h.name + ' is locked: ' + h.lock + '.'); return; }
+      save.hero = h.id; persist(); toast(h.name + ' will lead the next expedition.'); renderAll(); return;
+    }
     if (b.dataset.start) { save.startAt = b.dataset.start; persist(); toast(save.startAt === 'camp' ? 'Runs start at Camp.' : 'Runs start at the ' + World.SUB_BY[save.startAt].name + ' Wayshrine.'); renderAll(); return; }
     if (b.dataset.buy) {
       const cost = P.upgradeCost(save, b.dataset.buy);

@@ -63,6 +63,22 @@
   ];
   const ROSTER_BY = Object.fromEntries(ROSTER.map((u) => [u.id, u]));
 
+  // ---------- Heroes (WP15) ----------
+  // One hero per run (save.hero). Passive: `rules` (engine rule flags, via rulesFor), `hp` (max HP), `choices` (extra reward choices, app.js).
+  // Ability: a key of Engine.HERO_ABILITIES, once per battle. `unlock`: { boss: sub-area id } or { runs: n } (see heroUnlocked).
+  // The glyph is a placeholder brushed seal until real portraits exist.
+  const HEROES = [
+    { id: 'marshal', name: 'Marshal', glyph: '将', hue: '#c8352b', passive: 'Drilled ranks: Shields block +1', rules: { plate: 1 }, ability: 'rally', unlock: null, lock: '' },
+    { id: 'pyromancer', name: 'Pyromancer', glyph: '炎', hue: '#d9771f', passive: 'Barrels explode for 3', rules: { blast: 3 }, ability: 'ignite', unlock: { boss: 'meadow' }, lock: 'Defeat the Sunny Meadows boss' },
+    { id: 'quartermaster', name: 'Quartermaster', glyph: '糧', hue: '#5f7f3a', passive: 'One extra choice in every reward', choices: 1, ability: 'ration', unlock: { runs: 3 }, lock: 'Finish 3 expeditions' },
+    { id: 'sentinel', name: 'Sentinel', glyph: '守', hue: '#3e5a8c', passive: '+4 max HP', hp: 4, ability: 'brace', unlock: { boss: 'forest' }, lock: 'Defeat the Old Oak Wood boss' },
+  ];
+  const HERO_BY = Object.fromEntries(HEROES.map((h) => [h.id, h]));
+  const heroUnlocked = (s, id) => { const h = HERO_BY[id]; return !!h && (!h.unlock || (h.unlock.boss ? s.bossesBeaten.includes(h.unlock.boss) : (s.runs || 0) >= h.unlock.runs)); };
+  const heroOf = (s) => (HERO_BY[s.hero] && heroUnlocked(s, s.hero) ? HERO_BY[s.hero] : HERO_BY.marshal);
+  // Hero fields for the engine's stage definition (Engine.createState reads `hero` and `ability`).
+  const heroStage = (s) => { const h = heroOf(s); return { hero: h.id, ability: h.ability }; };
+
   // Camp upgrades bought with Souls. Each level's cost is listed.
   const UPGRADES = [
     { id: 'vitality', name: 'Vitality',  icon: '❤️', desc: '+3 max HP',                       costs: [15, 35, 70, 120, 190, 280, 420] },
@@ -98,6 +114,7 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
       upgrades: {},
       owned: ROSTER.filter((u) => u.start).map((u) => u.id),
       squad: ROSTER.filter((u) => u.start).map((u) => u.id),
+      hero: 'marshal',          // WP15: the hero taking the next run (see HEROES)
       waypoints: [],            // WP14: sub-area ids whose Wayshrine has been lit (runs can start there, fast travel to them)
       startAt: 'camp',          // WP14: 'camp' or a sub-area id with a lit waypoint: where the next run begins
       seen: [],                 // WP14: monster spot ids that have been scouted (the rest show as faint silhouettes)
@@ -129,6 +146,7 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
         if (root.World) { s.waypoints = s.waypoints.filter((id) => root.World.SUB_BY[id] && root.World.byId[id + '-wp']); if (s.startAt !== 'camp' && !s.waypoints.includes(s.startAt)) s.startAt = 'camp'; }
         s.unlocked = s.unlocked.filter((id) => root.World && root.World.SUB_BY[id]);
         if (!s.unlocked.length) s.unlocked = ['meadow'];
+        if (!HERO_BY[s.hero] || !heroUnlocked(s, s.hero)) s.hero = 'marshal';
         s.squad = s.squad.filter((id) => ROSTER_BY[id] && s.owned.includes(id));
         fitSquad(s);       // WP10: old saves counted slots; Rare units now cost more Command Points
         if (root.Items) root.Items.migrate(s); // WP8: old saves have a flat `equipped` list and no item levels
@@ -286,13 +304,14 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
     const out = Object.assign({}, Items() ? Items().rules(s) : {});
     const add = (r) => { for (const k of Object.keys(r)) out[k] = k === 'blast' ? Math.max(out[k] || 0, r[k]) : (out[k] || 0) + r[k]; };
     add(traitFx(s).rules);
+    if (heroOf(s).rules) add(heroOf(s).rules); // WP15 hero passive
     for (const id of s.squad) if (ROSTER_BY[id].rule && !(ROSTER_BY[id].rule.revive && run && run.reviveUsed)) add(ROSTER_BY[id].rule);
     // WP12: relics picked on this run (run.relics, ids from relics.js).
     if (run && run.relics && run.relics.length) { const R = typeof window !== 'undefined' ? window.Relics : require('./relics.js'); add(R.rules(run.relics)); }
     return out;
   }
 
-  const maxHp = (s) => BASE_HP + 3 * level(s, 'vitality') + gear(s).hp + traitFx(s).hp + growthFx(s).hp;
+  const maxHp = (s) => BASE_HP + 3 * level(s, 'vitality') + gear(s).hp + traitFx(s).hp + growthFx(s).hp + (heroOf(s).hp || 0);
   const slots = commandCap; // legacy name
   const soulRate = (s) => 1 + 0.2 * level(s, 'fortune') + (gear(s).souls + traitFx(s).souls + growthFx(s).souls) / 100;
 const scoutLevel = (s) => level(s, 'scouting');
@@ -352,6 +371,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
     PULL_COST, PULL10_COST, ODDS, PITY_AT, MAX_STARS, MAXED_DUST, OFFICE_COST, MASTERY_XP, MASTERY_PERKS, STAR_TEXT,
     starsOf, masteryOf, masteryLevel, growthFx, addXp, poolFor, grantUnit, pullOnce, pull, officeTrade, recruitable,
     CURRENCIES, balance, canSpend, earn, spend, spendAll, bossCrystals,
+    HEROES, HERO_BY, heroUnlocked, heroOf, heroStage,
     commandCap, squadCp, squadProblem, canAdd, fitSquad, activeTraits, traitCounts, traitFx, rulesFor, unitCp: UNIT_CP,
     freshSave, load, save, reset, level, scoutLevel, maxHp, slots, soulRate, startSupplies, upgradeCost, cheapestUpgrade, recruitAvailable, buildArmy,
   };

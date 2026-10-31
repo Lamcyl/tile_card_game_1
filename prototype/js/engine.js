@@ -54,6 +54,14 @@
     rage:   { name: 'Fury',      badge: '♨', text: 'gains {n} extra ATK every turn it survives' },
     harden: { name: 'Harden',    badge: '▣', text: 'gains 1 armor every turn it survives (up to {n})' },
   };
+  // Hero abilities (WP15): usable once per battle, during the Plan phase, via useAbility(). `target` 'enemy' needs a tile choice.
+  // rally / brace set a one-turn rule (rules.rally, rules.brace) that resolveTurn consumes; ration and ignite act at once.
+  const HERO_ABILITIES = {
+    rally:  { name: 'Rally',  icon: '📣', target: 'none',  text: 'Every attacker gets +1 ATK this turn.' },
+    ignite: { name: 'Ignite', icon: '🔥', target: 'enemy', text: 'Set one enemy ablaze: a Barrel explodes at once, anything else takes 2 damage (ignores armor).' },
+    ration: { name: 'Ration', icon: '🍙', target: 'none',  text: 'Heal the damage taken in this battle, up to 4 HP.' },
+    brace:  { name: 'Brace',  icon: '🛡️', target: 'none',  text: 'Every enemy strike is weakened by 2 this turn.' },
+  };
   const gimmickText = (e) => (ENEMY_GIMMICKS[e.gimmick] ? ENEMY_GIMMICKS[e.gimmick].text.replace('{n}', e.gp) : '');
 
   const key = (r, c) => r + ',' + c;
@@ -67,7 +75,7 @@
 
   // Rule-driven attacker ATK bonus (WP12 relics): "feast" (kills by overkill, rules.feastN, max 3) and "kindle" (first turn only).
   function syncBonus(rules, turn) {
-    rules.bonusAtk = (rules.feast ? rules.feastN || 0 : 0) + (rules.kindle && turn === 1 ? rules.kindle : 0);
+    rules.bonusAtk = (rules.feast ? rules.feastN || 0 : 0) + (rules.kindle && turn === 1 ? rules.kindle : 0) + (rules.rally || 0);
     return rules;
   }
 
@@ -80,6 +88,9 @@
       damageTaken: 0,
       // Rule flags from equipped Legendaries and squad traits (Progress.rulesFor): spill, blast, opening, soften, sunder, stand, mend, revive. Empty by default.
       rules: syncBonus(Object.assign({}, stage.rules), 1),
+      hero: stage.hero || null,       // WP15: hero id and its once-per-battle ability (HERO_ABILITIES key); abilityUsed flips when spent
+      ability: stage.ability || null,
+      abilityUsed: false,
       status: 'playing', // 'playing' | 'cleared' | 'defeated'
       enemies: stage.enemies.map((e, i) => {
         const t = ENEMY_TYPES[e.type];
@@ -315,6 +326,34 @@
 
   const isThreat = (e) => e.alive && !ENEMY_TYPES[e.type].barrel;
 
+  // Can the hero use the ability right now? Returns null or the reason.
+  function abilityProblem(state, target) {
+    if (!state.ability || !HERO_ABILITIES[state.ability]) return 'no ability';
+    if (state.status !== 'playing') return 'battle over';
+    if (state.abilityUsed) return 'already used';
+    if (HERO_ABILITIES[state.ability].target === 'enemy' && !(target && state.enemies.some((e) => e.alive && e.id === target))) return 'choose an enemy';
+    if (state.ability === 'ration' && state.hp >= state.maxHp) return 'already at full health';
+    return null;
+  }
+  // Use the hero ability (Plan phase). `target` = enemy id for targeted abilities. Returns { state, events } or null if it cannot be used.
+  function useAbility(state0, target) {
+    if (abilityProblem(state0, target)) return null;
+    const state = clone(state0), events = [], id = state.ability;
+    state.abilityUsed = true;
+    events.push({ t: 'ability', id, hero: state.hero, target: target || null });
+    if (id === 'rally') { state.rules.rally = 1; syncBonus(state.rules, state.turn); }
+    else if (id === 'brace') state.rules.brace = 2;
+    else if (id === 'ration') {
+      const amount = Math.min(state.maxHp - state.hp, Math.min(4, state.damageTaken));
+      state.hp += amount; events.push({ t: 'mend', amount, hp: state.hp, source: 'ration' });
+    } else if (id === 'ignite') {
+      const e = state.enemies.find((x) => x.id === target);
+      dealDamage(state, e, ENEMY_TYPES[e.type].barrel ? e.hp : 2, false, events, 'ignite', true);
+      if (!state.enemies.some(isThreat)) { state.status = 'cleared'; events.push({ t: 'cleared' }); }
+    }
+    return { state, events };
+  }
+
   // Resolve one full turn: attackers fire, survivors strike, survivors enrage.
   // Returns the new state and an ordered event list for animation.
   function resolveTurn(state0, placement, army) {
@@ -357,6 +396,7 @@
       return { state, events };
     }
 
+    if (state.rules.rally) { delete state.rules.rally; syncBonus(state.rules, state.turn); } // Rally lasts for one volley
     // Surviving enemies strike the hero. Shields absorb damage in their column.
     const pools = [];
     const shieldsOf = [];
@@ -368,7 +408,7 @@
     const strike = (e, col, atk, splash) => {
       const blocked = Math.min(pools[col], atk);
       pools[col] -= blocked;
-      const dmg = Math.max(0, atk - blocked - (state.rules.soften || 0));
+      const dmg = Math.max(0, atk - blocked - (state.rules.soften || 0) - (state.rules.brace || 0));
       state.hp = Math.max(0, state.hp - dmg);
       state.damageTaken += dmg;
       events.push({ t: 'strike', id: e.id, atk, blocked, dmg, shields: shieldsOf[col], hp: state.hp, col, splash });
@@ -385,6 +425,7 @@
       for (const col of [e.col - 1, e.col + 1]) if (col >= 0 && col < COLS) strike(e, col, Math.ceil(e.atk / 2), true);
     }
 
+    if (state.rules.brace) delete state.rules.brace; // Brace lasts for one strike
     // Legendary rule "stand": once per battle a lethal blow leaves 1 HP.
     if (state.hp <= 0 && state.rules.stand && !state.standUsed) { state.hp = 1; state.standUsed = true; events.push({ t: 'stand', hp: 1 }); }
     // Phoenix Archer (rule "revive", once per run: the caller clears it afterwards via state.reviveUsed): rise again at half HP.
@@ -467,9 +508,9 @@
   }
 
   const Engine = {
-    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, gimmickText, incomingByColumn,
+    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, HERO_ABILITIES, gimmickText, incomingByColumn,
     key, parseKey, clone, cardStat,
-    createState, computeStats, targetsFor, reachableTiles, resolveTurn, isThreat,
+    createState, computeStats, targetsFor, reachableTiles, resolveTurn, useAbility, abilityProblem, isThreat,
   };
 
   // Always set the global (the browser bundle wraps this file as CommonJS),
