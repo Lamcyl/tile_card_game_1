@@ -220,11 +220,12 @@ button.wide { width: 100%; }
 .supply-line b { color: var(--vermilion-deep); font-family: var(--font-display); font-size: 17px; }
 
 :root {
-  --rar-common: #7a7260; --rar-rare: #3f5f8f; --rar-epic: #b8892c;
+  --rar-common: #7a7260; --rar-rare: #3f5f8f; --rar-epic: #b8892c; --rar-legendary: #7a3f8f;
 }
 .rar-common { --rar: var(--rar-common); }
 .rar-rare   { --rar: var(--rar-rare); }
 .rar-epic   { --rar: var(--rar-epic); }
+.rar-legendary { --rar: var(--rar-legendary); }
 .ic { font-size: 22px; }
 .drops { margin: 8px 0 4px; }
 .drops h4 { margin: 0 0 6px; font-family: var(--font-display); font-size: 14px; color: var(--ink-soft); letter-spacing: .04em; }
@@ -309,3 +310,40 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 .bounty-done { margin: 6px 0; padding: 4px 10px; border-left: 3px solid var(--indigo); background: rgba(63,95,143,.08); font-size: 13px; }
 .bounty-done p { margin: 3px 0; }
 .bounty-sum { font-size: 13px; color: var(--indigo); font-weight: 700; margin: 2px 0 8px; }
+
+/* WP8 gear: paperdoll, filters, substats, Legendary effect, boss tokens */
+.paperdoll { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin: 2px 0 8px; }
+.paperdoll .slot { display: grid; justify-items: center; gap: 1px; padding: 6px 2px 5px; min-width: 0; font-size: 11px; line-height: 1.15; background: var(--paper-grain), rgba(236,225,200,.55); border: 1.5px dashed rgba(43,42,53,.35); border-bottom: 3px solid var(--rar, rgba(43,42,53,.25)); box-shadow: none; opacity: 1; }
+.paperdoll .slot.filled { border-style: solid; background: var(--paper-grain), rgba(185,204,152,.3); }
+.paperdoll .slot:disabled { color: var(--muted); }
+.paperdoll .si { font-size: 20px; }
+.paperdoll .slot small { font-weight: 800; color: var(--ink-soft); letter-spacing: .03em; }
+.paperdoll .slot em { font-style: normal; color: var(--muted); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
+.chips { display: flex; gap: 5px; margin: 6px 0 8px; flex-wrap: wrap; }
+.chips button { padding: 4px 10px; font-size: 12px; background: transparent; box-shadow: none; border-color: rgba(43,42,53,.35); color: var(--ink-soft); font-weight: 600; }
+.chips button.on { background: rgba(184,137,44,.22); border-color: var(--ochre); color: var(--ink); }
+.item.gear { align-items: flex-start; }
+.item.gear .grow { gap: 1px; line-height: 1.25; }
+.item.gear .meta { font-size: 11.5px; color: var(--muted); }
+.item.gear .meta .rb, .drop-card .rb { font-style: normal; font-weight: 800; color: var(--rar, var(--muted)); }
+.item.gear .sub, .drop-card .sub { font-size: 12px; color: var(--ink-soft); }
+.fx { font-size: 11.5px; font-weight: 700; color: #6a2f7c; font-style: italic; }
+.drop .grow span.fx { color: #6a2f7c; }
+.item.gear.rar-legendary, .drop.rar-legendary { background: var(--paper-grain), linear-gradient(90deg, rgba(122,63,143,.13), transparent 70%); }
+.drop-card .sub, .drop-card .effect { display: block; font-size: 12.5px; }
+.drop-card .effect { font-weight: 700; color: var(--rar, var(--indigo)); }
+.item.gear .btns { display: grid; gap: 5px; flex: none; }
+.item.gear .btns button { min-width: 78px; padding: 6px 8px; }
+.item.gear .btns .salvage { font-size: 12px; background: transparent; color: var(--ink-soft); }
+.item.gear .btns .salvage.danger { color: #fff; }
+.drops h4 small, .tokens h4 small { font-family: var(--font-body); font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.tokens { margin: 6px 0; }
+.tokens h4 { margin: 0 0 5px; font-family: var(--font-display); font-size: 14px; color: var(--ink-soft); }
+.token-bar { position: relative; height: 18px; border: 1.5px solid var(--ink); border-radius: var(--brush-sm); background: rgba(236,225,200,.7); overflow: hidden; margin-bottom: 6px; }
+.token-bar i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, rgba(122,63,143,.55), rgba(184,137,44,.6)); }
+.token-bar b { position: relative; display: block; text-align: center; font-size: 12px; line-height: 15px; }
+.tokens .row { flex-wrap: wrap; }
+.tokens .row button { flex: 1 1 140px; font-size: 12px; padding: 6px 8px; border-color: var(--rar-legendary); }
+.tok-list { margin: 4px 0 8px; font-size: 13px; }
+.tok-list summary { cursor: pointer; font-weight: 700; color: var(--ink-soft); padding: 4px 0; }
+.tok-list h5 { margin: 6px 0 2px; font-family: var(--font-display); font-size: 13px; }

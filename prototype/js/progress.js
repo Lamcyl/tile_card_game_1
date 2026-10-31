@@ -39,7 +39,7 @@
 const BASE_SUPPLIES = 8;   // battles a fresh account can fight per run
 const SUPPLIES_PER_BOSS = 4; // a boss victory adds this many Supplies
 const Items = () => root.Items;
-const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range: {}, block: 0, hp: 0, supplies: 0, souls: 0 });
+const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range: {}, block: 0, hp: 0, supplies: 0, souls: 0, rules: {}, horn: false });
 
   const SAVE_KEY = 'tile-defense-world-v3';
 
@@ -60,7 +60,10 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
       lastPath: [],
       prevBestPath: [],         // the best route before the current bestPath (drawn as a second ghost)
       items: [],                // owned equipment item ids (permanent)
-      equipped: [],             // up to Items.SLOTS equipped item ids
+      itemData: {},             // WP8: per owned item { lv: item level, subs: [{kind, type, amount}] }
+      loadout: { weapon: null, armor: null, banner: null, ring1: null, ring2: null }, // WP8: equipped item id per slot
+      luck: {},                 // WP8 bad-luck protection: wins without the unique item (node id) / boss Legendary ('L:' + node id)
+      tokens: {},               // WP8 boss tokens per boss node id (Items.TOKENS_NEEDED buys a Legendary)
       run: null,
     };
   }
@@ -72,6 +75,7 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
         const s = Object.assign(freshSave(), JSON.parse(raw));
         s.unlocked = s.unlocked.filter((id) => root.World && root.World.SUB_BY[id]);
         if (!s.unlocked.length) s.unlocked = ['meadow'];
+        if (root.Items) root.Items.migrate(s); // WP8: old saves have a flat `equipped` list and no item levels
         return s;
       }
     } catch (e) { /* storage unavailable: play without saving */ }
@@ -144,7 +148,9 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
         card.block = (def.block || t.block) + level(s, 'bulwark') + (m.block || 0) + g.block;
         upgraded = card.block !== (def.block || t.block) || level(s, 'bulwark') > 0;
       } else if (t.role === 'support') {
-        card.amount = t.amount + (m.amount || 0) + (g.amount[def.type] || 0);
+        // Legendary rule: the first War Horn in the squad multiplies by 3.
+        const hornBase = def.type === 'horn' && g.horn && s.squad.find((x) => ROSTER_BY[x].type === 'horn') === id ? 3 : t.amount;
+        card.amount = hornBase + (m.amount || 0) + (g.amount[def.type] || 0);
         upgraded = card.amount !== t.amount;
       }
       if (upgraded) card.upgraded = true;

@@ -97,6 +97,8 @@
     else if (ev.t === 'regrow') log(nameOf(view, ev.id) + ' grows back (' + ev.hp + ' HP)', 'bad');
     else if (ev.t === 'move') log(nameOf(view, ev.id) + ' steps to column ' + (ev.to[1] + 1), 'bad');
     else if (ev.t === 'tide') log('The tide carries every enemy one column', 'bad');
+    else if (ev.t === 'stand') log('Last Breath: you cling on at 1 HP!', 'good');
+    else if (ev.t === 'mend') log('Lifebloom heals ' + ev.amount + ' HP', 'good');
     else if (ev.t === 'enrage') { if (ev.ids.length) log('Survivors enrage: +1 ⚔', 'bad'); }
     else if (ev.t === 'cleared') log('Stage cleared!', 'good');
     else if (ev.t === 'defeated') log('Your hero has fallen.', 'bad');
@@ -395,7 +397,7 @@
       render(); await sleep(300);
     } else if (ev.t === 'overkill') {
       const from = enemyCell(view, ev.from);
-      floatText(from, 'Overkill ' + ev.amount + '!', 'info');
+      floatText(from, (ev.side ? 'Spill ' : 'Overkill ') + ev.amount + '!', 'info');
       await projectile(from, enemyCell(view, ev.id));
     } else if (ev.t === 'explode') {
       const el = enemyCell(view, ev.id);
@@ -448,6 +450,9 @@
     } else if (ev.t === 'tide') {
       ev.moves.forEach((m) => { const e = view.enemies.find((en) => en.id === m.id); e.row = m.to[0]; e.col = m.to[1]; });
       render(); root.classList.add('tide-wash'); setTimeout(() => root.classList.remove('tide-wash'), 700 / game.speed); await sleep(520);
+    } else if (ev.t === 'stand' || ev.t === 'mend') {
+      const hero = $('#b-hero'); view.hp = ev.hp; flash(hero, 'heal-flash', 500);
+      floatText(hero, ev.t === 'stand' ? 'Last Breath!' : '+' + ev.amount + ' ♥', 'heal'); render(); await sleep(480);
     } else if (ev.t === 'enrage') {
       if (!ev.ids.length) return;
       ev.ids.forEach((id) => { view.enemies.find((en) => en.id === id).atk += 1; const el = enemyCell(view, id); flash(el, 'rage', 500); floatText(el, '+1 ⚔', 'info'); });

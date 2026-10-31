@@ -72,6 +72,8 @@
       maxHp: stage.heroMaxHp,
       turn: 1,
       damageTaken: 0,
+      // Rule flags from equipped Legendaries (Items.rules): spill, blast, opening, soften, sunder, stand, mend. Empty by default.
+      rules: Object.assign({}, stage.rules),
       status: 'playing', // 'playing' | 'cleared' | 'defeated'
       enemies: stage.enemies.map((e, i) => {
         const t = ENEMY_TYPES[e.type];
@@ -221,7 +223,8 @@
   }
 
   function dealDamage(state, e, amount, canCarry, events, source) {
-    let dmg = Math.max(0, amount - e.armor);
+    const armor = source === 'explode' ? e.armor : Math.max(0, e.armor - ((state.rules && state.rules.sunder) || 0));
+    let dmg = Math.max(0, amount - armor);
     const warded = wardReason(state, e, amount);
     if (warded) dmg = 0;
     const before = e.hp;
@@ -239,14 +242,24 @@
         events.push({ t: 'overkill', from: e.id, id: behind.id, amount: leftover });
         dealDamage(state, behind, leftover, false, events, 'overkill');
       }
+      // Legendary rule "spill": the leftover also hits the front-row enemies on either side.
+      if (state.rules && state.rules.spill) {
+        for (const dc of [-1, 1]) {
+          const side = enemyAt(state.enemies, 1, e.col + dc);
+          if (!side) continue;
+          events.push({ t: 'overkill', from: e.id, id: side.id, amount: leftover, side: true });
+          dealDamage(state, side, leftover, false, events, 'overkill');
+        }
+      }
     }
     if (e.kind === 'splitter') splitInto(state, e, events);
     const type = ENEMY_TYPES[e.type];
     if (type.barrel) {
-      events.push({ t: 'explode', id: e.id, amount: type.blast });
+      const blast = Math.max(type.blast, (state.rules && state.rules.blast) || 0);
+      events.push({ t: 'explode', id: e.id, amount: blast });
       for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
         const n = enemyAt(state.enemies, e.row + dr, e.col + dc);
-        if (n) dealDamage(state, n, type.blast, false, events, 'explode');
+        if (n) dealDamage(state, n, blast, false, events, 'explode');
       }
     }
   }
@@ -288,6 +301,7 @@
   // Returns the new state and an ordered event list for animation.
   function resolveTurn(state0, placement, army) {
     const state = clone(state0);
+    if (!state.rules) state.rules = {};
     const events = [];
     const stats = computeStats(placement, army, state.enemies);
 
@@ -295,12 +309,15 @@
     const attackers = Object.values(stats)
       .filter((s) => s.type.role === 'attacker')
       .sort((a, b) => a.r - b.r || a.c - b.c);
+    let opened = false;
     for (const s of attackers) {
       const targets = targetsFor(s, state.enemies);
-      events.push({ t: 'fire', key: s.key, atk: s.atk, targets: targets.map((e) => e.id) });
+      // Legendary rule "opening": the first shot that finds a target in the first turn deals double damage.
+      const dmg = state.rules.opening && state.turn === 1 && !opened && targets.length ? (opened = true, s.atk * 2) : s.atk;
+      events.push({ t: 'fire', key: s.key, atk: dmg, targets: targets.map((e) => e.id) });
       for (const e of targets) {
         if (!e.alive) continue; // killed earlier in this same volley (e.g. by a blast)
-        dealDamage(state, e, s.atk, s.type.pattern !== 'pierce', events, s.key);
+        dealDamage(state, e, dmg, s.type.pattern !== 'pierce', events, s.key);
       }
       if (!state.enemies.some(isThreat)) break;
     }
@@ -321,7 +338,7 @@
     const strike = (e, col, atk, splash) => {
       const blocked = Math.min(pools[col], atk);
       pools[col] -= blocked;
-      const dmg = atk - blocked;
+      const dmg = Math.max(0, atk - blocked - (state.rules.soften || 0));
       state.hp = Math.max(0, state.hp - dmg);
       state.damageTaken += dmg;
       events.push({ t: 'strike', id: e.id, atk, blocked, dmg, shields: shieldsOf[col], hp: state.hp, col, splash });
@@ -338,6 +355,8 @@
       for (const col of [e.col - 1, e.col + 1]) if (col >= 0 && col < COLS) strike(e, col, Math.ceil(e.atk / 2), true);
     }
 
+    // Legendary rule "stand": once per battle a lethal blow leaves 1 HP.
+    if (state.hp <= 0 && state.rules.stand && !state.standUsed) { state.hp = 1; state.standUsed = true; events.push({ t: 'stand', hp: 1 }); }
     if (state.hp <= 0) {
       state.status = 'defeated';
       events.push({ t: 'defeated' });
@@ -406,6 +425,8 @@
       moves.forEach((m) => { state.enemies.find((x) => x.id === m.id).col = m.to[1]; });
       events.push({ t: 'tide', moves });
     }
+    // Legendary rule "mend": heal 1 HP at the end of every turn survived.
+    if (state.rules.mend && state.hp < state.maxHp) { state.hp = Math.min(state.maxHp, state.hp + state.rules.mend); events.push({ t: 'mend', amount: state.rules.mend, hp: state.hp }); }
     state.turn += 1;
     return { state, events };
   }

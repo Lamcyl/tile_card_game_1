@@ -9,7 +9,7 @@
   let campTab = 'upgrades';
   let sheetOpen = true;
   let busy = false;
-  let confirmReset = false, confirmReturn = false;
+  let confirmReset = false, confirmReturn = false, confirmSalvage = null, gearFilter = 'all';
   let pointAt = null; // upgrade id the results screen points to (first-run guarantee)
 
   const run = () => save.run;
@@ -89,10 +89,23 @@
   function dropRow(e, n) {
     const it = Items.BY_ID[e.id], owned = save.items.includes(it.id);
     const firstBoss = e.kind === 'unique' && n.type === 'boss' && !save.bossesBeaten.includes(n.sub);
-    const chance = firstBoss ? 'first win' : Math.round(e.chance * 100) + '%';
+    const now = Items.chanceNow(save, n, e), pity = now > e.chance + 0.001 && !firstBoss;
+    const chance = firstBoss ? 'first win' : Math.round(now * 100) + '%' + (pity ? '↑' : '');
+    const fx = Items.fxOf(it);
     return '<div class="drop ' + rarClass(it) + (e.kind === 'unique' ? ' unique' : '') + (owned ? ' owned' : '') + '">' + itemIcon(it) +
-      '<div class="grow"><b>' + esc(it.name) + '</b><span>' + esc(Items.describe(it)) + (e.kind === 'unique' ? ' · only here' : '') + '</span></div>' +
+      '<div class="grow"><b>' + esc(it.name) + '</b><span>' + esc(it.slot === 'ring' ? 'Ring' : Items.SLOT_NAMES[it.slot]) + ' · ' + esc(Items.describe(it, n.level)) + (e.kind === 'unique' ? ' · only here' : '') + '</span>' +
+      (fx ? '<span class="fx">' + esc(fx.text) + '</span>' : '') + '</div>' +
       '<span class="chance">' + (owned ? '✓' : chance) + '</span></div>';
+  }
+  // Boss tokens: progress bar plus a button for each Legendary of the boss that is not owned yet.
+  function tokenBlock(n) {
+    const have = Items.tokensOf(save, n.id), need = Items.TOKENS_NEEDED, legs = Items.LEGENDS_OF[n.id] || [];
+    if (!legs.length) return '';
+    const can = have >= need;
+    return '<div class="tokens"><h4>Boss tokens <small>every kill gives one; ' + need + ' buy a Legendary</small></h4>' +
+      '<div class="token-bar" aria-label="' + have + ' of ' + need + ' tokens"><i style="width:' + Math.min(100, 100 * have / need) + '%"></i><b>' + Math.min(have, need) + '/' + need + (have > need ? ' (+' + (have - need) + ')' : '') + '</b></div>' +
+      '<div class="row">' + legs.map((it) => save.items.includes(it.id) ? '<span class="muted small grow">' + esc(it.name) + ' ✓</span>' :
+        '<button class="rar-legendary" data-redeem="' + n.id + '|' + it.id + '"' + (can ? '' : ' disabled') + '>' + esc(Items.icon(it)) + ' ' + esc(it.name) + '</button>').join('') + '</div></div>';
   }
   function supplyNote(n) {
     return n.type === 'boss' ? '<span class="cost gain">🎒 Boss: +' + P.SUPPLIES_PER_BOSS + ' Supplies</span>' : '<span class="cost">🎒 Costs 1 Supply</span>';
@@ -113,7 +126,10 @@
         ? (save.bossesBeaten.includes(n.sub) ? 'Already defeated once. Fight again for Souls.' : 'Defeat it to reveal ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + (sub.unlocks.length ? '.' : '. This is a final boss.'))
         : n.type === 'elite' ? 'A tougher fight that pays double Souls.' : 'A normal fight.') + ' Reward: ✦ ' + souls + ', up to ✦ ' + Math.round(Gen.soulsFor(n, 3) * P.soulRate(save)) + ' with ★★★ (no damage, plus a bonus item roll).</p>';
       body += '<p>' + supplyNote(n) + '</p>';
-      body += '<div class="drops"><h4>Possible drops</h4>' + Items.tableFor(n).map((e) => dropRow(e, n)).join('') + '</div>';
+      body += '<div class="drops"><h4>Possible drops <small>item level ' + n.level + (n.type === 'elite' ? ' · an elite always drops something' : '') + '</small></h4>' + Items.tableFor(n).map((e) => dropRow(e, n)).join('') + '</div>';
+      if (n.type === 'boss') body += tokenBlock(n);
+      const miss = Items.missesOf(save, n.id);
+      if (miss > 0) body += '<p class="muted small">Bad-luck protection: ' + miss + ' win' + (miss === 1 ? '' : 's') + ' without the unique item. Its chance rises each time.</p>';
     } else if (n.type === 'shrine') body += '<p class="muted">Restores 8 HP. Once per run.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
     else if (n.type === 'treasure') body += '<p class="muted">Free supplies: ✦ 10 and a reward of your choice.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
 
@@ -145,7 +161,7 @@
     html += '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
       '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
-      { upgrades: 'Upgrades', squad: 'Squad ' + save.squad.length + '/' + P.slots(save), recruit: 'Recruit', gear: 'Gear ' + save.equipped.length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
+      { upgrades: 'Upgrades', squad: 'Squad ' + save.squad.length + '/' + P.slots(save), recruit: 'Recruit', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
     html += '<div class="list">';
     if (campTab === 'upgrades') {
       for (const u of P.UPGRADES) {
@@ -176,16 +192,39 @@
     html += '</div><div class="tools"><span class="muted small">Prototype tools</span><button data-act="cheat">+100 ✦ 10 💎 10 ⚒</button><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset progress') + '</button></div>';
     return html;
   }
+  // Stat lines of an owned item: main effect, substats and (Legendary) the unique rule.
+  function itemLines(it) {
+    const d = Items.dataOf(save, it.id), fx = Items.fxOf(it);
+    return '<span class="effect">' + esc(Items.effectText(it.kind, it.type, Items.mainAmount(it, d))) + '</span>' +
+      d.subs.map((sb) => '<span class="sub">+ ' + esc(Items.substatText(sb, d)) + '</span>').join('') +
+      (fx ? '<span class="fx">' + esc(fx.text) + '</span>' : '');
+  }
   function gearTab() {
     const owned = save.items.map((id) => Items.BY_ID[id]).filter(Boolean);
-    let h = '<p class="muted small">Items drop from monsters and are kept forever. Equip up to ' + Items.SLOTS + ' (' + save.equipped.length + ' equipped). Collected ' + owned.length + '/' + Items.ALL.length + '.</p>';
+    const eq = Items.equippedIds(save);
+    let h = '<div class="paperdoll" aria-label="Equipped gear">' + Items.SLOT_LIST.map((sl) => {
+      const id = save.loadout[sl.id], it = id && Items.BY_ID[id];
+      return '<button class="slot ' + (it ? rarClass(it) + ' filled' : '') + '" ' + (it ? 'data-equip="' + it.id + '" title="' + esc(it.name) + ': tap to unequip"' : 'disabled') + '>' +
+        '<span class="si">' + (it ? esc(Items.icon(it)) : sl.icon) + '</span><small>' + sl.name + '</small><em>' + (it ? esc(it.name) : 'empty') + '</em></button>';
+    }).join('') + '</div>';
+    h += '<p class="muted small">Items drop from monsters, scale with the fight\'s level and are kept forever. Rings take anything. Collected ' + owned.length + '/' + Items.ALL.length + '. Salvaging gives Dust ⚒.</p>';
+    const chips = [['all', 'All']].concat(Object.keys(Items.SLOT_NAMES).map((k) => [k, Items.SLOT_NAMES[k]]));
+    h += '<div class="chips">' + chips.map((c) => '<button class="' + (gearFilter === c[0] ? 'on' : '') + '" data-gfilter="' + c[0] + '">' + c[1] + '</button>').join('') + '</div>';
+    const bossTok = World.nodes.filter((n) => n.type === 'boss' && Items.tokensOf(save, n.id) > 0);
+    if (bossTok.length) h += '<details class="tok-list"><summary>Boss tokens (' + bossTok.length + ' boss' + (bossTok.length === 1 ? '' : 'es') + ')</summary>' +
+      bossTok.map((n) => '<h5>' + esc(nodeTitle(n)) + '</h5>' + tokenBlock(n)).join('') + '</details>';
+    const list = owned.filter((it) => gearFilter === 'all' || it.slot === gearFilter);
     if (!owned.length) return h + '<p class="empty-gear">No gear yet. Win battles on the map: every monster has an item that only it drops.</p>';
-    owned.sort((a, b) => (save.equipped.includes(b.id) - save.equipped.includes(a.id)) || (Items.RARITY[b.rarity].order - Items.RARITY[a.rarity].order) || a.name.localeCompare(b.name));
-    for (const it of owned) {
-      const on = save.equipped.includes(it.id), src = it.source;
-      const from = src.kind === 'unique' ? nodeTitle(World.byId[src.spot]) + ' · ' + World.SUB_BY[src.sub].name : src.kind === 'sub' ? World.SUB_BY[src.sub].name : src.region;
-      h += '<div class="item gear ' + rarClass(it) + (on ? ' equipped' : '') + '">' + itemIcon(it) + '<div class="grow"><b>' + esc(it.name) + ' <small>' + Items.RARITY[it.rarity].name + '</small></b><span class="effect">' + esc(Items.describe(it)) + '</span><span class="muted">' + esc(from) + '</span></div>' +
-        '<button class="' + (on ? 'on' : '') + '" data-equip="' + it.id + '">' + (on ? 'Equipped' : 'Equip') + '</button></div>';
+    list.sort((a, b) => (eq.includes(b.id) - eq.includes(a.id)) || (Items.RARITY[b.rarity].order - Items.RARITY[a.rarity].order) || (Items.dataOf(save, b.id).lv - Items.dataOf(save, a.id).lv) || a.name.localeCompare(b.name));
+    if (!list.length) h += '<p class="empty-gear">Nothing in this slot yet.</p>';
+    for (const it of list) {
+      const on = eq.includes(it.id), src = it.source, d = Items.dataOf(save, it.id);
+      const from = src.kind === 'unique' ? nodeTitle(World.byId[src.spot]) + ' · ' + World.SUB_BY[src.sub].name : src.kind === 'legend' ? 'Signature of ' + nodeTitle(World.byId[src.spot]) : src.kind === 'sub' ? World.SUB_BY[src.sub].name : src.region;
+      const val = Items.salvageValue(save, it.id), sure = confirmSalvage === it.id;
+      h += '<div class="item gear ' + rarClass(it) + (on ? ' equipped' : '') + '">' + itemIcon(it) + '<div class="grow"><b>' + esc(it.name) + '</b>' +
+        '<span class="meta"><i class="rb">' + Items.RARITY[it.rarity].name + '</i> ' + (it.slot === 'ring' ? 'Ring' : Items.SLOT_NAMES[it.slot]) + ' · iLv ' + d.lv + '</span>' + itemLines(it) + '<span class="muted">' + esc(from) + '</span></div>' +
+        '<div class="btns"><button class="' + (on ? 'on' : '') + '" data-equip="' + it.id + '">' + (on ? 'Unequip' : 'Equip') + '</button>' +
+        '<button class="salvage' + (sure ? ' danger' : '') + '" data-salvage="' + it.id + '">' + (sure ? 'Sure? ' : '') + '⚒ +' + val + '</button></div></div>';
     }
     return h;
   }
@@ -237,7 +276,7 @@
       r.cleared.push(id); r.souls += 10; persist(); renderAll();
       offerReward('Supply cache', 'You found ✦ 10 and some supplies. This cost no Supplies.', n); return;
     }
-    const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp }, Gen.generateBattle(n, r.seed));
+    const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: Items.rules(save) }, Gen.generateBattle(n, r.seed));
     WorldMap.setActive(false);
     document.body.classList.add('in-battle');
     Battle.start({
@@ -247,19 +286,22 @@
     });
   }
 
-  // The reward card shown when an item drops.
-  function dropCard(it, note) {
-    return '<div class="drop-card ' + rarClass(it) + '"><span class="ic big">' + esc(Items.icon(it)) + '</span><div class="grow"><small class="new">New item · ' + Items.RARITY[it.rarity].name + '</small><b>' + esc(it.name) + '</b><span>' + esc(Items.describe(it)) + '</span>' +
+  // The reward card shown when an item drops (a duplicate shows as Dust instead).
+  function dropCard(res, note) {
+    const it = res.item;
+    if (!res.isNew) return '<div class="drop-card ' + rarClass(it) + '"><span class="ic big">' + esc(Items.icon(it)) + '</span><div class="grow"><small class="new">Duplicate · ' + Items.RARITY[it.rarity].name + '</small><b>' + esc(it.name) + '</b><span>Turned into ⚒ ' + res.dust + ' Dust' + (res.levelUp ? '; your copy rose to item level ' + res.lv : '') + '.</span></div></div>';
+    return '<div class="drop-card ' + rarClass(it) + '"><span class="ic big">' + esc(Items.icon(it)) + '</span><div class="grow"><small class="new">New ' + Items.RARITY[it.rarity].name + ' · ' + (it.slot === 'ring' ? 'Ring' : Items.SLOT_NAMES[it.slot]) + ' · iLv ' + res.lv + '</small><b>' + esc(it.name) + '</b>' + itemLines(it) +
       (note ? '<em>' + esc(note) + '</em>' : '') + '</div></div>';
   }
   // Equip a freshly dropped item into a free slot and apply it to the run in progress.
-  function autoEquip(it) {
-    if (save.equipped.length >= Items.SLOTS) return false;
-    save.equipped.push(it.id);
-    const r = run();
+  function autoEquip(res) {
+    if (!res || !res.isNew) return false;
+    const before = Items.bonuses(save);
+    if (!Items.equip(save, res.id, true)) return false;
+    const after = Items.bonuses(save), r = run();
     if (r) {
-      if (it.kind === 'hp') { r.maxHp += it.amount; r.hp += it.amount; }
-      if (it.kind === 'supplies') { r.supplies += it.amount; r.startSupplies += it.amount; }
+      r.maxHp += after.hp - before.hp; r.hp += after.hp - before.hp;
+      r.supplies += after.supplies - before.supplies; r.startSupplies += after.supplies - before.supplies;
     }
     return true;
   }
@@ -274,15 +316,17 @@
     const gained = Math.round(Gen.soulsFor(n, stars) * P.soulRate(save));
     r.souls += gained; r.wins += 1; r.maxLevel = Math.max(r.maxLevel, n.level); r.cleared.push(n.id);
     // Items: rolled before the boss is marked as beaten, so its first kill always drops its unique item.
-    let dropId = Items.rollDrop(save, n, r.seed);
-    if (!dropId && save.runs === 0 && !r.found.length && r.wins === 2) dropId = Items.guaranteedDrop(save, n); // design 24.3: an item in the first two battles
-    let item = null, equipped = false, bonusItem = null, bonusEquipped = false;
-    if (dropId) { item = Items.BY_ID[dropId]; save.items.push(dropId); r.found.push(dropId); equipped = autoEquip(item); }
-    // A 3-star clear earns one extra loot roll (design 11); it never repeats an item already owned.
+    let drop = Items.grantDrop(save, n, r.seed);
+    if (!drop && save.runs === 0 && !r.found.length && r.wins === 2) drop = Items.guaranteedDrop(save, n); // design 24.3: an item in the first two battles
+    const item = drop && drop.item ? drop : null, equipped = autoEquip(item);
+    if (item && item.isNew) r.found.push(item.id);
+    // A 3-star clear earns one extra loot roll (design 11); a duplicate turns into Dust.
+    let bonusItem = null, bonusEquipped = false;
     if (stars === 3) {
-      const bonusId = Items.rollDrop(save, n, r.seed + ':star');
-      if (bonusId) { bonusItem = Items.BY_ID[bonusId]; save.items.push(bonusId); r.found.push(bonusId); bonusEquipped = autoEquip(bonusItem); }
+      const b = Items.grantDrop(save, n, r.seed + ':star', { bonus: true });
+      if (b && b.item) { bonusItem = b; if (b.isNew) r.found.push(b.id); bonusEquipped = autoEquip(b); }
     }
+    const dustLine = drop && drop.consolation ? '<p class="supply-line">Elite spoils: ⚒ ' + drop.dust + ' Dust (you own everything it drops).</p>' : '';
     // Supplies: normal and elite wins cost 1, a boss adds some.
     const boss = n.type === 'boss';
     r.supplies += boss ? P.SUPPLIES_PER_BOSS : -1;
@@ -303,8 +347,8 @@
     const done = Bounties.track(r.bounties, Object.assign({ won: true, stars, node: n.type }, report || {}));
     const bountyLine = done.length ? '<div class="bounty-done">' + done.map((b) => '<p>🎯 Bounty complete: <b>' + esc(Bounties.text(b)) + '</b> · 💎 ' + b.reward + ' at run end</p>').join('') + '</div>' : '';
     const supLine = '<p class="supply-line">🎒 ' + (boss ? 'The boss falls: <b>+' + P.SUPPLIES_PER_BOSS + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left.</p>';
-    const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'Your three slots are full. Swap it in at Camp ▸ Gear.') : '') +
-      (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'Slots full: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
+    const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
+      (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'No free slot: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
     persist(); renderAll();
     if (r.supplies <= 0) { outOfSupplies(title, text, extra); return; }
     offerReward(title, text, n, extra);
@@ -405,6 +449,7 @@
   $('#sheet').addEventListener('click', (ev) => {
     const b = ev.target.closest('button'); if (!b) return;
     if (b.id === 'sheet-toggle') { sheetOpen = !sheetOpen; renderSheet(); return; }
+    if (!b.dataset.salvage) confirmSalvage = null;
     if (b.dataset.tab) { campTab = b.dataset.tab; sheetOpen = true; renderSheet(); return; }
     if (b.dataset.buy) {
       const cost = P.upgradeCost(save, b.dataset.buy);
@@ -421,11 +466,24 @@
       return;
     }
     if (b.dataset.equip) {
-      const id = b.dataset.equip, i = save.equipped.indexOf(id);
-      if (i >= 0) save.equipped.splice(i, 1);
-      else if (save.equipped.length < Items.SLOTS) save.equipped.push(id);
-      else { toast('All ' + Items.SLOTS + ' gear slots are full. Unequip something first.'); return; }
+      const id = b.dataset.equip;
+      if (!Items.unequip(save, id)) {
+        const res = Items.equip(save, id);
+        if (res && res.replaced) toast(Items.BY_ID[res.replaced].name + ' was swapped out.');
+      }
       persist(); renderAll(); return;
+    }
+    if (b.dataset.gfilter) { gearFilter = b.dataset.gfilter; renderSheet(); return; }
+    if (b.dataset.salvage) {
+      const id = b.dataset.salvage;
+      if (confirmSalvage !== id) { confirmSalvage = id; renderSheet(); return; }
+      confirmSalvage = null; const name = Items.BY_ID[id].name, n = Items.salvage(save, id);
+      persist(); toast(name + ' salvaged: ⚒ +' + n + ' Dust.'); renderAll(); return;
+    }
+    if (b.dataset.redeem) {
+      const [bossId, itemId] = b.dataset.redeem.split('|'), res = Items.redeemToken(save, bossId, itemId);
+      if (res) { persist(); toast(res.item.name + ' bought with ' + Items.TOKENS_NEEDED + ' boss tokens.'); renderAll(); }
+      return;
     }
     if (b.dataset.squad) {
       const id = b.dataset.squad, i = save.squad.indexOf(id);

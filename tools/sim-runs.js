@@ -69,8 +69,15 @@ function playRun(save0) {
     const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed);
     if (st.status !== 'cleared') return { wins, maxLv, souls: Math.round(souls * 0.75), bosses, items, end: 'died', diedAt: node.level, start: Progress.startSupplies(save0), save };
     hp = st.hp; wins++; maxLv = Math.max(maxLv, node.level); souls += Gen.soulsFor(node, Gen.starsFor(st.damageTaken || 0)) * Progress.soulRate(save);
-    const drop = Items.rollDrop(save, node, seed) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null);
-    if (drop) { items++; save.items.push(drop); if (save.equipped.length < Items.SLOTS) { save.equipped.push(drop); const it = Items.BY_ID[drop]; if (it.kind === 'hp') hp += it.amount; if (it.kind === 'supplies') supplies += it.amount; } }
+    // Real WP8 drop logic (levels, substats, pity, elite guarantee, boss Legendaries); new items auto-equip into a free slot.
+    const drop = Items.grantDrop(save, node, seed) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null);
+    if (drop && drop.item) {
+      if (drop.isNew) {
+        items++;
+        const b0 = Items.bonuses(save);
+        if (Items.equip(save, drop.id, true)) { const b1 = Items.bonuses(save); hp += b1.hp - b0.hp; supplies += b1.supplies - b0.supplies; }
+      }
+    }
     if (node.type === 'boss') {
       supplies += Progress.SUPPLIES_PER_BOSS; bosses++; souls += 25;
       if (!save.bossesBeaten.includes(node.sub)) { save.bossesBeaten.push(node.sub); for (const u of World.SUB_BY[node.sub].unlocks) if (!save.unlocked.includes(u)) save.unlocked.push(u); }
@@ -95,7 +102,7 @@ function campaign(maxRuns) {
   const order = ['vitality', 'provisions', 'command', 'drill', 'fortune', 'bulwark'];
   for (let r = 1; r <= maxRuns; r++) {
     const res = playRun(save); const before = save.bossesBeaten.length;
-    save = res.save; save.runs++; save.souls += Math.round(res.souls); save.run = null; save.equipped = save.equipped.slice(0, Items.SLOTS);
+    save = res.save; save.runs++; save.souls += Math.round(res.souls); save.run = null;
     for (const b of save.bossesBeaten) { for (const u of World.SUB_BY[b].unlocks) if (!(u in unlockRun)) unlockRun[u] = r; }
     for (const b of save.bossesBeaten) { const reg = World.SUB_BY[b].region; if (!(reg in firstRun)) firstRun[reg] = r; }
     for (let guard = 0; guard < 20; guard++) { // shopping
