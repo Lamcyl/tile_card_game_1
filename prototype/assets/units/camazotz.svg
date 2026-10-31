@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.t{fill:none;stroke:#1b1a1a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><g id="w">
+<path class="o d" d="M110 120L40 44L4 112Q22 108 28 128Q40 118 50 150Q66 136 78 168Q90 156 104 182Z"/>
+<path class="t" d="M40 44L28 128M40 44L50 150M40 44L78 168M40 44L104 182" style="stroke-width:3;stroke:#9a948b"/>
+<path class="o m" d="M110 120L40 44" style="stroke-width:7" />
+<path class="o p" d="M40 44L30 14L56 36Z"/>
+<path class="o p" d="M4 112L-2 100L12 106Z" style="stroke-width:3" />
+</g></defs>
+<use href="#w"/><use href="#w" transform="translate(256 0) scale(-1 1)"/>
+<!-- legs -->
+<path class="o l" d="M112 176L104 214M144 176L152 214" style="stroke-width:9" />
+<path class="o p" d="M104 214L94 226M104 214L104 230M104 214L114 228M152 214L142 228M152 214L152 230M152 214L162 226" style="stroke-width:3"/>
+<!-- torso -->
+<path class="o l" d="M100 118Q128 108 156 118L146 182Q128 192 110 182Z"/>
+<path class="t" d="M112 138Q128 144 144 138M114 152Q128 158 142 152M116 166Q128 172 140 166" style="stroke-width:3;stroke:#55514c"/>
+<!-- ears -->
+<path class="o d" d="M92 58L76 6L116 40Z"/><path class="o d" d="M164 58L180 6L140 40Z"/>
+<path class="v" d="M92 48L84 20L108 40Z"/><path class="v" d="M164 48L172 20L148 40Z"/>
+<!-- head -->
+<path class="o p" d="M84 82C84 44 172 44 172 82C172 108 156 126 128 130C100 126 84 108 84 82Z"/>
+<!-- eyes -->
+<path class="o i" d="M92 78L120 88L116 100Q100 100 92 90Z"/><path class="o i" d="M164 78L136 88L140 100Q156 100 164 90Z"/>
+<circle class="v" cx="110" cy="92" r="4.500"/><circle class="v" cx="146" cy="92" r="4.500"/>
+<!-- leaf nose -->
+<path class="o d" d="M128 70L112 100L128 108L144 100Z"/>
+<!-- mouth -->
+<path class="o v" d="M98 108Q128 116 158 108Q156 130 128 132Q100 130 98 108Z"/>
+<path class="o p" d="M104 110L110 126L117 112M139 112L146 126L152 110M120 113L124 120L128 113L132 120L136 113" style="stroke-width:3"/>
+</svg>

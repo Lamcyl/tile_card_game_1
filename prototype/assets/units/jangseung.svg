@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce jangseung: two guardian poles lean out like gate wardens, a roaring V of carved faces -->
+<!-- RIGHT POLE (behind) -->
+<g transform="translate(162 248) rotate(10) scale(.92)">
+<path d="M-17 0 L-22 -70 Q-46 -92 -46 -132 Q-48 -190 0 -194 Q48 -190 46 -132 Q46 -92 22 -70 L17 0Z" fill="#d4cec3"/>
+<path d="M26 -160 Q46 -130 40 -92 Q26 -74 22 -70 L17 0 Q34 -20 28 -60 Q50 -100 46 -132Z" fill="#9a948b" stroke="none"/>
+<path d="M-14 -20 L0 -30 L14 -20 M-16 -44 L0 -54 L16 -44" fill="none" stroke="#c8352b" stroke-width="5"/>
+<path d="M-8 -8 L-12 -60 M10 -4 L8 -64" stroke="#9a948b" stroke-width="3" fill="none"/>
+<!-- face -->
+<path d="M-42 -156 L-8 -142 L-10 -132 L-44 -140Z M42 -156 L8 -142 L10 -132 L44 -140Z" fill="#1b1a1a" stroke-width="3"/>
+<circle cx="-23" cy="-134" r="17" fill="#f6f2e9"/><circle cx="23" cy="-134" r="17" fill="#f6f2e9"/>
+<circle cx="-20" cy="-131" r="8" fill="#c8352b" stroke-width="3"/><circle cx="26" cy="-131" r="8" fill="#c8352b" stroke-width="3"/>
+<path d="M-24 -138 L-24 -124 M22 -138 L22 -124" stroke-width="2.5" fill="none"/>
+<path d="M-8 -122 Q0 -128 8 -122 L10 -108 Q0 -102 -10 -108Z" fill="#9a948b" stroke-width="3.5"/>
+<path d="M-36 -98 Q0 -84 36 -98 L30 -80 Q0 -66 -30 -80Z" fill="#f6f2e9" stroke-width="3.5"/>
+<path d="M-26 -94 L-22 -84 L-16 -92 L-10 -84 L-4 -92 L2 -84 L8 -92 L14 -84 L20 -92 L24 -84" fill="none" stroke-width="3"/>
+<path d="M-30 -86 L-30 -74 M30 -86 L30 -74" stroke-width="3" fill="none"/>
+<!-- hat -->
+<path d="M-44 -176 Q-30 -198 0 -198 Q30 -198 44 -176 Q60 -218 20 -246 Q26 -222 0 -216 Q-26 -222 -20 -246 Q-60 -218 -44 -176Z" fill="#55514c"/>
+<path d="M-44 -176 Q0 -164 44 -176" fill="none" stroke="#c8352b" stroke-width="7"/>
+<path d="M-16 -206 L-10 -226 M16 -206 L10 -226" stroke="#9a948b" stroke-width="3" fill="none"/>
+</g>
+<!-- LEFT POLE (front) -->
+<g transform="translate(94 248) rotate(-10) scale(.92)">
+<path d="M-18 0 L-24 -70 Q-48 -92 -50 -134 Q-52 -194 0 -198 Q52 -194 50 -134 Q48 -92 24 -70 L18 0Z" fill="#d4cec3"/>
+<path d="M28 -164 Q50 -134 44 -94 Q28 -74 24 -70 L18 0 Q36 -20 30 -60 Q54 -100 50 -134Z" fill="#9a948b" stroke="none"/>
+<path d="M-16 -22 L0 -32 L16 -22 M-18 -46 L0 -56 L18 -46" fill="none" stroke="#c8352b" stroke-width="5"/>
+<path d="M-8 -8 L-14 -62 M10 -4 L10 -66 M-6 -64 L-2 -52 L-8 -44" stroke="#9a948b" stroke-width="3" fill="none"/>
+<!-- face -->
+<path d="M-46 -150 L-10 -140 L-10 -126 L-46 -134Z M46 -150 L10 -140 L10 -126 L46 -134Z" fill="#1b1a1a" stroke-width="3"/>
+<circle cx="-24" cy="-128" r="18" fill="#f6f2e9"/><circle cx="24" cy="-128" r="18" fill="#f6f2e9"/>
+<circle cx="-21" cy="-126" r="8.5" fill="#c8352b" stroke-width="3"/><circle cx="27" cy="-126" r="8.5" fill="#c8352b" stroke-width="3"/>
+<path d="M-21 -134 L-21 -118 M27 -134 L27 -118" stroke-width="2.5" fill="none"/>
+<path d="M-9 -116 Q0 -123 9 -116 L12 -100 Q0 -94 -12 -100Z" fill="#9a948b" stroke-width="3.5"/>
+<path d="M-38 -96 Q0 -112 38 -96 Q42 -66 0 -60 Q-42 -66 -38 -96Z" fill="#1b1a1a"/>
+<path d="M-34 -94 L-28 -80 L-22 -94 M-12 -98 L-6 -82 L0 -98 L6 -82 L12 -98 M22 -94 L28 -80 L34 -94" fill="#f6f2e9" stroke-width="3"/>
+<path d="M-26 -62 L-20 -74 L-14 -62 M14 -62 L20 -74 L26 -62" fill="#f6f2e9" stroke-width="3"/>
+<path d="M-12 -68 Q0 -80 12 -68 Q0 -62 -12 -68Z" fill="#c8352b" stroke-width="2.5"/>
+<!-- hat -->
+<path d="M-42 -176 L-52 -216 L-30 -204 L-22 -240 L0 -214 L22 -240 L30 -204 L52 -216 L42 -176 Q0 -198 -42 -176Z" fill="#55514c"/>
+<path d="M-46 -176 Q0 -160 46 -176" fill="none" stroke="#c8352b" stroke-width="7"/>
+<path d="M0 -196 L0 -216 M-22 -196 L-22 -214 M22 -196 L22 -214" stroke="#9a948b" stroke-width="3" fill="none"/>
+</g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- fierce huay chivo: shaggy goat-beast charging right, long horns lowered, eyes streaming fire -->
+
+<path class="n" stroke="#1b1a1a" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" d="M54 150Q26 176 24 206"/><path class="n" stroke="#9a948b" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M54 150Q26 176 24 206"/>
+<path class="o i" d="M16 202L32 206L30 224L14 220Z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" d="M116 156Q146 176 176 190"/><path class="n" stroke="#9a948b" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M116 156Q146 176 176 190"/>
+<path class="o i" d="M172 182L190 194L182 210L166 198Z"/>
+<path class="o d" d="M28 104L10 70L36 92L28 62L52 96Z"/>
+<path class="o m" d="M163.3 135.5L142.6 146.9L135.9 163.5L108.4 163.9L86.0 174.0L64.6 163.2L37.2 162.0L31.8 145.1L12.1 133.1L25.3 118.1L22.5 100.9L48.1 94.7L63.6 80.5L89.6 86.0L116.1 81.3L130.4 96.0L155.5 103.1L151.3 120.1Z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="25" stroke-linecap="round" stroke-linejoin="round" d="M70 156Q64 192 74 222"/><path class="n" stroke="#d4cec3" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" d="M70 156Q64 192 74 222"/>
+<path class="o i" d="M66 218L84 220L84 238L64 236Z"/>
+<path class="n" stroke="#1b1a1a" stroke-width="25" stroke-linecap="round" stroke-linejoin="round" d="M120 146Q138 186 130 220"/><path class="n" stroke="#d4cec3" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" d="M120 146Q138 186 130 220"/>
+<path class="o i" d="M124 216L142 218L140 236L120 234Z"/>
+<ellipse class="o m" cx="144" cy="108" rx="40" ry="32" transform="rotate(14 144 108)"/>
+<path class="t" stroke-width="2.5" d="M124 92L136 98M118 106L130 110M122 122L134 120"/>
+<path class="o m" d="M150 74Q140 14 238 34Q190 44 200 82Z"/>
+<path class="o l" d="M136 84Q116 22 218 10Q168 28 180 86Z"/>
+<path class="t" stroke-width="2.5" d="M158 58L176 58M168 38L190 38"/>
+<path class="o d" d="M150 96L118 60L156 76Z"/>
+<path class="o l" d="M148 98Q172 76 208 90Q238 104 248 132Q244 156 216 152L192 148Q166 152 152 136Z"/>
+<path class="o i" d="M240 124L250 130L242 138Z"/>
+<path class="t" stroke-width="3" d="M196 142Q220 144 238 138"/>
+<path class="o i" d="M204 150L196 176L218 152Z" stroke-width="3"/>
+<path class="o i" d="M158 112L198 106L194 124Q172 128 158 112Z"/>
+<path class="v" d="M168 114L188 111L186 119Q174 120 168 114Z"/>
+<path class="o v" d="M164 110Q138 94 112 112Q134 108 124 128Q146 118 164 120Z" stroke-width="3"/>
+<path class="t" stroke-width="5" d="M152 100L204 96"/>
+
+</svg>

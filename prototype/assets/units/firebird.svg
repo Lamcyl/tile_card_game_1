@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- firebird screaming in a banking dive, wings raised, tail streaming as flame -->
+<!-- flame tail plumes -->
+<path d="M152 150 C186 170 214 206 244 250 C204 236 166 210 140 176Z" fill="#c8352b"/>
+<path d="M140 160 C146 200 138 234 112 252 C112 224 106 196 112 168Z" fill="#c8352b"/>
+<path d="M160 144 C200 156 236 176 254 200 C226 204 184 184 156 166Z" fill="#c8352b"/>
+<path d="M150 164 C176 190 200 214 222 236 M138 176 C134 206 128 226 120 240" fill="none" stroke="#f6f2e9" stroke-width="3"/>
+<!-- upper wing raised -->
+<path d="M112 120 C124 74 164 34 214 8 L200 36 L226 32 L198 62 L218 64 L188 90 L204 98 L156 118Z" fill="#d4cec3"/>
+<path d="M130 114 C146 80 176 48 206 26 M150 116 C168 92 190 76 206 66" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M214 8 L200 36 L226 32 L198 62 L218 64 L188 90 L204 98" fill="none" stroke="#c8352b" stroke-width="3.5"/>
+<!-- lower wing swept back -->
+<path d="M118 136 C160 122 204 116 248 126 L224 140 L246 152 L212 156 L228 172 L184 164 L128 156Z" fill="#9a948b"/>
+<path d="M248 126 L224 140 L246 152 L212 156 L228 172" fill="none" stroke="#c8352b" stroke-width="3.5"/>
+<!-- body -->
+<path d="M70 100 Q104 82 142 110 Q176 134 160 166 Q130 184 98 156 Q70 138 70 100Z" fill="#f6f2e9"/>
+<path d="M96 148 Q116 156 134 148 M100 132 Q122 140 146 130" fill="none" stroke="#c8352b" stroke-width="3.5"/>
+<!-- talons -->
+<path d="M94 158 L76 190 L62 188 M76 190 L74 204 M76 190 L90 200 M116 164 L110 196 L96 198 M110 196 L112 210 M110 196 L124 204" fill="none" stroke-width="5"/>
+<!-- head -->
+<path d="M64 102 Q56 68 84 58 Q114 54 122 84 Q126 108 98 118 Q74 122 64 102Z" fill="#f6f2e9"/>
+<path d="M82 60 Q66 36 74 10 Q86 30 92 42 Q98 16 116 4 Q112 32 108 56Z" fill="#c8352b" stroke-width="3.5"/>
+<path d="M68 88 L22 98 L66 100Z" fill="#1b1a1a" stroke-width="3.5"/>
+<path d="M70 100 L26 116 L72 114Z" fill="#d4cec3" stroke-width="3.5"/>
+<path d="M62 94 L34 100 L62 98Z" fill="#c8352b" stroke="none"/>
+<path d="M82 78 L108 86 L102 96 Q88 96 82 88Z" fill="#1b1a1a" stroke-width="3"/>
+<circle cx="95" cy="90" r="3" fill="#c8352b" stroke="none"/>
+<path d="M78 72 L114 84" fill="none" stroke-width="4.5"/>
+</svg>

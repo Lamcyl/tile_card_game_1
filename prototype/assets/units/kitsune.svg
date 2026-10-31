@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+<path id="tl" d="M0 0 Q-24 -40 -14 -80 Q-8 -96 0 -104 Q8 -96 14 -80 Q24 -40 0 0 Z"/>
+<path id="fl" d="M0 16 Q-18 8 -13 -8 Q-8 -18 -2 -34 Q4 -20 12 -12 Q20 6 0 16 Z"/>
+</defs>
+<!-- nine tails -->
+<g transform="translate(128 210) rotate(-76) scale(1.15 1.000)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(76) scale(1.15 1.000)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(-57) scale(1.15 1.192)"><use href="#tl" fill="#9a948b" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(57) scale(1.15 1.192)"><use href="#tl" fill="#9a948b" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(-38) scale(1.15 1.365)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(38) scale(1.15 1.365)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(-19) scale(1.15 1.500)"><use href="#tl" fill="#9a948b" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(19) scale(1.15 1.500)"><use href="#tl" fill="#9a948b" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<g transform="translate(128 210) rotate(0) scale(1.15 1.558)"><use href="#tl" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M-12 -82 Q0 -72 12 -82 Q8 -96 0 -104 Q-8 -96 -12 -82 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="2.5" stroke-linejoin="round"/></g>
+<!-- crouched body on all fours -->
+<ellipse cx="128" cy="198" rx="60" ry="32" fill="#1b1a1a"/>
+<ellipse cx="128" cy="199" rx="54" ry="27" fill="#9a948b"/>
+<ellipse cx="128" cy="196" rx="54" ry="26" fill="#d4cec3"/>
+<!-- haunches: thigh, knee, tucked hind leg, paw -->
+<path d="M76 186 Q54 192 56 214 Q58 226 74 226 L100 226 L104 198 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M180 186 Q202 192 200 214 Q198 226 182 226 L156 226 L152 198 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M66 200 Q60 212 70 220 M74 196 Q70 204 74 210 M190 200 Q196 212 186 220 M182 196 Q186 204 182 210" fill="none" stroke="#1b1a1a" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M62 218 Q80 210 98 220 M194 218 Q176 210 158 220" fill="none" stroke="#9a948b" stroke-width="4" stroke-linecap="round"/>
+<path d="M59.0 222 Q59.0 212 74 212 Q89.0 212 89.0 222 L89.0 230 Q89.0 232 86.0 232 L62.0 232 Q59.0 232 59.0 230 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M70 224 L70 232 M78 224 L78 232" stroke="#1b1a1a" stroke-width="2" stroke-linecap="round"/><path d="M167.0 222 Q167.0 212 182 212 Q197.0 212 197.0 222 L197.0 230 Q197.0 232 194.0 232 L170.0 232 Q167.0 232 167.0 230 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M178 224 L178 232 M186 224 L186 232" stroke="#1b1a1a" stroke-width="2" stroke-linecap="round"/>
+<!-- chest bib and shoulders -->
+<ellipse cx="104" cy="176" rx="20" ry="16" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5"/>
+<ellipse cx="152" cy="176" rx="20" ry="16" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4.5"/>
+<path d="M98 160 L158 160 L162 176 L152 182 L158 194 L144 192 L138 204 L128 194 L118 204 L112 192 L98 194 L104 182 L94 176 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3.5" stroke-linejoin="round"/>
+<!-- tapered front legs with elbow bend -->
+<path d="M90 170 L118 170 Q114 190 110 214 L96 214 Q82 192 90 170 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M166 170 L138 170 Q142 190 146 214 L160 214 Q174 192 166 170 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M90 198 Q102 202 112 198 L110 214 L96 214 Z M166 198 Q154 202 144 198 L146 214 L160 214 Z" fill="#55514c"/>
+<path d="M89.0 222 Q89.0 212 103 212 Q117.0 212 117.0 222 L117.0 230 Q117.0 232 114.0 232 L92.0 232 Q89.0 232 89.0 230 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M99 224 L99 232 M107 224 L107 232" stroke="#1b1a1a" stroke-width="2" stroke-linecap="round"/><path d="M139.0 222 Q139.0 212 153 212 Q167.0 212 167.0 222 L167.0 230 Q167.0 232 164.0 232 L142.0 232 Q139.0 232 139.0 230 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="4.5" stroke-linejoin="round"/><path d="M149 224 L149 232 M157 224 L157 232" stroke="#1b1a1a" stroke-width="2" stroke-linecap="round"/>
+<g transform="translate(128 118) scale(.74) translate(-128 -112)">
+<!-- head with spiky cheek fur -->
+<path d="M58 112 L38 120 L56 128 L36 142 L62 144 L56 158 L84 154 Q104 172 128 172 Q152 172 172 154 L200 158 L194 144 L220 142 L200 128 L218 120 L198 112 Q198 62 128 58 Q58 62 58 112 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M64 112 L50 120 L64 126 L50 138 L68 140 L66 150 L88 148 Q106 164 128 164 Q150 164 168 148 L190 150 L188 140 L206 138 L192 126 L206 120 L192 112 Q192 68 128 64 Q64 68 64 112 Z" fill="#9a948b"/>
+<path d="M64 112 L50 120 L64 126 L50 138 L68 140 L66 148 L88 146 Q106 158 128 158 Q150 158 168 146 L190 148 L188 140 L206 138 L192 126 L206 120 L192 112 Q192 68 128 64 Q64 68 64 112 Z" fill="#f6f2e9"/>
+<!-- tall ears -->
+<path d="M70 82 Q56 38 76 12 Q108 30 120 66 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M186 82 Q200 38 180 12 Q148 30 136 66 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M78 70 Q72 44 80 26 Q98 42 106 64 Z M178 70 Q184 44 176 26 Q158 42 150 64 Z" fill="#1b1a1a"/>
+<!-- sly eyes -->
+<path d="M66 100 L118 112 L116 100 L74 86 Z M190 100 L138 112 L140 100 L182 86 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M74 108 L118 112 Q110 122 94 120 Q80 116 74 108 Z M182 108 L138 112 Q146 122 162 120 Q176 116 182 108 Z" fill="#1b1a1a"/>
+<path d="M92 112 Q100 110 106 113 M164 112 Q156 110 150 113" stroke="#f6f2e9" stroke-width="3" fill="none" stroke-linecap="round"/>
+<circle cx="102" cy="114" r="2" fill="#c8352b"/><circle cx="154" cy="114" r="2" fill="#c8352b"/>
+<path d="M128 68 Q120 80 128 92 Q136 80 128 68 Z" fill="#c8352b"/>
+<!-- nose + grin -->
+<path d="M116 126 Q128 120 140 126 Q134 136 128 136 Q122 136 116 126 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M92 138 Q128 150 164 138 Q158 162 128 164 Q98 162 92 138 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M100 141 L106 154 L112 144 Z M144 144 L150 154 L156 141 Z M120 146 L124 156 L128 147 Z M128 147 L132 156 L136 146 Z" fill="#f6f2e9"/>
+</g>
+<!-- fox fire -->
+<g transform="translate(38 40) scale(1.2)">
+<use href="#fl" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<use href="#fl" fill="#9a948b" transform="translate(0 4) scale(.55)"/>
+</g>
+</svg>

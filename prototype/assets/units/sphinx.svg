@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.s{stroke:#1b1a1a;stroke-linejoin:round;stroke-linecap:round}.n{fill:none}</style>
+<path fill="none" stroke="#1b1a1a" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" d="M236 208 Q250 168 214 150 Q204 144 198 150"/>
+<path fill="none" stroke="#d4cec3" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M236 208 Q250 168 214 150 Q204 144 198 150"/>
+<path class="d" d="M200 148 L186 134 L206 138 L210 124 L216 142Z"/><path class="s n" stroke-width="4" d="M200 148 L186 134 L206 138 L210 124 L216 142Z"/>
+<path class="l" d="M56 152 Q130 136 196 160 Q242 182 238 226 L56 226Z"/><path class="m" d="M60 206 L238 206 L238 226 L60 226Z"/>
+<path class="s n" stroke-width="7" d="M56 152 Q130 136 196 160 Q242 182 238 226 L56 226Z"/>
+<path class="p" d="M162 200 Q160 166 198 164 Q238 170 234 214 L226 226 L166 226Z"/><path class="s n" stroke-width="4" d="M162 200 Q160 166 198 164 Q238 170 234 214 L226 226 L166 226Z"/>
+<path fill="none" stroke="#9a948b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M178 180 Q196 170 214 182"/>
+<path class="m" d="M86 150 L116 150 L116 208 Q132 210 132 226 L70 226 Q70 210 86 208Z"/><path class="s n" stroke-width="6" d="M86 150 L116 150 L116 208 Q132 210 132 226 L70 226 Q70 210 86 208Z"/>
+<path class="l" d="M42 148 L90 148 L90 204 Q114 206 114 226 L22 226 Q22 206 42 204Z"/><path class="m" d="M30 214 L112 214 L112 226 L24 226Z"/>
+<path class="s n" stroke-width="7" d="M42 148 L90 148 L90 204 Q114 206 114 226 L22 226 Q22 206 42 204Z"/>
+<path fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M36 226 L36 214M50 226 L50 214M64 226L64 214"/>
+<path fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M64 150 L70 170 L60 184 L68 200M168 168 L178 186 L168 200 L178 214M206 170 L212 190"/>
+<path class="m" d="M240 226 L236 216 L226 226Z"/><path class="s n" stroke-width="3" d="M240 226 L236 216 L226 226Z"/>
+<path class="d" d="M36 156 L52 92 Q54 28 100 28 Q146 28 148 92 L164 156 L124 144 L100 156 L76 144Z"/><path class="s n" stroke-width="7" d="M36 156 L52 92 Q54 28 100 28 Q146 28 148 92 L164 156 L124 144 L100 156 L76 144Z"/>
+<path fill="none" stroke="#d4cec3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M46 104L64 100M134 104L152 100M46 116L64 112M134 116L152 112M46 128L64 124M134 128L152 124M46 140L64 136M134 140L152 136"/>
+<path fill="none" stroke="#d4cec3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M70 50 Q100 38 130 50"/>
+<path class="p" d="M68 88 L70 114 L82 142 L118 142 L130 114 L132 88 Q132 66 100 66 Q68 66 68 88Z"/><path class="s n" stroke-width="6" d="M68 88 L70 114 L82 142 L118 142 L130 114 L132 88 Q132 66 100 66 Q68 66 68 88Z"/>
+<path class="i" d="M50 78 Q100 48 150 78 L150 90 Q100 62 50 90Z"/>
+<path class="g" d="M100 50 L108 66 L92 66Z"/><path class="s n" stroke-width="2.5" d="M100 50 L108 66 L92 66Z"/>
+<path class="i" d="M76 114 L124 114 Q126 134 100 138 Q74 134 76 114Z"/><path class="s n" stroke-width="4" d="M76 114 L124 114 Q126 134 100 138 Q74 134 76 114Z"/>
+<path class="i" d="M79 115 L91 115 L85 130Z M109 115 L121 115 L115 130Z M90 136 L95 124 L100 137Z M100 137 L105 124 L110 136Z"/>
+<path class="d" d="M90 128 Q100 120 110 128 Q106 136 100 136 Q94 136 90 128Z"/>
+<path class="i" d="M70 84 L96 94 L95 102 L70 94Z M130 84 L104 94 L105 102 L130 94Z"/>
+<path class="i" d="M76 100 Q86 94 96 102 Q86 108 76 100Z M124 100 Q114 94 104 102 Q114 108 124 100Z"/>
+<circle class="g" cx="86" cy="101" r="3"/>
+<circle class="g" cx="114" cy="101" r="3"/>
+<path class="i" d="M96 106 L104 106 L100 113Z"/>
+<path fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M116 68 L110 80 L118 90 L112 100M100 40 L96 52"/>
+<path class="m" d="M10 226 L18 212 L30 226Z"/><path class="s n" stroke-width="3" d="M10 226 L18 212 L30 226Z"/>
+</svg>

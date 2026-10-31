@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<g transform="translate(128 134) scale(0.94) translate(-128 -134)">
+<!-- Leshy, forest lord: hunched tree-trunk, great branching antler crown, root-claw arms, eyes aflame -->
+<!-- grasping roots on ground -->
+<path d="M20 246 Q60 226 90 240 M236 246 Q200 224 168 240 M70 250 Q40 236 18 214" fill="none" stroke="#55514c" stroke-width="7"/>
+<!-- far arm raised -->
+<path d="M180 150 Q222 140 224 92 Q226 70 214 56" fill="none" stroke-width="22"/><path d="M180 150 Q222 140 224 92 Q226 70 214 56" fill="none" stroke="#9a948b" stroke-width="14"/>
+<path d="M214 56 L196 34 M214 56 L216 28 M214 56 L232 34 M216 62 L240 56" fill="none" stroke-width="7"/>
+<path d="M214 56 L196 34 M214 56 L216 28 M214 56 L232 34 M216 62 L240 56" fill="none" stroke="#d4cec3" stroke-width="2.5"/>
+<!-- legs / roots -->
+<path d="M84 190 L66 238 L44 246 M100 196 L98 244 M150 194 L170 240 L196 246 M168 188 L206 226" fill="none" stroke-width="16"/>
+<path d="M84 190 L66 238 L44 246 M100 196 L98 244 M150 194 L170 240 L196 246 M168 188 L206 226" fill="none" stroke="#55514c" stroke-width="8"/>
+<!-- trunk torso -->
+<path d="M66 132 Q56 170 74 214 L186 214 Q202 170 190 128 Q160 112 128 116 Q98 112 66 132Z" fill="#9a948b"/>
+<path d="M86 138 Q80 176 92 210 M112 124 Q108 170 112 212 M144 124 Q148 170 146 212 M170 136 Q176 176 166 210" fill="none" stroke="#55514c" stroke-width="3"/>
+<ellipse cx="150" cy="176" rx="14" ry="20" fill="#55514c" stroke-width="3.5"/>
+<!-- moss on shoulders -->
+<path d="M58 134 Q50 112 74 106 Q82 94 100 104 Q116 100 114 124 Q90 130 58 134Z" fill="#55514c"/>
+<path d="M146 122 Q150 100 172 104 Q190 94 200 114 Q206 128 196 134 Q170 126 146 122Z" fill="#55514c"/>
+<path d="M70 114 L68 124 M88 108 L88 120 M164 110 L162 120 M184 106 L184 118" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+<!-- near arm hanging, clawing -->
+<path d="M70 140 Q30 150 26 190 Q24 206 36 216" fill="none" stroke-width="24"/><path d="M70 140 Q30 150 26 190 Q24 206 36 216" fill="none" stroke="#9a948b" stroke-width="16"/>
+<path d="M36 216 L18 238 M36 216 L36 244 M36 216 L54 238 M34 212 L10 218" fill="none" stroke-width="8"/>
+<path d="M36 216 L18 238 M36 216 L36 244 M36 216 L54 238 M34 212 L10 218" fill="none" stroke="#d4cec3" stroke-width="3"/>
+<!-- antler crown -->
+<path d="M82 74 Q56 52 40 20 M62 50 Q36 52 22 34 M54 36 Q62 18 52 4 M96 56 Q84 24 98 4 M122 52 Q120 22 130 4 M174 74 Q200 52 216 20 M194 50 Q220 52 234 34 M202 36 Q194 18 204 4 M160 56 Q172 24 158 4 M134 52 Q136 22 128 4" fill="none" stroke-width="12"/>
+<path d="M82 74 Q56 52 40 20 M62 50 Q36 52 22 34 M54 36 Q62 18 52 4 M96 56 Q84 24 98 4 M122 52 Q120 22 130 4 M174 74 Q200 52 216 20 M194 50 Q220 52 234 34 M202 36 Q194 18 204 4 M160 56 Q172 24 158 4 M134 52 Q136 22 128 4" fill="none" stroke="#d4cec3" stroke-width="5"/>
+<!-- head -->
+<path d="M72 96 Q66 52 128 50 Q190 52 184 96 Q184 122 160 136 L148 150 L128 142 L108 150 L96 136 Q72 122 72 96Z" fill="#d4cec3"/>
+<path d="M82 70 Q92 80 88 92 M176 66 Q166 78 170 90 M128 54 V76" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- fierce eyes -->
+<path d="M84 84 L120 94 L114 110 Q94 114 84 100Z" fill="#1b1a1a"/><path d="M172 84 L136 94 L142 110 Q162 114 172 100Z" fill="#1b1a1a"/>
+<path d="M94 94 L112 98 L108 105 L96 102Z M162 94 L144 98 L148 105 L160 102Z" fill="#c8352b" stroke="none"/>
+<path d="M128 100 L120 120 L136 120Z" fill="#9a948b" stroke-width="3"/>
+<!-- hollow mouth -->
+<path d="M100 126 Q128 150 156 126 Q146 156 128 160 Q110 156 100 126Z" fill="#1b1a1a" stroke-width="3.5"/>
+<path d="M108 130 L114 142 L120 134 L128 146 L136 134 L142 142 L148 130" fill="#f6f2e9" stroke-width="2"/>
+<!-- moss beard dangling -->
+<path d="M82 124 Q76 150 86 164 L96 150 L100 176 L112 154 L120 182 L128 160 L136 182 L144 154 L156 176 L160 150 L170 164 Q180 150 174 124 Q160 144 128 142 Q96 144 82 124Z" fill="#55514c"/>
+</g>
+</svg>

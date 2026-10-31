@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+<path id="w" d="M100 150 Q52 124 14 62 Q22 76 24 90 L8 100 Q18 104 26 110 L10 136 Q26 134 36 130 L24 162 Q44 158 54 150 L50 184 Q76 178 98 170 Z"/>
+<path id="wd" d="M92 146 Q56 122 26 84 M96 154 Q56 140 20 118 M96 160 Q60 156 30 148 M94 166 Q70 168 52 170"/>
+<path id="bl" d="M0 0 Q-11 -28 0 -58 Q11 -28 0 0 Z"/>
+</defs>
+<!-- wings spread -->
+<use href="#w" fill="#9a948b" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<use href="#wd" fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round"/>
+<g transform="translate(256 0) scale(-1 1)">
+<use href="#w" fill="#9a948b" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<use href="#wd" fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round"/>
+</g>
+<!-- robe -->
+<path d="M82 150 Q128 134 174 150 L186 214 Q128 228 70 214 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M86 154 Q128 140 170 154 L180 208 Q128 220 76 208 Z" fill="#9a948b"/>
+<path d="M88 154 Q128 142 168 154 L174 200 Q128 212 82 200 Z" fill="#d4cec3"/>
+<path d="M96 152 L128 184 L160 152" fill="none" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M82 192 Q128 208 174 192 L176 204 Q128 220 80 204 Z" fill="#1b1a1a"/>
+<circle cx="128" cy="170" r="6.5" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3"/>
+<circle cx="110" cy="166" r="5.5" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3"/>
+<circle cx="146" cy="166" r="5.5" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3"/>
+<!-- talon feet -->
+<path d="M100 206 L100 218" stroke="#1b1a1a" stroke-width="16" stroke-linecap="round"/><path d="M100 206 L100 218" stroke="#9a948b" stroke-width="9" stroke-linecap="round"/><path d="M100 218 L74 229" stroke="#1b1a1a" stroke-width="12" stroke-linecap="round"/><path d="M100 218 L100 232" stroke="#1b1a1a" stroke-width="12" stroke-linecap="round"/><path d="M100 218 L126 229" stroke="#1b1a1a" stroke-width="12" stroke-linecap="round"/><path d="M100 218 L74 229" stroke="#9a948b" stroke-width="5.5" stroke-linecap="round"/><path d="M100 218 L100 232" stroke="#9a948b" stroke-width="5.5" stroke-linecap="round"/><path d="M100 218 L126 229" stroke="#9a948b" stroke-width="5.5" stroke-linecap="round"/><path d="M66 232 L76 224 L78 232 Z M96 237 L100 230 L104 237 Z M134 232 L124 224 L122 232 Z" fill="#1b1a1a" opacity="0"/><path d="M156 206 L156 218" stroke="#1b1a1a" stroke-width="16" stroke-linecap="round"/><path d="M156 206 L156 218" stroke="#9a948b" stroke-width="9" stroke-linecap="round"/><path d="M156 218 L130 229" stroke="#1b1a1a" stroke-width="12" stroke-linecap="round"/><path d="M156 218 L156 232" stroke="#1b1a1a" stroke-width="12" stroke-linecap="round"/><path d="M156 218 L182 229" stroke="#1b1a1a" stroke-width="12" stroke-linecap="round"/><path d="M156 218 L130 229" stroke="#9a948b" stroke-width="5.5" stroke-linecap="round"/><path d="M156 218 L156 232" stroke="#9a948b" stroke-width="5.5" stroke-linecap="round"/><path d="M156 218 L182 229" stroke="#9a948b" stroke-width="5.5" stroke-linecap="round"/><path d="M122 232 L132 224 L134 232 Z M152 237 L156 230 L160 237 Z M190 232 L180 224 L178 232 Z" fill="#1b1a1a" opacity="0"/>
+<!-- left claw hand -->
+<path d="M84 160 Q62 170 58 190 L78 194 Q86 180 96 170 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="64" cy="194" r="11" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4"/>
+<path d="M56 202 L50 214 L62 204 Z M64 204 L62 216 L72 204 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="2"/>
+<!-- raised arm and fan -->
+<path d="M170 158 Q196 156 204 124 L218 128 Q214 170 178 176 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<g transform="translate(212 118) rotate(8)">
+<g stroke="#1b1a1a" stroke-width="3.5" stroke-linejoin="round" fill="#f6f2e9">
+<use href="#bl" transform="rotate(-72) scale(.85)"/>
+<use href="#bl" transform="rotate(-36) scale(.97)"/>
+<use href="#bl" transform="rotate(0)"/>
+<use href="#bl" transform="rotate(36) scale(.97)"/>
+<use href="#bl" transform="rotate(72) scale(.85)"/>
+</g>
+<path d="M0 0 L0 8" stroke="#1b1a1a" stroke-width="6"/>
+<circle cx="0" cy="2" r="9" fill="#d4cec3" stroke="#1b1a1a" stroke-width="4"/>
+</g>
+<!-- crow head -->
+<!-- neck ruff -->
+<path d="M70 132 L58 140 L74 142 L66 156 L86 150 L92 164 L106 152 L116 166 L128 154 L140 166 L150 152 L164 164 L170 150 L190 156 L182 142 L198 140 L186 132 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M72 138 L66 146 L82 144 L90 156 L102 146 L116 158 L128 148 L140 158 L154 146 L166 156 L174 144 L190 146 L184 138 Z" fill="#55514c"/>
+<!-- skull -->
+<path d="M76 104 Q70 56 128 46 Q186 56 180 104 Q182 130 156 140 Q128 150 100 140 Q74 130 76 104 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M82 104 Q78 62 128 52 Q178 62 174 104 Q174 128 154 134 Q128 142 102 134 Q82 128 82 104 Z" fill="#55514c"/>
+<path d="M84 98 Q84 66 112 56 Q92 72 92 104 Z" fill="#9a948b"/>
+<!-- crown and cheek feather tufts -->
+<path d="M82 70 L62 58 L80 82 Z M174 70 L194 58 L176 82 Z M78 96 L58 96 L80 108 Z M178 96 L198 96 L176 108 Z M80 118 L62 126 L84 128 Z M176 118 L194 126 L172 128 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<!-- tokin -->
+<path d="M108 58 L114 32 L142 32 L148 58 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M119 40 L123 50" stroke="#9a948b" stroke-width="3" stroke-linecap="round"/>
+<path d="M148 52 Q172 54 170 74 M108 52 Q84 54 86 74" fill="none" stroke="#1b1a1a" stroke-width="3" stroke-linecap="round"/>
+<!-- brow feathers + eyes -->
+<path d="M76 86 L102 98 L104 88 L84 74 L90 66 L68 64 Z M180 86 L154 98 L152 88 L172 74 L166 66 L188 64 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M84 96 L108 100 Q108 120 94 120 Q82 114 84 96 Z M172 96 L148 100 Q148 120 162 120 Q174 114 172 96 Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="3.5" stroke-linejoin="round"/>
+<ellipse cx="99" cy="109" rx="4.5" ry="7" fill="#1b1a1a"/><ellipse cx="157" cy="109" rx="4.5" ry="7" fill="#1b1a1a"/>
+<circle cx="98" cy="106" r="1.3" fill="#c8352b"/><circle cx="156" cy="106" r="1.3" fill="#c8352b"/>
+<!-- open mouth, lower mandible -->
+<path d="M114 136 Q128 128 142 136 Q140 154 129 160 Q116 154 114 136 Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M118 138 Q128 134 138 138 Q136 150 129 154 Q120 148 118 138 Z" fill="#9a948b"/>
+<path d="M121 140 Q129 146 137 140 Q134 148 129 150 Q124 148 121 140 Z" fill="#c8352b"/>
+<!-- long hooked upper beak -->
+<path d="M104 96 Q128 78 152 96 Q150 122 140 144 Q137 160 132 170 Q130 178 126 176 Q120 168 120 156 Q116 138 110 122 Q104 110 104 96 Z" fill="#d4cec3" stroke="#1b1a1a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M120 156 Q116 138 110 122 Q104 110 104 96 Q116 114 126 122 Q128 144 126 176 Q120 168 120 156 Z" fill="#9a948b"/>
+<path d="M128 90 Q128 130 128 160" stroke="#1b1a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M114 106 Q118 110 122 106 M134 106 Q138 110 142 106" stroke="#1b1a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M126 176 Q132 172 134 162" stroke="#1b1a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

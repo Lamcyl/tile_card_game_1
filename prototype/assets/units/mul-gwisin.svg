@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce mul-gwisin: looming drowned face behind a curtain of wet hair, long pale hands grasping in from both sides -->
+<defs>
+<g id="hand">
+<path d="M-6 200 Q18 176 34 146" fill="none" stroke-width="22"/>
+<path d="M-6 200 Q18 176 34 146" fill="none" stroke="#f6f2e9" stroke-width="14"/>
+<path d="M28 120 Q20 92 34 70 L40 74 Q30 96 38 114Z" fill="#f6f2e9"/>
+<path d="M38 114 Q32 84 48 60 L54 64 Q42 88 46 110Z" fill="#f6f2e9"/>
+<path d="M46 112 Q44 80 60 62 L66 68 Q54 86 54 112Z" fill="#f6f2e9"/>
+<path d="M54 114 Q54 90 70 78 L74 84 Q64 96 62 120Z" fill="#f6f2e9"/>
+<path d="M30 118 Q26 146 40 154 Q58 152 62 122 Q46 110 30 118Z" fill="#f6f2e9"/>
+<path d="M36 140 Q44 134 52 140" fill="none" stroke="#9a948b" stroke-width="2.5"/>
+</g>
+</defs>
+<use href="#hand"/>
+<use href="#hand" transform="translate(256 0) scale(-1 1)"/>
+<!-- hair curtain -->
+<path d="M62 112 Q54 28 128 24 Q202 28 194 112 L212 190 L204 232 L192 204 L186 246 L172 208 L150 226 L128 214 L106 226 L84 208 L70 246 L64 204 L52 232 L44 190Z" fill="#1b1a1a"/>
+<!-- face -->
+<path d="M76 96 Q78 52 128 50 Q178 52 180 96 Q182 146 156 180 Q128 198 100 180 Q74 146 76 96Z" fill="#f6f2e9"/>
+<!-- sunken shading -->
+<path d="M84 130 Q92 160 108 176 M172 130 Q164 160 148 176" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- eyes: left hidden under a lock, right wide -->
+<path d="M92 112 L120 118 L116 132 Q100 134 92 124Z" fill="#f6f2e9" stroke-width="3"/><circle cx="108" cy="124" r="6" fill="#c8352b" stroke-width="2.5"/><circle cx="108" cy="124" r="2.5" fill="#1b1a1a" stroke="none"/><path d="M90 104 L122 112" fill="none" stroke-width="4"/>
+<path d="M164 112 L136 118 L140 132 Q156 134 164 124Z" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="150" cy="124" r="6" fill="#c8352b" stroke-width="2.5"/><circle cx="150" cy="124" r="2.5" fill="#1b1a1a" stroke="none"/>
+<path d="M130 106 L170 100" fill="none" stroke-width="4"/>
+<path d="M120 132 L112 150" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- mouth: gaping, water pouring -->
+<path d="M104 160 Q128 150 152 160 Q150 186 128 190 Q106 186 104 160Z" fill="#1b1a1a"/>
+<path d="M112 160 L116 168 L121 160 M135 160 L140 168 L144 160" fill="#f6f2e9" stroke-width="2.5"/>
+<path d="M120 188 Q116 204 122 208 Q128 204 124 188" fill="#d4cec3" stroke-width="3"/>
+<!-- bangs and the lock across the face -->
+<path d="M72 100 Q76 52 128 48 Q180 52 184 100 L172 80 L160 102 L146 70 L130 96 L116 66 L102 100 L92 78Z" fill="#1b1a1a"/>
+<path d="M100 64 Q110 70 114 100 Q106 132 102 160 Q96 178 98 196 L88 196 Q82 170 90 136 Q94 96 92 70Z" fill="#1b1a1a"/>
+<path d="M72 100 Q66 150 78 198 L88 196 Q82 150 90 106Z" fill="#1b1a1a"/>
+<path d="M184 100 Q190 150 178 198 L168 196 Q174 150 166 106Z" fill="#1b1a1a"/>
+<!-- sleeve collar + vermilion funeral sash -->
+</svg>

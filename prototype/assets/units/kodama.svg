@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs><path id="lf" d="M0 0C-12-10-12-30 0-44C12-30 12-10 0 0Z"/></defs>
+<!-- stump with roots -->
+<path d="M44 224C54 214 52 198 66 188L190 188C204 198 202 214 212 224C198 236 170 234 128 234C86 234 58 236 44 224Z" fill="#55514c" stroke="#1b1a1a" stroke-width="7" stroke-linejoin="round"/>
+<ellipse cx="128" cy="188" rx="64" ry="16" fill="#9a948b" stroke="#1b1a1a" stroke-width="5"/>
+<path d="M80 206L88 228M176 206L168 228M128 208L128 230" stroke="#1b1a1a" stroke-width="3.5" stroke-linecap="round"/>
+<!-- body -->
+<path d="M92 158C86 176 98 188 128 188C158 188 170 176 164 158Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="6" stroke-linejoin="round"/>
+<path d="M96 170L58 182L40 156M160 170L198 182L216 156" fill="none" stroke="#1b1a1a" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M96 170L58 182L40 156M160 170L198 182L216 156" fill="none" stroke="#f6f2e9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M40 156L30 142M40 156L42 140M40 156L50 142M216 156L226 142M216 156L214 140M216 156L206 142" stroke="#1b1a1a" stroke-width="4" stroke-linecap="round"/>
+<!-- twig horns -->
+<g fill="none" stroke="#1b1a1a" stroke-linecap="round" stroke-linejoin="round"><path d="M92 62L72 32L78 10M72 32L52 24M80 44L62 46" stroke-width="7"/><path d="M164 62L184 32L178 10M184 32L204 24M176 44L194 46" stroke-width="7"/></g>
+<!-- head -->
+<path d="M128 40C70 40 52 90 60 128C64 152 94 166 128 166C162 166 192 152 196 128C204 90 186 40 128 40Z" fill="#f6f2e9" stroke="#1b1a1a" stroke-width="7" stroke-linejoin="round"/>
+<path d="M178 60C194 82 196 112 188 134C180 148 166 156 150 160" fill="none" stroke="#d4cec3" stroke-width="9" stroke-linecap="round"/>
+<!-- bark cracks -->
+<g fill="none" stroke="#1b1a1a" stroke-linecap="round" stroke-linejoin="round"><path d="M92 50L100 66L90 76L98 88M166 52L158 68L168 78" stroke-width="3.5"/><path d="M70 120L84 128L76 142M186 118L172 130L180 144" stroke-width="3"/><path d="M128 150L122 158M138 152L142 160" stroke-width="3"/></g>
+<path d="M92 66L96 72M168 70L164 74" stroke="#55514c" stroke-width="5" stroke-linecap="round" opacity="0"/>
+<!-- angry eyes -->
+<path d="M84 94L122 112L118 128L90 120C82 114 80 102 84 94Z" fill="#1b1a1a"/>
+<path d="M172 94L134 112L138 128L166 120C174 114 176 102 172 94Z" fill="#1b1a1a"/>
+<path d="M96 112L102 115M160 112L154 115" stroke="#f6f2e9" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M78 86L124 108M178 86L132 108" stroke="#1b1a1a" stroke-width="6" stroke-linecap="round"/>
+<!-- jagged mouth -->
+<path d="M104 138L112 132L120 142L128 132L136 142L144 132L152 138L146 152C138 158 118 158 110 152Z" fill="#1b1a1a" stroke="#1b1a1a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M112 140L116 134M140 140L144 134" stroke="#f6f2e9" stroke-width="0"/>
+<path d="M118 148L122 142L126 148M130 148L134 142L138 148" fill="#f6f2e9" stroke="#f6f2e9" stroke-width="1.5" stroke-linejoin="round"/>
+<circle cx="80" cy="134" r="5" fill="#9a948b"/><circle cx="176" cy="134" r="5" fill="#9a948b"/>
+<!-- ragged leaves -->
+<g fill="#9a948b" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round"><use href="#lf" transform="translate(128 48) rotate(0)" fill="#d4cec3"/><use href="#lf" transform="translate(112 50) rotate(-30)"/><use href="#lf" transform="translate(144 50) rotate(30)"/></g>
+<path d="M30 90L46 98M26 110L44 112M226 90L210 98M230 110L212 112" stroke="#9a948b" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M36 170L46 164M220 172L210 166" stroke="#c8352b" stroke-width="0"/>
+</svg>

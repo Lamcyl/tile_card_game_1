@@ -26,24 +26,25 @@
   const CAMP = { id: 'camp', type: 'camp', x: 500, y: 1675, sub: 'meadow', level: 0 };
 
   // Enemy themes per sub-area: basic, tough, armored, barrel skin and boss.
+  // Each entry is [name, emoji fallback, drawing in assets/units/].
   const THEMES = {
-    meadow:  { basic: ['Goblin', '👺'], tough: ['Bull', '🐂'], armored: ['Hedgehog', '🦔'], barrel: ['Powder Barrel', '🛢️'], boss: ['Boar King', '🐗'] },
-    forest:  { basic: ['Wolf', '🐺'], tough: ['Bear', '🐻'], armored: ['Thornling', '🌲'], barrel: ['Puffshroom', '🍄'], boss: ['Elder Treant', '🌳'] },
-    beach:   { basic: ['Pirate', '🏴‍☠️'], tough: ['Walrus', '🦭'], armored: ['Hermit Crab', '🐚'], barrel: ['Powder Keg', '🛢️'], boss: ['Crab Queen', '🦀'] },
-    coral:   { basic: ['Squid', '🦑'], tough: ['Shark', '🦈'], armored: ['Turtle', '🐢'], barrel: ['Pufferfish', '🐡'], boss: ['Kraken', '🐙'] },
-    dunes:   { basic: ['Jackal', '🐕'], tough: ['Camel Rider', '🐪'], armored: ['Scorpion', '🦂'], barrel: ['Cactus', '🌵'], boss: ['Sand Wyrm', '🐍'] },
-    temple:  { basic: ['Mummy', '🧟'], tough: ['Bat Swarm', '🦇'], armored: ['Guardian', '🗿'], barrel: ['Cursed Urn', '🏺'], boss: ['Sun Pharaoh', '🤴'] },
-    snow:    { basic: ['Penguin', '🐧'], tough: ['Yeti', '🦍'], armored: ['Snowman', '⛄'], barrel: ['Frost Bomb', '🧊'], boss: ['Frost Wolf', '🐺'] },
-    glacier: { basic: ['Ice Wisp', '👻'], tough: ['Mammoth', '🦣'], armored: ['Ice Golem', '☃️'], barrel: ['Ice Crystal', '💎'], boss: ['Ice Queen', '👸'] },
-    ash:     { basic: ['Imp', '😈'], tough: ['Fire Spirit', '🔥'], armored: ['Rock Golem', '🪨'], barrel: ['Fire Bomb', '💣'], boss: ['Ash Colossus', '👹'] },
-    caldera: { basic: ['Salamander', '🦎'], tough: ['Demon', '👿'], armored: ['Obsidian Golem', '🗿'], barrel: ['Magma Bomb', '💣'], boss: ['Magma Dragon', '🐉'] },
+    meadow:  { basic: ['Alux', '👺', 'alux'], tough: ['Tanuki', '🦝', 'tanuki'], armored: ['Jangseung', '🗿', 'jangseung'], barrel: ['Chōchin-obake', '🏮', 'chochin-obake'], boss: ['Sansin', '🐯', 'sansin'] },
+    forest:  { basic: ['Kodama', '🌱', 'kodama'], tough: ['Leshy', '🌳', 'leshy'], armored: ['Bulgasari', '🐗', 'bulgasari'], barrel: ['Kasa-obake', '☂️', 'kasa-obake'], boss: ['Yamata no Orochi', '🐍', 'orochi'] },
+    beach:   { basic: ['Kappa', '🐢', 'kappa'], tough: ['Sobek', '🐊', 'sobek'], armored: ['Xuanwu', '🐢', 'xuanwu'], barrel: ['Jingwei', '🐦', 'jingwei'], boss: ['Scylla', '🐙', 'scylla'] },
+    coral:   { basic: ['Mul Gwisin', '👻', 'mul-gwisin'], tough: ['Jörmungandr', '🐍', 'jormungandr'], armored: ['Imugi', '🐉', 'imugi'], barrel: ['Rusalka', '🧜', 'rusalka'], boss: ['Poseidon', '🔱', 'poseidon'] },
+    dunes:   { basic: ['Serket', '🦂', 'serket'], tough: ['Sekhmet', '🦁', 'sekhmet'], armored: ['Khepri', '🪲', 'khepri'], barrel: ['Ushabti', '🏺', 'ushabti'], boss: ['Apep', '🐍', 'apep'] },
+    temple:  { basic: ['Mummy', '🧟', 'mummy'], tough: ['Camazotz', '🦇', 'camazotz'], armored: ['Sphinx', '🗿', 'sphinx'], barrel: ['Taweret', '🦛', 'taweret'], boss: ['Ra', '☀️', 'ra'] },
+    snow:    { basic: ['Yuki-onna', '❄️', 'yuki-onna'], tough: ['Troll', '👹', 'troll'], armored: ['Haetae', '🦁', 'haetae'], barrel: ['Yutu', '🐇', 'yutu'], boss: ['Jangsan-beom', '🐅', 'jangsan-beom'] },
+    glacier: { basic: ['Draugr', '💀', 'draugr'], tough: ['Valkyrie', '🪽', 'valkyrie'], armored: ['Cyclops', '👁️', 'cyclops'], barrel: ['Dalgyal Gwisin', '🥚', 'dalgyal-gwisin'], boss: ['Hel', '💀', 'hel'] },
+    ash:     { basic: ['Dokkaebi', '👺', 'dokkaebi'], tough: ['Oni', '👹', 'oni'], armored: ['Cabrakan', '🪨', 'cabrakan'], barrel: ['Bulgae', '🔥', 'bulgae'], boss: ['Surtr', '🔥', 'surtr'] },
+    caldera: { basic: ['Huay Chivo', '🐐', 'huay-chivo'], tough: ['Minotaur', '🐂', 'minotaur'], armored: ['Taotie', '🗿', 'taotie'], barrel: ['Firebird', '🐦‍🔥', 'firebird'], boss: ['Zmey Gorynych', '🐉', 'zmey'] },
   };
   // Register every themed enemy with the rules engine.
   for (const sub of Object.keys(THEMES)) {
     for (const role of ['basic', 'tough', 'armored', 'barrel', 'boss']) {
-      const [name, icon] = THEMES[sub][role];
+      const [name, icon, art] = THEMES[sub][role];
       Engine.ENEMY_TYPES[sub + '_' + role] = Object.assign(
-        { name, icon },
+        { name, icon, art },
         role === 'barrel' ? { barrel: true, blast: 2 } : {},
         role === 'boss' ? { boss: true } : {});
     }

@@ -1,0 +1,21 @@
+/* Shared design tokens for every screen. Colours keep their names and roles when re-themed. */
+:root {
+  --bg: #0e1117;
+  --panel: #1c2230;
+  --panel-2: #262e40;
+  --line: #3a4560;
+  --text: #eef1f7;
+  --muted: #9aa3b8;
+  --accent: #f2b134;
+  --hp: #e04f5f;
+  --good: #4cc38a;
+  --boost: #6ee7a8;
+  --enemy-zone: #2e2024;
+  --player-zone: #1f2a2a;
+  --attacker: #b5473a;
+  --support: #3a6fb5;
+  --mult: #b58a2a;
+  --defender: #6b7280;
+  --cell: min(66px, calc((min(100vw, 480px) - 44px) / 5));
+  color-scheme: dark;
+}

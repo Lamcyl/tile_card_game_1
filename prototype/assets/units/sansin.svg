@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- fierce sansin: stern mountain god, beard streaming in a mountain gale, staff raised, great tiger roaring at his shoulder -->
+<!-- staff -->
+<path d="M236 30 L226 226" fill="none" stroke-width="12"/><path d="M236 30 L226 226" fill="none" stroke="#9a948b" stroke-width="5"/>
+<path d="M236 34 Q216 12 232 6 Q250 6 246 28" fill="none" stroke-width="12"/><path d="M236 34 Q216 12 232 6 Q250 6 246 28" fill="none" stroke="#9a948b" stroke-width="5"/>
+<!-- robe -->
+<path d="M104 134 Q160 106 222 128 L232 214 Q170 232 112 214Z" fill="#55514c"/>
+<path d="M130 150 L168 214 M200 140 L204 216" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M118 150 Q168 126 226 146" fill="none" stroke="#c8352b" stroke-width="7"/>
+<!-- raised sleeve + hand on staff -->
+<path d="M214 128 Q232 108 232 84" fill="none" stroke-width="30"/><path d="M214 128 Q232 108 232 84" fill="none" stroke="#55514c" stroke-width="22"/>
+<circle cx="230" cy="70" r="11" fill="#f6f2e9"/>
+<!-- beard streaming in wind -->
+<path d="M140 98 Q130 150 148 184 L160 232 L172 192 L190 226 L196 184 L216 206 L206 150 Q204 116 196 98 Q176 122 168 116 Q152 122 140 98Z" fill="#f6f2e9"/>
+<path d="M156 130 Q152 160 164 190 M174 128 Q176 160 186 188 M190 124 Q196 150 202 172" fill="none" stroke="#9a948b" stroke-width="3"/>
+<!-- head -->
+<ellipse cx="168" cy="78" rx="36" ry="34" fill="#f6f2e9"/>
+<path d="M104 54 Q168 74 232 54 Q226 42 168 40 Q110 42 104 54Z" fill="#1b1a1a"/>
+<path d="M124 52 Q124 18 168 16 Q212 18 212 52Z" fill="#1b1a1a"/>
+<path d="M130 46 Q168 54 206 46" fill="none" stroke="#9a948b" stroke-width="3"/>
+<path d="M134 74 L160 82 M202 74 L176 82" fill="none" stroke-width="9"/>
+<path d="M134 74 L160 82 M202 74 L176 82" fill="none" stroke="#f6f2e9" stroke-width="3"/>
+<path d="M140 88 L158 88 M178 88 L196 88" fill="none" stroke-width="4"/>
+<circle cx="149" cy="88" r="3" fill="#c8352b" stroke="none"/><circle cx="187" cy="88" r="3" fill="#c8352b" stroke="none"/>
+<path d="M168 88 L164 104 L172 104" fill="none" stroke-width="3"/>
+<path d="M140 106 Q152 98 168 106 Q184 98 198 106 Q184 114 168 110 Q152 114 140 106Z" fill="#f6f2e9" stroke-width="3"/>
+<!-- tiger shoulder + head roaring -->
+<path d="M0 150 Q10 100 66 96 Q112 100 118 150 L126 212 Q70 230 6 214Z" fill="#d4cec3"/>
+<path d="M18 130 L34 144 M20 160 L40 168 M24 192 L44 192 M108 132 L92 146 M112 166 L94 170" fill="none" stroke-width="6"/>
+<circle cx="22" cy="86" r="16" fill="#d4cec3"/><circle cx="104" cy="82" r="16" fill="#d4cec3"/>
+<circle cx="22" cy="88" r="7" fill="#9a948b" stroke="none"/><circle cx="104" cy="84" r="7" fill="#9a948b" stroke="none"/>
+<ellipse cx="62" cy="116" rx="50" ry="44" fill="#d4cec3"/>
+<path d="M48 76 L50 92 M62 74 L62 94 M76 76 L74 92" fill="none" stroke-width="5"/>
+<path d="M14 104 L30 112 M14 122 L30 124 M110 104 L94 112 M110 122 L94 124" fill="none" stroke-width="5"/>
+<path d="M28 100 L54 112 L50 122 Q36 122 28 112Z" fill="#f6f2e9" stroke-width="3"/><path d="M96 100 L70 112 L74 122 Q88 122 96 112Z" fill="#f6f2e9" stroke-width="3"/>
+<circle cx="44" cy="114" r="4.5" fill="#c8352b" stroke-width="2"/><circle cx="80" cy="114" r="4.5" fill="#c8352b" stroke-width="2"/>
+<path d="M24 94 L56 108 M100 94 L68 108" fill="none" stroke-width="5"/>
+<path d="M50 126 L62 120 L74 126 L68 134 L56 134Z" fill="#1b1a1a" stroke-width="3"/>
+<path d="M30 140 Q62 130 94 140 Q92 176 62 180 Q32 176 30 140Z" fill="#1b1a1a"/>
+<path d="M36 140 L42 156 L48 140 M76 140 L82 156 L88 140" fill="#f6f2e9" stroke-width="3"/>
+<path d="M44 172 L50 160 L56 172 M68 172 L74 160 L80 172" fill="#f6f2e9" stroke-width="3"/>
+<path d="M46 164 Q62 156 78 164 Q70 174 54 172Z" fill="#9a948b" stroke-width="2.5"/>
+</svg>

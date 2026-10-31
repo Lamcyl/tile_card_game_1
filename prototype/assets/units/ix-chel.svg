@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><style>.i{fill:#1b1a1a}.p{fill:#f6f2e9}.l{fill:#d4cec3}.m{fill:#9a948b}.d{fill:#55514c}.v{fill:#c8352b}.g{fill:#c9a23a}.o{stroke:#1b1a1a;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.t{stroke:#1b1a1a;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.n{fill:none}</style>
+<!-- cute ix chel: sleepy weaver nested in a crescent-moon cradle hugging her rabbit -->
+<g class="g o" style="stroke-width:3" ><path d="M40 40 L44 52 L56 56 L44 60 L40 72 L36 60 L24 56 L36 52Z"/><path d="M220 30 L223 38 L231 41 L223 44 L220 52 L217 44 L209 41 L217 38Z"/><path d="M226 84 L228 90 L234 92 L228 94 L226 100 L224 94 L218 92 L224 90Z"/></g>
+<!-- twin buns -->
+<circle class="o i" cx="80" cy="62" r="20"/><circle class="o i" cx="176" cy="62" r="20"/>
+<path class="o g" d="M70 70 L90 54 M166 54 L186 70" style="stroke-width:3"/>
+<!-- hair back -->
+<path class="o i" d="M84 96 Q80 40 128 38 Q176 40 172 96 L178 140 Q166 148 160 128 L96 128 Q90 148 78 140Z"/>
+<!-- left arm w/ yarn -->
+<path class="o p" d="M106 142 Q76 150 74 182 L96 184 Q98 164 116 156Z"/>
+<!-- robe -->
+<path class="o p" d="M104 134 L152 134 L172 220 L84 220Z"/>
+<path class="t" d="M96 176 L104 168 L112 176 L120 168 L128 176 L136 168 L144 176 L152 168 L160 176" style="stroke-width:4;stroke:#c9a23a"/>
+<path class="o g" d="M110 134 L128 148 L146 134Z"/>
+<!-- face -->
+<ellipse class="o p" cx="128" cy="98" rx="40" ry="36"/>
+<path class="o i" d="M87 94 Q92 60 128 60 Q164 60 169 94 Q152 76 128 82 Q104 76 87 94Z"/>
+<path class="o g" d="M112 70 Q128 52 144 70 Q128 62 112 70Z" style="stroke-width:3"/>
+<path class="t" d="M99 108 Q107 99 115 108M141 108 Q149 99 157 108" style="stroke-width:3.5"/>
+<g class="m" opacity=".7"><ellipse cx="97" cy="120" rx="8" ry="5"/><ellipse cx="159" cy="120" rx="8" ry="5"/></g>
+<path class="t" d="M120 122 Q128 130 136 122" style="stroke-width:3"/>
+<!-- yarn ball + thread -->
+<circle class="o g" cx="72" cy="186" r="15"/><path class="t" d="M60 180 Q72 172 84 182M58 190 Q72 182 86 192" style="stroke-width:2"/>
+<path class="t" d="M62 174 Q30 160 48 132 Q62 112 40 98" style="stroke-width:3.5;stroke:#c9a23a"/>
+<circle class="o p" cx="86" cy="178" r="8"/>
+<!-- rabbit -->
+<path class="o p" d="M166 170 Q150 116 164 112 Q178 112 182 164Z"/><path class="l" d="M168 160 Q158 124 165 122 Q172 124 175 158Z"/>
+<path class="o p" d="M186 168 Q192 118 206 118 Q214 126 200 172Z"/><path class="l" d="M194 160 Q196 130 204 130 Q206 138 198 162Z"/>
+<ellipse class="o p" cx="184" cy="202" rx="32" ry="20"/>
+<ellipse class="o p" cx="184" cy="178" rx="22" ry="18"/>
+<circle class="i" cx="175" cy="176" r="3"/><circle class="i" cx="193" cy="176" r="3"/><path class="o g" d="M180 183 L188 183 L184 188Z" style="stroke-width:2.5"/>
+<path class="o p" d="M150 140 Q170 150 176 192 L156 196 Q154 172 142 160Z"/>
+<circle class="o p" cx="162" cy="198" r="8"/>
+<!-- moon cradle -->
+<path class="o l" d="M12 128 Q20 242 128 252 Q236 242 244 128 Q206 214 128 218 Q50 214 12 128Z"/>
+<g class="m"><circle cx="50" cy="206" r="7"/><circle cx="206" cy="212" r="6"/><circle cx="104" cy="238" r="5"/><circle cx="154" cy="236" r="7"/></g>
+</svg>

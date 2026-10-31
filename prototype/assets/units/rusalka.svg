@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" stroke="#1b1a1a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<!-- drowned rusalka lunging up out of the river, clawed arms reaching, hair like writhing eels -->
+<!-- back wave -->
+<path d="M0 186 Q20 168 44 184 Q66 164 90 182 Q112 160 138 182 Q164 162 188 182 Q214 164 236 180 L256 186 L256 256 L0 256Z" fill="#55514c"/>
+<!-- hair tendrils -->
+<g fill="none" stroke-linecap="round">
+<path d="M150 86 Q200 60 206 20 Q214 8 236 14" stroke="#1b1a1a" stroke-width="24"/><path d="M150 86 Q200 60 206 20 Q214 8 236 14" stroke="#9a948b" stroke-width="16"/>
+<path d="M156 108 Q220 100 232 62 Q240 50 250 60" stroke="#1b1a1a" stroke-width="22"/><path d="M156 108 Q220 100 232 62 Q240 50 250 60" stroke="#55514c" stroke-width="14"/>
+<path d="M160 130 Q214 150 236 120 Q246 116 252 128" stroke="#1b1a1a" stroke-width="20"/><path d="M160 130 Q214 150 236 120 Q246 116 252 128" stroke="#9a948b" stroke-width="12"/>
+<path d="M128 60 Q150 20 190 14 Q204 10 206 2" stroke="#1b1a1a" stroke-width="20"/><path d="M128 60 Q150 20 190 14 Q204 10 206 2" stroke="#55514c" stroke-width="12"/>
+</g>
+<!-- weeds in hair -->
+<path d="M208 46 Q230 34 224 14 Q210 30 208 46Z M228 74 L246 82 L240 98Z" fill="#f6f2e9" stroke-width="3"/>
+<!-- torso, leaning forward -->
+<path d="M170 214 Q178 170 168 138 Q150 122 112 130 Q90 140 98 170 Q108 196 112 214Z" fill="#d4cec3"/>
+<path d="M104 160 L98 186 L114 178 L112 200 L126 188 M150 172 L146 200 L160 186 L162 206" fill="none" stroke-width="3"/>
+<path d="M104 150 Q136 160 166 148" fill="none" stroke="#c8352b" stroke-width="5" stroke-dasharray="7 5"/>
+<!-- arms -->
+<g fill="none" stroke-linecap="round">
+<path d="M118 138 Q74 142 56 112 Q48 100 34 94" stroke="#1b1a1a" stroke-width="20"/><path d="M118 138 Q74 142 56 112 Q48 100 34 94" stroke="#f6f2e9" stroke-width="12"/>
+<path d="M104 160 Q60 168 50 184 Q44 190 34 192" stroke="#1b1a1a" stroke-width="20"/><path d="M104 160 Q60 168 50 184 Q44 190 34 192" stroke="#f6f2e9" stroke-width="12"/>
+</g>
+<!-- claws -->
+<path d="M26 86 Q14 70 2 66 Q12 78 18 92Z M22 94 Q10 88 -2 90 Q10 96 20 102Z M22 104 Q12 106 4 116 Q14 114 24 110Z M30 106 Q28 118 22 128 Q34 122 38 108Z" fill="#f6f2e9" stroke-width="3"/>
+<ellipse cx="34" cy="94" rx="12" ry="12" fill="#f6f2e9"/>
+<path d="M26 184 Q14 168 2 164 Q12 176 18 190Z M22 192 Q10 186 -2 188 Q10 194 20 200Z M22 202 Q12 204 4 214 Q14 212 24 208Z M30 204 Q28 216 22 226 Q34 220 38 206Z" fill="#f6f2e9" stroke-width="3"/>
+<ellipse cx="34" cy="192" rx="12" ry="12" fill="#f6f2e9"/>
+<!-- head -->
+<path d="M70 70 Q74 22 132 22 Q184 28 180 80 Q176 128 124 130 Q76 124 70 70Z" fill="#f6f2e9"/>
+<!-- hair on top and fringe strands over face -->
+<path d="M62 130 L70 92 Q62 16 130 14 Q192 16 186 92 L198 130 L180 106 Q168 46 140 46 Q106 46 82 106Z" fill="#55514c"/>
+<path d="M92 50 Q84 90 96 124 M160 48 Q170 80 164 112" fill="none" stroke-width="5" stroke="#1b1a1a"/>
+<path d="M92 50 Q84 90 96 124 M160 48 Q170 80 164 112" fill="none" stroke-width="2" stroke="#9a948b"/>
+<!-- sunken eyes -->
+<path d="M82 76 L118 84 L112 102 Q92 106 80 92Z" fill="#1b1a1a"/><path d="M174 76 L138 84 L144 102 Q164 106 176 92Z" fill="#1b1a1a"/>
+<ellipse cx="102" cy="92" rx="6" ry="8" fill="#c8352b" stroke="none"/><ellipse cx="154" cy="92" rx="6" ry="8" fill="#c8352b" stroke="none"/>
+<path d="M102 86 L102 98 M154 86 L154 98" stroke="#1b1a1a" stroke-width="2.5"/>
+<path d="M84 108 Q96 116 108 110 M148 110 Q160 116 172 108" fill="none" stroke-width="3" stroke="#55514c"/>
+<!-- gaping mouth -->
+<path d="M100 108 Q128 100 156 108 Q150 134 128 138 Q106 134 100 108Z" fill="#1b1a1a"/>
+<path d="M104 110 L110 124 L116 110 L124 128 L130 110 L136 128 L142 110 L148 124 L152 110" fill="#f6f2e9" stroke-width="2.5"/>
+<!-- water in front -->
+<path d="M0 210 Q18 196 40 212 Q64 194 88 212 Q112 194 138 212 Q164 194 190 212 Q216 196 238 210 L256 206 L256 256 L0 256Z" fill="#d4cec3"/>
+<path d="M14 228 Q34 220 52 228 M96 234 Q120 224 144 234 M190 228 Q212 220 234 230" fill="none" stroke-width="3" stroke="#9a948b"/>
+<path d="M150 204 Q158 190 166 204Z" fill="#f6f2e9" stroke-width="2.5"/>
+</svg>
