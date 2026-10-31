@@ -165,10 +165,12 @@ Each enemy shows **♥ HP** and **⚔ ATK**. ATK doubles as the telegraph: it's 
 
 | Enemy | Rule |
 |---|---|
-| Healer | Heals adjacent enemies by 2 at the end of each turn it survives |
-| Splitter | Splits into two 1♥ enemies (in its tile and an empty neighbour) when destroyed |
-| Summoner | Adds a Goblin to an empty enemy tile each turn |
-| Bulwark | Blocks overkill and pierce from passing to the tile behind it |
+| Healer ✚ | Heals each orthogonally adjacent enemy by 2 (up to its max HP) at the end of each turn it survives |
+| Splitter ⑂ | Splits into two 1♥ enemies (in its tile and an empty neighbour; they attack at once) when destroyed |
+| Summoner ⚑ | Adds a minion (about 40% of its HP, 60% of its ATK) to the nearest empty enemy tile at the end of each turn it survives |
+| Bulwark ⛨ | Armored. Blocks overkill and Pierce from passing to the tile behind it when in the front row |
+
+These are rules carried by an ordinary themed creature (the engine's `kind` field), shown with a coloured badge and ring plus a rule hint before the fight. They appear from Lv10 (danger 4) in the templates `mender`, `brood`, `hive` and `bulwark`; Summoner minions and Splitter halves use the area's basic creature.
 | Boss | Large HP, high ATK and one gimmick (for example, it moves one column each turn, or it is immune to supporter-boosted damage below ×2) |
 
 ---

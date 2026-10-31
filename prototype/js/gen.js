@@ -44,13 +44,18 @@
     { name: 'bastion',    tier: 4, lv: [10, 12], hp: 0.36, hp5: 0.32, atk: 0.8, back: 'b...b', front: 'ta.ht' },
     { name: 'warband',    tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.43, atk: 0.8, back: 'tb.bt', front: 'bxhxb' },
     // Tier 4+ mechanics, one teaching template each.
-    { name: 'mender',     tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.4, atk: 0.8, back: 'b.m.b', front: '.tbt.', teach: 'healer' },
-    { name: 'brood',      tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.4, atk: 0.8, back: '.....', front: 'bsxsb', teach: 'splitter' },
-    { name: 'hive',       tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.4, atk: 0.8, back: 'b.u.b', front: 'tb.bt', teach: 'summoner' },
-    { name: 'bulwark',    tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.4, atk: 0.8, back: 'b.b.b', front: 'k.k.k', teach: 'bulwark' },
+    { name: 'mender',     tier: 4, lv: [10, 12], hp: 0.44, hp5: 0.46, atk: 0.8, back: 'b.m.b', front: '.tbt.', teach: 'healer' },
+    { name: 'brood',      tier: 4, lv: [10, 12], hp: 0.5, hp5: [0.56, 0.56, 0.55], atk: 1, atk5: 0.9, back: '.....', front: 'bsxsb', teach: 'splitter' },
+    { name: 'hive',       tier: 4, lv: [10, 10], hp: 0.43, hp5: [0.4, 0.36, 0.44], atk: 0.8, back: 'b.u.b', front: 'tb.bt', teach: 'summoner' },
+    { name: 'hive',       tier: 4, lv: [11, 12], hp: 0.4, atk: 0.8, back: 'b.u.b', front: 'tb.bt', teach: 'summoner' },
+    { name: 'bulwark',    tier: 4, lv: [10, 12], hp: 0.28, hp5: [0.34, 0.3, 0.34], atk: 0.8, back: 'b.b.b', front: 'k.k.k', teach: 'bulwark' },
   ];
   // Tier 5 (Lv13+) reuses the Survive layouts with beefier enemies (the reference squad is stronger by then).
-  TEMPLATES.filter((t) => t.tier === 4).forEach((t) => TEMPLATES.push(Object.assign({}, t, { tier: 5, lv: [13, 99], hp: t.hp5 || Math.round(t.hp * 90) / 100 })));
+  // hp5 may be a list (Lv13, Lv14, Lv15+) for templates whose cost jumps between levels.
+  TEMPLATES.filter((t) => t.tier === 4 && !(t.name === 'hive' && t.lv[0] === 11)).forEach((t) => {
+    if (Array.isArray(t.hp5)) t.hp5.forEach((hp, i) => TEMPLATES.push(Object.assign({}, t, { tier: 5, lv: [13 + i, i === 2 ? 99 : 13 + i], hp, atk: t.atk5 || t.atk })));
+    else TEMPLATES.push(Object.assign({}, t, { tier: 5, lv: [13, 99], hp: t.hp5 || Math.round(t.hp * 90) / 100, atk: t.atk5 || t.atk }));
+  });
   const MARK_OF_ROLE = { armored: 'ak', barrel: 'x' };
 
   function pickTemplate(node, R) {
