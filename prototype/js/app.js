@@ -2,7 +2,7 @@
 // battles, rewards and end-of-run results.
 (function () {
   'use strict';
-  const Relics = window.Relics, Bounties = window.Bounties, E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items;
+  const Events = window.Events, Relics = window.Relics, Bounties = window.Bounties, E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items;
   const $ = (s) => document.querySelector(s);
   let save = P.load();
   let selected = null;
@@ -47,9 +47,19 @@
     if (n.type === 'boss') return t.boss[0];
     if (n.type === 'elite') return t.tough[0] + ' Warband';
     if (n.type === 'shrine') return 'Healing Spring';
-    if (n.type === 'treasure') return 'Supply Cache';
+    if (n.type === 'treasure') return n.guarded ? 'Guarded Cache' : 'Supply Cache';
+    if (n.type === 'shop') return 'Wayside Market';
+    if (n.type === 'event') return eventAt(n).title;
+    if (n.guardFor) return t.armored[0] + ' Guard';
     return t[n.role === 'armored' || n.role === 'barrel' ? n.role : 'basic'][0] + ' Patrol';
   }
+
+  // WP13: the event vignette that lives at an event node (fixed per node), the guard fight of a guarded cache, shop prices.
+  const eventAt = (n) => Events.pick(World.SUB_BY[n.sub].region, World.hash(n.id));
+  const guardOf = (n) => Object.assign({}, n, { type: 'battle', role: 'armored', guardFor: true });
+  const regionOf = (n) => World.SUB_BY[n.sub].regionIndex;
+  const price = (base, n) => Math.round(base * (1 + 0.2 * regionOf(n)));
+  const goldNow = () => (run() ? run().gold || 0 : 0);
 
   // ---------- HUD ----------
   function renderHud() {
@@ -59,6 +69,7 @@
         '<div class="hud-hp"><span class="lbl">♥</span><div class="bar"><i style="width:' + (100 * r.hp / r.maxHp) + '%"></i></div><b>' + r.hp + '/' + r.maxHp + '</b></div>' +
         '<div class="hud-chip supplies' + (r.supplies <= 2 ? ' low' : '') + '" title="Supplies: battles left on this run. Normal and elite fights cost 1; the first boss adds ' + P.SUPPLIES_PER_BOSS + ', the next one 1 (after that a boss costs 1 like any fight).">🎒 ' + r.supplies + '</div>' +
         '<div class="hud-chip" title="Souls carried on this run">✦ ' + r.souls + '</div>' +
+        '<div class="hud-chip gold" title="Gold: earned in fights, spent in Shops and events. Lost when the run ends.">🪙 ' + (r.gold || 0) + '</div>' +
         (r.relics && r.relics.length ? '<div class="hud-chip relics" title="Relics on this run">' + relicRow(r.relics) + '</div>' : '');
     } else {
       $('#hud').innerHTML =
@@ -116,30 +127,34 @@
 
   function nodeSheet(n) {
     const r = run(), sub = World.SUB_BY[n.sub];
-    const isFight = ['battle', 'elite', 'boss'].includes(n.type);
+    const guard = n.type === 'treasure' && n.guarded && (!r || !r.cleared.includes(n.id)) ? guardOf(n) : null;
+    const isFight = ['battle', 'elite', 'boss'].includes(n.type) || !!guard;
     let body = '<div class="sheet-head"><div><h2>' + esc(nodeTitle(n)) + '</h2><p class="muted">' + esc(sub.name) + ' · ' + esc(sub.region) + '</p></div>' +
-      (isFight ? '<div class="lv-box">' + skulls(n.level) + '<span class="lv" style="background:' + lvColor(n.level) + '">Lv' + n.level + '</span></div>' : '') + '</div>';
+      (isFight || n.type === 'treasure' && n.guarded ? '<div class="lv-box">' + skulls(n.level) + '<span class="lv" style="background:' + lvColor(n.level) + '">Lv' + n.level + '</span></div>' : '') + '</div>';
     if (isFight) {
-      const preview = Gen.generateBattle(n, r ? r.seed : 'preview');
+      const preview = Gen.generateBattle(guard || n, r ? r.seed : 'preview');
       const icons = preview.enemies.map((e) => enemyChip(e.type)).join('');
       const souls = Math.round(Gen.soulsFor(n) * P.soulRate(save));
       body += '<p class="enemies">' + icons + '</p>';
       if (preview.intro) body += '<p class="gimmick-note"><b>' + esc(preview.intro.name) + (preview.intro.rule && preview.intro.rule !== 'Elite' ? ' · ' + esc((preview.intro.badge ? preview.intro.badge + ' ' : '') + preview.intro.rule) : '') + '.</b> ' + esc(preview.intro.text) + '</p>';
-      body += '<p class="muted">' + (n.type === 'boss'
+      if (guard) body += '<p class="muted">A guard stands over the chest. Beat it to open the cache: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + Gen.GUARD_GOLD + ' and a reward of your choice, plus the usual fight Souls.</p>';
+      else body += '<p class="muted">' + (n.type === 'boss'
         ? (save.bossesBeaten.includes(n.sub) ? 'Already defeated once. Fight again for Souls.' : 'Defeat it to reveal ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + (sub.unlocks.length ? '.' : '. This is a final boss.'))
         : n.type === 'elite' ? 'A tougher fight that pays double Souls.' : 'A normal fight.') + ' Reward: ✦ ' + souls + ', up to ✦ ' + Math.round(Gen.soulsFor(n, 3) * P.soulRate(save)) + ' with ★★★ (no damage, plus a bonus item roll).</p>';
-      body += '<p>' + supplyNote(n) + '</p>';
-      body += '<div class="drops"><h4>Possible drops <small>item level ' + n.level + (n.type === 'elite' ? ' · an elite always drops something' : '') + '</small></h4>' + Items.tableFor(n).map((e) => dropRow(e, n)).join('') + '</div>';
+      body += '<p>' + supplyNote(guard || n) + '</p>';
+      if (!guard) body += '<div class="drops"><h4>Possible drops <small>item level ' + n.level + (n.type === 'elite' ? ' · an elite always drops something' : '') + '</small></h4>' + Items.tableFor(n).map((e) => dropRow(e, n)).join('') + '</div>';
       if (n.type === 'boss') body += tokenBlock(n);
-      const miss = Items.missesOf(save, n.id);
+      const miss = guard ? 0 : Items.missesOf(save, n.id);
       if (miss > 0) body += '<p class="muted small">Bad-luck protection: ' + miss + ' win' + (miss === 1 ? '' : 's') + ' without the unique item. Its chance rises each time.</p>';
-    } else if (n.type === 'shrine') body += '<p class="muted">Restores 8 HP. Once per run.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
-    else if (n.type === 'treasure') body += '<p class="muted">Free supplies: ✦ ' + Gen.CACHE_SOULS + ' and a reward of your choice.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
+    } else if (n.type === 'shrine') body += '<p class="muted">A quiet spring and a small altar. Choose one: heal 8 HP <b>or</b> upgrade a unit for this run. Once per run.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
+    else if (n.type === 'treasure') body += '<p class="muted">Free supplies: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + Gen.CACHE_GOLD + ' and a reward of your choice.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
+    else if (n.type === 'shop') body += '<p class="muted">A travelling stall. Spend 🪙 Gold on healing, unit upgrades and relics. Stock changes every run; leave when you are done.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
+    else if (n.type === 'event') body += '<p class="muted">Something stirs here. A short choice with a risk and a reward.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
 
     if (!r) body += '<p class="hint">Set out from Camp to fight here.</p><button class="primary wide" data-act="close-node">Back to Camp</button>';
     else if (r.cleared.includes(n.id)) body += '<p class="hint">Already cleared on this run.</p><button class="wide" data-act="close-node">Close</button>';
     else body += '<div class="row"><button data-act="close-node">Cancel</button><button class="primary grow" data-act="engage">' +
-      (isFight ? (n.type === 'boss' ? '👑 Challenge' : '⚔ Fight') : n.type === 'shrine' ? '⛲ Rest' : '🎁 Open') + '</button></div>';
+      (isFight ? (n.type === 'boss' ? '👑 Challenge' : '⚔ Fight') : n.type === 'shrine' ? '⛲ Rest' : n.type === 'shop' ? '🛒 Browse' : n.type === 'event' ? '❓ Investigate' : '🎁 Open') + '</button></div>';
     return body;
   }
 
@@ -152,6 +167,7 @@
     const open = [...frontier()].filter((id) => ['battle', 'elite', 'boss'].includes(World.byId[id].type)).length;
     return '<div class="sheet-head"><div><h2>On expedition</h2><p class="muted">Free exploration: tap any monster in an open area. ' + open + ' fights left.</p></div></div>' +
       '<p class="supply-line">🎒 <b>' + r.supplies + '</b> Supplies left. Each normal or elite win costs 1; the first boss of a run adds ' + P.SUPPLIES_PER_BOSS + ', the second 1, later ones cost 1 like any fight. At 0 you return to Camp safely.</p>' +
+      '<p class="supply-line">🪙 <b>' + (r.gold || 0) + '</b> Gold. Spend it at Shops and events; unspent Gold is lost when the run ends.</p>' +
       (r.relics && r.relics.length ? '<h4 class="bounty-h">Relics <small>run only</small></h4><ul class="relic-list">' + r.relics.map((id) => '<li>' + relicRow([id]) + '<span><b>' + esc(Relics.BY_ID[id].name) + '</b> ' + esc(Relics.BY_ID[id].text) + '</span></li>').join('') + '</ul>' : '') +
       (bl.length ? '<h4 class="bounty-h">Bounties <small>optional, paid in 💎 when the run ends</small></h4>' + bountyList(bl) : '') +
       '<p class="muted small">HP never regenerates by itself. Return to Camp to keep all ✦ ' + r.souls + ' Souls; if you fall, you keep 75%.</p>' +
@@ -360,7 +376,7 @@
     if (problem) { toast(problem); campTab = 'squad'; sheetOpen = true; renderAll(); return; }
     const sup = P.startSupplies(save);
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: 'camp', cleared: ['camp'], path: ['camp'],
-      bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
+      bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
     selected = null; confirmReturn = false; persist();
     WorldMap.placeToken('camp');
     const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]);
@@ -369,7 +385,7 @@
   }
 
   async function engage(id) {
-    const r = run(), n = World.byId[id];
+    const r = run(); let n = World.byId[id];
     if (!r || busy || r.cleared.includes(id) || !save.unlocked.includes(n.sub)) return;
     busy = true; selected = null; sheetOpen = true; renderAll();
     // Short hops are walked; far ones just move the hero there.
@@ -377,14 +393,15 @@
     if (Math.hypot(from.x - n.x, from.y - n.y) < 1600) await WorldMap.walk([id]); else { WorldMap.placeToken(id); WorldMap.focus(n.x, n.y); }
     r.pos = id; r.path.push(id);
     busy = false;
-    if (n.type === 'shrine') {
-      const before = r.hp; r.hp = Math.min(r.maxHp, r.hp + 8); r.cleared.push(id); persist();
-      toast('The spring restores ' + (r.hp - before) + ' HP.'); renderAll(); return;
+    if (n.type === 'shrine') { renderAll(); openShrine(n); return; }
+    if (n.type === 'shop') { renderAll(); openShop(n); return; }
+    if (n.type === 'event') { renderAll(); openEvent(n); return; }
+    if (n.type === 'treasure' && !n.guarded) {
+      const gold = Gen.CACHE_GOLD + 2 * regionOf(n);
+      r.cleared.push(id); r.souls += Gen.CACHE_SOULS; r.gold = (r.gold || 0) + gold; persist(); renderAll();
+      offerReward('Supply cache', 'You found ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + gold + ' and some supplies. This cost no Supplies.', n); return;
     }
-    if (n.type === 'treasure') {
-      r.cleared.push(id); r.souls += Gen.CACHE_SOULS; persist(); renderAll();
-      offerReward('Supply cache', 'You found ✦ ' + Gen.CACHE_SOULS + ' and some supplies. This cost no Supplies.', n); return;
-    }
+    if (n.guarded) n = guardOf(n); // a guarded cache: beat its guard first (battleOver opens the chest)
     const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: P.rulesFor(save, r) }, Gen.generateBattle(n, r.seed));
     WorldMap.setActive(false);
     document.body.classList.add('in-battle');
@@ -425,6 +442,7 @@
     stars = stars || 1;
     const gained = Math.round(Gen.soulsFor(n, stars) * P.soulRate(save));
     P.addXp(save, save.squad, n.type === 'boss' ? 2 : 1); // WP11 unit mastery
+    const goldGain = Gen.goldFor(n, stars); r.gold = (r.gold || 0) + goldGain;
     r.souls += gained; r.wins += 1; r.maxLevel = Math.max(r.maxLevel, n.level); r.cleared.push(n.id);
     // Items: rolled before the boss is marked as beaten, so its first kill always drops its unique item.
     let drop = Items.grantDrop(save, n, r.seed);
@@ -444,7 +462,7 @@
     if (boss) r.bossesDown = (r.bossesDown || 0) + 1;
     r.supplies += gain;
     r.stars = (r.stars || 0) + stars;
-    let title = 'Victory ' + '★'.repeat(stars), text = '✦ ' + gained + ' Souls. You lost ' + state.damageTaken + ' HP.' + (stars === 3 ? ' Flawless: bonus loot roll!' : '');
+    let title = 'Victory ' + '★'.repeat(stars), text = '✦ ' + gained + ' Souls, 🪙 ' + goldGain + ' Gold. You lost ' + state.damageTaken + ' HP.' + (stars === 3 ? ' Flawless: bonus loot roll!' : '');
     if (boss && !save.bossesBeaten.includes(n.sub)) {
       save.bossesBeaten.push(n.sub);
       const sub = World.SUB_BY[n.sub];
@@ -456,6 +474,10 @@
         'Bonus ✦ ' + Gen.BOSS_BONUS_SOULS + ' and 💎 ' + cry + ' Crystals. New recruits may be waiting at Camp.';
       const target = sub.unlocks.length ? World.SUB_BY[sub.unlocks[0]] : sub;
       setTimeout(() => WorldMap.focus(target.entry[0], target.entry[1]), 300);
+    }
+    if (n.guardFor) { // the guard of a cache has fallen: the chest opens
+      const gg = Gen.GUARD_GOLD + 3 * regionOf(n); r.souls += Gen.CACHE_SOULS; r.gold += gg;
+      title = 'The guard falls ' + '★'.repeat(stars); text += ' The cache is yours: ✦ ' + Gen.CACHE_SOULS + ' and 🪙 ' + gg + ' more.';
     }
     const done = Bounties.track(r.bounties, Object.assign({ won: true, stars, node: n.type }, report || {}));
     const bountyLine = done.length ? '<div class="bounty-done">' + done.map((b) => '<p>🎯 Bounty complete: <b>' + esc(Bounties.text(b)) + '</b> · 💎 ' + b.reward + ' at run end</p>').join('') + '</div>' : '';
@@ -477,21 +499,109 @@
   const relicIcon = (rel) => '<span class="relic-ic" aria-hidden="true">' + rel.glyph + '</span>';
   const relicRow = (ids) => (ids || []).map((id) => '<span class="relic-ic sm" title="' + esc(Relics.BY_ID[id].name + ': ' + Relics.BY_ID[id].text) + '">' + Relics.BY_ID[id].glyph + '</span>').join('');
 
-  // Choose 1 of 3: always one heal, plus two upgrades for this run.
-  function offerReward(title, text, node, extra) {
-    const r = run(), R = World.rng(r.seed + ':reward:' + r.path.length);
-    const army = P.buildArmy(save, r.mods);
-    const regionIdx = node ? World.SUB_BY[node.sub].regionIndex : 0;
-    const pool = [];
+  // Every unit upgrade the run could take now: +1 ATK / block / boost, and +1 range (rare, from the second region on, design 24.2).
+  function upgradePool(node, R) {
+    const r = run(), army = P.buildArmy(save, r.mods), regionIdx = node ? World.SUB_BY[node.sub].regionIndex : 0, pool = [];
     for (const c of army) {
       const t = E.CARD_TYPES[c.type];
       if (t.role === 'attacker') {
         pool.push({ kind: 'atk', id: c.id, label: '+1 ATK · ' + unitTitle(c.id), icon: t.icon, card: c.id });
-        // Range is a rare reward that only appears from the second region onward (design 24.2).
         if (regionIdx >= 1 && ((c.pattern || t.pattern) !== 'straight' || c.range < 4) && R() < 0.4) pool.push({ kind: 'range', id: c.id, label: '+1 range · ' + unitTitle(c.id), icon: t.icon, card: c.id });
       } else if (t.role === 'defender') pool.push({ kind: 'block', id: c.id, label: '+1 block · ' + unitTitle(c.id), icon: t.icon, card: c.id });
       else if (t.effect !== 'mult') pool.push({ kind: 'amount', id: c.id, label: '+1 boost · ' + unitTitle(c.id), icon: t.icon, card: c.id });
     }
+    return pool;
+  }
+  const takeFrom = (pool, R, n) => { const out = []; while (out.length < n && pool.length) out.push(pool.splice(Math.floor(R() * pool.length), 1)[0]); return out; };
+  function applyUpgrade(p) { const m = run().mods[p.id] || (run().mods[p.id] = {}); m[p.kind] = (m[p.kind] || 0) + 1; }
+  function giveRelic(R) {
+    const r = run(), left = Relics.LIST.filter((x) => !r.relics.includes(x.id));
+    if (r.relics.length >= Relics.MAX_PER_RUN || !left.length) return null;
+    const rel = left[Math.floor(R() * left.length)]; r.relics.push(rel.id); return rel;
+  }
+  const pickBtn = (p, i, extra) => '<button data-reward="' + i + '"' + (extra && extra.dis ? ' disabled' : '') + '><span class="ic">' + (p.card ? unitView(p.card).img : p.icon) + '</span><span>' + esc(p.label) + '</span>' + (extra && extra.tag ? '<small class="price">' + extra.tag + '</small>' : '') + '</button>';
+
+  // Shrine (design 10.6): heal OR upgrade a unit, one choice, then it is spent.
+  function openShrine(n) {
+    const r = run(), R = World.rng(r.seed + ':shrine:' + n.id), ups = takeFrom(upgradePool(n, R), R, 2);
+    const picks = [{ kind: 'heal', label: 'Drink: heal 8 HP', icon: '💧' }].concat(ups);
+    modal('<h3>Healing Spring</h3><p>Clear water pools beneath a mossy altar. You may take <b>one</b> blessing.</p><div class="rewards">' + picks.map((p, i) => pickBtn(p, i)).join('') + '</div>' +
+      '<div class="row"><button data-act="close">Not now</button></div>');
+    $('#modal').onclick = (ev) => {
+      if (ev.target.closest('[data-act="close"]')) { closeModal(); return; }
+      const b = ev.target.closest('[data-reward]'); if (!b) return;
+      const p = picks[Number(b.dataset.reward)];
+      if (p.kind === 'heal') { const before = r.hp; r.hp = Math.min(r.maxHp, r.hp + 8); toast('The spring restores ' + (r.hp - before) + ' HP.'); }
+      else { applyUpgrade(p); toast(p.label.split(' · ')[0] + ' for ' + unitView(p.card).name + '.'); }
+      r.cleared.push(n.id); persist(); closeModal(); renderAll();
+    };
+  }
+
+  // Shop (WP13): four wares per visit, each bought once. Stock is rolled per run and shop; leaving closes it for the run.
+  function shopStock(n) {
+    const r = run(), R = World.rng(r.seed + ':shop:' + n.id), ups = takeFrom(upgradePool(n, R), R, 2), stock = [];
+    stock.push({ kind: 'heal', label: 'Healing draught: +8 HP', icon: '🍶', price: price(14, n) });
+    for (const u of ups) stock.push(Object.assign({}, u, { price: price(u.kind === 'range' ? 32 : 22, n) }));
+    const rel = r.relics.length < Relics.MAX_PER_RUN ? Relics.LIST.filter((x) => !r.relics.includes(x.id)) : [];
+    if (rel.length) { const x = rel[Math.floor(R() * rel.length)]; stock.push({ kind: 'relic', id: x.id, label: x.name + ': ' + x.text, icon: relicIcon(x), price: price(40, n) }); }
+    else stock.push({ kind: 'tonic', label: 'Ginseng tonic: +2 max HP', icon: '🌿', price: price(30, n) });
+    return stock;
+  }
+  function openShop(n) {
+    const r = run(); r.shops = r.shops || {};
+    const st = r.shops[n.id] || (r.shops[n.id] = { stock: shopStock(n), sold: [] });
+    const draw = () => {
+      modal('<h3>Wayside Market</h3><p class="muted small">A stall under a red awning. 🪙 <b>' + (r.gold || 0) + '</b> Gold · ♥ ' + r.hp + '/' + r.maxHp + '</p><div class="rewards shop">' +
+        st.stock.map((p, i) => pickBtn(p, i, st.sold.includes(i) ? { tag: 'sold', dis: true } : { tag: '🪙 ' + p.price, dis: (r.gold || 0) < p.price })).join('') + '</div>' +
+        '<div class="row"><button class="primary grow" data-act="leave">Leave the stall</button></div>');
+    };
+    draw();
+    $('#modal').onclick = (ev) => {
+      if (ev.target.closest('[data-act="leave"]')) { r.cleared.push(n.id); persist(); closeModal(); renderAll(); return; }
+      const b = ev.target.closest('[data-reward]'); if (!b || b.disabled) return;
+      const i = Number(b.dataset.reward), p = st.stock[i];
+      if (st.sold.includes(i) || (r.gold || 0) < p.price) return;
+      r.gold -= p.price; st.sold.push(i);
+      if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + 8);
+      else if (p.kind === 'tonic') { r.maxHp += 2; r.hp += 2; }
+      else if (p.kind === 'relic') { if (!r.relics.includes(p.id)) r.relics.push(p.id); }
+      else applyUpgrade(p);
+      persist(); renderHud(); draw();
+    };
+  }
+
+  // Event (WP13): a short vignette with choices; each choice may cost Gold and has a (sometimes random) outcome.
+  function openEvent(n) {
+    const r = run(), ev = eventAt(n), ri = regionOf(n), R = World.rng(r.seed + ':event:' + n.id);
+    modal('<h3>' + esc(ev.title) + '</h3><p class="event-text">' + esc(ev.text) + '</p><div class="rewards event">' + ev.choices.map((c, i) => {
+      const cost = Events.costOf(c, ri);
+      return '<button data-choice="' + i + '"' + ((r.gold || 0) < cost ? ' disabled' : '') + '><span>' + esc(c.label) + '</span>' + (cost ? '<small class="price">🪙 ' + cost + '</small>' : '') + '</button>';
+    }).join('') + '</div><div class="row"><button data-act="close">Not now</button></div>');
+    $('#modal').onclick = (e) => {
+      if (e.target.closest('[data-act="close"]')) { closeModal(); return; }
+      const b = e.target.closest('[data-choice]'); if (!b || b.disabled) return;
+      const c = ev.choices[Number(b.dataset.choice)], cost = Events.costOf(c, ri);
+      if ((r.gold || 0) < cost) return;
+      r.gold -= cost;
+      const out = Events.resolve(c, ri, R), fx = out.fx, notes = [];
+      if (fx.gold) { r.gold = Math.max(0, (r.gold || 0) + fx.gold); }
+      if (fx.souls) r.souls += fx.souls;
+      if (fx.maxhp) { r.maxHp += fx.maxhp; r.hp += fx.maxhp; }
+      if (fx.hp) r.hp = Math.max(1, Math.min(r.maxHp, r.hp + fx.hp));
+      const ap = () => { const picks = takeFrom(upgradePool(n, R).filter((p) => fx.atk ? p.kind === 'atk' : true), R, 1); if (picks[0]) { applyUpgrade(picks[0]); notes.push(picks[0].label); } };
+      for (let k = 0; k < (fx.atk || 0) + (fx.up || 0); k++) ap();
+      if (fx.relic) { const rel = giveRelic(R); notes.push(rel ? rel.name + ': ' + rel.text : 'You have no room for another relic.'); }
+      r.cleared.push(n.id); persist(); renderAll();
+      modal('<h3>' + esc(ev.title) + '</h3><p>' + esc(out.text) + '</p>' + (Events.fxText(fx) ? '<p class="event-fx"><b>' + esc(Events.fxText(fx)) + '</b></p>' : '') +
+        (notes.length ? '<ul class="event-notes">' + notes.map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul>' : '') + '<div class="row"><button class="primary grow" data-act="close">Continue</button></div>');
+      $('#modal').onclick = (e2) => { if (e2.target.closest('[data-act="close"]')) closeModal(); };
+    };
+  }
+
+  // Choose 1 of 3: always one heal, plus two upgrades for this run.
+  function offerReward(title, text, node, extra) {
+    const r = run(), R = World.rng(r.seed + ':reward:' + r.path.length);
+    const pool = upgradePool(node, R);
     const picks = [];
     // WP12: a relic takes the place of one upgrade when the run offers one (always after elites and bosses).
     const relic = Relics.offer(r.relics, R, node ? node.type : 'battle');
@@ -548,6 +658,7 @@
       (found.length ? '<p>Items found: <b>' + found.map((it) => esc(it.name)).join(', ') + '</b>. Equip them in Camp ▸ Gear.</p>' : '') +
       (unlockedNames.length ? '<p>New areas revealed: <b>' + esc(unlockedNames.join(', ')) + '</b></p>' : '') +
       (cheap ? '<p class="first-run">Your Souls already cover your first upgrade: <b>' + cheap.icon + ' ' + esc(cheap.name) + '</b> (' + esc(cheap.desc) + ') for ✦ ' + P.upgradeCost(save, cheap.id) + '.</p>' : '<p class="muted small">Spend Souls at Camp on upgrades and recruits, then set out again to reach further.</p>') +
+      ((r.gold || 0) > 0 ? '<p class="muted small">🪙 ' + r.gold + ' unspent Gold stayed behind: Gold only lasts for one expedition.</p>' : '') +
       '<div class="row">' + (cheap ? '<button class="primary grow" data-act="to-upgrades">Go to Upgrades</button><button data-act="to-camp">Camp</button>' : '<button class="primary grow" data-act="to-camp">Go to Camp</button>') + '</div>');
     $('#modal').onclick = (ev) => {
       if (!ev.target.closest('[data-act="to-camp"], [data-act="to-upgrades"]')) return;

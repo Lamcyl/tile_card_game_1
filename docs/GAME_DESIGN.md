@@ -315,7 +315,7 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
 | 👑 Boss | A fixed, handcrafted fight with signature loot. Unlocks the next region |
 | 💰 Treasure | Free loot, sometimes guarded |
 | 🛒 Shop | Spend gold on relics, heals and unit upgrades |
-| 🔥 Shrine | Heal **or** upgrade a unit (one choice) |
+| 🔥 Shrine | Heal **or** upgrade a unit (one choice) *(implemented, WP13)* |
 | ❓ Event | A short text choice with a risk and a reward |
 | 🗝 Secret | Hidden until found |
 | 🚩 Waypoint | Unlocks a new starting point |
@@ -337,7 +337,7 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
   - "+1 ATK for every enemy killed by overkill this run."
   - "The first Shield each battle blocks double."
   - *(Implemented, WP12: `js/relics.js`, 12 relics with Norse, Greek, Egyptian, Shinto and Vedic names, e.g. Mjölnir Shard (barrels explode twice), Prism of Ra (supporters boost diagonally), Fenrir's Fang (each overkill kill gives attackers +1 ATK for the battle, max +3), Aegis of Athena (Shields block double on turn 1 of a battle, a simplification of "first Shield"). A relic replaces one of the two upgrade choices: always after elites and bosses, about 40% of other wins, no duplicates, at most 4 per run. They are engine rule flags in `state.rules`, kept in the run state and lost when the run ends.)*
-- **Gold** is earned in battles and spent at shops. It resets when the run ends.
+- **Gold** is earned in battles and spent at shops and events. It resets when the run ends. *(Implemented, WP13: a fight pays (3 + 1.5 x level) Gold, x1.25 / x1.5 for 2 / 3 stars, x2 elite, x3 boss; caches pay 8 +2 per region, a cache guard 16 +3 per region. Shops (🛒 Wayside Market, 10 sub-areas) sell a heal (+8 HP, 14), two unit upgrades (22; range 32) and a relic (40) or a +2 max HP tonic once the relic cap is reached, prices +20% per region; each ware once, the shop closes when you leave. Event nodes (`js/events.js`, 15 vignettes, 3 per region, Korean / Slavic / Greek / Japanese / Egyptian / Maya / Norse myth) offer 2-3 choices, some with a Gold cost and a random outcome (HP is never taken below 1). The Shrine is now one choice: heal 8 HP or one of two unit upgrades. Six treasure caches are guarded: beating an armored patrol at the sub-area's top level (costs 1 Supply) opens the chest. Shops, events, shrines and unguarded caches cost no Supplies.)*
 - **Stage rating:** ★★★ for no damage, ★★ for 3 or less, ★ for a clear. A ★★★ clear gives an extra loot roll, rewarding a well-solved puzzle. Souls scale with the rating (prototype: ×1 / ×1.25 / ×1.5). *(Implemented.)*
 - **Bounties:** each run offers 1–3 optional goals ("Win 3 battles without Shields", "Kill a boss with overkill") that pay Crystals. *(Implemented, WP7: `js/bounties.js`; seven kinds (no Shield, ★★★, overkill count, boss overkill, one-turn win, barrels, elite), 2-5 💎 each, rolled at run start, shown in the run sheet, paid when the run ends even after a defeat.)*
 

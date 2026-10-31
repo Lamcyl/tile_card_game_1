@@ -183,7 +183,14 @@
     return base;
   }
 
-  const Gen = { generateBattle, soulsFor, starsFor, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
+  // Gold (WP13): a per-run currency from fights, spent in Shops and events, lost when the run ends. Stars add 25% / 50% like Souls.
+  const GOLD_STAR = [1, 1, 1.25, 1.5], CACHE_GOLD = 8, GUARD_GOLD = 16;
+  function goldFor(node, stars) {
+    const base = Math.round((3 + node.level * 1.5) * (GOLD_STAR[stars || 1] || 1));
+    return node.type === 'boss' ? base * 3 : node.type === 'elite' ? base * 2 : base;
+  }
+
+  const Gen = { generateBattle, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
   root.Gen = Gen;
   if (typeof module !== 'undefined' && module.exports) module.exports = Gen;
 })(typeof window !== 'undefined' ? window : globalThis);

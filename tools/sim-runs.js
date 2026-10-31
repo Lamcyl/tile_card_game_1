@@ -15,6 +15,7 @@ const Gen = require('../prototype/js/gen.js');
 const Progress = require('../prototype/js/progress.js');
 const Items = require('../prototype/js/items.js');
 const Relics = require('../prototype/js/relics.js');
+const Events = require('../prototype/js/events.js');
 
 const TILES = [];
 for (const r of Engine.PLAYER_ROWS) for (let c = 0; c < 5; c++) TILES.push(Engine.key(r, c));
@@ -56,17 +57,39 @@ function playRun(save0) {
   const seed = 'sim' + Math.random();
   const mods = {};
   const relics = []; // WP12: run relics (NORELICS=1 switches them off)
-  let hp = Progress.maxHp(save), supplies = Progress.startSupplies(save), cleared = new Set(), wins = 0, maxLv = 0, souls = 0, bosses = 0, items = 0, wonFirst = [];
+  let gold = 0, hp = Progress.maxHp(save), supplies = Progress.startSupplies(save), cleared = new Set(), wins = 0, maxLv = 0, souls = 0, bosses = 0, items = 0, wonFirst = [];
   for (;;) {
     if (supplies <= 0) return { wins, maxLv, souls, bosses, items, end: 'supplies', start: Progress.startSupplies(save0), save };
     // Sub-areas whose boss already fell are skipped (nothing new there); fights are taken lowest level first,
     // the boss when Supplies run low (<= 2) or when nothing else is left in the frontier.
     const open = World.nodes.filter((n) => n.type !== 'camp' && !cleared.has(n.id) && save.unlocked.includes(n.sub) && !save.bossesBeaten.includes(n.sub));
-    const pois = open.filter((n) => n.type === 'shrine' || n.type === 'treasure');
-    const fights = open.filter((n) => !pois.includes(n)).sort((a, b) => (a.type === 'boss') - (b.type === 'boss') || a.level - b.level);
-    const spring = pois.find((n) => n.type === 'shrine'); // heal when below 60% HP
-    if (spring && hp < Progress.maxHp(save) * 0.6) { cleared.add(spring.id); hp = Math.min(Progress.maxHp(save), hp + 8); continue; }
-    const cache = pois.find((n) => n.type === 'treasure'); if (cache) { cleared.add(cache.id); souls += Gen.CACHE_SOULS; continue; }
+    // WP13 non-battle nodes: spring (heal when hurt, else +1 ATK), cache, shop and event. A guarded cache is a normal fight with a bonus.
+    const pois = open.filter((n) => ['shrine', 'shop', 'event'].includes(n.type) || (n.type === 'treasure' && !n.guarded));
+    const guardOf = (n) => Object.assign({}, n, { type: 'battle', role: 'armored', guardFor: true });
+    const fights = open.filter((n) => !pois.includes(n)).map((n) => (n.guarded ? guardOf(n) : n)).sort((a, b) => (a.type === 'boss') - (b.type === 'boss') || a.level - b.level);
+    const ri = (n) => World.SUB_BY[n.sub].regionIndex, atkUp = () => { const att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker'); const id = att[Math.floor(Math.random() * att.length)]; mods[id] = { atk: ((mods[id] || {}).atk || 0) + 1 }; };
+    const maxHp = () => Progress.maxHp(save), spring = pois.find((n) => n.type === 'shrine'); // heal when below 60% HP
+    if (spring && hp < maxHp() * 0.6) { cleared.add(spring.id); hp = Math.min(maxHp(), hp + 8); continue; }
+    const cache = pois.find((n) => n.type === 'treasure'); if (cache) { cleared.add(cache.id); souls += Gen.CACHE_SOULS; gold += Gen.CACHE_GOLD + 2 * ri(cache); continue; }
+    const shop = pois.find((n) => n.type === 'shop');   // visit with 22+ Gold (>= 14 when hurt): heal if below 70%, then upgrades, a relic at 40+
+    if (shop && (gold >= 22 || (gold >= 14 && hp < maxHp() * 0.7))) {
+      cleared.add(shop.id); const pr = (b) => Math.round(b * (1 + 0.2 * ri(shop)));
+      if (hp < maxHp() * 0.7 && gold >= pr(14)) { gold -= pr(14); hp = Math.min(maxHp(), hp + 8); }
+      if (!process.env.NORELICS && relics.length < Relics.MAX_PER_RUN && gold >= pr(40)) { const left = Relics.LIST.filter((x) => !relics.includes(x.id) && !['prism', 'mjolnir', 'susanoo'].includes(x.id)); if (left.length) { gold -= pr(40); relics.push(left[Math.floor(Math.random() * left.length)].id); } }
+      for (let k = 0; k < 2 && gold >= pr(22); k++) { gold -= pr(22); atkUp(); }
+      continue;
+    }
+    const evn = pois.find((n) => n.type === 'event');   // take the first affordable non-leaving choice
+    if (evn) {
+      cleared.add(evn.id); const e = Events.pick(World.SUB_BY[evn.sub].region, World.hash(evn.id)), c = e.choices.find((ch) => ch !== Events.LEAVE && Events.costOf(ch, ri(evn)) <= gold && !(ch.cost && ch.cost.gold > 12));
+      if (c) {
+        gold -= Events.costOf(c, ri(evn)); const fx = Events.resolve(c, ri(evn), Math.random).fx;
+        gold = Math.max(0, gold + (fx.gold || 0)); souls += fx.souls || 0; if (fx.maxhp) hp += fx.maxhp; if (fx.hp) hp = Math.max(1, Math.min(maxHp(), hp + fx.hp));
+        for (let k = 0; k < (fx.atk || 0) + (fx.up || 0); k++) atkUp();
+        if (fx.relic && !process.env.NORELICS && relics.length < Relics.MAX_PER_RUN) { const left = Relics.LIST.filter((x) => !relics.includes(x.id)); if (left.length) relics.push(left[Math.floor(Math.random() * left.length)].id); }
+      }
+      continue;
+    }
     if (!fights.length) return { wins, maxLv, souls, bosses, items, end: 'cleared', start: Progress.startSupplies(save0), save };
     const bossNode = fights.find((n) => n.type === 'boss'), normals = fights.filter((n) => n.type !== 'boss');
     const node = bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode);
@@ -74,7 +97,8 @@ function playRun(save0) {
     const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save, { relics }));
     if (st.status !== 'cleared') return { wins, maxLv, souls: Math.round(souls * 0.75), bosses, items, end: 'died', diedAt: node.level, start: Progress.startSupplies(save0), save };
     if (process.env.DEBUG) console.log('  run' + (save0.runs + 1) + ' w' + wins + ' ' + node.id + ' ' + node.type + ' Lv' + node.level + ' hp ' + st.hp + '/' + Progress.maxHp(save) + ' sup ' + supplies + ' atk ' + JSON.stringify(Progress.buildArmy(save, mods).filter((c) => c.atk).map((c) => c.id + ':' + c.atk)) + ' dmg' + st.damageTaken);
-    hp = st.hp; wins++; Progress.addXp(save, save.squad, node.type === 'boss' ? 2 : 1); // WP11 mastery
+    hp = st.hp; wins++; gold += Gen.goldFor(node, Gen.starsFor(st.damageTaken || 0));
+    if (node.guardFor) { souls += Gen.CACHE_SOULS; gold += Gen.GUARD_GOLD + 3 * ri(node); } Progress.addXp(save, save.squad, node.type === 'boss' ? 2 : 1); // WP11 mastery
      maxLv = Math.max(maxLv, node.level); souls += Gen.soulsFor(node, Gen.starsFor(st.damageTaken || 0)) * Progress.soulRate(save);
     // Real WP8 drop logic (levels, substats, pity, elite guarantee, boss Legendaries); new items auto-equip into a free slot.
     const stars = Gen.starsFor(st.damageTaken || 0);

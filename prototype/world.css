@@ -458,3 +458,14 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 .b-relics[hidden] { display: none; }
 .relic-list { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 6px; }
 .relic-list li { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+
+/* WP13: Gold, shop, events */
+.hud-chip.gold { color: #9a6b12; }
+.rewards button { position: relative; }
+.rewards button:disabled { opacity: .55; }
+.rewards .price { margin-left: auto; flex: none; font-weight: 700; color: #9a6b12; white-space: nowrap; }
+.rewards.event button { min-height: 48px; }
+.rewards.shop .ic { flex: none; }
+.event-text { font-style: italic; line-height: 1.45; }
+.event-fx { margin: 6px 0; color: var(--indigo); }
+.event-notes { margin: 4px 0 8px; padding-left: 18px; font-size: 13px; }
