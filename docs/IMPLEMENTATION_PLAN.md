@@ -62,7 +62,7 @@ Each package targets a mostly distinct file set so they can run one after anothe
 | 4 | Battle templates and solver validation (DONE) | M9 | gen.js, tools/solve.js, tools/validate-gen.js | L |
 | 5 | New enemy mechanics | M10 | engine.js, world-data.js, battle.js | L |
 | 6 | Handcrafted bosses and elites | M11 | boss-defs.js, engine.js, gen.js | L |
-| 7 | Currencies and bounties | M20, M21 | progress.js, bounties.js, app.js | M |
+| 7 | Currencies and bounties (DONE) | M20, M21 | progress.js, bounties.js, app.js | M |
 | 8 | Equipment slots, substats, legendaries | M23, M26 | items.js, progress.js, app.js (Gear tab) | L |
 | 9 | Forge and sets | M24, M25 | items.js, engine.js, app.js | M |
 | 10 | Unit rarity and squad rules | M17, M16 | progress.js, engine.js, art.js, app.js (Squad tab) | L |
@@ -102,6 +102,8 @@ Each package targets a mostly distinct file set so they can run one after anothe
 *Done (WP6):* 20 bosses and 20 elites are handcrafted in `js/boss-defs.js` (fixed layouts, never mirrored) and built by `Gen.fromDef`; eleven boss gimmicks live in the engine (`Engine.ENEMY_GIMMICKS`: guard, ward, veil, gaze, sweep, stride, tide, regrow, regen, rage, harden; new events `move`, `tide`, `regrow`, `rage`, `harden`, `hit.warded`) next to the WP5 kinds, shown as a badge, an intro line in the battle message/log and a note on the node sheet; `validate-gen.js bosses` solves every boss/elite with a tier reference squad (+ run ATK upgrades); WP5 tier-5 edge cases (`brood`, `bastion`) retuned and the survive-tier check retries with a stronger search, so `validate-gen.js 40` passes cleanly; see GAME_DESIGN section 24 for the pacing numbers.
 
 **WP7 Currencies and bounties.** Add Crystals and Dust to the save with HUD chips and a small currency bar in Camp; award Crystals for first boss kills. Add a `bounties.js` module that rolls 1-3 optional goals per run (win N battles without Shields, kill a boss with overkill), tracks them through battle events and pays Crystals on completion in the end-of-run modal.
+
+*Done (WP7):* save gains `crystals`, `dust`, `bountiesDone` (defaults on load; same save key); Camp HUD shows Souls / 💎 / ⚒ chips plus a currency bar (Runs / Best moved into it); first boss kill per sub-area pays 💎 3 + region index at once; `js/bounties.js` rolls 1-3 of 7 bounty kinds into `run.bounties`, `battle.js` passes a report `{shields, overkills, bossOverkill, explosions, turns}` as the third `onEnd` argument, `app.js` tracks them, lists them in the run sheet and pays at run end (results modal). Souls untouched, so pacing is unchanged. **Helper API for later packages** (`Progress`): `CURRENCIES` (id to name/icon), `balance(save, cur)`, `canSpend(save, cur, n)`, `earn(save, cur, n)`, `spend(save, cur, n)` (true/false, atomic), `spendAll(save, {dust: 5, souls: 20})` (all or nothing), `bossCrystals(regionIndex)`; `cur` is `'souls' | 'crystals' | 'dust'`. WP8/9 earn Dust via `earn(save, 'dust', n)` and spend via `spend`; WP11 spends `'crystals'`. `Bounties`: `roll(R)`, `track(list, report)`, `collect(list)`.
 
 **WP8 Equipment model.** Rework `items.js`: named slots (Weapon, Armor, Banner, Ring x2), item level from node danger, Rare/Epic substats, Legendary with a unique rule-changing effect (implemented as engine flags, for example overkill carries sideways). Migrate saves (bump the save key or add a migration). Add boss signature Legendaries, bad-luck protection counters and boss tokens in the save, guaranteed elite drops, and update the Gear tab.
 

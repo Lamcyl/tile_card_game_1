@@ -6,7 +6,7 @@
   // report = { won, stars, node: 'battle'|'elite'|'boss', shields (a Shield card was placed), overkills, bossOverkill,
   //            explosions (barrels blown up), turns }.  `n` = goal of the rolled bounty.
   const KINDS = {
-    noshield: { icon: '🛡', goals: [2, 3], pay: [3, 4], text: (n) => 'Win ' + n + ' battles without placing a Shield',
+    noshield: { icon: '🛡', goals: [2, 3], pay: [3, 4], text: (n) => 'Win ' + n + (n === 1 ? ' battle' : ' battles') + ' without placing a Shield',
       test: (r) => r.won && !r.shields },
     stars:    { icon: '★', goals: [1, 2], pay: [3, 5], text: (n) => 'Earn ★★★ in ' + n + (n === 1 ? ' battle' : ' battles'),
       test: (r) => r.won && r.stars === 3 },

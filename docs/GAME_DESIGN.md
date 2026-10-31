@@ -338,7 +338,7 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
   - "The first Shield each battle blocks double."
 - **Gold** is earned in battles and spent at shops. It resets when the run ends.
 - **Stage rating:** ★★★ for no damage, ★★ for 3 or less, ★ for a clear. A ★★★ clear gives an extra loot roll, rewarding a well-solved puzzle. Souls scale with the rating (prototype: ×1 / ×1.25 / ×1.5). *(Implemented.)*
-- **Bounties:** each run offers 1–3 optional goals ("Win 3 battles without Shields", "Kill a boss with overkill") that pay Crystals.
+- **Bounties:** each run offers 1–3 optional goals ("Win 3 battles without Shields", "Kill a boss with overkill") that pay Crystals. *(Implemented, WP7: `js/bounties.js`; seven kinds (no Shield, ★★★, overkill count, boss overkill, one-turn win, barrels, elite), 2-5 💎 each, rolled at run start, shown in the run sheet, paid when the run ends even after a defeat.)*
 
 ---
 
@@ -485,8 +485,8 @@ Permanent buffs from achievements are small and themed. Most rewards are currenc
 |---|---|---|---|
 | 🪙 Gold | Battles during a run | Shops during the run | Lost when the run ends |
 | ✦ Souls | End of run (reach, danger, stars) | Camp upgrades | Kept |
-| 💎 Crystals | Bosses, achievements, bounties | Gacha | Kept |
-| ⚒ Dust | Salvaging items and duplicate units | Forge | Kept |
+| 💎 Crystals | First boss kill of each sub-area (3, +1 per region; paid at once), bounties (paid at run end), achievements (later) | Gacha | Kept |
+| ⚒ Dust | Salvaging items and duplicate units (no source yet; Camp's prototype cheat adds some) | Forge | Kept |
 
 Four currencies is the maximum; more starts to confuse players.
 
