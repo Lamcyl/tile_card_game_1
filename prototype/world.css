@@ -487,3 +487,21 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 .hero-chip.locked { opacity: .6; }
 .hero-chip.locked .hero-seal { filter: grayscale(1); }
 .hero-text { margin: 6px 2px 0; font-size: 12.5px; line-height: 1.35; color: #5a4a3a; }
+
+/* ---- WP16: the painted Camp (inline SVG in the Camp sheet) ---- */
+.camp-scene { display: block; width: 100%; height: auto; max-height: 100px; margin: 2px 0 8px; border-radius: var(--brush); background: linear-gradient(#dfe8dc, #eef0d8 70%, #cfd6a4); border: 1px solid rgba(43,42,53,.28); }
+.camp-scene .cs-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: cs-flick 1.1s ease-in-out infinite alternate; }
+.camp-scene .cs-lantern { animation: cs-sway 3s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 50% 0; }
+.camp-scene .cs-smoke { animation: cs-smoke 3.2s ease-out infinite; }
+.camp-scene .cs-glow { animation: cs-glow 2.4s ease-in-out infinite alternate; }
+.camp-scene .cs-flag { transform-box: fill-box; transform-origin: 0 50%; animation: cs-sway 2.2s ease-in-out infinite alternate; }
+@keyframes cs-flick { from { transform: scale(1, .88); } to { transform: scale(.92, 1.08); } }
+@keyframes cs-sway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+@keyframes cs-smoke { from { transform: translateY(0); opacity: .6; } to { transform: translateY(-14px) scale(1.6); opacity: 0; } }
+@keyframes cs-glow { from { opacity: .45; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .camp-scene * { animation: none !important; } }
+.track-h { margin: 10px 0 2px; font: 800 12px/1 var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: var(--indigo); display: flex; align-items: center; gap: 8px; }
+.track-h::after { content: ''; flex: 1; border-top: 1.5px dashed rgba(43,42,53,.25); }
+.item.track.built { border-left: 4px solid var(--moss); }
+.tabs { gap: 4px; }
+.tabs button { padding: 8px 2px; font-size: 12px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: clip; }

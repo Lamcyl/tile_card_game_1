@@ -215,6 +215,29 @@
     }).join('') + '</div><p class="hero-text"><b>' + esc(cur.name) + '</b> · Passive: ' + esc(cur.passive) + '. Ability (once per battle): <b>' + ab.icon + ' ' + esc(ab.name) + '</b>, ' + esc(ab.text.charAt(0).toLowerCase() + ab.text.slice(1)) + '</p></div>';
   }
 
+  // WP16: the painted Camp. Small inline SVG in the watercolour palette; structures appear as Camp tracks are upgraded.
+  function campScene(sv) {
+    const L = (id) => P.level(sv, id), g = [];
+    const tent = (x, w, col, key) => '<g class="cs-' + key + '"><path d="M' + (x - w) + ' 80 L' + x + ' ' + (80 - w * 0.95) + ' L' + (x + w) + ' 80 Z" fill="' + col + '" stroke="#2b2a35" stroke-width="1.4" stroke-linejoin="round"/><path d="M' + x + ' ' + (80 - w * 0.95) + ' L' + (x - w * 0.22) + ' 80 L' + (x + w * 0.22) + ' 80 Z" fill="#3a2d22" opacity=".75"/><path d="M' + x + ' ' + (80 - w * 0.95) + ' v-6" stroke="#2b2a35" stroke-width="1.4"/></g>';
+    g.push('<ellipse cx="180" cy="86" rx="190" ry="14" fill="#a6b27c" opacity=".55"/><ellipse cx="90" cy="84" rx="95" ry="7" fill="#c7b98a" opacity=".5"/><path d="M0 70 q40 -22 90 -6 t100 -4 t100 -2 t70 8 V100 H0Z" fill="#9fb48a" opacity=".42"/>');
+    if (L('scouting')) g.push('<g class="cs-tower"><path d="M14 80 L18 44 M34 80 L30 44" stroke="#5b4630" stroke-width="2.4"/><path d="M17 62 L31 62 M16 52 L32 52 M17 62 L31 52 M31 62 L17 52" stroke="#5b4630" stroke-width="1.2"/><rect x="12" y="38" width="26" height="8" rx="1.5" fill="#8d6a46" stroke="#2b2a35" stroke-width="1.2"/><path d="M9 38 L25 28 L41 38 Z" fill="#c8352b" stroke="#2b2a35" stroke-width="1.2" stroke-linejoin="round"/></g>');
+    if (L('revive')) g.push('<g class="cs-torii"><path d="M52 80 V50 M72 80 V50" stroke="#c8352b" stroke-width="3.4"/><path d="M45 50 Q62 44 79 50" stroke="#c8352b" stroke-width="4" fill="none"/><path d="M50 58 H74" stroke="#c8352b" stroke-width="2.6"/><circle class="cs-glow" cx="62" cy="68" r="4" fill="#f2c94c"/></g>');
+    g.push(tent(104, 30, '#e9dcb8', 'tent'));
+    if (L('vitality') >= 2) g.push(tent(286, 24, '#d9cba0', 'tent2'));
+    if (L('vitality') >= 5) g.push(tent(318, 18, '#e4b9a8', 'tent3'));
+    if (L('ward')) g.push('<g class="cs-ward"><path d="M72 46 Q104 56 136 46" stroke="#8a6a3a" stroke-width="1.6" fill="none"/>' + [82, 98, 114, 128].slice(0, 2 + L('ward')).map((x) => '<path d="M' + x + ' ' + (50 + (x - 104) * (x - 104) / 700) + ' l-2 7 l3 5" stroke="#f7f0e0" stroke-width="3" fill="none" stroke-linejoin="round"/>').join('') + '</g>');
+    g.push('<g class="cs-fire"><path d="M139 82 L158 82 M142 84 L155 79 M155 84 L142 79" stroke="#4a3626" stroke-width="2.6" stroke-linecap="round"/><path class="cs-flame" d="M148 79 C141 72 147 68 146 61 C151 66 156 70 154 76 C153 78 151 79 148 79Z" fill="#e8772e" stroke="#c8352b" stroke-width="1"/><path class="cs-flame" d="M148 78 C145 74 148 72 148 69 C151 72 152 75 150 78Z" fill="#f2c94c"/></g>');
+    if (L('fortune')) { const n = Math.min(5, 2 + L('fortune')); let ls = '<path d="M60 40 Q150 54 240 38" stroke="#6b5f52" stroke-width="1" fill="none"/>'; for (let i = 0; i < n; i++) { const x = 70 + i * (160 / Math.max(1, n - 1)), y = 40 + 10 * Math.sin(Math.PI * (x - 60) / 180) + 4; ls += '<g class="cs-lantern" style="animation-delay:' + (i * 0.4) + 's"><rect x="' + (x - 4) + '" y="' + y + '" width="8" height="11" rx="3" fill="#e8772e" stroke="#7a2a18" stroke-width="1"/><rect x="' + (x - 2.2) + '" y="' + (y + 2) + '" width="4.4" height="7" rx="2" fill="#f7d77a"/></g>'; } g.push('<g class="cs-lanterns">' + ls + '</g>'); }
+    if (L('choice')) g.push('<g class="cs-sign"><path d="M178 82 V58" stroke="#5b4630" stroke-width="2.4"/><path d="M178 60 H194 L199 64 L194 68 H178Z" fill="#d8b77a" stroke="#2b2a35" stroke-width="1"/><path d="M178 70 H164 L159 74 L164 78 H178Z" fill="#d8b77a" stroke="#2b2a35" stroke-width="1"/></g>');
+    if (L('drill') || L('bulwark')) g.push('<g class="cs-forge"><rect x="204" y="62" width="30" height="18" fill="#8a6a4a" stroke="#2b2a35" stroke-width="1.3"/><path d="M200 63 L219 50 L238 63Z" fill="#6b4a38" stroke="#2b2a35" stroke-width="1.3" stroke-linejoin="round"/><rect x="226" y="40" width="6" height="14" fill="#7a7a7e" stroke="#2b2a35" stroke-width="1"/><circle class="cs-smoke" cx="229" cy="36" r="4" fill="#b8b3a8" opacity=".6"/><rect x="209" y="70" width="9" height="10" fill="#e8772e" opacity=".85"/>' + (L('bulwark') ? '<path d="M240 80 v-10 a6 7 0 0 1 12 0 v10Z" fill="#8f98a8" stroke="#2b2a35" stroke-width="1.1"/>' : '') + '</g>');
+    if (L('command') >= 3) g.push('<g class="cs-hall"><rect x="250" y="60" width="26" height="20" fill="#e6d3a6" stroke="#2b2a35" stroke-width="1.3"/><path d="M244 62 Q263 44 282 62Z" fill="#3e5483" stroke="#2b2a35" stroke-width="1.3" stroke-linejoin="round"/><path d="M263 40 v-8" stroke="#2b2a35"/><path d="M263 32 h10 l-3 4 3 4 h-10Z" fill="#c8352b" stroke="#2b2a35" stroke-width=".8"/></g>');
+    else if (L('command')) g.push('<g class="cs-pole"><path d="M258 80 V40" stroke="#5b4630" stroke-width="2.4"/><path class="cs-flag" d="M259 41 h18 l-5 6 5 6 h-18Z" fill="#c8352b" stroke="#2b2a35" stroke-width="1"/></g>');
+    if (L('provisions')) g.push('<g class="cs-crates"><rect x="330" y="68" width="16" height="12" fill="#b88a55" stroke="#2b2a35" stroke-width="1.2"/><path d="M330 74 H346 M338 68 V80" stroke="#6b4a2a" stroke-width="1"/>' + (L('provisions') >= 2 ? '<rect x="336" y="56" width="12" height="12" fill="#c79a62" stroke="#2b2a35" stroke-width="1.2"/>' : '') + (L('provisions') >= 3 ? '<ellipse cx="322" cy="76" rx="6" ry="5" fill="#d9c58a" stroke="#2b2a35" stroke-width="1.1"/>' : '') + '</g>');
+    if (L('purse')) g.push('<g class="cs-purse"><path d="M300 80 q-6 -3 -4 -11 q4 -4 8 0 q2 8 -4 11Z" fill="#c9a23a" stroke="#2b2a35" stroke-width="1.1"/><circle cx="300" cy="73" r="2" fill="#f7e9a8"/></g>');
+    if (L('board')) g.push('<g class="cs-board"><path d="M196 82 V76 M222 82 V76" stroke="#5b4630" stroke-width="2"/><rect x="192" y="68" width="34" height="8" rx="1" fill="#e6c98a" stroke="#2b2a35" stroke-width="1.1"/><path d="M200 68 V76 M209 68 V76 M217 68 V76 M192 72 H226" stroke="#6b4a2a" stroke-width=".7"/></g>');
+    return '<svg class="camp-scene" viewBox="0 0 360 96" role="img" aria-label="Your camp. It grows as you buy Camp upgrades.">' + g.join('') + '</svg>';
+  }
+
   function campSheet() {
     const tabs = ['upgrades', 'squad', 'recruit', 'summon', 'gear'];
     let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad (Command Points, one supporter minimum), then set out with 🎒 ' + P.startSupplies(save) + ' Supplies.</p></div>' +
@@ -223,17 +246,21 @@
       html += '<div class="start-at" aria-label="Start position"><small>🚩 Start at</small>' + ['camp'].concat(save.waypoints).map((id) =>
         '<button class="' + (save.startAt === id ? 'on' : '') + '" data-start="' + id + '">' + (id === 'camp' ? '⛺ Camp' : esc(World.SUB_BY[id].name)) + '</button>').join('') + '</div>';
     }
-    html += heroPicker();
+    html += campScene(save) + heroPicker();
     html += '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
       '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
       { upgrades: 'Camp', squad: 'Squad ' + P.squadCp(save) + '/' + P.commandCap(save), recruit: 'Recruit', summon: 'Summon', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
     html += '<div class="list">';
     if (campTab === 'upgrades') {
-      for (const u of P.UPGRADES) {
-        const lv = P.level(save, u.id), cost = P.upgradeCost(save, u.id);
-        html += '<div class="item"><span class="ic">' + u.icon + '</span><div class="grow"><b>' + u.name + ' <small>Lv ' + lv + '/' + u.costs.length + '</small></b><span class="muted">' + u.desc + '</span></div>' +
+      const GROUPS = [['Body', ['vitality', 'ward', 'revive', 'bulwark']], ['Arms', ['command', 'drill']], ['Fortune', ['fortune', 'purse', 'provisions', 'choice']], ['Exploring', ['scouting', 'board']]];
+      for (const [gname, ids] of GROUPS) {
+       html += '<h4 class="track-h">' + gname + '</h4>';
+       for (const id of ids) {
+        const u = P.UPGRADE_BY[id], lv = P.level(save, u.id), cost = P.upgradeCost(save, u.id);
+        html += '<div class="item track' + (lv ? ' built' : '') + '"><span class="ic">' + u.icon + '</span><div class="grow"><b>' + u.name + ' <small>Lv ' + lv + '/' + u.costs.length + '</small></b><span class="muted">' + u.desc + '</span></div>' +
           (cost === null ? '<span class="muted">Max</span>' : '<button data-buy="' + u.id + '"' + (pointAt === u.id ? ' class="point"' : '') + (save.souls < cost ? ' disabled' : '') + '>✦ ' + cost + '</button>') + '</div>';
+       }
       }
       html += '<p class="muted small">Max HP ' + P.maxHp(save) + ' · Squad slots ' + P.slots(save) + ' · Start Supplies ' + P.startSupplies(save) + '</p>';
     } else if (campTab === 'squad') {

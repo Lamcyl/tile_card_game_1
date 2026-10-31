@@ -437,6 +437,8 @@ Items can belong to sets. Example: **Wolfpack**. With 2 pieces, Banners also boo
 | Scouting | Larger fog reveal radius · see node contents before travelling |
 | Board | Unlock a 6th column or a 4th player row (late game) |
 
+*(Implemented, WP16.)* Tracks: Vitality, Command, Drill, Bulwark, Fortune, Provisions, Scouting plus **Ward** (barrier +1 per level, 2 levels, absorbs the first damage taken each battle after Shields), **Second Wind** (one revive per run at half HP, stacks with the Phoenix Archer's), **Choice** (Lv1: 4 reward choices, +1 more with the Quartermaster; Lv2: one reward re-roll per run), **Purse** (+5 starting Gold per level, 3 levels) and **Board** (a **4th player row** behind the others; the 6th-column variant was not built). The Camp sheet shows a painted camp that gains a tower, torii, forge, banner hall, tents, lanterns, crates and more as tracks are bought.
+
 Upgrade costs rise steeply and tracks have caps, so Camp upgrades support progress without replacing skill. The Camp screen grows visually as it is upgraded (more tents, a forge, a banner hall).
 
 ### 14.2 Heroes
