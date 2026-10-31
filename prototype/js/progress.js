@@ -89,6 +89,13 @@
     { id: 'fortune',  name: 'Fortune',   icon: '✦',  desc: '+20% Souls from battles',         costs: [40, 110, 230, 450] },
     { id: 'provisions', name: 'Provisions', icon: '🎒', desc: '+2 starting Supplies (battles per run)', costs: [20, 60, 140, 250] },
     { id: 'scouting', name: 'Scouting', icon: '🔭', desc: 'Sharper eyes: spots and secrets reveal from further away; Lv 3 shows what lurks in every spot', costs: [25, 70, 150] }, // WP14
+    // WP16 tracks. Ward: barrier per battle; Second Wind: revive (stacks with the Phoenix Archer); Choice: Lv1 a 4th reward choice, Lv2 one re-roll per run
+    // (both stack with the Quartermaster); Purse: starting Gold; Board: Engine rule `deepRow`, a 4th player row.
+    { id: 'ward',     name: 'Ward',        icon: '🔰', desc: 'A paper ward soaks the first damage of every battle: barrier +1 per level', costs: [60, 200] },
+    { id: 'revive',   name: 'Second Wind', icon: '🌅', desc: 'Once per run a lethal blow leaves you standing at half HP', costs: [300] },
+    { id: 'choice',   name: 'Choice',      icon: '🧭', desc: 'Lv 1: one more reward choice after every fight. Lv 2: one reward re-roll per run', costs: [90, 220] },
+    { id: 'purse',    name: 'Purse',       icon: '👛', desc: '+5 starting Gold per level (for Shops and events)', costs: [20, 50, 100] },
+    { id: 'board',    name: 'Board',       icon: '🗺️', desc: 'Late game: a 4th player row on the battle board (more room for Shields and supporters)', costs: [600] },
   ];
   const UPGRADE_BY = Object.fromEntries(UPGRADES.map((u) => [u.id, u]));
   const BASE_HP = 20;
@@ -306,7 +313,12 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
     const add = (r) => { for (const k of Object.keys(r)) out[k] = k === 'blast' ? Math.max(out[k] || 0, r[k]) : (out[k] || 0) + r[k]; };
     add(traitFx(s).rules);
     if (heroOf(s).rules) add(heroOf(s).rules); // WP15 hero passive
-    for (const id of s.squad) if (ROSTER_BY[id].rule && !(ROSTER_BY[id].rule.revive && run && run.reviveUsed)) add(ROSTER_BY[id].rule);
+    for (const id of s.squad) if (ROSTER_BY[id].rule) add(ROSTER_BY[id].rule);
+    // WP16 Camp tracks: barrier per battle, a revive (stacks with Phoenix Archer), and the Board track's extra row.
+    if (level(s, 'ward')) out.barrier = (out.barrier || 0) + level(s, 'ward');
+    if (level(s, 'revive')) out.revive = (out.revive || 0) + 1;
+    if (level(s, 'board')) out.deepRow = 1;
+    if (out.revive) { out.revive -= Math.min(out.revive, Number(run && run.reviveUsed) || 0); if (!out.revive) delete out.revive; } // revives already spent this run
     // WP12: relics picked on this run (run.relics, ids from relics.js).
     if (run && run.relics && run.relics.length) { const R = typeof window !== 'undefined' ? window.Relics : require('./relics.js'); add(R.rules(run.relics)); }
     return out;
@@ -316,6 +328,10 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
   const slots = commandCap; // legacy name
   const soulRate = (s) => 1 + 0.2 * level(s, 'fortune') + (gear(s).souls + traitFx(s).souls + growthFx(s).souls) / 100;
 const scoutLevel = (s) => level(s, 'scouting');
+const startGold = (s) => 5 * level(s, 'purse');
+// Reward choices after a fight: 3 base, +1 Choice Lv1, +1 Quartermaster (so 5 with both); re-rolls per run: 1 at Choice Lv2.
+const rewardChoices = (s) => 3 + (level(s, 'choice') >= 1 ? 1 : 0) + (heroOf(s).choices || 0);
+const rewardRerolls = (s) => (level(s, 'choice') >= 2 ? 1 : 0);
 const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s).supplies;
   function upgradeCost(s, id) {
     const u = UPGRADE_BY[id]; const lv = level(s, id);
@@ -374,7 +390,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
     CURRENCIES, balance, canSpend, earn, spend, spendAll, bossCrystals,
     HEROES, HERO_BY, heroUnlocked, heroOf, heroStage,
     commandCap, squadCp, squadProblem, canAdd, fitSquad, activeTraits, traitCounts, traitFx, rulesFor, unitCp: UNIT_CP,
-    freshSave, load, save, reset, level, scoutLevel, maxHp, slots, soulRate, startSupplies, upgradeCost, cheapestUpgrade, recruitAvailable, buildArmy,
+    freshSave, load, save, reset, level, scoutLevel, startGold, rewardChoices, rewardRerolls, maxHp, slots, soulRate, startSupplies, upgradeCost, cheapestUpgrade, recruitAvailable, buildArmy,
   };
   root.Progress = Progress;
   if (typeof module !== 'undefined' && module.exports) module.exports = Progress;

@@ -19,9 +19,10 @@
   const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null, report: null, hero: null, aiming: false };
 
   // Board cells are built once; their contents are redrawn on every render.
-  (function buildBoard() {
+  function buildBoard(rows) {
     const board = $('#b-board');
-    for (let r = 0; r < E.ROWS; r++) {
+    board.innerHTML = '';
+    for (let r = 0; r < rows; r++) {
       for (let c = 0; c < E.COLS; c++) {
         const cell = document.createElement('div');
         cell.className = 'cell row-' + r + (r < 2 ? ' enemy-zone' : ' player-zone');
@@ -29,7 +30,10 @@
         board.appendChild(cell);
       }
     }
-  })();
+    game.rows = rows;
+    root.classList.toggle('deep-board', rows > E.ROWS);
+  }
+  buildBoard(E.ROWS);
 
   const cellEl = (k) => root.querySelector('.cell[data-key="' + k + '"]');
   const cardById = (id) => game.army.find((c) => c.id === id);
@@ -39,6 +43,7 @@
   function start(opts) {
     game.army = opts.army;
     game.state = E.createState(opts.stage);
+    if (game.rows !== E.rowsFor(game.state.rules)) buildBoard(E.rowsFor(game.state.rules)); // Camp Board track: a 4th player row
     game.view = null;
     game.selected = null;
     game.busy = false;
@@ -92,7 +97,7 @@
     else if (ev.t === 'overkill') log('&nbsp;&nbsp;Overkill: ' + ev.amount + ' carries to the ' + nameOf(view, ev.id));
     else if (ev.t === 'explode') log('&nbsp;&nbsp;Barrel explodes' + (ev.echo ? ' again (Mjölnir Shard)' : '') + ' for ' + ev.amount + ' to its neighbours');
     else if (ev.t === 'feast') log("Fenrir's Fang: attackers now have +" + ev.n + ' ATK', 'good');
-    else if (ev.t === 'strike') log(nameOf(view, ev.id) + ' attacks for ⚔' + ev.atk + (ev.blocked ? ', shield blocks ' + ev.blocked : '') + (ev.dmg ? ', you take ' + ev.dmg : ''), ev.dmg ? 'bad' : '');
+    else if (ev.t === 'strike') log(nameOf(view, ev.id) + ' attacks for ⚔' + ev.atk + (ev.blocked ? ', shield blocks ' + ev.blocked : '') + (ev.warded ? ', ward absorbs ' + ev.warded : '') + (ev.dmg ? ', you take ' + ev.dmg : ''), ev.dmg ? 'bad' : '');
     else if (ev.t === 'bulwark') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' blocks the overkill (' + ev.amount + ' wasted)', 'bad');
     else if (ev.t === 'spawn') log(ev.reason === 'split' ? '&nbsp;&nbsp;' + nameOf(view, ev.from) + ' splits: a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' appears' : nameOf(view, ev.from) + ' summons a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' (♥' + ev.enemy.hp + ' ⚔' + ev.enemy.atk + ')', 'bad');
     else if (ev.t === 'heal') log(nameOf(view, ev.id) + ' heals ' + ev.targets.map((h) => nameOf(view, h.id) + ' +' + h.amount).join(', '), 'bad');
@@ -133,7 +138,7 @@
     const stats = E.computeStats(game.placement, game.army, s.enemies, s.rules);
     $('#b-turn').textContent = s.turn;
     $('#b-hpfill').style.width = (100 * s.hp / s.maxHp) + '%';
-    $('#b-hptext').textContent = s.hp + ' / ' + s.maxHp;
+    $('#b-hptext').textContent = s.hp + ' / ' + s.maxHp + (s.barrier ? ' · 🔰' + s.barrier : '');
     renderHero(s);
 
     const focusKey = game.hover && game.placement[game.hover] ? game.hover : (game.selected && tileOf(game.selected)) || null;
@@ -145,7 +150,7 @@
         E.targetsFor(st, s.enemies).forEach((e) => willHit.add(E.key(e.row, e.col)));
       } else if (st.type.role === 'support') st.boosts.forEach((k) => boostTargets.add(k));
     }
-    for (let r = 0; r < E.ROWS; r++) {
+    for (let r = 0; r < game.rows; r++) {
       for (let c = 0; c < E.COLS; c++) {
         const k = E.key(r, c);
         const cell = cellEl(k);
@@ -198,12 +203,13 @@
     const inc = E.incomingByColumn(s.enemies);
     for (let c = 0; c < E.COLS; c++) {
       const incoming = inc[c];
-      const block = E.PLAYER_ROWS.map((r) => stats[E.key(r, c)]).filter((st) => st && st.type.role === 'defender').reduce((n, st) => n + st.block, 0);
+      const block = E.playerRowsFor(s.rules).map((r) => stats[E.key(r, c)]).filter((st) => st && st.type.role === 'defender').reduce((n, st) => n + st.block, 0);
       const dmg = Math.max(0, incoming - block);
       total += dmg;
       cols.push(incoming === 0 ? '<div class="muted">–</div>' : '<div class="' + (dmg ? 'dmg' : 'safe') + '">' + (dmg ? '−' + dmg : '✓') + '</div>');
     }
     $('#b-threat').innerHTML = cols.join('');
+    total = Math.max(0, total - (s.barrier || 0));
     $('#b-threat-total').textContent = total;
     $('#b-threat-total').className = total ? 'dmg' : 'safe';
   }
@@ -481,6 +487,7 @@
         floatText(cellEl(ev.shields[0]), 'Blocked ' + ev.blocked, 'block');
         if (ev.dmg) await projectile(cellEl(ev.shields[0]), hero, 'enemy-shot');
       }
+      if (ev.warded) floatText(hero, 'Ward −' + ev.warded, 'block');
       if (ev.dmg) { flash(hero, 'hurt', 350); floatText(hero, '−' + ev.dmg + ' ♥', 'dmg'); }
       view.hp = ev.hp; render(); await sleep(340);
     } else if (ev.t === 'bulwark') {

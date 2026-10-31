@@ -423,7 +423,7 @@
     const sup = P.startSupplies(save);
     const startId = save.startAt !== 'camp' && save.waypoints.includes(save.startAt) ? save.startAt + '-wp' : 'camp'; // WP14: begin at a lit Wayshrine
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: startId, cleared: ['camp'], path: [startId], keys: 0,
-      bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
+      bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: P.startGold(save), rerolls: P.rewardRerolls(save), reviveUsed: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
     selected = null; confirmReturn = false; persist();
     WorldMap.placeToken(startId);
     if (startId === 'camp') { const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]); } else WorldMap.focus(World.byId[startId].x, World.byId[startId].y);
@@ -502,7 +502,7 @@
     r.placement = Battle.placement();
     Battle.hide(); document.body.classList.remove('in-battle'); WorldMap.setActive(true);
     r.hp = state.hp;
-    if (state.reviveUsed) r.reviveUsed = true; // Phoenix Archer: one rebirth per run
+    if (state.reviveUsed) r.reviveUsed = (Number(r.reviveUsed) || 0) + state.reviveUsed; // revives spent (Phoenix Archer, Second Wind): once per run each
     if (state.status !== 'cleared') { persist(); endRun(true); return; }
     stars = stars || 1;
     const gained = Math.round(Gen.soulsFor(n, stars) * P.soulRate(save));
@@ -666,18 +666,20 @@
   }
 
   // Choose 1 of 3: always one heal, plus two upgrades for this run.
-  function offerReward(title, text, node, extra) {
-    const r = run(), R = World.rng(r.seed + ':reward:' + r.path.length);
+  function offerReward(title, text, node, extra, rerolled) {
+    const r = run(), R = World.rng(r.seed + ':reward:' + r.path.length + (rerolled ? ':rr' + rerolled : ''));
     const pool = upgradePool(node, R);
     const picks = [];
     // WP12: a relic takes the place of one upgrade when the run offers one (always after elites and bosses).
     const relic = Relics.offer(r.relics, R, node ? node.type : 'battle');
-    while (picks.length < (relic ? 1 : 2) + (P.heroOf(save).choices || 0) && pool.length) picks.push(pool.splice(Math.floor(R() * pool.length), 1)[0]);
+    while (picks.length < (relic ? 1 : 2) + P.rewardChoices(save) - 3 && pool.length) picks.push(pool.splice(Math.floor(R() * pool.length), 1)[0]);
     if (relic) picks.push({ kind: 'relic', id: relic.id, label: relic.name + ': ' + relic.text, icon: relicIcon(relic) });
     picks.push({ kind: 'heal', label: 'Heal 5 HP', icon: '❤️' });
     modal('<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p>' + (extra || '') + '<p class="muted small">Choose one reward for this run:</p><div class="rewards">' +
-      picks.map((p, i) => '<button data-reward="' + i + '"><span class="ic">' + (p.card ? unitView(p.card).img : p.icon) + '</span><span>' + esc(p.label) + '</span></button>').join('') + '</div>');
+      picks.map((p, i) => '<button data-reward="' + i + '"><span class="ic">' + (p.card ? unitView(p.card).img : p.icon) + '</span><span>' + esc(p.label) + '</span></button>').join('') + '</div>' +
+      ((r.rerolls || 0) > 0 ? '<div class="row"><button class="grow" data-reroll-reward="1">🎲 Re-roll the choices (' + r.rerolls + ' left this run)</button></div>' : ''));
     $('#modal').onclick = (ev) => {
+      if (ev.target.closest('[data-reroll-reward]')) { r.rerolls -= 1; persist(); offerReward(title, text, node, extra, (rerolled || 0) + 1); return; }
       const b = ev.target.closest('[data-reward]'); if (!b) return;
       const p = picks[Number(b.dataset.reward)];
       if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + 5);

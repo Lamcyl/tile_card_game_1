@@ -10,6 +10,9 @@
   // Rows 2-4 belong to the player (2 = front, 4 = back).
   const ENEMY_ROWS = [1, 0];
   const PLAYER_ROWS = [2, 3, 4];
+  // Camp track Board (WP16): rule flag `deepRow` adds a 4th player row (row 5, behind row 4). Everything that walks the board asks these.
+  const rowsFor = (rules) => (rules && rules.deepRow ? ROWS + 1 : ROWS);
+  const playerRowsFor = (rules) => (rules && rules.deepRow ? PLAYER_ROWS.concat(ROWS) : PLAYER_ROWS);
 
   const CARD_TYPES = {
     swordsman: { name: 'Swordsman', role: 'attacker', icon: '🗡️', atk: 3, pattern: 'straight', range: 1 },
@@ -91,6 +94,8 @@
       hero: stage.hero || null,       // WP15: hero id and its once-per-battle ability (HERO_ABILITIES key); abilityUsed flips when spent
       ability: stage.ability || null,
       abilityUsed: false,
+      barrier: Math.max(0, (stage.rules && stage.rules.barrier) || 0), // Camp Ward (WP16): soaks the first damage of this battle
+      reviveUsed: 0,                  // revives spent in this battle (Phoenix Archer, Camp Second Wind); rules.revive = revives still available
       status: 'playing', // 'playing' | 'cleared' | 'defeated'
       enemies: stage.enemies.map((e, i) => {
         const t = ENEMY_TYPES[e.type];
@@ -144,7 +149,7 @@
     }
     for (const s of Object.values(stats)) {
       if (s.type.role !== 'support') continue;
-      for (const tk of supportTargets(s.type.target, s.r, s.c, rules.diagAll || (rules.diag && s.card.type === 'banner'))) {
+      for (const tk of supportTargets(s.type.target, s.r, s.c, rules.diagAll || (rules.diag && s.card.type === 'banner'), rowsFor(rules))) {
         const t = stats[tk];
         if (!t || t.type.role !== 'attacker') continue;
         const amount = cardStat(s.card, 'amount');
@@ -171,12 +176,12 @@
 
   // Tiles a supporter affects. Only player tiles count.
   // `diag` (set bonus Wolfpack): a Banner also boosts its four diagonal neighbours.
-  function supportTargets(target, r, c, diag) {
+  function supportTargets(target, r, c, diag, rowCount) {
     const cells = target === 'up'
       ? [[r - 1, c]].concat(diag ? [[r - 1, c - 1], [r - 1, c + 1]] : [])
       : [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]].concat(diag ? [[r - 1, c - 1], [r - 1, c + 1], [r + 1, c - 1], [r + 1, c + 1]] : []);
     return cells
-      .filter(([tr, tc]) => tr >= 2 && tr < ROWS && tc >= 0 && tc < COLS)
+      .filter(([tr, tc]) => tr >= 2 && tr < (rowCount || ROWS) && tc >= 0 && tc < COLS)
       .map(([tr, tc]) => key(tr, tc));
   }
 
@@ -401,17 +406,19 @@
     const pools = [];
     const shieldsOf = [];
     for (let col = 0; col < COLS; col++) {
-      shieldsOf[col] = PLAYER_ROWS.map((r) => key(r, col)).filter((k) => stats[k] && stats[k].type.role === 'defender');
+      shieldsOf[col] = playerRowsFor(state.rules).map((r) => key(r, col)).filter((k) => stats[k] && stats[k].type.role === 'defender');
       pools[col] = shieldsOf[col].reduce((sum, k) => sum + stats[k].block, 0);
       if (state.rules.aegis && state.turn === 1) pools[col] *= 2; // relic "aegis": Shields block double on the first turn
     }
     const strike = (e, col, atk, splash) => {
       const blocked = Math.min(pools[col], atk);
       pools[col] -= blocked;
-      const dmg = Math.max(0, atk - blocked - (state.rules.soften || 0) - (state.rules.brace || 0));
+      let dmg = Math.max(0, atk - blocked - (state.rules.soften || 0) - (state.rules.brace || 0));
+      const warded = Math.min(state.barrier || 0, dmg);
+      if (warded) { state.barrier -= warded; dmg -= warded; }
       state.hp = Math.max(0, state.hp - dmg);
       state.damageTaken += dmg;
-      events.push({ t: 'strike', id: e.id, atk, blocked, dmg, shields: shieldsOf[col], hp: state.hp, col, splash });
+      events.push({ t: 'strike', id: e.id, atk, blocked, warded, dmg, shields: shieldsOf[col], hp: state.hp, col, splash });
     };
     for (let col = 0; col < COLS; col++) {
       for (const er of ENEMY_ROWS) {
@@ -428,9 +435,9 @@
     if (state.rules.brace) delete state.rules.brace; // Brace lasts for one strike
     // Legendary rule "stand": once per battle a lethal blow leaves 1 HP.
     if (state.hp <= 0 && state.rules.stand && !state.standUsed) { state.hp = 1; state.standUsed = true; events.push({ t: 'stand', hp: 1 }); }
-    // Phoenix Archer (rule "revive", once per run: the caller clears it afterwards via state.reviveUsed): rise again at half HP.
-    if (state.hp <= 0 && state.rules.revive && !state.reviveUsed) {
-      state.hp = Math.max(1, Math.ceil(state.maxHp / 2)); state.reviveUsed = true; events.push({ t: 'revive', hp: state.hp });
+    // Revive (Phoenix Archer, Camp Second Wind): rules.revive = revives available this battle; the caller adds state.reviveUsed to the run's tally.
+    if (state.hp <= 0 && (state.rules.revive || 0) > (state.reviveUsed || 0)) {
+      state.hp = Math.max(1, Math.ceil(state.maxHp / 2)); state.reviveUsed = (state.reviveUsed || 0) + 1; events.push({ t: 'revive', hp: state.hp });
     }
     if (state.hp <= 0) {
       state.status = 'defeated';
@@ -508,7 +515,7 @@
   }
 
   const Engine = {
-    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, HERO_ABILITIES, gimmickText, incomingByColumn,
+    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, rowsFor, playerRowsFor, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, HERO_ABILITIES, gimmickText, incomingByColumn,
     key, parseKey, clone, cardStat,
     createState, computeStats, targetsFor, reachableTiles, resolveTurn, useAbility, abilityProblem, isThreat,
   };
