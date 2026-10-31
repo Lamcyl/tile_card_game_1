@@ -4,6 +4,8 @@
 // Usage: node tools/sim-runs.js [runs]            profiles at fixed progress points
 //        node tools/sim-runs.js 1 campaign [maxRuns]   consecutive runs with greedy Camp shopping
 'use strict';
+// SEED=<n> makes every run reproducible (Math.random is replaced by a seeded generator).
+if (process.env.SEED) { let a = Number(process.env.SEED) >>> 0; Math.random = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const Engine = require('../prototype/js/engine.js');
 try { require('../prototype/js/world-layout.js'); } catch (e) { /* placeholder layout */ }
 const World = require('../prototype/js/world-data.js');
@@ -71,14 +73,15 @@ function playRun(save0) {
     hp = st.hp; wins++; Progress.addXp(save, save.squad, node.type === 'boss' ? 2 : 1); // WP11 mastery
      maxLv = Math.max(maxLv, node.level); souls += Gen.soulsFor(node, Gen.starsFor(st.damageTaken || 0)) * Progress.soulRate(save);
     // Real WP8 drop logic (levels, substats, pity, elite guarantee, boss Legendaries); new items auto-equip into a free slot.
-    const drop = Items.grantDrop(save, node, seed) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null);
-    if (drop && drop.item) {
-      if (drop.isNew) {
-        items++;
-        const b0 = Items.bonuses(save);
-        if (Items.equip(save, drop.id, true)) { const b1 = Items.bonuses(save); hp += b1.hp - b0.hp; supplies += b1.supplies - b0.supplies; }
-      }
-    }
+    const stars = Gen.starsFor(st.damageTaken || 0);
+    const takeDrop = (drop) => {
+      if (!drop || !drop.item || !drop.isNew) return;
+      items++;
+      const b0 = Items.bonuses(save);
+      if (Items.equip(save, drop.id, true)) { const b1 = Items.bonuses(save); hp += b1.hp - b0.hp; supplies += b1.supplies - b0.supplies; }
+    };
+    takeDrop(Items.grantDrop(save, node, seed) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null));
+    if (stars === 3) takeDrop(Items.grantDrop(save, node, seed + ':star', { bonus: true })); // 3-star clears earn a bonus roll (app.js battleOver)
     if (node.type === 'boss') {
       supplies += Progress.SUPPLIES_PER_BOSS; bosses++; souls += 25;
       if (!save.bossesBeaten.includes(node.sub)) { save.bossesBeaten.push(node.sub); for (const u of World.SUB_BY[node.sub].unlocks) if (!save.unlocked.includes(u)) save.unlocked.push(u); }
