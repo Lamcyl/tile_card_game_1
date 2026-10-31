@@ -15,9 +15,24 @@ const BOARDS = [
   ['swiss-minimal', 'Swiss minimal', 'Pure minimalism: off-white, hairline grid, one accent, nothing else.'],
 ];
 
+const LOCATIONS = [
+  ['loc-grassland', 'Grassland', 'Open meadow with stone pavers set in the grass.'],
+  ['loc-forest', 'Forest', 'Forest clearing under the canopy.'],
+  ['loc-swamp', 'Swamp', 'Murky marsh with planks and reeds.'],
+  ['loc-beach', 'Beach', 'Sandy shore meeting the sea.'],
+  ['loc-desert', 'Desert', 'Dunes and sun-baked sand slabs.'],
+  ['loc-canyon', 'Canyon', 'Red-rock badlands and mesa ledges.'],
+  ['loc-ice', 'Ice field', 'Frozen tundra with ice plates and snow.'],
+  ['loc-mountain', 'Mountain peak', 'Rocky summit above the clouds.'],
+  ['loc-volcano', 'Volcano', 'Cooled basalt slabs over glowing lava.'],
+  ['loc-crystal-cave', 'Crystal cave', 'Underground cavern lit by crystals.'],
+];
+// node build-boards.mjs locations → the round-2 location boards.
+const round = process.argv[2] === 'locations' ? 'locations' : '';
+const LIST = round ? LOCATIONS : BOARDS;
 const dir = new URL('./boards/', import.meta.url);
 let n = 0;
-const cards = BOARDS.map(([slug, name, desc]) => {
+const cards = LIST.map(([slug, name, desc]) => {
   n++;
   const file = new URL(slug + '.svg', dir);
   // Embedded as an <img> so each board's own styles and ids stay isolated.
@@ -30,7 +45,7 @@ const cards = BOARDS.map(([slug, name, desc]) => {
 const page = `<!DOCTYPE html>
 <html lang="en"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Board Designs</title>
+<title>Board ${round ? 'Locations' : 'Designs'}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,10 +75,11 @@ const page = `<!DOCTYPE html>
   .missing { height: 100%; display: grid; place-items: center; color: #999; }
 </style>
 <div class="wrap">
-  <header class="top"><h1>Board designs</h1><p>Ten directions for the 5×5 battle board (2 enemy rows on top, 3 player rows below), each shown on a phone screen with real units placed and one highlighted drop tile. Tell me which numbers to take further.</p></header>
+  <header class="top"><h1>Board designs${round ? ': locations' : ''}</h1><p>Ten ${round ? 'locations' : 'directions'} for the 5×5 battle board (2 enemy rows on top, 3 player rows below), each shown on a phone screen with real units placed and one highlighted drop tile. Tell me which numbers to take further.</p></header>
   <section class="grid">
 ${cards}
   </section>
 </div>`;
-writeFileSync(new URL('./boards-gallery.html', import.meta.url), page);
-console.log('boards-gallery.html', Math.round(page.length / 1024) + ' kB');
+const out = round ? 'boards-locations.html' : 'boards-gallery.html';
+writeFileSync(new URL('./' + out, import.meta.url), page);
+console.log(out, Math.round(page.length / 1024) + ' kB');
