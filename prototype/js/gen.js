@@ -7,7 +7,7 @@
   function shuffle(a, R) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   const vary = (v, R, spread) => Math.max(1, Math.round(v * (1 - spread + R() * spread * 2)));
 
-  const RAMP_HP = 0.12, RAMP_ATK = 0.6;
+  const RAMP_HP = 0.07, RAMP_ATK = 0.35;
   function generateBattle(node, runSeed) {
     const R = World.rng(runSeed + ':' + node.id);
     const L = node.level;
@@ -30,7 +30,7 @@
       // Boss in the front centre, minions around it. Usually a two-turn fight.
       const cell = [1, 2]; free.splice(free.findIndex((f) => f[0] === 1 && f[1] === 2), 1);
       add('boss', Math.round((10 + L * 4) * ramp), 3 + Math.floor(L * 0.6) + rampAtk, L >= 7 ? 1 : 0, cell);
-      const minions = Math.min(7, 1 + Math.floor(L / 2));
+      const minions = L <= 4 ? 2 : Math.min(5, 1 + Math.floor(L / 2)); // early bosses bring fewer minions (design 24.1)
       for (let i = 0; i < minions; i++) {
         const role = R() < 0.3 && L >= 4 ? 'armored' : 'basic';
         add(role, vary((2 + L * 0.95) * ramp, R, 0.3), vary(1.4 + L * 0.42, R, 0.3) + rampAtk, role === 'armored' ? 1 : 0, take(() => true));
@@ -73,7 +73,7 @@
 
   // Souls for winning a battle at a node (before the Fortune bonus).
   // Stage rating (design 11): 3 stars = no damage, 2 = at most 3 damage, 1 = any clear.
-  const STAR_SOULS = [1, 1, 1.15, 1.3];
+  const STAR_SOULS = [1, 1, 1.25, 1.5];
   const starsFor = (damageTaken) => (damageTaken <= 0 ? 3 : damageTaken <= 3 ? 2 : 1);
   function soulsFor(node, stars) {
     const base = Math.round((3 + node.level * 2) * (STAR_SOULS[stars || 1] || 1));

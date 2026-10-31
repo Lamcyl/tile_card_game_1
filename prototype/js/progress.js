@@ -13,25 +13,25 @@
     { id: 'archer2', type: 'archer',    cost: 35 },
     { id: 'banner1', type: 'banner',    cost: 45, need: 'meadow' },
     { id: 'horn1',   type: 'horn',      cost: 70, need: 'meadow' },
-    { id: 'mage1',   type: 'mage',      cost: 55, need: 'forest' },
-    { id: 'sword2',  type: 'swordsman', cost: 60, need: 'forest' },
-    { id: 'shield2', type: 'shield',    cost: 60, need: 'forest', block: 2 },
-    { id: 'spy1',    type: 'spyglass',  cost: 70, need: 'bamboo' },
-    { id: 'drum2',   type: 'drummer',   cost: 80, need: 'bamboo' },
-    { id: 'spear2',  type: 'spearman',  cost: 110, need: ['coral', 'oasis'] },
-    { id: 'horn2',   type: 'horn',      cost: 160, need: ['coral', 'oasis'] },
-    { id: 'mage2',   type: 'mage',      cost: 180, need: ['snow', 'ash'] },
+    { id: 'mage1',   type: 'mage',      cost: 70, need: 'forest' },
+    { id: 'sword2',  type: 'swordsman', cost: 100, need: 'forest' },
+    { id: 'shield2', type: 'shield',    cost: 100, need: 'forest', block: 2 },
+    { id: 'spy1',    type: 'spyglass',  cost: 90, need: 'bamboo' },
+    { id: 'drum2',   type: 'drummer',   cost: 100, need: 'bamboo' },
+    { id: 'spear2',  type: 'spearman',  cost: 150, need: ['coral', 'oasis'] },
+    { id: 'horn2',   type: 'horn',      cost: 220, need: ['coral', 'oasis'] },
+    { id: 'mage2',   type: 'mage',      cost: 260, need: ['snow', 'ash'] },
   ];
   const ROSTER_BY = Object.fromEntries(ROSTER.map((u) => [u.id, u]));
 
   // Camp upgrades bought with Souls. Each level's cost is listed.
   const UPGRADES = [
-    { id: 'vitality', name: 'Vitality',  icon: '❤️', desc: '+3 max HP',                       costs: [15, 30, 50, 80, 120, 170] },
-    { id: 'command',  name: 'Command',   icon: '🎖️', desc: '+1 squad slot',                   costs: [25, 50, 90, 140, 200] },
-    { id: 'drill',    name: 'Drill',     icon: '⚔️', desc: '+1 ATK to every attacker',        costs: [60, 150, 300] },
-    { id: 'bulwark',  name: 'Bulwark',   icon: '🛡️', desc: '+1 block to every Shield',        costs: [30, 80, 160] },
-    { id: 'fortune',  name: 'Fortune',   icon: '✦',  desc: '+20% Souls from battles',         costs: [40, 90, 160] },
-    { id: 'provisions', name: 'Provisions', icon: '🎒', desc: '+2 starting Supplies (battles per run)', costs: [20, 50, 100, 170] },
+    { id: 'vitality', name: 'Vitality',  icon: '❤️', desc: '+3 max HP',                       costs: [15, 35, 70, 120, 190, 280, 420] },
+    { id: 'command',  name: 'Command',   icon: '🎖️', desc: '+1 squad slot',                   costs: [25, 60, 120, 200, 300] },
+    { id: 'drill',    name: 'Drill',     icon: '⚔️', desc: '+1 ATK to every attacker',        costs: [60, 180, 420, 800] },
+    { id: 'bulwark',  name: 'Bulwark',   icon: '🛡️', desc: '+1 block to every Shield',        costs: [30, 100, 220, 420] },
+    { id: 'fortune',  name: 'Fortune',   icon: '✦',  desc: '+20% Souls from battles',         costs: [40, 110, 230, 450] },
+    { id: 'provisions', name: 'Provisions', icon: '🎒', desc: '+2 starting Supplies (battles per run)', costs: [20, 60, 140, 250] },
   ];
   const UPGRADE_BY = Object.fromEntries(UPGRADES.map((u) => [u.id, u]));
   const BASE_HP = 20;

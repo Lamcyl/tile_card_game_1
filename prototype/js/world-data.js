@@ -15,7 +15,7 @@
   const SUB_DEFS = [
     // Greenvale
     { id: 'meadow',  region: 'Greenvale',   name: 'Sunny Meadows',    biome: 'meadow',  lm: ['hill', 'Blossom Hill'],              lv: [1, 2], bossLv: 4,  unlocks: ['forest'],         from: 'camp',   poi: 'treasure' },
-    { id: 'forest',  region: 'Greenvale',   name: 'Old Oak Wood',     biome: 'forest',  lm: ['oak-grove', 'The Elder Oak'],        lv: [2, 3], bossLv: 4,  unlocks: ['bamboo'],         from: 'meadow', poi: 'shrine' },
+    { id: 'forest',  region: 'Greenvale',   name: 'Old Oak Wood',     biome: 'forest',  lm: ['oak-grove', 'The Elder Oak'],        lv: [3, 4], bossLv: 5,  unlocks: ['bamboo'],         from: 'meadow', poi: 'shrine' },
     { id: 'bamboo',  region: 'Greenvale',   name: 'Bamboo Valley',    biome: 'forest',  lm: ['bamboo-grove', 'The Jade Bamboo'],   lv: [3, 4], bossLv: 5,  unlocks: ['lake'],           from: 'forest', poi: 'treasure' },
     { id: 'lake',    region: 'Greenvale',   name: 'Mirror Lake',      biome: 'coral',   lm: ['lake', 'Mirror Lake'],               lv: [4, 5], bossLv: 6,  unlocks: ['beach', 'dunes'], from: 'bamboo', poi: 'shrine' },
     // Azure Coast
@@ -121,7 +121,8 @@
       const add = (id, p, type, level, role) => nodes.push(Object.assign({ id, x: Math.round(p[0]), y: Math.round(p[1]), sub: sub.id, type, level }, role ? { role } : {}));
       const n = sub.spots.length;
       sub.spots.forEach((p, i) => {
-        const level = Math.round(sub.lv[0] + (n > 1 ? i / (n - 1) : 0) * (sub.lv[1] - sub.lv[0]));
+        // The first sub-area's early spots stay at its lowest level longer (design 24.1: gentle first runs).
+        const level = sub.lv[0] + Math.floor(i * (sub.lv[1] - sub.lv[0] + 1) / n);
         const role = level >= 2 || i >= 2 ? NORMAL_ROLES[i % NORMAL_ROLES.length] : 'basic';
         add(sub.id + '-' + i, p, 'battle', level, role);
       });
