@@ -59,7 +59,7 @@ Each package targets a mostly distinct file set so they can run one after anothe
 | 1 | Battle feedback: stars and log (DONE) | M3, M4 | battle.js, battle.css, index.html, small hook in app.js and gen.js | S |
 | 2 | Danger skulls and results/ghost path (DONE) | M8, M5, M6 | app.js, map.js, style.css, progress.js | M |
 | 3 | Pacing tuning of early game | M7 | world-layout.js, world-data.js, gen.js, tools/sim-runs.js | M |
-| 4 | Battle templates and solver validation | M9 | gen.js, tools/solve.js, tools/validate-gen.js | L |
+| 4 | Battle templates and solver validation (DONE) | M9 | gen.js, tools/solve.js, tools/validate-gen.js | L |
 | 5 | New enemy mechanics | M10 | engine.js, world-data.js, battle.js | L |
 | 6 | Handcrafted bosses and elites | M11 | boss-defs.js, engine.js, gen.js | L |
 | 7 | Currencies and bounties | M20, M21 | progress.js, bounties.js, app.js | M |
@@ -90,6 +90,8 @@ Each package targets a mostly distinct file set so they can run one after anothe
 *Done (WP3):* no layout change; Meadows spots now Lv 1,1,1,2,2 (floor spread), early bosses (Lv<=4) bring 2 minions, Old Oak Wood is Lv 3-4 (boss 5), enemy ramp above Lv7 softened to +7% HP / +0.35 ATK per level, bosses cap at 5 minions, Isles/Temple bosses Lv 9, Camp costs and recruit costs raised from tier 2 on (+1 extra level on Vitality/Drill/Bulwark/Fortune), Souls stars x1 / x1.25 / x1.5. Sim (stars on): fresh account ~10 battles (6 when the Lv4 boss wins, 11-16 when it falls); campaign: Greenvale cleared run 3-6, Azure/Sunscorch first boss run 4-7, Snowdrift (Frostveil) unlocked run 15-25 in 3 of 4 campaigns, Ash Fields (Ember) once at run 18.
 
 **WP4 Templates and solver validation.** Replace the random placement in `gen.js` with named templates per danger tier (layout shapes plus barrel and armor placement rules); tier 1 teaches one mechanic per fight. Extend `tools/solve.js` into a batch validator that, for many seeds and a reference squad, asserts: tier 1 is trivial, tiers 2-3 have a 0-damage 1-turn solution, tier 4+ has none and the best line costs 1-4 HP. Fail CI-style with a report. Tune templates until it passes.
+
+*Done (WP4):* ordinary battles come from 13 named templates in `gen.js` (`Gen.TEMPLATES`, row strings for back/front, random mirror, per-template HP/ATK scale) by `World.danger`: tier 1 one idea per fight (attack, range, boost, overkill, barrel, shield, armor), tiers 2-3 hidden one-turn clears, tier 4-5 "Survive" layouts with a heavy enemy; bosses/elites keep the old random generator until WP6 (Lv<=6 bosses got +HP, Souls x0.8, to hold WP3 pacing). `tools/solve.js` exports its solver; `node tools/validate-gen.js [seeds] [tiers]` is the batch validator (exit 1 plus report on failure).
 
 **WP5 New enemy mechanics.** Add Healer (heals neighbours by 2 at end of turn), Splitter (spawns two 1-HP enemies on death), Summoner (adds a Goblin each turn) and Bulwark (blocks overkill and pierce to the tile behind) to `engine.js` `createState` and `resolveTurn` with new events; extend `battle.js` rendering and playback for the new events, register the types in `world-data.js` themes for regions 3+, and let `gen.js` use them at tier 4+. Keep the engine pure so `solve.js` still works.
 

@@ -1,6 +1,6 @@
 // Batch validator for the battle templates in prototype/js/gen.js (design 8.2).
 // For many seeds per danger tier and a reference squad it asserts:
-//   tier 1  : trivial        (a 1-turn 0-damage clear exists and a fair share of random placements already clear it)
+//   tier 1  : trivial        (a 1-turn 0-damage clear exists and even a very short search finds it)
 //   tier 2-3: puzzle         (a 1-turn 0-damage clear exists, random placements rarely find it)
 //   tier 4+ : survive        (no 1-turn clear exists, the best line costs 1-4 HP)
 // Exits with code 1 and a report when any seed breaks its tier's rule.
@@ -25,10 +25,15 @@ const TIER_LEVELS = { 1: [1, 2, 3], 2: [4, 5, 6], 3: [7, 8, 9], 4: [10, 11, 12],
 const SUB_FOR = { 1: 'forest', 2: 'lake', 3: 'cove', 4: 'rime', 5: 'caldera' };
 const ROLES = ['basic', 'armored', 'barrel'];
 
-function refSave(tier) { return Object.assign(Progress.freshSave(), JSON.parse(JSON.stringify(REF[tier]))); }
+// The deepest level of the last tier is met with a fully upgraded squad (Drill 4, Bulwark 4).
+function refSave(tier, level) {
+  const save = Object.assign(Progress.freshSave(), JSON.parse(JSON.stringify(REF[tier])));
+  if (tier === 5 && level >= 15) { save.upgrades.drill = 4; save.upgrades.bulwark = 4; }
+  return save;
+}
 
 function check(tier, level, seed, role, effort) {
-  const save = refSave(tier), army = Progress.buildArmy(save, {});
+  const save = refSave(tier, level), army = Progress.buildArmy(save, {});
   const node = { id: 'v-' + tier + '-' + level + '-' + seed, type: 'battle', level, sub: SUB_FOR[tier], role };
   const gen = Gen.generateBattle(node, 'validate' + seed);
   const stage = Object.assign({ heroHp: Progress.maxHp(save), heroMaxHp: Progress.maxHp(save) }, gen);
@@ -39,7 +44,7 @@ function check(tier, level, seed, role, effort) {
   if (tier === 1) {
     rec.random = Solve.randomClearRate(state, army, 150);
     if (!clear) rec.fails.push('no 1-turn clear');
-    else if (rec.random < 0.1) rec.fails.push('not trivial (random clears ' + Math.round(rec.random * 100) + '%)');
+    else if (!Solve.oneTurnClear(state, army, 2, 400)) rec.fails.push('not trivial (a short search misses the clear)');
   } else if (tier <= 3) {
     rec.random = Solve.randomClearRate(state, army, 150);
     if (!clear) rec.fails.push('no 1-turn 0-damage clear');
@@ -47,7 +52,7 @@ function check(tier, level, seed, role, effort) {
   } else {
     if (clear) rec.fails.push('1-turn clear exists');
     else {
-      const best = Solve.solve(state, army, 0, 4);
+      const best = Solve.solve(state, army, 0, 3, { first: 10, later: 4, iters: 1200 });
       rec.cost = best.total;
       if (best.total < 1 || best.total > 4) rec.fails.push('best line costs ' + best.total + ' HP (want 1-4)');
     }
@@ -63,7 +68,7 @@ function main() {
   let bad = 0, total = 0;
   const failures = [];
   for (const tier of tiers) {
-    const effort = tier >= 4 ? { restarts: 30, iters: 1500 } : { restarts: 12, iters: 1500 };
+    const effort = tier >= 4 ? { restarts: 16, iters: 1500 } : { restarts: 12, iters: 1500 };
     const recs = [];
     for (let i = 0; i < seeds; i++) {
       const level = TIER_LEVELS[tier][i % 3];

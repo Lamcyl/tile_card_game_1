@@ -55,9 +55,10 @@ function anneal(state, army, iters = 4000) {
 }
 
 // Best total damage to finish the stage, exploring a few turn-1 lines.
-function solve(state, army, depth = 0, maxTurns = 4) {
+function solve(state, army, depth = 0, maxTurns = 4, effort = {}) {
+  const first = effort.first || 30, later = effort.later || 12, iters = effort.iters || 4000;
   const candidates = [];
-  for (let i = 0; i < (depth === 0 ? 30 : 12); i++) candidates.push(anneal(state, army));
+  for (let i = 0; i < (depth === 0 ? first : later); i++) candidates.push(anneal(state, army, iters));
   candidates.sort((a, b) => a.value - b.value);
   const seen = new Set();
   let best = null;
@@ -72,7 +73,7 @@ function solve(state, army, depth = 0, maxTurns = 4) {
     if (s.status === 'playing') {
       if (depth + 1 >= maxTurns) total += 99;
       else {
-        const sub = solve(s, army, depth + 1, maxTurns);
+        const sub = solve(s, army, depth + 1, maxTurns, effort);
         total += sub.total;
         line = line.concat(sub.line);
       }
