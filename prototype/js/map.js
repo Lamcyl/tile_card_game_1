@@ -1989,6 +1989,7 @@
     const e = ease(ovT), detail = clamp01(1 - e * 2.2), marks = clamp01(e * 2.2 - 0.3);
     if (e < 0.6) { drawWater(e); drawSparks(); } lap('water');
     drawPrints();
+    drawGhostPaths();
     drawEntities(detail, marks); lap('entities');
     drawLabels(e);
     drawWisps(e);
@@ -2104,6 +2105,22 @@
   }
 
   function drawPaths(e) { /* free exploration: no path graph, roads are painted into the terrain */ }
+  // Ghost route of past expeditions, shown at Camp: the previous best reach (gold) and the last run (vermilion).
+  function drawGhostPaths() {
+    if (st.run || !st.save) return;
+    const k = 1 / z, one = (ids, col, width, dash) => {
+      const pts = (ids || []).map((id) => World.byId[id]).filter(Boolean);
+      if (pts.length < 2) return;
+      ctx.strokeStyle = col; ctx.lineWidth = width * Math.max(k, 0.5); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.setLineDash([dash * Math.max(k, 0.5), dash * 0.9 * Math.max(k, 0.5)]);
+      ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+      for (let i = 1; i < pts.length; i++) { const a = pts[i - 1], b = pts[i], mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2 - Math.hypot(b.x - a.x, b.y - a.y) * 0.08; ctx.quadraticCurveTo(mx, my, b.x, b.y); }
+      ctx.stroke(); ctx.setLineDash([]);
+    };
+    ctx.save(); ctx.globalAlpha = 0.5;
+    one(st.save.bestPath, '#b8892e', 5, 12);
+    if (st.save.lastPath !== st.save.bestPath && JSON.stringify(st.save.lastPath) !== JSON.stringify(st.save.bestPath)) one(st.save.lastPath, VERM, 3.5, 9);
+    ctx.restore();
+  }
   // Region names sit in the sea around the continent so they never cover an area label.
   const REGION_AT = [['Frostveil', 1218, 62], ['Ember Peaks', 5418, 62], ['Azure Coast', 1218, 4700], ['Sunscorch', 5418, 4700], ['Greenvale', 2900, 5850]];
   const wrapName = (n) => { const w = n.split(' '); if (w.length < 2) return [n]; let best = 1, bd = 1e9; for (let i = 1; i < w.length; i++) { const d = Math.abs(w.slice(0, i).join(' ').length - w.slice(i).join(' ').length); if (d < bd) { bd = d; best = i; } } return [w.slice(0, best).join(' '), w.slice(best).join(' ')]; };
@@ -2167,12 +2184,7 @@
   }
 
   // ---------- Entities: nodes and the hero, sorted by depth ----------
-  const lvlDifficulty = (n) => {
-    if (n.type === 'boss') return 5;
-    if (n.type === 'elite') return 4;
-    const sub = World.SUB_BY[n.sub] || { lv: [n.level, n.level + 1] }, span = Math.max(1, sub.lv[1] - sub.lv[0]);
-    return 1 + Math.round(clamp01((n.level - sub.lv[0]) / span) * 2);
-  };
+  const lvlDifficulty = (n) => World.danger(n.level); // same skull rating as the sheets (design 8.1)
   function roleOf(n) { return n.role || (n.type === 'boss' ? 'boss' : n.type === 'elite' ? 'tough' : 'basic'); }
   const nodeH = (n) => (n.type === 'boss' ? 112 : n.type === 'elite' ? 84 : n.type === 'camp' ? 46 : n.type === 'battle' ? 74 : 34);
 

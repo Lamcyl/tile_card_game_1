@@ -42,6 +42,8 @@
     game.selected = null;
     game.busy = false;
     game.onEnd = opts.onEnd;
+    logEl.innerHTML = '';
+    log('Fight begins: place your squad.', 'turn');
     // Keep the player's last layout for cards that are still in the squad.
     const kept = {};
     for (const [k, id] of Object.entries(opts.placement || {})) if (cardById(id)) kept[k] = id;
@@ -54,6 +56,32 @@
     render();
   }
   const placement = () => Object.assign({}, game.placement);
+
+  // ---------- Battle log (design 20) ----------
+  const logEl = $('#b-log-lines');
+  function log(html, cls) {
+    const line = document.createElement('div');
+    if (cls) line.className = cls;
+    line.innerHTML = html;
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+  const nameOf = (view, id) => { const e = view.enemies.find((en) => en.id === id); return e ? E.ENEMY_TYPES[e.type].name : 'Enemy'; };
+  const cardName = (key) => { const c = cardById(game.placement[key]); if (!c) return 'Unit'; const u = window.Art ? Art.unit(c) : null; return (u && u.name) || E.CARD_TYPES[c.type].name; };
+  function logEvent(ev, view) {
+    if (ev.t === 'fire') log(ev.targets.length ? cardName(ev.key) + ' fires for ⚔' + ev.atk : cardName(ev.key) + ' has no target in range', ev.targets.length ? '' : 'bad');
+    else if (ev.t === 'hit') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' takes ' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' (armor)' : '') + (ev.killed ? ', defeated' : ' (' + ev.hp + ' left)'), ev.killed ? 'good' : '');
+    else if (ev.t === 'overkill') log('&nbsp;&nbsp;Overkill: ' + ev.amount + ' carries to the ' + nameOf(view, ev.id));
+    else if (ev.t === 'explode') log('&nbsp;&nbsp;Barrel explodes for ' + ev.amount + ' to its neighbours');
+    else if (ev.t === 'strike') log(nameOf(view, ev.id) + ' attacks for ⚔' + ev.atk + (ev.blocked ? ', shield blocks ' + ev.blocked : '') + (ev.dmg ? ', you take ' + ev.dmg : ''), ev.dmg ? 'bad' : '');
+    else if (ev.t === 'enrage') { if (ev.ids.length) log('Survivors enrage: +1 ⚔', 'bad'); }
+    else if (ev.t === 'cleared') log('Stage cleared!', 'good');
+    else if (ev.t === 'defeated') log('Your hero has fallen.', 'bad');
+  }
+  $('#b-log-toggle').addEventListener('click', () => {
+    const open = $('#b-log').classList.toggle('collapsed') === false;
+    $('#b-log-toggle').setAttribute('aria-expanded', String(open));
+  });
 
   // Painted backdrop and stream style follow the biome of the fight.
   const STREAM_BY_BIOME = { meadow: 'water', forest: 'water', beach: 'sea', coral: 'sea', dunes: 'sand', temple: 'sand', snow: 'ice', glacier: 'ice', ash: 'lava', caldera: 'lava' };
@@ -294,16 +322,23 @@
     const { state, events } = E.resolveTurn(before, game.placement, game.army);
     game.view = E.clone(before);
     $('#b-msg').textContent = '';
+    log('Turn ' + before.turn, 'turn');
     render();
-    for (const ev of events) await playEvent(ev, game.view, stats);
+    for (const ev of events) { logEvent(ev, game.view); await playEvent(ev, game.view, stats); }
     game.state = state; game.view = null; game.busy = false;
     render();
     if (state.status === 'playing') {
       $('#b-msg').textContent = 'Turn ' + state.turn + ': you lost ' + (before.hp - state.hp) + ' HP and the survivors enraged (+1 ⚔). Rearrange and fight again.';
     } else {
-      $('#b-msg').textContent = state.status === 'cleared' ? 'Victory!' : 'Your hero has fallen.';
-      await sleep(700);
-      game.onEnd(state);
+      let stars = 0;
+      if (state.status === 'cleared') {
+        stars = window.Gen ? Gen.starsFor(state.damageTaken) : 1;
+        const note = ['', 'cleared', 'at most 3 damage taken', 'no damage taken'][stars];
+        $('#b-msg').innerHTML = 'Victory! <span class="stars" aria-label="' + stars + ' stars">' + '★'.repeat(stars) + '<i>' + '★'.repeat(3 - stars) + '</i></span> ' + note;
+        log('Rating: ' + '★'.repeat(stars) + ' (' + note + ')', 'good');
+      } else $('#b-msg').textContent = 'Your hero has fallen.';
+      await sleep(stars ? 1400 : 700);
+      game.onEnd(state, stars);
     }
   }
 

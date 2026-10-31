@@ -10,6 +10,7 @@
   let sheetOpen = true;
   let busy = false;
   let confirmReset = false, confirmReturn = false;
+  let pointAt = null; // upgrade id the results screen points to (first-run guarantee)
 
   const run = () => save.run;
   const persist = () => P.save(save);
@@ -79,6 +80,9 @@
     sheet.innerHTML = html;
   }
 
+  // Danger rating (design 8.1) as skulls, the same rating the map draws above each monster.
+  const skulls = (level) => { const d = World.danger(level); return '<span class="skulls d' + d + '" title="Danger ' + d + ' of 5" aria-label="Danger ' + d + ' of 5">' + '☠'.repeat(d) + '</span>'; };
+
   const rarClass = (it) => 'rar-' + it.rarity;
   const itemIcon = (it) => '<span class="ic">' + esc(Items.icon(it)) + '</span>';
   // One line of the "possible drops" list on a spot's sheet.
@@ -98,7 +102,7 @@
     const r = run(), sub = World.SUB_BY[n.sub];
     const isFight = ['battle', 'elite', 'boss'].includes(n.type);
     let body = '<div class="sheet-head"><div><h2>' + esc(nodeTitle(n)) + '</h2><p class="muted">' + esc(sub.name) + ' · ' + esc(sub.region) + '</p></div>' +
-      (isFight ? '<span class="lv" style="background:' + lvColor(n.level) + '">Lv' + n.level + '</span>' : '') + '</div>';
+      (isFight ? '<div class="lv-box">' + skulls(n.level) + '<span class="lv" style="background:' + lvColor(n.level) + '">Lv' + n.level + '</span></div>' : '') + '</div>';
     if (isFight) {
       const preview = Gen.generateBattle(n, r ? r.seed : 'preview');
       const icons = preview.enemies.map((e) => enemyChip(e.type)).join('');
@@ -106,7 +110,7 @@
       body += '<p class="enemies">' + icons + '</p>';
       body += '<p class="muted">' + (n.type === 'boss'
         ? (save.bossesBeaten.includes(n.sub) ? 'Already defeated once. Fight again for Souls.' : 'Defeat it to reveal ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + (sub.unlocks.length ? '.' : '. This is a final boss.'))
-        : n.type === 'elite' ? 'A tougher fight that pays double Souls.' : 'A normal fight.') + ' Reward: ✦ ' + souls + '.</p>';
+        : n.type === 'elite' ? 'A tougher fight that pays double Souls.' : 'A normal fight.') + ' Reward: ✦ ' + souls + ', up to ✦ ' + Math.round(Gen.soulsFor(n, 3) * P.soulRate(save)) + ' with ★★★ (no damage, plus a bonus item roll).</p>';
       body += '<p>' + supplyNote(n) + '</p>';
       body += '<div class="drops"><h4>Possible drops</h4>' + Items.tableFor(n).map((e) => dropRow(e, n)).join('') + '</div>';
     } else if (n.type === 'shrine') body += '<p class="muted">Restores 8 HP. Once per run.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
@@ -139,7 +143,7 @@
       for (const u of P.UPGRADES) {
         const lv = P.level(save, u.id), cost = P.upgradeCost(save, u.id);
         html += '<div class="item"><span class="ic">' + u.icon + '</span><div class="grow"><b>' + u.name + ' <small>Lv ' + lv + '/' + u.costs.length + '</small></b><span class="muted">' + u.desc + '</span></div>' +
-          (cost === null ? '<span class="muted">Max</span>' : '<button data-buy="' + u.id + '"' + (save.souls < cost ? ' disabled' : '') + '>✦ ' + cost + '</button>') + '</div>';
+          (cost === null ? '<span class="muted">Max</span>' : '<button data-buy="' + u.id + '"' + (pointAt === u.id ? ' class="point"' : '') + (save.souls < cost ? ' disabled' : '') + '>✦ ' + cost + '</button>') + '</div>';
       }
       html += '<p class="muted small">Max HP ' + P.maxHp(save) + ' · Squad slots ' + P.slots(save) + ' · Start Supplies ' + P.startSupplies(save) + '</p>';
     } else if (campTab === 'squad') {
@@ -231,7 +235,7 @@
     Battle.start({
       title: nodeTitle(n), subtitle: World.SUB_BY[n.sub].name + ' · Lv' + n.level, stage, biome: World.SUB_BY[n.sub].biome,
       army: P.buildArmy(save, r.mods), placement: r.placement,
-      onEnd: (state) => battleOver(n, state),
+      onEnd: (state, stars) => battleOver(n, state, stars),
     });
   }
 
@@ -252,36 +256,44 @@
     return true;
   }
 
-  function battleOver(n, state) {
+  function battleOver(n, state, stars) {
     const r = run();
     r.placement = Battle.placement();
     Battle.hide(); document.body.classList.remove('in-battle'); WorldMap.setActive(true);
     r.hp = state.hp;
     if (state.status !== 'cleared') { persist(); endRun(true); return; }
-    const gained = Math.round(Gen.soulsFor(n) * P.soulRate(save));
+    stars = stars || 1;
+    const gained = Math.round(Gen.soulsFor(n, stars) * P.soulRate(save));
     r.souls += gained; r.wins += 1; r.maxLevel = Math.max(r.maxLevel, n.level); r.cleared.push(n.id);
     // Items: rolled before the boss is marked as beaten, so its first kill always drops its unique item.
     let dropId = Items.rollDrop(save, n, r.seed);
     if (!dropId && save.runs === 0 && !r.found.length && r.wins === 2) dropId = Items.guaranteedDrop(save, n); // design 24.3: an item in the first two battles
-    let item = null, equipped = false;
+    let item = null, equipped = false, bonusItem = null, bonusEquipped = false;
     if (dropId) { item = Items.BY_ID[dropId]; save.items.push(dropId); r.found.push(dropId); equipped = autoEquip(item); }
+    // A 3-star clear earns one extra loot roll (design 11); it never repeats an item already owned.
+    if (stars === 3) {
+      const bonusId = Items.rollDrop(save, n, r.seed + ':star');
+      if (bonusId) { bonusItem = Items.BY_ID[bonusId]; save.items.push(bonusId); r.found.push(bonusId); bonusEquipped = autoEquip(bonusItem); }
+    }
     // Supplies: normal and elite wins cost 1, a boss adds some.
     const boss = n.type === 'boss';
     r.supplies += boss ? P.SUPPLIES_PER_BOSS : -1;
-    let title = 'Victory', text = '✦ ' + gained + ' Souls. You lost ' + state.damageTaken + ' HP.';
+    r.stars = (r.stars || 0) + stars;
+    let title = 'Victory ' + '★'.repeat(stars), text = '✦ ' + gained + ' Souls. You lost ' + state.damageTaken + ' HP.' + (stars === 3 ? ' Flawless: bonus loot roll!' : '');
     if (boss && !save.bossesBeaten.includes(n.sub)) {
       save.bossesBeaten.push(n.sub);
       const sub = World.SUB_BY[n.sub];
       for (const u of sub.unlocks) if (!save.unlocked.includes(u)) { save.unlocked.push(u); r.unlockedNow.push(u); }
       r.souls += 25;
-      title = World.THEMES[n.sub].boss[0] + ' defeated!';
+      title = World.THEMES[n.sub].boss[0] + ' defeated! ' + '★'.repeat(stars);
       text = (sub.unlocks.length ? 'The fog lifts over ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + '. ' : 'You conquered ' + sub.region + '! ') +
         'Bonus ✦ 25. New recruits may be waiting at Camp.';
       const target = sub.unlocks.length ? World.SUB_BY[sub.unlocks[0]] : sub;
       setTimeout(() => WorldMap.focus(target.entry[0], target.entry[1]), 300);
     }
     const supLine = '<p class="supply-line">🎒 ' + (boss ? 'The boss falls: <b>+' + P.SUPPLIES_PER_BOSS + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left.</p>';
-    const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'Your three slots are full. Swap it in at Camp ▸ Gear.') : '') + supLine;
+    const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'Your three slots are full. Swap it in at Camp ▸ Gear.') : '') +
+      (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'Slots full: swap it in at Camp ▸ Gear.')) : '') + supLine;
     persist(); renderAll();
     if (r.supplies <= 0) { outOfSupplies(title, text, extra); return; }
     offerReward(title, text, n, extra);
@@ -324,23 +336,42 @@
 
   function endRun(defeated, reason) {
     const r = run();
-    const earned = defeated ? Math.floor(r.souls * 0.75) : r.souls;
-    const prevBest = save.bestLevel;
+    let earned = defeated ? Math.floor(r.souls * 0.75) : r.souls;
+    const prevBest = save.bestLevel, prevBestPath = save.bestPath || [];
+    const firstRun = save.runs === 0;
+    // New furthest reach: deeper fight, or the same depth with a longer route. The old best stays as a second ghost.
+    const newBest = r.wins > 0 && (r.maxLevel > prevBest || (r.maxLevel === prevBest && r.path.length > prevBestPath.length));
     save.souls += earned; save.runs += 1;
     save.bestLevel = Math.max(save.bestLevel, r.maxLevel);
-    save.lastPath = r.path; save.run = null; selected = null; confirmReturn = false;
+    save.lastPath = r.path.slice();
+    if (newBest) { save.prevBestPath = prevBestPath; save.bestPath = r.path.slice(); }
+    // First-run guarantee (design 24.1): the first run always pays for the cheapest Camp upgrade.
+    let bonus = 0; pointAt = null;
+    if (firstRun) {
+      const cheap = P.cheapestUpgrade(save);
+      if (cheap) { if (save.souls < cheap.cost) { bonus = cheap.cost - save.souls; save.souls += bonus; } pointAt = cheap.id; }
+    }
+    save.run = null; selected = null; confirmReturn = false;
     persist();
     const unlockedNames = r.unlockedNow.map((u) => World.SUB_BY[u].name);
     const found = (r.found || []).map((id) => Items.BY_ID[id]);
+    const fights = r.path.map((id) => World.byId[id]).filter((n) => n && ['battle', 'elite', 'boss'].includes(n.type) && r.cleared.includes(n.id));
+    const route = fights.length
+      ? '<div class="route" aria-label="Route taken">' + fights.map((n) => '<span class="stop" title="' + esc(nodeTitle(n)) + '">' + skulls(n.level) + '<small>Lv' + n.level + '</small></span>').join('<i>›</i>') + '</div>'
+      : '<p class="muted small">No fights this time.</p>';
+    const cheap = pointAt ? P.UPGRADE_BY[pointAt] : null;
     modal('<h3>' + (defeated ? 'Your hero has fallen' : reason === 'supplies' ? 'Out of Supplies' : 'Back at Camp') + '</h3>' +
-      '<div class="stats"><div><b>' + r.wins + '</b><span>battles won</span></div><div><b>Lv' + r.maxLevel + '</b><span>deepest fight' + (r.maxLevel > prevBest ? ' · new best!' : '') + '</span></div>' +
-      '<div><b>✦ ' + earned + '</b><span>' + (defeated ? '75% of ' + r.souls + ' kept' : 'all Souls kept') + '</span></div></div>' +
+      '<div class="stats"><div><b>' + r.wins + '</b><span>battles won' + (r.stars ? ' · ' + r.stars + '★' : '') + '</span></div><div><b>Lv' + r.maxLevel + '</b><span>deepest fight' + (newBest ? ' · new best!' : '') + '</span></div>' +
+      '<div><b>✦ ' + earned + (bonus ? ' +' + bonus : '') + '</b><span>' + (defeated ? '75% of ' + r.souls + ' kept' : 'all Souls kept') + (bonus ? ' + first-run bonus' : '') + '</span></div></div>' +
+      '<h4 class="route-h">Your route</h4>' + route +
+      '<p class="reach">Furthest reach: <b>Lv' + r.maxLevel + '</b> · ' + (prevBest ? 'previous best <b>Lv' + prevBest + '</b>' : 'your first expedition') + '. ' +
+      (newBest ? 'A new record! ' : '') + '<span class="muted">The map at Camp now draws your last route (red) and best reach (gold) as faint ghost lines' + (newBest && prevBestPath.length > 1 ? ', with the old best in grey' : '') + '.</span></p>' +
       (found.length ? '<p>Items found: <b>' + found.map((it) => esc(it.name)).join(', ') + '</b>. Equip them in Camp ▸ Gear.</p>' : '') +
       (unlockedNames.length ? '<p>New areas revealed: <b>' + esc(unlockedNames.join(', ')) + '</b></p>' : '') +
-      '<p class="muted small">Spend Souls at Camp on upgrades and recruits, then set out again to reach further.</p>' +
-      '<div class="row"><button class="primary grow" data-act="to-camp">Go to Camp</button></div>');
+      (cheap ? '<p class="first-run">Your Souls already cover your first upgrade: <b>' + cheap.icon + ' ' + esc(cheap.name) + '</b> (' + esc(cheap.desc) + ') for ✦ ' + P.upgradeCost(save, cheap.id) + '.</p>' : '<p class="muted small">Spend Souls at Camp on upgrades and recruits, then set out again to reach further.</p>') +
+      '<div class="row">' + (cheap ? '<button class="primary grow" data-act="to-upgrades">Go to Upgrades</button><button data-act="to-camp">Camp</button>' : '<button class="primary grow" data-act="to-camp">Go to Camp</button>') + '</div>');
     $('#modal').onclick = (ev) => {
-      if (!ev.target.closest('[data-act="to-camp"]')) return;
+      if (!ev.target.closest('[data-act="to-camp"], [data-act="to-upgrades"]')) return;
       closeModal(); WorldMap.placeToken('camp'); WorldMap.focus(World.CAMP.x, World.CAMP.y - 120);
       campTab = 'upgrades'; sheetOpen = true; renderAll();
     };
@@ -363,7 +394,7 @@
     if (b.dataset.tab) { campTab = b.dataset.tab; sheetOpen = true; renderSheet(); return; }
     if (b.dataset.buy) {
       const cost = P.upgradeCost(save, b.dataset.buy);
-      if (cost !== null && save.souls >= cost) { save.souls -= cost; save.upgrades[b.dataset.buy] = P.level(save, b.dataset.buy) + 1; persist(); toast(P.UPGRADE_BY[b.dataset.buy].name + ' upgraded.'); renderAll(); }
+      if (cost !== null && save.souls >= cost) { pointAt = null; save.souls -= cost; save.upgrades[b.dataset.buy] = P.level(save, b.dataset.buy) + 1; persist(); toast(P.UPGRADE_BY[b.dataset.buy].name + ' upgraded.'); renderAll(); }
       return;
     }
     if (b.dataset.recruit) {

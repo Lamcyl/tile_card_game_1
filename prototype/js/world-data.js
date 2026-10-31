@@ -135,7 +135,9 @@
     return { nodes, edges: [], byId, adj: Object.fromEntries(nodes.map((n) => [n.id, []])) };
   }
 
-  const WORLD = Object.assign(buildWorld(), { MAP_W, MAP_H, SUBAREAS, SUB_BY, REGIONS, THEMES, CAMP, hash, rng, NORMAL_ROLES });
+  // Danger rating in skulls (design 8.1): Lv1-3 = 1, 4-6 = 2, 7-9 = 3, 10-12 = 4, 13+ = 5.
+  const danger = (level) => Math.max(1, Math.min(5, Math.ceil(level / 3)));
+  const WORLD = Object.assign(buildWorld(), { danger, MAP_W, MAP_H, SUBAREAS, SUB_BY, REGIONS, THEMES, CAMP, hash, rng, NORMAL_ROLES });
   root.World = WORLD;
   if (typeof module !== 'undefined' && module.exports) module.exports = WORLD;
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -72,14 +72,17 @@
   }
 
   // Souls for winning a battle at a node (before the Fortune bonus).
-  function soulsFor(node) {
-    const base = 3 + node.level * 2;
+  // Stage rating (design 11): 3 stars = no damage, 2 = at most 3 damage, 1 = any clear.
+  const STAR_SOULS = [1, 1, 1.15, 1.3];
+  const starsFor = (damageTaken) => (damageTaken <= 0 ? 3 : damageTaken <= 3 ? 2 : 1);
+  function soulsFor(node, stars) {
+    const base = Math.round((3 + node.level * 2) * (STAR_SOULS[stars || 1] || 1));
     if (node.type === 'boss') return base * 3;
     if (node.type === 'elite') return base * 2;
     return base;
   }
 
-  const Gen = { generateBattle, soulsFor };
+  const Gen = { generateBattle, soulsFor, starsFor };
   root.Gen = Gen;
   if (typeof module !== 'undefined' && module.exports) module.exports = Gen;
 })(typeof window !== 'undefined' ? window : globalThis);

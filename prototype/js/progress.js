@@ -55,6 +55,7 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
       bestLevel: 0,
       bestPath: [],
       lastPath: [],
+      prevBestPath: [],         // the best route before the current bestPath (drawn as a second ghost)
       items: [],                // owned equipment item ids (permanent)
       equipped: [],             // up to Items.SLOTS equipped item ids
       run: null,
@@ -90,6 +91,12 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
     const u = UPGRADE_BY[id]; const lv = level(s, id);
     return lv < u.costs.length ? u.costs[lv] : null;
   }
+  // The cheapest next Camp upgrade (first-run guarantee, design 24.1).
+  function cheapestUpgrade(s) {
+    let best = null;
+    for (const u of UPGRADES) { const c = upgradeCost(s, u.id); if (c !== null && (!best || c < best.cost)) best = { id: u.id, cost: c }; }
+    return best;
+  }
   function recruitAvailable(s, unit) {
     if (!unit.need) return true;
     const need = Array.isArray(unit.need) ? unit.need : [unit.need];
@@ -123,7 +130,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
 
   const Progress = {
     ROSTER, ROSTER_BY, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, SUPPLIES_PER_BOSS,
-    freshSave, load, save, reset, level, maxHp, slots, soulRate, startSupplies, upgradeCost, recruitAvailable, buildArmy,
+    freshSave, load, save, reset, level, maxHp, slots, soulRate, startSupplies, upgradeCost, cheapestUpgrade, recruitAvailable, buildArmy,
   };
   root.Progress = Progress;
   if (typeof module !== 'undefined' && module.exports) module.exports = Progress;
