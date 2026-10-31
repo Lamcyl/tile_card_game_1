@@ -442,3 +442,19 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 @keyframes pull-in { from { opacity: 0; transform: translateY(6px) scale(.96); } to { opacity: 1; transform: none; } }
 @keyframes halo { 0% { opacity: 0; transform: scale(.6); } 40% { opacity: 1; } 100% { opacity: .55; transform: scale(1); } }
 @media (prefers-reduced-motion: reduce) { .pull, .pull .halo, .pull .brush { animation-duration: .01s; animation-delay: 0s; } }
+
+/* WP12 relics: small brushed ink-wash seals */
+.relic-ic {
+  display: inline-grid; place-items: center; width: 34px; height: 34px; flex: none;
+  font: 700 19px/1 var(--b-serif, 'Noto Serif JP', serif); color: #f6efdd;
+  border-radius: 52% 46% 50% 44% / 46% 52% 44% 50%;
+  background: radial-gradient(circle at 38% 30%, #5a5f78 0%, #2b2a35 70%);
+  box-shadow: inset 0 0 0 2px rgba(246,239,221,.18), 0 0 0 1px rgba(43,42,53,.55), 1px 2px 3px rgba(43,42,53,.35);
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+.relic-ic.sm { width: 22px; height: 22px; font-size: 13px; }
+.hud-chip.relics { display: inline-flex; gap: 3px; padding: 4px 6px; }
+.b-relics { display: flex; gap: 3px; margin-top: 3px; }
+.b-relics[hidden] { display: none; }
+.relic-list { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 6px; }
+.relic-list li { display: flex; gap: 8px; align-items: center; font-size: 13px; }

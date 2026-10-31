@@ -65,6 +65,12 @@
     return card[field] !== undefined ? card[field] : CARD_TYPES[card.type][field];
   }
 
+  // Rule-driven attacker ATK bonus (WP12 relics): "feast" (kills by overkill, rules.feastN, max 3) and "kindle" (first turn only).
+  function syncBonus(rules, turn) {
+    rules.bonusAtk = (rules.feast ? rules.feastN || 0 : 0) + (rules.kindle && turn === 1 ? rules.kindle : 0);
+    return rules;
+  }
+
   // Build a stage's starting state from its definition.
   function createState(stage) {
     return {
@@ -73,7 +79,7 @@
       turn: 1,
       damageTaken: 0,
       // Rule flags from equipped Legendaries and squad traits (Progress.rulesFor): spill, blast, opening, soften, sunder, stand, mend, revive. Empty by default.
-      rules: Object.assign({}, stage.rules),
+      rules: syncBonus(Object.assign({}, stage.rules), 1),
       status: 'playing', // 'playing' | 'cleared' | 'defeated'
       enemies: stage.enemies.map((e, i) => {
         const t = ENEMY_TYPES[e.type];
@@ -121,13 +127,13 @@
         // WP10: a card may carry its own firing pattern and unit effects (fx: ignoreArmor, chain) from its roster entry.
         pattern: card.pattern || type.pattern,
         fx: card.fx || null,
-        plus: 0, mult: 1, rangeBonus: 0,
+        plus: type.role === 'attacker' ? rules.bonusAtk || 0 : 0, mult: 1, rangeBonus: type.role === 'attacker' ? rules.reach || 0 : 0,
         boostedBy: [], boosts: [],
       };
     }
     for (const s of Object.values(stats)) {
       if (s.type.role !== 'support') continue;
-      for (const tk of supportTargets(s.type.target, s.r, s.c, rules.diag && s.card.type === 'banner')) {
+      for (const tk of supportTargets(s.type.target, s.r, s.c, rules.diagAll || (rules.diag && s.card.type === 'banner'))) {
         const t = stats[tk];
         if (!t || t.type.role !== 'attacker') continue;
         const amount = cardStat(s.card, 'amount');
@@ -146,7 +152,7 @@
         const gaze = (enemies || []).filter((e) => e.alive && e.gimmick === 'gaze' && e.col === s.c).reduce((n, e) => n + e.gp, 0);
         if (gaze) { s.gazed = Math.min(gaze, s.atk); s.atk -= s.gazed; }
       } else if (s.type.role === 'defender') {
-        s.block = cardStat(s.card, 'block');
+        s.block = cardStat(s.card, 'block') + (rules.plate || 0);
       }
     }
     return stats;
@@ -156,7 +162,7 @@
   // `diag` (set bonus Wolfpack): a Banner also boosts its four diagonal neighbours.
   function supportTargets(target, r, c, diag) {
     const cells = target === 'up'
-      ? [[r - 1, c]]
+      ? [[r - 1, c]].concat(diag ? [[r - 1, c - 1], [r - 1, c + 1]] : [])
       : [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]].concat(diag ? [[r - 1, c - 1], [r - 1, c + 1], [r + 1, c - 1], [r + 1, c + 1]] : []);
     return cells
       .filter(([tr, tc]) => tr >= 2 && tr < ROWS && tc >= 0 && tc < COLS)
@@ -238,6 +244,10 @@
     events.push({ t: 'hit', id: e.id, amount, dmg, armor: e.armor, hp: e.hp, killed, source, warded });
     if (!killed) return;
     e.alive = false;
+    if (source === 'overkill' && state.rules && state.rules.feast && (state.rules.feastN || 0) < 3) {
+      state.rules.feastN = (state.rules.feastN || 0) + 1; syncBonus(state.rules, state.turn);
+      events.push({ t: 'feast', n: state.rules.feastN });
+    }
     const leftover = dmg - before;
     // Overkill: leftover damage carries to the enemy directly behind.
     if (canCarry && leftover > 0 && e.row === 1) {
@@ -261,10 +271,13 @@
     const type = ENEMY_TYPES[e.type];
     if (type.barrel) {
       const blast = Math.max(type.blast, (state.rules && state.rules.blast) || 0);
-      events.push({ t: 'explode', id: e.id, amount: blast });
-      for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
-        const n = enemyAt(state.enemies, e.row + dr, e.col + dc);
-        if (n) dealDamage(state, n, blast, false, events, 'explode');
+      // Relic "echo" (Mjölnir Shard): the blast goes off a second time.
+      for (let pass = 0; pass < (state.rules && state.rules.echo ? 2 : 1); pass++) {
+        events.push({ t: 'explode', id: e.id, amount: blast, echo: pass === 1 });
+        for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+          const n = enemyAt(state.enemies, e.row + dr, e.col + dc);
+          if (n) dealDamage(state, n, blast, false, events, 'explode');
+        }
       }
     }
   }
@@ -350,6 +363,7 @@
     for (let col = 0; col < COLS; col++) {
       shieldsOf[col] = PLAYER_ROWS.map((r) => key(r, col)).filter((k) => stats[k] && stats[k].type.role === 'defender');
       pools[col] = shieldsOf[col].reduce((sum, k) => sum + stats[k].block, 0);
+      if (state.rules.aegis && state.turn === 1) pools[col] *= 2; // relic "aegis": Shields block double on the first turn
     }
     const strike = (e, col, atk, splash) => {
       const blocked = Math.min(pools[col], atk);
@@ -448,6 +462,7 @@
     // Legendary rule "mend": heal 1 HP at the end of every turn survived.
     if (state.rules.mend && state.hp < state.maxHp) { state.hp = Math.min(state.maxHp, state.hp + state.rules.mend); events.push({ t: 'mend', amount: state.rules.mend, hp: state.hp }); }
     state.turn += 1;
+    syncBonus(state.rules, state.turn);
     return { state, events };
   }
 

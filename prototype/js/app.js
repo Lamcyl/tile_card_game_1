@@ -2,7 +2,7 @@
 // battles, rewards and end-of-run results.
 (function () {
   'use strict';
-  const Bounties = window.Bounties, E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items;
+  const Relics = window.Relics, Bounties = window.Bounties, E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items;
   const $ = (s) => document.querySelector(s);
   let save = P.load();
   let selected = null;
@@ -58,7 +58,8 @@
       $('#hud').innerHTML =
         '<div class="hud-hp"><span class="lbl">♥</span><div class="bar"><i style="width:' + (100 * r.hp / r.maxHp) + '%"></i></div><b>' + r.hp + '/' + r.maxHp + '</b></div>' +
         '<div class="hud-chip supplies' + (r.supplies <= 2 ? ' low' : '') + '" title="Supplies: battles left on this run. Normal and elite fights cost 1; the first boss adds ' + P.SUPPLIES_PER_BOSS + ', the next one 1 (after that a boss costs 1 like any fight).">🎒 ' + r.supplies + '</div>' +
-        '<div class="hud-chip" title="Souls carried on this run">✦ ' + r.souls + '</div>';
+        '<div class="hud-chip" title="Souls carried on this run">✦ ' + r.souls + '</div>' +
+        (r.relics && r.relics.length ? '<div class="hud-chip relics" title="Relics on this run">' + relicRow(r.relics) + '</div>' : '');
     } else {
       $('#hud').innerHTML =
         '<div class="hud-chip big" title="Souls: buy Camp upgrades and recruits">✦ ' + P.balance(save, 'souls') + ' <small>Souls</small></div>' +
@@ -151,6 +152,7 @@
     const open = [...frontier()].filter((id) => ['battle', 'elite', 'boss'].includes(World.byId[id].type)).length;
     return '<div class="sheet-head"><div><h2>On expedition</h2><p class="muted">Free exploration: tap any monster in an open area. ' + open + ' fights left.</p></div></div>' +
       '<p class="supply-line">🎒 <b>' + r.supplies + '</b> Supplies left. Each normal or elite win costs 1; the first boss of a run adds ' + P.SUPPLIES_PER_BOSS + ', the second 1, later ones cost 1 like any fight. At 0 you return to Camp safely.</p>' +
+      (r.relics && r.relics.length ? '<h4 class="bounty-h">Relics <small>run only</small></h4><ul class="relic-list">' + r.relics.map((id) => '<li>' + relicRow([id]) + '<span><b>' + esc(Relics.BY_ID[id].name) + '</b> ' + esc(Relics.BY_ID[id].text) + '</span></li>').join('') + '</ul>' : '') +
       (bl.length ? '<h4 class="bounty-h">Bounties <small>optional, paid in 💎 when the run ends</small></h4>' + bountyList(bl) : '') +
       '<p class="muted small">HP never regenerates by itself. Return to Camp to keep all ✦ ' + r.souls + ' Souls; if you fall, you keep 75%.</p>' +
       '<button class="wide' + (confirmReturn ? ' danger' : '') + '" data-act="return">' + (confirmReturn ? 'Tap again to end the run and return' : '🏕 Return to Camp') + '</button>';
@@ -358,7 +360,7 @@
     if (problem) { toast(problem); campTab = 'squad'; sheetOpen = true; renderAll(); return; }
     const sup = P.startSupplies(save);
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: 'camp', cleared: ['camp'], path: ['camp'],
-      bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, wins: 0, maxLevel: 0, mods: {}, placement: {}, unlockedNow: [], found: [] };
+      bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
     selected = null; confirmReturn = false; persist();
     WorldMap.placeToken('camp');
     const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]);
@@ -388,7 +390,7 @@
     document.body.classList.add('in-battle');
     Battle.start({
       title: nodeTitle(n), subtitle: World.SUB_BY[n.sub].name + ' · Lv' + n.level, stage, biome: World.SUB_BY[n.sub].biome,
-      army: P.buildArmy(save, r.mods), placement: r.placement,
+      army: P.buildArmy(save, r.mods), placement: r.placement, relics: r.relics || [],
       onEnd: (state, stars, report) => battleOver(n, state, stars, report),
     });
   }
@@ -471,6 +473,10 @@
     $('#modal').onclick = (ev) => { if (ev.target.closest('[data-act="home"]')) { closeModal(); endRun(false, 'supplies'); } };
   }
 
+  // Brushed ink-wash mark for a relic (CSS .relic-ic).
+  const relicIcon = (rel) => '<span class="relic-ic" aria-hidden="true">' + rel.glyph + '</span>';
+  const relicRow = (ids) => (ids || []).map((id) => '<span class="relic-ic sm" title="' + esc(Relics.BY_ID[id].name + ': ' + Relics.BY_ID[id].text) + '">' + Relics.BY_ID[id].glyph + '</span>').join('');
+
   // Choose 1 of 3: always one heal, plus two upgrades for this run.
   function offerReward(title, text, node, extra) {
     const r = run(), R = World.rng(r.seed + ':reward:' + r.path.length);
@@ -487,7 +493,10 @@
       else if (t.effect !== 'mult') pool.push({ kind: 'amount', id: c.id, label: '+1 boost · ' + unitTitle(c.id), icon: t.icon, card: c.id });
     }
     const picks = [];
-    while (picks.length < 2 && pool.length) picks.push(pool.splice(Math.floor(R() * pool.length), 1)[0]);
+    // WP12: a relic takes the place of one upgrade when the run offers one (always after elites and bosses).
+    const relic = Relics.offer(r.relics, R, node ? node.type : 'battle');
+    while (picks.length < (relic ? 1 : 2) && pool.length) picks.push(pool.splice(Math.floor(R() * pool.length), 1)[0]);
+    if (relic) picks.push({ kind: 'relic', id: relic.id, label: relic.name + ': ' + relic.text, icon: relicIcon(relic) });
     picks.push({ kind: 'heal', label: 'Heal 5 HP', icon: '❤️' });
     modal('<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p>' + (extra || '') + '<p class="muted small">Choose one reward for this run:</p><div class="rewards">' +
       picks.map((p, i) => '<button data-reward="' + i + '"><span class="ic">' + (p.card ? unitView(p.card).img : p.icon) + '</span><span>' + esc(p.label) + '</span></button>').join('') + '</div>');
@@ -495,6 +504,7 @@
       const b = ev.target.closest('[data-reward]'); if (!b) return;
       const p = picks[Number(b.dataset.reward)];
       if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + 5);
+      else if (p.kind === 'relic') { (r.relics || (r.relics = [])).push(p.id); toast(Relics.BY_ID[p.id].name + ' joins the expedition.'); }
       else { const m = r.mods[p.id] || (r.mods[p.id] = {}); m[p.kind] = (m[p.kind] || 0) + 1; }
       persist(); closeModal(); renderAll();
     };

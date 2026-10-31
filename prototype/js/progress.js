@@ -278,6 +278,8 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
     const add = (r) => { for (const k of Object.keys(r)) out[k] = k === 'blast' ? Math.max(out[k] || 0, r[k]) : (out[k] || 0) + r[k]; };
     add(traitFx(s).rules);
     for (const id of s.squad) if (ROSTER_BY[id].rule && !(ROSTER_BY[id].rule.revive && run && run.reviveUsed)) add(ROSTER_BY[id].rule);
+    // WP12: relics picked on this run (run.relics, ids from relics.js).
+    if (run && run.relics && run.relics.length) { const R = typeof window !== 'undefined' ? window.Relics : require('./relics.js'); add(R.rules(run.relics)); }
     return out;
   }
 

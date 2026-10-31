@@ -13,5 +13,6 @@ import './js/gen.js';
 import './js/battle.js';
 import './js/items.js';
 import './js/bounties.js';
+import './js/relics.js';
 import './js/map.js';
 import './js/app.js';

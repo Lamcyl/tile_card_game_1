@@ -53,6 +53,7 @@
     game.placement = kept;
     setBiome(opts.biome);
     $('#b-name').textContent = opts.title;
+    { const ids = opts.relics || [], el = $('#b-relics'); el.hidden = !ids.length; el.innerHTML = ids.map((id) => { const rl = window.Relics.BY_ID[id]; return '<span class="relic-ic sm" title="' + rl.name + ': ' + rl.text + '">' + rl.glyph + '</span>'; }).join(''); if (ids.length) log('Relics: ' + ids.map((id) => window.Relics.BY_ID[id].name).join(', '), 'turn'); }
     $('#b-sub').textContent = opts.subtitle;
     const kinds = [...new Set(game.state.enemies.map((e) => e.kind).filter(Boolean))];
     const intro = opts.stage.intro;
@@ -87,7 +88,8 @@
     else if (ev.t === 'hit' && ev.warded) log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' is untouched (' + WARD_TEXT[ev.warded] + ')', 'bad');
     else if (ev.t === 'hit') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' takes ' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' (armor)' : '') + (ev.killed ? ', defeated' : ' (' + ev.hp + ' left)'), ev.killed ? 'good' : '');
     else if (ev.t === 'overkill') log('&nbsp;&nbsp;Overkill: ' + ev.amount + ' carries to the ' + nameOf(view, ev.id));
-    else if (ev.t === 'explode') log('&nbsp;&nbsp;Barrel explodes for ' + ev.amount + ' to its neighbours');
+    else if (ev.t === 'explode') log('&nbsp;&nbsp;Barrel explodes' + (ev.echo ? ' again (Mjölnir Shard)' : '') + ' for ' + ev.amount + ' to its neighbours');
+    else if (ev.t === 'feast') log("Fenrir's Fang: attackers now have +" + ev.n + ' ATK', 'good');
     else if (ev.t === 'strike') log(nameOf(view, ev.id) + ' attacks for ⚔' + ev.atk + (ev.blocked ? ', shield blocks ' + ev.blocked : '') + (ev.dmg ? ', you take ' + ev.dmg : ''), ev.dmg ? 'bad' : '');
     else if (ev.t === 'bulwark') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' blocks the overkill (' + ev.amount + ' wasted)', 'bad');
     else if (ev.t === 'spawn') log(ev.reason === 'split' ? '&nbsp;&nbsp;' + nameOf(view, ev.from) + ' splits: a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' appears' : nameOf(view, ev.from) + ' summons a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' (♥' + ev.enemy.hp + ' ⚔' + ev.enemy.atk + ')', 'bad');
@@ -456,6 +458,8 @@
     } else if (ev.t === 'tide') {
       ev.moves.forEach((m) => { const e = view.enemies.find((en) => en.id === m.id); e.row = m.to[0]; e.col = m.to[1]; });
       render(); root.classList.add('tide-wash'); setTimeout(() => root.classList.remove('tide-wash'), 700 / game.speed); await sleep(520);
+    } else if (ev.t === 'feast') {
+      floatText($('#b-hero'), '+1 ⚔ Fang', 'info'); await sleep(300);
     } else if (ev.t === 'stand' || ev.t === 'mend' || ev.t === 'revive') {
       const hero = $('#b-hero'); view.hp = ev.hp; flash(hero, 'heal-flash', 500);
       floatText(hero, ev.t === 'stand' ? 'Last Breath!' : ev.t === 'revive' ? 'Reborn! ' + ev.hp + ' ♥' : '+' + ev.amount + ' ♥', 'heal'); render(); await sleep(480);

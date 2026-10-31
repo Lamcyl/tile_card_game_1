@@ -5,7 +5,7 @@
 //        node tools/sim-runs.js 1 campaign [maxRuns]   consecutive runs with greedy Camp shopping
 'use strict';
 // SEED=<n> makes every run reproducible (Math.random and the gacha rng are seeded). TRACE=1 prints the Camp state after each campaign run, DEBUG=1 every battle;
-// NOITEMS / NOGACHA / NORULES switch a power source off (ablation).
+// NOITEMS / NOGACHA / NORULES / NORELICS switch a power source off (ablation).
 if (process.env.SEED) { let a = Number(process.env.SEED) >>> 0; Math.random = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const Engine = require('../prototype/js/engine.js');
 try { require('../prototype/js/world-layout.js'); } catch (e) { /* placeholder layout */ }
@@ -14,6 +14,7 @@ require('../prototype/js/boss-defs.js');
 const Gen = require('../prototype/js/gen.js');
 const Progress = require('../prototype/js/progress.js');
 const Items = require('../prototype/js/items.js');
+const Relics = require('../prototype/js/relics.js');
 
 const TILES = [];
 for (const r of Engine.PLAYER_ROWS) for (let c = 0; c < 5; c++) TILES.push(Engine.key(r, c));
@@ -54,6 +55,7 @@ function playRun(save0) {
   const save = JSON.parse(JSON.stringify(save0));
   const seed = 'sim' + Math.random();
   const mods = {};
+  const relics = []; // WP12: run relics (NORELICS=1 switches them off)
   let hp = Progress.maxHp(save), supplies = Progress.startSupplies(save), cleared = new Set(), wins = 0, maxLv = 0, souls = 0, bosses = 0, items = 0, wonFirst = [];
   for (;;) {
     if (supplies <= 0) return { wins, maxLv, souls, bosses, items, end: 'supplies', start: Progress.startSupplies(save0), save };
@@ -69,7 +71,7 @@ function playRun(save0) {
     const bossNode = fights.find((n) => n.type === 'boss'), normals = fights.filter((n) => n.type !== 'boss');
     const node = bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode);
     cleared.add(node.id);
-    const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save));
+    const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save, { relics }));
     if (st.status !== 'cleared') return { wins, maxLv, souls: Math.round(souls * 0.75), bosses, items, end: 'died', diedAt: node.level, start: Progress.startSupplies(save0), save };
     if (process.env.DEBUG) console.log('  run' + (save0.runs + 1) + ' w' + wins + ' ' + node.id + ' ' + node.type + ' Lv' + node.level + ' hp ' + st.hp + '/' + Progress.maxHp(save) + ' sup ' + supplies + ' atk ' + JSON.stringify(Progress.buildArmy(save, mods).filter((c) => c.atk).map((c) => c.id + ':' + c.atk)) + ' dmg' + st.damageTaken);
     hp = st.hp; wins++; Progress.addXp(save, save.squad, node.type === 'boss' ? 2 : 1); // WP11 mastery
@@ -89,8 +91,10 @@ function playRun(save0) {
       supplies += Progress.bossSupplies(bosses); bosses++; souls += Gen.BOSS_BONUS_SOULS; // real rule: 3, then 1, then -1
       if (!save.bossesBeaten.includes(node.sub)) { save.bossesBeaten.push(node.sub); for (const u of World.SUB_BY[node.sub].unlocks) if (!save.unlocked.includes(u)) save.unlocked.push(u); }
     } else supplies -= 1;
-    // Reward: heal when low, otherwise +1 ATK on a random attacker.
+    // Reward: heal when low, otherwise a relic when offered (greedy: first offered), otherwise +1 ATK on a random attacker.
+    const offered = process.env.NORELICS ? null : Relics.offer(relics, Math.random, node.type);
     if (hp < Progress.maxHp(save) * 0.5) hp = Math.min(Progress.maxHp(save), hp + 5);
+    else if (offered) relics.push(offered.id);
     else { const att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker'); const id = att[Math.floor(Math.random() * att.length)]; mods[id] = { atk: ((mods[id] || {}).atk || 0) + 1 }; }
   }
 }
