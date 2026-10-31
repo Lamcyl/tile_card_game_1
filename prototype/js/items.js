@@ -412,7 +412,7 @@
       pick = table.find((e) => e.kind !== 'legend' && !owned.has(e.id) && e.kind !== 'unique');
       if (!pick) { const dust = 3; root.Progress.earn(save, 'dust', dust); return { dust, consolation: true }; }
     }
-    return pick ? addItem(save, pick.id, node.level, seed) : null;
+    return pick ? addItem(save, pick.id, Math.min(MAX_ILVL, node.level + (opts.lvBonus || 0)), seed) : null; // WP18: Heat / Descend raise the item level (opts.lvBonus)
   }
   // A guaranteed drop (first run, section 24.3): the spot's unique item, else a shared one not owned yet.
   function guaranteedDrop(save, node) {

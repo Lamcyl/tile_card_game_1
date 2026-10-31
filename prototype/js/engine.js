@@ -13,6 +13,10 @@
   // Camp track Board (WP16): rule flag `deepRow` adds a 4th player row (row 5, behind row 4). Everything that walks the board asks these.
   const rowsFor = (rules) => (rules && rules.deepRow ? ROWS + 1 : ROWS);
   const playerRowsFor = (rules) => (rules && rules.deepRow ? PLAYER_ROWS.concat(ROWS) : PLAYER_ROWS);
+  // Heat "The board loses a column" (WP18): rule flag `lostCol` closes the rightmost player column (cards cannot stand there, enemies above it still strike).
+  const lostColsFor = (rules) => Math.max(0, Math.min(2, (rules && rules.lostCol) || 0));
+  const tileBlocked = (rules, k) => { const [r, c] = k.split(',').map(Number); return r >= 2 && c >= COLS - lostColsFor(rules); };
+  const playerTilesFor = (rules) => { const out = []; for (const r of playerRowsFor(rules)) for (let c = 0; c < COLS - lostColsFor(rules); c++) out.push(r + ',' + c); return out; };
 
   const CARD_TYPES = {
     swordsman: { name: 'Swordsman', role: 'attacker', icon: '🗡️', atk: 3, pattern: 'straight', range: 1 },
@@ -66,6 +70,9 @@
     brace:  { name: 'Brace',  icon: '🛡️', target: 'none',  text: 'Every enemy strike is weakened by 2 this turn.' },
   };
   const gimmickText = (e) => (ENEMY_GIMMICKS[e.gimmick] ? ENEMY_GIMMICKS[e.gimmick].text.replace('{n}', e.gp) : '');
+
+  // Heat "heals are 50% weaker" (rule healHalf): the hero's healing is halved, rounded down (a 1-HP Lifebloom tick is lost).
+  const healFor = (rules, n) => (rules && rules.healHalf ? Math.floor(n / 2) : n);
 
   const key = (r, c) => r + ',' + c;
   const parseKey = (k) => k.split(',').map(Number);
@@ -133,7 +140,7 @@
     const stats = {};
     for (const k of Object.keys(placement)) {
       const card = byId[placement[k]];
-      if (!card) continue;
+      if (!card || tileBlocked(rules, k)) continue; // a closed column (Heat) holds no card
       const [r, c] = parseKey(k);
       const type = CARD_TYPES[card.type];
       stats[k] = {
@@ -349,7 +356,7 @@
     if (id === 'rally') { state.rules.rally = 1; syncBonus(state.rules, state.turn); }
     else if (id === 'brace') state.rules.brace = 2;
     else if (id === 'ration') {
-      const amount = Math.min(state.maxHp - state.hp, Math.min(4, state.damageTaken));
+      const amount = Math.min(state.maxHp - state.hp, healFor(state.rules, Math.min(4, state.damageTaken)));
       state.hp += amount; events.push({ t: 'mend', amount, hp: state.hp, source: 'ration' });
     } else if (id === 'ignite') {
       const e = state.enemies.find((x) => x.id === target);
@@ -447,7 +454,8 @@
 
     // Survivors enrage, so long fights get expensive.
     const raged = state.enemies.filter(isThreat);
-    raged.forEach((e) => { e.atk += 1; });
+    const enrageBy = 1 + (state.rules.enrageMore || 0); // Heat: enrage gives +2 instead of +1
+    raged.forEach((e) => { e.atk += enrageBy; });
     events.push({ t: 'enrage', ids: raged.map((e) => e.id) });
     // Boss gimmicks that act at the end of the turn.
     for (const e of raged) {
@@ -508,14 +516,14 @@
       events.push({ t: 'tide', moves });
     }
     // Legendary rule "mend": heal 1 HP at the end of every turn survived.
-    if (state.rules.mend && state.hp < state.maxHp) { state.hp = Math.min(state.maxHp, state.hp + state.rules.mend); events.push({ t: 'mend', amount: state.rules.mend, hp: state.hp }); }
+    if (state.rules.mend && state.hp < state.maxHp) { state.hp = Math.min(state.maxHp, state.hp + healFor(state.rules, state.rules.mend)); events.push({ t: 'mend', amount: healFor(state.rules, state.rules.mend), hp: state.hp }); }
     state.turn += 1;
     syncBonus(state.rules, state.turn);
     return { state, events };
   }
 
   const Engine = {
-    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, rowsFor, playerRowsFor, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, HERO_ABILITIES, gimmickText, incomingByColumn,
+    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, rowsFor, playerRowsFor, lostColsFor, tileBlocked, playerTilesFor, healFor, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, HERO_ABILITIES, gimmickText, incomingByColumn,
     key, parseKey, clone, cardStat,
     createState, computeStats, targetsFor, reachableTiles, resolveTurn, useAbility, abilityProblem, isThreat,
   };

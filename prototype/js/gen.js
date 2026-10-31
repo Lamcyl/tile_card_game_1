@@ -163,12 +163,31 @@
     return { enemies, template: (isBoss ? 'boss ' : 'elite ') + sub, intro };
   }
 
-  function generateBattle(node, runSeed) {
+  // ---------- Heat and Descend (WP18, design 15) ----------
+  // opts = Progress.genOpts(save): { heat: [mod ids], descend: n, mult: reward multiplier, lv: item level bonus }.
+  // Descend raises every spot's level by DESCEND_LV per step (the whole map is a harder copy of itself: bigger numbers, tier-5 layouts);
+  // Heat "hp" / "armor" are applied to the generated enemies here, the other Heat mods live in engine rules (Progress.rulesFor).
+  const DESCEND_LV = 2;
+  const scaled = (node, opts) => (opts && opts.descend ? Object.assign({}, node, { level: node.level + DESCEND_LV * opts.descend }) : node);
+  function applyHeat(gen, heat) {
+    if (!heat || !heat.length) return gen;
+    for (const e of gen.enemies) {
+      if (e.type.endsWith('_barrel')) continue;
+      if (heat.includes('hp')) e.hp += 1;
+      if (heat.includes('armor')) e.armor = (e.armor || 0) + 1;
+    }
+    return gen;
+  }
+
+  function generateBattle(node0, runSeed, opts) {
+    const node = scaled(node0, opts);
     const R = World.rng(runSeed + ':' + node.id);
     const Defs = root.BossDefs;
-    if (node.type === 'boss' && Defs.BOSSES[node.sub]) return fromDef(node, Defs.BOSSES[node.sub], R, true);
-    if (node.type === 'elite' && Defs.ELITES[node.sub]) return fromDef(node, Object.assign({ bossHp: 1, bossAtk: 1 }, Defs.ELITES[node.sub]), R, false);
-    return fromTemplate(node, R);
+    let gen;
+    if (node.type === 'boss' && Defs.BOSSES[node.sub]) gen = fromDef(node, Defs.BOSSES[node.sub], R, true);
+    else if (node.type === 'elite' && Defs.ELITES[node.sub]) gen = fromDef(node, Object.assign({ bossHp: 1, bossAtk: 1 }, Defs.ELITES[node.sub]), R, false);
+    else gen = fromTemplate(node, R);
+    return applyHeat(gen, opts && opts.heat);
   }
 
   // Souls for winning a battle at a node (before the Fortune bonus).
@@ -176,8 +195,9 @@
   const STAR_SOULS = [1, 1, 1.25, 1.5];
   const SOUL_SCALE = 0.36, BOSS_BONUS_SOULS = 11, CACHE_SOULS = 5; // first boss kill bonus and supply cache Souls (WP18: about 45% of the old 0.8 / 25 / 10)
   const starsFor = (damageTaken) => (damageTaken <= 0 ? 3 : damageTaken <= 3 ? 2 : 1);
-  function soulsFor(node, stars) {
-    const base = Math.round((3 + node.level * 2) * SOUL_SCALE * (STAR_SOULS[stars || 1] || 1)); // SOUL_SCALE: WP18 pacing (was 0.8, then 0.36 once gear, sets and gacha made accounts strong early)
+  function soulsFor(node, stars, opts) {
+    node = scaled(node, opts);
+    const base = Math.round((3 + node.level * 2) * (opts && opts.mult ? opts.mult : 1) * SOUL_SCALE * (STAR_SOULS[stars || 1] || 1)); // SOUL_SCALE: WP18 pacing (was 0.8, then 0.36 once gear, sets and gacha made accounts strong early)
     if (node.type === 'boss') return base * 3;
     if (node.type === 'elite') return base * 2;
     return base;
@@ -185,12 +205,13 @@
 
   // Gold (WP13): a per-run currency from fights, spent in Shops and events, lost when the run ends. Stars add 25% / 50% like Souls.
   const GOLD_STAR = [1, 1, 1.25, 1.5], CACHE_GOLD = 8, GUARD_GOLD = 16;
-  function goldFor(node, stars) {
-    const base = Math.round((3 + node.level * 1.5) * (GOLD_STAR[stars || 1] || 1));
+  function goldFor(node, stars, opts) {
+    node = scaled(node, opts);
+    const base = Math.round((3 + node.level * 1.5) * (opts && opts.mult ? opts.mult : 1) * (GOLD_STAR[stars || 1] || 1));
     return node.type === 'boss' ? base * 3 : node.type === 'elite' ? base * 2 : base;
   }
 
-  const Gen = { generateBattle, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
+  const Gen = { DESCEND_LV, scaled, generateBattle, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
   root.Gen = Gen;
   if (typeof module !== 'undefined' && module.exports) module.exports = Gen;
 })(typeof window !== 'undefined' ? window : globalThis);
