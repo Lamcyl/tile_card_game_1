@@ -39,6 +39,23 @@
     bulwark:  { name: 'Bulwark',  badge: '⛨', text: 'blocks overkill and Pierce from reaching the enemy behind it' },
   };
 
+  // Boss / elite gimmicks (set per enemy as `gimmick`, parameter `gp`). One per fight, announced before it starts.
+  // `text` may use {n} for the parameter. Handled in dealDamage (guard, ward, veil, regrow) and resolveTurn (the rest).
+  const ENEMY_GIMMICKS = {
+    guard:  { name: 'Guarded',   badge: '♜', text: 'takes no damage while its guard (marked ♜) still stands' },
+    ward:   { name: 'Hide',      badge: '◈', text: 'ignores every hit weaker than {n} damage' },
+    veil:   { name: 'Veiled',    badge: '☁', text: 'cannot be hurt during the first {n} turn(s)' },
+    gaze:   { name: 'Gaze',      badge: '◉', text: 'attackers in its column lose {n} ATK' },
+    sweep:  { name: 'Sweep',     badge: '≋', text: 'also strikes both neighbouring columns for half its damage' },
+    stride: { name: 'Stride',    badge: '⇄', text: 'steps one column sideways every turn, swapping places with whoever is there' },
+    tide:   { name: 'Tide',      badge: '〰', text: 'every enemy is carried one column each turn: the back row drifts left, the front row right' },
+    regrow: { name: 'Regrow',    badge: '❀', text: 'grows back once with {n} HP at the end of a turn if the fight is not over' },
+    regen:  { name: 'Regenerate', badge: '✚', text: 'heals {n} HP at the end of every turn' },
+    rage:   { name: 'Fury',      badge: '♨', text: 'gains {n} extra ATK every turn it survives' },
+    harden: { name: 'Harden',    badge: '▣', text: 'gains 1 armor every turn it survives (up to {n})' },
+  };
+  const gimmickText = (e) => (ENEMY_GIMMICKS[e.gimmick] ? ENEMY_GIMMICKS[e.gimmick].text.replace('{n}', e.gp) : '');
+
   const key = (r, c) => r + ',' + c;
   const parseKey = (k) => k.split(',').map(Number);
   const clone = (o) => JSON.parse(JSON.stringify(o));
@@ -72,6 +89,12 @@
           // minion = { type, hp, atk } is what a Splitter / Summoner spawns.
           kind: e.kind || null,
           minion: e.minion || null,
+          // Boss / elite gimmick (see ENEMY_GIMMICKS) and its parameter; `guardian` marks the escort a 'guard' boss hides behind.
+          gimmick: e.gimmick || null,
+          gp: e.gp || 0,
+          guardian: !!e.guardian,
+          dir: e.dir || 1,
+          lives: e.gimmick === 'regrow' ? 1 : 0,
         };
       }),
     };
@@ -79,7 +102,7 @@
 
   // Final numbers for every placed card after supporters are applied.
   // Rule: add all + bonuses first, then apply all × multipliers.
-  function computeStats(placement, army) {
+  function computeStats(placement, army, enemies) {
     const byId = {};
     army.forEach((c) => { byId[c.id] = c; });
     const stats = {};
@@ -113,6 +136,9 @@
       if (s.type.role === 'attacker') {
         s.atk = (s.baseAtk + s.plus) * s.mult;
         s.range = s.baseRange + s.rangeBonus;
+        // A gazing enemy weakens every attacker in its column.
+        const gaze = (enemies || []).filter((e) => e.alive && e.gimmick === 'gaze' && e.col === s.c).reduce((n, e) => n + e.gp, 0);
+        if (gaze) { s.gazed = Math.min(gaze, s.atk); s.atk -= s.gazed; }
       } else if (s.type.role === 'defender') {
         s.block = cardStat(s.card, 'block');
       }
@@ -186,12 +212,22 @@
     return out;
   }
 
+  // Why a hit does nothing at all (boss gimmicks), or null.
+  function wardReason(state, e, amount) {
+    if (e.gimmick === 'guard' && state.enemies.some((o) => o.alive && o.guardian)) return 'guard';
+    if (e.gimmick === 'ward' && amount < e.gp) return 'ward';
+    if (e.gimmick === 'veil' && state.turn <= e.gp) return 'veil';
+    return null;
+  }
+
   function dealDamage(state, e, amount, canCarry, events, source) {
-    const dmg = Math.max(0, amount - e.armor);
+    let dmg = Math.max(0, amount - e.armor);
+    const warded = wardReason(state, e, amount);
+    if (warded) dmg = 0;
     const before = e.hp;
     e.hp = Math.max(0, e.hp - dmg);
-    const killed = dmg >= before;
-    events.push({ t: 'hit', id: e.id, amount, dmg, armor: e.armor, hp: e.hp, killed, source });
+    const killed = !warded && dmg >= before;
+    events.push({ t: 'hit', id: e.id, amount, dmg, armor: e.armor, hp: e.hp, killed, source, warded });
     if (!killed) return;
     e.alive = false;
     const leftover = dmg - before;
@@ -220,7 +256,7 @@
     const t = ENEMY_TYPES[m.type];
     const born = {
       id: 'e' + state.enemies.length, type: m.type, row, col, hp, maxHp: hp,
-      atk: t && t.barrel ? 0 : (m.atk || 1), armor: 0, alive: true, kind: null, minion: null, spawned: true,
+      atk: t && t.barrel ? 0 : (m.atk || 1), armor: 0, alive: true, kind: null, minion: null, spawned: true, gimmick: null, gp: 0, guardian: false, dir: 1, lives: 0,
     };
     state.enemies.push(born);
     events.push({ t: 'spawn', from: src.id, reason, enemy: clone(born) });
