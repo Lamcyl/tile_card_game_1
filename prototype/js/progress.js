@@ -71,6 +71,7 @@
     { id: 'bulwark',  name: 'Bulwark',   icon: '🛡️', desc: '+1 block to every Shield',        costs: [30, 100, 220, 420] },
     { id: 'fortune',  name: 'Fortune',   icon: '✦',  desc: '+20% Souls from battles',         costs: [40, 110, 230, 450] },
     { id: 'provisions', name: 'Provisions', icon: '🎒', desc: '+2 starting Supplies (battles per run)', costs: [20, 60, 140, 250] },
+    { id: 'scouting', name: 'Scouting', icon: '🔭', desc: 'Sharper eyes: spots and secrets reveal from further away; Lv 3 shows what lurks in every spot', costs: [25, 70, 150] }, // WP14
   ];
   const UPGRADE_BY = Object.fromEntries(UPGRADES.map((u) => [u.id, u]));
   const BASE_HP = 20;
@@ -97,6 +98,11 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
       upgrades: {},
       owned: ROSTER.filter((u) => u.start).map((u) => u.id),
       squad: ROSTER.filter((u) => u.start).map((u) => u.id),
+      waypoints: [],            // WP14: sub-area ids whose Wayshrine has been lit (runs can start there, fast travel to them)
+      startAt: 'camp',          // WP14: 'camp' or a sub-area id with a lit waypoint: where the next run begins
+      seen: [],                 // WP14: monster spot ids that have been scouted (the rest show as faint silhouettes)
+      secrets: [],              // WP14: ids of hidden Sealed Caches that have been found (they stay on the map)
+      secretsOpened: [],        // WP14: Sealed Caches opened at least once (the first time pays a Crystal)
       unlocked: ['meadow'],     // sub-areas visible on the map
       bossesBeaten: [],         // sub-area ids whose boss has fallen at least once
       runs: 0,
@@ -117,7 +123,10 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
     try {
       const raw = localStorage.getItem(SAVE_KEY);
       if (raw) {
-        const s = Object.assign(freshSave(), JSON.parse(raw));
+        const data = JSON.parse(raw), s = Object.assign(freshSave(), data);
+        // WP14 migration: an old save has no `seen` list, so everything it could already reach counts as scouted.
+        if (!data.seen && root.World) s.seen = root.World.nodes.filter((n) => root.World.FOGGED.includes(n.type) && s.unlocked.includes(n.sub)).map((n) => n.id);
+        if (root.World) { s.waypoints = s.waypoints.filter((id) => root.World.SUB_BY[id] && root.World.byId[id + '-wp']); if (s.startAt !== 'camp' && !s.waypoints.includes(s.startAt)) s.startAt = 'camp'; }
         s.unlocked = s.unlocked.filter((id) => root.World && root.World.SUB_BY[id]);
         if (!s.unlocked.length) s.unlocked = ['meadow'];
         s.squad = s.squad.filter((id) => ROSTER_BY[id] && s.owned.includes(id));
@@ -286,6 +295,7 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
   const maxHp = (s) => BASE_HP + 3 * level(s, 'vitality') + gear(s).hp + traitFx(s).hp + growthFx(s).hp;
   const slots = commandCap; // legacy name
   const soulRate = (s) => 1 + 0.2 * level(s, 'fortune') + (gear(s).souls + traitFx(s).souls + growthFx(s).souls) / 100;
+const scoutLevel = (s) => level(s, 'scouting');
 const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s).supplies;
   function upgradeCost(s, id) {
     const u = UPGRADE_BY[id]; const lv = level(s, id);
@@ -343,7 +353,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
     starsOf, masteryOf, masteryLevel, growthFx, addXp, poolFor, grantUnit, pullOnce, pull, officeTrade, recruitable,
     CURRENCIES, balance, canSpend, earn, spend, spendAll, bossCrystals,
     commandCap, squadCp, squadProblem, canAdd, fitSquad, activeTraits, traitCounts, traitFx, rulesFor, unitCp: UNIT_CP,
-    freshSave, load, save, reset, level, maxHp, slots, soulRate, startSupplies, upgradeCost, cheapestUpgrade, recruitAvailable, buildArmy,
+    freshSave, load, save, reset, level, scoutLevel, maxHp, slots, soulRate, startSupplies, upgradeCost, cheapestUpgrade, recruitAvailable, buildArmy,
   };
   root.Progress = Progress;
   if (typeof module !== 'undefined' && module.exports) module.exports = Progress;

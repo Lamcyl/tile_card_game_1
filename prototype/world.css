@@ -469,3 +469,11 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 .event-text { font-style: italic; line-height: 1.45; }
 .event-fx { margin: 6px 0; color: var(--indigo); }
 .event-notes { margin: 4px 0 8px; padding-left: 18px; font-size: 13px; }
+
+/* WP14: keys, unscouted spots and the start-position picker */
+.hud-chip.keys { color: #7a4e78; }
+.enemy-chip.unknown { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 22px; color: #8a96a6; background: rgba(210, 218, 226, .45); border-style: dashed; }
+.start-at { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0 6px; }
+.start-at small { color: #6a5a4a; margin-right: 2px; }
+.start-at button { padding: 5px 10px; font-size: 13px; min-height: 32px; border-radius: 16px; }
+.start-at button.on { background: #c8402f; color: #fbf5e4; border-color: #c8402f; }

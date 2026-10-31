@@ -154,7 +154,7 @@
   const danger = (level) => Math.max(1, Math.min(5, Math.ceil(level / 3)));
   // WP14 scouting: a monster spot (ordinary or elite) within `sightRadius` of where the hero has stood is revealed for good; farther ones stay
   // faint silhouettes. Hidden secrets are found within `secretRadius`. Camp "Scouting" levels widen both. MAX_KEYS = keys carried per run.
-  const sightRadius = (lv) => 380 + 150 * (lv || 0);
+  const sightRadius = (lv) => 430 + 150 * (lv || 0);
   const secretRadius = (lv) => 130 + 50 * (lv || 0);
   const FOGGED = ['battle', 'elite'];
   const WORLD = Object.assign(buildWorld(), { sightRadius, secretRadius, FOGGED, MAX_KEYS: 3, SCOUT_GOLD: 6, danger, MAP_W, MAP_H, SUBAREAS, SUB_BY, REGIONS, THEMES, CAMP, hash, rng, NORMAL_ROLES });

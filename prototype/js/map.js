@@ -35,7 +35,8 @@
   const token = { x: World.CAMP.x + HERO_OFF.x, y: World.CAMP.y + HERO_OFF.y, walk: null, face: 1, stride: 0 };
   const prints = [];                 // fading footprints
   let dest = null;                   // free-roam destination mark
-  let onTap = () => {};
+  let onTap = () => {}, onHero = () => {};
+  const lastSight = { x: -1e9, y: -1e9 };   // where the hero last revealed the fog
   let active = true;
   let T = 0;
   let ovOn = false, ovT = 0;         // overview target and animated progress 0..1
@@ -802,7 +803,9 @@
       gc.globalCompositeOperation = 'saturation'; gc.fillStyle = '#808080'; gc.fillRect(0, 0, S, S);
       gc.globalCompositeOperation = 'destination-in'; gc.drawImage(a, 0, 0);
       gc.globalCompositeOperation = 'source-over'; gc.globalAlpha = 0.18; gc.fillStyle = '#9fb0b8'; gc.globalCompositeOperation = 'source-atop'; gc.fillRect(0, 0, S, S);
-      m.color = a; m.grey = g;
+      const sl = document.createElement('canvas'); sl.width = sl.height = S; const sc = sl.getContext('2d');   // WP14: unscouted spots are drawn as ink silhouettes
+      sc.drawImage(a, 0, 0); sc.globalCompositeOperation = 'source-in'; sc.fillStyle = '#56667a'; sc.fillRect(0, 0, S, S);
+      m.color = a; m.grey = g; m.sil = sl;
     };
     img.src = url;
     return m;
@@ -1941,7 +1944,11 @@
   //  Frame
   // ================================================================================================
   const unlocked = (sub) => !st.save || st.save.unlocked.includes(sub);
-  const visibleNode = (n) => n.type === 'camp' || unlocked(n.sub);
+  // WP14: hidden Sealed Caches only exist on the map once found; ordinary / elite spots outside the hero's sight are faint silhouettes until scouted.
+  let seenSet = new Set(), secretSet = new Set();
+  const visibleNode = (n) => n.type === 'camp' || (unlocked(n.sub) && (n.type !== 'secret' || secretSet.has(n.id)));
+  const scoutLv = () => (st.save && st.save.upgrades && st.save.upgrades.scouting) || 0;
+  const nodeSeen = (n) => !World.FOGGED.includes(n.type) || !st.save || seenSet.has(n.id) || scoutLv() >= 3 || (!!st.run && st.run.cleared.includes(n.id));
   function clampCam() {
     const hw = vw / 2 / zIn, hh2 = vh / 2 / zIn;
     cam.x = Math.max(hw - 160, Math.min(MAP_W - hw + 160, cam.x));
@@ -1957,6 +1964,7 @@
     const t0 = performance.now();
     const dt = Math.min(0.05, (now - (frame.last || now)) / 1000); frame.last = now; T += dt; frameNo++;
     stepToken(dt);
+    if (Math.hypot(token.x - lastSight.x, token.y - lastSight.y) > 40) { lastSight.x = token.x; lastSight.y = token.y; onHero(token.x, token.y); }
     zIn = zBase * uz;
     if (follow) { cam.x += (follow.x - cam.x) * Math.min(1, dt * 5); cam.y += (follow.y - cam.y) * Math.min(1, dt * 5); }
     clampCam();
@@ -2194,6 +2202,7 @@
     const run = st.run;
     if (!run) return 'open';
     if (run.cleared.includes(n.id)) return 'done';
+    if (n.type === 'waypoint' || n.type === 'secret') return 'open';
     return st.frontier.has(n.id) ? 'near' : 'far';
   }
 
@@ -2217,6 +2226,9 @@
     if (type === 'treasure') return drawChest(n, A, done, far);
     if (type === 'shop') return drawShop(n, A, done, far);
     if (type === 'event') return drawEvent(n, A, done, far);
+    if (type === 'waypoint') return drawWaypoint(n, A);
+    if (type === 'secret') return drawSecret(n, A, done);
+    if (!nodeSeen(n)) return drawUnseen(n, A);
     const boss = type === 'boss', elite = type === 'elite';
     const rx = boss ? 46 : elite ? 33 : 29, ry = rx * 0.4, S = boss ? 96 : elite ? 72 : 64;
     const diff = lvlDifficulty(n), col = DANGER[diff - 1], grey = far || done;
@@ -2266,6 +2278,63 @@
       ctx.globalAlpha = 1;
     } else drawTick(n.x, n.y - 14, A);
     if (st.selected === n.id) drawSelect(n.x, n.y, rx + 10, ry + 5, A);
+  }
+  // WP14: an unscouted spot is a faint ink silhouette in a patch of mist; its danger pips still show (you know how deep it is, not what lives there).
+  function drawUnseen(n, A) {
+    const elite = n.type === 'elite', rx = elite ? 33 : 29, ry = rx * 0.4, S = elite ? 72 : 64, diff = lvlDifficulty(n);
+    soft(ctx, n.x, n.y - 14, rx * 2.1, 30, '#e9eef0', A * 0.55);
+    const rs = ringSprite('#8f918f', rx, ry, World.hash(n.id) % 2 === 1);
+    ctx.globalAlpha = A * 0.28; ctx.drawImage(rs.c, n.x - rs.w / 2, n.y - rs.h / 2, rs.w, rs.h);
+    const m = monsterSprite(n.sub + '_' + roleOf(n), false), sway = Math.sin(T * 0.9 + n.x) * 1.5;
+    ctx.globalAlpha = A * 0.42;
+    if (m.sil) ctx.drawImage(m.sil, n.x - S / 2 + sway, n.y + 2 - S * 0.92, S, S);
+    else { ctx.fillStyle = '#56667a'; ctx.beginPath(); ctx.ellipse(n.x, n.y - S * 0.35, S * 0.22, S * 0.32, 0, 0, 7); ctx.fill(); }
+    soft(ctx, n.x, n.y - S * 0.45, rx * 1.4, S * 0.35, '#eef2f2', A * 0.35);   // drifting mist over the figure
+    const pl = pillSprite(diff, DANGER[diff - 1], true);
+    ctx.globalAlpha = A * 0.7; ctx.drawImage(pl.c, n.x - pl.w / 2, n.y - S * 0.98 - pl.h + 4, pl.w, pl.h);
+    ctx.globalAlpha = 1;
+    if (st.selected === n.id) drawSelect(n.x, n.y, rx + 10, ry + 5, A);
+  }
+  // WP14: a Wayshrine is a small vermilion torii with a lantern; dim until lit, then it glows and a pennant flutters.
+  function drawWaypoint(n, A) {
+    const x = n.x, y = n.y, lit = !!st.save && st.save.waypoints.includes(n.sub);
+    ctx.globalAlpha = A; soft(ctx, x, y + 3, 34, 10, '#4a3a2a', 0.3);
+    if (lit) soft(ctx, x, y - 22, 46, 40, '#ffd27a', 0.22 + 0.05 * Math.sin(T * 2));
+    const col = lit ? '#c8402f' : '#9b8f86', pw = 17, ph = 44;
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.strokeStyle = col; ctx.lineWidth = 4.2;
+    ctx.beginPath(); ctx.moveTo(x - pw, y); ctx.lineTo(x - pw, y - ph + 6); ctx.moveTo(x + pw, y); ctx.lineTo(x + pw, y - ph + 6); ctx.stroke();
+    ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x - pw - 3, y - ph + 14); ctx.lineTo(x + pw + 3, y - ph + 14); ctx.stroke();
+    ctx.strokeStyle = '#2b2530'; ctx.lineWidth = 5.2; ctx.beginPath(); ctx.moveTo(x - pw - 9, y - ph + 4); ctx.quadraticCurveTo(x, y - ph - 2, x + pw + 9, y - ph + 4); ctx.stroke();
+    // hanging lantern
+    const sw = Math.sin(T * 1.8 + x) * (lit ? 1.4 : 0.4);
+    ctx.strokeStyle = INK; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x, y - ph + 8); ctx.lineTo(x + sw, y - ph + 15); ctx.stroke();
+    ctx.fillStyle = lit ? '#ffe39a' : '#cfc8b8'; ctx.beginPath(); ctx.ellipse(x + sw, y - ph + 20, 4.4, 5.6, 0, 0, 7); ctx.fill(); ctx.lineWidth = 1.1; ctx.stroke();
+    if (lit) { ctx.strokeStyle = 'rgba(255,255,255,.75)'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(x + sw, y - ph + 20, 2.4, 0.4, 3); ctx.stroke(); }
+    if (lit) { // pennant
+      const fx = x + pw + 14, wv = Math.sin(T * 3 + y) * 2;
+      ctx.strokeStyle = '#4a3a2e'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(fx, y); ctx.lineTo(fx, y - 36); ctx.stroke();
+      ctx.fillStyle = INDIGO; ctx.beginPath(); ctx.moveTo(fx, y - 36); ctx.quadraticCurveTo(fx + 8, y - 35 + wv, fx + 15, y - 31 + wv); ctx.quadraticCurveTo(fx + 8, y - 29, fx, y - 26); ctx.closePath(); ctx.fill();
+    } else { // unlit: a pulsing ring invites the hero to light it
+      const k = (T * 0.9) % 1; ctx.globalAlpha = A * 0.8 * (1 - k); ctx.strokeStyle = '#e8b04a'; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.ellipse(x, y, 26 + k * 12, 9 + k * 5, 0, 0, 7); ctx.stroke(); ctx.globalAlpha = A;
+    }
+    ctx.lineCap = 'butt'; ctx.globalAlpha = 1;
+    if (st.selected === n.id) drawSelect(x, y - 4, 38, 14, A);
+  }
+  // WP14: a hidden Sealed Cache: a small lacquered chest with a violet cord and a faint shimmer; brighter while the hero carries a key.
+  function drawSecret(n, A, done) {
+    const x = n.x, y = n.y, keyed = !!st.run && st.run.keys > 0;
+    ctx.globalAlpha = A * (done ? 0.5 : 1); soft(ctx, x, y + 2, 26, 8, '#4a3a2a', 0.35);
+    if (!done) soft(ctx, x, y - 14, 30, 24, '#c8a8f0', keyed ? 0.3 + 0.1 * Math.sin(T * 3) : 0.14);
+    ctx.fillStyle = '#5a3a5c'; ctx.fillRect(x - 13, y - 13, 26, 14);
+    ctx.fillStyle = '#7a4e78'; ctx.beginPath(); ctx.moveTo(x - 13, y - 13); ctx.quadraticCurveTo(x, y - 27, x + 13, y - 13); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#d6b45a'; ctx.fillRect(x - 14, y - 14, 28, 2.6); ctx.fillRect(x - 2.5, y - 14, 5, 7);
+    ctx.strokeStyle = INK; ctx.lineWidth = 1.4; ctx.strokeRect(x - 13, y - 13, 26, 14); ctx.beginPath(); ctx.moveTo(x - 13, y - 13); ctx.quadraticCurveTo(x, y - 27, x + 13, y - 13); ctx.stroke();
+    if (!done) { ctx.strokeStyle = VERM; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x - 14, y - 7); ctx.lineTo(x + 14, y - 7); ctx.stroke(); ctx.fillStyle = VERM; ctx.fillRect(x - 3, y - 11, 6, 8); }
+    if (!done && keyed) { const k = 0.5 + 0.5 * Math.sin(T * 4); ctx.globalAlpha = A * k; ctx.fillStyle = '#fff6c4'; ctx.beginPath(); ctx.moveTo(x + 15, y - 28); ctx.lineTo(x + 17, y - 23); ctx.lineTo(x + 22, y - 21); ctx.lineTo(x + 17, y - 19); ctx.lineTo(x + 15, y - 14); ctx.lineTo(x + 13, y - 19); ctx.lineTo(x + 8, y - 21); ctx.lineTo(x + 13, y - 23); ctx.closePath(); ctx.fill(); }
+    ctx.globalAlpha = 1;
+    if (done) drawTick(x, y - 14, A);
+    if (st.selected === n.id) drawSelect(x, y - 4, 28, 12, A);
   }
   function drawTick(x, y, A) {
     ctx.globalAlpha = A * 0.95; ctx.fillStyle = '#5f9f6a'; ctx.beginPath(); ctx.arc(x, y, 12, 0, 7); ctx.fill();
@@ -2362,7 +2431,7 @@
   // Overview markers: small brushed discs.
   function drawMarker(n, A) {
     const state = nodeState(n), k = 1 / z, boss = n.type === 'boss';
-    const r = (boss ? 5.2 : n.type === 'camp' ? 7 : n.type === 'elite' ? 3.8 : n.type === 'shrine' || n.type === 'treasure' || n.type === 'shop' || n.type === 'event' ? 3.4 : 2.7) * k, x = n.x, y = n.y;
+    const r = (boss ? 5.2 : n.type === 'camp' ? 7 : n.type === 'elite' ? 3.8 : n.type === 'shrine' || n.type === 'treasure' || n.type === 'shop' || n.type === 'event' || n.type === 'waypoint' || n.type === 'secret' ? 3.4 : 2.7) * k, x = n.x, y = n.y;
     ctx.globalAlpha = A;
     if (state === 'near') { const q = (T * 0.9) % 1; ctx.globalAlpha = A * (1 - q); ctx.strokeStyle = '#e8b04a'; ctx.lineWidth = 1.6 * k; ctx.beginPath(); ctx.arc(x, y, r + (2 + q * 4) * k, 0, 7); ctx.stroke(); ctx.globalAlpha = A; }
     let fill = '#fbf5e4', edge = '#5b4a3a';
@@ -2373,6 +2442,8 @@
     else if (n.type === 'treasure') { fill = '#f3dfa0'; edge = '#b8892e'; }
     else if (n.type === 'shop') { fill = '#f3dfa0'; edge = '#c0553c'; }
     else if (n.type === 'event') { fill = '#efe4f4'; edge = '#7a5aa0'; }
+    else if (n.type === 'waypoint') { const lit = !!st.save && st.save.waypoints.includes(n.sub); fill = lit ? '#f6d9d2' : '#e4e0d8'; edge = lit ? VERM : '#9b8f86'; }
+    else if (n.type === 'secret') { fill = '#e6d8f2'; edge = '#7a4e78'; }
     else edge = DANGER[lvlDifficulty(n) - 1];
     ctx.fillStyle = state === 'far' || state === 'done' || r * z > 4 ? fill : edge; ctx.strokeStyle = edge; ctx.lineWidth = (boss ? 1.8 : 1.3) * k;
     ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.stroke();
@@ -2382,6 +2453,8 @@
     else if (n.type === 'shrine') { ctx.fillStyle = '#3f8fa8'; ctx.beginPath(); ctx.moveTo(x, y - r * 0.6); ctx.quadraticCurveTo(x + r * 0.55, y + r * 0.05, x, y + r * 0.55); ctx.quadraticCurveTo(x - r * 0.55, y + r * 0.05, x, y - r * 0.6); ctx.fill(); }
     else if (n.type === 'treasure') { ctx.fillStyle = '#8a5a34'; ctx.fillRect(x - r * 0.55, y - r * 0.3, r * 1.1, r * 0.75); ctx.fillStyle = '#dcb450'; ctx.fillRect(x - r * 0.1, y - r * 0.3, r * 0.2, r * 0.4); }
     else if (n.type === 'shop') { ctx.fillStyle = '#c0553c'; ctx.beginPath(); ctx.moveTo(x - r * 0.7, y - r * 0.05); ctx.lineTo(x - r * 0.5, y - r * 0.6); ctx.lineTo(x + r * 0.5, y - r * 0.6); ctx.lineTo(x + r * 0.7, y - r * 0.05); ctx.closePath(); ctx.fill(); ctx.fillStyle = '#dcb450'; ctx.fillRect(x - r * 0.5, y, r, r * 0.45); }
+    else if (n.type === 'waypoint') { ctx.strokeStyle = edge; ctx.lineWidth = 1.5 * k; ctx.beginPath(); ctx.moveTo(x - r * 0.4, y + r * 0.5); ctx.lineTo(x - r * 0.4, y - r * 0.6); ctx.stroke(); ctx.fillStyle = edge; ctx.beginPath(); ctx.moveTo(x - r * 0.4, y - r * 0.6); ctx.lineTo(x + r * 0.6, y - r * 0.3); ctx.lineTo(x - r * 0.4, y); ctx.closePath(); ctx.fill(); }
+    else if (n.type === 'secret') { ctx.fillStyle = '#7a4e78'; ctx.beginPath(); ctx.moveTo(x, y - r * 0.6); ctx.lineTo(x + r * 0.5, y); ctx.lineTo(x, y + r * 0.6); ctx.lineTo(x - r * 0.5, y); ctx.closePath(); ctx.fill(); }
     else if (n.type === 'event') { ctx.strokeStyle = '#7a5aa0'; ctx.lineWidth = 1.5 * k; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x - r * 0.35, y - r * 0.2); ctx.quadraticCurveTo(x - r * 0.3, y - r * 0.7, x, y - r * 0.55); ctx.quadraticCurveTo(x + r * 0.4, y - r * 0.4, x, y + r * 0.05); ctx.lineTo(x, y + r * 0.2); ctx.stroke(); ctx.fillStyle = '#7a5aa0'; ctx.beginPath(); ctx.arc(x, y + r * 0.52, r * 0.12, 0, 7); ctx.fill(); ctx.lineCap = 'butt'; }
     else if (r * z > 4) skull(ctx, x, y, r * 0.52, state === 'far' ? '#8f918f' : INK, fill);
     if (boss) { ctx.fillStyle = state === 'far' ? '#9b9a96' : VERM; ctx.fillRect(x + r * 0.55, y - r * 1.5, 5 * k, 5 * k); ctx.strokeStyle = '#4a3a2e'; ctx.lineWidth = 1.3 * k; ctx.beginPath(); ctx.moveTo(x + r * 0.55, y - r * 1.5); ctx.lineTo(x + r * 0.55, y - r * 0.6); ctx.stroke(); }
@@ -2490,7 +2563,7 @@
       token.walk = { pts, done, route: true };
     });
   }
-  function placeToken(id) { const n = World.byId[id]; token.x = n.x + HERO_OFF.x; token.y = n.y + HERO_OFF.y; token.walk = null; }
+  function placeToken(id) { const n = World.byId[id]; token.x = n.x + HERO_OFF.x; token.y = n.y + HERO_OFF.y; token.walk = null; lastSight.x = -1e9; }
   // Free roam: walk toward a tapped point, around obstacles; a tap on water or a cliff goes to the nearest shore
   function roamTo(x, y) {
     if (token.walk && token.walk.route) return;
@@ -2530,7 +2603,11 @@
     const p = pan; endPtr(ev); if (ptrs.size) return; pan = null;
     if (!p || p.moved) return;
     const w = toWorld(ev);
-    if (ovOn || ovT > 0.5) { setOverview(false, w.x, w.y); return; }
+    if (ovOn || ovT > 0.5) {
+      // WP14: in the overview a tap on a lit Wayshrine flag selects it (fast travel / start position); anywhere else zooms in
+      if (st.save) for (const n of NODES) if (n.type === 'waypoint' && st.save.waypoints.includes(n.sub) && Math.hypot(w.x - n.x, w.y - n.y) * z < 22) { setOverview(false, n.x, n.y); onTap(n); return; }
+      setOverview(false, w.x, w.y); return;
+    }
     let best = null;
     for (const n of NODES) {
       if (!visibleNode(n)) continue;
@@ -2590,8 +2667,8 @@
   window.addEventListener('resize', resize);
 
   window.WorldMap = {
-    init(opts) { onTap = opts.onTap; resize(); makeButton(); zIn = zBase * uz; z = zIn; vx = cam.x; vy = cam.y; X0 = vx - vw / 2 / z; Y0 = vy - vh / 2 / z; WW = vw / z; WH = vh / z; pump(40); requestAnimationFrame(frame); },
-    update(next) { Object.assign(st, next); },
+    init(opts) { onTap = opts.onTap; onHero = opts.onHero || onHero; resize(); makeButton(); zIn = zBase * uz; z = zIn; vx = cam.x; vy = cam.y; X0 = vx - vw / 2 / z; Y0 = vy - vh / 2 / z; WW = vw / z; WH = vh / z; pump(40); requestAnimationFrame(frame); },
+    update(next) { Object.assign(st, next); if (st.save) { seenSet = new Set(st.save.seen || []); secretSet = new Set(st.save.secrets || []); } },
     focus(x, y, instant) {
       if (ovOn) setOverview(false);
       const t = { x, y: y + (0.5 - FOCUS_Y) * vh / zIn };

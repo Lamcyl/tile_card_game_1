@@ -36,8 +36,24 @@
   function frontier() {
     const r = run(); if (!r) return new Set();
     const cleared = new Set(r.cleared), out = new Set();
-    for (const n of World.nodes) if (n.type !== 'camp' && save.unlocked.includes(n.sub) && !cleared.has(n.id)) out.add(n.id);
+    for (const n of World.nodes) if (n.type !== 'camp' && save.unlocked.includes(n.sub) && !cleared.has(n.id) && (n.type !== 'secret' || save.secrets.includes(n.id))) out.add(n.id);
     return out;
+  }
+  // WP14 scouting. A fogged spot (ordinary / elite) counts as scouted once the hero has been close, a scout looked, or it was fought.
+  const isSeen = (n) => !World.FOGGED.includes(n.type) || save.seen.includes(n.id) || P.scoutLevel(save) >= 3 || (run() && run().cleared.includes(n.id));
+  // Reveal spots within `rs` and hidden secrets within `rsec` of a point (defaults: the Scouting level's sight). Called as the hero walks.
+  function revealAround(x, y, rs, rsec) {
+    const lv = P.scoutLevel(save); rs = rs || World.sightRadius(lv); rsec = rsec || World.secretRadius(lv);
+    let changed = false, found = null;
+    for (const n of World.nodes) {
+      if (n.type === 'camp' || !save.unlocked.includes(n.sub)) continue;
+      const d = Math.hypot(n.x - x, n.y - y);
+      if (World.FOGGED.includes(n.type)) { if (d <= rs && !save.seen.includes(n.id)) { save.seen.push(n.id); changed = true; } }
+      else if (n.type === 'secret' && d <= rsec && !save.secrets.includes(n.id)) { save.secrets.push(n.id); changed = true; found = n; }
+    }
+    if (changed) { persist(); syncMap(); }
+    if (found) toast('You spot something hidden nearby: a Sealed Cache!');
+    return changed;
   }
   function syncMap() { WorldMap.update({ save, run: run(), frontier: frontier(), selected }); }
 
@@ -49,6 +65,8 @@
     if (n.type === 'shrine') return 'Healing Spring';
     if (n.type === 'treasure') return n.guarded ? 'Guarded Cache' : 'Supply Cache';
     if (n.type === 'shop') return 'Wayside Market';
+    if (n.type === 'waypoint') return 'Wayshrine';
+    if (n.type === 'secret') return 'Sealed Cache';
     if (n.type === 'event') return eventAt(n).title;
     if (n.guardFor) return t.armored[0] + ' Guard';
     return t[n.role === 'armored' || n.role === 'barrel' ? n.role : 'basic'][0] + ' Patrol';
@@ -68,6 +86,7 @@
       $('#hud').innerHTML =
         '<div class="hud-hp"><span class="lbl">♥</span><div class="bar"><i style="width:' + (100 * r.hp / r.maxHp) + '%"></i></div><b>' + r.hp + '/' + r.maxHp + '</b></div>' +
         '<div class="hud-chip supplies' + (r.supplies <= 2 ? ' low' : '') + '" title="Supplies: battles left on this run. Normal and elite fights cost 1; the first boss adds ' + P.SUPPLIES_PER_BOSS + ', the next one 1 (after that a boss costs 1 like any fight).">🎒 ' + r.supplies + '</div>' +
+        (r.keys > 0 ? '<div class="hud-chip keys" title="Keys: dropped by elites and bosses. Each opens one hidden Sealed Cache.">🗝 ' + r.keys + '</div>' : '') +
         '<div class="hud-chip" title="Souls carried on this run">✦ ' + r.souls + '</div>' +
         '<div class="hud-chip gold" title="Gold: earned in fights, spent in Shops and events. Lost when the run ends.">🪙 ' + (r.gold || 0) + '</div>' +
         (r.relics && r.relics.length ? '<div class="hud-chip relics" title="Relics on this run">' + relicRow(r.relics) + '</div>' : '');
@@ -133,28 +152,40 @@
       (isFight || n.type === 'treasure' && n.guarded ? '<div class="lv-box">' + skulls(n.level) + '<span class="lv" style="background:' + lvColor(n.level) + '">Lv' + n.level + '</span></div>' : '') + '</div>';
     if (isFight) {
       const preview = Gen.generateBattle(guard || n, r ? r.seed : 'preview');
-      const icons = preview.enemies.map((e) => enemyChip(e.type)).join('');
+      const unseen = !guard && n.type !== 'boss' && !isSeen(n);
+      const icons = unseen ? '<span class="enemy-chip unknown" title="Not scouted yet">?</span>'.repeat(3) : preview.enemies.map((e) => enemyChip(e.type)).join('');
       const souls = Math.round(Gen.soulsFor(n) * P.soulRate(save));
       body += '<p class="enemies">' + icons + '</p>';
-      if (preview.intro) body += '<p class="gimmick-note"><b>' + esc(preview.intro.name) + (preview.intro.rule && preview.intro.rule !== 'Elite' ? ' · ' + esc((preview.intro.badge ? preview.intro.badge + ' ' : '') + preview.intro.rule) : '') + '.</b> ' + esc(preview.intro.text) + '</p>';
+      if (unseen) body += '<p class="muted">🔭 Not scouted yet: you see the danger, not what lurks here. Walk closer' + (r ? ', send a scout for 🪙 ' + price(World.SCOUT_GOLD, n) : '') + ', or raise Scouting at Camp.</p>';
+      else if (preview.intro) body += '<p class="gimmick-note"><b>' + esc(preview.intro.name) + (preview.intro.rule && preview.intro.rule !== 'Elite' ? ' · ' + esc((preview.intro.badge ? preview.intro.badge + ' ' : '') + preview.intro.rule) : '') + '.</b> ' + esc(preview.intro.text) + '</p>';
       if (guard) body += '<p class="muted">A guard stands over the chest. Beat it to open the cache: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + Gen.GUARD_GOLD + ' and a reward of your choice, plus the usual fight Souls.</p>';
       else body += '<p class="muted">' + (n.type === 'boss'
         ? (save.bossesBeaten.includes(n.sub) ? 'Already defeated once. Fight again for Souls.' : 'Defeat it to reveal ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + (sub.unlocks.length ? '.' : '. This is a final boss.'))
         : n.type === 'elite' ? 'A tougher fight that pays double Souls.' : 'A normal fight.') + ' Reward: ✦ ' + souls + ', up to ✦ ' + Math.round(Gen.soulsFor(n, 3) * P.soulRate(save)) + ' with ★★★ (no damage, plus a bonus item roll).</p>';
       body += '<p>' + supplyNote(guard || n) + '</p>';
-      if (!guard) body += '<div class="drops"><h4>Possible drops <small>item level ' + n.level + (n.type === 'elite' ? ' · an elite always drops something' : '') + '</small></h4>' + Items.tableFor(n).map((e) => dropRow(e, n)).join('') + '</div>';
+      if (!guard && !unseen) body += '<div class="drops"><h4>Possible drops <small>item level ' + n.level + (n.type === 'elite' ? ' · an elite always drops something' : '') + '</small></h4>' + Items.tableFor(n).map((e) => dropRow(e, n)).join('') + '</div>';
       if (n.type === 'boss') body += tokenBlock(n);
       const miss = guard ? 0 : Items.missesOf(save, n.id);
       if (miss > 0) body += '<p class="muted small">Bad-luck protection: ' + miss + ' win' + (miss === 1 ? '' : 's') + ' without the unique item. Its chance rises each time.</p>';
     } else if (n.type === 'shrine') body += '<p class="muted">A quiet spring and a small altar. Choose one: heal 8 HP <b>or</b> upgrade a unit for this run. Once per run.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
     else if (n.type === 'treasure') body += '<p class="muted">Free supplies: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + Gen.CACHE_GOLD + ' and a reward of your choice.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
     else if (n.type === 'shop') body += '<p class="muted">A travelling stall. Spend 🪙 Gold on healing, unit upgrades and relics. Stock changes every run; leave when you are done.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
-    else if (n.type === 'event') body += '<p class="muted">Something stirs here. A short choice with a risk and a reward.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
+    else if (n.type === 'waypoint') {
+      const lit = save.waypoints.includes(n.sub);
+      body += '<p class="muted">' + (lit ? 'A lit Wayshrine. ' + (r ? 'Fast travel here for free any time.' : 'Expeditions can start from here.') : 'A torii and a quiet lantern. Light it once and it stays lit: later runs can start here, and you can fast travel back to it.') + '</p><p><span class="cost free">Free: costs no Supplies</span>' +
+        (lit && !r && save.startAt === n.sub ? ' <span class="cost gain">Your next run starts here</span>' : '') + '</p>';
+    } else if (n.type === 'secret') {
+      const keys = r ? r.keys || 0 : 0;
+      body += '<p class="muted">A lacquered chest hidden off the trail, sealed with a vermilion cord. It opens with a 🗝 Key (dropped by elites and bosses): ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + (Gen.CACHE_GOLD + 2 * regionOf(n)) + ', 4 HP, and ' + (save.secretsOpened.includes(n.id) ? '⚒ 2 Dust.' : '💎 1 Crystal the first time.') + '</p><p><span class="cost free">Free: costs no Supplies</span> <span class="cost' + (keys ? ' gain' : '') + '">🗝 ' + (r ? keys + ' key' + (keys === 1 ? '' : 's') + ' carried' : 'needs a key') + '</span></p>';
+    } else if (n.type === 'event') body += '<p class="muted">Something stirs here. A short choice with a risk and a reward.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
 
-    if (!r) body += '<p class="hint">Set out from Camp to fight here.</p><button class="primary wide" data-act="close-node">Back to Camp</button>';
+    if (!r && n.type === 'waypoint' && save.waypoints.includes(n.sub)) body += '<div class="row"><button data-act="close-node">Back</button><button class="primary grow" data-act="start-here">' + (save.startAt === n.sub ? '🚩 Start here ✓' : '🚩 Start runs here') + '</button></div>';
+    else if (!r) body += '<p class="hint">Set out from Camp to ' + (n.type === 'waypoint' || n.type === 'secret' ? 'visit this' : 'fight here') + '.</p><button class="primary wide" data-act="close-node">Back to Camp</button>';
     else if (r.cleared.includes(n.id)) body += '<p class="hint">Already cleared on this run.</p><button class="wide" data-act="close-node">Close</button>';
-    else body += '<div class="row"><button data-act="close-node">Cancel</button><button class="primary grow" data-act="engage">' +
-      (isFight ? (n.type === 'boss' ? '👑 Challenge' : '⚔ Fight') : n.type === 'shrine' ? '⛲ Rest' : n.type === 'shop' ? '🛒 Browse' : n.type === 'event' ? '❓ Investigate' : '🎁 Open') + '</button></div>';
+    else body += '<div class="row"><button data-act="close-node">Cancel</button>' +
+      (isFight && !isSeen(n) && n.type !== 'boss' ? '<button data-act="scout"' + (goldNow() < price(World.SCOUT_GOLD, n) ? ' disabled' : '') + ' title="Reveal this spot and its surroundings">🔭 Scout 🪙 ' + price(World.SCOUT_GOLD, n) + '</button>' : '') +
+      '<button class="primary grow" data-act="engage"' + (n.type === 'secret' && !(r.keys > 0) ? ' disabled' : '') + '>' +
+      (isFight ? (n.type === 'boss' ? '👑 Challenge' : '⚔ Fight') : n.type === 'waypoint' ? (save.waypoints.includes(n.sub) ? '🚩 Fast travel' : '🚩 Light the shrine') : n.type === 'secret' ? '🗝 Open' : n.type === 'shrine' ? '⛲ Rest' : n.type === 'shop' ? '🛒 Browse' : n.type === 'event' ? '❓ Investigate' : '🎁 Open') + '</button></div>';
     return body;
   }
 
@@ -178,6 +209,10 @@
     const tabs = ['upgrades', 'squad', 'recruit', 'summon', 'gear'];
     let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad (Command Points, one supporter minimum), then set out with 🎒 ' + P.startSupplies(save) + ' Supplies.</p></div>' +
       '<button class="primary" data-act="start">Set out ➜</button></div>';
+    if (save.waypoints.length) {
+      html += '<div class="start-at" aria-label="Start position"><small>🚩 Start at</small>' + ['camp'].concat(save.waypoints).map((id) =>
+        '<button class="' + (save.startAt === id ? 'on' : '') + '" data-start="' + id + '">' + (id === 'camp' ? '⛺ Camp' : esc(World.SUB_BY[id].name)) + '</button>').join('') + '</div>';
+    }
     html += '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
       '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
@@ -375,24 +410,43 @@
     const problem = P.squadProblem(save);
     if (problem) { toast(problem); campTab = 'squad'; sheetOpen = true; renderAll(); return; }
     const sup = P.startSupplies(save);
-    save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: 'camp', cleared: ['camp'], path: ['camp'],
+    const startId = save.startAt !== 'camp' && save.waypoints.includes(save.startAt) ? save.startAt + '-wp' : 'camp'; // WP14: begin at a lit Wayshrine
+    save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: startId, cleared: ['camp'], path: [startId], keys: 0,
       bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
     selected = null; confirmReturn = false; persist();
-    WorldMap.placeToken('camp');
-    const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]);
-    toast('Expedition started with ' + sup + ' Supplies and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
+    WorldMap.placeToken(startId);
+    if (startId === 'camp') { const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]); } else WorldMap.focus(World.byId[startId].x, World.byId[startId].y);
+    toast('Expedition started' + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Supplies and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
     renderAll();
   }
 
   async function engage(id) {
     const r = run(); let n = World.byId[id];
     if (!r || busy || r.cleared.includes(id) || !save.unlocked.includes(n.sub)) return;
+    if (n.type === 'secret' && !(r.keys > 0)) { toast('The cache is sealed. Elites and bosses drop keys.'); return; }
+    if (n.type === 'waypoint' && save.waypoints.includes(n.sub)) { // fast travel: free and instant
+      selected = null; WorldMap.placeToken(id); WorldMap.focus(n.x, n.y); r.pos = id; persist(); toast('Fast travel to the ' + World.SUB_BY[n.sub].name + ' Wayshrine.'); renderAll(); return;
+    }
     busy = true; selected = null; sheetOpen = true; renderAll();
     // Short hops are walked; far ones just move the hero there.
     const from = World.byId[r.pos] || World.CAMP;
     if (Math.hypot(from.x - n.x, from.y - n.y) < 1600) await WorldMap.walk([id]); else { WorldMap.placeToken(id); WorldMap.focus(n.x, n.y); }
     r.pos = id; r.path.push(id);
+    if (World.FOGGED.includes(n.type) && !save.seen.includes(id)) save.seen.push(id);
     busy = false;
+    if (n.type === 'waypoint') { // first visit: light it (stays lit for good) and see the surroundings
+      save.waypoints.push(n.sub); revealAround(n.x, n.y, 620, 260); persist(); renderAll();
+      modal('<h3>Wayshrine lit</h3><p>The lantern at the ' + esc(World.SUB_BY[n.sub].name) + ' Wayshrine glows. The hills around it are no longer a mystery.</p><p class="supply-line">🚩 Later runs can <b>start here</b> (pick it at Camp or on the shrine\'s sheet), and you can fast travel back to it for free during a run. This cost no Supplies.</p><div class="row"><button class="primary grow" data-act="ok">Good</button></div>');
+      $('#modal').onclick = (ev) => { if (ev.target.closest('[data-act="ok"]')) closeModal(); }; return;
+    }
+    if (n.type === 'secret') {
+      r.keys -= 1; r.cleared.push(id); const first = !save.secretsOpened.includes(id), gold = Gen.CACHE_GOLD + 2 * regionOf(n);
+      r.souls += Gen.CACHE_SOULS; r.gold = (r.gold || 0) + gold; r.hp = Math.min(r.maxHp, r.hp + 4);
+      if (first) { save.secretsOpened.push(id); P.earn(save, 'crystals', 1); r.crystalsNow = (r.crystalsNow || 0) + 1; } else P.earn(save, 'dust', 2);
+      persist(); renderAll();
+      modal('<h3>Sealed Cache opened</h3><p>The cord parts. Inside: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + gold + ', and a restorative draught (+4 HP). ' + (first ? '💎 1 Crystal, found for the first time!' : '⚒ 2 Dust.') + ' This cost no Supplies.</p><div class="row"><button class="primary grow" data-act="ok">Good</button></div>');
+      $('#modal').onclick = (ev) => { if (ev.target.closest('[data-act="ok"]')) closeModal(); }; return;
+    }
     if (n.type === 'shrine') { renderAll(); openShrine(n); return; }
     if (n.type === 'shop') { renderAll(); openShop(n); return; }
     if (n.type === 'event') { renderAll(); openEvent(n); return; }
@@ -481,7 +535,9 @@
     }
     const done = Bounties.track(r.bounties, Object.assign({ won: true, stars, node: n.type }, report || {}));
     const bountyLine = done.length ? '<div class="bounty-done">' + done.map((b) => '<p>🎯 Bounty complete: <b>' + esc(Bounties.text(b)) + '</b> · 💎 ' + b.reward + ' at run end</p>').join('') + '</div>' : '';
-    const supLine = '<p class="supply-line">🎒 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left.</p>';
+    let keyNote = '';
+    if ((boss || n.type === 'elite') && (r.keys || 0) < World.MAX_KEYS) { r.keys = (r.keys || 0) + 1; keyNote = ' · 🗝 <b>+1 Key</b> (opens a hidden Sealed Cache)'; }
+    const supLine = '<p class="supply-line">🎒 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left' + keyNote + '.</p>';
     const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
       (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'No free slot: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
     persist(); renderAll();
@@ -683,6 +739,7 @@
     if (b.id === 'sheet-toggle') { sheetOpen = !sheetOpen; renderSheet(); return; }
     if (!b.dataset.salvage) confirmSalvage = null;
     if (b.dataset.tab) { campTab = b.dataset.tab; sheetOpen = true; renderSheet(); return; }
+    if (b.dataset.start) { save.startAt = b.dataset.start; persist(); toast(save.startAt === 'camp' ? 'Runs start at Camp.' : 'Runs start at the ' + World.SUB_BY[save.startAt].name + ' Wayshrine.'); renderAll(); return; }
     if (b.dataset.buy) {
       const cost = P.upgradeCost(save, b.dataset.buy);
       if (cost !== null && save.souls >= cost) { pointAt = null; save.souls -= cost; save.upgrades[b.dataset.buy] = P.level(save, b.dataset.buy) + 1; persist(); toast(P.UPGRADE_BY[b.dataset.buy].name + ' upgraded.'); renderAll(); }
@@ -750,6 +807,11 @@
     const act = b.dataset.act;
     if (act === 'start') startRun();
     else if (act === 'engage') engage(selected);
+    else if (act === 'start-here') { const n = World.byId[selected]; save.startAt = n.sub; persist(); toast('Runs now start at the ' + World.SUB_BY[n.sub].name + ' Wayshrine.'); renderAll(); }
+    else if (act === 'scout') {
+      const n = World.byId[selected], cost = price(World.SCOUT_GOLD, n);
+      if (run() && goldNow() >= cost) { run().gold -= cost; revealAround(n.x, n.y, 330, 240); save.seen.includes(n.id) || save.seen.push(n.id); persist(); toast('A scout reports back (🪙 ' + cost + ').'); renderAll(); } else toast('Not enough Gold to send a scout.');
+    }
     else if (act === 'close-node') { selected = null; renderAll(); }
     else if (act === 'return') { if (!confirmReturn) { confirmReturn = true; renderSheet(); } else endRun(false); }
     else if (act === 'cheat') { save.souls += 100; P.earn(save, 'crystals', 30); P.earn(save, 'dust', 10); persist(); renderAll(); }
@@ -760,6 +822,7 @@
   });
 
   WorldMap.init({
+    onHero(x, y) { revealAround(x, y); },
     onTap(node) {
       if (busy) return;
       confirmReturn = false; confirmReset = false;

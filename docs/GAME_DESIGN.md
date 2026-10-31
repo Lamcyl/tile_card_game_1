@@ -262,7 +262,7 @@ Inspired by incremental exploration games such as *Our Ascent*, *Hero's Quest* a
 - **One large, persistent world map**, made of encounter nodes connected by paths, spreading out from the **Camp** at its centre (or one edge).
 - The map is divided into **regions** (Goblin Woods, Iron Keep, Sunken Crypt, …). Each region has its own enemy set, encounter pool, boss and loot table.
 - Every node shows a **danger rating** (☠ to ☠☠☠☠☠) that depends on its distance from Camp and its region. Rewards rise with danger. *(Prototype: skulls are derived from level: Lv1-3 = 1, 4-6 = 2, 7-9 = 3, 10-12 = 4, 13+ = 5, shown on sheets and above map monsters.)*
-- Unexplored parts of the map are under **fog**. Nodes you have seen stay revealed permanently.
+- Unexplored parts of the map are under **fog**. Nodes you have seen stay revealed permanently. *(Implemented, WP14: locked sub-areas are fogged; inside an unlocked one, far ordinary/elite spots are silhouettes until the hero has been near or scouted, see 24.6.)*
 
 ### 10.2 A run (an expedition)
 
@@ -586,7 +586,7 @@ The prototype in `prototype/` has two pages.
 
 **Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
 
-**Not included yet:** relics, heroes, Heat, waypoints and secrets, art and audio.
+**Not included yet:** heroes, Heat, art and audio.
 
 See the README for how to run it.
 
@@ -636,6 +636,14 @@ These directions came out of the first playtest. Numbers are starting points for
 - This replaces the "fight a spot next to your trail" rule (10.2), and makes waypoints (10.5) optional.
 - Open question: should spots in already-conquered sub-areas cost less, or give less?
 - 24.1 is tuned (WP3): gentler first sub-area, steeper costs and enemy ramp from region 2.
+
+### 24.6 Waypoints, keys, secrets and scouting (implemented, WP14)
+
+- **Wayshrines** (🚩): one near the entry of 19 sub-areas (not Mist Isles). Visiting one for the first time lights it for good (free, no Supplies, and it reveals the spots around it). A run can **start** at any lit Wayshrine (Camp "Start at" chips, or the shrine's sheet); during a run a lit shrine offers **free instant fast travel**. Because every unlocked spot is already open, a waypoint changes where the hero stands (and so what the fog shows), not run length.
+- **Keys** (🗝): every elite and boss win drops one (max 3 carried, lost at run end). A key opens a **Sealed Cache**, a secret hidden off the trails in each sub-area (19): ✦ and 🪙 like a supply cache, 4 HP, and 💎 1 the first time (later ⚒ 2 Dust). No Supplies cost, no reward choice.
+- **Secrets** stay invisible until the hero walks within 130 units (+50 per Scouting level) or a scout looks; once found they stay on the map for good.
+- **Scouting fog**: inside an unlocked sub-area, ordinary and elite spots farther than 430 units (+150 per Scouting level) from anywhere the hero has stood are faint silhouettes with their danger pips but no enemies or drop list; bosses and non-fight spots are landmarks and always visible. Spots, once seen, stay seen (`save.seen`). Scout button in a run: 🪙 6 (x region cost factor) reveals a spot and its surroundings. Camp upgrade **Scouting** (3 levels, ✦ 25 / 70 / 150): radius, secret radius, and at Lv 3 every spot shows its contents. Fighting a spot always reveals it.
+- Pacing (`sim-runs.js` models keys and caches, secrets found 60% of the time): fresh account about 10 battles per run, no change beyond noise.
 
 ### WP18 early pacing pass (numbers)
 
