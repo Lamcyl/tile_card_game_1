@@ -16,7 +16,7 @@
   };
   const SPEEDS = [1, 2, 4];
 
-  const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null, report: null };
+  const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null, report: null, hero: null, aiming: false };
 
   // Board cells are built once; their contents are redrawn on every render.
   (function buildBoard() {
@@ -42,6 +42,8 @@
     game.view = null;
     game.selected = null;
     game.busy = false;
+    game.aiming = false;
+    game.hero = opts.hero || null;
     game.onEnd = opts.onEnd;
     game.report = { shields: false, overkills: 0, bossOverkill: false, explosions: 0, turns: 0 }; // read by bounties (app.js)
     logEl.innerHTML = '';
@@ -99,9 +101,11 @@
     else if (ev.t === 'regrow') log(nameOf(view, ev.id) + ' grows back (' + ev.hp + ' HP)', 'bad');
     else if (ev.t === 'move') log(nameOf(view, ev.id) + ' steps to column ' + (ev.to[1] + 1), 'bad');
     else if (ev.t === 'tide') log('The tide carries every enemy one column', 'bad');
+    else if (ev.t === 'ability' && ev.target) log('&nbsp;&nbsp;Target: ' + nameOf(view, ev.target));
     else if (ev.t === 'stand') log('Last Breath: you cling on at 1 HP!', 'good');
     else if (ev.t === 'revive') log('Phoenix Rebirth: you rise again with ' + ev.hp + ' HP!', 'good');
     else if (ev.t === 'chain') log('Lightning leaps to another enemy', 'hit');
+    else if (ev.t === 'mend' && ev.source === 'ration') log('Field rations restore ' + ev.amount + ' HP', 'good');
     else if (ev.t === 'mend') log('Lifebloom heals ' + ev.amount + ' HP', 'good');
     else if (ev.t === 'enrage') { if (ev.ids.length) log('Survivors enrage: +1 ⚔', 'bad'); }
     else if (ev.t === 'cleared') log('Stage cleared!', 'good');
@@ -130,6 +134,7 @@
     $('#b-turn').textContent = s.turn;
     $('#b-hpfill').style.width = (100 * s.hp / s.maxHp) + '%';
     $('#b-hptext').textContent = s.hp + ' / ' + s.maxHp;
+    renderHero(s);
 
     const focusKey = game.hover && game.placement[game.hover] ? game.hover : (game.selected && tileOf(game.selected)) || null;
     const reach = new Set(), willHit = new Set(), boostTargets = new Set();
@@ -147,6 +152,7 @@
         cell.classList.toggle('reach', reach.has(k));
         cell.classList.toggle('will-hit', willHit.has(k));
         cell.classList.toggle('boost-target', boostTargets.has(k));
+        cell.classList.toggle('can-target', game.aiming && r < 2 && !!s.enemies.find((en) => en.alive && en.row === r && en.col === c));
         cell.classList.toggle('can-drop', r >= 2 && !!game.selected && !game.busy);
         if (r < 2) {
           const e = s.enemies.find((en) => en.alive && en.row === r && en.col === c);
@@ -165,6 +171,25 @@
     $('#b-fight').disabled = game.busy || s.status !== 'playing';
     $('#b-clear').disabled = game.busy || s.status !== 'playing';
     $('#b-speed').textContent = game.speed + '×';
+  }
+
+  // Hero panel (WP15): placeholder seal portrait, passive, and the once-per-battle ability button.
+  function renderHero(s) {
+    const h = game.hero, ab = s.ability && E.HERO_ABILITIES[s.ability], btn = $('#b-ability'), seal = $('#b-hero-seal');
+    seal.textContent = h ? h.glyph : '命';
+    seal.style.setProperty('--hero-hue', h ? h.hue : '');
+    $('#b-hero-name').textContent = h ? h.name : 'Hero';
+    $('#b-hero-passive').textContent = h ? h.passive : '';
+    $('#b-hero').style.setProperty('--hero-hue', h ? h.hue : '');
+    btn.hidden = !ab;
+    if (!ab) return;
+    const problem = E.abilityProblem(s, ab.target === 'enemy' ? (s.enemies.find((en) => en.alive) || {}).id : null);
+    const used = s.abilityUsed, stuck = !used && problem;
+    btn.disabled = game.busy || s.status !== 'playing' || used || !!stuck;
+    btn.classList.toggle('aiming', game.aiming);
+    btn.innerHTML = '<span aria-hidden="true">' + ab.icon + '</span> ' + (used ? ab.name + ' (spent)' : game.aiming ? 'Pick a target' : ab.name);
+    btn.title = ab.name + ' (once per battle): ' + ab.text + (used ? ' Already used.' : stuck ? ' (' + problem + ')' : '');
+    btn.setAttribute('aria-label', btn.title);
   }
 
   function renderThreat(s, stats) {
@@ -264,6 +289,11 @@
     return el.closest('.cell.player-zone') || el.closest('#b-hand');
   }
   root.addEventListener('pointerdown', (ev) => {
+    if (game.aiming && !game.busy && game.state && game.state.status === 'playing' && ev.target.closest('#b-board')) { // ability targeting (WP15): pick on press, the board re-renders on release
+      const cell = ev.target.closest('.cell.can-target');
+      if (cell) { const [r, c] = E.parseKey(cell.dataset.key), en = game.state.enemies.find((x) => x.alive && x.row === r && x.col === c); if (en) { ev.preventDefault(); castAbility(en.id); } }
+      return;
+    }
     if (game.busy || !game.state || game.state.status !== 'playing' || ev.button > 0) return;
     if (!ev.target.closest('#b-board, #b-hand')) return;
     const card = ev.target.closest('[data-card]');
@@ -372,7 +402,12 @@
     log('Turn ' + before.turn, 'turn');
     render();
     for (const ev of events) { logEvent(ev, game.view); await playEvent(ev, game.view, stats); }
-    game.state = state; game.view = null; game.busy = false;
+    await settle(before, state);
+  }
+
+  // After a turn or an ability: show the state, then either carry on planning or end the battle.
+  async function settle(before, state) {
+    game.state = state; game.view = null; game.busy = false; game.aiming = false;
     render();
     if (state.status === 'playing') {
       $('#b-msg').textContent = 'Turn ' + state.turn + ': you lost ' + (before.hp - state.hp) + ' HP and the survivors enraged (+1 ⚔). Rearrange and fight again.';
@@ -388,6 +423,33 @@
       game.onEnd(state, stars, game.report);
     }
   }
+
+  // ---------- Hero ability (WP15) ----------
+  async function castAbility(target) {
+    const before = game.state, ab = E.HERO_ABILITIES[before.ability];
+    const out = E.useAbility(before, target);
+    game.aiming = false;
+    if (!out) { render(); return; }
+    game.busy = true; game.selected = null;
+    for (const ev of out.events) if (ev.t === 'explode') game.report.explosions += 1;
+    game.view = E.clone(before);
+    log((game.hero ? game.hero.name : 'Hero') + ' uses ' + ab.name + ': ' + ab.text, 'good');
+    render();
+    for (const ev of out.events) { logEvent(ev, game.view); await playEvent(ev, game.view, null); }
+    if (out.state.status !== 'playing') { await settle(before, out.state); return; }
+    game.state = out.state; game.view = null; game.busy = false;
+    $('#b-msg').textContent = ab.name + ' is spent for this battle. ' + (before.ability === 'rally' ? 'Attackers hit harder this turn: press Fight.' : before.ability === 'brace' ? 'Enemy strikes are weakened this turn: press Fight.' : 'Rearrange and press Fight.');
+    render();
+  }
+  $('#b-ability').addEventListener('click', () => {
+    const s = game.state; if (!s || game.busy || s.status !== 'playing' || s.abilityUsed || !s.ability) return;
+    if (E.HERO_ABILITIES[s.ability].target === 'enemy') {
+      game.aiming = !game.aiming;
+      $('#b-msg').textContent = game.aiming ? E.HERO_ABILITIES[s.ability].name + ': tap an enemy to target it (tap the button again to cancel).' : '';
+      render();
+    } else castAbility(null);
+  });
+
 
   async function playEvent(ev, view, stats) {
     if (ev.t === 'fire') {
@@ -460,6 +522,11 @@
       render(); root.classList.add('tide-wash'); setTimeout(() => root.classList.remove('tide-wash'), 700 / game.speed); await sleep(520);
     } else if (ev.t === 'feast') {
       floatText($('#b-hero'), '+1 ⚔ Fang', 'info'); await sleep(300);
+    } else if (ev.t === 'ability') {
+      const hero = $('#b-hero'), ab = E.HERO_ABILITIES[view.ability];
+      flash(hero, 'heal-flash', 500); floatText(hero, ab.icon + ' ' + ab.name + '!', 'info');
+      if (ev.target) await projectile(hero, enemyCell(view, ev.target), 'heal-shot');
+      else await sleep(380);
     } else if (ev.t === 'stand' || ev.t === 'mend' || ev.t === 'revive') {
       const hero = $('#b-hero'); view.hp = ev.hp; flash(hero, 'heal-flash', 500);
       floatText(hero, ev.t === 'stand' ? 'Last Breath!' : ev.t === 'revive' ? 'Reborn! ' + ev.hp + ' ♥' : '+' + ev.amount + ' ♥', 'heal'); render(); await sleep(480);

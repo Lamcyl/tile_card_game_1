@@ -131,7 +131,6 @@ button.primary { background: var(--attacker); border-color: transparent; font-we
   display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 6px 10px;
   background: var(--panel-2); border-radius: 10px;
 }
-.hero-icon { font-size: 22px; }
 .hp-bar { flex: 1; height: 12px; background: #111; border-radius: 6px; overflow: hidden; }
 .hp-fill { height: 100%; background: var(--hp); transition: width .3s; }
 .hp-text { font-weight: 700; min-width: 64px; text-align: right; }

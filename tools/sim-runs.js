@@ -5,6 +5,7 @@
 //        node tools/sim-runs.js 1 campaign [maxRuns]   consecutive runs with greedy Camp shopping
 'use strict';
 // SEED=<n> makes every run reproducible (Math.random and the gacha rng are seeded). TRACE=1 prints the Camp state after each campaign run, DEBUG=1 every battle;
+// HERO=<marshal|pyromancer|quartermaster|sentinel|rotate> chooses the hero (default marshal; profiles ignore unlocks); NOABILITY=1 never uses the ability.
 // NOITEMS / NOGACHA / NORULES / NORELICS switch a power source off (ablation).
 if (process.env.SEED) { let a = Number(process.env.SEED) >>> 0; Math.random = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const Engine = require('../prototype/js/engine.js');
@@ -20,11 +21,11 @@ const Events = require('../prototype/js/events.js');
 const TILES = [];
 for (const r of Engine.PLAYER_ROWS) for (let c = 0; c < 5; c++) TILES.push(Engine.key(r, c));
 
-function score(state, p, army) {
+function score(state, p, army, baseHp) {
   const s = Engine.resolveTurn(state, p, army).state;
   if (s.status === 'cleared') return -1;
   const threat = s.enemies.filter(Engine.isThreat);
-  return (state.hp - s.hp) + 0.6 * threat.reduce((n, e) => n + e.atk, 0) + 0.15 * threat.reduce((n, e) => n + e.hp, 0) + (s.status === 'defeated' ? 100 : 0);
+  return ((baseHp === undefined ? state.hp : baseHp) - s.hp) + 0.6 * threat.reduce((n, e) => n + e.atk, 0) + 0.15 * threat.reduce((n, e) => n + e.hp, 0) + (s.status === 'defeated' ? 100 : 0);
 }
 function bestPlacement(state, army, iters = 2500, restarts = 4) {
   let best = null, bestV = Infinity;
@@ -42,10 +43,38 @@ function bestPlacement(state, army, iters = 2500, restarts = 4) {
   }
   return best;
 }
-function fight(node, hp, maxHp, army, seed, rules) {
-  const stage = Object.assign({ heroHp: hp, heroMaxHp: maxHp, rules: rules || {} }, Gen.generateBattle(node, seed));
+// Hero ability policy (WP15): before planning a turn, try the ability (every sensible target) and use it when the best
+// placement afterwards scores clearly better than without it (a margin keeps it for a worse turn). NOABILITY=1 never uses it.
+function abilityCandidates(st) {
+  const id = st.ability, a = Engine.HERO_ABILITIES[id];
+  if (!a || a.target === 'none') return [null];
+  const foes = st.enemies.filter((e) => e.alive);
+  const barrels = foes.filter((e) => Engine.ENEMY_TYPES[e.type].barrel);
+  const threats = foes.filter(Engine.isThreat).sort((x, y) => y.atk - x.atk || x.hp - y.hp);
+  return [...new Set(barrels.concat(threats.slice(0, 2)).map((e) => e.id))];
+}
+function planTurn(st, army, p0) {
+  if (process.env.NOABILITY || st.abilityUsed || !st.ability) return { st, placement: p0 };
+  const v0 = score(st, p0, army);
+  if (v0 < 0) return { st, placement: p0 }; // this turn clears the board anyway
+  let best = null;
+  for (const t of abilityCandidates(st)) {
+    const out = Engine.useAbility(st, t); if (!out) continue;
+    if (out.state.status === 'cleared') return { st: out.state, placement: {} };
+    const p1 = bestPlacement(out.state, army, 900, 2), v1 = score(out.state, p1, army, st.hp);
+    if (!best || v1 < best.v) best = { v: v1, st: out.state, placement: p1 };
+  }
+  return best && best.v + 1.5 < v0 ? best : { st, placement: p0 };
+}
+function fight(node, hp, maxHp, army, seed, rules, heroStage) {
+  const stage = Object.assign({ heroHp: hp, heroMaxHp: maxHp, rules: rules || {} }, heroStage || {}, Gen.generateBattle(node, seed));
   let st = Engine.createState(stage);
-  while (st.status === 'playing' && st.turn <= 6) st = Engine.resolveTurn(st, bestPlacement(st, army), army).state;
+  while (st.status === 'playing' && st.turn <= 6) {
+    const plan = planTurn(st, army, bestPlacement(st, army));
+    st = plan.st;
+    if (st.status !== 'playing') break;
+    st = Engine.resolveTurn(st, plan.placement, army).state;
+  }
   return st;
 }
 
@@ -97,7 +126,7 @@ function playRun(save0) {
     const bossNode = fights.find((n) => n.type === 'boss'), normals = fights.filter((n) => n.type !== 'boss');
     const node = bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode);
     cleared.add(node.id);
-    const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save, { relics }));
+    const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save, { relics }), Progress.heroStage(save));
     if (st.status !== 'cleared') return { wins, maxLv, souls: Math.round(souls * 0.75), bosses, items, end: 'died', diedAt: node.level, start: Progress.startSupplies(save0), save };
     if (process.env.DEBUG) console.log('  run' + (save0.runs + 1) + ' w' + wins + ' ' + node.id + ' ' + node.type + ' Lv' + node.level + ' hp ' + st.hp + '/' + Progress.maxHp(save) + ' sup ' + supplies + ' atk ' + JSON.stringify(Progress.buildArmy(save, mods).filter((c) => c.atk).map((c) => c.id + ':' + c.atk)) + ' dmg' + st.damageTaken);
     hp = st.hp; wins++; if (node.type === 'elite' || node.type === 'boss') keys = Math.min(World.MAX_KEYS, keys + 1); gold += Gen.goldFor(node, Gen.starsFor(st.damageTaken || 0));
@@ -133,16 +162,23 @@ const profiles = {
   'Greenvale done (HP+15, 7 slots, Drill 1, Provisions 2)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 5, command: 2, drill: 1, bulwark: 1, provisions: 2 }, unlocked: ['meadow', 'forest', 'bamboo', 'lake', 'beach', 'dunes'], bossesBeaten: ['meadow', 'forest', 'bamboo', 'lake'], squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1'] }),
 };
 
+// Hero choice (WP15): HERO=<id> picks one (falls back to Marshal while locked); HERO=rotate cycles through the unlocked heroes run by run.
+function setHero(save, force) {
+  const want = process.env.HERO || 'marshal', list = Progress.HEROES.filter((h) => Progress.heroUnlocked(save, h.id));
+  if (force && Progress.HERO_BY[want]) { save.hero = want; return; } // profiles: any hero, whatever the unlock state
+  save.hero = want === 'rotate' ? list[(save.runs || 0) % list.length].id : (list.find((h) => h.id === want) || list[0]).id;
+}
 // Campaign: play consecutive runs, spending Souls greedily on the cheapest useful Camp upgrade or recruit,
 // and report in which run each region's first boss fell.
 function campaign(maxRuns) {
   const crystalBoss = new Set(); let simSeed = (Number(process.env.SEED) || 0) * 7919 + 12345; const simRnd = () => { simSeed = (simSeed * 1664525 + 1013904223) >>> 0; return simSeed / 4294967296; };
-  let save = Progress.freshSave(); const firstRun = {}, unlockRun = {}, log = [];
+  let save = Progress.freshSave(); setHero(save); const firstRun = {}, unlockRun = {}, log = [];
   const order = ['vitality', 'provisions', 'command', 'drill', 'fortune', 'bulwark'];
   for (let r = 1; r <= maxRuns; r++) {
     const res = playRun(save); const before = save.bossesBeaten.length;
     save = res.save; save.runs++; save.souls += Math.round(res.souls); save.run = null;
     if (r === 1) { const cheap = Progress.cheapestUpgrade(save); if (cheap && save.souls < cheap.cost) save.souls = cheap.cost; } // first-run guarantee (app.js endRun)
+    setHero(save);
     for (const b of save.bossesBeaten) { for (const u of World.SUB_BY[b].unlocks) if (!(u in unlockRun)) unlockRun[u] = r; }
     // WP11 gacha approximation: Crystals = first boss kills (3 + region) + about 3 per run from bounties; spent on single pulls with a seeded rng.
     for (const b of save.bossesBeaten) if (!(crystalBoss.has(b))) { crystalBoss.add(b); save.crystals += Math.round(Progress.bossCrystals(World.SUB_BY[b].regionIndex)); }
@@ -172,7 +208,7 @@ console.log('World: ' + World.SUBAREAS.length + ' sub-areas, ' + nodes.length + 
 if (process.argv[3] !== 'campaign') {
   for (const [name, save] of Object.entries(profiles)) {
     if (process.env.PROFILE && !name.includes(process.env.PROFILE)) continue;
-    const res = []; for (let i = 0; i < N; i++) res.push(playRun(save));
+    setHero(save, true); const res = []; for (let i = 0; i < N; i++) res.push(playRun(save));
     const avg = (f) => (res.reduce((n, r) => n + f(r), 0) / N).toFixed(1);
     console.log(`\n${name} (start Supplies ${res[0].start}): battles won ${avg((r) => r.wins)}, bosses ${avg((r) => r.bosses)}, items ${avg((r) => r.items)}, deepest level ${avg((r) => r.maxLv)}, souls ${avg((r) => r.souls)}`);
     console.log('  ' + res.map((r) => (r.end === 'died' ? 'died at Lv' + r.diedAt : r.end === 'supplies' ? 'out of Supplies' : 'cleared all') + ' after ' + r.wins).join(' | '));

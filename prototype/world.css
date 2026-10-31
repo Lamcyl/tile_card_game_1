@@ -477,3 +477,13 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 .start-at small { color: #6a5a4a; margin-right: 2px; }
 .start-at button { padding: 5px 10px; font-size: 13px; min-height: 32px; border-radius: 16px; }
 .start-at button.on { background: #c8402f; color: #fbf5e4; border-color: #c8402f; }
+
+/* WP15 hero picker at Camp */
+.hero-pick { margin: 4px 0 8px; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.hero-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 4px; min-height: 40px; font-size: 13px; border-radius: 18px; }
+.hero-chip .hero-seal { width: 30px; height: 30px; font-size: 17px; }
+.hero-chip.on { background: #f3e2b8; border-color: #c8402f; box-shadow: 0 0 0 2px #c8402f; }
+.hero-chip.locked { opacity: .6; }
+.hero-chip.locked .hero-seal { filter: grayscale(1); }
+.hero-text { margin: 6px 2px 0; font-size: 12.5px; line-height: 1.35; color: #5a4a3a; }

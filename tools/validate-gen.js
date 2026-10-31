@@ -28,7 +28,7 @@ const ROLES = ['basic', 'armored', 'barrel'];
 
 // The deepest level of the last tier is met with a fully upgraded squad (Drill 4, Bulwark 4).
 function refSave(tier, level) {
-  const save = Object.assign(Progress.freshSave(), JSON.parse(JSON.stringify(REF[tier])));
+  const save = Object.assign(Progress.freshSave(), JSON.parse(JSON.stringify(REF[tier])), { hero: null }); // heroless reference squads (hero passives would only make fights easier)
   if (tier === 5 && level >= 15) { save.upgrades.drill = 4; save.upgrades.bulwark = 4; }
   return save;
 }

@@ -75,7 +75,8 @@
   ];
   const HERO_BY = Object.fromEntries(HEROES.map((h) => [h.id, h]));
   const heroUnlocked = (s, id) => { const h = HERO_BY[id]; return !!h && (!h.unlock || (h.unlock.boss ? s.bossesBeaten.includes(h.unlock.boss) : (s.runs || 0) >= h.unlock.runs)); };
-  const heroOf = (s) => (HERO_BY[s.hero] && heroUnlocked(s, s.hero) ? HERO_BY[s.hero] : HERO_BY.marshal);
+  const NO_HERO = { id: null, name: 'No hero', passive: '', ability: null, glyph: '命', hue: '#c8352b' }; // tools use hero: null (validators)
+  const heroOf = (s) => HERO_BY[s.hero] || NO_HERO; // load() and the Camp picker enforce unlocks and a valid hero
   // Hero fields for the engine's stage definition (Engine.createState reads `hero` and `ability`).
   const heroStage = (s) => { const h = heroOf(s); return { hero: h.id, ability: h.ability }; };
 

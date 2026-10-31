@@ -444,6 +444,16 @@ Upgrade costs rise steeply and tracks have caps, so Camp upgrades support progre
 - Choose one hero per run. Each has a **passive** and an **ability usable once per battle**.
 - Examples: **Marshal** (swap two units mid-turn), **Pyromancer** (ignite one barrel), **Quartermaster** (+1 reward choice).
 - Heroes are unlocked through milestones or pulled from the gacha.
+- *(Implemented, WP15.)* The hero is picked on the Camp sheet (chips with a brushed-seal monogram as a placeholder portrait, until real art exists) and saved as `save.hero`. Passives are engine rules / HP / reward choices; abilities live in `Engine.HERO_ABILITIES` and are used in the Plan phase with `Engine.useAbility`, so the solver and simulations understand them. The hero panel in battle shows the seal, name, passive and an ability button (a targeted ability asks you to tap an enemy; the button is greyed out as "spent" afterwards).
+
+| Hero | Unlock | Passive | Ability (once per battle) |
+|---|---|---|---|
+| **Marshal** 将 | from the start | Shields block +1 | **Rally**: every attacker +1 ATK this turn (replaces "swap two units": units can already be rearranged freely during Plan) |
+| **Pyromancer** 炎 | beat the Sunny Meadows boss | Barrels explode for 3 | **Ignite**: pick an enemy; a Barrel explodes at once, anything else takes 2 damage ignoring armor |
+| **Quartermaster** 糧 | finish 3 expeditions | One extra choice in every reward | **Ration**: heal the damage taken this battle, up to 4 HP |
+| **Sentinel** 守 | beat the Old Oak Wood boss | +4 max HP | **Brace**: enemy strikes are weakened by 2 this turn |
+
+Gacha-pulled heroes and the Marshal's literal swap are not implemented.
 
 ### 14.3 Achievements
 
@@ -586,7 +596,7 @@ The prototype in `prototype/` has two pages.
 
 **Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
 
-**Not included yet:** heroes, Heat, art and audio.
+**Not included yet:** Heat, art and audio (heroes are in, with placeholder seals).
 
 See the README for how to run it.
 
