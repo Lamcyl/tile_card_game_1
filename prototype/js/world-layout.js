@@ -698,6 +698,34 @@
     util: { rng, hash, inPoly, fillPoly, stampEllipse, stampRect, stampLine, bboxOf, wobble, dist },
     version: 4,
   };
+  // WP13: extra non-battle spots (a Shop and an Event per sub-area). Found on rings around the area centre: on walkable ground inside the
+  // area's own shape, at least 150 from every other node, the landmark and the gates, and reachable from the entry (findPath).
+  // Deterministic (own rng stream), so the existing node positions are untouched. Computed lazily on first read.
+  const EXTRA = {};
+  function placeExtras(id) {
+    const A = AREA_BY[id], out = { shop: null, event: null }, R = rng('extras:' + id);
+    const taken = [A.boss, ...A.elites, ...A.spots, A.entry].concat(A.poiP ? [A.poiP] : []);
+    const L = A.landmark;
+    let gap = 150;
+    const clear = (p) => taken.every((q) => dist(p, q) >= gap) && A.ports.every((q) => dist(p, q.stub) >= 110) && dist(p, [L.x, L.y]) >= Math.max(L.rx, L.ry) * 1.5 + 60;
+    for (const kind of ['shop', 'event']) {
+      let best = null;
+      for (let t = 0; t < 900 && !best; t++) {
+        gap = t < 300 ? 150 : t < 600 ? 125 : 105;
+        const ang = R() * 6.2832, rad = 110 + R() * 380, p = R2([A.cx + Math.cos(ang) * rad, A.cy + Math.sin(ang) * rad]);
+        if (LAYOUT.subAt(p[0], p[1]) !== id || LAYOUT.blocked(p[0], p[1]) || !clear(p)) continue;
+        // keep the 60 units around it walkable too, so the marker is not wedged against a cliff
+        if ([[60, 0], [-60, 0], [0, 60], [0, -60]].some((d) => LAYOUT.blocked(p[0] + d[0], p[1] + d[1]))) continue;
+        if (!LAYOUT.findPath(A.entry[0], A.entry[1], p[0], p[1], { limit: 40000 })) continue;
+        best = p;
+      }
+      out[kind] = best; if (best) taken.push(best);
+    }
+    return out;
+  }
+  for (const id of Object.keys(subareas)) {
+    for (const kind of ['shop', 'event']) Object.defineProperty(subareas[id], kind, { enumerable: true, get() { return (EXTRA[id] || (EXTRA[id] = placeExtras(id)))[kind]; } });
+  }
   root.WorldLayout = LAYOUT;
   if (typeof module !== 'undefined' && module.exports) module.exports = LAYOUT;
 })(typeof window !== 'undefined' ? window : globalThis);

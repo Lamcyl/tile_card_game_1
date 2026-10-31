@@ -11,7 +11,8 @@
   // Free exploration: every monster spot of an unlocked sub-area is open.
   //   lm       = [landmark kind, label]      lv / bossLv = level range of ordinary spots / of the boss
   //   unlocks  = sub-areas revealed by this sub-area's boss; from = the sub-area (or 'camp') that leads here
-  //   poi      = kind of the optional non-battle spot: 'shrine' (healing spring) or 'treasure' (supply cache); free of Supplies
+  //   poi      = kind of the optional non-battle spot: 'shrine' (spring: heal OR upgrade) or 'treasure' (supply cache, sometimes guarded); free of Supplies.
+  //   WP13 also adds a 'shop' (gold) and an 'event' (text vignette) node per sub-area, placed by WorldLayout (subareas[id].shop / .event)
   const SUB_DEFS = [
     // Greenvale
     { id: 'meadow',  region: 'Greenvale',   name: 'Sunny Meadows',    biome: 'meadow',  lm: ['hill', 'Blossom Hill'],              lv: [1, 2], bossLv: 4,  unlocks: ['forest'],         from: 'camp',   poi: 'treasure' },
@@ -39,6 +40,8 @@
     { id: 'lavafall',region: 'Ember Peaks', name: 'Ember Falls',      biome: 'ash',     lm: ['lava-falls', 'The Ember Falls'],     lv: [11, 12], bossLv: 13, unlocks: ['caldera'],       from: 'ridge',  poi: 'treasure' },
     { id: 'caldera', region: 'Ember Peaks', name: 'Magma Caldera',    biome: 'caldera', lm: ['volcano', 'Mount Ember'],           lv: [12, 14], bossLv: 15, unlocks: [],                from: 'lavafall', poi: 'shrine' },
   ];
+  const GUARDED = ['bamboo', 'cove', 'canyon', 'frozen', 'glacier', 'lavafall']; // treasure caches that have a guard (WP13)
+  const SHOPS = ['meadow', 'bamboo', 'beach', 'cove', 'dunes', 'canyon', 'snow', 'rime', 'ash', 'lavafall']; // sub-areas with a Shop (WP13)
   const REGIONS = ['Greenvale', 'Azure Coast', 'Sunscorch', 'Frostveil', 'Ember Peaks'];
 
   // ---------- Deterministic helpers ----------
@@ -69,7 +72,7 @@
     const L = (LAYOUT && LAYOUT.subareas && LAYOUT.subareas[d.id]) || placeholderSub(i);
     return {
       id: d.id, region: d.region, name: d.name, biome: d.biome, lv: d.lv, bossLv: d.bossLv, unlocks: d.unlocks, from: d.from, poi: d.poi,
-      bounds: L.bounds, shape: L.shape || null, entry: L.entry, boss: L.boss, elites: L.elites || [], spots: L.spots || [], poiPos: L.poi || null,
+      bounds: L.bounds, shape: L.shape || null, entry: L.entry, boss: L.boss, elites: L.elites || [], spots: L.spots || [], poiPos: L.poi || null, shopPos: L.shop || null, eventPos: L.event || null,
       landmark: Object.assign({}, L.landmark, { kind: d.lm[0], label: d.lm[1] }),
       regionIndex: REGIONS.indexOf(d.region),
     };
@@ -128,7 +131,15 @@
       });
       const eliteLv = sub.lv[1] + (sub.regionIndex >= 1 ? 1 : 0);
       sub.elites.forEach((p, i) => add(sub.id + '-e' + i, p, 'elite', eliteLv, 'tough'));
-      if (sub.poiPos) add(sub.id + '-poi', sub.poiPos, sub.poi, sub.lv[0]);
+      if (sub.poiPos) {
+        // WP13: some caches are guarded (you must beat a patrol first); the guard is a normal fight at the sub-area's top level.
+        const guarded = sub.poi === 'treasure' && GUARDED.includes(sub.id);
+        add(sub.id + '-poi', sub.poiPos, sub.poi, guarded ? sub.lv[1] : sub.lv[0], guarded ? 'armored' : null);
+        if (guarded) nodes[nodes.length - 1].guarded = true;
+      }
+      // WP13: a roadside Shop in every second sub-area and an Event (a short vignette) in every sub-area. Both are free of Supplies.
+      if (sub.shopPos && SHOPS.includes(sub.id)) add(sub.id + '-shop', sub.shopPos, 'shop', sub.lv[0]);
+      if (sub.eventPos) add(sub.id + '-event', sub.eventPos, 'event', sub.lv[0]);
       add(sub.id + '-boss', sub.boss, 'boss', sub.bossLv, 'boss');
     }
     const byId = Object.fromEntries(nodes.map((n) => [n.id, n]));

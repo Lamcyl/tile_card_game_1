@@ -2215,6 +2215,8 @@
     if (type === 'camp') return drawCamp(n, A);
     if (type === 'shrine') return drawShrine(n, A, done, far);
     if (type === 'treasure') return drawChest(n, A, done, far);
+    if (type === 'shop') return drawShop(n, A, done, far);
+    if (type === 'event') return drawEvent(n, A, done, far);
     const boss = type === 'boss', elite = type === 'elite';
     const rx = boss ? 46 : elite ? 33 : 29, ry = rx * 0.4, S = boss ? 96 : elite ? 72 : 64;
     const diff = lvlDifficulty(n), col = DANGER[diff - 1], grey = far || done;
@@ -2307,6 +2309,38 @@
     if (done) drawTick(x, y - 14, A);
     if (st.selected === n.id) drawSelect(x, y, 36, 15, A);
   }
+  // WP13: a roadside market stall (vermilion and cream awning, a hanging coin) and an event lantern (a paper lantern with a brushed "?").
+  function drawShop(n, A, done, far) {
+    const x = n.x, y = n.y; ctx.globalAlpha = A * (done ? 0.5 : far ? 0.65 : 1);
+    soft(ctx, x, y + 2, 32, 10, '#4a3a2a', 0.3);
+    const gr = (c) => (far ? '#a3a099' : c);
+    ctx.strokeStyle = INK; ctx.lineWidth = 1.5;
+    ctx.fillStyle = gr('#a56e3c'); ctx.fillRect(x - 17, y - 12, 34, 12); ctx.strokeRect(x - 17, y - 12, 34, 12);   // counter
+    ctx.strokeStyle = gr('#6a4a2c'); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x - 17, y - 12); ctx.lineTo(x - 17, y - 36); ctx.moveTo(x + 17, y - 12); ctx.lineTo(x + 17, y - 36); ctx.stroke();
+    for (let i = 0; i < 4; i++) { ctx.fillStyle = i % 2 ? gr('#f3e7c8') : gr(VERM); ctx.beginPath(); ctx.moveTo(x - 20 + i * 10, y - 36); ctx.lineTo(x - 10 + i * 10, y - 36); ctx.lineTo(x - 11 + i * 10, y - 28); ctx.lineTo(x - 19 + i * 10, y - 28); ctx.closePath(); ctx.fill(); }
+    ctx.strokeStyle = INK; ctx.lineWidth = 1.3; ctx.beginPath(); ctx.moveTo(x - 20, y - 36); ctx.lineTo(x + 20, y - 36); ctx.lineTo(x + 19, y - 28); ctx.lineTo(x - 19, y - 28); ctx.closePath(); ctx.stroke();
+    ctx.fillStyle = gr('#dcb450'); for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.ellipse(x - 8 + i * 8, y - 14, 3.2, 2, 0, 0, 7); ctx.fill(); }
+    if (!done && !far) { const sw = Math.sin(T * 2.4) * 1.5; ctx.strokeStyle = INK; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x + 8, y - 28); ctx.lineTo(x + 8 + sw, y - 22); ctx.stroke(); ctx.fillStyle = '#dcb450'; ctx.beginPath(); ctx.arc(x + 8 + sw, y - 20, 3.4, 0, 7); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#6a4a2c'; ctx.fillRect(x + 7 + sw, y - 21, 2, 2); }
+    ctx.globalAlpha = 1;
+    if (done) drawTick(x, y - 18, A);
+    if (st.selected === n.id) drawSelect(x, y - 4, 32, 13, A);
+  }
+  function drawEvent(n, A, done, far) {
+    const x = n.x, y = n.y; ctx.globalAlpha = A * (done ? 0.5 : far ? 0.65 : 1);
+    soft(ctx, x, y + 2, 24, 8, '#4a3a2a', 0.3);
+    const gr = (c) => (far ? '#a3a099' : c), sway = Math.sin(T * 1.6 + x) * (done || far ? 0 : 1.2);
+    ctx.strokeStyle = gr('#6a4a2c'); ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(x - 8, y); ctx.lineTo(x - 8, y - 38); ctx.quadraticCurveTo(x - 8, y - 42, x + 2, y - 42); ctx.lineTo(x + 6 + sway, y - 42); ctx.stroke();   // lantern post
+    ctx.strokeStyle = INK; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x + 6 + sway, y - 42); ctx.lineTo(x + 6 + sway, y - 37); ctx.stroke();
+    if (!done && !far) soft(ctx, x + 6 + sway, y - 26, 20, 20, '#ffd27a', 0.35);
+    ctx.fillStyle = gr('#f3d9a0'); ctx.beginPath(); ctx.ellipse(x + 6 + sway, y - 27, 9, 11, 0, 0, 7); ctx.fill();
+    ctx.strokeStyle = INK; ctx.lineWidth = 1.4; ctx.stroke();
+    ctx.fillStyle = gr('#4a3a2e'); ctx.fillRect(x + 1 + sway, y - 39, 10, 3); ctx.fillRect(x + 1 + sway, y - 17, 10, 3);
+    ctx.strokeStyle = gr(VERM); ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x + 2.5 + sway, y - 30); ctx.quadraticCurveTo(x + 3 + sway, y - 35, x + 7 + sway, y - 33); ctx.quadraticCurveTo(x + 10 + sway, y - 31, x + 6.5 + sway, y - 27); ctx.lineTo(x + 6.5 + sway, y - 25); ctx.stroke();
+    ctx.fillStyle = gr(VERM); ctx.beginPath(); ctx.arc(x + 6.5 + sway, y - 21.2, 1.3, 0, 7); ctx.fill(); ctx.lineCap = 'butt';
+    ctx.globalAlpha = 1;
+    if (done) drawTick(x, y - 14, A);
+    if (st.selected === n.id) drawSelect(x, y - 4, 26, 12, A);
+  }
   function drawChest(n, A, done, far) {
     const x = n.x, y = n.y; ctx.globalAlpha = A * (done ? 0.5 : far ? 0.65 : 1);
     soft(ctx, x, y + 2, 28, 9, '#4a3a2a', 0.35);
@@ -2315,6 +2349,10 @@
     ctx.fillStyle = gr('#a56e3c'); ctx.beginPath(); ctx.moveTo(x - 16, y - 16); ctx.quadraticCurveTo(x, y - 34, x + 16, y - 16); ctx.closePath(); ctx.fill();
     ctx.fillStyle = gr('#dcb450'); ctx.fillRect(x - 17, y - 17, 34, 3); ctx.fillRect(x - 12, y - 28, 3, 12); ctx.fillRect(x + 9, y - 28, 3, 12); ctx.fillRect(x - 3, y - 18, 6, 8);
     ctx.strokeStyle = INK; ctx.lineWidth = 1.5; ctx.strokeRect(x - 16, y - 16, 32, 17); ctx.beginPath(); ctx.moveTo(x - 16, y - 16); ctx.quadraticCurveTo(x, y - 34, x + 16, y - 16); ctx.stroke();
+    if (n.guarded && !done) { // a vermilion rope seal and a tiny paper tag: this cache has a guard
+      ctx.globalAlpha = A * (far ? 0.65 : 1); ctx.strokeStyle = far ? '#a3a099' : VERM; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(x - 17, y - 9); ctx.lineTo(x + 17, y - 9); ctx.stroke();
+      ctx.fillStyle = far ? '#a3a099' : VERM; ctx.fillRect(x - 4, y - 14, 8, 10); ctx.strokeStyle = '#fbeadb'; ctx.lineWidth = 1.3; ctx.beginPath(); ctx.moveTo(x - 2, y - 11); ctx.lineTo(x + 2, y - 7); ctx.moveTo(x + 2, y - 11); ctx.lineTo(x - 2, y - 7); ctx.stroke();
+    }
     if (!done && !far) { const k = 0.5 + 0.5 * Math.sin(T * 4); ctx.globalAlpha = A * k; ctx.fillStyle = '#fff6c4'; ctx.beginPath(); ctx.moveTo(x + 18, y - 34); ctx.lineTo(x + 20, y - 29); ctx.lineTo(x + 25, y - 27); ctx.lineTo(x + 20, y - 25); ctx.lineTo(x + 18, y - 20); ctx.lineTo(x + 16, y - 25); ctx.lineTo(x + 11, y - 27); ctx.lineTo(x + 16, y - 29); ctx.closePath(); ctx.fill(); }
     ctx.globalAlpha = 1;
     if (done) drawTick(x, y - 12, A);
@@ -2324,7 +2362,7 @@
   // Overview markers: small brushed discs.
   function drawMarker(n, A) {
     const state = nodeState(n), k = 1 / z, boss = n.type === 'boss';
-    const r = (boss ? 5.2 : n.type === 'camp' ? 7 : n.type === 'elite' ? 3.8 : n.type === 'shrine' || n.type === 'treasure' ? 3.4 : 2.7) * k, x = n.x, y = n.y;
+    const r = (boss ? 5.2 : n.type === 'camp' ? 7 : n.type === 'elite' ? 3.8 : n.type === 'shrine' || n.type === 'treasure' || n.type === 'shop' || n.type === 'event' ? 3.4 : 2.7) * k, x = n.x, y = n.y;
     ctx.globalAlpha = A;
     if (state === 'near') { const q = (T * 0.9) % 1; ctx.globalAlpha = A * (1 - q); ctx.strokeStyle = '#e8b04a'; ctx.lineWidth = 1.6 * k; ctx.beginPath(); ctx.arc(x, y, r + (2 + q * 4) * k, 0, 7); ctx.stroke(); ctx.globalAlpha = A; }
     let fill = '#fbf5e4', edge = '#5b4a3a';
@@ -2333,6 +2371,8 @@
     else if (state === 'far') { fill = '#cfcdc6'; edge = '#8f918f'; }
     else if (n.type === 'shrine') { fill = '#d8eef2'; edge = '#3f8fa8'; }
     else if (n.type === 'treasure') { fill = '#f3dfa0'; edge = '#b8892e'; }
+    else if (n.type === 'shop') { fill = '#f3dfa0'; edge = '#c0553c'; }
+    else if (n.type === 'event') { fill = '#efe4f4'; edge = '#7a5aa0'; }
     else edge = DANGER[lvlDifficulty(n) - 1];
     ctx.fillStyle = state === 'far' || state === 'done' || r * z > 4 ? fill : edge; ctx.strokeStyle = edge; ctx.lineWidth = (boss ? 1.8 : 1.3) * k;
     ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.stroke();
@@ -2341,6 +2381,8 @@
     else if (n.type === 'camp') { ctx.fillStyle = '#c0553c'; ctx.beginPath(); ctx.moveTo(x - r * 0.6, y + r * 0.45); ctx.lineTo(x, y - r * 0.6); ctx.lineTo(x + r * 0.6, y + r * 0.45); ctx.closePath(); ctx.fill(); }
     else if (n.type === 'shrine') { ctx.fillStyle = '#3f8fa8'; ctx.beginPath(); ctx.moveTo(x, y - r * 0.6); ctx.quadraticCurveTo(x + r * 0.55, y + r * 0.05, x, y + r * 0.55); ctx.quadraticCurveTo(x - r * 0.55, y + r * 0.05, x, y - r * 0.6); ctx.fill(); }
     else if (n.type === 'treasure') { ctx.fillStyle = '#8a5a34'; ctx.fillRect(x - r * 0.55, y - r * 0.3, r * 1.1, r * 0.75); ctx.fillStyle = '#dcb450'; ctx.fillRect(x - r * 0.1, y - r * 0.3, r * 0.2, r * 0.4); }
+    else if (n.type === 'shop') { ctx.fillStyle = '#c0553c'; ctx.beginPath(); ctx.moveTo(x - r * 0.7, y - r * 0.05); ctx.lineTo(x - r * 0.5, y - r * 0.6); ctx.lineTo(x + r * 0.5, y - r * 0.6); ctx.lineTo(x + r * 0.7, y - r * 0.05); ctx.closePath(); ctx.fill(); ctx.fillStyle = '#dcb450'; ctx.fillRect(x - r * 0.5, y, r, r * 0.45); }
+    else if (n.type === 'event') { ctx.strokeStyle = '#7a5aa0'; ctx.lineWidth = 1.5 * k; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x - r * 0.35, y - r * 0.2); ctx.quadraticCurveTo(x - r * 0.3, y - r * 0.7, x, y - r * 0.55); ctx.quadraticCurveTo(x + r * 0.4, y - r * 0.4, x, y + r * 0.05); ctx.lineTo(x, y + r * 0.2); ctx.stroke(); ctx.fillStyle = '#7a5aa0'; ctx.beginPath(); ctx.arc(x, y + r * 0.52, r * 0.12, 0, 7); ctx.fill(); ctx.lineCap = 'butt'; }
     else if (r * z > 4) skull(ctx, x, y, r * 0.52, state === 'far' ? '#8f918f' : INK, fill);
     if (boss) { ctx.fillStyle = state === 'far' ? '#9b9a96' : VERM; ctx.fillRect(x + r * 0.55, y - r * 1.5, 5 * k, 5 * k); ctx.strokeStyle = '#4a3a2e'; ctx.lineWidth = 1.3 * k; ctx.beginPath(); ctx.moveTo(x + r * 0.55, y - r * 1.5); ctx.lineTo(x + r * 0.55, y - r * 0.6); ctx.stroke(); }
     if (st.selected === n.id) { ctx.strokeStyle = VERM; ctx.lineWidth = 2 * k; ctx.setLineDash([5 * k, 4 * k]); ctx.beginPath(); ctx.arc(x, y, r + 6 * k, 0, 7); ctx.stroke(); ctx.setLineDash([]); }
