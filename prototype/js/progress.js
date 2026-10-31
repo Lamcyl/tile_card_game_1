@@ -33,7 +33,7 @@
   };
   const TRAIT_STEPS = [2, 4, 6];
 
-  // Every unit the player can own. `need` = boss that must be beaten first; `cost` = Souls, `gems` = Crystals (until the WP11 gacha).
+  // Every unit the player can own. `need` = boss that must be beaten first; `cost` = Souls (Commons only; Rare and above are pulled with Crystals).
   //   rarity, trait: see RARITY / TRAITS. stats: overrides of the card type's numbers (atk, range, pattern, block, amount).
   //   fx: per-card engine effects (ignoreArmor, chain, see engine.js). rule: engine rule flags the unit grants to the whole run while
   //   it is in the squad (revive = Phoenix Archer). perk: one line shown in the Squad / Recruit tabs.
@@ -48,18 +48,18 @@
     U({ id: 'banner1', type: 'banner',    trait: 'order',  cost: 45, need: 'meadow' }),
     U({ id: 'horn1',   type: 'horn',      trait: 'arcane', cost: 70, need: 'meadow' }),
     U({ id: 'mage1',   type: 'mage',      trait: 'arcane', cost: 70, need: 'forest' }),
-    U({ id: 'sword2',  type: 'swordsman', trait: 'wild',   cost: 100, need: 'forest', rarity: 'rare', stats: { atk: 4 }, perk: 'Ruyi Staff: hits for 4 instead of 3' }),
-    U({ id: 'shield2', type: 'shield',    trait: 'order',  cost: 100, need: 'forest', rarity: 'rare', stats: { block: 3 }, perk: 'Bronze plating: blocks 3 instead of 2' }),
+    U({ id: 'sword2',  type: 'swordsman', trait: 'wild',   rarity: 'rare', stats: { atk: 4 }, perk: 'Ruyi Staff: hits for 4 instead of 3' }),
+    U({ id: 'shield2', type: 'shield',    trait: 'order',  rarity: 'rare', stats: { block: 3 }, perk: 'Bronze plating: blocks 3 instead of 2' }),
     U({ id: 'spy1',    type: 'spyglass',  trait: 'arcane', cost: 90, need: 'bamboo' }),
-    U({ id: 'drum2',   type: 'drummer',   trait: 'arcane', cost: 100, need: 'bamboo', rarity: 'rare', stats: { amount: 2 }, perk: 'Thunder drums: +2 ATK instead of +1' }),
-    U({ id: 'spear2',  type: 'spearman',  trait: 'arcane', cost: 150, need: ['coral', 'oasis'], rarity: 'rare', stats: { atk: 3 }, perk: 'Lightning spear: hits for 3 instead of 2' }),
+    U({ id: 'drum2',   type: 'drummer',   trait: 'arcane', rarity: 'rare', stats: { amount: 2 }, perk: 'Thunder drums: +2 ATK instead of +1' }),
+    U({ id: 'spear2',  type: 'spearman',  trait: 'arcane', rarity: 'rare', stats: { atk: 3 }, perk: 'Lightning spear: hits for 3 instead of 2' }),
     U({ id: 'horn2',   type: 'horn',      trait: 'wild',   cost: 220, need: ['coral', 'oasis'] }),
-    U({ id: 'mage2',   type: 'mage',      trait: 'arcane', cost: 260, need: ['snow', 'ash'], rarity: 'rare', stats: { atk: 2 }, perk: 'Jaguar moon: hits for 2 instead of 1' }),
+    U({ id: 'mage2',   type: 'mage',      trait: 'arcane', rarity: 'rare', stats: { atk: 2 }, perk: 'Jaguar moon: hits for 2 instead of 1' }),
     U({ id: 'ushabti1', type: 'shield',    trait: 'undead', cost: 160, need: 'temple', block: 2 }),
-    // Rare / Epic / Legendary units with rule effects. Crystal prices stand in for the WP11 gacha.
-    U({ id: 'longbow1', type: 'archer', trait: 'undead', gems: 10, need: 'bamboo', rarity: 'rare', stats: { atk: 2, range: 5 }, fx: { ignoreArmor: 1 }, perk: 'Range 5; arrows ignore armor' }),
-    U({ id: 'storm1',   type: 'mage',   trait: 'arcane', gems: 24, need: ['coral', 'oasis'], rarity: 'epic', stats: { atk: 2, range: 3 }, fx: { chain: 1 }, perk: 'Lightning chains to one more enemy next to a struck one' }),
-    U({ id: 'phoenix1', type: 'archer', trait: 'wild',   gems: 40, need: ['snow', 'ash'], rarity: 'legendary', stats: { atk: 3, range: 5, pattern: 'pierce' }, rule: { revive: 1 }, perk: 'Pierces every row; once per run you rise again at half HP' }),
+    // Rare / Epic / Legendary units with rule effects. Rare and above come only from the gacha (WP11): no Souls cost, no boss gate.
+    U({ id: 'longbow1', type: 'archer', trait: 'undead', rarity: 'rare', stats: { atk: 2, range: 5 }, fx: { ignoreArmor: 1 }, perk: 'Range 5; arrows ignore armor' }),
+    U({ id: 'storm1',   type: 'mage',   trait: 'arcane', rarity: 'epic', stats: { atk: 2, range: 3 }, fx: { chain: 1 }, perk: 'Lightning chains to one more enemy next to a struck one' }),
+    U({ id: 'phoenix1', type: 'archer', trait: 'wild',   rarity: 'legendary', stats: { atk: 3, range: 5, pattern: 'pierce' }, rule: { revive: 1 }, perk: 'Pierces every row; once per run you rise again at half HP' }),
   ];
   const ROSTER_BY = Object.fromEntries(ROSTER.map((u) => [u.id, u]));
 
@@ -90,6 +90,7 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
       dust: 0,                  // ⚒ crafting currency: salvage and duplicates; spent in the Forge (WP9)
       units: {},                // WP11: per owned unit { stars: 1-5 (duplicates), xp: mastery points }; absent = stars 1, xp 0
       pity: 0,                  // WP11: gacha pulls since the last Epic
+      seals: {},                // WP11: Recruitment Office seals per rarity (from duplicates)
       bountiesDone: 0,          // completed bounties, lifetime
       upgrades: {},
       owned: ROSTER.filter((u) => u.start).map((u) => u.id),
@@ -145,6 +146,80 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
   }
   // Crystals for the first defeat of a sub-area boss (3 in region 1, +1 per region).
   const bossCrystals = (regionIndex) => 3 + (regionIndex || 0);
+
+
+  // ---------- Gacha, duplicate stars and mastery (WP11) ----------
+  const PULL_COST = 3, PULL10_COST = 27;          // Crystals
+  const ODDS = { common: 62, rare: 28, epic: 9, legendary: 1 }; // percent per pull
+  const PITY_AT = 30;                              // the 30th pull since the last Epic (or better) is an Epic
+  const MAX_STARS = 5;
+  // Dust for a duplicate of a unit already at 5 stars; Recruitment Office seals needed per rarity.
+  const MAXED_DUST = { common: 3, rare: 8, epic: 20, legendary: 50 };
+  const OFFICE_COST = { common: 4, rare: 6, epic: 8, legendary: 10 };
+  const MASTERY_XP = [0, 30, 80, 150, 250];        // xp needed for mastery level 1..5 (1 xp per battle won, 2 for a boss)
+  const MASTERY_PERKS = ['', '+1 HP (shared)', '+1% Souls', '+1 HP (shared)', 'Veteran: +1 to the main stat'];
+  const STAR_TEXT = ['', '', '+1 HP (shared)', '+1 main stat', '+1 HP (shared)', 'Ascended: +1 range / block / boost'];
+  const unitOf = (s, id) => (s.units && s.units[id]) || { stars: 1, xp: 0 };
+  const starsOf = (s, id) => Math.max(1, Math.min(MAX_STARS, unitOf(s, id).stars || 1));
+  const masteryLevel = (xp) => { let l = 1; for (let i = 1; i < MASTERY_XP.length; i++) if (xp >= MASTERY_XP[i]) l = i + 1; return l; };
+  const masteryOf = (s, id) => { const xp = unitOf(s, id).xp || 0, lv = masteryLevel(xp); return { xp, lv, next: lv < MASTERY_XP.length ? MASTERY_XP[lv] : null, from: MASTERY_XP[lv - 1] }; };
+  // Squad-wide extras from stars and mastery: hp points are shared (2 points = 1 max HP), souls in percent.
+  function growthFx(s) {
+    let pts = 0, souls = 0;
+    for (const id of s.squad) {
+      const st = starsOf(s, id), ml = masteryOf(s, id).lv;
+      pts += (st >= 2 ? 1 : 0) + (st >= 4 ? 1 : 0) + (ml >= 2 ? 1 : 0) + (ml >= 4 ? 1 : 0);
+      if (ml >= 3) souls += 1;
+    }
+    return { hp: Math.floor(pts / 2), souls };
+  }
+  function addXp(s, ids, n) {
+    s.units = s.units || {};
+    for (const id of ids) { const u = s.units[id] || (s.units[id] = { stars: 1, xp: 0 }); u.xp = (u.xp || 0) + n; }
+  }
+  const recruitable = (u) => u.rarity === 'common' && u.cost !== undefined; // direct boss-gated recruits are a Common-only fallback
+  // Units a pull of this rarity can give. Commons respect boss gates; Rare and above never do.
+  function poolFor(s, rarity) {
+    return ROSTER.filter((u) => u.rarity === rarity && (rarity !== 'common' || u.start || recruitAvailable(s, u)));
+  }
+  // Gives the player a unit (new, or a duplicate: +1 star, a seal, or Dust once at 5 stars). Returns a result record.
+  function grantUnit(s, id) {
+    const u = ROSTER_BY[id]; s.units = s.units || {}; s.seals = s.seals || {};
+    const res = { id, rarity: u.rarity, isNew: !s.owned.includes(id), stars: 1, dust: 0, seal: 0, starUp: false };
+    if (res.isNew) { s.owned.push(id); s.units[id] = Object.assign({ stars: 1, xp: 0 }, s.units[id]); if (!canAdd(s, id)) s.squad.push(id); return res; }
+    const rec = s.units[id] || (s.units[id] = { stars: 1, xp: 0 });
+    rec.stars = starsOf(s, id);
+    if (rec.stars < MAX_STARS) { rec.stars++; res.starUp = true; }
+    else res.dust = earn(s, 'dust', MAXED_DUST[u.rarity]);
+    res.stars = rec.stars; res.seal = 1; s.seals[u.rarity] = (s.seals[u.rarity] || 0) + 1;
+    return res;
+  }
+  // One pull: rnd() returns [0,1). Pity: the PITY_AT-th pull since the last Epic or Legendary is an Epic.
+  function pullOnce(s, rnd) {
+    s.pity = (s.pity || 0) + 1;
+    let rarity, pityHit = false;
+    if (s.pity >= PITY_AT) { rarity = 'epic'; pityHit = true; }
+    else { let r = rnd() * 100; rarity = 'common'; for (const k of ['legendary', 'epic', 'rare']) { if (r < ODDS[k]) { rarity = k; break; } r -= ODDS[k]; } }
+    if (rarity === 'epic' || rarity === 'legendary') s.pity = 0;
+    const pool = poolFor(s, rarity);
+    const res = grantUnit(s, pool[Math.floor(rnd() * pool.length)].id);
+    res.pityHit = pityHit; return res;
+  }
+  // n pulls for Crystals (1 or 10); returns the list of results, or null if you cannot pay.
+  function pull(s, n, rnd) {
+    if (!spend(s, 'crystals', n === 10 ? PULL10_COST : PULL_COST * n)) return null;
+    const out = []; for (let i = 0; i < n; i++) out.push(pullOnce(s, rnd)); return out;
+  }
+  // Recruitment Office: spend seals of a rarity to take any unit of that rarity (new, or +1 star). Returns result or null.
+  function officeTrade(s, id) {
+    const u = ROSTER_BY[id]; if (!u) return null;
+    s.seals = s.seals || {};
+    if ((s.seals[u.rarity] || 0) < OFFICE_COST[u.rarity]) return null;
+    if (s.owned.includes(id) && starsOf(s, id) >= MAX_STARS) return null;
+    s.seals[u.rarity] -= OFFICE_COST[u.rarity];
+    const res = grantUnit(s, id); s.seals[u.rarity] -= res.seal; // a trade does not refund a seal
+    res.seal = 0; return res;
+  }
 
   function save(s) {
     try { localStorage.setItem(SAVE_KEY, JSON.stringify(s)); } catch (e) { /* ignore */ }
@@ -204,9 +279,9 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
     return out;
   }
 
-  const maxHp = (s) => BASE_HP + 3 * level(s, 'vitality') + gear(s).hp + traitFx(s).hp;
+  const maxHp = (s) => BASE_HP + 3 * level(s, 'vitality') + gear(s).hp + traitFx(s).hp + growthFx(s).hp;
   const slots = commandCap; // legacy name
-  const soulRate = (s) => 1 + 0.2 * level(s, 'fortune') + (gear(s).souls + traitFx(s).souls) / 100;
+  const soulRate = (s) => 1 + 0.2 * level(s, 'fortune') + (gear(s).souls + traitFx(s).souls + growthFx(s).souls) / 100;
 const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s).supplies;
   function upgradeCost(s, id) {
     const u = UPGRADE_BY[id]; const lv = level(s, id);
@@ -219,6 +294,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
     return best;
   }
   function recruitAvailable(s, unit) {
+    if (unit.rarity !== 'common') return false; // WP11: Rare and above come from the gacha
     if (!unit.need) return true;
     const need = Array.isArray(unit.need) ? unit.need : [unit.need];
     return need.some((b) => s.bossesBeaten.includes(b));
@@ -233,31 +309,34 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
       const base = (f) => (def.stats && def.stats[f] !== undefined ? def.stats[f] : t[f]);
       const m = (mods && mods[id]) || {};
       const card = { id, type: def.type };
+      const st = starsOf(s, id), vet = masteryOf(s, id).lv >= 5 ? 1 : 0, star3 = st >= 3 ? 1 : 0, star5 = st >= 5 ? 1 : 0;
       let upgraded = false;
       if (t.role === 'attacker') {
         const wild = def.trait === 'wild' ? tf.wildAtk : 0, mage = def.type === 'mage' ? tf.mageAtk : 0;
-        card.atk = base('atk') + level(s, 'drill') + (m.atk || 0) + (g.atk[def.type] || 0) + wild + mage;
-        card.range = base('range') + (m.range || 0) + (g.range[def.type] || 0);
+        card.atk = base('atk') + star3 + vet + level(s, 'drill') + (m.atk || 0) + (g.atk[def.type] || 0) + wild + mage;
+        card.range = base('range') + star5 + (m.range || 0) + (g.range[def.type] || 0);
         upgraded = card.atk !== base('atk') || card.range !== base('range');
         if (def.stats && def.stats.pattern) card.pattern = def.stats.pattern;
         if (def.fx) card.fx = def.fx;
       } else if (t.role === 'defender') {
         const b0 = def.block || base('block');
-        card.block = b0 + level(s, 'bulwark') + (m.block || 0) + g.block + tf.block;
+        card.block = b0 + star3 + star5 + vet + level(s, 'bulwark') + (m.block || 0) + g.block + tf.block;
         upgraded = card.block !== b0 || level(s, 'bulwark') > 0;
       } else if (t.role === 'support') {
         // Legendary rule: the first War Horn in the squad multiplies by 3.
         const b0 = def.type === 'horn' && g.horn && s.squad.find((x) => ROSTER_BY[x].type === 'horn') === id ? 3 : base('amount');
-        card.amount = b0 + (m.amount || 0) + (g.amount[def.type] || 0) + (def.trait === 'arcane' && t.effect === 'atk' ? tf.arcAmount : 0);
+        card.amount = b0 + (t.effect === 'mult' ? 0 : star3 + star5) + (m.amount || 0) + (g.amount[def.type] || 0) + (def.trait === 'arcane' && t.effect === 'atk' ? tf.arcAmount : 0);
         upgraded = card.amount !== base('amount');
       }
-      if (upgraded) card.upgraded = true;
+      if (upgraded || st > 1) card.upgraded = true;
       return card;
     });
   }
 
   const Progress = {
     ROSTER, ROSTER_BY, RARITY, TRAITS, TRAIT_STEPS, BASE_CP, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, SUPPLIES_PER_BOSS,
+    PULL_COST, PULL10_COST, ODDS, PITY_AT, MAX_STARS, MAXED_DUST, OFFICE_COST, MASTERY_XP, MASTERY_PERKS, STAR_TEXT,
+    starsOf, masteryOf, masteryLevel, growthFx, addXp, poolFor, grantUnit, pullOnce, pull, officeTrade, recruitable,
     CURRENCIES, balance, canSpend, earn, spend, spendAll, bossCrystals,
     commandCap, squadCp, squadProblem, canAdd, fitSquad, activeTraits, traitCounts, traitFx, rulesFor, unitCp: UNIT_CP,
     freshSave, load, save, reset, level, maxHp, slots, soulRate, startSupplies, upgradeCost, cheapestUpgrade, recruitAvailable, buildArmy,

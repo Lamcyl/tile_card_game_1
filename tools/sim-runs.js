@@ -68,7 +68,8 @@ function playRun(save0) {
     cleared.add(node.id);
     const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save));
     if (st.status !== 'cleared') return { wins, maxLv, souls: Math.round(souls * 0.75), bosses, items, end: 'died', diedAt: node.level, start: Progress.startSupplies(save0), save };
-    hp = st.hp; wins++; maxLv = Math.max(maxLv, node.level); souls += Gen.soulsFor(node, Gen.starsFor(st.damageTaken || 0)) * Progress.soulRate(save);
+    hp = st.hp; wins++; Progress.addXp(save, save.squad, node.type === 'boss' ? 2 : 1); // WP11 mastery
+     maxLv = Math.max(maxLv, node.level); souls += Gen.soulsFor(node, Gen.starsFor(st.damageTaken || 0)) * Progress.soulRate(save);
     // Real WP8 drop logic (levels, substats, pity, elite guarantee, boss Legendaries); new items auto-equip into a free slot.
     const drop = Items.grantDrop(save, node, seed) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null);
     if (drop && drop.item) {
@@ -98,12 +99,17 @@ const profiles = {
 // Campaign: play consecutive runs, spending Souls greedily on the cheapest useful Camp upgrade or recruit,
 // and report in which run each region's first boss fell.
 function campaign(maxRuns) {
+  const crystalBoss = new Set(); let simSeed = 12345; const simRnd = () => { simSeed = (simSeed * 1664525 + 1013904223) >>> 0; return simSeed / 4294967296; };
   let save = Progress.freshSave(); const firstRun = {}, unlockRun = {}, log = [];
   const order = ['vitality', 'provisions', 'command', 'drill', 'fortune', 'bulwark'];
   for (let r = 1; r <= maxRuns; r++) {
     const res = playRun(save); const before = save.bossesBeaten.length;
     save = res.save; save.runs++; save.souls += Math.round(res.souls); save.run = null;
     for (const b of save.bossesBeaten) { for (const u of World.SUB_BY[b].unlocks) if (!(u in unlockRun)) unlockRun[u] = r; }
+    // WP11 gacha approximation: Crystals = first boss kills (3 + region) + about 3 per run from bounties; spent on single pulls with a seeded rng.
+    for (const b of save.bossesBeaten) if (!(crystalBoss.has(b))) { crystalBoss.add(b); save.crystals += Progress.bossCrystals(World.SUB_BY[b].regionIndex); }
+    save.crystals += 3;
+    while (save.crystals >= Progress.PULL_COST) { Progress.pull(save, 1, simRnd); }
     for (const b of save.bossesBeaten) { const reg = World.SUB_BY[b].region; if (!(reg in firstRun)) firstRun[reg] = r; }
     for (let guard = 0; guard < 20; guard++) { // shopping
       const opts = [];
@@ -115,7 +121,7 @@ function campaign(maxRuns) {
     if (save.bossesBeaten.length === World.SUBAREAS.length) break;
   }
   console.log('\nCampaign (' + maxRuns + ' runs max): battles per run ' + log.join(' '));
-  console.log('  final upgrades ' + JSON.stringify(save.upgrades) + ', squad ' + save.squad.length + ' (' + Progress.squadCp(save) + '/' + Progress.commandCap(save) + ' CP), owned ' + save.owned.length + ', items ' + save.items.length);
+  console.log('  final upgrades ' + JSON.stringify(save.upgrades) + ', squad ' + save.squad.length + ' (' + Progress.squadCp(save) + '/' + Progress.commandCap(save) + ' CP), owned ' + save.owned.length + ' (stars ' + save.owned.map((i) => Progress.starsOf(save, i)).join('') + ', pity ' + save.pity + ')' + ', items ' + save.items.length);
   console.log('  bosses beaten ' + save.bossesBeaten.length + '/' + World.SUBAREAS.length + ' (' + save.bossesBeaten.join(', ') + ')');
   console.log('  run in which a sub-area was first unlocked: ' + ['forest', 'beach', 'dunes', 'snow', 'ash', 'glacier', 'caldera'].map((u) => u + ' ' + (unlockRun[u] || '-')).join(', '));
   console.log('  run in which each region first had a boss beaten: ' + World.REGIONS.map((g) => g + ' ' + (firstRun[g] || '-')).join(', '));
