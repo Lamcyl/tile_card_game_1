@@ -174,15 +174,16 @@
   // Souls for winning a battle at a node (before the Fortune bonus).
   // Stage rating (design 11): 3 stars = no damage, 2 = at most 3 damage, 1 = any clear.
   const STAR_SOULS = [1, 1, 1.25, 1.5];
+  const SOUL_SCALE = 0.36, BOSS_BONUS_SOULS = 11, CACHE_SOULS = 5; // first boss kill bonus and supply cache Souls (WP18: about 45% of the old 0.8 / 25 / 10)
   const starsFor = (damageTaken) => (damageTaken <= 0 ? 3 : damageTaken <= 3 ? 2 : 1);
   function soulsFor(node, stars) {
-    const base = Math.round((3 + node.level * 2) * 0.8 * (STAR_SOULS[stars || 1] || 1)); // 0.8: templates make 3-star clears common
+    const base = Math.round((3 + node.level * 2) * SOUL_SCALE * (STAR_SOULS[stars || 1] || 1)); // SOUL_SCALE: WP18 pacing (was 0.8, then 0.36 once gear, sets and gacha made accounts strong early)
     if (node.type === 'boss') return base * 3;
     if (node.type === 'elite') return base * 2;
     return base;
   }
 
-  const Gen = { generateBattle, soulsFor, starsFor, TEMPLATES };
+  const Gen = { generateBattle, soulsFor, starsFor, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
   root.Gen = Gen;
   if (typeof module !== 'undefined' && module.exports) module.exports = Gen;
 })(typeof window !== 'undefined' ? window : globalThis);

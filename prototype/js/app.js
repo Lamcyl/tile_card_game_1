@@ -57,7 +57,7 @@
     if (r) {
       $('#hud').innerHTML =
         '<div class="hud-hp"><span class="lbl">♥</span><div class="bar"><i style="width:' + (100 * r.hp / r.maxHp) + '%"></i></div><b>' + r.hp + '/' + r.maxHp + '</b></div>' +
-        '<div class="hud-chip supplies' + (r.supplies <= 2 ? ' low' : '') + '" title="Supplies: battles left on this run. Normal and elite fights cost 1, bosses add ' + P.SUPPLIES_PER_BOSS + '.">🎒 ' + r.supplies + '</div>' +
+        '<div class="hud-chip supplies' + (r.supplies <= 2 ? ' low' : '') + '" title="Supplies: battles left on this run. Normal and elite fights cost 1; the first boss adds ' + P.SUPPLIES_PER_BOSS + ', the next one 1 (after that a boss costs 1 like any fight).">🎒 ' + r.supplies + '</div>' +
         '<div class="hud-chip" title="Souls carried on this run">✦ ' + r.souls + '</div>';
     } else {
       $('#hud').innerHTML =
@@ -108,7 +108,9 @@
         '<button class="rar-legendary" data-redeem="' + n.id + '|' + it.id + '"' + (can ? '' : ' disabled') + '>' + esc(Items.icon(it)) + ' ' + esc(it.name) + '</button>').join('') + '</div></div>';
   }
   function supplyNote(n) {
-    return n.type === 'boss' ? '<span class="cost gain">🎒 Boss: +' + P.SUPPLIES_PER_BOSS + ' Supplies</span>' : '<span class="cost">🎒 Costs 1 Supply</span>';
+    if (n.type !== 'boss') return '<span class="cost">🎒 Costs 1 Supply</span>';
+    const g = P.bossSupplies(run() ? run().bossesDown : 0);
+    return g > 0 ? '<span class="cost gain">🎒 Boss: +' + g + ' Supplies</span>' : '<span class="cost">🎒 Costs 1 Supply</span>';
   }
 
   function nodeSheet(n) {
@@ -131,7 +133,7 @@
       const miss = Items.missesOf(save, n.id);
       if (miss > 0) body += '<p class="muted small">Bad-luck protection: ' + miss + ' win' + (miss === 1 ? '' : 's') + ' without the unique item. Its chance rises each time.</p>';
     } else if (n.type === 'shrine') body += '<p class="muted">Restores 8 HP. Once per run.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
-    else if (n.type === 'treasure') body += '<p class="muted">Free supplies: ✦ 10 and a reward of your choice.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
+    else if (n.type === 'treasure') body += '<p class="muted">Free supplies: ✦ ' + Gen.CACHE_SOULS + ' and a reward of your choice.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
 
     if (!r) body += '<p class="hint">Set out from Camp to fight here.</p><button class="primary wide" data-act="close-node">Back to Camp</button>';
     else if (r.cleared.includes(n.id)) body += '<p class="hint">Already cleared on this run.</p><button class="wide" data-act="close-node">Close</button>';
@@ -148,7 +150,7 @@
     const r = run(), bl = r.bounties || [];
     const open = [...frontier()].filter((id) => ['battle', 'elite', 'boss'].includes(World.byId[id].type)).length;
     return '<div class="sheet-head"><div><h2>On expedition</h2><p class="muted">Free exploration: tap any monster in an open area. ' + open + ' fights left.</p></div></div>' +
-      '<p class="supply-line">🎒 <b>' + r.supplies + '</b> Supplies left. Each normal or elite win costs 1; a boss adds ' + P.SUPPLIES_PER_BOSS + '. At 0 you return to Camp safely.</p>' +
+      '<p class="supply-line">🎒 <b>' + r.supplies + '</b> Supplies left. Each normal or elite win costs 1; the first boss of a run adds ' + P.SUPPLIES_PER_BOSS + ', the second 1, later ones cost 1 like any fight. At 0 you return to Camp safely.</p>' +
       (bl.length ? '<h4 class="bounty-h">Bounties <small>optional, paid in 💎 when the run ends</small></h4>' + bountyList(bl) : '') +
       '<p class="muted small">HP never regenerates by itself. Return to Camp to keep all ✦ ' + r.souls + ' Souls; if you fall, you keep 75%.</p>' +
       '<button class="wide' + (confirmReturn ? ' danger' : '') + '" data-act="return">' + (confirmReturn ? 'Tap again to end the run and return' : '🏕 Return to Camp') + '</button>';
@@ -378,8 +380,8 @@
       toast('The spring restores ' + (r.hp - before) + ' HP.'); renderAll(); return;
     }
     if (n.type === 'treasure') {
-      r.cleared.push(id); r.souls += 10; persist(); renderAll();
-      offerReward('Supply cache', 'You found ✦ 10 and some supplies. This cost no Supplies.', n); return;
+      r.cleared.push(id); r.souls += Gen.CACHE_SOULS; persist(); renderAll();
+      offerReward('Supply cache', 'You found ✦ ' + Gen.CACHE_SOULS + ' and some supplies. This cost no Supplies.', n); return;
     }
     const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: P.rulesFor(save, r) }, Gen.generateBattle(n, r.seed));
     WorldMap.setActive(false);
@@ -436,24 +438,26 @@
     const dustLine = drop && drop.consolation ? '<p class="supply-line">Elite spoils: ⚒ ' + drop.dust + ' Dust (you own everything it drops).</p>' : '';
     // Supplies: normal and elite wins cost 1, a boss adds some.
     const boss = n.type === 'boss';
-    r.supplies += boss ? P.SUPPLIES_PER_BOSS : -1;
+    const gain = boss ? P.bossSupplies(r.bossesDown || 0) : -1;
+    if (boss) r.bossesDown = (r.bossesDown || 0) + 1;
+    r.supplies += gain;
     r.stars = (r.stars || 0) + stars;
     let title = 'Victory ' + '★'.repeat(stars), text = '✦ ' + gained + ' Souls. You lost ' + state.damageTaken + ' HP.' + (stars === 3 ? ' Flawless: bonus loot roll!' : '');
     if (boss && !save.bossesBeaten.includes(n.sub)) {
       save.bossesBeaten.push(n.sub);
       const sub = World.SUB_BY[n.sub];
       for (const u of sub.unlocks) if (!save.unlocked.includes(u)) { save.unlocked.push(u); r.unlockedNow.push(u); }
-      r.souls += 25;
+      r.souls += Gen.BOSS_BONUS_SOULS;
       const cry = P.earn(save, 'crystals', P.bossCrystals(sub.regionIndex)); r.crystalsNow = (r.crystalsNow || 0) + cry;
       title = World.THEMES[n.sub].boss[0] + ' defeated! ' + '★'.repeat(stars);
       text = (sub.unlocks.length ? 'The fog lifts over ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + '. ' : 'You conquered ' + sub.region + '! ') +
-        'Bonus ✦ 25 and 💎 ' + cry + ' Crystals. New recruits may be waiting at Camp.';
+        'Bonus ✦ ' + Gen.BOSS_BONUS_SOULS + ' and 💎 ' + cry + ' Crystals. New recruits may be waiting at Camp.';
       const target = sub.unlocks.length ? World.SUB_BY[sub.unlocks[0]] : sub;
       setTimeout(() => WorldMap.focus(target.entry[0], target.entry[1]), 300);
     }
     const done = Bounties.track(r.bounties, Object.assign({ won: true, stars, node: n.type }, report || {}));
     const bountyLine = done.length ? '<div class="bounty-done">' + done.map((b) => '<p>🎯 Bounty complete: <b>' + esc(Bounties.text(b)) + '</b> · 💎 ' + b.reward + ' at run end</p>').join('') + '</div>' : '';
-    const supLine = '<p class="supply-line">🎒 ' + (boss ? 'The boss falls: <b>+' + P.SUPPLIES_PER_BOSS + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left.</p>';
+    const supLine = '<p class="supply-line">🎒 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left.</p>';
     const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
       (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'No free slot: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
     persist(); renderAll();

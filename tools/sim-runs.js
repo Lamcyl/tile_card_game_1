@@ -4,7 +4,8 @@
 // Usage: node tools/sim-runs.js [runs]            profiles at fixed progress points
 //        node tools/sim-runs.js 1 campaign [maxRuns]   consecutive runs with greedy Camp shopping
 'use strict';
-// SEED=<n> makes every run reproducible (Math.random is replaced by a seeded generator).
+// SEED=<n> makes every run reproducible (Math.random and the gacha rng are seeded). TRACE=1 prints the Camp state after each campaign run, DEBUG=1 every battle;
+// NOITEMS / NOGACHA / NORULES switch a power source off (ablation).
 if (process.env.SEED) { let a = Number(process.env.SEED) >>> 0; Math.random = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const Engine = require('../prototype/js/engine.js');
 try { require('../prototype/js/world-layout.js'); } catch (e) { /* placeholder layout */ }
@@ -63,18 +64,20 @@ function playRun(save0) {
     const fights = open.filter((n) => !pois.includes(n)).sort((a, b) => (a.type === 'boss') - (b.type === 'boss') || a.level - b.level);
     const spring = pois.find((n) => n.type === 'shrine'); // heal when below 60% HP
     if (spring && hp < Progress.maxHp(save) * 0.6) { cleared.add(spring.id); hp = Math.min(Progress.maxHp(save), hp + 8); continue; }
-    const cache = pois.find((n) => n.type === 'treasure'); if (cache) { cleared.add(cache.id); souls += 10; continue; }
+    const cache = pois.find((n) => n.type === 'treasure'); if (cache) { cleared.add(cache.id); souls += Gen.CACHE_SOULS; continue; }
     if (!fights.length) return { wins, maxLv, souls, bosses, items, end: 'cleared', start: Progress.startSupplies(save0), save };
     const bossNode = fights.find((n) => n.type === 'boss'), normals = fights.filter((n) => n.type !== 'boss');
     const node = bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode);
     cleared.add(node.id);
     const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save));
     if (st.status !== 'cleared') return { wins, maxLv, souls: Math.round(souls * 0.75), bosses, items, end: 'died', diedAt: node.level, start: Progress.startSupplies(save0), save };
+    if (process.env.DEBUG) console.log('  run' + (save0.runs + 1) + ' w' + wins + ' ' + node.id + ' ' + node.type + ' Lv' + node.level + ' hp ' + st.hp + '/' + Progress.maxHp(save) + ' sup ' + supplies + ' atk ' + JSON.stringify(Progress.buildArmy(save, mods).filter((c) => c.atk).map((c) => c.id + ':' + c.atk)) + ' dmg' + st.damageTaken);
     hp = st.hp; wins++; Progress.addXp(save, save.squad, node.type === 'boss' ? 2 : 1); // WP11 mastery
      maxLv = Math.max(maxLv, node.level); souls += Gen.soulsFor(node, Gen.starsFor(st.damageTaken || 0)) * Progress.soulRate(save);
     // Real WP8 drop logic (levels, substats, pity, elite guarantee, boss Legendaries); new items auto-equip into a free slot.
     const stars = Gen.starsFor(st.damageTaken || 0);
     const takeDrop = (drop) => {
+      if (process.env.NOITEMS) return;
       if (!drop || !drop.item || !drop.isNew) return;
       items++;
       const b0 = Items.bonuses(save);
@@ -83,7 +86,7 @@ function playRun(save0) {
     takeDrop(Items.grantDrop(save, node, seed) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null));
     if (stars === 3) takeDrop(Items.grantDrop(save, node, seed + ':star', { bonus: true })); // 3-star clears earn a bonus roll (app.js battleOver)
     if (node.type === 'boss') {
-      supplies += Progress.SUPPLIES_PER_BOSS; bosses++; souls += 25;
+      supplies += Progress.bossSupplies(bosses); bosses++; souls += Gen.BOSS_BONUS_SOULS; // real rule: 3, then 1, then -1
       if (!save.bossesBeaten.includes(node.sub)) { save.bossesBeaten.push(node.sub); for (const u of World.SUB_BY[node.sub].unlocks) if (!save.unlocked.includes(u)) save.unlocked.push(u); }
     } else supplies -= 1;
     // Reward: heal when low, otherwise +1 ATK on a random attacker.
@@ -102,17 +105,18 @@ const profiles = {
 // Campaign: play consecutive runs, spending Souls greedily on the cheapest useful Camp upgrade or recruit,
 // and report in which run each region's first boss fell.
 function campaign(maxRuns) {
-  const crystalBoss = new Set(); let simSeed = 12345; const simRnd = () => { simSeed = (simSeed * 1664525 + 1013904223) >>> 0; return simSeed / 4294967296; };
+  const crystalBoss = new Set(); let simSeed = (Number(process.env.SEED) || 0) * 7919 + 12345; const simRnd = () => { simSeed = (simSeed * 1664525 + 1013904223) >>> 0; return simSeed / 4294967296; };
   let save = Progress.freshSave(); const firstRun = {}, unlockRun = {}, log = [];
   const order = ['vitality', 'provisions', 'command', 'drill', 'fortune', 'bulwark'];
   for (let r = 1; r <= maxRuns; r++) {
     const res = playRun(save); const before = save.bossesBeaten.length;
     save = res.save; save.runs++; save.souls += Math.round(res.souls); save.run = null;
+    if (r === 1) { const cheap = Progress.cheapestUpgrade(save); if (cheap && save.souls < cheap.cost) save.souls = cheap.cost; } // first-run guarantee (app.js endRun)
     for (const b of save.bossesBeaten) { for (const u of World.SUB_BY[b].unlocks) if (!(u in unlockRun)) unlockRun[u] = r; }
     // WP11 gacha approximation: Crystals = first boss kills (3 + region) + about 3 per run from bounties; spent on single pulls with a seeded rng.
-    for (const b of save.bossesBeaten) if (!(crystalBoss.has(b))) { crystalBoss.add(b); save.crystals += Progress.bossCrystals(World.SUB_BY[b].regionIndex); }
+    for (const b of save.bossesBeaten) if (!(crystalBoss.has(b))) { crystalBoss.add(b); save.crystals += Math.round(Progress.bossCrystals(World.SUB_BY[b].regionIndex)); }
     save.crystals += 3;
-    while (save.crystals >= Progress.PULL_COST) { Progress.pull(save, 1, simRnd); }
+    while (!process.env.NOGACHA && save.crystals >= Progress.PULL_COST) { Progress.pull(save, 1, simRnd); }
     for (const b of save.bossesBeaten) { const reg = World.SUB_BY[b].region; if (!(reg in firstRun)) firstRun[reg] = r; }
     for (let guard = 0; guard < 20; guard++) { // shopping
       const opts = [];
@@ -120,6 +124,7 @@ function campaign(maxRuns) {
       for (const id of order) { const c = Progress.upgradeCost(save, id); if (c !== null && c <= save.souls) opts.push({ cost: c, buy: () => { save.upgrades[id] = (save.upgrades[id] || 0) + 1; } }); }
       if (!opts.length) break; opts.sort((a, b) => a.cost - b.cost); save.souls -= opts[0].cost; opts[0].buy();
     }
+    if (process.env.TRACE) console.log('after run ' + r + ': souls left ' + save.souls + ' (earned ' + Math.round(res.souls) + ') upgrades ' + JSON.stringify(save.upgrades) + ' squad ' + save.squad.join(',') + ' crystals ' + save.crystals + ' items ' + save.items.length + ' wins ' + res.wins + ' end ' + res.end);
     log.push(res.wins + (res.end === 'died' ? 'x@' + res.diedAt : '') + (res.bosses ? 'B' + res.bosses : ''));
     if (save.bossesBeaten.length === World.SUBAREAS.length) break;
   }

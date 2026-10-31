@@ -76,7 +76,9 @@
   const BASE_HP = 20;
   const BASE_CP = 8;   // Command Points: a Common unit costs 1, Rare 2, Epic 3, Legendary 4
 const BASE_SUPPLIES = 8;   // battles a fresh account can fight per run
-const SUPPLIES_PER_BOSS = 4; // a boss victory adds this many Supplies
+const SUPPLIES_PER_BOSS = 3; // the first boss of a run adds this many Supplies (WP18 pacing: 4 let strong runs snowball to 90+ battles)
+const BOSS_SUPPLY_STEP = 2;  // ...and every further boss in the same run adds this much less; below 0 it just costs 1 Supply like any fight (3, +1, then -1)
+const bossSupplies = (bossesDown) => Math.max(-1, SUPPLIES_PER_BOSS - BOSS_SUPPLY_STEP * (bossesDown || 0)); // net Supplies change for the next boss win
 const Items = () => root.Items;
 const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range: {}, block: 0, hp: 0, supplies: 0, souls: 0, rules: {}, horn: false });
 
@@ -334,7 +336,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
   }
 
   const Progress = {
-    ROSTER, ROSTER_BY, RARITY, TRAITS, TRAIT_STEPS, BASE_CP, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, SUPPLIES_PER_BOSS,
+    ROSTER, ROSTER_BY, RARITY, TRAITS, TRAIT_STEPS, BASE_CP, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, SUPPLIES_PER_BOSS, bossSupplies,
     PULL_COST, PULL10_COST, ODDS, PITY_AT, MAX_STARS, MAXED_DUST, OFFICE_COST, MASTERY_XP, MASTERY_PERKS, STAR_TEXT,
     starsOf, masteryOf, masteryLevel, growthFx, addXp, poolFor, grantUnit, pullOnce, pull, officeTrade, recruitable,
     CURRENCIES, balance, canSpend, earn, spend, spendAll, bossCrystals,

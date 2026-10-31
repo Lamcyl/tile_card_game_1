@@ -329,7 +329,7 @@
 
   // ----- Drops -----
   // Drop chances for a win: [unique, shared from sub-area, shared from region].
-  const CHANCE = { battle: [0.25, 0.07, 0.04], elite: [0.40, 0.12, 0.07], boss: [0.35, 0.18, 0.10] };
+  const CHANCE = { battle: [0.12, 0.035, 0.02], elite: [0.20, 0.06, 0.035], boss: [0.18, 0.09, 0.05] }; // WP18 pacing: about half of the WP8 chances (25/7/4, 40/12/7, 35/18/10); bad-luck protection is unchanged
 
   // Everything a spot can drop, unique item first: [{ id, kind, chance }]. A boss also lists its two Legendaries (kind 'legend').
   function tableFor(node) {
