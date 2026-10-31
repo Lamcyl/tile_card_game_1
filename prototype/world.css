@@ -276,3 +276,36 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 @keyframes pointpulse { 50% { box-shadow: 0 0 0 4px rgba(200,64,47,.35); } }
 
 .gimmick-note { margin: 6px 0; padding: 6px 9px; border-radius: 8px; background: rgba(138, 58, 42, .1); border-left: 3px solid rgba(138, 58, 42, .7); font-size: 13px; line-height: 1.35; }
+
+/* Currencies and bounties (WP7) */
+.hud-chip.cur { padding-inline: 10px; }
+.hud-chip.crystals { color: var(--indigo); }
+.hud-chip.dust { color: #7a5a34; }
+.hud-chip.big { padding-inline: 10px; }
+.cur-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 10px; padding: 6px 8px;
+  background: rgba(236,225,200,.6); border: 1.5px solid rgba(43,42,53,.45); border-radius: var(--brush-sm);
+}
+.cur-bar > span { display: inline-flex; align-items: baseline; gap: 4px; font-size: 14px; }
+.cur-bar b { font-family: var(--font-display); font-size: 16px; }
+.cur-bar small { color: var(--muted); font-size: 11px; font-weight: 500; }
+.cur-bar .cur-souls { color: var(--vermilion-deep); }
+.cur-bar .cur-crystals { color: var(--indigo); }
+.cur-bar .cur-dust { color: #7a5a34; }
+.cur-bar .cur-meta { margin-left: auto; }
+.bounty-h { margin: 10px 0 4px; font-family: var(--font-display); font-size: 15px; }
+.bounty-h small { font-family: inherit; font-weight: 500; color: var(--muted); font-size: 11px; }
+.bounties { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 4px; }
+.bounties li {
+  display: flex; align-items: center; gap: 8px; padding: 5px 10px; font-size: 13px;
+  background: rgba(247,240,224,.8); border: 1.5px dashed rgba(43,42,53,.45); border-radius: var(--brush-sm);
+}
+.bounties li .bi { width: 20px; text-align: center; }
+.bounties li .bt { flex: 1; min-width: 0; }
+.bounties li small { color: var(--muted); font-weight: 700; }
+.bounties li .pay { color: var(--indigo); font-weight: 700; white-space: nowrap; }
+.bounties li.done { border-style: solid; border-color: var(--moss); background: rgba(185,204,152,.4); }
+.bounties li.done .bt { text-decoration: line-through; text-decoration-color: rgba(43,42,53,.4); }
+.bounty-done { margin: 6px 0; padding: 4px 10px; border-left: 3px solid var(--indigo); background: rgba(63,95,143,.08); font-size: 13px; }
+.bounty-done p { margin: 3px 0; }
+.bounty-sum { font-size: 13px; color: var(--indigo); font-weight: 700; margin: 2px 0 8px; }

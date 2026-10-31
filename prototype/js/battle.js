@@ -16,7 +16,7 @@
   };
   const SPEEDS = [1, 2, 4];
 
-  const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null };
+  const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null, report: null };
 
   // Board cells are built once; their contents are redrawn on every render.
   (function buildBoard() {
@@ -43,6 +43,7 @@
     game.selected = null;
     game.busy = false;
     game.onEnd = opts.onEnd;
+    game.report = { shields: false, overkills: 0, bossOverkill: false, explosions: 0, turns: 0 }; // read by bounties (app.js)
     logEl.innerHTML = '';
     { const collapse = window.innerHeight < 900; $('#b-log').classList.toggle('collapsed', collapse); $('#b-log-toggle').setAttribute('aria-expanded', String(!collapse)); } // short screens keep the Fight button in view
     log('Fight begins: place your squad.', 'turn');
@@ -347,6 +348,15 @@
     const before = game.state;
     const stats = E.computeStats(game.placement, game.army);
     const { state, events } = E.resolveTurn(before, game.placement, game.army);
+    { // bounty bookkeeping
+      const rep = game.report; rep.turns += 1;
+      if (Object.values(game.placement).some((id) => { const c = cardById(id); return c && E.CARD_TYPES[c.type].role === 'defender'; })) rep.shields = true;
+      for (const ev of events) {
+        if (ev.t === 'overkill') rep.overkills += 1;
+        else if (ev.t === 'explode') rep.explosions += 1;
+        else if (ev.t === 'hit' && ev.killed && ev.source === 'overkill') { const en = before.enemies.find((x) => x.id === ev.id); if (en && /_boss$/.test(en.type)) rep.bossOverkill = true; }
+      }
+    }
     game.view = E.clone(before);
     $('#b-msg').textContent = '';
     log('Turn ' + before.turn, 'turn');
@@ -365,7 +375,7 @@
         log('Rating: ' + '★'.repeat(stars) + ' (' + note + ')', 'good');
       } else $('#b-msg').textContent = 'Your hero has fallen.';
       await sleep(stars ? 1400 : 700);
-      game.onEnd(state, stars);
+      game.onEnd(state, stars, game.report);
     }
   }
 

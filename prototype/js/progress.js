@@ -46,6 +46,9 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
   function freshSave() {
     return {
       souls: 0,
+      crystals: 0,              // 💎 premium-ish currency: first boss kills, bounties, achievements; spent on gacha pulls (WP11)
+      dust: 0,                  // ⚒ crafting currency: salvage and duplicates; spent in the Forge (WP9)
+      bountiesDone: 0,          // completed bounties, lifetime
       upgrades: {},
       owned: ROSTER.filter((u) => u.start).map((u) => u.id),
       squad: ROSTER.filter((u) => u.start).map((u) => u.id),
@@ -74,6 +77,27 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
     } catch (e) { /* storage unavailable: play without saving */ }
     return freshSave();
   }
+  // ---------- Currencies ----------
+  // One place for every wallet balance so later packages (Forge: dust, Gacha: crystals) share the same helpers.
+  const CURRENCIES = {
+    souls:    { name: 'Souls',    icon: '✦' },
+    crystals: { name: 'Crystals', icon: '💎' },
+    dust:     { name: 'Dust',     icon: '⚒' },
+  };
+  const balance = (s, cur) => Math.max(0, Math.floor(s[cur] || 0));
+  const canSpend = (s, cur, n) => n >= 0 && balance(s, cur) >= n;
+  function earn(s, cur, n) { n = Math.max(0, Math.floor(n)); s[cur] = balance(s, cur) + n; return n; }
+  // Deducts n and returns true, or returns false (and changes nothing) if the balance is too low.
+  function spend(s, cur, n) { n = Math.floor(n); if (!canSpend(s, cur, n)) return false; s[cur] = balance(s, cur) - n; return true; }
+  // Spend several currencies at once ({ dust: 5, souls: 20 }); all or nothing.
+  function spendAll(s, cost) {
+    if (!Object.keys(cost).every((c) => canSpend(s, c, cost[c]))) return false;
+    for (const c of Object.keys(cost)) spend(s, c, cost[c]);
+    return true;
+  }
+  // Crystals for the first defeat of a sub-area boss (3 in region 1, +1 per region).
+  const bossCrystals = (regionIndex) => 3 + (regionIndex || 0);
+
   function save(s) {
     try { localStorage.setItem(SAVE_KEY, JSON.stringify(s)); } catch (e) { /* ignore */ }
   }
@@ -130,6 +154,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
 
   const Progress = {
     ROSTER, ROSTER_BY, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, SUPPLIES_PER_BOSS,
+    CURRENCIES, balance, canSpend, earn, spend, spendAll, bossCrystals,
     freshSave, load, save, reset, level, maxHp, slots, soulRate, startSupplies, upgradeCost, cheapestUpgrade, recruitAvailable, buildArmy,
   };
   root.Progress = Progress;

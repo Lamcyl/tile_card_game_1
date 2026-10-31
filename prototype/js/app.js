@@ -2,7 +2,7 @@
 // battles, rewards and end-of-run results.
 (function () {
   'use strict';
-  const E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items;
+  const Bounties = window.Bounties, E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items;
   const $ = (s) => document.querySelector(s);
   let save = P.load();
   let selected = null;
@@ -61,9 +61,9 @@
         '<div class="hud-chip" title="Souls carried on this run">✦ ' + r.souls + '</div>';
     } else {
       $('#hud').innerHTML =
-        '<div class="hud-chip big">✦ ' + save.souls + ' <small>Souls</small></div>' +
-        '<div class="hud-chip">Runs ' + save.runs + '</div>' +
-        '<div class="hud-chip">Best Lv' + save.bestLevel + '</div>';
+        '<div class="hud-chip big" title="Souls: buy Camp upgrades and recruits">✦ ' + P.balance(save, 'souls') + ' <small>Souls</small></div>' +
+        '<div class="hud-chip cur crystals" title="Crystals: from first boss kills and bounties. Spent on recruits (coming soon).">💎 ' + P.balance(save, 'crystals') + '</div>' +
+        '<div class="hud-chip cur dust" title="Dust: from salvaging gear. Spent in the Forge (coming soon).">⚒ ' + P.balance(save, 'dust') + '</div>';
     }
   }
 
@@ -124,11 +124,16 @@
     return body;
   }
 
+  function bountyList(list, showPay) {
+    return '<ul class="bounties">' + list.map((b) => '<li class="' + (b.done ? 'done' : '') + '"><span class="bi">' + (b.done ? '✓' : Bounties.icon(b)) + '</span><span class="bt">' + esc(Bounties.text(b)) + '</span>' +
+      '<small>' + (b.done ? 'done' : b.progress + '/' + b.goal) + '</small><span class="pay">💎 ' + b.reward + '</span></li>').join('') + '</ul>';
+  }
   function runSheet() {
-    const r = run();
+    const r = run(), bl = r.bounties || [];
     const open = [...frontier()].filter((id) => ['battle', 'elite', 'boss'].includes(World.byId[id].type)).length;
     return '<div class="sheet-head"><div><h2>On expedition</h2><p class="muted">Free exploration: tap any monster in an open area. ' + open + ' fights left.</p></div></div>' +
       '<p class="supply-line">🎒 <b>' + r.supplies + '</b> Supplies left. Each normal or elite win costs 1; a boss adds ' + P.SUPPLIES_PER_BOSS + '. At 0 you return to Camp safely.</p>' +
+      (bl.length ? '<h4 class="bounty-h">Bounties <small>optional, paid in 💎 when the run ends</small></h4>' + bountyList(bl) : '') +
       '<p class="muted small">HP never regenerates by itself. Return to Camp to keep all ✦ ' + r.souls + ' Souls; if you fall, you keep 75%.</p>' +
       '<button class="wide' + (confirmReturn ? ' danger' : '') + '" data-act="return">' + (confirmReturn ? 'Tap again to end the run and return' : '🏕 Return to Camp') + '</button>';
   }
@@ -137,6 +142,8 @@
     const tabs = ['upgrades', 'squad', 'recruit', 'gear'];
     let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad, then set out with 🎒 ' + P.startSupplies(save) + ' Supplies.</p></div>' +
       '<button class="primary" data-act="start">Set out ➜</button></div>';
+    html += '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
+      '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
       { upgrades: 'Upgrades', squad: 'Squad ' + save.squad.length + '/' + P.slots(save), recruit: 'Recruit', gear: 'Gear ' + save.equipped.length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
     html += '<div class="list">';
@@ -166,7 +173,7 @@
           (avail ? '<button data-recruit="' + u.id + '"' + (save.souls < u.cost ? ' disabled' : '') + '>✦ ' + u.cost + '</button>' : '<span class="muted">🔒</span>') + '</div>';
       }
     }
-    html += '</div><div class="tools"><span class="muted small">Prototype tools</span><button data-act="cheat">+100 ✦</button><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset progress') + '</button></div>';
+    html += '</div><div class="tools"><span class="muted small">Prototype tools</span><button data-act="cheat">+100 ✦ 10 💎 10 ⚒</button><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset progress') + '</button></div>';
     return html;
   }
   function gearTab() {
@@ -205,11 +212,11 @@
     if (!army.some((c) => E.CARD_TYPES[c.type].role === 'attacker')) { toast('Add at least one attacker to your squad.'); campTab = 'squad'; renderAll(); return; }
     const sup = P.startSupplies(save);
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: 'camp', cleared: ['camp'], path: ['camp'],
-      souls: 0, wins: 0, maxLevel: 0, mods: {}, placement: {}, unlockedNow: [], found: [] };
+      bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, wins: 0, maxLevel: 0, mods: {}, placement: {}, unlockedNow: [], found: [] };
     selected = null; confirmReturn = false; persist();
     WorldMap.placeToken('camp');
     const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]);
-    toast('Expedition started with ' + sup + ' Supplies. Choose any fight.');
+    toast('Expedition started with ' + sup + ' Supplies and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
     renderAll();
   }
 
@@ -236,7 +243,7 @@
     Battle.start({
       title: nodeTitle(n), subtitle: World.SUB_BY[n.sub].name + ' · Lv' + n.level, stage, biome: World.SUB_BY[n.sub].biome,
       army: P.buildArmy(save, r.mods), placement: r.placement,
-      onEnd: (state, stars) => battleOver(n, state, stars),
+      onEnd: (state, stars, report) => battleOver(n, state, stars, report),
     });
   }
 
@@ -257,7 +264,7 @@
     return true;
   }
 
-  function battleOver(n, state, stars) {
+  function battleOver(n, state, stars, report) {
     const r = run();
     r.placement = Battle.placement();
     Battle.hide(); document.body.classList.remove('in-battle'); WorldMap.setActive(true);
@@ -286,15 +293,18 @@
       const sub = World.SUB_BY[n.sub];
       for (const u of sub.unlocks) if (!save.unlocked.includes(u)) { save.unlocked.push(u); r.unlockedNow.push(u); }
       r.souls += 25;
+      const cry = P.earn(save, 'crystals', P.bossCrystals(sub.regionIndex)); r.crystalsNow = (r.crystalsNow || 0) + cry;
       title = World.THEMES[n.sub].boss[0] + ' defeated! ' + '★'.repeat(stars);
       text = (sub.unlocks.length ? 'The fog lifts over ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + '. ' : 'You conquered ' + sub.region + '! ') +
-        'Bonus ✦ 25. New recruits may be waiting at Camp.';
+        'Bonus ✦ 25 and 💎 ' + cry + ' Crystals. New recruits may be waiting at Camp.';
       const target = sub.unlocks.length ? World.SUB_BY[sub.unlocks[0]] : sub;
       setTimeout(() => WorldMap.focus(target.entry[0], target.entry[1]), 300);
     }
+    const done = Bounties.track(r.bounties, Object.assign({ won: true, stars, node: n.type }, report || {}));
+    const bountyLine = done.length ? '<div class="bounty-done">' + done.map((b) => '<p>🎯 Bounty complete: <b>' + esc(Bounties.text(b)) + '</b> · 💎 ' + b.reward + ' at run end</p>').join('') + '</div>' : '';
     const supLine = '<p class="supply-line">🎒 ' + (boss ? 'The boss falls: <b>+' + P.SUPPLIES_PER_BOSS + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left.</p>';
     const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'Your three slots are full. Swap it in at Camp ▸ Gear.') : '') +
-      (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'Slots full: swap it in at Camp ▸ Gear.')) : '') + supLine;
+      (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'Slots full: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
     persist(); renderAll();
     if (r.supplies <= 0) { outOfSupplies(title, text, extra); return; }
     offerReward(title, text, n, extra);
@@ -343,6 +353,8 @@
     // New furthest reach: deeper fight, or the same depth with a longer route. The old best stays as a second ghost.
     const newBest = r.wins > 0 && (r.maxLevel > prevBest || (r.maxLevel === prevBest && r.path.length > prevBestPath.length));
     save.souls += earned; save.runs += 1;
+    const bl = r.bounties || [], bountyCrystals = Bounties.collect(bl);
+    P.earn(save, 'crystals', bountyCrystals); save.bountiesDone = (save.bountiesDone || 0) + bl.filter((b) => b.done).length;
     save.bestLevel = Math.max(save.bestLevel, r.maxLevel);
     save.lastPath = r.path.slice();
     if (newBest) { save.prevBestPath = prevBestPath; save.bestPath = r.path.slice(); }
@@ -367,6 +379,7 @@
       '<h4 class="route-h">Your route</h4>' + route +
       '<p class="reach">Furthest reach: <b>Lv' + r.maxLevel + '</b> · ' + (prevBest ? 'previous best <b>Lv' + prevBest + '</b>' : 'your first expedition') + '. ' +
       (newBest ? 'A new record! ' : '') + '<span class="muted">The map at Camp now draws your last route (red) and best reach (gold) as faint ghost lines' + (newBest && prevBestPath.length > 1 ? ', with the old best in grey' : '') + '.</span></p>' +
+      (bl.length ? '<h4 class="route-h">Bounties</h4>' + bountyList(bl) + '<p class="bounty-sum">' + (bountyCrystals || r.crystalsNow ? '💎 +' + (bountyCrystals + (r.crystalsNow || 0)) + ' Crystals' + (r.crystalsNow ? ' (' + r.crystalsNow + ' from a first boss kill)' : '') : 'No bounty finished this time.') + '</p>' : '') +
       (found.length ? '<p>Items found: <b>' + found.map((it) => esc(it.name)).join(', ') + '</b>. Equip them in Camp ▸ Gear.</p>' : '') +
       (unlockedNames.length ? '<p>New areas revealed: <b>' + esc(unlockedNames.join(', ')) + '</b></p>' : '') +
       (cheap ? '<p class="first-run">Your Souls already cover your first upgrade: <b>' + cheap.icon + ' ' + esc(cheap.name) + '</b> (' + esc(cheap.desc) + ') for ✦ ' + P.upgradeCost(save, cheap.id) + '.</p>' : '<p class="muted small">Spend Souls at Camp on upgrades and recruits, then set out again to reach further.</p>') +
@@ -426,7 +439,7 @@
     else if (act === 'engage') engage(selected);
     else if (act === 'close-node') { selected = null; renderAll(); }
     else if (act === 'return') { if (!confirmReturn) { confirmReturn = true; renderSheet(); } else endRun(false); }
-    else if (act === 'cheat') { save.souls += 100; persist(); renderAll(); }
+    else if (act === 'cheat') { save.souls += 100; P.earn(save, 'crystals', 10); P.earn(save, 'dust', 10); persist(); renderAll(); }
     else if (act === 'reset') {
       if (!confirmReset) { confirmReset = true; renderSheet(); return; }
       confirmReset = false; save = P.reset(); WorldMap.placeToken('camp'); WorldMap.focus(World.CAMP.x, World.CAMP.y - 120, true); toast('Progress erased.'); renderAll();
