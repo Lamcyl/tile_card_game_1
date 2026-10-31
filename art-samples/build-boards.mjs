@@ -35,10 +35,17 @@ const MAPS = [
   ['map-pixel', 'Pixel JRPG', 'Retro 16-bit overworld with tile-based terrain.'],
   ['map-papercraft', 'Papercraft', 'Layered cut-paper diorama with soft drop shadows.'],
 ];
+const EXPLORE = [
+  ['explore-trails', 'Branching trails', 'Close-up path network: forks lead to monsters standing in clearings.'],
+  ['explore-freeroam', 'Free roam', 'Open terrain the hero walks freely; monsters wander with danger rings.'],
+  ['explore-tiles', 'Tile steps', 'The region as big terrain tiles; the hero moves tile to tile, monsters hold tiles.'],
+  ['explore-isometric', 'Isometric 2.5D', 'Angled diorama camera with depth; paths wind up into the next region.'],
+  ['map-diorama', 'Overview (fast travel)', 'The zoomed-out style-2 map, now used for fast travel between regions.'],
+];
 // node build-boards.mjs locations → the round-2 location boards; maps → overworld map styles.
-const round = ['locations', 'maps'].includes(process.argv[2]) ? process.argv[2] : '';
-const LIST = round === 'maps' ? MAPS : round ? LOCATIONS : BOARDS;
-const dir = new URL(round === 'maps' ? './maps/' : './boards/', import.meta.url);
+const round = ['locations', 'maps', 'explore'].includes(process.argv[2]) ? process.argv[2] : '';
+const LIST = round === 'explore' ? EXPLORE : round === 'maps' ? MAPS : round ? LOCATIONS : BOARDS;
+const dir = new URL(round === 'maps' || round === 'explore' ? './maps/' : './boards/', import.meta.url);
 let n = 0;
 const cards = LIST.map(([slug, name, desc]) => {
   n++;
@@ -53,7 +60,7 @@ const cards = LIST.map(([slug, name, desc]) => {
 const page = `<!DOCTYPE html>
 <html lang="en"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${round === 'maps' ? 'Overworld Map Styles' : 'Board ' + (round ? 'Locations' : 'Designs')}</title>
+<title>${round === 'explore' ? 'Exploration Map' : round === 'maps' ? 'Overworld Map Styles' : 'Board ' + (round ? 'Locations' : 'Designs')}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,11 +90,11 @@ const page = `<!DOCTYPE html>
   .missing { height: 100%; display: grid; place-items: center; color: #999; }
 </style>
 <div class="wrap">
-  <header class="top"><h1>${round === 'maps' ? 'Overworld map styles' : 'Board designs' + (round ? ': locations' : '')}</h1><p>${round === 'maps' ? 'Six styles for the overworld map, each a phone-screen slice: the Camp and grassland at the bottom, other regions above, cleared, available and locked encounter nodes, elites, a boss and fog beyond it.' : 'Ten ' + (round ? 'locations' : 'directions') + ' for the 5×5 battle board (2 enemy rows on top, 3 player rows below), each shown on a phone screen with real units placed and one highlighted drop tile.'} Tell me which numbers to take further.</p></header>
+  <header class="top"><h1>${round === 'explore' ? 'Exploration map' : round === 'maps' ? 'Overworld map styles' : 'Board designs' + (round ? ': locations' : '')}</h1><p>${round === 'explore' ? 'Four takes on the zoomed-in map the player explores — choosing a direction and which monster to fight — in the Bright diorama style, with the zoomed-out overview last for comparison as the fast-travel map.' : round === 'maps' ? 'Six styles for the overworld map, each a phone-screen slice: the Camp and grassland at the bottom, other regions above, cleared, available and locked encounter nodes, elites, a boss and fog beyond it.' : 'Ten ' + (round ? 'locations' : 'directions') + ' for the 5×5 battle board (2 enemy rows on top, 3 player rows below), each shown on a phone screen with real units placed and one highlighted drop tile.'} Tell me which numbers to take further.</p></header>
   <section class="grid">
 ${cards}
   </section>
 </div>`;
-const out = round === 'maps' ? 'maps-gallery.html' : round ? 'boards-locations.html' : 'boards-gallery.html';
+const out = round === 'explore' ? 'explore-gallery.html' : round === 'maps' ? 'maps-gallery.html' : round ? 'boards-locations.html' : 'boards-gallery.html';
 writeFileSync(new URL('./' + out, import.meta.url), page);
 console.log(out, Math.round(page.length / 1024) + ' kB');
