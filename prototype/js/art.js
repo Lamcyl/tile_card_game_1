@@ -18,6 +18,9 @@ const UNITS = {
 // Fallback drawing per card type, for cards without their own entry.
 const BY_TYPE = { swordsman: 'kamaitachi', archer: 'tengu', spearman: 'nezha', mage: 'kitsune', drummer: 'raijin', banner: 'komainu', horn: 'siren', spyglass: 'samjok-o', shield: 'nurikabe' };
 
+const backdrops = import.meta.glob('../assets/battle/*.svg', { query: '?url', import: 'default', eager: true });
+const BACKDROPS = Object.fromEntries(Object.entries(backdrops).map(([path, u]) => [path.split('/').pop().replace('.svg', ''), u]));
+
 const url = (name) => URLS[name] || null;
 window.Art = {
   url,
@@ -31,6 +34,8 @@ window.Art = {
     const t = window.Engine.ENEMY_TYPES[typeKey];
     return t && t.art ? url(t.art) : null;
   },
+  // Painted battle backdrop for a biome (meadow, forest, beach, coral, dunes, temple, snow, glacier, ash, caldera).
+  battleBackdrop(biome) { return BACKDROPS[biome] || BACKDROPS.meadow || null; },
   // The watercolour theme mockups, for reference backgrounds.
   theme: {
     overview: new URL('../assets/theme/overview.svg', import.meta.url).href,
