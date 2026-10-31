@@ -7,6 +7,7 @@
   const root = document.getElementById('battle');
   const $ = (sel) => root.querySelector(sel);
 
+  const WARD_TEXT = { guard: 'its guard still stands', ward: 'hit too weak', veil: 'veiled this turn' };
   const PATTERN_GLYPH = { straight: '↑', pierce: '⇈', spread: '↖↑↗' };
   const PATTERN_TEXT = {
     straight: 'hits the first enemy in its column',
@@ -53,7 +54,17 @@
     $('#b-name').textContent = opts.title;
     $('#b-sub').textContent = opts.subtitle;
     const kinds = [...new Set(game.state.enemies.map((e) => e.kind).filter(Boolean))];
-    $('#b-msg').textContent = kinds.length ? kinds.map((k) => E.ENEMY_KINDS[k].badge + ' ' + E.ENEMY_KINDS[k].name + ': ' + E.ENEMY_KINDS[k].text + '.').join(' ') : Object.keys(kept).length ? 'Your last layout is ready. Adjust it, then press Fight.' : 'Place your squad, then press Fight.';
+    const intro = opts.stage.intro;
+    const rules = kinds.map((k) => E.ENEMY_KINDS[k].badge + ' ' + E.ENEMY_KINDS[k].name + ': ' + E.ENEMY_KINDS[k].text + '.');
+    [...new Set(game.state.enemies.map((e) => e.gimmick).filter(Boolean))].forEach((g) => {
+      const e = game.state.enemies.find((x) => x.gimmick === g);
+      rules.push(E.ENEMY_GIMMICKS[g].badge + ' ' + E.ENEMY_GIMMICKS[g].name + ': ' + E.gimmickText(e) + '.');
+    });
+    const introEl = $('#b-msg');
+    if (intro) {
+      introEl.innerHTML = '<span class="intro-name">' + (intro.rule === 'Elite' ? '💀 ' : '👑 ') + intro.name + (intro.rule ? ' <i>' + (intro.badge ? intro.badge + ' ' : '') + intro.rule + '</i>' : '') + '</span> ' + intro.text;
+      log((intro.rule === 'Elite' ? 'Elite: ' : 'Boss: ') + intro.name + (intro.rule && intro.rule !== 'Elite' ? ' (' + intro.rule + ')' : '') + '. ' + intro.text, 'bad');
+    } else introEl.textContent = rules.length ? rules.join(' ') : Object.keys(kept).length ? 'Your last layout is ready. Adjust it, then press Fight.' : 'Place your squad, then press Fight.';
     root.hidden = false;
     render();
   }
@@ -72,6 +83,7 @@
   const cardName = (key) => { const c = cardById(game.placement[key]); if (!c) return 'Unit'; const u = window.Art ? Art.unit(c) : null; return (u && u.name) || E.CARD_TYPES[c.type].name; };
   function logEvent(ev, view) {
     if (ev.t === 'fire') log(ev.targets.length ? cardName(ev.key) + ' fires for ⚔' + ev.atk : cardName(ev.key) + ' has no target in range', ev.targets.length ? '' : 'bad');
+    else if (ev.t === 'hit' && ev.warded) log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' is untouched (' + WARD_TEXT[ev.warded] + ')', 'bad');
     else if (ev.t === 'hit') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' takes ' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' (armor)' : '') + (ev.killed ? ', defeated' : ' (' + ev.hp + ' left)'), ev.killed ? 'good' : '');
     else if (ev.t === 'overkill') log('&nbsp;&nbsp;Overkill: ' + ev.amount + ' carries to the ' + nameOf(view, ev.id));
     else if (ev.t === 'explode') log('&nbsp;&nbsp;Barrel explodes for ' + ev.amount + ' to its neighbours');
@@ -79,6 +91,11 @@
     else if (ev.t === 'bulwark') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' blocks the overkill (' + ev.amount + ' wasted)', 'bad');
     else if (ev.t === 'spawn') log(ev.reason === 'split' ? '&nbsp;&nbsp;' + nameOf(view, ev.from) + ' splits: a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' appears' : nameOf(view, ev.from) + ' summons a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' (♥' + ev.enemy.hp + ' ⚔' + ev.enemy.atk + ')', 'bad');
     else if (ev.t === 'heal') log(nameOf(view, ev.id) + ' heals ' + ev.targets.map((h) => nameOf(view, h.id) + ' +' + h.amount).join(', '), 'bad');
+    else if (ev.t === 'rage') log(nameOf(view, ev.id) + ' is in a fury: +' + ev.amount + ' ⚔', 'bad');
+    else if (ev.t === 'harden') log(nameOf(view, ev.id) + ' hardens: armor ' + ev.armor, 'bad');
+    else if (ev.t === 'regrow') log(nameOf(view, ev.id) + ' grows back (' + ev.hp + ' HP)', 'bad');
+    else if (ev.t === 'move') log(nameOf(view, ev.id) + ' steps to column ' + (ev.to[1] + 1), 'bad');
+    else if (ev.t === 'tide') log('The tide carries every enemy one column', 'bad');
     else if (ev.t === 'enrage') { if (ev.ids.length) log('Survivors enrage: +1 ⚔', 'bad'); }
     else if (ev.t === 'cleared') log('Stage cleared!', 'good');
     else if (ev.t === 'defeated') log('Your hero has fallen.', 'bad');
@@ -102,7 +119,7 @@
 
   function render() {
     const s = current();
-    const stats = E.computeStats(game.placement, game.army);
+    const stats = E.computeStats(game.placement, game.army, s.enemies);
     $('#b-turn').textContent = s.turn;
     $('#b-hpfill').style.width = (100 * s.hp / s.maxHp) + '%';
     $('#b-hptext').textContent = s.hp + ' / ' + s.maxHp;
@@ -146,8 +163,9 @@
   function renderThreat(s, stats) {
     let total = 0;
     const cols = [];
+    const inc = E.incomingByColumn(s.enemies);
     for (let c = 0; c < E.COLS; c++) {
-      const incoming = s.enemies.filter((e) => E.isThreat(e) && e.col === c).reduce((n, e) => n + e.atk, 0);
+      const incoming = inc[c];
       const block = E.PLAYER_ROWS.map((r) => stats[E.key(r, c)]).filter((st) => st && st.type.role === 'defender').reduce((n, st) => n + st.block, 0);
       const dmg = Math.max(0, incoming - block);
       total += dmg;
@@ -169,10 +187,12 @@
       return '<div class="enemy barrel" title="' + t.name + ': explodes for ' + t.blast + ' damage to every adjacent enemy when destroyed. It does not attack.">' +
         face + '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">💥' + t.blast + '</span></div></div>';
     }
-    const kind = e.kind ? E.ENEMY_KINDS[e.kind] : null;
-    return '<div class="enemy' + (t.boss ? ' boss' : '') + (kind ? ' kind-' + e.kind : '') + '" title="' + t.name + (kind ? ' (' + kind.name + ': ' + kind.text + ')' : '') + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' +
+    const gim = e.gimmick ? E.ENEMY_GIMMICKS[e.gimmick] : null;
+    const kind = e.kind ? E.ENEMY_KINDS[e.kind] : gim ? { name: gim.name, badge: gim.badge, text: E.gimmickText(e) } : null;
+    const guard = e.guardian ? ' guardian' : '';
+    return '<div class="enemy' + (t.boss ? ' boss' : '') + (e.kind ? ' kind-' + e.kind : '') + (gim ? ' gimmick gimmick-' + e.gimmick : '') + guard + '" title="' + t.name + (kind ? ' (' + kind.name + ': ' + kind.text + ')' : '') + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' +
       (e.armor ? ', armor ' + e.armor : '') + '">' + face +
-      (kind ? '<span class="kind-badge" aria-label="' + kind.name + '">' + kind.badge + '</span>' : '') +
+      (kind ? '<span class="kind-badge" aria-label="' + kind.name + '">' + kind.badge + '</span>' : '') + (e.guardian ? '<span class="guard-badge" title="Guard: the boss takes no damage while this enemy lives">♜</span>' : '') +
       (e.armor ? '<span class="tag armor">🛡' + TXT + e.armor + '</span>' : '') + (t.boss ? '<span class="crown">👑</span>' : '') +
       '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">⚔' + TXT + e.atk + '</span></div></div>';
   }
@@ -184,9 +204,9 @@
     if (t.role === 'attacker') {
       const atk = st ? st.atk : E.cardStat(card, 'atk');
       const range = st ? st.range : E.cardStat(card, 'range');
-      main = '<span class="' + (st && st.atk !== st.baseAtk ? 'boosted' : '') + '">⚔' + TXT + atk + '</span>';
+      main = '<span class="' + (st && st.gazed ? 'gazed' : st && st.atk !== st.baseAtk ? 'boosted' : '') + '">⚔' + TXT + atk + '</span>';
       sub = '<span>' + PATTERN_GLYPH[t.pattern] + '</span><span class="' + (st && st.rangeBonus ? 'boosted' : '') + '">R' + range + '</span>';
-      desc += atk + ' damage, ' + PATTERN_TEXT[t.pattern] + ', reaches ' + range + ' tile(s) up';
+      desc += atk + ' damage' + (st && st.gazed ? ' (weakened by a gaze)' : '') + ', ' + PATTERN_TEXT[t.pattern] + ', reaches ' + range + ' tile(s) up';
     } else if (t.role === 'support') {
       const amount = E.cardStat(card, 'amount');
       main = t.effect === 'atk' ? '+' + amount : t.effect === 'mult' ? '×' + amount : 'R+' + amount;
@@ -360,7 +380,7 @@
       const e = view.enemies.find((en) => en.id === ev.id), el = enemyCell(view, ev.id);
       e.hp = ev.hp;
       flash(el, 'shake', 300);
-      floatText(el, '−' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' 🛡' : ''), 'dmg');
+      floatText(el, ev.warded ? (ev.warded === 'ward' ? 'Too weak!' : ev.warded === 'guard' ? 'Guarded ♜' : 'Veiled ☁') : '−' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' 🛡' : ''), ev.warded ? 'info' : 'dmg');
       if (ev.killed) e.alive = false;
       render(); await sleep(300);
     } else if (ev.t === 'overkill') {
@@ -394,12 +414,30 @@
     } else if (ev.t === 'heal') {
       const src = enemyCell(view, ev.id);
       flash(src, 'heal-flash', 500);
+      if (ev.self) { const n = view.enemies.find((en) => en.id === ev.id); n.hp = ev.targets[0].hp; floatText(src, '+' + ev.targets[0].amount + ' ♥', 'heal'); render(); await sleep(420); return; }
       await Promise.all(ev.targets.map((h) => {
         const n = view.enemies.find((en) => en.id === h.id); n.hp = h.hp;
         floatText(enemyCell(view, h.id), '+' + h.amount + ' ♥', 'heal');
         return projectile(src, enemyCell(view, h.id), 'heal-shot');
       }));
       render(); await sleep(260);
+    } else if (ev.t === 'rage') {
+      const e = view.enemies.find((en) => en.id === ev.id); e.atk = ev.atk; const el = enemyCell(view, ev.id);
+      flash(el, 'rage', 500); floatText(el, 'Fury +' + ev.amount + ' ⚔', 'info'); render(); await sleep(520);
+    } else if (ev.t === 'harden') {
+      const e = view.enemies.find((en) => en.id === ev.id); e.armor = ev.armor;
+      floatText(enemyCell(view, ev.id), 'Armor ' + ev.armor + ' 🛡', 'info'); render(); await sleep(440);
+    } else if (ev.t === 'regrow') {
+      const e = view.enemies.find((en) => en.id === ev.id); e.alive = true; e.hp = ev.hp; render();
+      const el = enemyCell(view, ev.id); el.classList.remove('spawned'); void el.offsetWidth; el.classList.add('spawned');
+      floatText(el, 'Regrows ❀', 'info'); setTimeout(() => el.classList.remove('spawned'), 600 / game.speed); await sleep(520);
+    } else if (ev.t === 'move') {
+      const e = view.enemies.find((en) => en.id === ev.id); e.row = ev.to[0]; e.col = ev.to[1];
+      if (ev.swap) { const o = view.enemies.find((en) => en.id === ev.swap); o.col = ev.from[1]; }
+      render(); floatText(enemyCell(view, ev.id), ev.to[1] > ev.from[1] ? '→' : '←', 'info'); await sleep(420);
+    } else if (ev.t === 'tide') {
+      ev.moves.forEach((m) => { const e = view.enemies.find((en) => en.id === m.id); e.row = m.to[0]; e.col = m.to[1]; });
+      render(); root.classList.add('tide-wash'); setTimeout(() => root.classList.remove('tide-wash'), 700 / game.speed); await sleep(520);
     } else if (ev.t === 'enrage') {
       if (!ev.ids.length) return;
       ev.ids.forEach((id) => { view.enemies.find((en) => en.id === id).atk += 1; const el = enemyCell(view, id); flash(el, 'rage', 500); floatText(el, '+1 ⚔', 'info'); });

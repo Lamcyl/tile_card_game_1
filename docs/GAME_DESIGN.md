@@ -171,7 +171,29 @@ Each enemy shows **♥ HP** and **⚔ ATK**. ATK doubles as the telegraph: it's 
 | Bulwark ⛨ | Armored. Blocks overkill and Pierce from passing to the tile behind it when in the front row |
 
 These are rules carried by an ordinary themed creature (the engine's `kind` field), shown with a coloured badge and ring plus a rule hint before the fight. They appear from Lv10 (danger 4) in the templates `mender`, `brood`, `hive` and `bulwark`; Summoner minions and Splitter halves use the area's basic creature.
-| Boss | Large HP, high ATK and one gimmick (for example, it moves one column each turn, or it is immune to supporter-boosted damage below ×2) |
+| Boss | Large HP, high ATK and one gimmick (see 7.3). Handcrafted, one per sub-area |
+
+### 7.3 Boss gimmicks and elites
+
+Every boss is a fixed layout from `js/boss-defs.js` with one rule, announced by an intro line (`👑 Name`, rule badge) when the fight opens and on the node sheet. A boss either carries an engine **gimmick** (`Engine.ENEMY_GIMMICKS`) or one of the 7.2 kinds. The badge on the enemy repeats the rule; hover shows the text.
+
+| Boss (sub-area) | Rule |
+|---|---|
+| Sansin (Sunny Meadows) | **Guarded ♜**: takes no damage while its tiger guard lives; overkill from the guard's death carries on to Sansin |
+| Yamata no Orochi (Old Oak Wood) | **Regrow ❀**: its heads grow back once (at the end of a turn, unless the whole board fell) |
+| Qiongqi (Bamboo Valley) / Nidhogg (Frozen Lake) | **Hide ◈**: hits weaker than 3 / 4 damage do nothing |
+| Medusa (Mirror Lake) | **Gaze ◉**: attackers in her column lose 1 ATK |
+| Scylla (Shell Beach) / Surtr (Ash Fields) | **Sweep ≋**: also strikes both neighbouring columns for half damage |
+| Poseidon (Coral Shallows) | **Tide 〰**: the back row drifts one column left and the front row one column right each turn |
+| Hydra (Shipwreck Cove) | **Regenerate ✚**: heals about 12% of its HP every turn |
+| Typhon (Mist Isles) | **Fury ♨**: +1 extra ATK every turn it survives |
+| Apep (Dune Sea) | **Harden ▣**: +1 armor per turn (up to 3) |
+| Set (Palm Oasis) / Vucub-Caquix (Obsidian Ridge) | **Stride ⇄**: sidesteps one column per turn, swapping with whoever is there |
+| Ah Puch (Red Canyon) / Hel (Rime Forest) / Jangsan-beom (Snowdrift) / Loki (Ember Falls) | The Summoner / Healer / Bulwark / Splitter rule of 7.2, on the boss itself |
+| Ra (Buried Temple) / Morana (Glacier Throne) | **Veiled ☁**: cannot be hurt on turn 1 (clear the escort first, strike on turn 2) |
+| Zmey Gorynych (Magma Caldera) | Three heads that **regrow ❀** around the boss |
+
+Elites are small fixed variants (no gimmick of their own, a note on the sheet): brute with escort, heavy bodyguard, armoured pair, powder gang (heavy between barrels), Bulwark wall, Splitter brood, Summoner hive and Healer field hospital, assigned per sub-area. Boss and elite HP is the level's base HP times a tuned factor with the full growth ramp of 24.1. `tools/validate-gen.js bosses` solves all 40 with the reference squad of that tier (plus the ATK upgrades a run has earned by then): no boss falls in one turn, and the best line clears within 4 turns (usually 2-3) at a bounded HP cost.
 
 ---
 
@@ -185,11 +207,11 @@ Difficulty depends on a node's **danger rating**, which rises with distance from
 |---|---|---|---|
 | **☠ Learn** (near Camp) | 1 | Find the obvious placement | One mechanic per battle: attack, range, +, ×, Shield |
 | **☠☠ to ☠☠☠ Think** | 1–2 | Find the clever one-turn clear | Barrels, armor, back-row enemies, overkill |
-| **☠☠☠☠+ Survive** | 2 (a one-turn clear is usually impossible) | **Minimize damage** | Healer, Summoner, Splitter. Region bosses |
+| **☠☠☠☠+ Survive** | 2 (a one-turn clear is usually impossible) | **Minimize damage** | Healer, Summoner, Splitter. Gimmick bosses |
 
 ### 8.2 Stage design rules
 
-- Ordinary battles are built from **templates** (enemy layouts plus placement rules for barrels and armor) scaled by danger. Elites and bosses are **handcrafted**. Everything is validated by the solver (`tools/solve.js`).
+- Ordinary battles are built from **templates** (enemy layouts plus placement rules for barrels and armor) scaled by danger. Elites and bosses are **handcrafted** (7.3). Everything is validated by the solver (`tools/solve.js`).
 - ☠: the solution is visually obvious.
 - ☠☠–☠☠☠: a one-turn, zero-damage solution **must exist**, but random placements should almost never find it.
 - ☠☠☠☠+: a one-turn clear should **not** exist. The best line should cost a small amount of HP (1–4), while a careless line costs 3–4× that.
@@ -553,9 +575,9 @@ The prototype in `prototype/` has two pages.
 - **Items:** 210 permanent items (140 unique, 60 sub-area, 10 region); see 24.3.
 - **Ending a run:** Return to Camp or running out of Supplies keeps 100% of Souls; a defeat keeps 75%.
 - **Camp:** Souls buy upgrades (Vitality, Command, Drill, Bulwark, Fortune, Provisions) and recruits. Bosses unlock new recruits. The squad is limited by slots. The Gear tab equips up to 3 items.
-- **Battles:** ordinary spots pick a named template by danger tier (`gen.js`): tier 1 teaches one mechanic per fight (attack, range, +, overkill, barrel, Shield, armor), tiers 2-3 are layouts with a hidden one-turn zero-damage clear, tier 4+ cannot be cleared in one turn (heavy enemy, best line costs about 1-4 HP). Layouts are mirrored at random and scaled by level. `node tools/validate-gen.js` checks this with the solver against a reference squad per tier. Elites and bosses still use the older random generator (bosses are usually two-turn fights) until they are handcrafted.
+- **Battles:** ordinary spots pick a named template by danger tier (`gen.js`): tier 1 teaches one mechanic per fight (attack, range, +, overkill, barrel, Shield, armor), tiers 2-3 are layouts with a hidden one-turn zero-damage clear, tier 4+ cannot be cleared in one turn (heavy enemy, best line costs about 1-4 HP). Layouts are mirrored at random and scaled by level. `node tools/validate-gen.js` checks this with the solver against a reference squad per tier. Elites and bosses are handcrafted fights from `boss-defs.js` (7.3): one gimmick per boss, usually a two-turn fight.
 - **Saving:** progress is saved in the browser. Prototype tools give +100 Souls or reset progress.
-- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player (Souls use the real star multipliers). On a fresh account it fights about 10 battles (6 if it dies to the Lv4 boss, 11-16 once the boss falls); real players should land at the 8-10 battles of 24.1. Sunny Meadows spots are Lv 1,1,1,2,2 with a Lv4 boss (2 minions, +7 HP now that template fights are cheap to clear); Old Oak Wood is Lv 3-4. Enemy growth ramps up from Lv8 (HP +7% and about +0.35 ATK per level above 7); Camp upgrades and recruits cost more from the second tier on, and Vitality, Drill, Bulwark and Fortune gained one more level. With greedy Camp shopping (`node tools/sim-runs.js 1 campaign 45`) the strong simulated player beats Greenvale in 3-6 runs, Azure Coast and Sunscorch in 4-8, and unlocks Frostveil around run 15-30 (Ember Peaks is slower, often beyond run 45); real players are slower. After the WP4 templates (strong player now clears most fights with 0 damage; Souls per fight x0.8, Lv5-6 bosses +9 HP): fresh account about 9 battles, first Greenvale boss in run 1-4, Azure Coast and Sunscorch first boss in run 4-7 (4 simulated campaigns).
+- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player (Souls use the real star multipliers). On a fresh account it fights about 10 battles (6 if it dies to the Lv4 boss, 11-16 once the boss falls); real players should land at the 8-10 battles of 24.1. Sunny Meadows spots are Lv 1,1,1,2,2 with a Lv4 boss (2 minions, +7 HP now that template fights are cheap to clear); Old Oak Wood is Lv 3-4. Enemy growth ramps up from Lv8 (HP +7% and about +0.35 ATK per level above 7); Camp upgrades and recruits cost more from the second tier on, and Vitality, Drill, Bulwark and Fortune gained one more level. With greedy Camp shopping (`node tools/sim-runs.js 1 campaign 45`) the strong simulated player beats Greenvale in 3-6 runs, Azure Coast and Sunscorch in 4-8, and unlocks Frostveil around run 15-30 (Ember Peaks is slower, often beyond run 45); real players are slower. After WP6 (handcrafted bosses and elites with the full growth ramp; boss HP factor 1.7 at Lv<=6, 2.1 at Lv7, 2.5 at Lv8-9, 2.4 at Lv10-12, 2.1 at Lv13+, elites 75% of that): fresh account about 9 battles (the Lv4 Sansin falls in about one run in four), Greenvale boss in run 1-3, Azure Coast and Sunscorch first boss in run 4-9, Frostveil and Ember Peaks unlocked around run 9 and their first boss around run 17-20 (campaign sim, 3 samples). After the WP4 templates (strong player now clears most fights with 0 damage; Souls per fight x0.8, Lv5-6 bosses +9 HP): fresh account about 9 battles, first Greenvale boss in run 1-4, Azure Coast and Sunscorch first boss in run 4-7 (4 simulated campaigns).
 
 **Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
 

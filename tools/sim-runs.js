@@ -7,6 +7,7 @@
 const Engine = require('../prototype/js/engine.js');
 try { require('../prototype/js/world-layout.js'); } catch (e) { /* placeholder layout */ }
 const World = require('../prototype/js/world-data.js');
+require('../prototype/js/boss-defs.js');
 const Gen = require('../prototype/js/gen.js');
 const Progress = require('../prototype/js/progress.js');
 const Items = require('../prototype/js/items.js');

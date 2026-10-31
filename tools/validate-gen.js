@@ -9,6 +9,7 @@
 const Engine = require('../prototype/js/engine.js');
 try { require('../prototype/js/world-layout.js'); } catch (e) { /* placeholder layout */ }
 const World = require('../prototype/js/world-data.js');
+require('../prototype/js/boss-defs.js');
 const Gen = require('../prototype/js/gen.js');
 const Progress = require('../prototype/js/progress.js');
 const Solve = require('./solve.js');
@@ -52,7 +53,9 @@ function check(tier, level, seed, role, effort) {
   } else {
     if (clear) rec.fails.push('1-turn clear exists');
     else {
-      const best = Solve.solve(state, army, 0, 3, { first: 10, later: 4, iters: 1200 });
+      let best = Solve.solve(state, army, 0, 3, { first: 10, later: 4, iters: 1200 });
+      // The annealing solver is stochastic: an out-of-range cost only counts if a stronger search confirms it.
+      if (best.total > 4) { const b2 = Solve.solve(state, army, 0, 3, { first: 24, later: 8, iters: 2000 }); if (b2.total < best.total) best = b2; }
       rec.cost = best.total;
       if (best.total < 1 || best.total > 4) rec.fails.push('best line costs ' + best.total + ' HP (want 1-4)');
     }
@@ -60,7 +63,60 @@ function check(tier, level, seed, role, effort) {
   return rec;
 }
 
+// ---------- Bosses and elites (handcrafted, one gimmick each) ----------
+// Every boss and elite node of the world is generated for real and solved with the reference squad of its tier
+// (a weaker one for the first boss). Rules: no one-turn clear for a boss (usually a two-turn fight), the best line
+// clears within 4 turns, and costs at most 50% (boss) / 35% (elite) of the reference max HP.
+// Summary line per fight: best-line HP cost and turns.
+function bossSave(node) {
+  const tier = World.danger(node.level);
+  const save = refSave(tier, node.level);
+  if (node.level <= 4) { save.upgrades = { vitality: 2 }; save.squad = ['sword1', 'archer1', 'drum1', 'shield1', 'spear1']; }
+  return save;
+}
+// By the time a run reaches a boss the post-battle rewards have added ATK to the squad (+1 ATK to one attacker per win,
+// so roughly +1 per attacker per 3 wins; the sim reaches a boss after 6-30 wins). Stand-in: ATK added to every attacker.
+const RUN_ATK = (level) => (level <= 4 ? 2 : level <= 6 ? 2 : level <= 9 ? 3 : level <= 12 ? 6 : level <= 14 ? 8 : 10);
+function runMods(save, node) {
+  const mods = {}, plus = RUN_ATK(node.level);
+  for (const id of save.squad) if (Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker') mods[id] = { atk: plus };
+  return mods;
+}
+function checkFight(node, effort, tries) {
+  const save = bossSave(node), army = Progress.buildArmy(save, runMods(save, node));
+  const maxHp = Progress.maxHp(save);
+  const gen = Gen.generateBattle(node, 'validate-fight');
+  const state = Engine.createState(Object.assign({ heroHp: maxHp, heroMaxHp: maxHp }, gen));
+  const boss = node.type === 'boss';
+  const rec = { id: node.id, level: node.level, boss, maxHp, fails: [], enemies: gen.enemies.length, hp: gen.enemies.reduce((n, e) => n + (e.type.endsWith('_barrel') ? 0 : e.hp), 0) };
+  const clear = Solve.oneTurnClear(state, army, effort.restarts, effort.iters);
+  rec.clear = !!clear;
+  const best = Solve.solve(state, army, 0, 4, { first: effort.first, later: 3, iters: effort.iters });
+  rec.cost = best.total; rec.turns = best.line.length;
+  if (boss && clear) rec.fails.push('boss falls in one turn');
+  if (best.total >= 99) rec.fails.push('unwinnable in 4 turns');
+  else if (best.total > (boss ? 0.5 : 0.35) * maxHp) rec.fails.push('best line costs ' + best.total + ' of ' + maxHp + ' HP');
+  else if (best.total < 1 && boss) rec.fails.push('boss costs nothing');
+  return rec;
+}
+function bossMain(args) {
+  const only = args[0] && args[0] !== 'all' ? args[0].split(',') : null;
+  const effort = { restarts: 10, iters: 1200, first: 10 };
+  const nodes = World.nodes.filter((n) => (n.type === 'boss' || n.type === 'elite') && (!only || only.includes(n.sub) || only.includes(n.type)));
+  let bad = 0; const failures = [];
+  for (const n of nodes) {
+    let rec = checkFight(n, effort);
+    // The annealing solver is stochastic: a failure must repeat on a second try to count.
+    if (rec.fails.length) rec = checkFight(n, effort);
+    console.log(`${rec.id.padEnd(14)} Lv${String(rec.level).padEnd(3)} ${rec.boss ? 'boss ' : 'elite'} enemies ${rec.enemies} hp ${String(rec.hp).padEnd(4)} ref HP ${rec.maxHp} best cost ${String(rec.cost).padEnd(3)} turns ${rec.turns} oneTurn ${rec.clear ? 'yes' : 'no '} ${rec.fails.length ? 'FAIL ' + rec.fails.join('; ') : ''}`);
+    if (rec.fails.length) { bad++; failures.push(`  ${rec.id}: ${rec.fails.join('; ')}`); }
+  }
+  if (bad) { console.log('\nFAILURES (' + bad + '/' + nodes.length + '):\n' + failures.join('\n')); process.exit(1); }
+  console.log('\nAll ' + nodes.length + ' boss and elite fights pass.');
+}
+
 function main() {
+  if (process.argv[2] === 'bosses') return bossMain(process.argv.slice(3));
   const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
   const verbose = process.argv.includes('--verbose');
   const seeds = Number(args[0] || 10);

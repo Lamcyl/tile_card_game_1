@@ -52,6 +52,7 @@ prototype/js/world-data.js           Regions, sub-areas, levels, unlocks, enemy 
 prototype/js/progress.js             Souls, Camp upgrades, roster, save file
 prototype/js/items.js                Equipment items, drop tables and their effects
 prototype/js/gen.js                  Battle generator (level + sub-area theme)
+prototype/js/boss-defs.js            Handcrafted bosses and elites (one gimmick each)
 prototype/js/map.js                  Painted world map, fog, paths, hero, panning
 prototype/js/battle.js               Battle screen (placement + animated turns)
 prototype/js/app.js                  Game flow: Camp, runs, rewards, results

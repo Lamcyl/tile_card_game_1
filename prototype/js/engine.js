@@ -271,6 +271,17 @@
     if (spot) spawn(state, e, spot[0], spot[1], 1, events, 'split');
   }
 
+  // Damage each column's enemies would deal next strike, sweepers included: [{col: n}] as an array of COLS numbers.
+  function incomingByColumn(enemies) {
+    const out = new Array(COLS).fill(0);
+    for (const e of enemies) {
+      if (!isThreat(e)) continue;
+      out[e.col] += e.atk;
+      if (e.gimmick === 'sweep') for (const c of [e.col - 1, e.col + 1]) if (c >= 0 && c < COLS) out[c] += Math.ceil(e.atk / 2);
+    }
+    return out;
+  }
+
   const isThreat = (e) => e.alive && !ENEMY_TYPES[e.type].barrel;
 
   // Resolve one full turn: attackers fire, survivors strike, survivors enrage.
@@ -278,7 +289,7 @@
   function resolveTurn(state0, placement, army) {
     const state = clone(state0);
     const events = [];
-    const stats = computeStats(placement, army);
+    const stats = computeStats(placement, army, state.enemies);
 
     // Attackers fire front row first, then left to right.
     const attackers = Object.values(stats)
@@ -301,20 +312,30 @@
     }
 
     // Surviving enemies strike the hero. Shields absorb damage in their column.
+    const pools = [];
+    const shieldsOf = [];
     for (let col = 0; col < COLS; col++) {
-      const shieldKeys = PLAYER_ROWS.map((r) => key(r, col))
-        .filter((k) => stats[k] && stats[k].type.role === 'defender');
-      let pool = shieldKeys.reduce((sum, k) => sum + stats[k].block, 0);
+      shieldsOf[col] = PLAYER_ROWS.map((r) => key(r, col)).filter((k) => stats[k] && stats[k].type.role === 'defender');
+      pools[col] = shieldsOf[col].reduce((sum, k) => sum + stats[k].block, 0);
+    }
+    const strike = (e, col, atk, splash) => {
+      const blocked = Math.min(pools[col], atk);
+      pools[col] -= blocked;
+      const dmg = atk - blocked;
+      state.hp = Math.max(0, state.hp - dmg);
+      state.damageTaken += dmg;
+      events.push({ t: 'strike', id: e.id, atk, blocked, dmg, shields: shieldsOf[col], hp: state.hp, col, splash });
+    };
+    for (let col = 0; col < COLS; col++) {
       for (const er of ENEMY_ROWS) {
         const e = enemyAt(state.enemies, er, col);
         if (!e || !isThreat(e) || e.atk <= 0) continue;
-        const blocked = Math.min(pool, e.atk);
-        pool -= blocked;
-        const dmg = e.atk - blocked;
-        state.hp = Math.max(0, state.hp - dmg);
-        state.damageTaken += dmg;
-        events.push({ t: 'strike', id: e.id, atk: e.atk, blocked, dmg, shields: shieldKeys, hp: state.hp });
+        strike(e, col, e.atk, false);
       }
+    }
+    // Sweepers also strike the neighbouring columns for half damage (after every direct strike).
+    for (const e of state.enemies.filter((x) => isThreat(x) && x.gimmick === 'sweep' && x.atk > 0)) {
+      for (const col of [e.col - 1, e.col + 1]) if (col >= 0 && col < COLS) strike(e, col, Math.ceil(e.atk / 2), true);
     }
 
     if (state.hp <= 0) {
@@ -327,6 +348,15 @@
     const raged = state.enemies.filter(isThreat);
     raged.forEach((e) => { e.atk += 1; });
     events.push({ t: 'enrage', ids: raged.map((e) => e.id) });
+    // Boss gimmicks that act at the end of the turn.
+    for (const e of raged) {
+      if (e.gimmick === 'rage') { e.atk += e.gp; events.push({ t: 'rage', id: e.id, amount: e.gp, atk: e.atk }); }
+      if (e.gimmick === 'harden' && e.armor < e.gp) { e.armor += 1; events.push({ t: 'harden', id: e.id, armor: e.armor }); }
+      if (e.gimmick === 'regen' && e.hp < e.maxHp) {
+        const amount = Math.min(e.gp, e.maxHp - e.hp); e.hp += amount;
+        events.push({ t: 'heal', id: e.id, targets: [{ id: e.id, amount, hp: e.hp }], self: true });
+      }
+    }
 
     // Healers mend their neighbours, then Summoners call reinforcements (they act at the end of the turn).
     for (const h of state.enemies.filter((e) => e.alive && e.kind === 'healer')) {
@@ -351,12 +381,37 @@
       }
       if (best) spawn(state, sm, best.r, best.c, (sm.minion && sm.minion.hp) || 2, events, 'summon');
     }
+    // Regrow: a fallen head grows back once, in its own tile if it is still free.
+    for (const e of state.enemies.filter((x) => !x.alive && x.gimmick === 'regrow' && x.lives > 0)) {
+      if (enemyAt(state.enemies, e.row, e.col)) continue;
+      e.lives -= 1; e.alive = true; e.hp = Math.min(e.maxHp, e.gp || e.maxHp);
+      events.push({ t: 'regrow', id: e.id, hp: e.hp });
+    }
+    // Movement: Stride (one sidestep, bouncing off the edge) and Tide (everyone is carried along).
+    for (const e of state.enemies.filter((x) => x.alive && x.gimmick === 'stride')) {
+      let to = e.col + e.dir;
+      if (to < 0 || to >= COLS) { e.dir = -e.dir; to = e.col + e.dir; }
+      const other = enemyAt(state.enemies, e.row, to);
+      const from = e.col;
+      if (other) other.col = from;
+      e.col = to;
+      events.push({ t: 'move', id: e.id, from: [e.row, from], to: [e.row, to], swap: other ? other.id : null });
+    }
+    if (state.enemies.some((x) => x.alive && x.gimmick === 'tide')) {
+      const moves = [];
+      for (const e of state.enemies.filter((x) => x.alive)) {
+        const d = e.row === 0 ? -1 : 1;
+        moves.push({ id: e.id, to: [e.row, (e.col + d + COLS) % COLS] });
+      }
+      moves.forEach((m) => { state.enemies.find((x) => x.id === m.id).col = m.to[1]; });
+      events.push({ t: 'tide', moves });
+    }
     state.turn += 1;
     return { state, events };
   }
 
   const Engine = {
-    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS,
+    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, gimmickText, incomingByColumn,
     key, parseKey, clone, cardStat,
     createState, computeStats, targetsFor, reachableTiles, resolveTurn, isThreat,
   };

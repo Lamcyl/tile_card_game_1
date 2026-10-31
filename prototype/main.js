@@ -8,6 +8,7 @@ import './js/world-layout.js';
 import './js/world-data.js';
 import './js/art.js';
 import './js/progress.js';
+import './js/boss-defs.js';
 import './js/gen.js';
 import './js/battle.js';
 import './js/items.js';

@@ -3,8 +3,8 @@
 (function (root) {
   'use strict';
   const World = root.World;
+  if (!root.BossDefs && typeof require === 'function') require('./boss-defs.js'); // Node tools (the browser loads it first)
 
-  function shuffle(a, R) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   const vary = (v, R, spread) => Math.max(1, Math.round(v * (1 - spread + R() * spread * 2)));
 
   const RAMP_HP = 0.07, RAMP_ATK = 0.35;
@@ -41,11 +41,11 @@
     { name: 'crossfire',   tier: 3, lv: [7, 9], hp: 0.38, atk: 1, back: '.b.b.', front: 'bx.xb' },
     // Tier 4+ (Survive): too much for one turn; the best line leaves a weak survivor.
     { name: 'gatehouse',  tier: 4, lv: [10, 12], hp: 0.63, hp5: 0.62, atk: 0.8, back: '.b.b.', front: 'bxhxb' },
-    { name: 'bastion',    tier: 4, lv: [10, 12], hp: 0.36, hp5: 0.32, atk: 0.8, back: 'b...b', front: 'ta.ht' },
+    { name: 'bastion',    tier: 4, lv: [10, 12], hp: 0.36, hp5: 0.34, atk: 0.8, back: 'b...b', front: 'ta.ht' },
     { name: 'warband',    tier: 4, lv: [10, 12], hp: 0.4, hp5: 0.43, atk: 0.8, back: 'tb.bt', front: 'bxhxb' },
     // Tier 4+ mechanics, one teaching template each.
     { name: 'mender',     tier: 4, lv: [10, 12], hp: 0.44, hp5: 0.46, atk: 0.8, back: 'b.m.b', front: '.tbt.', teach: 'healer' },
-    { name: 'brood',      tier: 4, lv: [10, 12], hp: 0.5, hp5: [0.56, 0.56, 0.55], atk: 1, atk5: 0.9, back: '.....', front: 'bsxsb', teach: 'splitter' },
+    { name: 'brood',      tier: 4, lv: [10, 12], hp: 0.53, hp5: [0.57, 0.57, 0.58], atk: 1, atk5: 0.9, back: '.....', front: 'bsxsb', teach: 'splitter' },
     { name: 'hive',       tier: 4, lv: [10, 10], hp: 0.43, hp5: [0.4, 0.36, 0.44], atk: 0.8, back: 'b.u.b', front: 'tb.bt', teach: 'summoner' },
     { name: 'hive',       tier: 4, lv: [11, 12], hp: 0.4, atk: 0.8, back: 'b.u.b', front: 'tb.bt', teach: 'summoner' },
     { name: 'bulwark',    tier: 4, lv: [10, 12], hp: 0.28, hp5: [0.34, 0.3, 0.34], atk: 0.8, back: 'b.b.b', front: 'k.k.k', teach: 'bulwark' },
@@ -106,61 +106,69 @@
     return { enemies, template: t.name, teach: t.teach };
   }
 
-  function generateBattle(node, runSeed) {
-    const R = World.rng(runSeed + ':' + node.id);
-    if (node.type !== 'boss' && node.type !== 'elite') return fromTemplate(node, R);
-    return legacyBattle(node, R);
+  // ---------- Handcrafted bosses and elites (js/boss-defs.js) ----------
+  // Boss and elite HP is the level's base enemy HP times the def's multiplier times this per-level factor (elites 75%), tuned with
+  // tools/sim-runs.js so that the first boss falls for a fresh account about one run in four and Frostveil opens around run 7-18.
+  const fightHp = (L) => (L <= 6 ? 1.7 : L <= 7 ? 2.1 : L <= 9 ? 2.5 : L <= 12 ? 2.4 : 2.1);
+  // Chars as in the templates plus B (the boss), G (guard of a 'guard' boss) and H (a head that regrows once).
+  function fromDef(node, def, R, isBoss) {
+    const L = node.level, sub = node.sub, E = root.Engine;
+    const ramp = L > 7 ? 1 + RAMP_HP * (L - 7) : 1, // bosses and elites keep the full ramp (design 24.1)
+       rampAtk = L > 7 ? Math.floor((L - 7) * RAMP_ATK) : 0;
+    const unitHp = (2.2 + L * 0.95) * ramp * fightHp(L) * (isBoss ? 1 : 0.75), unitAtk = 1.5 + L * 0.42 + rampAtk;
+    const enemies = [];
+    [[0, def.back], [1, def.front]].forEach(([row, str]) => {
+      for (let i = 0; i < 5; i++) {
+        const ch = str[i];
+        if (ch === '.') continue;
+        if (ch === 'x') { enemies.push({ type: sub + '_barrel', row, col: i, hp: 1 }); continue; }
+        if (ch === 'B') {
+          const hp = Math.max(1, Math.round(unitHp * def.bossHp)), atk = Math.max(1, Math.round(unitAtk * def.bossAtk));
+          const en = { type: sub + '_boss', row, col: i, hp, atk, armor: 0 };
+          if (def.gimmick) { en.gimmick = def.gimmick; en.gp = def.gp || (def.gpHp ? Math.max(1, Math.round(hp * def.gpHp)) : 0); }
+          if (def.kind) {
+            en.kind = def.kind;
+            if (def.kind === 'splitter') en.minion = { type: sub + '_basic', hp: 1, atk: Math.max(1, Math.round(atk * 0.5)) };
+            if (def.kind === 'summoner') en.minion = { type: sub + '_basic', hp: Math.max(2, Math.round(unitHp * 0.5)), atk: Math.max(1, Math.round(atk * 0.5)) };
+          }
+          enemies.push(en);
+          continue;
+        }
+        let role = 'basic', hpMul = 1, atkAdd = 0, armor = 0, kind = null, extra = null;
+        if (ch === 'w') hpMul = 0.6;
+        else if (ch === 't') { role = 'tough'; hpMul = 1.4; atkAdd = L >= 5 ? 1 : 0; }
+        else if (ch === 'h') { role = 'tough'; hpMul = 2.2; atkAdd = 1; }
+        else if (ch === 'a') { role = 'armored'; armor = L >= 9 ? 2 : 1; hpMul = 0.9; }
+        else if (ch === 'k') { role = 'armored'; armor = L >= 9 ? 2 : 1; hpMul = 1.1; kind = 'bulwark'; }
+        else if (ch === 'm') { hpMul = 0.8; kind = 'healer'; }
+        else if (ch === 's') { role = 'tough'; hpMul = 1; kind = 'splitter'; }
+        else if (ch === 'u') { hpMul = 0.9; kind = 'summoner'; }
+        else if (ch === 'G') { role = 'tough'; hpMul = 1.2; atkAdd = 1; extra = { guardian: true }; }
+        else if (ch === 'H') { role = 'tough'; hpMul = 1; extra = { gimmick: 'regrow' }; }
+        const hp = vary(unitHp * hpMul * def.hp, R, 0.06);
+        const atk = Math.max(1, Math.round(vary(unitAtk - rampAtk, R, 0.1) * def.atk)) + atkAdd + rampAtk;
+        const en = { type: sub + '_' + role, row, col: i, hp, atk, armor };
+        if (kind) en.kind = kind;
+        if (extra) Object.assign(en, extra);
+        if (en.gimmick === 'regrow') en.gp = Math.max(2, Math.round(hp * 0.6));
+        if (kind === 'splitter' || kind === 'summoner') en.minion = { type: sub + '_basic', hp: kind === 'splitter' ? 1 : Math.max(2, Math.round(hp * 0.4)), atk: Math.max(1, Math.round(atk * 0.6)) };
+        enemies.push(en);
+      }
+    });
+    const name = def.name;
+    const g = def.gimmick ? E.ENEMY_GIMMICKS[def.gimmick] : def.kind ? E.ENEMY_KINDS[def.kind] : null;
+    const intro = isBoss
+      ? { name, rule: g ? g.name : '', badge: g ? g.badge : '', text: def.intro }
+      : { name, rule: 'Elite', badge: '', text: def.note };
+    return { enemies, template: (isBoss ? 'boss ' : 'elite ') + sub, intro };
   }
 
-  // Bosses and elites keep the older random layout until they get handcrafted definitions.
-  function legacyBattle(node, R) {
-    const L = node.level;
-    // From the second region on, enemies grow faster than the squad's early upgrades (design 24.1).
-    const ramp = L > 7 ? 1 + RAMP_HP * (L - 7) : 1, rampAtk = L > 7 ? Math.floor((L - 7) * RAMP_ATK) : 0;
-    const sub = node.sub;
-    const enemies = [];
-    const free = [];
-    for (const r of [1, 0]) for (let c = 0; c < 5; c++) free.push([r, c]);
-    const take = (pred) => {
-      const opts = shuffle(free.filter(pred), R);
-      const cell = opts[0] || shuffle(free.slice(), R)[0];
-      free.splice(free.indexOf(cell), 1);
-      return cell;
-    };
-
-    const add = (role, hp, atk, armor, cell) => enemies.push({ type: sub + '_' + role, row: cell[0], col: cell[1], hp, atk, armor: armor || 0 });
-
-    if (node.type === 'boss') {
-      // Boss in the front centre, minions around it. Usually a two-turn fight.
-      const cell = [1, 2]; free.splice(free.findIndex((f) => f[0] === 1 && f[1] === 2), 1);
-      add('boss', Math.round((10 + L * 4 + (L <= 4 ? 7 : L <= 6 ? 9 : 0)) * ramp), 3 + Math.floor(L * 0.6) + rampAtk, L >= 7 ? 1 : 0, cell);
-      const minions = L <= 4 ? 2 : Math.min(5, 1 + Math.floor(L / 2)); // early bosses bring fewer minions (design 24.1)
-      for (let i = 0; i < minions; i++) {
-        const role = R() < 0.3 && L >= 4 ? 'armored' : 'basic';
-        add(role, vary((2 + L * 0.95) * ramp, R, 0.3), vary(1.4 + L * 0.42, R, 0.3) + rampAtk, role === 'armored' ? 1 : 0, take(() => true));
-      }
-      if (L >= 3) add('barrel', 1, 0, 0, take((f) => f[0] === 1));
-      return { enemies, template: 'boss' };
-    }
-
-    // Elite: one big tough enemy plus a random escort.
-    const count = Math.min(8, Math.max(3, Math.round(3 + L * 0.55)));
-    for (let i = 0; i < count; i++) {
-      const roll = R();
-      let role = 'basic', hpMul = 1, atkAdd = 0, armor = 0;
-      if (L >= 3 && roll < 0.22) { role = 'armored'; armor = L >= 9 ? 2 : 1; hpMul = 0.9; }
-      else if (roll < 0.45) { role = 'tough'; hpMul = 1.4; atkAdd = L >= 5 ? 1 : 0; }
-      if (i === 0) { role = 'tough'; hpMul = 2.2; atkAdd = 1; }
-      const hp = vary((2.2 + L * 0.95) * hpMul * ramp, R, 0.3);
-      const atk = vary(1.5 + L * 0.42, R, 0.35) + atkAdd + rampAtk;
-      add(role, hp, atk, armor, take((f) => (role === 'tough' ? f[0] === 1 : true)));
-    }
-    const barrels = L < 2 ? 0 : (R() < 0.6 ? 1 : 0) + (L >= 5 && R() < 0.45 ? 1 : 0);
-    for (let i = 0; i < barrels && free.length; i++) {
-      const cell = take((f) => enemies.some((e) => Math.abs(e.row - f[0]) + Math.abs(e.col - f[1]) === 1));
-      enemies.push({ type: sub + '_barrel', row: cell[0], col: cell[1], hp: 1 });
-    }
-    return { enemies, template: 'elite' };
+  function generateBattle(node, runSeed) {
+    const R = World.rng(runSeed + ':' + node.id);
+    const Defs = root.BossDefs;
+    if (node.type === 'boss' && Defs.BOSSES[node.sub]) return fromDef(node, Defs.BOSSES[node.sub], R, true);
+    if (node.type === 'elite' && Defs.ELITES[node.sub]) return fromDef(node, Object.assign({ bossHp: 1, bossAtk: 1 }, Defs.ELITES[node.sub]), R, false);
+    return fromTemplate(node, R);
   }
 
   // Souls for winning a battle at a node (before the Fortune bonus).

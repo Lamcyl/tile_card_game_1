@@ -239,3 +239,14 @@
 .spawned .enemy { animation: spawn-pop .5s ease-out; }
 @keyframes heal-pulse { 50% { filter: brightness(1.25) saturate(1.3); transform: scale(1.06); } }
 @keyframes spawn-pop { from { transform: scale(.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* Boss and elite gimmicks (Engine.ENEMY_GIMMICKS) and the intro line */
+.enemy.gimmick .kind-badge { background: #8a3a2a; }
+.enemy.gimmick::after { content: ""; position: absolute; inset: 0; border-radius: 12px; pointer-events: none; box-shadow: inset 0 0 0 2px rgba(138, 58, 42, .85); }
+.enemy .guard-badge { position: absolute; bottom: 14px; right: -3px; width: 18px; height: 18px; line-height: 16px; text-align: center; font: 800 12px var(--b-serif); color: #fbf4e2; background: #6a4a2a; border: 2px solid rgba(251, 244, 226, .95); border-radius: 50%; z-index: 2; pointer-events: none; }
+.enemy.guardian::after { content: ""; position: absolute; inset: 0; border-radius: 12px; pointer-events: none; box-shadow: inset 0 0 0 2px rgba(106, 74, 42, .9); }
+.gazed, .c-sub .gazed { color: #8a3a9a; text-decoration: underline wavy; }
+#b-msg .intro-name { font-weight: 800; color: #8a3a2a; }
+#b-msg .intro-name i { font-style: normal; font-weight: 700; padding: 0 6px; margin-left: 2px; border-radius: 9px; background: rgba(138, 58, 42, .14); }
+.tide-wash .board::before { animation: tide-wash .7s ease-in-out; }
+@keyframes tide-wash { 50% { filter: brightness(1.35) saturate(1.4); } }

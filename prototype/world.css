@@ -274,3 +274,5 @@ button.wide { width: 100%; }
 .first-run { padding: 8px 10px; border-radius: var(--brush-sm); background: rgba(232,176,74,.22); border: 1px dashed #b8892e; font-size: 14px; }
 button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: var(--vermilion); }
 @keyframes pointpulse { 50% { box-shadow: 0 0 0 4px rgba(200,64,47,.35); } }
+
+.gimmick-note { margin: 6px 0; padding: 6px 9px; border-radius: 8px; background: rgba(138, 58, 42, .1); border-left: 3px solid rgba(138, 58, 42, .7); font-size: 13px; line-height: 1.35; }
