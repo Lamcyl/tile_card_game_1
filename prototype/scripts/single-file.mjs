@@ -11,6 +11,9 @@ const title = html.match(/<title>[\s\S]*?<\/title>/)[0];
 const body = html.match(/<body>([\s\S]*)<\/body>/)[1];
 
 const out = [
+  '<!DOCTYPE html>',
+  '<html lang="en"><meta charset="utf-8">',
+  '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">',
   title,
   '<meta name="claude:viewport-fit-sides" content="cover">',
   `<style>\n${css}\n</style>`,
