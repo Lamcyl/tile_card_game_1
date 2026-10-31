@@ -124,6 +124,8 @@ Each package targets a mostly distinct file set so they can run one after anothe
 
 **WP12 Relics.** New `relics.js` with a dozen rule-bending relics (barrels explode twice, supporters boost diagonally, overkill kills grant ATK, first Shield blocks double) implemented as engine rule flags passed in the run state. Offer them in the post-battle choice (heal / upgrade / relic), show owned relics in the HUD, and reset them each run.
 
+*Done (WP12):* `js/relics.js` holds 12 myth-themed relics (Norse/Greek/Egyptian/Shinto/Vedic) that grant engine rule flags via `Progress.rulesFor(save, run)` (`run.relics`, reset each run); new flags `echo`, `diagAll`, `feast`, `aegis`, `plate`, `reach`, `kindle` in `engine.js`; offered in place of one upgrade in the post-battle choice (always after elites/bosses, ~40% otherwise, max 4 per run); shown as ink-seal icons in the HUD, run sheet and battle header; `sim-runs.js` takes the first offered relic (`NORELICS=1` ablation).
+
 **WP13 Shop, shrine choice, events.** Add Gold to runs (earned per battle, spent in shops, lost at run end). Add node types Shop (relics, heals, unit upgrades), Event (text choices with risk/reward in `events.js`), turn Shrine into "heal or upgrade a unit", and make some Treasure nodes guarded. Place them in `world-layout.js`/`world-data.js` and add map icons.
 
 **WP14 Map expansion.** Add Waypoint nodes (saved in `save.waypoints`, selectable as run start), Keys dropped by elites/bosses that open locked paths and hidden regions, Secret nodes found through events or 3-star clears, and Scouting (fog reveal radius and previewing node contents, tied to a Camp track). Update the fog renderer in `map.js` and the WORLD_SPEC contract (new feature fields).

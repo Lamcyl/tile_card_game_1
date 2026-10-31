@@ -336,6 +336,7 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
   - "Supporters also boost diagonally."
   - "+1 ATK for every enemy killed by overkill this run."
   - "The first Shield each battle blocks double."
+  - *(Implemented, WP12: `js/relics.js`, 12 relics with Norse, Greek, Egyptian, Shinto and Vedic names, e.g. Mjölnir Shard (barrels explode twice), Prism of Ra (supporters boost diagonally), Fenrir's Fang (each overkill kill gives attackers +1 ATK for the battle, max +3), Aegis of Athena (Shields block double on turn 1 of a battle, a simplification of "first Shield"). A relic replaces one of the two upgrade choices: always after elites and bosses, about 40% of other wins, no duplicates, at most 4 per run. They are engine rule flags in `state.rules`, kept in the run state and lost when the run ends.)*
 - **Gold** is earned in battles and spent at shops. It resets when the run ends.
 - **Stage rating:** ★★★ for no damage, ★★ for 3 or less, ★ for a clear. A ★★★ clear gives an extra loot roll, rewarding a well-solved puzzle. Souls scale with the rating (prototype: ×1 / ×1.25 / ×1.5). *(Implemented.)*
 - **Bounties:** each run offers 1–3 optional goals ("Win 3 battles without Shields", "Kill a boss with overkill") that pay Crystals. *(Implemented, WP7: `js/bounties.js`; seven kinds (no Shield, ★★★, overkill count, boss overkill, one-turn win, barrels, elite), 2-5 💎 each, rolled at run start, shown in the run sheet, paid when the run ends even after a defeat.)*
