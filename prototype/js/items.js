@@ -171,7 +171,7 @@
   const SUB_KINDS = [['hp', 3], ['souls', 2], ['block', 2], ['atk', 2], ['amount', 1]];
   const SUB_BASE = { hp: 2, souls: 4, block: 1, atk: 1, amount: 1 };
   function rollSubstats(item, R) {
-    const n = item.rarity === 'common' ? 0 : item.rarity === 'rare' ? 1 : 2, subs = [];
+    const n = item.rarity === 'common' || item.rarity === 'rare' ? 0 : 2, subs = [];
     for (let guard = 0; subs.length < n && guard < 30; guard++) {
       const kind = pickWeighted(R, SUB_KINDS);
       const pool = kind === 'atk' ? ATK_TYPES : kind === 'amount' ? AMOUNT_TYPES : null;
@@ -304,10 +304,10 @@
 
   // ----- Forge (WP9): Dust rerolls a substat or raises the item level -----
   const MAX_ILVL = 20;
-  const REROLL_COST = { rare: 6, epic: 10, legendary: 14 };
+  const REROLL_COST = { epic: 10, legendary: 14 };
   const levelCost = (save, id) => { const d = dataOf(save, id); return d.lv >= MAX_ILVL ? null : 4 + Math.floor(d.lv * 1.5) + (BY_ID[id].rarity === 'common' ? 0 : 2); };
   const rerollCost = (save, id) => { const it = BY_ID[id]; return it && REROLL_COST[it.rarity] && dataOf(save, id).subs.length ? REROLL_COST[it.rarity] : null; };
-  // Replace substat `idx` with a different one (never the main stat or an existing substat). Returns the new substat or null.
+  // (Rare items carry no substats since the WP9 pacing pass, so only Epic and Legendary can be rerolled.) Replace substat `idx` with a different one (never the main stat or an existing substat). Returns the new substat or null.
   function reroll(save, id, idx) {
     const item = BY_ID[id], d = save.items.includes(id) && save.itemData[id], cost = rerollCost(save, id);
     if (!d || cost === null || !d.subs[idx] || !root.Progress.spend(save, 'dust', cost)) return null;
@@ -409,7 +409,7 @@
       if (node.type === 'boss') save.tokens[node.id] = (save.tokens[node.id] || 0) + 1;
     }
     if (!pick && node.type === 'elite' && !opts.bonus) {
-      pick = table.find((e) => e.kind !== 'legend' && !owned.has(e.id));
+      pick = table.find((e) => e.kind !== 'legend' && !owned.has(e.id) && e.kind !== 'unique');
       if (!pick) { const dust = 3; root.Progress.earn(save, 'dust', dust); return { dust, consolation: true }; }
     }
     return pick ? addItem(save, pick.id, node.level, seed) : null;
