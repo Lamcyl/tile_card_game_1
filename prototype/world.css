@@ -389,3 +389,56 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 .trait span { color: var(--muted); }
 .trait span i { font-style: normal; font-weight: 800; display: inline-block; min-width: 14px; }
 .trait span.got { color: var(--ink); font-weight: 700; }
+
+/* ---------- Summon, stars and mastery (WP11) ---------- */
+.tabs button { min-width: 0; padding-left: 2px; padding-right: 2px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip.stars { color: var(--ochre); letter-spacing: -1px; }
+.chip.stars i { font-style: normal; color: rgba(43,42,53,.25); }
+.chip.mastery { color: var(--moss); }
+.summon .odds, .office .seals { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; font-weight: 700; margin: 2px 0 8px; }
+.summon .odds span, .office .seals span { color: var(--rar); }
+.summon .odds i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--rar); margin-right: 4px; }
+.pity, .cp-bar { position: relative; }
+.pity { height: 26px; border: 1.5px solid var(--ink); border-radius: var(--brush-sm); overflow: hidden; background: rgba(236,225,200,.7); margin: 4px 0 10px; }
+.pity i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, rgba(184,137,44,.35), rgba(184,137,44,.7)); }
+.pity span { position: relative; display: block; text-align: center; font-size: 12px; line-height: 23px; }
+.pulls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pulls button { display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
+.pulls button small { font-size: 12px; font-weight: 600; opacity: .9; }
+.office, .mastery-list { margin-top: 14px; }
+.office h4, .mastery-list h4 { margin: 0 0 6px; font-family: var(--font-display); font-size: 15px; }
+.office h4 small, .mastery-list h4 small { font-family: var(--font-body); font-weight: 500; color: var(--muted); font-size: 11px; }
+.mrow { display: flex; gap: 10px; align-items: center; padding: 6px 0; border-bottom: 1px dashed rgba(43,42,53,.2); }
+.mrow .art { width: 38px; height: 38px; flex: none; overflow: hidden; border-radius: 50% 44% 52% 46%; background: radial-gradient(circle at 40% 35%, #fbf5e6, var(--paper-deep)); border: 1px solid rgba(43,42,53,.3); display: grid; place-items: center; }
+.mrow .art img { width: 100%; height: 100%; object-fit: contain; }
+.mrow .grow { min-width: 0; display: grid; gap: 2px; }
+.mbar { display: block; height: 6px; border-radius: 3px; background: rgba(43,42,53,.15); overflow: hidden; }
+.mbar i { display: block; height: 100%; background: var(--moss); }
+
+/* Brushed reveal: the drawing is unveiled by a sweeping ink-brush mask; a rarity-coloured wash blooms behind it. */
+.pull-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 10px 0 6px; }
+.pull-grid.one { grid-template-columns: 1fr; }
+.pull { position: relative; display: grid; justify-items: center; gap: 1px; text-align: center; padding: 4px 1px 5px; min-width: 0;
+  border: 1.5px solid var(--rar); border-radius: var(--brush-sm); background: rgba(247,240,224,.7); animation: pull-in .35s ease-out both; animation-delay: var(--d, 0s); }
+.pull .halo { position: absolute; inset: 0; border-radius: inherit; opacity: 0; animation: halo 1.2s ease-out both; animation-delay: var(--d, 0s);
+  background: radial-gradient(ellipse at 50% 42%, color-mix(in srgb, var(--rar) 55%, transparent), transparent 70%); }
+.pull .brush { position: relative; width: 100%; aspect-ratio: 1; display: grid; place-items: center; font-size: 28px;
+  -webkit-mask-image: linear-gradient(100deg, #000 38%, transparent 62%); mask-image: linear-gradient(100deg, #000 38%, transparent 62%);
+  -webkit-mask-size: 320% 100%; mask-size: 320% 100%; -webkit-mask-position: 100% 0; mask-position: 100% 0;
+  animation: brush-reveal .9s cubic-bezier(.3,.6,.3,1) both; animation-delay: calc(var(--d, 0s) + .15s); }
+.pull .brush img { width: 100%; height: 100%; object-fit: contain; }
+.pull b { font: 800 11px/1.15 var(--font-display); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pull small { font-size: 10px; font-weight: 700; color: var(--rar); }
+.pull em { font-style: normal; font-size: 10px; font-weight: 800; color: var(--vermilion-deep); }
+.pull.fresh em { color: #fbf3e2; background: var(--vermilion); border-radius: 3px; padding: 0 5px; }
+.pull.rar-epic, .pull.rar-legendary { box-shadow: 0 0 0 2px color-mix(in srgb, var(--rar) 25%, transparent); }
+.pull.pity em::after { content: " pity"; }
+.pull-grid.one .pull { padding: 12px 8px 12px; gap: 3px; }
+.pull-grid.one .pull .brush { width: min(200px, 60vw); }
+.pull-grid.one .pull b { font-size: 20px; }
+.pull-grid.one .pull small, .pull-grid.one .pull em { font-size: 13px; }
+.center { text-align: center; }
+@keyframes brush-reveal { to { -webkit-mask-position: 0 0; mask-position: 0 0; } }
+@keyframes pull-in { from { opacity: 0; transform: translateY(6px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes halo { 0% { opacity: 0; transform: scale(.6); } 40% { opacity: 1; } 100% { opacity: .55; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .pull, .pull .halo, .pull .brush { animation-duration: .01s; animation-delay: 0s; } }

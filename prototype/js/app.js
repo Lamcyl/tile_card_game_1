@@ -62,7 +62,7 @@
     } else {
       $('#hud').innerHTML =
         '<div class="hud-chip big" title="Souls: buy Camp upgrades and recruits">✦ ' + P.balance(save, 'souls') + ' <small>Souls</small></div>' +
-        '<div class="hud-chip cur crystals" title="Crystals: from first boss kills and bounties. Spent on Rare, Epic and Legendary recruits.">💎 ' + P.balance(save, 'crystals') + '</div>' +
+        '<div class="hud-chip cur crystals" title="Crystals: from first boss kills and bounties. Spent on Summon pulls (Rare, Epic and Legendary units).">💎 ' + P.balance(save, 'crystals') + '</div>' +
         '<div class="hud-chip cur dust" title="Dust: from salvaging gear. Spent in the Forge (coming soon).">⚒ ' + P.balance(save, 'dust') + '</div>';
     }
   }
@@ -155,13 +155,13 @@
   }
 
   function campSheet() {
-    const tabs = ['upgrades', 'squad', 'recruit', 'gear'];
+    const tabs = ['upgrades', 'squad', 'recruit', 'summon', 'gear'];
     let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad (Command Points, one supporter minimum), then set out with 🎒 ' + P.startSupplies(save) + ' Supplies.</p></div>' +
       '<button class="primary" data-act="start">Set out ➜</button></div>';
     html += '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
       '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
-      { upgrades: 'Upgrades', squad: 'Squad ' + P.squadCp(save) + '/' + P.commandCap(save) + ' CP', recruit: 'Recruit', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
+      { upgrades: 'Camp', squad: 'Squad ' + P.squadCp(save) + '/' + P.commandCap(save), recruit: 'Recruit', summon: 'Summon', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
     html += '<div class="list">';
     if (campTab === 'upgrades') {
       for (const u of P.UPGRADES) {
@@ -184,21 +184,24 @@
       }
     } else if (campTab === 'gear') {
       html += gearTab();
-    } else {
+    } else if (campTab === 'recruit') {
       let shown = 0;
       for (const u of P.ROSTER) {
-        if (save.owned.includes(u.id) || u.start) continue;
+        if (save.owned.includes(u.id) || u.start || !P.recruitable(u)) continue;
         shown++;
-        const avail = P.recruitAvailable(save, u), gems = u.gems !== undefined;
+        const avail = P.recruitAvailable(save, u), gems = false;
         const need = Array.isArray(u.need) ? u.need : [u.need];
         const can = gems ? P.canSpend(save, 'crystals', u.gems) : save.souls >= u.cost;
         html += '<div class="item unit ' + rarClassOf(u.id) + (avail ? '' : ' locked') + '">' + unitCell(u.id, unitMeta(u.id) + '<span class="muted">' +
           (avail ? describeType(u.type, u) : 'Defeat ' + need.map((b) => World.THEMES[b].boss[0]).join(' or ')) + '</span>' + unitPerk(u.id)) +
           (avail ? '<button data-recruit="' + u.id + '"' + (can ? '' : ' disabled') + '>' + (gems ? '💎 ' + u.gems : '✦ ' + u.cost) + '</button>' : '<span class="muted">🔒</span>') + '</div>';
       }
-      if (!shown) html += '<p class="muted">Everyone has joined you.</p>';
+      if (!shown) html += '<p class="muted">Every Common has joined you. Rare, Epic and Legendary units come from the Summon tab.</p>';
+      else html += '<p class="muted small">Commons can be bought here with Souls once their boss has fallen. Rarer units come from the Summon tab.</p>';
+    } else if (campTab === 'summon') {
+      html += summonTab();
     }
-    html += '</div><div class="tools"><span class="muted small">Prototype tools</span><button data-act="cheat">+100 ✦ 10 💎 10 ⚒</button><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset progress') + '</button></div>';
+    html += '</div><div class="tools"><span class="muted small">Prototype tools</span><button data-act="cheat">+100 ✦ 30 💎 10 ⚒</button><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset progress') + '</button></div>';
     return html;
   }
   // Stat lines of an owned item: main effect, substats and (Legendary) the unique rule.
@@ -268,7 +271,54 @@
   // Rarity, Command Point cost and trait of a roster unit, as a small line of chips.
   function unitMeta(id) {
     const u = P.ROSTER_BY[id], tr = P.TRAITS[u.trait];
-    return '<span class="meta"><span class="chip rar">' + P.RARITY[u.rarity].name + '</span><span class="chip cp" title="Command Points">🎖️ ' + P.unitCp(id) + '</span><span class="chip trait" title="' + esc(tr.name + ' trait') + '">' + tr.icon + ' ' + tr.name + '</span></span>';
+    return '<span class="meta"><span class="chip rar">' + P.RARITY[u.rarity].name + '</span><span class="chip cp" title="Command Points">🎖️ ' + P.unitCp(id) + '</span><span class="chip trait" title="' + esc(tr.name + ' trait') + '">' + tr.icon + ' ' + tr.name + '</span>' + growthChips(id) + '</span>';
+  }
+  // Duplicate stars and mastery level of an owned unit.
+  function growthChips(id) {
+    if (!save.owned.includes(id)) return '';
+    const st = P.starsOf(save, id), m = P.masteryOf(save, id);
+    return '<span class="chip stars" title="Duplicates raise stars: ' + esc(P.STAR_TEXT.slice(2, st + 1).join(', ') || 'none yet') + '">' + '★'.repeat(st) + '<i>' + '★'.repeat(P.MAX_STARS - st) + '</i></span>' +
+      '<span class="chip mastery" title="Mastery grows when the unit fights. ' + esc(m.next === null ? 'Max level.' : m.xp + '/' + m.next + ' xp to the next level.') + '">Mastery ' + m.lv + '</span>';
+  }
+  // Mastery progress bar for the Summon tab.
+  const masteryBar = (id) => { const m = P.masteryOf(save, id), pct = m.next === null ? 100 : Math.round(100 * (m.xp - m.from) / (m.next - m.from)); return '<span class="mbar" title="' + m.xp + ' xp"><i style="width:' + pct + '%"></i></span>'; };
+
+  // ---------- Summon (WP11) ----------
+  let summonMsg = '';
+  function summonTab() {
+    const cr = P.balance(save, 'crystals'), pity = save.pity || 0, seals = save.seals || {};
+    let h = '<div class="summon"><div class="odds">' + Object.keys(P.ODDS).map((k) => '<span class="rar-' + k + '"><i></i>' + P.RARITY[k].name + ' ' + P.ODDS[k] + '%</span>').join('') + '</div>' +
+      '<div class="pity" role="meter" aria-valuenow="' + pity + '" aria-valuemax="' + P.PITY_AT + '"><i style="width:' + Math.min(100, 100 * pity / P.PITY_AT) + '%"></i><span>Pity <b>' + pity + ' / ' + P.PITY_AT + '</b> · an Epic is guaranteed at ' + P.PITY_AT + '</span></div>' +
+      '<div class="pulls"><button class="primary" data-pull="1"' + (cr < P.PULL_COST ? ' disabled' : '') + '>Summon ×1<small>💎 ' + P.PULL_COST + '</small></button>' +
+      '<button class="primary" data-pull="10"' + (cr < P.PULL10_COST ? ' disabled' : '') + '>Summon ×10<small>💎 ' + P.PULL10_COST + '</small></button></div>' +
+      '<p class="muted small">Duplicates add a ★ (max ' + P.MAX_STARS + ': ' + esc(P.STAR_TEXT[2]) + ' at ★2, ' + esc(P.STAR_TEXT[3]) + ' at ★3, ' + esc(P.STAR_TEXT[5]) + ' at ★5), give a Seal, and turn into Dust at ★5. Commons are drawn from units whose boss has fallen.</p>' +
+      (summonMsg ? '<p class="squad-rule ok">' + summonMsg + '</p>' : '') + '</div>';
+    h += '<div class="office"><h4>Recruitment Office <small>trade Seals for any unit of that rarity</small></h4><div class="seals">' + Object.keys(P.OFFICE_COST).map((k) =>
+      '<span class="rar-' + k + '"><b>' + (seals[k] || 0) + '</b> / ' + P.OFFICE_COST[k] + ' ' + P.RARITY[k].name + '</span>').join('') + '</div>';
+    const ready = Object.keys(P.OFFICE_COST).filter((k) => (seals[k] || 0) >= P.OFFICE_COST[k]);
+    if (!ready.length) h += '<p class="muted small">Every duplicate pull earns a Seal of its rarity. Collect enough and choose your unit here, so bad luck never locks out a plan.</p>';
+    for (const u of P.ROSTER) {
+      if (!ready.includes(u.rarity) || (save.owned.includes(u.id) && P.starsOf(save, u.id) >= P.MAX_STARS)) continue;
+      h += '<div class="item unit ' + rarClassOf(u.id) + '">' + unitCell(u.id, unitMeta(u.id)) + '<button data-office="' + u.id + '">' + (save.owned.includes(u.id) ? '+1 ★' : 'Recruit') + '</button></div>';
+    }
+    h += '</div><div class="mastery-list"><h4>Mastery <small>units grow by fighting: +1 xp per win, +2 for a boss</small></h4>' + save.owned.map((id) => {
+      const m = P.masteryOf(save, id);
+      return '<div class="mrow ' + rarClassOf(id) + '"><span class="art">' + unitView(id).img + '</span><div class="grow"><b>' + esc(unitView(id).name) + '</b> <small>Mastery ' + m.lv + ' · ' + m.xp + (m.next === null ? '' : '/' + m.next) + ' xp</small>' + masteryBar(id) +
+        '<span class="muted small">' + (m.lv < 5 ? 'Next: ' + esc(P.MASTERY_PERKS[m.lv]) : 'Veteran: +1 main stat') + '</span></div></div>';
+    }).join('') + '</div>';
+    return h;
+  }
+  // Brushed reveal of the pull results: the creature drawing is unveiled by a sweeping ink-brush mask in its rarity colour.
+  function showSummon(results) {
+    const one = results.length === 1;
+    const tile = (r, i) => {
+      const v = unitView(r.id), tag = r.isNew ? 'NEW' : r.starUp ? '★' + r.stars : r.dust ? '+⚒ ' + r.dust : 'Max';
+      return '<div class="pull rar-' + r.rarity + (r.isNew ? ' fresh' : '') + (r.pityHit ? ' pity' : '') + '" style="--d:' + (i * 0.14) + 's"><span class="halo"></span><span class="brush">' + v.img + '</span>' +
+        '<b>' + esc(v.name) + '</b><small>' + P.RARITY[r.rarity].name + '</small><em>' + tag + '</em></div>';
+    };
+    modal('<h3>' + (one ? 'Summoned' : 'Summoned ×' + results.length) + '</h3><div class="pull-grid' + (one ? ' one' : '') + '">' + results.map(tile).join('') + '</div>' +
+      '<p class="muted small center">' + 'Pity ' + (save.pity || 0) + ' / ' + P.PITY_AT + '</p><div class="row"><button class="primary grow" data-act="close">Continue</button></div>');
+    $('#modal').onclick = (ev) => { if (ev.target.closest('[data-act="close"]')) closeModal(); };
   }
   const unitPerk = (id) => (P.ROSTER_BY[id].perk ? '<span class="perk">' + esc(P.ROSTER_BY[id].perk) + '</span>' : '');
   // Trait synergy panel: count per trait, active bonuses and the next step to reach.
@@ -370,6 +420,7 @@
     if (state.status !== 'cleared') { persist(); endRun(true); return; }
     stars = stars || 1;
     const gained = Math.round(Gen.soulsFor(n, stars) * P.soulRate(save));
+    P.addXp(save, save.squad, n.type === 'boss' ? 2 : 1); // WP11 unit mastery
     r.souls += gained; r.wins += 1; r.maxLevel = Math.max(r.maxLevel, n.level); r.cleared.push(n.id);
     // Items: rolled before the boss is marked as beaten, so its first kill always drops its unique item.
     let drop = Items.grantDrop(save, n, r.seed);
@@ -521,6 +572,18 @@
       }
       return;
     }
+    if (b.dataset.pull) {
+      const n = Number(b.dataset.pull), res = P.pull(save, n, Math.random);
+      if (!res) { toast('Not enough Crystals.'); return; }
+      const ups = res.filter((r) => r.starUp).length, news = res.filter((r) => r.isNew).length;
+      summonMsg = news + ' new, ' + ups + ' star-up' + (ups === 1 ? '' : 's') + '.';
+      persist(); renderAll(); showSummon(res); return;
+    }
+    if (b.dataset.office) {
+      const res = P.officeTrade(save, b.dataset.office);
+      if (res) { summonMsg = ''; persist(); toast(unitView(res.id).name + (res.isNew ? ' joined your roster.' : ' gained a star (★' + res.stars + ').')); renderAll(); showSummon([res]); } else toast('Not enough Seals.');
+      return;
+    }
     if (b.dataset.equip) {
       const id = b.dataset.equip;
       if (!Items.unequip(save, id)) {
@@ -564,7 +627,7 @@
     else if (act === 'engage') engage(selected);
     else if (act === 'close-node') { selected = null; renderAll(); }
     else if (act === 'return') { if (!confirmReturn) { confirmReturn = true; renderSheet(); } else endRun(false); }
-    else if (act === 'cheat') { save.souls += 100; P.earn(save, 'crystals', 10); P.earn(save, 'dust', 10); persist(); renderAll(); }
+    else if (act === 'cheat') { save.souls += 100; P.earn(save, 'crystals', 30); P.earn(save, 'dust', 10); persist(); renderAll(); }
     else if (act === 'reset') {
       if (!confirmReset) { confirmReset = true; renderSheet(); return; }
       confirmReset = false; save = P.reset(); WorldMap.placeToken('camp'); WorldMap.focus(World.CAMP.x, World.CAMP.y - 120, true); toast('Progress erased.'); renderAll();

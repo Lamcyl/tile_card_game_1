@@ -358,10 +358,11 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
 
 *Implemented (WP10):* Longbowman (Draugr, Rare), Storm Mage (Typhon, Epic, chain hits the lowest-HP enemy next to a struck one for the same damage) and Phoenix Archer (revives at half max HP, once per run) exist and are bought with Crystals until the WP11 gacha; Wukong, Talos, Perun, Lei Gong and Ix Chel are Rare with +1 to their main number.
 
-- **Duplicates** add stars (★1–★5), each a small upgrade. ★5 unlocks a **unit perk**.
-- **Pity:** a guaranteed Epic every 30 pulls. A **Recruitment Office** trades unwanted duplicates for a unit of your choice, so bad luck never locks out a strategy.
+- **Duplicates** add stars (★1–★5), each a small upgrade. ★5 unlocks a **unit perk**. *(Implemented, WP11: ★2/★4 give shared HP, ★3 +1 ATK/block/boost, ★5 +1 range/block/boost; a duplicate also gives a Seal, and a duplicate of a ★5 unit turns into Dust.)*
+- **Pulls:** 💎 3 each (10 for 27); Common 62 / Rare 28 / Epic 9 / Legendary 1 %. Rare and above come only from the gacha; Commons can still be bought with Souls after their boss falls.
+- **Pity:** a guaranteed Epic every 30 pulls. A **Recruitment Office** trades Seals (one per duplicate; 4 Common, 6 Rare, 8 Epic, 10 Legendary) for a unit of that rarity of your choice, so bad luck never locks out a strategy.
 - The common units from section 6.5 are the starting roster. Every region must be beatable with common units.
-- **Unit mastery:** units gain XP when used. Mastery levels unlock small perks and skins, rewarding players who stick with favourites.
+- **Unit mastery:** units gain XP when used (1 per battle won, 2 for a boss; levels at 30/80/150/250 xp; Lv2/4 shared HP, Lv3 +1% Souls, Lv5 +1 main stat; skins not built yet). Mastery levels unlock small perks and skins, rewarding players who stick with favourites.
 
 ### 12.2 The squad (what you bring on a run)
 
@@ -584,7 +585,7 @@ The prototype in `prototype/` has two pages.
 
 **Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
 
-**Not included yet:** gacha pulls (recruits are bought directly), relics, heroes, Heat, waypoints and secrets, art and audio.
+**Not included yet:** relics, heroes, Heat, waypoints and secrets, art and audio.
 
 See the README for how to run it.
 
