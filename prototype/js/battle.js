@@ -122,7 +122,7 @@
 
   function render() {
     const s = current();
-    const stats = E.computeStats(game.placement, game.army, s.enemies);
+    const stats = E.computeStats(game.placement, game.army, s.enemies, s.rules);
     $('#b-turn').textContent = s.turn;
     $('#b-hpfill').style.width = (100 * s.hp / s.maxHp) + '%';
     $('#b-hptext').textContent = s.hp + ' / ' + s.maxHp;
@@ -348,7 +348,7 @@
     if (!Object.keys(game.placement).length) { $('#b-msg').textContent = 'Place at least one card first.'; return; }
     game.busy = true; game.selected = null;
     const before = game.state;
-    const stats = E.computeStats(game.placement, game.army);
+    const stats = E.computeStats(game.placement, game.army, undefined, before.rules);
     const { state, events } = E.resolveTurn(before, game.placement, game.army);
     { // bounty bookkeeping
       const rep = game.report; rep.turns += 1;

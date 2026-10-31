@@ -104,7 +104,8 @@
 
   // Final numbers for every placed card after supporters are applied.
   // Rule: add all + bonuses first, then apply all × multipliers.
-  function computeStats(placement, army, enemies) {
+  function computeStats(placement, army, enemies, rules) {
+    rules = rules || {};
     const byId = {};
     army.forEach((c) => { byId[c.id] = c; });
     const stats = {};
@@ -123,11 +124,11 @@
     }
     for (const s of Object.values(stats)) {
       if (s.type.role !== 'support') continue;
-      for (const tk of supportTargets(s.type.target, s.r, s.c)) {
+      for (const tk of supportTargets(s.type.target, s.r, s.c, rules.diag && s.card.type === 'banner')) {
         const t = stats[tk];
         if (!t || t.type.role !== 'attacker') continue;
         const amount = cardStat(s.card, 'amount');
-        if (s.type.effect === 'atk') t.plus += amount;
+        if (s.type.effect === 'atk') t.plus += amount + (rules.bannerBite && s.card.type === 'banner' ? rules.bannerBite : 0);
         else if (s.type.effect === 'mult') t.mult *= amount;
         else if (s.type.effect === 'range') t.rangeBonus += amount;
         t.boostedBy.push(s.key);
@@ -149,10 +150,11 @@
   }
 
   // Tiles a supporter affects. Only player tiles count.
-  function supportTargets(target, r, c) {
+  // `diag` (set bonus Wolfpack): a Banner also boosts its four diagonal neighbours.
+  function supportTargets(target, r, c, diag) {
     const cells = target === 'up'
       ? [[r - 1, c]]
-      : [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]];
+      : [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]].concat(diag ? [[r - 1, c - 1], [r - 1, c + 1], [r + 1, c - 1], [r + 1, c + 1]] : []);
     return cells
       .filter(([tr, tc]) => tr >= 2 && tr < ROWS && tc >= 0 && tc < COLS)
       .map(([tr, tc]) => key(tr, tc));
@@ -303,7 +305,7 @@
     const state = clone(state0);
     if (!state.rules) state.rules = {};
     const events = [];
-    const stats = computeStats(placement, army, state.enemies);
+    const stats = computeStats(placement, army, state.enemies, state.rules);
 
     // Attackers fire front row first, then left to right.
     const attackers = Object.values(stats)

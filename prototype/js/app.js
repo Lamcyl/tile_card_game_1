@@ -9,7 +9,7 @@
   let campTab = 'upgrades';
   let sheetOpen = true;
   let busy = false;
-  let confirmReset = false, confirmReturn = false, confirmSalvage = null, gearFilter = 'all';
+  let confirmReset = false, confirmReturn = false, confirmSalvage = null, gearFilter = 'all', gearView = 'gear';
   let pointAt = null; // upgrade id the results screen points to (first-run guarantee)
 
   const run = () => save.run;
@@ -199,7 +199,33 @@
       d.subs.map((sb) => '<span class="sub">+ ' + esc(Items.substatText(sb, d)) + '</span>').join('') +
       (fx ? '<span class="fx">' + esc(fx.text) + '</span>' : '');
   }
+  // Set bonuses of the equipped gear: one row per set with at least one piece worn.
+  function setPanel() {
+    const st = Items.setStatus(save);
+    if (!st.length) return '<p class="muted small set-hint">Sets: wear 2 or 4 items from one region (every item belongs to its region\'s set) for bonuses.</p>';
+    return '<div class="sets">' + st.map((x) => '<div class="set-card' + (x.tiers.some((t) => t.on) ? ' on' : '') + '"><b>' + x.set.icon + ' ' + esc(x.set.name) + ' <small>' + x.count + ' piece' + (x.count === 1 ? '' : 's') + '</small></b>' +
+      x.tiers.map((t) => '<span class="' + (t.on ? 'on' : '') + '">' + (t.on ? '✔' : '○') + ' ' + t.n + ': ' + esc(t.text) + '</span>').join('') + '</div>').join('') + '</div>';
+  }
+  function forgeView() {
+    const owned = save.items.map((id) => Items.BY_ID[id]).filter(Boolean), eq = Items.equippedIds(save), dust = P.balance(save, 'dust');
+    let h = '<p class="muted small">Spend ⚒ Dust (<b>' + dust + '</b>) to reroll a substat or raise an item\'s level (max ' + Items.MAX_ILVL + '). Salvage items in the Gear view.</p>' + setPanel();
+    if (!owned.length) return h + '<p class="empty-gear">Nothing to forge yet.</p>';
+    owned.sort((a, b) => (eq.includes(b.id) - eq.includes(a.id)) || (Items.RARITY[b.rarity].order - Items.RARITY[a.rarity].order) || a.name.localeCompare(b.name));
+    for (const it of owned) {
+      const d = Items.dataOf(save, it.id), lc = Items.levelCost(save, it.id), rc = Items.rerollCost(save, it.id), set = Items.setOf(it);
+      h += '<div class="item gear forge ' + rarClass(it) + (eq.includes(it.id) ? ' equipped' : '') + '">' + itemIcon(it) + '<div class="grow"><b>' + esc(it.name) + '</b>' +
+        '<span class="meta"><i class="rb">' + Items.RARITY[it.rarity].name + '</i> iLv ' + d.lv + (set ? ' · ' + set.icon + ' ' + esc(set.name) : '') + '</span>' + '<span class="effect">' + esc(Items.effectText(it.kind, it.type, Items.mainAmount(it, d))) + '</span>' +
+        d.subs.map((sb, i) => '<span class="subrow"><span class="sub">+ ' + esc(Items.substatText(sb, d)) + '</span><button data-reroll="' + it.id + '|' + i + '"' + (dust < rc ? ' disabled' : '') + ' aria-label="Reroll substat">🎲 ⚒' + rc + '</button></span>').join('') +
+        '<span class="forge-btns">' + (lc === null ? '<span class="muted">Max level</span>' : '<button data-lvup="' + it.id + '"' + (dust < lc ? ' disabled' : '') + '>⬆ Level ' + (d.lv + 1) + ' · ⚒' + lc + '</button>') + '</span></div></div>';
+    }
+    return h;
+  }
   function gearTab() {
+    const toggle = '<div class="chips views">' + [['gear', 'Gear'], ['forge', '⚒ Forge']].map((c) => '<button class="' + (gearView === c[0] ? 'on' : '') + '" data-gview="' + c[0] + '">' + c[1] + '</button>').join('') + '</div>';
+    if (gearView === 'forge') return toggle + forgeView();
+    return toggle + gearList();
+  }
+  function gearList() {
     const owned = save.items.map((id) => Items.BY_ID[id]).filter(Boolean);
     const eq = Items.equippedIds(save);
     let h = '<div class="paperdoll" aria-label="Equipped gear">' + Items.SLOT_LIST.map((sl) => {
@@ -207,6 +233,7 @@
       return '<button class="slot ' + (it ? rarClass(it) + ' filled' : '') + '" ' + (it ? 'data-equip="' + it.id + '" title="' + esc(it.name) + ': tap to unequip"' : 'disabled') + '>' +
         '<span class="si">' + (it ? esc(Items.icon(it)) : sl.icon) + '</span><small>' + sl.name + '</small><em>' + (it ? esc(it.name) : 'empty') + '</em></button>';
     }).join('') + '</div>';
+    h += setPanel();
     h += '<p class="muted small">Items drop from monsters, scale with the fight\'s level and are kept forever. Rings take anything. Collected ' + owned.length + '/' + Items.ALL.length + '. Salvaging gives Dust ⚒.</p>';
     const chips = [['all', 'All']].concat(Object.keys(Items.SLOT_NAMES).map((k) => [k, Items.SLOT_NAMES[k]]));
     h += '<div class="chips">' + chips.map((c) => '<button class="' + (gearFilter === c[0] ? 'on' : '') + '" data-gfilter="' + c[0] + '">' + c[1] + '</button>').join('') + '</div>';
@@ -472,6 +499,17 @@
         if (res && res.replaced) toast(Items.BY_ID[res.replaced].name + ' was swapped out.');
       }
       persist(); renderAll(); return;
+    }
+    if (b.dataset.gview) { gearView = b.dataset.gview; renderSheet(); return; }
+    if (b.dataset.reroll) {
+      const [id, i] = b.dataset.reroll.split('|'), sb = Items.reroll(save, id, Number(i));
+      if (sb) { persist(); toast('Substat rerolled: ' + Items.substatText(sb, Items.dataOf(save, id))); renderAll(); } else toast('Not enough Dust.');
+      return;
+    }
+    if (b.dataset.lvup) {
+      const lv = Items.levelUp(save, b.dataset.lvup);
+      if (lv) { persist(); toast(Items.BY_ID[b.dataset.lvup].name + ' is now item level ' + lv + '.'); renderAll(); } else toast('Not enough Dust.');
+      return;
     }
     if (b.dataset.gfilter) { gearFilter = b.dataset.gfilter; renderSheet(); return; }
     if (b.dataset.salvage) {

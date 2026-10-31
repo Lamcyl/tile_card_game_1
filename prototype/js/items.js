@@ -268,10 +268,64 @@
       const fx = fxOf(it);
       if (fx) for (const k of Object.keys(fx.rule)) { if (k === 'horn') b.horn = true; else b.rules[k] = k === 'blast' ? Math.max(b.rules[k] || 0, fx.rule[k]) : (b.rules[k] || 0) + fx.rule[k]; }
     }
+    for (const st of setStatus(save)) for (const t of st.tiers) {
+      if (!t.on) continue;
+      if (t.rule) for (const k of Object.keys(t.rule)) b.rules[k] = k === 'blast' ? Math.max(b.rules[k] || 0, t.rule[k]) : (b.rules[k] || 0) + t.rule[k];
+      if (t.bonus) for (const k of Object.keys(t.bonus)) { if (typeof t.bonus[k] === 'object') for (const ty of Object.keys(t.bonus[k])) add(k, ty, t.bonus[k][ty]); else add(k, null, t.bonus[k]); }
+    }
     return b;
   }
   // The engine rule flags (state.rules) granted by the equipped Legendaries.
   const rules = (save) => Object.assign({}, bonuses(save).rules);
+
+  // ----- Item sets (WP9): every item belongs to the set of its region; 2 / 4 equipped pieces of one set grant bonuses -----
+  // `bonus` fields add to the Items.bonuses() totals; `rule` fields become engine rule flags (state.rules).
+  const SETS = {
+    'Greenvale':   { name: 'Wolfpack',   icon: '🐺', tiers: [
+      { n: 2, text: 'Banners also boost the four diagonal tiles.', rule: { diag: 1 } },
+      { n: 4, text: 'Every attacker a Banner boosts gets +1 ATK more.', rule: { bannerBite: 1 } } ] },
+    'Azure Coast': { name: 'Tidewatch',  icon: '🌊', tiers: [
+      { n: 2, text: '+4 max HP.', bonus: { hp: 4 } }, { n: 4, text: '+1 starting Supply.', bonus: { supplies: 1 } } ] },
+    'Sunscorch':   { name: 'Dune Nomads', icon: '🏜️', tiers: [
+      { n: 2, text: '+10% Souls.', bonus: { souls: 10 } }, { n: 4, text: 'Shields block +1.', bonus: { block: 1 } } ] },
+    'Frostveil':   { name: 'Frostguard', icon: '❄️', tiers: [
+      { n: 2, text: 'Shields block +1.', bonus: { block: 1 } }, { n: 4, text: '+8 max HP.', bonus: { hp: 8 } } ] },
+    'Ember Peaks': { name: 'Cinderforge', icon: '🌋', tiers: [
+      { n: 2, text: '+1 ATK to Swordsmen and Spearmen.', bonus: { atk: { swordsman: 1, spearman: 1 } } }, { n: 4, text: 'Barrels explode for 3 instead of 2.', rule: { blast: 3 } } ] },
+  };
+  const regionOf = (item) => (item.source.region || World.SUB_BY[item.source.sub].region);
+  const setOf = (item) => SETS[regionOf(item)] || null;
+  // Equipped pieces per set: [{ region, set, count, tiers: [{...tier, on}] }] for sets with at least one piece.
+  function setStatus(save) {
+    const counts = {};
+    for (const id of equippedIds(save || {})) { const it = BY_ID[id]; if (it) { const r = regionOf(it); counts[r] = (counts[r] || 0) + 1; } }
+    return Object.keys(counts).map((r) => ({ region: r, set: SETS[r], count: counts[r], tiers: SETS[r].tiers.map((t) => Object.assign({ on: counts[r] >= t.n }, t)) }));
+  }
+
+  // ----- Forge (WP9): Dust rerolls a substat or raises the item level -----
+  const MAX_ILVL = 20;
+  const REROLL_COST = { rare: 6, epic: 10, legendary: 14 };
+  const levelCost = (save, id) => { const d = dataOf(save, id); return d.lv >= MAX_ILVL ? null : 4 + Math.floor(d.lv * 1.5) + (BY_ID[id].rarity === 'common' ? 0 : 2); };
+  const rerollCost = (save, id) => { const it = BY_ID[id]; return it && REROLL_COST[it.rarity] && dataOf(save, id).subs.length ? REROLL_COST[it.rarity] : null; };
+  // Replace substat `idx` with a different one (never the main stat or an existing substat). Returns the new substat or null.
+  function reroll(save, id, idx) {
+    const item = BY_ID[id], d = save.items.includes(id) && save.itemData[id], cost = rerollCost(save, id);
+    if (!d || cost === null || !d.subs[idx] || !root.Progress.spend(save, 'dust', cost)) return null;
+    d.rr = (d.rr || 0) + 1;
+    const R = World.rng('reroll:' + id + ':' + d.rr + ':' + idx), old = d.subs[idx];
+    for (let guard = 0; guard < 60; guard++) {
+      const kind = pickWeighted(R, SUB_KINDS), pool = kind === 'atk' ? ATK_TYPES : kind === 'amount' ? AMOUNT_TYPES : null;
+      const type = pool ? pool[Math.floor(R() * pool.length)] : null;
+      if ((kind === item.kind && type === item.type) || (kind === old.kind && type === old.type) || d.subs.some((x, j) => j !== idx && x.kind === kind && x.type === type)) continue;
+      return (d.subs[idx] = { kind, type, amount: SUB_BASE[kind] });
+    }
+    return old;
+  }
+  function levelUp(save, id) {
+    const cost = save.items.includes(id) ? levelCost(save, id) : null;
+    if (cost === null || !root.Progress.spend(save, 'dust', cost)) return null;
+    return ++save.itemData[id].lv;
+  }
 
   // ----- Drops -----
   // Drop chances for a win: [unique, shared from sub-area, shared from region].
@@ -379,6 +433,7 @@
     SLOTS, SLOT_LIST, SLOT_KEYS, SLOT_NAMES, RARITY, ALL, BY_ID, UNIQUE_OF, LEGENDS_OF, LEGEND_FX, CHANCE, TOKENS_NEEDED, subPool, regionPool,
     tableFor, chanceNow, grantDrop, guaranteedDrop, addItem, salvage, salvageValue, duplicateValue, redeemToken, tokensOf,
     describe, substatText, effectText, icon, bonuses, rules, scale, mainAmount, subAmount, dataOf, fxOf, newData, migrate, emptyLoadout,
+    SETS, setOf, setStatus, regionOf, MAX_ILVL, levelCost, rerollCost, reroll, levelUp,
     equip, unequip, equippedIds, slotOfItem, targetSlot, creatureOf, missesOf,
   };
   root.Items = Items;

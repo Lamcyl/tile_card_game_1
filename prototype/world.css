@@ -347,3 +347,17 @@ button.point { animation: pointpulse 1.2s ease-in-out infinite; border-color: va
 .tok-list { margin: 4px 0 8px; font-size: 13px; }
 .tok-list summary { cursor: pointer; font-weight: 700; color: var(--ink-soft); padding: 4px 0; }
 .tok-list h5 { margin: 6px 0 2px; font-family: var(--font-display); font-size: 13px; }
+
+/* WP9: sets and Forge (sub-view of the Gear tab) */
+.chips.views button { flex: 1; padding: 7px 10px; font-size: 13px; }
+.sets { display: grid; gap: 6px; margin: 4px 0 8px; }
+.set-card { display: grid; gap: 1px; padding: 6px 10px; border-radius: 10px 14px 10px 12px; border: 1.5px dashed rgba(43,42,53,.3); background: var(--paper-grain), rgba(251,245,230,.6); font-size: 12px; color: var(--muted); }
+.set-card.on { border-style: solid; border-color: var(--ochre); background: var(--paper-grain), rgba(184,137,44,.12); }
+.set-card b { font-family: var(--font-display); font-size: 14px; color: var(--ink); }
+.set-card b small { font-family: var(--font-body); color: var(--muted); font-weight: 500; }
+.set-card span.on { color: #2f6b34; font-weight: 700; }
+.set-hint { margin: 4px 0 8px; }
+.item.forge .subrow { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.item.forge button { padding: 4px 8px; font-size: 12px; min-width: 44px; white-space: nowrap; }
+.item.forge .forge-btns { margin-top: 4px; display: flex; }
+.item.forge .forge-btns button { flex: 1; }
