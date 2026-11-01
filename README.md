@@ -11,7 +11,7 @@ A turn-based tile placement game with roguelite runs. You place a fixed army of 
 
 The prototype is the **world map game**:
 1. Set out from Camp.
-2. Fight any monster in an unlocked area, in any order. Each win costs 1 Ration (bosses give some back), and the run ends when HP or Rations run out, or when you return to Camp to bank your Souls. Monsters drop gear you equip at Camp.
+2. Fight any monster in an open area, in any order (only the first area is open at the start; each boss opens the next one for that run). Each win costs 1 Ration (bosses give some back), and the run ends when HP or Rations run out, or when you return to Camp to bank your Souls. Monsters drop gear you equip at Camp.
 3. Spend Souls on upgrades and recruits, then go further on the next run.
 
 The world is a large, sparse map of 5 regions with 4 sub-areas each (20 in all, see `docs/WORLD_SPEC.md`). Each sub-area has a landmark, 6-7 enemies including its own boss, and the boss reveals the next area.

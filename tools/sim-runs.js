@@ -92,12 +92,17 @@ function playRun(save0) {
   const mods = {};
   const gopts = Progress.genOpts(save), heal = (n) => Progress.healAmt(save, n); // WP18: Heat / Descend (HEAT=hp,rage,... DESCEND=n)
   const relics = []; // WP12: run relics (NORELICS=1 switches them off)
+  // Per-run gates (app.js): only Sunny Meadows is open at the start (the sim never starts at a Wayshrine); a boss opens the areas it leads to for this run.
+  // Endgame 'farm' mode keeps every area open (the player starts at a lit Wayshrine deep in the map).
+  const runOpen = new Set(save.farm ? World.SUBAREAS.map((x) => x.id) : ['meadow']);
   let gold = Progress.startGold(save), keys = 0, reviveUsed = 0, rerolls = Progress.rewardRerolls(save), hp = Progress.maxHp(save), supplies = Progress.startSupplies(save), cleared = new Set(), wins = 0, maxLv = 0, souls = 0, bosses = 0, items = 0, wonFirst = [];
   for (;;) {
     if (supplies <= 0) return { wins, maxLv, souls, bosses, items, end: 'supplies', start: Progress.startSupplies(save0), save };
     // Sub-areas whose boss already fell are skipped (nothing new there); fights are taken lowest level first,
     // the boss when Rations run low (<= 2) or when nothing else is left in the frontier.
-    const open = World.nodes.filter((n) => n.type !== 'camp' && n.type !== 'waypoint' && !cleared.has(n.id) && save.unlocked.includes(n.sub) && (save.farm || !save.bossesBeaten.includes(n.sub))); // save.farm (endgame mode): beaten sub-areas stay open
+    // A sub-area whose boss already fell in an earlier run has nothing new, but its boss is still the gate to the areas behind it: it is re-fought each run (rushed, first).
+    const isGate = (n) => n.type === 'boss' && World.SUB_BY[n.sub].unlocks.some((u) => !runOpen.has(u));
+    const open = World.nodes.filter((n) => n.type !== 'camp' && n.type !== 'waypoint' && !cleared.has(n.id) && save.unlocked.includes(n.sub) && runOpen.has(n.sub) && (save.farm || !save.bossesBeaten.includes(n.sub) || isGate(n) || wins < 3)); // save.farm (endgame mode): beaten sub-areas stay open; otherwise their ordinary spots only serve as a 3-win warm-up
     // WP14: a hidden Sealed Cache (found by walking near it, assumed 60% of the time) is opened with a key dropped by an elite or boss: cache Souls and Gold plus 4 HP.
     const secret = open.find((n) => n.type === 'secret');
     if (secret && keys > 0) { cleared.add(secret.id); if (Math.random() < 0.6) { keys--; if (!save.secretsOpened.includes(secret.id)) { save.secretsOpened.push(secret.id); save.crystals += 1; } else save.dust += 2; /* app.js: 1 Crystal the first time, later 2 Dust */ souls += Gen.CACHE_SOULS; gold += Gen.CACHE_GOLD + 2 * World.SUB_BY[secret.sub].regionIndex; hp = Math.min(Progress.maxHp(save), hp + heal(4)); } continue; }
@@ -109,13 +114,13 @@ function playRun(save0) {
     const maxHp = () => Progress.maxHp(save), spring = pois.find((n) => n.type === 'shrine'); // heal when below 60% HP
     if (spring && hp < maxHp() * 0.6) { cleared.add(spring.id); hp = Math.min(maxHp(), hp + heal(8)); continue; }
     const cache = pois.find((n) => n.type === 'treasure'); if (cache) { cleared.add(cache.id); souls += Gen.CACHE_SOULS; gold += Gen.CACHE_GOLD + 2 * ri(cache); continue; }
-    const shop = pois.find((n) => n.type === 'shop');   // visit with 22+ Gold (>= 14 when hurt): heal if below 70%, then upgrades, a relic at 40+
-    if (shop && (gold >= 22 || (gold >= 14 && hp < maxHp() * 0.7))) {
-      cleared.add(shop.id); const pr = (b) => Math.round(b * (1 + 0.2 * ri(shop)));
-      if (hp < maxHp() * 0.7 && gold >= pr(14)) { gold -= pr(14); hp = Math.min(maxHp(), hp + heal(8)); }
-      if (!process.env.NORELICS && relics.length < Relics.MAX_PER_RUN && gold >= pr(40)) { const left = Relics.LIST.filter((x) => !relics.includes(x.id) && !['prism', 'mjolnir', 'susanoo'].includes(x.id)); if (left.length) { gold -= pr(40); relics.push(left[Math.floor(Math.random() * left.length)].id); } }
-      for (let k = 0; k < 2 && gold >= pr(22); k++) { gold -= pr(22); atkUp(); }
-      continue;
+    // Shop (app.js): browsing is free but the market closes after ONE purchase. The player only visits when it will buy: heal when hurt (below 70%), else a relic at 40+, else one +1 ATK (22).
+    const shop = pois.find((n) => n.type === 'shop');
+    if (shop) {
+      const pr = (b) => Math.round(b * (1 + 0.2 * ri(shop))), canRelic = !process.env.NORELICS && relics.length < Relics.MAX_PER_RUN && gold >= pr(40);
+      if (hp < maxHp() * 0.7 && gold >= pr(14)) { cleared.add(shop.id); gold -= pr(14); hp = Math.min(maxHp(), hp + heal(8)); continue; }
+      if (canRelic) { const left = Relics.LIST.filter((x) => !relics.includes(x.id) && !['prism', 'mjolnir', 'susanoo'].includes(x.id)); if (left.length) { cleared.add(shop.id); gold -= pr(40); relics.push(left[Math.floor(Math.random() * left.length)].id); continue; } }
+      if (gold >= pr(22)) { cleared.add(shop.id); gold -= pr(22); atkUp(); continue; }
     }
     const evn = pois.find((n) => n.type === 'event');   // take the first affordable non-leaving choice
     if (evn) {
@@ -130,7 +135,9 @@ function playRun(save0) {
     }
     if (!fights.length) return { wins, maxLv, souls, bosses, items, end: 'cleared', start: Progress.startSupplies(save0), save };
     const bossNode = fights.find((n) => n.type === 'boss'), normals = fights.filter((n) => n.type !== 'boss');
-    const node = bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode);
+    // Gate boss of an already conquered area: straight through, but only after 3 warm-up wins this run (a cold +0 ATK squad would die to it and earn nothing).
+    const rush = wins >= 3 ? fights.find((n) => n.type === 'boss' && save.bossesBeaten.includes(n.sub)) : null;
+    const node = rush || (bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode));
     cleared.add(node.id);
     if (process.env.LOGBOSS && (node.type === 'boss' || node.type === 'elite')) { // WP18: snapshot of the account at every boss / elite fight (feeds the validator's reference squads)
       const ar = Progress.buildArmy(save, mods), rl = Progress.rulesFor(save, { relics, reviveUsed });
@@ -158,7 +165,8 @@ function playRun(save0) {
     if (stars === 3) takeDrop(Items.grantDrop(save, node, seed + ':star', { bonus: true, lvBonus: Progress.itemLvBonus(save) })); // 3-star clears earn a bonus roll (app.js battleOver)
     if (node.type === 'boss') {
       supplies += Progress.bossSupplies(bosses); bosses++; souls += Gen.BOSS_BONUS_SOULS; // real rule: 3, then 1, then -1
-      if (!save.bossesBeaten.includes(node.sub)) { save.bossesBeaten.push(node.sub); for (const u of World.SUB_BY[node.sub].unlocks) if (!save.unlocked.includes(u)) save.unlocked.push(u); }
+      for (const u of World.SUB_BY[node.sub].unlocks) { runOpen.add(u); if (!save.unlocked.includes(u)) save.unlocked.push(u); } // opens for this run; the fog lifts for good
+      if (!save.bossesBeaten.includes(node.sub)) save.bossesBeaten.push(node.sub);
     } else supplies -= 1;
     // Reward: heal when low, otherwise a relic when offered (greedy: first offered), otherwise +1 ATK on a random attacker.
     // Camp Choice track: Lv1 a 4th choice = a second look at the relic offer; Lv2 = one re-roll per run (another look when nothing good was offered).

@@ -6,6 +6,8 @@ Shared contract between the world **content** (js/world-data.js, items, enemies,
 
 Five regions, four sub-areas each (20). Every sub-area has its own boss and **6–7 enemies including the boss** (typically 4–5 normal, 1 elite, 1 boss), plus 0–1 free point of interest (healing spring or supply cache). In each region the sub-areas unlock in the order listed (each boss unlocks the next). Lake's boss unlocks both Azure Coast (beach) and Sunscorch (dunes); Mist Isles' boss unlocks Frostveil (snow); Buried Temple's boss unlocks Ember Peaks (ash).
 
+**Gates (per run).** `World` only describes which area leads where (`from` / `unlocks`). Whether an area is *open* is run state (`run.open`, set by `app.js`): Sunny Meadows at a Camp start, the Wayshrine's own sub-area for a Wayshrine start, plus every area unlocked by a boss beaten in this run. `save.unlocked` only controls the fog (permanent). The map treats a fog-free but closed area as a walkable-no region (`lockedAt`) and paints it washed out with a seal at its entry.
+
 | Region | id | Name | Landmark kind | Battle biome |
 |---|---|---|---|---|
 | Greenvale | meadow | Sunny Meadows | hill | meadow |

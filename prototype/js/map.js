@@ -2673,7 +2673,7 @@
     ovBtn.type = 'button'; ovBtn.className = 'wc-overview-btn';
     ovBtn.setAttribute('aria-label', 'Toggle overview map');
     Object.assign(ovBtn.style, {
-      position: 'absolute', right: 'max(12px, env(safe-area-inset-right, 0px))', top: 'calc(62px + env(safe-area-inset-top, 0px))',
+      position: 'absolute', right: 'max(12px, env(safe-area-inset-right, 0px))', top: 'calc(88px + env(safe-area-inset-top, 0px))',
       width: '48px', height: '48px', padding: '0', borderRadius: '50%', border: '0',
       background: 'radial-gradient(circle at 40% 35%, #fbf5e2, #ecdfbd)', boxShadow: '0 2px 8px rgba(40,50,70,.35), inset 0 0 0 1px rgba(255,255,255,.6)',
       display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', touchAction: 'manipulation',

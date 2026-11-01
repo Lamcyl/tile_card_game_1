@@ -8,6 +8,7 @@
   let selected = null;
   let campTab = 'upgrades';
   let sheetOpen = true;
+  let menuOpen = false, dropSel = null; // in-run: HUD menu panel, tapped drop icon on the compact card
   let busy = false;
   let confirmReset = false, confirmReturn = false, confirmSalvage = null, gearFilter = 'all', gearView = 'gear';
   let journalView = null, bestRegion = 0; // WP17: null = Camp tabs, else 'ach' | 'bestiary' | 'codex'
@@ -37,9 +38,14 @@
   function frontier() {
     const r = run(); if (!r) return new Set();
     const cleared = new Set(r.cleared), out = new Set();
-    for (const n of World.nodes) if (n.type !== 'camp' && save.unlocked.includes(n.sub) && !cleared.has(n.id) && (n.type !== 'secret' || save.secrets.includes(n.id))) out.add(n.id);
+    for (const n of World.nodes) if (n.type !== 'camp' && save.unlocked.includes(n.sub) && subOpen(n.sub) && !cleared.has(n.id) && (n.type !== 'secret' || save.secrets.includes(n.id))) out.add(n.id);
     return out;
   }
+  // Per-run gates: the fog of an area stays lifted for good (save.unlocked), but on each run only the start area is open
+  // (a lit Wayshrine start opens its own area); the boss of an area opens the ones it leads to, for this run only.
+  const openList = () => { const r = run(); return r ? (r.open || (r.open = save.unlocked.slice())) : []; };
+  const subOpen = (id) => !run() || openList().includes(id);
+  const gateBoss = (id) => { const s = World.SUB_BY[id], f = s && s.from; return f && World.THEMES[f] ? World.THEMES[f].boss[0] : 'the guardian'; };
   // WP14 scouting. A fogged spot (ordinary / elite) counts as scouted once the hero has been close, a scout looked, or it was fought.
   const isSeen = (n) => !World.FOGGED.includes(n.type) || save.seen.includes(n.id) || P.scoutLevel(save) >= 3 || (run() && run().cleared.includes(n.id));
   // Reveal spots within `rs` and hidden secrets within `rsec` of a point (defaults: the Scouting level's sight). Called as the hero walks.
@@ -84,18 +90,21 @@
 
   // ---------- HUD ----------
   function renderHud() {
-    const r = run();
+    const r = run(), hud = $('#hud');
+    hud.classList.toggle('run', !!r);
     if (r) {
-      $('#hud').innerHTML =
-        '<div class="hud-hp"><span class="lbl">♥</span><div class="bar"><i style="width:' + (100 * r.hp / r.maxHp) + '%"></i></div><b>' + r.hp + '/' + r.maxHp + '</b></div>' +
-        '<div class="hud-chip supplies' + (r.supplies <= 2 ? ' low' : '') + '" title="Rations: battles left on this run. Normal and elite fights cost 1; the first boss adds ' + P.SUPPLIES_PER_BOSS + ', the next one 1 (after that a boss costs 1 like any fight).">🍙 ' + r.supplies + '</div>' +
-        (r.keys > 0 ? '<div class="hud-chip keys" title="Keys: dropped by elites and bosses. Each opens one hidden Sealed Cache.">🗝 ' + r.keys + '</div>' : '') +
-        '<div class="hud-chip" title="Souls carried on this run">✦ ' + r.souls + '</div>' +
+      hud.innerHTML =
+        '<div class="hud-row"><div class="hud-hp" title="Hit points"><span class="lbl">♥</span><div class="bar"><i style="width:' + (100 * r.hp / r.maxHp) + '%"></i></div><b>' + r.hp + '/' + r.maxHp + '</b></div>' +
+        '<div class="hud-chip rations' + (r.supplies <= 2 ? ' low' : '') + '" title="Rations: battles left on this run. Normal and elite fights cost 1; the first boss adds ' + P.SUPPLIES_PER_BOSS + ', the next one 1 (after that a boss costs 1 like any fight).">🍙 ' + r.supplies + '</div>' +
         '<div class="hud-chip gold" title="Gold: earned in fights, spent in Shops and events. Lost when the run ends.">🪙 ' + (r.gold || 0) + '</div>' +
-        (P.heatPoints(save) || P.descendOf(save) ? '<div class="hud-chip heat" title="' + esc(heatSummary()) + '">🔥 ' + P.heatPoints(save) + (P.descendOf(save) ? ' · ▼' + P.descendOf(save) : '') + '</div>' : '') +
-        (r.relics && r.relics.length ? '<div class="hud-chip relics" title="Relics on this run">' + relicRow(r.relics) + '</div>' : '');
+        '<button type="button" class="hud-menu' + (menuOpen ? ' on' : '') + '" data-act="toggle-menu" aria-label="Expedition menu" aria-expanded="' + menuOpen + '">☰</button></div>' +
+        '<div class="hud-row sub">' +
+        '<div class="hud-chip mini" title="Souls carried on this run">✦ ' + r.souls + '</div>' +
+        (r.keys > 0 ? '<div class="hud-chip mini keys" title="Keys: dropped by elites and bosses. Each opens one hidden Sealed Cache.">🗝 ' + r.keys + '</div>' : '') +
+        (P.heatPoints(save) || P.descendOf(save) ? '<div class="hud-chip mini heat" title="' + esc(heatSummary()) + '">🔥 ' + P.heatPoints(save) + (P.descendOf(save) ? ' · ▼' + P.descendOf(save) : '') + '</div>' : '') +
+        (r.relics && r.relics.length ? '<div class="hud-chip mini relics" title="Relics on this run">' + relicRow(r.relics) + '</div>' : '') + '</div>';
     } else {
-      $('#hud').innerHTML =
+      hud.innerHTML =
         '<div class="hud-chip big" title="Souls: buy Camp upgrades and recruits">✦ ' + P.balance(save, 'souls') + ' <small>Souls</small></div>' +
         '<div class="hud-chip cur crystals" title="Crystals: from first boss kills and bounties. Spent on Summon pulls (Rare, Epic and Legendary units).">💎 ' + P.balance(save, 'crystals') + '</div>' +
         '<div class="hud-chip cur dust" title="Dust: from salvaging gear. Spent in the Forge (coming soon).">⚒ ' + P.balance(save, 'dust') + '</div>';
@@ -105,13 +114,14 @@
   // ---------- Bottom sheet ----------
   function renderSheet() {
     const sheet = $('#sheet');
-    sheet.classList.toggle('collapsed', !sheetOpen);
     const r = run();
+    sheet.hidden = !!r; // in a run the map is the focus: details come as a compact card, the rest in the HUD menu
+    if (r) { sheet.innerHTML = ''; return; }
+    sheet.classList.toggle('collapsed', !sheetOpen);
     const node = selected ? World.byId[selected] : null;
     let html = '<button class="grab" id="sheet-toggle" aria-label="' + (sheetOpen ? 'Collapse' : 'Expand') + ' panel"><span></span></button>';
     if (node && node.type !== 'camp') html += nodeSheet(node);
-    else if (!r) html += campSheet();
-    else html += runSheet();
+    else html += campSheet();
     sheet.innerHTML = html;
   }
 
@@ -176,7 +186,7 @@
     else if (n.type === 'shop') body += '<p class="muted">A travelling stall. Spend 🪙 Gold on healing, unit upgrades and relics. Stock changes every run; leave when you are done.</p><p><span class="cost free">Free: costs no Rations</span></p>';
     else if (n.type === 'waypoint') {
       const lit = save.waypoints.includes(n.sub);
-      body += '<p class="muted">' + (lit ? 'A lit Wayshrine. ' + (r ? 'Fast travel here for free any time.' : 'Expeditions can start from here.') : 'A torii and a quiet lantern. Light it once and it stays lit: later runs can start here, and you can fast travel back to it.') + '</p><p><span class="cost free">Free: costs no Rations</span>' +
+      body += '<p class="muted">' + (lit ? 'A lit Wayshrine. ' + (r ? 'Fast travel here for free any time.' : 'Expeditions can start from here; only this area is open at the start.') : 'A torii and a quiet lantern. Light it once and it stays lit: later runs can start here, and you can fast travel back to it.') + '</p><p><span class="cost free">Free: costs no Rations</span>' +
         (lit && !r && save.startAt === n.sub ? ' <span class="cost gain">Your next run starts here</span>' : '') + '</p>';
     } else if (n.type === 'secret') {
       const keys = r ? r.keys || 0 : 0;
@@ -197,16 +207,83 @@
     return '<ul class="bounties">' + list.map((b) => '<li class="' + (b.done ? 'done' : '') + '"><span class="bi">' + (b.done ? '✓' : Bounties.icon(b)) + '</span><span class="bt">' + esc(Bounties.text(b)) + '</span>' +
       '<small>' + (b.done ? 'done' : b.progress + '/' + b.goal) + '</small><span class="pay">💎 ' + b.reward + '</span></li>').join('') + '</ul>';
   }
-  function runSheet() {
-    const r = run(), bl = r.bounties || [];
-    const open = [...frontier()].filter((id) => ['battle', 'elite', 'boss'].includes(World.byId[id].type)).length;
-    return '<div class="sheet-head"><div><h2>On expedition</h2><p class="muted">Free exploration: tap any monster in an open area. ' + open + ' fights left.</p></div></div>' +
-      '<p class="supply-line">🍙 <b>' + r.supplies + '</b> Rations left. Each normal or elite win costs 1; the first boss of a run adds ' + P.SUPPLIES_PER_BOSS + ', the second 1, later ones cost 1 like any fight. At 0 you return to Camp safely.</p>' +
-      '<p class="supply-line">🪙 <b>' + (r.gold || 0) + '</b> Gold. Spend it at Shops and events; unspent Gold is lost when the run ends.</p>' +
+  // ---------- In-run UI: compact info card + HUD menu ----------
+  // A small floating card for a tapped spot: name, danger, one-line gimmick, cost/gain, drops as icons, actions. Never shown for ground taps.
+  function dropChip(e, n, i) {
+    const it = Items.BY_ID[e.id], owned = save.items.includes(it.id), uniq = e.kind === 'unique' || e.kind === 'legend';
+    const firstBoss = e.kind === 'unique' && n.type === 'boss' && !save.bossesBeaten.includes(n.sub);
+    const now = Items.chanceNow(save, n, e), pity = now > e.chance + 0.001 && !firstBoss;
+    const tag = owned ? '✓' : firstBoss ? '1st' : Math.round(now * 100) + '%' + (pity ? '↑' : '');
+    return '<button type="button" class="dchip ' + rarClass(it) + (uniq ? ' unique' : '') + (owned ? ' owned' : '') + (dropSel === i ? ' sel' : '') + '" data-drop="' + i + '" aria-label="' + esc(it.name + ', ' + Items.RARITY[it.rarity].name + (uniq ? ', unique' : '') + (owned ? ', owned' : '')) + '">' +
+      '<span class="ic">' + esc(Items.icon(it)) + '</span><small>' + tag + '</small></button>';
+  }
+  function dropDetail(e, n) {
+    const it = Items.BY_ID[e.id], fx = Items.fxOf(it);
+    return '<p class="drop-detail ' + rarClass(it) + '"><b>' + esc(it.name) + '</b> · ' + Items.RARITY[it.rarity].name + ' ' + esc(it.slot === 'ring' ? 'Ring' : Items.SLOT_NAMES[it.slot]) + ' · ' + esc(Items.describe(it, n.level)) + (e.kind === 'unique' ? ' · only here' : '') + (fx ? ' · ' + esc(fx.text) : '') + '</p>';
+  }
+  function cardHTML(n) {
+    const r = run(), sub = World.SUB_BY[n.sub], done = r.cleared.includes(n.id), open = subOpen(n.sub);
+    const guard = n.type === 'treasure' && n.guarded && !done ? guardOf(n) : null;
+    const isFight = ['battle', 'elite', 'boss'].includes(n.type) || !!guard;
+    const x = '<button type="button" class="card-x" data-act="close-node" aria-label="Close">✕</button>';
+    let h = '<div class="card-head"><div class="grow"><h3>' + esc(nodeTitle(n)) + '</h3><small class="muted">' + esc(sub.name) + '</small></div>' +
+      (isFight || n.type === 'treasure' && n.guarded ? '<div class="lv-box">' + skulls(n.level) + '<span class="lv" style="background:' + lvColor(n.level) + '">Lv' + n.level + '</span></div>' : '') + x + '</div>';
+    if (!open) return h + '<p class="card-line closed">🔒 Closed on this run. Defeat <b>' + esc(gateBoss(n.sub)) + '</b> to open the way.</p>';
+    if (done) return h + '<p class="card-line">Already cleared on this run.</p>';
+    let chips = '', note = '', acts = '';
+    const act = (cls, label, a, dis) => '<button type="button" class="' + cls + '" data-act="' + a + '"' + (dis ? ' disabled' : '') + '>' + label + '</button>';
+    if (isFight) {
+      const preview = Gen.generateBattle(guard || n, r.seed, gopts()), unseen = !guard && n.type !== 'boss' && !isSeen(n), g = guard || n;
+      const bg = n.type === 'boss' ? P.bossSupplies(r.bossesDown || 0) : 0;
+      const souls = Math.round(Gen.soulsFor(g, 1, gopts()) * P.soulRate(save));
+      chips = '<div class="card-enemies">' + (unseen ? '<span class="enemy-chip unknown" title="Not scouted yet">?</span>'.repeat(3) : preview.enemies.map((e) => enemyChip(e.type)).join('')) + '</div>' +
+        '<span class="cost' + (bg > 0 ? ' gain' : '') + '">' + (bg > 0 ? '+' + bg : '−1') + ' 🍙</span><span class="cost">✦ ' + souls + '+</span>';
+      if (unseen) note = '<p class="card-line">🔭 Not scouted: you see the danger, not what lurks here.</p>';
+      else if (preview.intro) note = '<p class="card-line gimmick"><b>' + esc((preview.intro.badge ? preview.intro.badge + ' ' : '') + (preview.intro.rule && preview.intro.rule !== 'Elite' ? preview.intro.rule : preview.intro.name)) + '</b> ' + esc(preview.intro.text) + '</p>';
+      else if (guard) note = '<p class="card-line">A guard stands over the chest: beat it to open the cache.</p>';
+      if (!guard && !unseen) {
+        const table = Items.tableFor(n);
+        note += '<div class="dchips" aria-label="Possible drops">' + table.map((e, i) => dropChip(e, n, i)).join('') + '</div>' + (dropSel !== null && table[dropSel] ? dropDetail(table[dropSel], n) : '');
+        if (n.type === 'boss' && (Items.LEGENDS_OF[n.id] || []).length) note += '<p class="card-line small">Boss tokens ' + Math.min(Items.tokensOf(save, n.id), Items.TOKENS_NEEDED) + '/' + Items.TOKENS_NEEDED + ' (Legendary at Camp)</p>';
+      }
+      if (n.type === 'boss' && !save.bossesBeaten.includes(n.sub)) note += '<p class="card-line small">Beating it opens ' + (sub.unlocks.length ? esc(sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ')) : 'nothing more: a final boss') + '.</p>';
+      else if (n.type === 'boss' && sub.unlocks.length) note += '<p class="card-line small">Beating it opens ' + esc(sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ')) + ' for this run.</p>';
+      acts = (!guard && !unseen ? '' : '') + (unseen && n.type !== 'boss' ? act('', '🔭 Scout 🪙 ' + price(World.SCOUT_GOLD, n), 'scout', goldNow() < price(World.SCOUT_GOLD, n)) : '') + act('primary grow', n.type === 'boss' ? '👑 Challenge' : '⚔ Fight', 'engage');
+    } else if (n.type === 'shrine') { chips = '<span class="cost free">Free</span>'; note = '<p class="card-line">Heal 8 HP <b>or</b> upgrade a unit for this run. Once per run.</p>'; acts = act('primary grow', '⛲ Rest', 'engage'); }
+    else if (n.type === 'treasure') { chips = '<span class="cost free">Free</span><span class="cost gain">+✦ ' + Gen.CACHE_SOULS + '</span><span class="cost gain">+🪙 ' + (Gen.CACHE_GOLD + 2 * regionOf(n)) + '</span>'; note = '<p class="card-line">A reward of your choice.</p>'; acts = act('primary grow', '🎁 Open', 'engage'); }
+    else if (n.type === 'shop') { chips = '<span class="cost">🪙 ' + (r.gold || 0) + '</span><span class="cost free">Browse free</span>'; note = '<p class="card-line warn">⚠ You can buy only <b>one</b> item here. The market packs up after your purchase.</p>'; acts = act('primary grow', '🛒 Browse', 'engage'); }
+    else if (n.type === 'event') { chips = '<span class="cost free">Free</span>'; note = '<p class="card-line">A short choice with a risk and a reward.</p>'; acts = act('primary grow', '❓ Investigate', 'engage'); }
+    else if (n.type === 'waypoint') {
+      const lit = save.waypoints.includes(n.sub);
+      chips = '<span class="cost free">Free</span>'; note = '<p class="card-line">' + (lit ? 'A lit Wayshrine: fast travel here, or start runs here from Camp.' : 'Light it once and it stays lit: later runs can start here.') + '</p>';
+      acts = act('primary grow', lit ? '🚩 Fast travel' : '🚩 Light the shrine', 'engage');
+    } else if (n.type === 'secret') {
+      chips = '<span class="cost free">Free</span><span class="cost' + (r.keys ? ' gain' : '') + '">🗝 ' + (r.keys || 0) + '</span>'; note = '<p class="card-line">A hidden chest. Needs a 🗝 Key: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + (Gen.CACHE_GOLD + 2 * regionOf(n)) + ', 4 HP and a Crystal or Dust.</p>';
+      acts = act('primary grow', '🗝 Open', 'engage', !(r.keys > 0));
+    }
+    return h + '<div class="card-row">' + chips + '</div>' + note + '<div class="row card-acts">' + acts + '</div>';
+  }
+  function renderCard() {
+    const el = $('#card'), n = run() && selected ? World.byId[selected] : null;
+    if (!n || n.type === 'camp') { el.hidden = true; el.innerHTML = ''; return; }
+    el.hidden = false; el.innerHTML = cardHTML(n);
+  }
+  // The expedition menu (HUD button): Rations and Gold, relics, bounties, scout, return to Camp.
+  function renderMenu() {
+    const el = $('#runmenu'), r = run();
+    if (!r || !menuOpen) { el.hidden = true; el.innerHTML = ''; return; }
+    const bl = r.bounties || [], open = [...frontier()].filter((id) => ['battle', 'elite', 'boss'].includes(World.byId[id].type)).length;
+    const here = World.byId[r.pos] || World.CAMP, cost = price(World.SCOUT_GOLD, here);
+    el.hidden = false;
+    el.innerHTML = '<div class="menu-head"><h3>On expedition</h3><button type="button" class="card-x" data-act="toggle-menu" aria-label="Close menu">✕</button></div>' +
+      '<p class="supply-line">🍙 <b>' + r.supplies + '</b> Rations left, ' + open + ' fights in open areas. Each normal or elite win costs 1; the first boss of a run adds ' + P.SUPPLIES_PER_BOSS + ', the second 1, later ones cost 1. At 0 you return to Camp safely.</p>' +
+      '<p class="supply-line">🪙 <b>' + (r.gold || 0) + '</b> Gold · 🗝 <b>' + (r.keys || 0) + '</b> Keys · ✦ <b>' + r.souls + '</b> Souls</p>' +
+      '<p class="supply-line small">Open areas: ' + esc(openList().map((id) => World.SUB_BY[id].name).join(', ')) + '. Others stay closed until their gate boss falls.</p>' +
       (r.relics && r.relics.length ? '<h4 class="bounty-h">Relics <small>run only</small></h4><ul class="relic-list">' + r.relics.map((id) => '<li>' + relicRow([id]) + '<span><b>' + esc(Relics.BY_ID[id].name) + '</b> ' + esc(Relics.BY_ID[id].text) + '</span></li>').join('') + '</ul>' : '') +
-      (bl.length ? '<h4 class="bounty-h">Bounties <small>optional, paid in 💎 when the run ends</small></h4>' + bountyList(bl) : '') +
-      '<p class="muted small">HP never regenerates by itself. Return to Camp to keep all ✦ ' + r.souls + ' Souls; if you fall, you keep 75%.</p>' +
-      '<button class="wide' + (confirmReturn ? ' danger' : '') + '" data-act="return">' + (confirmReturn ? 'Tap again to end the run and return' : '🏕 Return to Camp') + '</button>';
+      (bl.length ? '<h4 class="bounty-h">Bounties <small>paid in 💎 at run end</small></h4>' + bountyList(bl) : '') +
+      '<div class="row"><button type="button" data-act="scout-here"' + (goldNow() < cost ? ' disabled' : '') + ' title="Reveal the spots around the hero">🔭 Send a scout 🪙 ' + cost + '</button>' +
+      '<button type="button" class="grow' + (confirmReturn ? ' danger' : '') + '" data-act="return">' + (confirmReturn ? 'Tap again to return' : '🏕 Return to Camp') + '</button></div>' +
+      '<p class="muted small">HP never regenerates by itself. Returning keeps all Souls; falling keeps 75%.</p>';
   }
 
   // WP15: hero chips (brushed-seal monograms stand in for portraits) and the chosen hero's passive and ability.
@@ -542,7 +619,7 @@
   }
   const lvColor = (L) => (L <= 3 ? '#3f9a46' : L <= 6 ? '#d9a21b' : L <= 9 ? '#e0731f' : '#c63b31');
 
-  function renderAll() { renderHud(); renderSheet(); syncMap(); }
+  function renderAll() { renderHud(); renderSheet(); renderCard(); renderMenu(); syncMap(); }
 
   // ---------- Actions ----------
   function startRun() {
@@ -551,22 +628,23 @@
     const sup = P.startSupplies(save);
     const startId = save.startAt !== 'camp' && save.waypoints.includes(save.startAt) ? save.startAt + '-wp' : 'camp'; // WP14: begin at a lit Wayshrine
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: startId, cleared: ['camp'], path: [startId], keys: 0,
-      bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: P.startGold(save), rerolls: P.rewardRerolls(save), reviveUsed: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
-    selected = null; confirmReturn = false; journalView = null; persist();
+      open: [startId === 'camp' ? 'meadow' : save.startAt], bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: P.startGold(save), rerolls: P.rewardRerolls(save), reviveUsed: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
+    selected = null; confirmReturn = false; menuOpen = false; journalView = null; persist();
     WorldMap.placeToken(startId);
     if (startId === 'camp') { const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]); } else WorldMap.focus(World.byId[startId].x, World.byId[startId].y);
-    toast('Expedition started' + (P.heatPoints(save) || P.descendOf(save) ? ' (Heat ' + P.heatPoints(save) + (P.descendOf(save) ? ', Descend ' + P.descendOf(save) : '') + ')' : '') + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Rations and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
+    toast('Expedition started' + (P.heatPoints(save) || P.descendOf(save) ? ' (Heat ' + P.heatPoints(save) + (P.descendOf(save) ? ', Descend ' + P.descendOf(save) : '') + ')' : '') + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Rations (only ' + World.SUB_BY[run().open[0]].name + ' is open) and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
     renderAll();
   }
 
   async function engage(id) {
     const r = run(); let n = World.byId[id];
     if (!r || busy || r.cleared.includes(id) || !save.unlocked.includes(n.sub)) return;
+    if (!subOpen(n.sub)) { toast('Closed on this run: defeat ' + gateBoss(n.sub) + ' first.'); return; }
     if (n.type === 'secret' && !(r.keys > 0)) { toast('The cache is sealed. Elites and bosses drop keys.'); return; }
     if (n.type === 'waypoint' && save.waypoints.includes(n.sub)) { // fast travel: free and instant
       selected = null; WorldMap.placeToken(id); WorldMap.focus(n.x, n.y); r.pos = id; persist(); toast('Fast travel to the ' + World.SUB_BY[n.sub].name + ' Wayshrine.'); renderAll(); return;
     }
-    busy = true; selected = null; sheetOpen = true; renderAll();
+    busy = true; selected = null; menuOpen = false; sheetOpen = true; renderAll();
     // Short hops are walked; far ones just move the hero there.
     const from = World.byId[r.pos] || World.CAMP;
     if (Math.hypot(from.x - n.x, from.y - n.y) < 1600) await WorldMap.walk([id]); else { WorldMap.placeToken(id); WorldMap.focus(n.x, n.y); }
@@ -660,17 +738,21 @@
     r.supplies += gain;
     r.stars = (r.stars || 0) + stars;
     let title = 'Victory ' + '★'.repeat(stars), text = '✦ ' + gained + ' Souls, 🪙 ' + goldGain + ' Gold. You lost ' + state.damageTaken + ' HP.' + (stars === 3 ? ' Flawless: bonus loot roll!' : '');
-    if (boss && !save.bossesBeaten.includes(n.sub)) {
-      save.bossesBeaten.push(n.sub);
-      const sub = World.SUB_BY[n.sub];
-      for (const u of sub.unlocks) if (!save.unlocked.includes(u)) { save.unlocked.push(u); r.unlockedNow.push(u); }
-      r.souls += Gen.BOSS_BONUS_SOULS;
-      const cry = P.earn(save, 'crystals', P.bossCrystals(sub.regionIndex)); r.crystalsNow = (r.crystalsNow || 0) + cry;
-      title = World.THEMES[n.sub].boss[0] + ' defeated! ' + '★'.repeat(stars);
-      text = (sub.unlocks.length ? 'The fog lifts over ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + '. ' : 'You conquered ' + sub.region + '! ') +
-        'Bonus ✦ ' + Gen.BOSS_BONUS_SOULS + ' and 💎 ' + cry + ' Crystals. New recruits may be waiting at Camp.';
-      const target = sub.unlocks.length ? World.SUB_BY[sub.unlocks[0]] : sub;
-      setTimeout(() => WorldMap.focus(target.entry[0], target.entry[1]), 300);
+    if (boss) { // the boss opens the areas it leads to for THIS run (and lifts their fog for good, the first time)
+      const sub = World.SUB_BY[n.sub], first = !save.bossesBeaten.includes(n.sub), open = openList(), opened = sub.unlocks.filter((u) => !open.includes(u));
+      for (const u of sub.unlocks) { if (!save.unlocked.includes(u)) { save.unlocked.push(u); r.unlockedNow.push(u); } if (!open.includes(u)) open.push(u); }
+      if (first) {
+        save.bossesBeaten.push(n.sub);
+        r.souls += Gen.BOSS_BONUS_SOULS;
+        const cry = P.earn(save, 'crystals', P.bossCrystals(sub.regionIndex)); r.crystalsNow = (r.crystalsNow || 0) + cry;
+        title = World.THEMES[n.sub].boss[0] + ' defeated! ' + '★'.repeat(stars);
+        text = (sub.unlocks.length ? 'The fog lifts over ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + ' and the way is open. ' : 'You conquered ' + sub.region + '! ') +
+          'Bonus ✦ ' + Gen.BOSS_BONUS_SOULS + ' and 💎 ' + cry + ' Crystals. New recruits may be waiting at Camp.';
+      } else if (opened.length) {
+        title = World.THEMES[n.sub].boss[0] + ' defeated! ' + '★'.repeat(stars);
+        text = 'The gates to ' + opened.map((u) => World.SUB_BY[u].name).join(' and ') + ' open for this run. ✦ ' + gained + ' Souls, 🪙 ' + goldGain + ' Gold. You lost ' + state.damageTaken + ' HP.';
+      }
+      if (opened.length) { const target = World.SUB_BY[opened[0]]; setTimeout(() => WorldMap.focus(target.entry[0], target.entry[1]), 300); }
     }
     if (boss) { const was = save.descendDone; P.noteBoss(save, n.sub); if (P.FINAL_BOSSES.includes(n.sub) && P.descendOf(save) > 0 && save.descendDone > was) text += ' Descend ' + P.descendOf(save) + ' conquered: Descend ' + Math.min(P.MAX_DESCEND, P.descendOf(save) + 1) + ' is open at Camp.'; }
     if (boss && P.FINAL_BOSSES.includes(n.sub) && !save.heatSeen) { save.heatSeen = true; text += ' 🔥 The Heat braziers are lit at Camp: Heat modifiers and Descend are open.'; }
@@ -738,7 +820,7 @@
     };
   }
 
-  // Shop (WP13): four wares per visit, each bought once. Stock is rolled per run and shop; leaving closes it for the run.
+  // Shop (WP13, revised): four wares. Browsing is free and the market stays open until ONE item is bought; then it packs up for the run.
   function shopStock(n) {
     const r = run(), R = World.rng(r.seed + ':shop:' + n.id), ups = takeFrom(upgradePool(n, R), R, 2), stock = [];
     stock.push({ kind: 'heal', label: 'Healing draught: +8 HP', icon: '🍶', price: price(14, n) });
@@ -750,24 +832,32 @@
   }
   function openShop(n) {
     const r = run(); r.shops = r.shops || {};
-    const st = r.shops[n.id] || (r.shops[n.id] = { stock: shopStock(n), sold: [] });
+    const st = r.shops[n.id] || (r.shops[n.id] = { stock: shopStock(n) });
+    let pick = null;
     const draw = () => {
-      modal('<h3>Wayside Market</h3><p class="muted small">A stall under a red awning. 🪙 <b>' + (r.gold || 0) + '</b> Gold · ♥ ' + r.hp + '/' + r.maxHp + '</p><div class="rewards shop">' +
-        st.stock.map((p, i) => pickBtn(p, i, st.sold.includes(i) ? { tag: 'sold', dis: true } : { tag: '🪙 ' + p.price, dis: (r.gold || 0) < p.price })).join('') + '</div>' +
-        '<div class="row"><button class="primary grow" data-act="leave">Leave the stall</button></div>');
+      const p = pick === null ? null : st.stock[pick];
+      modal('<h3>Wayside Market</h3><p class="shop-warn">⚠ You can buy <b>only one item</b> here: the market packs up after your purchase. Look around as often as you like first.</p>' +
+        '<p class="muted small">🪙 <b>' + (r.gold || 0) + '</b> Gold · ♥ ' + r.hp + '/' + r.maxHp + '</p><div class="rewards shop">' +
+        st.stock.map((q, i) => pickBtn(q, i, { tag: '🪙 ' + q.price, dis: (r.gold || 0) < q.price })).join('') + '</div>' +
+        (p ? '<p class="shop-confirm">Buy <b>' + esc(p.label) + '</b> for 🪙 ' + p.price + '? The market closes for this run.</p><div class="row"><button data-act="back">Not that one</button><button class="primary grow" data-act="buy">Buy and close</button></div>'
+          : '<div class="row"><button class="primary grow" data-act="leave">Leave (the stall stays open)</button></div>'));
     };
     draw();
     $('#modal').onclick = (ev) => {
-      if (ev.target.closest('[data-act="leave"]')) { r.cleared.push(n.id); persist(); closeModal(); renderAll(); return; }
+      if (ev.target.closest('[data-act="leave"]')) { closeModal(); renderAll(); return; }
+      if (ev.target.closest('[data-act="back"]')) { pick = null; draw(); return; }
+      if (ev.target.closest('[data-act="buy"]') && pick !== null) {
+        const p = st.stock[pick];
+        if ((r.gold || 0) < p.price) return;
+        r.gold -= p.price;
+        if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + heal(8));
+        else if (p.kind === 'tonic') { r.maxHp += 2; r.hp += 2; }
+        else if (p.kind === 'relic') { if (!r.relics.includes(p.id)) r.relics.push(p.id); }
+        else applyUpgrade(p);
+        r.cleared.push(n.id); persist(); closeModal(); renderAll(); toast('Bought: ' + p.label.split(':')[0] + '. The market packs up.'); return;
+      }
       const b = ev.target.closest('[data-reward]'); if (!b || b.disabled) return;
-      const i = Number(b.dataset.reward), p = st.stock[i];
-      if (st.sold.includes(i) || (r.gold || 0) < p.price) return;
-      r.gold -= p.price; st.sold.push(i);
-      if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + heal(8));
-      else if (p.kind === 'tonic') { r.maxHp += 2; r.hp += 2; }
-      else if (p.kind === 'relic') { if (!r.relics.includes(p.id)) r.relics.push(p.id); }
-      else applyUpgrade(p);
-      persist(); renderHud(); draw();
+      pick = Number(b.dataset.reward); draw();
     };
   }
 
@@ -843,7 +933,7 @@
       const cheap = P.cheapestUpgrade(save);
       if (cheap) { if (save.souls < cheap.cost) { bonus = cheap.cost - save.souls; save.souls += bonus; } pointAt = cheap.id; }
     }
-    save.run = null; selected = null; confirmReturn = false;
+    save.run = null; selected = null; confirmReturn = false; menuOpen = false;
     const featHtml = checkFeats(true);
     persist();
     const unlockedNames = r.unlockedNow.map((u) => World.SUB_BY[u].name);
@@ -883,8 +973,9 @@
   }
 
   // ---------- Wiring ----------
-  $('#sheet').addEventListener('click', (ev) => {
+  const onPanelClick = (ev) => {
     const b = ev.target.closest('button'); if (!b) return;
+    if (b.dataset.drop !== undefined) { dropSel = dropSel === Number(b.dataset.drop) ? null : Number(b.dataset.drop); renderCard(); return; }
     if (b.id === 'sheet-toggle') { sheetOpen = !sheetOpen; renderSheet(); return; }
     if (!b.dataset.salvage) confirmSalvage = null;
     if (b.dataset.jv) { journalView = b.dataset.jv === 'close' ? null : b.dataset.jv; renderSheet(); const l = $('#sheet'); l.scrollTop = 0; return; }
@@ -970,21 +1061,28 @@
       const n = World.byId[selected], cost = price(World.SCOUT_GOLD, n);
       if (run() && goldNow() >= cost) { run().gold -= cost; revealAround(n.x, n.y, 330, 240); save.seen.includes(n.id) || save.seen.push(n.id); persist(); toast('A scout reports back (🪙 ' + cost + ').'); renderAll(); } else toast('Not enough Gold to send a scout.');
     }
-    else if (act === 'close-node') { selected = null; renderAll(); }
-    else if (act === 'return') { if (!confirmReturn) { confirmReturn = true; renderSheet(); } else endRun(false); }
+    else if (act === 'close-node') { selected = null; dropSel = null; renderAll(); }
+    else if (act === 'toggle-menu') { menuOpen = !menuOpen; confirmReturn = false; selected = null; renderAll(); }
+    else if (act === 'scout-here') {
+      const h = WorldMap.heroAt(), here = World.byId[run().pos] || World.CAMP, cost = price(World.SCOUT_GOLD, here);
+      if (goldNow() >= cost) { run().gold -= cost; revealAround(h.x, h.y, 330 + 300, 240 + 120); persist(); toast('A scout reports back (🪙 ' + cost + ').'); renderAll(); } else toast('Not enough Gold to send a scout.');
+    }
+    else if (act === 'return') { if (!confirmReturn) { confirmReturn = true; renderMenu(); } else { menuOpen = false; endRun(false); } }
     else if (act === 'cheat') { save.souls += 100; P.earn(save, 'crystals', 30); P.earn(save, 'dust', 10); persist(); renderAll(); }
     else if (act === 'reset') {
       if (!confirmReset) { confirmReset = true; renderSheet(); return; }
       confirmReset = false; save = P.reset(); WorldMap.placeToken('camp'); WorldMap.focus(World.CAMP.x, World.CAMP.y - 120, true); toast('Progress erased.'); renderAll();
     }
-  });
+  };
+  for (const id of ['#sheet', '#card', '#runmenu', '#hud']) $(id).addEventListener('click', onPanelClick);
 
   WorldMap.init({
     onHero(x, y) { revealAround(x, y); },
     onTap(node) {
       if (busy) return;
-      confirmReturn = false; confirmReset = false;
-      if (!node || (node.type === 'camp' && !run())) { selected = null; sheetOpen = true; renderAll(); return; }
+      confirmReturn = false; confirmReset = false; dropSel = null;
+      if (run()) { menuOpen = false; selected = node && node.type !== 'camp' ? node.id : null; renderAll(); return; } // ground taps only walk the hero
+      if (!node || node.type === 'camp') { selected = null; sheetOpen = true; renderAll(); return; }
       selected = node.id; sheetOpen = true; renderAll();
     },
   });
