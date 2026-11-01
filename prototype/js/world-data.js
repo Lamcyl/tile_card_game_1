@@ -152,12 +152,15 @@
 
   // Danger rating in skulls (design 8.1): Lv1-3 = 1, 4-6 = 2, 7-9 = 3, 10-12 = 4, 13+ = 5.
   const danger = (level) => Math.max(1, Math.min(5, Math.ceil(level / 3)));
+  // The single power curve (docs/GAME_DESIGN.md "Power curve"): w(L) = (L/5)^1.5, 1.0 at Lv5 (the Greenvale boss band).
+  // Reward magnitudes (Souls, Gold, run upgrades, item levels, boss Rations) are all affine in w(L), so a deeper fight is worth more per Ration.
+  const power = (level) => Math.pow(Math.max(1, level) / 5, 1.5);
   // WP14 scouting: a monster spot (ordinary or elite) within `sightRadius` of where the hero has stood is revealed for good; farther ones stay
   // faint silhouettes. Hidden secrets are found within `secretRadius`. Camp "Scouting" levels widen both. MAX_KEYS = keys carried per run.
   const sightRadius = (lv) => 430 + 150 * (lv || 0);
   const secretRadius = (lv) => 130 + 50 * (lv || 0);
   const FOGGED = ['battle', 'elite'];
-  const WORLD = Object.assign(buildWorld(), { sightRadius, secretRadius, FOGGED, MAX_KEYS: 3, SCOUT_GOLD: 6, danger, MAP_W, MAP_H, SUBAREAS, SUB_BY, REGIONS, THEMES, CAMP, hash, rng, NORMAL_ROLES });
+  const WORLD = Object.assign(buildWorld(), { sightRadius, secretRadius, FOGGED, MAX_KEYS: 3, SCOUT_GOLD: 6, danger, power, MAP_W, MAP_H, SUBAREAS, SUB_BY, REGIONS, THEMES, CAMP, hash, rng, NORMAL_ROLES });
   root.World = WORLD;
   if (typeof module !== 'undefined' && module.exports) module.exports = WORLD;
 })(typeof window !== 'undefined' ? window : globalThis);

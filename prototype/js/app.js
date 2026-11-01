@@ -86,6 +86,8 @@
   const price = (base, n) => Math.round(base * (1 + 0.2 * regionOf(n)));
   const goldNow = () => (run() ? run().gold || 0 : 0);
   const gopts = () => P.genOpts(save);                 // WP18 Heat / Descend options for Gen (enemy tweaks, level shift, reward multiplier)
+  // Boss Rations of a boss node right now: first = never beaten on this account (a new frontier, pays more), else a toll boss. Grows with the level (power curve).
+  const bossGain = (n) => P.bossSupplies(Gen.scaled(n, gopts()).level, !save.bossesBeaten.includes(n.sub));
   const heal = (n) => P.healAmt(save, n);              // WP18 Heat "Bitter Herbs": healing is halved
 
   // ---------- HUD ----------
@@ -96,7 +98,7 @@
     if (r) {
       hud.innerHTML =
         '<div class="hud-row"><div class="hud-hp" title="Hit points"><span class="lbl">♥</span><div class="bar"><i style="width:' + (100 * r.hp / r.maxHp) + '%"></i></div><b>' + r.hp + '/' + r.maxHp + '</b></div>' +
-        '<div class="hud-chip rations' + (r.supplies <= 2 ? ' low' : '') + '" title="Rations: battles left on this run. Normal and elite fights cost 1; the first boss adds ' + P.SUPPLIES_PER_BOSS + ', the next one 1 (after that a boss costs 1 like any fight).">🍙 ' + r.supplies + '</div>' +
+        '<div class="hud-chip rations' + (r.supplies <= 2 ? ' low' : '') + '" title="Rations: battles left on this run. Normal and elite fights cost 1; every boss pays Rations that grow with its level (more for an area you have never conquered).">🍙 ' + r.supplies + '</div>' +
         '<div class="hud-chip gold" title="Gold: earned in fights, spent in Shops and events. Lost when the run ends.">🪙 ' + (r.gold || 0) + '</div>' +
         '<button type="button" class="hud-menu' + (menuOpen ? ' on' : '') + '" data-act="toggle-menu" aria-label="Expedition menu" aria-expanded="' + menuOpen + '">☰</button></div>' +
         '<div class="hud-row sub">' +
@@ -153,8 +155,8 @@
   }
   function supplyNote(n) {
     if (n.type !== 'boss') return '<span class="cost">🍙 Costs 1 Ration</span>';
-    const g = P.bossSupplies(run() ? run().bossesDown : 0);
-    return g > 0 ? '<span class="cost gain">🍙 Boss: +' + g + ' Rations</span>' : '<span class="cost">🍙 Costs 1 Ration</span>';
+    const g = bossGain(n), first = !save.bossesBeaten.includes(n.sub);
+    return '<span class="cost gain">🍙 Boss: +' + g + ' Rations' + (first ? ' (new area)' : '') + '</span>';
   }
 
   function nodeSheet(n) {
@@ -233,7 +235,7 @@
     const act = (cls, label, a, dis) => '<button type="button" class="' + cls + '" data-act="' + a + '"' + (dis ? ' disabled' : '') + '>' + label + '</button>';
     if (isFight) {
       const preview = Gen.generateBattle(guard || n, r.seed, gopts()), unseen = !guard && n.type !== 'boss' && !isSeen(n), g = guard || n;
-      const bg = n.type === 'boss' ? P.bossSupplies(r.bossesDown || 0) : 0;
+      const bg = n.type === 'boss' ? bossGain(n) : 0;
       const souls = Math.round(Gen.soulsFor(g, 1, gopts()) * P.soulRate(save));
       chips = '<div class="card-enemies">' + (unseen ? '<span class="enemy-chip unknown" title="Not scouted yet">?</span>'.repeat(3) : preview.enemies.map((e) => enemyChip(e.type)).join('')) + '</div>' +
         '<span class="cost' + (bg > 0 ? ' gain' : '') + '">' + (bg > 0 ? '+' + bg : '−1') + ' 🍙</span><span class="cost">✦ ' + souls + '+</span>';
@@ -275,7 +277,7 @@
     const here = World.byId[r.pos] || World.CAMP, cost = price(World.SCOUT_GOLD, here);
     el.hidden = false;
     el.innerHTML = '<div class="menu-head"><h3>On expedition</h3><button type="button" class="card-x" data-act="toggle-menu" aria-label="Close menu">✕</button></div>' +
-      '<p class="supply-line">🍙 <b>' + r.supplies + '</b> Rations left, ' + open + ' fights in open areas. Each normal or elite win costs 1; the first boss of a run adds ' + P.SUPPLIES_PER_BOSS + ', the second 1, later ones cost 1. At 0 you return to Camp safely.</p>' +
+      '<p class="supply-line">🍙 <b>' + r.supplies + '</b> Rations left, ' + open + ' fights in open areas. Each normal or elite win costs 1; every boss pays Rations that grow with its level (an area you never conquered pays about 3x a toll boss), so push deep, then farm the highest area. At 0 you return to Camp safely.</p>' +
       '<p class="supply-line">🪙 <b>' + (r.gold || 0) + '</b> Gold · 🗝 <b>' + (r.keys || 0) + '</b> Keys · ✦ <b>' + r.souls + '</b> Souls</p>' +
       '<p class="supply-line small">Open areas: ' + esc(openList().map((id) => World.SUB_BY[id].name).join(', ')) + '. Others stay closed until their gate boss falls.</p>' +
       (r.relics && r.relics.length ? '<h4 class="bounty-h">Relics <small>run only</small></h4><ul class="relic-list">' + r.relics.map((id) => '<li>' + relicRow([id]) + '<span><b>' + esc(Relics.BY_ID[id].name) + '</b> ' + esc(Relics.BY_ID[id].text) + '</span></li>').join('') + '</ul>' : '') +
@@ -829,10 +831,10 @@
     }
     const dustLine = drop && drop.consolation ? '<p class="supply-line">Elite spoils: ⚒ ' + drop.dust + ' Dust (you own everything it drops).</p>' : '';
     // Rations: normal and elite wins cost 1, a boss adds some.
-    const boss = n.type === 'boss';
-    const gain = boss ? P.bossSupplies(r.bossesDown || 0) : -1;
+    const boss = n.type === 'boss', wasBeaten = save.bossesBeaten.includes(n.sub);
+    const gain = boss ? bossGain(n) : -1;
     if (boss) r.bossesDown = (r.bossesDown || 0) + 1;
-    r.supplies += gain;
+    r.supplies = gain > 0 ? P.addSupplies(r.supplies, gain) : r.supplies + gain;
     r.stars = (r.stars || 0) + stars;
     let title = 'Victory ' + '★'.repeat(stars), text = '✦ ' + gained + ' Souls, 🪙 ' + goldGain + ' Gold. You lost ' + state.damageTaken + ' HP.' + (stars === 3 ? ' Flawless: bonus loot roll!' : '');
     if (boss) { // the boss opens the areas it leads to for THIS run (and lifts their fog for good, the first time)
@@ -861,7 +863,7 @@
     const bountyLine = done.length ? '<div class="bounty-done">' + done.map((b) => '<p>🎯 Bounty complete: <b>' + esc(Bounties.text(b)) + '</b> · 💎 ' + b.reward + ' at run end</p>').join('') + '</div>' : '';
     let keyNote = '';
     if ((boss || n.type === 'elite') && (r.keys || 0) < World.MAX_KEYS) { r.keys = (r.keys || 0) + 1; keyNote = ' · 🗝 <b>+1 Key</b> (opens a hidden Sealed Cache)'; }
-    const supLine = '<p class="supply-line">🍙 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Rations</b>' : 'Spent <b>1 Ration</b>') + ' · ' + Math.max(0, r.supplies) + ' left' + keyNote + '.</p>';
+    const supLine = '<p class="supply-line">🍙 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Rations</b>' + (!wasBeaten ? ' (new area)' : '') : 'Spent <b>1 Ration</b>') + ' · ' + Math.max(0, r.supplies) + ' left' + keyNote + '.</p>';
     const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
       checkFeats(true) + (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'No free slot: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
     persist(); renderAll();
@@ -880,20 +882,22 @@
   const relicRow = (ids) => (ids || []).map((id) => '<span class="relic-ic sm" title="' + esc(Relics.BY_ID[id].name + ': ' + Relics.BY_ID[id].text) + '">' + Relics.BY_ID[id].glyph + '</span>').join('');
 
   // Every unit upgrade the run could take now: +1 ATK / block / boost, and +1 range (rare, from the second region on, design 24.2).
-  function upgradePool(node, R) {
+  // `rw` (Gen.rewardFor) scales the amounts for the post-battle choice; shrines, shops and events pass none and give +1.
+  function upgradePool(node, R, rw) {
+    const nA = rw ? rw.atk : 1, nB = rw ? rw.block : 1, nM = rw ? rw.amount : 1;
     const r = run(), army = P.buildArmy(save, r.mods), regionIdx = node ? World.SUB_BY[node.sub].regionIndex : 0, pool = [];
     for (const c of army) {
       const t = E.CARD_TYPES[c.type];
       if (t.role === 'attacker') {
-        pool.push({ kind: 'atk', id: c.id, label: '+1 ATK · ' + unitTitle(c.id), icon: t.icon, card: c.id });
+        pool.push({ kind: 'atk', n: nA, id: c.id, label: '+' + nA + ' ATK · ' + unitTitle(c.id), icon: t.icon, card: c.id });
         if (regionIdx >= 1 && ((c.pattern || t.pattern) !== 'straight' || c.range < 4) && R() < 0.4) pool.push({ kind: 'range', id: c.id, label: '+1 range · ' + unitTitle(c.id), icon: t.icon, card: c.id });
-      } else if (t.role === 'defender') pool.push({ kind: 'block', id: c.id, label: '+1 block · ' + unitTitle(c.id), icon: t.icon, card: c.id });
-      else if (t.effect !== 'mult') pool.push({ kind: 'amount', id: c.id, label: '+1 boost · ' + unitTitle(c.id), icon: t.icon, card: c.id });
+      } else if (t.role === 'defender') pool.push({ kind: 'block', n: nB, id: c.id, label: '+' + nB + ' block · ' + unitTitle(c.id), icon: t.icon, card: c.id });
+      else if (t.effect !== 'mult') pool.push({ kind: 'amount', n: nM, id: c.id, label: '+' + nM + ' boost · ' + unitTitle(c.id), icon: t.icon, card: c.id });
     }
     return pool;
   }
   const takeFrom = (pool, R, n) => { const out = []; while (out.length < n && pool.length) out.push(pool.splice(Math.floor(R() * pool.length), 1)[0]); return out; };
-  function applyUpgrade(p) { const m = run().mods[p.id] || (run().mods[p.id] = {}); m[p.kind] = (m[p.kind] || 0) + 1; }
+  function applyUpgrade(p) { const m = run().mods[p.id] || (run().mods[p.id] = {}); m[p.kind] = (m[p.kind] || 0) + (p.n || 1); }
   function giveRelic(R) {
     const r = run(), left = Relics.LIST.filter((x) => !r.relics.includes(x.id));
     if (r.relics.length >= Relics.MAX_PER_RUN || !left.length) return null;
@@ -989,23 +993,29 @@
   // Choose 1 of 3: always one heal, plus two upgrades for this run.
   function offerReward(title, text, node, extra, rerolled) {
     const r = run(), R = World.rng(r.seed + ':reward:' + r.path.length + (rerolled ? ':rr' + rerolled : ''));
-    const pool = upgradePool(node, R);
+    const rw = Gen.rewardFor(node || { level: 1, type: 'battle' }, gopts()), pool = upgradePool(node, R, rw);
     const picks = [];
     // WP12: a relic takes the place of one upgrade when the run offers one (always after elites and bosses).
     const relic = Relics.offer(r.relics, R, node ? node.type : 'battle');
     while (picks.length < (relic ? 1 : 2) + P.rewardChoices(save) - 3 && pool.length) picks.push(pool.splice(Math.floor(R() * pool.length), 1)[0]);
     if (relic) picks.push({ kind: 'relic', id: relic.id, label: relic.name + ': ' + relic.text, icon: relicIcon(relic) });
-    picks.push({ kind: 'heal', label: 'Heal 5 HP', icon: '❤️' });
-    modal('<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p>' + (extra || '') + '<p class="muted small">Choose one reward for this run:</p><div class="rewards">' +
+    // Depth pays: elites and bosses from Lv7 (ordinary fights from Lv10, one time in three) also offer a team-wide Warcry; from Lv6 a Fortify (max HP).
+    const team = rw.team || (rw.teamChance && R() < rw.teamChance ? 1 : 0);
+    if (team) picks.push({ kind: 'team', n: team, label: 'Warcry: every attacker +' + team + ' ATK', icon: '📣' });
+    if (!team && rw.hp && R() < 0.6) picks.push({ kind: 'maxhp', n: rw.hp, label: 'Fortify: +' + rw.hp + ' max HP', icon: '💪' });
+    picks.push({ kind: 'heal', n: rw.heal, label: 'Heal ' + rw.heal + ' HP', icon: '❤️' });
+    modal('<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p>' + (extra || '') + '<p class="muted small">Choose one reward for this run (Lv' + rw.level + ' fight' + (node && node.type !== 'battle' ? ', ' + node.type : '') + '; deeper fights offer bigger rewards):</p><div class="rewards">' +
       picks.map((p, i) => '<button data-reward="' + i + '"><span class="ic">' + (p.card ? unitView(p.card).img : p.icon) + '</span><span>' + esc(p.label) + '</span></button>').join('') + '</div>' +
       ((r.rerolls || 0) > 0 ? '<div class="row"><button class="grow" data-reroll-reward="1">🎲 Re-roll the choices (' + r.rerolls + ' left this run)</button></div>' : ''));
     $('#modal').onclick = (ev) => {
       if (ev.target.closest('[data-reroll-reward]')) { r.rerolls -= 1; persist(); offerReward(title, text, node, extra, (rerolled || 0) + 1); return; }
       const b = ev.target.closest('[data-reward]'); if (!b) return;
       const p = picks[Number(b.dataset.reward)];
-      if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + heal(5));
+      if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + heal(p.n));
+      else if (p.kind === 'maxhp') { r.maxHp += p.n; r.hp += p.n; }
+      else if (p.kind === 'team') { for (const c of P.buildArmy(save, r.mods)) if (E.CARD_TYPES[c.type].role === 'attacker') { const m = r.mods[c.id] || (r.mods[c.id] = {}); m.atk = (m.atk || 0) + p.n; } }
       else if (p.kind === 'relic') { (r.relics || (r.relics = [])).push(p.id); toast(Relics.BY_ID[p.id].name + ' joins the expedition.'); }
-      else { const m = r.mods[p.id] || (r.mods[p.id] = {}); m[p.kind] = (m[p.kind] || 0) + 1; }
+      else applyUpgrade(p);
       persist(); closeModal(); renderAll();
     };
   }

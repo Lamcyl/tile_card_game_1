@@ -206,7 +206,7 @@
   const starsFor = (damageTaken) => (damageTaken <= 0 ? 3 : damageTaken <= 3 ? 2 : 1);
   function soulsFor(node, stars, opts) {
     node = scaled(node, opts);
-    const base = Math.round((3 + node.level * 2) * (opts && opts.mult ? opts.mult : 1) * SOUL_SCALE * (STAR_SOULS[stars || 1] || 1)); // SOUL_SCALE: WP18 pacing (was 0.8, then 0.36 once gear, sets and gacha made accounts strong early)
+    const base = Math.round((4 + 9 * World.power(node.level)) * (opts && opts.mult ? opts.mult : 1) * SOUL_SCALE * (STAR_SOULS[stars || 1] || 1)); // SOUL_SCALE: WP18 pacing (was 0.8, then 0.36 once gear, sets and gacha made accounts strong early)
     if (node.type === 'boss') return base * 3;
     if (node.type === 'elite') return base * 2;
     return base;
@@ -216,11 +216,26 @@
   const GOLD_STAR = [1, 1, 1.25, 1.5], CACHE_GOLD = 8, GUARD_GOLD = 16;
   function goldFor(node, stars, opts) {
     node = scaled(node, opts);
-    const base = Math.round((3 + node.level * 1.5) * (opts && opts.mult ? opts.mult : 1) * (GOLD_STAR[stars || 1] || 1));
+    const base = Math.round((3 + 7 * World.power(node.level)) * (opts && opts.mult ? opts.mult : 1) * (GOLD_STAR[stars || 1] || 1));
     return node.type === 'boss' ? base * 3 : node.type === 'elite' ? base * 2 : base;
   }
 
-  const Gen = { DESCEND_LV, scaled, generateBattle, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
+  // ---------- Run rewards by depth (rework "depth pays", design "Power curve") ----------
+  // What the post-battle choice offers for a won fight at `node` (level after Descend). Everything follows w = World.power(L):
+  //   atk    +ATK of the single-unit upgrade: round((0.5 + 0.55w) x kind) with kind 1 / 1.5 (elite) / 2 (boss)  -> normal Lv1-7 +1, Lv8-11 +2? see table in the design doc
+  //   block  Shield / boost upgrades: half of atk (min 1)
+  //   heal   HP restored by the heal option: (3 + 0.6L) x 1 / 1.25 / 1.5
+  //   hp     "Fortify" (+max HP for the run), from Lv6: (1 + L/3) x 1 / 1.25 / 1.5
+  //   team   "Warcry": every attacker +N ATK. Elites and bosses from Lv7 (N = 1, boss Lv13+: 2), ordinary fights from Lv10 only 1 time in 3 (sim: always counted as 1/3)
+  function rewardFor(node0, opts) {
+    const node = scaled(node0, opts), L = node.level, w = World.power(L);
+    const k = node.type === 'boss' ? 2 : node.type === 'elite' ? 1.5 : 1, hk = node.type === 'boss' ? 1.5 : node.type === 'elite' ? 1.25 : 1;
+    const atk = Math.max(1, Math.round((0.5 + 0.55 * w) * k));
+    return { level: L, atk, block: Math.max(1, Math.round(atk / 2)), amount: Math.max(1, Math.round(atk / 2)), heal: Math.round((3 + 0.6 * L) * hk), hp: L >= 6 ? Math.round((1 + L / 3) * hk) : 0,
+      team: k > 1 && L >= 7 ? (node.type === 'boss' && L >= 13 ? 2 : 1) : 0, teamChance: k === 1 && L >= 10 ? 1 / 3 : 0 };
+  }
+
+  const Gen = { DESCEND_LV, rewardFor, scaled, generateBattle, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
   root.Gen = Gen;
   if (typeof module !== 'undefined' && module.exports) module.exports = Gen;
 })(typeof window !== 'undefined' ? window : globalThis);

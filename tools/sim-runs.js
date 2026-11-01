@@ -137,7 +137,9 @@ function playRun(save0) {
     const bossNode = fights.find((n) => n.type === 'boss'), normals = fights.filter((n) => n.type !== 'boss');
     // Gate boss of an already conquered area: straight through, but only after 3 warm-up wins this run (a cold +0 ATK squad would die to it and earn nothing).
     const rush = wins >= 3 ? fights.find((n) => n.type === 'boss' && save.bossesBeaten.includes(n.sub)) : null;
-    const node = rush || (bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode));
+    // Depth pays: after the warm-up and the gate rush, the player grinds the HIGHEST fights of the frontier first (rewards and Souls grow with the level, a Ration costs the same).
+    const grind = wins >= 3 && !process.env.ASCEND ? normals.slice().sort((a, b) => b.level - a.level)[0] : normals[0];
+    const node = rush || (bossNode && (supplies <= 2 || !normals.length) ? bossNode : (grind || bossNode));
     cleared.add(node.id);
     if (process.env.LOGBOSS && (node.type === 'boss' || node.type === 'elite')) { // WP18: snapshot of the account at every boss / elite fight (feeds the validator's reference squads)
       const ar = Progress.buildArmy(save, mods), rl = Progress.rulesFor(save, { relics, reviveUsed });
@@ -164,7 +166,7 @@ function playRun(save0) {
     takeDrop(Items.grantDrop(save, node, seed, { lvBonus: Progress.itemLvBonus(save) }) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null));
     if (stars === 3) takeDrop(Items.grantDrop(save, node, seed + ':star', { bonus: true, lvBonus: Progress.itemLvBonus(save) })); // 3-star clears earn a bonus roll (app.js battleOver)
     if (node.type === 'boss') {
-      supplies += Progress.bossSupplies(bosses); bosses++; souls += Gen.BOSS_BONUS_SOULS; // real rule: 3, then 1, then -1
+      supplies = Progress.addSupplies(supplies, Progress.bossSupplies(Gen.scaled(node, gopts).level, !save.bossesBeaten.includes(node.sub))); bosses++; souls += Gen.BOSS_BONUS_SOULS; // real rule: Rations grow with the boss level, new areas pay ~3x a toll boss
       for (const u of World.SUB_BY[node.sub].unlocks) { runOpen.add(u); if (!save.unlocked.includes(u)) save.unlocked.push(u); } // opens for this run; the fog lifts for good
       if (!save.bossesBeaten.includes(node.sub)) save.bossesBeaten.push(node.sub);
     } else supplies -= 1;
@@ -174,9 +176,13 @@ function playRun(save0) {
     let offered = process.env.NORELICS ? null : Relics.offer(relics, Math.random, node.type);
     for (let look = Progress.level(save, 'choice') >= 1 ? 1 : 0; look > 0 && !good(offered) && !process.env.NORELICS; look--) offered = Relics.offer(relics, Math.random, node.type) || offered;
     if (!good(offered) && rerolls > 0 && !process.env.NORELICS && hp >= Progress.maxHp(save) * 0.5) { rerolls--; offered = Relics.offer(relics, Math.random, node.type) || offered; }
-    if (hp < Progress.maxHp(save) * 0.5) hp = Math.min(Progress.maxHp(save), hp + heal(5));
+    // Depth-scaled rewards (Gen.rewardFor, same numbers as the app): heal when low, else a relic, else the Warcry (team) pick, else the single-unit ATK step.
+    const rw = Gen.rewardFor(node, gopts), att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker');
+    const team = rw.team || (rw.teamChance && Math.random() < rw.teamChance ? 1 : 0);
+    if (hp < Progress.maxHp(save) * 0.5) hp = Math.min(Progress.maxHp(save), hp + heal(rw.heal));
     else if (offered && !['prism', 'mjolnir', 'susanoo'].includes(offered.id)) relics.push(offered.id); // greedy: skip the situational relics
-    else { const att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker'); const id = att[Math.floor(Math.random() * att.length)]; mods[id] = { atk: ((mods[id] || {}).atk || 0) + 1 }; }
+    else if (team) { for (const id of att) mods[id] = Object.assign(mods[id] || {}, { atk: ((mods[id] || {}).atk || 0) + team }); }
+    else { const id = att[Math.floor(Math.random() * att.length)]; mods[id] = Object.assign(mods[id] || {}, { atk: ((mods[id] || {}).atk || 0) + rw.atk }); }
   }
 }
 

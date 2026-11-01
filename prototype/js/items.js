@@ -22,8 +22,11 @@
   const TOKENS_NEEDED = 6;            // boss tokens that buy one of the boss's Legendaries
   const LEGEND_CHANCE = 0.05, LEGEND_PITY = 0.04; // per boss kill, +4% for every kill without a Legendary
   const UNIQUE_PITY = 0.05, PITY_CAP = 0.9;       // unique item: +5% for every win without it
-  const ILVL_STEP = 0.05;                         // every item level adds +5% to each number (rounded down)
-  const scale = (base, lv) => Math.max(base, Math.floor(base * (1 + ILVL_STEP * ((lv || 1) - 1)) + 1e-9));
+  // Item level follows the power curve (rework "depth pays"): numbers are multiplied by 0.9 + 0.3 w(iLv), w = (iLv/5)^1.5 (x1.2 at iLv5 as before, x1.75 at 10, x2.46 at 15; was +5% per level, x1.7 at 15).
+  // Starting Rations and range never scale (they would break the Ration economy / one-turn puzzles).
+  const ILVL_FLAT = ['supplies', 'range'];
+  const ilvlMul = (lv) => 0.9 + 0.3 * World.power(lv || 1);
+  const scale = (base, lv, kind) => (ILVL_FLAT.includes(kind) ? base : Math.max(base, Math.floor(base * ilvlMul(lv) + 1e-9)));
   // Strength of each effect by rarity.
   const MAG = {
     atk:      { common: 1, rare: 2, epic: 3 },
@@ -232,8 +235,8 @@
   function unequip(save, id) { const k = slotOfItem(save, id); if (k) save.loadout[k] = null; return !!k; }
 
   // ----- Numbers of an owned item -----
-  const mainAmount = (item, data) => scale(item.amount, data.lv);
-  const subAmount = (sub, data) => scale(sub.amount, data.lv);
+  const mainAmount = (item, data) => scale(item.amount, data.lv, item.kind);
+  const subAmount = (sub, data) => scale(sub.amount, data.lv, sub.kind);
   const fxOf = (item) => (item.fx ? LEGEND_FX[item.fx] : null);
 
   function effectText(kind, type, n) {
@@ -249,7 +252,7 @@
     }
   }
   // Main effect text; `lv` (optional) scales it to an item level.
-  function describe(item, lv) { return effectText(item.kind, item.type, lv ? scale(item.amount, lv) : item.amount); }
+  function describe(item, lv) { return effectText(item.kind, item.type, lv ? scale(item.amount, lv, item.kind) : item.amount); }
   const substatText = (sub, data) => effectText(sub.kind, sub.type, subAmount(sub, data));
   function icon(item) {
     if (item.type) return Engine.CARD_TYPES[item.type].icon;

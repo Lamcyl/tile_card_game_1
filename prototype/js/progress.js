@@ -101,10 +101,15 @@
   const BASE_HP = 20;
   const BASE_CP = 8;   // Command Points: a Common unit costs 1, Rare 2, Epic 3, Legendary 4
 const BASE_SUPPLIES = 8;   // battles a fresh account can fight per run
-const SUPPLIES_PER_BOSS = 3; // the first boss of a run adds this many Rations (WP18 pacing: 4 let strong runs snowball to 90+ battles)
-const BOSS_SUPPLY_STEP = 2;  // ...and every further boss in the same run adds this much less; below 0 it just costs 1 Ration like any fight (3, +1, then -1)
-const bossSupplies = (bossesDown) => Math.max(-1, SUPPLIES_PER_BOSS - BOSS_SUPPLY_STEP * (bossesDown || 0)); // net Rations change for the next boss win
+// Boss Rations (rework "depth pays"): a boss win's NET Rations change (+N, already after the 1 Ration the fight costs) grows with the boss level along the power curve (World.power).
+//  first: an area boss this account has never beaten (a new frontier) pays round(1.6 + 2w): Lv4 +3, Lv7 +5, Lv9 +6, Lv11 +8, Lv13 +10, Lv15 +12.
+//  toll:  a boss of an area already conquered (re-fought as the gate of the rush) pays round(0.7w): Lv4-6 +1, Lv9 +2, Lv13 +3, Lv15 +4. The rush is nearly free but never a Ration farm.
+// Rations are capped (MAX_RATIONS) as a last safety net; the real brake is that every spot can be fought once per run.
+const MAX_RATIONS = 60;
+const bossSupplies = (level, first) => (first ? Math.round(1.6 + 2 * root.World.power(level)) : Math.max(1, Math.round(0.7 * root.World.power(level))));
+const addSupplies = (cur, delta) => Math.min(Math.max(cur, MAX_RATIONS), cur + delta);
 const Items = () => root.Items;
+
 const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range: {}, block: 0, hp: 0, supplies: 0, souls: 0, rules: {}, horn: false });
 
   const SAVE_KEY = 'tile-defense-world-v3';
@@ -430,7 +435,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
   }
 
   const Progress = {
-    ROSTER, ROSTER_BY, RARITY, TRAITS, TRAIT_STEPS, BASE_CP, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, SUPPLIES_PER_BOSS, bossSupplies,
+    ROSTER, ROSTER_BY, RARITY, TRAITS, TRAIT_STEPS, BASE_CP, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, MAX_RATIONS, bossSupplies, addSupplies,
     PULL_COST, PULL10_COST, ODDS, PITY_AT, MAX_STARS, MAXED_DUST, OFFICE_COST, MASTERY_XP, MASTERY_PERKS, STAR_TEXT,
     starsOf, masteryOf, masteryLevel, growthFx, addXp, poolFor, grantUnit, pullOnce, pull, officeTrade, recruitable,
     CURRENCIES, balance, canSpend, earn, spend, spendAll, bossCrystals,
