@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Greenvale: region map draft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap">
+<style>
+  /* One stitched region map (maps/greenvale-region.svg) in a pan/zoom stage, with a legend and jump buttons. */
+  :root {
+    --paper: #f3eee3; --card: #fbf8f1; --ink: #1b1a1a; --muted: #6b655c; --line: #ddd5c6; --seal: #c8352b;
+    --display: "Shippori Mincho", "Hiragino Mincho ProN", Georgia, serif; --body: "Zen Kaku Gothic New", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper: #17161a; --card: #211f24; --ink: #efe9dd; --muted: #a59d90; --line: #36323a; color-scheme: dark; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.5 var(--body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-block: 24px 56px; display: grid; gap: 18px; }
+  h1 { font: 800 clamp(26px, 4.5vw, 40px)/1.1 var(--display); margin: 0; }
+  .top p { margin: 8px 0 0; color: var(--muted); max-width: 70ch; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .bar .sep { flex: none; width: 1px; height: 24px; background: var(--line); margin-inline: 4px; }
+  button { font: 700 13px var(--body); color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; cursor: pointer; min-height: 36px; }
+  button:hover { border-color: var(--seal); }
+  button.on { background: var(--seal); border-color: var(--seal); color: #fff; }
+  button .n { display: inline-grid; place-items: center; width: 18px; height: 18px; margin-right: 6px; border-radius: 50%; border: 1.5px solid var(--seal); color: var(--seal); font: 800 10px var(--display); }
+  button.on .n { border-color: #fff; color: #fff; }
+  /* stage */
+  .stagebox { display: grid; justify-items: center; }
+  .stage { position: relative; width: 100%; height: min(78vh, 920px); overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none;
+    border: 6px solid #1b1a1a; border-radius: 22px; background: #efe8d2; cursor: grab; }
+  .stage.drag { cursor: grabbing; }
+  .stage.phone { width: min(402px, 100%); height: auto; aspect-ratio: 390 / 700; }
+  #map { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+  #map img { display: block; width: 2005.7px; height: 3231.4px; max-width: none; pointer-events: none; -webkit-user-drag: none; }
+  .hud { position: absolute; left: 10px; bottom: 10px; background: rgba(27,26,26,.72); color: #f3ead6; font: 700 12px var(--body); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+  .hint { color: var(--muted); font-size: 13px; margin: 0; }
+  /* legend */
+  .legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+  .lg { text-align: left; border-radius: 14px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; font-weight: 400; min-height: 0; }
+  .lg h3 { font: 800 17px/1.2 var(--display); margin: 0; display: flex; gap: 8px; align-items: center; }
+  .lg h3 .n { margin: 0; flex: none; width: 24px; height: 24px; font-size: 12px; }
+  .lg p { margin: 0; font-size: 13px; color: var(--muted); }
+  .lg .sw { height: 6px; border-radius: 3px; margin-top: 4px; }
+  .route { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; font-size: 14px; }
+  .route b { font-family: var(--display); }
+  .main { display: grid; gap: 18px; align-items: start; }
+  .side { display: grid; gap: 12px; }
+  @media (min-width: 1000px) { .main { grid-template-columns: minmax(0, 1fr) 340px; } .stage { height: min(86vh, 1000px); } .legend { grid-template-columns: 1fr; } .side { max-height: min(86vh, 1000px); overflow: auto; padding-right: 4px; } }
+  @media (max-width: 520px) { .stage { height: 72vh; } }
+</style>
+<div class="wrap">
+  <header class="top">
+    <h1>Greenvale: the whole region</h1>
+    <p>All eight sub-areas stitched onto one shared 36 x 58 tile grid (about 56 px tiles, no grid lines). Drag to pan, pinch or scroll to zoom, double-tap to zoom in. The jump buttons frame a 390 px-wide phone screen (7 tiles across) so you can judge how it feels while playing. Mockup only, nothing here is wired into the game.</p>
+  </header>
+
+  <div class="bar" id="bar">
+    <button id="bFit" class="on">Overview</button>
+    <button id="bCamp"><span class="n">0</span>Camp</button>
+    <span class="sep"></span>
+    <span id="areaBtns" style="display:contents"></span>
+  </div>
+
+  <div class="main"><div>
+  <div class="stagebox">
+    <div class="stage" id="stage" aria-label="Greenvale region map">
+      <div id="map"><img id="img" src="maps/greenvale-region.svg" alt="Greenvale region map" draggable="false"></div>
+      <div class="hud" id="hud">overview</div>
+    </div>
+  </div>
+  <p class="hint">Overview shows the dashed sub-area outlines and name labels; play zoom is the same drawing at 1:1 (390 px = 7 tiles).</p>
+  </div>
+  <div class="side">
+  <div class="route"><b>Route:</b> Camp (south edge) &rarr; 1 Sunny Meadows &rarr; west gate into 2 Old Oak Wood &rarr; north gate into 3 Bamboo Valley &rarr; east gate (stream mouth) into 4 Mirror Lake &rarr; north gate up to 5 Rice Terraces &rarr; west gate into 6 Mossy Ruins &rarr; north gate into 7 Firefly Marsh &rarr; east gate into 8 Misty Highlands &rarr; stone mountain gate at the north edge, the way out to the next region.</div>
+
+  <div class="legend" id="legend"></div>
+  </div></div>
+</div>
+
+<script>
+const MAP_W = 2005.7, MAP_H = 3231.4, T = 390 / 7;
+// centre (in cells) to frame for each phone-zoom jump, plus the legend text
+const AREAS = [
+  { id: 1, name: 'Sunny Meadows', at: [24, 46], col: '#c8dc9a', skulls: '1-2', boss: 'Tanuki', gate: 'Farm gate with a flower arch', note: 'Rolling wildflower grass and a pond; the camp sits at its south edge. Thins into oak trees to the west.' },
+  { id: 2, name: 'Old Oak Wood', at: [8, 45], col: '#a9c47c', skulls: '1-3', boss: 'Tengu', gate: 'Door in a hollow oak trunk', note: 'Dense dappled forest, giant sacred oaks, a torii waypoint, a hidden cache. Bamboo creeps in from the north.' },
+  { id: 3, name: 'Bamboo Valley', at: [9, 33], col: '#bcd68c', skulls: '1-3', boss: 'Jorogumo', gate: 'Thatched hut past the plank bridge', note: 'Bamboo groves on both banks of a stream that runs east into the lake.' },
+  { id: 4, name: 'Mirror Lake', at: [26, 34], col: '#8cc6d2', skulls: '2-4', boss: 'Imugi', gate: 'Boathouse by the north shore', note: 'Large lilied lake with a torii standing in the water and a jetty with a chest at its end.' },
+  { id: 5, name: 'Rice Terraces', at: [27, 19], col: '#c4d98e', skulls: '2-4', boss: 'Bulgasari', gate: 'White storehouse (kura)', note: 'Flooded paddies stepped up the slope behind earth banks, a waterwheel and maples; the lake shore turns into terraces.' },
+  { id: 6, name: 'Mossy Ruins', at: [9, 19.5], col: '#a9c286', skulls: '2-4', boss: 'Gashadokuro', gate: 'Ruined archway above the marsh edge', note: 'Crumbled shrine walls, pillars, glowing lanterns, cedars and pines under low mist.' },
+  { id: 7, name: 'Firefly Marsh', at: [10, 7], col: '#6aa49e', skulls: '3-5', boss: 'Orochi', gate: 'Stilt hut on the east boardwalk', note: 'Murky wetland at dusk: boardwalk islands, willows, lily pads, drifting fireflies.' },
+  { id: 8, name: 'Misty Highlands', at: [26, 7], col: '#d6c47c', skulls: '3-5', boss: 'Raijin', gate: 'Grey stone mountain gate (region exit)', note: 'Ochre rocky pasture, standing stones, cedars and drifting mist below the gate.' },
+];
+const stage = document.getElementById('stage'), mapEl = document.getElementById('map'), hud = document.getElementById('hud');
+let s = 1, x = 0, y = 0, mode = 'fit';
+const stW = () => stage.clientWidth, stH = () => stage.clientHeight;
+const fitScale = () => Math.min(stW() / MAP_W, stH() / MAP_H);
+function apply() { mapEl.style.transform = `translate(${x}px,${y}px) scale(${s})`; hud.textContent = (mode === 'fit' ? 'overview' : 'play zoom') + ' · ' + Math.round(s / (stW() / 390) * 100) + '% of phone scale'; }
+function clamp() { const w = MAP_W * s, h = MAP_H * s, m = 60;
+  x = w + 2 * m <= stW() ? (stW() - w) / 2 : Math.min(m, Math.max(stW() - w - m, x));
+  y = h + 2 * m <= stH() ? (stH() - h) / 2 : Math.min(m, Math.max(stH() - h - m, y)); }
+function setMode(m) { mode = m; stage.classList.toggle('phone', m === 'phone'); document.getElementById('bFit').classList.toggle('on', m === 'fit'); }
+function fit() { setMode('fit'); markBtn(null); s = fitScale(); x = (stW() - MAP_W * s) / 2; y = (stH() - MAP_H * s) / 2; clamp(); apply(); }
+function jump(cx, cy, key) { setMode('phone'); stage.scrollIntoView({ block: 'nearest' }); markBtn(key); s = stW() / 390; x = stW() / 2 - cx * T * s - 0; y = stH() / 2 - cy * T * s; clamp(); apply(); }
+function markBtn(key) { document.querySelectorAll('[data-j]').forEach(b => b.classList.toggle('on', b.dataset.j === String(key))); }
+function zoomAt(px, py, f) { const ns = Math.max(fitScale() * .9, Math.min(4, s * f)); x = px - (px - x) * ns / s; y = py - (py - y) * ns / s; s = ns; if (mode === 'fit' && s > fitScale() * 1.05) setMode('free'); clamp(); apply(); }
+
+// pointer events: one finger pans, two fingers pinch
+const ptrs = new Map(); let last = null;
+stage.addEventListener('pointerdown', e => { stage.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]); stage.classList.add('drag'); last = null; });
+stage.addEventListener('pointermove', e => { if (!ptrs.has(e.pointerId)) return; const rect = stage.getBoundingClientRect(), prev = ptrs.get(e.pointerId); ptrs.set(e.pointerId, [e.clientX, e.clientY]);
+  if (ptrs.size === 1) { x += e.clientX - prev[0]; y += e.clientY - prev[1]; clamp(); apply(); }
+  else if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; const d = Math.hypot(a[0] - b[0], a[1] - b[1]), mx = (a[0] + b[0]) / 2 - rect.left, my = (a[1] + b[1]) / 2 - rect.top;
+    if (last) { x += mx - last.mx; y += my - last.my; zoomAt(mx, my, d / last.d); } last = { d, mx, my }; } });
+const up = e => { ptrs.delete(e.pointerId); last = null; if (!ptrs.size) stage.classList.remove('drag'); };
+stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
+stage.addEventListener('wheel', e => { e.preventDefault(); const r = stage.getBoundingClientRect(); zoomAt(e.clientX - r.left, e.clientY - r.top, Math.exp(-e.deltaY * (e.ctrlKey ? .01 : .0016))); }, { passive: false });
+stage.addEventListener('dblclick', e => { const r = stage.getBoundingClientRect(); zoomAt(e.clientX - r.left, e.clientY - r.top, s < stW() / 390 * .9 ? (stW() / 390) / s : .5); });
+addEventListener('resize', () => { if (mode === 'fit') fit(); else { clamp(); apply(); } });
+
+// buttons + legend
+const btns = document.getElementById('areaBtns'), legend = document.getElementById('legend');
+for (const a of AREAS) {
+  const b = document.createElement('button'); b.dataset.j = a.id; b.innerHTML = `<span class="n">${a.id}</span>${a.name}`; b.onclick = () => jump(a.at[0] + .5, a.at[1] + .5, a.id); btns.appendChild(b);
+  const l = document.createElement('button'); l.className = 'lg'; l.innerHTML = `<h3><span class="n">${a.id}</span>${a.name}</h3><p><b>Boss:</b> ${a.boss} &middot; <b>Skulls:</b> ${a.skulls}</p><p><b>Gate:</b> ${a.gate}</p><p>${a.note}</p><div class="sw" style="background:${a.col}"></div>`;
+  l.onclick = () => { jump(a.at[0] + .5, a.at[1] + .5, a.id); }; legend.appendChild(l);
+}
+document.getElementById('bFit').onclick = fit;
+document.getElementById('bCamp').onclick = () => jump(22.5, 50.5, 'camp');
+document.getElementById('bCamp').dataset.j = 'camp';
+const img = document.getElementById('img');
+fit();
+const h = location.hash.match(/^#(\d)$/); if (h && AREAS[+h[1] - 1]) { const a = AREAS[+h[1] - 1]; jump(a.at[0] + .5, a.at[1] + .5, a.id); }
+</script>
