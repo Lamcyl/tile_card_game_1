@@ -110,12 +110,21 @@
   // Boss and elite HP is the level's base enemy HP times the def's multiplier times this per-level factor (elites 75%), tuned with
   // tools/sim-runs.js so that the first boss falls for a fresh account about one run in four and Frostveil opens around run 7-18.
   const fightHp = (L) => (L <= 6 ? 1.7 : L <= 7 ? 2.1 : L <= 9 ? 2.5 : L <= 12 ? 2.4 : 2.1);
+  // WP18 pacing levers (boss and elite fights): per-band multipliers on top of fightHp / the base ATK, bands = Lv<=4, 5-6, 7-9, 10-12, 13+.
+  // They are what stretches the campaign (Greenvale cleared about run 3-6, Frostveil / Ember Peaks about run 15-25, see docs/IMPLEMENTATION_PLAN.md WP18)
+  // and are checked against the median-account reference of `node tools/validate-gen.js bosses`. Per-boss fine tuning: `adj: [hp, atk]` in boss-defs.js.
+  // Experiments: TUNE='{"hp":[...5 numbers],"atk":[...5 numbers]}' (Node tools only) multiplies on top.
+  const BOSS_BAND = { hp: [1.0, 1.9, 1.8, 1.55, 1.4], atk: [1, 1.3, 1.4, 1.4, 1.4] };
+  const TUNE = (typeof process !== 'undefined' && process.env && process.env.TUNE) ? JSON.parse(process.env.TUNE) : {};
+  const band = (L) => (L <= 4 ? 0 : L <= 6 ? 1 : L <= 9 ? 2 : L <= 12 ? 3 : 4);
+  const tune = (k, L) => BOSS_BAND[k][band(L)] * (TUNE[k] ? TUNE[k][band(L)] : 1);
   // Chars as in the templates plus B (the boss), G (guard of a 'guard' boss) and H (a head that regrows once).
   function fromDef(node, def, R, isBoss) {
     const L = node.level, sub = node.sub, E = root.Engine;
     const ramp = L > 7 ? 1 + RAMP_HP * (L - 7) : 1, // bosses and elites keep the full ramp (design 24.1)
        rampAtk = L > 7 ? Math.floor((L - 7) * RAMP_ATK) : 0;
-    const unitHp = (2.2 + L * 0.95) * ramp * fightHp(L) * (isBoss ? 1 : 0.75), unitAtk = 1.5 + L * 0.42 + rampAtk;
+    const adj = def.adj || [1, 1];
+    const unitHp = (2.2 + L * 0.95) * ramp * fightHp(L) * tune('hp', L) * adj[0] * (isBoss ? 1 : 0.75), unitAtk = (1.5 + L * 0.42 + rampAtk) * tune('atk', L) * adj[1];
     const enemies = [];
     [[0, def.back], [1, def.front]].forEach(([row, str]) => {
       for (let i = 0; i < 5; i++) {
@@ -193,7 +202,7 @@
   // Souls for winning a battle at a node (before the Fortune bonus).
   // Stage rating (design 11): 3 stars = no damage, 2 = at most 3 damage, 1 = any clear.
   const STAR_SOULS = [1, 1, 1.25, 1.5];
-  const SOUL_SCALE = 0.36, BOSS_BONUS_SOULS = 11, CACHE_SOULS = 5; // first boss kill bonus and supply cache Souls (WP18: about 45% of the old 0.8 / 25 / 10)
+  const SOUL_SCALE = 0.32, BOSS_BONUS_SOULS = 11, CACHE_SOULS = 5; // first boss kill bonus and supply cache Souls (WP18: about 45% of the old 0.8 / 25 / 10)
   const starsFor = (damageTaken) => (damageTaken <= 0 ? 3 : damageTaken <= 3 ? 2 : 1);
   function soulsFor(node, stars, opts) {
     node = scaled(node, opts);

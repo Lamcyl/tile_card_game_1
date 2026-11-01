@@ -79,6 +79,8 @@
   const regionOf = (n) => World.SUB_BY[n.sub].regionIndex;
   const price = (base, n) => Math.round(base * (1 + 0.2 * regionOf(n)));
   const goldNow = () => (run() ? run().gold || 0 : 0);
+  const gopts = () => P.genOpts(save);                 // WP18 Heat / Descend options for Gen (enemy tweaks, level shift, reward multiplier)
+  const heal = (n) => P.healAmt(save, n);              // WP18 Heat "Bitter Herbs": healing is halved
 
   // ---------- HUD ----------
   function renderHud() {
@@ -90,6 +92,7 @@
         (r.keys > 0 ? '<div class="hud-chip keys" title="Keys: dropped by elites and bosses. Each opens one hidden Sealed Cache.">🗝 ' + r.keys + '</div>' : '') +
         '<div class="hud-chip" title="Souls carried on this run">✦ ' + r.souls + '</div>' +
         '<div class="hud-chip gold" title="Gold: earned in fights, spent in Shops and events. Lost when the run ends.">🪙 ' + (r.gold || 0) + '</div>' +
+        (P.heatPoints(save) || P.descendOf(save) ? '<div class="hud-chip heat" title="' + esc(heatSummary()) + '">🔥 ' + P.heatPoints(save) + (P.descendOf(save) ? ' · ▼' + P.descendOf(save) : '') + '</div>' : '') +
         (r.relics && r.relics.length ? '<div class="hud-chip relics" title="Relics on this run">' + relicRow(r.relics) + '</div>' : '');
     } else {
       $('#hud').innerHTML =
@@ -152,17 +155,17 @@
     let body = '<div class="sheet-head"><div><h2>' + esc(nodeTitle(n)) + '</h2><p class="muted">' + esc(sub.name) + ' · ' + esc(sub.region) + '</p></div>' +
       (isFight || n.type === 'treasure' && n.guarded ? '<div class="lv-box">' + skulls(n.level) + '<span class="lv" style="background:' + lvColor(n.level) + '">Lv' + n.level + '</span></div>' : '') + '</div>';
     if (isFight) {
-      const preview = Gen.generateBattle(guard || n, r ? r.seed : 'preview');
+      const preview = Gen.generateBattle(guard || n, r ? r.seed : 'preview', gopts());
       const unseen = !guard && n.type !== 'boss' && !isSeen(n);
       const icons = unseen ? '<span class="enemy-chip unknown" title="Not scouted yet">?</span>'.repeat(3) : preview.enemies.map((e) => enemyChip(e.type)).join('');
-      const souls = Math.round(Gen.soulsFor(n) * P.soulRate(save));
+      const souls = Math.round(Gen.soulsFor(n, 1, gopts()) * P.soulRate(save));
       body += '<p class="enemies">' + icons + '</p>';
       if (unseen) body += '<p class="muted">🔭 Not scouted yet: you see the danger, not what lurks here. Walk closer' + (r ? ', send a scout for 🪙 ' + price(World.SCOUT_GOLD, n) : '') + ', or raise Scouting at Camp.</p>';
       else if (preview.intro) body += '<p class="gimmick-note"><b>' + esc(preview.intro.name) + (preview.intro.rule && preview.intro.rule !== 'Elite' ? ' · ' + esc((preview.intro.badge ? preview.intro.badge + ' ' : '') + preview.intro.rule) : '') + '.</b> ' + esc(preview.intro.text) + '</p>';
       if (guard) body += '<p class="muted">A guard stands over the chest. Beat it to open the cache: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + Gen.GUARD_GOLD + ' and a reward of your choice, plus the usual fight Souls.</p>';
       else body += '<p class="muted">' + (n.type === 'boss'
         ? (save.bossesBeaten.includes(n.sub) ? 'Already defeated once. Fight again for Souls.' : 'Defeat it to reveal ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + (sub.unlocks.length ? '.' : '. This is a final boss.'))
-        : n.type === 'elite' ? 'A tougher fight that pays double Souls.' : 'A normal fight.') + ' Reward: ✦ ' + souls + ', up to ✦ ' + Math.round(Gen.soulsFor(n, 3) * P.soulRate(save)) + ' with ★★★ (no damage, plus a bonus item roll).</p>';
+        : n.type === 'elite' ? 'A tougher fight that pays double Souls.' : 'A normal fight.') + ' Reward: ✦ ' + souls + ', up to ✦ ' + Math.round(Gen.soulsFor(n, 3, gopts()) * P.soulRate(save)) + ' with ★★★ (no damage, plus a bonus item roll).</p>';
       body += '<p>' + supplyNote(guard || n) + '</p>';
       if (!guard && !unseen) body += '<div class="drops"><h4>Possible drops <small>item level ' + n.level + (n.type === 'elite' ? ' · an elite always drops something' : '') + '</small></h4>' + Items.tableFor(n).map((e) => dropRow(e, n)).join('') + '</div>';
       if (n.type === 'boss') body += tokenBlock(n);
@@ -239,8 +242,33 @@
     return '<svg class="camp-scene" viewBox="0 0 360 96" role="img" aria-label="Your camp. It grows as you buy Camp upgrades.">' + g.join('') + '</svg>';
   }
 
+  // ---------- Heat and Descend (WP18) ----------
+  const heatSummary = () => 'Heat ' + P.heatPoints(save) + ': ' + save.heat.map((id) => P.HEAT_BY[id].name).join(', ') + (P.descendOf(save) ? ' · Descend ' + P.descendOf(save) : '') + ' · rewards x' + P.rewardMult(save).toFixed(2);
+  function heatTab() {
+    if (!P.heatUnlocked(save)) {
+      return '<div class="heat-lock"><svg viewBox="0 0 120 70" aria-hidden="true"><path d="M20 60 Q60 54 100 60" stroke="#6b5f52" stroke-width="2" fill="none"/><path d="M60 56 C46 44 58 36 54 22 C66 30 74 42 66 52 C64 55 62 56 60 56Z" fill="#c9bfae" stroke="#6b5f52" stroke-width="1.6"/></svg>' +
+        '<h4>The braziers are cold</h4><p class="muted">Defeat a final boss, Morana at the Glacier Throne or Zmey Gorynych at the Magma Caldera, to light them. Then you may take on <b>Heat</b> modifiers for richer rewards, and <b>Descend</b> into a harder copy of the whole map.</p></div>';
+    }
+    const pts = P.heatPoints(save), d = P.descendOf(save), dmax = P.descendMax(save), busyRun = !!run();
+    let html = '<div class="heat-head"><div class="heat-flame ' + (pts ? 'lit' : '') + '" aria-hidden="true"><svg viewBox="0 0 40 48"><path d="M20 46 C8 40 6 28 14 20 C14 26 18 28 20 26 C18 18 24 10 28 2 C34 14 38 24 34 34 C32 40 26 44 20 46Z" fill="' + (pts ? '#e8772e' : '#cfc6b4') + '" stroke="#2b2a35" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 44 C15 40 16 34 20 30 C24 34 25 40 20 44Z" fill="' + (pts ? '#f2c94c' : '#e6dfd0') + '"/></svg></div>' +
+      '<div class="grow"><b>Heat ' + pts + '</b> <small class="muted">/ ' + P.HEAT_MODS.reduce((n, m) => n + m.pts, 0) + '</small><div class="muted small">Rewards ×' + P.rewardMult(save).toFixed(2) + ' (Souls and Gold) · drops +' + P.itemLvBonus(save) + ' item levels</div></div></div>';
+    if (busyRun) html += '<p class="muted small">Heat can only be changed at Camp, between expeditions.</p>';
+    html += '<h4 class="track-h">Heat modifiers</h4>';
+    for (const m of P.HEAT_MODS) {
+      const on = P.heatOn(save, m.id);
+      html += '<div class="item heat-mod' + (on ? ' on' : '') + '"><span class="heat-pts" aria-hidden="true">' + m.pts + '</span><div class="grow"><b>' + esc(m.name) + '</b><span class="muted">' + esc(m.text) + '</span></div>' +
+        '<button class="heat-switch" role="switch" aria-checked="' + on + '" aria-label="' + esc(m.name) + '" data-heat="' + m.id + '"' + (busyRun ? ' disabled' : '') + '><i></i></button></div>';
+    }
+    if (P.heatOn(save, 'cp') && P.squadProblem(save)) html += '<p class="heat-warn">⚠ ' + esc(P.squadProblem(save)) + ' Trim the squad in the Squad tab.</p>';
+    html += '<h4 class="track-h">Descend</h4><div class="item descend"><span class="ic">▼</span><div class="grow"><b>Descend ' + d + (dmax < P.MAX_DESCEND ? '' : '') + ' <small>/ ' + P.MAX_DESCEND + '</small></b><span class="muted">' +
+      (d ? 'Every spot is ' + (Gen.DESCEND_LV * d) + ' levels harder; rewards ×' + (1 + 0.4 * d).toFixed(1) + ', drops +' + (2 * d) + ' item levels.' : 'The normal map. Each step makes every spot ' + Gen.DESCEND_LV + ' levels harder for ×1.4 more rewards and +2 item levels.') +
+      (dmax < P.MAX_DESCEND ? ' Beat a final boss on Descend ' + dmax + ' to open the next step.' : '') + '</span></div>' +
+      '<div class="stepper"><button data-descend="-1" aria-label="Descend less"' + (d <= 0 || busyRun ? ' disabled' : '') + '>−</button><b>' + d + '</b><button data-descend="1" aria-label="Descend more"' + (d >= dmax || busyRun ? ' disabled' : '') + '>+</button></div></div>';
+    return html;
+  }
+
   function campSheet() {
-    const tabs = ['upgrades', 'squad', 'recruit', 'summon', 'gear'];
+    const tabs = ['upgrades', 'squad', 'recruit', 'summon', 'gear', 'heat'];
     let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad (Command Points, one supporter minimum), then set out with 🎒 ' + P.startSupplies(save) + ' Supplies.</p></div>' +
       '<button class="primary" data-act="start">Set out ➜</button></div>';
     if (save.waypoints.length) {
@@ -253,7 +281,7 @@
     if (journalView) return html + jbtn + bar + journalTab() + toolsRow();
     html += campScene(save) + heroPicker() + bar + jbtn;
     html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
-      { upgrades: 'Camp', squad: 'Squad ' + P.squadCp(save) + '/' + P.commandCap(save), recruit: 'Recruit', summon: 'Summon', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS }[t] + '</button>').join('') + '</div>';
+      { upgrades: 'Camp', squad: 'Squad ' + P.squadCp(save) + '/' + P.commandCap(save), recruit: 'Recruit', summon: 'Summon', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS, heat: '🔥' + (P.heatUnlocked(save) ? (P.heatPoints(save) || '') : '🔒') }[t] + '</button>').join('') + '</div>';
     html += '<div class="list">';
     if (campTab === 'upgrades') {
       const GROUPS = [['Body', ['vitality', 'ward', 'revive', 'bulwark']], ['Arms', ['command', 'drill']], ['Fortune', ['fortune', 'purse', 'provisions', 'choice']], ['Exploring', ['scouting', 'board']]];
@@ -278,6 +306,8 @@
         html += '<div class="item unit ' + rarClassOf(id) + '">' + unitCell(id, unitMeta(id) + '<span class="muted">' + statLine(card) + '</span>' + unitPerk(id)) +
           '<button class="' + (inSquad ? 'on' : blocked ? 'cant' : '') + '" data-squad="' + id + '" title="' + esc(blocked || '') + '">' + (inSquad ? 'In squad' : 'Add') + '</button></div>';
       }
+    } else if (campTab === 'heat') {
+      html += heatTab();
     } else if (campTab === 'gear') {
       html += gearTab();
     } else if (campTab === 'recruit') {
@@ -525,7 +555,7 @@
     selected = null; confirmReturn = false; journalView = null; persist();
     WorldMap.placeToken(startId);
     if (startId === 'camp') { const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]); } else WorldMap.focus(World.byId[startId].x, World.byId[startId].y);
-    toast('Expedition started' + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Supplies and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
+    toast('Expedition started' + (P.heatPoints(save) || P.descendOf(save) ? ' (Heat ' + P.heatPoints(save) + (P.descendOf(save) ? ', Descend ' + P.descendOf(save) : '') + ')' : '') + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Supplies and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
     renderAll();
   }
 
@@ -550,7 +580,7 @@
     }
     if (n.type === 'secret') {
       r.keys -= 1; r.cleared.push(id); const first = !save.secretsOpened.includes(id), gold = Gen.CACHE_GOLD + 2 * regionOf(n);
-      r.souls += Gen.CACHE_SOULS; r.gold = (r.gold || 0) + gold; r.hp = Math.min(r.maxHp, r.hp + 4);
+      r.souls += Gen.CACHE_SOULS; r.gold = (r.gold || 0) + gold; r.hp = Math.min(r.maxHp, r.hp + heal(4));
       if (first) { save.secretsOpened.push(id); P.earn(save, 'crystals', 1); r.crystalsNow = (r.crystalsNow || 0) + 1; } else P.earn(save, 'dust', 2);
       persist(); renderAll();
       modal('<h3>Sealed Cache opened</h3><p>The cord parts. Inside: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + gold + ', and a restorative draught (+4 HP). ' + (first ? '💎 1 Crystal, found for the first time!' : '⚒ 2 Dust.') + ' This cost no Supplies.</p><div class="row"><button class="primary grow" data-act="ok">Good</button></div>');
@@ -565,7 +595,7 @@
       offerReward('Supply cache', 'You found ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + gold + ' and some supplies. This cost no Supplies.', n); return;
     }
     if (n.guarded) n = guardOf(n); // a guarded cache: beat its guard first (battleOver opens the chest)
-    const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: P.rulesFor(save, r) }, P.heroStage(save), Gen.generateBattle(n, r.seed));
+    const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: P.rulesFor(save, r) }, P.heroStage(save), Gen.generateBattle(n, r.seed, gopts()));
     WorldMap.setActive(false);
     document.body.classList.add('in-battle');
     Battle.start({
@@ -607,19 +637,19 @@
     if (state.reviveUsed) r.reviveUsed = (Number(r.reviveUsed) || 0) + state.reviveUsed; // revives spent (Phoenix Archer, Second Wind): once per run each
     if (state.status !== 'cleared') { Journal.check(save); persist(); endRun(true); return; }
     stars = stars || 1;
-    const gained = Math.round(Gen.soulsFor(n, stars) * P.soulRate(save));
+    const gained = Math.round(Gen.soulsFor(n, stars, gopts()) * P.soulRate(save));
     P.addXp(save, save.squad, n.type === 'boss' ? 2 : 1); // WP11 unit mastery
-    const goldGain = Gen.goldFor(n, stars); r.gold = (r.gold || 0) + goldGain;
+    const goldGain = Gen.goldFor(n, stars, gopts()); r.gold = (r.gold || 0) + goldGain;
     r.souls += gained; r.wins += 1; r.maxLevel = Math.max(r.maxLevel, n.level); r.cleared.push(n.id);
     // Items: rolled before the boss is marked as beaten, so its first kill always drops its unique item.
-    let drop = Items.grantDrop(save, n, r.seed);
+    let drop = Items.grantDrop(save, n, r.seed, { lvBonus: P.itemLvBonus(save) });
     if (!drop && save.runs === 0 && !r.found.length && r.wins === 2) drop = Items.guaranteedDrop(save, n); // design 24.3: an item in the first two battles
     const item = drop && drop.item ? drop : null, equipped = autoEquip(item);
     if (item && item.isNew) r.found.push(item.id);
     // A 3-star clear earns one extra loot roll (design 11); a duplicate turns into Dust.
     let bonusItem = null, bonusEquipped = false;
     if (stars === 3) {
-      const b = Items.grantDrop(save, n, r.seed + ':star', { bonus: true });
+      const b = Items.grantDrop(save, n, r.seed + ':star', { bonus: true, lvBonus: P.itemLvBonus(save) });
       if (b && b.item) { bonusItem = b; if (b.isNew) r.found.push(b.id); bonusEquipped = autoEquip(b); }
     }
     const dustLine = drop && drop.consolation ? '<p class="supply-line">Elite spoils: ⚒ ' + drop.dust + ' Dust (you own everything it drops).</p>' : '';
@@ -642,6 +672,8 @@
       const target = sub.unlocks.length ? World.SUB_BY[sub.unlocks[0]] : sub;
       setTimeout(() => WorldMap.focus(target.entry[0], target.entry[1]), 300);
     }
+    if (boss) { const was = save.descendDone; P.noteBoss(save, n.sub); if (P.FINAL_BOSSES.includes(n.sub) && P.descendOf(save) > 0 && save.descendDone > was) text += ' Descend ' + P.descendOf(save) + ' conquered: Descend ' + Math.min(P.MAX_DESCEND, P.descendOf(save) + 1) + ' is open at Camp.'; }
+    if (boss && P.FINAL_BOSSES.includes(n.sub) && !save.heatSeen) { save.heatSeen = true; text += ' 🔥 The Heat braziers are lit at Camp: Heat modifiers and Descend are open.'; }
     if (n.guardFor) { // the guard of a cache has fallen: the chest opens
       const gg = Gen.GUARD_GOLD + 3 * regionOf(n); r.souls += Gen.CACHE_SOULS; r.gold += gg;
       title = 'The guard falls ' + '★'.repeat(stars); text += ' The cache is yours: ✦ ' + Gen.CACHE_SOULS + ' and 🪙 ' + gg + ' more.';
@@ -700,7 +732,7 @@
       if (ev.target.closest('[data-act="close"]')) { closeModal(); return; }
       const b = ev.target.closest('[data-reward]'); if (!b) return;
       const p = picks[Number(b.dataset.reward)];
-      if (p.kind === 'heal') { const before = r.hp; r.hp = Math.min(r.maxHp, r.hp + 8); toast('The spring restores ' + (r.hp - before) + ' HP.'); }
+      if (p.kind === 'heal') { const before = r.hp; r.hp = Math.min(r.maxHp, r.hp + heal(8)); toast('The spring restores ' + (r.hp - before) + ' HP.'); }
       else { applyUpgrade(p); toast(p.label.split(' · ')[0] + ' for ' + unitView(p.card).name + '.'); }
       r.cleared.push(n.id); persist(); closeModal(); renderAll();
     };
@@ -731,7 +763,7 @@
       const i = Number(b.dataset.reward), p = st.stock[i];
       if (st.sold.includes(i) || (r.gold || 0) < p.price) return;
       r.gold -= p.price; st.sold.push(i);
-      if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + 8);
+      if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + heal(8));
       else if (p.kind === 'tonic') { r.maxHp += 2; r.hp += 2; }
       else if (p.kind === 'relic') { if (!r.relics.includes(p.id)) r.relics.push(p.id); }
       else applyUpgrade(p);
@@ -756,7 +788,7 @@
       if (fx.gold) { r.gold = Math.max(0, (r.gold || 0) + fx.gold); }
       if (fx.souls) r.souls += fx.souls;
       if (fx.maxhp) { r.maxHp += fx.maxhp; r.hp += fx.maxhp; }
-      if (fx.hp) r.hp = Math.max(1, Math.min(r.maxHp, r.hp + fx.hp));
+      if (fx.hp) r.hp = Math.max(1, Math.min(r.maxHp, r.hp + (fx.hp > 0 ? heal(fx.hp) : fx.hp)));
       const ap = () => { const picks = takeFrom(upgradePool(n, R).filter((p) => fx.atk ? p.kind === 'atk' : true), R, 1); if (picks[0]) { applyUpgrade(picks[0]); notes.push(picks[0].label); } };
       for (let k = 0; k < (fx.atk || 0) + (fx.up || 0); k++) ap();
       if (fx.relic) { const rel = giveRelic(R); notes.push(rel ? rel.name + ': ' + rel.text : 'You have no room for another relic.'); }
@@ -784,7 +816,7 @@
       if (ev.target.closest('[data-reroll-reward]')) { r.rerolls -= 1; persist(); offerReward(title, text, node, extra, (rerolled || 0) + 1); return; }
       const b = ev.target.closest('[data-reward]'); if (!b) return;
       const p = picks[Number(b.dataset.reward)];
-      if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + 5);
+      if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + heal(5));
       else if (p.kind === 'relic') { (r.relics || (r.relics = [])).push(p.id); toast(Relics.BY_ID[p.id].name + ' joins the expedition.'); }
       else { const m = r.mods[p.id] || (r.mods[p.id] = {}); m[p.kind] = (m[p.kind] || 0) + 1; }
       persist(); closeModal(); renderAll();
@@ -863,6 +895,8 @@
       if (!P.heroUnlocked(save, h.id)) { toast(h.name + ' is locked: ' + h.lock + '.'); return; }
       save.hero = h.id; persist(); toast(h.name + ' will lead the next expedition.'); renderAll(); return;
     }
+    if (b.dataset.heat) { if (!run() && P.toggleHeat(save, b.dataset.heat)) { persist(); renderAll(); } return; }
+    if (b.dataset.descend) { if (!run()) { P.setDescend(save, P.descendOf(save) + Number(b.dataset.descend)); persist(); renderAll(); } return; }
     if (b.dataset.start) { save.startAt = b.dataset.start; persist(); toast(save.startAt === 'camp' ? 'Runs start at Camp.' : 'Runs start at the ' + World.SUB_BY[save.startAt].name + ' Wayshrine.'); renderAll(); return; }
     if (b.dataset.buy) {
       const cost = P.upgradeCost(save, b.dataset.buy);

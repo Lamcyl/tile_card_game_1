@@ -140,6 +140,9 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
       loadout: { weapon: null, armor: null, banner: null, ring1: null, ring2: null }, // WP8: equipped item id per slot
       luck: {},                 // WP8 bad-luck protection: wins without the unique item (node id) / boss Legendary ('L:' + node id)
       tokens: {},               // WP8 boss tokens per boss node id (Items.TOKENS_NEEDED buys a Legendary)
+      heat: [],                 // WP18: active Heat modifier ids (HEAT_MODS); only usable after a final boss has fallen
+      descend: 0,               // WP18: chosen Descend level (0 = normal map); each step raises every spot by Gen.DESCEND_LV levels
+      descendDone: -1,          // WP18: highest Descend level at which a final boss has fallen (-1 = none; unlocks the next step)
       run: null,
     };
   }
@@ -155,6 +158,8 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
         s.unlocked = s.unlocked.filter((id) => root.World && root.World.SUB_BY[id]);
         if (!s.unlocked.length) s.unlocked = ['meadow'];
         if (!HERO_BY[s.hero] || !heroUnlocked(s, s.hero)) s.hero = 'marshal';
+        s.heat = heatUnlocked(s) ? (s.heat || []).filter((id) => HEAT_BY[id]) : []; // WP18
+        s.descend = Math.max(0, Math.min(descendMax(s), Number(s.descend) || 0));
         s.squad = s.squad.filter((id) => ROSTER_BY[id] && s.owned.includes(id));
         fitSquad(s);       // WP10: old saves counted slots; Rare units now cost more Command Points
         if (root.Journal) root.Journal.normalize(s); // WP17: old saves have no journal
@@ -183,11 +188,11 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
     return true;
   }
   // Crystals for the first defeat of a sub-area boss (3 in region 1, +1 per region).
-  const bossCrystals = (regionIndex) => 3 + (regionIndex || 0);
+  const bossCrystals = (regionIndex) => 2 + (regionIndex || 0); // WP18: was 3 + region (gacha power arrived too early)
 
 
   // ---------- Gacha, duplicate stars and mastery (WP11) ----------
-  const PULL_COST = 3, PULL10_COST = 27;          // Crystals
+  const PULL_COST = 4, PULL10_COST = 36;          // Crystals (WP18: was 3 / 27)
   const ODDS = { common: 62, rare: 28, epic: 9, legendary: 1 }; // percent per pull
   const PITY_AT = 30;                              // the 30th pull since the last Epic (or better) is an Epic
   const MAX_STARS = 5;
@@ -268,8 +273,45 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
   }
 
   const level = (s, id) => s.upgrades[id] || 0;
+  // ---------- Heat and Descend (WP18, design 15) ----------
+  // After a final boss (Glacier Throne or Magma Caldera) has fallen the Camp offers Heat modifiers (each adds Heat points; Heat raises rewards and item level)
+  // and Descend (new game plus: the whole map is DESCEND_LV levels harder per step, rewards x(1 + 0.4 per step)).
+  // Engine / Gen hooks: hp, armor -> Gen.generateBattle opts; rage, heal, col -> engine rules (rulesFor); cp -> commandCap.
+  const HEAT_MODS = [
+    { id: 'hp',    name: 'Tough Hides',      pts: 1, text: 'Every enemy has +1 HP.' },
+    { id: 'rage',  name: 'Fury',             pts: 2, text: 'Enrage gives +2 ATK instead of +1.' },
+    { id: 'heal',  name: 'Bitter Herbs',     pts: 1, text: 'All your healing is 50% weaker.' },
+    { id: 'armor', name: 'Lacquered Plates', pts: 3, text: 'Every enemy starts with 1 armor.' },
+    { id: 'cp',    name: 'Thin Ranks',       pts: 2, text: 'Command Point cap -2.' },
+    { id: 'col',   name: 'Flooded Lane',     pts: 4, text: 'The board loses its right-hand column.' },
+  ];
+  const HEAT_BY = Object.fromEntries(HEAT_MODS.map((m) => [m.id, m]));
+  const FINAL_BOSSES = ['glacier', 'caldera'];   // sub-areas whose boss is a final boss
+  const MAX_DESCEND = 5, HEAT_REWARD = 0.08, DESCEND_REWARD = 0.4;
+  const heatUnlocked = (s) => (s.bossesBeaten || []).some((b) => FINAL_BOSSES.includes(b));
+  const descendMax = (s) => (heatUnlocked(s) ? Math.min(MAX_DESCEND, Math.max(0, (s.descendDone === undefined ? -1 : s.descendDone)) + 1) : 0);
+  const heatList = (s) => (s.heat || []).filter((id) => HEAT_BY[id]);
+  const heatPoints = (s) => heatList(s).reduce((n, id) => n + HEAT_BY[id].pts, 0);
+  const heatOn = (s, id) => heatList(s).includes(id);
+  const descendOf = (s) => Math.max(0, Number(s.descend) || 0);
+  const rewardMult = (s) => (1 + HEAT_REWARD * heatPoints(s)) * (1 + DESCEND_REWARD * descendOf(s));
+  const itemLvBonus = (s) => Math.floor(heatPoints(s) / 3) + 2 * descendOf(s); // item level bonus of drops (the node level itself is only raised for enemies)
+  // The options Gen / the sim need for a run under the current Heat and Descend settings.
+  const genOpts = (s) => ({ heat: heatList(s), descend: descendOf(s), mult: rewardMult(s), lv: itemLvBonus(s) });
+  function toggleHeat(s, id) {
+    if (!heatUnlocked(s) || !HEAT_BY[id]) return false;
+    s.heat = heatOn(s, id) ? heatList(s).filter((x) => x !== id) : heatList(s).concat(id);
+    return true;
+  }
+  function setDescend(s, n) { s.descend = Math.max(0, Math.min(descendMax(s), Math.floor(n))); return s.descend; }
+  // Called when a boss falls: a final boss at the current Descend level unlocks the next level.
+  function noteBoss(s, sub) { if (FINAL_BOSSES.includes(sub)) s.descendDone = Math.max(s.descendDone === undefined ? -1 : s.descendDone, descendOf(s)); }
+  // The hero's healing under the Heat "Bitter Herbs" modifier (springs, shops, rewards; the engine halves Lifebloom and Ration itself).
+  const healAmt = (s, n) => (heatOn(s, 'heal') ? Math.floor(n / 2) : n);
+
   // ---------- Squad: Command Points, the supporter rule, trait bonuses ----------
-  const commandCap = (s) => BASE_CP + level(s, 'command');
+  const capBase = (s) => BASE_CP + level(s, 'command');
+  const commandCap = (s) => Math.max(2, capBase(s) - (heatOn(s, 'cp') ? 2 : 0));
   const squadCp = (s, ids) => (ids || s.squad).reduce((n, id) => n + UNIT_CP(id), 0);
   const roleOf = (id) => Engine.CARD_TYPES[ROSTER_BY[id].type].role;
   // Why this squad may not set out (a message), or null. Needs an attacker and a supporter, within the Command Point cap.
@@ -287,7 +329,7 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
   }
   // Drops units from the back of the squad until it fits the cap (old saves, fewer Command levels).
   function fitSquad(s) {
-    while (s.squad.length && squadCp(s) > commandCap(s)) s.squad.pop();
+    while (s.squad.length && squadCp(s) > capBase(s)) s.squad.pop(); // Heat's cap penalty never removes units
     return s;
   }
   // Trait counts of a squad, and the bonuses that are active: [{ trait, count, step, text }] for every reached step.
@@ -319,6 +361,9 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
     if (level(s, 'ward')) out.barrier = (out.barrier || 0) + level(s, 'ward');
     if (level(s, 'revive')) out.revive = (out.revive || 0) + 1;
     if (level(s, 'board')) out.deepRow = 1;
+    if (heatOn(s, 'rage')) out.enrageMore = 1; // WP18 Heat
+    if (heatOn(s, 'heal')) out.healHalf = 1;
+    if (heatOn(s, 'col')) out.lostCol = 1;
     if (out.revive) { out.revive -= Math.min(out.revive, Number(run && run.reviveUsed) || 0); if (!out.revive) delete out.revive; } // revives already spent this run
     // WP12: relics picked on this run (run.relics, ids from relics.js).
     if (run && run.relics && run.relics.length) { const R = typeof window !== 'undefined' ? window.Relics : require('./relics.js'); add(R.rules(run.relics)); }
@@ -390,6 +435,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
     starsOf, masteryOf, masteryLevel, growthFx, addXp, poolFor, grantUnit, pullOnce, pull, officeTrade, recruitable,
     CURRENCIES, balance, canSpend, earn, spend, spendAll, bossCrystals,
     HEROES, HERO_BY, heroUnlocked, heroOf, heroStage,
+    HEAT_MODS, HEAT_BY, FINAL_BOSSES, MAX_DESCEND, heatUnlocked, descendMax, heatPoints, heatOn, descendOf, rewardMult, itemLvBonus, genOpts, toggleHeat, setDescend, noteBoss, healAmt, capBase,
     commandCap, squadCp, squadProblem, canAdd, fitSquad, activeTraits, traitCounts, traitFx, rulesFor, unitCp: UNIT_CP,
     freshSave, load, save, reset, level, scoutLevel, startGold, rewardChoices, rewardRerolls, maxHp, slots, soulRate, startSupplies, upgradeCost, cheapestUpgrade, recruitAvailable, buildArmy,
   };

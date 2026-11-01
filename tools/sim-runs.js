@@ -5,6 +5,7 @@
 //        node tools/sim-runs.js 1 campaign [maxRuns]   consecutive runs with greedy Camp shopping
 'use strict';
 // SEED=<n> makes every run reproducible (Math.random and the gacha rng are seeded). TRACE=1 prints the Camp state after each campaign run, DEBUG=1 every battle;
+// HEAT=<hp,rage,heal,armor,cp,col> and DESCEND=<n> switch Heat / Descend on (WP18; 'endgame' mode plays a maxed account with them).
 // HERO=<marshal|pyromancer|quartermaster|sentinel|rotate> chooses the hero (default marshal; profiles ignore unlocks); NOABILITY=1 never uses the ability.
 // NOITEMS / NOGACHA / NORULES / NORELICS switch a power source off (ablation).
 if (process.env.SEED) { let a = Number(process.env.SEED) >>> 0; Math.random = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
@@ -19,10 +20,9 @@ const Relics = require('../prototype/js/relics.js');
 const Events = require('../prototype/js/events.js');
 
 const tilesCache = {};
-function tilesFor(state) { // WP16: the Board track adds a 4th player row (rule deepRow)
-  const rows = Engine.playerRowsFor(state.rules), id = rows.join();
-  if (!tilesCache[id]) { tilesCache[id] = []; for (const r of rows) for (let c = 0; c < Engine.COLS; c++) tilesCache[id].push(Engine.key(r, c)); }
-  return tilesCache[id];
+function tilesFor(state) { // WP16: the Board track adds a 4th player row (rule deepRow); WP18 Heat may close the right-hand column (rule lostCol)
+  const id = Engine.playerRowsFor(state.rules).join() + ':' + Engine.lostColsFor(state.rules);
+  return tilesCache[id] || (tilesCache[id] = Engine.playerTilesFor(state.rules));
 }
 
 function score(state, p, army, baseHp) {
@@ -71,8 +71,8 @@ function planTurn(st, army, p0) {
   }
   return best && best.v + 1.5 < v0 ? best : { st, placement: p0 };
 }
-function fight(node, hp, maxHp, army, seed, rules, heroStage) {
-  const stage = Object.assign({ heroHp: hp, heroMaxHp: maxHp, rules: rules || {} }, heroStage || {}, Gen.generateBattle(node, seed));
+function fight(node, hp, maxHp, army, seed, rules, heroStage, gopts) {
+  const stage = Object.assign({ heroHp: hp, heroMaxHp: maxHp, rules: rules || {} }, heroStage || {}, Gen.generateBattle(node, seed, gopts));
   let st = Engine.createState(stage);
   while (st.status === 'playing' && st.turn <= 6) {
     const plan = planTurn(st, army, bestPlacement(st, army));
@@ -90,28 +90,29 @@ function playRun(save0) {
   const save = JSON.parse(JSON.stringify(save0));
   const seed = 'sim' + Math.random();
   const mods = {};
+  const gopts = Progress.genOpts(save), heal = (n) => Progress.healAmt(save, n); // WP18: Heat / Descend (HEAT=hp,rage,... DESCEND=n)
   const relics = []; // WP12: run relics (NORELICS=1 switches them off)
   let gold = Progress.startGold(save), keys = 0, reviveUsed = 0, rerolls = Progress.rewardRerolls(save), hp = Progress.maxHp(save), supplies = Progress.startSupplies(save), cleared = new Set(), wins = 0, maxLv = 0, souls = 0, bosses = 0, items = 0, wonFirst = [];
   for (;;) {
     if (supplies <= 0) return { wins, maxLv, souls, bosses, items, end: 'supplies', start: Progress.startSupplies(save0), save };
     // Sub-areas whose boss already fell are skipped (nothing new there); fights are taken lowest level first,
     // the boss when Supplies run low (<= 2) or when nothing else is left in the frontier.
-    const open = World.nodes.filter((n) => n.type !== 'camp' && n.type !== 'waypoint' && !cleared.has(n.id) && save.unlocked.includes(n.sub) && !save.bossesBeaten.includes(n.sub));
+    const open = World.nodes.filter((n) => n.type !== 'camp' && n.type !== 'waypoint' && !cleared.has(n.id) && save.unlocked.includes(n.sub) && (save.farm || !save.bossesBeaten.includes(n.sub))); // save.farm (endgame mode): beaten sub-areas stay open
     // WP14: a hidden Sealed Cache (found by walking near it, assumed 60% of the time) is opened with a key dropped by an elite or boss: cache Souls and Gold plus 4 HP.
     const secret = open.find((n) => n.type === 'secret');
-    if (secret && keys > 0) { cleared.add(secret.id); if (Math.random() < 0.6) { keys--; souls += Gen.CACHE_SOULS; gold += Gen.CACHE_GOLD + 2 * World.SUB_BY[secret.sub].regionIndex; hp = Math.min(Progress.maxHp(save), hp + 4); } continue; }
+    if (secret && keys > 0) { cleared.add(secret.id); if (Math.random() < 0.6) { keys--; if (!save.secretsOpened.includes(secret.id)) { save.secretsOpened.push(secret.id); save.crystals += 1; } else save.dust += 2; /* app.js: 1 Crystal the first time, later 2 Dust */ souls += Gen.CACHE_SOULS; gold += Gen.CACHE_GOLD + 2 * World.SUB_BY[secret.sub].regionIndex; hp = Math.min(Progress.maxHp(save), hp + heal(4)); } continue; }
     // WP13 non-battle nodes: spring (heal when hurt, else +1 ATK), cache, shop and event. A guarded cache is a normal fight with a bonus.
     const pois = open.filter((n) => ['shrine', 'shop', 'event'].includes(n.type) || (n.type === 'treasure' && !n.guarded));
     const guardOf = (n) => Object.assign({}, n, { type: 'battle', role: 'armored', guardFor: true });
-    const fights = open.filter((n) => !pois.includes(n) && n.type !== 'secret').map((n) => (n.guarded ? guardOf(n) : n)).sort((a, b) => (a.type === 'boss') - (b.type === 'boss') || a.level - b.level);
+    const fights = open.filter((n) => !pois.includes(n) && n.type !== 'secret').map((n) => (n.guarded ? guardOf(n) : n)).sort((a, b) => (a.type === 'boss') - (b.type === 'boss') || (save.farm ? b.level - a.level : a.level - b.level)); // farm (endgame): deepest spots first
     const ri = (n) => World.SUB_BY[n.sub].regionIndex, atkUp = () => { const att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker'); const id = att[Math.floor(Math.random() * att.length)]; mods[id] = { atk: ((mods[id] || {}).atk || 0) + 1 }; };
     const maxHp = () => Progress.maxHp(save), spring = pois.find((n) => n.type === 'shrine'); // heal when below 60% HP
-    if (spring && hp < maxHp() * 0.6) { cleared.add(spring.id); hp = Math.min(maxHp(), hp + 8); continue; }
+    if (spring && hp < maxHp() * 0.6) { cleared.add(spring.id); hp = Math.min(maxHp(), hp + heal(8)); continue; }
     const cache = pois.find((n) => n.type === 'treasure'); if (cache) { cleared.add(cache.id); souls += Gen.CACHE_SOULS; gold += Gen.CACHE_GOLD + 2 * ri(cache); continue; }
     const shop = pois.find((n) => n.type === 'shop');   // visit with 22+ Gold (>= 14 when hurt): heal if below 70%, then upgrades, a relic at 40+
     if (shop && (gold >= 22 || (gold >= 14 && hp < maxHp() * 0.7))) {
       cleared.add(shop.id); const pr = (b) => Math.round(b * (1 + 0.2 * ri(shop)));
-      if (hp < maxHp() * 0.7 && gold >= pr(14)) { gold -= pr(14); hp = Math.min(maxHp(), hp + 8); }
+      if (hp < maxHp() * 0.7 && gold >= pr(14)) { gold -= pr(14); hp = Math.min(maxHp(), hp + heal(8)); }
       if (!process.env.NORELICS && relics.length < Relics.MAX_PER_RUN && gold >= pr(40)) { const left = Relics.LIST.filter((x) => !relics.includes(x.id) && !['prism', 'mjolnir', 'susanoo'].includes(x.id)); if (left.length) { gold -= pr(40); relics.push(left[Math.floor(Math.random() * left.length)].id); } }
       for (let k = 0; k < 2 && gold >= pr(22); k++) { gold -= pr(22); atkUp(); }
       continue;
@@ -121,7 +122,7 @@ function playRun(save0) {
       cleared.add(evn.id); const e = Events.pick(World.SUB_BY[evn.sub].region, World.hash(evn.id)), c = e.choices.find((ch) => ch !== Events.LEAVE && Events.costOf(ch, ri(evn)) <= gold && !(ch.cost && ch.cost.gold > 12));
       if (c) {
         gold -= Events.costOf(c, ri(evn)); const fx = Events.resolve(c, ri(evn), Math.random).fx;
-        gold = Math.max(0, gold + (fx.gold || 0)); souls += fx.souls || 0; if (fx.maxhp) hp += fx.maxhp; if (fx.hp) hp = Math.max(1, Math.min(maxHp(), hp + fx.hp));
+        gold = Math.max(0, gold + (fx.gold || 0)); souls += fx.souls || 0; if (fx.maxhp) hp += fx.maxhp; if (fx.hp) hp = Math.max(1, Math.min(maxHp(), hp + (fx.hp > 0 ? heal(fx.hp) : fx.hp)));
         for (let k = 0; k < (fx.atk || 0) + (fx.up || 0); k++) atkUp();
         if (fx.relic && !process.env.NORELICS && relics.length < Relics.MAX_PER_RUN) { const left = Relics.LIST.filter((x) => !relics.includes(x.id)); if (left.length) relics.push(left[Math.floor(Math.random() * left.length)].id); }
       }
@@ -131,13 +132,19 @@ function playRun(save0) {
     const bossNode = fights.find((n) => n.type === 'boss'), normals = fights.filter((n) => n.type !== 'boss');
     const node = bossNode && (supplies <= 2 || !normals.length) ? bossNode : (normals[0] || bossNode);
     cleared.add(node.id);
-    const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save, { relics, reviveUsed }), Progress.heroStage(save));
+    if (process.env.LOGBOSS && (node.type === 'boss' || node.type === 'elite')) { // WP18: snapshot of the account at every boss / elite fight (feeds the validator's reference squads)
+      const ar = Progress.buildArmy(save, mods), rl = Progress.rulesFor(save, { relics, reviveUsed });
+      require('fs').appendFileSync(process.env.LOGBOSS, JSON.stringify({ id: node.id, sub: node.sub, type: node.type, lv: node.level, run: save0.runs + 1, win: wins, hp, maxHp: Progress.maxHp(save), vit: Progress.level(save, 'vitality'), up: save.upgrades, squad: save.squad,
+        atk: ar.filter((c) => c.atk).map((c) => c.id + ':' + c.atk + '/' + c.range), blk: ar.filter((c) => c.block).map((c) => c.block), amt: ar.filter((c) => c.amount).map((c) => c.id + ':' + c.amount), mods: Object.fromEntries(Object.entries(mods).map(([k, v]) => [k, v.atk || 0])),
+        rules: rl, relics: relics.slice(), stars: save.squad.map((i) => Progress.starsOf(save, i)).join('') }) + '\n');
+    }
+    const st = fight(node, hp, Progress.maxHp(save), Progress.buildArmy(save, mods), seed, process.env.NORULES ? {} : Progress.rulesFor(save, { relics, reviveUsed }), Progress.heroStage(save), gopts);
     reviveUsed += st.reviveUsed || 0;
     if (st.status !== 'cleared') return { wins, maxLv, souls: Math.round(souls * 0.75), bosses, items, end: 'died', diedAt: node.level, start: Progress.startSupplies(save0), save };
     if (process.env.DEBUG) console.log('  run' + (save0.runs + 1) + ' w' + wins + ' ' + node.id + ' ' + node.type + ' Lv' + node.level + ' hp ' + st.hp + '/' + Progress.maxHp(save) + ' sup ' + supplies + ' atk ' + JSON.stringify(Progress.buildArmy(save, mods).filter((c) => c.atk).map((c) => c.id + ':' + c.atk)) + ' dmg' + st.damageTaken);
-    hp = st.hp; wins++; if (node.type === 'elite' || node.type === 'boss') keys = Math.min(World.MAX_KEYS, keys + 1); gold += Gen.goldFor(node, Gen.starsFor(st.damageTaken || 0));
+    hp = st.hp; wins++; if (node.type === 'elite' || node.type === 'boss') keys = Math.min(World.MAX_KEYS, keys + 1); gold += Gen.goldFor(node, Gen.starsFor(st.damageTaken || 0), gopts);
     if (node.guardFor) { souls += Gen.CACHE_SOULS; gold += Gen.GUARD_GOLD + 3 * ri(node); } Progress.addXp(save, save.squad, node.type === 'boss' ? 2 : 1); // WP11 mastery
-     maxLv = Math.max(maxLv, node.level); souls += Gen.soulsFor(node, Gen.starsFor(st.damageTaken || 0)) * Progress.soulRate(save);
+     maxLv = Math.max(maxLv, node.level); souls += Math.round(Gen.soulsFor(node, Gen.starsFor(st.damageTaken || 0), gopts) * Progress.soulRate(save)); // rounded per fight like app.js battleOver
     // Real WP8 drop logic (levels, substats, pity, elite guarantee, boss Legendaries); new items auto-equip into a free slot.
     const stars = Gen.starsFor(st.damageTaken || 0);
     const takeDrop = (drop) => {
@@ -147,8 +154,8 @@ function playRun(save0) {
       const b0 = Items.bonuses(save);
       if (Items.equip(save, drop.id, true)) { const b1 = Items.bonuses(save); hp += b1.hp - b0.hp; supplies += b1.supplies - b0.supplies; }
     };
-    takeDrop(Items.grantDrop(save, node, seed) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null));
-    if (stars === 3) takeDrop(Items.grantDrop(save, node, seed + ':star', { bonus: true })); // 3-star clears earn a bonus roll (app.js battleOver)
+    takeDrop(Items.grantDrop(save, node, seed, { lvBonus: Progress.itemLvBonus(save) }) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null));
+    if (stars === 3) takeDrop(Items.grantDrop(save, node, seed + ':star', { bonus: true, lvBonus: Progress.itemLvBonus(save) })); // 3-star clears earn a bonus roll (app.js battleOver)
     if (node.type === 'boss') {
       supplies += Progress.bossSupplies(bosses); bosses++; souls += Gen.BOSS_BONUS_SOULS; // real rule: 3, then 1, then -1
       if (!save.bossesBeaten.includes(node.sub)) { save.bossesBeaten.push(node.sub); for (const u of World.SUB_BY[node.sub].unlocks) if (!save.unlocked.includes(u)) save.unlocked.push(u); }
@@ -159,19 +166,35 @@ function playRun(save0) {
     let offered = process.env.NORELICS ? null : Relics.offer(relics, Math.random, node.type);
     for (let look = Progress.level(save, 'choice') >= 1 ? 1 : 0; look > 0 && !good(offered) && !process.env.NORELICS; look--) offered = Relics.offer(relics, Math.random, node.type) || offered;
     if (!good(offered) && rerolls > 0 && !process.env.NORELICS && hp >= Progress.maxHp(save) * 0.5) { rerolls--; offered = Relics.offer(relics, Math.random, node.type) || offered; }
-    if (hp < Progress.maxHp(save) * 0.5) hp = Math.min(Progress.maxHp(save), hp + 5);
+    if (hp < Progress.maxHp(save) * 0.5) hp = Math.min(Progress.maxHp(save), hp + heal(5));
     else if (offered && !['prism', 'mjolnir', 'susanoo'].includes(offered.id)) relics.push(offered.id); // greedy: skip the situational relics
     else { const att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker'); const id = att[Math.floor(Math.random() * att.length)]; mods[id] = { atk: ((mods[id] || {}).atk || 0) + 1 }; }
   }
 }
 
-const profiles = {
+// Camp shopping plan of the campaign sim: [kind, id, level to reach] in order of priority (power first, comfort last).
+const SHOP_PLAN = [['up', 'vitality', 1], ['unit', 'spear1'], ['up', 'provisions', 1], ['up', 'command', 1], ['up', 'drill', 1], ['up', 'vitality', 2], ['unit', 'archer2'], ['up', 'bulwark', 1], ['up', 'command', 2],
+  ['up', 'vitality', 3], ['unit', 'banner1'], ['unit', 'horn1'], ['unit', 'mage1'], ['up', 'drill', 2], ['up', 'provisions', 2], ['up', 'bulwark', 2], ['up', 'command', 3], ['up', 'vitality', 4], ['up', 'fortune', 1], ['up', 'ward', 1],
+  ['up', 'choice', 1], ['up', 'vitality', 5], ['up', 'command', 4], ['up', 'drill', 3], ['up', 'bulwark', 3], ['up', 'fortune', 2], ['up', 'provisions', 3], ['up', 'ward', 2], ['up', 'purse', 1], ['up', 'vitality', 6], ['up', 'command', 5],
+  ['up', 'revive', 1], ['up', 'choice', 2], ['up', 'drill', 4], ['up', 'bulwark', 4], ['up', 'fortune', 3], ['up', 'purse', 2], ['up', 'vitality', 7], ['up', 'fortune', 4], ['up', 'purse', 3], ['up', 'board', 1], ['unit', 'spy1'], ['unit', 'ushabti1'], ['unit', 'horn2']];
+let profiles = {
   'fresh account': Progress.freshSave(),
   'after ~5 runs (HP+6, spear, archer2)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 2 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1'] }),
   'meadow boss beaten (HP+9, 6 slots, horn, Provisions 1)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 3, command: 1, provisions: 1 }, unlocked: ['meadow', 'forest'], bossesBeaten: ['meadow'], squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1'] }),
   'Greenvale done (HP+15, 7 slots, Drill 1, Provisions 2)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 5, command: 2, drill: 1, bulwark: 1, provisions: 2 }, unlocked: ['meadow', 'forest', 'bamboo', 'lake', 'beach', 'dunes'], bossesBeaten: ['meadow', 'forest', 'bamboo', 'lake'], squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1'] }),
 };
 
+// WP18 endgame account: every Camp track maxed, best squad (stars 3), no gear. Used by `node tools/sim-runs.js N endgame` with HEAT / DESCEND to see how hard the post-game is.
+function endgameSave() {
+  const s = Progress.freshSave();
+  for (const u of Progress.UPGRADES) s.upgrades[u.id] = u.costs.length;
+  s.unlocked = World.SUBAREAS.map((x) => x.id); s.bossesBeaten = World.SUBAREAS.map((x) => x.id); s.runs = 99;
+  s.owned = Progress.ROSTER.map((u) => u.id); s.units = {}; for (const id of s.owned) s.units[id] = { stars: 3, xp: 250 };
+  s.squad = []; for (const id of ['phoenix1', 'storm1', 'sword2', 'drum2', 'shield2', 'horn1', 'banner1', 'longbow1', 'spear2', 'mage2']) if (!Progress.canAdd(s, id)) s.squad.push(id);
+  s.heat = (process.env.HEAT || '').split(',').filter(Boolean); s.descend = Number(process.env.DESCEND || 0);
+  s.descendDone = s.descend; s.farm = true; s.hero = process.env.HERO || 'marshal';
+  return s;
+}
 // Hero choice (WP15): HERO=<id> picks one (falls back to Marshal while locked); HERO=rotate cycles through the unlocked heroes run by run.
 function setHero(save, force) {
   const want = process.env.HERO || 'marshal', list = Progress.HEROES.filter((h) => Progress.heroUnlocked(save, h.id));
@@ -195,11 +218,32 @@ function campaign(maxRuns) {
     save.crystals += 3;
     while (!process.env.NOGACHA && save.crystals >= Progress.PULL_COST) { Progress.pull(save, 1, simRnd); }
     for (const b of save.bossesBeaten) { const reg = World.SUB_BY[b].region; if (!(reg in firstRun)) firstRun[reg] = r; }
-    for (let guard = 0; guard < 20; guard++) { // shopping
-      const opts = [];
-      for (const u of Progress.ROSTER) if (!u.start && !save.owned.includes(u.id) && Progress.recruitAvailable(save, u) && u.cost <= save.souls) opts.push({ cost: u.cost, buy: () => { save.owned.push(u.id); if (!Progress.canAdd(save, u.id)) save.squad.push(u.id); } });
-      for (const id of order) { const c = Progress.upgradeCost(save, id); if (c !== null && c <= save.souls) opts.push({ cost: c, buy: () => { save.upgrades[id] = (save.upgrades[id] || 0) + 1; } }); }
-      if (!opts.length) break; opts.sort((a, b) => a.cost - b.cost); save.souls -= opts[0].cost; opts[0].buy();
+    // Shopping (WP18 fix): a planning player buys power first (Vitality, Drill, Bulwark, Command, a few recruits) and saves up for the next item on
+    // the list instead of buying whatever is cheapest (the old greedy rule spent early Souls on Purse / Ward / Choice and left Drill at 0 for 15 runs).
+    // NOGREEDY-style old behaviour: SHOP=cheap.
+    if (process.env.SHOP === 'cheap') {
+      for (let guard = 0; guard < 20; guard++) {
+        const opts = [];
+        for (const u of Progress.ROSTER) if (!u.start && !save.owned.includes(u.id) && Progress.recruitAvailable(save, u) && u.cost <= save.souls) opts.push({ cost: u.cost, buy: () => { save.owned.push(u.id); if (!Progress.canAdd(save, u.id)) save.squad.push(u.id); } });
+        for (const id of order) { const c = Progress.upgradeCost(save, id); if (c !== null && c <= save.souls) opts.push({ cost: c, buy: () => { save.upgrades[id] = (save.upgrades[id] || 0) + 1; } }); }
+        if (!opts.length) break; opts.sort((a, b) => a.cost - b.cost); save.souls -= opts[0].cost; opts[0].buy();
+      }
+    } else for (let guard = 0; guard < 40; guard++) {
+      let bought = false;
+      for (const [kind, id, lv] of SHOP_PLAN) {
+        if (kind === 'up') {
+          if (!order.includes(id) || Progress.level(save, id) >= lv) continue;
+          const c = Progress.upgradeCost(save, id); if (c === null) continue;
+          if (c > save.souls) break; // save up for this one
+          save.souls -= c; save.upgrades[id] = (save.upgrades[id] || 0) + 1; bought = true; break;
+        } else {
+          const u = Progress.ROSTER_BY[id];
+          if (save.owned.includes(id) || !Progress.recruitAvailable(save, u)) continue;
+          if (u.cost > save.souls) break;
+          save.souls -= u.cost; save.owned.push(id); if (!Progress.canAdd(save, id)) save.squad.push(id); bought = true; break;
+        }
+      }
+      if (!bought) break;
     }
     if (process.env.TRACE) console.log('after run ' + r + ': souls left ' + save.souls + ' (earned ' + Math.round(res.souls) + ') upgrades ' + JSON.stringify(save.upgrades) + ' squad ' + save.squad.join(',') + ' crystals ' + save.crystals + ' items ' + save.items.length + ' wins ' + res.wins + ' end ' + res.end);
     log.push(res.wins + (res.end === 'died' ? 'x@' + res.diedAt : '') + (res.bosses ? 'B' + res.bosses : ''));
@@ -215,6 +259,7 @@ function campaign(maxRuns) {
 const N = Number(process.argv[2] || 6);
 const nodes = World.nodes.filter((n) => n.type !== 'camp');
 console.log('World: ' + World.SUBAREAS.length + ' sub-areas, ' + nodes.length + ' spots (free exploration; ' + nodes.filter((n) => ['battle', 'elite', 'boss'].includes(n.type)).length + ' monster spots), ' + Items.ALL.length + ' items' + (typeof window === 'undefined' && !globalThis.WorldLayout ? ' [placeholder layout]' : ''));
+if (process.argv[3] === 'endgame') profiles = { ['endgame account, Heat ' + Progress.heatPoints(Object.assign(Progress.freshSave(), { heat: (process.env.HEAT || '').split(',').filter(Boolean) })) + ', Descend ' + Number(process.env.DESCEND || 0)]: endgameSave() };
 if (process.argv[3] !== 'campaign') {
   for (const [name, save] of Object.entries(profiles)) {
     if (process.env.PROFILE && !name.includes(process.env.PROFILE)) continue;

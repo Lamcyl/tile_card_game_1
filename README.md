@@ -79,4 +79,8 @@ To check world map difficulty, play whole runs with a strong simulated player an
 
 ```bash
 node tools/sim-runs.js 6       # 6 simulated runs per account profile
+node tools/sim-runs.js 1 campaign 40   # consecutive runs with Camp shopping: when does each region unlock? (SEED=n, LOGBOSS=file, HERO=...)
+HEAT=hp,rage,heal,armor,cp,col DESCEND=2 node tools/sim-runs.js 4 endgame   # a maxed account on Heat / Descend
+node tools/validate-gen.js 40          # battle templates (40 seeds per danger tier)
+node tools/validate-gen.js bosses      # every boss and elite against the median campaign account (BOSS_TURNS=5 allows longer fights)
 ```

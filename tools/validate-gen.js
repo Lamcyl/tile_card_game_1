@@ -22,14 +22,26 @@ const REF = {
   4: { upgrades: { vitality: 6, command: 3, drill: 2, bulwark: 2 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1', 'banner1'] },
   5: { upgrades: { vitality: 7, command: 4, drill: 3, bulwark: 3 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1', 'banner1', 'archer2'] },
 };
+// Bosses and elites are met mid-run by a median campaign account (WP18, from the sim's boss snapshots): it owns gacha units
+// (Storm Mage, Rare swordsman), more Drill and Bulwark and less Vitality than the template references above (gear adds HP, see POWER).
+const BOSS_REF = {
+  1: REF[1], 2: REF[2],
+  3: { upgrades: { vitality: 3, command: 3, drill: 1, bulwark: 2 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1', 'banner1', 'storm1'] },
+  4: { upgrades: { vitality: 5, command: 3, drill: 2, bulwark: 2 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1', 'banner1', 'storm1'] },
+  5: { upgrades: { vitality: 6, command: 4, drill: 2, bulwark: 3 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1', 'banner1', 'archer2', 'storm1'] },
+};
+// The first boss of Azure Coast and Sunscorch is the wall a freshly cleared Greenvale account meets (target: falls in run 5-10, WP18): it is checked
+// against a lighter account (no gacha units, Drill 1) that still has the usual gear and relics.
+const EARLY_BOSSES = ['beach', 'dunes'];
+const EARLY_REF = { upgrades: { vitality: 3, command: 2, drill: 1, bulwark: 1 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1', 'banner1'] };
 const TIER_LEVELS = { 1: [1, 2, 3], 2: [4, 5, 6], 3: [7, 8, 9], 4: [10, 11, 12], 5: [13, 14, 15] };
 const SUB_FOR = { 1: 'forest', 2: 'lake', 3: 'cove', 4: 'rime', 5: 'caldera' };
 const ROLES = ['basic', 'armored', 'barrel'];
 
 // The deepest level of the last tier is met with a fully upgraded squad (Drill 4, Bulwark 4).
-function refSave(tier, level) {
-  const save = Object.assign(Progress.freshSave(), JSON.parse(JSON.stringify(REF[tier])), { hero: null }); // heroless reference squads (hero passives would only make fights easier)
-  if (tier === 5 && level >= 15) { save.upgrades.drill = 4; save.upgrades.bulwark = 4; }
+function refSave(tier, level, table) {
+  const save = Object.assign(Progress.freshSave(), JSON.parse(JSON.stringify((table || REF)[tier])), { hero: null }); // heroless reference squads (hero passives would only make fights easier)
+  if (!table && tier === 5 && level >= 15) { save.upgrades.drill = 4; save.upgrades.bulwark = 4; } // the deepest template level is met with a fully upgraded squad
   return save;
 }
 
@@ -70,32 +82,57 @@ function check(tier, level, seed, role, effort) {
 // Summary line per fight: best-line HP cost and turns.
 function bossSave(node) {
   const tier = World.danger(node.level);
-  const save = refSave(tier, node.level);
+  const save = node.type === 'boss' && EARLY_BOSSES.includes(node.sub) ? refSave(tier, node.level, { [tier]: EARLY_REF }) : refSave(tier, node.level, BOSS_REF);
   if (node.level <= 4) { save.upgrades = { vitality: 2 }; save.squad = ['sword1', 'archer1', 'drum1', 'shield1', 'spear1']; }
   return save;
 }
-// By the time a run reaches a boss the post-battle rewards have added ATK to the squad (+1 ATK to one attacker per win,
-// so roughly +1 per attacker per 3 wins; the sim reaches a boss after 6-30 wins). Stand-in: ATK added to every attacker.
-const RUN_ATK = (level) => (level <= 4 ? 2 : level <= 6 ? 2 : level <= 9 ? 3 : level <= 12 ? 6 : level <= 14 ? 8 : 10);
+// Power a player realistically has when meeting a boss or elite of this level, on top of the Camp upgrades and squad of its tier (WP18).
+// Measured with `LOGBOSS=file node tools/sim-runs.js 1 campaign 30` (median over 4 seeds, see docs/IMPLEMENTATION_PLAN.md WP18):
+//   atk    ATK added to every attacker: run rewards (+1 ATK per won fight), item sub-stats and sets, star and mastery bonuses
+//   block  extra block on every Shield (gear, Order trait)
+//   hp     max HP relative to the reference Camp (gear, mastery, trait bonuses; negative where the reference Camp is richer than the median account)
+//   rules  engine rules the account carries: hero Marshal (plate), item sets (Wolfpack diag / bannerBite) and the 1-4 relics a run has found by then
+// Heroless in the other checks; here the Marshal's passive and typical relics are included because every boss is met mid-run.
+const POWER = [
+  { upTo: 4,  atk: 3, block: 0, hp: 0,   rules: { plate: 1 } },
+  { upTo: 6,  atk: 4, block: 1, hp: -4,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1 } },
+  { upTo: 9,  atk: 3, block: 1, hp: 5,   rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1 } },
+  { upTo: 12, atk: 3, block: 2, hp: 10,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1, stand: 1 } },
+  { upTo: 14, atk: 3, block: 2, hp: 12,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1, stand: 1, barrier: 1 } },
+  { upTo: 99, atk: 4, block: 3, hp: 15,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1, stand: 1, barrier: 1, aegis: 1 } },
+];
+const MAX_TURNS = Number(process.env.BOSS_TURNS || 4); // a boss must fall within this many turns
+const powerAt = (level, node) => (node && node.type === 'boss' && EARLY_BOSSES.includes(node.sub) ? Object.assign({}, POWER.find((p) => level <= p.upTo), { atk: 3, hp: 10 }) : POWER.find((p) => level <= p.upTo));
 function runMods(save, node) {
-  const mods = {}, plus = RUN_ATK(node.level);
-  for (const id of save.squad) if (Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker') mods[id] = { atk: plus };
+  const mods = {}, pw = powerAt(node.level, node);
+  for (const id of save.squad) {
+    const role = Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role;
+    if (role === 'attacker') mods[id] = { atk: pw.atk };
+    else if (role === 'defender' && pw.block) mods[id] = { block: pw.block };
+  }
   return mods;
 }
-function checkFight(node, effort, tries) {
+// The solver is stochastic: one unlucky search can miss a good line. A failure on cost is only final when two stronger
+// searches (more restarts and iterations) agree; the best line over all tries counts. A found one-turn clear is always real.
+function checkFight(node, effort) {
   const save = bossSave(node), army = Progress.buildArmy(save, runMods(save, node));
-  const maxHp = Progress.maxHp(save);
+  const maxHp = Progress.maxHp(save) + powerAt(node.level, node).hp;
   const gen = Gen.generateBattle(node, 'validate-fight');
-  const state = Engine.createState(Object.assign({ heroHp: maxHp, heroMaxHp: maxHp, rules: Progress.rulesFor(save) }, gen));
+  const state = Engine.createState(Object.assign({ heroHp: maxHp, heroMaxHp: maxHp, rules: Object.assign(Progress.rulesFor(save), powerAt(node.level, node).rules) }, gen));
   const boss = node.type === 'boss';
   const rec = { id: node.id, level: node.level, boss, maxHp, fails: [], enemies: gen.enemies.length, hp: gen.enemies.reduce((n, e) => n + (e.type.endsWith('_barrel') ? 0 : e.hp), 0) };
   const clear = Solve.oneTurnClear(state, army, effort.restarts, effort.iters);
   rec.clear = !!clear;
-  const best = Solve.solve(state, army, 0, 4, { first: effort.first, later: 3, iters: effort.iters });
+  const limit = (boss ? 0.5 : 0.35) * maxHp;
+  let best = Solve.solve(state, army, 0, MAX_TURNS, { first: effort.first, later: 3, iters: effort.iters });
+  for (let k = 1; k <= 3 && best.total > limit; k++) { // escalate the search effort before calling a fight too hard
+    const b2 = Solve.solve(state, army, 0, MAX_TURNS, { first: effort.first * (k + 1), later: 3 + k, iters: effort.iters + 600 * k });
+    if (b2.total < best.total) best = b2;
+  }
   rec.cost = best.total; rec.turns = best.line.length;
   if (boss && clear) rec.fails.push('boss falls in one turn');
-  if (best.total >= 99) rec.fails.push('unwinnable in 4 turns');
-  else if (best.total > (boss ? 0.5 : 0.35) * maxHp) rec.fails.push('best line costs ' + best.total + ' of ' + maxHp + ' HP');
+  if (best.total >= 99) rec.fails.push('unwinnable in ' + MAX_TURNS + ' turns');
+  else if (best.total > limit) rec.fails.push('best line costs ' + best.total + ' of ' + maxHp + ' HP');
   else if (best.total < 1 && boss) rec.fails.push('boss costs nothing');
   return rec;
 }
@@ -128,7 +165,13 @@ function main() {
     const recs = [];
     for (let i = 0; i < seeds; i++) {
       const level = TIER_LEVELS[tier][i % 3];
-      recs.push(check(tier, level, i, ROLES[i % ROLES.length], effort));
+      let rec = check(tier, level, i, ROLES[i % ROLES.length], effort);
+      // The annealing solver is stochastic. A failure that says "the search did not find the clear / the line costs too much" is retried
+      // with 2x and 3x the effort (WP18); failures that are certain (a one-turn clear exists where none should, too easy) are final.
+      for (let k = 2; k <= 3 && rec.fails.length && rec.fails.every((f) => /no 1-turn|not trivial|best line costs|costs/.test(f)); k++) {
+        rec = check(tier, level, i, ROLES[i % ROLES.length], { restarts: effort.restarts * k, iters: effort.iters + 600 * (k - 1) });
+      }
+      recs.push(rec);
     }
     const pass = recs.filter((r) => !r.fails.length).length;
     total += recs.length; bad += recs.length - pass;

@@ -56,7 +56,7 @@
     log('Fight begins: place your squad.', 'turn');
     // Keep the player's last layout for cards that are still in the squad.
     const kept = {};
-    for (const [k, id] of Object.entries(opts.placement || {})) if (cardById(id)) kept[k] = id;
+    for (const [k, id] of Object.entries(opts.placement || {})) if (cardById(id) && !E.tileBlocked(game.state.rules, k)) kept[k] = id;
     game.placement = kept;
     setBiome(opts.biome);
     $('#b-name').textContent = opts.title;
@@ -158,7 +158,8 @@
         cell.classList.toggle('will-hit', willHit.has(k));
         cell.classList.toggle('boost-target', boostTargets.has(k));
         cell.classList.toggle('can-target', game.aiming && r < 2 && !!s.enemies.find((en) => en.alive && en.row === r && en.col === c));
-        cell.classList.toggle('can-drop', r >= 2 && !!game.selected && !game.busy);
+        cell.classList.toggle('closed', r >= 2 && E.tileBlocked(s.rules, k)); // Heat "Flooded Lane"
+        cell.classList.toggle('can-drop', r >= 2 && !E.tileBlocked(s.rules, k) && !!game.selected && !game.busy);
         if (r < 2) {
           const e = s.enemies.find((en) => en.alive && en.row === r && en.col === c);
           cell.innerHTML = e ? enemyHTML(e) : '';
@@ -280,6 +281,7 @@
 
   function placeCard(id, k) {
     const from = tileOf(id);
+    if (game.state && E.tileBlocked(game.state.rules, k)) return; // Heat: the closed column holds no card
     const occupant = game.placement[k];
     if (occupant === id) return;
     if (from) delete game.placement[from];
@@ -292,7 +294,7 @@
   function dropTargetAt(x, y) {
     const el = document.elementFromPoint(x, y);
     if (!el || !root.contains(el)) return null;
-    return el.closest('.cell.player-zone') || el.closest('#b-hand');
+    return el.closest('.cell.player-zone:not(.closed)') || el.closest('#b-hand');
   }
   root.addEventListener('pointerdown', (ev) => {
     if (game.aiming && !game.busy && game.state && game.state.status === 'playing' && ev.target.closest('#b-board')) { // ability targeting (WP15): pick on press, the board re-renders on release

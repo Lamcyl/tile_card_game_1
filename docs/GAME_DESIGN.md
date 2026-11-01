@@ -360,7 +360,7 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
 *Implemented (WP10):* Longbowman (Draugr, Rare), Storm Mage (Typhon, Epic, chain hits the lowest-HP enemy next to a struck one for the same damage) and Phoenix Archer (revives at half max HP, once per run) exist and are bought with Crystals until the WP11 gacha; Wukong, Talos, Perun, Lei Gong and Ix Chel are Rare with +1 to their main number.
 
 - **Duplicates** add stars (★1–★5), each a small upgrade. ★5 unlocks a **unit perk**. *(Implemented, WP11: ★2/★4 give shared HP, ★3 +1 ATK/block/boost, ★5 +1 range/block/boost; a duplicate also gives a Seal, and a duplicate of a ★5 unit turns into Dust.)*
-- **Pulls:** 💎 3 each (10 for 27); Common 62 / Rare 28 / Epic 9 / Legendary 1 %. Rare and above come only from the gacha; Commons can still be bought with Souls after their boss falls.
+- **Pulls:** 💎 4 each (10 for 36; 3 and 27 before WP18); Common 62 / Rare 28 / Epic 9 / Legendary 1 %. Rare and above come only from the gacha; Commons can still be bought with Souls after their boss falls.
 - **Pity:** a guaranteed Epic every 30 pulls. A **Recruitment Office** trades Seals (one per duplicate; 4 Common, 6 Rare, 8 Epic, 10 Legendary) for a unit of that rarity of your choice, so bad luck never locks out a strategy.
 - The common units from section 6.5 are the starting roster. Every region must be beatable with common units.
 - **Unit mastery:** units gain XP when used (1 per battle won, 2 for a boss; levels at 30/80/150/250 xp; Lv2/4 shared HP, Lv3 +1% Souls, Lv5 +1 main stat; skins not built yet). Mastery levels unlock small perks and skins, rewarding players who stick with favourites.
@@ -487,6 +487,19 @@ Permanent buffs from achievements are small and themed. Most rewards are currenc
 
 - **Descend:** a harder version of the whole map (new game plus), combinable with Heat.
 
+*Prototype (WP18):* both are unlocked by defeating a **final boss** (Morana at the Glacier Throne or Zmey Gorynych at the Magma Caldera) and live in the Camp's 🔥 tab (a lock with a cold brazier before that). Each modifier is a toggle with its Heat points (1 / 2 / 1 / 3 / 2 / 4 = 13 in total):
+
+| Modifier (prototype name) | Heat | Where it acts |
+|---|---|---|
+| Tough Hides: every enemy +1 HP | 1 | `Gen.generateBattle(node, seed, opts)` (`opts = Progress.genOpts(save)`) |
+| Fury: enrage gives +2 ATK | 2 | engine rule `enrageMore` |
+| Bitter Herbs: your healing is halved (rounded down; Lifebloom's 1 HP tick is lost) | 1 | engine rule `healHalf` (Lifebloom, Ration), `Progress.healAmt` (springs, shops, rewards, events, caches) |
+| Lacquered Plates: every enemy starts with 1 armor | 3 | `Gen.generateBattle` |
+| Thin Ranks: Command Point cap -2 | 2 | `Progress.commandCap` (the squad is not trimmed, Set out asks you to) |
+| Flooded Lane: the board loses its right-hand column | 4 | engine rule `lostCol` (`Engine.tileBlocked / playerTilesFor`): cards cannot stand there, enemies above it still strike; closed tiles are inked out in the battle |
+
+Heat multiplies **rewards by 1 + 0.08 per Heat point** (Souls and Gold; 13 Heat = x2.04) and raises the **item level of drops by 1 per 3 Heat**. **Descend** (levels 0-5) shifts every spot `Gen.DESCEND_LV` = 2 levels per step (enemy stats, template tier and boss strength all follow the higher level), pays **x(1 + 0.4 per step)** and adds +2 item levels per step. Descend 1 is open after any final boss; beating a final boss while on Descend N opens Descend N+1. Both combine, show as a 🔥 chip in the run HUD, and are fixed for the duration of an expedition. `tools/sim-runs.js N endgame` (env `HEAT=hp,rage,heal,armor,cp,col`, `DESCEND=n`) plays a maxed account to size the post-game.
+
 ---
 
 ## 16. Extra modes
@@ -596,11 +609,11 @@ The prototype in `prototype/` has two pages.
 - **Camp:** Souls buy upgrades (Vitality, Command, Drill, Bulwark, Fortune, Provisions) and recruits. Bosses unlock new recruits. The squad is limited by slots. The Gear tab equips up to 5 items (Weapon, Armor, Banner, Ring x2).
 - **Battles:** ordinary spots pick a named template by danger tier (`gen.js`): tier 1 teaches one mechanic per fight (attack, range, +, overkill, barrel, Shield, armor), tiers 2-3 are layouts with a hidden one-turn zero-damage clear, tier 4+ cannot be cleared in one turn (heavy enemy, best line costs about 1-4 HP). Layouts are mirrored at random and scaled by level. `node tools/validate-gen.js` checks this with the solver against a reference squad per tier. Elites and bosses are handcrafted fights from `boss-defs.js` (7.3): one gimmick per boss, usually a two-turn fight.
 - **Saving:** progress is saved in the browser. Prototype tools give +100 Souls or reset progress.
-- **Balancing:** `tools/sim-runs.js` plays whole runs with a strong player (Souls use the real star multipliers). On a fresh account it fights about 10 battles (6 if it dies to the Lv4 boss, 11-16 once the boss falls); real players should land at the 8-10 battles of 24.1. Sunny Meadows spots are Lv 1,1,1,2,2 with a Lv4 boss (2 minions, +7 HP now that template fights are cheap to clear); Old Oak Wood is Lv 3-4. Enemy growth ramps up from Lv8 (HP +7% and about +0.35 ATK per level above 7); Camp upgrades and recruits cost more from the second tier on, and Vitality, Drill, Bulwark and Fortune gained one more level. With greedy Camp shopping (`node tools/sim-runs.js 1 campaign 45`) the strong simulated player beats Greenvale in 3-6 runs, Azure Coast and Sunscorch in 4-8, and unlocks Frostveil around run 15-30 (Ember Peaks is slower, often beyond run 45); real players are slower. After WP6 (handcrafted bosses and elites with the full growth ramp; boss HP factor 1.7 at Lv<=6, 2.1 at Lv7, 2.5 at Lv8-9, 2.4 at Lv10-12, 2.1 at Lv13+, elites 75% of that): fresh account about 9 battles (the Lv4 Sansin falls in about one run in four), Greenvale boss in run 1-3, Azure Coast and Sunscorch first boss in run 4-9, Frostveil and Ember Peaks unlocked around run 9 and their first boss around run 17-20 (campaign sim, 3 samples). After the WP4 templates (strong player now clears most fights with 0 damage; Souls per fight x0.8 (x0.36 since WP18), Lv5-6 bosses +9 HP): fresh account about 9 battles, first Greenvale boss in run 1-4, Azure Coast and Sunscorch first boss in run 4-7 (4 simulated campaigns).
+- **Balancing:** *(current numbers: "WP18 final pacing pass" at the end of this section; the history below is kept for reference)* `tools/sim-runs.js` plays whole runs with a strong player (Souls use the real star multipliers). On a fresh account it fights about 10 battles (6 if it dies to the Lv4 boss, 11-16 once the boss falls); real players should land at the 8-10 battles of 24.1. Sunny Meadows spots are Lv 1,1,1,2,2 with a Lv4 boss (2 minions, +7 HP now that template fights are cheap to clear); Old Oak Wood is Lv 3-4. Enemy growth ramps up from Lv8 (HP +7% and about +0.35 ATK per level above 7); Camp upgrades and recruits cost more from the second tier on, and Vitality, Drill, Bulwark and Fortune gained one more level. With greedy Camp shopping (`node tools/sim-runs.js 1 campaign 45`) the strong simulated player beats Greenvale in 3-6 runs, Azure Coast and Sunscorch in 4-8, and unlocks Frostveil around run 15-30 (Ember Peaks is slower, often beyond run 45); real players are slower. After WP6 (handcrafted bosses and elites with the full growth ramp; boss HP factor 1.7 at Lv<=6, 2.1 at Lv7, 2.5 at Lv8-9, 2.4 at Lv10-12, 2.1 at Lv13+, elites 75% of that): fresh account about 9 battles (the Lv4 Sansin falls in about one run in four), Greenvale boss in run 1-3, Azure Coast and Sunscorch first boss in run 4-9, Frostveil and Ember Peaks unlocked around run 9 and their first boss around run 17-20 (campaign sim, 3 samples). After the WP4 templates (strong player now clears most fights with 0 damage; Souls per fight x0.8 (x0.36 since WP18), Lv5-6 bosses +9 HP): fresh account about 9 battles, first Greenvale boss in run 1-4, Azure Coast and Sunscorch first boss in run 4-7 (4 simulated campaigns).
 
 **Battle sandbox (`sandbox.html`)**: the three handcrafted mid-run stages (6, 9 and 12) from the first prototype.
 
-**Not included yet:** Heat, art and audio (heroes are in, with placeholder seals).
+**Not included yet:** art and audio (heroes are in, with placeholder seals; Heat and Descend are in since WP18).
 
 See the README for how to run it.
 
@@ -665,3 +678,18 @@ These directions came out of the first playtest. Numbers are starting points for
 - Levers: boss Supplies 3 / 1 / then 1 each (was +4 every boss); Souls per fight factor 0.8 to 0.36, first-boss bonus 25 to 11, cache 10 to 5; item drop chances halved.
 - Campaign sim, 8 seeds x 40 runs, run in which each was first reached (mean): Greenvale boss 1.9, Greenvale cleared (Azure/Sunscorch open) 2.0, Azure/Sunscorch first boss 3.8 / 3.9, Frostveil / Ember Peaks unlocked 4.9 / 5.0, their first boss 7.8 / 8.1. Longest run 22 battles (was 94-105). Fresh account about 10.6 battles per run (was 11.8-13.2).
 - Still faster than the targets (3-6 / 5-10 / 15-25): the strong simulated player already clears Lv<=9 once it owns a few upgrades, and the boss/elite HP is capped by `validate-gen.js bosses` reference squads. Next lever for WP18: Lv7-9 boss strength and the Camp upgrade/Gacha economy.
+
+### WP18 final pacing pass (numbers)
+
+Measured with the final code: fresh account = `PROFILE=fresh node tools/sim-runs.js 60` (seeds 31-33); campaign = `SEED=1..8 node tools/sim-runs.js 1 campaign 35` (greedy-but-planned Camp shopping, `SHOP=cheap` for the old cheapest-first rule, 35 runs maximum so ">35" means not reached).
+
+| Target | Result |
+|---|---|
+| Fresh account 9-11 battles per run | **9.3 / 10.1 / 9.6** (3 x 60 runs; 6 when the Lv4 boss wins, 11-16 when it falls) |
+| Greenvale cleared (Azure Coast and Sunscorch open) run 3-6 | **3.3** mean over 8 seeds (2, 3, 6, 6, 2, 1, 3, 3) |
+| Azure Coast / Sunscorch first boss run 5-10 | **4.8 / 6.5** (2-8 / 2-14) |
+| Frostveil / Ember Peaks first unlock run 15-25 | runs 7, 28, 30, >35, 8, 5, 15, 7 (Frostveil): mean 17.0 when the capped seed counts as 35, **median 8**; Ember Peaks 7, 28, 30, >35, 10, 6, 15, 8. Strongly bimodal: lucky accounts (an early Epic, gear sets) pass the Lv9 bosses by run 5-8, unlucky ones sit in front of them for 20+ runs |
+| Final regions unlocked (Glacier Throne / Magma Caldera) | runs 18, 30, >35, >35, 18, 10, 24, 10 / 20, 30, >35, >35, 18, 11, 24, 12 (mean about 18-19 for the six seeds that got there) |
+| Battles per campaign run | 10.5 on average: ordinary runs 9.7, boss-chain runs 17.5 (about 11% of runs; a first Greenvale boss win refunds Supplies and the run snowballs +1 ATK per won fight) |
+
+Before WP18 part 2 (same sim, old levers): fresh account 9-11 but Greenvale cleared in run 1-2, Frostveil / Ember unlocked in run 3-5 and the final regions in run 5. Levers moved: boss and elite strength per level band (`gen.js` `BOSS_BAND`, hp x1 / 1.9 / 1.8 / 1.55 / 1.4, atk x1 / 1.3 / 1.4 / 1.4 / 1.4 for Lv<=4 / 5-6 / 7-9 / 10-12 / 13+) plus per-boss `adj` in `boss-defs.js`; Souls per fight x0.32; boss Crystals 2 + region; gacha 4 Crystals per pull (36 for 10). `tools/validate-gen.js bosses` checks each boss against the median campaign account (`BOSS_REF` + `POWER`, built from `LOGBOSS` snapshots) and all 40 pass with every best line at 0-43% of the reference HP (limit 50%); `validate-gen.js 40` passes 200/200.
