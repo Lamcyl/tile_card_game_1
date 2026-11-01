@@ -371,8 +371,6 @@
         '<span class="p-cp">🎖️ ' + cp + '/' + cap + '<small>' + (problem ? '⚠ ' + esc(problem) : 'Squad ready · tap to change') + '</small></span></button>' +
       '<div class="camp-grid">' + tiles.map((t) => '<button type="button" class="ctile" data-cv="' + t[0] + '"><span class="seal-ic" aria-hidden="true">' + t[1] + '</span><span class="ct"><b>' + t[2] + '</b><small>' + t[3] + '</small></span>' + (t[4] ? '<i class="badge">' + t[4] + '</i>' : '') + '</button>').join('') + '</div></div>';
     let foot = '<div class="camp-foot">';
-    if (save.waypoints.length) foot += '<div class="start-at" aria-label="Start position"><small>🚩 Start at</small>' + ['camp'].concat(save.waypoints).map((id) =>
-      '<button type="button" class="' + (save.startAt === id ? 'on' : '') + '" data-start="' + id + '">' + (id === 'camp' ? '⛺ Camp' : esc(World.SUB_BY[id].name)) + '</button>').join('') + '</div>';
     foot += '<button type="button" class="primary setout" data-act="start"><span class="so-main"><i aria-hidden="true">出陣</i>Set out</span><small>🍙 ' + P.startSupplies(save) + ' Rations · ♥ ' + P.maxHp(save) + ' HP</small></button></div>';
     return { body, foot };
   }
@@ -705,6 +703,25 @@
   function startRun() {
     const problem = P.squadProblem(save);
     if (problem) { toast(problem); campView = 'team'; renderAll(); return; }
+    const lit = save.waypoints.filter((id) => World.SUB_BY[id]);
+    if (!lit.length) { save.startAt = 'camp'; beginRun(); return; }
+    openStartChooser(lit);
+  }
+  // Set out with lit Wayshrines: a compact sheet lists Camp plus the shrines by region; picking a row starts the run there.
+  function openStartChooser(lit) {
+    const groups = {};
+    lit.forEach((id) => { const reg = World.SUB_BY[id].region; (groups[reg] = groups[reg] || []).push(id); });
+    const row = (id, label) => '<button type="button" class="sc-row' + (save.startAt === id ? ' on' : '') + '" data-pick-start="' + id + '"><span aria-hidden="true">' + (id === 'camp' ? '⛺' : '🚩') + '</span>' + esc(label) + '</button>';
+    modal('<div class="start-chooser"><h3>Where to start?</h3><div class="sc-list">' + row('camp', 'Camp') +
+      Object.keys(groups).map((reg) => '<div class="sc-region">' + esc(reg) + '</div>' + groups[reg].map((id) => row(id, World.SUB_BY[id].name)).join('')).join('') +
+      '</div><button type="button" class="sc-cancel" data-act="close">Cancel</button></div>');
+    $('#modal').onclick = (ev) => {
+      const b = ev.target.closest('[data-pick-start]');
+      if (b) { save.startAt = b.dataset.pickStart; closeModal(); beginRun(); return; }
+      if (ev.target.closest('[data-act="close"]') || ev.target === $('#modal')) closeModal();
+    };
+  }
+  function beginRun() {
     const sup = P.startSupplies(save);
     const startId = save.startAt !== 'camp' && save.waypoints.includes(save.startAt) ? save.startAt + '-wp' : 'camp'; // WP14: begin at a lit Wayshrine
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: startId, cleared: ['camp'], path: [startId], keys: 0,

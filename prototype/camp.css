@@ -213,3 +213,12 @@
 .camp .traits h4, .camp .traits details { grid-column: 1 / -1; margin: 0; }
 .camp .traits details summary { min-height: 44px; display: flex; align-items: center; font-weight: 700; font-size: 13px; }
 .traits-more { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+
+/* Set out chooser: a compact scrolling sheet of Camp + lit Wayshrines grouped by region */
+.start-chooser { display: flex; flex-direction: column; gap: 6px; max-height: min(70dvh, 520px); text-align: left; }
+.start-chooser h3 { margin: 0 0 2px; }
+.start-chooser .sc-list { overflow-y: auto; overscroll-behavior: contain; display: grid; gap: 4px; padding-right: 2px; }
+.start-chooser .sc-region { position: sticky; top: 0; z-index: 1; margin-top: 4px; padding: 2px 8px; font: 800 11px var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--vermilion-deep); background: rgba(247,240,224,.96); border-bottom: 1px dashed rgba(120,92,56,.45); }
+.start-chooser .sc-row { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 40px; padding: 4px 12px; text-align: left; font-size: 15px; border-radius: 8px 12px 8px 12px; }
+.start-chooser .sc-row.on { background: #c8402f; color: #fbf5e4; border-color: #c8402f; }
+.start-chooser .sc-cancel { align-self: stretch; min-height: 40px; }
