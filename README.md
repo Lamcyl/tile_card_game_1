@@ -10,7 +10,7 @@ A turn-based tile placement game with roguelite runs. You place a fixed army of 
 **Online:** https://claude.ai/artifact/1ifNch1Wk52wrNVw2fzVsh (claude.ai artifact; sign-in required, share it from the page's Share menu).
 
 The prototype is the **world map game**:
-1. Set out from the **Camp menu**: a full-screen home (currencies, hero and squad, Set out with Start-at and Rations) with buttons for Upgrades, Team (hero, squad, Command Points, traits), Gear (paper-doll, inventory, Forge, sets), Summon (gacha, Recruitment Office, Recruit), Heat (once unlocked), Journal, World map (read-only) and Settings (reset, test currency).
+1. Set out from the **Camp menu**: a full-screen home (currencies, hero and squad, Set out with Rations; with lit Wayshrines it opens a compact start chooser listing Camp and the shrines by region) with buttons for Upgrades, Team (hero, squad, Command Points, traits), Gear (paper-doll, inventory, Forge, sets), Summon (gacha, Recruitment Office, Recruit), Heat (once unlocked), Journal, World map (read-only) and Settings (reset, test currency).
 2. Fight any monster in an open area, in any order (only the first area is open at the start; each boss opens the next one for that run). Each win costs 1 Ration (bosses give some back), and the run ends when HP or Rations run out, or when you return to Camp to bank your Souls. Monsters drop gear you equip at Camp.
 3. Spend Souls on upgrades and recruits, then go further on the next run.
 

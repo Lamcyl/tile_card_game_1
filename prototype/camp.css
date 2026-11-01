@@ -90,8 +90,6 @@
   flex: none; padding: 10px max(14px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
   background: var(--paper-grain), rgba(247,240,224,.97); border-top: 2px solid rgba(43,42,53,.65); box-shadow: 0 -2px 0 rgba(201,162,58,.45), 0 -8px 18px rgba(70,55,30,.14);
 }
-.camp-foot .start-at { margin: 0 0 8px; }
-.camp-foot .start-at button { min-height: 44px; padding: 5px 12px; }
 .setout { width: 100%; min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 18px; font-size: 24px; font-family: var(--font-display); font-weight: 800; }
 .setout .so-main { display: inline-flex; align-items: center; gap: 12px; }
 .setout i { font-style: normal; font-size: 15px; letter-spacing: 0; padding: 4px 6px; border: 2px solid rgba(251,243,226,.8); border-radius: 4px; line-height: 1; writing-mode: horizontal-tb; background: rgba(90,15,10,.25); }

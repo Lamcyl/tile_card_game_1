@@ -557,7 +557,10 @@ Four currencies is the maximum; more starts to confuse players.
 - **Hover or select an attacker** to highlight the tiles it can reach and the enemy it would hit right now.
 - **Threat forecast:** under each column, show how much damage you take if nothing in that column dies, after Shields.
 - **Step-by-step playback** of each turn (shot, hit, overkill, explosion, strike, enrage), with a speed toggle and a text battle log.
-- Input: drag-and-drop, plus tap-to-select and tap-to-place for touch.
+- Input: drag-and-drop, plus tap-to-select and tap-to-place for touch. Pointer events: pressing a unit (hand or board) and moving more than ~6 px drags it at once, no selection tap needed; a shorter press is a tap. Dropping on another tile moves or swaps, dropping on the hand returns it.
+- **Range preview while dragging:** from the tile under the pointer, an attacker shows the tiles it reaches (vermilion fill with diagonal hatch, ↑ badge) and the enemies it would hit (deeper red crosshatch, ✖ badge), a supporter shows its boost targets (teal dotted fill, ✚ badge); buffs from the would-be neighbours are included. The same shows on hover or selection. Shapes and badges, not just colour, carry the meaning.
+- **One-screen battle:** the battle never scrolls. The cell size is measured from the viewport (`fit()` in `js/battle.js`, 100dvh plus safe-area insets), covering 5 or 6 board rows, threat line, hero panel with ability, hand and controls. The hand is one scrollable row of compact cards; the battle log (📜) and the hint line (tap to expand) are toggles.
+- **Set out chooser:** the Camp home has no Start-at chips. With lit Wayshrines, Set out opens a scrollable sheet of Camp plus the shrines grouped by region; picking one starts the run there. With none, the run starts at once.
 
 ---
 

@@ -1089,7 +1089,6 @@
     }
     if (b.dataset.heat) { if (!run() && P.toggleHeat(save, b.dataset.heat)) { persist(); renderAll(); } return; }
     if (b.dataset.descend) { if (!run()) { P.setDescend(save, P.descendOf(save) + Number(b.dataset.descend)); persist(); renderAll(); } return; }
-    if (b.dataset.start) { save.startAt = b.dataset.start; persist(); toast(save.startAt === 'camp' ? 'Runs start at Camp.' : 'Runs start at the ' + World.SUB_BY[save.startAt].name + ' Wayshrine.'); renderAll(); return; }
     if (b.dataset.buy) {
       const cost = P.upgradeCost(save, b.dataset.buy);
       if (cost !== null && save.souls >= cost) { pointAt = null; save.souls -= cost; save.upgrades[b.dataset.buy] = P.level(save, b.dataset.buy) + 1; persist(); toast(P.UPGRADE_BY[b.dataset.buy].name + ' upgraded.'); renderAll(); }

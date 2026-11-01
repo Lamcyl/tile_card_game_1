@@ -52,7 +52,7 @@
     game.onEnd = opts.onEnd;
     game.report = { shields: false, overkills: 0, bossOverkill: false, explosions: 0, turns: 0 }; // read by bounties (app.js)
     logEl.innerHTML = '';
-    { const collapse = window.innerHeight < 900; $('#b-log').classList.toggle('collapsed', collapse); $('#b-log-toggle').setAttribute('aria-expanded', String(!collapse)); } // short screens keep the Fight button in view
+    $('#b-log').classList.add('collapsed'); $('#b-log-toggle').setAttribute('aria-expanded', 'false'); $('#b-msg').classList.remove('open'); // log and hints are toggles: the board gets the height
     log('Fight begins: place your squad.', 'turn');
     // Keep the player's last layout for cards that are still in the squad.
     const kept = {};
@@ -76,6 +76,7 @@
     } else introEl.textContent = rules.length ? rules.join(' ') : Object.keys(kept).length ? 'Your last layout is ready. Adjust it, then press Fight.' : 'Place your squad, then press Fight.';
     root.hidden = false;
     render();
+    fit();
   }
   const placement = () => Object.assign({}, game.placement);
 
@@ -141,22 +142,14 @@
     $('#b-hptext').textContent = s.hp + ' / ' + s.maxHp + (s.barrier ? ' · 🔰' + s.barrier : '');
     renderHero(s);
 
-    const focusKey = game.hover && game.placement[game.hover] ? game.hover : (game.selected && tileOf(game.selected)) || null;
-    const reach = new Set(), willHit = new Set(), boostTargets = new Set();
-    if (focusKey && stats[focusKey] && !game.busy) {
-      const st = stats[focusKey];
-      if (st.type.role === 'attacker') {
-        E.reachableTiles(st).forEach((k) => reach.add(k));
-        E.targetsFor(st, s.enemies).forEach((e) => willHit.add(E.key(e.row, e.col)));
-      } else if (st.type.role === 'support') st.boosts.forEach((k) => boostTargets.add(k));
-    }
+    const rng = rangeFor(s, stats);
     for (let r = 0; r < game.rows; r++) {
       for (let c = 0; c < E.COLS; c++) {
         const k = E.key(r, c);
         const cell = cellEl(k);
-        cell.classList.toggle('reach', reach.has(k));
-        cell.classList.toggle('will-hit', willHit.has(k));
-        cell.classList.toggle('boost-target', boostTargets.has(k));
+        cell.classList.toggle('reach', rng.reach.has(k));
+        cell.classList.toggle('will-hit', rng.willHit.has(k));
+        cell.classList.toggle('boost-target', rng.boost.has(k));
         cell.classList.toggle('can-target', game.aiming && r < 2 && !!s.enemies.find((en) => en.alive && en.row === r && en.col === c));
         cell.classList.toggle('closed', r >= 2 && E.tileBlocked(s.rules, k)); // Heat "Flooded Lane"
         cell.classList.toggle('can-drop', r >= 2 && !E.tileBlocked(s.rules, k) && !!game.selected && !game.busy);
@@ -172,11 +165,52 @@
     const hand = game.army.filter((c) => !tileOf(c.id));
     $('#b-hand').innerHTML = hand.length
       ? hand.map(handSlotHTML).join('')
-      : '<div class="hand-empty">Whole squad placed. Drop a card here to take it back.</div>';
+      : '<div class="hand-empty">Squad placed. Drop a card here to take it back.</div>';
     renderThreat(s, stats);
     $('#b-fight').disabled = game.busy || s.status !== 'playing';
     $('#b-clear').disabled = game.busy || s.status !== 'playing';
     $('#b-speed').textContent = game.speed + '×';
+  }
+
+  // Which tiles the focused unit reaches / will hit / boosts. While dragging (or with an unplaced unit selected and a
+  // tile hovered) the unit is previewed on the tile under the pointer, buffs from its would-be neighbours included.
+  function rangeFor(s, stats) {
+    const out = { reach: new Set(), willHit: new Set(), boost: new Set() };
+    if (game.busy) return out;
+    let focusKey = null, st = null;
+    const dragId = drag && drag.ghost ? drag.id : null;
+    const probe = dragId || (game.selected && !tileOf(game.selected) ? game.selected : null); // a unit not on the board yet (or being dragged)
+    if (probe) {
+      const k = dragId ? (drag.over && drag.over.dataset.key) : game.hover;
+      const rowOf = k ? E.parseKey(k)[0] : -1;
+      if (k && rowOf >= 2 && !E.tileBlocked(s.rules, k)) {
+        const p = Object.assign({}, game.placement), from = tileOf(probe), occ = p[k];
+        if (from) delete p[from];
+        p[k] = probe;
+        if (occ && from && occ !== probe) p[from] = occ;
+        const hs = E.computeStats(p, game.army, s.enemies, s.rules);
+        focusKey = k; st = hs[k];
+      }
+    } else {
+      focusKey = game.hover && game.placement[game.hover] ? game.hover : (game.selected && tileOf(game.selected)) || null;
+      st = focusKey ? stats[focusKey] : null;
+    }
+    if (!st) return out;
+    if (st.type.role === 'attacker') {
+      E.reachableTiles(st).forEach((k) => out.reach.add(k));
+      E.targetsFor(st, s.enemies).forEach((e) => out.willHit.add(E.key(e.row, e.col)));
+    } else if (st.type.role === 'support') st.boosts.forEach((k) => out.boost.add(k));
+    return out;
+  }
+  // Lightweight refresh of the highlight classes only (no card re-render), used on every drag move.
+  function paintRange() {
+    const s = current(), rng = rangeFor(s, E.computeStats(game.placement, game.army, s.enemies, s.rules));
+    for (let r = 0; r < game.rows; r++) for (let c = 0; c < E.COLS; c++) {
+      const k = E.key(r, c), cell = cellEl(k);
+      cell.classList.toggle('reach', rng.reach.has(k));
+      cell.classList.toggle('will-hit', rng.willHit.has(k));
+      cell.classList.toggle('boost-target', rng.boost.has(k));
+    }
   }
 
   // Hero panel (WP15): placeholder seal portrait, passive, and the once-per-battle ability button.
@@ -187,6 +221,7 @@
     $('#b-hero-name').textContent = h ? h.name : 'Hero';
     $('#b-hero-passive').textContent = h ? h.passive : '';
     $('#b-hero').style.setProperty('--hero-hue', h ? h.hue : '');
+    $('#b-hero-passive').title = h ? h.passive : '';
     btn.hidden = !ab;
     if (!ab) return;
     const problem = E.abilityProblem(s, ab.target === 'enemy' ? (s.enemies.find((en) => en.alive) || {}).id : null);
@@ -296,53 +331,73 @@
     if (!el || !root.contains(el)) return null;
     return el.closest('.cell.player-zone:not(.closed)') || el.closest('#b-hand');
   }
+  const DRAG_PX = 6; // movement under this is a tap, over it a drag (pointer events: mouse, touch and pen alike)
   root.addEventListener('pointerdown', (ev) => {
     if (game.aiming && !game.busy && game.state && game.state.status === 'playing' && ev.target.closest('#b-board')) { // ability targeting (WP15): pick on press, the board re-renders on release
       const cell = ev.target.closest('.cell.can-target');
       if (cell) { const [r, c] = E.parseKey(cell.dataset.key), en = game.state.enemies.find((x) => x.alive && x.row === r && x.col === c); if (en) { ev.preventDefault(); castAbility(en.id); } }
       return;
     }
-    if (game.busy || !game.state || game.state.status !== 'playing' || ev.button > 0) return;
+    if (game.busy || !game.state || game.state.status !== 'playing' || ev.button > 0 || drag) return;
     if (!ev.target.closest('#b-board, #b-hand')) return;
     const card = ev.target.closest('[data-card]');
-    drag = { id: card ? card.dataset.card : null, el: card, x0: ev.clientX, y0: ev.clientY, ghost: null, over: null };
-    if (card) ev.preventDefault();
+    drag = { id: card ? card.dataset.card : null, el: card, fromHand: !card || card.dataset.from === 'hand', x0: ev.clientX, y0: ev.clientY, pid: ev.pointerId, touch: ev.pointerType !== 'mouse', ghost: null, over: null };
+    if (card && !drag.touch) ev.preventDefault();
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerup', onPointerUp, { once: true });
+    window.addEventListener('pointercancel', onPointerCancel, { once: true });
   });
+  function endDragListeners() {
+    window.removeEventListener('pointermove', onPointerMove);
+    window.removeEventListener('pointerup', onPointerUp);
+    window.removeEventListener('pointercancel', onPointerCancel);
+  }
+  function startGhost(ev) {
+    const el = drag.el, r = el.getBoundingClientRect();
+    drag.ghost = el.cloneNode(true);
+    drag.ghost.classList.add('ghost');
+    drag.ghost.classList.remove('selected');
+    drag.ghost.style.width = r.width + 'px';
+    drag.ghost.style.height = r.height + 'px';
+    drag.ghost.style.setProperty('--cell', getComputedStyle(el).getPropertyValue('--cell'));
+    root.appendChild(drag.ghost);
+    el.classList.add('dragging');
+    root.classList.add('is-dragging');
+    game.hover = null;
+    if (navigator.vibrate) { try { navigator.vibrate(8); } catch (e) { /* ignore */ } }
+  }
   function onPointerMove(ev) {
-    if (!drag || !drag.id) return;
-    if (!drag.ghost && Math.hypot(ev.clientX - drag.x0, ev.clientY - drag.y0) > 6) {
-      const r = drag.el.getBoundingClientRect();
-      drag.ghost = drag.el.cloneNode(true);
-      drag.ghost.classList.add('ghost');
-      drag.ghost.style.width = r.width + 'px';
-      drag.ghost.style.height = r.height + 'px';
-      document.body.appendChild(drag.ghost);
-      drag.el.classList.add('dragging');
+    if (!drag || ev.pointerId !== drag.pid || !drag.id) return;
+    if (!drag.ghost) {
+      const dx = ev.clientX - drag.x0, dy = ev.clientY - drag.y0;
+      if (Math.hypot(dx, dy) <= DRAG_PX) return;
+      startGhost(ev);
     }
-    if (!drag.ghost) return;
+    if (ev.cancelable) ev.preventDefault();
     drag.ghost.style.left = (ev.clientX - drag.ghost.offsetWidth / 2) + 'px';
-    drag.ghost.style.top = (ev.clientY - drag.ghost.offsetHeight / 2) + 'px';
-    const over = dropTargetAt(ev.clientX, ev.clientY);
+    drag.ghost.style.top = (ev.clientY - drag.ghost.offsetHeight / 2 - (drag.touch ? 18 : 0)) + 'px'; // touch: lift the card above the fingertip
+    const over = dropTargetAt(ev.clientX, ev.clientY - (drag.touch ? 18 : 0));
     if (over !== drag.over) {
       if (drag.over) drag.over.classList.remove('drop-hover');
       if (over) over.classList.add('drop-hover');
       drag.over = over;
+      paintRange();
     }
   }
-  function onPointerUp(ev) {
-    window.removeEventListener('pointermove', onPointerMove);
+  function finishDrag(ev, cancelled) {
+    endDragListeners();
     const d = drag; drag = null;
     if (!d) return;
     if (d.over) d.over.classList.remove('drop-hover');
-    const target = dropTargetAt(ev.clientX, ev.clientY);
+    root.classList.remove('is-dragging');
+    const target = cancelled ? null : dropTargetAt(ev.clientX, ev.clientY - (d.ghost && d.touch ? 18 : 0));
     if (d.ghost) {
       d.ghost.remove();
       if (target && target.id === 'b-hand') returnCard(d.id);
       else if (target) placeCard(d.id, target.dataset.key);
       game.selected = null;
-    } else if (d.id) {
+    } else if (cancelled) { /* the browser took the gesture (e.g. a scroll of the hand) */ }
+    else if (d.id) {
       const tappedTile = d.el.dataset.from !== 'hand' ? d.el.dataset.from : null;
       if (game.selected === d.id) game.selected = null;
       else if (game.selected && tappedTile) { placeCard(game.selected, tappedTile); game.selected = null; }
@@ -354,13 +409,15 @@
     } else game.selected = null;
     render();
   }
+  function onPointerUp(ev) { finishDrag(ev, false); }
+  function onPointerCancel(ev) { finishDrag(ev, true); }
   $('#b-board').addEventListener('pointerover', (ev) => {
-    if (drag && drag.ghost) return;
+    if (drag) return;
     const cell = ev.target.closest && ev.target.closest('.cell');
     const k = cell ? cell.dataset.key : null;
-    if (k !== game.hover) { game.hover = k; if (!game.busy) render(); }
+    if (k !== game.hover) { game.hover = k; if (!game.busy) paintRange(); } // classes only: rebuilding the cards here would detach the one being pressed (touch fires pointerover just before pointerdown)
   });
-  $('#b-board').addEventListener('pointerleave', () => { game.hover = null; if (!game.busy && game.state) render(); });
+  $('#b-board').addEventListener('pointerleave', () => { if (drag) return; game.hover = null; if (!game.busy && game.state) paintRange(); });
 
   // ---------- Turn playback ----------
 
@@ -546,12 +603,32 @@
     }
   }
 
+  // The hint / result line is one line; tap it to read the rest.
+  $('#b-msg').addEventListener('click', () => $('#b-msg').classList.toggle('open'));
+
+  // Size the board from the real viewport: the largest --cell for which the whole screen (header, board, threat,
+  // hero, hand, controls) fits without scrolling. Everything else scales from --cell in battle.css.
+  function fit() {
+    if (root.hidden) return;
+    const cap = Math.min(root.clientWidth || innerWidth, 480) - 26;
+    let lo = 28, hi = Math.min(game.rows > E.ROWS ? 64 : 72, cap / 5);
+    for (let i = 0; i < 9; i++) {
+      const mid = (lo + hi) / 2;
+      root.style.setProperty('--cell', mid + 'px');
+      if (root.scrollHeight > root.clientHeight) hi = mid; else lo = mid;
+    }
+    root.style.setProperty('--cell', Math.floor(lo * 10) / 10 + 'px');
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', () => setTimeout(fit, 120));
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
+
   $('#b-fight').addEventListener('click', fight);
   $('#b-clear').addEventListener('click', () => { game.placement = {}; game.selected = null; render(); });
   $('#b-speed').addEventListener('click', () => { game.speed = SPEEDS[(SPEEDS.indexOf(game.speed) + 1) % SPEEDS.length]; render(); });
 
   window.Battle = {
-    start, placement, hide: () => { root.hidden = true; },
+    start, placement, fit, hide: () => { root.hidden = true; },
     // Current fight, read by automated tests.
     debug: () => ({ state: game.state, army: game.army }),
   };
