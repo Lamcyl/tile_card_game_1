@@ -87,7 +87,7 @@
   const goldNow = () => (run() ? run().gold || 0 : 0);
   const gopts = () => P.genOpts(save);                 // WP18 Heat / Descend options for Gen (enemy tweaks, level shift, reward multiplier)
   // Boss Rations of a boss node right now: first = never beaten on this account (a new frontier, pays more), else a toll boss. Grows with the level (power curve).
-  const bossGain = (n) => P.bossSupplies(Gen.scaled(n, gopts()).level, !save.bossesBeaten.includes(n.sub));
+  const bossGain = (n) => P.bossSupplies(Gen.scaled(n, gopts()).level, !save.bossesBeaten.includes(n.sub), run() ? run().newDown : 0);
   const heal = (n) => P.healAmt(save, n);              // WP18 Heat "Bitter Herbs": healing is halved
 
   // ---------- HUD ----------
@@ -156,7 +156,7 @@
   function supplyNote(n) {
     if (n.type !== 'boss') return '<span class="cost">🍙 Costs 1 Ration</span>';
     const g = bossGain(n), first = !save.bossesBeaten.includes(n.sub);
-    return '<span class="cost gain">🍙 Boss: +' + g + ' Rations' + (first ? ' (new area)' : '') + '</span>';
+    return '<span class="cost gain">🍙 Boss: ' + (g > 0 ? '+' + g + ' Rations' : 'free passage (Ration refunded)') + (first ? ' · new area' : '') + '</span>';
   }
 
   function nodeSheet(n) {
@@ -175,8 +175,10 @@
       else if (preview.intro) body += '<p class="gimmick-note"><b>' + esc(preview.intro.name) + (preview.intro.rule && preview.intro.rule !== 'Elite' ? ' · ' + esc((preview.intro.badge ? preview.intro.badge + ' ' : '') + preview.intro.rule) : '') + '.</b> ' + esc(preview.intro.text) + '</p>';
       if (guard) body += '<p class="muted">A guard stands over the chest. Beat it to open the cache: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + Gen.GUARD_GOLD + ' and a reward of your choice, plus the usual fight Souls.</p>';
       else body += '<p class="muted">' + (n.type === 'boss'
-        ? (save.bossesBeaten.includes(n.sub) ? 'Already defeated once. Fight again for Souls.' : 'Defeat it to reveal ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + (sub.unlocks.length ? '.' : '. This is a final boss.'))
+        ? (save.bossesBeaten.includes(n.sub) ? 'Already defeated: a toll boss on the way deeper (pays few Rations, no first-kill bonus).' : 'Defeat it to reveal ' + sub.unlocks.map((u) => World.SUB_BY[u].name).join(' and ') + (sub.unlocks.length ? '.' : '. This is a final boss.'))
         : n.type === 'elite' ? 'A tougher fight that pays double Souls.' : 'A normal fight.') + ' Reward: ✦ ' + souls + ', up to ✦ ' + Math.round(Gen.soulsFor(n, 3, gopts()) * P.soulRate(save)) + ' with ★★★ (no damage, plus a bonus item roll).</p>';
+      { const rw = Gen.rewardFor(guard || n, gopts()); // what the post-battle choice offers here (Gen.rewardFor): deeper fights pay more
+        body += '<p class="muted small">After the fight: upgrades of +' + rw.atk + ' ATK / +' + rw.block + ' block, heal ' + rw.heal + ' HP' + (rw.hp ? ', Fortify +' + rw.hp + ' max HP' : '') + (rw.team ? ', Warcry (all attackers +' + rw.team + ')' : '') + (n.type !== 'battle' ? ', a relic' : '') + '. Gear drops at item level ' + (Gen.scaled(n, gopts()).level + P.itemLvBonus(save)) + '.</p>'; }
       body += '<p>' + supplyNote(guard || n) + '</p>';
       if (!guard && !unseen) body += '<div class="drops"><h4>Possible drops <small>item level ' + n.level + (n.type === 'elite' ? ' · an elite always drops something' : '') + '</small></h4>' + Items.tableFor(n).map((e) => dropRow(e, n)).join('') + '</div>';
       if (n.type === 'boss') body += tokenBlock(n);
@@ -238,7 +240,7 @@
       const bg = n.type === 'boss' ? bossGain(n) : 0;
       const souls = Math.round(Gen.soulsFor(g, 1, gopts()) * P.soulRate(save));
       chips = '<div class="card-enemies">' + (unseen ? '<span class="enemy-chip unknown" title="Not scouted yet">?</span>'.repeat(3) : preview.enemies.map((e) => enemyChip(e.type)).join('')) + '</div>' +
-        '<span class="cost' + (bg > 0 ? ' gain' : '') + '">' + (bg > 0 ? '+' + bg : '−1') + ' 🍙</span><span class="cost">✦ ' + souls + '+</span>';
+        '<span class="cost' + (n.type === 'boss' ? ' gain' : '') + '">' + (n.type === 'boss' ? (bg > 0 ? '+' + bg : '±0') : '−1') + ' 🍙</span><span class="cost">✦ ' + souls + '+</span>';
       if (unseen) note = '<p class="card-line">🔭 Not scouted: you see the danger, not what lurks here.</p>';
       else if (preview.intro) note = '<p class="card-line gimmick"><b>' + esc((preview.intro.badge ? preview.intro.badge + ' ' : '') + (preview.intro.rule && preview.intro.rule !== 'Elite' ? preview.intro.rule : preview.intro.name)) + '</b> ' + esc(preview.intro.text) + '</p>';
       else if (guard) note = '<p class="card-line">A guard stands over the chest: beat it to open the cache.</p>';
@@ -833,7 +835,7 @@
     // Rations: normal and elite wins cost 1, a boss adds some.
     const boss = n.type === 'boss', wasBeaten = save.bossesBeaten.includes(n.sub);
     const gain = boss ? bossGain(n) : -1;
-    if (boss) r.bossesDown = (r.bossesDown || 0) + 1;
+    if (boss) { r.bossesDown = (r.bossesDown || 0) + 1; if (!wasBeaten) r.newDown = (r.newDown || 0) + 1; } // newDown: new areas conquered this run (each pays x0.8 less Rations)
     r.supplies = gain > 0 ? P.addSupplies(r.supplies, gain) : r.supplies + gain;
     r.stars = (r.stars || 0) + stars;
     let title = 'Victory ' + '★'.repeat(stars), text = '✦ ' + gained + ' Souls, 🪙 ' + goldGain + ' Gold. You lost ' + state.damageTaken + ' HP.' + (stars === 3 ? ' Flawless: bonus loot roll!' : '');
@@ -863,7 +865,7 @@
     const bountyLine = done.length ? '<div class="bounty-done">' + done.map((b) => '<p>🎯 Bounty complete: <b>' + esc(Bounties.text(b)) + '</b> · 💎 ' + b.reward + ' at run end</p>').join('') + '</div>' : '';
     let keyNote = '';
     if ((boss || n.type === 'elite') && (r.keys || 0) < World.MAX_KEYS) { r.keys = (r.keys || 0) + 1; keyNote = ' · 🗝 <b>+1 Key</b> (opens a hidden Sealed Cache)'; }
-    const supLine = '<p class="supply-line">🍙 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Rations</b>' + (!wasBeaten ? ' (new area)' : '') : 'Spent <b>1 Ration</b>') + ' · ' + Math.max(0, r.supplies) + ' left' + keyNote + '.</p>';
+    const supLine = '<p class="supply-line">🍙 ' + (boss ? 'The boss falls: ' + (gain > 0 ? '<b>+' + gain + ' Rations</b>' : '<b>its Ration is refunded</b>') + (!wasBeaten ? ' (new area pays more)' : ' (toll boss)') : 'Spent <b>1 Ration</b>') + ' · ' + Math.max(0, r.supplies) + ' left' + keyNote + '.</p>';
     const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
       checkFeats(true) + (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'No free slot: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
     persist(); renderAll();

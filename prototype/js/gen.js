@@ -114,7 +114,9 @@
   // They are what stretches the campaign (Greenvale cleared about run 3-6, Frostveil / Ember Peaks about run 15-25, see docs/IMPLEMENTATION_PLAN.md WP18)
   // and are checked against the median-account reference of `node tools/validate-gen.js bosses`. Per-boss fine tuning: `adj: [hp, atk]` in boss-defs.js.
   // Experiments: TUNE='{"hp":[...5 numbers],"atk":[...5 numbers]}' (Node tools only) multiplies on top.
-  const BOSS_BAND = { hp: [1.0, 1.9, 1.8, 1.55, 1.4], atk: [1, 1.3, 1.4, 1.4, 1.4] };
+  // Rework "depth pays": the player side of the curve rose with depth (run cap 1.5 + 0.3L ATK, gear x(1 + 0.2w)), so the two deep bands (Lv10-12, Lv13+) were raised x1.3 / x1.35 HP and x1.1 ATK
+  // (was hp 1.55 / 1.4, atk 1.4 / 1.4); validate-gen.js POWER was raised to match and every boss still costs 20-50% of the reference HP.
+  const BOSS_BAND = { hp: [1.0, 1.9, 1.8, 2.0, 1.9], atk: [1, 1.3, 1.4, 1.54, 1.54] };
   const TUNE = (typeof process !== 'undefined' && process.env && process.env.TUNE) ? JSON.parse(process.env.TUNE) : {};
   const band = (L) => (L <= 4 ? 0 : L <= 6 ? 1 : L <= 9 ? 2 : L <= 12 ? 3 : 4);
   const tune = (k, L) => BOSS_BAND[k][band(L)] * (TUNE[k] ? TUNE[k][band(L)] : 1);

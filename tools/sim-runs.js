@@ -95,7 +95,7 @@ function playRun(save0) {
   // Per-run gates (app.js): only Sunny Meadows is open at the start (the sim never starts at a Wayshrine); a boss opens the areas it leads to for this run.
   // Endgame 'farm' mode keeps every area open (the player starts at a lit Wayshrine deep in the map).
   const runOpen = new Set(save.farm ? World.SUBAREAS.map((x) => x.id) : ['meadow']);
-  let gold = Progress.startGold(save), keys = 0, reviveUsed = 0, rerolls = Progress.rewardRerolls(save), hp = Progress.maxHp(save), supplies = Progress.startSupplies(save), cleared = new Set(), wins = 0, maxLv = 0, souls = 0, bosses = 0, items = 0, wonFirst = [];
+  let gold = Progress.startGold(save), keys = 0, reviveUsed = 0, rerolls = Progress.rewardRerolls(save), hp = Progress.maxHp(save), supplies = Progress.startSupplies(save), cleared = new Set(), wins = 0, maxLv = 0, souls = 0, bosses = 0, newDown = 0, items = 0, wonFirst = [];
   for (;;) {
     if (supplies <= 0) return { wins, maxLv, souls, bosses, items, end: 'supplies', start: Progress.startSupplies(save0), save };
     // Sub-areas whose boss already fell are skipped (nothing new there); fights are taken lowest level first,
@@ -140,7 +140,8 @@ function playRun(save0) {
     // Depth pays: after the warm-up and the gate rush, the player grinds the HIGHEST fights of the frontier first (rewards and Souls grow with the level, a Ration costs the same).
     // The highest fight it can handle: its level is at most one above the deepest boss the account has beaten (the frontier area is graded by that boss).
     const safeLv = Math.max(3, ...save.bossesBeaten.map((b) => World.nodes.find((x) => x.sub === b && x.type === 'boss').level)) + 1 + (gopts.descend ? 2 * gopts.descend : 0);
-    const grind = wins >= 3 && !process.env.ASCEND ? (normals.filter((x) => x.level <= safeLv).sort((a, b) => b.level - a.level)[0] || normals[0]) : normals[0];
+    const grind = wins >= 3 && save.bossesBeaten.length && !process.env.ASCEND ? // (a fresh account has no frontier boss to grade by: it climbs from the bottom)
+       (normals.filter((x) => x.level <= safeLv).sort((a, b) => b.level - a.level)[0] || normals[0]) : normals[0];
     const node = rush || (bossNode && (supplies <= 2 || !normals.length) ? bossNode : (grind || bossNode));
     cleared.add(node.id);
     if (process.env.LOGBOSS && (node.type === 'boss' || node.type === 'elite')) { // WP18: snapshot of the account at every boss / elite fight (feeds the validator's reference squads)
@@ -168,7 +169,7 @@ function playRun(save0) {
     takeDrop(Items.grantDrop(save, node, seed, { lvBonus: Progress.itemLvBonus(save) }) || (!save0.runs && wins === 2 && !items ? Items.guaranteedDrop(save, node) : null));
     if (stars === 3) takeDrop(Items.grantDrop(save, node, seed + ':star', { bonus: true, lvBonus: Progress.itemLvBonus(save) })); // 3-star clears earn a bonus roll (app.js battleOver)
     if (node.type === 'boss') {
-      supplies = Progress.addSupplies(supplies, Progress.bossSupplies(Gen.scaled(node, gopts).level, !save.bossesBeaten.includes(node.sub))); bosses++; souls += Gen.BOSS_BONUS_SOULS; // real rule: Rations grow with the boss level, new areas pay ~3x a toll boss
+      { const first = !save.bossesBeaten.includes(node.sub); supplies = Progress.addSupplies(supplies, Progress.bossSupplies(Gen.scaled(node, gopts).level, first, newDown)); if (first) newDown++; } bosses++; souls += Gen.BOSS_BONUS_SOULS; // real rule: Rations grow with the boss level, new areas pay ~3x a toll boss
       for (const u of World.SUB_BY[node.sub].unlocks) { runOpen.add(u); if (!save.unlocked.includes(u)) save.unlocked.push(u); } // opens for this run; the fog lifts for good
       if (!save.bossesBeaten.includes(node.sub)) save.bossesBeaten.push(node.sub);
     } else supplies -= 1;

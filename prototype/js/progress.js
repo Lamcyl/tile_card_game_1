@@ -103,10 +103,12 @@
 const BASE_SUPPLIES = 8;   // battles a fresh account can fight per run
 // Boss Rations (rework "depth pays"): a boss win's NET Rations change (+N, already after the 1 Ration the fight costs) grows with the boss level along the power curve (World.power).
 //  first: an area boss this account has never beaten (a new frontier) pays round(2 + 1.3w): Lv4 +3, Lv7 +4, Lv9 +5, Lv11 +6, Lv13 +7, Lv15 +9.
+//         ...times 0.8 for every other new area already conquered in the same run (newDown), min 1.
 //  toll:  a boss of an area already conquered (re-fought as the gate of the rush) pays floor(w / 1.5): Lv4-6 +0 (free passage), Lv7-10 +1, Lv11-14 +2, Lv15 +3. The rush is nearly free but never a Ration farm.
 // Rations are capped (MAX_RATIONS) as a last safety net; the real brake is that every spot can be fought once per run.
 const MAX_RATIONS = 60;
-const bossSupplies = (level, first) => (first ? Math.round(2 + 1.3 * root.World.power(level)) : Math.floor(root.World.power(level) / 1.5));
+const NEW_AREA_DECAY = 0.8; // every further never-beaten boss conquered in the SAME run pays x0.8 less (newDown = how many already fell this run): a run cannot chain-conquer the world on Rations
+const bossSupplies = (level, first, newDown) => (first ? Math.max(1, Math.round((2 + 1.3 * root.World.power(level)) * Math.pow(NEW_AREA_DECAY, newDown || 0))) : Math.floor(root.World.power(level) / 1.5));
 const addSupplies = (cur, delta) => Math.min(Math.max(cur, MAX_RATIONS), cur + delta);
 const Items = () => root.Items;
 
@@ -435,7 +437,7 @@ const startSupplies = (s) => BASE_SUPPLIES + 2 * level(s, 'provisions') + gear(s
   }
 
   const Progress = {
-    ROSTER, ROSTER_BY, RARITY, TRAITS, TRAIT_STEPS, BASE_CP, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, MAX_RATIONS, bossSupplies, addSupplies,
+    ROSTER, ROSTER_BY, RARITY, TRAITS, TRAIT_STEPS, BASE_CP, UPGRADES, UPGRADE_BY, BASE_HP, BASE_SUPPLIES, MAX_RATIONS, NEW_AREA_DECAY, bossSupplies, addSupplies,
     PULL_COST, PULL10_COST, ODDS, PITY_AT, MAX_STARS, MAXED_DUST, OFFICE_COST, MASTERY_XP, MASTERY_PERKS, STAR_TEXT,
     starsOf, masteryOf, masteryLevel, growthFx, addXp, poolFor, grantUnit, pullOnce, pull, officeTrade, recruitable,
     CURRENCIES, balance, canSpend, earn, spend, spendAll, bossCrystals,
