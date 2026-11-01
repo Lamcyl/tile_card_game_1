@@ -239,7 +239,7 @@
 
   // Run upgrades cannot grow without bound however long a run lasts: a unit's run bonus is capped by the deepest level reached on the run
   // (the player side of the curve: linear in L, 1.5 + 0.3L ATK, 1 + 0.2L block, 1 + 0.15L boost). Deep fights fill the cap in a few picks, shallow ones barely move it.
-  const runCap = (L) => ({ atk: Math.round(1.5 + 0.3 * L), block: Math.round(1 + 0.2 * L), amount: Math.round(1 + 0.15 * L) });
+  const runCap = (L) => ({ atk: Math.max(4, Math.round(1.5 + 0.3 * L)), block: Math.round(1 + 0.2 * L), amount: Math.round(1 + 0.15 * L) });
   const clipTo = (cur, step, cap) => Math.max(0, Math.min(step, cap - (cur || 0)));
 
   const Gen = { DESCEND_LV, rewardFor, runCap, clipTo, scaled, generateBattle, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };

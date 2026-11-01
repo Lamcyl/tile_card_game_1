@@ -40,7 +40,7 @@
                intro: 'A thick winter pelt: overkill and Pierce never get past the tiger to the tile behind it.' },
     frozen:  { name: 'Nidhogg', adj: [0.9, 1],      gimmick: 'ward', gp: 4, back: '.t.t.', front: 'b.B.b', hp: 0.4, atk: 1, bossHp: 2.2, bossAtk: 1.0,
                intro: 'Iron scales: hits weaker than 4 damage do nothing. Stack boosts.' },
-    rime:    { name: 'Hel',          kind: 'healer', back: '..b..', front: 't.B.t', hp: 0.5, atk: 1, bossHp: 2.6, bossAtk: 1.0,
+    rime:    { name: 'Hel',          kind: 'healer', adj: [0.88, 1], back: '..b..', front: 't.B.t', hp: 0.5, atk: 1, bossHp: 2.6, bossAtk: 1.0,
                intro: 'The queen of the dead mends every neighbour by 2 each turn. Cut her off from her guard.' },
     glacier: { name: 'Morana', adj: [0.8, 0.8],       gimmick: 'veil', gp: 1, back: 'b.m.b', front: 't.B.t', hp: 0.4, atk: 1, bossHp: 1.8, bossAtk: 1.0,
                intro: 'A blizzard hides Morana on turn 1. Break her healers first, then strike on turn 2.' },

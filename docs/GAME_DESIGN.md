@@ -329,7 +329,7 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
 
 - **After each battle, choose 1 of 3 (or more):** the size of the choices **grows with the fight's level and type** (24.8, "Power curve"; a Lv15 boss is worth several Lv3 fights).
   - ❤️ **Heal** HP: (4 + 0.6 x Lv) HP, x1.25 elite, x1.5 boss.
-  - ⬆️ **Upgrade** a unit for this run: +N ATK (N = 1 at Lv1-11, 2 from Lv12, elites 1-3, bosses 1-4), +N/2 block or boost, or +1 range (rare, region 2+). A unit's run bonus is capped by the deepest level reached on the run (ATK cap 1.5 + 0.3 x Lv), so deep fights fill the cap fast and shallow ones barely move it.
+  - ⬆️ **Upgrade** a unit for this run: +N ATK (N = 1 at Lv1-11, 2 from Lv12, elites 1-3, bosses 1-4), +N/2 block or boost, or +1 range (rare, region 2+). A unit's run bonus is capped by the deepest level reached on the run (ATK cap max(4, 1.5 + 0.3 x Lv)), so deep fights fill the cap fast and shallow ones barely move it.
   - 📣 **Warcry**: every attacker +1 ATK (bosses from Lv9, elites from Lv11, ordinary fights from Lv13 one time in four). 💪 **Fortify**: +(1 + Lv/3) max HP for the run (from Lv6, replaces the Warcry slot).
   - 💠 **Relic**: a run-only effect.
 - **Relics** give each run its own identity, even with the same squad. They bend rules rather than adding stats:
@@ -697,7 +697,7 @@ Feedback: after the first two bosses a boss paid no Rations, and the post-battle
 | Run ATK step (post-battle) | round((0.4 + 0.3w) x k), k = 1 / 1.5 elite / 2 boss; block and boost half of it |
 | Heal / Fortify (max HP) | (4 + 0.6L) / (1 + L/3), x1.25 elite, x1.5 boss |
 | Warcry (all attackers +1) | boss Lv9+, elite Lv11+, ordinary Lv13+ one time in four |
-| Run cap per unit | ATK 1.5 + 0.3L, block 1 + 0.2L, boost 1 + 0.15L of the deepest level reached (every source: fights, shops, shrines, events) |
+| Run cap per unit | ATK max(4, 1.5 + 0.3L), block 1 + 0.2L, boost 1 + 0.15L of the deepest level reached (every source: fights, shops, shrines, events) |
 | Item level numbers | x(1 + 0.2w(iLv)); item level = node level (+Heat/Descend); Rations and range never scale |
 | Boss Rations, new area | round((2 + 1.3w) x 0.8^n), n = new areas already conquered in this run, min 1 |
 | Boss Rations, conquered area (toll) | floor(w / 1.5) |
