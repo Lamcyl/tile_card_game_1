@@ -22,10 +22,10 @@
   const TOKENS_NEEDED = 6;            // boss tokens that buy one of the boss's Legendaries
   const LEGEND_CHANCE = 0.05, LEGEND_PITY = 0.04; // per boss kill, +4% for every kill without a Legendary
   const UNIQUE_PITY = 0.05, PITY_CAP = 0.9;       // unique item: +5% for every win without it
-  // Item level follows the power curve (rework "depth pays"): numbers are multiplied by 0.9 + 0.3 w(iLv), w = (iLv/5)^1.5 (x1.2 at iLv5 as before, x1.75 at 10, x2.46 at 15; was +5% per level, x1.7 at 15).
+  // Item level follows the power curve (rework "depth pays"): numbers are multiplied by 1 + 0.2 w(iLv), w = (iLv/5)^1.5 (x1.2 at iLv5 as before, x1.57 at 10, x2.04 at 15, x2.5 at 19; was +5% per level: x1.45 at 10, x1.7 at 15).
   // Starting Rations and range never scale (they would break the Ration economy / one-turn puzzles).
   const ILVL_FLAT = ['supplies', 'range'];
-  const ilvlMul = (lv) => 0.9 + 0.3 * World.power(lv || 1);
+  const ilvlMul = (lv) => 1.0 + 0.2 * World.power(lv || 1);
   const scale = (base, lv, kind) => (ILVL_FLAT.includes(kind) ? base : Math.max(base, Math.floor(base * ilvlMul(lv) + 1e-9)));
   // Strength of each effect by rarity.
   const MAG = {

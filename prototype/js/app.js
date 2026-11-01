@@ -884,8 +884,8 @@
   // Every unit upgrade the run could take now: +1 ATK / block / boost, and +1 range (rare, from the second region on, design 24.2).
   // `rw` (Gen.rewardFor) scales the amounts for the post-battle choice; shrines, shops and events pass none and give +1.
   function upgradePool(node, R, rw) {
-    const r = run(), cap = rw ? Gen.runCap(Math.max(r.maxLevel || 0, rw.level)) : null; // the post-battle choice respects the run cap (Gen.runCap), shrines and shops do not
-    const room = (id, k, step) => (rw ? Gen.clipTo(((r.mods[id] || {})[k]), step, cap[k]) : 1);
+    const r = run(), cap = Gen.runCap(Math.max(r.maxLevel || 0, rw ? rw.level : node ? node.level : 0)); // units already at the run cap (Gen.runCap) are not offered
+    const room = (id, k, step) => Gen.clipTo(((r.mods[id] || {})[k]), step, cap[k]);
     const army = P.buildArmy(save, r.mods), regionIdx = node ? World.SUB_BY[node.sub].regionIndex : 0, pool = [];
     for (const c of army) {
       const t = E.CARD_TYPES[c.type];
@@ -899,7 +899,11 @@
     return pool;
   }
   const takeFrom = (pool, R, n) => { const out = []; while (out.length < n && pool.length) out.push(pool.splice(Math.floor(R() * pool.length), 1)[0]); return out; };
-  function applyUpgrade(p) { const m = run().mods[p.id] || (run().mods[p.id] = {}); m[p.kind] = (m[p.kind] || 0) + (p.n || 1); }
+  // Every source of run upgrades (post-battle choice, shrine, shop, event) respects the run cap (Gen.runCap) of the deepest level reached.
+  function applyUpgrade(p, node) {
+    const r = run(), m = r.mods[p.id] || (r.mods[p.id] = {}), cap = Gen.runCap(Math.max(r.maxLevel || 0, node ? node.level : 0))[p.kind];
+    m[p.kind] = (m[p.kind] || 0) + (cap === undefined ? (p.n || 1) : Gen.clipTo(m[p.kind], p.n || 1, cap));
+  }
   function giveRelic(R) {
     const r = run(), left = Relics.LIST.filter((x) => !r.relics.includes(x.id));
     if (r.relics.length >= Relics.MAX_PER_RUN || !left.length) return null;
@@ -918,7 +922,7 @@
       const b = ev.target.closest('[data-reward]'); if (!b) return;
       const p = picks[Number(b.dataset.reward)];
       if (p.kind === 'heal') { const before = r.hp; r.hp = Math.min(r.maxHp, r.hp + heal(8)); toast('The spring restores ' + (r.hp - before) + ' HP.'); }
-      else { applyUpgrade(p); toast(p.label.split(' · ')[0] + ' for ' + unitView(p.card).name + '.'); }
+      else { applyUpgrade(p, n); toast(p.label.split(' · ')[0] + ' for ' + unitView(p.card).name + '.'); }
       r.cleared.push(n.id); persist(); closeModal(); renderAll();
     };
   }
@@ -956,7 +960,7 @@
         if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + heal(8));
         else if (p.kind === 'tonic') { r.maxHp += 2; r.hp += 2; }
         else if (p.kind === 'relic') { if (!r.relics.includes(p.id)) r.relics.push(p.id); }
-        else applyUpgrade(p);
+        else applyUpgrade(p, n);
         r.cleared.push(n.id); persist(); closeModal(); renderAll(); toast('Bought: ' + p.label.split(':')[0] + '. The market packs up.'); return;
       }
       const b = ev.target.closest('[data-reward]'); if (!b || b.disabled) return;
@@ -982,7 +986,7 @@
       if (fx.souls) r.souls += fx.souls;
       if (fx.maxhp) { r.maxHp += fx.maxhp; r.hp += fx.maxhp; }
       if (fx.hp) r.hp = Math.max(1, Math.min(r.maxHp, r.hp + (fx.hp > 0 ? heal(fx.hp) : fx.hp)));
-      const ap = () => { const picks = takeFrom(upgradePool(n, R).filter((p) => fx.atk ? p.kind === 'atk' : true), R, 1); if (picks[0]) { applyUpgrade(picks[0]); notes.push(picks[0].label); } };
+      const ap = () => { const picks = takeFrom(upgradePool(n, R).filter((p) => fx.atk ? p.kind === 'atk' : true), R, 1); if (picks[0]) { applyUpgrade(picks[0], n); notes.push(picks[0].label); } };
       for (let k = 0; k < (fx.atk || 0) + (fx.up || 0); k++) ap();
       if (fx.relic) { const rel = giveRelic(R); notes.push(rel ? rel.name + ': ' + rel.text : 'You have no room for another relic.'); }
       r.cleared.push(n.id); persist(); renderAll();

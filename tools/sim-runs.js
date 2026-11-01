@@ -110,7 +110,7 @@ function playRun(save0) {
     const pois = open.filter((n) => ['shrine', 'shop', 'event'].includes(n.type) || (n.type === 'treasure' && !n.guarded));
     const guardOf = (n) => Object.assign({}, n, { type: 'battle', role: 'armored', guardFor: true });
     const fights = open.filter((n) => !pois.includes(n) && n.type !== 'secret').map((n) => (n.guarded ? guardOf(n) : n)).sort((a, b) => (a.type === 'boss') - (b.type === 'boss') || (save.farm ? b.level - a.level : a.level - b.level)); // farm (endgame): deepest spots first
-    const ri = (n) => World.SUB_BY[n.sub].regionIndex, atkUp = () => { const att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker'); const id = att[Math.floor(Math.random() * att.length)]; mods[id] = { atk: ((mods[id] || {}).atk || 0) + 1 }; };
+    const ri = (n) => World.SUB_BY[n.sub].regionIndex, atkUp = () => { const cap = Gen.runCap(maxLv).atk, att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker' && ((mods[id] || {}).atk || 0) < cap); if (!att.length) return; const id = att[Math.floor(Math.random() * att.length)]; mods[id] = Object.assign(mods[id] || {}, { atk: ((mods[id] || {}).atk || 0) + 1 }); }; // the run cap applies to shops and events too
     const maxHp = () => Progress.maxHp(save), spring = pois.find((n) => n.type === 'shrine'); // heal when below 60% HP
     if (spring && hp < maxHp() * 0.6) { cleared.add(spring.id); hp = Math.min(maxHp(), hp + heal(8)); continue; }
     const cache = pois.find((n) => n.type === 'treasure'); if (cache) { cleared.add(cache.id); souls += Gen.CACHE_SOULS; gold += Gen.CACHE_GOLD + 2 * ri(cache); continue; }
