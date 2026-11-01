@@ -56,6 +56,12 @@ const TILEMAPS = [
   ['tilemap-4-lowpoly-terraces', 'Low-poly terraces', 'Faceted diorama: a raised rock plateau, a sunken lake, pine cones, octagon pads under monsters and the hero.'],
   ['tilemap-5-flat-bold-regions', 'Flat bold regions', 'Minimal tilemap of bold colour regions with rounded plates only under tiles of interest; fog is scalloped lavender.'],
 ];
+const TILEMAPS4 = [
+  ['tilemap4-a-bright-block-diorama', 'A. Bright block diorama', 'Isometric tile blocks with earth-layer sides, grass terraces, a stone rock wall and gatehouse, and water all around.'],
+  ['tilemap4-b-pastel-island-chain', 'B. Pastel island chain', 'Softer pastel palette and deeper bevels: islands joined by narrow strips, blossom trees and drifting fog clouds.'],
+  ['tilemap4-c-moody-fortress-plateau', 'C. Moody fortress plateau', 'Darker three-quarter view: stone plateaus, a battlemented wall and a torch-lit boss gate with its guardian beside it.'],
+  ['tilemap4-d-watercolour-tile-blocks', 'D. Watercolour tile blocks', 'Our indigo, moss, ochre and rose palette with vermilion accents, rendered as stacked three-quarter tile blocks.'],
+];
 const TILEMAPS3 = [
   ['tilemap3-a-wash-ink-outlines', 'A. Wash ground, inked objects', 'Seamless watercolour ground with a thin ink outline on the tall trees, cliffs, gate, shrine, shop and chest.'],
   ['tilemap3-b-painted-soft-shadow', 'B. Wash ground, painted objects', 'Same ground; objects have no outlines, only soft painted shading and a gentle drop shadow that anchors them.'],
@@ -66,9 +72,9 @@ const TILEMAPS3 = [
 ];
 
 // node build-boards.mjs locations → the round-2 location boards; maps → overworld map styles.
-const round = ['locations', 'maps', 'explore', 'tiles', 'tilemaps', 'tilemaps3'].includes(process.argv[2]) ? process.argv[2] : '';
-const LIST = round === 'tilemaps3' ? TILEMAPS3 : round === 'tilemaps' ? TILEMAPS : round === 'tiles' ? TILES : round === 'explore' ? EXPLORE : round === 'maps' ? MAPS : round ? LOCATIONS : BOARDS;
-const dir = new URL(round === 'maps' || round === 'explore' || round === 'tiles' || round === 'tilemaps' || round === 'tilemaps3' ? './maps/' : './boards/', import.meta.url);
+const round = ['locations', 'maps', 'explore', 'tiles', 'tilemaps', 'tilemaps3', 'tilemaps4'].includes(process.argv[2]) ? process.argv[2] : '';
+const LIST = round === 'tilemaps4' ? TILEMAPS4 : round === 'tilemaps3' ? TILEMAPS3 : round === 'tilemaps' ? TILEMAPS : round === 'tiles' ? TILES : round === 'explore' ? EXPLORE : round === 'maps' ? MAPS : round ? LOCATIONS : BOARDS;
+const dir = new URL(round === 'maps' || round === 'explore' || round === 'tiles' || round === 'tilemaps' || round === 'tilemaps3' || round === 'tilemaps4' ? './maps/' : './boards/', import.meta.url);
 let n = 0;
 const cards = LIST.map(([slug, name, desc]) => {
   n++;
@@ -83,7 +89,7 @@ const cards = LIST.map(([slug, name, desc]) => {
 const page = `<!DOCTYPE html>
 <html lang="en"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${round === 'tilemaps3' ? 'Tile map designs, round 3' : round === 'tilemaps' ? 'Tile map designs, round 2' : round === 'tiles' ? 'Tile map designs' : round === 'explore' ? 'Exploration Map' : round === 'maps' ? 'Overworld Map Styles' : 'Board ' + (round ? 'Locations' : 'Designs')}</title>
+<title>${round === 'tilemaps4' ? 'Tile map designs, round 4' : round === 'tilemaps3' ? 'Tile map designs, round 3' : round === 'tilemaps' ? 'Tile map designs, round 2' : round === 'tiles' ? 'Tile map designs' : round === 'explore' ? 'Exploration Map' : round === 'maps' ? 'Overworld Map Styles' : 'Board ' + (round ? 'Locations' : 'Designs')}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,11 +119,11 @@ const page = `<!DOCTYPE html>
   .missing { height: 100%; display: grid; place-items: center; color: #999; }
 </style>
 <div class="wrap">
-  <header class="top"><h1>${round === 'tilemaps3' ? 'Tile map designs, round 3' : round === 'tilemaps' ? 'Tile map designs, round 2' : round === 'tiles' ? 'Tile map designs' : round === 'explore' ? 'Exploration map' : round === 'maps' ? 'Overworld map styles' : 'Board designs' + (round ? ': locations' : '')}</h1><p>${round === 'tilemaps3' ? 'Four blends of round 2\'s watercolour terrain with its crisp three-quarter objects, no filters used. Each shows the boss beside the gate door, enemies with skull pips, and the hero\'s four step tiles. Round-2 designs 1 and 3 are at the end for comparison. Tell me which to take further.' : round === 'tilemaps' ? 'Five seamless tilemaps, no grid lines: terrain joins into continuous ground with proper shores, forests and cliffs. The grid is felt through tile-sized objects and the soft highlight on the hero\'s step options. Tell me which numbers to take further.' : round === 'tiles' ? 'Five tile-based takes on the exploration map: every tile is passable ground, an obstacle or boundary, or a tile of interest (enemy with danger skulls, chest, shrine, shop, boss gate). No paths; the hero steps to a highlighted neighbouring tile. Tell me which numbers to take further.' : round === 'explore' ? 'Four takes on the zoomed-in map the player explores — choosing a direction and which monster to fight — in the Bright diorama style, with the zoomed-out overview last for comparison as the fast-travel map.' : round === 'maps' ? 'Six styles for the overworld map, each a phone-screen slice: the Camp and grassland at the bottom, other regions above, cleared, available and locked encounter nodes, elites, a boss and fog beyond it.' : 'Ten ' + (round ? 'locations' : 'directions') + ' for the 5×5 battle board (2 enemy rows on top, 3 player rows below), each shown on a phone screen with real units placed and one highlighted drop tile.'} Tell me which numbers to take further.</p></header>
+  <header class="top"><h1>${round === 'tilemaps4' ? 'Tile map designs, round 4' : round === 'tilemaps3' ? 'Tile map designs, round 3' : round === 'tilemaps' ? 'Tile map designs, round 2' : round === 'tiles' ? 'Tile map designs' : round === 'explore' ? 'Exploration map' : round === 'maps' ? 'Overworld map styles' : 'Board designs' + (round ? ': locations' : '')}</h1><p>${round === 'tilemaps4' ? 'Four tabletop-diorama takes: chunky tile blocks with visible earth and stone sides, flat-shaded low-poly props, enemies on round pedestals with skull pips, the hero\'s step tiles raised and lit, and unexplored tiles under fog. No filters used. Tell me which to take further.' : round === 'tilemaps3' ? 'Four blends of round 2\'s watercolour terrain with its crisp three-quarter objects, no filters used. Each shows the boss beside the gate door, enemies with skull pips, and the hero\'s four step tiles. Round-2 designs 1 and 3 are at the end for comparison. Tell me which to take further.' : round === 'tilemaps' ? 'Five seamless tilemaps, no grid lines: terrain joins into continuous ground with proper shores, forests and cliffs. The grid is felt through tile-sized objects and the soft highlight on the hero\'s step options. Tell me which numbers to take further.' : round === 'tiles' ? 'Five tile-based takes on the exploration map: every tile is passable ground, an obstacle or boundary, or a tile of interest (enemy with danger skulls, chest, shrine, shop, boss gate). No paths; the hero steps to a highlighted neighbouring tile. Tell me which numbers to take further.' : round === 'explore' ? 'Four takes on the zoomed-in map the player explores — choosing a direction and which monster to fight — in the Bright diorama style, with the zoomed-out overview last for comparison as the fast-travel map.' : round === 'maps' ? 'Six styles for the overworld map, each a phone-screen slice: the Camp and grassland at the bottom, other regions above, cleared, available and locked encounter nodes, elites, a boss and fog beyond it.' : 'Ten ' + (round ? 'locations' : 'directions') + ' for the 5×5 battle board (2 enemy rows on top, 3 player rows below), each shown on a phone screen with real units placed and one highlighted drop tile.'} Tell me which numbers to take further.</p></header>
   <section class="grid">
 ${cards}
   </section>
 </div>`;
-const out = round === 'tilemaps3' ? 'tilemaps3-gallery.html' : round === 'tilemaps' ? 'tilemaps-gallery.html' : round === 'tiles' ? 'tiles-gallery.html' : round === 'explore' ? 'explore-gallery.html' : round === 'maps' ? 'maps-gallery.html' : round ? 'boards-locations.html' : 'boards-gallery.html';
+const out = round === 'tilemaps4' ? 'tilemaps4-gallery.html' : round === 'tilemaps3' ? 'tilemaps3-gallery.html' : round === 'tilemaps' ? 'tilemaps-gallery.html' : round === 'tiles' ? 'tiles-gallery.html' : round === 'explore' ? 'explore-gallery.html' : round === 'maps' ? 'maps-gallery.html' : round ? 'boards-locations.html' : 'boards-gallery.html';
 writeFileSync(new URL('./' + out, import.meta.url), page);
 console.log(out, Math.round(page.length / 1024) + ' kB');
