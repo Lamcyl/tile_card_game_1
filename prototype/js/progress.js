@@ -102,11 +102,11 @@
   const BASE_CP = 8;   // Command Points: a Common unit costs 1, Rare 2, Epic 3, Legendary 4
 const BASE_SUPPLIES = 8;   // battles a fresh account can fight per run
 // Boss Rations (rework "depth pays"): a boss win's NET Rations change (+N, already after the 1 Ration the fight costs) grows with the boss level along the power curve (World.power).
-//  first: an area boss this account has never beaten (a new frontier) pays round(1.6 + 2w): Lv4 +3, Lv7 +5, Lv9 +6, Lv11 +8, Lv13 +10, Lv15 +12.
-//  toll:  a boss of an area already conquered (re-fought as the gate of the rush) pays round(0.7w): Lv4-6 +1, Lv9 +2, Lv13 +3, Lv15 +4. The rush is nearly free but never a Ration farm.
+//  first: an area boss this account has never beaten (a new frontier) pays round(2 + 1.3w): Lv4 +3, Lv7 +4, Lv9 +5, Lv11 +6, Lv13 +7, Lv15 +9.
+//  toll:  a boss of an area already conquered (re-fought as the gate of the rush) pays floor(w / 1.5): Lv4-6 +0 (free passage), Lv7-10 +1, Lv11-14 +2, Lv15 +3. The rush is nearly free but never a Ration farm.
 // Rations are capped (MAX_RATIONS) as a last safety net; the real brake is that every spot can be fought once per run.
 const MAX_RATIONS = 60;
-const bossSupplies = (level, first) => (first ? Math.round(1.6 + 2 * root.World.power(level)) : Math.max(1, Math.round(0.7 * root.World.power(level))));
+const bossSupplies = (level, first) => (first ? Math.round(2 + 1.3 * root.World.power(level)) : Math.floor(root.World.power(level) / 1.5));
 const addSupplies = (cur, delta) => Math.min(Math.max(cur, MAX_RATIONS), cur + delta);
 const Items = () => root.Items;
 

@@ -884,15 +884,17 @@
   // Every unit upgrade the run could take now: +1 ATK / block / boost, and +1 range (rare, from the second region on, design 24.2).
   // `rw` (Gen.rewardFor) scales the amounts for the post-battle choice; shrines, shops and events pass none and give +1.
   function upgradePool(node, R, rw) {
-    const nA = rw ? rw.atk : 1, nB = rw ? rw.block : 1, nM = rw ? rw.amount : 1;
-    const r = run(), army = P.buildArmy(save, r.mods), regionIdx = node ? World.SUB_BY[node.sub].regionIndex : 0, pool = [];
+    const r = run(), cap = rw ? Gen.runCap(Math.max(r.maxLevel || 0, rw.level)) : null; // the post-battle choice respects the run cap (Gen.runCap), shrines and shops do not
+    const room = (id, k, step) => (rw ? Gen.clipTo(((r.mods[id] || {})[k]), step, cap[k]) : 1);
+    const army = P.buildArmy(save, r.mods), regionIdx = node ? World.SUB_BY[node.sub].regionIndex : 0, pool = [];
     for (const c of army) {
       const t = E.CARD_TYPES[c.type];
       if (t.role === 'attacker') {
-        pool.push({ kind: 'atk', n: nA, id: c.id, label: '+' + nA + ' ATK · ' + unitTitle(c.id), icon: t.icon, card: c.id });
+        const nA = room(c.id, 'atk', rw ? rw.atk : 1);
+        if (nA) pool.push({ kind: 'atk', n: nA, id: c.id, label: '+' + nA + ' ATK · ' + unitTitle(c.id), icon: t.icon, card: c.id });
         if (regionIdx >= 1 && ((c.pattern || t.pattern) !== 'straight' || c.range < 4) && R() < 0.4) pool.push({ kind: 'range', id: c.id, label: '+1 range · ' + unitTitle(c.id), icon: t.icon, card: c.id });
-      } else if (t.role === 'defender') pool.push({ kind: 'block', n: nB, id: c.id, label: '+' + nB + ' block · ' + unitTitle(c.id), icon: t.icon, card: c.id });
-      else if (t.effect !== 'mult') pool.push({ kind: 'amount', n: nM, id: c.id, label: '+' + nM + ' boost · ' + unitTitle(c.id), icon: t.icon, card: c.id });
+      } else if (t.role === 'defender') { const nB = room(c.id, 'block', rw ? rw.block : 1); if (nB) pool.push({ kind: 'block', n: nB, id: c.id, label: '+' + nB + ' block · ' + unitTitle(c.id), icon: t.icon, card: c.id }); }
+      else if (t.effect !== 'mult') { const nM = room(c.id, 'amount', rw ? rw.amount : 1); if (nM) pool.push({ kind: 'amount', n: nM, id: c.id, label: '+' + nM + ' boost · ' + unitTitle(c.id), icon: t.icon, card: c.id }); }
     }
     return pool;
   }
@@ -1000,7 +1002,8 @@
     while (picks.length < (relic ? 1 : 2) + P.rewardChoices(save) - 3 && pool.length) picks.push(pool.splice(Math.floor(R() * pool.length), 1)[0]);
     if (relic) picks.push({ kind: 'relic', id: relic.id, label: relic.name + ': ' + relic.text, icon: relicIcon(relic) });
     // Depth pays: elites and bosses from Lv7 (ordinary fights from Lv10, one time in three) also offer a team-wide Warcry; from Lv6 a Fortify (max HP).
-    const team = rw.team || (rw.teamChance && R() < rw.teamChance ? 1 : 0);
+    const capNow = Gen.runCap(Math.max(r.maxLevel || 0, rw.level)), teamRoom = P.buildArmy(save, r.mods).some((c) => E.CARD_TYPES[c.type].role === 'attacker' && ((r.mods[c.id] || {}).atk || 0) < capNow.atk);
+    const team = teamRoom ? (rw.team || (rw.teamChance && R() < rw.teamChance ? 1 : 0)) : 0;
     if (team) picks.push({ kind: 'team', n: team, label: 'Warcry: every attacker +' + team + ' ATK', icon: '📣' });
     if (!team && rw.hp && R() < 0.6) picks.push({ kind: 'maxhp', n: rw.hp, label: 'Fortify: +' + rw.hp + ' max HP', icon: '💪' });
     picks.push({ kind: 'heal', n: rw.heal, label: 'Heal ' + rw.heal + ' HP', icon: '❤️' });
@@ -1013,7 +1016,7 @@
       const p = picks[Number(b.dataset.reward)];
       if (p.kind === 'heal') r.hp = Math.min(r.maxHp, r.hp + heal(p.n));
       else if (p.kind === 'maxhp') { r.maxHp += p.n; r.hp += p.n; }
-      else if (p.kind === 'team') { for (const c of P.buildArmy(save, r.mods)) if (E.CARD_TYPES[c.type].role === 'attacker') { const m = r.mods[c.id] || (r.mods[c.id] = {}); m.atk = (m.atk || 0) + p.n; } }
+      else if (p.kind === 'team') { for (const c of P.buildArmy(save, r.mods)) if (E.CARD_TYPES[c.type].role === 'attacker') { const m = r.mods[c.id] || (r.mods[c.id] = {}); m.atk = (m.atk || 0) + Gen.clipTo(m.atk, p.n, Gen.runCap(r.maxLevel || 0).atk); } }
       else if (p.kind === 'relic') { (r.relics || (r.relics = [])).push(p.id); toast(Relics.BY_ID[p.id].name + ' joins the expedition.'); }
       else applyUpgrade(p);
       persist(); closeModal(); renderAll();

@@ -138,7 +138,9 @@ function playRun(save0) {
     // Gate boss of an already conquered area: straight through, but only after 3 warm-up wins this run (a cold +0 ATK squad would die to it and earn nothing).
     const rush = wins >= 3 ? fights.find((n) => n.type === 'boss' && save.bossesBeaten.includes(n.sub)) : null;
     // Depth pays: after the warm-up and the gate rush, the player grinds the HIGHEST fights of the frontier first (rewards and Souls grow with the level, a Ration costs the same).
-    const grind = wins >= 3 && !process.env.ASCEND ? normals.slice().sort((a, b) => b.level - a.level)[0] : normals[0];
+    // The highest fight it can handle: its level is at most one above the deepest boss the account has beaten (the frontier area is graded by that boss).
+    const safeLv = Math.max(3, ...save.bossesBeaten.map((b) => World.nodes.find((x) => x.sub === b && x.type === 'boss').level)) + 1 + (gopts.descend ? 2 * gopts.descend : 0);
+    const grind = wins >= 3 && !process.env.ASCEND ? (normals.filter((x) => x.level <= safeLv).sort((a, b) => b.level - a.level)[0] || normals[0]) : normals[0];
     const node = rush || (bossNode && (supplies <= 2 || !normals.length) ? bossNode : (grind || bossNode));
     cleared.add(node.id);
     if (process.env.LOGBOSS && (node.type === 'boss' || node.type === 'elite')) { // WP18: snapshot of the account at every boss / elite fight (feeds the validator's reference squads)
@@ -176,13 +178,16 @@ function playRun(save0) {
     let offered = process.env.NORELICS ? null : Relics.offer(relics, Math.random, node.type);
     for (let look = Progress.level(save, 'choice') >= 1 ? 1 : 0; look > 0 && !good(offered) && !process.env.NORELICS; look--) offered = Relics.offer(relics, Math.random, node.type) || offered;
     if (!good(offered) && rerolls > 0 && !process.env.NORELICS && hp >= Progress.maxHp(save) * 0.5) { rerolls--; offered = Relics.offer(relics, Math.random, node.type) || offered; }
-    // Depth-scaled rewards (Gen.rewardFor, same numbers as the app): heal when low, else a relic, else the Warcry (team) pick, else the single-unit ATK step.
-    const rw = Gen.rewardFor(node, gopts), att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker');
-    const team = rw.team || (rw.teamChance && Math.random() < rw.teamChance ? 1 : 0);
+    // Depth-scaled rewards (Gen.rewardFor / Gen.runCap, same numbers as the app): heal when low, else a relic, else the Warcry (team) pick, else the single-unit ATK step (capped per unit).
+    const rw = Gen.rewardFor(node, gopts), cap = Gen.runCap(Math.max(maxLv, rw.level)), att = save.squad.filter((id) => Engine.CARD_TYPES[Progress.ROSTER_BY[id].type].role === 'attacker');
+    const room = att.filter((id) => ((mods[id] || {}).atk || 0) < cap.atk);
+    const team = room.length ? (rw.team || (rw.teamChance && Math.random() < rw.teamChance ? 1 : 0)) : 0;
+    const bump = (id, n) => { mods[id] = Object.assign(mods[id] || {}, { atk: ((mods[id] || {}).atk || 0) + Gen.clipTo((mods[id] || {}).atk, n, cap.atk) }); };
     if (hp < Progress.maxHp(save) * 0.5) hp = Math.min(Progress.maxHp(save), hp + heal(rw.heal));
     else if (offered && !['prism', 'mjolnir', 'susanoo'].includes(offered.id)) relics.push(offered.id); // greedy: skip the situational relics
-    else if (team) { for (const id of att) mods[id] = Object.assign(mods[id] || {}, { atk: ((mods[id] || {}).atk || 0) + team }); }
-    else { const id = att[Math.floor(Math.random() * att.length)]; mods[id] = Object.assign(mods[id] || {}, { atk: ((mods[id] || {}).atk || 0) + rw.atk }); }
+    else if (team) room.forEach((id) => bump(id, team));
+    else if (room.length) bump(room[Math.floor(Math.random() * room.length)], rw.atk);
+    else if (hp < Progress.maxHp(save)) hp = Math.min(Progress.maxHp(save), hp + heal(rw.heal));
   }
 }
 

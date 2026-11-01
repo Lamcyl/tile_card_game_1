@@ -221,21 +221,26 @@
   }
 
   // ---------- Run rewards by depth (rework "depth pays", design "Power curve") ----------
-  // What the post-battle choice offers for a won fight at `node` (level after Descend). Everything follows w = World.power(L):
-  //   atk    +ATK of the single-unit upgrade: round((0.5 + 0.55w) x kind) with kind 1 / 1.5 (elite) / 2 (boss)  -> normal Lv1-7 +1, Lv8-11 +2? see table in the design doc
-  //   block  Shield / boost upgrades: half of atk (min 1)
+  // What the post-battle choice offers for a won fight at `node` (level after Descend). Everything follows w = World.power(L) = (L/5)^1.5:
+  //   atk    +ATK of the single-unit upgrade: round((0.4 + 0.3w) x kind), kind 1 / 1.5 (elite) / 2 (boss)   -> ordinary +1 (Lv12+ +2), elite +1..3, boss +1..4
+  //   block  Shield upgrades and supporter boosts: half of atk (min 1)
   //   heal   HP restored by the heal option: (3 + 0.6L) x 1 / 1.25 / 1.5
   //   hp     "Fortify" (+max HP for the run), from Lv6: (1 + L/3) x 1 / 1.25 / 1.5
-  //   team   "Warcry": every attacker +N ATK. Elites and bosses from Lv7 (N = 1, boss Lv13+: 2), ordinary fights from Lv10 only 1 time in 3 (sim: always counted as 1/3)
+  //   team   "Warcry": every attacker +1 ATK. Bosses from Lv9 always, elites from Lv11, ordinary fights from Lv13 one time in four
   function rewardFor(node0, opts) {
-    const node = scaled(node0, opts), L = node.level, w = World.power(L);
-    const k = node.type === 'boss' ? 2 : node.type === 'elite' ? 1.5 : 1, hk = node.type === 'boss' ? 1.5 : node.type === 'elite' ? 1.25 : 1;
-    const atk = Math.max(1, Math.round((0.5 + 0.55 * w) * k));
+    const node = scaled(node0, opts), L = node.level, w = World.power(L), boss = node.type === 'boss', elite = node.type === 'elite';
+    const k = boss ? 2 : elite ? 1.5 : 1, hk = boss ? 1.5 : elite ? 1.25 : 1;
+    const atk = Math.max(1, Math.round((0.4 + 0.3 * w) * k));
     return { level: L, atk, block: Math.max(1, Math.round(atk / 2)), amount: Math.max(1, Math.round(atk / 2)), heal: Math.round((3 + 0.6 * L) * hk), hp: L >= 6 ? Math.round((1 + L / 3) * hk) : 0,
-      team: k > 1 && L >= 7 ? (node.type === 'boss' && L >= 13 ? 2 : 1) : 0, teamChance: k === 1 && L >= 10 ? 1 / 3 : 0 };
+      team: (boss && L >= 9) || (elite && L >= 11) ? 1 : 0, teamChance: k === 1 && L >= 13 ? 0.25 : 0 };
   }
 
-  const Gen = { DESCEND_LV, rewardFor, scaled, generateBattle, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
+  // Run upgrades cannot grow without bound however long a run lasts: a unit's run bonus is capped by the deepest level reached on the run
+  // (the player side of the curve: linear in L, 1.5 + 0.3L ATK, 1 + 0.2L block, 1 + 0.15L boost). Deep fights fill the cap in a few picks, shallow ones barely move it.
+  const runCap = (L) => ({ atk: Math.round(1.5 + 0.3 * L), block: Math.round(1 + 0.2 * L), amount: Math.round(1 + 0.15 * L) });
+  const clipTo = (cur, step, cap) => Math.max(0, Math.min(step, cap - (cur || 0)));
+
+  const Gen = { DESCEND_LV, rewardFor, runCap, clipTo, scaled, generateBattle, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
   root.Gen = Gen;
   if (typeof module !== 'undefined' && module.exports) module.exports = Gen;
 })(typeof window !== 'undefined' ? window : globalThis);
