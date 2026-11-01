@@ -96,10 +96,10 @@ function bossSave(node) {
 const POWER = [
   { upTo: 4,  atk: 3, block: 0, hp: 0,   rules: { plate: 1 } },
   { upTo: 6,  atk: 4, block: 1, hp: -4,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1 } },
-  { upTo: 9,  atk: 3, block: 1, hp: 5,   rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1 } },
-  { upTo: 12, atk: 3, block: 2, hp: 10,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1, stand: 1 } },
-  { upTo: 14, atk: 3, block: 2, hp: 12,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1, stand: 1, barrier: 1 } },
-  { upTo: 99, atk: 4, block: 3, hp: 15,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1, stand: 1, barrier: 1, aegis: 1 } },
+  { upTo: 9,  atk: 4, block: 1, hp: 5,   rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1 } },
+  { upTo: 12, atk: 5, block: 2, hp: 10,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1, stand: 1 } },
+  { upTo: 14, atk: 6, block: 2, hp: 12,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1, stand: 1, barrier: 1 } },
+  { upTo: 99, atk: 6, block: 3, hp: 15,  rules: { plate: 1, diag: 1, bannerBite: 1, sunder: 1, opening: 1, reach: 1, stand: 1, barrier: 1, aegis: 1 } },
 ];
 const MAX_TURNS = Number(process.env.BOSS_TURNS || 4); // a boss must fall within this many turns
 const powerAt = (level, node) => (node && node.type === 'boss' && EARLY_BOSSES.includes(node.sub) ? Object.assign({}, POWER.find((p) => level <= p.upTo), { atk: 3, hp: 10 }) : POWER.find((p) => level <= p.upTo));
