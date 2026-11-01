@@ -226,14 +226,14 @@
   // What the post-battle choice offers for a won fight at `node` (level after Descend). Everything follows w = World.power(L) = (L/5)^1.5:
   //   atk    +ATK of the single-unit upgrade: round((0.4 + 0.3w) x kind), kind 1 / 1.5 (elite) / 2 (boss)   -> ordinary +1 (Lv12+ +2), elite +1..3, boss +1..4
   //   block  Shield upgrades and supporter boosts: half of atk (min 1)
-  //   heal   HP restored by the heal option: (3 + 0.6L) x 1 / 1.25 / 1.5
+  //   heal   HP restored by the heal option: (4 + 0.6L) x 1 / 1.25 / 1.5
   //   hp     "Fortify" (+max HP for the run), from Lv6: (1 + L/3) x 1 / 1.25 / 1.5
   //   team   "Warcry": every attacker +1 ATK. Bosses from Lv9 always, elites from Lv11, ordinary fights from Lv13 one time in four
   function rewardFor(node0, opts) {
     const node = scaled(node0, opts), L = node.level, w = World.power(L), boss = node.type === 'boss', elite = node.type === 'elite';
     const k = boss ? 2 : elite ? 1.5 : 1, hk = boss ? 1.5 : elite ? 1.25 : 1;
     const atk = Math.max(1, Math.round((0.4 + 0.3 * w) * k));
-    return { level: L, atk, block: Math.max(1, Math.round(atk / 2)), amount: Math.max(1, Math.round(atk / 2)), heal: Math.round((3 + 0.6 * L) * hk), hp: L >= 6 ? Math.round((1 + L / 3) * hk) : 0,
+    return { level: L, atk, block: Math.max(1, Math.round(atk / 2)), amount: Math.max(1, Math.round(atk / 2)), heal: Math.round((4 + 0.6 * L) * hk), hp: L >= 6 ? Math.round((1 + L / 3) * hk) : 0,
       team: (boss && L >= 9) || (elite && L >= 11) ? 1 : 0, teamChance: k === 1 && L >= 13 ? 0.25 : 0 };
   }
 

@@ -328,7 +328,7 @@ Early unlocks should come quickly (one meaningful unlock almost every run) so sh
 ## 11. In-run progression
 
 - **After each battle, choose 1 of 3 (or more):** the size of the choices **grows with the fight's level and type** (24.8, "Power curve"; a Lv15 boss is worth several Lv3 fights).
-  - ❤️ **Heal** HP: (3 + 0.6 x Lv) HP, x1.25 elite, x1.5 boss.
+  - ❤️ **Heal** HP: (4 + 0.6 x Lv) HP, x1.25 elite, x1.5 boss.
   - ⬆️ **Upgrade** a unit for this run: +N ATK (N = 1 at Lv1-11, 2 from Lv12, elites 1-3, bosses 1-4), +N/2 block or boost, or +1 range (rare, region 2+). A unit's run bonus is capped by the deepest level reached on the run (ATK cap 1.5 + 0.3 x Lv), so deep fights fill the cap fast and shallow ones barely move it.
   - 📣 **Warcry**: every attacker +1 ATK (bosses from Lv9, elites from Lv11, ordinary fights from Lv13 one time in four). 💪 **Fortify**: +(1 + Lv/3) max HP for the run (from Lv6, replaces the Warcry slot).
   - 💠 **Relic**: a run-only effect.
@@ -678,6 +678,50 @@ Playtest feedback: the tap-everything bottom panel covered 60-70% of the screen,
 - **Wayside Market.** Visiting does not use the market up. It shows "You can buy only one item here: the market packs up after your purchase"; choosing an item asks for confirmation ("Buy and close") and only that purchase closes the market for the run. Leaving keeps it open. (`tools/sim-runs.js` buys exactly one item per market: heal when below 70% HP, else a relic at 40+ Gold, else one +1 ATK.)
 - **Per-run gates.** Fog lifting is permanent (`save.unlocked`: areas ever unlocked stay painted, not misty), but a run starts with only Sunny Meadows open (`run.open`). A sub-area's gates are closed (spots dimmed and not fightable, the hero cannot walk in, a vermilion seal at its gate and the note "Defeat <boss> this run") until the boss that leads to it is defeated **in this run**; re-clearing a conquered boss pays Souls and the small toll Rations of 24.8 (nothing at Lv4-6, +1 at Lv7-10, more deeper) but no first-kill bonus or Crystals. Starting at a lit Wayshrine opens that Wayshrine's sub-area only (a shortcut past the earlier bosses). Fast travel cannot enter a closed area.
 - **Pacing (re-measured, `tools/sim-runs.js`).** Fresh account: 9.9 battles per run (40 runs, target 9-11, unchanged as only Sunny Meadows is open). Campaign (4 seeds x 30 runs, the sim re-clears gate bosses each run after a 3-win warm-up): Greenvale boss run 1-2, Azure Coast / Sunscorch first boss run 3-6 / 3-7 (WP18: 4.8 / 6.5), Frostveil / Ember Peaks first unlocked run 6-26 / 7-27 (seed spread is wide, WP18 mean was about the same). Shift: ordinary veteran runs stay at 9-12 battles, but a run that re-clears a long boss chain reaches 17-21 battles and there are more of them (about every other run once the chain is conquered, before about 11% of runs), because the boss Rations refund (+3, +1) now pays for the walk through conquered areas instead of skipping them.
+
+### 24.8 Power curve: depth pays (WP19)
+
+Feedback: after the first two bosses a boss paid no Rations, and the post-battle reward was "+1 ATK" even at the endgame. Wanted loop: **rush the boss chain to the highest area you can, then grind there for gear and stats**, so a deep fight must be clearly worth more per Ration than a shallow one.
+
+**Options for the power scale (levels 1-15, +Descend, small integers on a 5x5 board).**
+- *Exponential* (a^L): Lv1 to Lv15 spans 30-100x. Integers explode (an ATK 3 unit vs 300 HP), one-turn puzzles and overkill stop being readable, and every number needs rebalancing per Descend step. Rejected.
+- *Linear/low polynomial for enemies* (what the validated enemy curve already is: basic HP 2.2 + 0.95L, ATK 1.5 + 0.42L, boss HP about L^1.1): keeps the board readable (HP 3 to 16, bosses 5 to 75 per unit) and the puzzle solver bands valid. Kept for **danger**.
+- *Power law for reward* (k = 1.5): rewards grow faster than danger, so reward per Ration rises with depth while the risk (a defeat keeps 75% Souls and ends the run) is the counterweight. k = 1 would barely differ from today, k = 2 gives 100x between Lv1 and Lv15 and breaks the economy.
+
+**Chosen:** one curve, `w(L) = (L/5)^1.5` (`World.power`, 1.0 at Lv5). Enemies stay near-linear (danger), every reward magnitude is affine in w, and the player side is bounded by a linear cap so a long run cannot snowball:
+
+| Quantity | Formula |
+|---|---|
+| Souls per fight | round((4 + 9w) x 0.32 x stars x Heat), x2 elite, x3 boss |
+| Gold per fight | (3 + 7w) x stars, x2 elite, x3 boss |
+| Run ATK step (post-battle) | round((0.4 + 0.3w) x k), k = 1 / 1.5 elite / 2 boss; block and boost half of it |
+| Heal / Fortify (max HP) | (4 + 0.6L) / (1 + L/3), x1.25 elite, x1.5 boss |
+| Warcry (all attackers +1) | boss Lv9+, elite Lv11+, ordinary Lv13+ one time in four |
+| Run cap per unit | ATK 1.5 + 0.3L, block 1 + 0.2L, boost 1 + 0.15L of the deepest level reached (every source: fights, shops, shrines, events) |
+| Item level numbers | x(1 + 0.2w(iLv)); item level = node level (+Heat/Descend); Rations and range never scale |
+| Boss Rations, new area | round((2 + 1.3w) x 0.8^n), n = new areas already conquered in this run, min 1 |
+| Boss Rations, conquered area (toll) | floor(w / 1.5) |
+
+| Lv | w(L) | enemy HP | enemy ATK | boss unit HP | Souls (normal/elite/boss) | Gold | run ATK step n/e/b | cap ATK | heal | Rations first/toll | item x |
+| 1 | 0.09 | 3.2 | 1.9 | 5 | 2/4/6 | 4 | 1/1/1 | 2 | 4 | 2 / +0 | x1.02 |
+| 2 | 0.25 | 4.1 | 2.3 | 7 | 2/4/6 | 5 | 1/1/1 | 2 | 4 | 2 / +0 | x1.05 |
+| 3 | 0.46 | 5.0 | 2.8 | 9 | 3/6/9 | 6 | 1/1/1 | 2 | 5 | 3 / +0 | x1.09 |
+| 4 | 0.72 | 6.0 | 3.2 | 10 | 3/6/9 | 8 | 1/1/1 | 3 | 5 | 3 / +0 | x1.14 |
+| 5 | 1.00 | 7.0 | 3.6 | 22 | 4/8/12 | 10 | 1/1/1 | 3 | 6 | 3 / +0 | x1.20 |
+| 6 | 1.31 | 7.9 | 4.0 | 26 | 5/10/15 | 12 | 1/1/2 | 3 | 7 | 4 / +0 | x1.26 |
+| 7 | 1.66 | 8.8 | 4.4 | 33 | 6/12/18 | 15 | 1/1/2 | 4 | 7 | 4 / +1 | x1.33 |
+| 8 | 2.02 | 9.8 | 4.9 | 47 | 7/14/21 | 17 | 1/2/2 | 4 | 8 | 5 / +1 | x1.40 |
+| 9 | 2.41 | 10.8 | 5.3 | 55 | 8/16/24 | 20 | 1/2/2 | 4 | 8 | 5 / +1 | x1.48 |
+| 10 | 2.83 | 11.7 | 6.7 | 53 | 9/18/27 | 23 | 1/2/2 | 5 | 9 | 6 / +1 | x1.57 |
+| 11 | 3.26 | 12.6 | 7.1 | 60 | 11/22/33 | 26 | 1/2/3 | 5 | 10 | 6 / +2 | x1.65 |
+| 12 | 3.72 | 13.6 | 7.5 | 68 | 12/24/36 | 29 | 2/2/3 | 5 | 10 | 7 / +2 | x1.74 |
+| 13 | 4.19 | 14.6 | 9.0 | 61 | 13/26/39 | 32 | 2/2/3 | 5 | 11 | 7 / +2 | x1.84 |
+| 14 | 4.69 | 15.5 | 9.4 | 68 | 15/30/45 | 36 | 2/3/4 | 6 | 11 | 8 / +3 | x1.94 |
+| 15 | 5.20 | 16.4 | 9.8 | 75 | 16/32/48 | 39 | 2/3/4 | 6 | 12 | 9 / +3 | x2.04 |
+
+Rations rule: normal and elite fights cost 1. A boss pays the net amounts above (a toll boss at Lv4-6 is a free passage). The decay 0.8^n and the 60 Ration cap stop a run from conquering the whole world on Rations, and every spot can still be fought only once per run. Boss and elite strength in the two deep bands was raised (`BOSS_BAND` hp x1.3 / x1.35, atk x1.1) and `validate-gen.js` POWER now assumes ATK +3 / +4 / +4 / +5 / +6 / +6 (the run cap) so every boss still costs 20-50% of the reference HP.
+
+**The loop.** Early: bosses pay +3 to +5, so rushing new areas extends the run. Later: toll bosses are almost free so the rush to the frontier costs little, then the highest fights you can survive give 2-3x the Souls and gear levels of shallow ones for the same single Ration. `tools/sim-runs.js` follows this: 3 warm-up wins, rush gate bosses, then grind the highest frontier fights up to (deepest beaten boss level + 1), the frontier boss last.
 
 ### 24.6 Waypoints, keys, secrets and scouting (implemented, WP14)
 
