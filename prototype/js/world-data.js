@@ -11,7 +11,7 @@
   // Free exploration: every monster spot of an unlocked sub-area is open.
   //   lm       = [landmark kind, label]      lv / bossLv = level range of ordinary spots / of the boss
   //   unlocks  = sub-areas revealed by this sub-area's boss; from = the sub-area (or 'camp') that leads here
-  //   poi      = kind of the optional non-battle spot: 'shrine' (spring: heal OR upgrade) or 'treasure' (supply cache, sometimes guarded); free of Supplies.
+  //   poi      = kind of the optional non-battle spot: 'shrine' (spring: heal OR upgrade) or 'treasure' (supply cache, sometimes guarded); free of Rations.
   //   WP13 also adds a 'shop' (gold) and an 'event' (text vignette) node per sub-area, placed by WorldLayout (subareas[id].shop / .event)
   const SUB_DEFS = [
     // Greenvale
@@ -137,7 +137,7 @@
         add(sub.id + '-poi', sub.poiPos, sub.poi, guarded ? sub.lv[1] : sub.lv[0], guarded ? 'armored' : null);
         if (guarded) nodes[nodes.length - 1].guarded = true;
       }
-      // WP13: a roadside Shop in every second sub-area and an Event (a short vignette) in every sub-area. Both are free of Supplies.
+      // WP13: a roadside Shop in every second sub-area and an Event (a short vignette) in every sub-area. Both are free of Rations.
       if (sub.shopPos && SHOPS.includes(sub.id)) add(sub.id + '-shop', sub.shopPos, 'shop', sub.lv[0]);
       if (sub.eventPos) add(sub.id + '-event', sub.eventPos, 'event', sub.lv[0]);
       // WP14: a Wayshrine (waypoint) near each sub-area's entry and a hidden Sealed Cache (secret: invisible until the hero walks close or a scout finds it; needs a key).

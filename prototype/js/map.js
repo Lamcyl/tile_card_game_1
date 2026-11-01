@@ -1940,10 +1940,36 @@
     }
   }
 
+
+  // Per-run gates: an unlocked (fog-free) sub-area that is still closed on this run is washed out, with a vermilion seal at its gate
+  // and a note naming the boss that opens it.
+  function drawClosed() {
+    if (!st.run || !st.save) return;
+    const eo = ease(ovT);
+    for (const id of SUBIDS) {
+      if (!closedSub(id)) continue;
+      const sub = WL.subareas[id], b = sub.bounds; if (b[2] + 100 < X0 || b[0] - 100 > X0 + WW || b[3] + 100 < Y0 || b[1] - 100 > Y0 + WH) continue;
+      if (sub.shape && sub.shape.length) { ctx.globalAlpha = 0.3 * (1 - eo * 0.6); ctx.fillStyle = '#e9e2cf'; ctx.beginPath(); sub.shape.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.closePath(); ctx.fill(); }
+      const u = 1 / z, ls = 1 - 0.4 * eo;
+      const sx = sub.entry[0], sy = sub.entry[1] - 20;   // the gate: a rope and a vermilion seal tag
+      ctx.save(); ctx.translate(sx, sy); ctx.scale(u * ls, u * ls); ctx.globalAlpha = 1;
+      ctx.strokeStyle = '#4a3a2e'; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(-26, 10); ctx.quadraticCurveTo(0, 20, 26, 10); ctx.stroke();
+      ctx.strokeStyle = '#6a2a1c'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(0, 15); ctx.lineTo(0, 24); ctx.stroke();
+      ctx.fillStyle = VERM; ctx.strokeStyle = '#7a1f18'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.rect(-11, 24, 22, 24); ctx.fill(); ctx.stroke();
+      ctx.strokeStyle = '#fbeadb'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-6, 31); ctx.lineTo(6, 31); ctx.moveTo(0, 31); ctx.lineTo(0, 42); ctx.moveTo(-5, 37); ctx.lineTo(5, 37); ctx.stroke();
+      ctx.restore();
+      if (eo < 0.5) inkText('Defeat ' + bossNameFor(id) + ' this run', sx, sy + 66 * u * ls, 11.5, 1 - eo * 2, 600, true);
+    }
+    ctx.globalAlpha = 1;
+  }
+
   // ================================================================================================
   //  Frame
   // ================================================================================================
   const unlocked = (sub) => !st.save || st.save.unlocked.includes(sub);
+  // Per-run gates: during a run only the sub-areas in run.open can be entered (fog stays lifted for every area ever unlocked).
+  const runOpen = (sub) => !st.run || !st.save || (st.run.open || st.save.unlocked).includes(sub);
+  const closedSub = (sub) => unlocked(sub) && !runOpen(sub);
   // WP14: hidden Sealed Caches only exist on the map once found; ordinary / elite spots outside the hero's sight are faint silhouettes until scouted.
   let seenSet = new Set(), secretSet = new Set();
   const visibleNode = (n) => n.type === 'camp' || (unlocked(n.sub) && (n.type !== 'secret' || secretSet.has(n.id)));
@@ -2002,6 +2028,7 @@
     drawLabels(e);
     drawWisps(e);
     drawFog(); lap('fog');
+    drawClosed();
     drawDest();
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     if (e < 0.5) weather(dt, 1 - e * 2);
@@ -2202,6 +2229,7 @@
     const run = st.run;
     if (!run) return 'open';
     if (run.cleared.includes(n.id)) return 'done';
+    if (closedSub(n.sub)) return 'closed';
     if (n.type === 'waypoint' || n.type === 'secret') return 'open';
     return st.frontier.has(n.id) ? 'near' : 'far';
   }
@@ -2220,7 +2248,7 @@
   }
 
   function drawNode(n, A) {
-    const type = n.type, state = nodeState(n), done = state === 'done', far = state === 'far';
+    const type = n.type, state = nodeState(n), done = state === 'done', far = state === 'far' || state === 'closed';
     if (type === 'camp') return drawCamp(n, A);
     if (type === 'shrine') return drawShrine(n, A, done, far);
     if (type === 'treasure') return drawChest(n, A, done, far);
@@ -2516,7 +2544,7 @@
   // ================================================================================================
   //  Hero walking: tap-to-walk follows A* around water, cliffs and fog; stops where the ground ends
   // ================================================================================================
-  const lockedAt = (x, y) => { const s = WL.subAt(x, y); return !!s && !unlocked(s); };
+  const lockedAt = (x, y) => { const s = WL.subAt(x, y); return !!s && (!unlocked(s) || !runOpen(s)); };
   const walkable = (x, y) => !WL.blocked(x, y) && !lockedAt(x, y);
   function losFree(a, b) { const L = Math.hypot(b[0] - a[0], b[1] - a[1]), m = Math.max(1, Math.ceil(L / 10)); for (let i = 1; i <= m; i++) if (!walkable(a[0] + (b[0] - a[0]) * i / m, a[1] + (b[1] - a[1]) * i / m)) return false; return true; }
   function routeTo(sx, sy, tx, ty) {

@@ -85,7 +85,7 @@ function fight(node, hp, maxHp, army, seed, rules, heroStage, gopts) {
 
 // One run with free exploration: every spot in an unlocked sub-area is open. The player takes the
 // lowest-level fight first (bosses last, or when nothing else is left), uses springs when hurt,
-// and stops when Supplies run out or the hero falls. Items drop with their real chances and are auto-equipped.
+// and stops when Rations run out or the hero falls. Items drop with their real chances and are auto-equipped.
 function playRun(save0) {
   const save = JSON.parse(JSON.stringify(save0));
   const seed = 'sim' + Math.random();
@@ -96,7 +96,7 @@ function playRun(save0) {
   for (;;) {
     if (supplies <= 0) return { wins, maxLv, souls, bosses, items, end: 'supplies', start: Progress.startSupplies(save0), save };
     // Sub-areas whose boss already fell are skipped (nothing new there); fights are taken lowest level first,
-    // the boss when Supplies run low (<= 2) or when nothing else is left in the frontier.
+    // the boss when Rations run low (<= 2) or when nothing else is left in the frontier.
     const open = World.nodes.filter((n) => n.type !== 'camp' && n.type !== 'waypoint' && !cleared.has(n.id) && save.unlocked.includes(n.sub) && (save.farm || !save.bossesBeaten.includes(n.sub))); // save.farm (endgame mode): beaten sub-areas stay open
     // WP14: a hidden Sealed Cache (found by walking near it, assumed 60% of the time) is opened with a key dropped by an elite or boss: cache Souls and Gold plus 4 HP.
     const secret = open.find((n) => n.type === 'secret');
@@ -265,7 +265,7 @@ if (process.argv[3] !== 'campaign') {
     if (process.env.PROFILE && !name.includes(process.env.PROFILE)) continue;
     setHero(save, true); const res = []; for (let i = 0; i < N; i++) res.push(playRun(save));
     const avg = (f) => (res.reduce((n, r) => n + f(r), 0) / N).toFixed(1);
-    console.log(`\n${name} (start Supplies ${res[0].start}): battles won ${avg((r) => r.wins)}, bosses ${avg((r) => r.bosses)}, items ${avg((r) => r.items)}, deepest level ${avg((r) => r.maxLv)}, souls ${avg((r) => r.souls)}`);
-    console.log('  ' + res.map((r) => (r.end === 'died' ? 'died at Lv' + r.diedAt : r.end === 'supplies' ? 'out of Supplies' : 'cleared all') + ' after ' + r.wins).join(' | '));
+    console.log(`\n${name} (start Rations ${res[0].start}): battles won ${avg((r) => r.wins)}, bosses ${avg((r) => r.bosses)}, items ${avg((r) => r.items)}, deepest level ${avg((r) => r.maxLv)}, souls ${avg((r) => r.souls)}`);
+    console.log('  ' + res.map((r) => (r.end === 'died' ? 'died at Lv' + r.diedAt : r.end === 'supplies' ? 'out of Rations' : 'cleared all') + ' after ' + r.wins).join(' | '));
   }
 } else campaign(Number(process.argv[4] || 40));

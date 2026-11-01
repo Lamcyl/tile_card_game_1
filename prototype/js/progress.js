@@ -87,7 +87,7 @@
     { id: 'drill',    name: 'Drill',     icon: '⚔️', desc: '+1 ATK to every attacker',        costs: [60, 180, 420, 800] },
     { id: 'bulwark',  name: 'Bulwark',   icon: '🛡️', desc: '+1 block to every Shield',        costs: [30, 100, 220, 420] },
     { id: 'fortune',  name: 'Fortune',   icon: '✦',  desc: '+20% Souls from battles',         costs: [40, 110, 230, 450] },
-    { id: 'provisions', name: 'Provisions', icon: '🎒', desc: '+2 starting Supplies (battles per run)', costs: [20, 60, 140, 250] },
+    { id: 'provisions', name: 'Provisions', icon: '🍙', desc: '+2 starting Rations (battles per run)', costs: [20, 60, 140, 250] },
     { id: 'scouting', name: 'Scouting', icon: '🔭', desc: 'Sharper eyes: spots and secrets reveal from further away; Lv 3 shows what lurks in every spot', costs: [25, 70, 150] }, // WP14
     // WP16 tracks. Ward: barrier per battle; Second Wind: revive (stacks with the Phoenix Archer); Choice: Lv1 a 4th reward choice, Lv2 one re-roll per run
     // (both stack with the Quartermaster); Purse: starting Gold; Board: Engine rule `deepRow`, a 4th player row.
@@ -101,9 +101,9 @@
   const BASE_HP = 20;
   const BASE_CP = 8;   // Command Points: a Common unit costs 1, Rare 2, Epic 3, Legendary 4
 const BASE_SUPPLIES = 8;   // battles a fresh account can fight per run
-const SUPPLIES_PER_BOSS = 3; // the first boss of a run adds this many Supplies (WP18 pacing: 4 let strong runs snowball to 90+ battles)
-const BOSS_SUPPLY_STEP = 2;  // ...and every further boss in the same run adds this much less; below 0 it just costs 1 Supply like any fight (3, +1, then -1)
-const bossSupplies = (bossesDown) => Math.max(-1, SUPPLIES_PER_BOSS - BOSS_SUPPLY_STEP * (bossesDown || 0)); // net Supplies change for the next boss win
+const SUPPLIES_PER_BOSS = 3; // the first boss of a run adds this many Rations (WP18 pacing: 4 let strong runs snowball to 90+ battles)
+const BOSS_SUPPLY_STEP = 2;  // ...and every further boss in the same run adds this much less; below 0 it just costs 1 Ration like any fight (3, +1, then -1)
+const bossSupplies = (bossesDown) => Math.max(-1, SUPPLIES_PER_BOSS - BOSS_SUPPLY_STEP * (bossesDown || 0)); // net Rations change for the next boss win
 const Items = () => root.Items;
 const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range: {}, block: 0, hp: 0, supplies: 0, souls: 0, rules: {}, horn: false });
 

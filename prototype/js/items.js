@@ -243,7 +243,7 @@
       case 'hp': return '+' + n + ' max HP';
       case 'souls': return '+' + n + '% Souls';
       case 'amount': return plural(type) + ' give +' + n + ' more';
-      case 'supplies': return '+' + n + ' starting Supplies';
+      case 'supplies': return '+' + n + ' starting Rations';
       case 'range': return '+' + n + ' range to ' + plural(type);
       default: return '';
     }
@@ -253,7 +253,7 @@
   const substatText = (sub, data) => effectText(sub.kind, sub.type, subAmount(sub, data));
   function icon(item) {
     if (item.type) return Engine.CARD_TYPES[item.type].icon;
-    return { block: '🛡️', hp: '❤️', souls: '✦', supplies: '🎒' }[item.kind] || '✨';
+    return { block: '🛡️', hp: '❤️', souls: '✦', supplies: '🍙' }[item.kind] || '✨';
   }
 
   // Sum of the equipped items' effects (main effect + substats, scaled by item level) and the Legendary rules.
@@ -285,7 +285,7 @@
       { n: 2, text: 'Banners also boost the four diagonal tiles.', rule: { diag: 1 } },
       { n: 4, text: 'Every attacker a Banner boosts gets +1 ATK more.', rule: { bannerBite: 1 } } ] },
     'Azure Coast': { name: 'Tidewatch',  icon: '🌊', tiers: [
-      { n: 2, text: '+4 max HP.', bonus: { hp: 4 } }, { n: 4, text: '+1 starting Supply.', bonus: { supplies: 1 } } ] },
+      { n: 2, text: '+4 max HP.', bonus: { hp: 4 } }, { n: 4, text: '+1 starting Ration.', bonus: { supplies: 1 } } ] },
     'Sunscorch':   { name: 'Dune Nomads', icon: '🏜️', tiers: [
       { n: 2, text: '+10% Souls.', bonus: { souls: 10 } }, { n: 4, text: 'Shields block +1.', bonus: { block: 1 } } ] },
     'Frostveil':   { name: 'Frostguard', icon: '❄️', tiers: [

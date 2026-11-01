@@ -64,7 +64,7 @@
     if (n.type === 'boss') return t.boss[0];
     if (n.type === 'elite') return t.tough[0] + ' Warband';
     if (n.type === 'shrine') return 'Healing Spring';
-    if (n.type === 'treasure') return n.guarded ? 'Guarded Cache' : 'Supply Cache';
+    if (n.type === 'treasure') return n.guarded ? 'Guarded Cache' : 'Wayside Cache';
     if (n.type === 'shop') return 'Wayside Market';
     if (n.type === 'waypoint') return 'Wayshrine';
     if (n.type === 'secret') return 'Sealed Cache';
@@ -88,7 +88,7 @@
     if (r) {
       $('#hud').innerHTML =
         '<div class="hud-hp"><span class="lbl">♥</span><div class="bar"><i style="width:' + (100 * r.hp / r.maxHp) + '%"></i></div><b>' + r.hp + '/' + r.maxHp + '</b></div>' +
-        '<div class="hud-chip supplies' + (r.supplies <= 2 ? ' low' : '') + '" title="Supplies: battles left on this run. Normal and elite fights cost 1; the first boss adds ' + P.SUPPLIES_PER_BOSS + ', the next one 1 (after that a boss costs 1 like any fight).">🎒 ' + r.supplies + '</div>' +
+        '<div class="hud-chip supplies' + (r.supplies <= 2 ? ' low' : '') + '" title="Rations: battles left on this run. Normal and elite fights cost 1; the first boss adds ' + P.SUPPLIES_PER_BOSS + ', the next one 1 (after that a boss costs 1 like any fight).">🍙 ' + r.supplies + '</div>' +
         (r.keys > 0 ? '<div class="hud-chip keys" title="Keys: dropped by elites and bosses. Each opens one hidden Sealed Cache.">🗝 ' + r.keys + '</div>' : '') +
         '<div class="hud-chip" title="Souls carried on this run">✦ ' + r.souls + '</div>' +
         '<div class="hud-chip gold" title="Gold: earned in fights, spent in Shops and events. Lost when the run ends.">🪙 ' + (r.gold || 0) + '</div>' +
@@ -143,9 +143,9 @@
         '<button class="rar-legendary" data-redeem="' + n.id + '|' + it.id + '"' + (can ? '' : ' disabled') + '>' + esc(Items.icon(it)) + ' ' + esc(it.name) + '</button>').join('') + '</div></div>';
   }
   function supplyNote(n) {
-    if (n.type !== 'boss') return '<span class="cost">🎒 Costs 1 Supply</span>';
+    if (n.type !== 'boss') return '<span class="cost">🍙 Costs 1 Ration</span>';
     const g = P.bossSupplies(run() ? run().bossesDown : 0);
-    return g > 0 ? '<span class="cost gain">🎒 Boss: +' + g + ' Supplies</span>' : '<span class="cost">🎒 Costs 1 Supply</span>';
+    return g > 0 ? '<span class="cost gain">🍙 Boss: +' + g + ' Rations</span>' : '<span class="cost">🍙 Costs 1 Ration</span>';
   }
 
   function nodeSheet(n) {
@@ -171,17 +171,17 @@
       if (n.type === 'boss') body += tokenBlock(n);
       const miss = guard ? 0 : Items.missesOf(save, n.id);
       if (miss > 0) body += '<p class="muted small">Bad-luck protection: ' + miss + ' win' + (miss === 1 ? '' : 's') + ' without the unique item. Its chance rises each time.</p>';
-    } else if (n.type === 'shrine') body += '<p class="muted">A quiet spring and a small altar. Choose one: heal 8 HP <b>or</b> upgrade a unit for this run. Once per run.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
-    else if (n.type === 'treasure') body += '<p class="muted">Free supplies: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + Gen.CACHE_GOLD + ' and a reward of your choice.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
-    else if (n.type === 'shop') body += '<p class="muted">A travelling stall. Spend 🪙 Gold on healing, unit upgrades and relics. Stock changes every run; leave when you are done.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
+    } else if (n.type === 'shrine') body += '<p class="muted">A quiet spring and a small altar. Choose one: heal 8 HP <b>or</b> upgrade a unit for this run. Once per run.</p><p><span class="cost free">Free: costs no Rations</span></p>';
+    else if (n.type === 'treasure') body += '<p class="muted">Free loot: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + Gen.CACHE_GOLD + ' and a reward of your choice.</p><p><span class="cost free">Free: costs no Rations</span></p>';
+    else if (n.type === 'shop') body += '<p class="muted">A travelling stall. Spend 🪙 Gold on healing, unit upgrades and relics. Stock changes every run; leave when you are done.</p><p><span class="cost free">Free: costs no Rations</span></p>';
     else if (n.type === 'waypoint') {
       const lit = save.waypoints.includes(n.sub);
-      body += '<p class="muted">' + (lit ? 'A lit Wayshrine. ' + (r ? 'Fast travel here for free any time.' : 'Expeditions can start from here.') : 'A torii and a quiet lantern. Light it once and it stays lit: later runs can start here, and you can fast travel back to it.') + '</p><p><span class="cost free">Free: costs no Supplies</span>' +
+      body += '<p class="muted">' + (lit ? 'A lit Wayshrine. ' + (r ? 'Fast travel here for free any time.' : 'Expeditions can start from here.') : 'A torii and a quiet lantern. Light it once and it stays lit: later runs can start here, and you can fast travel back to it.') + '</p><p><span class="cost free">Free: costs no Rations</span>' +
         (lit && !r && save.startAt === n.sub ? ' <span class="cost gain">Your next run starts here</span>' : '') + '</p>';
     } else if (n.type === 'secret') {
       const keys = r ? r.keys || 0 : 0;
-      body += '<p class="muted">A lacquered chest hidden off the trail, sealed with a vermilion cord. It opens with a 🗝 Key (dropped by elites and bosses): ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + (Gen.CACHE_GOLD + 2 * regionOf(n)) + ', 4 HP, and ' + (save.secretsOpened.includes(n.id) ? '⚒ 2 Dust.' : '💎 1 Crystal the first time.') + '</p><p><span class="cost free">Free: costs no Supplies</span> <span class="cost' + (keys ? ' gain' : '') + '">🗝 ' + (r ? keys + ' key' + (keys === 1 ? '' : 's') + ' carried' : 'needs a key') + '</span></p>';
-    } else if (n.type === 'event') body += '<p class="muted">Something stirs here. A short choice with a risk and a reward.</p><p><span class="cost free">Free: costs no Supplies</span></p>';
+      body += '<p class="muted">A lacquered chest hidden off the trail, sealed with a vermilion cord. It opens with a 🗝 Key (dropped by elites and bosses): ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + (Gen.CACHE_GOLD + 2 * regionOf(n)) + ', 4 HP, and ' + (save.secretsOpened.includes(n.id) ? '⚒ 2 Dust.' : '💎 1 Crystal the first time.') + '</p><p><span class="cost free">Free: costs no Rations</span> <span class="cost' + (keys ? ' gain' : '') + '">🗝 ' + (r ? keys + ' key' + (keys === 1 ? '' : 's') + ' carried' : 'needs a key') + '</span></p>';
+    } else if (n.type === 'event') body += '<p class="muted">Something stirs here. A short choice with a risk and a reward.</p><p><span class="cost free">Free: costs no Rations</span></p>';
 
     if (!r && n.type === 'waypoint' && save.waypoints.includes(n.sub)) body += '<div class="row"><button data-act="close-node">Back</button><button class="primary grow" data-act="start-here">' + (save.startAt === n.sub ? '🚩 Start here ✓' : '🚩 Start runs here') + '</button></div>';
     else if (!r) body += '<p class="hint">Set out from Camp to ' + (n.type === 'waypoint' || n.type === 'secret' ? 'visit this' : 'fight here') + '.</p><button class="primary wide" data-act="close-node">Back to Camp</button>';
@@ -201,7 +201,7 @@
     const r = run(), bl = r.bounties || [];
     const open = [...frontier()].filter((id) => ['battle', 'elite', 'boss'].includes(World.byId[id].type)).length;
     return '<div class="sheet-head"><div><h2>On expedition</h2><p class="muted">Free exploration: tap any monster in an open area. ' + open + ' fights left.</p></div></div>' +
-      '<p class="supply-line">🎒 <b>' + r.supplies + '</b> Supplies left. Each normal or elite win costs 1; the first boss of a run adds ' + P.SUPPLIES_PER_BOSS + ', the second 1, later ones cost 1 like any fight. At 0 you return to Camp safely.</p>' +
+      '<p class="supply-line">🍙 <b>' + r.supplies + '</b> Rations left. Each normal or elite win costs 1; the first boss of a run adds ' + P.SUPPLIES_PER_BOSS + ', the second 1, later ones cost 1 like any fight. At 0 you return to Camp safely.</p>' +
       '<p class="supply-line">🪙 <b>' + (r.gold || 0) + '</b> Gold. Spend it at Shops and events; unspent Gold is lost when the run ends.</p>' +
       (r.relics && r.relics.length ? '<h4 class="bounty-h">Relics <small>run only</small></h4><ul class="relic-list">' + r.relics.map((id) => '<li>' + relicRow([id]) + '<span><b>' + esc(Relics.BY_ID[id].name) + '</b> ' + esc(Relics.BY_ID[id].text) + '</span></li>').join('') + '</ul>' : '') +
       (bl.length ? '<h4 class="bounty-h">Bounties <small>optional, paid in 💎 when the run ends</small></h4>' + bountyList(bl) : '') +
@@ -269,7 +269,7 @@
 
   function campSheet() {
     const tabs = ['upgrades', 'squad', 'recruit', 'summon', 'gear', 'heat'];
-    let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad (Command Points, one supporter minimum), then set out with 🎒 ' + P.startSupplies(save) + ' Supplies.</p></div>' +
+    let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad (Command Points, one supporter minimum), then set out with 🍙 ' + P.startSupplies(save) + ' Rations.</p></div>' +
       '<button class="primary" data-act="start">Set out ➜</button></div>';
     if (save.waypoints.length) {
       html += '<div class="start-at" aria-label="Start position"><small>🚩 Start at</small>' + ['camp'].concat(save.waypoints).map((id) =>
@@ -293,7 +293,7 @@
           (cost === null ? '<span class="muted">Max</span>' : '<button data-buy="' + u.id + '"' + (pointAt === u.id ? ' class="point"' : '') + (save.souls < cost ? ' disabled' : '') + '>✦ ' + cost + '</button>') + '</div>';
        }
       }
-      html += '<p class="muted small">Max HP ' + P.maxHp(save) + ' · Squad slots ' + P.slots(save) + ' · Start Supplies ' + P.startSupplies(save) + '</p>';
+      html += '<p class="muted small">Max HP ' + P.maxHp(save) + ' · Squad slots ' + P.slots(save) + ' · Start Rations ' + P.startSupplies(save) + '</p>';
     } else if (campTab === 'squad') {
       const army = P.buildArmy(save, {}), problem = P.squadProblem(save), cp = P.squadCp(save), cap = P.commandCap(save);
       html += '<div class="squad-head"><div class="cp-bar' + (cp > cap ? ' over' : '') + '" role="meter" aria-valuenow="' + cp + '" aria-valuemax="' + cap + '"><i style="width:' + Math.min(100, 100 * cp / cap) + '%"></i><span>🎖️ Command Points <b>' + cp + ' / ' + cap + '</b></span></div>' +
@@ -555,7 +555,7 @@
     selected = null; confirmReturn = false; journalView = null; persist();
     WorldMap.placeToken(startId);
     if (startId === 'camp') { const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]); } else WorldMap.focus(World.byId[startId].x, World.byId[startId].y);
-    toast('Expedition started' + (P.heatPoints(save) || P.descendOf(save) ? ' (Heat ' + P.heatPoints(save) + (P.descendOf(save) ? ', Descend ' + P.descendOf(save) : '') + ')' : '') + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Supplies and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
+    toast('Expedition started' + (P.heatPoints(save) || P.descendOf(save) ? ' (Heat ' + P.heatPoints(save) + (P.descendOf(save) ? ', Descend ' + P.descendOf(save) : '') + ')' : '') + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Rations and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
     renderAll();
   }
 
@@ -575,7 +575,7 @@
     busy = false;
     if (n.type === 'waypoint') { // first visit: light it (stays lit for good) and see the surroundings
       save.waypoints.push(n.sub); revealAround(n.x, n.y, 620, 260); persist(); renderAll();
-      modal('<h3>Wayshrine lit</h3><p>The lantern at the ' + esc(World.SUB_BY[n.sub].name) + ' Wayshrine glows. The hills around it are no longer a mystery.</p><p class="supply-line">🚩 Later runs can <b>start here</b> (pick it at Camp or on the shrine\'s sheet), and you can fast travel back to it for free during a run. This cost no Supplies.</p><div class="row"><button class="primary grow" data-act="ok">Good</button></div>');
+      modal('<h3>Wayshrine lit</h3><p>The lantern at the ' + esc(World.SUB_BY[n.sub].name) + ' Wayshrine glows. The hills around it are no longer a mystery.</p><p class="supply-line">🚩 Later runs can <b>start here</b> (pick it at Camp or on the shrine\'s sheet), and you can fast travel back to it for free during a run. This cost no Rations.</p><div class="row"><button class="primary grow" data-act="ok">Good</button></div>');
       $('#modal').onclick = (ev) => { if (ev.target.closest('[data-act="ok"]')) closeModal(); }; return;
     }
     if (n.type === 'secret') {
@@ -583,7 +583,7 @@
       r.souls += Gen.CACHE_SOULS; r.gold = (r.gold || 0) + gold; r.hp = Math.min(r.maxHp, r.hp + heal(4));
       if (first) { save.secretsOpened.push(id); P.earn(save, 'crystals', 1); r.crystalsNow = (r.crystalsNow || 0) + 1; } else P.earn(save, 'dust', 2);
       persist(); renderAll();
-      modal('<h3>Sealed Cache opened</h3><p>The cord parts. Inside: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + gold + ', and a restorative draught (+4 HP). ' + (first ? '💎 1 Crystal, found for the first time!' : '⚒ 2 Dust.') + ' This cost no Supplies.</p><div class="row"><button class="primary grow" data-act="ok">Good</button></div>');
+      modal('<h3>Sealed Cache opened</h3><p>The cord parts. Inside: ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + gold + ', and a restorative draught (+4 HP). ' + (first ? '💎 1 Crystal, found for the first time!' : '⚒ 2 Dust.') + ' This cost no Rations.</p><div class="row"><button class="primary grow" data-act="ok">Good</button></div>');
       $('#modal').onclick = (ev) => { if (ev.target.closest('[data-act="ok"]')) closeModal(); }; return;
     }
     if (n.type === 'shrine') { renderAll(); openShrine(n); return; }
@@ -592,7 +592,7 @@
     if (n.type === 'treasure' && !n.guarded) {
       const gold = Gen.CACHE_GOLD + 2 * regionOf(n);
       r.cleared.push(id); r.souls += Gen.CACHE_SOULS; r.gold = (r.gold || 0) + gold; persist(); renderAll();
-      offerReward('Supply cache', 'You found ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + gold + ' and some supplies. This cost no Supplies.', n); return;
+      offerReward('Wayside cache', 'You found ✦ ' + Gen.CACHE_SOULS + ', 🪙 ' + gold + ' and a bit of food. This cost no Rations.', n); return;
     }
     if (n.guarded) n = guardOf(n); // a guarded cache: beat its guard first (battleOver opens the chest)
     const stage = Object.assign({ heroHp: r.hp, heroMaxHp: r.maxHp, rules: P.rulesFor(save, r) }, P.heroStage(save), Gen.generateBattle(n, r.seed, gopts()));
@@ -653,7 +653,7 @@
       if (b && b.item) { bonusItem = b; if (b.isNew) r.found.push(b.id); bonusEquipped = autoEquip(b); }
     }
     const dustLine = drop && drop.consolation ? '<p class="supply-line">Elite spoils: ⚒ ' + drop.dust + ' Dust (you own everything it drops).</p>' : '';
-    // Supplies: normal and elite wins cost 1, a boss adds some.
+    // Rations: normal and elite wins cost 1, a boss adds some.
     const boss = n.type === 'boss';
     const gain = boss ? P.bossSupplies(r.bossesDown || 0) : -1;
     if (boss) r.bossesDown = (r.bossesDown || 0) + 1;
@@ -682,7 +682,7 @@
     const bountyLine = done.length ? '<div class="bounty-done">' + done.map((b) => '<p>🎯 Bounty complete: <b>' + esc(Bounties.text(b)) + '</b> · 💎 ' + b.reward + ' at run end</p>').join('') + '</div>' : '';
     let keyNote = '';
     if ((boss || n.type === 'elite') && (r.keys || 0) < World.MAX_KEYS) { r.keys = (r.keys || 0) + 1; keyNote = ' · 🗝 <b>+1 Key</b> (opens a hidden Sealed Cache)'; }
-    const supLine = '<p class="supply-line">🎒 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Supplies</b>' : 'Spent <b>1 Supply</b>') + ' · ' + Math.max(0, r.supplies) + ' left' + keyNote + '.</p>';
+    const supLine = '<p class="supply-line">🍙 ' + (gain > 0 ? 'The boss falls: <b>+' + gain + ' Rations</b>' : 'Spent <b>1 Ration</b>') + ' · ' + Math.max(0, r.supplies) + ' left' + keyNote + '.</p>';
     const extra = (item ? dropCard(item, equipped ? 'Equipped automatically. Change it in Camp ▸ Gear.' : 'No free slot. Swap it in at Camp ▸ Gear.') : '') + dustLine +
       checkFeats(true) + (bonusItem ? dropCard(bonusItem, '★★★ bonus drop. ' + (bonusEquipped ? 'Equipped automatically.' : 'No free slot: swap it in at Camp ▸ Gear.')) : '') + bountyLine + supLine;
     persist(); renderAll();
@@ -692,7 +692,7 @@
 
   function outOfSupplies(title, text, extra) {
     modal('<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p>' + extra +
-      '<p><b>You are out of Supplies.</b> The expedition heads home safely with all Souls.</p><div class="row"><button class="primary grow" data-act="home">Return to Camp</button></div>');
+      '<p><b>You are out of Rations.</b> The expedition heads home safely with all Souls.</p><div class="row"><button class="primary grow" data-act="home">Return to Camp</button></div>');
     $('#modal').onclick = (ev) => { if (ev.target.closest('[data-act="home"]')) { closeModal(); endRun(false, 'supplies'); } };
   }
 
@@ -853,7 +853,7 @@
       ? '<div class="route" aria-label="Route taken">' + fights.map((n) => '<span class="stop" title="' + esc(nodeTitle(n)) + '">' + skulls(n.level) + '<small>Lv' + n.level + '</small></span>').join('<i>›</i>') + '</div>'
       : '<p class="muted small">No fights this time.</p>';
     const cheap = pointAt ? P.UPGRADE_BY[pointAt] : null;
-    modal('<h3>' + (defeated ? 'Your hero has fallen' : reason === 'supplies' ? 'Out of Supplies' : 'Back at Camp') + '</h3>' +
+    modal('<h3>' + (defeated ? 'Your hero has fallen' : reason === 'supplies' ? 'Out of Rations' : 'Back at Camp') + '</h3>' +
       '<div class="stats"><div><b>' + r.wins + '</b><span>battles won' + (r.stars ? ' · ' + r.stars + '★' : '') + '</span></div><div><b>Lv' + r.maxLevel + '</b><span>deepest fight' + (newBest ? ' · new best!' : '') + '</span></div>' +
       '<div><b>✦ ' + earned + (bonus ? ' +' + bonus : '') + '</b><span>' + (defeated ? '75% of ' + r.souls + ' kept' : 'all Souls kept') + (bonus ? ' + first-run bonus' : '') + '</span></div></div>' +
       '<h4 class="route-h">Your route</h4>' + route +

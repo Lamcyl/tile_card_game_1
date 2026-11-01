@@ -209,7 +209,7 @@ button.wide { width: 100%; }
 }
 .toast::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; background: var(--vermilion); border-radius: 2px 3px 2px 3px; transform: rotate(10deg); }
 
-/* Supplies, items and gear */
+/* Rations, items and gear */
 .hud-chip.supplies { color: var(--moss); }
 .hud-chip.supplies.low { color: var(--vermilion); animation: pulse 1.2s ease-in-out infinite; }
 @keyframes pulse { 50% { transform: scale(1.07); } }

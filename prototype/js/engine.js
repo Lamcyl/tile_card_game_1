@@ -66,7 +66,7 @@
   const HERO_ABILITIES = {
     rally:  { name: 'Rally',  icon: '📣', target: 'none',  text: 'Every attacker gets +1 ATK this turn.' },
     ignite: { name: 'Ignite', icon: '🔥', target: 'enemy', text: 'Set one enemy ablaze: a Barrel explodes at once, anything else takes 2 damage (ignores armor).' },
-    ration: { name: 'Ration', icon: '🍙', target: 'none',  text: 'Heal the damage taken in this battle, up to 4 HP.' },
+    ration: { name: 'Ration', icon: '🍱', target: 'none',  text: 'Heal the damage taken in this battle, up to 4 HP.' },
     brace:  { name: 'Brace',  icon: '🛡️', target: 'none',  text: 'Every enemy strike is weakened by 2 this turn.' },
   };
   const gimmickText = (e) => (ENEMY_GIMMICKS[e.gimmick] ? ENEMY_GIMMICKS[e.gimmick].text.replace('{n}', e.gp) : '');
