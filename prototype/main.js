@@ -2,6 +2,7 @@
 // files that set window globals, so they are imported in dependency order.
 import './theme.css';
 import './world.css';
+import './camp.css';
 import './battle.css';
 import './js/engine.js';
 import './js/world-layout.js';

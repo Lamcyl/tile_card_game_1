@@ -10,7 +10,7 @@ A turn-based tile placement game with roguelite runs. You place a fixed army of 
 **Online:** https://claude.ai/artifact/1ifNch1Wk52wrNVw2fzVsh (claude.ai artifact; sign-in required, share it from the page's Share menu).
 
 The prototype is the **world map game**:
-1. Set out from Camp.
+1. Set out from the **Camp menu**: a full-screen home (currencies, hero and squad, Set out with Start-at and Rations) with buttons for Upgrades, Team (hero, squad, Command Points, traits), Gear (paper-doll, inventory, Forge, sets), Summon (gacha, Recruitment Office, Recruit), Heat (once unlocked), Journal, World map (read-only) and Settings (reset, test currency).
 2. Fight any monster in an open area, in any order (only the first area is open at the start; each boss opens the next one for that run). Each win costs 1 Ration (bosses give some back), and the run ends when HP or Rations run out, or when you return to Camp to bank your Souls. Monsters drop gear you equip at Camp.
 3. Spend Souls on upgrades and recruits, then go further on the next run.
 
@@ -45,7 +45,7 @@ npm run single                       # dist/tile-defense.html, one self-containe
 
 ```
 docs/GAME_DESIGN.md                  Gameplay design document
-prototype/index.html                 World map game (Vite entry: main.js, world.css)
+prototype/index.html                 World map game (Vite entry: main.js, world.css, camp.css)
 prototype/js/engine.js               Battle rules engine (pure logic, shared with tools)
 prototype/js/world-layout.js         Map geometry (WorldLayout): sub-area shapes, spot positions, terrain features
 prototype/js/world-data.js           Regions, sub-areas, levels, unlocks, enemy themes; builds the monster spots from the layout
@@ -55,7 +55,7 @@ prototype/js/gen.js                  Battle generator (level + sub-area theme)
 prototype/js/boss-defs.js            Handcrafted bosses and elites (one gimmick each)
 prototype/js/map.js                  Painted world map, fog, paths, hero, panning
 prototype/js/battle.js               Battle screen (placement + animated turns)
-prototype/js/app.js                  Game flow: Camp, runs, rewards, results
+prototype/js/app.js                  Game flow: Camp menu screens, runs, rewards, results (camp.css styles the Camp menu)
 prototype/sandbox.html               Three-stage battle tester (sandbox.js, style.css, js/stages.js, js/ui.js)
 prototype/scripts/single-file.mjs    Packs the game into one HTML fragment
 prototype/capacitor.config.json      Capacitor app settings

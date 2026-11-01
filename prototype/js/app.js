@@ -6,12 +6,12 @@
   const $ = (s) => document.querySelector(s);
   let save = P.load();
   let selected = null;
-  let campTab = 'upgrades';
+  let campView = 'home', teamSel = null, gearSel = null, summonView = 'summon'; // dedicated Camp menu: current screen and selections
   let sheetOpen = true;
   let menuOpen = false, dropSel = null; // in-run: HUD menu panel, tapped drop icon on the compact card
   let busy = false;
-  let confirmReset = false, confirmReturn = false, confirmSalvage = null, gearFilter = 'all', gearView = 'gear';
-  let journalView = null, bestRegion = 0; // WP17: null = Camp tabs, else 'ach' | 'bestiary' | 'codex'
+  let confirmReset = false, confirmReturn = false, confirmSalvage = null, gearFilter = 'all';
+  let journalView = 'ach', bestRegion = 0; // WP17 Journal screen: 'ach' | 'bestiary' | 'codex'
   let pointAt = null; // upgrade id the results screen points to (first-run guarantee)
 
   const run = () => save.run;
@@ -91,6 +91,7 @@
   // ---------- HUD ----------
   function renderHud() {
     const r = run(), hud = $('#hud');
+    hud.hidden = !r && campView !== 'map';
     hud.classList.toggle('run', !!r);
     if (r) {
       hud.innerHTML =
@@ -103,11 +104,11 @@
         (r.keys > 0 ? '<div class="hud-chip mini keys" title="Keys: dropped by elites and bosses. Each opens one hidden Sealed Cache.">🗝 ' + r.keys + '</div>' : '') +
         (P.heatPoints(save) || P.descendOf(save) ? '<div class="hud-chip mini heat" title="' + esc(heatSummary()) + '">🔥 ' + P.heatPoints(save) + (P.descendOf(save) ? ' · ▼' + P.descendOf(save) : '') + '</div>' : '') +
         (r.relics && r.relics.length ? '<div class="hud-chip mini relics" title="Relics on this run">' + relicRow(r.relics) + '</div>' : '') + '</div>';
-    } else {
-      hud.innerHTML =
+    } else if (campView === 'map') { // read-only World map from the Camp menu
+      hud.innerHTML = '<button type="button" class="hud-back" data-cv="home" aria-label="Back to Camp">‹ Camp</button>' +
         '<div class="hud-chip big" title="Souls: buy Camp upgrades and recruits">✦ ' + P.balance(save, 'souls') + ' <small>Souls</small></div>' +
         '<div class="hud-chip cur crystals" title="Crystals: from first boss kills and bounties. Spent on Summon pulls (Rare, Epic and Legendary units).">💎 ' + P.balance(save, 'crystals') + '</div>' +
-        '<div class="hud-chip cur dust" title="Dust: from salvaging gear. Spent in the Forge (coming soon).">⚒ ' + P.balance(save, 'dust') + '</div>';
+        '<div class="hud-chip cur dust" title="Dust: from salvaging gear. Spent in the Forge on gear.">⚒ ' + P.balance(save, 'dust') + '</div>';
     }
   }
 
@@ -115,14 +116,12 @@
   function renderSheet() {
     const sheet = $('#sheet');
     const r = run();
-    sheet.hidden = !!r; // in a run the map is the focus: details come as a compact card, the rest in the HUD menu
-    if (r) { sheet.innerHTML = ''; return; }
-    sheet.classList.toggle('collapsed', !sheetOpen);
+    // The sheet only describes a spot picked on the read-only World map; in a run the map shows the compact card instead, and Camp has its own screens.
     const node = selected ? World.byId[selected] : null;
-    let html = '<button class="grab" id="sheet-toggle" aria-label="' + (sheetOpen ? 'Collapse' : 'Expand') + ' panel"><span></span></button>';
-    if (node && node.type !== 'camp') html += nodeSheet(node);
-    else html += campSheet();
-    sheet.innerHTML = html;
+    sheet.hidden = !!r || campView !== 'map' || !node || node.type === 'camp';
+    if (sheet.hidden) { sheet.innerHTML = ''; return; }
+    sheet.classList.toggle('collapsed', !sheetOpen);
+    sheet.innerHTML = '<button class="grab" id="sheet-toggle" aria-label="' + (sheetOpen ? 'Collapse' : 'Expand') + ' panel"><span></span></button>' + nodeSheet(node);
   }
 
   // Danger rating (design 8.1) as skulls, the same rating the map draws above each monster.
@@ -194,7 +193,7 @@
     } else if (n.type === 'event') body += '<p class="muted">Something stirs here. A short choice with a risk and a reward.</p><p><span class="cost free">Free: costs no Rations</span></p>';
 
     if (!r && n.type === 'waypoint' && save.waypoints.includes(n.sub)) body += '<div class="row"><button data-act="close-node">Back</button><button class="primary grow" data-act="start-here">' + (save.startAt === n.sub ? '🚩 Start here ✓' : '🚩 Start runs here') + '</button></div>';
-    else if (!r) body += '<p class="hint">Set out from Camp to ' + (n.type === 'waypoint' || n.type === 'secret' ? 'visit this' : 'fight here') + '.</p><button class="primary wide" data-act="close-node">Back to Camp</button>';
+    else if (!r) body += '<p class="hint">Set out from Camp to ' + (n.type === 'waypoint' || n.type === 'secret' ? 'visit this' : 'fight here') + '.</p><button class="wide" data-act="close-node">Close</button>';
     else if (r.cleared.includes(n.id)) body += '<p class="hint">Already cleared on this run.</p><button class="wide" data-act="close-node">Close</button>';
     else body += '<div class="row"><button data-act="close-node">Cancel</button>' +
       (isFight && !isSeen(n) && n.type !== 'boss' ? '<button data-act="scout"' + (goldNow() < price(World.SCOUT_GOLD, n) ? ' disabled' : '') + ' title="Reveal this spot and its surroundings">🔭 Scout 🪙 ' + price(World.SCOUT_GOLD, n) + '</button>' : '') +
@@ -336,7 +335,7 @@
       html += '<div class="item heat-mod' + (on ? ' on' : '') + '"><span class="heat-pts" aria-hidden="true">' + m.pts + '</span><div class="grow"><b>' + esc(m.name) + '</b><span class="muted">' + esc(m.text) + '</span></div>' +
         '<button class="heat-switch" role="switch" aria-checked="' + on + '" aria-label="' + esc(m.name) + '" data-heat="' + m.id + '"' + (busyRun ? ' disabled' : '') + '><i></i></button></div>';
     }
-    if (P.heatOn(save, 'cp') && P.squadProblem(save)) html += '<p class="heat-warn">⚠ ' + esc(P.squadProblem(save)) + ' Trim the squad in the Squad tab.</p>';
+    if (P.heatOn(save, 'cp') && P.squadProblem(save)) html += '<p class="heat-warn">⚠ ' + esc(P.squadProblem(save)) + ' Trim the squad in the Team screen.</p>';
     html += '<h4 class="track-h">Descend</h4><div class="item descend"><span class="ic">▼</span><div class="grow"><b>Descend ' + d + (dmax < P.MAX_DESCEND ? '' : '') + ' <small>/ ' + P.MAX_DESCEND + '</small></b><span class="muted">' +
       (d ? 'Every spot is ' + (Gen.DESCEND_LV * d) + ' levels harder; rewards ×' + (1 + 0.4 * d).toFixed(1) + ', drops +' + (2 * d) + ' item levels.' : 'The normal map. Each step makes every spot ' + Gen.DESCEND_LV + ' levels harder for ×1.4 more rewards and +2 item levels.') +
       (dmax < P.MAX_DESCEND ? ' Beat a final boss on Descend ' + dmax + ' to open the next step.' : '') + '</span></div>' +
@@ -344,69 +343,196 @@
     return html;
   }
 
-  function campSheet() {
-    const tabs = ['upgrades', 'squad', 'recruit', 'summon', 'gear', 'heat'];
-    let html = '<div class="sheet-head"><div><h2>Camp</h2><p class="muted">Spend Souls, pick your squad (Command Points, one supporter minimum), then set out with 🍙 ' + P.startSupplies(save) + ' Rations.</p></div>' +
-      '<button class="primary" data-act="start">Set out ➜</button></div>';
-    if (save.waypoints.length) {
-      html += '<div class="start-at" aria-label="Start position"><small>🚩 Start at</small>' + ['camp'].concat(save.waypoints).map((id) =>
-        '<button class="' + (save.startAt === id ? 'on' : '') + '" data-start="' + id + '">' + (id === 'camp' ? '⛺ Camp' : esc(World.SUB_BY[id].name)) + '</button>').join('') + '</div>';
-    }
-    let bar = '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') +
-      '<span class="cur-meta"><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></span></div>';
-    const jbtn = '<button class="journal-btn' + (journalView ? ' on' : '') + '" data-jv="' + (journalView ? 'close' : 'ach') + '">' + (journalView ? '← Back to Camp' : '📖 Journal <small>' + Journal.doneCount(save) + '/' + Journal.LIST.length + ' feats · ' + Journal.seenCount(save) + '/' + Journal.creatures().length + ' creatures</small>') + '</button>';
-    if (journalView) return html + jbtn + bar + journalTab() + toolsRow();
-    html += campScene(save) + heroPicker() + bar + jbtn;
-    html += '<div class="tabs">' + tabs.map((t) => '<button class="' + (campTab === t ? 'on' : '') + '" data-tab="' + t + '">' +
-      { upgrades: 'Camp', squad: 'Squad ' + P.squadCp(save) + '/' + P.commandCap(save), recruit: 'Recruit', summon: 'Summon', gear: 'Gear ' + Items.equippedIds(save).length + '/' + Items.SLOTS, heat: '🔥' + (P.heatUnlocked(save) ? (P.heatPoints(save) || '') : '🔒') }[t] + '</button>').join('') + '</div>';
-    html += '<div class="list">';
-    if (campTab === 'upgrades') {
-      const GROUPS = [['Body', ['vitality', 'ward', 'revive', 'bulwark']], ['Arms', ['command', 'drill']], ['Fortune', ['fortune', 'purse', 'provisions', 'choice']], ['Exploring', ['scouting', 'board']]];
-      for (const [gname, ids] of GROUPS) {
-       html += '<h4 class="track-h">' + gname + '</h4>';
-       for (const id of ids) {
-        const u = P.UPGRADE_BY[id], lv = P.level(save, u.id), cost = P.upgradeCost(save, u.id);
-        html += '<div class="item track' + (lv ? ' built' : '') + '"><span class="ic">' + u.icon + '</span><div class="grow"><b>' + u.name + ' <small>Lv ' + lv + '/' + u.costs.length + '</small></b><span class="muted">' + u.desc + '</span></div>' +
-          (cost === null ? '<span class="muted">Max</span>' : '<button data-buy="' + u.id + '"' + (pointAt === u.id ? ' class="point"' : '') + (save.souls < cost ? ' disabled' : '') + '>✦ ' + cost + '</button>') + '</div>';
-       }
-      }
-      html += '<p class="muted small">Max HP ' + P.maxHp(save) + ' · Squad slots ' + P.slots(save) + ' · Start Rations ' + P.startSupplies(save) + '</p>';
-    } else if (campTab === 'squad') {
-      const army = P.buildArmy(save, {}), problem = P.squadProblem(save), cp = P.squadCp(save), cap = P.commandCap(save);
-      html += '<div class="squad-head"><div class="cp-bar' + (cp > cap ? ' over' : '') + '" role="meter" aria-valuenow="' + cp + '" aria-valuemax="' + cap + '"><i style="width:' + Math.min(100, 100 * cp / cap) + '%"></i><span>🎖️ Command Points <b>' + cp + ' / ' + cap + '</b></span></div>' +
-        '<p class="squad-rule ' + (problem ? 'bad' : 'ok') + '">' + (problem ? '⚠ ' + esc(problem) : '✔ Squad ready: an attacker and a supporter, ' + (cap - cp) + ' CP spare.') + '</p>' +
-        '<p class="muted small">Cost by rarity: Common 1 · Rare 2 · Epic 3 · Legendary 4. Buy Command to raise the cap.</p></div>';
-      html += traitPanel();
-      for (const id of save.owned) {
-        const inSquad = save.squad.includes(id), card = army.find((c) => c.id === id) || P.buildArmy(Object.assign({}, save, { squad: [id] }), {})[0];
-        const blocked = !inSquad && P.canAdd(save, id);
-        html += '<div class="item unit ' + rarClassOf(id) + '">' + unitCell(id, unitMeta(id) + '<span class="muted">' + statLine(card) + '</span>' + unitPerk(id)) +
-          '<button class="' + (inSquad ? 'on' : blocked ? 'cant' : '') + '" data-squad="' + id + '" title="' + esc(blocked || '') + '">' + (inSquad ? 'In squad' : 'Add') + '</button></div>';
-      }
-    } else if (campTab === 'heat') {
-      html += heatTab();
-    } else if (campTab === 'gear') {
-      html += gearTab();
-    } else if (campTab === 'recruit') {
-      let shown = 0;
-      for (const u of P.ROSTER) {
-        if (save.owned.includes(u.id) || u.start || !P.recruitable(u)) continue;
-        shown++;
-        const avail = P.recruitAvailable(save, u), gems = false;
-        const need = Array.isArray(u.need) ? u.need : [u.need];
-        const can = gems ? P.canSpend(save, 'crystals', u.gems) : save.souls >= u.cost;
-        html += '<div class="item unit ' + rarClassOf(u.id) + (avail ? '' : ' locked') + '">' + unitCell(u.id, unitMeta(u.id) + '<span class="muted">' +
-          (avail ? describeType(u.type, u) : 'Defeat ' + need.map((b) => World.THEMES[b].boss[0]).join(' or ')) + '</span>' + unitPerk(u.id)) +
-          (avail ? '<button data-recruit="' + u.id + '"' + (can ? '' : ' disabled') + '>' + (gems ? '💎 ' + u.gems : '✦ ' + u.cost) + '</button>' : '<span class="muted">🔒</span>') + '</div>';
-      }
-      if (!shown) html += '<p class="muted">Every Common has joined you. Rare, Epic and Legendary units come from the Summon tab.</p>';
-      else html += '<p class="muted small">Commons can be bought here with Souls once their boss has fallen. Rarer units come from the Summon tab.</p>';
-    } else if (campTab === 'summon') {
-      html += summonTab();
-    }
-    return html + '</div>' + toolsRow();
+  // ---------- Camp menu: a dedicated full-screen home plus one screen per topic ----------
+  const CAMP_SCREENS = {
+    upgrades: { title: 'Upgrades', icon: '⛺' }, team: { title: 'Team', icon: '🎖️' }, gear: { title: 'Gear', icon: '⚔️' }, summon: { title: 'Summon', icon: '✨' },
+    heat: { title: 'Heat', icon: '🔥' }, journal: { title: 'Journal', icon: '📖' }, settings: { title: 'Settings', icon: '⚙️' },
+  };
+  const upgradesAffordable = () => Object.keys(P.UPGRADE_BY).filter((id) => { const c = P.upgradeCost(save, id); return c !== null && save.souls >= c; }).length;
+  const curBar = () => '<div class="cur-bar" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '"><i>' + P.CURRENCIES[c].icon + '</i><b>' + P.balance(save, c) + '</b><small>' + P.CURRENCIES[c].name + '</small></span>').join('') + '</div>';
+  const miniCur = () => '<div class="mini-cur" aria-label="Currencies">' + Object.keys(P.CURRENCIES).map((c) => '<span class="cur-' + c + '" title="' + P.CURRENCIES[c].name + '">' + P.CURRENCIES[c].icon + ' <b>' + P.balance(save, c) + '</b></span>').join('') + '</div>';
+
+  function campHome() {
+    const cur = P.heroOf(save), problem = P.squadProblem(save), cp = P.squadCp(save), cap = P.commandCap(save), ups = upgradesAffordable(), cr = P.balance(save, 'crystals');
+    const tiles = [
+      ['upgrades', '⛺', 'Upgrades', ups ? ups + ' affordable' : 'Camp tracks', ups ? ups : 0],
+      ['team', '🎖️', 'Team', 'CP ' + cp + '/' + cap + ' · ' + save.squad.length + ' units', problem ? '!' : 0],
+      ['gear', '⚔️', 'Gear', Items.equippedIds(save).length + '/' + Items.SLOTS + ' worn · Forge', 0],
+      ['summon', '✨', 'Summon', '💎 ' + cr + ' · Recruit', cr >= P.PULL_COST ? '•' : 0],
+    ];
+    if (P.heatUnlocked(save)) tiles.push(['heat', '🔥', 'Heat', 'Heat ' + P.heatPoints(save) + (P.descendOf(save) ? ' · ▼' + P.descendOf(save) : ''), 0]);
+    tiles.push(['journal', '📖', 'Journal', Journal.doneCount(save) + '/' + Journal.LIST.length + ' feats', 0], ['map', '🗺️', 'World map', 'Look around', 0], ['settings', '⚙️', 'Settings', 'Reset · test gold', 0]);
+    const squadArt = save.squad.map((id) => '<span class="mini ' + rarClassOf(id) + '" title="' + esc(unitTitle(id)) + '">' + unitView(id).img + '</span>').join('');
+    const body = '<div class="camp-banner"><div class="sun" aria-hidden="true"></div>' + campScene(save) + '<div class="banner-title"><h1>Camp</h1><small>Runs ' + save.runs + ' · Best Lv' + save.bestLevel + '</small></div></div>' +
+      '<div class="camp-pad">' + curBar() +
+      '<button type="button" class="party' + (problem ? ' warn' : '') + '" data-cv="team" aria-label="Change hero and squad">' +
+        '<span class="p-hero">' + sealHTML(cur) + '<span><b>' + esc(cur.name) + '</b><small>' + esc(cur.passive) + '</small></span></span>' +
+        '<span class="p-squad">' + (squadArt || '<em>Empty squad</em>') + '</span>' +
+        '<span class="p-cp">🎖️ ' + cp + '/' + cap + '<small>' + (problem ? '⚠ ' + esc(problem) : 'Squad ready · tap to change') + '</small></span></button>' +
+      '<div class="camp-grid">' + tiles.map((t) => '<button type="button" class="ctile" data-cv="' + t[0] + '"><span class="seal-ic" aria-hidden="true">' + t[1] + '</span><span class="ct"><b>' + t[2] + '</b><small>' + t[3] + '</small></span>' + (t[4] ? '<i class="badge">' + t[4] + '</i>' : '') + '</button>').join('') + '</div></div>';
+    let foot = '<div class="camp-foot">';
+    if (save.waypoints.length) foot += '<div class="start-at" aria-label="Start position"><small>🚩 Start at</small>' + ['camp'].concat(save.waypoints).map((id) =>
+      '<button type="button" class="' + (save.startAt === id ? 'on' : '') + '" data-start="' + id + '">' + (id === 'camp' ? '⛺ Camp' : esc(World.SUB_BY[id].name)) + '</button>').join('') + '</div>';
+    foot += '<button type="button" class="primary setout" data-act="start"><span class="so-main"><i aria-hidden="true">出陣</i>Set out</span><small>🍙 ' + P.startSupplies(save) + ' Rations · ♥ ' + P.maxHp(save) + ' HP</small></button></div>';
+    return { body, foot };
   }
-  const toolsRow = () => '<div class="tools"><span class="muted small">Prototype tools</span><button data-act="cheat">+100 ✦ 30 💎 10 ⚒</button><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset progress') + '</button></div>';
+
+  function upgradesBody() {
+    const GROUPS = [['Body', ['vitality', 'ward', 'revive', 'bulwark']], ['Arms', ['command', 'drill']], ['Fortune', ['fortune', 'purse', 'provisions', 'choice']], ['Exploring', ['scouting', 'board']]];
+    let html = '<p class="lead">Spend ✦ Souls on permanent Camp upgrades. Your camp grows as you build.</p><div class="list">';
+    for (const [gname, ids] of GROUPS) {
+      html += '<h4 class="track-h">' + gname + '</h4>';
+      for (const id of ids) {
+        const u = P.UPGRADE_BY[id], lv = P.level(save, u.id), cost = P.upgradeCost(save, u.id);
+        html += '<div class="item track' + (lv ? ' built' : '') + '"><span class="ic">' + u.icon + '</span><div class="grow"><b>' + u.name + ' <small>Lv ' + lv + '/' + u.costs.length + '</small></b><span class="muted">' + u.desc + '</span>' +
+          '<span class="pips" aria-hidden="true">' + u.costs.map((_, i) => '<i class="' + (i < lv ? 'on' : '') + '"></i>').join('') + '</span></div>' +
+          (cost === null ? '<span class="maxed">Max</span>' : '<button data-buy="' + u.id + '"' + (pointAt === u.id ? ' class="point"' : '') + (save.souls < cost ? ' disabled' : '') + '>✦ ' + cost + '</button>') + '</div>';
+      }
+    }
+    return html + '</div><p class="muted small">Max HP ' + P.maxHp(save) + ' · Command Points ' + P.commandCap(save) + ' · Start Rations ' + P.startSupplies(save) + '</p>';
+  }
+
+  // Team: hero, squad slots (tap or drag to swap), Command Points, traits and the owned roster as a grid.
+  function placeInSquad(id, i) {
+    if (save.squad.includes(id) || !save.owned.includes(id)) return;
+    const next = save.squad.slice();
+    if (i >= 0 && i < next.length) next[i] = id; else next.push(id);
+    if (P.squadCp(save, next) > P.commandCap(save)) { toast('Not enough Command Points for that swap (' + P.squadCp(save, next) + '/' + P.commandCap(save) + ').'); return; }
+    save.squad = next; teamSel = id; persist(); renderAll();
+  }
+  function tapSlot(i) {
+    const cur = save.squad[i];
+    if (teamSel && !save.squad.includes(teamSel)) { placeInSquad(teamSel, cur === undefined ? -1 : i); return; }
+    teamSel = cur === undefined || teamSel === cur ? null : cur; renderAll();
+  }
+  function dropOnSlot(id, i) {
+    const from = save.squad.indexOf(id);
+    if (from >= 0) { if (from !== i && i < save.squad.length) { const t = save.squad[i]; save.squad[i] = id; save.squad[from] = t; persist(); renderAll(); } return; }
+    placeInSquad(id, i < save.squad.length ? i : -1);
+  }
+  function teamBody() {
+    const army = P.buildArmy(save, {}), problem = P.squadProblem(save), cp = P.squadCp(save), cap = P.commandCap(save);
+    const cardOf = (id) => army.find((c) => c.id === id) || P.buildArmy(Object.assign({}, save, { squad: [id] }), {})[0];
+    if (teamSel && !save.owned.includes(teamSel)) teamSel = null;
+    let h = '<h4 class="track-h">Hero</h4>' + heroPicker() + '<div class="squad-sticky"><h4 class="track-h">Squad <small>tap or drag a unit onto a slot to swap</small></h4>';
+    h += '<div class="squad-head"><div class="cp-bar' + (cp > cap ? ' over' : '') + '" role="meter" aria-valuenow="' + cp + '" aria-valuemax="' + cap + '"><i style="width:' + Math.min(100, 100 * cp / cap) + '%"></i><span>🎖️ Command Points <b>' + cp + ' / ' + cap + '</b></span></div>' +
+      '<p class="squad-rule ' + (problem ? 'bad' : 'ok') + '">' + (problem ? '⚠ ' + esc(problem) : '✔ Squad ready: an attacker and a supporter, ' + (cap - cp) + ' CP spare.') + '</p></div>';
+    const nslots = Math.max(5, save.squad.length + 1);
+    h += '<div class="slots" aria-label="Squad">';
+    for (let i = 0; i < nslots; i++) {
+      const id = save.squad[i];
+      h += id ? '<button type="button" class="uslot ' + rarClassOf(id) + (teamSel === id ? ' sel' : '') + '" data-slot="' + i + '" data-drag="' + id + '" draggable="true" aria-label="' + esc(unitTitle(id)) + ', in squad"><span class="art">' + unitView(id).img + '</span><small>🎖️' + P.unitCp(id) + ' · ' + esc(unitView(id).name) + '</small></button>'
+        : '<button type="button" class="uslot empty" data-slot="' + i + '" aria-label="Empty slot"><span class="plus">+</span><small>empty</small></button>';
+    }
+    h += '</div></div>' + traitPanel() + '<h4 class="track-h">Roster <small>' + save.owned.length + ' units · more from Summon and Recruit</small></h4><div class="roster">';
+    for (const id of save.owned) {
+      const inSq = save.squad.includes(id), st = P.starsOf(save, id);
+      h += '<button type="button" class="utile ' + rarClassOf(id) + (inSq ? ' insquad' : '') + (teamSel === id ? ' sel' : '') + '" data-tsel="' + id + '" data-drag="' + id + '" draggable="true" aria-label="' + esc(unitTitle(id) + (inSq ? ', in squad' : '')) + '">' +
+        '<span class="art">' + unitView(id).img + '</span><b>' + esc(unitView(id).name) + '</b><small>🎖️' + P.unitCp(id) + ' <span class="stars">' + '★'.repeat(st) + '</span></small>' + (inSq ? '<i class="tick">✓</i>' : '') + '</button>';
+    }
+    h += '</div>';
+    let drawer = '';
+    if (teamSel) {
+      const id = teamSel, inSq = save.squad.includes(id), why = !inSq && P.canAdd(save, id);
+      drawer = '<aside class="drawer udetail ' + rarClassOf(id) + '"><button type="button" class="d-x" data-tsel="" aria-label="Close">✕</button><div class="item unit ' + rarClassOf(id) + '">' + unitCell(id, unitMeta(id) + '<span class="muted">' + statLine(cardOf(id)) + '</span>' + unitPerk(id)) + '</div>' +
+        '<div class="row"><button type="button" class="' + (inSq ? '' : 'primary') + ' grow" data-squad="' + id + '">' + (inSq ? 'Remove from squad' : why ? 'Add (needs a swap)' : 'Add to squad') + '</button></div>' +
+        (why ? '<p class="muted small">' + esc(why) + ' Tap a squad slot above to swap this unit in.</p>' : !inSq ? '<p class="muted small">Tap a squad slot above to swap it in, or add it to a free slot.</p>' : '') + '</aside>';
+    }
+    return { body: h, foot: drawer };
+  }
+
+  // Gear: paper-doll of the 5 slots, set bonuses, filtered inventory grid; item detail with equip, Forge and salvage in a drawer.
+  const itemFrom = (it) => { const src = it.source; return src.kind === 'unique' ? nodeTitle(World.byId[src.spot]) + ' · ' + World.SUB_BY[src.sub].name : src.kind === 'legend' ? 'Signature of ' + nodeTitle(World.byId[src.spot]) : src.kind === 'sub' ? World.SUB_BY[src.sub].name : src.region; };
+  const DOLL = '<svg class="doll-fig" viewBox="0 0 100 190" aria-hidden="true"><path d="M50 12c-9 0-15 7-15 16s6 17 15 17 15-8 15-17-6-16-15-16z" fill="#e9dcb8" stroke="#2b2a35" stroke-width="2.4"/><path d="M26 58c8-8 16-11 24-11s16 3 24 11l8 50-12 3-4-30-4 94H44l-2-94-4 30-12-3z" fill="#d7cba3" stroke="#2b2a35" stroke-width="2.4" stroke-linejoin="round"/><path d="M42 118l-7 62h12l3-52 3 52h12l-7-62z" fill="#c9bd96" stroke="#2b2a35" stroke-width="2.2" stroke-linejoin="round"/><circle cx="50" cy="70" r="5" fill="#c8352b" opacity=".85"/></svg>';
+  function gearBody() {
+    const owned = save.items.map((id) => Items.BY_ID[id]).filter(Boolean), eq = Items.equippedIds(save);
+    if (gearSel && !save.items.includes(gearSel)) gearSel = null;
+    const slotBtn = (sl) => {
+      const id = save.loadout[sl.id], it = id && Items.BY_ID[id];
+      return '<button type="button" class="slot ' + (it ? rarClass(it) + ' filled' : 'empty') + (it && gearSel === it.id ? ' sel' : '') + '" ' + (it ? 'data-gsel="' + it.id + '" aria-label="' + esc(sl.name + ': ' + it.name) + '"' : 'data-gfilter="' + (sl.fits) + '" aria-label="' + sl.name + ' slot is empty, show matching items"') + '>' +
+        '<span class="si">' + (it ? esc(Items.icon(it)) : sl.icon) + '</span><small>' + sl.name + '</small><em>' + (it ? esc(it.name) : 'empty') + '</em></button>';
+    };
+    const L = Items.SLOT_LIST;
+    let h = '<div class="doll" aria-label="Equipped gear"><div class="doll-col">' + [L[0], L[1], L[2]].map(slotBtn).join('') + '</div>' + DOLL + '<div class="doll-col">' + [L[3], L[4]].map(slotBtn).join('') +
+      '<div class="doll-note"><b>' + eq.length + '/' + Items.SLOTS + '</b><small>worn</small></div></div></div>';
+    h += setPanel();
+    const chips = [['all', 'All']].concat(Object.keys(Items.SLOT_NAMES).map((k) => [k, Items.SLOT_NAMES[k]]));
+    h += '<h4 class="track-h">Inventory <small>' + owned.length + '/' + Items.ALL.length + ' collected · tap an item</small></h4><div class="chips">' + chips.map((c) => '<button class="' + (gearFilter === c[0] ? 'on' : '') + '" data-gfilter="' + c[0] + '">' + c[1] + '</button>').join('') + '</div>';
+    const bossTok = World.nodes.filter((n) => n.type === 'boss' && Items.tokensOf(save, n.id) > 0);
+    if (bossTok.length) h += '<details class="tok-list"><summary>Boss tokens (' + bossTok.length + ' boss' + (bossTok.length === 1 ? '' : 'es') + ')</summary>' + bossTok.map((n) => '<h5>' + esc(nodeTitle(n)) + '</h5>' + tokenBlock(n)).join('') + '</details>';
+    const list = owned.filter((it) => gearFilter === 'all' || it.slot === gearFilter);
+    list.sort((a, b) => (eq.includes(b.id) - eq.includes(a.id)) || (Items.RARITY[b.rarity].order - Items.RARITY[a.rarity].order) || (Items.dataOf(save, b.id).lv - Items.dataOf(save, a.id).lv) || a.name.localeCompare(b.name));
+    if (!owned.length) h += '<p class="empty-gear">No gear yet. Win battles on the map: every monster has an item that only it drops.</p>';
+    else if (!list.length) h += '<p class="empty-gear">Nothing in this slot yet.</p>';
+    else h += '<div class="inv">' + list.map((it) => '<button type="button" class="gtile ' + rarClass(it) + (eq.includes(it.id) ? ' equipped' : '') + (gearSel === it.id ? ' sel' : '') + '" data-gsel="' + it.id + '" aria-label="' + esc(it.name + ', ' + Items.RARITY[it.rarity].name + (eq.includes(it.id) ? ', equipped' : '')) + '"><span class="gi">' + esc(Items.icon(it)) + '</span><b>' + esc(it.name) + '</b><small>iLv ' + Items.dataOf(save, it.id).lv + '</small>' + (eq.includes(it.id) ? '<i class="tick">E</i>' : '') + '</button>').join('') + '</div>';
+    let drawer = '';
+    const it = gearSel && Items.BY_ID[gearSel];
+    if (it) {
+      const on = eq.includes(it.id), d = Items.dataOf(save, it.id), dust = P.balance(save, 'dust'), lc = Items.levelCost(save, it.id), rc = Items.rerollCost(save, it.id), set = Items.setOf(it), fx = Items.fxOf(it), val = Items.salvageValue(save, it.id), sure = confirmSalvage === it.id;
+      drawer = '<aside class="drawer gdetail ' + rarClass(it) + '"><button type="button" class="d-x" data-gsel="" aria-label="Close">✕</button>' +
+        '<div class="gd-head">' + itemIcon(it) + '<div class="grow"><b>' + esc(it.name) + '</b><span class="meta"><i class="rb">' + Items.RARITY[it.rarity].name + '</i> ' + (it.slot === 'ring' ? 'Ring' : Items.SLOT_NAMES[it.slot]) + ' · iLv ' + d.lv + (set ? ' · ' + set.icon + ' ' + esc(set.name) : '') + '</span><span class="muted small">' + esc(itemFrom(it)) + '</span></div></div>' +
+        '<div class="gd-stats"><span class="effect">' + esc(Items.effectText(it.kind, it.type, Items.mainAmount(it, d))) + '</span>' +
+        d.subs.map((sb, i) => '<span class="subrow"><span class="sub">+ ' + esc(Items.substatText(sb, d)) + '</span><button data-reroll="' + it.id + '|' + i + '"' + (dust < rc ? ' disabled' : '') + ' aria-label="Reroll substat">🎲 ⚒' + rc + '</button></span>').join('') +
+        (fx ? '<span class="fx">' + esc(fx.text) + '</span>' : '') + '</div>' +
+        '<div class="gd-forge"><small>⚒ Forge · you have ' + dust + ' Dust</small>' + (lc === null ? '<span class="muted">Max item level</span>' : '<button data-lvup="' + it.id + '"' + (dust < lc ? ' disabled' : '') + '>⬆ Level ' + (d.lv + 1) + ' · ⚒' + lc + '</button>') + '</div>' +
+        '<div class="row"><button class="grow ' + (on ? 'on' : 'primary') + '" data-equip="' + it.id + '">' + (on ? 'Unequip' : 'Equip') + '</button><button class="salvage' + (sure ? ' danger' : '') + '" data-salvage="' + it.id + '">' + (sure ? 'Sure? ' : 'Salvage ') + '⚒ +' + val + '</button></div></aside>';
+    }
+    return { body: h, foot: drawer };
+  }
+
+  function recruitBody() {
+    let shown = 0, html = '<div class="list">';
+    for (const u of P.ROSTER) {
+      if (save.owned.includes(u.id) || u.start || !P.recruitable(u)) continue;
+      shown++;
+      const avail = P.recruitAvailable(save, u), need = Array.isArray(u.need) ? u.need : [u.need], can = save.souls >= u.cost;
+      html += '<div class="item unit ' + rarClassOf(u.id) + (avail ? '' : ' locked') + '">' + unitCell(u.id, unitMeta(u.id) + '<span class="muted">' +
+        (avail ? describeType(u.type, u) : 'Defeat ' + need.map((b) => World.THEMES[b].boss[0]).join(' or ')) + '</span>' + unitPerk(u.id)) +
+        (avail ? '<button data-recruit="' + u.id + '"' + (can ? '' : ' disabled') + '>✦ ' + u.cost + '</button>' : '<span class="muted">🔒</span>') + '</div>';
+    }
+    html += '</div>';
+    if (!shown) return '<p class="muted">Every Common has joined you. Rare, Epic and Legendary units come from Summon.</p>';
+    return html + '<p class="muted small">Commons can be bought here with Souls once their boss has fallen. Rarer units come from Summon.</p>';
+  }
+  function summonBody() {
+    const views = [['summon', '✨ Summon'], ['recruit', '🛡 Recruit']];
+    return '<div class="chips views">' + views.map((c) => '<button class="' + (summonView === c[0] ? 'on' : '') + '" data-sview="' + c[0] + '">' + c[1] + '</button>').join('') + '</div>' + (summonView === 'recruit' ? recruitBody() : summonTab());
+  }
+  function settingsBody() {
+    return '<p class="lead">Prototype tools and save data.</p><div class="list"><div class="item"><span class="ic">💰</span><div class="grow"><b>Test currency</b><span class="muted">Adds 100 ✦ Souls, 30 💎 Crystals and 10 ⚒ Dust.</span></div><button data-act="cheat">+100 ✦ 30 💎 10 ⚒</button></div>' +
+      '<div class="item"><span class="ic">🗑</span><div class="grow"><b>Reset progress</b><span class="muted">Erases the whole save: upgrades, roster, gear and the map.</span></div><button data-act="reset" class="' + (confirmReset ? 'danger' : '') + '">' + (confirmReset ? 'Tap again to erase' : 'Reset') + '</button></div>' +
+      '<div class="item"><span class="ic">📊</span><div class="grow"><b>Record</b><span class="muted">' + save.runs + ' expeditions · deepest fight Lv' + save.bestLevel + ' · ' + save.owned.length + ' units · ' + save.items.length + ' items</span></div></div></div>';
+  }
+
+  let campShown = null;
+  function renderCamp() {
+    const el = $('#camp'), show = !run() && campView !== 'map';
+    el.hidden = !show;
+    if (!show) { el.innerHTML = ''; campShown = null; return; }
+    const prev = el.querySelector('.camp-body'), top = prev && campShown === campView ? prev.scrollTop : 0;
+    let body = '', foot = '', head = '';
+    if (campView === 'home') ({ body, foot } = campHome());
+    else {
+      const sc = CAMP_SCREENS[campView] || CAMP_SCREENS.upgrades;
+      head = '<header class="camp-head"><button type="button" class="back" data-cv="home" aria-label="Back to Camp">‹</button><h2><span aria-hidden="true">' + sc.icon + '</span> ' + sc.title + '</h2>' + miniCur() + '</header>';
+      if (campView === 'upgrades') body = upgradesBody();
+      else if (campView === 'team') ({ body, foot } = teamBody());
+      else if (campView === 'gear') ({ body, foot } = gearBody());
+      else if (campView === 'summon') body = summonBody();
+      else if (campView === 'heat') body = heatTab();
+      else if (campView === 'journal') body = journalTab();
+      else body = settingsBody();
+    }
+    el.innerHTML = '<div class="camp-screen v-' + campView + (campShown !== campView ? ' enter' : '') + '">' + head + '<div class="camp-body">' + body + '</div>' + foot + '</div>';
+    el.querySelector('.camp-body').scrollTop = top; campShown = campView;
+    const sel = el.querySelector('.camp-body .utile.sel, .camp-body .gtile.sel'); if (sel && el.querySelector('.drawer')) sel.scrollIntoView({ block: 'nearest' });
+  }
+  function goCamp(v) {
+    campView = v; selected = null; confirmReset = false; confirmSalvage = null; teamSel = null; gearSel = null; summonMsg = '';
+    if (v === 'journal' && !journalView) journalView = 'ach';
+    renderAll();
+    WorldMap.setOverview(v === 'map');
+  }
 
   // ---------- Journal (WP17): Achievements, Bestiary, Codex ----------
   function journalTab() {
@@ -489,55 +615,6 @@
     return '<div class="sets">' + st.map((x) => '<div class="set-card' + (x.tiers.some((t) => t.on) ? ' on' : '') + '"><b>' + x.set.icon + ' ' + esc(x.set.name) + ' <small>' + x.count + ' piece' + (x.count === 1 ? '' : 's') + '</small></b>' +
       x.tiers.map((t) => '<span class="' + (t.on ? 'on' : '') + '">' + (t.on ? '✔' : '○') + ' ' + t.n + ': ' + esc(t.text) + '</span>').join('') + '</div>').join('') + '</div>';
   }
-  function forgeView() {
-    const owned = save.items.map((id) => Items.BY_ID[id]).filter(Boolean), eq = Items.equippedIds(save), dust = P.balance(save, 'dust');
-    let h = '<p class="muted small">Spend ⚒ Dust (<b>' + dust + '</b>) to reroll a substat or raise an item\'s level (max ' + Items.MAX_ILVL + '). Salvage items in the Gear view.</p>' + setPanel();
-    if (!owned.length) return h + '<p class="empty-gear">Nothing to forge yet.</p>';
-    owned.sort((a, b) => (eq.includes(b.id) - eq.includes(a.id)) || (Items.RARITY[b.rarity].order - Items.RARITY[a.rarity].order) || a.name.localeCompare(b.name));
-    for (const it of owned) {
-      const d = Items.dataOf(save, it.id), lc = Items.levelCost(save, it.id), rc = Items.rerollCost(save, it.id), set = Items.setOf(it);
-      h += '<div class="item gear forge ' + rarClass(it) + (eq.includes(it.id) ? ' equipped' : '') + '">' + itemIcon(it) + '<div class="grow"><b>' + esc(it.name) + '</b>' +
-        '<span class="meta"><i class="rb">' + Items.RARITY[it.rarity].name + '</i> iLv ' + d.lv + (set ? ' · ' + set.icon + ' ' + esc(set.name) : '') + '</span>' + '<span class="effect">' + esc(Items.effectText(it.kind, it.type, Items.mainAmount(it, d))) + '</span>' +
-        d.subs.map((sb, i) => '<span class="subrow"><span class="sub">+ ' + esc(Items.substatText(sb, d)) + '</span><button data-reroll="' + it.id + '|' + i + '"' + (dust < rc ? ' disabled' : '') + ' aria-label="Reroll substat">🎲 ⚒' + rc + '</button></span>').join('') +
-        '<span class="forge-btns">' + (lc === null ? '<span class="muted">Max level</span>' : '<button data-lvup="' + it.id + '"' + (dust < lc ? ' disabled' : '') + '>⬆ Level ' + (d.lv + 1) + ' · ⚒' + lc + '</button>') + '</span></div></div>';
-    }
-    return h;
-  }
-  function gearTab() {
-    const toggle = '<div class="chips views">' + [['gear', 'Gear'], ['forge', '⚒ Forge']].map((c) => '<button class="' + (gearView === c[0] ? 'on' : '') + '" data-gview="' + c[0] + '">' + c[1] + '</button>').join('') + '</div>';
-    if (gearView === 'forge') return toggle + forgeView();
-    return toggle + gearList();
-  }
-  function gearList() {
-    const owned = save.items.map((id) => Items.BY_ID[id]).filter(Boolean);
-    const eq = Items.equippedIds(save);
-    let h = '<div class="paperdoll" aria-label="Equipped gear">' + Items.SLOT_LIST.map((sl) => {
-      const id = save.loadout[sl.id], it = id && Items.BY_ID[id];
-      return '<button class="slot ' + (it ? rarClass(it) + ' filled' : '') + '" ' + (it ? 'data-equip="' + it.id + '" title="' + esc(it.name) + ': tap to unequip"' : 'disabled') + '>' +
-        '<span class="si">' + (it ? esc(Items.icon(it)) : sl.icon) + '</span><small>' + sl.name + '</small><em>' + (it ? esc(it.name) : 'empty') + '</em></button>';
-    }).join('') + '</div>';
-    h += setPanel();
-    h += '<p class="muted small">Items drop from monsters, scale with the fight\'s level and are kept forever. Rings take anything. Collected ' + owned.length + '/' + Items.ALL.length + '. Salvaging gives Dust ⚒.</p>';
-    const chips = [['all', 'All']].concat(Object.keys(Items.SLOT_NAMES).map((k) => [k, Items.SLOT_NAMES[k]]));
-    h += '<div class="chips">' + chips.map((c) => '<button class="' + (gearFilter === c[0] ? 'on' : '') + '" data-gfilter="' + c[0] + '">' + c[1] + '</button>').join('') + '</div>';
-    const bossTok = World.nodes.filter((n) => n.type === 'boss' && Items.tokensOf(save, n.id) > 0);
-    if (bossTok.length) h += '<details class="tok-list"><summary>Boss tokens (' + bossTok.length + ' boss' + (bossTok.length === 1 ? '' : 'es') + ')</summary>' +
-      bossTok.map((n) => '<h5>' + esc(nodeTitle(n)) + '</h5>' + tokenBlock(n)).join('') + '</details>';
-    const list = owned.filter((it) => gearFilter === 'all' || it.slot === gearFilter);
-    if (!owned.length) return h + '<p class="empty-gear">No gear yet. Win battles on the map: every monster has an item that only it drops.</p>';
-    list.sort((a, b) => (eq.includes(b.id) - eq.includes(a.id)) || (Items.RARITY[b.rarity].order - Items.RARITY[a.rarity].order) || (Items.dataOf(save, b.id).lv - Items.dataOf(save, a.id).lv) || a.name.localeCompare(b.name));
-    if (!list.length) h += '<p class="empty-gear">Nothing in this slot yet.</p>';
-    for (const it of list) {
-      const on = eq.includes(it.id), src = it.source, d = Items.dataOf(save, it.id);
-      const from = src.kind === 'unique' ? nodeTitle(World.byId[src.spot]) + ' · ' + World.SUB_BY[src.sub].name : src.kind === 'legend' ? 'Signature of ' + nodeTitle(World.byId[src.spot]) : src.kind === 'sub' ? World.SUB_BY[src.sub].name : src.region;
-      const val = Items.salvageValue(save, it.id), sure = confirmSalvage === it.id;
-      h += '<div class="item gear ' + rarClass(it) + (on ? ' equipped' : '') + '">' + itemIcon(it) + '<div class="grow"><b>' + esc(it.name) + '</b>' +
-        '<span class="meta"><i class="rb">' + Items.RARITY[it.rarity].name + '</i> ' + (it.slot === 'ring' ? 'Ring' : Items.SLOT_NAMES[it.slot]) + ' · iLv ' + d.lv + '</span>' + itemLines(it) + '<span class="muted">' + esc(from) + '</span></div>' +
-        '<div class="btns"><button class="' + (on ? 'on' : '') + '" data-equip="' + it.id + '">' + (on ? 'Unequip' : 'Equip') + '</button>' +
-        '<button class="salvage' + (sure ? ' danger' : '') + '" data-salvage="' + it.id + '">' + (sure ? 'Sure? ' : '') + '⚒ +' + val + '</button></div></div>';
-    }
-    return h;
-  }
   const rarClassOf = (id) => 'rar-' + P.ROSTER_BY[id].rarity;
   // Rarity, Command Point cost and trait of a roster unit, as a small line of chips.
   function unitMeta(id) {
@@ -595,11 +672,14 @@
   // Trait synergy panel: count per trait, active bonuses and the next step to reach.
   function traitPanel() {
     const counts = P.traitCounts(save);
-    return '<div class="traits"><h4>Traits <small>2 / 4 / 6 of a kind in the squad</small></h4>' + Object.keys(P.TRAITS).map((t) => {
+    const card = (t) => {
       const tr = P.TRAITS[t], n = counts[t] || 0;
       return '<div class="trait' + (n >= 2 ? ' on' : '') + '"><b>' + tr.icon + ' ' + tr.name + ' <em>' + n + '</em></b>' + P.TRAIT_STEPS.map((st) =>
         '<span class="' + (n >= st ? 'got' : '') + '"><i>' + st + '</i> ' + esc(tr.tiers[st].text) + '</span>').join('') + '</div>';
-    }).join('') + '</div>';
+    };
+    const all = Object.keys(P.TRAITS), used = all.filter((t) => counts[t]), spare = all.filter((t) => !counts[t]);
+    return '<div class="traits"><h4>Trait bonuses <small>2 / 4 / 6 of a kind in the squad</small></h4>' + used.map(card).join('') +
+      (spare.length ? '<details><summary>Other traits (' + spare.length + ')</summary><div class="traits-more">' + spare.map(card).join('') + '</div></details>' : '') + '</div>';
   }
   function statLine(card) {
     const t = E.CARD_TYPES[card.type];
@@ -619,17 +699,17 @@
   }
   const lvColor = (L) => (L <= 3 ? '#3f9a46' : L <= 6 ? '#d9a21b' : L <= 9 ? '#e0731f' : '#c63b31');
 
-  function renderAll() { renderHud(); renderSheet(); renderCard(); renderMenu(); syncMap(); }
+  function renderAll() { renderHud(); renderCamp(); renderSheet(); renderCard(); renderMenu(); syncMap(); }
 
   // ---------- Actions ----------
   function startRun() {
     const problem = P.squadProblem(save);
-    if (problem) { toast(problem); campTab = 'squad'; sheetOpen = true; renderAll(); return; }
+    if (problem) { toast(problem); campView = 'team'; renderAll(); return; }
     const sup = P.startSupplies(save);
     const startId = save.startAt !== 'camp' && save.waypoints.includes(save.startAt) ? save.startAt + '-wp' : 'camp'; // WP14: begin at a lit Wayshrine
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: startId, cleared: ['camp'], path: [startId], keys: 0,
       open: [startId === 'camp' ? 'meadow' : save.startAt], bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: P.startGold(save), rerolls: P.rewardRerolls(save), reviveUsed: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
-    selected = null; confirmReturn = false; menuOpen = false; journalView = null; persist();
+    selected = null; confirmReturn = false; menuOpen = false; persist();
     WorldMap.placeToken(startId);
     if (startId === 'camp') { const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]); } else WorldMap.focus(World.byId[startId].x, World.byId[startId].y);
     toast('Expedition started' + (P.heatPoints(save) || P.descendOf(save) ? ' (Heat ' + P.heatPoints(save) + (P.descendOf(save) ? ', Descend ' + P.descendOf(save) : '') + ')' : '') + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Rations (only ' + World.SUB_BY[run().open[0]].name + ' is open) and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
@@ -933,7 +1013,7 @@
       const cheap = P.cheapestUpgrade(save);
       if (cheap) { if (save.souls < cheap.cost) { bonus = cheap.cost - save.souls; save.souls += bonus; } pointAt = cheap.id; }
     }
-    save.run = null; selected = null; confirmReturn = false; menuOpen = false;
+    save.run = null; selected = null; confirmReturn = false; menuOpen = false; campView = 'home'; teamSel = null; gearSel = null;
     const featHtml = checkFeats(true);
     persist();
     const unlockedNames = r.unlockedNow.map((u) => World.SUB_BY[u].name);
@@ -958,7 +1038,7 @@
     $('#modal').onclick = (ev) => {
       if (!ev.target.closest('[data-act="to-camp"], [data-act="to-upgrades"]')) return;
       closeModal(); WorldMap.placeToken('camp'); WorldMap.focus(World.CAMP.x, World.CAMP.y - 120);
-      campTab = 'upgrades'; sheetOpen = true; renderAll();
+      campView = ev.target.closest('[data-act="to-upgrades"]') ? 'upgrades' : 'home'; renderAll();
     };
     renderAll();
   }
@@ -978,9 +1058,13 @@
     if (b.dataset.drop !== undefined) { dropSel = dropSel === Number(b.dataset.drop) ? null : Number(b.dataset.drop); renderCard(); return; }
     if (b.id === 'sheet-toggle') { sheetOpen = !sheetOpen; renderSheet(); return; }
     if (!b.dataset.salvage) confirmSalvage = null;
-    if (b.dataset.jv) { journalView = b.dataset.jv === 'close' ? null : b.dataset.jv; renderSheet(); const l = $('#sheet'); l.scrollTop = 0; return; }
-    if (b.dataset.region) { bestRegion = Number(b.dataset.region); renderSheet(); return; }
-    if (b.dataset.tab) { journalView = null; campTab = b.dataset.tab; sheetOpen = true; renderSheet(); return; }
+    if (b.dataset.cv) { goCamp(b.dataset.cv); return; }
+    if (b.dataset.jv) { journalView = b.dataset.jv; renderAll(); const l = $('#camp .camp-body'); if (l) l.scrollTop = 0; return; }
+    if (b.dataset.region) { bestRegion = Number(b.dataset.region); renderAll(); return; }
+    if (b.dataset.tsel !== undefined) { teamSel = b.dataset.tsel && b.dataset.tsel !== teamSel ? b.dataset.tsel : null; renderAll(); return; }
+    if (b.dataset.slot !== undefined) { tapSlot(Number(b.dataset.slot)); return; }
+    if (b.dataset.gsel !== undefined) { gearSel = b.dataset.gsel && b.dataset.gsel !== gearSel ? b.dataset.gsel : null; renderAll(); return; }
+    if (b.dataset.sview) { summonView = b.dataset.sview; renderAll(); return; }
     if (b.dataset.hero) {
       const h = P.HERO_BY[b.dataset.hero];
       if (!P.heroUnlocked(save, h.id)) { toast(h.name + ' is locked: ' + h.lock + '.'); return; }
@@ -1023,7 +1107,6 @@
       }
       persist(); renderAll(); return;
     }
-    if (b.dataset.gview) { gearView = b.dataset.gview; renderSheet(); return; }
     if (b.dataset.reroll) {
       const [id, i] = b.dataset.reroll.split('|'), sb = Items.reroll(save, id, Number(i));
       if (sb) { persist(); toast('Substat rerolled: ' + Items.substatText(sb, Items.dataOf(save, id))); renderAll(); } else toast('Not enough Dust.');
@@ -1034,11 +1117,11 @@
       if (lv) { persist(); toast(Items.BY_ID[b.dataset.lvup].name + ' is now item level ' + lv + '.'); renderAll(); } else toast('Not enough Dust.');
       return;
     }
-    if (b.dataset.gfilter) { gearFilter = b.dataset.gfilter; renderSheet(); return; }
+    if (b.dataset.gfilter) { gearFilter = b.dataset.gfilter; renderAll(); return; }
     if (b.dataset.salvage) {
       const id = b.dataset.salvage;
-      if (confirmSalvage !== id) { confirmSalvage = id; renderSheet(); return; }
-      confirmSalvage = null; const name = Items.BY_ID[id].name, n = Items.salvage(save, id);
+      if (confirmSalvage !== id) { confirmSalvage = id; renderAll(); return; }
+      confirmSalvage = null; gearSel = null; const name = Items.BY_ID[id].name, n = Items.salvage(save, id);
       persist(); toast(name + ' salvaged: ⚒ +' + n + ' Dust.'); renderAll(); return;
     }
     if (b.dataset.redeem) {
@@ -1070,11 +1153,16 @@
     else if (act === 'return') { if (!confirmReturn) { confirmReturn = true; renderMenu(); } else { menuOpen = false; endRun(false); } }
     else if (act === 'cheat') { save.souls += 100; P.earn(save, 'crystals', 30); P.earn(save, 'dust', 10); persist(); renderAll(); }
     else if (act === 'reset') {
-      if (!confirmReset) { confirmReset = true; renderSheet(); return; }
-      confirmReset = false; save = P.reset(); WorldMap.placeToken('camp'); WorldMap.focus(World.CAMP.x, World.CAMP.y - 120, true); toast('Progress erased.'); renderAll();
+      if (!confirmReset) { confirmReset = true; renderAll(); return; }
+      confirmReset = false; teamSel = gearSel = null; campView = 'home'; save = P.reset(); WorldMap.placeToken('camp'); WorldMap.focus(World.CAMP.x, World.CAMP.y - 120, true); toast('Progress erased.'); renderAll();
     }
   };
-  for (const id of ['#sheet', '#card', '#runmenu', '#hud']) $(id).addEventListener('click', onPanelClick);
+  for (const id of ['#sheet', '#camp', '#card', '#runmenu', '#hud']) $(id).addEventListener('click', onPanelClick);
+
+  // Drag a unit onto a squad slot (mouse / pen; touch uses tap-to-swap).
+  $('#camp').addEventListener('dragstart', (ev) => { const d = ev.target.closest('[data-drag]'); if (d) { ev.dataTransfer.setData('text/plain', d.dataset.drag); ev.dataTransfer.effectAllowed = 'move'; } });
+  $('#camp').addEventListener('dragover', (ev) => { if (ev.target.closest('[data-slot]')) ev.preventDefault(); });
+  $('#camp').addEventListener('drop', (ev) => { const sl = ev.target.closest('[data-slot]'); if (!sl) return; ev.preventDefault(); const id = ev.dataTransfer.getData('text/plain'); if (id && P.ROSTER_BY[id]) dropOnSlot(id, Number(sl.dataset.slot)); });
 
   WorldMap.init({
     onHero(x, y) { revealAround(x, y); },
@@ -1082,7 +1170,8 @@
       if (busy) return;
       confirmReturn = false; confirmReset = false; dropSel = null;
       if (run()) { menuOpen = false; selected = node && node.type !== 'camp' ? node.id : null; renderAll(); return; } // ground taps only walk the hero
-      if (!node || node.type === 'camp') { selected = null; sheetOpen = true; renderAll(); return; }
+      if (campView !== 'map') return; // Camp screens cover the map; only the read-only World map view inspects spots
+      if (!node || node.type === 'camp') { selected = null; renderAll(); return; }
       selected = node.id; sheetOpen = true; renderAll();
     },
   });
