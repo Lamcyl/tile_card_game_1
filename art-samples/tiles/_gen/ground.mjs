@@ -195,7 +195,7 @@ function patchStyle(t, G, famKey, rimCol) {
 // crowns for forest-edge pieces: every crown lies wholly inside the tile, so neighbouring tiles never need to agree on one
 const CROWN_SPOTS = (() => { const r = rng(hash('crown-spots')); const base = [[16, 16], [48, 16], [16, 48], [48, 48]]; return base.map(([x, y]) => [x + r.range(-3, 3), y + r.range(-3, 3), r.range(13, 16)]); })();
 const CROWN_FILL = (() => { const r = rng(hash('crown-spots2')); return [[32, 32, 11], [32, 6, 7], [32, 58, 7], [6, 32, 7], [58, 32, 7]]; })();
-function inShape(G, x, y, rad) {
+export function inShape(G, x, y, rad) {
   if (x - rad < G.x0 || x + rad > G.x1 || y - rad < G.y0 || y + rad > G.y1) return false;
   const corner = (cx, cy, R, sx, sy) => R && (x - cx) * sx > 0 && (y - cy) * sy > 0 && Math.hypot(x - cx, y - cy) > R - rad;
   const R = G.R; if (!G.h(BIT.N) && !G.h(BIT.W) && corner(G.x0 + R, G.y0 + R, R, -1, -1)) return false;
@@ -237,10 +237,10 @@ function virtualGeom(G, ox, oy, mg, R) {
 }
 // Crowns follow a staggered lattice (period 64, identical in every tile). A crown that crosses a tile edge is drawn only if it
 // fits inside the shape of every tile it touches, judged from data both tiles share, so neighbours always agree.
-function crowns(t, G) {
+export function crowns(t, G, { pal = CROWN_PAL, tag = '', draw = null } = {}) {
   const slots = [];
   for (let j = 0; j < 4; j++) for (let i = 0; i < 3; i++) {
-    const r = rng(hash(`slot${i},${j}`)); slots.push({ x: 10.67 + 21.33 * i + (j % 2 ? 10.67 : 0) + r.range(-2.5, 2.5), y: 8 + 16 * j + r.range(-2.5, 2.5), r0: r.range(12.5, 15.5), pal: Math.floor(r.range(0, 4)), seed: 200 + i * 7 + j });
+    const r = rng(hash(`slot${tag}${i},${j}`)); slots.push({ x: 10.67 + 21.33 * i + (j % 2 ? 10.67 : 0) + r.range(-2.5, 2.5), y: 8 + 16 * j + r.range(-2.5, 2.5), r0: r.range(12.5, 15.5), pal: Math.floor(r.range(0, 4)), seed: 200 + i * 7 + j });
   }
   const fits = (px, py, r) => {
     for (let oy = Math.floor((py - r) / T); oy <= Math.floor((py + r) / T); oy++) for (let ox = Math.floor((px - r) / T); ox <= Math.floor((px + r) / T); ox++) {
@@ -254,7 +254,7 @@ function crowns(t, G) {
     placed.push([px, py, r, s]);
   }
   placed.sort((a, b) => a[1] - b[1]);
-  for (const [x, y, r, s] of placed) t.add(crown(t, x, y, r, s.seed, CROWN_PAL[s.pal], false));
+  for (const [x, y, r, s] of placed) t.add((draw || crown)(t, x, y, r, s.seed, pal[s.pal % pal.length], false));
 }
 export function blobTile(styleKey, mask, variant = 0) {
   const S = STYLES[styleKey]; const t = newTile({ cat: S.cat, name: styleKey, variant: pad3(mask) });

@@ -5,13 +5,15 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { compose } from './_gen/compose.mjs';
+import { composeSub } from './_gen/compose-sub.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const man = JSON.parse(readFileSync(join(here, 'manifest.json'), 'utf8'));
 const STRICT = !!process.env.STRICT;
 const svgs = new Map(), symId = new Map();
 man.tiles.forEach((t, i) => { const s = readFileSync(join(here, t.path), 'utf8').trim(); svgs.set(t.path, s); symId.set(t.path, 's' + i); });
-const keyOf = (p) => p.replace(/^greenvale\/common\//, '').replace(/\.svg$/, '');
+const PRE = { 'sunny-meadows': 'sm:', 'old-oak-wood': 'oo:' };
+const keyOf = (p) => p.replace(/^greenvale\/common\//, '').replace(/^greenvale\/(sunny-meadows|old-oak-wood)\//, (m, s) => PRE[s]).replace(/\.svg$/, '');
 const byKey = new Map(man.tiles.map(t => [keyOf(t.path), t]));
 const esc = (s) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -27,6 +29,7 @@ const sceneSvg = (scene, id) => {
 };
 const has = (k) => byKey.has(k);
 const meadow = compose(7, has, 'meadow'), forest = compose(23, has, 'forest');
+const smeadows = composeSub(11, has, 'meadows'), soakwood = composeSub(5, has, 'oakwood'), sblend = composeSub(8, has, 'blend');
 
 // ---- grouping ----
 const catInfo = {
@@ -49,10 +52,10 @@ const card = (t) => {
   const label = `${t.name}${t.variant ? ' ' + t.variant : ''}`;
   return `<figure class="card${cells > 1 ? ' wide' : ''}" title="${esc(t.path)}"><div class="paper${t.category === 'overlays' || t.category === 'decals' ? ' dark' : ''}"><svg viewBox="0 0 ${t.size[0]} ${t.size[1]}" style="width:${w}px;max-width:100%" aria-label="${esc(label)}"><use href="#${symId.get(t.path)}" width="${t.size[0]}" height="${t.size[1]}"/></svg></div><figcaption><b>${esc(t.name)}</b> <span>${esc(t.variant || '')}</span><small>${t.size[0]}&times;${t.size[1]}</small></figcaption></figure>`;
 };
-const catHtml = (cat, tiles) => {
+const catHtml = (cat, tiles, idp = 'c-') => {
   const [title, note] = catInfo[cat];
   const auto = tiles.some(t => t.tags.includes('autotile'));
-  let h = `<section class="cat" id="c-${cat}"><h3>${title} <em>${tiles.length}</em></h3><p class="note">${note}</p>`;
+  let h = `<section class="cat" id="${idp}${cat}"><h3>${title} <em>${tiles.length}</em></h3><p class="note">${note}</p>`;
   if (auto) for (const [name, ts] of sets(tiles)) h += `<details open><summary><b>${esc(name)}</b> &middot; ${ts.length} pieces</summary><div class="grid dense">${ts.map(card).join('')}</div></details>`;
   else h += `<div class="grid">${tiles.map(card).join('')}</div>`;
   return h + '</section>';
@@ -63,8 +66,15 @@ const regionHtml = () => {
   let h = `<section class="region" id="greenvale"><h2>Greenvale <span class="jp">緑の谷</span></h2><div class="sub" id="common"><h2 class="subh">Common <small>${common.length} tiles shared by all eight sub-areas</small></h2>`;
   for (const c of catOrder) { const ts = common.filter(t => t.category === c); if (ts.length) h += catHtml(c, ts); }
   h += '</div>';
+  const SUBINFO = { 'sunny-meadows': ['Sunny Meadows', '#sm-', 'Wildflower carpets and patch autotiles, rolling hills, farm fields with crops, farm fences and stone walls, windmill, barn, beehives, scarecrows, picnic, orchard and sunflowers, the lone blossom tree with petal drift, and a lily pond.'], 'old-oak-wood': ['Old Oak Wood', '#oo-', 'Forest-floor variants (moss, roots, litter, ferns, glow), oaks of every age, the sacred oak and its hollow-trunk door, root arches, fungi and glowing mushrooms, fallen logs, shrine stones and a stone circle, a woodcutter camp, owls and webs, plus the meadow to forest blends.'] };
+  for (const [sub, [title, pre, note]] of Object.entries(SUBINFO)) {
+    const ts = man.tiles.filter(t => t.sub === sub);
+    h += `<div class="sub" id="${sub}"><h2 class="subh">${title} <small>${ts.length} tiles</small></h2><p class="note">${note}</p><nav class="toc subtoc">${catOrder.filter(c => ts.some(t => t.category === c)).map(c => `<a href="${pre}${c}">${catInfo[c][0].split(' (')[0]} (${ts.filter(t => t.category === c).length})</a>`).join('')}</nav>`;
+    for (const c of catOrder) { const cs = ts.filter(t => t.category === c); if (cs.length) h += catHtml(c, cs, pre.slice(1)); }
+    h += '</div>';
+  }
   const planned = Object.entries(man.subareas).filter(([k, v]) => v === 'planned');
-  h += `<div class="sub planned"><h2 class="subh">Sub-area sets <small>planned for the next steps</small></h2><div class="chips">${planned.map(([k], i) => `<span class="chip"><b>${i + 1}</b> ${k.replace(/-/g, ' ')}</span>`).join('')}</div><p class="note">Folders <code>greenvale/&lt;sub-area&gt;/&lt;category&gt;/</code> are reserved. Sub-area tiles reuse the same palette, canvases and autotile masks.</p></div></section>`;
+  h += `<div class="sub planned"><h2 class="subh">Remaining sub-area sets <small>planned for the next steps</small></h2><div class="chips">${planned.map(([k], i) => `<span class="chip">${k.replace(/-/g, ' ')}</span>`).join('')}</div><p class="note">Folders <code>greenvale/&lt;sub-area&gt;/&lt;category&gt;/</code> are reserved. Sub-area tiles reuse the same palette, canvases and autotile masks.</p></div></section>`;
   return h;
 };
 const toc = catOrder.map(c => `<a href="#c-${c}">${catInfo[c][0].split(' (')[0]}</a>`).join('');
@@ -73,11 +83,12 @@ const statChips = catOrder.map(c => `<span class="chip">${catInfo[c][0].split(' 
 // the browser re-runs the same composer for the reroll buttons
 const runtime = `
 const compose = ${compose.toString()};
+const composeSub = ${composeSub.toString()};
 const syms = ${JSON.stringify(Object.fromEntries(man.tiles.map(t => [keyOf(t.path), [symId.get(t.path), t.category]])))};
 const STRICT = ${STRICT};
 const has = (k) => k in syms;
 function draw(id, seed, which) {
-  const sc = compose(seed, has, which), el = document.getElementById(id);
+  const sc = (which === 'meadows' || which === 'oakwood' || which === 'blend' ? composeSub : compose)(seed, has, which), el = document.getElementById(id);
   el.innerHTML = sc.items.map(it => { const [s, c] = syms[it.k], o = !STRICT && (c === 'ground' || c === 'ground-detail' || c === 'edges') ? .35 : 0; return '<use href="#' + s + '" x="' + (it.x - o) + '" y="' + (it.y - o) + '" width="' + (it.w + 2 * o) + '" height="' + (it.h + 2 * o) + '"/>'; }).join('');
 }
 for (const b of document.querySelectorAll('[data-reroll]')) b.addEventListener('click', () => draw(b.dataset.reroll, (Math.random() * 1e9) | 0, b.dataset.which));
@@ -115,6 +126,8 @@ const html = `<!DOCTYPE html>
   svg.patch { display: block; width: 100%; height: auto; border-radius: 10px; background: #c6db98; }
   .patchpair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 14px; }
   .region { display: grid; gap: 28px; } .sub { display: grid; gap: 22px; }
+  .subpatch { margin: 14px 0 0; }
+  nav.subtoc { position: static; border-bottom: 0; padding: 0; }
   .subh { padding-bottom: 6px; border-bottom: 2px solid var(--seal); } .subh small { font: 400 13px var(--body); color: var(--muted); margin-left: 8px; }
   .cat { display: grid; gap: 6px; }
   details { margin-top: 8px; } summary { cursor: pointer; padding: 6px 0; font-size: 14px; }
@@ -133,13 +146,19 @@ const html = `<!DOCTYPE html>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs></defs>${symbols}</svg>
 <div class="wrap">
   <header class="top"><h1>Greenvale tileset</h1>
-    <p>Step 1 of the tile library: ${man.total} hand-written SVG tiles in round-3 design B (seamless watercolour terrain, crisp 3/4-view props with soft painted shading and a soft drop shadow). Base cell 64&times;64, tall props 64&times;128, large objects 128&times;128. Shown at 2&times; on paper cards. Spec in <code>tiles/TILESET.md</code>.</p>
+    <p>Steps 1 and 2 of the tile library: ${man.total} hand-written SVG tiles (common set plus the Sunny Meadows and Old Oak Wood sub-areas) in round-3 design B (seamless watercolour terrain, crisp 3/4-view props with soft painted shading and a soft drop shadow). Base cell 64&times;64, tall props 64&times;128, large objects 128&times;128. Shown at 2&times; on paper cards. Spec in <code>tiles/TILESET.md</code>.</p>
     <div class="chips">${statChips}</div></header>
   <nav class="toc"><a href="#patch">Sample patch</a>${toc}</nav>
   <section id="patch" class="patchbox"><header><div><h2>Sample patches</h2><p class="note">Composed at random from the tiles below: random grass variants side by side with no seams, a pond (shallow shore set + deep set), a cliff plateau, a tree line, a dirt paddock with fences, plus props and fog. Reroll for a new layout.</p></div></header>
     <div class="patchpair">
       <div><header class="chips"><button data-reroll="p1" data-which="meadow">Reroll meadow</button></header>${sceneSvg(meadow, 'p1')}</div>
       <div><header class="chips"><button data-reroll="p2" data-which="forest">Reroll forest</button></header>${sceneSvg(forest, 'p2')}</div>
+    </div>
+    <h2 class="subpatch">Sub-area patches</h2><p class="note">Sunny Meadows and Old Oak Wood composed from their own sets (with common props where useful), and the meadow to forest blend: grass, forest-floor patch autotiles, grass-and-leaf ground ramps, an oak grove and tree line.</p>
+    <div class="patchpair">
+      <div><header class="chips"><button data-reroll="p3" data-which="meadows">Reroll Sunny Meadows</button></header>${sceneSvg(smeadows, 'p3')}</div>
+      <div><header class="chips"><button data-reroll="p4" data-which="oakwood">Reroll Old Oak Wood</button></header>${sceneSvg(soakwood, 'p4')}</div>
+      <div><header class="chips"><button data-reroll="p5" data-which="blend">Reroll meadow to forest blend</button></header>${sceneSvg(sblend, 'p5')}</div>
     </div></section>
   ${regionHtml()}
 </div>
