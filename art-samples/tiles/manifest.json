@@ -1,0 +1,12479 @@
+{
+ "version": 1,
+ "tileSize": 64,
+ "canvases": {
+  "cell": [
+   64,
+   64
+  ],
+  "tall": [
+   64,
+   128
+  ],
+  "large": [
+   128,
+   128
+  ]
+ },
+ "light": "upper-left",
+ "pathPattern": "<region>/<subarea|common>/<category>/<name>-<variant>.svg",
+ "autotile": {
+  "blob47": {
+   "bits": {
+    "N": 1,
+    "NE": 2,
+    "E": 4,
+    "SE": 8,
+    "S": 16,
+    "SW": 32,
+    "W": 64,
+    "NW": 128
+   },
+   "rule": "a diagonal bit counts only when both adjacent orthogonal bits are set",
+   "pieces": 47,
+   "sets": [
+    "water-shore",
+    "water-deep",
+    "dirt-patch",
+    "sand-patch",
+    "cliff",
+    "forest"
+   ],
+   "fileSuffix": "zero-padded decimal canonical mask, e.g. water-shore-017.svg",
+   "neighbourOutsideSet": "a neighbour in the set (bit = 1) means the tile continues across that edge"
+  },
+  "connect4": {
+   "bits": {
+    "N": 1,
+    "E": 2,
+    "S": 4,
+    "W": 8
+   },
+   "pieces": 16,
+   "sets": [
+    "fence-wood",
+    "hedge",
+    "hedge-blossom"
+   ],
+   "fileSuffix": "two-digit decimal mask, e.g. fence-wood-06.svg"
+  },
+  "fogEdge": {
+   "bits": {
+    "N": 1,
+    "E": 2,
+    "S": 4,
+    "W": 8
+   },
+   "pieces": 15,
+   "note": "bit set = fog hugs that side; mask 0 is empty so it is omitted"
+  }
+ },
+ "subareas": {
+  "common": "shared by the whole region",
+  "sunny-meadows": "planned",
+  "old-oak-wood": "planned",
+  "bamboo-valley": "planned",
+  "mirror-lake": "planned",
+  "rice-terraces": "planned",
+  "mossy-ruins": "planned",
+  "firefly-marsh": "planned",
+  "misty-highlands": "planned"
+ },
+ "counts": {
+  "ground": 24,
+  "ground-detail": 24,
+  "decals": 22,
+  "edges": 282,
+  "trees": 31,
+  "rocks": 17,
+  "grass": 9,
+  "fences": 48,
+  "props": 29,
+  "interest": 22,
+  "overlays": 29
+ },
+ "total": 537,
+ "tiles": [
+  {
+   "path": "greenvale/common/ground/dirt-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "dirt",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/dirt-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "dirt",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/dirt-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "dirt",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/dirt-d.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "dirt",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/forest-floor-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "forest-floor",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/forest-floor-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "forest-floor",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/forest-floor-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "forest-floor",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/grass-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/grass-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/grass-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "grass",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/grass-d.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "grass",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/rock-top-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "rock-top",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "top"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/rock-top-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "rock-top",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "top"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/sand-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/sand-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/sand-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/water-deep-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "water-deep",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/water-deep-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "water-deep",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/water-deep-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "water-deep",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/water-deep-d.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "water-deep",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/water-shallow-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "water-shallow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "water",
+    "shallow"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/water-shallow-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "water-shallow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "water",
+    "shallow"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/water-shallow-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "water-shallow",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "water",
+    "shallow"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground/water-shallow-d.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground",
+   "name": "water-shallow",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "water",
+    "shallow"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-acorns-leaves-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-acorns-leaves",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-acorns-leaves-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-acorns-leaves",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-clover-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-clover",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-clover-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-clover",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-clover-bloom-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-clover-bloom",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-clover-bloom-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-clover-bloom",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-dandelions-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-dandelions",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-dandelions-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-dandelions",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-mixed-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-mixed",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-mixed-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-mixed",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-rose-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-rose",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-rose-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-rose",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-violet-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-violet",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-violet-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-violet",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-white-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-white",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-white-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-white",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-yellow-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-yellow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-flowers-yellow-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-flowers-yellow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-long-grass-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-long-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-long-grass-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-long-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-pebbles-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-pebbles",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-pebbles-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-pebbles",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-pebbles-moss-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-pebbles-moss",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/ground-detail/grass-pebbles-moss-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "grass-pebbles-moss",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "grass",
+    "decal-baked"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/blossom-petals-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "blossom-petals",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/blossom-petals-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "blossom-petals",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/clover-patch-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "clover-patch",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/clover-patch-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "clover-patch",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/dry-grass-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "dry-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/dry-grass-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "dry-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/flower-patch-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "flower-patch",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/flower-patch-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "flower-patch",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/leaf-litter-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "leaf-litter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/leaf-litter-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "leaf-litter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/moss-patch-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "moss-patch",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/moss-patch-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "moss-patch",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/mud-patch-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "mud-patch",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/mud-patch-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "mud-patch",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/mushroom-dots-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "mushroom-dots",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/mushroom-dots-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "mushroom-dots",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/pebble-scatter-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "pebble-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/pebble-scatter-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "pebble-scatter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/puddle-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "puddle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/puddle-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "puddle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/snow-dusting-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "snow-dusting",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/decals/snow-dusting-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "decals",
+   "name": "snow-dusting",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "decal",
+    "transparent"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-000.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-001.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-004.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-005.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-007.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-016.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-017.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-020.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-021.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-023.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-028.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-029.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-031.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-064.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-065.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-068.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-069.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-071.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-080.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-081.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-084.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-085.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-087.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-092.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-093.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-095.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-112.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-113.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-116.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-117.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-119.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-124.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-125.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-127.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-193.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-197.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-199.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-209.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-213.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-215.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-221.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-223.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-241.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-245.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-247.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-253.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/cliff-255.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "cliff",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "cliff"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-000.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-001.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-004.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-005.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-007.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-016.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-017.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-020.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-021.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-023.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-028.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-029.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-031.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-064.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-065.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-068.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-069.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-071.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-080.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-081.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-084.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-085.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-087.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-092.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-093.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-095.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-112.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-113.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-116.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-117.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-119.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-124.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-125.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-127.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-193.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-197.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-199.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-209.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-213.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-215.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-221.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-223.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-241.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-245.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-247.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-253.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/dirt-patch-255.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "dirt-patch",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "transition",
+    "grass-to-dirt"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-000.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-001.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-004.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-005.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-007.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-016.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-017.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-020.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-021.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-023.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-028.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-029.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-031.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-064.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-065.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-068.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-069.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-071.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-080.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-081.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-084.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-085.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-087.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-092.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-093.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-095.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-112.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-113.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-116.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-117.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-119.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-124.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-125.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-127.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-193.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-197.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-199.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-209.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-213.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-215.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-221.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-223.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-241.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-245.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-247.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-253.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/forest-255.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "forest",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "forest",
+    "tree-line"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-000.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-001.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-004.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-005.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-007.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-016.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-017.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-020.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-021.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-023.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-028.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-029.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-031.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-064.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-065.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-068.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-069.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-071.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-080.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-081.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-084.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-085.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-087.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-092.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-093.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-095.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-112.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-113.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-116.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-117.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-119.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-124.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-125.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-127.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-193.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-197.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-199.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-209.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-213.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-215.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-221.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-223.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-241.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-245.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-247.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-253.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/sand-patch-255.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "sand-patch",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "transition",
+    "grass-to-sand"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-000.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-001.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-004.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-005.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-007.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-016.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-017.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-020.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-021.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-023.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-028.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-029.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-031.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-064.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-065.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-068.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-069.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-071.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-080.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-081.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-084.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-085.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-087.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-092.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-093.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-095.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-112.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-113.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-116.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-117.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-119.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-124.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-125.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-127.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-193.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-197.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-199.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-209.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-213.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-215.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-221.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-223.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-241.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-245.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-247.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-253.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-deep-255.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-deep",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "water",
+    "deep"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-000.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-001.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-004.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-005.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-007.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-016.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-017.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-020.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-021.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-023.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-028.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-029.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-031.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-064.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-065.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-068.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-069.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-071.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-080.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-081.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-084.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-085.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-087.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-092.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-093.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-095.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-112.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-113.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-116.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-117.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-119.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-124.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-125.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-127.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-193.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-197.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-199.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-209.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-213.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-215.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-221.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-223.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-241.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-245.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-247.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-253.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/edges/water-shore-255.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "edges",
+   "name": "water-shore",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "water",
+    "shore"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bamboo-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bamboo",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "bamboo-valley"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bamboo-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bamboo",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "bamboo-valley"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bamboo-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bamboo",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "bamboo-valley"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/blossom-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "blossom",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "sakura",
+    "sunny-meadows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/blossom-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "blossom",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "sakura",
+    "sunny-meadows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/blossom-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "blossom",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "sakura",
+    "sunny-meadows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/blossom-great-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "blossom-great",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "landmark",
+    "sunny-meadows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bush-autumn-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bush-autumn",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bush-berry-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bush-berry",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bush-blossom-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bush-blossom",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bush-fern-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bush-fern",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bush-hydrangea-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bush-hydrangea",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bush-round-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bush-round",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/bush-round-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "bush-round",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/cedar-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "cedar",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "highlands",
+    "ruins",
+    "conifer"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/cedar-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "cedar",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "highlands",
+    "ruins",
+    "conifer"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/maple-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "maple",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "rice-terraces",
+    "autumn"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/maple-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "maple",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "rice-terraces",
+    "autumn"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/oak-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "oak",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "forest",
+    "broadleaf"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/oak-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "oak",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "forest",
+    "broadleaf"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/oak-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "oak",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "forest",
+    "broadleaf"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/oak-d.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "oak",
+   "variant": "d",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "forest",
+    "broadleaf"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/oak-great-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "oak-great",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "landmark",
+    "old-oak-wood",
+    "plain"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/oak-great-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "oak-great",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "landmark",
+    "old-oak-wood",
+    "shimenawa"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/pine-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "pine",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "forest",
+    "conifer"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/pine-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "pine",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "forest",
+    "conifer"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/pine-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "pine",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "forest",
+    "conifer"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/pine-d.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "pine",
+   "variant": "d",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "forest",
+    "conifer"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/pine-sapling-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "pine-sapling",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/willow-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "willow",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "mirror-lake",
+    "marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/trees/willow-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "trees",
+   "name": "willow",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "mirror-lake",
+    "marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/boulder-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/boulder-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/boulder-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/boulder-d.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/boulder-large-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-large",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/boulder-large-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-large",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/boulder-mossy-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-mossy",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "old-oak-wood",
+    "ruins"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/boulder-mossy-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-mossy",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "old-oak-wood",
+    "ruins"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/boulder-mossy-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-mossy",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "old-oak-wood",
+    "ruins"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/rock-cluster-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-cluster",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/rock-cluster-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-cluster",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/rock-cluster-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-cluster",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/rock-small-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-small",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/rock-small-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-small",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/standing-stone-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "standing-stone",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "plain",
+    "misty-highlands"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/standing-stone-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "standing-stone",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "shimenawa",
+    "misty-highlands"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/rocks/standing-stone-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "rocks",
+   "name": "standing-stone",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "plain",
+    "misty-highlands"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/grass/lily-pads-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "grass",
+   "name": "lily-pads",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "water-overlay",
+    "mirror-lake",
+    "marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/grass/lily-pads-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "grass",
+   "name": "lily-pads",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "water-overlay",
+    "mirror-lake",
+    "marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/grass/lily-pads-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "grass",
+   "name": "lily-pads",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "water-overlay",
+    "mirror-lake",
+    "marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/grass/reeds-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "grass",
+   "name": "reeds",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "water-edge",
+    "mirror-lake",
+    "marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/grass/reeds-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "grass",
+   "name": "reeds",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "water-edge",
+    "mirror-lake",
+    "marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/grass/reeds-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "grass",
+   "name": "reeds",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "water-edge",
+    "mirror-lake",
+    "marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/grass/tall-grass-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "grass",
+   "name": "tall-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "concealing",
+    "overlay-prop"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/grass/tall-grass-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "grass",
+   "name": "tall-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "concealing",
+    "overlay-prop"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/grass/tall-grass-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "grass",
+   "name": "tall-grass",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "concealing",
+    "overlay-prop"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-00.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-01.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-02.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-03.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-04.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-05.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-06.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-07.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-08.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-09.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-10.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-11.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-12.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-13.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-14.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/fence-wood-15.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "fence-wood",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-00.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-01.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-02.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-03.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-04.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-05.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-06.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-07.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-08.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-09.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-10.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-11.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-12.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-13.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-14.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-15.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-00.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-01.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-02.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-03.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-04.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-05.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-06.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-07.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-08.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-09.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-10.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-11.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-12.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-13.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-14.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/fences/hedge-blossom-15.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "fences",
+   "name": "hedge-blossom",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/barrel-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "barrel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "village"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/barrel-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "barrel",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "village"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/barrel-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "barrel",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "village"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/bench-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "bench",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/crate-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "crate",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "village"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/crate-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "crate",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "village"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/crate-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "crate",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "village"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/event-lantern-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "event-lantern",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "interest",
+    "unlit"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/event-lantern-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "event-lantern",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "interest",
+    "lit"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/haybale-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "haybale",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "village"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/log-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "log",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/log-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "log",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/mushroom-ring-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "mushroom-ring",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "interest",
+    "fairy",
+    "old-oak-wood"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/mushroom-ring-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "mushroom-ring",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "interest",
+    "fairy",
+    "old-oak-wood"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/mushrooms-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "mushrooms",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/mushrooms-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "mushrooms",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/mushrooms-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "mushrooms",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/sack-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "sack",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "village"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/scarecrow-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "scarecrow",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "village",
+    "rice-terraces"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/signpost-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "signpost",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "interest"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/signpost-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "signpost",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "interest"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/signpost-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "signpost",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "interest"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/stone-lantern-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "stone-lantern",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "unlit",
+    "shrine"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/stone-lantern-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "stone-lantern",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "lit",
+    "shrine"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/stone-lantern-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "stone-lantern",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "unlit",
+    "shrine"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/stump-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "stump",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "forest"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/stump-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "stump",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "forest"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/stump-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "stump",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "forest"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/props/well-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "props",
+   "name": "well",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "village"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/campfire-lit.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "campfire",
+   "variant": "lit",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camp",
+    "lit"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/campfire-unlit.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "campfire",
+   "variant": "unlit",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camp",
+    "unlit"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/chest-closed-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "chest",
+   "variant": "closed-a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "loot",
+    "closed"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/chest-closed-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "chest",
+   "variant": "closed-b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "loot",
+    "closed"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/chest-open-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "chest",
+   "variant": "open-a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "loot",
+    "open"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/chest-open-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "chest",
+   "variant": "open-b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "loot",
+    "open"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/gate-farm-closed.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "gate-farm",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "sunny-meadows",
+    "closed"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/gate-farm-open.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "gate-farm",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "sunny-meadows",
+    "open"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/gate-hut-closed.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "gate-hut",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "bamboo-valley",
+    "firefly-marsh",
+    "closed"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/gate-hut-open.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "gate-hut",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "bamboo-valley",
+    "firefly-marsh",
+    "open"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/gate-stone-closed.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "gate-stone",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "misty-highlands",
+    "closed"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/gate-stone-open.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "gate-stone",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "misty-highlands",
+    "open"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/jizo-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "jizo",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "shrine",
+    "firefly-marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/secret-cache-hidden.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "secret-cache",
+   "variant": "hidden",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "loot",
+    "secret",
+    "hidden"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/secret-cache-revealed.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "secret-cache",
+   "variant": "revealed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "loot",
+    "secret",
+    "open"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/shop-stall-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "shop-stall",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "shop"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/shop-stall-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "shop-stall",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "shop"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/shop-stall-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "shop-stall",
+   "variant": "c",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "shop"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/tent-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "tent",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "camp"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/torii-broken.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "torii",
+   "variant": "broken",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "waypoint",
+    "shrine",
+    "broken"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/torii-lit.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "torii",
+   "variant": "lit",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "waypoint",
+    "shrine",
+    "lit"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/interest/torii-unlit.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "interest",
+   "name": "torii",
+   "variant": "unlit",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "waypoint",
+    "shrine",
+    "unlit"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/dapple-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "dapple",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "seamless",
+    "old-oak-wood"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/dapple-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "dapple",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "seamless",
+    "old-oak-wood"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fireflies-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fireflies",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "glow",
+    "firefly-marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fireflies-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fireflies",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "glow",
+    "firefly-marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fireflies-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fireflies",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "glow",
+    "firefly-marsh"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-01.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:1"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-02.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:2"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-03.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:3"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-04.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:4"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-05.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:5"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-06.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:6"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-07.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:7"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-08.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:8"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-09.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:9"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-10.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:10"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-11.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:11"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-12.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:12"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-13.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:13"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-14.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:14"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-edge-15.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-edge",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "autotile",
+    "connect4",
+    "mask:15"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-full-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-full",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "seamless"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-full-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-full",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "seamless"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/fog-full-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "fog-full",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "fog",
+    "seamless"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/leaves-drift-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "leaves-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "ambient"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/mist-low-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "mist-low",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mist",
+    "seamless",
+    "misty-highlands",
+    "ruins"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/mist-low-b.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "mist-low",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mist",
+    "seamless",
+    "misty-highlands",
+    "ruins"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/mist-low-c.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "mist-low",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mist",
+    "seamless",
+    "misty-highlands",
+    "ruins"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/petals-drift-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "petals-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "ambient"
+   ],
+   "note": ""
+  },
+  {
+   "path": "greenvale/common/overlays/sunbeam-a.svg",
+   "region": "greenvale",
+   "sub": "common",
+   "category": "overlays",
+   "name": "sunbeam",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light"
+   ],
+   "note": ""
+  }
+ ]
+}
