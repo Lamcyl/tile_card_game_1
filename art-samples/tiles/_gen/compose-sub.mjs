@@ -1,12 +1,14 @@
 // Sample-scene composer for the sub-area patches (inlined into the gallery like compose.mjs, so it must stay self-contained).
 // composeSub(seed, has, which) -> { w, h, items:[{k,x,y,w,h}] }. which: 'meadows' | 'oakwood' | 'blend'.
+// Step 5 adds which = 'marsh' | 'highlands' | 'ascent' (ruins and marsh climbing into the highlands) | 'overview' (16x24 strip through all eight sub-areas); keys 'fm:' firefly-marsh, 'mh:' misty-highlands.
 // Keys: common tiles as in compose.mjs (e.g. 'ground/grass-a'); sub-area tiles with a prefix: 'sm:' sunny-meadows, 'oo:' old-oak-wood, 'bv:' bamboo-valley, 'ml:' mirror-lake.
 // which also takes 'bamboo' | 'lake' | 'stream' (stream feeding the lake), and (step 4) 'rice' | 'ruins' | 'terraces' (lake to terraces to ruins); keys 'rt:' rice-terraces, 'mr:' mossy-ruins.
 export function composeSub(seed, has, which = 'meadows') {
   let a = seed >>> 0;
   const R = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
   const pick = (arr) => arr[Math.floor(R() * arr.length)];
-  const COLS = 12, ROWS = 10, S = 64;
+  let COLS = 12, ROWS = 10; const S = 64;
+  if (which === 'overview') { COLS = 16; ROWS = 24; }   // the Greenvale overview strip is 16x24 tiles
   const grid = () => Array.from({ length: ROWS }, () => Array(COLS).fill(false));
   const N = 1, NE = 2, E = 4, SE = 8, SS = 16, SW = 32, W = 64, NW = 128;
   const at = (g, x, y) => (x < 0 || y < 0 || x >= COLS || y >= ROWS) ? true : g[y][x];
@@ -310,12 +312,204 @@ export function composeSub(seed, has, which = 'meadows') {
       for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) { if (lake[y][x] && R() < .25) over.push(['ml:overlays/' + pick(['sun-glitter-a', 'sparkle-evening-a', 'dragonflies-a']), x * S, y * S, S, S]); else if ((B[y][x] || flat[y][x]) && R() < .2) over.push([rt('overlays/paddy-glint-' + pick(['a', 'b'])), x * S, y * S, S, S]); else if ((E[y][x] || D[y][x]) && R() < .22) over.push([mr('overlays/wisp-glow-' + pick(VR)), x * S, y * S, S, S]); }
     }
   }
+  // ---- step 5: Firefly Marsh, Misty Highlands, the marsh/ruins -> highlands ascent, and the Greenvale overview strip ----
+  if (which === 'marsh' || which === 'highlands' || which === 'ascent' || which === 'overview') {
+    const fm = (k) => 'fm:' + k, mh = (k) => 'mh:' + k, mr = (k) => 'mr:' + k, rt = (k) => 'rt:' + k, ml = (k) => 'ml:' + k, VR = ['a', 'b', 'c', 'd'];
+    const box = (x0, y0, x1, y1) => { const g = grid(); for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) if (x >= 0 && y >= 0 && x < COLS && y < ROWS) g[y][x] = true; return g; };
+    const inG = (g, x, y) => x >= 0 && y >= 0 && x < COLS && y < ROWS && g[y][x];
+    const band = (g, pre, nm, x, y) => put(pre('edges/' + nm + '-' + p3(canon(mask(g, x, y)))), x * S, y * S);
+    const all8 = (g, x, y) => [-1, 0, 1].every((dy) => [-1, 0, 1].every((dx) => at(g, x + dx, y + dy)));
+    const ring8 = (g, x, y) => [-1, 0, 1].some((dy) => [-1, 0, 1].some((dx) => (dx || dy) && inG(g, x + dx, y + dy)));
+    const erode = (g) => { const o = grid(); for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) o[y][x] = g[y][x] && all8(g, x, y); return o; };
+    const lineProp = (g, pre, nm, x, y, sy = y) => { props.push({ k: pre('fences/' + nm + '-' + String(fenceMask(g, x, y)).padStart(2, '0')), x: x * S, y: y * S, w: S, h: S, s: sy }); claim(x, y); };
+    const cells = (fn) => { for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) fn(x, y); };
+    const setCells = (g, list, v = true) => { for (const [x, y] of list) if (x >= 0 && y >= 0 && x < COLS && y < ROWS) g[y][x] = v; return g; };
+    const mossG = ['mr:ground/moss-grass-a', 'mr:ground/moss-grass-b', 'mr:ground/moss-grass-c', 'mr:ground/moss-thick-a'];
+    const mist = (k, x, y, w = 2, h = 2) => over.push([k, x * S, y * S, w * S, h * S]);
+    // ---------- Firefly Marsh pieces ----------
+    const marshGround = (x, y, wet) => put(wet ? pick([fm('ground/peat-' + pick(VR)), fm('ground/peat-' + pick(VR)), fm('ground/mud-' + pick(['a', 'b', 'c', 'd'])), fm('ground/bog-moss-' + pick(['a', 'b', 'c'])), fm('ground-detail/' + pick(['marigold-a', 'marigold-b', 'sedge-tussock-a', 'loosestrife-b', 'bog-cotton-a', 'mud-puddles-a', 'mud-puddles-b', 'reed-stubble-a']))]) : pick([fm('ground/dusk-grass-' + pick(['a', 'a', 'b', 'c', 'd', 'e'])), fm('ground/dusk-grass-' + pick(['a', 'b', 'c'])), fm('ground-detail/' + pick(['loosestrife-a', 'sedge-tussock-b', 'reed-stubble-b']))]), x * S, y * S);
+    const marshWater = (x, y) => { const r = R(); put(r < .38 ? fm('ground/marsh-water-' + pick(['a', 'a', 'd', 'e'])) : r < .6 ? fm('ground/marsh-water-c') : r < .8 ? fm('ground-detail/' + pick(['lily-dusk-a', 'lily-dusk-b'])) : fm('ground-detail/' + pick(['duckweed-mat-a', 'duckweed-mat-b', 'wisp-water-a'])), x * S, y * S); };
+    const marshScene = (pool, bwKinds, o = {}) => {
+      const deep = erode(erode(pool)), land = grid(); cells((x, y) => { land[y][x] = !pool[y][x]; });
+      const bw = grid(); for (const k of Object.keys(bwKinds)) { const [x, y] = k.split(',').map(Number); bw[y][x] = true; }
+      cells((x, y) => {
+        if (!pool[y][x]) { marshGround(x, y, ring8(pool, x, y) || R() < .25); return; }
+        const m = canon(mask(pool, x, y));
+        if (m === 255) { if (deep[y][x]) band(deep, fm, 'marsh-deep', x, y); else marshWater(x, y); } else put(fm('edges/' + (x <= 3 ? 'marsh-pool-weed' : y >= 7 ? 'marsh-pool-lily' : 'marsh-pool') + '-' + p3(m)), x * S, y * S);
+      });
+      for (const [k, nm] of Object.entries(bwKinds)) { const [x, y] = k.split(',').map(Number); lineProp(bw, fm, nm, x, y, y - .5); }
+      return { deep, land, bw };
+    };
+    const marshProps = (pool, land, bw, o = {}) => {
+      const water = (x, y) => pool[y][x] && canon(mask(pool, x, y)) === 255 && !bw[y][x];
+      scatter(['fm:grass/lily-pads-dusk-a', 'fm:grass/lily-pads-dusk-b', 'fm:grass/lily-pads-dusk-c', 'fm:grass/lily-pads-dusk-d', 'fm:grass/duckweed-float-a', 'fm:grass/duckweed-float-b'], 7, (x, y) => water(x, y));
+      scatter(['fm:props/stump-water-a', 'fm:props/stump-water-b', 'fm:props/stump-water-c', 'fm:props/sunken-boat-a', 'fm:props/sunken-boat-b', 'fm:props/sunken-boat-c', 'fm:props/pile-water-b', 'fm:rocks/sunken-log-a', 'fm:rocks/turtle-rock-a', 'fm:props/frog-a', 'fm:props/heron-silhouette-a', 'fm:props/heron-silhouette-b', 'fm:props/heron-silhouette-c', 'fm:grass/cattail-dusk-c', 'fm:grass/reeds-dusk-d'], 8, (x, y) => water(x, y));
+      scatter(['fm:props/floating-lantern-a', 'fm:props/floating-lantern-b', 'fm:props/floating-lantern-c'], 4, (x, y) => water(x, y));
+      scatter(['fm:trees/willow-marsh-a', 'fm:trees/willow-marsh-b', 'fm:trees/snag-marsh-a', 'fm:trees/snag-marsh-b', 'fm:trees/cypress-knees-a', 'fm:trees/alder-marsh-a', 'fm:trees/alder-marsh-b'], o.trees || 7, (x, y) => land[y][x] && !bw[y][x] && (o.treeOk ? o.treeOk(x, y) : (x <= 1 || x >= 10 || y <= 2)), 'tall');
+      scatter(['fm:grass/cattail-dusk-a', 'fm:grass/cattail-dusk-b', 'fm:grass/reeds-dusk-a', 'fm:grass/reeds-dusk-b', 'fm:grass/reeds-dusk-c', 'fm:grass/iris-marsh-a', 'fm:grass/iris-marsh-b', 'fm:grass/sedge-clump-a', 'fm:grass/marigold-clump-a', 'fm:grass/cotton-grass-a', 'fm:grass/horsetail-a', 'fm:trees/bush-bog-myrtle-a', 'fm:trees/bush-bog-myrtle-b', 'fm:trees/bush-willow-scrub-a', 'fm:trees/bush-bramble-dusk-a', 'fm:rocks/mud-mound-a', 'fm:rocks/mud-mound-b', 'fm:rocks/mossy-boulder-marsh-a', 'fm:props/frog-b', 'fm:props/frog-d', 'fm:props/mushroom-glow-a', 'fm:props/mushroom-glow-b', 'fm:props/net-rack-a', 'fm:props/reed-bundle-a', 'fm:props/stone-frog-a', 'fm:props/fish-trap-a'], o.small || 13, (x, y) => land[y][x] && !bw[y][x]);
+      scatter(['fm:props/will-o-wisp-a', 'fm:props/will-o-wisp-b', 'fm:props/will-o-wisp-c', 'fm:props/will-o-wisp-d'], 3, (x, y) => land[y][x] && !bw[y][x]);
+      cells((x, y) => { if (free(x, y) && R() < .3) put(pool[y][x] ? fm('decals/' + pick(['duckweed-clump-a', 'duckweed-clump-b', 'ripple-rings-a', 'ripple-rings-b', 'lily-leaf-a', 'lily-leaf-b', 'lily-leaf-c', 'bubbles-a', 'frog-spawn-a'])) : fm('decals/' + pick(['mud-splat-a', 'mud-splat-b', 'heron-tracks-a', 'heron-tracks-b', 'bog-mushrooms-a', 'bog-mushrooms-b', 'fallen-reeds-a', 'dead-leaves-a', 'dead-leaves-b', 'dusk-fringe-a', 'dusk-fringe-c'])), x * S, y * S); });
+    };
+    const marshOverlays = (pool, land, tintFn) => {
+      cells((x, y) => {
+        over.push([fm('overlays/dusk-tint-' + tintFn(x, y)), x * S, y * S, S, S]);
+        const r = R(); if (land[y][x] && r < .22) over.push([fm('overlays/fireflies-' + pick(['a', 'b', 'b', 'c', 'e'])), x * S, y * S, S, S]); else if (pool[y][x] && r < .2) over.push([fm('overlays/fireflies-' + pick(['b', 'c', 'd'])), x * S, y * S, S, S]); else if (pool[y][x] && r < .3) over.push([fm('overlays/lanterns-floating-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]); else if (pool[y][x] && r < .38) over.push([fm('overlays/' + pick(['mist-low-a', 'mist-low-b', 'mist-low-c', 'sparkle-dusk-a', 'sparkle-dusk-b'])), x * S, y * S, S, S]); else if (land[y][x] && r < .28) over.push([fm('overlays/' + pick(['wisp-trail-a', 'wisp-trail-b', 'midges-a', 'midges-b'])), x * S, y * S, S, S]);
+      });
+      mist(fm('overlays/fireflies-swarm-a'), 1, 3); mist(fm('overlays/fireflies-swarm-b'), 8, 5); mist(fm('overlays/mist-bank-' + pick(VR)), 0, 7); mist(fm('overlays/mist-bank-' + pick(VR)), 8, 0); mist(fm('overlays/mist-bank-' + pick(VR)), 3, 4); mist(fm('overlays/bats-flight-a'), 5, 0);
+    };
+    if (which === 'marsh') {
+      const pool = ells(grid(), 5.8, 5.6, 5.4, 3.5, .15);
+      for (const [x0, y0, x1, y1] of [[2, 6, 3, 7], [8, 7, 9, 8], [9, 2, 10, 3]]) for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) pool[y][x] = false;
+      for (let x = 0; x < COLS; x++) pool[0][x] = pool[1][x] = false; for (let y = 0; y < ROWS; y++) pool[y][COLS - 1] = false;
+      const K = {}; for (const [x, y, n] of [[4, 2, 'boardwalk-lantern'], [5, 2, 'boardwalk'], [5, 3, 'boardwalk-lantern'], [5, 4, 'boardwalk-mossy'], [5, 5, 'boardwalk'], [6, 5, 'boardwalk'], [7, 5, 'boardwalk-mossy'], [4, 5, 'boardwalk-mossy'], [3, 5, 'boardwalk-broken'], [5, 6, 'boardwalk-lantern'], [5, 7, 'boardwalk-broken'], [5, 8, 'boardwalk-mossy'], [5, 9, 'boardwalk']]) K[x + ',' + y] = n;
+      const { land, bw } = marshScene(pool, K);
+      // reed beds along the western and eastern banks, a hint of day grass at the south-west corner where the ruins begin
+      const rb = grid(); cells((x, y) => { if (land[y][x] && !(x === 0 && y <= 1) && ((x === 0 && y >= 2 && y <= 8) || (x === 11 && y >= 3 && y <= 9))) rb[y][x] = true; });
+      cells((x, y) => { if (rb[y][x]) band(rb, fm, 'reed-bed', x, y); });
+      add(fm('interest/gate-stilt-hut-' + pick(['closed', 'open'])), 4, 1, 'large'); add(fm('interest/stilt-hut-a'), 8, 5, 'large'); add(fm('interest/stilt-hut-c'), 2, 7, 'large'); add(fm('interest/watchtower-stilt-a'), 9, 3, 'large'); add(fm('interest/shrine-islet-marsh-a'), 8, 8, 'large');
+      add(fm('props/lantern-pole-b'), 6, 3, 'tall'); add(fm('props/lantern-pole-c'), 4, 4, 'tall'); add(fm('props/jizo-marsh-b'), 3, 2, 'tall'); add(fm('props/lantern-marsh-b'), 7, 2, 'tall'); add(fm('props/hokora-marsh-b'), 1, 5, 'tall'); add(fm('props/pile-water-c'), 6, 8); add(fm('props/signpost-marsh-a'), 6, 9, 'tall');
+      marshProps(pool, land, bw, { trees: 7, small: 12 });
+      marshOverlays(pool, land, () => 'light');
+    }
+
+    // ---------- Misty Highlands pieces ----------
+    const highGround = (x, y, wet) => put(pick([mh('ground/ochre-pasture-' + pick(VR)), mh('ground/ochre-pasture-' + pick(VR)), mh('ground/ochre-pasture-' + pick(['a', 'b'])), mh('ground/ochre-dry-' + pick(['a', 'b'])), mh('ground/ochre-pasture-' + pick(['c', 'd'])), mh('ground/gorse-' + pick(['a', 'b', 'c'])), mh('ground-detail/' + pick(['thistle-a', 'pebbles-ochre-a', 'pebbles-ochre-b', 'wool-tufts-a', 'heather-bloom-b', 'gorse-flower-a']))]), x * S, y * S);
+    const highProps = (ok, o = {}) => {
+      scatter(['mh:trees/pine-bent-a', 'mh:trees/pine-bent-b', 'mh:trees/pine-bent-c', 'mh:trees/pine-bent-d', 'mh:trees/rowan-a', 'mh:trees/birch-mountain-a', 'mh:trees/thorn-lone-a'], o.trees || 5, (x, y) => ok(x, y) && (o.treeOk ? o.treeOk(x, y) : true), 'tall');
+      scatter(['mh:rocks/standing-stone-a', 'mh:rocks/standing-stone-b', 'mh:rocks/standing-stone-c', 'mh:rocks/standing-stone-d', 'mh:rocks/standing-stone-e', 'mh:rocks/rock-spire-a', 'mh:rocks/rock-spire-b'], o.stones || 4, (x, y) => ok(x, y), 'tall');
+      scatter(['mh:trees/pine-dwarf-a', 'mh:trees/pine-dwarf-b', 'mh:trees/gorse-bush-a', 'mh:trees/gorse-bush-b', 'mh:trees/gorse-bush-c', 'mh:trees/heather-clump-a', 'mh:trees/heather-clump-b', 'mh:trees/juniper-a', 'mh:rocks/boulder-ochre-a', 'mh:rocks/boulder-ochre-b', 'mh:rocks/boulder-ochre-c', 'mh:rocks/erratic-lichen-a', 'mh:rocks/scree-pile-a', 'mh:rocks/scree-pile-b', 'mh:rocks/cairn-a', 'mh:rocks/cairn-b', 'mh:rocks/cairn-c', 'mh:rocks/cairn-d', 'mh:grass/thistle-tall-a', 'mh:grass/thistle-tall-b', 'mh:grass/bracken-ochre-a', 'mh:grass/bracken-ochre-b', 'mh:grass/tussock-grass-a', 'mh:grass/tussock-grass-b', 'mh:props/mani-stone-a', 'mh:props/mani-stone-b'], o.small || 14, (x, y) => ok(x, y));
+      cells((x, y) => { if (free(x, y) && ok(x, y) && R() < .32) put(mh('decals/' + pick(['goat-a', 'goat-b', 'goat-c', 'goat-d', 'bird-hawk-a', 'bird-crow-a', 'bird-crow-b', 'bird-lark-a', 'bird-flock-a', 'scree-scatter-a', 'scree-scatter-b', 'rock-flecks-a', 'goat-tracks-a', 'goat-tracks-b', 'wind-grass-a', 'wind-grass-b', 'wind-grass-c', 'lichen-patch-a', 'feather-a', 'scree-scatter-c'])), x * S, y * S); });
+    };
+    const highOverlays = (ok, rav = null) => {
+      cells((x, y) => { const r = R(); if (rav && rav[y][x]) over.push([mh('overlays/mist-rise-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]); else if (ok(x, y) && r < .18) over.push([mh('overlays/mist-low-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]); else if (ok(x, y) && r < .3) over.push([mh('overlays/' + pick(['wind-streaks-a', 'wind-streaks-b', 'dew-glint-a', 'dew-glint-b'])), x * S, y * S, S, S]); });
+      mist(mh('overlays/mist-drift-' + pick(VR)), 0, 5); mist(mh('overlays/mist-drift-' + pick(VR)), 8, 1); mist(mh('overlays/mist-drift-' + pick(VR)), 4, 7); mist(mh('overlays/cloud-shadow-' + pick(['a', 'b'])), 2, 2); mist(mh('overlays/birds-high-a'), 6, 0); over.push([mh('overlays/light-shafts-highland-a'), 3 * S, 3 * S, S, 2 * S]);
+    };
+    if (which === 'highlands') {
+      const R2 = box(0, 0, COLS - 1, 0), R1 = box(0, 1, COLS - 1, 2), S4 = grid(), RV = ells(grid(), 9.8, 7.0, 1.3, 2.4, .1), BW = grid(), PF = grid(), WD = grid();
+      setCells(S4, [[1, 3], [2, 3], [2, 4], [3, 4], [3, 5], [4, 5], [4, 6], [4, 7], [4, 8], [4, 9]]);
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (RV[y][x] && (y < 5 || x < 8)) RV[y][x] = false;
+      setCells(BW, [[8, 7], [9, 7], [10, 7], [11, 7]]); setCells(PF, [[6, 5], [7, 5], [8, 5]]); setCells(WD, [[5, 9], [6, 9], [7, 9], [8, 9]]);
+      const HP = ells(grid(), 6.0, 5.0, 1.4, 1.0, .1), SP = ells(grid(), 1.0, 6.4, 1.2, 1.1, .1), GT = box(0, 4, 0, 5);
+      cells((x, y) => { if (R1[y][x] || R2[y][x] || S4[y][x] || RV[y][x] || HP[y][x] || SP[y][x] || GT[y][x]) return; highGround(x, y); });
+      cells((x, y) => { if (R2[y][x]) band(R2, mh, 'ridge-high', x, y); else if (R1[y][x]) band(R1, mh, 'ridge-grey', x, y); else if (HP[y][x]) { if (canon(mask(HP, x, y)) === 255) put(mh('ground/heather-' + pick(VR)), x * S, y * S); else band(HP, mh, 'heather-patch', x, y); } else if (SP[y][x]) { if (canon(mask(SP, x, y)) === 255) put(mh('ground/scree-' + pick(VR)), x * S, y * S); else band(SP, mh, 'scree-patch', x, y); } else if (GT[y][x]) band(GT, mh, 'gorse-thicket', x, y); else if (S4[y][x]) band(S4, mh, 'mountain-stream', x, y); else if (RV[y][x]) band(RV, mh, 'ravine', x, y); });
+      cells((x, y) => { if (BW[y][x]) lineProp(BW, mh, 'rope-bridge', x, y, y - .5); if (PF[y][x]) lineProp(PF, mh, 'prayer-flags', x, y); if (WD[y][x]) lineProp(WD, mh, 'wall-drystone', x, y); });
+      add(mh('interest/gate-mountain-' + pick(['closed', 'open'])), 5, 3, 'large'); add(mh('interest/waterfall-mountain-' + pick(['a', 'b'])), 1, 3, 'large'); add(mh('interest/stone-circle-' + pick(['a', 'b'])), 6, 8, 'large'); add(mh('interest/standing-stones-trio-a'), 9, 4, 'large'); add(mh('interest/hut-shepherd-' + pick(['a', 'b'])), 1, 9, 'large');
+      add(mh('props/mountain-shrine-b'), 3, 3, 'tall'); add(mh('props/lantern-mountain-b'), 8, 4, 'tall'); add(mh('props/prayer-flag-pole-' + pick(['a', 'b'])), 11, 6, 'tall'); add(mh('props/signpost-trail-a'), 7, 4, 'tall'); add(mh('props/jizo-mountain-a'), 0, 8, 'tall'); add(mh('props/cascade-small-a'), 3, 6); add(mh('props/cascade-small-b'), 4, 9);
+      highProps((x, y) => !R1[y][x] && !R2[y][x] && !S4[y][x] && !RV[y][x] && !BW[y][x] && !PF[y][x] && !WD[y][x], { trees: 5, stones: 3, small: 13, treeOk: (x, y) => x <= 2 || x >= 10 || y >= 8 });
+      highOverlays((x, y) => !RV[y][x], RV);
+    }
+    // ---------- the ascent: Mossy Ruins and Firefly Marsh climbing into the Misty Highlands ----------
+    if (which === 'ascent') {
+      const HI = ells(grid(), 5.5, 1.2, 7.4, 3.4, .16), bx = (y) => 5.6 + Math.sin(y * .9) * 1.0, RU = grid(), MA = grid();
+      cells((x, y) => { if (!HI[y][x]) { if (x + .5 < bx(y)) RU[y][x] = true; else MA[y][x] = true; } });
+      const PL = ells(grid(), 8.6, 7.4, 2.4, 1.6, .12); cells((x, y) => { if (!MA[y][x] || y < 5) PL[y][x] = false; });
+      const NR = grid(); cells((x, y) => { NR[y][x] = !RU[y][x]; });
+      const touch = (g, x, y) => ring8(g, x, y), cnt = (g, x, y) => [-1, 0, 1].reduce((a, dy) => a + [-1, 0, 1].reduce((b, dx) => b + ((dx || dy) && inG(g, x + dx, y + dy) ? 1 : 0), 0), 0);
+      const R1 = box(0, 0, COLS - 1, 0), bwK = {}; for (const [x, y] of [[8, 9], [8, 8], [8, 7]]) bwK[x + ',' + y] = 'boardwalk-mossy';
+      const BW = grid(); setCells(BW, [[10, 9], [10, 8], [10, 7]]);
+      cells((x, y) => {
+        if (R1[y][x]) { band(R1, mh, 'ridge-grey', x, y); return; }
+        if (HI[y][x]) { const m = canon(mask(HI, x, y)); if (m === 255) { const r = R(); put(r < .12 ? mh('ground/scree-' + pick(VR)) : r < .24 ? mh('ground/heather-' + pick(VR)) : r < .34 ? mh('ground-detail/' + pick(['thistle-a', 'pebbles-ochre-a', 'wool-tufts-a'])) : mh('ground/ochre-pasture-' + pick(VR)), x * S, y * S); } else put(mh('edges/' + (cnt(MA, x, y) >= cnt(RU, x, y) ? 'ochre-patch-peat-' : 'ochre-patch-moss-') + p3(m)), x * S, y * S); return; }
+        if (RU[y][x]) { const r = R(); put(touch(HI, x, y) ? pick(mossG) : r < .3 ? mr('ground/flagstone-' + pick(['mossy', 'cracked', 'wet']) + '-' + pick(['a', 'b', 'c'])) : r < .6 ? pick(mossG) : mr('ground-detail/' + pick(['moss-stones-a', 'ruin-leaves-a', 'ruin-fern-a'])), x * S, y * S); return; }
+        if (PL[y][x]) { const m = canon(mask(PL, x, y)); if (m === 255) put(fm('ground/marsh-water-' + pick(['a', 'c', 'd'])), x * S, y * S); else put(fm('edges/marsh-pool-' + p3(m)), x * S, y * S); return; }
+        if (MA[y][x] && touch(RU, x, y) && !touch(HI, x, y)) { band(NR, fm, 'dusk-patch-moss', x, y); return; }
+        marshGround(x, y, touch(HI, x, y) || touch(PL, x, y) || R() < .3);
+      });
+      cells((x, y) => { if (BW[y][x]) lineProp(BW, fm, 'boardwalk-mossy', x, y, y - .5); });
+      add(mr('interest/gate-ruin-arch-' + pick(['closed', 'open'])), 2, 5, 'large'); add(mr('props/ruin-lantern-b'), 1, 6, 'tall'); add(mr('props/ruin-lantern-d'), 4, 6, 'tall'); add(mr('props/pillar-standing-a'), 0, 8, 'tall'); add(mr('props/jizo-mossy-a'), 3, 8, 'tall');
+      add(fm('interest/stilt-hut-a'), 9, 6, 'large'); add(fm('props/lantern-pole-b'), 11, 8, 'tall'); add(fm('interest/gate-stilt-hut-' + pick(['closed', 'open'])), 8, 4, 'large');
+      add(mh('interest/standing-stones-trio-a'), 3, 3, 'large'); add(mh('interest/gate-mountain-closed'), 8, 2, 'large'); add(mh('props/prayer-flag-pole-a'), 6, 3, 'tall');
+      scatter(['mh:trees/pine-bent-a', 'mh:trees/pine-bent-b', 'mh:trees/pine-bent-c', 'mh:trees/rowan-a', 'mh:rocks/standing-stone-a', 'mh:rocks/standing-stone-b', 'mh:rocks/standing-stone-e', 'mh:rocks/rock-spire-a'], 6, (x, y) => HI[y][x] && y >= 1, 'tall');
+      scatter(['mh:trees/gorse-bush-a', 'mh:trees/gorse-bush-b', 'mh:trees/heather-clump-a', 'mh:rocks/boulder-ochre-a', 'mh:rocks/cairn-a', 'mh:rocks/scree-pile-a', 'mh:grass/thistle-tall-a', 'mh:grass/bracken-ochre-a', 'mh:grass/tussock-grass-a', 'mh:trees/pine-dwarf-a'], 10, (x, y) => HI[y][x] && y >= 1);
+      scatter(['mr:trees/maple-shrine-a', 'mr:trees/snag-ivy-a', 'trees/cedar-a', 'trees/pine-a', 'fm:trees/willow-marsh-a', 'fm:trees/snag-marsh-a', 'fm:trees/alder-marsh-a'], 6, (x, y) => (RU[y][x] || MA[y][x]) && !BW[y][x] && !PL[y][x], 'tall');
+      scatter(['mr:rocks/rubble-pile-a', 'mr:rocks/boulder-ruin-a', 'mr:grass/fern-clump-a', 'mr:grass/moss-clump-a', 'mr:grass/ivy-bush-a', 'mr:props/stone-basin-a', 'mr:props/grave-marker-a'], 6, (x, y) => RU[y][x]);
+      scatter(['fm:grass/cattail-dusk-a', 'fm:grass/reeds-dusk-a', 'fm:grass/iris-marsh-a', 'fm:grass/sedge-clump-a', 'fm:trees/bush-bog-myrtle-a', 'fm:props/frog-b', 'fm:props/mushroom-glow-a', 'fm:props/stump-water-a', 'fm:props/heron-silhouette-a', 'fm:rocks/mud-mound-a'], 7, (x, y) => MA[y][x] && !BW[y][x]);
+      scatter(['fm:grass/lily-pads-dusk-a', 'fm:grass/lily-pads-dusk-c', 'fm:props/floating-lantern-a', 'fm:props/sunken-boat-a'], 3, (x, y) => PL[y][x] && canon(mask(PL, x, y)) === 255);
+      cells((x, y) => { if (free(x, y) && R() < .28) { if (HI[y][x]) put(mh('decals/' + pick(['goat-a', 'goat-b', 'bird-crow-a', 'scree-scatter-a', 'wind-grass-a', 'lichen-patch-a'])), x * S, y * S); else if (RU[y][x]) put(mr('decals/' + pick(['moss-patch-a', 'crack-paving-a', 'fallen-leaves-a', 'rubble-scatter-a', 'puddle-a'])), x * S, y * S); else put(fm('decals/' + pick(['mud-splat-a', 'dusk-fringe-a', 'heron-tracks-a', 'dead-leaves-a', 'bog-mushrooms-a'])), x * S, y * S); } });
+      cells((x, y) => { const r = R(); if (MA[y][x] || PL[y][x]) over.push([fm('overlays/dusk-tint-' + (y >= 8 ? 'mid' : 'light')), x * S, y * S, S, S]); if (MA[y][x] && r < .3) over.push([fm('overlays/fireflies-' + pick(['a', 'b', 'c', 'e'])), x * S, y * S, S, S]); else if (RU[y][x] && r < .12) over.push([mr('overlays/wisp-glow-' + pick(VR)), x * S, y * S, S, S]); else if (HI[y][x] && r < .22) over.push([mh('overlays/mist-low-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]); });
+      mist(mh('overlays/mist-drift-' + pick(VR)), 0, 1); mist(mh('overlays/mist-drift-' + pick(VR)), 6, 3); mist(mr('overlays/ruin-mist-a'), 0, 6); mist(fm('overlays/mist-bank-' + pick(VR)), 6, 7); mist(fm('overlays/fireflies-swarm-a'), 9, 6); over.push([mr('overlays/light-shafts-ruin-a'), 3 * S, 5 * S, S, 2 * S]); mist(mh('overlays/birds-high-a'), 3, 0);
+    }
+
+    // ---------- the Greenvale overview: a 16x24 strip from Sunny Meadows (south) to the Misty Highlands gate (north) ----------
+    if (which === 'overview') {
+      const bsh = (k, x) => k === 3 ? 0 : Math.round(Math.sin(x * .75 + k * 2.1) * 1.1 + Math.sin(x * .31 + k) * .6);
+      const Z = Array.from({ length: ROWS }, (_, y) => Array.from({ length: COLS }, (_, x) => { let z = 0; for (let k = 1; k <= 7; k++) if (y >= 3 * k + bsh(k, x)) z = k; return z; }));
+      const zg = (...zs) => { const g = grid(); cells((x, y) => { g[y][x] = zs.includes(Z[y][x]); }); return g; };
+      const Zs = [0, 1, 2, 3, 4, 5, 6, 7].map((z) => zg(z)), zin = (z, x, y) => inG(Zs[z], x, y);
+      const LK = ells(grid(), 11.2, 14.0, 4.4, 2.4, .12), ST = grid(); for (let x = 3; x <= 8; x++) ST[16][x] = true;
+      const U = grid(); cells((x, y) => { U[y][x] = LK[y][x] || ST[y][x]; });
+      const R2 = grid(), R1 = grid(); cells((x, y) => { if (Z[y][x] === 0 && y === 0) R2[y][x] = true; if (Z[y][x] === 0 && y === 1) R1[y][x] = true; });
+      const PL = ells(grid(), 7.5, 4.6, 3.8, 1.3, .1); cells((x, y) => { if (Z[y][x] !== 1 || U[y][x]) PL[y][x] = false; });
+      const NR = grid(); cells((x, y) => { NR[y][x] = Z[y][x] <= 1; });
+      const T2 = grid(), T1 = grid(), PF = ells(grid(), 4, 10.6, 2.6, 1.0, .1), BG = ells(grid(), 3.5, 17.0, 3, 1.1, .1), WF = ells(grid(), 11, 22.2, 2.6, 1.0, .1);
+      cells((x, y) => { if (Z[y][x] === 2 && y + 1 < ROWS && Z[y + 1][x] === 3) T2[y][x] = true; if (Z[y][x] === 3 && y > 0 && Z[y - 1][x] === 2) T1[y][x] = true; if (Z[y][x] !== 3 || T1[y][x] || U[y][x]) PF[y][x] = false; if (Z[y][x] !== 5 || U[y][x]) BG[y][x] = false; if (Z[y][x] !== 7) WF[y][x] = false; });
+      const BW = grid(); setCells(BW, [[6, 5], [7, 5], [8, 5], [9, 5], [9, 4], [9, 3]]);
+      const OAK = Zs[6], H = Zs[0], touchZ = (z, x, y) => ring8(Zs[z], x, y);
+      cells((x, y) => {
+        const z = Z[y][x], px = x * S, py = y * S;
+        if (U[y][x]) {
+          const m = canon(mask(U, x, y));
+          if (ST[y][x]) put(x <= 7 ? bv('edges/stream-' + p3(m)) : bv('edges/stream-mouth-' + p3(m)), px, py);
+          else if (m === 255) put(R() < .75 ? ml('ground/lake-shallow-' + pick(VR)) : ml('ground-detail/' + pick(['lake-lilies-a', 'lake-petals-a', 'lake-fish-a'])), px, py);
+          else put(!inG(LK, x, y - 1) && y <= 13 ? rt('edges/lake-bank-earth-' + p3(m)) : ml('edges/lake-shore-pebble-' + p3(m)), px, py);
+          return;
+        }
+        if (z === 0) {
+          if (R2[y][x]) band(R2, mh, 'ridge-high', x, y); else if (R1[y][x]) band(R1, mh, 'ridge-grey', x, y);
+          else { const m = canon(mask(H, x, y)); if (m !== 255) put(mh('edges/ochre-patch-peat-' + p3(m)), px, py); else highGround(x, y); }
+        } else if (z === 1) {
+          if (PL[y][x]) { const m = canon(mask(PL, x, y)); if (m === 255) marshWater(x, y); else put(fm('edges/marsh-pool-' + p3(m)), px, py); }
+          else if (touchZ(0, x, y)) put(fm('ground/peat-' + pick(VR)), px, py);
+          else if (touchZ(2, x, y)) band(NR, fm, 'dusk-patch-moss', x, y);
+          else marshGround(x, y, ring8(PL, x, y) || R() < .2);
+        } else if (z === 2) {
+          if (T2[y][x]) band(T2, mr, 'terrace-mossy', x, y); else { const r = R(); put(r < .3 ? mr('ground/flagstone-' + pick(['mossy', 'cracked', 'wet']) + '-' + pick(['a', 'b', 'c'])) : r < .7 ? pick(mossG) : mr('ground-detail/' + pick(['moss-stones-a', 'ruin-leaves-a', 'ruin-fern-a', 'ruin-leaves-b'])), px, py); }
+        } else if (z === 3) {
+          if (T1[y][x]) band(T1, rt, 'terrace-paddy-ripe', x, y); else if (PF[y][x]) band(PF, rt, 'paddy-field-ripe', x, y); else { const r = R(); put(r < .45 ? rt('ground/terrace-grass-' + pick(['a', 'b', 'c'])) : r < .6 ? rt('ground/bank-weeds-' + pick(['a', 'b'])) : pick(grassK), px, py); }
+        } else if (z === 4) put(R() < .15 ? ml('ground-detail/' + pick(['pebble-beach-a', 'lake-petals-a'])) : pick(grassK), px, py);
+        else if (z === 5) { if (BG[y][x]) band(BG, bv, 'bamboo-grove', x, y); else put(pick(['ba', 'ba', 'ba']) && bv('ground/' + pick(['grass-bamboo-a', 'grass-bamboo-b', 'floor-bamboo-a', 'grass-bamboo-a'])), px, py); }
+        else if (z === 6) { const m = canon(mask(OAK, x, y)); if (m !== 255) put(oo('edges/floor-patch-' + p3(m)), px, py); else put(oo('ground/' + pick(['floor-moss-a', 'floor-moss-b', 'floor-dark-a', 'floor-golden-a', 'floor-grassy-a'])), px, py); }
+        else { if (WF[y][x]) band(WF, sm, 'wildflower-patch', x, y); else { const r = R(); put(r < .5 ? sm('ground/meadow-' + pick(['hill', 'lush', 'dew', 'golden']) + '-' + pick(['a', 'b'])) : r < .58 ? sm('ground-detail/meadow-' + pick(['blush', 'gold', 'lavender', 'poppy']) + '-a') : pick(grassK), px, py); } }
+      });
+      cells((x, y) => { if (BW[y][x]) lineProp(BW, fm, 'boardwalk-mossy', x, y, y - .5); });
+      // landmarks, one gate per sub-area
+      add(mh('interest/gate-mountain-' + pick(['closed', 'open'])), 7, 2, 'large'); add(mh('interest/standing-stones-trio-a'), 2, 2, 'large'); add(mh('interest/stone-circle-a'), 12, 2, 'large');
+      add(fm('interest/gate-stilt-hut-closed'), 4, 4, 'large'); add(fm('interest/stilt-hut-a'), 12, 5, 'large'); add(fm('props/lantern-pole-b'), 10, 5, 'tall'); add(fm('props/jizo-marsh-b'), 2, 5, 'tall');
+      add(mr('interest/gate-ruin-arch-closed'), 10, 7, 'large'); add(mr('props/ruin-lantern-b'), 8, 7, 'tall'); add(mr('props/ruin-lantern-d'), 13, 7, 'tall'); add(mr('props/jizo-mossy-a'), 3, 7, 'tall'); add(mr('props/pillar-standing-a'), 5, 7, 'tall'); add(mr('props/komainu-mossy-a'), 6, 6);
+      add(rt('interest/kura-gate-closed'), 12, 11, 'large'); add(rt('interest/waterwheel-a'), 2, 11, 'large'); add(rt('trees/persimmon-a'), 7, 11, 'tall'); add(rt('props/scarecrow-kakashi-a'), 5, 10, 'tall'); add(rt('props/field-shrine-a'), 9, 10);
+      add(ml('interest/torii-lake-a'), 11, 14, 'large'); add(ml('props/rowboat-a'), 9, 14); add(ml('trees/willow-weeping-a'), 1, 13, 'tall'); add(ml('trees/willow-weeping-b'), 5, 13, 'tall'); add(ml('props/heron-a'), 14, 15);
+      add(bv('interest/hut-gate-closed'), 1, 17, 'large'); add(bv('props/stone-lantern-b'), 6, 15, 'tall'); add(bv('interest/waterfall-a'), 13, 17, 'large') || add(bv('props/tea-stool-parasol-a'), 13, 17);
+      add(oo('interest/gate-hollow-oak-closed'), 7, 20, 'large'); add(oo('trees/oak-mature-a'), 2, 20, 'tall'); add(oo('trees/oak-mature-b'), 12, 20, 'tall'); add(oo('props/hokora-b'), 4, 19, 'tall'); add(oo('props/mushroom-glow-a'), 10, 19);
+      add(sm('interest/gate-farm-closed'.replace('sm:', '')), 6, 22, 'large') || add('interest/gate-farm-closed', 6, 22, 'large'); add(sm('interest/windmill-a'), 2, 23, 'large'); add(sm('interest/barn-a'), 12, 23, 'large'); add(sm('props/scarecrow-field-b'), 10, 21, 'tall'); add(sm('props/beehive-a'), 9, 22);
+      highProps((x, y) => Z[y][x] === 0 && y >= 2 && !U[y][x], { trees: 3, stones: 2, small: 6, treeOk: (x, y) => x <= 1 || x >= 14 });
+      scatter(['fm:trees/willow-marsh-a', 'fm:trees/snag-marsh-a', 'fm:trees/alder-marsh-a', 'fm:trees/cypress-knees-a'], 3, (x, y) => Z[y][x] === 1 && !PL[y][x] && !BW[y][x] && (x <= 1 || x >= 14), 'tall');
+      scatter(['fm:grass/cattail-dusk-a', 'fm:grass/reeds-dusk-a', 'fm:grass/iris-marsh-a', 'fm:props/frog-b', 'fm:props/mushroom-glow-a', 'fm:props/heron-silhouette-a', 'fm:props/stump-water-a'], 5, (x, y) => Z[y][x] === 1 && !BW[y][x]);
+      scatter(['fm:grass/lily-pads-dusk-a', 'fm:props/floating-lantern-a', 'fm:props/sunken-boat-a'], 2, (x, y) => PL[y][x] && canon(mask(PL, x, y)) === 255 && !BW[y][x]);
+      scatter(['trees/cedar-a', 'trees/pine-a', 'mr:trees/maple-shrine-a', 'mr:trees/snag-ivy-a'], 3, (x, y) => Z[y][x] === 2 && !T2[y][x] && (x <= 1 || x >= 14), 'tall');
+      scatter(['mr:rocks/rubble-pile-a', 'mr:grass/fern-clump-a', 'mr:grass/moss-clump-a', 'mr:props/stone-basin-a', 'mr:rocks/boulder-ruin-a'], 4, (x, y) => Z[y][x] === 2 && !T2[y][x]);
+      scatter(['rt:props/straw-stack-a', 'rt:props/harvest-basket-a', 'rt:props/ducks-paddy-a', 'rt:props/egret-paddy-a', 'rt:props/tawara-a'], 4, (x, y) => Z[y][x] === 3 && !T1[y][x]);
+      scatter(['ml:grass/reed-lake-a', 'ml:grass/cattail-lake-a', 'ml:grass/lily-pads-a', 'ml:grass/lotus-bloom-a'], 4, (x, y) => LK[y][x] && canon(mask(U, x, y)) === 255);
+      scatter(['ml:trees/oak-lakeside-a'], 2, (x, y) => Z[y][x] === 4 && !U[y][x], 'tall');
+      scatter(['ml:trees/bush-hydrangea-a', 'ml:rocks/shore-boulder-a', 'ml:grass/reed-lake-b'], 4, (x, y) => Z[y][x] === 4 && !U[y][x]);
+      scatter(['bv:trees/bamboo-green-a', 'bv:trees/bamboo-golden-a', 'bv:trees/bamboo-slender-a', 'bv:trees/bamboo-mixed-a', 'bv:trees/bamboo-green-b'], 6, (x, y) => Z[y][x] === 5 && !U[y][x], 'tall');
+      scatter(['bv:grass/iris-bank-a', 'bv:grass/sasa-clump-a', 'bv:rocks/stream-rock-a'], 3, (x, y) => Z[y][x] === 5 && !U[y][x]);
+      scatter(['oo:trees/oak-mature-c', 'oo:trees/oak-young-a', 'oo:trees/oak-autumn-a', 'oo:trees/oak-dead-a'], 6, (x, y) => Z[y][x] === 6, 'tall');
+      scatter(['oo:props/mushroom-cluster-a', 'oo:props/log-fallen-a', 'oo:props/stump-mossy-a', 'oo:grass/fern-clump-a', 'oo:rocks/boulder-mossy-oak-a'], 4, (x, y) => Z[y][x] === 6);
+      scatter(['sm:trees/oak-meadow-a', 'sm:trees/orchard-tree-a', 'sm:trees/oak-meadow-b'], 3, (x, y) => Z[y][x] === 7 && !WF[y][x], 'tall');
+      scatter(['sm:grass/wildflower-clump-a', 'sm:grass/lavender-bush-a', 'sm:props/haystack-a', 'sm:rocks/boulder-flowered-a'], 5, (x, y) => Z[y][x] === 7);
+      cells((x, y) => { const z = Z[y][x]; if (!free(x, y) || R() > .22) return; put(z === 0 ? mh('decals/' + pick(['goat-a', 'bird-crow-a', 'scree-scatter-a', 'wind-grass-a'])) : z === 1 ? fm('decals/' + pick(['mud-splat-a', 'dusk-fringe-a', 'heron-tracks-a', 'dead-leaves-a'])) : z === 2 ? mr('decals/' + pick(['moss-patch-a', 'crack-paving-a', 'fallen-leaves-a', 'puddle-a'])) : z === 3 ? rt('decals/' + pick(['farmer-hat-a', 'straw-scatter-a', 'footprints-mud-a'])) : z === 7 ? 'decals/' + pick(['clover-a', 'flower-patch-a'].slice(0, 0).concat(['dandelion-a'])) : 'decals/dandelion-a', x * S, y * S); });
+      cells((x, y) => { const z = Z[y][x], r = R(); if (z <= 1) over.push([fm('overlays/dusk-tint-' + (z === 1 ? 'mid' : 'light')), x * S, y * S, S, S]); if (z === 1 && r < .3) over.push([fm('overlays/fireflies-' + pick(['a', 'b', 'c', 'e'])), x * S, y * S, S, S]); else if (z === 0 && r < .2) over.push([mh('overlays/mist-low-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]); else if (z === 2 && r < .12) over.push([mr('overlays/wisp-glow-' + pick(VR)), x * S, y * S, S, S]); else if (z === 3 && r < .12) over.push([rt('overlays/paddy-glint-a'), x * S, y * S, S, S]); else if (LK[y][x] && r < .25) over.push([ml('overlays/' + pick(['sun-glitter-a', 'sparkle-evening-a'])), x * S, y * S, S, S]); else if (z === 6 && r < .14) over.push([oo('overlays/' + pick(['dapple-a', 'spores-a'])), x * S, y * S, S, S]); else if (z === 7 && r < .12) over.push([sm('overlays/' + pick(['butterflies-a', 'bees-a'])), x * S, y * S, S, S]); });
+      mist(mh('overlays/mist-drift-a'), 0, 1); mist(mh('overlays/mist-drift-c'), 9, 0); mist(fm('overlays/fireflies-swarm-a'), 5, 3); mist(fm('overlays/mist-bank-b'), 11, 4); mist(mr('overlays/ruin-mist-a'), 1, 7); mist(rt('overlays/terrace-mist-a'), 8, 9); mist(ml('overlays/water-mist-a'), 10, 14); mist(bv('overlays/valley-mist-a'), 0, 16); mist(oo('overlays/mist-a'), 8, 18);
+    }
+  }
   // decals that were put before props are in `items` already; now props by foot row, then overlays
   props.sort((p, q) => p.s - q.s || p.x - q.x);
   for (const p of props) put(p.k, p.x, p.y, p.w, p.h);
   for (const o of over) put(o[0], o[1], o[2], o[3], o[4]);
+  if (which !== 'overview') {
   for (let x = 0; x < COLS; x++) put('overlays/fog-edge-04', x * S, (ROWS - 1) * S);
   for (let y = 0; y < ROWS; y++) put('overlays/fog-edge-08', 0, y * S), put('overlays/fog-edge-02', (COLS - 1) * S, y * S);
   put('overlays/fog-edge-12', 0, (ROWS - 1) * S); put('overlays/fog-edge-06', (COLS - 1) * S, (ROWS - 1) * S);
+  }
   return { w: COLS * S, h: ROWS * S, items };
 }
