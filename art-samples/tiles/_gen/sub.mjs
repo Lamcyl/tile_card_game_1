@@ -3,7 +3,7 @@
 import { T, P, rng, hash, f, newTile, save, ell, circ, rect, path, line, ink, shadow, blobPath, tuft } from './lib.mjs';
 import { BIT, canon, BLOBS, blobGeom, pad3, skeleton, FAM, inShape } from './ground.mjs';
 
-export const SUBS = { meadow: 'sunny-meadows', oak: 'old-oak-wood' };
+export const SUBS = { meadow: 'sunny-meadows', oak: 'old-oak-wood', bamboo: 'bamboo-valley', lake: 'mirror-lake' };
 export const maker = (sub) => ({
   mk: (cat, name, variant, w = T, h = T) => newTile({ sub, cat, name, variant }, w, h),
   out: (t, cat, name, variant, tags = []) => save(t, { sub, cat, name, variant, tags: [...tags, sub] }),
