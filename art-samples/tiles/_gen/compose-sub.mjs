@@ -1,6 +1,7 @@
 // Sample-scene composer for the sub-area patches (inlined into the gallery like compose.mjs, so it must stay self-contained).
 // composeSub(seed, has, which) -> { w, h, items:[{k,x,y,w,h}] }. which: 'meadows' | 'oakwood' | 'blend'.
-// Keys: common tiles as in compose.mjs (e.g. 'ground/grass-a'); sub-area tiles with a prefix: 'sm:' sunny-meadows, 'oo:' old-oak-wood.
+// Keys: common tiles as in compose.mjs (e.g. 'ground/grass-a'); sub-area tiles with a prefix: 'sm:' sunny-meadows, 'oo:' old-oak-wood, 'bv:' bamboo-valley, 'ml:' mirror-lake.
+// which also takes 'bamboo' | 'lake' | 'stream' (stream feeding the lake).
 export function composeSub(seed, has, which = 'meadows') {
   let a = seed >>> 0;
   const R = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
@@ -31,7 +32,7 @@ export function composeSub(seed, has, which = 'meadows') {
   const sets = [];     // [grid, key prefix]
   const regionSet = (g, pre) => { sets.push([g, pre]); };
   const grassK = ['ground/grass-a', 'ground/grass-b', 'ground/grass-c', 'ground/grass-d'];
-  const sm = (k) => 'sm:' + k, oo = (k) => 'oo:' + k;
+  const sm = (k) => 'sm:' + k, oo = (k) => 'oo:' + k, bv = (k) => 'bv:' + k, ml = (k) => 'ml:' + k;
   const alpha = (k, x, y, w = S, h = S) => put(k, x, y, w, h);
   const fenceMask = (fg, x, y) => (at2(fg, x, y - 1) ? 1 : 0) | (at2(fg, x + 1, y) ? 2 : 0) | (at2(fg, x, y + 1) ? 4 : 0) | (at2(fg, x - 1, y) ? 8 : 0);
   const at2 = (g, x, y) => x >= 0 && y >= 0 && x < COLS && y < ROWS && g[y][x];
@@ -93,7 +94,7 @@ export function composeSub(seed, has, which = 'meadows') {
     scatter([oo('decals/leaf-pile-a'), oo('decals/web-dew-a'), oo('decals/root-web-b'), oo('decals/moss-carpet-a'), oo('decals/paw-prints-a'), oo('decals/fallen-branch-b')], 5, (x, y) => !forest[y][x] && !clear[y][x]);
     for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (!forest[y][x] && R() < .26) over.push([oo('overlays/dapple-oak-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]);
     over.push([oo('overlays/forest-mist-a'), 0, 5 * S, 2 * S, 2 * S], [oo('overlays/forest-mist-b'), 8 * S, 6 * S, 2 * S, 2 * S], [oo('overlays/light-shafts-a'), 6 * S, 1 * S, S, 2 * S], [oo('overlays/light-shafts-b'), 3 * S, 3 * S, S, 2 * S], [oo('overlays/spore-glow-a'), 6 * S, 6 * S, S, S], [oo('overlays/leaf-fall-a'), 9 * S, 3 * S, S, S], [oo('overlays/leaf-fall-b'), 2 * S, 4 * S, S, S]);
-  } else {   // blend: meadow on the left flows through floor-patch tongues and oaks into the wood on the right
+  } else if (which === 'blend') {   // blend: meadow on the left flows through floor-patch tongues and oaks into the wood on the right
     const noise = Array.from({ length: ROWS }, () => R());
     const patch = grid(), grove = grid(), line = grid(), flow = grid();
     for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) { const b = 4.4 + Math.sin(y * 1.3) * .9 + noise[y] * 1.1; patch[y][x] = x >= b; grove[y][x] = x >= b + 3.4 + Math.cos(y * .9) * .8 && y >= 1 && y <= 8; }
@@ -131,6 +132,106 @@ export function composeSub(seed, has, which = 'meadows') {
     for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (free(x, y) && x <= 3 && R() < .08) put(sm('decals/' + pick(['butterflies-a', 'butterfly-c', 'bee-flower-a'])), x * S, y * S);
     for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (patch[y][x] && R() < .24) over.push([oo('overlays/dapple-oak-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]);
     over.push([sm('overlays/butterflies-fly-a'), 1 * S, 2 * S, S, S], [sm('overlays/pollen-motes-b'), 2 * S, 6 * S, S, S], [oo('overlays/light-shafts-a'), 5 * S, 3 * S, S, 2 * S], [oo('overlays/light-shafts-b'), 7 * S, 5 * S, S, 2 * S], [oo('overlays/leaf-fall-a'), 6 * S, 5 * S, S, S], [oo('overlays/forest-mist-a'), 8 * S, 6 * S, 2 * S, 2 * S]);
+
+  } else if (which === 'bamboo' || which === 'lake' || which === 'stream') {
+    const any = (k, cands, kind) => cands.some(([x, y]) => add(k, x, y, kind));
+    const sub = (a, b) => { for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (b[y][x]) a[y][x] = false; return a; };
+    const all8 = (g, x, y) => [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]].every(([dx, dy]) => at(g, x + dx, y + dy));
+    const ls = (n, k) => Array.from({ length: n }, (_, i) => String.fromCharCode(97 + i)).map(v => k + v);
+    if (which === 'bamboo') {
+      const band = grid(); for (let x = 0; x < COLS; x++) { const ya = x <= 4 ? 5 : x <= 8 ? 4 : 4; band[ya][x] = band[ya + 1][x] = true; if (x >= 9) band[ya + 2][x] = true; }
+      const gA = sub(ells(grid(), 1.0, 1.8, 2.4, 2.6, .25), band), gB = sub(ells(grid(), 10.6, 8.6, 2.6, 2.0, .25), band), gC = sub(ells(grid(), 10.4, 0.8, 2.2, 1.5, .2), band);
+      const grove = (x, y) => gA[y][x] || gB[y][x] || gC[y][x], near = (x, y) => [-1, 0, 1].some(dx => [-1, 0, 1].some(dy => x + dx >= 0 && y + dy >= 0 && x + dx < COLS && y + dy < ROWS && grove(x + dx, y + dy)));
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
+        if (grove(x, y) || band[y][x]) continue; const r = R();
+        const k = r < .3 ? bv('ground/grass-bamboo-' + pick(['a', 'b', 'c'])) : r < .4 ? bv('ground-detail/' + pick(['bamboo-litter-a', 'bamboo-litter-b', 'bamboo-shoots-a', 'bamboo-shoots-c', 'sasa-grass-a', 'sasa-grass-b', 'moss-stones-a'])) : pick(grassK);
+        put(has(k) ? k : pick(grassK), x * S, y * S);
+      }
+      for (const [g, nm] of [[gA, 'bamboo-grove'], [gB, 'bamboo-grove-golden'], [gC, 'bamboo-thicket']]) for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (g[y][x]) { put(bv('edges/' + nm + '-' + p3(canon(mask(g, x, y)))), x * S, y * S); claim(x, y); }
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (band[y][x]) {
+        const m = canon(mask(band, x, y)); let k = bv('edges/stream-' + p3(m));
+        if (m === 255) k = bv(pick(['ground/stream-water-a', 'ground/stream-water-c', 'ground/stream-stones-a', 'ground/stream-rapids-a', 'ground-detail/stream-koi-a', 'ground-detail/stream-koi-b', 'ground-detail/stream-leaves-a', 'ground-detail/stream-pebbles-a']));
+        put(k, x * S, y * S);
+      }
+      // bridge, hut gate, waterfall, tea house
+      const bx = 3; add(bv('props/bridge-plank-v-end-n-' + pick(['a', 'c'])), bx, 4); add(bv('props/bridge-plank-v-mid-a'), bx, 5); add(bv('props/bridge-plank-v-mid-a'), bx, 6); add(bv('props/bridge-plank-v-end-s-a'), bx, 7);
+      add(bv('interest/hut-gate-' + pick(['closed', 'open'])), 6, 3, 'large'); add(bv('interest/waterfall-' + pick(['a', 'b'])), 0, 6, 'large');
+      any(bv('interest/tea-house-' + pick(['a', 'b'])), [[8, 8], [7, 8], [6, 8], [5, 8]], 'large'); any(bv('interest/hut-thatched-' + pick(['a', 'b', 'c'])), [[9, 3], [8, 2], [4, 2]], 'large');
+      add(bv('rocks/stepping-stones-a'), 7, 4); add(bv('rocks/stepping-stone-b'), 8, 4); add(bv('props/stone-lantern-d'), 2, 4, 'tall'); add(bv('props/stone-lantern-b'), 4, 8, 'tall'); add('interest/chest-closed-a', 9, 6);
+      add(bv('props/shishi-odoshi-' + pick(['a', 'b'])), 5, 7); add(bv('props/bamboo-bench-a'), 6, 7); add(bv('props/tsukubai-a'), 4, 7); add(bv('props/well-bamboo-a'), 1, 7); add(bv('props/sign-bamboo-a'), 2, 3, 'tall'); add(bv('props/drying-rack-a'), 8, 3, 'tall');
+      for (const x of [2, 3, 4]) if (free(x, 1)) { props.push({ k: bv('fences/fence-bamboo-' + String(fenceMask((() => { const g = grid(); for (let q = 2; q <= 4; q++) g[1][q] = true; return g; })(), x, 1)).padStart(2, '0')), x: x * S, y: S, w: S, h: S, s: 1 }); claim(x, 1); }
+      scatter(ls(3, 'bv:trees/bamboo-green-').concat(ls(2, 'bv:trees/bamboo-golden-'), ['bv:trees/bamboo-black-a', 'bv:trees/bamboo-young-a', 'bv:trees/bamboo-slender-a', 'bv:trees/bamboo-mixed-a', 'bv:trees/plum-blossom-a', 'bv:trees/maple-valley-a', 'bv:trees/pine-twisted-a']), 7, (x, y) => !band[y][x] && !grove(x, y) && near(x, y) && y >= 1, 'tall');
+      scatter(['bv:trees/bamboo-bush-a', 'bv:trees/bamboo-bush-b', 'bv:grass/bamboo-shoots-a', 'bv:grass/bamboo-shoots-b', 'bv:grass/sasa-clump-a', 'bv:grass/sasa-clump-b', 'bv:grass/sasa-clump-c', 'bv:props/bamboo-pile-a', 'bv:props/bamboo-basket-a', 'bv:rocks/boulder-bamboo-a', 'bv:rocks/boulder-bamboo-b', 'bv:props/bamboo-basket-b'], 8, (x, y) => !band[y][x] && !grove(x, y));
+      scatter(['bv:rocks/stream-rock-a', 'bv:rocks/stream-rock-b', 'bv:rocks/stream-rock-c', 'bv:rocks/stream-rock-d', 'bv:props/fish-trap-a', 'bv:grass/iris-bank-a'], 5, (x, y) => band[y][x] && mask(band, x, y) !== 0 && x >= 5 && (x < 7 || x > 8));
+      scatter(['bv:grass/iris-bank-a', 'bv:grass/iris-bank-b', 'grass/reeds-a', 'grass/reeds-b'], 4, (x, y) => !band[y][x] && !grove(x, y) && (band[y - 1] && band[y - 1][x] || band[y + 1] && band[y + 1][x]));
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (!grove(x, y) && free(x, y) && R() < .22) put(band[y][x] ? bv('decals/' + pick(['koi-a', 'koi-b', 'koi-c', 'koi-d', 'ripple-rings-a', 'ripple-rings-b', 'floating-leaves-a', 'foam-line-a'])) : bv('decals/' + pick(['leaf-fall-a', 'leaf-fall-b', 'leaf-fall-c', 'leaf-fall-d', 'shoots-a', 'shoots-b', 'fallen-culm-a', 'pebbles-bank-a'])), x * S, y * S);
+      over.push([bv('overlays/valley-mist-a'), 0, 3 * S, 2 * S, 2 * S], [bv('overlays/valley-mist-b'), 8 * S, 6 * S, 2 * S, 2 * S], [bv('overlays/valley-mist-c'), 4 * S, 0, 2 * S, 2 * S], [bv('overlays/light-shafts-a'), 2 * S, 2 * S, S, 2 * S], [bv('overlays/light-shafts-b'), 9 * S, 1 * S, S, 2 * S]);
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) { if (grove(x, y) && R() < .2) over.push([bv('overlays/sway-shadow-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]); else if (band[y][x] && R() < .3) over.push([bv('overlays/water-glint-' + pick(['a', 'b'])), x * S, y * S, S, S]); else if (R() < .06) over.push([bv('overlays/leaf-drift-' + pick(['a', 'b'])), x * S, y * S, S, S]); }
+    } else if (which === 'lake') {
+      const lake = ells(grid(), 4.4, 6.0, 5.0, 3.7, .3), deep = ells(grid(), 3.6, 6.4, 2.9, 2.1, .1), lily = ells(grid(), 7.2, 8.3, 1.8, 1.0, .1), isle = grid(), beach = grid(), jet = grid();
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) { if (!lake[y][x]) deep[y][x] = lily[y][x] = false; }
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (deep[y][x] && !all8(lake, x, y)) deep[y][x] = false;
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (lily[y][x] && (deep[y][x] || !all8(lake, x, y))) lily[y][x] = false;
+      isle[8][1] = isle[8][2] = true; for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (isle[y][x] && !(lake[y][x] && all8(lake, x, y))) isle[y][x] = false;
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (!lake[y][x] && [[1, 0], [0, 1], [-1, 0], [0, -1]].some(([dx, dy]) => at2(lake, x + dx, y + dy)) && (x >= 6 || y >= 8) && !(y === 5 && x >= 9 && x <= 10) && y >= 4) beach[y][x] = true;
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (beach[y][x] && lake[y][x]) beach[y][x] = false;
+      for (let x = 6; x <= 9; x++) jet[5][x] = true;
+      const lakeAt = (x, y) => lake[y][x];
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
+        if (lake[y][x]) continue; const r = R();
+        const k = r < .5 ? ml('ground/grass-lakeside-' + pick(['a', 'b', 'c'])) : pick(grassK);
+        put(has(k) ? k : pick(grassK), x * S, y * S);
+      }
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (beach[y][x]) put(ml('edges/lake-beach-' + p3(canon(mask(beach, x, y)))), x * S, y * S);
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (lake[y][x]) {
+        const m = canon(mask(lake, x, y)); let k = ml('edges/lake-shore-pebble-' + p3(m));
+        if (m === 255) k = deep[y][x] ? (R() < .55 ? ml('edges/lake-deep-mirror-255') : ml('ground/lake-deep-' + pick(['a', 'b', 'c', 'd']))) : lily[y][x] ? ml('edges/lily-bed-255') : ml(R() < .62 ? 'ground/lake-shallow-' + pick(['a', 'b', 'c', 'd']) : 'ground-detail/' + pick(['lake-lilies-a', 'lake-lilies-b', 'lake-petals-a', 'lake-shoal-a', 'lake-fish-a', 'lake-duckweed-b', 'lake-lotus-a']));
+        put(k, x * S, y * S);
+      }
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) { if (deep[y][x] && !all8(deep, x, y)) put(ml('edges/lake-deep-mirror-' + p3(canon(mask(deep, x, y)))), x * S, y * S); if (isle[y][x]) put(ml('edges/lake-island-' + p3(canon(mask(isle, x, y)))), x * S, y * S); if (lily[y][x] && !all8(lily, x, y)) put(ml('edges/lily-bed-' + p3(canon(mask(lily, x, y)))), x * S, y * S); }
+      const jg = grid(); for (let x = 6; x <= 10; x++) jg[5][x] = true;
+      for (let x = 6; x <= 9; x++) props.push({ k: ml('fences/jetty-' + (x === 6 ? 'old' : 'wood') + '-' + String(fenceMask(jg, x, 5)).padStart(2, '0')), x: x * S, y: 5 * S, w: S, h: S, s: 4.5 });
+      add('interest/chest-closed-a', 6, 5); add(ml('props/mooring-post-b'), 8, 6); add(ml('props/jetty-lantern-' + pick(['a', 'b'])), 9, 5, 'tall');
+      any(ml('interest/torii-lake-' + pick(['a', 'a', 'c'])), [[2, 6], [3, 6], [1, 6]], 'large'); any(ml('interest/boathouse-gate-' + pick(['closed', 'open'])), [[8, 2], [9, 2], [7, 2]], 'large'); any(ml('interest/shrine-islet-a'), [[1, 3], [0, 3]], 'large');
+      add(ml('props/rowboat-' + pick(['a', 'b', 'd'])), 5, 7); add(ml('props/rowboat-c'), 6, 8); add(ml('props/net-float-a'), 8, 7); add(ml('props/heron-a'), 4, 3); add(ml('props/heron-d'), 3, 8); add(ml('props/mandarin-ducks-b'), 4, 9); add(ml('props/buoy-a'), 1, 7); add(ml('props/lantern-float-a'), 5, 9);
+      add(ml('props/net-drying-a'), 10, 7, 'tall'); add(ml('props/fish-creel-a'), 9, 8); add(ml('props/rod-rest-a'), 10, 4); add(ml('props/kingfisher-post-a'), 7, 3);
+      scatter(['ml:trees/willow-weeping-a', 'ml:trees/willow-weeping-b', 'ml:trees/willow-young-a', 'ml:trees/oak-lakeside-a', 'ml:trees/oak-lakeside-b', 'ml:trees/willow-weeping-c'], 5, (x, y) => !lakeAt(x, y) && x >= 6 && y <= 4 || x >= 10, 'tall');
+      scatter(['ml:grass/reed-lake-a', 'ml:grass/reed-lake-b', 'ml:grass/reed-lake-c', 'ml:grass/cattail-lake-a', 'ml:grass/cattail-lake-b', 'ml:grass/rushes-a', 'ml:grass/rushes-b'], 7, (x, y) => !lakeAt(x, y) && [[1, 0], [0, 1], [-1, 0], [0, -1]].some(([dx, dy]) => at2(lake, x + dx, y + dy)));
+      scatter(['ml:grass/lily-pads-a', 'ml:grass/lily-pads-b', 'ml:grass/lily-pads-c', 'ml:grass/lily-pads-d', 'ml:grass/lily-pads-e', 'ml:grass/lotus-bloom-a', 'ml:grass/lotus-bloom-c', 'ml:grass/lotus-bud-a', 'ml:grass/lotus-leaf-a', 'ml:grass/lotus-leaf-c', 'ml:grass/lotus-seedpod-a', 'ml:grass/lily-pads-f'], 8, (x, y) => lily[y][x] || (lake[y][x] && !deep[y][x] && all8(lake, x, y) && x >= 5));
+      scatter(['ml:rocks/lake-rock-a', 'ml:rocks/lake-rock-b', 'ml:rocks/shallows-stone-a', 'ml:rocks/shallows-stone-b', 'ml:rocks/islet-a', 'ml:rocks/islet-c', 'ml:rocks/turtle-rock-a', 'ml:rocks/sandbar-b'], 5, (x, y) => lake[y][x] && !deep[y][x] && !isle[y][x]);
+      scatter(['ml:trees/bush-hydrangea-a', 'ml:trees/bush-hydrangea-b', 'ml:rocks/shore-boulder-a', 'ml:rocks/shore-boulder-c', 'ml:props/tea-stool-parasol-a'.replace('ml:props', 'bv:props')], 5, (x, y) => !lakeAt(x, y) && y >= 4 && x >= 6);
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (free(x, y) && R() < .25) { if (lake[y][x]) put(ml('decals/' + pick(['ripple-rings-a', 'ripple-rings-b', 'fish-shadow-a', 'fish-shadow-b', 'petals-float-a', 'duckweed-film-a', 'boat-wake-a'])), x * S, y * S); else put(ml('decals/' + pick(['driftwood-a', 'shells-a', 'shells-b', 'foam-lap-a'])), x * S, y * S); }
+      over.push([ml('overlays/water-mist-' + pick(['a', 'b', 'c'])), 0, 7 * S, 2 * S, 2 * S], [ml('overlays/cloud-reflection-a'), 3 * S, 4 * S, 2 * S, 2 * S], [ml('overlays/cloud-reflection-b'), 5 * S, 7 * S, 2 * S, 2 * S], [ml('overlays/heron-flight-a'), 4 * S, 1 * S, 2 * S, 2 * S], [ml('overlays/water-mist-b'), 9 * S, 0, 2 * S, 2 * S]);
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (lake[y][x]) { const r = R(); if (r < .22) over.push([ml('overlays/sun-glitter-' + pick(['a', 'b'])), x * S, y * S, S, S]); else if (r < .3) over.push([ml('overlays/sparkle-evening-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]); else if (r < .36) over.push([ml('overlays/dragonflies-' + pick(['a', 'b'])), x * S, y * S, S, S]); }
+    } else {   // stream feeding the lake: bamboo grove and plank bridge on the left, hut gate at the mouth, lake on the right
+      const lake = ells(grid(), 9.4, 5.2, 3.0, 3.6, .25), band = grid(), mouthX = 5;
+      for (let x = 0; x <= mouthX + 1; x++) { band[4][x] = band[5][x] = true; }
+      const U = grid(); for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) U[y][x] = lake[y][x] || band[y][x];
+      const gA = sub(ells(grid(), 1.2, 1.2, 3.4, 1.9, .2), U), gB = sub(ells(grid(), 2.0, 8.6, 3.6, 1.9, .2), U), gC = sub(ells(grid(), 6.4, 0.6, 2.2, 1.0, .2), U);
+      const grove = (x, y) => gA[y][x] || gB[y][x] || gC[y][x];
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
+        if (U[y][x] || grove(x, y)) continue; const r = R(), tr = x >= 5 && x <= 7;   // bamboo litter fades into lakeside grass towards the east
+        const k = x <= 4 ? (r < .35 ? bv('ground/grass-bamboo-' + pick(['a', 'b', 'c'])) : r < .5 ? bv('ground-detail/' + pick(['bamboo-litter-a', 'bamboo-shoots-b', 'sasa-grass-a'])) : pick(grassK)) : tr ? (r < .3 ? bv('ground/grass-bamboo-' + pick(['a', 'b'])) : r < .55 ? ml('ground/grass-lakeside-' + pick(['a', 'b'])) : pick(grassK)) : (r < .6 ? ml('ground/grass-lakeside-' + pick(['a', 'b', 'c'])) : pick(grassK));
+        put(has(k) ? k : pick(grassK), x * S, y * S);
+      }
+      for (const [g, nm] of [[gA, 'bamboo-grove'], [gB, 'bamboo-grove-golden'], [gC, 'bamboo-thicket']]) for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (g[y][x]) { put(bv('edges/' + nm + '-' + p3(canon(mask(g, x, y)))), x * S, y * S); claim(x, y); }
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (U[y][x]) {
+        const m = canon(mask(U, x, y)); let k;
+        if (band[y][x] && x < mouthX) k = bv('edges/stream-' + p3(m)); else if (band[y][x] && x === mouthX) k = bv('edges/stream-mouth-' + p3(m)); else k = ml('edges/lake-shore-pebble-' + p3(m));
+        if (m === 255 && !band[y][x]) k = R() < .6 ? ml('ground/lake-shallow-' + pick(['a', 'b', 'c', 'd'])) : ml('ground-detail/' + pick(['lake-lilies-a', 'lake-petals-a', 'lake-shoal-a', 'lake-fish-a', 'lake-lilies-c']));
+        put(k, x * S, y * S);
+      }
+      [['end-n', 3], ['mid', 4], ['mid', 5], ['end-s', 6]].forEach(([part, y]) => props.push({ k: bv('props/bridge-plank-v-' + part + '-a'), x: 3 * S, y: y * S, w: S, h: S, s: y }));
+      add(bv('interest/hut-gate-open'), 5, 3, 'large'); add(bv('interest/waterfall-a'), 0, 5, 'large'); add(bv('props/stone-lantern-d'), 2, 3, 'tall'); add(bv('props/stone-lantern-b'), 7, 3, 'tall'); claim(3, 3); add(bv('props/shishi-odoshi-b'), 4, 7); add(bv('props/bamboo-bench-b'), 5, 7);
+      add(ml('props/rowboat-a'), 9, 5); add(ml('props/heron-a'), 10, 7); add(ml('props/mooring-post-a'), 8, 7); add(ml('trees/willow-weeping-a'.replace(/^/, '')), 10, 2, 'tall'); add(ml('interest/torii-lake-a'), 10, 8, 'large');
+      scatter(['bv:trees/bamboo-green-a', 'bv:trees/bamboo-golden-a', 'bv:trees/bamboo-young-b', 'bv:trees/bamboo-slender-a', 'bv:trees/bamboo-green-c', 'bv:trees/bamboo-mixed-a'], 6, (x, y) => !U[y][x] && !grove(x, y) && x <= 6 && y >= 1 && (y <= 3 || y >= 6), 'tall');
+      scatter(['ml:grass/reed-lake-a', 'ml:grass/cattail-lake-a', 'ml:grass/reed-lake-c', 'bv:grass/iris-bank-a', 'bv:grass/iris-bank-b', 'ml:grass/rushes-a', 'ml:grass/lily-pads-a', 'ml:grass/lily-pads-c', 'ml:grass/lotus-bloom-a'], 7, (x, y) => (U[y][x] && x >= 6 && all8(U, x, y)) || (!U[y][x] && !grove(x, y) && [[1, 0], [0, 1], [-1, 0], [0, -1]].some(([dx, dy]) => at2(U, x + dx, y + dy))));
+      scatter(['bv:rocks/stream-rock-a', 'bv:rocks/stream-rock-c', 'bv:rocks/stepping-stone-a', 'bv:rocks/stepping-stones-b', 'ml:rocks/shallows-stone-a'], 3, (x, y) => band[y][x] && x >= 1 && x <= 5 && !used.has(x + ',' + y));
+      scatter(['ml:trees/willow-young-a', 'ml:trees/bush-hydrangea-a', 'ml:rocks/shore-boulder-a', 'bv:rocks/boulder-bamboo-a', 'ml:grass/reed-lake-b'], 5, (x, y) => !U[y][x] && !grove(x, y) && x >= 5);
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (free(x, y) && R() < .2 && !grove(x, y)) put(U[y][x] ? (x <= 6 ? bv('decals/' + pick(['koi-a', 'koi-c', 'floating-leaves-b', 'ripple-rings-c'])) : ml('decals/' + pick(['ripple-rings-a', 'fish-shadow-a', 'petals-float-b', 'boat-wake-b']))) : bv('decals/' + pick(['leaf-fall-a', 'leaf-fall-c', 'shoots-a', 'pebbles-bank-b'])), x * S, y * S);
+      over.push([bv('overlays/valley-mist-a'), 0, 5 * S, 2 * S, 2 * S], [bv('overlays/valley-mist-c'), 3 * S, 0, 2 * S, 2 * S], [ml('overlays/water-mist-a'), 7 * S, 6 * S, 2 * S, 2 * S], [ml('overlays/cloud-reflection-a'), 9 * S, 2 * S, 2 * S, 2 * S], [bv('overlays/light-shafts-a'), 1 * S, 1 * S, S, 2 * S], [ml('overlays/heron-flight-a'), 7 * S, 1 * S, 2 * S, 2 * S]);
+      for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) if (U[y][x] && R() < .25) over.push([x <= 5 ? bv('overlays/water-glint-' + pick(['a', 'b'])) : ml('overlays/' + pick(['sun-glitter-a', 'sparkle-evening-a', 'dragonflies-a'])), x * S, y * S, S, S]); else if (grove(x, y) && R() < .2) over.push([bv('overlays/sway-shadow-' + pick(['a', 'b', 'c'])), x * S, y * S, S, S]);
+    }
   }
   // decals that were put before props are in `items` already; now props by foot row, then overlays
   props.sort((p, q) => p.s - q.s || p.x - q.x);

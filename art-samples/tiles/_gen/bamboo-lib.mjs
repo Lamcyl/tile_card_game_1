@@ -5,7 +5,8 @@ import { P, rng, hash, f, ell, circ, rect, path, line, ink } from './sub.mjs';
 export const BAM = {
   green: { culm: ['#cdeaa0', '#8cc462', '#4d8a3c'], node: '#3f7030', leaf: ['#a8e496', '#5fae5c', '#2f6e3a'], inkc: '#1d4a26' },
   golden: { culm: ['#fdeea6', '#e8c14e', '#a8802a'], node: '#8a6420', leaf: ['#cfe88a', '#80b552', '#4a7a34'], inkc: '#5a4410' },
-  black: { culm: ['#8a7a78', '#4a3c3e', '#22191c'], node: '#0f0a0c', leaf: ['#82c68c', '#3f8a52', '#235238'], inkc: '#140e12' },
+  black: { culm: ['#8a7a78', '#4a3c3e', '#22191c'], node: '#0f0a0c', leaf: ['#a4dca0', '#58a866', '#2e6c48'], inkc: '#140e12' },
+  goldtop: { culm: ['#fdeea6', '#e8c14e', '#a8802a'], node: '#8a6420', leaf: ['#f8f2a8', '#dcc85c', '#a89a38'], inkc: '#5a4410' },
   young: { culm: ['#e2f4ae', '#aad476', '#6aa04a'], node: '#5a8a3c', leaf: ['#bdeea0', '#7cc468', '#3f8a48'], inkc: '#1d4a26' },
 };
 
@@ -59,16 +60,17 @@ export function clump(t, r, { cx = 32, by = 112, n = 6, hMin = 70, hMax = 100, s
 export function bambooCrown(t, cx, cy, r, seed, pal) {
   const rr = rng(seed + 5), o = [];
   o.push(ell(cx + r * .12, cy + r * .86, r * .95, r * .3, '#2e2c1a', .2));
-  for (let i = 0; i < 4; i++) { const x = cx + (i - 1.5) * r * .3 + rr.range(-1, 1); o.push(culm(t, x, cy + r * .9, cy + r * .1, r * .13 + .8, pal, { seg: 7, inkOp: .6 })); }
+  o.push(line(`M${f(cx - r * .38)} ${f(cy + r * .9)}v${f(-r * .3)}M${f(cx)} ${f(cy + r * .92)}v${f(-r * .35)}M${f(cx + r * .38)} ${f(cy + r * .9)}v${f(-r * .3)}`, pal.culm[1], r * .15 + .8, 1), line(`M${f(cx - r * .38)} ${f(cy + r * .9)}v${f(-r * .3)}M${f(cx)} ${f(cy + r * .92)}v${f(-r * .35)}M${f(cx + r * .38)} ${f(cy + r * .9)}v${f(-r * .3)}`, pal.node, 1, .5, { transform: 'translate(1.4 0)' }));
   o.push(circ(cx, cy, r * .95, pal.leaf[2], .96, ink(pal.inkc, .9, .7)));
   const rg = t.rg(pal.leaf, .34, .28, .9);
   o.push(circ(cx - r * .06, cy - r * .06, r * .84, rg, .95));
-  const n = Math.round(r * 1.7);
+  const n = Math.round(r * .95), bat = [[], [], []], rot = (x, y, a) => [x * Math.cos(a) - y * Math.sin(a), x * Math.sin(a) + y * Math.cos(a)];
   for (let i = 0; i < n; i++) {
-    const a = rr.range(0, 6.283), d = Math.sqrt(rr()) * r * .62, x = cx + Math.cos(a) * d, y = cy + Math.sin(a) * d * .9, ang = a * 57.3 + rr.range(-40, 40) + 25;
-    const light = Math.cos(a + 2.4) * .5 + .5; // upper-left light
-    o.push(blade(x, y, ang, r * rr.range(.38, .55), r * .1, pal.leaf[light > .62 ? 0 : light > .3 ? 1 : 2], pal.inkc, .4));
+    const a = rr.range(0, 6.283), d = Math.sqrt(rr()) * r * .62, x = cx + Math.cos(a) * d, y = cy + Math.sin(a) * d * .9, ang = (a * 57.3 + rr.range(-40, 40) + 25) / 57.3;
+    const light = Math.cos(a + 2.4) * .5 + .5, len = r * rr.range(.38, .55), wd = r * .1, P1 = rot(len * .45, -wd, ang), P2 = rot(len, 0, ang), P3 = rot(len * .45, wd, ang);
+    bat[light > .62 ? 0 : light > .3 ? 1 : 2].push(`M${f(x)} ${f(y)}Q${f(x + P1[0])} ${f(y + P1[1])} ${f(x + P2[0])} ${f(y + P2[1])}Q${f(x + P3[0])} ${f(y + P3[1])} ${f(x)} ${f(y)}Z`);
   }
+  for (const k of [2, 1, 0]) if (bat[k].length) o.push(path(bat[k].join(''), pal.leaf[k], 1, { stroke: pal.inkc, 'stroke-width': .45, 'stroke-opacity': .4 }));
   o.push(ell(cx - r * .35, cy - r * .42, r * .32, r * .16, pal.leaf[0], .55, -25));
   return o.join('');
 }
