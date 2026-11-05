@@ -1,6 +1,6 @@
 # World spec (v4: tile-map overworld, WP20)
 
-Status: step 1 (data + generator) is implemented; the renderer, navigation and game wiring follow in steps 2 to 4 (docs/WP20_PLAN.md). The v3 free-roam contract is kept at the end of this file until step 4 replaces it.
+Status: steps 1 to 3 (data + generator, atlases, tile renderer and navigation modules with a standalone viewer) are implemented; the game wiring follows in step 4 (docs/WP20_PLAN.md). The v3 free-roam contract is kept at the end of this file until step 4 replaces it.
 
 ## Model
 
@@ -24,6 +24,13 @@ Status: step 1 (data + generator) is implemented; the renderer, navigation and g
 - `docs/world-preview/<region>.svg`: review picture (areas, borders, gates, nodes).
 
 `--check` asserts: 6-7 enemies per sub-area, spacing, every node and gate reachable from the entry with all gates open and every outgoing gate reachable from its own sub-area, link adjacency, identical hash on two runs, every tile key and autotile piece present in the manifest.
+
+## Render and navigation (WP20 step 3)
+
+`js/tilemap.js` (`window.TileMap`) and `js/world-nav.js` (`window.WorldNav`) need `window.WorldGen` (set it from `import('./js/world-gen.js').default`, the UMD file is bundled as CommonJS). Try them in `tiles.html?r=greenvale&unlocked=meadow` (query list in `docs/WP20_PLAN.md` step 3 notes).
+- Values in `assets/world/<region>.json`: `ground`, `detail`, `props[].t` are tile index + 1 (frame `atlas.frames[v - 1]`), set grids hold canonical mask + 1 (0 = empty; 256 = blob mask 255). Prop x,y = bottom-left cell, tall and large props extend upwards, gates have `t = [closed, open]`.
+- Terrain: 16 x 16 tile chunks with a 2 px bleed, composed once (ground, detail, sets in `setOrder`), LRU 20. Per frame: visible chunks, then props and caller sprites y-sorted by foot row, then fog (`fog-full` on fogged cells, `fog-edge-<mask>` next to fog). `TileMap.render(ctx, {x0,y0,x1,y1}, sprites)` expects the world transform on `ctx`.
+- Navigation: `WorldNav.blocked(x, y)`, `subAt(x, y)` in world units (tile = 64, negative coordinates allowed), `blockedTile`, `gateAtTile`, `findPath(sx, sy, tx, ty, walkable)`; gate cut cells are not in the blocked grid, the caller blocks them while the target sub-area is closed this run.
 
 ## Legacy v3 contract (still used by the game until WP20 step 4)
 

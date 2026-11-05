@@ -32,14 +32,14 @@ await page.setContent('<body style="margin:0;background:#222"><canvas id="v" wid
 const res = await page.evaluate(async ({ atlas, sheets, ground, detail, sets, N, ox, oy }) => {
   const imgs = await Promise.all(sheets.map(async (b) => { const im = new Image(); im.src = 'data:image/webp;base64,' + b; await im.decode(); return im; }));
   const T = 64, CH = 16;
-  const draw = (g, i, x, y) => { const f = atlas.frames[i]; if (!f) return; const s = atlas.sheets[f[0]]; g.drawImage(imgs[f[0]], f[1], f[2], f[3], f[4], x, y, T + 1, T + 1); }; // 1 px overdraw
+  const draw = (g, i, x, y) => { const f = atlas.frames[i - 1]; if (!f) return; const s = atlas.sheets[f[0]]; g.drawImage(imgs[f[0]], f[1], f[2], f[3], f[4], x, y, T + 1, T + 1); }; // 1 px overdraw
   const chunks = [];
   for (let cy = 0; cy < 3; cy++) for (let cx = 0; cx < 3; cx++) {
     const c = document.createElement('canvas'); c.width = c.height = CH * T; const g = c.getContext('2d');
     for (let y = 0; y < CH; y++) for (let x = 0; x < CH; x++) {
       const wx = ox + cx * CH + x, wy = oy + cy * CH + y, k = wy * N + wx; if (wx < 0 || wy < 0 || wx >= N || wy >= N) continue;
       draw(g, ground[k], x * T, y * T); if (detail[k]) draw(g, detail[k], x * T, y * T);
-      for (const s of sets) { const m = s.grid[k]; if (!m) continue; const v = s.type === 'blob' ? String(m).padStart(3, '0') : String(m).padStart(2, '0'); const pi = s.pieces[v]; if (pi != null) draw(g, pi, x * T, y * T); }
+      for (const s of sets) { const m = s.grid[k]; if (!m) continue; const v = s.type === 'blob' ? String(m - 1).padStart(3, '0') : String(m - 1).padStart(2, '0'); const pi = s.pieces[v]; if (pi != null) draw(g, pi + 1, x * T, y * T); }
     }
     chunks.push(c);
   }

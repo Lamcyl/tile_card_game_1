@@ -388,15 +388,28 @@ export function generateRegion(def, ti, box) {
   const tiles = []; const tileIdx = new Map();
   const tid = (path) => { if (!tileIdx.has(path)) { tileIdx.set(path, tiles.length + 1); tiles.push(path); } return tileIdx.get(path); };
   const ground = new Int32Array(N * N), detail = new Int32Array(N * N);
+  // Soft ground (WP20 step 3): every sub-area is ONE primary family (`ground[0]`, its variants a..d are mutually seamless), so
+  // meadows stay continuous watercolour. The other listed families are rare accents (`accentRate`, default 1.2%) and only when they
+  // share a material tag and a base colour (within 14 RGB units, or an identical base for details) with the primary; ground-detail tiles are opaque, baked on one base family, and are used only when
+  // they match the primary (no water/reflection bases, a shared material tag or name token), otherwise they would show as
+  // hard-edged squares of another colour.
+  const GENERIC = new Set(['seamless', 'ground', 'ground-detail', 'decal-baked', 'desert', 'loot', 'flowers', 'wildflowers', 'litter', 'pebbles', 'ripples', 'inlay', 'tracks', 'blend', 'dry']);
+  const tokens = (k) => { const t = new Set(ti.tags(k)); for (const w of k.split('/')[1].split('-')) t.add(w); for (const g of GENERIC) t.delete(g); return t; };
+  const near = (a, b, t = 14) => { const A = ti.baseFill(a), B = ti.baseFill(b); return !A || !B || Math.hypot(A[0] - B[0], A[1] - B[1], A[2] - B[2]) <= t; }; // same base colour -> no visible square
+  const shares = (a, b) => { const A = tokens(a); for (const t of tokens(b)) if (A.has(t)) return true; return false; };
   sub.forEach((d, si) => {
     ti.needAll(d.ground, 'ground'); ti.needAll(d.detail || [], 'detail');
-    const pn = fbm2(hashStr(`${def.id}:${d.id}:g`), 7);
+    const prim = d.ground[0];
+    const accents = d.ground.slice(1).filter((k) => shares(prim, k) && near(prim, k)), accentRate = d.accentRate ?? 0.012;
+    const details = (d.detail || []).filter((k) => !ti.tags(k).some((t) => t === 'water' || t === 'reflection') && (d.detailAny || (near(prim, k, 3) || (shares(prim, k) && near(prim, k)))));
+    d.detailUsed = details; d.accentUsed = accents;
+    const vsP = ti.variants(prim);
     for (let i = 0; i < N * N; i++) {
       if (lab[i] !== si) continue; const x = i % N, y = (i / N) | 0;
-      const k = d.ground[Math.min(d.ground.length - 1, Math.floor(pn(x, y) * d.ground.length * 1.15))];
-      const vs = ti.variants(k); ground[i] = tid(ti.path(k, vs[Math.floor(hash2(7, x, y) * vs.length)]));
-      if (d.detail && d.detail.length && hash2(13, x, y) < (d.detailRate ?? 0.2)) {
-        const dk = d.detail[Math.floor(hash2(17, x, y) * d.detail.length)]; const dv = ti.variants(dk); detail[i] = tid(ti.path(dk, dv[Math.floor(hash2(19, x, y) * dv.length)]));
+      let fam = prim; if (accents.length && hash2(23, x, y) < accentRate) fam = accents[Math.floor(hash2(29, x, y) * accents.length)];
+      const vs = fam === prim ? vsP : ti.variants(fam); ground[i] = tid(ti.path(fam, vs[Math.floor(hash2(7, x, y) * vs.length)]));
+      if (details.length && hash2(13, x, y) < (d.detailRate ?? 0.2)) {
+        const dk = details[Math.floor(hash2(17, x, y) * details.length)]; const dv = ti.variants(dk); detail[i] = tid(ti.path(dk, dv[Math.floor(hash2(19, x, y) * dv.length)]));
       }
     }
   });

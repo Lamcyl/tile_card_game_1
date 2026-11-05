@@ -30,7 +30,7 @@ function build() {
   const order = defs.sort((a, b) => (a.kind === 'camp' ? -1 : b.kind === 'camp' ? 1 : (a.slot.ring - b.slot.ring) || a.id.localeCompare(b.id)));
   const gens = {}, tis = {};
   for (const d of order) {
-    tis[d.id] = tileIndex(manifest, d.tileset);
+    tis[d.id] = tileIndex(manifest, d.tileset, ROOT);
     gens[d.id] = generateRegion(d, tis[d.id], boxOf(d));
     for (const sa of d.subareas) for (const o of sa.overlays || []) tis[d.id].need(o);
     for (const o of ['overlays/fog-edge', 'overlays/fog-full']) tis.greenvale ? tis.greenvale.need(o) : tileIndex(manifest, 'greenvale').need(o); // fog tiles are shared (Greenvale set)
