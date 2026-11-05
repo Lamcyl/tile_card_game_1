@@ -21,6 +21,8 @@ const BY_TYPE = { swordsman: 'kamaitachi', archer: 'tengu', spearman: 'nezha', m
 
 const backdrops = import.meta.glob('../assets/battle/*.svg', { query: '?url', import: 'default', eager: true });
 const BACKDROPS = Object.fromEntries(Object.entries(backdrops).map(([path, u]) => [path.split('/').pop().replace('.svg', ''), u]));
+// WP20: biomes without a painted backdrop yet borrow one (painting marsh / highlands / saltflat / canyon is an art task).
+const BACKDROP_ALIAS = { marsh: 'coral', highlands: 'forest', saltflat: 'dunes', canyon: 'dunes', rice: 'meadow', ruins: 'forest', palms: 'dunes', citadel: 'temple' };
 
 const url = (name) => URLS[name] || null;
 window.Art = {
@@ -36,7 +38,7 @@ window.Art = {
     return t && t.art ? url(t.art) : null;
   },
   // Painted battle backdrop for a biome (meadow, forest, beach, coral, dunes, temple, snow, glacier, ash, caldera).
-  battleBackdrop(biome) { return BACKDROPS[biome] || BACKDROPS.meadow || null; },
+  battleBackdrop(biome) { return BACKDROPS[biome] || BACKDROPS[BACKDROP_ALIAS[biome]] || BACKDROPS.meadow || null; },
   // The watercolour theme mockups, for reference backgrounds.
   theme: {
     overview: new URL('../assets/theme/overview.svg', import.meta.url).href,

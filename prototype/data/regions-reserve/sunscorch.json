@@ -1,0 +1,184 @@
+{
+ "id": "sunscorch",
+ "name": "Sunscorch",
+ "note": "Retired in WP20 (no tileset yet). Ready content for a future region: levels, themes and unlocks verbatim; boss/elite fights stay in js/boss-defs.js under the old ids.",
+ "slot": null,
+ "subareas": [
+  {
+   "id": "dunes",
+   "name": "Dune Sea",
+   "biome": "dunes",
+   "lm": "giant-dune",
+   "lmLabel": "Singing Dune",
+   "lv": [
+    5,
+    6
+   ],
+   "bossLv": 7,
+   "from": "lake",
+   "unlocks": [
+    "oasis"
+   ],
+   "poi": "shrine",
+   "theme": {
+    "basic": [
+     "Serket",
+     "🦂",
+     "serket"
+    ],
+    "tough": [
+     "Sekhmet",
+     "🦁",
+     "sekhmet"
+    ],
+    "armored": [
+     "Khepri",
+     "🪲",
+     "khepri"
+    ],
+    "barrel": [
+     "Ushabti",
+     "🏺",
+     "ushabti"
+    ],
+    "boss": [
+     "Apep",
+     "🐍",
+     "apep"
+    ]
+   }
+  },
+  {
+   "id": "oasis",
+   "name": "Palm Oasis",
+   "biome": "dunes",
+   "lm": "oasis",
+   "lmLabel": "Mirage Pool",
+   "lv": [
+    6,
+    7
+   ],
+   "bossLv": 8,
+   "from": "dunes",
+   "unlocks": [
+    "canyon"
+   ],
+   "poi": "shrine",
+   "theme": {
+    "basic": [
+     "Bes",
+     "🧌",
+     "bes"
+    ],
+    "tough": [
+     "Anubis",
+     "🐺",
+     "anubis"
+    ],
+    "armored": [
+     "Ammit",
+     "🐊",
+     "ammit"
+    ],
+    "barrel": [
+     "Wadjet",
+     "🐍",
+     "wadjet"
+    ],
+    "boss": [
+     "Set",
+     "🌪️",
+     "set"
+    ]
+   }
+  },
+  {
+   "id": "canyon",
+   "name": "Red Canyon",
+   "biome": "dunes",
+   "lm": "mesa",
+   "lmLabel": "Crimson Mesa",
+   "lv": [
+    7,
+    8
+   ],
+   "bossLv": 9,
+   "from": "oasis",
+   "unlocks": [
+    "temple"
+   ],
+   "poi": "treasure",
+   "theme": {
+    "basic": [
+     "Cadejo",
+     "🐕",
+     "cadejo"
+    ],
+    "tough": [
+     "Balam",
+     "🐆",
+     "balam"
+    ],
+    "armored": [
+     "Buluc Chabtan",
+     "🗡️",
+     "buluc-chabtan"
+    ],
+    "barrel": [
+     "Bennu",
+     "🐦‍🔥",
+     "bennu"
+    ],
+    "boss": [
+     "Ah Puch",
+     "💀",
+     "ah-puch"
+    ]
+   }
+  },
+  {
+   "id": "temple",
+   "name": "Buried Temple",
+   "biome": "temple",
+   "lm": "pyramid",
+   "lmLabel": "The Sunken Pyramid",
+   "lv": [
+    8,
+    9
+   ],
+   "bossLv": 9,
+   "from": "canyon",
+   "unlocks": [
+    "ash"
+   ],
+   "poi": "treasure",
+   "theme": {
+    "basic": [
+     "Mummy",
+     "🧟",
+     "mummy"
+    ],
+    "tough": [
+     "Camazotz",
+     "🦇",
+     "camazotz"
+    ],
+    "armored": [
+     "Sphinx",
+     "🗿",
+     "sphinx"
+    ],
+    "barrel": [
+     "Taweret",
+     "🦛",
+     "taweret"
+    ],
+    "boss": [
+     "Ra",
+     "☀️",
+     "ra"
+    ]
+   }
+  }
+ ]
+}

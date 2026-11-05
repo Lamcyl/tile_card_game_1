@@ -558,7 +558,7 @@
     const j = Journal.J(save), subs = World.SUBAREAS.filter((x) => x.region === World.REGIONS[bestRegion]);
     let h = '<div class="chips">' + World.REGIONS.map((rg, i) => {
       const n = World.SUBAREAS.filter((x) => x.region === rg).reduce((t, x) => t + Journal.ROLES.filter((r) => j.seen[Journal.keyOf(x.id, r)] > 0).length, 0);
-      return '<button class="' + (bestRegion === i ? 'on' : '') + '" data-region="' + i + '">' + esc(rg) + '<small>' + n + '/20</small></button>';
+      return '<button class="' + (bestRegion === i ? 'on' : '') + '" data-region="' + i + '">' + esc(rg) + '<small>' + n + '/' + 5 * World.SUBAREAS.filter((x) => x.region === rg).length + '</small></button>';
     }).join('') + '</div>';
     for (const sub of subs) {
       h += '<h4 class="track-h">' + esc(sub.name) + '</h4>';
@@ -729,10 +729,10 @@
     const sup = P.startSupplies(save);
     const startId = save.startAt !== 'camp' && save.waypoints.includes(save.startAt) ? save.startAt + '-wp' : 'camp'; // WP14: begin at a lit Wayshrine
     save.run = { seed: 'run' + Date.now(), hp: P.maxHp(save), maxHp: P.maxHp(save), supplies: sup, startSupplies: sup, pos: startId, cleared: ['camp'], path: [startId], keys: 0,
-      open: [startId === 'camp' ? 'meadow' : save.startAt], bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: P.startGold(save), rerolls: P.rewardRerolls(save), reviveUsed: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
+      open: [startId === 'camp' ? World.CAMP.sub : save.startAt], bounties: Bounties.roll(World.rng('bounty:' + Date.now())), crystalsNow: 0, souls: 0, gold: P.startGold(save), rerolls: P.rewardRerolls(save), reviveUsed: 0, shops: {}, wins: 0, maxLevel: 0, mods: {}, relics: [], placement: {}, unlockedNow: [], found: [] };
     selected = null; confirmReturn = false; menuOpen = false; persist();
     WorldMap.placeToken(startId);
-    if (startId === 'camp') { const sub = World.SUB_BY.meadow; WorldMap.focus(sub.entry[0], sub.entry[1]); } else WorldMap.focus(World.byId[startId].x, World.byId[startId].y);
+    if (startId === 'camp') WorldMap.focus(World.CAMP.x, World.CAMP.y - 60); else WorldMap.focus(World.byId[startId].x, World.byId[startId].y);
     toast('Expedition started' + (P.heatPoints(save) || P.descendOf(save) ? ' (Heat ' + P.heatPoints(save) + (P.descendOf(save) ? ', Descend ' + P.descendOf(save) : '') + ')' : '') + (startId === 'camp' ? '' : ' at the ' + World.SUB_BY[World.byId[startId].sub].name + ' Wayshrine') + ' with ' + sup + ' Rations (only ' + World.SUB_BY[run().open[0]].name + ' is open) and ' + run().bounties.length + (run().bounties.length === 1 ? ' bounty' : ' bounties') + '.');
     renderAll();
   }

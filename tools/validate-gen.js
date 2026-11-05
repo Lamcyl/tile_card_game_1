@@ -7,7 +7,6 @@
 // Usage: node tools/validate-gen.js [seedsPerTier=10] [tiers=1,2,3,4,5] [--verbose]
 'use strict';
 const Engine = require('../prototype/js/engine.js');
-try { require('../prototype/js/world-layout.js'); } catch (e) { /* placeholder layout */ }
 const World = require('../prototype/js/world-data.js');
 require('../prototype/js/boss-defs.js');
 const Gen = require('../prototype/js/gen.js');
@@ -30,12 +29,12 @@ const BOSS_REF = {
   4: { upgrades: { vitality: 5, command: 3, drill: 2, bulwark: 2 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1', 'banner1', 'storm1'] },
   5: { upgrades: { vitality: 6, command: 4, drill: 2, bulwark: 3 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1', 'banner1', 'archer2', 'storm1'] },
 };
-// The first boss of Azure Coast and Sunscorch is the wall a freshly cleared Greenvale account meets (target: falls in run 5-10, WP18): it is checked
+// The first boss of each new level band (WP20: rice, the first of Greenvale's Lv7+ areas, and dshallows, the first of Ashkara) is the wall a freshly cleared Greenvale account meets (target: falls in run 5-10, WP18): it is checked
 // against a lighter account (no gacha units, Drill 1) that still has the usual gear and relics.
-const EARLY_BOSSES = ['beach', 'dunes'];
+const EARLY_BOSSES = ['rice', 'dshallows'];
 const EARLY_REF = { upgrades: { vitality: 3, command: 2, drill: 1, bulwark: 1 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1', 'banner1'] };
 const TIER_LEVELS = { 1: [1, 2, 3], 2: [4, 5, 6], 3: [7, 8, 9], 4: [10, 11, 12], 5: [13, 14, 15] };
-const SUB_FOR = { 1: 'forest', 2: 'lake', 3: 'cove', 4: 'rime', 5: 'caldera' };
+const SUB_FOR = { 1: 'forest', 2: 'lake', 3: 'ruins', 4: 'tomb', 5: 'citadel' };
 const ROLES = ['basic', 'armored', 'barrel'];
 
 // The deepest level of the last tier is met with a fully upgraded squad (Drill 4, Bulwark 4).

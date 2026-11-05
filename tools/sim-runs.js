@@ -10,7 +10,6 @@
 // NOITEMS / NOGACHA / NORULES / NORELICS switch a power source off (ablation).
 if (process.env.SEED) { let a = Number(process.env.SEED) >>> 0; Math.random = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const Engine = require('../prototype/js/engine.js');
-try { require('../prototype/js/world-layout.js'); } catch (e) { /* placeholder layout */ }
 const World = require('../prototype/js/world-data.js');
 require('../prototype/js/boss-defs.js');
 const Gen = require('../prototype/js/gen.js');
@@ -94,7 +93,7 @@ function playRun(save0) {
   const relics = []; // WP12: run relics (NORELICS=1 switches them off)
   // Per-run gates (app.js): only Sunny Meadows is open at the start (the sim never starts at a Wayshrine); a boss opens the areas it leads to for this run.
   // Endgame 'farm' mode keeps every area open (the player starts at a lit Wayshrine deep in the map).
-  const runOpen = new Set(save.farm ? World.SUBAREAS.map((x) => x.id) : ['meadow']);
+  const runOpen = new Set(save.farm ? World.SUBAREAS.map((x) => x.id) : [World.CAMP.sub]);
   let gold = Progress.startGold(save), keys = 0, reviveUsed = 0, rerolls = Progress.rewardRerolls(save), hp = Progress.maxHp(save), supplies = Progress.startSupplies(save), cleared = new Set(), wins = 0, maxLv = 0, souls = 0, bosses = 0, newDown = 0, items = 0, wonFirst = [];
   for (;;) {
     if (supplies <= 0) return { wins, maxLv, souls, bosses, items, end: 'supplies', start: Progress.startSupplies(save0), save };
@@ -201,7 +200,7 @@ let profiles = {
   'fresh account': Progress.freshSave(),
   'after ~5 runs (HP+6, spear, archer2)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 2 }, squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1'] }),
   'meadow boss beaten (HP+9, 6 slots, horn, Provisions 1)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 3, command: 1, provisions: 1 }, unlocked: ['meadow', 'forest'], bossesBeaten: ['meadow'], squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1'] }),
-  'Greenvale done (HP+15, 7 slots, Drill 1, Provisions 2)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 5, command: 2, drill: 1, bulwark: 1, provisions: 2 }, unlocked: ['meadow', 'forest', 'bamboo', 'lake', 'beach', 'dunes'], bossesBeaten: ['meadow', 'forest', 'bamboo', 'lake'], squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1'] }),
+  'Greenvale done (HP+15, 7 slots, Drill 1, Provisions 2)': Object.assign(Progress.freshSave(), { upgrades: { vitality: 5, command: 2, drill: 1, bulwark: 1, provisions: 2 }, unlocked: ['meadow', 'forest', 'bamboo', 'lake', 'rice', 'ruins'], bossesBeaten: ['meadow', 'forest', 'bamboo', 'lake'], squad: ['sword1', 'archer1', 'drum1', 'shield1', 'spear1', 'horn1', 'mage1'] }),
 };
 
 // WP18 endgame account: every Camp track maxed, best squad (stars 3), no gear. Used by `node tools/sim-runs.js N endgame` with HEAT / DESCEND to see how hard the post-game is.
@@ -272,13 +271,13 @@ function campaign(maxRuns) {
   console.log('\nCampaign (' + maxRuns + ' runs max): battles per run ' + log.join(' '));
   console.log('  final upgrades ' + JSON.stringify(save.upgrades) + ', squad ' + save.squad.length + ' (' + Progress.squadCp(save) + '/' + Progress.commandCap(save) + ' CP), owned ' + save.owned.length + ' (stars ' + save.owned.map((i) => Progress.starsOf(save, i)).join('') + ', pity ' + save.pity + ')' + ', items ' + save.items.length);
   console.log('  bosses beaten ' + save.bossesBeaten.length + '/' + World.SUBAREAS.length + ' (' + save.bossesBeaten.join(', ') + ')');
-  console.log('  run in which a sub-area was first unlocked: ' + ['forest', 'beach', 'dunes', 'snow', 'ash', 'glacier', 'caldera'].map((u) => u + ' ' + (unlockRun[u] || '-')).join(', '));
+  console.log('  run in which a sub-area was first unlocked: ' + World.SUBAREAS.map((x) => x.id).filter((u) => u !== World.CAMP.sub).map((u) => u + ' ' + (unlockRun[u] || '-')).join(', '));
   console.log('  run in which each region first had a boss beaten: ' + World.REGIONS.map((g) => g + ' ' + (firstRun[g] || '-')).join(', '));
 }
 
 const N = Number(process.argv[2] || 6);
 const nodes = World.nodes.filter((n) => n.type !== 'camp');
-console.log('World: ' + World.SUBAREAS.length + ' sub-areas, ' + nodes.length + ' spots (free exploration; ' + nodes.filter((n) => ['battle', 'elite', 'boss'].includes(n.type)).length + ' monster spots), ' + Items.ALL.length + ' items' + (typeof window === 'undefined' && !globalThis.WorldLayout ? ' [placeholder layout]' : ''));
+console.log('World: ' + World.SUBAREAS.length + ' sub-areas, ' + nodes.length + ' spots (free exploration; ' + nodes.filter((n) => ['battle', 'elite', 'boss'].includes(n.type)).length + ' monster spots), ' + Items.ALL.length + ' items');
 if (process.argv[3] === 'endgame') profiles = { ['endgame account, Heat ' + Progress.heatPoints(Object.assign(Progress.freshSave(), { heat: (process.env.HEAT || '').split(',').filter(Boolean) })) + ', Descend ' + Number(process.env.DESCEND || 0)]: endgameSave() };
 if (process.argv[3] !== 'campaign') {
   for (const [name, save] of Object.entries(profiles)) {

@@ -61,12 +61,14 @@
   const BY_ID = {}; LIST.forEach((e) => { BY_ID[e.id] = e; });
   const GOLD_SCALE = [1, 1.3, 1.6, 1.9, 2.2]; // per region index, applied to every gold amount of an event
 
+  // WP20: regions without their own vignettes borrow the retired regions' (Ashkara: Sunscorch + Ember Peaks; Greenvale: + Azure Coast)
+  const REGION_ALIAS = { Greenvale: ['Azure Coast'], Ashkara: ['Sunscorch', 'Ember Peaks'] };
   // The event that lives at a node: stable for a given run seed and node id, spread over the region's events.
   function pick(region, seedNum) {
-    const l = LIST.filter((e) => e.region === region);
+    const ok = [region].concat(REGION_ALIAS[region] || []), l = LIST.filter((e) => ok.includes(e.region));
     return l[seedNum % l.length];
   }
-  const scale = (n, regionIndex) => Math.round(n * (GOLD_SCALE[regionIndex] || 1));
+  const scale = (n, regionIndex) => Math.round(n * (GOLD_SCALE[regionIndex] || 1 + 0.3 * (regionIndex || 0)));
   // The choice as shown to the player: gold costs scaled to the region.
   function costOf(choice, regionIndex) { return choice.cost && choice.cost.gold ? scale(choice.cost.gold, regionIndex) : 0; }
   // Rolls an outcome of a choice (rnd returns [0,1)); returns { text, fx } with gold scaled to the region.

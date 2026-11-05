@@ -1,4 +1,4 @@
-// Handcrafted boss and elite fights (design 8.2). One definition per sub-area boss (20) and per elite (20).
+// Handcrafted boss and elite fights (design 8.2). One definition per sub-area boss and per elite (16 live sub-areas plus the retired ones kept as reserve).
 // gen.js turns a definition into enemies at the node's level; tools/validate-gen.js checks every one with the solver.
 //
 // Layout rows are `back` (row 0) and `front` (row 1), one char per column, never mirrored (landmarks are fixed).
@@ -77,6 +77,11 @@
     lavafall:{ name: 'Hive',       back: 'b.u.b', front: 'tb.bt', hp: 0.35, atk: 1, note: 'A summoner keeps the line full.' },
     caldera: { name: 'Field hospital', back: 'b.m.b', front: '.tbt.', hp: 0.5, atk: 1, note: 'A healer mends the line.' },
   };
+
+  // WP20: 16 sub-areas (data/regions/*.json, `bossDef`). The new sub-areas reuse the fights of the retired ones (their gimmicks and layouts are
+  // validated); the retired ids stay here as ready content for future regions (data/regions-reserve/).
+  const REUSE = { rice: 'beach', ruins: 'cove', marsh: 'coral', highlands: 'isles', dshallows: 'dunes', palms: 'oasis', erg: 'ash', saltmirror: 'ridge', wadi: 'canyon', bazaar: 'lavafall', tomb: 'temple', citadel: 'caldera' };
+  for (const id of Object.keys(REUSE)) { BOSSES[id] = BOSSES[REUSE[id]]; ELITES[id] = ELITES[REUSE[id]]; }
 
   const BossDefs = { BOSSES, ELITES };
   root.BossDefs = BossDefs;

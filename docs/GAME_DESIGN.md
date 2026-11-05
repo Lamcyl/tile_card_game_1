@@ -670,6 +670,8 @@ These directions came out of the first playtest. Numbers are starting points for
 
 ### 24.7 In-run UI, Rations naming, one-item markets and per-run gates (playtest revision)
 
+*WP20 note:* the per-run gates now run over the 16 organic sub-areas of Greenvale and Ashkara (`from` / `unlocks` graph with the lake fork; Misty Highlands opens Dune Shallows). A closed gate is a real gate tile that blocks walking; its sealed sprite carries the vermilion tag.
+
 Playtest feedback: the tap-everything bottom panel covered 60-70% of the screen, "Supplies" read like an inventory, relics pushed the HP bar off the HUD, markets closed after a mere visit, and conquered areas stayed open forever.
 
 - **Map first.** During a run tapping the ground only walks the hero. The big bottom sheet exists only at Camp (a dedicated Camp menu screen is planned). Tapping a monster, market, spring, cache, event, Wayshrine or Sealed Cache opens a **compact info card** (max about 30% of the screen, bottom): name, danger skulls and Lv, one gimmick line for elites and bosses, cost or gain chips ("-1 🍙", "+3 🍙", "Free"), the enemy portraits as a small row, **possible drops as a row of small icons** (rarity-coloured frame, ◆ marker for a unique item, ✓ when owned, a short % or "1st" for a first boss kill; tap an icon for a one-line detail), and the Fight / Visit and close buttons. Tapping the ground or another spot closes or replaces it.

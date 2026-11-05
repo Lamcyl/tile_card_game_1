@@ -1,0 +1,182 @@
+{
+ "id": "frostveil",
+ "name": "Frostveil",
+ "note": "Retired in WP20 (no tileset yet). Ready content for a future region: levels, themes and unlocks verbatim; boss/elite fights stay in js/boss-defs.js under the old ids.",
+ "slot": null,
+ "subareas": [
+  {
+   "id": "snow",
+   "name": "Snowdrift Plains",
+   "biome": "snow",
+   "lm": "ice-peak",
+   "lmLabel": "Whitecap Peak",
+   "lv": [
+    9,
+    10
+   ],
+   "bossLv": 11,
+   "from": "isles",
+   "unlocks": [
+    "frozen"
+   ],
+   "poi": "shrine",
+   "theme": {
+    "basic": [
+     "Yuki-onna",
+     "❄️",
+     "yuki-onna"
+    ],
+    "tough": [
+     "Troll",
+     "👹",
+     "troll"
+    ],
+    "armored": [
+     "Haetae",
+     "🦁",
+     "haetae"
+    ],
+    "barrel": [
+     "Yutu",
+     "🐇",
+     "yutu"
+    ],
+    "boss": [
+     "Jangsan-beom",
+     "🐅",
+     "jangsan-beom"
+    ]
+   }
+  },
+  {
+   "id": "frozen",
+   "name": "Frozen Lake",
+   "biome": "glacier",
+   "lm": "frozen-lake",
+   "lmLabel": "Glass Lake",
+   "lv": [
+    10,
+    11
+   ],
+   "bossLv": 12,
+   "from": "snow",
+   "unlocks": [
+    "rime"
+   ],
+   "poi": "treasure",
+   "theme": {
+    "basic": [
+     "Nisse",
+     "🎅",
+     "nisse"
+    ],
+    "tough": [
+     "Lindworm",
+     "🐛",
+     "lindworm"
+    ],
+    "armored": [
+     "Dvergr",
+     "⛏️",
+     "dvergr"
+    ],
+    "barrel": [
+     "Ratatoskr",
+     "🐿️",
+     "ratatoskr"
+    ],
+    "boss": [
+     "Nidhogg",
+     "🐉",
+     "nidhogg"
+    ]
+   }
+  },
+  {
+   "id": "rime",
+   "name": "Rime Forest",
+   "biome": "snow",
+   "lm": "ice-forest",
+   "lmLabel": "The Crystal Pines",
+   "lv": [
+    11,
+    12
+   ],
+   "bossLv": 13,
+   "from": "frozen",
+   "unlocks": [
+    "glacier"
+   ],
+   "poi": "shrine",
+   "theme": {
+    "basic": [
+     "Draugr",
+     "💀",
+     "draugr"
+    ],
+    "tough": [
+     "Valkyrie",
+     "🪽",
+     "valkyrie"
+    ],
+    "armored": [
+     "Cyclops",
+     "👁️",
+     "cyclops"
+    ],
+    "barrel": [
+     "Dalgyal Gwisin",
+     "🥚",
+     "dalgyal-gwisin"
+    ],
+    "boss": [
+     "Hel",
+     "💀",
+     "hel"
+    ]
+   }
+  },
+  {
+   "id": "glacier",
+   "name": "Glacier Throne",
+   "biome": "glacier",
+   "lm": "ice-palace",
+   "lmLabel": "The Frost Palace",
+   "lv": [
+    12,
+    14
+   ],
+   "bossLv": 15,
+   "from": "rime",
+   "unlocks": [],
+   "poi": "treasure",
+   "theme": {
+    "basic": [
+     "Jötunn",
+     "🧊",
+     "jotunn"
+    ],
+    "tough": [
+     "Sleipnir",
+     "🐴",
+     "sleipnir"
+    ],
+    "armored": [
+     "Koschei",
+     "🦴",
+     "koschei"
+    ],
+    "barrel": [
+     "Domovoi",
+     "🏠",
+     "domovoi"
+    ],
+    "boss": [
+     "Morana",
+     "❄️",
+     "morana"
+    ]
+   }
+  }
+ ]
+}

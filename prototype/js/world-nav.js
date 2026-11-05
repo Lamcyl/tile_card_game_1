@@ -1,3 +1,4 @@
+import './world-boot.js'; // sets window.WorldGen (UMD module) before this file reads it
 // Navigation over the tile world (WP20): same API shape as WorldLayout (blocked, subAt) plus findPath.
 // Data comes from window.WorldGen (js/world-gen.js): per region an RLE `blocked` bitset and `subId` grid.
 // World units: 1 tile = 64 units; tile (tx,ty) is world x in [tx*64, tx*64+64). Negative coordinates are fine.

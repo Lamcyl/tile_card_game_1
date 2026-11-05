@@ -5,7 +5,9 @@ import './world.css';
 import './camp.css';
 import './battle.css';
 import './js/engine.js';
-import './js/world-layout.js';
+import './js/world-boot.js'; // window.WorldGen first: shared chunks evaluate before main's own body
+import './js/world-nav.js';
+import './js/tilemap.js';
 import './js/world-data.js';
 import './js/art.js';
 import './js/progress.js';

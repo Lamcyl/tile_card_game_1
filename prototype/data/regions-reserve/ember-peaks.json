@@ -1,0 +1,182 @@
+{
+ "id": "ember-peaks",
+ "name": "Ember Peaks",
+ "note": "Retired in WP20 (no tileset yet). Ready content for a future region: levels, themes and unlocks verbatim; boss/elite fights stay in js/boss-defs.js under the old ids.",
+ "slot": null,
+ "subareas": [
+  {
+   "id": "ash",
+   "name": "Ash Fields",
+   "biome": "ash",
+   "lm": "burnt-grove",
+   "lmLabel": "The Cinder Grove",
+   "lv": [
+    9,
+    10
+   ],
+   "bossLv": 11,
+   "from": "temple",
+   "unlocks": [
+    "ridge"
+   ],
+   "poi": "treasure",
+   "theme": {
+    "basic": [
+     "Dokkaebi",
+     "👺",
+     "dokkaebi"
+    ],
+    "tough": [
+     "Oni",
+     "👹",
+     "oni"
+    ],
+    "armored": [
+     "Cabrakan",
+     "🪨",
+     "cabrakan"
+    ],
+    "barrel": [
+     "Bulgae",
+     "🔥",
+     "bulgae"
+    ],
+    "boss": [
+     "Surtr",
+     "🔥",
+     "surtr"
+    ]
+   }
+  },
+  {
+   "id": "ridge",
+   "name": "Obsidian Ridge",
+   "biome": "caldera",
+   "lm": "obsidian-ridge",
+   "lmLabel": "The Glass Ridge",
+   "lv": [
+    10,
+    11
+   ],
+   "bossLv": 12,
+   "from": "ash",
+   "unlocks": [
+    "lavafall"
+   ],
+   "poi": "shrine",
+   "theme": {
+    "basic": [
+     "Kui",
+     "🦎",
+     "kui"
+    ],
+    "tough": [
+     "Zipacna",
+     "🐊",
+     "zipacna"
+    ],
+    "armored": [
+     "Hundun",
+     "⚫",
+     "hundun"
+    ],
+    "barrel": [
+     "Pixiu",
+     "🦁",
+     "pixiu"
+    ],
+    "boss": [
+     "Vucub-Caquix",
+     "🦜",
+     "vucub-caquix"
+    ]
+   }
+  },
+  {
+   "id": "lavafall",
+   "name": "Ember Falls",
+   "biome": "ash",
+   "lm": "lava-falls",
+   "lmLabel": "The Ember Falls",
+   "lv": [
+    11,
+    12
+   ],
+   "bossLv": 13,
+   "from": "ridge",
+   "unlocks": [
+    "caldera"
+   ],
+   "poi": "treasure",
+   "theme": {
+    "basic": [
+     "Gumiho",
+     "🦊",
+     "gumiho"
+    ],
+    "tough": [
+     "Cerberus",
+     "🐕",
+     "cerberus"
+    ],
+    "armored": [
+     "Jowangshin",
+     "🏺",
+     "jowangshin"
+    ],
+    "barrel": [
+     "Fenghuang",
+     "🐦‍🔥",
+     "fenghuang"
+    ],
+    "boss": [
+     "Loki",
+     "🔥",
+     "loki"
+    ]
+   }
+  },
+  {
+   "id": "caldera",
+   "name": "Magma Caldera",
+   "biome": "caldera",
+   "lm": "volcano",
+   "lmLabel": "Mount Ember",
+   "lv": [
+    12,
+    14
+   ],
+   "bossLv": 15,
+   "from": "lavafall",
+   "unlocks": [],
+   "poi": "shrine",
+   "theme": {
+    "basic": [
+     "Huay Chivo",
+     "🐐",
+     "huay-chivo"
+    ],
+    "tough": [
+     "Minotaur",
+     "🐂",
+     "minotaur"
+    ],
+    "armored": [
+     "Taotie",
+     "🗿",
+     "taotie"
+    ],
+    "barrel": [
+     "Firebird",
+     "🐦‍🔥",
+     "firebird"
+    ],
+    "boss": [
+     "Zmey Gorynych",
+     "🐉",
+     "zmey"
+    ]
+   }
+  }
+ ]
+}

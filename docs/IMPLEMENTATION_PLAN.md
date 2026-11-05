@@ -182,3 +182,7 @@ Feedback: bosses stopped paying Rations after the second one, and the post-battl
 - Rations: new-area boss `round((2 + 1.3w) x 0.8^n)` (n = new areas already conquered this run), toll boss `floor(w/1.5)`, cap 60 held (`Progress.bossSupplies`, `addSupplies`). UI: boss card chip "+N / ±0 🍙", "new area", node sheet shows the post-battle reward sizes, reward modal labels "+N ATK", Warcry, Fortify, "Heal N HP".
 - Validators: `BOSS_BAND` deep bands raised (hp 2.0 / 1.9, atk 1.54), Hel `adj` 0.88, `validate-gen.js` POWER atk 3/4/4/5/6/6. `validate-gen.js 40` (200 battles) and `bosses` (40 fights) pass.
 - Sim (`tools/sim-runs.js`): warm-up, gate rush, then grind the highest frontier fights (level <= deepest beaten boss + 1). Fresh account 10.0-10.2 battles per run (40 runs, 2 seeds). Campaign, 3 seeds x 22 runs: longest run 53 battles (was 21 old, 90-120 before the 0.8^n decay and the cap); Frostveil first unlocked run 4 / 13 / 18, Ember Peaks conquered run 5 in one seed and not within 22 runs in the other two (wide seed spread, as before).
+
+## WP20: tile-map world (steps 1 to 4 done)
+
+See `docs/WP20_PLAN.md` (Step notes). The overworld is a generated tile map (Greenvale 8 + Ashkara 8 sub-areas, Camp slot), drawn by `tilemap.js`, walked with `world-nav.js`; save key v4. Steps 5 (progression pass, validators) and 6 (data-only region dry run, cleanup) are open.

@@ -15,9 +15,15 @@
  "defaultBiome": "meadow",
  "rim": "forest",
  "border": "cliff",
- "entry": [58, 87],
+ "entry": [
+  58,
+  87
+ ],
  "exit": {
-  "at": [40, 9],
+  "at": [
+   40,
+   9
+  ],
   "to": "ashkara",
   "gate": "interest/gate-mountain"
  },
@@ -56,9 +62,15 @@
    "name": "Sunny Meadows",
    "biome": "meadow",
    "lm": "hill",
-   "lv": [1, 2],
+   "lv": [
+    1,
+    2
+   ],
    "bossLv": 4,
-   "seed": [62, 74],
+   "seed": [
+    62,
+    74
+   ],
    "weight": 0.627,
    "angle": 20,
    "stretch": 1.1,
@@ -70,8 +82,16 @@
      "gate": "interest/gate-farm"
     }
    ],
-   "ground": ["ground/grass", "ground/meadow-lush", "ground/meadow-golden"],
-   "detail": ["ground-detail/grass-flowers-mixed", "ground-detail/meadow-poppy", "ground-detail/meadow-white"],
+   "ground": [
+    "ground/grass",
+    "ground/meadow-lush",
+    "ground/meadow-golden"
+   ],
+   "detail": [
+    "ground-detail/grass-flowers-mixed",
+    "ground-detail/meadow-poppy",
+    "ground-detail/meadow-white"
+   ],
    "detailRate": 0.22,
    "sets": [
     {
@@ -87,35 +107,89 @@
    ],
    "scatter": [
     {
-     "k": ["trees/oak-meadow", "trees/blossom", "trees/oak-young"],
-     "d": 0.0264
+     "k": [
+      "trees/oak-meadow",
+      "trees/blossom",
+      "trees/oak-young"
+     ],
+     "d": 0.1372
     },
     {
-     "k": ["trees/bush-round", "trees/bush-blossom", "grass/wildflower-clump", "grass/tall-grass"],
-     "d": 0.066
+     "k": [
+      "trees/bush-round",
+      "trees/bush-blossom",
+      "grass/wildflower-clump",
+      "grass/tall-grass"
+     ],
+     "d": 0.3432
     },
     {
-     "k": ["rocks/boulder-flowered", "props/haybale", "props/signpost"],
-     "d": 0.0132
+     "k": [
+      "rocks/boulder-flowered",
+      "props/haybale",
+      "props/signpost"
+     ],
+     "d": 0.0686
     }
    ],
    "stamps": [
     {
      "k": "trees/blossom-lone",
-     "at": [66, 70],
+     "at": [
+      66,
+      70
+     ],
      "landmark": true
     }
    ],
-   "overlays": ["overlays/petals-drift", "overlays/sunbeam"]
+   "overlays": [
+    "overlays/petals-drift",
+    "overlays/sunbeam"
+   ],
+   "theme": {
+    "basic": [
+     "Alux",
+     "👺",
+     "alux"
+    ],
+    "tough": [
+     "Tanuki",
+     "🦝",
+     "tanuki"
+    ],
+    "armored": [
+     "Jangseung",
+     "🗿",
+     "jangseung"
+    ],
+    "barrel": [
+     "Chōchin-obake",
+     "🏮",
+     "chochin-obake"
+    ],
+    "boss": [
+     "Sansin",
+     "🐯",
+     "sansin"
+    ]
+   },
+   "lmLabel": "Blossom Hill",
+   "bossDef": "meadow"
   },
   {
    "id": "forest",
    "name": "Old Oak Wood",
    "biome": "forest",
    "lm": "oak-grove",
-   "lv": [3, 4],
+   "lv": [
+    3,
+    4
+   ],
    "bossLv": 5,
-   "seed": [26, 74],
+   "seed": [
+    26,
+    74
+   ],
    "weight": 0.873,
    "angle": -30,
    "stretch": 1.25,
@@ -127,8 +201,16 @@
      "gate": "interest/gate-hollow-oak"
     }
    ],
-   "ground": ["ground/forest-floor", "ground/moss-grass", "ground/grass-leafy"],
-   "detail": ["ground-detail/floor-leaf-litter", "ground-detail/floor-mushrooms", "ground-detail/floor-acorns"],
+   "ground": [
+    "ground/forest-floor",
+    "ground/moss-grass",
+    "ground/grass-leafy"
+   ],
+   "detail": [
+    "ground-detail/floor-leaf-litter",
+    "ground-detail/floor-mushrooms",
+    "ground-detail/floor-acorns"
+   ],
    "detailRate": 0.25,
    "sets": [
     {
@@ -144,36 +226,88 @@
    ],
    "scatter": [
     {
-     "k": ["trees/oak-mature", "trees/oak", "trees/oak-great"],
-     "d": 0.154,
+     "k": [
+      "trees/oak-mature",
+      "trees/oak",
+      "trees/oak-great"
+     ],
+     "d": 0.8008,
      "where": "set:edges/oak-forest"
     },
     {
-     "k": ["trees/oak-young", "trees/bush-fern", "grass/fern-clump"],
-     "d": 0.066
+     "k": [
+      "trees/oak-young",
+      "trees/bush-fern",
+      "grass/fern-clump"
+     ],
+     "d": 0.3432
     },
     {
-     "k": ["rocks/boulder-mossy-oak", "props/log-fallen"],
-     "d": 0.022
+     "k": [
+      "rocks/boulder-mossy-oak",
+      "props/log-fallen"
+     ],
+     "d": 0.1144
     }
    ],
    "stamps": [
     {
      "k": "trees/oak-sacred",
-     "at": [24, 76],
+     "at": [
+      24,
+      76
+     ],
      "landmark": true
     }
    ],
-   "overlays": ["overlays/dapple-oak", "overlays/light-shafts"]
+   "overlays": [
+    "overlays/dapple-oak",
+    "overlays/light-shafts"
+   ],
+   "theme": {
+    "basic": [
+     "Kodama",
+     "🌱",
+     "kodama"
+    ],
+    "tough": [
+     "Leshy",
+     "🌳",
+     "leshy"
+    ],
+    "armored": [
+     "Bulgasari",
+     "🐗",
+     "bulgasari"
+    ],
+    "barrel": [
+     "Kasa-obake",
+     "☂️",
+     "kasa-obake"
+    ],
+    "boss": [
+     "Yamata no Orochi",
+     "🐍",
+     "orochi"
+    ]
+   },
+   "lmLabel": "The Elder Oak",
+   "bossDef": "forest"
   },
   {
    "id": "bamboo",
    "name": "Bamboo Valley",
    "biome": "forest",
    "lm": "bamboo-grove",
-   "lv": [3, 4],
+   "lv": [
+    3,
+    4
+   ],
    "bossLv": 5,
-   "seed": [16, 46],
+   "seed": [
+    16,
+    46
+   ],
    "weight": 1.266,
    "angle": 80,
    "stretch": 1.4,
@@ -185,8 +319,16 @@
      "gate": "interest/gate-hut"
     }
    ],
-   "ground": ["ground/grass-bamboo", "ground/floor-bamboo", "ground/floor-golden"],
-   "detail": ["ground-detail/bamboo-litter", "ground-detail/bamboo-shoots", "ground-detail/sasa-grass"],
+   "ground": [
+    "ground/grass-bamboo",
+    "ground/floor-bamboo",
+    "ground/floor-golden"
+   ],
+   "detail": [
+    "ground-detail/bamboo-litter",
+    "ground-detail/bamboo-shoots",
+    "ground-detail/sasa-grass"
+   ],
    "detailRate": 0.2,
    "sets": [
     {
@@ -196,44 +338,102 @@
     },
     {
      "k": "edges/stream",
-     "blob": [3, 12],
-     "at": [10, 40],
+     "blob": [
+      3,
+      12
+     ],
+     "at": [
+      10,
+      40
+     ],
      "wobble": 0.7,
      "blocks": true
     }
    ],
    "scatter": [
     {
-     "k": ["trees/bamboo-green", "trees/bamboo-mixed", "trees/bamboo-slender"],
-     "d": 0.198,
+     "k": [
+      "trees/bamboo-green",
+      "trees/bamboo-mixed",
+      "trees/bamboo-slender"
+     ],
+     "d": 1.0296,
      "where": "set:edges/bamboo-grove"
     },
     {
-     "k": ["grass/sasa-clump", "grass/bamboo-shoots", "trees/bamboo-young"],
-     "d": 0.066
+     "k": [
+      "grass/sasa-clump",
+      "grass/bamboo-shoots",
+      "trees/bamboo-young"
+     ],
+     "d": 0.3432
     },
     {
-     "k": ["rocks/boulder-bamboo", "rocks/stream-rock"],
-     "d": 0.0176
+     "k": [
+      "rocks/boulder-bamboo",
+      "rocks/stream-rock"
+     ],
+     "d": 0.0916
     }
    ],
    "stamps": [
     {
      "k": "interest/hut-thatched",
-     "at": [20, 52],
+     "at": [
+      20,
+      52
+     ],
      "landmark": true
     }
    ],
-   "overlays": ["overlays/valley-mist"]
+   "overlays": [
+    "overlays/valley-mist"
+   ],
+   "theme": {
+    "basic": [
+     "Shanxiao",
+     "👹",
+     "shanxiao"
+    ],
+    "tough": [
+     "Baihu",
+     "🐅",
+     "baihu"
+    ],
+    "armored": [
+     "Baize",
+     "🦁",
+     "baize"
+    ],
+    "barrel": [
+     "Nian",
+     "🧨",
+     "nian"
+    ],
+    "boss": [
+     "Qiongqi",
+     "🐯",
+     "qiongqi"
+    ]
+   },
+   "lmLabel": "The Jade Bamboo",
+   "guarded": true,
+   "bossDef": "bamboo"
   },
   {
    "id": "lake",
    "name": "Mirror Lake",
    "biome": "coral",
    "lm": "lake",
-   "lv": [4, 5],
+   "lv": [
+    4,
+    5
+   ],
    "bossLv": 6,
-   "seed": [50, 46],
+   "seed": [
+    50,
+    46
+   ],
    "weight": 0.877,
    "angle": 0,
    "stretch": 1,
@@ -249,55 +449,123 @@
      "gate": "interest/gate-stone"
     }
    ],
-   "ground": ["ground/grass-lakeside", "ground/grass", "ground/beach-pebble"],
-   "detail": ["ground-detail/grass-flowers-white", "ground-detail/lake-petals"],
+   "ground": [
+    "ground/grass-lakeside",
+    "ground/grass",
+    "ground/beach-pebble"
+   ],
+   "detail": [
+    "ground-detail/grass-flowers-white",
+    "ground-detail/lake-petals"
+   ],
    "detailRate": 0.14,
    "sets": [
     {
      "k": "edges/water-shore",
      "deep": "edges/water-deep",
-     "blob": [9, 8],
-     "at": [50, 46],
+     "blob": [
+      9,
+      8
+     ],
+     "at": [
+      50,
+      46
+     ],
      "wobble": 0.6,
      "blocks": true
     }
    ],
    "scatter": [
     {
-     "k": ["trees/willow", "trees/oak-lakeside", "trees/willow-young"],
-     "d": 0.044
+     "k": [
+      "trees/willow",
+      "trees/oak-lakeside",
+      "trees/willow-young"
+     ],
+     "d": 0.2288
     },
     {
-     "k": ["grass/reeds", "grass/cattail-lake", "grass/iris-bank"],
-     "d": 0.066
+     "k": [
+      "grass/reeds",
+      "grass/cattail-lake",
+      "grass/iris-bank"
+     ],
+     "d": 0.3432
     },
     {
-     "k": ["rocks/shore-boulder", "rocks/lake-rock"],
-     "d": 0.0176
+     "k": [
+      "rocks/shore-boulder",
+      "rocks/lake-rock"
+     ],
+     "d": 0.0916
     }
    ],
    "stamps": [
     {
      "k": "interest/torii-lake",
-     "at": [50, 46],
+     "at": [
+      50,
+      46
+     ],
      "force": true,
      "landmark": true
     },
     {
      "k": "interest/jetty-landing",
-     "at": [47, 52]
+     "at": [
+      47,
+      52
+     ]
     }
    ],
-   "overlays": ["overlays/water-glint", "overlays/dragonflies"]
+   "overlays": [
+    "overlays/water-glint",
+    "overlays/dragonflies"
+   ],
+   "theme": {
+    "basic": [
+     "Bannik",
+     "🛁",
+     "bannik"
+    ],
+    "tough": [
+     "Jorogumo",
+     "🕷️",
+     "jorogumo"
+    ],
+    "armored": [
+     "Baku",
+     "🐘",
+     "baku"
+    ],
+    "barrel": [
+     "Hitotsume-kozo",
+     "👁️",
+     "hitotsume-kozo"
+    ],
+    "boss": [
+     "Medusa",
+     "🐍",
+     "medusa"
+    ]
+   },
+   "lmLabel": "Mirror Lake",
+   "bossDef": "lake"
   },
   {
    "id": "rice",
    "name": "Rice Terraces",
    "biome": "meadow",
    "lm": "terraces",
-   "lv": [5, 6],
+   "lv": [
+    5,
+    6
+   ],
    "bossLv": 7,
-   "seed": [78, 36],
+   "seed": [
+    78,
+    36
+   ],
    "weight": 0.885,
    "angle": -60,
    "stretch": 1.3,
@@ -309,8 +577,15 @@
      "gate": "interest/kura-gate"
     }
    ],
-   "ground": ["ground/terrace-grass", "ground/terrace-earth", "ground/grass"],
-   "detail": ["ground-detail/paddy-hills", "ground-detail/grass-clover"],
+   "ground": [
+    "ground/terrace-grass",
+    "ground/terrace-earth",
+    "ground/grass"
+   ],
+   "detail": [
+    "ground-detail/paddy-hills",
+    "ground-detail/grass-clover"
+   ],
    "detailRate": 0.15,
    "sets": [
     {
@@ -327,43 +602,102 @@
    ],
    "scatter": [
     {
-     "k": ["trees/maple", "trees/orchard-tree", "trees/bush-round"],
-     "d": 0.033
+     "k": [
+      "trees/maple",
+      "trees/orchard-tree",
+      "trees/bush-round"
+     ],
+     "d": 0.1716
     },
     {
-     "k": ["props/scarecrow", "props/harvest-basket", "props/haybale"],
-     "d": 0.0154
+     "k": [
+      "props/scarecrow",
+      "props/harvest-basket",
+      "props/haybale"
+     ],
+     "d": 0.08
     },
     {
-     "k": ["grass/tall-grass", "grass/marigold-clump"],
-     "d": 0.066
+     "k": [
+      "grass/tall-grass",
+      "grass/marigold-clump"
+     ],
+     "d": 0.3432
     }
    ],
    "stamps": [
     {
      "k": "interest/waterwheel",
-     "at": [80, 34],
+     "at": [
+      80,
+      34
+     ],
      "landmark": true
     }
    ],
-   "overlays": ["overlays/paddy-glint"]
+   "overlays": [
+    "overlays/paddy-glint"
+   ],
+   "theme": {
+    "basic": [
+     "Kappa",
+     "🐢",
+     "kappa"
+    ],
+    "tough": [
+     "Sobek",
+     "🐊",
+     "sobek"
+    ],
+    "armored": [
+     "Xuanwu",
+     "🐢",
+     "xuanwu"
+    ],
+    "barrel": [
+     "Jingwei",
+     "🐦",
+     "jingwei"
+    ],
+    "boss": [
+     "Scylla",
+     "🐙",
+     "scylla"
+    ]
+   },
+   "lmLabel": "The Terrace Stair",
+   "bossDef": "beach"
   },
   {
    "id": "ruins",
    "name": "Mossy Ruins",
    "biome": "forest",
    "lm": "torii-ruin",
-   "lv": [6, 7],
+   "lv": [
+    6,
+    7
+   ],
    "bossLv": 8,
-   "seed": [28, 24],
+   "seed": [
+    28,
+    24
+   ],
    "weight": 1.034,
    "angle": 40,
    "stretch": 1.2,
    "poi": "treasure",
    "shop": true,
    "unlocks": [],
-   "ground": ["ground/moss-thick", "ground/flagstone-mossy", "ground/moss-grass"],
-   "detail": ["ground-detail/ruin-fern", "ground-detail/ruin-leaves", "ground-detail/moss-stones"],
+   "ground": [
+    "ground/moss-thick",
+    "ground/flagstone-mossy",
+    "ground/moss-grass"
+   ],
+   "detail": [
+    "ground-detail/ruin-fern",
+    "ground-detail/ruin-leaves",
+    "ground-detail/moss-stones"
+   ],
    "detailRate": 0.22,
    "sets": [
     {
@@ -379,35 +713,89 @@
    ],
    "scatter": [
     {
-     "k": ["trees/cedar", "trees/pine"],
-     "d": 0.066
+     "k": [
+      "trees/cedar",
+      "trees/pine"
+     ],
+     "d": 0.3432
     },
     {
-     "k": ["props/pillar-standing", "props/pillar-toppled", "rocks/boulder-ruin", "rocks/wall-chunk"],
-     "d": 0.044
+     "k": [
+      "props/pillar-standing",
+      "props/pillar-toppled",
+      "rocks/boulder-ruin",
+      "rocks/wall-chunk"
+     ],
+     "d": 0.2288
     },
     {
-     "k": ["props/ruin-lantern", "grass/moss-mound", "grass/mushrooms-ruin"],
-     "d": 0.0264
+     "k": [
+      "props/ruin-lantern",
+      "grass/moss-mound",
+      "grass/mushrooms-ruin"
+     ],
+     "d": 0.1372
     }
    ],
    "stamps": [
     {
      "k": "interest/torii-ruin",
-     "at": [26, 20],
+     "at": [
+      26,
+      20
+     ],
      "landmark": true
     }
    ],
-   "overlays": ["overlays/ruin-mist", "overlays/light-shafts-ruin"]
+   "overlays": [
+    "overlays/ruin-mist",
+    "overlays/light-shafts-ruin"
+   ],
+   "theme": {
+    "basic": [
+     "Harpy",
+     "🦅",
+     "harpy"
+    ],
+    "tough": [
+     "Gashadokuro",
+     "💀",
+     "gashadokuro"
+    ],
+    "armored": [
+     "Nemean Lion",
+     "🦁",
+     "nemean-lion"
+    ],
+    "barrel": [
+     "Cheonyeo Gwisin",
+     "👻",
+     "cheonyeo-gwisin"
+    ],
+    "boss": [
+     "Hydra",
+     "🐲",
+     "hydra"
+    ]
+   },
+   "lmLabel": "The Torii Ruin",
+   "guarded": true,
+   "bossDef": "cove"
   },
   {
    "id": "marsh",
    "name": "Firefly Marsh",
    "biome": "marsh",
    "lm": "boardwalk",
-   "lv": [6, 7],
+   "lv": [
+    6,
+    7
+   ],
    "bossLv": 8,
-   "seed": [70, 16],
+   "seed": [
+    70,
+    16
+   ],
    "weight": 1.331,
    "angle": -10,
    "stretch": 1.2,
@@ -419,8 +807,16 @@
      "gate": "interest/gate-stilt-hut"
     }
    ],
-   "ground": ["ground/bog-moss", "ground/dusk-grass", "ground/wet-moor"],
-   "detail": ["ground-detail/bog-cotton", "ground-detail/duckweed-mat", "ground-detail/lily-dusk"],
+   "ground": [
+    "ground/bog-moss",
+    "ground/dusk-grass",
+    "ground/wet-moor"
+   ],
+   "detail": [
+    "ground-detail/bog-cotton",
+    "ground-detail/duckweed-mat",
+    "ground-detail/lily-dusk"
+   ],
    "detailRate": 0.2,
    "sets": [
     {
@@ -437,44 +833,104 @@
    ],
    "scatter": [
     {
-     "k": ["trees/willow-marsh", "trees/alder-marsh", "trees/bush-willow-scrub"],
-     "d": 0.044
+     "k": [
+      "trees/willow-marsh",
+      "trees/alder-marsh",
+      "trees/bush-willow-scrub"
+     ],
+     "d": 0.2288
     },
     {
-     "k": ["grass/reeds-dusk", "grass/cattail-dusk", "grass/iris-marsh"],
-     "d": 0.088
+     "k": [
+      "grass/reeds-dusk",
+      "grass/cattail-dusk",
+      "grass/iris-marsh"
+     ],
+     "d": 0.4576
     },
     {
-     "k": ["rocks/mossy-boulder-marsh", "props/lantern-marsh"],
-     "d": 0.0154
+     "k": [
+      "rocks/mossy-boulder-marsh",
+      "props/lantern-marsh"
+     ],
+     "d": 0.08
     }
    ],
    "stamps": [
     {
      "k": "interest/stilt-hut",
-     "at": [66, 12],
+     "at": [
+      66,
+      12
+     ],
      "landmark": true
     }
    ],
-   "overlays": ["overlays/fireflies", "overlays/dusk-tint"]
+   "overlays": [
+    "overlays/fireflies",
+    "overlays/dusk-tint"
+   ],
+   "theme": {
+    "basic": [
+     "Mul Gwisin",
+     "👻",
+     "mul-gwisin"
+    ],
+    "tough": [
+     "Jörmungandr",
+     "🐍",
+     "jormungandr"
+    ],
+    "armored": [
+     "Imugi",
+     "🐉",
+     "imugi"
+    ],
+    "barrel": [
+     "Rusalka",
+     "🧜",
+     "rusalka"
+    ],
+    "boss": [
+     "Poseidon",
+     "🔱",
+     "poseidon"
+    ]
+   },
+   "lmLabel": "The Firefly Boardwalk",
+   "bossDef": "coral"
   },
   {
    "id": "highlands",
    "name": "Misty Highlands",
    "biome": "highlands",
    "lm": "standing-stones",
-   "lv": [7, 8],
+   "lv": [
+    7,
+    8
+   ],
    "bossLv": 9,
    "final": true,
-   "seed": [46, 16],
+   "seed": [
+    46,
+    16
+   ],
    "weight": 1.35,
    "angle": 0,
    "stretch": 1.15,
    "poi": "treasure",
    "shop": true,
    "unlocks": [],
-   "ground": ["ground/ochre-pasture", "ground/heather", "ground/ochre-dry"],
-   "detail": ["ground-detail/pebbles-ochre", "ground-detail/heather-bloom", "ground-detail/thistle"],
+   "ground": [
+    "ground/ochre-pasture",
+    "ground/heather",
+    "ground/ochre-dry"
+   ],
+   "detail": [
+    "ground-detail/pebbles-ochre",
+    "ground-detail/heather-bloom",
+    "ground-detail/thistle"
+   ],
    "detailRate": 0.2,
    "sets": [
     {
@@ -490,26 +946,72 @@
    ],
    "scatter": [
     {
-     "k": ["trees/cedar", "trees/pine-twisted", "trees/juniper"],
-     "d": 0.0264
+     "k": [
+      "trees/cedar",
+      "trees/pine-twisted",
+      "trees/juniper"
+     ],
+     "d": 0.1372
     },
     {
-     "k": ["rocks/rock-spire", "rocks/standing-stone", "rocks/boulder-ochre"],
-     "d": 0.0308
+     "k": [
+      "rocks/rock-spire",
+      "rocks/standing-stone",
+      "rocks/boulder-ochre"
+     ],
+     "d": 0.1602
     },
     {
-     "k": ["grass/bracken-ochre", "trees/heather-clump"],
-     "d": 0.066
+     "k": [
+      "grass/bracken-ochre",
+      "trees/heather-clump"
+     ],
+     "d": 0.3432
     }
    ],
    "stamps": [
     {
      "k": "interest/standing-stones-trio",
-     "at": [44, 12],
+     "at": [
+      44,
+      12
+     ],
      "landmark": true
     }
    ],
-   "overlays": ["overlays/mist-low", "overlays/light-shafts-highland"]
+   "overlays": [
+    "overlays/mist-low",
+    "overlays/light-shafts-highland"
+   ],
+   "theme": {
+    "basic": [
+     "Ungnyeo",
+     "🌊",
+     "ungnyeo"
+    ],
+    "tough": [
+     "Griffin",
+     "🦅",
+     "griffin"
+    ],
+    "armored": [
+     "Chimera",
+     "🦁",
+     "chimera"
+    ],
+    "barrel": [
+     "Inmyeonjo",
+     "🐦",
+     "inmyeonjo"
+    ],
+    "boss": [
+     "Typhon",
+     "🌪️",
+     "typhon"
+    ]
+   },
+   "lmLabel": "The Standing Stones",
+   "bossDef": "isles"
   }
  ]
 }

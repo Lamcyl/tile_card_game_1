@@ -5,7 +5,7 @@ import { blobMask, connectMask } from './autotile.mjs';
 import { bfs, clearance, d2, bestCandidate } from './nodes.mjs';
 
 const TILE = 64;
-const CONTENT_KEYS = ['name', 'biome', 'lm', 'lv', 'bossLv', 'guarded', 'theme', 'final', 'bossDef', 'overlays', 'shop'];
+const CONTENT_KEYS = ['name', 'biome', 'lm', 'lv', 'bossLv', 'guarded', 'theme', 'final', 'bossDef', 'lmLabel', 'overlays', 'shop'];
 
 export function generateRegion(def, ti, box) {
   const N = def.size, S = N - 1, isCamp = def.kind === 'camp';
@@ -328,8 +328,10 @@ export function generateRegion(def, ti, box) {
     for (let i = 0; i < N * N; i++) if (lane[i]) for (const [dx, dy] of [[0, 0], ...N8]) { const x = (i % N) + dx, y = ((i / N) | 0) + dy; if (inb(x, y)) laneD[I(x, y)] = 1; }
     for (let i = 0; i < N * N; i++) if (laneD[i]) laneMask[i] = 1;
     // secret: the dead end farthest from the lane
-    const ld = bfs(N, cells.filter((i) => lane[i]), (i) => dist[i] >= 0).dist;
+    const lb = bfs(N, cells.filter((i) => lane[i]), (i) => dist[i] >= 0), ld = lb.dist;
     const secret = place((i) => ok(i, 2) && !laneD[i] && ld[i] >= 0, (i) => ld[i] + clear[i] * 0.3);
+    // the way to the secret stays free of props too (dense scatter must not seal it in)
+    for (let c = secret; c >= 0; c = lb.parent[c]) for (const [dx, dy] of [[0, 0], ...N8]) { const x = (c % N) + dx, y = ((c / N) | 0) + dy; if (inb(x, y)) laneMask[I(x, y)] = 1; }
     const wpos = (i) => i < 0 ? null : (([x, y]) => [Math.round((x + 0.5) * TILE), Math.round((y + 0.5) * TILE)])(worldOf(i % N, (i / N) | 0));
     let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1; for (const i of cells) { x0 = Math.min(x0, i % N); x1 = Math.max(x1, i % N); y0 = Math.min(y0, (i / N) | 0); y1 = Math.max(y1, (i / N) | 0); }
     const [bx0, by0] = worldOf(x0, y0), [bx1, by1] = worldOf(x1 + 1, y1 + 1);

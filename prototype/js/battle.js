@@ -123,7 +123,7 @@
   });
 
   // Painted backdrop and stream style follow the biome of the fight.
-  const STREAM_BY_BIOME = { meadow: 'water', forest: 'water', beach: 'sea', coral: 'sea', dunes: 'sand', temple: 'sand', snow: 'ice', glacier: 'ice', ash: 'lava', caldera: 'lava' };
+  const STREAM_BY_BIOME = { meadow: 'water', forest: 'water', beach: 'sea', coral: 'sea', dunes: 'sand', temple: 'sand', snow: 'ice', glacier: 'ice', ash: 'lava', caldera: 'lava', marsh: 'water', highlands: 'water', saltflat: 'sand', canyon: 'sand' };
   function setBiome(biome) {
     const b = STREAM_BY_BIOME[biome] ? biome : 'meadow';
     root.dataset.biome = b;

@@ -82,6 +82,10 @@
     'Ember Peaks': [['Emberforged Band', 'atk:spearman', 'rare'], ['Cinder Crown', 'souls', 'rare']],
   };
 
+  // WP20: sub-areas that reuse a retired sub-area's content (`bossDef` in the region data) reuse its item pool; Ashkara reuses the Sunscorch region pool.
+  for (const sub of World.SUBAREAS) if (!SUB_SHARED[sub.id]) SUB_SHARED[sub.id] = SUB_SHARED[sub.bossDef];
+  for (const region of World.REGIONS) if (!REGION_SHARED[region]) REGION_SHARED[region] = REGION_SHARED['Sunscorch'];
+
   const ALL = [], BY_ID = {}, UNIQUE_OF = {}, USED_NAMES = new Set();
 
   function make(id, name, rarity, effect, source) {
@@ -296,6 +300,7 @@
     'Ember Peaks': { name: 'Cinderforge', icon: '🌋', tiers: [
       { n: 2, text: '+1 ATK to Swordsmen and Spearmen.', bonus: { atk: { swordsman: 1, spearman: 1 } } }, { n: 4, text: 'Barrels explode for 3 instead of 2.', rule: { blast: 3 } } ] },
   };
+  for (const region of World.REGIONS) if (!SETS[region]) SETS[region] = SETS['Sunscorch'];
   const regionOf = (item) => (item.source.region || World.SUB_BY[item.source.sub].region);
   const setOf = (item) => SETS[regionOf(item)] || null;
   // Equipped pieces per set: [{ region, set, count, tiers: [{...tier, on}] }] for sets with at least one piece.

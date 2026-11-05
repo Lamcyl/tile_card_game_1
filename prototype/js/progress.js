@@ -53,9 +53,9 @@
     U({ id: 'spy1',    type: 'spyglass',  trait: 'arcane', cost: 90, need: 'bamboo' }),
     U({ id: 'drum2',   type: 'drummer',   trait: 'arcane', rarity: 'rare', stats: { amount: 2 }, perk: 'Thunder drums: +2 ATK instead of +1' }),
     U({ id: 'spear2',  type: 'spearman',  trait: 'arcane', rarity: 'rare', stats: { atk: 3 }, perk: 'Lightning spear: hits for 3 instead of 2' }),
-    U({ id: 'horn2',   type: 'horn',      trait: 'wild',   cost: 220, need: ['coral', 'oasis'] }),
+    U({ id: 'horn2',   type: 'horn',      trait: 'wild',   cost: 220, need: ['marsh', 'palms'] }),
     U({ id: 'mage2',   type: 'mage',      trait: 'arcane', rarity: 'rare', stats: { atk: 2 }, perk: 'Jaguar moon: hits for 2 instead of 1' }),
-    U({ id: 'ushabti1', type: 'shield',    trait: 'undead', cost: 160, need: 'temple', block: 2 }),
+    U({ id: 'ushabti1', type: 'shield',    trait: 'undead', cost: 160, need: 'tomb', block: 2 }),
     // Rare / Epic / Legendary units with rule effects. Rare and above come only from the gacha (WP11): no Souls cost, no boss gate.
     U({ id: 'longbow1', type: 'archer', trait: 'undead', rarity: 'rare', stats: { atk: 2, range: 5 }, fx: { ignoreArmor: 1 }, perk: 'Range 5; arrows ignore armor' }),
     U({ id: 'storm1',   type: 'mage',   trait: 'arcane', rarity: 'epic', stats: { atk: 2, range: 3 }, fx: { chain: 1 }, perk: 'Lightning chains to one more enemy next to a struck one' }),
@@ -114,7 +114,7 @@ const Items = () => root.Items;
 
 const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range: {}, block: 0, hp: 0, supplies: 0, souls: 0, rules: {}, horn: false });
 
-  const SAVE_KEY = 'tile-defense-world-v3';
+  const SAVE_KEY = 'tile-defense-world-v4';
   const UNIT_CP = (id) => RARITY[ROSTER_BY[id].rarity].cp;
 
   function freshSave() {
@@ -293,7 +293,7 @@ const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range
     { id: 'col',   name: 'Flooded Lane',     pts: 4, text: 'The board loses its right-hand column.' },
   ];
   const HEAT_BY = Object.fromEntries(HEAT_MODS.map((m) => [m.id, m]));
-  const FINAL_BOSSES = ['glacier', 'caldera'];   // sub-areas whose boss is a final boss
+  const FINAL_BOSSES = ['citadel'];   // sub-areas whose boss is a final boss (World.FINAL_SUBS: the last sub-area of the last region)
   const MAX_DESCEND = 5, HEAT_REWARD = 0.08, DESCEND_REWARD = 0.4;
   const heatUnlocked = (s) => (s.bossesBeaten || []).some((b) => FINAL_BOSSES.includes(b));
   const descendMax = (s) => (heatUnlocked(s) ? Math.min(MAX_DESCEND, Math.max(0, (s.descendDone === undefined ? -1 : s.descendDone)) + 1) : 0);

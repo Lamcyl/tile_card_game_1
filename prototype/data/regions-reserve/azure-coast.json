@@ -1,0 +1,184 @@
+{
+ "id": "azure-coast",
+ "name": "Azure Coast",
+ "note": "Retired in WP20 (no tileset yet). Ready content for a future region: levels, themes and unlocks verbatim; boss/elite fights stay in js/boss-defs.js under the old ids.",
+ "slot": null,
+ "subareas": [
+  {
+   "id": "beach",
+   "name": "Shell Beach",
+   "biome": "beach",
+   "lm": "lighthouse",
+   "lmLabel": "Pearl Lighthouse",
+   "lv": [
+    5,
+    6
+   ],
+   "bossLv": 7,
+   "from": "lake",
+   "unlocks": [
+    "coral"
+   ],
+   "poi": "treasure",
+   "theme": {
+    "basic": [
+     "Kappa",
+     "🐢",
+     "kappa"
+    ],
+    "tough": [
+     "Sobek",
+     "🐊",
+     "sobek"
+    ],
+    "armored": [
+     "Xuanwu",
+     "🐢",
+     "xuanwu"
+    ],
+    "barrel": [
+     "Jingwei",
+     "🐦",
+     "jingwei"
+    ],
+    "boss": [
+     "Scylla",
+     "🐙",
+     "scylla"
+    ]
+   }
+  },
+  {
+   "id": "coral",
+   "name": "Coral Shallows",
+   "biome": "coral",
+   "lm": "reef-arch",
+   "lmLabel": "Coral Arch",
+   "lv": [
+    6,
+    7
+   ],
+   "bossLv": 8,
+   "from": "beach",
+   "unlocks": [
+    "cove"
+   ],
+   "poi": "shrine",
+   "theme": {
+    "basic": [
+     "Mul Gwisin",
+     "👻",
+     "mul-gwisin"
+    ],
+    "tough": [
+     "Jörmungandr",
+     "🐍",
+     "jormungandr"
+    ],
+    "armored": [
+     "Imugi",
+     "🐉",
+     "imugi"
+    ],
+    "barrel": [
+     "Rusalka",
+     "🧜",
+     "rusalka"
+    ],
+    "boss": [
+     "Poseidon",
+     "🔱",
+     "poseidon"
+    ]
+   }
+  },
+  {
+   "id": "cove",
+   "name": "Shipwreck Cove",
+   "biome": "beach",
+   "lm": "shipwreck",
+   "lmLabel": "The Wrecked Galleon",
+   "lv": [
+    7,
+    8
+   ],
+   "bossLv": 9,
+   "from": "coral",
+   "unlocks": [
+    "isles"
+   ],
+   "poi": "treasure",
+   "theme": {
+    "basic": [
+     "Harpy",
+     "🦅",
+     "harpy"
+    ],
+    "tough": [
+     "Gashadokuro",
+     "💀",
+     "gashadokuro"
+    ],
+    "armored": [
+     "Nemean Lion",
+     "🦁",
+     "nemean-lion"
+    ],
+    "barrel": [
+     "Cheonyeo Gwisin",
+     "👻",
+     "cheonyeo-gwisin"
+    ],
+    "boss": [
+     "Hydra",
+     "🐲",
+     "hydra"
+    ]
+   }
+  },
+  {
+   "id": "isles",
+   "name": "Mist Isles",
+   "biome": "coral",
+   "lm": "sea-stacks",
+   "lmLabel": "The Needle Stacks",
+   "lv": [
+    8,
+    9
+   ],
+   "bossLv": 9,
+   "from": "cove",
+   "unlocks": [
+    "snow"
+   ],
+   "poi": "shrine",
+   "theme": {
+    "basic": [
+     "Ungnyeo",
+     "🌊",
+     "ungnyeo"
+    ],
+    "tough": [
+     "Griffin",
+     "🦅",
+     "griffin"
+    ],
+    "armored": [
+     "Chimera",
+     "🦁",
+     "chimera"
+    ],
+    "barrel": [
+     "Inmyeonjo",
+     "🐦",
+     "inmyeonjo"
+    ],
+    "boss": [
+     "Typhon",
+     "🌪️",
+     "typhon"
+    ]
+   }
+  }
+ ]
+}

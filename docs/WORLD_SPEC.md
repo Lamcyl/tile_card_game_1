@@ -27,12 +27,12 @@ Status: steps 1 to 3 (data + generator, atlases, tile renderer and navigation mo
 
 ## Render and navigation (WP20 step 3)
 
-`js/tilemap.js` (`window.TileMap`) and `js/world-nav.js` (`window.WorldNav`) need `window.WorldGen` (set it from `import('./js/world-gen.js').default`, the UMD file is bundled as CommonJS). Try them in `tiles.html?r=greenvale&unlocked=meadow` (query list in `docs/WP20_PLAN.md` step 3 notes).
+`js/tilemap.js` (`window.TileMap`) and `js/world-nav.js` (`window.WorldNav`) need `window.WorldGen` (set by `js/world-boot.js`, the UMD file is bundled as CommonJS; step 4 loads them from `main.js`, `map.js` is the only caller). Try them in `tiles.html?r=greenvale&unlocked=meadow` (query list in `docs/WP20_PLAN.md` step 3 notes).
 - Values in `assets/world/<region>.json`: `ground`, `detail`, `props[].t` are tile index + 1 (frame `atlas.frames[v - 1]`), set grids hold canonical mask + 1 (0 = empty; 256 = blob mask 255). Prop x,y = bottom-left cell, tall and large props extend upwards, gates have `t = [closed, open]`.
 - Terrain: 16 x 16 tile chunks with a 2 px bleed, composed once (ground, detail, sets in `setOrder`), LRU 20. Per frame: visible chunks, then props and caller sprites y-sorted by foot row, then fog (`fog-full` on fogged cells, `fog-edge-<mask>` next to fog). `TileMap.render(ctx, {x0,y0,x1,y1}, sprites)` expects the world transform on `ctx`.
 - Navigation: `WorldNav.blocked(x, y)`, `subAt(x, y)` in world units (tile = 64, negative coordinates allowed), `blockedTile`, `gateAtTile`, `findPath(sx, sy, tx, ty, walkable)`; gate cut cells are not in the blocked grid, the caller blocks them while the target sub-area is closed this run.
 
-## Legacy v3 contract (still used by the game until WP20 step 4)
+## Legacy v3 contract (retired in WP20 step 4: `world-layout.js` is deleted; the node and `World` contract below still holds, positions now come from `world-gen.js`)
 
 Shared contract between the world **content** (js/world-data.js, items, enemies, balance) and the world **layout + painting** (js/world-layout.js, js/map.js).
 
