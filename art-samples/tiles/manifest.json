@@ -88,7 +88,11 @@
     "ridge-grey",
     "ridge-high",
     "mountain-stream",
-    "ravine"
+    "ravine",
+    "dune-ridge",
+    "oasis-shore",
+    "hardpan-patch",
+    "sandstone-cliff"
    ],
    "fileSuffix": "zero-padded decimal canonical mask, e.g. water-shore-017.svg",
    "neighbourOutsideSet": "a neighbour in the set (bit = 1) means the tile continues across that edge"
@@ -132,7 +136,8 @@
     "rope-bridge",
     "prayer-flags",
     "wall-drystone",
-    "fence-rope-post"
+    "fence-rope-post",
+    "wall-mudbrick"
    ],
    "fileSuffix": "two-digit decimal mask, e.g. fence-wood-06.svg"
   },
@@ -158,6 +163,53 @@
   "firefly-marsh": "done (step 5)",
   "misty-highlands": "done (step 5)"
  },
+ "regions": {
+  "greenvale": {
+   "total": 4541,
+   "counts": {
+    "ground": 190,
+    "ground-detail": 137,
+    "decals": 218,
+    "edges": 2679,
+    "trees": 133,
+    "rocks": 92,
+    "grass": 91,
+    "fences": 496,
+    "props": 259,
+    "interest": 93,
+    "overlays": 153
+   }
+  },
+  "ashkara": {
+   "name": "Ashkara (desert)",
+   "doc": "art-samples/maps/DESERT.md",
+   "total": 359,
+   "counts": {
+    "ground": 29,
+    "ground-detail": 8,
+    "decals": 19,
+    "edges": 188,
+    "trees": 21,
+    "rocks": 12,
+    "grass": 6,
+    "fences": 16,
+    "props": 34,
+    "interest": 15,
+    "overlays": 11
+   },
+   "subareas": {
+    "common": "done (desert step 1)",
+    "dune-shallows": "planned",
+    "seven-palms": "planned",
+    "singing-erg": "planned",
+    "salt-mirror": "planned",
+    "red-wadi": "planned",
+    "dust-bazaar": "planned",
+    "tomb-approach": "planned",
+    "sun-citadel": "planned"
+   }
+  }
+ },
  "counts": {
   "ground": 190,
   "ground-detail": 137,
@@ -171,7 +223,7 @@
   "interest": 93,
   "overlays": 153
  },
- "total": 4541,
+ "total": 4900,
  "tiles": [
   {
    "path": "greenvale/bamboo-valley/ground/floor-bamboo-a.svg",
@@ -118363,6 +118415,8497 @@
     "light",
     "sunny-meadows",
     "sunny-meadows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/dune-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "dune-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/hardpan-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "hardpan",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/hardpan-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "hardpan",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "salt",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/hardpan-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "hardpan",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/hardpan-d.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "hardpan",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "dry-pool",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/oasis-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "oasis-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/oasis-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "oasis-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/oasis-grass-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "oasis-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/oasis-grass-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "oasis-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/oasis-grass-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "oasis-grass",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "flowers",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/oasis-grass-d.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "oasis-grass",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "dry",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/oasis-water-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "oasis-water",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/oasis-water-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "oasis-water",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/oasis-water-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "oasis-water",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "lily",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/reg-gravel-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "reg-gravel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/reg-gravel-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "reg-gravel",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/reg-gravel-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "reg-gravel",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/reg-gravel-d.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "reg-gravel",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/sand-dune-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand-dune",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/sand-dune-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand-dune",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/sand-dune-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand-dune",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/sand-dune-d.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand-dune",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tufts",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/sand-fine-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand-fine",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/sand-fine-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand-fine",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/sand-fine-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand-fine",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/sand-fine-d.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "sand-fine",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/slab-sandstone-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "slab-sandstone",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/slab-sandstone-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "slab-sandstone",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand-drift",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground/slab-sandstone-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground",
+   "name": "slab-sandstone",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cracked",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground-detail/dune-grass-baked-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "dune-grass-baked",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "grass",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground-detail/hardpan-salt-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "hardpan-salt",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "salt",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground-detail/oasis-clover-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "oasis-clover",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "clover",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground-detail/oasis-flowers-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "oasis-flowers",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "flowers",
+    "oleander",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground-detail/reg-fossils-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "reg-fossils",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "fossil",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground-detail/sand-scrub-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "sand-scrub",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "scrub",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground-detail/sand-shells-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "sand-shells",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "fossil",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/ground-detail/slab-glyphs-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "ground-detail",
+   "name": "slab-glyphs",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "glyphs",
+    "ruin",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/bone-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/camel-tracks-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "camel-tracks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/crack-large-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "crack-large",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/crack-large-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "crack-large",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/dry-grass-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "dry-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/dry-grass-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "dry-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/foot-prints-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "foot-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/lizard-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "lizard",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/oleander-petals-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "oleander-petals",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/palm-litter-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "palm-litter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/pebble-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "pebble-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/sand-drift-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "sand-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/sand-drift-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "sand-drift",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/sand-ripples-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "sand-ripples",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/sand-ripples-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "sand-ripples",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/sand-ripples-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "sand-ripples",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/scarab-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "scarab",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/snake-trail-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "snake-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/decals/wind-scour-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "decals",
+   "name": "wind-scour",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-000.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-001.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-004.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-005.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-007.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-016.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-017.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-020.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-021.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-023.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-028.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-029.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-031.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-064.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-065.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-068.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-069.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-071.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-080.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-081.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-084.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-085.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-087.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-092.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-093.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-095.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-112.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-113.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-116.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-117.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-119.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-124.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-125.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-127.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-193.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-197.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-199.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-209.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-213.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-215.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-221.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-223.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-241.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-245.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-247.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-253.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/dune-ridge-255.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "dune-ridge",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-000.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-001.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-004.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-005.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-007.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-016.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-017.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-020.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-021.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-023.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-028.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-029.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-031.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-064.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-065.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-068.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-069.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-071.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-080.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-081.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-084.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-085.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-087.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-092.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-093.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-095.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-112.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-113.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-116.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-117.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-119.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-124.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-125.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-127.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-193.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-197.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-199.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-209.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-213.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-215.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-221.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-223.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-241.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-245.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-247.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-253.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/hardpan-patch-255.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "hardpan-patch",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "hardpan",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-000.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-001.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-004.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-005.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-007.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-016.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-017.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-020.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-021.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-023.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-028.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-029.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-031.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-064.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-065.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-068.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-069.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-071.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-080.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-081.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-084.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-085.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-087.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-092.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-093.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-095.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-112.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-113.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-116.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-117.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-119.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-124.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-125.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-127.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-193.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-197.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-199.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-209.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-213.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-215.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-221.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-223.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-241.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-245.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-247.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-253.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/oasis-shore-255.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "oasis-shore",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "water",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-000.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-001.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-004.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-005.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-007.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-016.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-017.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-020.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-021.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-023.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-028.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-029.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-031.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-064.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-065.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-068.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-069.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-071.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-080.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-081.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-084.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-085.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-087.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-092.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-093.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-095.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-112.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-113.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-116.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-117.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-119.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-124.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-125.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-127.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-193.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-197.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-199.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-209.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-213.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-215.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-221.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-223.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-241.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-245.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-247.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-253.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/edges/sandstone-cliff-255.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "edges",
+   "name": "sandstone-cliff",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "cliff",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/acacia-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "acacia",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "acacia",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/acacia-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "acacia",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "acacia",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/agave-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "agave",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "succulent",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/agave-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "agave",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "succulent",
+    "obstacle",
+    "bloom",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/cactus-tall-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "cactus-tall",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "cactus",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/cactus-tall-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "cactus-tall",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "cactus",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/creosote-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "creosote",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "shrub",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/date-palm-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "date-palm",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "palm",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/date-palm-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "date-palm",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "palm",
+    "obstacle",
+    "dates",
+    "loot",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/date-palm-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "date-palm",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "palm",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/date-palm-d.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "date-palm",
+   "variant": "d",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "palm",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/date-palm-young-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "date-palm-young",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "palm",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/date-palm-young-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "date-palm-young",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "palm",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/dead-tree-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "dead-tree",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "dead",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/dead-tree-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "dead-tree",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "dead",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/dry-bush-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "dry-bush",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "shrub",
+    "dry",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/palm-grove-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "palm-grove",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "palm",
+    "obstacle",
+    "oasis",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/prickly-pear-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "prickly-pear",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "cactus",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/prickly-pear-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "prickly-pear",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "cactus",
+    "obstacle",
+    "fruit",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/tamarisk-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "tamarisk",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "shrub",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/trees/tamarisk-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "trees",
+   "name": "tamarisk",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "shrub",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/boulder-red-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-red",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "rock",
+    "red",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/boulder-red-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-red",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "rock",
+    "red",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/boulder-sandstone-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-sandstone",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "rock",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/boulder-sandstone-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-sandstone",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "rock",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/boulder-sandstone-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "boulder-sandstone",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obstacle",
+    "rock",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/mesa-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "mesa",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "obstacle",
+    "rock",
+    "mesa",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/mesa-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "mesa",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "obstacle",
+    "rock",
+    "mesa",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/rock-arch-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-arch",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "obstacle",
+    "rock",
+    "arch",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/rock-cluster-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-cluster",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rock",
+    "small",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/rock-cluster-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-cluster",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rock",
+    "small",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/rock-spire-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-spire",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "obstacle",
+    "rock",
+    "hoodoo",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/rocks/rock-spire-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "rocks",
+   "name": "rock-spire",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "obstacle",
+    "rock",
+    "hoodoo",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/grass/dune-grass-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "grass",
+   "name": "dune-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "concealing",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/grass/dune-grass-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "grass",
+   "name": "dune-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "concealing",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/grass/papyrus-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "grass",
+   "name": "papyrus",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "oasis",
+    "papyrus",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/grass/papyrus-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "grass",
+   "name": "papyrus",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "oasis",
+    "papyrus",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/grass/reeds-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "grass",
+   "name": "reeds-oasis",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "oasis",
+    "reeds",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/grass/reeds-oasis-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "grass",
+   "name": "reeds-oasis",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "oasis",
+    "reeds",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-00.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-01.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-02.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-03.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-04.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-05.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-06.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-07.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-08.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-09.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-10.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-11.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-12.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-13.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-14.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/fences/wall-mudbrick-15.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "wall",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/adobe-house-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "adobe-house",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "building",
+    "obstacle",
+    "village",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/basket-woven-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "basket-woven",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "basket",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/bones-lying-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "bones-lying",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "bones",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/bones-pile-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "bones-pile",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "bones",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/bones-ribcage-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "bones-ribcage",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "bones",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/cairn-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "cairn",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "marker",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/camel-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "camel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "creature-prop",
+    "caravan",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/camel-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "camel",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "creature-prop",
+    "caravan",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/camel-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "camel",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "creature-prop",
+    "caravan",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/campfire-lit.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "campfire",
+   "variant": "lit",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camp",
+    "lit",
+    "light",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/campfire-unlit.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "campfire",
+   "variant": "unlit",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camp",
+    "unlit",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/cargo-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "cargo",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "caravan",
+    "obstacle",
+    "loot",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/cargo-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "cargo",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "caravan",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/column-standing-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "column-standing",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "ruin",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/column-standing-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "column-standing",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "ruin",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/column-stump-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "column-stump",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ruin",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/column-toppled-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "column-toppled",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ruin",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/jar-broken-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "jar-broken",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "pot",
+    "broken",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/jar-clay-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "jar-clay",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "pot",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/jar-clay-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "jar-clay",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "pot",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/jar-clay-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "jar-clay",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "pot",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/jar-clay-d.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "jar-clay",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "pot",
+    "fallen",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/obelisk-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "obelisk",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "ruin",
+    "obstacle",
+    "monument",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/shaduf-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "shaduf",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "well",
+    "obstacle",
+    "water",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/signpost-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "signpost",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "sign",
+    "decor",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/skull-camel-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "skull-camel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "bones",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/skull-horned-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "skull-horned",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "bones",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/tea-rug-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "tea-rug",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "caravan",
+    "camp",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/tent-bedouin-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "tent-bedouin",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "tent",
+    "obstacle",
+    "camp",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/tent-small-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "tent-small",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "tent",
+    "obstacle",
+    "camp",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/tent-striped-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "tent-striped",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "tent",
+    "obstacle",
+    "camp",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/tumbleweed-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "tumbleweed",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decor",
+    "dry",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/water-skins-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "water-skins",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "caravan",
+    "decor",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/props/well-stone-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "props",
+   "name": "well-stone",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "well",
+    "obstacle",
+    "water",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/chest-gilded-closed.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "chest-gilded",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "interest",
+    "loot",
+    "closed",
+    "rare",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/chest-gilded-open.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "chest-gilded",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "interest",
+    "loot",
+    "open",
+    "rare",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/chest-wood-closed.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "chest-wood",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "interest",
+    "loot",
+    "closed",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/chest-wood-open.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "chest-wood",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "interest",
+    "loot",
+    "open",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/djinn-lamp-awake.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "djinn-lamp",
+   "variant": "awake",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "event",
+    "interest",
+    "lit",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/djinn-lamp-dormant.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "djinn-lamp",
+   "variant": "dormant",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "event",
+    "interest",
+    "unlit",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/gate-pylon-closed.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "gate-pylon",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "interest",
+    "closed",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/gate-pylon-open.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "gate-pylon",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "interest",
+    "open",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/sand-cache-hidden.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "sand-cache",
+   "variant": "hidden",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "interest",
+    "cache",
+    "hidden",
+    "secret",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/sand-cache-revealed.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "sand-cache",
+   "variant": "revealed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "interest",
+    "cache",
+    "revealed",
+    "secret",
+    "loot",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/shop-stall-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "shop-stall",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "shop",
+    "obstacle",
+    "interest",
+    "spices",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/shop-stall-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "shop-stall",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "shop",
+    "obstacle",
+    "interest",
+    "rugs",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/sphinx-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "sphinx",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "monument",
+    "obstacle",
+    "interest",
+    "ruin",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/waypoint-stele-lit.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "waypoint-stele",
+   "variant": "lit",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "waypoint",
+    "interest",
+    "lit",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/interest/waypoint-stele-unlit.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "interest",
+   "name": "waypoint-stele",
+   "variant": "unlit",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "waypoint",
+    "interest",
+    "unlit",
+    "obstacle",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/blown-sand-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "blown-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sand",
+    "wind",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/blown-sand-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "blown-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sand",
+    "wind",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/blown-sand-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "blown-sand",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sand",
+    "wind",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/dune-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "dune-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/dune-shadow-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "dune-shadow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/dune-shadow-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "dune-shadow",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "dune",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/dust-devil-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "dust-devil",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "dust",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/heat-shimmer-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "heat-shimmer",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shimmer",
+    "heat",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/heat-shimmer-b.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "heat-shimmer",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shimmer",
+    "heat",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/heat-shimmer-c.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "heat-shimmer",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shimmer",
+    "heat",
+    "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/common/overlays/sun-glare-a.svg",
+   "region": "ashkara",
+   "sub": "common",
+   "category": "overlays",
+   "name": "sun-glare",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "sun",
+    "desert"
    ],
    "note": ""
   }

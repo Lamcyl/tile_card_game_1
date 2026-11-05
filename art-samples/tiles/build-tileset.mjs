@@ -9,12 +9,13 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { compose } from './_gen/compose.mjs';
 import { composeSub } from './_gen/compose-sub.mjs';
+import { composeDesert } from './_gen/compose-desert.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url)), art = join(here, '..');
 const man = JSON.parse(readFileSync(join(here, 'manifest.json'), 'utf8'));
 const STRICT = !!process.env.STRICT;
 const PRE = { 'sunny-meadows': 'sm:', 'old-oak-wood': 'oo:', 'bamboo-valley': 'bv:', 'mirror-lake': 'ml:', 'rice-terraces': 'rt:', 'mossy-ruins': 'mr:', 'firefly-marsh': 'fm:', 'misty-highlands': 'mh:' };
-const keyOf = (p) => p.replace(/^greenvale\/common\//, '').replace(/^greenvale\/(sunny-meadows|old-oak-wood|bamboo-valley|mirror-lake|rice-terraces|mossy-ruins|firefly-marsh|misty-highlands)\//, (m, s) => PRE[s]).replace(/\.svg$/, '');
+const keyOf = (p) => p.replace(/^ashkara\/common\//, 'ds:').replace(/^greenvale\/common\//, '').replace(/^greenvale\/(sunny-meadows|old-oak-wood|bamboo-valley|mirror-lake|rice-terraces|mossy-ruins|firefly-marsh|misty-highlands)\//, (m, s) => PRE[s]).replace(/\.svg$/, '');
 const byKey = new Map(man.tiles.map(t => [keyOf(t.path), t]));
 const esc = (s) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const has = (k) => byKey.has(k);
@@ -22,6 +23,7 @@ const has = (k) => byKey.has(k);
 // ---- set definitions ----
 const SETS = {
   common: { title: 'Common', jp: '共通', note: 'Shared by the whole region: seamless ground families, the autotile sets (water shore, deep water, dirt, sand, cliff, forest), trees, rocks, fences and hedges, props, interest objects and overlays.' },
+  'desert-common': { region: 'ashkara', sub: 'common', file: 'desert-common', title: 'Ashkara: Desert common', jp: '砂の国', note: 'Step 1 of the second region, the desert Ashkara (design in maps/DESERT.md). Seamless sand, rippled dune, cracked hardpan, reg gravel, sandstone slab, oasis grass and oasis water (all on one shared wash geometry, plus fringe ramps), four 47-piece autotile sets (dune ridge, oasis shore, hardpan patch, sandstone cliff), a mud-brick connect-4 wall, date palms, acacia, cacti, shrubs, mesas, spires and an arch, bones, jars, columns, an obelisk, tents, a camel caravan, a campfire, well and shaduf, chests, shop stalls, a waypoint stele, the djinn lamp, the sandstone pylon gate (closed, open), a sphinx, and heat shimmer, blown sand and dune shadow overlays.' },
   'sunny-meadows': { title: 'Sunny Meadows', jp: '陽だまりの野', note: 'Wildflower carpets and patch autotiles, rolling hills, farm fields with crops, farm fences and stone walls, windmill, barn, beehives, scarecrows, picnic, orchard and sunflowers, the lone blossom tree with petal drift, and a lily pond.' },
   'old-oak-wood': { title: 'Old Oak Wood', jp: '古い樫の森', note: 'Forest-floor variants (moss, roots, litter, ferns, glow), oaks of every age, the sacred oak and its hollow-trunk door, root arches, fungi and glowing mushrooms, fallen logs, shrine stones and a stone circle, a woodcutter camp, owls and webs, plus the meadow to forest blends.' },
   'bamboo-valley': { title: 'Bamboo Valley', jp: '竹の谷', note: 'Green, golden, black and young bamboo (clumps, bushes, stands, three tree-line autotiles), a clear stream autotile with pebbly banks that flows east, stepping stones, rapids, koi, plank bridges and an arched bridge, a waterfall, thatched huts and the hut gate, a tea house, stone lanterns, shishi-odoshi and tsukubai, bamboo fences and screens, valley mist and light shafts. The stream-mouth set blends the stream into Mirror Lake.' },
@@ -45,6 +47,7 @@ const catInfo = {
   overlays: ['Overlays', 'Fog edges, mist, fireflies, dappled light, sparkle and drifting petals. Drawn above everything else.'],
 };
 const catOrder = Object.keys(catInfo);
+const inSet = (t, id) => { const S = SETS[id]; return t.region === (S.region || 'greenvale') && t.sub === (S.sub || id); };
 const sets = (tiles) => { const m = new Map(); for (const t of tiles) { if (!m.has(t.name)) m.set(t.name, []); m.get(t.name).push(t); } return m; };
 
 // ---- scenes (same composers run again in the browser for the reroll buttons) ----
@@ -56,6 +59,7 @@ const PATCHES = [
   ['p9', 'rice', 'sub', composeSub(6, has, 'rice'), 'Reroll Rice Terraces'], ['p10', 'ruins', 'sub', composeSub(13, has, 'ruins'), 'Reroll Mossy Ruins'], ['p11', 'terraces', 'sub', composeSub(2, has, 'terraces'), 'Reroll lake to terraces to ruins blend'],
   ['p12', 'marsh', 'sub', composeSub(5, has, 'marsh'), 'Reroll Firefly Marsh'], ['p13', 'highlands', 'sub', composeSub(7, has, 'highlands'), 'Reroll Misty Highlands'], ['p14', 'ascent', 'sub', composeSub(3, has, 'ascent'), 'Reroll ruins and marsh to highlands blend'],
   ['p15', 'overview', 'overview', composeSub(12, has, 'overview'), 'Reroll Greenvale overview'],
+  ['p16', 'desert', 'desert', composeDesert(14, has), 'Reroll desert oasis'],
 ];
 const imgPath = (rel, t) => rel + 'tiles/' + t.path;
 const sceneSvg = (scene, id, rel) => {
@@ -64,14 +68,15 @@ const sceneSvg = (scene, id, rel) => {
 };
 const runtime = `
 const compose = ${compose.toString()};
+const composeDesert = ${composeDesert.toString()};
 const composeSub = ${composeSub.toString()};
-const files = ${JSON.stringify(Object.fromEntries(man.tiles.map(t => [keyOf(t.path), [t.path.replace(/^greenvale\//, '')]])))};
+const files = ${JSON.stringify(Object.fromEntries(man.tiles.map(t => [keyOf(t.path), [t.path]])))};
 const OPAQUE = new Set(['ground', 'ground-detail', 'edges']), STRICT = ${STRICT};
 const cat = ${JSON.stringify(Object.fromEntries(man.tiles.map(t => [keyOf(t.path), t.category])))};
 const has = (k) => k in files;
 function draw(id, seed, which) {
-  const sc = (which === 'meadow' || which === 'forest' ? compose : composeSub)(seed, has, which), el = document.getElementById(id);
-  el.innerHTML = sc.items.map(it => { const o = !STRICT && OPAQUE.has(cat[it.k]) ? .35 : 0; return '<image href="tiles/greenvale/' + files[it.k][0] + '" x="' + (it.x - o) + '" y="' + (it.y - o) + '" width="' + (it.w + 2 * o) + '" height="' + (it.h + 2 * o) + '"/>'; }).join('');
+  const sc = (which === 'desert' ? composeDesert : which === 'meadow' || which === 'forest' ? compose : composeSub)(seed, has, which), el = document.getElementById(id);
+  el.innerHTML = sc.items.map(it => { const o = !STRICT && OPAQUE.has(cat[it.k]) ? .35 : 0; return '<image href="tiles/' + files[it.k][0] + '" x="' + (it.x - o) + '" y="' + (it.y - o) + '" width="' + (it.w + 2 * o) + '" height="' + (it.h + 2 * o) + '"/>'; }).join('');
 }
 for (const b of document.querySelectorAll('[data-reroll]')) b.addEventListener('click', () => draw(b.dataset.reroll, (Math.random() * 1e9) | 0, b.dataset.which));
 `;
@@ -111,20 +116,21 @@ mkdirSync(join(art, 'tileset'), { recursive: true });
 for (const f of readdirSync(join(art, 'tileset'))) if (f.endsWith('.html')) unlinkSync(join(art, 'tileset', f));
 const sizes = {};
 for (const [id, S] of Object.entries(SETS)) {
-  const ts = man.tiles.filter(t => t.sub === id), cs = catOrder.filter(c => ts.some(t => t.category === c));
+  const ts = man.tiles.filter(t => inSet(t, id)), cs = catOrder.filter(c => ts.some(t => t.category === c));
   const body = `${crumbs('../', id)}<header class="top"><h1>${esc(S.title)} <span class="jp">${S.jp}</span></h1><p>${S.note}</p><p class="note">${ts.length} tiles. Shown at 2&times; on paper cards; tiles are loaded from <code>../tiles/${esc(ts[0].path.replace(/\/[^/]+$/, '').replace(/\/[^/]+$/, ''))}/</code>. Spec in <code>tiles/TILESET.md</code>.</p><div class="chips">${cs.map(c => `<a class="chip" href="#c-${c}">${catInfo[c][0].split(' (')[0]} <b>${ts.filter(t => t.category === c).length}</b></a>`).join('')}</div></header>${cs.map(c => catHtml(c, ts.filter(t => t.category === c), '../')).join('')}`;
-  const html = shell(`${S.title} - Greenvale tileset`, body); writeFileSync(join(art, 'tileset', id + '.html'), html); sizes[id] = html.length;
+  const html = shell(`${S.title} - ${S.region === 'ashkara' ? 'Ashkara' : 'Greenvale'} tileset`, body); writeFileSync(join(art, 'tileset', id + '.html'), html); sizes[id] = html.length;
 }
-const counts = (id) => man.tiles.filter(t => t.sub === id).length;
-const idxBody = `<header class="top"><h1>Greenvale tileset <span class="jp">緑の谷</span></h1>
-  <p>${man.total} hand-written SVG tiles in round-3 design B (seamless watercolour terrain, crisp 3/4-view props with soft painted shading and a soft drop shadow): the common set plus Sunny Meadows, Old Oak Wood (step 2), Bamboo Valley and Mirror Lake (step 3), Rice Terraces and Mossy Ruins (step 4), Firefly Marsh and Misty Highlands (step 5). Base cell 64&times;64, tall props 64&times;128, large objects 128&times;128. Spec in <code>tiles/TILESET.md</code>.</p>
+const counts = (id) => man.tiles.filter(t => inSet(t, id)).length;
+const idxBody = `<header class="top"><h1>Greenvale tileset <span class="jp">緑の谷</span> and Ashkara <span class="jp">砂の国</span></h1>
+  <p>${man.total} hand-written SVG tiles in round-3 design B (seamless watercolour terrain, crisp 3/4-view props with soft painted shading and a soft drop shadow): the common set plus Sunny Meadows, Old Oak Wood (step 2), Bamboo Valley and Mirror Lake (step 3), Rice Terraces and Mossy Ruins (step 4), Firefly Marsh and Misty Highlands (step 5), plus the first set of the second region, the desert Ashkara (<code>tileset/desert-common.html</code>, ${counts('desert-common')} tiles, design in <code>maps/DESERT.md</code>). Base cell 64&times;64, tall props 64&times;128, large objects 128&times;128. Spec in <code>tiles/TILESET.md</code>.</p>
   <div class="chips">${Object.entries(SETS).map(([id, s]) => `<a class="chip" href="tileset/${id}.html">${esc(s.title)} <b>${counts(id)}</b></a>`).join('')}</div></header>
-  <nav class="toc"><a href="#overview">Overview</a><a href="#patch">Sample patches</a><a href="#sets">Tile sets</a>${Object.entries(SETS).map(([id, s]) => `<a href="tileset/${id}.html">${esc(s.title)}</a>`).join('')}</nav>
+  <nav class="toc"><a href="#overview">Overview</a><a href="#desert">Desert patch</a><a href="#patch">Sample patches</a><a href="#sets">Tile sets</a>${Object.entries(SETS).map(([id, s]) => `<a href="tileset/${id}.html">${esc(s.title)}</a>`).join('')}</nav>
   <section id="sets" class="patchbox"><h2>Tile sets</h2><p class="note">One page per set; each lists every tile by category with the autotile sets grouped by name. The pages load the SVG files by relative path, so keep the layout <code>tileset-gallery.html</code>, <code>tileset/</code>, <code>tiles/greenvale/</code> together when hosting.</p>
-    <div class="setgrid">${Object.entries(SETS).map(([id, s]) => { const ts = man.tiles.filter(t => t.sub === id), pick = ['interest', 'trees', 'props'].map(c => ts.find(t => t.category === c && t.size[0] >= 64 && t.size[1] >= 128)).filter(Boolean).slice(0, 3); return `<a class="setcard" href="tileset/${id}.html"><div class="thumbs paper">${pick.map(t => `<img loading="lazy" src="tiles/${t.path}" alt="" style="height:${t.size[1]}px">`).join('')}</div><h3>${esc(s.title)} <em>${ts.length}</em></h3><p class="note">${esc(s.note.split('. ')[0].replace(/\.$/, ''))}.</p></a>`; }).join('')}</div></section>
+    <div class="setgrid">${Object.entries(SETS).map(([id, s]) => { const ts = man.tiles.filter(t => inSet(t, id)), pick = ['interest', 'trees', 'props'].map(c => ts.find(t => t.category === c && t.size[0] >= 64 && t.size[1] >= 128)).filter(Boolean).slice(0, 3); return `<a class="setcard" href="tileset/${id}.html"><div class="thumbs paper">${pick.map(t => `<img loading="lazy" src="tiles/${t.path}" alt="" style="height:${t.size[1]}px">`).join('')}</div><h3>${esc(s.title)} <em>${ts.length}</em></h3><p class="note">${esc(s.note.split('. ')[0].replace(/\.$/, ''))}.</p></a>`; }).join('')}</div></section>
   <section id="patch" class="patchbox"><header><div><h2>Sample patches</h2><p class="note">Composed at random from the tiles: random grass variants side by side with no seams, ponds and lakes (shore set, deep set, lily beds), cliffs, tree lines, fenced fields, plus props and fog. Reroll for a new layout.</p></div></header>
     <h2 class="subpatch">Common</h2><div class="patchpair">${PATCHES.filter(p => p[2] === 'common').map(([id, w, , sc, label]) => `<div><header class="chips"><button data-reroll="${id}" data-which="${w}">${label}</button></header>${sceneSvg(sc, id, '')}</div>`).join('')}</div>
     <h2 class="subpatch">Sub-areas</h2><p class="note">Each sub-area composed from its own sets (with common props where useful). The three blends: the meadow to forest edge, the Bamboo Valley stream widening through the stream-mouth autotiles into Mirror Lake, and the Mirror Lake shore climbing through earth banks, paddy terraces and mossy stone terraces into the Mossy Ruins platform, and, from step 5, Firefly Marsh at dusk, the Misty Highlands, and the ruins and marsh climbing into the highlands.</p><div class="patchpair">${PATCHES.filter(p => p[2] === 'sub').map(([id, w, , sc, label]) => `<div><header class="chips"><button data-reroll="${id}" data-which="${w}">${label}</button></header>${sceneSvg(sc, id, '')}</div>`).join('')}</div></section>
+  <section id="desert" class="patchbox"><header><div><h2>Ashkara desert patch</h2><p class="note">An oasis pool with date palms, a camp and caravan, a bazaar stall, a sphinx and pylon gate on a sandstone plateau, dune ridges, a hardpan flat and a mud-brick wall, composed from the desert common set only. Reroll for a new layout.</p></div><button data-reroll="p16" data-which="desert">Reroll desert oasis</button></header><div style="max-width:768px;margin:0 auto;width:100%">${sceneSvg(PATCHES.find(p => p[0] === 'p16')[3], 'p16', '')}</div></section>
   <section id="overview" class="patchbox"><header><div><h2>Greenvale overview</h2><p class="note">A 16&times;24 strip walking north through all eight sub-areas, each in its own tiles: Sunny Meadows, Old Oak Wood (floor-patch blend), Bamboo Valley with its stream running into Mirror Lake, the Rice Terraces climbing through paddy and mossy terraces into the Mossy Ruins, dusk-patch into Firefly Marsh, and ochre patches rising into the Misty Highlands under the stone mountain gate.</p></div><button data-reroll="p15" data-which="overview">Reroll Greenvale overview</button></header><div style="max-width:640px;margin:0 auto;width:100%">${sceneSvg(PATCHES.find(p => p[0] === 'p15')[3], 'p15', '')}</div></section>`;
 const idx = shell('Greenvale tileset', idxBody, { script: runtime });
 writeFileSync(join(art, 'tileset-gallery.html'), idx); sizes.index = idx.length;
