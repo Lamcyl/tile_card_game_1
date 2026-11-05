@@ -104,7 +104,11 @@
     "slip-face-ridge",
     "lee-hollow",
     "dune-grass-patch",
-    "ripple-field"
+    "ripple-field",
+    "brine-pool",
+    "brine-deep",
+    "salt-crust-shelf",
+    "mirage-flat"
    ],
    "fileSuffix": "zero-padded decimal canonical mask, e.g. water-shore-017.svg",
    "neighbourOutsideSet": "a neighbour in the set (bit = 1) means the tile continues across that edge"
@@ -154,7 +158,10 @@
     "ditch-irrigation",
     "hedge-oleander",
     "fence-chime-line",
-    "fence-sand-slat"
+    "fence-sand-slat",
+    "wall-salt-block",
+    "track-mine",
+    "fence-salt-rope"
    ],
    "fileSuffix": "two-digit decimal mask, e.g. fence-wood-06.svg"
   },
@@ -200,26 +207,26 @@
   "ashkara": {
    "name": "Ashkara (desert)",
    "doc": "art-samples/maps/DESERT.md",
-   "total": 1526,
+   "total": 1991,
    "counts": {
-    "ground": 117,
-    "ground-detail": 55,
-    "decals": 111,
-    "edges": 752,
-    "trees": 70,
-    "rocks": 50,
-    "grass": 30,
-    "fences": 96,
-    "props": 140,
-    "interest": 60,
-    "overlays": 45
+    "ground": 174,
+    "ground-detail": 78,
+    "decals": 146,
+    "edges": 940,
+    "trees": 87,
+    "rocks": 70,
+    "grass": 38,
+    "fences": 144,
+    "props": 177,
+    "interest": 77,
+    "overlays": 60
    },
    "subareas": {
     "common": "done (desert step 1)",
     "dune-shallows": "done (desert step 2)",
     "seven-palms": "done (desert step 3)",
     "singing-erg": "done (desert step 4)",
-    "salt-mirror": "planned",
+    "salt-mirror": "done (desert step 5)",
     "red-wadi": "planned",
     "dust-bazaar": "planned",
     "tomb-approach": "planned",
@@ -240,7 +247,7 @@
   "interest": 93,
   "overlays": 153
  },
- "total": 6067,
+ "total": 6532,
  "tiles": [
   {
    "path": "greenvale/bamboo-valley/ground/floor-bamboo-a.svg",
@@ -119623,6 +119630,1406 @@
    "note": ""
   },
   {
+   "path": "ashkara/salt-mirror/ground/brine-deep-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "brine-deep",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/brine-deep-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "brine-deep",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "brine",
+    "deep",
+    "sparkle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/brine-salt-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "brine-salt-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/brine-shallow-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "brine-shallow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "brine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/brine-shallow-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "brine-shallow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "brine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/brine-shallow-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "brine-shallow",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "brine",
+    "sparkle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/gypsum-flour-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "gypsum-flour",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/gypsum-flour-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "gypsum-flour",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "crystals",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/gypsum-salt-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "gypsum-salt-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/mirage-flat-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "mirage-flat",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "mirage",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/mirage-flat-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "mirage-flat",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "mirage",
+    "sparkle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/mirage-salt-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "mirage-salt-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/mud-brine-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "mud-brine",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/mud-brine-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "mud-brine",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "wet",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/mud-brine-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "mud-brine",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "wet",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/mud-pan-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "mud-pan-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/mud-salt-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "mud-salt-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-apricot-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-apricot-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-apricot-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-apricot-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-bleached-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-bleached",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-bleached-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-bleached",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-bleached-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-bleached",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-common-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-common-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-common-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-common-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-cream-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-cream-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-cream-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-cream-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-flaked-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-flaked",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "flakes",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-flaked-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-flaked",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "flakes",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-red-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-red-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-red-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-red-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/pan-salt-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "pan-salt-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-apricot-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-apricot-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-apricot-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-apricot-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-cream-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-cream-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-cream-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-cream-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-crust-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-crust",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-crust-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-crust",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-crust-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-crust",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cracks",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-crust-d.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-crust",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-dune-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-dune-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-dune-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-dune-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-flat-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-flat",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-flat-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-flat",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-pan-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-pan-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-pan-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-pan-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-polygon-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-polygon",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cracks",
+    "polygons",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-polygon-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-polygon",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cracks",
+    "polygons",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-polygon-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-polygon",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cracks",
+    "polygons",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-puffed-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-puffed",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "puffy",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-puffed-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-puffed",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "puffy",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-red-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-red-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-red-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-red-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-sand-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-sand-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-sand-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-sand",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-sand-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-sand-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground/salt-sand-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground",
+   "name": "salt-sand-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/seven-palms/ground/cream-oasis-fringe-a.svg",
    "region": "ashkara",
    "sub": "seven-palms",
@@ -121678,6 +123085,571 @@
    "note": ""
   },
   {
+   "path": "ashkara/salt-mirror/ground-detail/bone-flecks-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "bone-flecks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "bones",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/bone-flecks-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "bone-flecks",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "bones",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/brine-shrimp-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "brine-shrimp",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "brine",
+    "creature",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/camel-prints-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "camel-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/evaporation-rings-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "evaporation-rings",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "rings",
+    "brine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/flamingo-prints-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "flamingo-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "bird",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/flamingo-prints-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "flamingo-prints",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "bird",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/glass-shards-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "glass-shards",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "glass",
+    "loot",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/glass-shards-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "glass-shards",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "glass",
+    "loot",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/halite-cubes-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "halite-cubes",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "crystals",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/mirage-streaks-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "mirage-streaks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "mirage",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/mud-curls-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "mud-curls",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "flakes",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/pink-algae-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "pink-algae",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "algae",
+    "brine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/pink-algae-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "pink-algae",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "algae",
+    "brine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/rail-spikes-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "rail-spikes",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "rust",
+    "loot",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/rust-stain-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "rust-stain",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "stain",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/salt-crystals-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "salt-crystals",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "crystals",
+    "loot",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/salt-crystals-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "salt-crystals",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "crystals",
+    "loot",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/salt-frost-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "salt-frost",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "crystals",
+    "efflorescence",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/salt-pebbles-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "salt-pebbles",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pebbles",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/samphire-sprouts-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "samphire-sprouts",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "plants",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/sulphur-stain-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "sulphur-stain",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "stain",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/ground-detail/wheel-ruts-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "ground-detail",
+   "name": "wheel-ruts",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "cart",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/seven-palms/ground-detail/fallen-dates-a.svg",
    "region": "ashkara",
    "sub": "seven-palms",
@@ -123579,6 +125551,832 @@
     "caravan",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/bone-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/bone-scatter-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/boot-prints-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "boot-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/brine-puddle-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "brine-puddle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "brine",
+    "puddle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/brine-puddle-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "brine-puddle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "brine",
+    "puddle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/brine-puddle-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "brine-puddle",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "brine",
+    "puddle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/brine-stain-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "brine-stain",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "brine",
+    "stain",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/brine-stain-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "brine-stain",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "brine",
+    "stain",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/camel-prints-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "camel-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "caravan",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/cart-ruts-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "cart-ruts",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "cart",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/cart-ruts-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "cart-ruts",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "cart",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/crack-lines-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "crack-lines",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cracks",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/crack-lines-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "crack-lines",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cracks",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/crack-lines-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "crack-lines",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cracks",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/crystal-bloom-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "crystal-bloom",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "crystals",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/crystal-bloom-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "crystal-bloom",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "crystals",
+    "pink",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/evaporation-ring-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "evaporation-ring",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "rings",
+    "brine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/evaporation-ring-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "evaporation-ring",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "rings",
+    "brine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/flamingo-prints-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "flamingo-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "bird",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/footprint-trail-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "footprint-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/glass-glint-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "glass-glint",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "glass",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/mirage-puddle-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "mirage-puddle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "mirage",
+    "water",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/mirage-puddle-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "mirage-puddle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "mirage",
+    "water",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/mud-curls-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "mud-curls",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "flakes",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/pink-algae-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "pink-algae",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "algae",
+    "brine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/polygon-rim-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "polygon-rim",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cracks",
+    "polygons",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/rust-stain-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "rust-stain",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "stain",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/salt-flakes-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "salt-flakes",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "salt",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/salt-snake-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "salt-snake",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "snake",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/salt-spill-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "salt-spill",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "salt",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/salt-spill-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "salt-spill",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "salt",
+    "heap",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/skull-bleached-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "skull-bleached",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "skull",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/skull-bleached-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "skull-bleached",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "skull",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/vulture-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "vulture-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "bird",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/decals/wet-dark-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "decals",
+   "name": "wet-dark",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wet",
+    "desert",
+    "salt-mirror"
    ],
    "note": ""
   },
@@ -134540,6 +137338,5082 @@
    "note": ""
   },
   {
+   "path": "ashkara/salt-mirror/edges/brine-deep-000.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-001.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-004.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-005.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-007.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-016.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-017.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-020.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-021.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-023.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-028.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-029.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-031.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-064.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-065.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-068.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-069.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-071.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-080.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-081.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-084.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-085.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-087.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-092.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-093.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-095.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-112.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-113.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-116.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-117.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-119.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-124.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-125.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-127.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-193.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-197.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-199.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-209.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-213.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-215.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-221.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-223.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-241.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-245.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-247.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-253.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-deep-255.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-deep",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "water",
+    "brine",
+    "deep",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-000.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-001.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-004.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-005.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-007.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-016.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-017.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-020.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-021.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-023.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-028.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-029.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-031.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-064.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-065.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-068.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-069.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-071.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-080.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-081.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-084.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-085.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-087.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-092.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-093.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-095.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-112.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-113.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-116.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-117.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-119.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-124.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-125.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-127.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-193.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-197.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-199.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-209.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-213.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-215.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-221.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-223.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-241.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-245.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-247.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-253.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/brine-pool-255.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "brine-pool",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "water",
+    "brine",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-000.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-001.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-004.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-005.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-007.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-016.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-017.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-020.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-021.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-023.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-028.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-029.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-031.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-064.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-065.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-068.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-069.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-071.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-080.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-081.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-084.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-085.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-087.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-092.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-093.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-095.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-112.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-113.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-116.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-117.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-119.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-124.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-125.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-127.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-193.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-197.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-199.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-209.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-213.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-215.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-221.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-223.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-241.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-245.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-247.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-253.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/mirage-flat-255.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "mirage-flat",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "water",
+    "mirage",
+    "shore",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-000.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-001.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-004.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-005.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-007.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-016.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-017.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-020.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-021.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-023.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-028.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-029.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-031.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-064.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-065.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-068.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-069.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-071.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-080.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-081.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-084.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-085.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-087.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-092.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-093.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-095.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-112.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-113.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-116.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-117.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-119.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-124.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-125.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-127.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-193.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-197.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-199.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-209.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-213.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-215.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-221.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-223.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-241.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-245.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-247.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-253.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/edges/salt-crust-shelf-255.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "edges",
+   "name": "salt-crust-shelf",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "salt",
+    "raised",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/seven-palms/edges/irrigated-field-000.svg",
    "region": "ashkara",
    "sub": "seven-palms",
@@ -145332,6 +153206,433 @@
    "note": ""
   },
   {
+   "path": "ashkara/salt-mirror/trees/dead-palm-salt-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "dead-palm-salt",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "palm",
+    "salt",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/dead-palm-salt-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "dead-palm-salt",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "palm",
+    "salt",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/dead-shrub-salt-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "dead-shrub-salt",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "dead",
+    "salt",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/dead-shrub-salt-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "dead-shrub-salt",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "dead",
+    "salt",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/dead-tree-salt-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "dead-tree-salt",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "salt",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/dead-tree-salt-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "dead-tree-salt",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "salt",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/dead-tree-salt-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "dead-tree-salt",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "salt",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/dead-tree-salt-d.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "dead-tree-salt",
+   "variant": "d",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "salt",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/saltbush-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "saltbush",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "silver",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/saltbush-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "saltbush",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "silver",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/samphire-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "samphire",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "succulent",
+    "brine",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/samphire-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "samphire",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "succulent",
+    "brine",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/samphire-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "samphire",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "succulent",
+    "brine",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/stump-salt-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "stump-salt",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "dead",
+    "salt",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/stump-salt-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "stump-salt",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "dead",
+    "salt",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/tamarisk-salt-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "tamarisk-salt",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "green",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/trees/tamarisk-salt-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "trees",
+   "name": "tamarisk-salt",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "green",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/seven-palms/trees/date-palm-fruiting-a.svg",
    "region": "ashkara",
    "sub": "seven-palms",
@@ -146727,6 +155028,515 @@
    "note": ""
   },
   {
+   "path": "ashkara/salt-mirror/rocks/gypsum-rose-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "gypsum-rose",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "gypsum",
+    "crystals",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/halite-cube-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "halite-cube",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "crystals",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/pan-slab-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "pan-slab",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "hardpan",
+    "slab",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/pan-slab-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "pan-slab",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "hardpan",
+    "slab",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/petrified-log-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "petrified-log",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "fossil",
+    "wood",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-arch-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-arch",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "salt",
+    "arch",
+    "landmark",
+    "large",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-block-cairn-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-block-cairn",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "cairn",
+    "signature",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-block-cairn-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-block-cairn",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "cairn",
+    "signature",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-block-cairn-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-block-cairn",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "cairn",
+    "signature",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-boulder-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-boulder",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "boulder",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-boulder-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-boulder",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "boulder",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-boulder-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-boulder",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "boulder",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-cluster-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-cluster",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "crystals",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-cluster-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-cluster",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "crystals",
+    "pink",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-mushroom-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-mushroom",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "formation",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-mushroom-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-mushroom",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "formation",
+    "one",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-pillar-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-pillar",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "salt",
+    "formation",
+    "tall",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-pillar-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-pillar",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "salt",
+    "formation",
+    "tall",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-pillar-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-pillar",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "salt",
+    "formation",
+    "tall",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/rocks/salt-pillar-d.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "rocks",
+   "name": "salt-pillar",
+   "variant": "d",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "salt",
+    "formation",
+    "tall",
+    "tall",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/seven-palms/rocks/mossy-rock-a.svg",
    "region": "ashkara",
    "sub": "seven-palms",
@@ -147638,6 +156448,199 @@
     "dune",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/grass/brine-reed-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "grass",
+   "name": "brine-reed",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "reed",
+    "tall",
+    "tall",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/grass/brine-reed-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "grass",
+   "name": "brine-reed",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "reed",
+    "tall",
+    "dry",
+    "tall",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/grass/dry-sedge-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "grass",
+   "name": "dry-sedge",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "pale",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/grass/pickleweed-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "grass",
+   "name": "pickleweed",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "succulent",
+    "green",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/grass/pickleweed-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "grass",
+   "name": "pickleweed",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "succulent",
+    "red",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/grass/salt-grass-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "grass",
+   "name": "salt-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "pale",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/grass/salt-grass-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "grass",
+   "name": "salt-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "pale",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/grass/salt-grass-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "grass",
+   "name": "salt-grass",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "pink",
+    "one",
+    "desert",
+    "salt-mirror"
    ],
    "note": ""
   },
@@ -148920,6 +157923,1286 @@
     "obstacle",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-00.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-01.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-02.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-03.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-04.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-05.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-06.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-07.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-08.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-09.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-10.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-11.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-12.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-13.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-14.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/fence-salt-rope-15.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "fence-salt-rope",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "fence",
+    "rope",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-00.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-01.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-02.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-03.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-04.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-05.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-06.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-07.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-08.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-09.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-10.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-11.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-12.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-13.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-14.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/track-mine-15.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "track-mine",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "rail",
+    "mine",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-00.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-01.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-02.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-03.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-04.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-05.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-06.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-07.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-08.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-09.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-10.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-11.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-12.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-13.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-14.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/fences/wall-salt-block-15.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "fences",
+   "name": "wall-salt-block",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "wall",
+    "salt",
+    "obstacle",
+    "desert",
+    "salt-mirror"
    ],
    "note": ""
   },
@@ -152385,6 +162668,894 @@
    "note": ""
   },
   {
+   "path": "ashkara/salt-mirror/props/barrel-brine-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "barrel-brine",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "barrel",
+    "brine",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/barrel-brine-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "barrel-brine",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "barrel",
+    "brine",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/bone-pile-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "bone-pile",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/bone-pile-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "bone-pile",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/boots-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "boots",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "loot",
+    "clothing",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/crate-wood-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "crate-wood",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "crate",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/evaporation-tray-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "evaporation-tray",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt-works",
+    "brine",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/flamingo-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "flamingo",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bird",
+    "flamingo",
+    "signature",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/flamingo-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "flamingo",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bird",
+    "flamingo",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/flamingo-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "flamingo",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bird",
+    "flamingo",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/flamingo-nest-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "flamingo-nest",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bird",
+    "nest",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/glass-shards-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "glass-shards",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "glass",
+    "loot",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/glass-shards-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "glass-shards",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "glass",
+    "loot",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/lantern-rusty-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "lantern-rusty",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "lantern",
+    "mine",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/mining-cart-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "mining-cart",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cart",
+    "mine",
+    "signature",
+    "obstacle",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/mining-cart-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "mining-cart",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cart",
+    "mine",
+    "signature",
+    "obstacle",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/mining-cart-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "mining-cart",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cart",
+    "mine",
+    "signature",
+    "obstacle",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/mirage-pole-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "mirage-pole",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "marker",
+    "tall",
+    "tall",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/ore-bucket-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "ore-bucket",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "mine",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/pick-shovel-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "pick-shovel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "tools",
+    "mine",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/rope-coil-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "rope-coil",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rope",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/salt-brick-stack-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "salt-brick-stack",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "bricks",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/salt-brick-stack-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "salt-brick-stack",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "bricks",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/salt-pile-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "salt-pile",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "pile",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/salt-pile-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "salt-pile",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "pile",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/salt-pile-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "salt-pile",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "salt",
+    "pile",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/salt-rake-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "salt-rake",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "tools",
+    "salt-works",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/salt-sack-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "salt-sack",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sack",
+    "salt",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/salt-sack-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "salt-sack",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sack",
+    "salt",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/signpost-brine-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "signpost-brine",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sign",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/skull-camel-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "skull-camel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "skull",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/skull-human-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "skull-human",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "skull",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/skull-ox-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "skull-ox",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "skull",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/skull-ox-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "skull-ox",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "skull",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/tent-ruin-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "tent-ruin",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camp",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/wheelbarrow-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "wheelbarrow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "tools",
+    "mine",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/props/windlass-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "props",
+   "name": "windlass",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "mine",
+    "tall",
+    "tall",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/seven-palms/props/basket-stack-a.svg",
    "region": "ashkara",
    "sub": "seven-palms",
@@ -154639,6 +165810,447 @@
    "note": ""
   },
   {
+   "path": "ashkara/salt-mirror/interest/brine-spring-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "brine-spring",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "brine",
+    "spring",
+    "salt",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/caravan-remains-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "caravan-remains",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "bones",
+    "wreck",
+    "caravan",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/cart-wreck-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "cart-wreck",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "mine",
+    "wreck",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/chest-salt-closed.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "chest-salt",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "closed",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/chest-salt-open.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "chest-salt",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "open",
+    "one",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/crystal-cave-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "crystal-cave",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "cave",
+    "salt",
+    "crystals",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/gate-salt-block-closed.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "gate-salt-block",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "closed",
+    "salt",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/gate-salt-block-open.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "gate-salt-block",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "open",
+    "salt",
+    "signature",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/mining-shack-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "mining-shack",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "mine",
+    "building",
+    "salt",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/ore-hoist-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "ore-hoist",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "mine",
+    "structure",
+    "salt",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/salt-lake-mirage-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "salt-lake-mirage",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "lake",
+    "mirage",
+    "salt",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/salt-lake-mirage-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "salt-lake-mirage",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "lake",
+    "mirage",
+    "salt",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/salt-obelisk-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "salt-obelisk",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "monument",
+    "salt",
+    "obstacle",
+    "tall",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/salt-pillar-grove-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "salt-pillar-grove",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "salt",
+    "formation",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/salt-statue-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "salt-statue",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "statue",
+    "salt",
+    "signature",
+    "obstacle",
+    "tall",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/salt-statue-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "salt-statue",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "statue",
+    "salt",
+    "obstacle",
+    "tall",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/interest/salt-works-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "interest",
+   "name": "salt-works",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "salt-works",
+    "brine",
+    "camp",
+    "obstacle",
+    "large",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/seven-palms/interest/camp-under-palms-a.svg",
    "region": "ashkara",
    "sub": "seven-palms",
@@ -155962,6 +167574,366 @@
     "wind",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/brine-sheen-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "brine-sheen",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "brine",
+    "sparkle",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/cold-light-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "cold-light",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "cold",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/cold-light-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "cold-light",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "cold",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/glare-bloom-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "glare-bloom",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "glare",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/heat-wave-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "heat-wave",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "heat",
+    "mirage",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/mirage-reflection-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "mirage-reflection",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mirage",
+    "reflection",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/mirage-reflection-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "mirage-reflection",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mirage",
+    "reflection",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/mirage-reflection-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "mirage-reflection",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mirage",
+    "reflection",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/mirage-shimmer-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "mirage-shimmer",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mirage",
+    "heat",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/mirage-shimmer-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "mirage-shimmer",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mirage",
+    "heat",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/mirage-shimmer-c.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "mirage-shimmer",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mirage",
+    "heat",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/pink-dusk-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "pink-dusk",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "dusk",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/salt-dust-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "salt-dust",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dust",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/salt-dust-b.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "salt-dust",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dust",
+    "desert",
+    "salt-mirror"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/salt-mirror/overlays/salt-sparkle-a.svg",
+   "region": "ashkara",
+   "sub": "salt-mirror",
+   "category": "overlays",
+   "name": "salt-sparkle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sparkle",
+    "salt",
+    "desert",
+    "salt-mirror"
    ],
    "note": ""
   },
