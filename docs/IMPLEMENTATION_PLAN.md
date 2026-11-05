@@ -171,7 +171,8 @@ Requested by the user after the round-3 tilemap review. **Do not implement yet**
 - **Content per sub-area:** each still has its own boss, 6–7 enemies, points of interest and a unique drop per enemy (as now). The power curve (GAME_DESIGN 24.8) must extend smoothly over the larger level range.
 - **Units:** expand the number of unit types well beyond the current 9 card types and ~20 roster units (new attack patterns, supports and defenders), each with its own creature art.
 - **Enemy art:** every sub-area needs its own set of enemy drawings (basic, tough, armored, barrel, boss and new kinds), so the creature library must grow to several hundred drawings over time.
-- **Art pipeline:** produced region by region. First batch: the 8 sub-areas of the starting region **Greenvale**, drawn as tilemap mockups (`art-samples/maps/greenvale-*.svg`).
+- **Structure areas:** some regions may sit *inside* a structure rather than in open country, e.g. 8 sub-areas within a pyramid, a Maya temple or a castle. Each floor, wing or chamber is a sub-area with its own boss and a gate (stair, sealed door, portcullis) to the next. They need interior tilesets (floors, walls, pillars, doors, traps, torches) alongside the outdoor ones, and can mix in courtyards or open-roof levels.
+- **Art pipeline:** produced region by region. First batch: the 8 sub-areas of the starting region **Greenvale**, drawn as tilemap mockups (`art-samples/maps/greenvale-*.svg`) plus a tileset of 4,541 tiles (`art-samples/tiles/`). Second: the desert region (tileset in progress).
 
 ## WP19: depth pays (power curve, boss Rations, depth-scaled rewards)
 

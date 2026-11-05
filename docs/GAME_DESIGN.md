@@ -752,3 +752,8 @@ Measured with the final code: fresh account = `PROFILE=fresh node tools/sim-runs
 | Battles per campaign run | 10.5 on average: ordinary runs 9.7, boss-chain runs 17.5 (about 11% of runs; a first Greenvale boss win refunds Rations and the run snowballs +1 ATK per won fight) |
 
 Before WP18 part 2 (same sim, old levers): fresh account 9-11 but Greenvale cleared in run 1-2, Frostveil / Ember unlocked in run 3-5 and the final regions in run 5. Levers moved: boss and elite strength per level band (`gen.js` `BOSS_BAND`, hp x1 / 1.9 / 1.8 / 1.55 / 1.4, atk x1 / 1.3 / 1.4 / 1.4 / 1.4 for Lv<=4 / 5-6 / 7-9 / 10-12 / 13+) plus per-boss `adj` in `boss-defs.js`; Souls per fight x0.32; boss Crystals 2 + region; gacha 4 Crystals per pull (36 for 10). `tools/validate-gen.js bosses` checks each boss against the median campaign account (`BOSS_REF` + `POWER`, built from `LOGBOSS` snapshots) and all 40 pass with every best line at 0-43% of the reference HP (limit 50%); `validate-gen.js 40` passes 200/200.
+
+## 25. Future world notes (not implemented)
+
+- **Structure regions.** Not every region is open country. Some may be set *inside* a structure, e.g. 8 sub-areas within a pyramid, a Maya temple or a castle. Each floor, wing or chamber is a sub-area with its own boss, joined by a gate such as a stair, sealed door or portcullis. These regions need interior tilesets (floors, walls, pillars, doors, traps, light sources) and may mix in courtyards or open-roof levels for variety. See `docs/IMPLEMENTATION_PLAN.md`, "Future: long-term world expansion".
+- **Region order for art.** Greenvale (done, tileset in `art-samples/tiles/greenvale/`), then the desert region (in progress).
