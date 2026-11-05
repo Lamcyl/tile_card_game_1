@@ -92,7 +92,11 @@
     "dune-ridge",
     "oasis-shore",
     "hardpan-patch",
-    "sandstone-cliff"
+    "sandstone-cliff",
+    "dune-crest",
+    "dry-pool",
+    "scrub-patch",
+    "shell-bed"
    ],
    "fileSuffix": "zero-padded decimal canonical mask, e.g. water-shore-017.svg",
    "neighbourOutsideSet": "a neighbour in the set (bit = 1) means the tile continues across that edge"
@@ -137,7 +141,8 @@
     "prayer-flags",
     "wall-drystone",
     "fence-rope-post",
-    "wall-mudbrick"
+    "wall-mudbrick",
+    "fence-driftwood"
    ],
    "fileSuffix": "two-digit decimal mask, e.g. fence-wood-06.svg"
   },
@@ -183,23 +188,23 @@
   "ashkara": {
    "name": "Ashkara (desert)",
    "doc": "art-samples/maps/DESERT.md",
-   "total": 359,
+   "total": 719,
    "counts": {
-    "ground": 29,
-    "ground-detail": 8,
-    "decals": 19,
-    "edges": 188,
-    "trees": 21,
-    "rocks": 12,
-    "grass": 6,
-    "fences": 16,
-    "props": 34,
-    "interest": 15,
-    "overlays": 11
+    "ground": 51,
+    "ground-detail": 19,
+    "decals": 46,
+    "edges": 376,
+    "trees": 37,
+    "rocks": 24,
+    "grass": 11,
+    "fences": 32,
+    "props": 76,
+    "interest": 27,
+    "overlays": 20
    },
    "subareas": {
     "common": "done (desert step 1)",
-    "dune-shallows": "planned",
+    "dune-shallows": "done (desert step 2)",
     "seven-palms": "planned",
     "singing-erg": "planned",
     "salt-mirror": "planned",
@@ -223,7 +228,7 @@
   "interest": 93,
   "overlays": 153
  },
- "total": 4900,
+ "total": 5260,
  "tiles": [
   {
    "path": "greenvale/bamboo-valley/ground/floor-bamboo-a.svg",
@@ -119073,6 +119078,539 @@
    "note": ""
   },
   {
+   "path": "ashkara/dune-shallows/ground/cream-clay-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "cream-clay-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/cream-clay-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "cream-clay-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/cream-dune-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "cream-dune-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/cream-dune-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "cream-dune-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/cream-fine-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "cream-fine-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/cream-fine-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "cream-fine-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/cream-hardpan-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "cream-hardpan-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/cream-hardpan-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "cream-hardpan-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/cream-reg-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "cream-reg-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/dry-puddle-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "dry-puddle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "dry-pool",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/dry-puddle-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "dry-puddle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "dry-pool",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/dry-puddle-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "dry-puddle",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "dry-pool",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/sand-cream-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "sand-cream",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/sand-cream-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "sand-cream",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/sand-cream-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "sand-cream",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/sand-cream-d.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "sand-cream",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/sand-wavelet-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "sand-wavelet",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ripples",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/sand-wavelet-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "sand-wavelet",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ripples",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/sand-wavelet-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "sand-wavelet",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ripples",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/wadi-clay-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "wadi-clay",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/wadi-clay-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "wadi-clay",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "salt",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground/wadi-clay-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground",
+   "name": "wadi-clay",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/ground-detail/dune-grass-baked-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -119255,6 +119793,273 @@
     "glyphs",
     "ruin",
     "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/cairn-trail-pebbles-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "cairn-trail-pebbles",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "trail",
+    "cairn",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/cream-shells-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "cream-shells",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "shell",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/cream-shells-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "cream-shells",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "shell",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/cream-shells-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "cream-shells",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "shell",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/dune-scrub-sprigs-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "dune-scrub-sprigs",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "scrub",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/dune-scrub-sprigs-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "dune-scrub-sprigs",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "scrub",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/dune-scrub-sprigs-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "dune-scrub-sprigs",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "scrub",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/fossil-sand-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "fossil-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/fossil-sand-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "fossil-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "fossil",
+    "fish",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/fossil-sand-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "fossil-sand",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "fossil",
+    "trilobite",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/ground-detail/wind-tracks-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "ground-detail",
+   "name": "wind-tracks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "desert",
+    "dune-shallows"
    ],
    "note": ""
   },
@@ -119656,6 +120461,626 @@
    "tags": [
     "decal",
     "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/beetle-tracks-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "beetle-tracks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/drift-mound-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "drift-mound",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/drift-mound-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "drift-mound",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/drift-mound-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "drift-mound",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/drift-mound-d.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "drift-mound",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/dry-crack-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "dry-crack",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "crack",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/dry-crack-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "dry-crack",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "crack",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/fossil-imprint-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "fossil-imprint",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/fossil-imprint-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "fossil-imprint",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/gull-feather-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "gull-feather",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "feather",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/lizard-dune-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "lizard-dune",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/lizard-dune-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "lizard-dune",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/lizard-dune-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "lizard-dune",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/rib-fragment-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "rib-fragment",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bone",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/ripple-small-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "ripple-small",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "ripples",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/ripple-small-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "ripple-small",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "ripples",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/ripple-small-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "ripple-small",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "ripples",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/ripple-small-d.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "ripple-small",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "ripples",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/sand-ring-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "sand-ring",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/shell-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "shell-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shell",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/shell-scatter-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "shell-scatter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shell",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/shell-scatter-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "shell-scatter",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shell",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/sprout-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "sprout",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "scrub",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/tumble-trail-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "tumble-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/tumble-trail-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "tumble-trail",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/wagon-ruts-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "wagon-ruts",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "caravan",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/decals/wagon-ruts-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "decals",
+   "name": "wagon-ruts",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "caravan",
+    "desert",
+    "dune-shallows"
    ],
    "note": ""
   },
@@ -124219,6 +125644,4847 @@
    "note": ""
   },
   {
+   "path": "ashkara/dune-shallows/edges/dry-pool-000.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-001.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-004.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-005.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-007.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-016.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-017.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-020.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-021.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-023.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-028.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-029.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-031.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-064.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-065.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-068.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-069.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-071.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-080.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-081.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-084.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-085.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-087.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-092.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-093.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-095.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-112.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-113.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-116.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-117.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-119.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-124.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-125.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-127.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-193.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-197.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-199.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-209.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-213.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-215.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-221.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-223.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-241.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-245.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-247.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-253.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dry-pool-255.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dry-pool",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "dry-pool",
+    "wadi",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-000.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-001.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-004.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-005.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-007.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-016.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-017.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-020.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-021.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-023.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-028.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-029.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-031.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-064.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-065.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-068.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-069.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-071.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-080.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-081.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-084.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-085.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-087.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-092.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-093.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-095.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-112.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-113.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-116.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-117.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-119.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-124.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-125.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-127.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-193.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-197.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-199.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-209.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-213.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-215.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-221.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-223.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-241.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-245.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-247.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-253.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/dune-crest-255.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "dune-crest",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-000.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-001.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-004.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-005.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-007.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-016.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-017.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-020.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-021.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-023.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-028.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-029.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-031.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-064.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-065.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-068.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-069.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-071.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-080.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-081.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-084.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-085.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-087.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-092.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-093.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-095.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-112.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-113.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-116.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-117.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-119.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-124.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-125.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-127.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-193.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-197.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-199.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-209.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-213.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-215.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-221.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-223.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-241.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-245.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-247.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-253.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/scrub-patch-255.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "scrub-patch",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "scrub",
+    "vegetation",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-000.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-001.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-004.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-005.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-007.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-016.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-017.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-020.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-021.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-023.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-028.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-029.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-031.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-064.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-065.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-068.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-069.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-071.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-080.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-081.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-084.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-085.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-087.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-092.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-093.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-095.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-112.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-113.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-116.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-117.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-119.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-124.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-125.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-127.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-193.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-197.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-199.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-209.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-213.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-215.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-221.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-223.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-241.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-245.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-247.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-253.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/edges/shell-bed-255.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "edges",
+   "name": "shell-bed",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "shell",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/trees/acacia-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -124704,6 +130970,396 @@
    "note": ""
   },
   {
+   "path": "ashkara/dune-shallows/trees/dead-brush-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dead-brush",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "dead",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/dead-brush-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dead-brush",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "dead",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/dead-brush-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dead-brush",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "dead",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/dead-tree-bleached-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dead-tree-bleached",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "dead",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/dead-tree-bleached-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dead-tree-bleached",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "dead",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/dune-creeper-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dune-creeper",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "flowers",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/dune-scrub-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dune-scrub",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "scrub",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/dune-scrub-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dune-scrub",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "scrub",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/dune-scrub-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dune-scrub",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "scrub",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/dune-scrub-d.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "dune-scrub",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "scrub",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/saltbush-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "saltbush",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/saltbush-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "saltbush",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/saltbush-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "saltbush",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush",
+    "obstacle",
+    "berries",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/thorn-acacia-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "thorn-acacia",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "tree",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/thorn-acacia-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "thorn-acacia",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "tree",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/trees/thorn-acacia-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "trees",
+   "name": "thorn-acacia",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "tree",
+    "obstacle",
+    "dead",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/rocks/boulder-red-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -124980,6 +131636,301 @@
    "note": ""
   },
   {
+   "path": "ashkara/dune-shallows/rocks/fossil-boulder-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "fossil-boulder",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/fossil-boulder-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "fossil-boulder",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "fossil",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/half-buried-rock-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "half-buried-rock",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "buried",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/half-buried-rock-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "half-buried-rock",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "buried",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/half-buried-rock-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "half-buried-rock",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "buried",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/pitted-boulder-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "pitted-boulder",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/sandwashed-rock-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "sandwashed-rock",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/sandwashed-rock-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "sandwashed-rock",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/sandwashed-rock-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "sandwashed-rock",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/sandwashed-rock-d.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "sandwashed-rock",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/wind-pillar-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "wind-pillar",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "rock",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/rocks/wind-pillar-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "rocks",
+   "name": "wind-pillar",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "rock",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/grass/dune-grass-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -125114,6 +132065,129 @@
     "oasis",
     "reeds",
     "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/grass/marram-pale-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "grass",
+   "name": "marram-pale",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "grass",
+    "dune",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/grass/marram-pale-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "grass",
+   "name": "marram-pale",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "grass",
+    "dune",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/grass/marram-pale-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "grass",
+   "name": "marram-pale",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "grass",
+    "dune",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/grass/sea-oats-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "grass",
+   "name": "sea-oats",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "grass",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/grass/sea-oats-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "grass",
+   "name": "sea-oats",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "grass",
+    "dune",
+    "desert",
+    "dune-shallows"
    ],
    "note": ""
   },
@@ -125514,6 +132588,422 @@
     "wall",
     "obstacle",
     "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-00.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-01.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-02.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-03.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-04.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-05.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-06.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-07.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-08.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-09.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-10.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-11.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-12.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-13.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-14.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/fences/fence-driftwood-15.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "fences",
+   "name": "fence-driftwood",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "fence",
+    "obstacle",
+    "desert",
+    "dune-shallows"
    ],
    "note": ""
   },
@@ -126292,6 +133782,1013 @@
    "note": ""
   },
   {
+   "path": "ashkara/dune-shallows/props/amphora-buried-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "amphora-buried",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "jar",
+    "buried",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/amphora-buried-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "amphora-buried",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "jar",
+    "buried",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/barrel-sand-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "barrel-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "barrel",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/bone-pile-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "bone-pile",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "bone",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/bottle-message-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "bottle-message",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "bottle",
+    "loot",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/cairn-trail-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "cairn-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "cairn",
+    "signature",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/cairn-trail-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "cairn-trail",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "cairn",
+    "signature",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/cairn-trail-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "cairn-trail",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "cairn",
+    "bone",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/cairn-trail-d.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "cairn-trail",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "cairn",
+    "flag",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/crate-broken-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "crate-broken",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "crate",
+    "wagon",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/driftwood-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "driftwood",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "driftwood",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/driftwood-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "driftwood",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "driftwood",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/driftwood-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "driftwood",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "driftwood",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/fire-ring-cold-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "fire-ring-cold",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "camp",
+    "fire",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/lantern-fallen-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "lantern-fallen",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "lantern",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/pennant-stake-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "pennant-stake",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "flag",
+    "waypoint",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/pennant-stake-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "pennant-stake",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "flag",
+    "waypoint",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/rib-bone-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "rib-bone",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "bone",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/rib-bone-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "rib-bone",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "bone",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/rib-bone-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "rib-bone",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "bone",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/rope-coil-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "rope-coil",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "rope",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/sack-cloth-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "sack-cloth",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "sack",
+    "supply",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/sandal-lost-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "sandal-lost",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "lost",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/sieve-frame-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "sieve-frame",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "dig",
+    "tools",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/signpost-arrow-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "signpost-arrow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "sign",
+    "tall-ish",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/signpost-arrow-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "signpost-arrow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "sign",
+    "tall-ish",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/skull-camel-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "skull-camel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "bone",
+    "skull",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/tent-scrap-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "tent-scrap",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "camp",
+    "cloth",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/tools-dig-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "tools-dig",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "dig",
+    "tools",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/tumbleweed-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "tumbleweed",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "tumbleweed",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/tumbleweed-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "tumbleweed",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "tumbleweed",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/tumbleweed-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "tumbleweed",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "tumbleweed",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/vertebra-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "vertebra",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "bone",
+    "whale",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/vertebra-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "vertebra",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "bone",
+    "whale",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/wagon-wheel-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "wagon-wheel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "wagon",
+    "buried",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/wagon-wheel-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "wagon-wheel",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "wagon",
+    "buried",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/water-skin-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "water-skin",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "skin",
+    "supply",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/waypoint-staff-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "waypoint-staff",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "prop",
+    "waypoint",
+    "tall",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/well-dry-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "well-dry",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "well",
+    "dry",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/whale-jaw-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "whale-jaw",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "bone",
+    "whale",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/windsock-pole-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "windsock-pole",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "prop",
+    "windsock",
+    "tall",
+    "signature",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/props/windsock-pole-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "props",
+   "name": "windsock-pole",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "prop",
+    "windsock",
+    "tall",
+    "signature",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/interest/chest-gilded-closed.svg",
    "region": "ashkara",
    "sub": "common",
@@ -126658,6 +135155,322 @@
    "note": ""
   },
   {
+   "path": "ashkara/dune-shallows/interest/abandoned-camp-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "abandoned-camp",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "camp",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/caravan-wagon-buried-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "caravan-wagon-buried",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "landmark",
+    "wagon",
+    "obstacle",
+    "signature",
+    "covered",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/caravan-wagon-buried-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "caravan-wagon-buried",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "landmark",
+    "wagon",
+    "obstacle",
+    "signature",
+    "collapsed",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/chest-sand-bone-closed.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "chest-sand-bone",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "interest",
+    "closed",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/chest-sand-bone-open.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "chest-sand-bone",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "interest",
+    "open",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/driftwood-shelter-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "driftwood-shelter",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "camp",
+    "shelter",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/fossil-dig-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "fossil-dig",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "dig",
+    "fossil",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/gate-rib-arch-closed.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "gate-rib-arch",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "interest",
+    "signature",
+    "closed",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/gate-rib-arch-open.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "gate-rib-arch",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "interest",
+    "signature",
+    "open",
+    "obstacle",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/waypoint-cairn-crest-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "waypoint-cairn-crest",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "landmark",
+    "cairn",
+    "waypoint",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/waypoint-cairn-crest-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "waypoint-cairn-crest",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "landmark",
+    "cairn",
+    "waypoint",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/interest/whale-skeleton-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "interest",
+   "name": "whale-skeleton",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "bone",
+    "whale",
+    "obstacle",
+    "signature",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/overlays/blown-sand-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -126906,6 +135719,222 @@
     "light",
     "sun",
     "desert"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/overlays/bright-haze-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "overlays",
+   "name": "bright-haze",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "haze",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/overlays/bright-haze-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "overlays",
+   "name": "bright-haze",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "haze",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/overlays/crest-spray-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "overlays",
+   "name": "crest-spray",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sand",
+    "wind",
+    "dune",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/overlays/pale-sun-glare-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "overlays",
+   "name": "pale-sun-glare",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "sun",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/overlays/sand-shimmer-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "overlays",
+   "name": "sand-shimmer",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sparkle",
+    "sun",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/overlays/sky-tint-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "overlays",
+   "name": "sky-tint",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/overlays/spindrift-a.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "overlays",
+   "name": "spindrift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sand",
+    "wind",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/overlays/spindrift-b.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "overlays",
+   "name": "spindrift",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sand",
+    "wind",
+    "desert",
+    "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dune-shallows/overlays/spindrift-c.svg",
+   "region": "ashkara",
+   "sub": "dune-shallows",
+   "category": "overlays",
+   "name": "spindrift",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sand",
+    "wind",
+    "desert",
+    "dune-shallows"
    ],
    "note": ""
   }
