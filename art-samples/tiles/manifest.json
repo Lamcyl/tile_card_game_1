@@ -108,7 +108,11 @@
     "brine-pool",
     "brine-deep",
     "salt-crust-shelf",
-    "mirage-flat"
+    "mirage-flat",
+    "hall-wall",
+    "tomb-wall",
+    "avenue-paving",
+    "sand-drift"
    ],
    "fileSuffix": "zero-padded decimal canonical mask, e.g. water-shore-017.svg",
    "neighbourOutsideSet": "a neighbour in the set (bit = 1) means the tile continues across that edge"
@@ -161,7 +165,10 @@
     "fence-sand-slat",
     "wall-salt-block",
     "track-mine",
-    "fence-salt-rope"
+    "fence-salt-rope",
+    "wall-hieroglyph",
+    "wall-sandstone-low",
+    "colonnade"
    ],
    "fileSuffix": "two-digit decimal mask, e.g. fence-wood-06.svg"
   },
@@ -207,19 +214,19 @@
   "ashkara": {
    "name": "Ashkara (desert)",
    "doc": "art-samples/maps/DESERT.md",
-   "total": 2758,
+   "total": 3189,
    "counts": {
-    "ground": 290,
-    "ground-detail": 111,
-    "decals": 204,
-    "edges": 1222,
-    "trees": 107,
-    "rocks": 101,
-    "grass": 52,
-    "fences": 208,
-    "props": 254,
-    "interest": 124,
-    "overlays": 85
+    "ground": 337,
+    "ground-detail": 128,
+    "decals": 231,
+    "edges": 1410,
+    "trees": 114,
+    "rocks": 114,
+    "grass": 60,
+    "fences": 256,
+    "props": 295,
+    "interest": 146,
+    "overlays": 98
    },
    "subareas": {
     "common": "done (desert step 1)",
@@ -229,7 +236,7 @@
     "salt-mirror": "done (desert step 5)",
     "red-wadi": "done (desert step 6)",
     "dust-bazaar": "done (desert step 7)",
-    "tomb-approach": "planned",
+    "tomb-approach": "done (desert step 8)",
     "sun-citadel": "planned"
    }
   }
@@ -247,7 +254,7 @@
   "interest": 93,
   "overlays": 153
  },
- "total": 7299,
+ "total": 7730,
  "tiles": [
   {
    "path": "greenvale/bamboo-valley/ground/floor-bamboo-a.svg",
@@ -125467,6 +125474,1209 @@
    "note": ""
   },
   {
+   "path": "ashkara/tomb-approach/ground/avenue-hall-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-hall-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-hall-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-hall-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-sand-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "drift",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-sand-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "drift",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-sand-c.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-sand",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "drift",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-sand-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-sand-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-slab-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-slab",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "avenue",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-slab-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-slab",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "avenue",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-slab-c.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-slab",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "avenue",
+    "glint",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-worn-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-worn",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "worn",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-worn-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-worn",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "worn",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/avenue-worn-c.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "avenue-worn",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "worn",
+    "cracks",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/bazaar-avenue-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "bazaar-avenue-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/bazaar-avenue-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "bazaar-avenue-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/dune-avenue-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "dune-avenue-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/gold-avenue-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "gold-avenue-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/gold-avenue-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "gold-avenue-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-cracked-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-cracked",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "cracks",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-dark-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-dark",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "basalt",
+    "sanctum",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-dark-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-dark",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "basalt",
+    "sanctum",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-dark-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-dark-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-drift-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "sand",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-drift-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-drift",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "sand",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-flag-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-flag",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "flagstone",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-flag-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-flag",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "flagstone",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-flag-c.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-flag",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "flagstone",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-inlay-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-inlay",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "inlay",
+    "gold",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-inlay-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-inlay",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "inlay",
+    "worn",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-painted-band-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-painted-band",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "painted",
+    "interior",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-painted-diamond-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-painted-diamond",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "painted",
+    "interior",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-painted-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-painted-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-painted-lotus-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-painted-lotus",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "painted",
+    "interior",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-painted-lotus-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-painted-lotus",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "painted",
+    "interior",
+    "worn",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-rubble-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-rubble",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "rubble",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-rubble-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-rubble",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "rubble",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-sand-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "interior",
+    "drift",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-sand-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "interior",
+    "drift",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-sand-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-sand-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-shade-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-shade",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "shade",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-shade-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-shade",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "interior",
+    "shade",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/hall-shade-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "hall-shade-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/pan-avenue-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "pan-avenue-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/reg-avenue-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "reg-avenue-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/sand-avenue-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "sand-avenue-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/slab-avenue-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "slab-avenue-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/slab-avenue-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "slab-avenue-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground/worn-avenue-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground",
+   "name": "worn-avenue-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/ground-detail/dune-grass-baked-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -128173,6 +129383,431 @@
     "scour",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/bone-scraps-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "bone-scraps",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "bones",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/broken-slab-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "broken-slab",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "rubble",
+    "broken",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/candle-stubs-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "candle-stubs",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "candle",
+    "wax",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/dried-lotus-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "dried-lotus",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "plants",
+    "offering",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/floor-ankh-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "floor-ankh",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "inlay",
+    "ankh",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/floor-cartouche-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "floor-cartouche",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "inlay",
+    "cartouche",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/floor-eye-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "floor-eye",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "inlay",
+    "eye",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/floor-scarab-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "floor-scarab",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "inlay",
+    "scarab",
+    "seal",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/floor-sun-disc-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "floor-sun-disc",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "inlay",
+    "sun",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/gold-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "gold-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "gold",
+    "loot",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/gold-scatter-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "gold-scatter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "gold",
+    "jewels",
+    "loot",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/joint-weeds-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "joint-weeds",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "plants",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/lapis-flakes-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "lapis-flakes",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "paint",
+    "flakes",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/linen-strips-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "linen-strips",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "linen",
+    "mummy",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/potsherds-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "potsherds",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pottery",
+    "loot",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/sand-ripples-stone-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "sand-ripples-stone",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "sand",
+    "wind",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/ground-detail/snake-trail-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "ground-detail",
+   "name": "snake-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "snake",
+    "desert",
+    "tomb-approach"
    ],
    "note": ""
   },
@@ -132953,6 +134588,665 @@
     "wind",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/bone-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/cobweb-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "cobweb",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "web",
+    "corner",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/crack-lines-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "crack-lines",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cracks",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/door-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "door-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "doorway",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/footprints-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "footprints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/grain-offering-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "grain-offering",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "grain",
+    "offering",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/lapis-dust-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "lapis-dust",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "paint",
+    "dust",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/linen-scrap-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "linen-scrap",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "linen",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/oil-spill-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "oil-spill",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "stain",
+    "oil",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/rubble-chips-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "rubble-chips",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "rubble",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/sand-drift-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "sand-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "drift",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/sand-drift-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "sand-drift",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "drift",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/sand-spill-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "sand-spill",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "doorway",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/sand-spill-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "sand-spill",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "corner",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/seal-wax-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "seal-wax",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "seal",
+    "wax",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/snake-track-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "snake-track",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "snake",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/soot-stain-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "soot-stain",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "stain",
+    "fire",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wall-cracks-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wall-cracks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wall-damage",
+    "cracks",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wall-damage-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wall-damage",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wall-damage",
+    "ruin",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wall-paint-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wall-paint",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wall-paint",
+    "painted",
+    "hieroglyph",
+    "cartouche",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wall-paint-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wall-paint",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wall-paint",
+    "painted",
+    "hieroglyph",
+    "winged-sun",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wall-paint-c.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wall-paint",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wall-paint",
+    "painted",
+    "hieroglyph",
+    "figures",
+    "gods",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wall-paint-d.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wall-paint",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wall-paint",
+    "painted",
+    "hieroglyph",
+    "boat",
+    "sun-boat",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wall-paint-e.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wall-paint",
+   "variant": "e",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wall-paint",
+    "painted",
+    "hieroglyph",
+    "lotus",
+    "frieze",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wall-paint-f.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wall-paint",
+   "variant": "f",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wall-paint",
+    "painted",
+    "hieroglyph",
+    "eye",
+    "cobra",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wall-sand-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wall-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "wall-foot",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/decals/wine-spill-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "decals",
+   "name": "wine-spill",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "stain",
+    "offering",
+    "desert",
+    "tomb-approach"
    ],
    "note": ""
   },
@@ -165058,6 +167352,5364 @@
    "note": ""
   },
   {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-000.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-001.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-004.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-005.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-007.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-016.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-017.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-020.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-021.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-023.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-028.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-029.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-031.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-064.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-065.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-068.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-069.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-071.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-080.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-081.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-084.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-085.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-087.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-092.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-093.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-095.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-112.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-113.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-116.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-117.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-119.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-124.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-125.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-127.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-193.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-197.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-199.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-209.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-213.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-215.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-221.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-223.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-241.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-245.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-247.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-253.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/avenue-paving-255.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "avenue-paving",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "paving",
+    "avenue",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-000.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-001.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-004.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-005.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-007.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-016.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-017.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-020.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-021.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-023.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-028.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-029.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-031.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-064.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-065.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-068.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-069.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-071.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-080.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-081.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-084.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-085.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-087.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-092.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-093.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-095.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-112.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-113.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-116.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-117.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-119.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-124.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-125.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-127.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-193.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-197.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-199.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-209.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-213.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-215.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-221.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-223.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-241.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-245.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-247.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-253.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/hall-wall-255.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "hall-wall",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "painted",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-000.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-001.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-004.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-005.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-007.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-016.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-017.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-020.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-021.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-023.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-028.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-029.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-031.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-064.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-065.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-068.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-069.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-071.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-080.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-081.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-084.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-085.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-087.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-092.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-093.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-095.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-112.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-113.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-116.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-117.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-119.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-124.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-125.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-127.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-193.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-197.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-199.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-209.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-213.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-215.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-221.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-223.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-241.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-245.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-247.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-253.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/sand-drift-255.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "sand-drift",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "sand",
+    "drift",
+    "floor",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-000.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-001.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-004.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-005.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-007.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-016.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-017.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-020.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-021.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-023.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-028.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-029.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-031.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-064.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-065.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-068.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-069.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-071.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-080.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-081.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-084.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-085.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-087.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-092.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-093.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-095.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-112.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-113.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-116.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-117.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-119.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-124.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-125.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-127.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-193.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-197.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-199.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-209.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-213.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-215.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-221.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-223.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-241.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-245.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-247.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-253.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/edges/tomb-wall-255.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "edges",
+   "name": "tomb-wall",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "3/4-view",
+    "wall",
+    "interior",
+    "obstacle",
+    "ashlar",
+    "pylon",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/trees/acacia-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -167691,6 +175343,185 @@
    "note": ""
   },
   {
+   "path": "ashkara/tomb-approach/trees/acacia-lone-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "trees",
+   "name": "acacia-lone",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "acacia",
+    "tree",
+    "tall",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/trees/palm-date-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "trees",
+   "name": "palm-date",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "palm",
+    "date",
+    "golden",
+    "tall",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/trees/palm-date-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "trees",
+   "name": "palm-date",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "palm",
+    "date",
+    "golden",
+    "tall",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/trees/papyrus-pot-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "trees",
+   "name": "papyrus-pot",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "papyrus",
+    "planter",
+    "interior",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/trees/papyrus-pot-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "trees",
+   "name": "papyrus-pot",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "papyrus",
+    "planter",
+    "interior",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/trees/tamarisk-dry-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "trees",
+   "name": "tamarisk-dry",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "tamarisk",
+    "shrub",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/trees/tamarisk-dry-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "trees",
+   "name": "tamarisk-dry",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "tamarisk",
+    "shrub",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/rocks/boulder-red-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -170194,6 +178025,335 @@
    "note": ""
   },
   {
+   "path": "ashkara/tomb-approach/rocks/column-drum-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "column-drum",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "column",
+    "ruin",
+    "painted",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/column-drum-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "column-drum",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "column",
+    "ruin",
+    "painted",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/rubble-pile-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "rubble-pile",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rubble",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/rubble-pile-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "rubble-pile",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rubble",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/sand-mound-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "sand-mound",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sand",
+    "drift",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/sand-mound-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "sand-mound",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sand",
+    "drift",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/sandstone-fallen-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "sandstone-fallen",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "block",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/sandstone-fallen-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "sandstone-fallen",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "block",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/sandstone-fallen-c.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "sandstone-fallen",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "boulder",
+    "rock",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/slab-broken-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "slab-broken",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "slab",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/slab-broken-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "slab-broken",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "slab",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/toppled-head-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "toppled-head",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "statue",
+    "head",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/rocks/toppled-head-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "rocks",
+   "name": "toppled-head",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "statue",
+    "head",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/grass/dune-grass-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -171447,6 +179607,191 @@
     "tall",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/grass/papyrus-dry-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "grass",
+   "name": "papyrus-dry",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "papyrus",
+    "reeds",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/grass/scrub-dry-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "grass",
+   "name": "scrub-dry",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scrub",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/grass/scrub-dry-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "grass",
+   "name": "scrub-dry",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scrub",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/grass/sedge-sand-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "grass",
+   "name": "sedge-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sedge",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/grass/sedge-sand-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "grass",
+   "name": "sedge-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sedge",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/grass/thorn-bush-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "grass",
+   "name": "thorn-bush",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "thorn",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/grass/thorn-bush-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "grass",
+   "name": "thorn-bush",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "thorn",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/grass/weeds-joint-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "grass",
+   "name": "weeds-joint",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "weeds",
+    "one",
+    "desert",
+    "tomb-approach"
    ],
    "note": ""
   },
@@ -176935,6 +185280,1414 @@
     "obstacle",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-00.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-01.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-02.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-03.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-04.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-05.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-06.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-07.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-08.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-09.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-10.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-11.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-12.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-13.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-14.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/colonnade-15.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "colonnade",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "3/4-view",
+    "columns",
+    "interior",
+    "obstacle",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-00.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-01.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-02.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-03.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-04.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-05.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-06.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-07.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-08.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-09.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-10.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-11.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-12.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-13.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-14.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-hieroglyph-15.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-hieroglyph",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "painted",
+    "interior",
+    "hieroglyph",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-00.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-01.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-02.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-03.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-04.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-05.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-06.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-07.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-08.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-09.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-10.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-11.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-12.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-13.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-14.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/fences/wall-sandstone-low-15.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "fences",
+   "name": "wall-sandstone-low",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "rough",
+    "low",
+    "ruined",
+    "desert",
+    "tomb-approach"
    ],
    "note": ""
   },
@@ -183040,6 +192793,1053 @@
    "note": ""
   },
   {
+   "path": "ashkara/tomb-approach/props/banner-pole-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "banner-pole",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "banner",
+    "pole",
+    "cloth",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/banner-pole-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "banner-pole",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "banner",
+    "pole",
+    "cloth",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/basin-lotus-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "basin-lotus",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "basin",
+    "lotus",
+    "water",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/brazier-bowl-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "brazier-bowl",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "brazier",
+    "fire",
+    "lit",
+    "light",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/brazier-bowl-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "brazier-bowl",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "brazier",
+    "unlit",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/brazier-pillar-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "brazier-pillar",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "brazier",
+    "fire",
+    "lit",
+    "light",
+    "pillar",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/brazier-pillar-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "brazier-pillar",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "brazier",
+    "unlit",
+    "pillar",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/canopic-jars-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "canopic-jars",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "canopic",
+    "tomb",
+    "jars",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/canopic-jars-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "canopic-jars",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "canopic",
+    "tomb",
+    "jars",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/column-broken-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "column-broken",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "column",
+    "ruin",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/column-broken-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "column-broken",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "column",
+    "ruin",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/column-lotus-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "column-lotus",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "column",
+    "lotus",
+    "painted",
+    "interior",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/column-palm-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "column-palm",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "column",
+    "palm",
+    "painted",
+    "interior",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/column-papyrus-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "column-papyrus",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "column",
+    "papyrus",
+    "painted",
+    "interior",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/column-papyrus-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "column-papyrus",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "column",
+    "papyrus",
+    "painted",
+    "interior",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/column-plain-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "column-plain",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "column",
+    "plain",
+    "interior",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/incense-burner-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "incense-burner",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "incense",
+    "smoke",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/lantern-hanging-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "lantern-hanging",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "lantern",
+    "light",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/mummy-case-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "mummy-case",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "mummy",
+    "coffin",
+    "tomb",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/mummy-case-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "mummy-case",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "mummy",
+    "coffin",
+    "tomb",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/obelisk-small-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "obelisk-small",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "obelisk",
+    "monument",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/obelisk-small-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "obelisk-small",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "obelisk",
+    "monument",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/offering-bowls-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "offering-bowls",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "offering",
+    "bowls",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/offering-table-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "offering-table",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "offering",
+    "table",
+    "altar",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/papyrus-scrolls-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "papyrus-scrolls",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scrolls",
+    "papyrus",
+    "loot",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/sarcophagus-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "sarcophagus",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sarcophagus",
+    "tomb",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/sarcophagus-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "sarcophagus",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sarcophagus",
+    "tomb",
+    "open",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/sarcophagus-c.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "sarcophagus",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sarcophagus",
+    "tomb",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/seal-scarab-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "seal-scarab",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scarab",
+    "seal",
+    "door",
+    "sealed",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/seal-scarab-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "seal-scarab",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scarab",
+    "seal",
+    "door",
+    "broken",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/statue-anubis-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "statue-anubis",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "anubis",
+    "statue",
+    "guardian",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/statue-anubis-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "statue-anubis",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "anubis",
+    "statue",
+    "guardian",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/statue-ram-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "statue-ram",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ram",
+    "statue",
+    "avenue",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/statue-ram-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "statue-ram",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ram",
+    "statue",
+    "avenue",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/statue-sphinx-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "statue-sphinx",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sphinx",
+    "statue",
+    "avenue",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/statue-sphinx-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "statue-sphinx",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sphinx",
+    "statue",
+    "avenue",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/stele-painted-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "stele-painted",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "stele",
+    "painted",
+    "monument",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/stele-painted-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "stele-painted",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "stele",
+    "painted",
+    "monument",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/torch-standing-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "torch-standing",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "torch",
+    "fire",
+    "light",
+    "lit",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/treasure-heap-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "treasure-heap",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "treasure",
+    "gold",
+    "loot",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/props/urn-tall-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "props",
+   "name": "urn-tall",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "urn",
+    "jar",
+    "painted",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/interest/chest-gilded-closed.svg",
    "region": "ashkara",
    "sub": "common",
@@ -186228,6 +197028,586 @@
    "note": ""
   },
   {
+   "path": "ashkara/tomb-approach/interest/altar-sun-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "altar-sun",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "altar",
+    "sun",
+    "offering",
+    "obstacle",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/chest-tomb-closed.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "chest-tomb",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "closed",
+    "interest",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/chest-tomb-open.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "chest-tomb",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "open",
+    "interest",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/colossus-seated-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "colossus-seated",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "colossus",
+    "statue",
+    "monument",
+    "obstacle",
+    "large",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/doorway-hall-closed.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "doorway-hall",
+   "variant": "closed",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "doorway",
+    "door",
+    "closed",
+    "interior",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/doorway-hall-open.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "doorway-hall",
+   "variant": "open",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "doorway",
+    "door",
+    "open",
+    "interior",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/doorway-sand-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "doorway-sand",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "doorway",
+    "buried",
+    "sand",
+    "interior",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/entrance-hall-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "entrance-hall",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "entrance-hall",
+    "pylon",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/entrance-hall-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "entrance-hall",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "entrance-hall",
+    "interior",
+    "signature",
+    "large",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/false-door-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "false-door",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "false-door",
+    "stele",
+    "painted",
+    "interior",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/gate-tomb-sealed-closed.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "gate-tomb-sealed",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "closed",
+    "sealed",
+    "sandstone",
+    "pylon",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/gate-tomb-sealed-open.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "gate-tomb-sealed",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "open",
+    "sandstone",
+    "pylon",
+    "signature",
+    "large",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/pylon-tower-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "pylon-tower",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "pylon",
+    "tower",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/pylon-tower-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "pylon-tower",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "pylon",
+    "tower",
+    "ruin",
+    "obstacle",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/sarcophagus-chamber-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "sarcophagus-chamber",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "sarcophagus",
+    "chamber",
+    "tomb",
+    "interior",
+    "obstacle",
+    "large",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/shrine-niche-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "shrine-niche",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "shrine",
+    "niche",
+    "statue",
+    "interior",
+    "lit",
+    "light",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/shrine-niche-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "shrine-niche",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "shrine",
+    "niche",
+    "statue",
+    "interior",
+    "tall",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/sphinx-great-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "sphinx-great",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "sphinx",
+    "monument",
+    "landmark",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/stairs-down-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "stairs-down",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "stairs",
+    "down",
+    "interior",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/stairs-sand-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "stairs-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "stairs",
+    "sand",
+    "choked",
+    "interior",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/stairs-sand-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "stairs-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "stairs",
+    "sand",
+    "choked",
+    "interior",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/interest/stairs-up-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "interest",
+   "name": "stairs-up",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "stairs",
+    "up",
+    "interior",
+    "one",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/overlays/blown-sand-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -188255,6 +199635,327 @@
     "dusk",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/beam-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "beam-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "roof",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/beam-shadow-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "beam-shadow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "roof",
+    "grid",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/brazier-glow-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "brazier-glow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "fire",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/dust-motes-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "dust-motes",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "dust",
+    "light",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/hall-dim-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "hall-dim",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "shade",
+    "interior",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/hall-dim-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "hall-dim",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "edge",
+    "interior",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/incense-smoke-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "incense-smoke",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "smoke",
+    "incense",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/roof-beam-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "roof-beam",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "beam",
+    "roof",
+    "hanging",
+    "shade",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/roof-beam-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "roof-beam",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "beam",
+    "roof",
+    "hanging",
+    "crossing",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/roof-beam-c.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "roof-beam",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "beam",
+    "roof",
+    "hanging",
+    "broken",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/sand-haze-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "sand-haze",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "sand",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/sun-shaft-a.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "sun-shaft",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "shaft",
+    "desert",
+    "tomb-approach"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/tomb-approach/overlays/sun-shaft-b.svg",
+   "region": "ashkara",
+   "sub": "tomb-approach",
+   "category": "overlays",
+   "name": "sun-shaft",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "shaft",
+    "desert",
+    "tomb-approach"
    ],
    "note": ""
   }
