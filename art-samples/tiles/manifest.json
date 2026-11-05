@@ -207,19 +207,19 @@
   "ashkara": {
    "name": "Ashkara (desert)",
    "doc": "art-samples/maps/DESERT.md",
-   "total": 1991,
+   "total": 2357,
    "counts": {
-    "ground": 174,
-    "ground-detail": 78,
-    "decals": 146,
-    "edges": 940,
-    "trees": 87,
-    "rocks": 70,
-    "grass": 38,
-    "fences": 144,
-    "props": 177,
-    "interest": 77,
-    "overlays": 60
+    "ground": 229,
+    "ground-detail": 94,
+    "decals": 177,
+    "edges": 1081,
+    "trees": 99,
+    "rocks": 88,
+    "grass": 46,
+    "fences": 176,
+    "props": 200,
+    "interest": 95,
+    "overlays": 72
    },
    "subareas": {
     "common": "done (desert step 1)",
@@ -227,7 +227,7 @@
     "seven-palms": "done (desert step 3)",
     "singing-erg": "done (desert step 4)",
     "salt-mirror": "done (desert step 5)",
-    "red-wadi": "planned",
+    "red-wadi": "done (desert step 6)",
     "dust-bazaar": "planned",
     "tomb-approach": "planned",
     "sun-citadel": "planned"
@@ -247,7 +247,7 @@
   "interest": 93,
   "overlays": 153
  },
- "total": 6532,
+ "total": 6898,
  "tiles": [
   {
    "path": "greenvale/bamboo-valley/ground/floor-bamboo-a.svg",
@@ -119630,6 +119630,1348 @@
    "note": ""
   },
   {
+   "path": "ashkara/red-wadi/ground/clay-cracked-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "clay-cracked",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cracks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/clay-cracked-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "clay-cracked",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cracks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/clay-cracked-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "clay-cracked",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cracks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/clay-terra-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "clay-terra-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/flood-silt-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "flood-silt",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "silt",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/flood-silt-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "flood-silt",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "silt",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/gravel-reg-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "gravel-reg-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/gravel-sand-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "gravel-sand-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/gravel-sand-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "gravel-sand-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/gravel-terra-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "gravel-terra-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/gravel-terra-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "gravel-terra-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/ochre-sand-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "ochre-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/ochre-sand-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "ochre-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/ochre-sand-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "ochre-sand",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/ochre-terra-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "ochre-terra-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/ochre-terra-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "ochre-terra-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/pool-gravel-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "pool-gravel-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/red-sand-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "red-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/red-sand-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "red-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/red-sand-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "red-sand",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/red-sand-terra-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "red-sand-terra-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/salt-terra-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "salt-terra-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/shade-floor-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "shade-floor",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "shade",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/shade-floor-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "shade-floor",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "shade",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/shade-terra-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "shade-terra-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/silt-gravel-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "silt-gravel-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-bazaar-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-bazaar-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-bazaar-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-bazaar-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-dune-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-dune-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-dune-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-dune-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-gold-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-gold-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-gold-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-gold-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-pan-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-pan-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-pan-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-pan-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-reg-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-reg-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-reg-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-reg-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-salt-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-salt-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-salt-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-salt-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-sand-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-sand-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-sand-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-sand-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-shelf-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-shelf",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-shelf-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-shelf",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-shelf-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-shelf",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-shelf-d.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-shelf",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-strata-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-strata",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "strata",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-strata-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-strata",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "strata",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/terra-strata-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "terra-strata",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "strata",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/wadi-cobble-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "wadi-cobble",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cobbles",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/wadi-cobble-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "wadi-cobble",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cobbles",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/wadi-gravel-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "wadi-gravel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/wadi-gravel-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "wadi-gravel",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/wadi-gravel-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "wadi-gravel",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/wadi-gravel-d.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "wadi-gravel",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/wadi-pool-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "wadi-pool",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "pool",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground/wadi-pool-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground",
+   "name": "wadi-pool",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "pool",
+    "sparkle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/salt-mirror/ground/brine-deep-a.svg",
    "region": "ashkara",
    "sub": "salt-mirror",
@@ -123085,6 +124427,395 @@
    "note": ""
   },
   {
+   "path": "ashkara/red-wadi/ground-detail/ammonite-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "ammonite",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "fossil",
+    "loot",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/bone-flecks-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "bone-flecks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "bones",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/camel-prints-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "camel-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/dry-tufts-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "dry-tufts",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "plants",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/flood-sticks-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "flood-sticks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "debris",
+    "flood",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/flood-sticks-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "flood-sticks",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "debris",
+    "flood",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/goat-prints-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "goat-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/hematite-flecks-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "hematite-flecks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "flecks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/iron-nodules-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "iron-nodules",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "nodules",
+    "loot",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/lichen-patch-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "lichen-patch",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "lichen",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/potsherds-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "potsherds",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pottery",
+    "loot",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/quartz-veins-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "quartz-veins",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "quartz",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/rain-pits-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "rain-pits",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pits",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/red-pebbles-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "red-pebbles",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pebbles",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/ripple-marks-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "ripple-marks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "ripples",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/ground-detail/strata-lines-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "ground-detail",
+   "name": "strata-lines",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "strata",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/salt-mirror/ground-detail/bone-flecks-a.svg",
    "region": "ashkara",
    "sub": "salt-mirror",
@@ -125551,6 +127282,743 @@
     "caravan",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/bone-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/bone-scatter-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/boot-prints-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "boot-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/cairn-trail-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "cairn-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "marker",
+    "trail",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/camel-prints-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "camel-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "caravan",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/crack-lines-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "crack-lines",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cracks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/crack-lines-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "crack-lines",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cracks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/crack-lines-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "crack-lines",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cracks",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/dry-puddle-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "dry-puddle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dry",
+    "puddle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/dry-puddle-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "dry-puddle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dry",
+    "puddle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/dry-puddle-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "dry-puddle",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dry",
+    "puddle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/flood-line-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "flood-line",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "flood",
+    "mark",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/flood-stain-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "flood-stain",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "stain",
+    "flood",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/flood-stain-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "flood-stain",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "stain",
+    "flood",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/goat-trail-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "goat-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "goat",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/gravel-bar-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "gravel-bar",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "gravel",
+    "bar",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/litter-twigs-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "litter-twigs",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "debris",
+    "twigs",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/lizard-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "lizard-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "animal",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/moss-seep-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "moss-seep",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "green",
+    "wet",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/ochre-stain-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "ochre-stain",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "stain",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/pool-puddle-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "pool-puddle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "puddle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/pool-puddle-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "pool-puddle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "puddle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/rock-chips-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "rock-chips",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "rock",
+    "chips",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/rock-chips-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "rock-chips",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "rock",
+    "chips",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/sand-drift-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "sand-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "drift",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/sand-drift-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "sand-drift",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "drift",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/shade-patch-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "shade-patch",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shade",
+    "blue",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/shade-patch-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "shade-patch",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shade",
+    "blue",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/skull-bleached-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "skull-bleached",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "skull",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/vulture-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "vulture-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "bird",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/decals/wheel-ruts-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "decals",
+   "name": "wheel-ruts",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "cart",
+    "desert",
+    "red-wadi"
    ],
    "note": ""
   },
@@ -137334,6 +139802,3813 @@
     "fossil",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-000.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-001.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-004.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-005.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-007.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-016.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-017.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-020.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-021.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-023.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-028.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-029.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-031.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-064.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-065.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-068.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-069.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-071.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-080.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-081.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-084.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-085.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-087.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-092.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-093.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-095.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-112.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-113.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-116.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-117.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-119.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-124.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-125.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-127.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-193.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-197.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-199.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-209.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-213.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-215.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-221.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-223.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-241.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-245.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-247.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-253.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/red-cliff-255.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "red-cliff",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "cliff",
+    "raised",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-000.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-001.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-004.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-005.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-007.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-016.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-017.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-020.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-021.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-023.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-028.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-029.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-031.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-064.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-065.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-068.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-069.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-071.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-080.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-081.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-084.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-085.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-087.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-092.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-093.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-095.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-112.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-113.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-116.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-117.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-119.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-124.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-125.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-127.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-193.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-197.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-199.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-209.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-213.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-215.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-221.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-223.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-241.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-245.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-247.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-253.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-bed-255.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-bed",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "wadi",
+    "gravel",
+    "bed",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-000.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-001.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-004.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-005.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-007.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-016.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-017.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-020.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-021.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-023.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-028.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-029.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-031.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-064.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-065.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-068.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-069.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-071.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-080.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-081.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-084.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-085.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-087.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-092.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-093.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-095.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-112.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-113.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-116.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-117.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-119.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-124.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-125.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-127.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-193.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-197.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-199.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-209.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-213.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-215.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-221.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-223.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-241.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-245.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-247.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-253.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/edges/wadi-pool-255.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "edges",
+   "name": "wadi-pool",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "water",
+    "pool",
+    "shore",
+    "desert",
+    "red-wadi"
    ],
    "note": ""
   },
@@ -153206,6 +159481,309 @@
    "note": ""
   },
   {
+   "path": "ashkara/red-wadi/trees/caper-bush-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "caper-bush",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "flower",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/caper-bush-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "caper-bush",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "green",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/dead-snag-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "dead-snag",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "tree",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/dead-snag-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "dead-snag",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "tree",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/juniper-twisted-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "juniper-twisted",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "juniper",
+    "green",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/juniper-twisted-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "juniper-twisted",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "juniper",
+    "green",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/juniper-twisted-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "juniper-twisted",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "juniper",
+    "green",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/oleander-wild-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "oleander-wild",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "flower",
+    "pink",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/oleander-wild-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "oleander-wild",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "flower",
+    "white",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/tamarisk-wadi-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "tamarisk-wadi",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "green",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/tamarisk-wadi-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "tamarisk-wadi",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "green",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/trees/wild-fig-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "trees",
+   "name": "wild-fig",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "fig",
+    "green",
+    "signature",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/salt-mirror/trees/dead-palm-salt-a.svg",
    "region": "ashkara",
    "sub": "salt-mirror",
@@ -155028,6 +161606,452 @@
    "note": ""
   },
   {
+   "path": "ashkara/red-wadi/rocks/balanced-rock-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "balanced-rock",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "hoodoo",
+    "balanced",
+    "tall",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/hoodoo-spire-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "hoodoo-spire",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "hoodoo",
+    "tall",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/hoodoo-spire-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "hoodoo-spire",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "hoodoo",
+    "tall",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/hoodoo-spire-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "hoodoo-spire",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "hoodoo",
+    "tall",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/hoodoo-spire-d.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "hoodoo-spire",
+   "variant": "d",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "hoodoo",
+    "tall",
+    "tall",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/mesa-butte-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "mesa-butte",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "mesa",
+    "landmark",
+    "large",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/mesa-butte-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "mesa-butte",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "mesa",
+    "landmark",
+    "large",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/red-boulder-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "red-boulder",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "boulder",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/red-boulder-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "red-boulder",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "boulder",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/red-boulder-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "red-boulder",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "boulder",
+    "mossy",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/red-rubble-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "red-rubble",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rubble",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/red-rubble-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "red-rubble",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rubble",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/sandstone-arch-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "sandstone-arch",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "arch",
+    "landmark",
+    "signature",
+    "large",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/sandstone-arch-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "sandstone-arch",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "arch",
+    "landmark",
+    "large",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/scree-slope-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "scree-slope",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scree",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/scree-slope-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "scree-slope",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scree",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/strata-slab-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "strata-slab",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "slab",
+    "strata",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/rocks/strata-slab-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "rocks",
+   "name": "strata-slab",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "slab",
+    "strata",
+    "one",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/salt-mirror/rocks/gypsum-rose-a.svg",
    "region": "ashkara",
    "sub": "salt-mirror",
@@ -156448,6 +163472,199 @@
     "dune",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/grass/desert-gourd-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "grass",
+   "name": "desert-gourd",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "plant",
+    "fruit",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/grass/dry-sedge-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "grass",
+   "name": "dry-sedge",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "pale",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/grass/red-grass-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "grass",
+   "name": "red-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "dry",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/grass/red-grass-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "grass",
+   "name": "red-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "dry",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/grass/thornbush-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "grass",
+   "name": "thornbush",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "thorn",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/grass/thornbush-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "grass",
+   "name": "thornbush",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "thorn",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/grass/wadi-reed-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "grass",
+   "name": "wadi-reed",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "reed",
+    "tall",
+    "tall",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/grass/wadi-reed-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "grass",
+   "name": "wadi-reed",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "reed",
+    "tall",
+    "dry",
+    "tall",
+    "desert",
+    "red-wadi"
    ],
    "note": ""
   },
@@ -157923,6 +165140,854 @@
     "obstacle",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-00.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-01.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-02.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-03.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-04.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-05.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-06.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-07.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-08.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-09.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-10.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-11.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-12.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-13.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-14.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/bridge-rope-15.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "bridge-rope",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "bridge",
+    "rope",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-00.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-01.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-02.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-03.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-04.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-05.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-06.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-07.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-08.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-09.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-10.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-11.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-12.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-13.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-14.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/fences/wall-red-stone-15.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "fences",
+   "name": "wall-red-stone",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "wall",
+    "stone",
+    "obstacle",
+    "desert",
+    "red-wadi"
    ],
    "note": ""
   },
@@ -162668,6 +170733,564 @@
    "note": ""
   },
   {
+   "path": "ashkara/red-wadi/props/cairn-red-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "cairn-red",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cairn",
+    "marker",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/cairn-red-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "cairn-red",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cairn",
+    "marker",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/carved-niche-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "carved-niche",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "niche",
+    "rock-cut",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/cave-mouth-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "cave-mouth",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cave",
+    "dark",
+    "signature",
+    "obstacle",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/cave-mouth-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "cave-mouth",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cave",
+    "dark",
+    "obstacle",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/clay-jar-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "clay-jar",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "pottery",
+    "jar",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/clay-jar-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "clay-jar",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "pottery",
+    "jar",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/driftwood-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "driftwood",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "wood",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/driftwood-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "driftwood",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "wood",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/flood-debris-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "flood-debris",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "debris",
+    "flood",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/flood-debris-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "flood-debris",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "debris",
+    "flood",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/flood-debris-c.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "flood-debris",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "debris",
+    "flood",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/goat-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "goat",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "animal",
+    "goat",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/goat-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "goat",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "animal",
+    "goat",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/offering-bowl-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "offering-bowl",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "altar",
+    "bowl",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/rock-cut-steps-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "rock-cut-steps",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "stairs",
+    "rock-cut",
+    "signature",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/rock-cut-steps-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "rock-cut-steps",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "stairs",
+    "rock-cut",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/rope-ladder-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "rope-ladder",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "ladder",
+    "cliff",
+    "signature",
+    "tall",
+    "tall",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/rope-ladder-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "rope-ladder",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "ladder",
+    "cliff",
+    "tall",
+    "tall",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/signpost-wadi-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "signpost-wadi",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sign",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/torch-sconce-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "torch-sconce",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "light",
+    "lit",
+    "rock-cut",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/torch-sconce-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "torch-sconce",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "light",
+    "unlit",
+    "rock-cut",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/props/water-skin-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "props",
+   "name": "water-skin",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "loot",
+    "camp",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/salt-mirror/props/barrel-brine-a.svg",
    "region": "ashkara",
    "sub": "salt-mirror",
@@ -165810,6 +174433,470 @@
    "note": ""
   },
   {
+   "path": "ashkara/red-wadi/interest/bedouin-camp-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "bedouin-camp",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "camp",
+    "tent",
+    "obstacle",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/chest-red-closed.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "chest-red",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/chest-red-open.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "chest-red",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/cliff-dwelling-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "cliff-dwelling",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "dwelling",
+    "cliff",
+    "building",
+    "obstacle",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/cliff-dwelling-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "cliff-dwelling",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "dwelling",
+    "cliff",
+    "building",
+    "obstacle",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/flood-wreck-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "flood-wreck",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "wreck",
+    "flood",
+    "cart",
+    "obstacle",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/gate-rock-cut-door-closed.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "gate-rock-cut-door",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "closed",
+    "rock-cut",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/gate-rock-cut-door-open.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "gate-rock-cut-door",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "open",
+    "rock-cut",
+    "signature",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/high-place-altar-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "high-place-altar",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "altar",
+    "steps",
+    "obstacle",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/hoodoo-grove-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "hoodoo-grove",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "hoodoo",
+    "grove",
+    "obstacle",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/obelisk-rock-cut-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "obelisk-rock-cut",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "obelisk",
+    "rock-cut",
+    "tall",
+    "signature",
+    "obstacle",
+    "tall",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/rock-cut-facade-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "rock-cut-facade",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "tomb",
+    "rock-cut",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/rock-cut-facade-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "rock-cut-facade",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "tomb",
+    "rock-cut",
+    "obstacle",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/stele-carved-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "stele-carved",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "stele",
+    "carved",
+    "tall",
+    "obstacle",
+    "tall",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/stele-carved-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "stele-carved",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "stele",
+    "carved",
+    "tall",
+    "obstacle",
+    "tall",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/tomb-door-small-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "tomb-door-small",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "door",
+    "rock-cut",
+    "tomb",
+    "obstacle",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/tomb-door-small-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "tomb-door-small",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "door",
+    "rock-cut",
+    "tomb",
+    "obstacle",
+    "one",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/interest/wadi-spring-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "interest",
+   "name": "wadi-spring",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "spring",
+    "water",
+    "oasis",
+    "obstacle",
+    "large",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/salt-mirror/interest/brine-spring-a.svg",
    "region": "ashkara",
    "sub": "salt-mirror",
@@ -167574,6 +176661,292 @@
     "wind",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/canyon-shade-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "canyon-shade",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "shade",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/canyon-shade-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "canyon-shade",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "shade",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/cliff-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "cliff-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "edge",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/cliff-shadow-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "cliff-shadow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "edge",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/dusk-glow-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "dusk-glow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "dusk",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/flood-mist-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "flood-mist",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mist",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/heat-haze-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "heat-haze",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "heat",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/red-dust-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "red-dust",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dust",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/red-dust-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "red-dust",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dust",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/sun-shaft-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "sun-shaft",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "shaft",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/sun-shaft-b.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "sun-shaft",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "shaft",
+    "desert",
+    "red-wadi"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/red-wadi/overlays/wet-sheen-a.svg",
+   "region": "ashkara",
+   "sub": "red-wadi",
+   "category": "overlays",
+   "name": "wet-sheen",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "water",
+    "sparkle",
+    "desert",
+    "red-wadi"
    ],
    "note": ""
   },

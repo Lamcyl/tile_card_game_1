@@ -1,0 +1,50 @@
+// Ashkara sub-area 5 Red Wadi decals (transparent stamps on the ground) and overlays (blue canyon shade, cliff shadow, flood mist, red dust, sun shafts, haze, dusk glow).
+// Runs on its own; helpers come from red-wadi-lib.mjs.
+import { T, rng, f, ell, circ, rect, path, line, ink, wrapped, C, tile, pts, TER, BLU, BONE, bone, skull, pebbleD } from './red-wadi-lib.mjs';
+const dec = (name, v, fn, tags = []) => tile('decals', name, v, C, ['decal', ...tags], fn);
+const ov = (name, v, fn, tags = []) => tile('overlays', name, v, C, ['overlay', ...tags], fn);
+const wob = (cx, cy, rx, ry, seed, n = 9, j = .22) => { const r = rng(seed); let d = ''; for (let i = 0; i < n; i++) { const a = i / n * 6.283, k = 1 + r.range(-j, j); d += `${i ? 'L' : 'M'}${f(cx + Math.cos(a) * rx * k)} ${f(cy + Math.sin(a) * ry * k)}`; } return d + 'Z'; };
+const cracks = (seed, col, op) => { const r = rng(seed); let o = ''; for (let k = 0; k < 3; k++) { let x = r.range(8, 56), y = r.range(8, 56), d = `M${f(x)} ${f(y)}`; for (let i = 0; i < 5; i++) { x += r.range(-14, 14); y += r.range(-14, 14); d += `L${f(x)} ${f(y)}`; } o += line(d, col, 1.1, op); } return o; };
+// ---- ground decals ----
+for (const [v, rx, ry, s] of [['a', 15, 9, 1], ['b', 10, 6, 2], ['c', 20, 12, 3]]) dec('dry-puddle', v, () => path(wob(32, 34, rx, ry, s * 7), '#d8a488', .95, ink('#8e5a3e', .9, .7)) + [[-.5, -.2], [.4, .3], [0, .7]].map(([a, b]) => line(`M${f(32 + a * rx)} ${f(34 + b * ry - 3)}l${f(rx * .5)} ${f(ry * .5)}l${f(-rx * .2)} ${f(ry * .4)}`, '#6e3a28', 1, .6)).join('') + path(wob(32, 34, rx * .6, ry * .6, s * 7 + 1), '#e8c0a4', .5), ['dry', 'puddle']);
+for (const [v, rx, ry, s] of [['a', 15, 8, 5], ['b', 9, 5, 6]]) dec('pool-puddle', v, () => path(wob(32, 34, rx + 2.4, ry + 2.4, s * 7), '#f6dcc8', .9) + path(wob(32, 34, rx, ry, s * 7 + 1), '#8fb0a8', 1, ink('#4a7470', .9, .7)) + ell(30 - rx * .2, 32, rx * .5, 1.8, '#e6f6f0', .8) + line(`M${f(32 - rx * .4)} 37q4 -1.6 8 0t8 0`, '#e6f6f0', 1, .5), ['water', 'puddle']);
+dec('flood-stain', 'a', () => path(wob(30, 32, 22, 10, 11, 10, .3), '#a8664c', .3) + path(wob(34, 34, 13, 5, 12), '#8c4e36', .22), ['stain', 'flood']);
+dec('flood-stain', 'b', () => path(wob(26, 30, 14, 8, 13, 9, .3), '#a8664c', .3) + path(wob(42, 40, 12, 6, 14), '#a8664c', .26), ['stain', 'flood']);
+dec('flood-line', 'a', () => [0, 1, 2].map(i => line(`M${6 + i * 3} ${40 - i * 8}Q32 ${34 - i * 8} ${58 - i * 3} ${40 - i * 8}`, '#8c4e36', 1.4, .5 - i * .1) + line(`M${6 + i * 3} ${41.4 - i * 8}Q32 ${35.4 - i * 8} ${58 - i * 3} ${41.4 - i * 8}`, '#fbe0c4', .8, .5)).join(''), ['flood', 'mark']);
+dec('sand-drift', 'a', () => path('M6 44Q18 24 32 26Q46 26 58 44Q32 50 6 44Z', '#f0cca8', .95, ink('#c8987a', .8, .6)) + path('M32 26Q46 26 58 44Q46 46 38 44Q40 34 32 26Z', '#b07c58', .25) + ell(24, 34, 9, 2.4, '#fbe6d0', .8, -12), ['sand', 'drift']);
+dec('sand-drift', 'b', () => path('M10 42Q22 30 36 32Q50 34 54 44Q30 48 10 42Z', '#f0cca8', .95, ink('#c8987a', .8, .6)) + path('M36 32Q50 34 54 44H44Q44 38 36 32Z', '#b07c58', .25) + line('M16 40q8 -4 16 -2t16 4', '#b07c58', 1, .4), ['sand', 'drift']);
+dec('gravel-bar', 'a', () => pts(rng(21), 14, 5, 7).map(([x, y]) => pebbleD(x, 24 + y * .35, rng(x * 7)().valueOf() * .2 + .35, ['#e0c4a4', '#8a6a50'])).join(''), ['gravel', 'bar']);
+dec('rock-chips', 'a', () => pts(rng(31), 8, 8, 8).map(([x, y], i) => path(`M${f(x - 3)} ${f(y + 1.6)}L${f(x - .6)} ${f(y - 3)}L${f(x + 3.2)} ${f(y + 1)}L${f(x + 1)} ${f(y + 2.6)}Z`, i % 2 ? '#c47e56' : '#e8b48a', 1, ink('#5a2a20', .6, .8))).join(''), ['rock', 'chips']);
+dec('rock-chips', 'b', () => pts(rng(32), 6, 9, 11).map(([x, y]) => pebbleD(x, y, rng(Math.round(x))() * .3 + .5, ['#e8b48a', '#a8664c'])).join(''), ['rock', 'chips']);
+dec('shade-patch', 'a', () => path(wob(32, 34, 24, 12, 41, 10, .25), '#5e6088', .22) + path(wob(30, 33, 14, 7, 42), '#4a4a78', .16), ['shade', 'blue']);
+dec('shade-patch', 'b', () => path(wob(28, 30, 16, 9, 43, 9, .3), '#5e6088', .22) + path(wob(44, 42, 12, 6, 44), '#5e6088', .2), ['shade', 'blue']);
+for (const [v, s] of [['a', 51], ['b', 52], ['c', 53]]) dec('crack-lines', v, () => cracks(s, '#6e3a28', .55), ['cracks']);
+dec('goat-trail', 'a', () => { let o = ''; for (let i = 0; i < 7; i++) { const x = 6 + i * 8.5, y = 36 - i * 1.6 + (i % 2) * 5; o += path(`M${x - 1.6} ${y}q-1 -3 1 -3.8q1.8 -.4 1.8 2.2M${x + 1.4} ${y + .3}q-1 -3 1 -3.8q1.8 -.4 1.8 2.2`, 'none', 1, { stroke: '#6e3a28', 'stroke-width': 1.1, 'stroke-opacity': .6, 'stroke-linecap': 'round' }); } return o; }, ['tracks', 'goat']);
+dec('camel-prints', 'a', () => { let o = ''; for (let i = 0; i < 6; i++) { const x = 6 + i * 10, y = 24 + (i % 2) * 10 + i * 1.4; o += ell(x, y, 3.2, 2.4, '#8e5a3e', .55) + ell(x, y, 1.2, 1, '#e4c8b2', .55); } return o; }, ['tracks', 'caravan']);
+dec('boot-prints', 'a', () => { let o = ''; for (let i = 0; i < 6; i++) { const x = 8 + i * 9, y = 32 + (i % 2) * 8; o += path(`M${x - 3} ${y - 4}Q${x} ${y - 6} ${x + 3} ${y - 4}L${x + 2.4} ${y + 1}Q${x} ${y + 3} ${x - 2.4} ${y + 1}Z`, '#8e5a3e', .5) + line(`M${x - 2} ${y - 2}h4`, '#e4c8b2', .6, .5); } return o; }, ['tracks']);
+dec('wheel-ruts', 'a', () => line('M-2 24Q20 22 40 26T66 24', '#8e5a3e', 2.6, .5) + line('M-2 40Q20 38 40 42T66 40', '#8e5a3e', 2.6, .5) + line('M-2 25.4Q20 23.4 40 27.4T66 25.4', '#fbe0c4', .9, .6) + line('M-2 41.4Q20 39.4 40 43.4T66 41.4', '#fbe0c4', .9, .6), ['tracks', 'cart']);
+dec('bone-scatter', 'a', () => bone(22, 30, 14, -20) + bone(40, 40, 12, 28) + bone(30, 48, 9, 80) + circ(46, 26, 2.2, '#fffaf0', 1, ink('#8a7458', .5, .8)), ['bones']);
+dec('bone-scatter', 'b', () => bone(20, 44, 12, 14) + skull(40, 28, .7, 20) + bone(44, 48, 9, -40), ['bones']);
+dec('skull-bleached', 'a', () => skull(32, 34, 1.4, -8), ['bones', 'skull']);
+dec('litter-twigs', 'a', () => pts(rng(61), 7, 9, 12).map(([x, y], i) => line(`M${f(x - 5)} ${f(y)}l10 ${i % 2 ? 2 : -2}`, '#8a6238', 1.6, .9) + line(`M${f(x - 5)} ${f(y - .6)}l10 ${i % 2 ? 2 : -2}`, '#d0a870', .6, .8)).join(''), ['debris', 'twigs']);
+dec('cairn-trail', 'a', () => [[10, 44], [22, 38], [34, 32], [46, 26], [56, 20]].map(([x, y]) => pebbleD(x, y, 1, ['#e8b48a', '#a8664c']) + pebbleD(x, y - 3, .6, ['#f0c8a4', '#c47e56'])).join(''), ['marker', 'trail']);
+dec('lizard-shadow', 'a', () => `<g opacity=".4" transform="translate(32 34) rotate(24)">${path('M-12 0Q-6 -2 0 0Q6 -3 10 -1L14 0L10 1Q6 3 0 2Q-6 3 -12 0Z', '#3b2a24')}${line('M-4 -1L-8 -5M-4 2L-8 6M4 -1L8 -5M4 2L8 6', '#3b2a24', 1.2, 1)}${line('M-12 0Q-18 4 -22 1', '#3b2a24', 1.4, 1)}</g>`, ['shadow', 'animal']);
+dec('vulture-shadow', 'a', () => `<g opacity=".28" transform="translate(32 34) rotate(18)">${path('M-18 2Q-8 -6 0 0Q8 -6 18 2Q8 -2 3 4L0 8L-3 4Q-8 -2 -18 2Z', '#3a2a4a')}</g>`, ['shadow', 'bird']);
+dec('ochre-stain', 'a', () => path(wob(30, 32, 18, 8, 71, 9, .3), '#e0b070', .4) + path(wob(32, 33, 9, 4, 72), '#c8883c', .3), ['stain']);
+dec('moss-seep', 'a', () => path(wob(32, 34, 14, 7, 81, 9, .3), '#8aa05c', .5) + path(wob(30, 33, 8, 4, 82), '#c8d68a', .5) + line('M20 36q6 -3 12 0t12 0', '#e6f6f0', .8, .5), ['green', 'wet']);
+// ---- overlays ----
+const grad = (id, cx, cy, r, col, a0, a1 = 0) => `<radialGradient id="${id}" cx="${cx}" cy="${cy}" r="${r}"><stop offset="0" stop-color="${col}" stop-opacity="${a0}"/><stop offset="1" stop-color="${col}" stop-opacity="${a1}"/></radialGradient>`;
+ov('canyon-shade', 'a', () => rect(0, 0, 64, 64, '#6a6aa0', 0, .18) + wrapped(32, 32, 30, (x, y) => ell(x, y, 30, 18, '#4a4a88', .1)), ['tint', 'shade']);
+ov('canyon-shade', 'b', () => rect(0, 0, 64, 64, '#7a78b0', 0, .14) + wrapped(20, 40, 24, (x, y) => ell(x, y, 24, 10, '#5a5a98', .12)), ['tint', 'shade']);
+ov('cliff-shadow', 'a', () => `<defs><linearGradient id="cs" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3a6a" stop-opacity=".42"/><stop offset="1" stop-color="#3a3a6a" stop-opacity="0"/></linearGradient></defs>` + rect(0, 0, 64, 64, 'url(#cs)'), ['shadow', 'edge']);
+ov('cliff-shadow', 'b', () => `<defs><linearGradient id="cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a6a" stop-opacity=".42"/><stop offset="1" stop-color="#3a3a6a" stop-opacity="0"/></linearGradient></defs>` + rect(0, 0, 64, 64, 'url(#cs)'), ['shadow', 'edge']);
+const dustO = (seed, n, op) => { const r = rng(seed); let o = ''; for (let i = 0; i < n; i++) { const x = r.range(0, T), y = r.range(0, T), w = r.range(14, 26); o += wrapped(x, y, w, (a, b) => ell(a, b, w, 3, '#e8a078', op, r.range(-8, 8)) + ell(a + 2, b - 1, w * .6, 1.6, '#f6c8a8', op)); } return o; };
+ov('red-dust', 'a', () => dustO(8901, 6, .3), ['wind', 'dust']);
+ov('red-dust', 'b', () => dustO(8902, 9, .22), ['wind', 'dust']);
+ov('flood-mist', 'a', () => wrapped(20, 40, 28, (x, y) => ell(x, y, 28, 7, '#e6f2f0', .4)) + wrapped(46, 22, 24, (x, y) => ell(x, y, 24, 6, '#fff', .34)), ['mist']);
+const shaft = (x0, w, op) => `<path d="M${x0} 0H${x0 + w}L${x0 + w - 22} 64H${x0 - 22}Z" fill="#fff0c8" opacity="${op}"/>`;
+ov('sun-shaft', 'a', () => shaft(30, 10, .26) + shaft(48, 6, .2) + shaft(14, 5, .16), ['light', 'shaft']);
+ov('sun-shaft', 'b', () => shaft(36, 14, .22) + shaft(18, 6, .2), ['light', 'shaft']);
+ov('heat-haze', 'a', () => Array.from({ length: 5 }, (_, i) => path(`M${8 + i * 12} 60Q${14 + i * 12} 44 ${8 + i * 12} 30Q${2 + i * 12} 16 ${8 + i * 12} 2`, 'none', 1, { stroke: '#fff', 'stroke-width': 2, 'stroke-opacity': .4 - i * .05, 'stroke-linecap': 'round' })).join(''), ['heat']);
+ov('dusk-glow', 'a', () => rect(0, 0, 64, 64, '#e8704c', 0, .14) + wrapped(32, 32, 30, (x, y) => ell(x, y, 30, 18, '#f6a070', .14)), ['tint', 'dusk']);
+ov('wet-sheen', 'a', () => [16, 30, 44].map((y, i) => line(`M${-4 + i * 8} ${y}q8 -3 16 0t16 0t16 0t16 0`, i % 2 ? '#fff' : '#e6f6f0', 1.6, .6)).join('') + wrapped(46, 22, 3, (x, y) => circ(x, y, 1.1, '#fff', .9)), ['water', 'sparkle']);
