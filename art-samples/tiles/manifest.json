@@ -96,7 +96,11 @@
     "dune-crest",
     "dry-pool",
     "scrub-patch",
-    "shell-bed"
+    "shell-bed",
+    "pool-lagoon",
+    "lush-meadow",
+    "papyrus-bed",
+    "irrigated-field"
    ],
    "fileSuffix": "zero-padded decimal canonical mask, e.g. water-shore-017.svg",
    "neighbourOutsideSet": "a neighbour in the set (bit = 1) means the tile continues across that edge"
@@ -142,7 +146,9 @@
     "wall-drystone",
     "fence-rope-post",
     "wall-mudbrick",
-    "fence-driftwood"
+    "fence-driftwood",
+    "ditch-irrigation",
+    "hedge-oleander"
    ],
    "fileSuffix": "two-digit decimal mask, e.g. fence-wood-06.svg"
   },
@@ -188,24 +194,24 @@
   "ashkara": {
    "name": "Ashkara (desert)",
    "doc": "art-samples/maps/DESERT.md",
-   "total": 719,
+   "total": 1126,
    "counts": {
-    "ground": 51,
-    "ground-detail": 19,
-    "decals": 46,
-    "edges": 376,
-    "trees": 37,
-    "rocks": 24,
-    "grass": 11,
-    "fences": 32,
-    "props": 76,
-    "interest": 27,
-    "overlays": 20
+    "ground": 83,
+    "ground-detail": 36,
+    "decals": 79,
+    "edges": 564,
+    "trees": 58,
+    "rocks": 33,
+    "grass": 21,
+    "fences": 64,
+    "props": 112,
+    "interest": 44,
+    "overlays": 32
    },
    "subareas": {
     "common": "done (desert step 1)",
     "dune-shallows": "done (desert step 2)",
-    "seven-palms": "planned",
+    "seven-palms": "done (desert step 3)",
     "singing-erg": "planned",
     "salt-mirror": "planned",
     "red-wadi": "planned",
@@ -228,7 +234,7 @@
   "interest": 93,
   "overlays": 153
  },
- "total": 5260,
+ "total": 5667,
  "tiles": [
   {
    "path": "greenvale/bamboo-valley/ground/floor-bamboo-a.svg",
@@ -119611,6 +119617,786 @@
    "note": ""
   },
   {
+   "path": "ashkara/seven-palms/ground/cream-oasis-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "cream-oasis-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/grass-lush-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "grass-lush",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/grass-lush-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "grass-lush",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tufts",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/grass-lush-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "grass-lush",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tufts",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/grass-lush-d.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "grass-lush",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "clover",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/grass-meadow-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "grass-meadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/grass-meadow-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "grass-meadow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tufts",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/grass-meadow-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "grass-meadow",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/loam-wet-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "loam-wet",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/loam-wet-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "loam-wet",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "furrows",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/loam-wet-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "loam-wet",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "mud",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-cream-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-cream-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-cream-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-cream-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-dune-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-dune-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-dune-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-dune-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-fine-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-fine-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-fine-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-fine-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-loam-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-loam-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-loam-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-loam-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-meadow-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-meadow-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-meadow-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-meadow-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-oasis-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-oasis-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/lush-oasis-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "lush-oasis-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/pool-deep-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "pool-deep",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "deep",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/pool-deep-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "pool-deep",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "deep",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/pool-water-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "pool-water",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/pool-water-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "pool-water",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/pool-water-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "pool-water",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/sand-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "sand-oasis",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/sand-oasis-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "sand-oasis",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tufts",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/sand-oasis-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "sand-oasis",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground/sand-oasis-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground",
+   "name": "sand-oasis-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/ground-detail/dune-grass-baked-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -120060,6 +120846,428 @@
     "tracks",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/fallen-dates-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "fallen-dates",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "dates",
+    "loot",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/fallen-dates-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "fallen-dates",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "dates",
+    "loot",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/irrigation-seep-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "irrigation-seep",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "water",
+    "seep",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/lush-clover-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "lush-clover",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "clover",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/lush-clover-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "lush-clover",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "clover",
+    "flowers",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/oleander-petals-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "oleander-petals",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "petals",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/oleander-petals-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "oleander-petals",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "petals",
+    "flowers",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/palm-litter-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "palm-litter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "palm",
+    "litter",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/palm-litter-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "palm-litter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "palm",
+    "litter",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/palm-litter-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "palm-litter",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "palm",
+    "litter",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/pool-lily-pads-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "pool-lily-pads",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "water",
+    "lily",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/pool-lily-pads-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "pool-lily-pads",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "water",
+    "lily",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/pool-lotus-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "pool-lotus",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "water",
+    "lotus",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/pool-lotus-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "pool-lotus",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "water",
+    "lotus",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/pool-lotus-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "pool-lotus",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "water",
+    "lotus",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/reed-sprouts-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "reed-sprouts",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "reeds",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/ground-detail/stepping-flags-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "ground-detail",
+   "name": "stepping-flags",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "flagstone",
+    "path",
+    "desert",
+    "seven-palms"
    ],
    "note": ""
   },
@@ -121081,6 +122289,796 @@
     "caravan",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/date-pits-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "date-pits",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dates",
+    "litter",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/dragonfly-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "dragonfly",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "animal",
+    "insect",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/dragonfly-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "dragonfly",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "animal",
+    "insect",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/fallen-frond-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "fallen-frond",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "palm",
+    "litter",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/fallen-frond-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "fallen-frond",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "palm",
+    "litter",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/fallen-frond-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "fallen-frond",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "palm",
+    "litter",
+    "dates",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/fish-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "fish-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "fish",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/fish-shadow-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "fish-shadow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "fish",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/frog-on-pad-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "frog-on-pad",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "animal",
+    "frog",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/frog-on-pad-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "frog-on-pad",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "animal",
+    "frog",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/goat-tracks-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "goat-tracks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "animal",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/lily-pad-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "lily-pad",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "lily",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/lily-pad-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "lily-pad",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "lily",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/lily-pad-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "lily-pad",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "lily",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/lotus-bloom-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "lotus-bloom",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "lotus",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/lotus-bloom-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "lotus-bloom",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "lotus",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/mud-puddle-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "mud-puddle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "puddle",
+    "mud",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/mud-puddle-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "mud-puddle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "puddle",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/palm-shade-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "palm-shade",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shade",
+    "palm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/palm-shade-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "palm-shade",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shade",
+    "palm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/palm-shade-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "palm-shade",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shade",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/petal-drift-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "petal-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "petals",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/petal-drift-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "petal-drift",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "petals",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/reed-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "reed-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shade",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/ripple-ring-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "ripple-ring",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "ripple",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/ripple-ring-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "ripple-ring",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "ripple",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/ripple-ring-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "ripple-ring",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "ripple",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/seep-trickle-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "seep-trickle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "trickle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/seep-trickle-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "seep-trickle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "trickle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/water-glint-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "water-glint",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "light",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/water-glint-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "water-glint",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "light",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/wet-footprints-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "wet-footprints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/decals/wet-footprints-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "decals",
+   "name": "wet-footprints",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "seven-palms"
    ],
    "note": ""
   },
@@ -130485,6 +132483,4941 @@
    "note": ""
   },
   {
+   "path": "ashkara/seven-palms/edges/irrigated-field-000.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-001.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-004.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-005.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-007.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-016.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-017.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-020.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-021.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-023.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-028.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-029.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-031.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-064.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-065.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-068.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-069.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-071.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-080.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-081.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-084.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-085.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-087.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-092.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-093.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-095.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-112.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-113.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-116.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-117.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-119.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-124.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-125.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-127.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-193.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-197.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-199.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-209.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-213.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-215.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-221.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-223.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-241.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-245.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-247.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-253.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/irrigated-field-255.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "irrigated-field",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "field",
+    "farm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-000.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-001.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-004.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-005.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-007.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-016.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-017.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-020.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-021.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-023.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-028.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-029.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-031.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-064.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-065.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-068.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-069.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-071.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-080.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-081.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-084.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-085.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-087.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-092.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-093.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-095.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-112.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-113.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-116.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-117.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-119.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-124.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-125.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-127.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-193.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-197.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-199.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-209.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-213.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-215.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-221.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-223.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-241.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-245.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-247.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-253.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/lush-meadow-255.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "lush-meadow",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "grass",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-000.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-001.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-004.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-005.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-007.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-016.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-017.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-020.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-021.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-023.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-028.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-029.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-031.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-064.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-065.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-068.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-069.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-071.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-080.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-081.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-084.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-085.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-087.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-092.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-093.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-095.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-112.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-113.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-116.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-117.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-119.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-124.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-125.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-127.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-193.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-197.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-199.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-209.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-213.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-215.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-221.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-223.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-241.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-245.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-247.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-253.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/papyrus-bed-255.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "papyrus-bed",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "papyrus",
+    "vegetation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-000.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-001.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-004.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-005.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-007.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-016.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-017.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-020.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-021.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-023.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-028.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-029.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-031.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-064.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-065.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-068.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-069.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-071.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-080.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-081.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-084.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-085.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-087.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-092.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-093.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-095.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-112.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-113.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-116.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-117.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-119.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-124.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-125.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-127.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-193.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-197.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-199.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-209.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-213.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-215.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-221.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-223.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-241.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-245.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-247.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-253.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/edges/pool-lagoon-255.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "edges",
+   "name": "pool-lagoon",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "water",
+    "oasis",
+    "pool",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/trees/acacia-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -131360,6 +138293,530 @@
    "note": ""
   },
   {
+   "path": "ashkara/seven-palms/trees/date-palm-fruiting-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "date-palm-fruiting",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "palm",
+    "obstacle",
+    "dates",
+    "loot",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/date-palm-fruiting-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "date-palm-fruiting",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "palm",
+    "obstacle",
+    "dates",
+    "loot",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/date-palm-fruiting-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "date-palm-fruiting",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "palm",
+    "obstacle",
+    "dates",
+    "loot",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/date-palm-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "date-palm-oasis",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "palm",
+    "obstacle",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/date-palm-oasis-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "date-palm-oasis",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "palm",
+    "obstacle",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/date-palm-pair-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "date-palm-pair",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "palm",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/date-palm-sapling-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "date-palm-sapling",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "palm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/date-palm-sapling-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "date-palm-sapling",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "palm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/fig-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "fig-oasis",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "tree",
+    "obstacle",
+    "fruit",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/fig-oasis-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "fig-oasis",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "tree",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/oleander-bush-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "oleander-bush",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush",
+    "obstacle",
+    "flowers",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/oleander-bush-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "oleander-bush",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush",
+    "obstacle",
+    "flowers",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/oleander-bush-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "oleander-bush",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush",
+    "obstacle",
+    "flowers",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/palm-grove-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "palm-grove-oasis",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "palm",
+    "obstacle",
+    "oasis",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/palm-grove-oasis-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "palm-grove-oasis",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "palm",
+    "obstacle",
+    "oasis",
+    "dates",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/palm-stump-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "palm-stump",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "palm",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/pomegranate-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "pomegranate",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush",
+    "obstacle",
+    "fruit",
+    "loot",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/pomegranate-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "pomegranate",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "bush",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/tamarisk-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "tamarisk",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "tamarisk",
+    "obstacle",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/tamarisk-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "tamarisk",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "tamarisk",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/trees/tamarisk-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "trees",
+   "name": "tamarisk",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "tamarisk",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/rocks/boulder-red-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -131931,6 +139388,231 @@
    "note": ""
   },
   {
+   "path": "ashkara/seven-palms/rocks/mossy-rock-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "rocks",
+   "name": "mossy-rock",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "moss",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/rocks/mossy-rock-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "rocks",
+   "name": "mossy-rock",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "moss",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/rocks/mossy-rock-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "rocks",
+   "name": "mossy-rock",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "moss",
+    "spring",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/rocks/river-stone-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "rocks",
+   "name": "river-stone",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "smooth",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/rocks/river-stone-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "rocks",
+   "name": "river-stone",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "smooth",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/rocks/river-stone-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "rocks",
+   "name": "river-stone",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "smooth",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/rocks/spring-boulder-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "rocks",
+   "name": "spring-boulder",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "obstacle",
+    "water",
+    "spring",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/rocks/wet-stones-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "rocks",
+   "name": "wet-stones",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/rocks/wet-stones-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "rocks",
+   "name": "wet-stones",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "rock",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/grass/dune-grass-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -132188,6 +139870,252 @@
     "dune",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/cattail-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "cattail-oasis",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "reeds",
+    "concealing",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/cattail-oasis-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "cattail-oasis",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "reeds",
+    "concealing",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/lotus-patch-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "lotus-patch",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "water",
+    "lotus",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/lotus-patch-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "lotus-patch",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "water",
+    "lotus",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/papyrus-stand-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "papyrus-stand",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "reeds",
+    "papyrus",
+    "concealing",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/papyrus-stand-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "papyrus-stand",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "reeds",
+    "papyrus",
+    "concealing",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/papyrus-stand-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "papyrus-stand",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "reeds",
+    "papyrus",
+    "concealing",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/sedge-tuft-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "sedge-tuft",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "grass",
+    "concealing",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/sedge-tuft-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "sedge-tuft",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "grass",
+    "concealing",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/grass/sedge-tuft-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "grass",
+   "name": "sedge-tuft",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "small",
+    "grass",
+    "concealing",
+    "desert",
+    "seven-palms"
    ],
    "note": ""
   },
@@ -133004,6 +140932,838 @@
     "obstacle",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-00.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-01.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-02.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-03.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-04.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-05.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-06.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-07.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-08.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-09.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-10.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-11.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-12.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-13.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-14.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/ditch-irrigation-15.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "ditch-irrigation",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "water",
+    "channel",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-00.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-01.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-02.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-03.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-04.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-05.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-06.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-07.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-08.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-09.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-10.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-11.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-12.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-13.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-14.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/fences/hedge-oleander-15.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "fences",
+   "name": "hedge-oleander",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "hedge",
+    "obstacle",
+    "desert",
+    "seven-palms"
    ],
    "note": ""
   },
@@ -134789,6 +143549,885 @@
    "note": ""
   },
   {
+   "path": "ashkara/seven-palms/props/basket-stack-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "basket-stack",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "basket",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/bench-palm-log-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "bench-palm-log",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "seat",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/clay-oven-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "clay-oven",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "oven",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/crate-dates-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "crate-dates",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "crate",
+    "dates",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/date-basket-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "date-basket",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "basket",
+    "dates",
+    "signature",
+    "loot",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/date-basket-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "date-basket",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "basket",
+    "dates",
+    "signature",
+    "loot",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/date-basket-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "date-basket",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "basket",
+    "dates",
+    "signature",
+    "empty",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/date-pile-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "date-pile",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "dates",
+    "loot",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/date-rack-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "date-rack",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "dates",
+    "drying",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/duck-pair-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "duck-pair",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "animal",
+    "bird",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/duck-pair-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "duck-pair",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "animal",
+    "bird",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/fish-trap-wicker-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "fish-trap-wicker",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "fishing",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/fish-trap-wicker-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "fish-trap-wicker",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "fishing",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/fish-trap-wicker-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "fish-trap-wicker",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "fishing",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/harvest-ladder-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "harvest-ladder",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "ladder",
+    "palm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/heron-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "heron-oasis",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "animal",
+    "bird",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/lantern-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "lantern-oasis",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "light",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/mortar-grind-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "mortar-grind",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "food",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/net-drying-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "net-drying",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "fishing",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/reed-boat-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "reed-boat",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "boat",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/reed-boat-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "reed-boat",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "boat",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/rope-bucket-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "rope-bucket",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/shaduf-lever-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "shaduf-lever",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "well",
+    "water",
+    "obstacle",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/shaduf-lever-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "shaduf-lever",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "well",
+    "water",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/shaduf-lever-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "shaduf-lever",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tall",
+    "well",
+    "water",
+    "obstacle",
+    "broken",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/signpost-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "signpost-oasis",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "sign",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/sluice-gate-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "sluice-gate",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "water",
+    "irrigation",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/sluice-gate-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "sluice-gate",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "water",
+    "irrigation",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/water-jar-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "water-jar",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "jar",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/water-jar-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "water-jar",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "jar",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/water-jar-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "water-jar",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "jar",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/water-trough-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "water-trough",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "water",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/water-trough-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "water-trough",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "water",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/well-oasis-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "well-oasis",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "well",
+    "water",
+    "obstacle",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/well-oasis-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "well-oasis",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "well",
+    "water",
+    "obstacle",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/props/well-oasis-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "props",
+   "name": "well-oasis",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "prop",
+    "well",
+    "water",
+    "obstacle",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/interest/chest-gilded-closed.svg",
    "region": "ashkara",
    "sub": "common",
@@ -135471,6 +145110,447 @@
    "note": ""
   },
   {
+   "path": "ashkara/seven-palms/interest/camp-under-palms-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "camp-under-palms",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "camp",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/chest-wicker-closed.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "chest-wicker",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "closed",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/chest-wicker-open.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "chest-wicker",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "open",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/date-harvest-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "date-harvest",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "dates",
+    "harvest",
+    "obstacle",
+    "loot",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/fisher-dock-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "fisher-dock",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "dock",
+    "water",
+    "fishing",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/gate-palm-frond-closed.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "gate-palm-frond",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "interest",
+    "signature",
+    "closed",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/gate-palm-frond-open.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "gate-palm-frond",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "gate",
+    "interest",
+    "signature",
+    "open",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/lotus-pond-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "lotus-pond",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "water",
+    "lotus",
+    "pond",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/oasis-pool-seven-palms-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "oasis-pool-seven-palms",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "landmark",
+    "oasis",
+    "palm",
+    "water",
+    "obstacle",
+    "signature",
+    "shaduf",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/oasis-pool-seven-palms-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "oasis-pool-seven-palms",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "landmark",
+    "oasis",
+    "palm",
+    "water",
+    "obstacle",
+    "signature",
+    "harvest",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/oasis-stall-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "oasis-stall",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "stall",
+    "shop",
+    "dates",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/oasis-stall-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "oasis-stall",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "stall",
+    "shop",
+    "dates",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/palm-pavilion-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "palm-pavilion",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "shelter",
+    "rest",
+    "obstacle",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/reed-hut-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "reed-hut",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "hut",
+    "building",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/reed-hut-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "reed-hut",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "hut",
+    "building",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/shaduf-garden-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "shaduf-garden",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "farm",
+    "water",
+    "obstacle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/interest/spring-fountain-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "interest",
+   "name": "spring-fountain",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "large",
+    "fountain",
+    "water",
+    "obstacle",
+    "signature",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/overlays/blown-sand-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -135935,6 +146015,295 @@
     "wind",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/dragonfly-drift-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "dragonfly-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "insect",
+    "animal",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/frond-light-shafts-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "frond-light-shafts",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "palm",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/morning-mist-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "morning-mist",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mist",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/morning-mist-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "morning-mist",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "mist",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/oasis-cool-tint-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "oasis-cool-tint",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "tint",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/palm-dapple-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "palm-dapple",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shade",
+    "palm",
+    "light",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/palm-dapple-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "palm-dapple",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shade",
+    "palm",
+    "light",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/palm-dapple-c.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "palm-dapple",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shade",
+    "palm",
+    "light",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/petal-fall-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "petal-fall",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "petals",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/pollen-motes-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "pollen-motes",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sparkle",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/pool-sparkle-a.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "pool-sparkle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sparkle",
+    "water",
+    "desert",
+    "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/seven-palms/overlays/pool-sparkle-b.svg",
+   "region": "ashkara",
+   "sub": "seven-palms",
+   "category": "overlays",
+   "name": "pool-sparkle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "sparkle",
+    "water",
+    "desert",
+    "seven-palms"
    ],
    "note": ""
   }
