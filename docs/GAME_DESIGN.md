@@ -756,4 +756,4 @@ Before WP18 part 2 (same sim, old levers): fresh account 9-11 but Greenvale clea
 ## 25. Future world notes (not implemented)
 
 - **Structure regions.** Not every region is open country. Some may be set *inside* a structure, e.g. 8 sub-areas within a pyramid, a Maya temple or a castle. Each floor, wing or chamber is a sub-area with its own boss, joined by a gate such as a stair, sealed door or portcullis. These regions need interior tilesets (floors, walls, pillars, doors, traps, light sources) and may mix in courtyards or open-roof levels for variety. See `docs/IMPLEMENTATION_PLAN.md`, "Future: long-term world expansion".
-- **Region order for art.** Greenvale (done, tileset in `art-samples/tiles/greenvale/`), then the desert region (in progress).
+- **Region order for art.** Greenvale (done, tileset in `art-samples/tiles/greenvale/`), then the desert region Ashkara (done, `art-samples/tiles/ashkara/`, 3,595 tiles).
