@@ -1,6 +1,6 @@
 # WP20 plan: tile-map overworld from the Greenvale and Ashkara tilesets
 
-Status: step 1 implemented (data + generator, see Step notes); steps 2 to 6 open. Replaces the painted free-roam map (`prototype/js/world-layout.js`, 733 lines; the painter in `prototype/js/map.js`, 2727 lines) with a tile map, re-spreads the WP19 progression (GAME_DESIGN 24.7 / 24.8) over 16 organic sub-areas, and makes a new region "mostly a data and tileset addition". Related: IMPLEMENTATION_PLAN "Future: long-term world expansion", `art-samples/tiles/TILESET.md`, `art-samples/maps/GREENVALE.md`, `DESERT.md`.
+Status: steps 1 and 2 implemented (see Step notes); steps 3 to 6 open. Replaces the painted free-roam map (`prototype/js/world-layout.js`, 733 lines; the painter in `prototype/js/map.js`, 2727 lines) with a tile map, re-spreads the WP19 progression (GAME_DESIGN 24.7 / 24.8) over 16 organic sub-areas, and makes a new region "mostly a data and tileset addition". Related: IMPLEMENTATION_PLAN "Future: long-term world expansion", `art-samples/tiles/TILESET.md`, `art-samples/maps/GREENVALE.md`, `DESERT.md`.
 
 ## 1. World model
 
@@ -134,3 +134,11 @@ Ordinary spots span `[bossLv - 2, bossLv - 1]` (meadow stays `[1, 2]`). Greenval
 - The generator keeps blocking sets (lakes, pools) 3 tiles away from borders and gates so a walkway always remains; nodes are placed after the static terrain and scatter props avoid lanes, so props never cut a route.
 - Camp: a single sub-area (no nodes) with eight 3-wide gate stubs at the box edge (N, E, S, W and the four corners). World y is negative north of the camp; step 3/4 must handle negative world coordinates (or add a global offset).
 - Output sizes: world-gen.js about 32 kB, assets/world about 95 kB per region (before the atlas step).
+
+**Step 2 (atlas rasteriser and size pilot), done.**
+- Rasteriser is Playwright Chromium (`tools/world/raster.mjs`), not `@resvg/resvg-js`: Chromium renders the SVG gradients correctly and encodes WebP itself, so no new devDependency was added (Playwright is a tool-level dependency; npm script `world:atlas` in `prototype/package.json`). Outputs: `prototype/assets/world/<region>-<grp>-<cls>.webp` + `<region>-atlas.json` (format in TILESET.md "Runtime use").
+- Sheets are split by group (terrain / prop / fx) and canvas class, not only by class, so quality can differ. fx = fog tiles plus the region's overlays (fog comes from Greenvale for every region).
+- Sizes are far under budget, so everything stays at 1.0x (no 0.75x/0.5x terrain): Greenvale 0.62 MB, Ashkara 0.46 MB, Camp 0.07 MB; single file about 4.7 MB (cap 9). Renderer can keep 1x tiles; no downscale blur at zoom 1.5.
+- Seam test (`tools/world/seam-test.mjs`, 3 x 3 chunks, zoom 0.8 / 1.5, 1 px overdraw): no visible seams; boundary gradient with q0.85 equals q1.0 (2.66 vs 2.67 at 0.8, 1.13 vs 1.13 at 1.5), so lossy WebP adds none.
+- Observation for step 3: the composed test area shows hard-edged stone/pale tiles mixed into plain meadow in places (set pieces such as `fences/wall-stone-mossy` and detail tiles); atlas values `256` in set grids have no manifest piece (skipped in the test). Check set/mask semantics when writing `tilemap.js`.
+- Re-run `node tools/world/raster.mjs` after every `node tools/build-world.mjs` (tile indices change).

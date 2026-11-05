@@ -6,6 +6,7 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview --host",
+    "world:atlas": "node ../tools/world/raster.mjs",
     "single": "vite build --mode single && node scripts/single-file.mjs",
     "android": "vite build && cap sync android && cap open android"
   },

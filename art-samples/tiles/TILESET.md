@@ -216,3 +216,17 @@ Folder `tiles/ashkara/sun-citadel/` (406 tiles, same naming and canvases), the l
 - Objects: scorched palms, glass trees, gold thorn; basalt boulders and columns, obsidian spires and shards, glass lumps, slag, gold ore, fallen gold blocks; burnt scrub, ash tufts, glass grass, ember weed; gold and obsidian obelisks (also broken), solar discs, mirror stands (with a light beam), fire bowls on pillars and on the ground (lit and unlit), djinn statues, scorched skeletons, gold pillars, sun banners, crystal lens stand, urns, offering bowl, sundial, gong, signpost.
 - Interest: `citadel-golden` a/b (landmark: the golden citadel seen from the glass desert, and the obelisk court), `gate-citadel-golden` closed/open (128x128, the region exit), `citadel-tower` a/b, `citadel-dome`, `watchtower-basalt`, `altar-sunfire`, `djinn-colossus`, `mirror-array`, `glass-spire` a/b, `doorway-citadel` closed/open, `stairs-gold` up/down, `chest-sun` closed/open, `camp-scorched`. Decals (19: glass cracks, scorch marks, ash, embers, footprints, gold dust, melt ring, drifts, fulgurite, cast shadows of obelisks and walls, scorched rune) and overlays (13: heat-distortion haze, sun glare, light rays, ember drift, golden haze, mirror glints, smoke, ink-blue shade).
 - Gallery: `tileset/ashkara-sun-citadel.html` plus the "Sun Citadel patch" on the index (`composeSunCitadel` in `_gen/compose-sun-citadel.mjs`, keys prefixed `sc:`, reroll button).
+
+## Runtime use (WP20 atlas)
+
+The game never loads the SVG tiles. `node tools/world/raster.mjs` (npm `world:atlas` in `prototype/`, needs Playwright's Chromium; run it after `node tools/build-world.mjs`) rasterises the tiles each region uses (`prototype/assets/world/<region>.json` `tiles`, plus the fog tiles and the region's overlays) into WebP sheets and `<region>-atlas.json` (`sheets[{file,grp,cls,w,h,scale}]`, `frames[i] = [sheet,x,y,w,h]` for `tiles[i]`, `extra["overlays/name-variant"]` for fog and overlays).
+- Naming: `<region>-<grp>-<cls>.webp`, `grp` = `terrain` (ground, ground-detail, edges/autotile), `prop` (trees, rocks, interest, fences, decals ...) or `fx` (fog and overlays); `cls` = `cell` (64 x 64), `tall` (64 x 128), `large` (128 x 128). Frames have a 2 px gutter; the renderer draws each cell 1 px oversize.
+- Scale and quality (flags `--terrain-scale/-q`, `--prop-scale/-q`, `--fx-scale/-q`): all groups 1.0x, lossy q0.85 (fx q0.75). The 0.75x / 0.5x terrain fallback was not needed.
+
+| Region | WebP total | Atlas JSON | Plan budget |
+|---|---|---|---|
+| Greenvale (606 tiles) | 0.62 MB | 12.7 kB | 2.0 MB |
+| Ashkara (520 tiles) | 0.46 MB | 10.7 kB | 2.0 MB |
+| Camp (72 tiles) | 0.07 MB | 2.1 kB | - |
+
+Extrapolated single file (3 regions): 2.86 MB + 1.15 MB x 1.33 (base64) + about 0.25 MB layer/atlas JSON = about 4.7 MB (cap 9 MB). Seam check: `node tools/world/seam-test.mjs <region> [x,y]` composes 3 x 3 chunks (16 x 16 tiles) like the runtime and blits them at zoom 0.8 and 1.5 at fractional camera offsets (PNG to `SEED_OUT` or `prototype/assets/world/_seam`, delete after use); the gradient at tile boundaries equals that of a q1.0 atlas, so lossy encoding adds no seams.
