@@ -207,19 +207,19 @@
   "ashkara": {
    "name": "Ashkara (desert)",
    "doc": "art-samples/maps/DESERT.md",
-   "total": 2357,
+   "total": 2758,
    "counts": {
-    "ground": 229,
-    "ground-detail": 94,
-    "decals": 177,
-    "edges": 1081,
-    "trees": 99,
-    "rocks": 88,
-    "grass": 46,
-    "fences": 176,
-    "props": 200,
-    "interest": 95,
-    "overlays": 72
+    "ground": 290,
+    "ground-detail": 111,
+    "decals": 204,
+    "edges": 1222,
+    "trees": 107,
+    "rocks": 101,
+    "grass": 52,
+    "fences": 208,
+    "props": 254,
+    "interest": 124,
+    "overlays": 85
    },
    "subareas": {
     "common": "done (desert step 1)",
@@ -228,7 +228,7 @@
     "singing-erg": "done (desert step 4)",
     "salt-mirror": "done (desert step 5)",
     "red-wadi": "done (desert step 6)",
-    "dust-bazaar": "planned",
+    "dust-bazaar": "done (desert step 7)",
     "tomb-approach": "planned",
     "sun-citadel": "planned"
    }
@@ -247,7 +247,7 @@
   "interest": 93,
   "overlays": 153
  },
- "total": 6898,
+ "total": 7299,
  "tiles": [
   {
    "path": "greenvale/bamboo-valley/ground/floor-bamboo-a.svg",
@@ -119630,6 +119630,1499 @@
    "note": ""
   },
   {
+   "path": "ashkara/dust-bazaar/ground/apricot-terra-bridge-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "apricot-terra-bridge",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-apricot-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-apricot-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-apricot-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-apricot-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-dune-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-dune-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-dune-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-dune-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-pan-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-pan-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-pan-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-pan-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-reg-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-reg-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-reg-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-reg-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-sand-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-sand-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-sand-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-sand-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-slab-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-slab-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-slab-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-slab-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-terra-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-terra-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/bazaar-terra-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "bazaar-terra-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/brick-rubble-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "brick-rubble",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "rubble",
+    "ruined",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/brick-rubble-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "brick-rubble",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "rubble",
+    "ruined",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/cobble-plaza-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "cobble-plaza-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/court-tile-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "court-tile",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tile",
+    "glazed",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/court-tile-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "court-tile",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tile",
+    "glazed",
+    "glint",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/court-tile-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "court-tile",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tile",
+    "cracked",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/dust-bazaar-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "dust-bazaar-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/dust-fine-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "dust-fine",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/dust-fine-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "dust-fine",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/dust-fine-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "dust-fine",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/earth-swept-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "earth-swept",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/earth-swept-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "earth-swept",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/earth-swept-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "earth-swept",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/earth-trampled-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "earth-trampled",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/earth-trampled-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "earth-trampled",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/earth-trampled-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "earth-trampled",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/mud-bazaar-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "mud-bazaar-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/mud-floor-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "mud-floor",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "mud-brick",
+    "cracks",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/mud-floor-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "mud-floor",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "mud-brick",
+    "cracks",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/packed-earth-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "packed-earth",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/packed-earth-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "packed-earth",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/packed-earth-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "packed-earth",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/packed-earth-d.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "packed-earth",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/plaza-bazaar-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "plaza-bazaar-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/plaza-bazaar-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "plaza-bazaar-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/plaza-cobble-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "plaza-cobble",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cobbles",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/plaza-cobble-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "plaza-cobble",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cobbles",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/plaza-cobble-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "plaza-cobble",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cobbles",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/plaza-slab-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "plaza-slab",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/plaza-slab-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "plaza-slab",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/plaza-slab-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "plaza-slab",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/plaza-slab-d.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "plaza-slab",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "pebbles",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/rose-bazaar-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "rose-bazaar-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/rubble-bazaar-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "rubble-bazaar-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/rug-red-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "rug-red",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "rug",
+    "cloth",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/rug-saffron-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "rug-saffron",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "rug",
+    "cloth",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/rug-teal-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "rug-teal",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "rug",
+    "cloth",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/shade-bazaar-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "shade-bazaar-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/shade-ground-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "shade-ground",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "shade",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/shade-ground-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "shade-ground",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "shade",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/straw-bazaar-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "straw-bazaar-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/straw-bazaar-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "straw-bazaar-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/straw-litter-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "straw-litter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "straw",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/straw-litter-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "straw-litter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "straw",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/straw-litter-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "straw-litter",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "straw",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground/trampled-bazaar-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground",
+   "name": "trampled-bazaar-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/red-wadi/ground/clay-cracked-a.svg",
    "region": "ashkara",
    "sub": "red-wadi",
@@ -124427,6 +125920,425 @@
    "note": ""
   },
   {
+   "path": "ashkara/dust-bazaar/ground-detail/ash-charcoal-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "ash-charcoal",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "ash",
+    "fire",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/bone-scraps-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "bone-scraps",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "bones",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/cloth-scraps-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "cloth-scraps",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "cloth",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/coins-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "coins-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "coins",
+    "loot",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/cracked-earth-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "cracked-earth",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "cracks",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/dates-fallen-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "dates-fallen",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "food",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/dung-pats-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "dung-pats",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "dung",
+    "animals",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/dye-spill-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "dye-spill",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "dye",
+    "stain",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/dye-spill-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "dye-spill",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "dye",
+    "stain",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/grain-spill-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "grain-spill",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "grain",
+    "loot",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/potsherds-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "potsherds",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pottery",
+    "loot",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/potsherds-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "potsherds",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pottery",
+    "loot",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/rope-coil-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "rope-coil",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "rope",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/spice-spill-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "spice-spill",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "spice",
+    "loot",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/spice-spill-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "spice-spill",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "spice",
+    "loot",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/straw-bundles-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "straw-bundles",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "straw",
+    "hay",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/ground-detail/weeds-dry-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "ground-detail",
+   "name": "weeds-dry",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "plants",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/red-wadi/ground-detail/ammonite-a.svg",
    "region": "ashkara",
    "sub": "red-wadi",
@@ -127282,6 +129194,645 @@
     "caravan",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/awning-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "awning-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "awning",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/bone-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/brick-chips-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "brick-chips",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "brick",
+    "chips",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/camel-prints-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "camel-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "caravan",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/camel-prints-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "camel-prints",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "caravan",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/cloth-scrap-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "cloth-scrap",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cloth",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/cloth-scrap-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "cloth-scrap",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cloth",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/coin-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "coin-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "coins",
+    "loot",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/crack-lines-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "crack-lines",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "cracks",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/dung-trail-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "dung-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dung",
+    "animals",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/dye-stain-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "dye-stain",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dye",
+    "stain",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/goat-trail-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "goat-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "goat",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/grain-spill-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "grain-spill",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "grain",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/lizard-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "lizard-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "animal",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/pigeon-feathers-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "pigeon-feathers",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "feathers",
+    "bird",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/puddle-muddy-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "puddle-muddy",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "puddle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/puddle-muddy-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "puddle-muddy",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "puddle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/puddle-muddy-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "puddle-muddy",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "water",
+    "puddle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/rope-coil-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "rope-coil",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "rope",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/sand-drift-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "sand-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "drift",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/sandal-prints-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "sandal-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/spice-spill-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "spice-spill",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "spice",
+    "color",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/spice-spill-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "spice-spill",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "spice",
+    "color",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/spice-spill-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "spice-spill",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "spice",
+    "color",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/straw-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "straw-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "straw",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/wheel-ruts-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "wheel-ruts",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "cart",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/decals/wine-lees-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "decals",
+   "name": "wine-lees",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "stain",
+    "desert",
+    "dust-bazaar"
    ],
    "note": ""
   },
@@ -139802,6 +142353,3907 @@
     "fossil",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-000.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-001.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-004.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-005.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-007.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-016.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-017.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-020.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-021.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-023.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-028.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-029.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-031.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-064.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-065.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-068.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-069.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-071.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-080.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-081.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-084.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-085.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-087.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-092.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-093.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-095.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-112.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-113.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-116.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-117.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-119.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-124.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-125.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-127.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-193.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-197.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-199.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-209.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-213.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-215.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-221.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-223.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-241.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-245.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-247.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-253.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/awning-cloth-255.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "awning-cloth",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "awning",
+    "cloth",
+    "shade",
+    "overhead",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-000.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-001.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-004.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-005.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-007.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-016.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-017.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-020.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-021.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-023.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-028.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-029.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-031.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-064.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-065.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-068.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-069.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-071.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-080.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-081.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-084.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-085.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-087.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-092.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-093.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-095.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-112.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-113.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-116.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-117.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-119.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-124.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-125.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-127.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-193.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-197.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-199.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-209.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-213.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-215.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-221.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-223.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-241.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-245.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-247.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-253.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/mudbrick-block-255.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "mudbrick-block",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "wall",
+    "building",
+    "raised",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-000.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-001.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-004.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-005.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-007.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-016.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-017.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-020.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-021.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-023.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-028.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-029.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-031.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-064.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-065.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-068.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-069.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-071.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-080.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-081.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-084.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-085.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-087.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-092.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-093.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-095.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-112.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-113.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-116.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-117.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-119.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-124.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-125.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-127.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-193.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-197.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-199.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-209.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-213.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-215.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-221.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-223.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-241.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-245.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-247.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-253.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/edges/plaza-paving-255.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "edges",
+   "name": "plaza-paving",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "paving",
+    "plaza",
+    "floor",
+    "desert",
+    "dust-bazaar"
    ],
    "note": ""
   },
@@ -159481,6 +165933,210 @@
    "note": ""
   },
   {
+   "path": "ashkara/dust-bazaar/trees/acacia-shade-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "trees",
+   "name": "acacia-shade",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "acacia",
+    "green",
+    "shade",
+    "tall",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/trees/acacia-shade-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "trees",
+   "name": "acacia-shade",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "acacia",
+    "dry",
+    "shade",
+    "tall",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/trees/fig-court-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "trees",
+   "name": "fig-court",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "fig",
+    "green",
+    "shade",
+    "tall",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/trees/fig-court-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "trees",
+   "name": "fig-court",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "fig",
+    "green",
+    "shade",
+    "tall",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/trees/pomegranate-pot-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "trees",
+   "name": "pomegranate-pot",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "pot",
+    "fruit",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/trees/pomegranate-pot-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "trees",
+   "name": "pomegranate-pot",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "pot",
+    "fruit",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/trees/trellis-vine-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "trees",
+   "name": "trellis-vine",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "vine",
+    "grapes",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/trees/trellis-vine-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "trees",
+   "name": "trellis-vine",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "vine",
+    "grapes",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/red-wadi/trees/caper-bush-a.svg",
    "region": "ashkara",
    "sub": "red-wadi",
@@ -161606,6 +168262,329 @@
    "note": ""
   },
   {
+   "path": "ashkara/dust-bazaar/rocks/brick-fall-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "brick-fall",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "brick",
+    "rubble",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/brick-fall-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "brick-fall",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "brick",
+    "rubble",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/brick-fall-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "brick-fall",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "brick",
+    "rubble",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/column-stump-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "column-stump",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "column",
+    "sandstone",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/column-stump-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "column-stump",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "column",
+    "sandstone",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/millstone-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "millstone",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "millstone",
+    "stone",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/millstone-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "millstone",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "millstone",
+    "stone",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/rubble-pile-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "rubble-pile",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rubble",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/rubble-pile-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "rubble-pile",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rubble",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/ruined-wall-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "ruined-wall",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "wall",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/ruined-wall-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "ruined-wall",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "wall",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/ruined-wall-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "ruined-wall",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "wall",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/rocks/stone-trough-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "rocks",
+   "name": "stone-trough",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "trough",
+    "water",
+    "one",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/red-wadi/rocks/balanced-rock-a.svg",
    "region": "ashkara",
    "sub": "red-wadi",
@@ -163476,6 +170455,150 @@
    "note": ""
   },
   {
+   "path": "ashkara/dust-bazaar/grass/hay-tuft-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "grass",
+   "name": "hay-tuft",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "hay",
+    "dry",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/grass/reed-bundle-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "grass",
+   "name": "reed-bundle",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "reeds",
+    "drying",
+    "tall",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/grass/thistle-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "grass",
+   "name": "thistle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "thistle",
+    "flower",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/grass/thistle-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "grass",
+   "name": "thistle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "thistle",
+    "flower",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/grass/weeds-dry-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "grass",
+   "name": "weeds-dry",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "dry",
+    "weeds",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/grass/weeds-dry-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "grass",
+   "name": "weeds-dry",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "dry",
+    "weeds",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/red-wadi/grass/desert-gourd-a.svg",
    "region": "ashkara",
    "sub": "red-wadi",
@@ -165140,6 +172263,870 @@
     "obstacle",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-00.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-01.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-02.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-03.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-04.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-05.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-06.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-07.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-08.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-09.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-10.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-11.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-12.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-13.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-14.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/rail-hitching-15.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "rail-hitching",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "rail",
+    "camel",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-00.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-01.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-02.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-03.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-04.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-05.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-06.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-07.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-08.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-09.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-10.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-11.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-12.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-13.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-14.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/fences/wall-mudbrick-15.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "fences",
+   "name": "wall-mudbrick",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "wall",
+    "mud-brick",
+    "obstacle",
+    "desert",
+    "dust-bazaar"
    ],
    "note": ""
   },
@@ -170733,6 +178720,1308 @@
    "note": ""
   },
   {
+   "path": "ashkara/dust-bazaar/props/amphora-rack-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "amphora-rack",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "jar",
+    "rack",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/awning-pole-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "awning-pole",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "awning",
+    "cloth",
+    "shade",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/awning-pole-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "awning-pole",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "awning",
+    "cloth",
+    "shade",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/awning-pole-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "awning-pole",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "awning",
+    "cloth",
+    "shade",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/awning-pole-d.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "awning-pole",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "awning",
+    "cloth",
+    "shade",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/awning-pole-e.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "awning-pole",
+   "variant": "e",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "awning",
+    "cloth",
+    "shade",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/banner-pole-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "banner-pole",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "banner",
+    "cloth",
+    "tall",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/banner-pole-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "banner-pole",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "banner",
+    "cloth",
+    "tall",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/banner-pole-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "banner-pole",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "banner",
+    "cloth",
+    "tall",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/barrel-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "barrel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "barrel",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/barrel-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "barrel",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "barrel",
+    "oil",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/brazier-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "brazier",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "fire",
+    "lit",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/brazier-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "brazier",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "fire",
+    "unlit",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/bread-basket-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "bread-basket",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bread",
+    "food",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/brick-pile-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "brick-pile",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "brick",
+    "building",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/camel-kneeling-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "camel-kneeling",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camel",
+    "animal",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/camel-kneeling-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "camel-kneeling",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camel",
+    "animal",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/chicken-coop-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "chicken-coop",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "coop",
+    "animal",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/cloth-bundle-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "cloth-bundle",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cloth",
+    "bale",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/cloth-bundle-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "cloth-bundle",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cloth",
+    "bale",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/cloth-rack-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "cloth-rack",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "cloth",
+    "dye",
+    "tall",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/crates-fruit-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "crates-fruit",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "crate",
+    "fruit",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/crates-fruit-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "crates-fruit",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "crate",
+    "fruit",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/crates-goods-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "crates-goods",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "crate",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/cushions-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "cushions",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seat",
+    "cloth",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/cushions-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "cushions",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seat",
+    "cloth",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/dung-cakes-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "dung-cakes",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "dung",
+    "fuel",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/hay-bale-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "hay-bale",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "hay",
+    "bale",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/hitching-post-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "hitching-post",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camel",
+    "post",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/hitching-post-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "hitching-post",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camel",
+    "post",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/hitching-post-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "hitching-post",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camel",
+    "post",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/hookah-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "hookah",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "hookah",
+    "brass",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/jar-big-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "jar-big",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "jar",
+    "pottery",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/jar-big-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "jar-big",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "jar",
+    "pottery",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/lamp-post-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "lamp-post",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "lamp",
+    "light",
+    "tall",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/lamp-post-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "lamp-post",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "lamp",
+    "light",
+    "tall",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/lantern-hanging-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "lantern-hanging",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "lamp",
+    "light",
+    "hanging",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/lantern-hanging-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "lantern-hanging",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "lamp",
+    "light",
+    "hanging",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/lantern-hanging-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "lantern-hanging",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "lamp",
+    "light",
+    "hanging",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/merchant-scales-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "merchant-scales",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scales",
+    "brass",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/mud-oven-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "mud-oven",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "oven",
+    "bread",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/notice-board-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "notice-board",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "board",
+    "notice",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/rug-rolls-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "rug-rolls",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rug",
+    "cloth",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/rug-rolls-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "rug-rolls",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rug",
+    "cloth",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/rug-stack-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "rug-stack",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rug",
+    "cloth",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/sacks-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "sacks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sack",
+    "grain",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/sacks-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "sacks",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sack",
+    "grain",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/sacks-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "sacks",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sack",
+    "spice",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/signboard-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "signboard",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sign",
+    "wood",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/signboard-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "signboard",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sign",
+    "wood",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/tea-table-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "tea-table",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "tea",
+    "table",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/teapots-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "teapots",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "tea",
+    "brass",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/teapots-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "teapots",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "tea",
+    "brass",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/props/water-skin-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "props",
+   "name": "water-skin",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "water",
+    "skin",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/red-wadi/props/cairn-red-a.svg",
    "region": "ashkara",
    "sub": "red-wadi",
@@ -174433,6 +183722,748 @@
    "note": ""
   },
   {
+   "path": "ashkara/dust-bazaar/interest/caravan-wagon-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "caravan-wagon",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "wagon",
+    "caravan",
+    "covered",
+    "obstacle",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/caravan-wagon-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "caravan-wagon",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "wagon",
+    "caravan",
+    "open",
+    "obstacle",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/caravanserai-court-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "caravanserai-court",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "caravanserai",
+    "ruin",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/caravanserai-court-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "caravanserai-court",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "caravanserai",
+    "court",
+    "signature",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/chest-bazaar-closed.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "chest-bazaar",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "closed",
+    "loot",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/chest-bazaar-open.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "chest-bazaar",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "open",
+    "loot",
+    "one",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/dyer-vats-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "dyer-vats",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "dyer",
+    "cloth",
+    "workshop",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/dyer-vats-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "dyer-vats",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "dyer",
+    "cloth",
+    "workshop",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/gate-bazaar-city-closed.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "gate-bazaar-city",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "closed",
+    "sandstone",
+    "pylon",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/gate-bazaar-city-open.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "gate-bazaar-city",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "open",
+    "sandstone",
+    "pylon",
+    "signature",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/mudbrick-house-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "mudbrick-house",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "house",
+    "mud-brick",
+    "building",
+    "obstacle",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/mudbrick-house-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "mudbrick-house",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "house",
+    "mud-brick",
+    "building",
+    "obstacle",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/mudbrick-house-c.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "mudbrick-house",
+   "variant": "c",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "house",
+    "mud-brick",
+    "building",
+    "obstacle",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/mudbrick-tower-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "mudbrick-tower",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tower",
+    "mud-brick",
+    "building",
+    "obstacle",
+    "tall",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/mudbrick-tower-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "mudbrick-tower",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tower",
+    "mud-brick",
+    "building",
+    "obstacle",
+    "tall",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/rug-merchant-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "rug-merchant",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "merchant",
+    "rug",
+    "shop",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/rug-merchant-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "rug-merchant",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "merchant",
+    "rug",
+    "shop",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-fruit-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-fruit",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "fruit",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-fruit-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-fruit",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "fruit",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-lamp-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-lamp",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "lamp",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-lamp-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-lamp",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "lamp",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-pottery-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-pottery",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "pottery",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-pottery-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-pottery",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "pottery",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-rug-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-rug",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "rug",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-rug-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-rug",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "rug",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-spice-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-spice",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "spice",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/stall-spice-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "stall-spice",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "stall",
+    "shop",
+    "spice",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/well-court-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "well-court",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "well",
+    "court",
+    "water",
+    "signature",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/interest/well-court-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "interest",
+   "name": "well-court",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "well",
+    "court",
+    "water",
+    "signature",
+    "large",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/red-wadi/interest/bedouin-camp-a.svg",
    "region": "ashkara",
    "sub": "red-wadi",
@@ -176661,6 +186692,318 @@
     "wind",
     "desert",
     "dune-shallows"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/awning-shade-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "awning-shade",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "shade",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/awning-shade-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "awning-shade",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "shade",
+    "cloth",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/cloth-shade-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "cloth-shade",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "edge",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/cloth-shade-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "cloth-shade",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "edge",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/cooking-smoke-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "cooking-smoke",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "smoke",
+    "fire",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/dusk-glow-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "dusk-glow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "dusk",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/dust-haze-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "dust-haze",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dust",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/dust-haze-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "dust-haze",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dust",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/heat-haze-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "heat-haze",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "heat",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/lantern-glow-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "lantern-glow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "lamp",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/spice-haze-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "spice-haze",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "haze",
+    "spice",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/sun-shaft-a.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "sun-shaft",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "shaft",
+    "desert",
+    "dust-bazaar"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/dust-bazaar/overlays/sun-shaft-b.svg",
+   "region": "ashkara",
+   "sub": "dust-bazaar",
+   "category": "overlays",
+   "name": "sun-shaft",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "shaft",
+    "desert",
+    "dust-bazaar"
    ],
    "note": ""
   },

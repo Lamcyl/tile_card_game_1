@@ -15,6 +15,7 @@ await import('./gen-ashkara-seven-palms.mjs');   // Ashkara sub-area 2: Seven Pa
 await import('./gen-ashkara-singing-erg.mjs'); await import('./gen-ashkara-singing-erg-objects.mjs'); await import('./gen-ashkara-singing-erg-interest.mjs'); await import('./gen-ashkara-singing-erg-decals.mjs');   // Ashkara sub-area 3: Singing Erg (four files, each runnable on its own; helpers in singing-erg-lib.mjs)
 await import('./gen-ashkara-salt-mirror.mjs'); await import('./gen-ashkara-salt-mirror-objects.mjs'); await import('./gen-ashkara-salt-mirror-interest.mjs'); await import('./gen-ashkara-salt-mirror-decals.mjs');   // Ashkara sub-area 4: Salt Mirror (four files, each runnable on its own; helpers in salt-mirror-lib.mjs)
 await import('./gen-ashkara-red-wadi.mjs'); await import('./gen-ashkara-red-wadi-objects.mjs'); await import('./gen-ashkara-red-wadi-interest.mjs'); await import('./gen-ashkara-red-wadi-decals.mjs');   // Ashkara sub-area 5: Red Wadi (four files, each runnable on its own; helpers in red-wadi-lib.mjs)
+await import('./gen-ashkara-dust-bazaar.mjs'); await import('./gen-ashkara-dust-bazaar-objects.mjs'); await import('./gen-ashkara-dust-bazaar-interest.mjs'); await import('./gen-ashkara-dust-bazaar-decals.mjs');   // Ashkara sub-area 6: Dust Bazaar (four files, each runnable on its own; helpers in dust-bazaar-lib.mjs)
 const order = ['ground', 'ground-detail', 'decals', 'edges', 'trees', 'rocks', 'grass', 'fences', 'props', 'interest', 'overlays'];
 const REGIONS = ['greenvale', 'ashkara'];   // greenvale first keeps its manifest order unchanged
 registry.sort((a, b) => REGIONS.indexOf(a.region) - REGIONS.indexOf(b.region) || order.indexOf(a.category) - order.indexOf(b.category) || a.path.localeCompare(b.path));
@@ -31,7 +32,7 @@ const manifest = {
   subareas: { common: 'shared by the whole region', 'sunny-meadows': 'done (step 2)', 'old-oak-wood': 'done (step 2)', 'bamboo-valley': 'done (step 3)', 'mirror-lake': 'done (step 3)', 'rice-terraces': 'done (step 4)', 'mossy-ruins': 'done (step 4)', 'firefly-marsh': 'done (step 5)', 'misty-highlands': 'done (step 5)' },
   regions: {
     greenvale: { total: registry.filter(t => t.region === 'greenvale').length, counts },
-    ashkara: { name: 'Ashkara (desert)', doc: 'art-samples/maps/DESERT.md', total: registry.filter(t => t.region === 'ashkara').length, counts: countsOf(registry.filter(t => t.region === 'ashkara')), subareas: { common: 'done (desert step 1)', 'dune-shallows': 'done (desert step 2)', 'seven-palms': 'done (desert step 3)', 'singing-erg': 'done (desert step 4)', 'salt-mirror': 'done (desert step 5)', 'red-wadi': 'done (desert step 6)', 'dust-bazaar': 'planned', 'tomb-approach': 'planned', 'sun-citadel': 'planned' } },
+    ashkara: { name: 'Ashkara (desert)', doc: 'art-samples/maps/DESERT.md', total: registry.filter(t => t.region === 'ashkara').length, counts: countsOf(registry.filter(t => t.region === 'ashkara')), subareas: { common: 'done (desert step 1)', 'dune-shallows': 'done (desert step 2)', 'seven-palms': 'done (desert step 3)', 'singing-erg': 'done (desert step 4)', 'salt-mirror': 'done (desert step 5)', 'red-wadi': 'done (desert step 6)', 'dust-bazaar': 'done (desert step 7)', 'tomb-approach': 'planned', 'sun-citadel': 'planned' } },
   },
   counts, total: registry.length, tiles: registry,
 };
