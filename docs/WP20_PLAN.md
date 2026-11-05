@@ -1,6 +1,6 @@
 # WP20 plan: tile-map overworld from the Greenvale and Ashkara tilesets
 
-Status: plan only, nothing implemented. Replaces the painted free-roam map (`prototype/js/world-layout.js`, 733 lines; the painter in `prototype/js/map.js`, 2727 lines) with a tile map, re-spreads the WP19 progression (GAME_DESIGN 24.7 / 24.8) over 16 organic sub-areas, and makes a new region "mostly a data and tileset addition". Related: IMPLEMENTATION_PLAN "Future: long-term world expansion", `art-samples/tiles/TILESET.md`, `art-samples/maps/GREENVALE.md`, `DESERT.md`.
+Status: step 1 implemented (data + generator, see Step notes); steps 2 to 6 open. Replaces the painted free-roam map (`prototype/js/world-layout.js`, 733 lines; the painter in `prototype/js/map.js`, 2727 lines) with a tile map, re-spreads the WP19 progression (GAME_DESIGN 24.7 / 24.8) over 16 organic sub-areas, and makes a new region "mostly a data and tileset addition". Related: IMPLEMENTATION_PLAN "Future: long-term world expansion", `art-samples/tiles/TILESET.md`, `art-samples/maps/GREENVALE.md`, `DESERT.md`.
 
 ## 1. World model
 
@@ -120,3 +120,17 @@ Ordinary spots span `[bossLv - 2, bossLv - 1]` (meadow stays `[1, 2]`). Greenval
 | Interior "structure" regions (pyramid, castle) | Out of scope: they fit the same model (a region whose rim is wall and borders are `wall`/`door`), needing only an interior tileset; list under Future. |
 | `map.js` has 2.7 kLoC of tangled UI + painting | Step 3 first lists its public API with grep and keeps behaviour, instead of rewriting the UI. |
 | Battle backdrops (4 missing) | Reuse for now, paint later as an art task; no code depends on it. |
+
+## Step notes
+
+**Step 1 (region data and generator), done.** Decisions where the plan was unclear:
+- Enemy counts: below 500 land tiles 4 spots + 1 elite + boss (6), 500 to 800 5 + 1 + boss (7), above 800 4 + 2 elites + boss (7), so every sub-area has 6 or 7 enemies (the plan's "5 spots + 2 elites" would make 8).
+- Sizes: the hand seeds plus a one-off weight tuning give 437 to 898 land tiles in Greenvale and 496 to 923 in Ashkara (plan: 350 to 900); the land mask is about 5,600 tiles per region. Weights are plain data in the region files.
+- Seeds and weights are tuned against the generator as it is (domain warp 13): changing `warp`, `landLimit` or a seed changes every area, re-tune the weights and look at the preview.
+- Entry and exit: `entry` / `exit.at` are points inside the land (the generator carves a 3-wide corridor to the nearest box edge and a land line to the first/last sub-area's seed); the exit gate stands in the corridor 2 tiles from the box edge.
+- Greenvale and Ashkara were authored south to north with the fork lake -> rice / lake -> ruins; `ruins` is a dead end whose boss stands at the farthest point. Greenvale uses a forest rim, Ashkara a sandstone cliff rim.
+- Fog tiles (`overlays/fog-edge`, `fog-full`) exist only in the Greenvale tileset; every region uses them.
+- Ground and autotile pieces are looked up by `category/name` in the manifest, ignoring the sub-area folder; the build fails on a missing key or a missing mask piece.
+- The generator keeps blocking sets (lakes, pools) 3 tiles away from borders and gates so a walkway always remains; nodes are placed after the static terrain and scatter props avoid lanes, so props never cut a route.
+- Camp: a single sub-area (no nodes) with eight 3-wide gate stubs at the box edge (N, E, S, W and the four corners). World y is negative north of the camp; step 3/4 must handle negative world coordinates (or add a global offset).
+- Output sizes: world-gen.js about 32 kB, assets/world about 95 kB per region (before the atlas step).

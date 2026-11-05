@@ -1,0 +1,481 @@
+{
+ "id": "ashkara",
+ "name": "Ashkara",
+ "tileset": "ashkara",
+ "slot": {
+  "dir": "N",
+  "ring": 2
+ },
+ "orient": 0,
+ "mirror": false,
+ "size": 96,
+ "landLimit": 0.8,
+ "requires": "highlands",
+ "startSub": "dshallows",
+ "defaultBiome": "dunes",
+ "rim": "cliff",
+ "border": "cliff",
+ "entry": [56, 87],
+ "exit": {
+  "at": [60, 9],
+  "to": null,
+  "gate": "interest/gate-citadel-golden"
+ },
+ "styles": {
+  "cliff": {
+   "set": "edges/sandstone-cliff"
+  },
+  "water": {
+   "set": "edges/brine-pool",
+   "deep": "edges/brine-deep"
+  },
+  "dune": {
+   "set": "edges/dune-ridge"
+  },
+  "wall": {
+   "connect": "fences/wall-mudbrick"
+  },
+  "redrock": {
+   "set": "edges/red-cliff"
+  }
+ },
+ "borders": {
+  "dshallows|palms": "dune",
+  "palms|erg": "dune",
+  "erg|saltmirror": "dune",
+  "dshallows|saltmirror": "dune",
+  "saltmirror|wadi": "cliff",
+  "wadi|bazaar": "redrock",
+  "bazaar|tomb": "wall",
+  "tomb|citadel": "wall",
+  "bazaar|citadel": "wall",
+  "wadi|citadel": "redrock"
+ },
+ "subareas": [
+  {
+   "id": "dshallows",
+   "name": "Dune Shallows",
+   "biome": "dunes",
+   "lm": "caravan-wagon",
+   "lv": [8, 9],
+   "bossLv": 10,
+   "seed": [60, 76],
+   "weight": 0.574,
+   "angle": 15,
+   "stretch": 1.2,
+   "poi": "treasure",
+   "shop": true,
+   "unlocks": [
+    {
+     "to": "palms",
+     "gate": "interest/gate-rib-arch"
+    }
+   ],
+   "ground": ["ground/sand-fine", "ground/sand-cream", "ground/sand-wavelet"],
+   "detail": ["ground-detail/sand-shells", "ground-detail/wind-ripples", "ground-detail/fossil-sand"],
+   "detailRate": 0.18,
+   "sets": [
+    {
+     "k": "edges/dune-ridge",
+     "thr": 0.68,
+     "scale": 10
+    },
+    {
+     "k": "edges/scrub-patch",
+     "thr": 0.7,
+     "scale": 8
+    }
+   ],
+   "scatter": [
+    {
+     "k": ["trees/dune-scrub", "trees/saltbush", "grass/dune-grass"],
+     "d": 0.066
+    },
+    {
+     "k": ["rocks/half-buried-rock", "props/cairn", "props/bones-pile"],
+     "d": 0.0176
+    }
+   ],
+   "stamps": [
+    {
+     "k": "interest/caravan-wagon",
+     "at": [60, 76],
+     "landmark": true
+    }
+   ],
+   "overlays": ["overlays/sand-haze"]
+  },
+  {
+   "id": "palms",
+   "name": "Seven Palms",
+   "biome": "dunes",
+   "lm": "oasis",
+   "lv": [9, 10],
+   "bossLv": 11,
+   "seed": [24, 72],
+   "weight": 0.614,
+   "angle": -35,
+   "stretch": 1.2,
+   "poi": "shrine",
+   "shop": false,
+   "unlocks": [
+    {
+     "to": "erg",
+     "gate": "interest/gate-palm-frond"
+    }
+   ],
+   "ground": ["ground/oasis-grass", "ground/grass-lush", "ground/sand-oasis"],
+   "detail": ["ground-detail/oasis-clover", "ground-detail/oasis-flowers", "ground-detail/palm-litter"],
+   "detailRate": 0.2,
+   "sets": [
+    {
+     "k": "edges/pool-lagoon",
+     "deep": null,
+     "blob": [7, 6],
+     "at": [22, 70],
+     "wobble": 0.6,
+     "blocks": true
+    },
+    {
+     "k": "edges/lush-meadow",
+     "thr": 0.55,
+     "scale": 8
+    }
+   ],
+   "scatter": [
+    {
+     "k": ["trees/date-palm", "trees/date-palm-oasis", "trees/tamarisk"],
+     "d": 0.066
+    },
+    {
+     "k": ["grass/papyrus", "grass/reeds-oasis", "trees/oleander-bush"],
+     "d": 0.066
+    },
+    {
+     "k": ["props/date-basket", "rocks/river-stone"],
+     "d": 0.0132
+    }
+   ],
+   "stamps": [
+    {
+     "k": "interest/oasis-pool-seven-palms",
+     "at": [24, 72],
+     "landmark": true
+    }
+   ],
+   "overlays": ["overlays/palm-dapple"]
+  },
+  {
+   "id": "erg",
+   "name": "Singing Erg",
+   "biome": "dunes",
+   "lm": "singing-dune",
+   "lv": [9, 10],
+   "bossLv": 11,
+   "seed": [18, 44],
+   "weight": 0.994,
+   "angle": 70,
+   "stretch": 1.15,
+   "poi": "treasure",
+   "shop": true,
+   "unlocks": [
+    {
+     "to": "saltmirror",
+     "gate": "interest/gate-twin-pillar"
+    }
+   ],
+   "ground": ["ground/sand-lee", "ground/sand-dune", "ground/sand-apricot"],
+   "detail": ["ground-detail/cross-ripples", "ground-detail/wind-scour", "ground-detail/scarab-tracks"],
+   "detailRate": 0.2,
+   "sets": [
+    {
+     "k": "edges/ripple-field",
+     "thr": 0.55,
+     "scale": 9
+    },
+    {
+     "k": "edges/slip-face-ridge",
+     "thr": 0.74,
+     "scale": 9
+    }
+   ],
+   "scatter": [
+    {
+     "k": ["grass/dune-grass", "grass/marram-pale", "trees/dune-scrub"],
+     "d": 0.055
+    },
+    {
+     "k": ["props/chime-pole", "props/bone-drift", "rocks/sand-mound"],
+     "d": 0.022
+    }
+   ],
+   "stamps": [
+    {
+     "k": "interest/singing-dune",
+     "at": [18, 44],
+     "landmark": true
+    }
+   ],
+   "overlays": ["overlays/singing-shimmer"]
+  },
+  {
+   "id": "saltmirror",
+   "name": "Salt Mirror",
+   "biome": "saltflat",
+   "lm": "salt-lake",
+   "lv": [10, 11],
+   "bossLv": 12,
+   "seed": [56, 50],
+   "weight": 0.705,
+   "angle": 0,
+   "stretch": 1,
+   "poi": "treasure",
+   "shop": false,
+   "unlocks": [
+    {
+     "to": "wadi",
+     "gate": "interest/gate-salt-block"
+    }
+   ],
+   "ground": ["ground/salt-flat", "ground/pan-bleached", "ground/salt-crust"],
+   "detail": ["ground-detail/salt-crystals", "ground-detail/evaporation-rings", "ground-detail/salt-pebbles"],
+   "detailRate": 0.18,
+   "sets": [
+    {
+     "k": "edges/brine-pool",
+     "deep": "edges/brine-deep",
+     "blob": [9, 7],
+     "at": [56, 50],
+     "wobble": 0.6,
+     "blocks": true
+    }
+   ],
+   "scatter": [
+    {
+     "k": ["trees/dead-shrub-salt", "trees/samphire", "trees/stump-salt"],
+     "d": 0.033
+    },
+    {
+     "k": ["rocks/salt-boulder", "rocks/salt-cluster", "props/bones-lying"],
+     "d": 0.022
+    }
+   ],
+   "stamps": [
+    {
+     "k": "interest/salt-lake-mirage",
+     "at": [56, 50],
+     "force": true,
+     "landmark": true
+    }
+   ],
+   "overlays": ["overlays/mirage-shimmer"]
+  },
+  {
+   "id": "wadi",
+   "name": "Red Wadi",
+   "biome": "canyon",
+   "lm": "rock-cut-facade",
+   "lv": [11, 12],
+   "bossLv": 13,
+   "seed": [75, 33],
+   "weight": 0.962,
+   "angle": -55,
+   "stretch": 1.35,
+   "poi": "shrine",
+   "shop": true,
+   "unlocks": [
+    {
+     "to": "bazaar",
+     "gate": "interest/gate-rock-cut-door"
+    }
+   ],
+   "ground": ["ground/red-sand", "ground/wadi-gravel", "ground/terra-shelf"],
+   "detail": ["ground-detail/red-pebbles", "ground-detail/strata-lines", "ground-detail/iron-nodules"],
+   "detailRate": 0.2,
+   "sets": [
+    {
+     "k": "edges/wadi-bed",
+     "thr": 0.62,
+     "scale": 9
+    },
+    {
+     "k": "edges/sandstone-cliff",
+     "thr": 0.8,
+     "scale": 6,
+     "blocks": true
+    }
+   ],
+   "scatter": [
+    {
+     "k": ["rocks/boulder-red", "rocks/red-rubble", "rocks/hoodoo-spire"],
+     "d": 0.044
+    },
+    {
+     "k": ["trees/tamarisk-wadi", "grass/wadi-reed"],
+     "d": 0.033
+    }
+   ],
+   "stamps": [
+    {
+     "k": "interest/rock-cut-facade",
+     "at": [75, 33],
+     "landmark": true
+    }
+   ],
+   "overlays": ["overlays/canyon-shade"]
+  },
+  {
+   "id": "bazaar",
+   "name": "Dust Bazaar",
+   "biome": "dunes",
+   "lm": "caravanserai",
+   "lv": [11, 12],
+   "bossLv": 13,
+   "seed": [54, 28],
+   "weight": 1.303,
+   "angle": 25,
+   "stretch": 1.1,
+   "poi": "treasure",
+   "shop": true,
+   "unlocks": [
+    {
+     "to": "tomb",
+     "gate": "interest/gate-bazaar-city"
+    }
+   ],
+   "ground": ["ground/packed-earth", "ground/earth-swept", "ground/plaza-cobble"],
+   "detail": ["ground-detail/spice-spill", "ground-detail/potsherds", "ground-detail/cloth-scraps"],
+   "detailRate": 0.2,
+   "sets": [
+    {
+     "k": "edges/plaza-paving",
+     "thr": 0.6,
+     "scale": 8
+    }
+   ],
+   "scatter": [
+    {
+     "k": ["props/clay-jar", "props/crates-goods", "props/basket-woven", "props/barrel-sand"],
+     "d": 0.055
+    },
+    {
+     "k": ["interest/stall-spice", "interest/stall-rug"],
+     "d": 0.0088
+    },
+    {
+     "k": ["trees/tamarisk", "trees/date-palm-young"],
+     "d": 0.0176
+    }
+   ],
+   "stamps": [
+    {
+     "k": "interest/caravanserai-court",
+     "at": [54, 28],
+     "landmark": true
+    }
+   ],
+   "overlays": ["overlays/dust-haze"]
+  },
+  {
+   "id": "tomb",
+   "name": "Tomb Approach",
+   "biome": "temple",
+   "lm": "sphinx-avenue",
+   "lv": [12, 13],
+   "bossLv": 14,
+   "seed": [36, 18],
+   "weight": 1.17,
+   "angle": 60,
+   "stretch": 1.3,
+   "poi": "shrine",
+   "shop": false,
+   "unlocks": [
+    {
+     "to": "citadel",
+     "gate": "interest/gate-tomb-sealed"
+    }
+   ],
+   "ground": ["ground/avenue-slab", "ground/slab-sandstone", "ground/gold-sand"],
+   "detail": ["ground-detail/slab-glyphs", "ground-detail/floor-scarab", "ground-detail/floor-ankh"],
+   "detailRate": 0.2,
+   "sets": [
+    {
+     "k": "edges/avenue-paving",
+     "thr": 0.55,
+     "scale": 8
+    }
+   ],
+   "scatter": [
+    {
+     "k": ["props/column-broken", "props/column-plain", "props/brazier"],
+     "d": 0.0308
+    },
+    {
+     "k": ["rocks/column-drum", "rocks/obelisk-stub", "rocks/sandstone-fallen"],
+     "d": 0.0264
+    }
+   ],
+   "stamps": [
+    {
+     "k": "interest/sphinx",
+     "at": [36, 18],
+     "landmark": true
+    }
+   ],
+   "overlays": ["overlays/golden-haze"]
+  },
+  {
+   "id": "citadel",
+   "name": "Sun Citadel",
+   "biome": "temple",
+   "lm": "citadel",
+   "lv": [13, 14],
+   "bossLv": 15,
+   "final": true,
+   "seed": [56, 13],
+   "weight": 2.491,
+   "angle": 0,
+   "stretch": 1.2,
+   "poi": "treasure",
+   "shop": true,
+   "unlocks": [],
+   "ground": ["ground/glass-sand", "ground/scorched", "ground/gold-shade"],
+   "detail": ["ground-detail/glass-shards", "ground-detail/gold-flakes", "ground-detail/scorch-mark"],
+   "detailRate": 0.2,
+   "sets": [
+    {
+     "k": "edges/glass-melt",
+     "thr": 0.6,
+     "scale": 9
+    },
+    {
+     "k": "edges/obsidian-slab",
+     "thr": 0.74,
+     "scale": 7
+    }
+   ],
+   "scatter": [
+    {
+     "k": ["rocks/obsidian-shard", "rocks/obsidian-spire", "rocks/glass-lump"],
+     "d": 0.0308
+    },
+    {
+     "k": ["trees/tree-glass", "trees/dead-snag"],
+     "d": 0.0176
+    },
+    {
+     "k": ["props/fire-bowl-pillar", "props/djinn-statue"],
+     "d": 0.011
+    }
+   ],
+   "stamps": [
+    {
+     "k": "interest/citadel-golden",
+     "at": [56, 13],
+     "landmark": true
+    }
+   ],
+   "overlays": ["overlays/heat-haze"]
+  }
+ ]
+}

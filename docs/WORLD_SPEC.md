@@ -1,4 +1,31 @@
-# World spec (v3: structured free-exploration map)
+# World spec (v4: tile-map overworld, WP20)
+
+Status: step 1 (data + generator) is implemented; the renderer, navigation and game wiring follow in steps 2 to 4 (docs/WP20_PLAN.md). The v3 free-roam contract is kept at the end of this file until step 4 replaces it.
+
+## Model
+
+- 1 tile = 64 world units. The world is a sparse grid of **region slots**, each 112 x 112 tiles (a 96 x 96 region box plus a 16-tile margin; the camp box is 48 x 48). A region has `slot {dir, ring}`; its box origin is `dir * ring * 112 + 8` tiles from the camp slot (0,0). Coordinates in `world-gen.js` are world tiles (y is negative north of the camp), node positions are tile centres in world units.
+- Camp Grounds (`camp.json`) has eight gate stubs, one per compass direction. Ring-1 regions link to the stub of their direction; a ring k region links to the exit of the ring k-1 region in the same direction. Cardinal chains get a 3-wide `walk` causeway through the margin (stored as cells); diagonal ones are kind `portal`.
+- Data, schema and field list: `prototype/data/regions/_schema.md`. Adding a region is a JSON file plus a tileset; nothing in the generator or the game is region specific.
+
+## Generator (`node tools/build-world.mjs [--check] [--preview]`)
+
+1. **Land mask**: superellipse with rim noise (`landLimit`), disks around the seeds, 3-wide corridors for entry and exit, detached islands dropped.
+2. **Sub-areas**: weighted anisotropic voronoi (`dist_i(warp(p)) / weight_i`, two noise octaves of domain warp), clean-up (largest component per label, orphan reassignment, majority smoothing). The label graph must contain every `from -> unlocks` link with at least 16 shared edge cells; otherwise the two seeds are nudged together and it retries (max 20, deterministic).
+3. **Borders**: cells within one tile of another label form a 3-wide band, styled per pair (`cliff`, `water`, `forest`, `wall`, `hedge`, ...) with 47-blob or connect-4 masks. Bands and the rim are blocked.
+4. **Gates**: for a link the band cell nearest the seed midpoint whose both ends reach the main bodies of the two sub-areas gets a 3-wide cut along the local border normal and a 128 x 128 gate prop. The region exit is a gate in the rim.
+5. **Layers**: ground families by noise patches, ground-detail, per-sub `sets` (blocking ones keep a 3-tile walkway to the borders), hand stamps (landmark), scatter props (avoid lanes, nodes, gate footprints; `tags: obstacle` footprints are blocked).
+6. **Nodes** per sub-area on walkable cells with clearance >= 3: boss beside the outgoing gate, spots and elites by best-candidate sampling (4.5 tiles apart), then waypoint (near the entry), poi, shop, event and the hidden secret (farthest from the route), all >= 3 tiles from any node. Spots are sorted by BFS distance from the entry.
+
+## Outputs
+
+- `prototype/js/world-gen.js` (UMD, `WorldGen`): regions with `origin`, `size`, `entry`, `exit`, `links`, `gates`, `subareas` (`bounds`, `entry`, `boss`, `elites`, `spots`, `poi`, `shop`, `event`, `wp`, `secret`, `landmark`, `from`, `unlocks`, content fields), `blocked` and `subId` grids (run-length, `[value, count, ...]`, row-major, size x size).
+- `prototype/assets/world/<region>.json`: `tiles` (manifest paths), run-length layers `ground`, `detail`, per autotile set masks (`mask + 1`, 0 = absent), `props {k,x,y,w,h,t}` (x,y = bottom-left cell of the footprint), overlays per sub-area.
+- `docs/world-preview/<region>.svg`: review picture (areas, borders, gates, nodes).
+
+`--check` asserts: 6-7 enemies per sub-area, spacing, every node and gate reachable from the entry with all gates open and every outgoing gate reachable from its own sub-area, link adjacency, identical hash on two runs, every tile key and autotile piece present in the manifest.
+
+## Legacy v3 contract (still used by the game until WP20 step 4)
 
 Shared contract between the world **content** (js/world-data.js, items, enemies, balance) and the world **layout + painting** (js/world-layout.js, js/map.js).
 

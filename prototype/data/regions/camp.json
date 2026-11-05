@@ -1,0 +1,35 @@
+{
+ "id": "camp", "name": "Camp Grounds", "kind": "camp", "tileset": "greenvale", "slot": null, "orient": 0, "size": 48, "startSub": "camp", "defaultBiome": "meadow", "rim": "forest", "stubGate": "interest/gate-stone", "styles": {
+  "forest": {
+   "set": "edges/forest"
+  }
+ }, "subareas": [ {
+   "id": "camp", "name": "Camp Grounds", "biome": "meadow", "seed": [ 24, 24
+   ], "weight": 1, "ground": [ "ground/grass", "ground/meadow-lush"
+   ], "detail": [ "ground-detail/grass-flowers-mixed", "ground-detail/grass-clover"
+   ], "detailRate": 0.15, "sets": [ {
+     "k": "edges/dirt-patch", "blob": [ 5, 5
+     ], "at": [ 24, 24
+     ], "wobble": 0.4
+    }
+   ], "scatter": [ {
+     "k": [ "trees/oak-meadow", "trees/bush-round"
+     ], "d": 0.02
+    }, {
+     "k": [ "grass/tall-grass", "grass/wildflower-clump"
+     ], "d": 0.03
+    }
+   ], "stamps": [ {
+     "k": "interest/campfire", "at": [ 24, 24
+     ]
+    }, {
+     "k": "interest/tent", "at": [ 20, 22
+     ], "landmark": true
+    }, {
+     "k": "interest/tent", "at": [ 28, 22
+     ]
+    }
+   ]
+  }
+ ]
+}
