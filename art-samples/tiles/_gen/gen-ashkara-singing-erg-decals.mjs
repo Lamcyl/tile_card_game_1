@@ -1,0 +1,60 @@
+// Ashkara sub-area 3: Singing Erg decals (transparent stamps on the ground) and overlays (dune-shadow bands, crest plumes, shimmer, sand veils).
+// Runs on its own; helpers come from singing-erg-lib.mjs.
+import { T, rng, f, ell, circ, rect, path, line, ink, wrapped, C, tile, pts, VIO, AP, bone, rib, skull, scarab, wind, slipStreaks, dgrass } from './singing-erg-lib.mjs';
+const dec = (name, v, fn, tags = []) => tile('decals', name, v, C, ['decal', ...tags], fn);
+const ov = (name, v, fn, tags = []) => tile('overlays', name, v, C, ['overlay', ...tags], fn);
+// ---- ground decals ----
+const ringS = (x, y, rx, op = .6) => ell(x, y, rx, rx * .5, 'none', op, 0, ink('#fff3d6', 1.3, op)) + ell(x + 1, y + 1.4, rx, rx * .5, 'none', op * .6, 0, ink('#a8703c', .9, op * .5));
+for (const [v, n, rx] of [['a', 3, 8], ['b', 4, 7], ['c', 2, 12]]) dec('sound-rings', v, () => Array.from({ length: n }, (_, i) => ringS(32, 34, rx + i * (v === 'c' ? 8 : 6.4), .65 - i * .13)).join(''), ['singing', 'magic']);
+const swirl = (cx, cy, turns, rmax, col, op, w) => { let d = `M${cx} ${cy}`; for (let i = 1; i <= 48; i++) { const u = i / 48, a = u * turns * 6.283, r = u * rmax; d += `L${f(cx + Math.cos(a) * r)} ${f(cy + Math.sin(a) * r * .5)}`; } return line(d, col, w, op); };
+dec('sand-devil-swirl', 'a', () => swirl(33, 34, 3, 24, '#a8703c', .5, 1.4) + swirl(34.4, 35.4, 3, 24, '#fff3d6', .55, .9), ['wind', 'sand-devil']);
+dec('sand-devil-swirl', 'b', () => swirl(30, 36, 2.2, 22, '#a8703c', .5, 1.4) + swirl(31.4, 37.4, 2.2, 22, '#fff3d6', .55, .9) + [[48, 20], [52, 28], [14, 18]].map(([x, y]) => circ(x, y, .9, '#fff3d6', .8)).join(''), ['wind', 'sand-devil']);
+const trail = (x0, y0, x1, y1, n) => { let o = ''; for (let i = 0; i < n; i++) { const u = i / (n - 1), x = x0 + (x1 - x0) * u, y = y0 + (y1 - y0) * u + Math.sin(u * 8) * 2.4; o += circ(x, y - 1.2, .8, '#8a5a30', .75) + circ(x + .4, y + 1.2, .8, '#8a5a30', .75); } return o; };
+dec('scarab-trail', 'a', () => trail(6, 46, 52, 18, 12) + scarab(56, 16, 1, -38), ['scarab', 'tracks', 'insect']);
+dec('scarab-trail', 'b', () => trail(8, 20, 54, 40, 12) + `<g>${ell(58, 42, 4.6, 4.2, '#3b3a24', .2)}${circ(57, 40.4, 4.2, '#6a4a30', 1, ink('#2a1a0a', .6, .85))}${circ(55.6, 39, 1.2, '#a88a68', .8)}</g>` + scarab(50, 41, .9, 60), ['scarab', 'tracks', 'insect', 'dung-ball']);
+dec('scarab-dungball', 'a', () => `<g>${ell(33, 42, 7, 2, '#3b3a24', .2)}${circ(32, 36, 7, '#6a4a30', 1, ink('#2a1a0a', .8, .85))}${circ(29.6, 33.4, 2.4, '#a88a68', .8)}</g>` + scarab(40, 28, 1, 150), ['scarab', 'insect']);
+dec('bone-scatter', 'a', (t, r) => bone(22, 30, 14, -20) + bone(40, 40, 12, 28) + bone(30, 48, 9, 80) + circ(46, 26, 2.2, '#fffaf0', 1, ink('#8a7458', .5, .8)), ['bones']);
+dec('bone-scatter', 'b', () => rib(32, 34, 20, -10) + rib(32, 40, 18, 4) + bone(18, 48, 10, 30) + skull(48, 24, .6, 20), ['bones']);
+dec('bone-scatter', 'c', () => skull(30, 34, 1, -14) + bone(46, 42, 10, 40) + bone(16, 44, 10, -50), ['bones', 'skull']);
+const sidew = (y, ph) => { let d = `M2 ${y}`; for (let i = 0; i < 6; i++) d += `q5 ${i % 2 ? 7 : -7} 10 0`; return line(d, '#a8703c', 2, .5) + line(d.replace('M2 ' + y, 'M2 ' + (y + 1.2)), '#fff3d6', .9, .55); };
+dec('sidewinder-trail', 'a', () => sidew(34, 0), ['tracks', 'snake']);
+dec('sidewinder-trail', 'b', () => `<g transform="rotate(-24 32 32)">${sidew(34, 0)}</g>`, ['tracks', 'snake']);
+const prints = (x0, y0, a, n, dx = 8) => { let o = ''; for (let i = 0; i < n; i++) { const x = x0 + Math.cos(a) * i * dx + (i % 2) * 2.4, y = y0 + Math.sin(a) * i * dx + (i % 2 ? 3 : -1); o += ell(x, y, 2.2, 1.6, '#a8703c', .6) + [[-1.6, -2.4], [0, -3], [1.6, -2.4]].map(([p, q]) => circ(x + p, y + q, .6, '#a8703c', .6)).join(''); } return o; };
+dec('caravan-prints', 'a', () => prints(6, 40, -.3, 7, 8.4), ['tracks', 'caravan']);
+dec('caravan-prints', 'b', () => prints(8, 22, .4, 6, 9) + prints(12, 44, -.2, 5, 9), ['tracks', 'caravan']);
+dec('fennec-prints', 'a', () => { let o = ''; for (let i = 0; i < 8; i++) { const x = 6 + i * 7.4, y = 40 - i * 2 + (i % 2) * 4; o += ell(x, y, 1.5, 1.2, '#a8703c', .6) + [[-1.4, -2], [0, -2.4], [1.4, -2]].map(([p, q]) => circ(x + p, y + q, .5, '#a8703c', .6)).join(''); } return o; }, ['tracks']);
+dec('slip-streaks', 'a', () => slipStreaks(8801, 5, '#8a6a7c') + slipStreaks(8802, 3, '#fff3d6'), ['dune', 'avalanche']);
+dec('slip-streaks', 'b', () => slipStreaks(8811, 7, '#946a52'), ['dune', 'avalanche']);
+dec('sand-crescent', 'a', () => path('M12 38Q22 18 44 22Q34 28 32 40Q20 36 12 38Z', '#fff3d6', .9, ink('#c48a5a', .8, .6)) + path('M32 40Q34 28 44 22Q48 34 36 44Z', VIO[1], .35), ['dune', 'barchan']);
+dec('sand-crescent', 'b', () => path('M10 36Q18 20 40 22Q30 28 28 38Q18 34 10 36Z', '#fff3d6', .9, ink('#c48a5a', .8, .6)) + path('M28 38Q30 28 40 22Q44 34 32 42Z', VIO[1], .35) + path('M32 46Q40 40 54 44Q46 50 32 46Z', '#fff3d6', .85, ink('#c48a5a', .7, .6)), ['dune', 'barchan']);
+dec('chime-shadow', 'a', () => path('M12 20L50 52L48 55L9 24Z', VIO[2], .28) + [0, 1, 2, 3].map(i => ell(26 + i * 6, 32 + i * 5.6, 1.2, 3.2, VIO[2], .28, -42)).join(''), ['shadow', 'chime']);
+dec('chime-shadow', 'b', () => path('M10 18L52 50L50 54L7 22Z', VIO[2], .3) + [0, 1, 2, 3, 4].map(i => ell(24 + i * 5.6, 30 + i * 4.8, 1.2, 4, VIO[2], .28, -40)).join(''), ['shadow', 'chime']);
+dec('buried-glyphs', 'a', () => path('M10 18L52 14L54 46L12 50Z', '#c8926a', .85, ink('#7a4a2a', .8, .7)) + [[16, 24], [28, 22], [40, 22], [16, 38], [30, 36], [42, 36]].map(([x, y]) => line(`M${x} ${y}h6M${x + 3} ${y}v-4M${x} ${y + 4}h6`, '#5a3a1a', 1.1, .8)).join('') + ell(14, 50, 12, 4, '#f1cb94', .95) + ell(50, 16, 12, 4, '#f1cb94', .95), ['ruin', 'glyph']);
+dec('buried-glyphs', 'b', () => path('M14 20Q32 12 50 20V46Q32 40 14 46Z', '#c8926a', .85, ink('#7a4a2a', .8, .7)) + circ(32, 30, 7, '#f3c24f', .9, ink('#5a3a0a', .8, .8)) + [0, 1, 2, 3, 4, 5, 6, 7].map(i => line(`M${f(32 + Math.cos(i * .785) * 8)} ${f(30 + Math.sin(i * .785) * 8)}l${f(Math.cos(i * .785) * 4)} ${f(Math.sin(i * .785) * 4)}`, '#f3c24f', 1.2, .9)).join('') + ell(32, 48, 20, 5, '#f1cb94', .95), ['ruin', 'glyph', 'sun']);
+dec('wind-scour', 'a', () => [[10, 24, 40], [16, 36, 34], [8, 48, 44]].map(([x, y, w]) => path(`M${x} ${y}Q${x + w / 2} ${y - 4} ${x + w} ${y}Q${x + w / 2} ${y + 2} ${x} ${y}Z`, '#fff3d6', .45)).join(''), ['wind']);
+dec('vulture-shadow', 'a', () => `<g opacity=".3" transform="translate(32 34) rotate(18)">${path('M-18 2Q-8 -6 0 0Q8 -6 18 2Q8 -2 3 4L0 8L-3 4Q-8 -2 -18 2Z', '#3a2a4a')}</g>`, ['shadow', 'bird']);
+dec('vulture-shadow', 'b', () => [[22, 26, 10, 1], [42, 42, -20, .7]].map(([x, y, a, s]) => `<g opacity=".28" transform="translate(${x} ${y}) rotate(${a}) scale(${s})">${path('M-18 2Q-8 -6 0 0Q8 -6 18 2Q8 -2 3 4L0 8L-3 4Q-8 -2 -18 2Z', '#3a2a4a')}</g>`).join(''), ['shadow', 'bird']);
+dec('fulgurite', 'a', () => line('M32 12L28 26L38 30L30 44L34 54', '#6a5a88', 3, .9) + line('M32 12L28 26L38 30L30 44L34 54', '#e8e0f4', 1, .8) + line('M38 30L48 34', '#6a5a88', 2, .8) + circ(32, 12, 2.6, '#e8e0f4', 1, ink('#6a5a88', .6, .8)), ['glass', 'lightning']);
+// small creatures (stamps)
+dec('fennec', 'a', () => `<g transform="translate(32 36)">${ell(1, 9, 11, 2.6, '#3b3a24', .18)}${path('M-8 8Q-9 -2 -3 -6Q3 -8 7 -2Q10 4 8 8Z', '#e8b878', 1, ink('#8a5a30', .8, .85))}${path('M-8 8Q-16 6 -14 12Q-8 12 -4 8Z', '#e8b878', 1, ink('#8a5a30', .7, .85))}${path('M-3 -6L-5 -17L0 -9Z M3 -7L7 -17L7 -6Z', '#e8b878', 1, ink('#8a5a30', .7, .85))}${path('M-3.6 -10L-4.6 -14L-1.4 -10Z', '#f6c8c0', .9)}${circ(-1.2, -3, 1, '#2a1a0a')}${circ(4, -3.4, 1, '#2a1a0a')}${ell(1.6, -.6, 1.2, .8, '#2a1a0a')}${ell(0, 4, 4, 3, '#fff0d0', .8)}</g>`, ['animal', 'fennec']);
+dec('jerboa', 'a', () => `<g transform="translate(30 38)">${ell(1, 7, 8, 2, '#3b3a24', .18)}${ell(0, 0, 5, 4.4, '#e8c898', 1, 0, ink('#8a5a30', .7, .85))}${circ(5, -3, 3, '#e8c898', 1, ink('#8a5a30', .7, .85))}${path('M5.4 -5L6.4 -10L8 -4.6Z M4 -5L2.6 -10L2 -4Z', '#e8c898', 1, ink('#8a5a30', .5, .85))}${circ(6.4, -3.6, .7, '#2a1a0a')}${line('M-4 3Q-12 4 -14 -4', '#8a5a30', 1, 1)}${circ(-14, -4.4, 1.3, '#fff0d0', 1, ink('#8a5a30', .5, .8))}${line('M-1 4L-3 8M2 4L4 8', '#8a5a30', 1.2, 1)}</g>`, ['animal', 'jerboa']);
+dec('lizard-sand', 'a', () => `<g transform="translate(32 34) rotate(-26)">${ell(1, 3, 10, 3, '#3b3a24', .16)}${path('M-12 0Q-4 -3 4 -2L10 0L4 2Q-4 3 -12 0Z', '#c89a58', 1, ink('#6a4a28', .7, .85))}${circ(8.6, 0, 2.6, '#c89a58', 1, ink('#6a4a28', .6, .85))}${line('M-12 0Q-18 4 -20 -2', '#c89a58', 1.6, 1)}${line('M-3 -2L-5 -6M3 -2L5 -6M-3 2L-5 6M3 2L5 6', '#6a4a28', 1.2, .9)}${[0, 1, 2, 3].map(i => circ(-6 + i * 4, 0, .8, '#6a4a28', .6)).join('')}</g>`, ['animal', 'lizard']);
+dec('dung-heap', 'a', () => ell(34, 40, 9, 5, '#3b3a24', .18) + path('M24 42Q24 32 34 32Q44 34 44 42Z', '#6a4a30', 1, ink('#2a1a0a', .8, .85)) + circ(30, 36, 1.8, '#a88a68', .6), ['scarab']);
+// ---- overlays ----
+// dune-shadow bands: long violet cast shadows that wrap across neighbouring cells
+const band = (cx, cy, rx, ry, rot, op) => wrapped(cx, cy, rx, (x, y) => ell(x, y, rx, ry, VIO[2], op * .55, rot) + ell(x, y, rx * .72, ry * .72, VIO[1], op * .6, rot));
+ov('dune-shadow-band', 'a', () => band(32, 30, 34, 8, -10, .5) + band(10, 54, 24, 5, -8, .4), ['shadow', 'dune']);
+ov('dune-shadow-band', 'b', () => band(30, 36, 38, 11, 8, .5), ['shadow', 'dune']);
+ov('dune-shadow-band', 'c', () => band(20, 18, 30, 6, -14, .45) + band(46, 46, 28, 7, -10, .5), ['shadow', 'dune']);
+const plume = (x, y, w, op) => ell(x, y, w, 1.6, '#fff3d6', op) + ell(x + w * .5, y - 1, w * .7, 1.2, '#fff3d6', op * .8) + ell(x + w, y - 2, w * .5, 1, '#fff3d6', op * .6);
+ov('crest-plume', 'a', () => [[8, 28, 12], [14, 36, 10], [4, 44, 8]].map(([x, y, w], i) => plume(x, y, w, .55 - i * .08)).join(''), ['wind', 'dune', 'spindrift']);
+ov('crest-plume', 'b', () => [[6, 22, 14], [10, 30, 12], [16, 40, 9], [8, 48, 8]].map(([x, y, w], i) => plume(x, y, w, .5 - i * .06)).join('') + wrapped(40, 20, 3, (x, y) => circ(x, y, 1, '#fff3d6', .8)), ['wind', 'dune', 'spindrift']);
+const veil = (seed, n, op) => { const r = rng(seed); let o = ''; for (let i = 0; i < n; i++) { const x = r.range(0, T), y = r.range(0, T), w = r.range(14, 26); o += wrapped(x, y, w, (a, b) => ell(a, b, w, 3, '#f1cb94', op, r.range(-8, 8)) + ell(a + 2, b - 1, w * .6, 1.2, '#fff3d6', op * .8)); } return o; };
+ov('sand-veil', 'a', () => veil(8901, 6, .22), ['wind', 'dust']);
+ov('sand-veil', 'b', () => veil(8902, 9, .18), ['wind', 'dust']);
+ov('sand-veil', 'c', () => veil(8903, 4, .28) + wrapped(30, 30, 20, (x, y) => ell(x, y, 20, 8, '#f6d6a4', .14)), ['wind', 'dust']);
+ov('singing-shimmer', 'a', () => [10, 18, 26, 34].map((rx, i) => ell(32, 32, rx, rx * .5, 'none', .55 - i * .1, 0, ink('#fff3d6', 1.4, .55 - i * .11))).join('') + [6, 14].map(rx => ell(32, 32, rx * 2.8, rx * 1.4, 'none', .3, 0, ink('#b9a2c4', 1, .3))).join(''), ['singing', 'magic', 'sound']);
+ov('singing-shimmer', 'b', () => Array.from({ length: 5 }, (_, i) => path(`M${6 + i * 12} 14Q${12 + i * 12} 32 ${6 + i * 12} 50`, 'none', 1, { stroke: '#fff3d6', 'stroke-width': 1.6, 'stroke-opacity': .5 - i * .06, 'stroke-linecap': 'round' }) + path(`M${9 + i * 12} 18Q${14 + i * 12} 32 ${9 + i * 12} 46`, 'none', 1, { stroke: '#b9a2c4', 'stroke-width': 1, 'stroke-opacity': .3, 'stroke-linecap': 'round' })).join(''), ['singing', 'magic', 'sound']);
+ov('violet-dusk', 'a', () => rect(0, 0, 64, 64, '#8e7aa8', 0, .16) + wrapped(32, 32, 30, (x, y) => ell(x, y, 30, 18, '#6a5a88', .12)), ['tint', 'dusk']);
+ov('chime-glint', 'a', () => [[14, 20], [40, 14], [50, 40], [24, 48]].map(([x, y], i) => `<g opacity="${.9 - i * .1}">${path(`M${x} ${y - 4}L${x + 1.1} ${y - 1.1}L${x + 4} ${y}L${x + 1.1} ${y + 1.1}L${x} ${y + 4}L${x - 1.1} ${y + 1.1}L${x - 4} ${y}L${x - 1.1} ${y - 1.1}Z`, '#fff8d0')}</g>`).join(''), ['light', 'sparkle']);
+ov('sand-devil-haze', 'a', () => Array.from({ length: 7 }, (_, i) => ell(32 + Math.sin(i * .9) * 4, 8 + i * 8, 6 + i * 2.4, 2.6, i % 2 ? '#e8bc82' : '#f6d6a4', .3) + ell(31 + Math.sin(i * .9) * 4, 7 + i * 8, 4 + i * 1.4, 1, '#fff3d6', .35)).join(''), ['wind', 'sand-devil']);

@@ -100,7 +100,11 @@
     "pool-lagoon",
     "lush-meadow",
     "papyrus-bed",
-    "irrigated-field"
+    "irrigated-field",
+    "slip-face-ridge",
+    "lee-hollow",
+    "dune-grass-patch",
+    "ripple-field"
    ],
    "fileSuffix": "zero-padded decimal canonical mask, e.g. water-shore-017.svg",
    "neighbourOutsideSet": "a neighbour in the set (bit = 1) means the tile continues across that edge"
@@ -148,7 +152,9 @@
     "wall-mudbrick",
     "fence-driftwood",
     "ditch-irrigation",
-    "hedge-oleander"
+    "hedge-oleander",
+    "fence-chime-line",
+    "fence-sand-slat"
    ],
    "fileSuffix": "two-digit decimal mask, e.g. fence-wood-06.svg"
   },
@@ -194,25 +200,25 @@
   "ashkara": {
    "name": "Ashkara (desert)",
    "doc": "art-samples/maps/DESERT.md",
-   "total": 1126,
+   "total": 1526,
    "counts": {
-    "ground": 83,
-    "ground-detail": 36,
-    "decals": 79,
-    "edges": 564,
-    "trees": 58,
-    "rocks": 33,
-    "grass": 21,
-    "fences": 64,
-    "props": 112,
-    "interest": 44,
-    "overlays": 32
+    "ground": 117,
+    "ground-detail": 55,
+    "decals": 111,
+    "edges": 752,
+    "trees": 70,
+    "rocks": 50,
+    "grass": 30,
+    "fences": 96,
+    "props": 140,
+    "interest": 60,
+    "overlays": 45
    },
    "subareas": {
     "common": "done (desert step 1)",
     "dune-shallows": "done (desert step 2)",
     "seven-palms": "done (desert step 3)",
-    "singing-erg": "planned",
+    "singing-erg": "done (desert step 4)",
     "salt-mirror": "planned",
     "red-wadi": "planned",
     "dust-bazaar": "planned",
@@ -234,7 +240,7 @@
   "interest": 93,
   "overlays": 153
  },
- "total": 5667,
+ "total": 6067,
  "tiles": [
   {
    "path": "greenvale/bamboo-valley/ground/floor-bamboo-a.svg",
@@ -120397,6 +120403,828 @@
    "note": ""
   },
   {
+   "path": "ashkara/singing-erg/ground/apricot-cream-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-cream-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-cream-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-cream-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-dune-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-dune-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-dune-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-dune-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-fine-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-fine-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-fine-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-fine-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-oasis-grass-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-oasis-grass-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-oasis-grass-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-oasis-grass-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-oasis-sand-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-oasis-sand-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-oasis-sand-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-oasis-sand-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-pan-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-pan-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/apricot-pan-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "apricot-pan-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/gravel-lag-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "gravel-lag",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/gravel-lag-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "gravel-lag",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/lee-apricot-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "lee-apricot-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-apricot-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-apricot",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-apricot-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-apricot",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-apricot-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-apricot",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ripples",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-apricot-d.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-apricot",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-crest-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-crest",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-crest-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-crest",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-lee-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-lee",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-lee-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-lee",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-lee-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-lee",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glint",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-slip-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-slip",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "slope",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-slip-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-slip",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "slope",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-slip-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-slip",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "slope",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-tufted-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-tufted",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tufts",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-tufted-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-tufted",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tufts",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-tufted-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-tufted",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "tufts",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-windpacked-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-windpacked",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-windpacked-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-windpacked",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/sand-windpacked-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "sand-windpacked",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "pebbles",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground/slip-apricot-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground",
+   "name": "slip-apricot-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/ground-detail/dune-grass-baked-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -121268,6 +122096,468 @@
     "path",
     "desert",
     "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/bone-flecks-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "bone-flecks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "bones",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/bone-flecks-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "bone-flecks",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "bones",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/cross-ripples-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "cross-ripples",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "ripples",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/desert-rose-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "desert-rose",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "crystal",
+    "loot",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/dune-grass-sprigs-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "dune-grass-sprigs",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "grass",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/dune-grass-sprigs-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "dune-grass-sprigs",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "grass",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/feathers-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "feathers",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "feather",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/fennec-prints-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "fennec-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/lee-shadow-streaks-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "lee-shadow-streaks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "shadow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/quartz-glitter-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "quartz-glitter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "quartz",
+    "loot",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/quartz-glitter-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "quartz-glitter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "quartz",
+    "loot",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/scarab-tracks-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "scarab-tracks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/scarab-tracks-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "scarab-tracks",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "insect",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/seed-pods-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "seed-pods",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "loot",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/sidewinder-track-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "sidewinder-track",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "tracks",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/sound-rings-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "sound-rings",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "singing",
+    "magic",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/wind-ripples-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "wind-ripples",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "ripples",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/wind-ripples-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "wind-ripples",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "ripples",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/ground-detail/wind-scour-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "ground-detail",
+   "name": "wind-scour",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pebbles",
+    "scour",
+    "desert",
+    "singing-erg"
    ],
    "note": ""
   },
@@ -123079,6 +124369,773 @@
     "tracks",
     "desert",
     "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/bone-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/bone-scatter-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/bone-scatter-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "bone-scatter",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "skull",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/buried-glyphs-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "buried-glyphs",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "ruin",
+    "glyph",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/buried-glyphs-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "buried-glyphs",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "ruin",
+    "glyph",
+    "sun",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/caravan-prints-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "caravan-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "caravan",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/caravan-prints-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "caravan-prints",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "caravan",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/chime-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "chime-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "chime",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/chime-shadow-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "chime-shadow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "chime",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/dung-heap-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "dung-heap",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "scarab",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/fennec-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "fennec",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "animal",
+    "fennec",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/fennec-prints-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "fennec-prints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/fulgurite-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "fulgurite",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "glass",
+    "lightning",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/jerboa-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "jerboa",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "animal",
+    "jerboa",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/lizard-sand-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "lizard-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "animal",
+    "lizard",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/sand-crescent-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "sand-crescent",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "barchan",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/sand-crescent-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "sand-crescent",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "barchan",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/sand-devil-swirl-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "sand-devil-swirl",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wind",
+    "sand-devil",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/sand-devil-swirl-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "sand-devil-swirl",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wind",
+    "sand-devil",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/scarab-dungball-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "scarab-dungball",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "scarab",
+    "insect",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/scarab-trail-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "scarab-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "scarab",
+    "tracks",
+    "insect",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/scarab-trail-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "scarab-trail",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "scarab",
+    "tracks",
+    "insect",
+    "dung-ball",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/sidewinder-trail-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "sidewinder-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "snake",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/sidewinder-trail-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "sidewinder-trail",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "snake",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/slip-streaks-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "slip-streaks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "avalanche",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/slip-streaks-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "slip-streaks",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "dune",
+    "avalanche",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/sound-rings-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "sound-rings",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "singing",
+    "magic",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/sound-rings-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "sound-rings",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "singing",
+    "magic",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/sound-rings-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "sound-rings",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "singing",
+    "magic",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/vulture-shadow-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "vulture-shadow",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "bird",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/vulture-shadow-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "vulture-shadow",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "bird",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/decals/wind-scour-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "decals",
+   "name": "wind-scour",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "wind",
+    "desert",
+    "singing-erg"
    ],
    "note": ""
   },
@@ -137418,6 +139475,4988 @@
    "note": ""
   },
   {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-000.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-001.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-004.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-005.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-007.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-016.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-017.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-020.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-021.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-023.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-028.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-029.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-031.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-064.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-065.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-068.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-069.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-071.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-080.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-081.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-084.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-085.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-087.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-092.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-093.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-095.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-112.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-113.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-116.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-117.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-119.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-124.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-125.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-127.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-193.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-197.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-199.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-209.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-213.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-215.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-221.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-223.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-241.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-245.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-247.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-253.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/dune-grass-patch-255.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "dune-grass-patch",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "grass",
+    "vegetation",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-000.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-001.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-004.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-005.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-007.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-016.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-017.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-020.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-021.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-023.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-028.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-029.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-031.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-064.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-065.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-068.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-069.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-071.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-080.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-081.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-084.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-085.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-087.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-092.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-093.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-095.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-112.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-113.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-116.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-117.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-119.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-124.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-125.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-127.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-193.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-197.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-199.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-209.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-213.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-215.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-221.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-223.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-241.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-245.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-247.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-253.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/lee-hollow-255.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "lee-hollow",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "dune",
+    "shadow",
+    "hollow",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-000.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-001.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-004.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-005.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-007.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-016.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-017.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-020.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-021.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-023.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-028.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-029.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-031.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-064.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-065.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-068.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-069.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-071.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-080.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-081.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-084.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-085.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-087.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-092.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-093.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-095.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-112.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-113.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-116.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-117.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-119.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-124.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-125.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-127.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-193.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-197.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-199.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-209.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-213.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-215.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-221.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-223.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-241.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-245.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-247.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-253.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/ripple-field-255.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "ripple-field",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "ripples",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-000.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-001.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-004.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-005.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-007.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-016.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-017.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-020.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-021.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-023.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-028.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-029.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-031.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-064.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-065.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-068.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-069.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-071.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-080.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-081.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-084.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-085.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-087.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-092.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-093.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-095.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-112.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-113.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-116.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-117.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-119.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-124.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-125.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-127.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-193.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-197.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-199.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-209.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-213.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-215.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-221.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-223.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-241.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-245.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-247.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-253.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/edges/slip-face-ridge-255.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "edges",
+   "name": "slip-face-ridge",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "dune",
+    "ridge",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/trees/acacia-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -138817,6 +145856,306 @@
    "note": ""
   },
   {
+   "path": "ashkara/singing-erg/trees/desert-broom-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "desert-broom",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "green",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/desert-broom-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "desert-broom",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "green",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/dune-stump-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "dune-stump",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "dead",
+    "buried",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/dune-stump-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "dune-stump",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "dead",
+    "buried",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/ephedra-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "ephedra",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "green",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/ghost-tree-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "ghost-tree",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "bleached",
+    "tall",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/ghost-tree-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "ghost-tree",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "dead",
+    "bleached",
+    "tall",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/saxaul-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "saxaul",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "desert",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/saxaul-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "saxaul",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "desert",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/saxaul-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "saxaul",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "shrub",
+    "desert",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/wind-acacia-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "wind-acacia",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "acacia",
+    "windswept",
+    "tall",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/trees/wind-acacia-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "trees",
+   "name": "wind-acacia",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "acacia",
+    "windswept",
+    "tall",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/rocks/boulder-red-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -139613,6 +146952,435 @@
    "note": ""
   },
   {
+   "path": "ashkara/singing-erg/rocks/boulder-apricot-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "boulder-apricot",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "boulder",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/boulder-apricot-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "boulder-apricot",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "boulder",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/column-top-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "column-top",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ruin",
+    "buried",
+    "column",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/column-top-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "column-top",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ruin",
+    "buried",
+    "column",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/column-top-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "column-top",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ruin",
+    "buried",
+    "column",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/crest-cairn-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "crest-cairn",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cairn",
+    "waypoint",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/crest-cairn-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "crest-cairn",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cairn",
+    "waypoint",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/crest-cairn-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "crest-cairn",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "cairn",
+    "waypoint",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/lintel-fallen-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "lintel-fallen",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ruin",
+    "buried",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/obelisk-stub-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "obelisk-stub",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ruin",
+    "buried",
+    "obelisk",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/statue-head-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "statue-head",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "statue",
+    "ruin",
+    "signature",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/statue-head-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "statue-head",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "statue",
+    "ruin",
+    "signature",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/ventifact-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "ventifact",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rock",
+    "faceted",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/ventifact-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "ventifact",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rock",
+    "faceted",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/ventifact-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "ventifact",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "rock",
+    "faceted",
+    "one",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/yardang-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "yardang",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "wind-carved",
+    "spire",
+    "tall",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/rocks/yardang-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "rocks",
+   "name": "yardang",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "wind-carved",
+    "spire",
+    "tall",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/grass/dune-grass-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -140116,6 +147884,226 @@
     "concealing",
     "desert",
     "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/grass/aristida-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "grass",
+   "name": "aristida",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "feathery",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/grass/dune-grass-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "grass",
+   "name": "dune-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "dune",
+    "signature",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/grass/dune-grass-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "grass",
+   "name": "dune-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "dune",
+    "signature",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/grass/dune-grass-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "grass",
+   "name": "dune-grass",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "dune",
+    "signature",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/grass/dune-grass-d.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "grass",
+   "name": "dune-grass",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "dune",
+    "signature",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/grass/sand-sedge-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "grass",
+   "name": "sand-sedge",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "sedge",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/grass/sand-sedge-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "grass",
+   "name": "sand-sedge",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "grass",
+    "sedge",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/grass/singing-reed-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "grass",
+   "name": "singing-reed",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "reed",
+    "plume",
+    "tall",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/grass/singing-reed-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "grass",
+   "name": "singing-reed",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "reed",
+    "plume",
+    "tall",
+    "desert",
+    "singing-erg"
    ],
    "note": ""
   },
@@ -141764,6 +149752,854 @@
     "obstacle",
     "desert",
     "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-00.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-01.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-02.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-03.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-04.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-05.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-06.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-07.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-08.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-09.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-10.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-11.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-12.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-13.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-14.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-chime-line-15.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-chime-line",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "fence",
+    "chime",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-00.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-01.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-02.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-03.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-04.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-05.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-06.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-07.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-08.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-09.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-10.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-11.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-12.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-13.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-14.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/fences/fence-sand-slat-15.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "fences",
+   "name": "fence-sand-slat",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "fence",
+    "obstacle",
+    "desert",
+    "singing-erg"
    ],
    "note": ""
   },
@@ -144428,6 +153264,699 @@
    "note": ""
   },
   {
+   "path": "ashkara/singing-erg/props/bone-drift-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "bone-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "signature",
+    "decor",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/bone-drift-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "bone-drift",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "signature",
+    "decor",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/bone-drift-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "bone-drift",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "signature",
+    "decor",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/brass-bell-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "brass-bell",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bell",
+    "singing",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/chime-pole-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "chime-pole",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "chime",
+    "singing",
+    "signature",
+    "obstacle",
+    "tall",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/chime-pole-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "chime-pole",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "chime",
+    "singing",
+    "signature",
+    "obstacle",
+    "tall",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/chime-pole-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "chime-pole",
+   "variant": "c",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "chime",
+    "singing",
+    "signature",
+    "obstacle",
+    "tall",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/chime-tripod-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "chime-tripod",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chime",
+    "singing",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/clay-jar-erg-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "clay-jar-erg",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "jar",
+    "camp",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/clay-jar-erg-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "clay-jar-erg",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "jar",
+    "camp",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/hourglass-sand-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "hourglass-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "hourglass",
+    "decor",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/listening-horn-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "listening-horn",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "horn",
+    "singing",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/sand-anchor-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "sand-anchor",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "stakes",
+    "camp",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/sand-devil-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "sand-devil",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "sand-devil",
+    "wind",
+    "signature",
+    "hazard",
+    "tall",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/sand-devil-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "sand-devil",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "sand-devil",
+    "wind",
+    "signature",
+    "hazard",
+    "tall",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/sand-sled-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "sand-sled",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sled",
+    "camp",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/scarab-big-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "scarab-big",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scarab",
+    "creature",
+    "guardian",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/scarab-swarm-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "scarab-swarm",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scarab",
+    "swarm",
+    "signature",
+    "creature",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/scarab-swarm-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "scarab-swarm",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scarab",
+    "swarm",
+    "signature",
+    "creature",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/scarab-swarm-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "scarab-swarm",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scarab",
+    "swarm",
+    "signature",
+    "creature",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/signpost-erg-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "signpost-erg",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sign",
+    "landmark",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/singing-drum-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "singing-drum",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "drum",
+    "singing",
+    "signature",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/skiff-buried-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "skiff-buried",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "wreck",
+    "buried",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/skull-camel-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "skull-camel",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bones",
+    "skull",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/trail-stakes-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "trail-stakes",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "marker",
+    "trail",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/waterskin-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "waterskin",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "camp",
+    "loot",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/wind-bell-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "wind-bell",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chime",
+    "bell",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/props/wind-vane-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "props",
+   "name": "wind-vane",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "vane",
+    "wind",
+    "tall",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/interest/chest-gilded-closed.svg",
    "region": "ashkara",
    "sub": "common",
@@ -145551,6 +155080,424 @@
    "note": ""
   },
   {
+   "path": "ashkara/singing-erg/interest/beast-skeleton-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "beast-skeleton",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "bones",
+    "skeleton",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/buried-colonnade-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "buried-colonnade",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "ruin",
+    "column",
+    "buried",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/chest-sand-closed.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "chest-sand",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "closed",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/chest-sand-open.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "chest-sand",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "open",
+    "one",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/chime-grove-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "chime-grove",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "chime",
+    "singing",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/crest-monument-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "crest-monument",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "cairn",
+    "monument",
+    "waypoint",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/drum-platform-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "drum-platform",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "drum",
+    "singing",
+    "ruin",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/gate-twin-pillar-closed.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "gate-twin-pillar",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "closed",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/gate-twin-pillar-open.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "gate-twin-pillar",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "open",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/nomad-camp-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "nomad-camp",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "camp",
+    "nomad",
+    "tent",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/obelisk-buried-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "obelisk-buried",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "ruin",
+    "obelisk",
+    "buried",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/scarab-nest-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "scarab-nest",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "scarab",
+    "nest",
+    "creature",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/singing-dune-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "singing-dune",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "dune",
+    "chime",
+    "singing",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/singing-dune-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "singing-dune",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "dune",
+    "chime",
+    "singing",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/statue-colossus-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "statue-colossus",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "statue",
+    "ruin",
+    "head",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/interest/statue-colossus-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "interest",
+   "name": "statue-colossus",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "statue",
+    "ruin",
+    "head",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/common/overlays/blown-sand-a.svg",
    "region": "ashkara",
    "sub": "common",
@@ -146304,6 +156251,322 @@
     "water",
     "desert",
     "seven-palms"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/chime-glint-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "chime-glint",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "sparkle",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/crest-plume-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "crest-plume",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dune",
+    "spindrift",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/crest-plume-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "crest-plume",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dune",
+    "spindrift",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/dune-shadow-band-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "dune-shadow-band",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/dune-shadow-band-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "dune-shadow-band",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/dune-shadow-band-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "dune-shadow-band",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shadow",
+    "dune",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/sand-devil-haze-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "sand-devil-haze",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "sand-devil",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/sand-veil-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "sand-veil",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dust",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/sand-veil-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "sand-veil",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dust",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/sand-veil-c.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "sand-veil",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "wind",
+    "dust",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/singing-shimmer-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "singing-shimmer",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "singing",
+    "magic",
+    "sound",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/singing-shimmer-b.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "singing-shimmer",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "singing",
+    "magic",
+    "sound",
+    "desert",
+    "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/singing-erg/overlays/violet-dusk-a.svg",
+   "region": "ashkara",
+   "sub": "singing-erg",
+   "category": "overlays",
+   "name": "violet-dusk",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "tint",
+    "dusk",
+    "desert",
+    "singing-erg"
    ],
    "note": ""
   }
