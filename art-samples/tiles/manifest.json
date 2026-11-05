@@ -214,19 +214,19 @@
   "ashkara": {
    "name": "Ashkara (desert)",
    "doc": "art-samples/maps/DESERT.md",
-   "total": 3189,
+   "total": 3595,
    "counts": {
-    "ground": 337,
-    "ground-detail": 128,
-    "decals": 231,
-    "edges": 1410,
-    "trees": 114,
-    "rocks": 114,
-    "grass": 60,
-    "fences": 256,
-    "props": 295,
-    "interest": 146,
-    "overlays": 98
+    "ground": 393,
+    "ground-detail": 149,
+    "decals": 250,
+    "edges": 1598,
+    "trees": 120,
+    "rocks": 129,
+    "grass": 66,
+    "fences": 288,
+    "props": 325,
+    "interest": 166,
+    "overlays": 111
    },
    "subareas": {
     "common": "done (desert step 1)",
@@ -237,7 +237,7 @@
     "red-wadi": "done (desert step 6)",
     "dust-bazaar": "done (desert step 7)",
     "tomb-approach": "done (desert step 8)",
-    "sun-citadel": "planned"
+    "sun-citadel": "done (desert step 9)"
    }
   }
  },
@@ -254,7 +254,7 @@
   "interest": 93,
   "overlays": 153
  },
- "total": 7730,
+ "total": 8136,
  "tiles": [
   {
    "path": "greenvale/bamboo-valley/ground/floor-bamboo-a.svg",
@@ -125474,6 +125474,1424 @@
    "note": ""
   },
   {
+   "path": "ashkara/sun-citadel/ground/avenue-court-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "avenue-court-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/avenue-glass-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "avenue-glass-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/avenue-glass-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "avenue-glass-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/basalt-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "basalt",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "basalt",
+    "rock",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/basalt-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "basalt",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "basalt",
+    "rock",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/basalt-c.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "basalt",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "basalt",
+    "rock",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/basalt-obsidian-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "basalt-obsidian-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/cinder-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "cinder",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cinder",
+    "burnt",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/cinder-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "cinder",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "cinder",
+    "burnt",
+    "embers",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/court-flag-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "court-flag",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "court",
+    "gold",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/court-flag-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "court-flag",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "court",
+    "gold",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/court-flag-c.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "court-flag",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "court",
+    "gold",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/court-inlay-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "court-inlay",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "inlay",
+    "gold",
+    "obsidian",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/court-inlay-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "court-inlay",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "floor",
+    "inlay",
+    "worn",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/court-mirror-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "court-mirror",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "court",
+    "polished",
+    "glint",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/court-mirror-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "court-mirror",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "paving",
+    "court",
+    "polished",
+    "glint",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/court-mirror-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "court-mirror-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/court-obsidian-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "court-obsidian-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/dune-gold-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "dune-gold-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/dune-gold-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "dune-gold-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/glass-basalt-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "glass-basalt-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/glass-fused-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "glass-fused",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glass",
+    "fused",
+    "smooth",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/glass-fused-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "glass-fused",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glass",
+    "fused",
+    "smooth",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/glass-sand-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "glass-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glass",
+    "fused",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/glass-sand-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "glass-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glass",
+    "fused",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/glass-sand-c.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "glass-sand",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "glass",
+    "fused",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/glass-scorched-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "glass-scorched-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-court-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-court-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-glass-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-glass-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-glass-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-glass-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-obsidian-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-obsidian-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-sand-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-sand",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "gold",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-sand-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-sand",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "gold",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-sand-c.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-sand",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "gold",
+    "glint",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-sand-d.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-sand",
+   "variant": "d",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "gold",
+    "glint",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-scorched-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-scorched-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-scorched-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-scorched-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-shade-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-shade",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "shade",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-shade-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-shade",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "sand",
+    "shade",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/gold-shade-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "gold-shade-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/obsidian-slab-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "obsidian-slab",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "obsidian",
+    "paving",
+    "dark",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/obsidian-slab-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "obsidian-slab",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "obsidian",
+    "paving",
+    "dark",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/obsidian-slab-c.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "obsidian-slab",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "obsidian",
+    "paving",
+    "dark",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/ochre-gold-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "ochre-gold-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/ochre-gold-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "ochre-gold-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/pan-gold-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "pan-gold-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/reg-gold-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "reg-gold-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/rsand-gold-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "rsand-gold-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/sand-gold-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "sand-gold-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/sand-gold-fringe-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "sand-gold-fringe",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/scorched-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "scorched",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "scorched",
+    "burnt",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/scorched-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "scorched",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "scorched",
+    "burnt",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/scorched-basalt-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "scorched-basalt-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/scorched-c.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "scorched",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "scorched",
+    "burnt",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/scorched-cinder-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "scorched-cinder-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground/wgrv-gold-fringe-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground",
+   "name": "wgrv-gold-fringe",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground",
+    "ramp",
+    "blend",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/tomb-approach/ground/avenue-hall-fringe-a.svg",
    "region": "ashkara",
    "sub": "tomb-approach",
@@ -129383,6 +130801,536 @@
     "scour",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/ash-drift-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "ash-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "ash",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/basalt-pebbles-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "basalt-pebbles",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pebbles",
+    "basalt",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/char-bones-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "char-bones",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "bones",
+    "burnt",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/cinder-pebbles-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "cinder-pebbles",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "pebbles",
+    "cinder",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/ember-scatter-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "ember-scatter",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "embers",
+    "fire",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/fulgurite-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "fulgurite",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "lightning",
+    "glass",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/glass-bubbles-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "glass-bubbles",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "glass",
+    "bubbles",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/glass-shards-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "glass-shards",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "glass",
+    "shards",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/glass-shards-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "glass-shards",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "glass",
+    "shards",
+    "sand",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/gold-flakes-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "gold-flakes",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "gold",
+    "loot",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/gold-flakes-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "gold-flakes",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "gold",
+    "coins",
+    "loot",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/heat-cracks-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "heat-cracks",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "cracks",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/melt-pool-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "melt-pool",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "glass",
+    "pool",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/mirror-shards-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "mirror-shards",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "mirror",
+    "shards",
+    "glint",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/obsidian-chips-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "obsidian-chips",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "obsidian",
+    "shards",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/obsidian-chips-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "obsidian-chips",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "obsidian",
+    "shards",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/rune-ring-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "rune-ring",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "inlay",
+    "ring",
+    "gold",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/scorch-mark-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "scorch-mark",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "scorch",
+    "burnt",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/scorch-mark-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "scorch-mark",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "scorch",
+    "burnt",
+    "blast",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/sun-disc-inlay-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "sun-disc-inlay",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "inlay",
+    "sun",
+    "gold",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/ground-detail/sun-rays-inlay-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "ground-detail",
+   "name": "sun-rays-inlay",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "seamless",
+    "ground-detail",
+    "inlay",
+    "sun",
+    "rays",
+    "desert",
+    "sun-citadel"
    ],
    "note": ""
   },
@@ -134588,6 +136536,465 @@
     "wind",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/ash-drift-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "ash-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "ash",
+    "drift",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/burnt-bones-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "burnt-bones",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "bones",
+    "burnt",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/ember-trail-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "ember-trail",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "embers",
+    "fire",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/footprints-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "footprints",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "tracks",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/fulgurite-trace-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "fulgurite-trace",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "lightning",
+    "glass",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/glass-crack-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "glass-crack",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "glass",
+    "cracks",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/glass-crack-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "glass-crack",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "glass",
+    "cracks",
+    "impact",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/gold-dust-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "gold-dust",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "gold",
+    "dust",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/melt-ring-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "melt-ring",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "glass",
+    "melt",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/obsidian-chips-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "obsidian-chips",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "obsidian",
+    "shards",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/rune-scorch-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "rune-scorch",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "rune",
+    "fire",
+    "magic",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/sand-drift-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "sand-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "drift",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/sand-drift-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "sand-drift",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "sand",
+    "drift",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/scorch-mark-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "scorch-mark",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "scorch",
+    "burnt",
+    "stain",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/scorch-mark-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "scorch-mark",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "scorch",
+    "burnt",
+    "stain",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/shadow-obelisk-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "shadow-obelisk",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "cast",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/shadow-wall-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "shadow-wall",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "shadow",
+    "wall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/soot-stain-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "soot-stain",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "stain",
+    "fire",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/decals/sun-glare-spot-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "decals",
+   "name": "sun-glare-spot",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "decal",
+    "light",
+    "glint",
+    "desert",
+    "sun-citadel"
    ],
    "note": ""
   },
@@ -167352,6 +169759,5317 @@
    "note": ""
   },
   {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-000.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-001.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-004.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-005.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-007.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-016.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-017.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-020.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-021.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-023.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-028.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-029.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-031.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-064.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-065.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-068.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-069.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-071.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-080.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-081.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-084.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-085.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-087.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-092.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-093.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-095.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-112.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-113.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-116.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-117.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-119.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-124.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-125.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-127.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-193.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-197.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-199.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-209.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-213.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-215.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-221.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-223.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-241.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-245.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-247.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-253.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/basalt-wall-255.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "basalt-wall",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "basalt",
+    "gold-inlay",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-000.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-001.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-004.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-005.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-007.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-016.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-017.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-020.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-021.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-023.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-028.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-029.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-031.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-064.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-065.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-068.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-069.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-071.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-080.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-081.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-084.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-085.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-087.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-092.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-093.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-095.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-112.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-113.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-116.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-117.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-119.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-124.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-125.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-127.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-193.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-197.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-199.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-209.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-213.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-215.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-221.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-223.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-241.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-245.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-247.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-253.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/citadel-wall-255.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "citadel-wall",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "citadel",
+    "mirror-panels",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-000.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-001.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-004.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-005.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-007.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-016.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-017.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-020.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-021.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-023.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-028.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-029.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-031.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-064.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-065.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-068.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-069.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-071.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-080.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-081.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-084.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-085.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-087.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-092.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-093.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-095.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-112.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-113.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-116.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-117.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-119.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-124.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-125.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-127.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-193.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-197.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-199.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-209.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-213.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-215.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-221.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-223.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-241.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-245.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-247.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-253.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/glass-melt-255.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "glass-melt",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "glass",
+    "melt",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-000.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "000",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:0",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-001.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "001",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:1",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-004.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "004",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:4",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-005.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "005",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:5",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-007.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "007",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:7",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-016.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "016",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:16",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-017.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "017",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:17",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-020.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "020",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:20",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-021.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "021",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:21",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-023.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "023",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:23",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-028.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "028",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:28",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-029.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "029",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:29",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-031.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "031",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:31",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-064.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "064",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:64",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-065.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "065",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:65",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-068.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "068",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:68",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-069.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "069",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:69",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-071.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "071",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:71",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-080.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "080",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:80",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-081.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "081",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:81",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-084.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "084",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:84",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-085.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "085",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:85",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-087.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "087",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:87",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-092.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "092",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:92",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-093.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "093",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:93",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-095.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "095",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:95",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-112.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "112",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:112",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-113.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "113",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:113",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-116.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "116",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:116",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-117.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "117",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:117",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-119.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "119",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:119",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-124.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "124",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:124",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-125.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "125",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:125",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-127.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "127",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:127",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-193.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "193",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:193",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-197.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "197",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:197",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-199.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "199",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:199",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-209.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "209",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:209",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-213.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "213",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:213",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-215.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "215",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:215",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-221.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "221",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:221",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-223.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "223",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:223",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-241.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "241",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:241",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-245.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "245",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:245",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-247.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "247",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:247",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-253.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "253",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:253",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/edges/obsidian-slab-255.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "edges",
+   "name": "obsidian-slab",
+   "variant": "255",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "blob47",
+    "mask:255",
+    "paving",
+    "obsidian",
+    "floor",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/tomb-approach/edges/avenue-paving-000.svg",
    "region": "ashkara",
    "sub": "tomb-approach",
@@ -175343,6 +183061,162 @@
    "note": ""
   },
   {
+   "path": "ashkara/sun-citadel/trees/palm-scorched-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "trees",
+   "name": "palm-scorched",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "palm",
+    "burnt",
+    "dead",
+    "tall",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/trees/palm-scorched-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "trees",
+   "name": "palm-scorched",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "palm",
+    "burnt",
+    "dead",
+    "tall",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/trees/thorn-gold-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "trees",
+   "name": "thorn-gold",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "thorn",
+    "shrub",
+    "gold",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/trees/thorn-gold-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "trees",
+   "name": "thorn-gold",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "thorn",
+    "shrub",
+    "gold",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/trees/tree-glass-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "trees",
+   "name": "tree-glass",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "glass",
+    "fused",
+    "dead",
+    "tall",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/trees/tree-glass-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "trees",
+   "name": "tree-glass",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "glass",
+    "fused",
+    "dead",
+    "tall",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/tomb-approach/trees/acacia-lone-a.svg",
    "region": "ashkara",
    "sub": "tomb-approach",
@@ -178025,6 +185899,389 @@
    "note": ""
   },
   {
+   "path": "ashkara/sun-citadel/rocks/basalt-boulder-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "basalt-boulder",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "boulder",
+    "basalt",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/basalt-boulder-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "basalt-boulder",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "boulder",
+    "basalt",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/basalt-boulder-c.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "basalt-boulder",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "boulder",
+    "basalt",
+    "gold-vein",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/basalt-columns-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "basalt-columns",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "basalt",
+    "columns",
+    "formation",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/basalt-columns-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "basalt-columns",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "basalt",
+    "columns",
+    "formation",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/glass-lump-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "glass-lump",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "glass",
+    "fused",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/glass-lump-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "glass-lump",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "glass",
+    "fused",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/gold-ore-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "gold-ore",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ore",
+    "gold",
+    "loot",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/gold-rubble-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "gold-rubble",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "gold",
+    "block",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/gold-rubble-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "gold-rubble",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "gold",
+    "block",
+    "ruin",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/obsidian-shard-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "obsidian-shard",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obsidian",
+    "crystal",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/obsidian-shard-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "obsidian-shard",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obsidian",
+    "crystal",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/obsidian-spire-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "obsidian-spire",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "obsidian",
+    "glass",
+    "formation",
+    "tall",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/obsidian-spire-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "obsidian-spire",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "obsidian",
+    "glass",
+    "formation",
+    "tall",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/rocks/slag-heap-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "rocks",
+   "name": "slag-heap",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "slag",
+    "burnt",
+    "one",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/tomb-approach/rocks/column-drum-a.svg",
    "region": "ashkara",
    "sub": "tomb-approach",
@@ -179607,6 +187864,150 @@
     "tall",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/grass/ash-tuft-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "grass",
+   "name": "ash-tuft",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "ash",
+    "tuft",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/grass/ember-weed-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "grass",
+   "name": "ember-weed",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "embers",
+    "fire",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/grass/glass-grass-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "grass",
+   "name": "glass-grass",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "glass",
+    "spiky",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/grass/glass-grass-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "grass",
+   "name": "glass-grass",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "glass",
+    "spiky",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/grass/scrub-burnt-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "grass",
+   "name": "scrub-burnt",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scrub",
+    "burnt",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/grass/scrub-burnt-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "grass",
+   "name": "scrub-burnt",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "scrub",
+    "burnt",
+    "one",
+    "desert",
+    "sun-citadel"
    ],
    "note": ""
   },
@@ -185280,6 +193681,934 @@
     "obstacle",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-00.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-01.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-02.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-03.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-04.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-05.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-06.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-07.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-08.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-09.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-10.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-11.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-12.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-13.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-14.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/mirror-screen-15.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "mirror-screen",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "3/4-view",
+    "mirror",
+    "gold",
+    "obstacle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-00.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "00",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:0",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-01.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "01",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:1",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-02.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "02",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:2",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-03.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "03",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:3",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-04.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "04",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:4",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-05.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "05",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:5",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-06.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "06",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:6",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-07.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "07",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:7",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-08.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "08",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:8",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-09.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "09",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:9",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-10.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "10",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:10",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-11.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "11",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:11",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-12.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "12",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:12",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-13.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "13",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:13",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-14.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "14",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:14",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/fences/parapet-gold-15.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "fences",
+   "name": "parapet-gold",
+   "variant": "15",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "autotile",
+    "connect4",
+    "mask:15",
+    "3/4-view",
+    "wall",
+    "obstacle",
+    "gold",
+    "low",
+    "citadel",
+    "desert",
+    "sun-citadel"
    ],
    "note": ""
   },
@@ -192793,6 +202122,761 @@
    "note": ""
   },
   {
+   "path": "ashkara/sun-citadel/props/banner-sun-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "banner-sun",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "banner",
+    "sun",
+    "gold",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/banner-sun-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "banner-sun",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "banner",
+    "sun",
+    "red",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/djinn-statue-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "djinn-statue",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "djinn",
+    "statue",
+    "obsidian",
+    "gold",
+    "signature",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/djinn-statue-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "djinn-statue",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "djinn",
+    "statue",
+    "obsidian",
+    "gold",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/fire-bowl-ground-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "fire-bowl-ground",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "fire",
+    "bowl",
+    "lit",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/fire-bowl-ground-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "fire-bowl-ground",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "fire",
+    "bowl",
+    "unlit",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/fire-bowl-pillar-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "fire-bowl-pillar",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "fire",
+    "bowl",
+    "lit",
+    "gold",
+    "signature",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/fire-bowl-pillar-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "fire-bowl-pillar",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "fire",
+    "bowl",
+    "unlit",
+    "gold",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/gong-sun-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "gong-sun",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "gong",
+    "gold",
+    "bell",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/lens-stand-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "lens-stand",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "lens",
+    "crystal",
+    "beam",
+    "signature",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/mirror-stand-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "mirror-stand",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "mirror",
+    "gold",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/mirror-stand-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "mirror-stand",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "mirror",
+    "gold",
+    "beam",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/obelisk-broken-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "obelisk-broken",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "obelisk",
+    "gold",
+    "ruin",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/obelisk-gold-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "obelisk-gold",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "obelisk",
+    "gold",
+    "signature",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/obelisk-gold-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "obelisk-gold",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "obelisk",
+    "gold",
+    "signature",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/obelisk-small-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "obelisk-small",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obelisk",
+    "gold",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/obelisk-small-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "obelisk-small",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "obelisk",
+    "obsidian",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/offering-bowl-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "offering-bowl",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "bowl",
+    "offering",
+    "gold",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/pillar-broken-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "pillar-broken",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "pillar",
+    "gold",
+    "ruin",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/pillar-gold-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "pillar-gold",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "pillar",
+    "gold",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/pillar-gold-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "pillar-gold",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "pillar",
+    "gold",
+    "sun",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/signpost-sun-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "signpost-sun",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "sign",
+    "sun",
+    "gold",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/skeleton-scorched-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "skeleton-scorched",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "skeleton",
+    "burnt",
+    "bones",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/skeleton-scorched-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "skeleton-scorched",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "skeleton",
+    "burnt",
+    "bones",
+    "beast",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/skeleton-scorched-c.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "skeleton-scorched",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "skeleton",
+    "burnt",
+    "bones",
+    "sitting",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/solar-disc-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "solar-disc",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "sun",
+    "disc",
+    "gold",
+    "signature",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/solar-disc-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "solar-disc",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "sun",
+    "disc",
+    "gold",
+    "signature",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/sundial-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "sundial",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "sundial",
+    "sun",
+    "stone",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/urn-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "urn",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "urn",
+    "gold",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/props/urn-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "props",
+   "name": "urn",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "urn",
+    "obsidian",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/tomb-approach/props/banner-pole-a.svg",
    "region": "ashkara",
    "sub": "tomb-approach",
@@ -197028,6 +207112,532 @@
    "note": ""
   },
   {
+   "path": "ashkara/sun-citadel/interest/altar-sunfire-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "altar-sunfire",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "altar",
+    "fire",
+    "sun",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/camp-scorched-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "camp-scorched",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "camp",
+    "ruin",
+    "burnt",
+    "signature",
+    "large",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/chest-sun-closed.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "chest-sun",
+   "variant": "closed",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "closed",
+    "gold",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/chest-sun-open.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "chest-sun",
+   "variant": "open",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "chest",
+    "loot",
+    "open",
+    "gold",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/citadel-dome-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "citadel-dome",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "dome",
+    "citadel",
+    "gold",
+    "obstacle",
+    "large",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/citadel-golden-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "citadel-golden",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "citadel",
+    "gold",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/citadel-golden-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "citadel-golden",
+   "variant": "b",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "landmark",
+    "obelisk-court",
+    "gold",
+    "signature",
+    "large",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/citadel-tower-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "citadel-tower",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tower",
+    "citadel",
+    "gold",
+    "obstacle",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/citadel-tower-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "citadel-tower",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tower",
+    "citadel",
+    "gold",
+    "obstacle",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/djinn-colossus-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "djinn-colossus",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "djinn",
+    "colossus",
+    "statue",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/doorway-citadel-closed.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "doorway-citadel",
+   "variant": "closed",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "doorway",
+    "citadel",
+    "gold",
+    "closed",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/doorway-citadel-open.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "doorway-citadel",
+   "variant": "open",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "doorway",
+    "citadel",
+    "gold",
+    "open",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/gate-citadel-golden-closed.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "gate-citadel-golden",
+   "variant": "closed",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "citadel",
+    "exit",
+    "gold",
+    "closed",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/gate-citadel-golden-open.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "gate-citadel-golden",
+   "variant": "open",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "gate",
+    "citadel",
+    "exit",
+    "gold",
+    "open",
+    "signature",
+    "large",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/glass-spire-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "glass-spire",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "glass",
+    "spire",
+    "formation",
+    "obstacle",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/glass-spire-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "glass-spire",
+   "variant": "b",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "glass",
+    "spire",
+    "formation",
+    "obstacle",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/mirror-array-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "mirror-array",
+   "variant": "a",
+   "size": [
+    128,
+    128
+   ],
+   "cells": [
+    2,
+    2
+   ],
+   "tags": [
+    "mirrors",
+    "gold",
+    "beam",
+    "signature",
+    "obstacle",
+    "large",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/stairs-gold-down.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "stairs-gold",
+   "variant": "down",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "stairs",
+    "gold",
+    "down",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/stairs-gold-up.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "stairs-gold",
+   "variant": "up",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "stairs",
+    "gold",
+    "up",
+    "one",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/interest/watchtower-basalt-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "interest",
+   "name": "watchtower-basalt",
+   "variant": "a",
+   "size": [
+    64,
+    128
+   ],
+   "cells": [
+    1,
+    2
+   ],
+   "tags": [
+    "tower",
+    "basalt",
+    "obstacle",
+    "tall",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
    "path": "ashkara/tomb-approach/interest/altar-sun-a.svg",
    "region": "ashkara",
    "sub": "tomb-approach",
@@ -199635,6 +210245,320 @@
     "dusk",
     "desert",
     "singing-erg"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/blue-shade-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "blue-shade",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shade",
+    "dim",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/blue-shade-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "blue-shade",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "shade",
+    "dim",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/ember-drift-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "ember-drift",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "embers",
+    "fire",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/ember-drift-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "ember-drift",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "embers",
+    "fire",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/golden-haze-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "golden-haze",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "haze",
+    "light",
+    "gold",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/heat-haze-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "heat-haze",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "haze",
+    "heat",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/heat-haze-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "heat-haze",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "haze",
+    "heat",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/heat-haze-c.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "heat-haze",
+   "variant": "c",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "haze",
+    "heat",
+    "dense",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/light-rays-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "light-rays",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "rays",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/light-rays-b.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "light-rays",
+   "variant": "b",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "rays",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/mirror-glint-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "mirror-glint",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "sparkle",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/smoke-plume-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "smoke-plume",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "smoke",
+    "fire",
+    "desert",
+    "sun-citadel"
+   ],
+   "note": ""
+  },
+  {
+   "path": "ashkara/sun-citadel/overlays/sun-glare-a.svg",
+   "region": "ashkara",
+   "sub": "sun-citadel",
+   "category": "overlays",
+   "name": "sun-glare",
+   "variant": "a",
+   "size": [
+    64,
+    64
+   ],
+   "cells": [
+    1,
+    1
+   ],
+   "tags": [
+    "overlay",
+    "light",
+    "flare",
+    "desert",
+    "sun-citadel"
    ],
    "note": ""
   },
