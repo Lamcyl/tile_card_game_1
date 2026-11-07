@@ -118,7 +118,7 @@
       const fg = (x, y) => (x >= 0 && y >= 0 && x < q.N && y < q.N && F[y * q.N + x] === 1);
       for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
         const wx = (q.ox + x) * T, wy = (q.oy + y) * T;
-        if (F[y * q.N + x]) { const f = q.fog.full[Math.floor(hash2(x, y, 3) * q.fog.full.length)]; blit(ctx, q, f, wx, wy, T + 1, T + 1); continue; }
+        if (F[y * q.N + x]) { const f = q.fog.full[Math.floor(hash2(x, y, 3) * q.fog.full.length)]; blit(ctx, q, f, wx, wy, T + 1, T + 1); ctx.fillStyle = 'rgba(58,74,92,0.46)'; ctx.fillRect(wx, wy, T + 1, T + 1); continue; }
         const m = (fg(x, y - 1) ? 1 : 0) | (fg(x + 1, y) ? 2 : 0) | (fg(x, y + 1) ? 4 : 0) | (fg(x - 1, y) ? 8 : 0);
         if (m) blit(ctx, q, q.fog.edge[m], wx, wy, T + 1, T + 1);
       }

@@ -99,3 +99,5 @@ Content code builds `World.nodes` from these positions (ids like `meadow-0`, `me
 
 New node types (ids `<sub>-wp`, `<sub>-secret`): `waypoint` (a Wayshrine: lit once via a free visit, then a start position and a fast-travel target) and `secret` (a Sealed Cache, **invisible and untappable until found**; opened with 1 Key). Constants on `World`: `sightRadius(scoutLevel)` = 430 + 150 per level, `secretRadius(scoutLevel)` = 130 + 50 per level, `FOGGED` = `['battle', 'elite']` (bosses, springs, caches, shops, events and shrines are landmarks and never fogged), `MAX_KEYS` = 3, `SCOUT_GOLD` = 6.
 Save fields: `waypoints` (sub-area ids), `startAt` (`'camp'` or a sub-area id), `seen` (scouted spot ids), `secrets` (found cache ids), `secretsOpened`. Run field: `keys`.
+
+Adding a region needs data only: see the "Add a region" checklist in IMPLEMENTATION_PLAN (verified in the step-6 dry run).

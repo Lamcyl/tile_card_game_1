@@ -185,7 +185,7 @@ Feedback: bosses stopped paying Rations after the second one, and the post-battl
 
 ## WP20: tile-map world (steps 1 to 5 done)
 
-See `docs/WP20_PLAN.md` (Step notes). The overworld is a generated tile map (Greenvale 8 + Ashkara 8 sub-areas, Camp slot), drawn by `tilemap.js`, walked with `world-nav.js`; save key v4. Steps 5 (progression pass, validators) and 6 (data-only region dry run, cleanup) are open.
+See `docs/WP20_PLAN.md` (Step notes). The overworld is a generated tile map (Greenvale 8 + Ashkara 8 sub-areas, Camp slot), drawn by `tilemap.js`, walked with `world-nav.js`; save key v4. 
 
 **WP20 final pacing numbers (step 5).** Levels as in GAME_DESIGN 24.8 (Greenvale bosses 4-9, Ashkara 10-15); WP19 formulas unchanged. `validate-gen.js 40` 200/200 and `validate-gen.js bosses` 36/36 pass after tuning three reused fights (dshallows boss, palms boss, rice elite). Campaign sim, `SEED=1..8 node tools/sim-runs.js 1 campaign 30` (greedy Camp shopping, strong player):
 - Fresh-account first run 6 to 13 battles (mean 9.8); first Greenvale boss falls in run 1 (6 seeds) or 2 (2 seeds).
@@ -193,3 +193,16 @@ See `docs/WP20_PLAN.md` (Step notes). The overworld is a generated tile map (Gre
 - Ashkara conquered (Citadel boss): run 9, 27, >30, >30, 13, 7, >30, 6 (median about 13; 3 of 8 seeds not done within 30 runs).
 - Longest run 54 battles (cap 60). Typical late grind runs 14 to 24 battles at B9 to B14.
 
+
+
+## Add a region (WP20 checklist)
+
+Proven by the step-6 dry run: a copy of Ashkara with prefixed sub-area ids at `{NE, ring 1}` built, checked and rendered with no JS edits (the file was removed afterwards).
+
+1. Tileset: tiles in `art-samples/tiles/<set>/` and an entry in `manifest.json` (region key = `tileset` in the region file).
+2. Region file `prototype/data/regions/<id>.json` (fields in `_schema.md`): `slot {dir, ring}`, seeds / weights / angles per sub-area, `borders`, ground, sets, scatter and stamps recipes, `unlocks` with gates, `entry`, `exit`, `bossDef`/`theme`/`lm` content, `lv` and `bossLv`. Sub-area ids must be unique across regions; start from a copy of an existing file.
+3. Enemy art, battle backdrop (alias an existing biome in `art.js` `BACKDROP_ALIAS` until painted) and boss/elite defs in `boss-defs.js` for new `bossDef` ids.
+4. Validator bands: `tools/validate-gen.js` (`EARLY_BOSSES`, `SUB_FOR`, `POWER` if a level band moves), then `node tools/validate-gen.js 40` and `bosses`.
+5. `node tools/build-world.mjs --check` (a failure names the area: tune `weight` or the seed; changing the slot changes the noise, so re-tune), then `cd prototype && npm run world:atlas`.
+6. Look at it: `npm run build`, open `tiles.html?r=<id>&unlocked=all&open=all`.
+7. Pacing: `SEED=1..8 node tools/sim-runs.js 1 campaign 30`, then `npm run single` and check the size (cap 9 MB; each region adds about 0.5 to 0.7 MB).
