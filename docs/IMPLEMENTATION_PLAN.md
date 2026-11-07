@@ -183,6 +183,13 @@ Feedback: bosses stopped paying Rations after the second one, and the post-battl
 - Validators: `BOSS_BAND` deep bands raised (hp 2.0 / 1.9, atk 1.54), Hel `adj` 0.88, `validate-gen.js` POWER atk 3/4/4/5/6/6. `validate-gen.js 40` (200 battles) and `bosses` (40 fights) pass.
 - Sim (`tools/sim-runs.js`): warm-up, gate rush, then grind the highest frontier fights (level <= deepest beaten boss + 1). Fresh account 10.0-10.2 battles per run (40 runs, 2 seeds). Campaign, 3 seeds x 22 runs: longest run 53 battles (was 21 old, 90-120 before the 0.8^n decay and the cap); Frostveil first unlocked run 4 / 13 / 18, Ember Peaks conquered run 5 in one seed and not within 22 runs in the other two (wide seed spread, as before).
 
-## WP20: tile-map world (steps 1 to 4 done)
+## WP20: tile-map world (steps 1 to 5 done)
 
 See `docs/WP20_PLAN.md` (Step notes). The overworld is a generated tile map (Greenvale 8 + Ashkara 8 sub-areas, Camp slot), drawn by `tilemap.js`, walked with `world-nav.js`; save key v4. Steps 5 (progression pass, validators) and 6 (data-only region dry run, cleanup) are open.
+
+**WP20 final pacing numbers (step 5).** Levels as in GAME_DESIGN 24.8 (Greenvale bosses 4-9, Ashkara 10-15); WP19 formulas unchanged. `validate-gen.js 40` 200/200 and `validate-gen.js bosses` 36/36 pass after tuning three reused fights (dshallows boss, palms boss, rice elite). Campaign sim, `SEED=1..8 node tools/sim-runs.js 1 campaign 30` (greedy Camp shopping, strong player):
+- Fresh-account first run 6 to 13 battles (mean 9.8); first Greenvale boss falls in run 1 (6 seeds) or 2 (2 seeds).
+- Greenvale conquered (Highlands boss, opens Ashkara): run 4, 23, 14, 7, 6, 4, 30, 4 (median 6.5, mean 11.5).
+- Ashkara conquered (Citadel boss): run 9, 27, >30, >30, 13, 7, >30, 6 (median about 13; 3 of 8 seeds not done within 30 runs).
+- Longest run 54 battles (cap 60). Typical late grind runs 14 to 24 battles at B9 to B14.
+

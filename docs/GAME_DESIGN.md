@@ -721,6 +721,15 @@ Feedback: after the first two bosses a boss paid no Rations, and the post-battle
 | 14 | 4.69 | 15.5 | 9.4 | 68 | 15/30/45 | 36 | 2/3/4 | 6 | 11 | 8 / +3 | x1.94 |
 | 15 | 5.20 | 16.4 | 9.8 | 75 | 16/32/48 | 39 | 2/3/4 | 6 | 12 | 9 / +3 | x2.04 |
 
+**Level table of the shipped world (WP20).** Level is set per sub-area in the region files (`lv` = ordinary range, `bossLv`; elite = `lv[1]` in Greenvale, `lv[1] + 1` from region index 1; the boss is `bossLv`). Ordinary spots span `[bossLv - 2, bossLv - 1]` (meadow stays `[1, 2]`). Rewards and Rations follow w(L) from the table above, so each deeper area pays more per Ration.
+
+| Region | Sub-area: ordinary / boss Lv |
+|---|---|
+| Greenvale (ring 1) | meadow 1-2 / 4, forest 3-4 / 5, bamboo 3-4 / 5, lake 4-5 / 6, rice 5-6 / 7, ruins 6-7 / 8, marsh 6-7 / 8, highlands 7-8 / 9 |
+| Ashkara (ring 2) | dshallows 8-9 / 10, palms 9-10 / 11, erg 9-10 / 11, saltmirror 10-11 / 12, wadi 11-12 / 13, bazaar 11-12 / 13, tomb 12-13 / 14, citadel 13-14 / 15 |
+
+**How the table extends to future regions.** Depth is set by ring, not by compass direction. For a chain region of 8 sub-areas, `bossLv(i) = prevRegionLastBoss + 1 + round(i * 5 / 7)`, `i = 0..7` (so every region adds 5-6 levels and ten regions reach about Lv70); ordinary spots are `[bossLv - 2, bossLv - 1]`. A ring-1 region in another direction (requires `rice`) starts near Lv8-10. Beyond Lv15 enemies stay near-linear (HP 2.2 + 0.95L) and rewards follow w(L) with no formula change. Before a region ships, `tools/validate-gen.js` needs `POWER` rows (and `TIER_LEVELS` / `SUB_FOR` entries) for its levels, and `node tools/validate-gen.js bosses` must pass for its bosses. A reused boss fight is tuned per sub-area with `BOSS_TUNE` / `ELITE_TUNE` in `boss-defs.js` (WP20: dshallows Apep `adj [0.65, 0.8]`, palms Set `adj [0.7, 0.9]`, rice elite `hp 0.35`).
+
 Rations rule: normal and elite fights cost 1. A boss pays the net amounts above (a toll boss at Lv4-6 is a free passage). The decay 0.8^n and the 60 Ration cap stop a run from conquering the whole world on Rations, and every spot can still be fought only once per run. Boss and elite strength in the two deep bands was raised (`BOSS_BAND` hp x1.3 / x1.35, atk x1.1) and `validate-gen.js` POWER now assumes ATK +3 / +4 / +4 / +5 / +6 / +6 (the run cap) so every boss still costs 20-50% of the reference HP.
 
 **The loop.** Early: bosses pay +3 to +5, so rushing new areas extends the run. Later: toll bosses are almost free so the rush to the frontier costs little, then the highest fights you can survive give 2-3x the Souls and gear levels of shallow ones for the same single Ration. `tools/sim-runs.js` follows this: 3 warm-up wins, rush gate bosses, then grind the highest frontier fights up to (deepest beaten boss level + 1), the frontier boss last.

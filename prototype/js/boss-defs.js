@@ -81,7 +81,13 @@
   // WP20: 16 sub-areas (data/regions/*.json, `bossDef`). The new sub-areas reuse the fights of the retired ones (their gimmicks and layouts are
   // validated); the retired ids stay here as ready content for future regions (data/regions-reserve/).
   const REUSE = { rice: 'beach', ruins: 'cove', marsh: 'coral', highlands: 'isles', dshallows: 'dunes', palms: 'oasis', erg: 'ash', saltmirror: 'ridge', wadi: 'canyon', bazaar: 'lavafall', tomb: 'temple', citadel: 'caldera' };
-  for (const id of Object.keys(REUSE)) { BOSSES[id] = BOSSES[REUSE[id]]; ELITES[id] = ELITES[REUSE[id]]; }
+  // WP20 step 5: per-sub-area fine tuning of a reused fight at its new level (fields replace those of the copied def; checked by `node tools/validate-gen.js bosses`).
+  const BOSS_TUNE = { dshallows: { adj: [0.65, 0.8] }, palms: { adj: [0.7, 0.9] } };
+  const ELITE_TUNE = { rice: { hp: 0.35 } };
+  for (const id of Object.keys(REUSE)) {
+    BOSSES[id] = Object.assign({}, BOSSES[REUSE[id]], BOSS_TUNE[id]);
+    ELITES[id] = Object.assign({}, ELITES[REUSE[id]], ELITE_TUNE[id]);
+  }
 
   const BossDefs = { BOSSES, ELITES };
   root.BossDefs = BossDefs;

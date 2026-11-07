@@ -1,6 +1,6 @@
 # WP20 plan: tile-map overworld from the Greenvale and Ashkara tilesets
 
-Status: steps 1 to 4 implemented (see Step notes); steps 5 and 6 open. Replaces the painted free-roam map (`prototype/js/world-layout.js`, 733 lines; the painter in `prototype/js/map.js`, 2727 lines) with a tile map, re-spreads the WP19 progression (GAME_DESIGN 24.7 / 24.8) over 16 organic sub-areas, and makes a new region "mostly a data and tileset addition". Related: IMPLEMENTATION_PLAN "Future: long-term world expansion", `art-samples/tiles/TILESET.md`, `art-samples/maps/GREENVALE.md`, `DESERT.md`.
+Status: steps 1 to 5 implemented (see Step notes); step 6 open. Replaces the painted free-roam map (`prototype/js/world-layout.js`, 733 lines; the painter in `prototype/js/map.js`, 2727 lines) with a tile map, re-spreads the WP19 progression (GAME_DESIGN 24.7 / 24.8) over 16 organic sub-areas, and makes a new region "mostly a data and tileset addition". Related: IMPLEMENTATION_PLAN "Future: long-term world expansion", `art-samples/tiles/TILESET.md`, `art-samples/maps/GREENVALE.md`, `DESERT.md`.
 
 ## 1. World model
 
@@ -161,3 +161,8 @@ Ordinary spots span `[bossLv - 2, bossLv - 1]` (meadow stays `[1, 2]`). Greenval
 - Scatter densities in both region files raised x5.2 (props: Greenvale 110 to 493, Ashkara 80 to 317). `gen-region.mjs` keeps the path to the secret free of props (dense scatter sealed a secret in bamboo). Atlas re-run: Greenvale 0.71 MB, Ashkara 0.49 MB.
 - Checks: `npm run build` and `npm run single` pass (single 4.68 MB, loads from file://). `validate-gen.js` 50/50. `sim-runs.js 1` runs (fresh account 12 battles, not tuned: step 5). Playwright 390 x 844: set out, tap-walk, enemy card, battle win, reward, Return to Camp; boss opens `forest` and its gate; second run shows the sealed gate "Defeat Sansin this run"; Wayshrine chooser by region; Highlands start, boss, walk through the exit gate into Ashkara; market opens; overview; no console errors. Frame time about 1-2 ms (chunk composes spike to 50-70 ms once).
 - Known: the Camp ground tiles show a faint vertical banding; the fog-full tiles are pale stone; the 4 new backdrops are still aliases.
+
+**Step 5 (progression pass and validators), done.**
+- The `lv` / `bossLv` values of section 4 were already in the region files (step 1), and `validate-gen.js` / `sim-runs.js` already use the new ids (step 4), so no band moved and `POWER` is unchanged. Only three reused fights failed `bosses`: dshallows boss (Apep, unwinnable), palms boss (Set, unwinnable), rice elite (cost 20 of 29 HP). `boss-defs.js` gained `BOSS_TUNE` / `ELITE_TUNE` (per-id overrides on top of the copied def): dshallows `adj [0.65, 0.8]`, palms `adj [0.7, 0.9]`, rice elite `hp 0.35`. Reused ids are now copies, not shared references.
+- Results: `validate-gen.js 40` 200/200, `bosses` 36/36. Campaign numbers (8 seeds x 30 runs) are in IMPLEMENTATION_PLAN "WP20 final pacing numbers"; Greenvale conquered median run 6.5, Ashkara conquered median about 13 (3 of 8 seeds not within 30 runs), longest run 54 battles. The level table and its extension rule are in GAME_DESIGN 24.8.
+
