@@ -16,7 +16,7 @@
   --good: #4cc38a;
   --boost: #6ee7a8;
   --cell: min(84px, calc((100vw - 56px) / 5));
-  color-scheme: dark;
+  color-scheme: only light;
 }
 
 * { box-sizing: border-box; }

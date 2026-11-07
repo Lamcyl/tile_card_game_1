@@ -9,7 +9,7 @@
   const World = window.World;
   const canvas = document.getElementById('map');
   const ctx = canvas.getContext('2d');
-  const VIEW = 520;      // world units across the screen width at the default exploration zoom
+  const VIEW = 347;      // world units across the screen width at the default exploration zoom
   const FOCUS_Y = 0.36;  // focused points sit this far down the screen, above the bottom sheet
   const HERO_OFF = { x: 20, y: 14 }; // the hero stands beside a node, not on the monster
   const OV_TOP = 74, OV_BOT = 0.655;   // the overview fits between the HUD and the bottom sheet

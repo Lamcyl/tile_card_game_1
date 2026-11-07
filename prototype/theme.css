@@ -33,5 +33,5 @@
   --gold: #c9a23a;
   --font-display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, "Times New Roman", serif;
   --font-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  color-scheme: light;
+  color-scheme: only light;
 }
