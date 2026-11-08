@@ -14,6 +14,17 @@
   const unrle = (a, N) => { const o = new Int32Array(N); let k = 0; for (let i = 0; i < a.length; i += 2) { o.fill(a[i], k, k + a[i + 1]); k += a[i + 1]; } return o; };
   const hash2 = (x, y, s) => { let h = Math.imul(x | 0, 374761393) ^ Math.imul(y | 0, 668265263) ^ Math.imul((s | 0) + 7, 1274126177); h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
 
+  // Inlined assets (single-file build) are data: URLs. Some hosts' content security policy blocks fetch() of data: URLs,
+  // so decode them directly; only real paths go through fetch().
+  async function getJSON(url) {
+    if (url && url.startsWith('data:')) {
+      const comma = url.indexOf(','), meta = url.slice(5, comma), body = url.slice(comma + 1);
+      if (meta.endsWith(';base64')) { const bin = atob(body), u8 = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i); return JSON.parse(new TextDecoder().decode(u8)); }
+      return JSON.parse(decodeURIComponent(body));
+    }
+    return (await fetch(url)).json();
+  }
+
   const R = {};              // region id -> state
   const chunkCache = new Map(); // "id:cx,cy" -> {cv, last}
   let frameNo = 0, MAX_CHUNKS = 20;
@@ -21,7 +32,7 @@
 
   async function load(id) {
     if (R[id]) return R[id];
-    const [layer, atlas] = await Promise.all([fetch(urlOf(id + '.json')).then((r) => r.json()), fetch(urlOf(id + '-atlas.json')).then((r) => r.json())]);
+    const [layer, atlas] = await Promise.all([getJSON(urlOf(id + '.json')), getJSON(urlOf(id + '-atlas.json'))]);
     const imgs = await Promise.all(atlas.sheets.map(async (s) => { const im = new Image(); im.src = urlOf(s.file); await im.decode(); return im; }));
     const N = layer.size, M = N * N;
     // set pieces: stored mask+1 -> tile index. Tile paths look like "<region>/<sub>/edges/<name>-<mask>.svg".
