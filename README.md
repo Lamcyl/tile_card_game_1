@@ -16,7 +16,7 @@ The prototype is the **world map game**:
 
 The world is a generated tile map (Greenvale and Ashkara tilesets): the Camp plus 2 regions with 8 irregular sub-areas each (16 in all, see `docs/WORLD_SPEC.md`). Each sub-area has a landmark, 6-7 enemies including its own boss, and the boss reveals the next area. Regions are data files, so more can be added without code changes.
 
-The earlier three-stage battle tester is at `sandbox.html` (run it with `npm run dev` or `npm run preview`).
+The **developer test page** is `dev.html` (see below). The earlier three-stage battle tester is at `sandbox.html` (run it with `npm run dev` or `npm run preview`).
 
 ## Web build (Vite + Capacitor)
 
@@ -37,9 +37,20 @@ npm run build && npm run preview     # production build on http://localhost:4173
 npm run single                       # dist/tile-defense.html, one self-contained file for the artifact
 ```
 
+- **Developer test page:** `npm run single:dev` builds `dist/tile-defense-dev.html` (one file, no world atlases, no `fetch()` of any kind, so it works under a `connect-src 'none'` CSP).
+
 - **On an Android phone in Chrome:** connect over USB, run `adb reverse tcp:4173 tcp:4173`, then open `http://localhost:4173` on the phone.
 - **As an installed app (Capacitor):** run `npx cap add android` once (needs Android Studio), then `npm run android` to build, sync and open Android Studio, and press Run.
 - **Updating the artifact:** run `npm run single` and republish `prototype/dist/tile-defense.html` to the same artifact URL.
+
+## Developer test page (`prototype/dev.html`)
+
+An interactive test bench with no map: open `/dev.html` under `npm run dev` / `npm run preview`, or use the single file above. It runs the real battle screen (`js/battle.js`) with the current dev squad and never touches the game save: all state is under `localStorage` key `tile-defense-dev-v1` (presets: `tile-defense-dev-presets-v1`; the game uses `tile-defense-world-v4`).
+
+- **Enemies:** regions, then sub-areas in progression order (tap to open), then every normal, elite and boss spot with level, enemy types and kinds, boss gimmick and the unique drop. **Fight** starts exactly that battle; afterwards the list shows win/lose, stars and turns. A seed field (generated fights are seeded), **Reroll all** and a per-fight dice button give new layouts; **-> Builder** copies a fight into the builder.
+- **Builder:** pick a sub-area (creatures and backdrop) and level, tap a tile of the 2x5 enemy board and add Basic / Tough / Armored / Barrel / Boss or a Healer / Splitter / Summoner / Bulwark, then edit type, kind, gimmick, HP, ATK, armor, gimmick parameter and guard flag. Meant for trying out the enemy-revamp ideas.
+- **Team:** add or remove any unit (no Command Point limit; a warning shows), set its rarity (CP cost and look), Stars and Mastery. **Camp:** hero, currencies, every upgrade track, Heat modifiers and Descend. **Gear:** grant, level, re-rarity, equip or remove any item. **Run:** current HP, max HP bonus, spent revives, relics, per-unit in-run ATK/range/block/boost bonuses, and the resulting engine rules.
+- Every edit applies to the next fight at once. **Presets** saves and loads whole setups (localStorage); **Reset to defaults** (tap twice) restores a rich default account (all bosses beaten, starter squad).
 
 ## Project layout
 
@@ -59,6 +70,7 @@ prototype/js/boss-defs.js            Handcrafted bosses and elites (one gimmick 
 prototype/js/map.js                  World map view: camera, hero, nodes, fog, panning
 prototype/js/battle.js               Battle screen (placement + animated turns)
 prototype/js/app.js                  Game flow: Camp menu screens, runs, rewards, results (camp.css styles the Camp menu)
+prototype/dev.html, dev.js, dev.css  Developer test page: enemy browser, battle builder, free editing (dev-boot.js marks the page)
 prototype/sandbox.html               Three-stage battle tester (sandbox.js, style.css, js/stages.js, js/ui.js)
 prototype/scripts/single-file.mjs    Packs the game into one HTML fragment
 prototype/capacitor.config.json      Capacitor app settings

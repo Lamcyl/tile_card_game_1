@@ -8,6 +8,7 @@
     "preview": "vite preview --host",
     "world:atlas": "node ../tools/world/raster.mjs",
     "single": "vite build --mode single && node scripts/single-file.mjs",
+    "single:dev": "vite build --mode single-dev && node scripts/single-file.mjs dev",
     "android": "vite build && cap sync android && cap open android"
   },
   "devDependencies": {

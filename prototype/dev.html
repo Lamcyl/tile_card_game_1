@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="color-scheme" content="only light">
+  <meta name="supported-color-schemes" content="light">
+  <title>Tile Defense - Dev test page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="dev"></div>
+  <button id="dev-exit" type="button" hidden>Exit battle</button>
+  <section id="battle" class="battle" hidden>
+      <header class="b-head">
+        <div class="b-title"><h2 id="b-name"></h2><small id="b-sub"></small><div id="b-relics" class="b-relics" hidden></div></div>
+        <div class="b-turn"><span>Turn</span> <b id="b-turn">1</b></div>
+      </header>
+      <div id="b-arena" class="arena">
+        <div id="b-board" class="board"></div>
+        <div class="threat-wrap">
+          <div class="threat-label">If nothing dies, you take <b id="b-threat-total">0</b></div>
+          <div id="b-threat" class="threat"></div>
+        </div>
+        <div id="b-hero" class="hero">
+          <span id="b-hero-seal" class="hero-seal" aria-hidden="true">命</span>
+          <div class="hero-info"><b id="b-hero-name">Hero</b><small id="b-hero-passive"></small></div>
+          <button id="b-ability" class="ability-btn" type="button" hidden></button>
+          <div class="hero-hp"><div class="bar"><i id="b-hpfill"></i></div><span id="b-hptext" class="hp-text"></span></div>
+        </div>
+        <div id="b-fx" class="fx"></div>
+      </div>
+      <p id="b-msg" class="b-msg" role="status" title="Tap to expand"></p>
+      <div id="b-hand" class="hand"></div>
+      <div class="b-controls">
+        <button id="b-clear" type="button">Return all</button>
+        <button id="b-log-toggle" type="button" aria-expanded="false" aria-controls="b-log" title="Battle log">📜</button>
+        <button id="b-speed" type="button" title="Animation speed">2×</button>
+        <button id="b-fight" type="button" class="primary grow">⚔ Fight</button>
+      </div>
+      <section id="b-log" class="b-log collapsed" aria-label="Battle log">
+        <div id="b-log-lines" class="log-lines" role="log"></div>
+      </section>
+    </section>
+  <script type="module" src="./dev.js"></script>
+</body>
+</html>
