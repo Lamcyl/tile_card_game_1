@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   const single = mode === 'single' || mode === 'single-dev';
   return {
     base: './',
+    server: { fs: { allow: ['..'] } }, // dev.html imports the design proposals from ../docs/data
     build: {
       outDir: mode === 'single-dev' ? 'dist-dev' : 'dist',
       assetsInlineLimit: single ? Number.MAX_SAFE_INTEGER : 4096,

@@ -16,6 +16,7 @@ import './js/gen.js';
 import './js/battle.js';
 import './js/items.js';
 import './js/relics.js';
+import { Design } from './design.js';
 
 (function () {
   'use strict';
@@ -274,13 +275,14 @@ import './js/relics.js';
   }
 
   // ---------- Render ----------
-  const TABS = [['enemies', 'Enemies'], ['builder', 'Builder'], ['team', 'Team'], ['camp', 'Camp'], ['gear', 'Gear'], ['run', 'Run'], ['presets', 'Presets']];
-  const TAB_FN = { enemies: tabEnemies, builder: tabBuilder, team: tabTeam, camp: tabCamp, gear: tabGear, run: tabRun, presets: tabPresets };
+  const TABS = [['enemies', 'Enemies'], ['builder', 'Builder'], ['team', 'Team'], ['camp', 'Camp'], ['gear', 'Gear'], ['run', 'Run'], ['presets', 'Presets'], ['design', 'Design']];
+  const TAB_FN = { enemies: tabEnemies, builder: tabBuilder, team: tabTeam, camp: tabCamp, gear: tabGear, run: tabRun, presets: tabPresets, design: () => '<div id="design-root"></div>' };
   function render() {
     applyOverrides();
     const root = $('#dev'), keep = window.scrollY;
     root.innerHTML = '<div class="d-head"><h1>Tile Defense dev test page</h1><div class="d-sum">' + esc(summaryLine()) + '</div><div class="d-tabs">' +
       TABS.map(([id, label]) => '<button class="sm' + (S.ui.tab === id ? ' on' : '') + '" data-a="tab" data-id="' + id + '">' + label + '</button>').join('') + '</div></div><div id="dev-body">' + TAB_FN[S.ui.tab]() + '</div>';
+    if (S.ui.tab === 'design') { if (!S.design || typeof S.design !== 'object') S.design = { marks: {}, sub: 'units' }; Design.mount($('#design-root'), S.design, persist); }
     window.scrollTo(0, keep);
   }
   const change = () => { persist(); render(); };
@@ -375,6 +377,7 @@ import './js/relics.js';
     if (d.open) { const sub = World.SUB_BY[id]; d.querySelector('.body').innerHTML = World.nodes.filter((n) => n.sub === id && ['battle', 'elite', 'boss'].includes(n.type)).map((n) => nodeRow(n, sub)).join(''); }
   }, true);
 
+  Design.bind($('#dev'));
   render();
   window.DevTest = { get state() { return S; }, results };
 })();
