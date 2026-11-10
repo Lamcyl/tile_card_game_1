@@ -1,0 +1,122 @@
+[
+ {
+  "id": "marshal",
+  "name": "Marshal",
+  "current": true,
+  "unlock": "start",
+  "passive": "Shields block +1",
+  "ability": "Rally: every attacker +1 ATK this turn",
+  "fiction": "Reframe: the Warden of the Gate who rallies the beasts.",
+  "status": "proposed"
+ },
+ {
+  "id": "pyromancer",
+  "name": "Pyromancer",
+  "current": true,
+  "unlock": "beat the Sunny Meadows boss",
+  "passive": "Barrels explode for 3",
+  "ability": "Ignite: a Barrel explodes at once, else 2 damage ignoring armor",
+  "fiction": "Reframe: a fire-spirit tender.",
+  "status": "proposed"
+ },
+ {
+  "id": "quartermaster",
+  "name": "Quartermaster",
+  "current": true,
+  "unlock": "finish 3 expeditions",
+  "passive": "One extra reward choice",
+  "ability": "Ration: heal the damage taken this battle, up to 4",
+  "fiction": "Reframe: a provisioner for the beast caravan.",
+  "status": "proposed"
+ },
+ {
+  "id": "sentinel",
+  "name": "Sentinel",
+  "current": true,
+  "unlock": "beat the Old Oak Wood boss",
+  "passive": "+4 max HP",
+  "ability": "Brace: enemy strikes weakened by 2 this turn",
+  "fiction": "Reframe: the shrine gate guard.",
+  "status": "proposed"
+ },
+ {
+  "id": "beastkeeper",
+  "name": "Beast-keeper",
+  "current": false,
+  "unlock": "from the start (replaces Marshal as default)",
+  "passive": "Evolution extensions unlock one mastery level earlier",
+  "ability": "Call: swap two units of the same family for free",
+  "fiction": "A wandering herder who raises hatchlings and kits into guardians.",
+  "status": "proposed"
+ },
+ {
+  "id": "shrine_warden",
+  "name": "Shrine Warden",
+  "current": false,
+  "unlock": "beat the first boss",
+  "passive": "Light and Wood units get +1 max HP to the hero each (up to +4)",
+  "ability": "Purify: remove all debuffs from your side and one status from an enemy",
+  "fiction": "Keeper of a mountain shrine where the guardians rest.",
+  "status": "proposed"
+ },
+ {
+  "id": "dragon_gate_keeper",
+  "name": "Dragon-Gate Keeper",
+  "current": false,
+  "unlock": "evolve a carp to a dragon",
+  "passive": "Fins evolve one mastery level earlier",
+  "ability": "Leap: one unit gains its next extension for this battle",
+  "fiction": "Guards the waterfall where carp leap to become dragons.",
+  "status": "proposed"
+ },
+ {
+  "id": "fox_priest",
+  "name": "Fox Priestess",
+  "current": false,
+  "unlock": "win with a Packs-heavy squad",
+  "passive": "Attune also works on the unit below",
+  "ability": "Foxfire: change the element of any one unit this turn",
+  "fiction": "Messenger of the fox shrine; bargains with tricksters.",
+  "status": "proposed"
+ },
+ {
+  "id": "naturalist",
+  "name": "Naturalist",
+  "current": false,
+  "unlock": "discover 30 beasts",
+  "passive": "Ambivalent beasts get +1 ATK or +1 block",
+  "ability": "Field Notes: reveal enemy elements and statuses for the rest of the battle",
+  "fiction": "A scholar cataloguing the bestiary.",
+  "status": "proposed"
+ },
+ {
+  "id": "storm_caller",
+  "name": "Storm Caller",
+  "current": false,
+  "unlock": "win with 4 Storm units",
+  "passive": "Reactions with Storm deal +1",
+  "ability": "Thunderclap: strike one enemy and chain once",
+  "fiction": "A rainmaker.",
+  "status": "proposed"
+ },
+ {
+  "id": "lantern_keeper",
+  "name": "Lantern Keeper",
+  "current": false,
+  "unlock": "beat 3 shadow bosses",
+  "passive": "Light units purge once per battle",
+  "ability": "Lantern: reveal and remove Hide/Veiled on every enemy",
+  "fiction": "Carries a lantern through haunted valleys.",
+  "status": "proposed"
+ },
+ {
+  "id": "menagerist",
+  "name": "Menagerist",
+  "current": false,
+  "unlock": "collect 20 units",
+  "passive": "Wilds count as any family",
+  "ability": "Open the Gate: the next placed unit joins free of Command cost",
+  "fiction": "Runs a traveling sanctuary.",
+  "status": "proposed"
+ }
+]

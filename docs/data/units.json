@@ -1,0 +1,3403 @@
+[
+ {
+  "id": "plume_herald",
+  "name": "Plume Herald",
+  "culture": "Maya",
+  "baseAnimal": "Ocellated turkey",
+  "element": "wood",
+  "family": "wings",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "herald",
+  "roles": {
+   "atk": 30,
+   "buff": 70,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "Adjacent Wings get +1 ATK.",
+  "synergyTags": [
+   "herald",
+   "wings"
+  ],
+  "bestiary": "Resplendent quetzal",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Ocellated turkey",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Resplendent quetzal",
+    "extends": "buff also reaches the diagonals"
+   },
+   {
+    "stage": 3,
+    "name": "Quetzal",
+    "extends": "boosted Wings also gain +1 range"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "sun_crow",
+  "name": "Sun Crow",
+  "culture": "Korean",
+  "baseAnimal": "Crow",
+  "element": "fire",
+  "family": "wings",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "scorch",
+  "roles": {
+   "atk": 80,
+   "buff": 20,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R3; the hit enemy Burns 1 for 2 turns.",
+  "synergyTags": [
+   "burn",
+   "sun-moon"
+  ],
+  "bestiary": "Samjok-o",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Crow",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Samjok-o",
+    "extends": "Burn lasts 3 turns"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "thousand_year_crane",
+  "name": "Thousand-Year Crane",
+  "culture": "Japanese",
+  "baseAnimal": "Red-crowned crane",
+  "element": "earth",
+  "family": "wings",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "spyglass",
+  "roles": {
+   "atk": 0,
+   "buff": 100,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "The unit above gets +1 range.",
+  "synergyTags": [
+   "range",
+   "support"
+  ],
+  "bestiary": "Tsuru",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Red-crowned crane",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Tsuru",
+    "extends": "the unit beside it also gets +1 range"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "raven_pair",
+  "name": "Raven Pair",
+  "culture": "Norse",
+  "baseAnimal": "Raven",
+  "element": "shadow",
+  "family": "wings",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "mark",
+  "roles": {
+   "atk": 70,
+   "buff": 30,
+   "guard": 0
+  },
+  "powerBudget": 11,
+  "ability": "Straight R4; the target is Marked (the next hit on it deals +1).",
+  "synergyTags": [
+   "mark",
+   "odin"
+  ],
+  "bestiary": "Huginn and Muninn",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Raven",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Odin's raven",
+    "extends": "Mark also lasts into the next turn"
+   },
+   {
+    "stage": 3,
+    "name": "Huginn and Muninn",
+    "extends": "Marks the front enemy of a second column"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "firebird",
+  "name": "Firebird",
+  "culture": "Slavic",
+  "baseAnimal": "Songbird",
+  "element": "fire",
+  "family": "wings",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "spread",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Spread R3, ATK 1; the centre target Burns 1.",
+  "synergyTags": [
+   "burn",
+   "spread"
+  ],
+  "bestiary": "Firebird (Zhar-ptitsa)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Songbird",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Firebird",
+    "extends": "Burn lasts 2 turns"
+   },
+   {
+    "stage": 3,
+    "name": "Flare-plume",
+    "extends": "side targets also Burn"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "phoenix",
+  "name": "Phoenix",
+  "culture": "Medieval",
+  "baseAnimal": "Red kite",
+  "element": "fire",
+  "family": "wings",
+  "rarity": "legendary",
+  "commandCost": 4,
+  "type": "rebirth",
+  "roles": {
+   "atk": 70,
+   "buff": 0,
+   "guard": 30
+  },
+  "powerBudget": 13,
+  "ability": "Pierce R5; once per run the hero rises at half HP.",
+  "synergyTags": [
+   "rebirth",
+   "pierce"
+  ],
+  "bestiary": "Phoenix",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Red kite",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Phoenix",
+    "extends": "Pierce range +1 and the revived hero keeps one Shield"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "khan_garid",
+  "name": "Khan Garid",
+  "culture": "Mongol",
+  "baseAnimal": "Golden eagle",
+  "element": "earth",
+  "family": "wings",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "skyfall",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight, unlimited range, ATK 1; best from the back row.",
+  "synergyTags": [
+   "skyfall",
+   "backline"
+  ],
+  "bestiary": "Khan Garid (Mongol)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Golden eagle",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Khan Garid",
+    "extends": "hit enemy is Marked"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "huma",
+  "name": "Huma",
+  "culture": "Persian",
+  "baseAnimal": "Saker falcon",
+  "element": "light",
+  "family": "wings",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "boost",
+  "roles": {
+   "atk": 20,
+   "buff": 80,
+   "guard": 0
+  },
+  "powerBudget": 12,
+  "ability": "The unit above gets +1 ATK; the first kill each turn heals the hero 1.",
+  "synergyTags": [
+   "boost",
+   "heal"
+  ],
+  "bestiary": "Huma",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Saker falcon",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Huma",
+    "extends": "the buff also reaches the upper-left tile"
+   },
+   {
+    "stage": 3,
+    "name": "Huma of Fortune",
+    "extends": "heals 1 more on a kill"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "pelican_of_mercy",
+  "name": "Pelican of Mercy",
+  "culture": "Medieval",
+  "baseAnimal": "Pelican",
+  "element": "water",
+  "family": "wings",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "bloom",
+  "roles": {
+   "atk": 0,
+   "buff": 40,
+   "guard": 60
+  },
+  "powerBudget": 9,
+  "ability": "Heals the hero 1 each turn.",
+  "synergyTags": [
+   "heal",
+   "support"
+  ],
+  "bestiary": "Pelican in her piety",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Pelican",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Pelican in her piety",
+    "extends": "heals 2 if the hero was struck that turn"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "hongsa",
+  "name": "Hongsa",
+  "culture": "Thai",
+  "baseAnimal": "Goose",
+  "element": "water",
+  "family": "wings",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "straight",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R3, ATK 2.",
+  "synergyTags": [
+   "basic",
+   "straight"
+  ],
+  "bestiary": "Hongsa (TH)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Goose",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Hongsa",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "kotuku",
+  "name": "Kotuku",
+  "culture": "Maori",
+  "baseAnimal": "White heron",
+  "element": "light",
+  "family": "wings",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "ward",
+  "roles": {
+   "atk": 0,
+   "buff": 30,
+   "guard": 70
+  },
+  "powerBudget": 9,
+  "ability": "Negates the first strike against the hero each battle.",
+  "synergyTags": [
+   "ward",
+   "rare-omen"
+  ],
+  "bestiary": "Kōtuku (Māori)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "White heron",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Kōtuku",
+    "extends": "also negates the first strike in the next column"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "tui_mimic",
+  "name": "Tui Mimic",
+  "culture": "Maori",
+  "baseAnimal": "Songbird",
+  "element": "wood",
+  "family": "wings",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "boost",
+  "roles": {
+   "atk": 0,
+   "buff": 100,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "The unit above gets +1 ATK.",
+  "synergyTags": [
+   "boost",
+   "support"
+  ],
+  "bestiary": "Tūī",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Songbird",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Tūī",
+    "extends": "the buff also applies to the unit beside it"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "kunpeng",
+  "name": "Kunpeng",
+  "culture": "Chinese",
+  "baseAnimal": "Kun fish",
+  "element": "storm",
+  "family": "wings",
+  "earlyFamily": "fins",
+  "rarity": "legendary",
+  "commandCost": 4,
+  "type": "pierce",
+  "roles": {
+   "atk": 90,
+   "buff": 0,
+   "guard": 10
+  },
+  "powerBudget": 14,
+  "ability": "Pierce R5, ATK 3; while still a Kun fish (stage 1) it counts as Fins.",
+  "synergyTags": [
+   "metamorph",
+   "pierce"
+  ],
+  "bestiary": "Kunpeng (鯤鵬)",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Kun fish",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Kunpeng",
+    "extends": "Pierce range +1 and chains once to a neighbour"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "sarimanok",
+  "name": "Sarimanok",
+  "culture": "Filipino",
+  "baseAnimal": "Rooster",
+  "element": "fire",
+  "family": "wings",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "tribute",
+  "roles": {
+   "atk": 70,
+   "buff": 30,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "Straight R2; +1 Soul for each kill.",
+  "synergyTags": [
+   "tribute",
+   "souls"
+  ],
+  "bestiary": "Sarimanok (PH)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Rooster",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Sarimanok",
+    "extends": "+2 Souls on a boss kill"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "gongjak_banner",
+  "name": "Gongjak Banner",
+  "culture": "Korean",
+  "baseAnimal": "Peafowl",
+  "element": "light",
+  "family": "wings",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "boost_cross",
+  "roles": {
+   "atk": 10,
+   "buff": 90,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "All 4 sides get +1 ATK.",
+  "synergyTags": [
+   "boost",
+   "cross"
+  ],
+  "bestiary": "Gongjak (공작)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Peafowl",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Gongjak",
+    "extends": "also gives +1 range"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "ceryneian_hind",
+  "name": "Ceryneian Hind",
+  "culture": "Greek",
+  "baseAnimal": "Roe deer",
+  "element": "wood",
+  "family": "hooves",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "swift",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R2; attacks before the front row does.",
+  "synergyTags": [
+   "swift"
+  ],
+  "bestiary": "Ceryneian Hind",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Roe deer",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Ceryneian Hind",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "white_hart",
+  "name": "White Hart",
+  "culture": "Medieval",
+  "baseAnimal": "Red deer",
+  "element": "light",
+  "family": "hooves",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "herald",
+  "roles": {
+   "atk": 0,
+   "buff": 50,
+   "guard": 50
+  },
+  "powerBudget": 9,
+  "ability": "Blocks 2 in its column; adjacent Hooves get +1 ATK.",
+  "synergyTags": [
+   "herald",
+   "hooves",
+   "guard"
+  ],
+  "bestiary": "White hart",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Red deer",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "White hart",
+    "extends": "the buff also gives +1 block to adjacent Shields"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "rakhsh",
+  "name": "Rakhsh",
+  "culture": "Persian",
+  "baseAnimal": "Arabian horse",
+  "element": "fire",
+  "family": "hooves",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "trample",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R2; also deals 1 to the enemy behind.",
+  "synergyTags": [
+   "trample"
+  ],
+  "bestiary": "Rakhsh",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Arabian horse",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Rakhsh",
+    "extends": "the splash is 2"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "cheonma",
+  "name": "Cheonma",
+  "culture": "Korean",
+  "baseAnimal": "Horse",
+  "element": "wind",
+  "family": "hooves",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "current",
+  "roles": {
+   "atk": 90,
+   "buff": 10,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R3; the hit enemy is pushed one column sideways.",
+  "synergyTags": [
+   "push",
+   "wind"
+  ],
+  "bestiary": "Cheonma (천마)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Horse",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Cheonma",
+    "extends": "also pushes the neighbour it lands next to"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "tulpar",
+  "name": "Tulpar",
+  "culture": "Turkic",
+  "baseAnimal": "Przewalski's horse",
+  "element": "wind",
+  "family": "hooves",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "swap",
+  "roles": {
+   "atk": 60,
+   "buff": 40,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "Straight R2; after attacking it swaps places with the ally behind it.",
+  "synergyTags": [
+   "swap",
+   "positioning"
+  ],
+  "bestiary": "Tulpar (Turkic)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Przewalski's horse",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Tulpar",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "audhumbla",
+  "name": "Audhumbla",
+  "culture": "Norse",
+  "baseAnimal": "Cow",
+  "element": "earth",
+  "family": "hooves",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "herd",
+  "roles": {
+   "atk": 0,
+   "buff": 20,
+   "guard": 80
+  },
+  "powerBudget": 8,
+  "ability": "Shield 2; +1 block per other Hooves ally (max +2).",
+  "synergyTags": [
+   "herd",
+   "shield"
+  ],
+  "bestiary": "Auðumbla",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Cow",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Audhumbla",
+    "extends": "the max is +3"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "indrik",
+  "name": "Indrik",
+  "culture": "Slavic",
+  "baseAnimal": "Wisent",
+  "element": "earth",
+  "family": "hooves",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "column_captain",
+  "roles": {
+   "atk": 20,
+   "buff": 80,
+   "guard": 0
+  },
+  "powerBudget": 12,
+  "ability": "Every attacker in its column gets +1 ATK.",
+  "synergyTags": [
+   "captain",
+   "column"
+  ],
+  "bestiary": "Indrik",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Wisent",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Indrik",
+    "extends": "also gives +1 range to the column"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "qilin",
+  "name": "Qilin",
+  "culture": "Chinese",
+  "baseAnimal": "Deer",
+  "element": "wood",
+  "family": "hooves",
+  "rarity": "legendary",
+  "commandCost": 4,
+  "type": "herald",
+  "roles": {
+   "atk": 50,
+   "buff": 50,
+   "guard": 0
+  },
+  "powerBudget": 13,
+  "ability": "Straight R3, ATK 2; all Hooves and Wings get +1 ATK.",
+  "synergyTags": [
+   "herald",
+   "aura",
+   "auspicious"
+  ],
+  "bestiary": "Qilin (麒麟)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Deer",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Qilin",
+    "extends": "its buff also reaches Fangs and Packs on adjacent tiles"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "karkadann",
+  "name": "Karkadann",
+  "culture": "Persian",
+  "baseAnimal": "Rhinoceros",
+  "element": "fire",
+  "family": "hooves",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "pierce",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Pierce R2, ATK 2.",
+  "synergyTags": [
+   "pierce"
+  ],
+  "bestiary": "Karkadann",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Rhinoceros",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Karkadann",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "reindeer_hauler",
+  "name": "Reindeer Hauler",
+  "culture": "Finnish",
+  "baseAnimal": "Reindeer",
+  "element": "frost",
+  "family": "hooves",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "chill",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R2; the hit enemy loses 1 ATK for the battle (min 1).",
+  "synergyTags": [
+   "chill",
+   "frost"
+  ],
+  "bestiary": "Reindeer",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Reindeer",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Sled-reindeer",
+    "extends": "Chill reaches the enemy behind"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "pegasus",
+  "name": "Pegasus",
+  "culture": "Greek",
+  "baseAnimal": "Horse",
+  "element": "storm",
+  "family": "hooves",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "skyfall",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight, unlimited range, ATK 1; chain reaction on Water targets.",
+  "synergyTags": [
+   "skyfall",
+   "storm"
+  ],
+  "bestiary": "Pegasus",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Horse",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Pegasus",
+    "extends": "hit chains 1 damage to a neighbour"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "sleipnir",
+  "name": "Sleipnir",
+  "culture": "Norse",
+  "baseAnimal": "Horse",
+  "element": "wind",
+  "family": "hooves",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "echo",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 12,
+  "ability": "Straight R2; attacks twice (second hit at half ATK).",
+  "synergyTags": [
+   "echo"
+  ],
+  "bestiary": "Sleipnir",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Horse",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Sleipnir",
+    "extends": "second hit at full ATK minus 1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "singha",
+  "name": "Singha",
+  "culture": "Thai",
+  "baseAnimal": "Lion",
+  "element": "fire",
+  "family": "fangs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "straight",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R1, ATK 3; Fangs Straight attackers carry overkill (Rend) with a 2-Fangs set.",
+  "synergyTags": [
+   "fangs",
+   "front"
+  ],
+  "bestiary": "Singha (TH)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Lion",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Singha",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "haetae",
+  "name": "Haetae",
+  "culture": "Korean",
+  "baseAnimal": "Lion cub",
+  "element": "water",
+  "family": "fangs",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "bastion",
+  "roles": {
+   "atk": 40,
+   "buff": 0,
+   "guard": 60
+  },
+  "powerBudget": 9,
+  "ability": "Shield 2 and Straight R1, ATK 1 from the same tile; Burn never hurts allies in its column.",
+  "synergyTags": [
+   "bastion",
+   "hybrid"
+  ],
+  "bestiary": "Haetae (해태)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Lion cub",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Haetae",
+    "extends": "Burn immunity covers adjacent columns"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "pixiu",
+  "name": "Pixiu",
+  "culture": "Chinese",
+  "baseAnimal": "Lynx",
+  "element": "earth",
+  "family": "fangs",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "tribute",
+  "roles": {
+   "atk": 60,
+   "buff": 40,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "Straight R2; +1 Soul per kill, +2 for an elite.",
+  "synergyTags": [
+   "tribute",
+   "souls"
+  ],
+  "bestiary": "Pixiu (貔貅)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Lynx",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Pixiu",
+    "extends": "Soul bonus applies to the whole squad's kills this turn"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "suanni",
+  "name": "Suanni",
+  "culture": "Chinese",
+  "baseAnimal": "Lion",
+  "element": "fire",
+  "family": "fangs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "pounce",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R1, ATK 2; +2 against an enemy at full HP.",
+  "synergyTags": [
+   "pounce"
+  ],
+  "bestiary": "Suanni",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Lion",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Suanni",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "yali",
+  "name": "Yali",
+  "culture": "Hindu",
+  "baseAnimal": "Elephant",
+  "element": "earth",
+  "family": "fangs",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "trample",
+  "roles": {
+   "atk": 60,
+   "buff": 0,
+   "guard": 40
+  },
+  "powerBudget": 11,
+  "ability": "Shield 2 and Straight R1, ATK 2 that also deals 1 behind.",
+  "synergyTags": [
+   "bastion",
+   "hybrid"
+  ],
+  "bestiary": "Yali (Vyala)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Elephant",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Yali",
+    "extends": "Shield 3"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "jaguar_moon",
+  "name": "Jaguar Moon",
+  "culture": "Maya",
+  "baseAnimal": "Jaguar",
+  "element": "shadow",
+  "family": "fangs",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "pounce",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R2, ATK 2; +2 against an enemy at full HP.",
+  "synergyTags": [
+   "pounce",
+   "shadow"
+  ],
+  "bestiary": "Jaguar",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Jaguar",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Night jaguar",
+    "extends": "hides: enemies cannot Mark it"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "amur_tiger",
+  "name": "Amur Tiger",
+  "culture": "Korean",
+  "baseAnimal": "Siberian tiger",
+  "element": "wood",
+  "family": "fangs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "pounce",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R1, ATK 2; +2 against an enemy at full HP.",
+  "synergyTags": [
+   "pounce",
+   "tiger-dragon"
+  ],
+  "bestiary": "Siberian tiger",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Siberian tiger",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Mountain tiger",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "snow_leopard",
+  "name": "Snow Leopard",
+  "culture": "Mongol",
+  "baseAnimal": "Snow leopard",
+  "element": "frost",
+  "family": "fangs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "chill",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R2; the hit enemy loses 1 ATK for the battle (min 1).",
+  "synergyTags": [
+   "chill",
+   "frost"
+  ],
+  "bestiary": "Snow leopard",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Snow leopard",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Ghost cat",
+    "extends": "Chill also reaches the enemy behind"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "puma_of_the_andes",
+  "name": "Puma of the Andes",
+  "culture": "Inca",
+  "baseAnimal": "Puma",
+  "element": "earth",
+  "family": "fangs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "latecomer",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R2, ATK 2; +2 ATK if it was the last card you placed this turn.",
+  "synergyTags": [
+   "latecomer"
+  ],
+  "bestiary": "Puma",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Puma",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Mountain lion",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "cat_sidhe",
+  "name": "Cat Sidhe",
+  "culture": "Celtic",
+  "baseAnimal": "Highland cat",
+  "element": "shadow",
+  "family": "fangs",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "hold",
+  "roles": {
+   "atk": 70,
+   "buff": 30,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "Straight R2; the hit enemy cannot strike this turn.",
+  "synergyTags": [
+   "hold",
+   "control"
+  ],
+  "bestiary": "Cat sìth",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Highland cat",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Cat sìth",
+    "extends": "also holds the enemy beside it"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "dragon_gate_carp",
+  "name": "Dragon-Gate Carp",
+  "culture": "Chinese",
+  "baseAnimal": "Carp",
+  "element": "water",
+  "family": "coils",
+  "earlyFamily": "fins",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "straight",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 12,
+  "ability": "Straight R2, ATK 2. Counts as Fins until stage 3, then as Coils.",
+  "synergyTags": [
+   "metamorph",
+   "carp-dragon"
+  ],
+  "bestiary": "Long (龍)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Carp",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Koi",
+    "extends": "range +1"
+   },
+   {
+    "stage": 3,
+    "name": "Long",
+    "extends": "chips 1 to the enemy behind and gains a rain-cloud Chill"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "chiwen",
+  "name": "Chiwen",
+  "culture": "Chinese",
+  "baseAnimal": "Gecko",
+  "element": "water",
+  "family": "coils",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "shield",
+  "roles": {
+   "atk": 0,
+   "buff": 30,
+   "guard": 70
+  },
+  "powerBudget": 9,
+  "ability": "Shield 2; Burn on allies in its column is doused.",
+  "synergyTags": [
+   "shield",
+   "douse"
+  ],
+  "bestiary": "Chiwen (螭吻)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Gecko",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Chiwen",
+    "extends": "doused column includes adjacent columns"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "wadjet",
+  "name": "Wadjet",
+  "culture": "Egyptian",
+  "baseAnimal": "Egyptian cobra",
+  "element": "fire",
+  "family": "coils",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "venom",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R2; the hit enemy takes 1 poison each turn, up to 3.",
+  "synergyTags": [
+   "venom"
+  ],
+  "bestiary": "Wadjet",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Egyptian cobra",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Wadjet",
+    "extends": "poison cap 4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "ddraig_goch",
+  "name": "Ddraig Goch",
+  "culture": "Welsh",
+  "baseAnimal": "Grass snake",
+  "element": "fire",
+  "family": "coils",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "pierce",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 12,
+  "ability": "Pierce R3, ATK 2.",
+  "synergyTags": [
+   "pierce",
+   "dragon"
+  ],
+  "bestiary": "Ddraig Goch",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Grass snake",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Ddraig Goch",
+    "extends": "Burns the front enemy it hits"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "rain_dragon_chen",
+  "name": "Rain Dragon (Chen)",
+  "culture": "Chinese",
+  "baseAnimal": "Lizard",
+  "element": "wood",
+  "family": "coils",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "boost",
+  "roles": {
+   "atk": 20,
+   "buff": 80,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "The unit above gets +1 ATK; Wood units get +2.",
+  "synergyTags": [
+   "boost",
+   "wood"
+  ],
+  "bestiary": "Dragon (Chen)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Lizard",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Dragon (Chen)",
+    "extends": "the buff reaches the upper-left tile"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "qiuniu",
+  "name": "Qiuniu",
+  "culture": "Chinese",
+  "baseAnimal": "Drum lizard",
+  "element": "earth",
+  "family": "coils",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "echo_up",
+  "roles": {
+   "atk": 0,
+   "buff": 100,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "The unit above attacks twice (second hit at half ATK).",
+  "synergyTags": [
+   "echo",
+   "support"
+  ],
+  "bestiary": "Qiuniu",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Drum lizard",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Qiuniu",
+    "extends": "the second hit is at full ATK minus 1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "yazi",
+  "name": "Yazi",
+  "culture": "Chinese",
+  "baseAnimal": "Wolf-lizard",
+  "element": "earth",
+  "family": "coils",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "molt",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R1, ATK 1; +1 ATK each turn it survives (max +3).",
+  "synergyTags": [
+   "molt",
+   "growth"
+  ],
+  "bestiary": "Yazi",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Wolf-lizard",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Yazi",
+    "extends": "max +4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "long_of_the_rain_rong",
+  "name": "Long of the Rain (Rong)",
+  "culture": "Vietnamese",
+  "baseAnimal": "Water snake",
+  "element": "water",
+  "family": "coils",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "chain",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R2; the same damage jumps to the lowest-HP neighbour of the target.",
+  "synergyTags": [
+   "chain",
+   "water"
+  ],
+  "bestiary": "Rồng (VN)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Water snake",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Rong",
+    "extends": "jump damage +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "bian",
+  "name": "Bian",
+  "culture": "Chinese",
+  "baseAnimal": "Mudskipper",
+  "element": "earth",
+  "family": "coils",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "decoy",
+  "roles": {
+   "atk": 0,
+   "buff": 0,
+   "guard": 100
+  },
+  "powerBudget": 8,
+  "ability": "Shield 3 in its column; takes the first enemy strike there.",
+  "synergyTags": [
+   "decoy",
+   "shield"
+  ],
+  "bestiary": "Bi'an",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Mudskipper",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Bi'an",
+    "extends": "Shield 4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "komodo",
+  "name": "Komodo",
+  "culture": "Indonesian",
+  "baseAnimal": "Komodo dragon",
+  "element": "earth",
+  "family": "coils",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "venom",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R1, ATK 2; poison 1 per turn, up to 3.",
+  "synergyTags": [
+   "venom"
+  ],
+  "bestiary": "Komodo dragon (ID)",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Komodo dragon",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Giant Komodo",
+    "extends": "poison cap 4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "geobuk",
+  "name": "Geobuk",
+  "culture": "Korean",
+  "baseAnimal": "Pond turtle",
+  "element": "water",
+  "family": "shells",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "carapace",
+  "roles": {
+   "atk": 20,
+   "buff": 0,
+   "guard": 80
+  },
+  "powerBudget": 10,
+  "ability": "Shield 2, +1 block each turn it is not struck (max +3).",
+  "synergyTags": [
+   "carapace",
+   "shield"
+  ],
+  "bestiary": "Geobuk (거북)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Pond turtle",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Geobuk",
+    "extends": "max +4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "divine_tortoise",
+  "name": "Divine Tortoise",
+  "culture": "Chinese",
+  "baseAnimal": "Tortoise",
+  "element": "frost",
+  "family": "shells",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "herald",
+  "roles": {
+   "atk": 0,
+   "buff": 20,
+   "guard": 80
+  },
+  "powerBudget": 12,
+  "ability": "Shields in its column and adjacent Shells get +1 block.",
+  "synergyTags": [
+   "herald",
+   "shells",
+   "shield"
+  ],
+  "bestiary": "Divine tortoise (Gui)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Tortoise",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Gui",
+    "extends": "also reaches adjacent columns"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "golden_turtle",
+  "name": "Golden Turtle",
+  "culture": "Vietnamese",
+  "baseAnimal": "River turtle",
+  "element": "earth",
+  "family": "shells",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "boost",
+  "roles": {
+   "atk": 0,
+   "buff": 80,
+   "guard": 20
+  },
+  "powerBudget": 10,
+  "ability": "The unit above gets +1 ATK and +1 range.",
+  "synergyTags": [
+   "boost",
+   "range"
+  ],
+  "bestiary": "Thần Kim Quy (VN)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "River turtle",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Kim Quy",
+    "extends": "the buff reaches the upper-left tile"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "bixi",
+  "name": "Bixi",
+  "culture": "Chinese",
+  "baseAnimal": "Tortoise",
+  "element": "earth",
+  "family": "shells",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "shield",
+  "roles": {
+   "atk": 0,
+   "buff": 0,
+   "guard": 100
+  },
+  "powerBudget": 8,
+  "ability": "Shield 3 in its column.",
+  "synergyTags": [
+   "shield"
+  ],
+  "bestiary": "Bixi (贔屭)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Tortoise",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Bixi",
+    "extends": "Shield 4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "honu",
+  "name": "Honu",
+  "culture": "Hawaiian",
+  "baseAnimal": "Green sea turtle",
+  "element": "water",
+  "family": "shells",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "bloom",
+  "roles": {
+   "atk": 0,
+   "buff": 30,
+   "guard": 70
+  },
+  "powerBudget": 7,
+  "ability": "Heals the hero 1 each turn.",
+  "synergyTags": [
+   "heal"
+  ],
+  "bestiary": "Green sea turtle (honu)",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Sea turtle",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Honu",
+    "extends": "heals 2 if the hero is below half HP"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "softshell_elder",
+  "name": "Softshell Elder",
+  "culture": "Mesopotamian",
+  "baseAnimal": "Euphrates softshell turtle",
+  "element": "wood",
+  "family": "shells",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "carapace",
+  "roles": {
+   "atk": 0,
+   "buff": 0,
+   "guard": 100
+  },
+  "powerBudget": 8,
+  "ability": "Shield 1, +1 block each turn it is not struck (max +3).",
+  "synergyTags": [
+   "carapace"
+  ],
+  "bestiary": "Euphrates softshell turtle",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Softshell",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Elder softshell",
+    "extends": "max +4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "coconut_crab",
+  "name": "Coconut Crab",
+  "culture": "Polynesian",
+  "baseAnimal": "Coconut crab",
+  "element": "fire",
+  "family": "shells",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "bastion",
+  "roles": {
+   "atk": 50,
+   "buff": 0,
+   "guard": 50
+  },
+  "powerBudget": 7,
+  "ability": "Shield 1 and Straight R1, ATK 2 from the same tile.",
+  "synergyTags": [
+   "bastion",
+   "hybrid"
+  ],
+  "bestiary": "Coconut crab",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Coconut crab",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Great coconut crab",
+    "extends": "Shield 2"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "nine_tail_fox",
+  "name": "Nine-Tail Fox",
+  "culture": "Japanese",
+  "baseAnimal": "Fox",
+  "element": "fire",
+  "family": "packs",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "attune",
+  "roles": {
+   "atk": 30,
+   "buff": 70,
+   "guard": 0
+  },
+  "powerBudget": 11,
+  "ability": "The unit above takes this unit's element.",
+  "synergyTags": [
+   "attune",
+   "trickster",
+   "converter"
+  ],
+  "bestiary": "Kitsune",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Fox",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Kitsune",
+    "extends": "also attunes the unit below"
+   },
+   {
+    "stage": 3,
+    "name": "Jiuweihu",
+    "extends": "attuned units gain +1 ATK"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "tanuki_trickster",
+  "name": "Tanuki Trickster",
+  "culture": "Japanese",
+  "baseAnimal": "Raccoon dog",
+  "element": "wood",
+  "family": "packs",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "mimic",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R2; takes the element of the first enemy it hits.",
+  "synergyTags": [
+   "mimic",
+   "trickster"
+  ],
+  "bestiary": "Tanuki (狸)",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Raccoon dog",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Tanuki",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "reynard",
+  "name": "Reynard",
+  "culture": "Medieval",
+  "baseAnimal": "Red fox",
+  "element": "shadow",
+  "family": "packs",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "swap",
+  "roles": {
+   "atk": 60,
+   "buff": 40,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "Straight R2; after attacking it swaps places with any adjacent ally.",
+  "synergyTags": [
+   "swap",
+   "trickster"
+  ],
+  "bestiary": "Reynard the Fox",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Red fox",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Reynard",
+    "extends": "swaps with any ally in its row"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "xolo_guide",
+  "name": "Xolo Guide",
+  "culture": "Aztec",
+  "baseAnimal": "Hairless dog",
+  "element": "earth",
+  "family": "packs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "decoy",
+  "roles": {
+   "atk": 0,
+   "buff": 0,
+   "guard": 100
+  },
+  "powerBudget": 8,
+  "ability": "Shield 2 in its column; takes the first enemy strike there.",
+  "synergyTags": [
+   "decoy",
+   "shield"
+  ],
+  "bestiary": "Xoloitzcuintli",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Hairless dog",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Xolo",
+    "extends": "Shield 3"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "zodiac_hound",
+  "name": "Zodiac Hound",
+  "culture": "Chinese",
+  "baseAnimal": "Dog",
+  "element": "earth",
+  "family": "packs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "herald",
+  "roles": {
+   "atk": 20,
+   "buff": 80,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Adjacent Packs get +1 ATK.",
+  "synergyTags": [
+   "herald",
+   "packs"
+  ],
+  "bestiary": "Dog (Xu)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Dog",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Dog (Xu)",
+    "extends": "also +1 range to adjacent Packs"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "cu_sidhe",
+  "name": "Cu Sidhe",
+  "culture": "Celtic",
+  "baseAnimal": "Irish wolfhound",
+  "element": "wood",
+  "family": "packs",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "howl",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R2, ATK 1; +1 ATK per other Packs unit in its row (max +2).",
+  "synergyTags": [
+   "howl",
+   "packs"
+  ],
+  "bestiary": "Cú Sídhe",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Irish wolfhound",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Cú Sídhe",
+    "extends": "max +3"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "simargl",
+  "name": "Simargl",
+  "culture": "Slavic",
+  "baseAnimal": "Grey wolf",
+  "element": "wind",
+  "family": "packs",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "pierce",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 12,
+  "ability": "Pierce R3, ATK 2.",
+  "synergyTags": [
+   "pierce",
+   "wind"
+  ],
+  "bestiary": "Simargl",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Grey wolf",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Simargl",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "bulgae",
+  "name": "Bulgae",
+  "culture": "Korean",
+  "baseAnimal": "Dog",
+  "element": "fire",
+  "family": "packs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "scorch",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R2; the hit enemy Burns 1 for 2 turns.",
+  "synergyTags": [
+   "burn"
+  ],
+  "bestiary": "Bulgae (불개)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Dog",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Bulgae",
+    "extends": "Burn lasts 3 turns"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "fennec_fox",
+  "name": "Fennec Fox",
+  "culture": "African",
+  "baseAnimal": "Fennec fox",
+  "element": "earth",
+  "family": "packs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "latecomer",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R2, ATK 2; +2 ATK if it was the last card you placed this turn.",
+  "synergyTags": [
+   "latecomer"
+  ],
+  "bestiary": "Fennec fox",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Fennec fox",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Desert fennec",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "winter_wolf",
+  "name": "Winter Wolf",
+  "culture": "Norse",
+  "baseAnimal": "Wolf",
+  "element": "frost",
+  "family": "packs",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "pounce",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R1, ATK 2; +2 against an enemy at full HP.",
+  "synergyTags": [
+   "pounce",
+   "frost"
+  ],
+  "bestiary": "Wolf",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Wolf",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Winter wolf",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "dolphin_chain",
+  "name": "Dolphin Chain",
+  "culture": "Greek",
+  "baseAnimal": "Dolphin",
+  "element": "water",
+  "family": "fins",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "chain",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R2; the same damage jumps to the lowest-HP neighbour of the target.",
+  "synergyTags": [
+   "chain",
+   "water"
+  ],
+  "bestiary": "Dolphin",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Dolphin",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Hippocampus",
+    "extends": "jump damage +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "salmon_of_knowledge",
+  "name": "Salmon of Knowledge",
+  "culture": "Celtic",
+  "baseAnimal": "Salmon",
+  "element": "water",
+  "family": "fins",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "firstborn",
+  "roles": {
+   "atk": 60,
+   "buff": 40,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "Straight R2, ATK 2; +2 ATK if it was the first card you placed this turn.",
+  "synergyTags": [
+   "firstborn"
+  ],
+  "bestiary": "Salmon of Knowledge",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Salmon",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Salmon of Knowledge",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "humpback_cantor",
+  "name": "Humpback Cantor",
+  "culture": "Polynesian",
+  "baseAnimal": "Humpback whale",
+  "element": "water",
+  "family": "fins",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "row_captain",
+  "roles": {
+   "atk": 10,
+   "buff": 90,
+   "guard": 0
+  },
+  "powerBudget": 12,
+  "ability": "Every attacker in its row gets +1 ATK.",
+  "synergyTags": [
+   "captain",
+   "row"
+  ],
+  "bestiary": "Humpback whale",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Humpback whale",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Great cantor",
+    "extends": "also +1 range to the row"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "hammerhead",
+  "name": "Hammerhead",
+  "culture": "Polynesian",
+  "baseAnimal": "Hammerhead shark",
+  "element": "earth",
+  "family": "fins",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "spread",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Spread R2, ATK 1.",
+  "synergyTags": [
+   "spread"
+  ],
+  "bestiary": "Hammerhead shark",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Hammerhead shark",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Great hammerhead",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "axolotl",
+  "name": "Axolotl",
+  "culture": "Aztec",
+  "baseAnimal": "Axolotl",
+  "element": "wood",
+  "family": "fins",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "molt",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R1, ATK 1; +1 ATK each turn it survives (max +3).",
+  "synergyTags": [
+   "molt",
+   "growth"
+  ],
+  "bestiary": "Axolotl",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Axolotl",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Ancient axolotl",
+    "extends": "max +4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "shachihoko",
+  "name": "Shachihoko",
+  "culture": "Japanese",
+  "baseAnimal": "Carp",
+  "element": "water",
+  "family": "fins",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "bastion",
+  "roles": {
+   "atk": 40,
+   "buff": 0,
+   "guard": 60
+  },
+  "powerBudget": 9,
+  "ability": "Shield 2 and Straight R1, ATK 1 from the same tile; Burn never hurts allies in its column.",
+  "synergyTags": [
+   "bastion",
+   "douse"
+  ],
+  "bestiary": "Shachihoko (鯱)",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Carp",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Shachihoko",
+    "extends": "Burn immunity covers adjacent columns"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "salamander",
+  "name": "Salamander",
+  "culture": "Medieval",
+  "baseAnimal": "Salamander",
+  "element": "fire",
+  "family": "fins",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "herald_element",
+  "roles": {
+   "atk": 20,
+   "buff": 80,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Adjacent Fire units get +1 ATK.",
+  "synergyTags": [
+   "herald",
+   "fire"
+  ],
+  "bestiary": "Salamander",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Salamander",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Fire salamander",
+    "extends": "the buff also reaches diagonals"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "river_hippo",
+  "name": "River Hippo",
+  "culture": "Egyptian",
+  "baseAnimal": "Hippopotamus",
+  "element": "earth",
+  "family": "fins",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "shield",
+  "roles": {
+   "atk": 0,
+   "buff": 0,
+   "guard": 100
+  },
+  "powerBudget": 8,
+  "ability": "Shield 3 in its column.",
+  "synergyTags": [
+   "shield"
+  ],
+  "bestiary": "Hippopotamus",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Hippopotamus",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Great hippo",
+    "extends": "Shield 4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "scarab_roller",
+  "name": "Scarab Roller",
+  "culture": "Egyptian",
+  "baseAnimal": "Scarab beetle",
+  "element": "earth",
+  "family": "chitin",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "offering",
+  "roles": {
+   "atk": 50,
+   "buff": 50,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "On Fight, consumes an adjacent Common ally for the battle: +2 ATK, the ally returns next battle.",
+  "synergyTags": [
+   "offering",
+   "sacrifice"
+  ],
+  "bestiary": "Scarab beetle",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Scarab beetle",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Khepri",
+    "extends": "+3 ATK from the offering"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "khepri",
+  "name": "Khepri",
+  "culture": "Egyptian",
+  "baseAnimal": "Dung beetle",
+  "element": "fire",
+  "family": "chitin",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "molt",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 12,
+  "ability": "Straight R1, ATK 2; +1 ATK each turn it survives (max +3); rises with the sun.",
+  "synergyTags": [
+   "molt",
+   "rebirth"
+  ],
+  "bestiary": "Khepri",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Dung beetle",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Khepri",
+    "extends": "max +4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "nazca_weaver",
+  "name": "Nazca Weaver",
+  "culture": "Andean",
+  "baseAnimal": "Spider",
+  "element": "shadow",
+  "family": "chitin",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "hold",
+  "roles": {
+   "atk": 70,
+   "buff": 30,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "Straight R2; the hit enemy cannot strike this turn.",
+  "synergyTags": [
+   "hold",
+   "web"
+  ],
+  "bestiary": "Nazca spider",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Spider",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Nazca weaver",
+    "extends": "holds the enemy beside it too"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "honeybee_hive",
+  "name": "Honeybee Hive",
+  "culture": "Real animal",
+  "baseAnimal": "Honeybee",
+  "element": "wood",
+  "family": "chitin",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "brood",
+  "roles": {
+   "atk": 60,
+   "buff": 40,
+   "guard": 0
+  },
+  "powerBudget": 7,
+  "ability": "Every 2nd turn spawns a 1-ATK Drone in an empty adjacent tile.",
+  "synergyTags": [
+   "brood",
+   "swarm"
+  ],
+  "bestiary": "(real animal)",
+  "realAnimal": true,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Honeybee",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Queen bee",
+    "extends": "spawns every turn"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "firefly_lantern",
+  "name": "Firefly Lantern",
+  "culture": "Real animal",
+  "baseAnimal": "Firefly",
+  "element": "light",
+  "family": "chitin",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "boost",
+  "roles": {
+   "atk": 0,
+   "buff": 100,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "The unit above gets +1 ATK.",
+  "synergyTags": [
+   "boost",
+   "light"
+  ],
+  "bestiary": "(real animal)",
+  "realAnimal": true,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Firefly",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Lantern swarm",
+    "extends": "the buff also applies to the unit beside it"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "mantis_ambusher",
+  "name": "Mantis Ambusher",
+  "culture": "Real animal",
+  "baseAnimal": "Praying mantis",
+  "element": "wind",
+  "family": "chitin",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "firstborn",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R1, ATK 2; +2 ATK if it was the first card you placed this turn.",
+  "synergyTags": [
+   "firstborn"
+  ],
+  "bestiary": "(real animal)",
+  "realAnimal": true,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Praying mantis",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Giant mantis",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "giant_panda",
+  "name": "Giant Panda",
+  "culture": "Chinese",
+  "baseAnimal": "Panda",
+  "element": "wood",
+  "family": "wilds",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "resonance",
+  "roles": {
+   "atk": 30,
+   "buff": 0,
+   "guard": 70
+  },
+  "powerBudget": 9,
+  "ability": "Shield 2; +1 block per other Wood ally (max +3).",
+  "synergyTags": [
+   "resonance",
+   "shield"
+  ],
+  "bestiary": "Giant panda (大熊貓)",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Panda",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Bamboo elder",
+    "extends": "max +4"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "brown_bear",
+  "name": "Brown Bear",
+  "culture": "Slavic",
+  "baseAnimal": "Brown bear",
+  "element": "earth",
+  "family": "wilds",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "straight",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Straight R1, ATK 3.",
+  "synergyTags": [
+   "front"
+  ],
+  "bestiary": "Brown bear",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Brown bear",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Old bear",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "polar_bear",
+  "name": "Polar Bear",
+  "culture": "Norse",
+  "baseAnimal": "Polar bear",
+  "element": "frost",
+  "family": "wilds",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "herald_element",
+  "roles": {
+   "atk": 0,
+   "buff": 30,
+   "guard": 70
+  },
+  "powerBudget": 9,
+  "ability": "Shield 3; adjacent Frost units get +1 block or +1 ATK.",
+  "synergyTags": [
+   "herald",
+   "frost"
+  ],
+  "bestiary": "Polar bear",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Polar bear",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Ice-bear",
+    "extends": "buff reaches diagonals"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "thor_s_goats",
+  "name": "Thor's Goats",
+  "culture": "Norse",
+  "baseAnimal": "Goat",
+  "element": "storm",
+  "family": "wilds",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "echo",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R2; attacks twice (second hit at half ATK).",
+  "synergyTags": [
+   "echo",
+   "storm"
+  ],
+  "bestiary": "Tanngrisnir and Tanngnjóstr",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Goat",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Tanngrisnir and Tanngnjóstr",
+    "extends": "second hit at full ATK minus 1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "raiju",
+  "name": "Raiju",
+  "culture": "Japanese",
+  "baseAnimal": "Weasel",
+  "element": "storm",
+  "family": "wilds",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "chain",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R2; the same damage jumps to the lowest-HP neighbour of the target.",
+  "synergyTags": [
+   "chain",
+   "storm"
+  ],
+  "bestiary": "Raijū (雷獣)",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Weasel",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Raijū",
+    "extends": "jump damage +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "kamaitachi_trio",
+  "name": "Kamaitachi Trio",
+  "culture": "Japanese",
+  "baseAnimal": "Weasel",
+  "element": "wind",
+  "family": "wilds",
+  "rarity": "common",
+  "commandCost": 1,
+  "type": "spread",
+  "roles": {
+   "atk": 100,
+   "buff": 0,
+   "guard": 0
+  },
+  "powerBudget": 8,
+  "ability": "Spread R2, ATK 1.",
+  "synergyTags": [
+   "spread",
+   "wind"
+  ],
+  "bestiary": "Kamaitachi (鎌鼬)",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Weasel",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Kamaitachi",
+    "extends": "range +1"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "ratatoskr",
+  "name": "Ratatoskr",
+  "culture": "Norse",
+  "baseAnimal": "Squirrel",
+  "element": "wood",
+  "family": "wilds",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "relay",
+  "roles": {
+   "atk": 0,
+   "buff": 100,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Boosts the unit above and the unit above that.",
+  "synergyTags": [
+   "relay",
+   "support"
+  ],
+  "bestiary": "Ratatoskr",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Squirrel",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Ratatoskr",
+    "extends": "boost magnitude +1 on the far unit"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "langur_mirror",
+  "name": "Langur Mirror",
+  "culture": "Hindu",
+  "baseAnimal": "Langur",
+  "element": "wind",
+  "family": "wilds",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "mirror",
+  "roles": {
+   "atk": 50,
+   "buff": 50,
+   "guard": 0
+  },
+  "powerBudget": 9,
+  "ability": "Copies the pattern and ATK of the unit to its left.",
+  "synergyTags": [
+   "mirror",
+   "copy"
+  ],
+  "bestiary": "Hanuman langur",
+  "realAnimal": false,
+  "nature": "Ambivalent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Langur",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Hanuman langur",
+    "extends": "also copies +1 range"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "baku",
+  "name": "Baku",
+  "culture": "Japanese",
+  "baseAnimal": "Tapir",
+  "element": "shadow",
+  "family": "wilds",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "sunder",
+  "roles": {
+   "atk": 80,
+   "buff": 20,
+   "guard": 0
+  },
+  "powerBudget": 10,
+  "ability": "Straight R2; the hit enemy loses 1 armor for the battle.",
+  "synergyTags": [
+   "sunder",
+   "purge"
+  ],
+  "bestiary": "Baku (獏)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Tapir",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Baku",
+    "extends": "Hide and Veiled enemies lose their rule when hit"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "bai_ze",
+  "name": "Bai Ze",
+  "culture": "Chinese",
+  "baseAnimal": "Goat",
+  "element": "light",
+  "family": "wilds",
+  "rarity": "epic",
+  "commandCost": 3,
+  "type": "mark",
+  "roles": {
+   "atk": 40,
+   "buff": 60,
+   "guard": 0
+  },
+  "powerBudget": 11,
+  "ability": "Straight R3; Marks every enemy in its column.",
+  "synergyTags": [
+   "mark",
+   "lore"
+  ],
+  "bestiary": "Bai Ze (白澤)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Goat",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Bai Ze",
+    "extends": "Marks the neighbour column front"
+   }
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "moon_hare",
+  "name": "Moon Hare",
+  "culture": "Chinese",
+  "baseAnimal": "Hare",
+  "element": "light",
+  "family": "wilds",
+  "rarity": "rare",
+  "commandCost": 2,
+  "type": "bloom",
+  "roles": {
+   "atk": 0,
+   "buff": 60,
+   "guard": 40
+  },
+  "powerBudget": 9,
+  "ability": "Heals the hero 1 each turn; Bond with Sun Crow: both +1 ATK.",
+  "synergyTags": [
+   "bond",
+   "sun-moon",
+   "heal"
+  ],
+  "bestiary": "Yutu (玉兔)",
+  "realAnimal": false,
+  "nature": "Benevolent",
+  "evolution": [
+   {
+    "stage": 1,
+    "name": "Hare",
+    "extends": "base form"
+   },
+   {
+    "stage": 2,
+    "name": "Yutu",
+    "extends": "heals 2 if the hero is below half HP"
+   }
+  ],
+  "status": "proposed"
+ }
+]

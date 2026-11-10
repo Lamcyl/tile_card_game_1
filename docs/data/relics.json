@@ -1,0 +1,525 @@
+[
+ {
+  "id": "mjolnir",
+  "name": "Mjölnir Shard",
+  "myth": "Norse",
+  "text": "Barrels explode twice.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "prism",
+  "name": "Prism of Ra",
+  "myth": "Egyptian",
+  "text": "Supporters also boost diagonally.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "fenrir",
+  "name": "Fenrir's Fang",
+  "myth": "Norse",
+  "text": "Each overkill kill gives all attackers +1 ATK for the battle (up to +3). REWORK: only Rend kills count.",
+  "current": true,
+  "ties": [
+   "overkill"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "aegis",
+  "name": "Aegis of Athena",
+  "myth": "Greek",
+  "text": "First turn Shields block double.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "chisel",
+  "name": "Hephaestus' Chisel",
+  "myth": "Greek",
+  "text": "Enemy armor counts 1 lower.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "yata",
+  "name": "Mirror of Yata",
+  "myth": "Shinto",
+  "text": "First shot of every battle deals double.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "idun",
+  "name": "Idun's Apple",
+  "myth": "Norse",
+  "text": "Heal 1 HP each turn.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "bastet",
+  "name": "Bastet's Amulet",
+  "myth": "Egyptian",
+  "text": "Once per battle a lethal blow leaves 1 HP.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "susanoo",
+  "name": "Susanoo's Edge",
+  "myth": "Shinto",
+  "text": "Overkill damage also spills to the enemies beside. REWORK: THE OVERKILL RELIC: all Straight attackers gain Rend; Spill is a separate upgrade.",
+  "current": true,
+  "ties": [
+   "overkill"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "artemis",
+  "name": "Artemis' Quiver",
+  "myth": "Greek",
+  "text": "All attackers +1 range.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "svalinn",
+  "name": "Svalinn Plate",
+  "myth": "Norse",
+  "text": "Shields block 1 more.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "agni",
+  "name": "Agni's Ember",
+  "myth": "Vedic",
+  "text": "First turn all attackers +1 ATK.",
+  "current": true,
+  "ties": [],
+  "status": "proposed"
+ },
+ {
+  "id": "new_hunter_s_moon",
+  "name": "Hunter's Moon",
+  "myth": "Celtic",
+  "text": "Fangs gain Rend; Rend cap 4.",
+  "current": false,
+  "ties": [
+   "overkill",
+   "family:fangs"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_wolf_pelt_mantle",
+  "name": "Wolf-Pelt Mantle",
+  "myth": "Norse",
+  "text": "Rend kills give all attackers +1 ATK this turn.",
+  "current": false,
+  "ties": [
+   "overkill"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_unquenched_ember",
+  "name": "Unquenched Ember",
+  "myth": "Slavic",
+  "text": "Fire reactions deal +1 and Burn ticks twice.",
+  "current": false,
+  "ties": [
+   "element:fire"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_tide_mirror",
+  "name": "Tide Mirror",
+  "myth": "Polynesian",
+  "text": "Conduct and Freeze trigger on every Water unit in the squad.",
+  "current": false,
+  "ties": [
+   "element:water",
+   "reactions"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_pale_aurora",
+  "name": "Pale Aurora",
+  "myth": "Finnish",
+  "text": "Frost units' Chill stacks to -2 ATK.",
+  "current": false,
+  "ties": [
+   "element:frost"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_thunder_egg",
+  "name": "Thunder Egg",
+  "myth": "Maya",
+  "text": "The first Storm chain each battle is doubled.",
+  "current": false,
+  "ties": [
+   "element:storm"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_gale_bag",
+  "name": "Gale Bag",
+  "myth": "Greek",
+  "text": "Wind pushes can move the target two columns.",
+  "current": false,
+  "ties": [
+   "element:wind"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_sapling_of_idun",
+  "name": "Sapling of Idun",
+  "myth": "Norse",
+  "text": "Wood units heal the hero 1 each time they Molt.",
+  "current": false,
+  "ties": [
+   "element:wood"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_mountain_heart",
+  "name": "Mountain Heart",
+  "myth": "Mongol",
+  "text": "Earth Shields block +1 and their column takes 1 less from Sweep.",
+  "current": false,
+  "ties": [
+   "element:earth"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_dawn_chalice",
+  "name": "Dawn Chalice",
+  "myth": "Persian",
+  "text": "Light purges one enemy debuff on your side each turn.",
+  "current": false,
+  "ties": [
+   "element:light"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_moonless_cloak",
+  "name": "Moonless Cloak",
+  "myth": "Celtic",
+  "text": "Shadow Hold lasts through the next turn.",
+  "current": false,
+  "ties": [
+   "element:shadow"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_reaction_codex",
+  "name": "Reaction Codex",
+  "myth": "Greek",
+  "text": "Each reaction a unit triggers gives +1 Soul (max 5 per battle).",
+  "current": false,
+  "ties": [
+   "reactions"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_alchemist_s_crucible",
+  "name": "Alchemist's Crucible",
+  "myth": "Egyptian",
+  "text": "Adjacent reactions also trigger across a row gap.",
+  "current": false,
+  "ties": [
+   "reactions"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_garuda_feather",
+  "name": "Garuda Feather",
+  "myth": "Hindu",
+  "text": "Wings Heralds also give +1 range.",
+  "current": false,
+  "ties": [
+   "family:wings"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_herd_bell",
+  "name": "Herd Bell",
+  "myth": "Mongol",
+  "text": "Herd bonuses cap +1 higher; Hooves are Swift.",
+  "current": false,
+  "ties": [
+   "family:hooves"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_dragon_gate_scroll",
+  "name": "Dragon-Gate Scroll",
+  "myth": "Chinese",
+  "text": "Carp and Fins units evolve one stage at once in a shrine this run.",
+  "current": false,
+  "ties": [
+   "evolution",
+   "family:coils"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_turtle_back_chart",
+  "name": "Turtle-Back Chart",
+  "myth": "Vietnamese",
+  "text": "Shells' Carapace starts at +1.",
+  "current": false,
+  "ties": [
+   "family:shells"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_nine_tail_brush",
+  "name": "Nine-Tail Brush",
+  "myth": "Japanese",
+  "text": "Attune also grants the converted unit +1 ATK.",
+  "current": false,
+  "ties": [
+   "family:packs",
+   "keyword:attune"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_river_lantern",
+  "name": "River Lantern",
+  "myth": "Chinese",
+  "text": "Fins and Coils count as Water for reactions.",
+  "current": false,
+  "ties": [
+   "family:fins"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_hive_queen_s_crown",
+  "name": "Hive Queen's Crown",
+  "myth": "Egyptian",
+  "text": "Brood Drones get +1 ATK; Offering gives +3.",
+  "current": false,
+  "ties": [
+   "family:chitin"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_menagerie_key",
+  "name": "Menagerie Key",
+  "myth": "Medieval",
+  "text": "Wilds count as any family for sets (all of them).",
+  "current": false,
+  "ties": [
+   "family:wilds"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_evolution_lantern",
+  "name": "Evolution Lantern",
+  "myth": "Chinese",
+  "text": "All your units gain their next extension for the first battle of each node.",
+  "current": false,
+  "ties": [
+   "evolution"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_hatching_stone",
+  "name": "Hatching Stone",
+  "myth": "Norse",
+  "text": "A unit evolves at one fewer mastery level.",
+  "current": false,
+  "ties": [
+   "evolution"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_red_thread_of_fate",
+  "name": "Red Thread of Fate",
+  "myth": "Chinese",
+  "text": "All Bonds give +2 ATK.",
+  "current": false,
+  "ties": [
+   "bond"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_twin_ravens_pact",
+  "name": "Twin Ravens' Pact",
+  "myth": "Norse",
+  "text": "Raven and Wolf units form a Bond.",
+  "current": false,
+  "ties": [
+   "bond"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_sun_and_moon",
+  "name": "Sun and Moon",
+  "myth": "Korean",
+  "text": "Sun Crow and Moon Hare Bond: both +2 ATK and the hero heals 1.",
+  "current": false,
+  "ties": [
+   "bond"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_tiger_and_dragon",
+  "name": "Tiger and Dragon",
+  "myth": "Korean",
+  "text": "Amur Tiger and Rain Dragon Bond: both +2 ATK.",
+  "current": false,
+  "ties": [
+   "bond"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_mentor_s_staff",
+  "name": "Mentor's Staff",
+  "myth": "Chinese",
+  "text": "Mentor effect: the lowest-stage unit counts as one stage higher.",
+  "current": false,
+  "ties": [
+   "keyword:mentor"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_trickster_s_mask",
+  "name": "Trickster's Mask",
+  "myth": "Japanese",
+  "text": "Swap units may swap twice and Attune lasts the whole run.",
+  "current": false,
+  "ties": [
+   "keyword:swap"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_quiet_lantern",
+  "name": "Quiet Lantern",
+  "myth": "Japanese",
+  "text": "Hold also removes Fury from the held enemy.",
+  "current": false,
+  "ties": [
+   "keyword:hold"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_golden_fleece",
+  "name": "Golden Fleece",
+  "myth": "Greek",
+  "text": "Tribute pays +1 Soul and the first kill each battle pays 3.",
+  "current": false,
+  "ties": [
+   "keyword:tribute"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_echo_shell",
+  "name": "Echo Shell",
+  "myth": "Polynesian",
+  "text": "Echo second hit deals full ATK minus 1.",
+  "current": false,
+  "ties": [
+   "keyword:echo"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_beast_keeper_s_horn",
+  "name": "Beast-Keeper's Horn",
+  "myth": "Mongol",
+  "text": "Hybrid units (two roles of 30%+) gain +1 power budget in effect: +1 ATK or +1 block.",
+  "current": false,
+  "ties": [
+   "roles"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_crown_of_moulting",
+  "name": "Crown of Moulting",
+  "myth": "Egyptian",
+  "text": "Molt cap +2 and Khepri-type rebirth once per run.",
+  "current": false,
+  "ties": [
+   "keyword:molt"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_reed_boat",
+  "name": "Reed Boat",
+  "myth": "Egyptian",
+  "text": "The hero cannot be struck on the first turn.",
+  "current": false,
+  "ties": [
+   "sustain"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_pilgrim_s_gourd",
+  "name": "Pilgrim's Gourd",
+  "myth": "Chinese",
+  "text": "Heal the hero 2 after every won battle.",
+  "current": false,
+  "ties": [
+   "sustain"
+  ],
+  "status": "proposed"
+ },
+ {
+  "id": "new_wild_hunt_horn",
+  "name": "Wild Hunt Horn",
+  "myth": "Norse",
+  "text": "Swift units attack twice on turn 1.",
+  "current": false,
+  "ties": [
+   "keyword:swift"
+  ],
+  "status": "proposed"
+ }
+]

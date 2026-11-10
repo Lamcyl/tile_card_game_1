@@ -1,0 +1,643 @@
+[
+ {
+  "id": "straight",
+  "name": "Straight",
+  "kind": "pattern",
+  "rule": "Hits the first living enemy in its column, if within range.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "spread",
+  "name": "Spread",
+  "kind": "pattern",
+  "rule": "Hits the first enemy in its column and each neighbouring column, if within range.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "pierce",
+  "name": "Pierce",
+  "kind": "pattern",
+  "rule": "Hits every living enemy in its column within range.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "boost",
+  "name": "Boost",
+  "kind": "support",
+  "rule": "Adds ATK (or range) to the attacker directly above it.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "boost_cross",
+  "name": "Cross Boost",
+  "kind": "support",
+  "rule": "Adds its bonus to attackers on all 4 sides.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "horn",
+  "name": "Multiplier",
+  "kind": "support",
+  "rule": "Multiplies the ATK of the unit above (x2).",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "spyglass",
+  "name": "Spyglass",
+  "kind": "support",
+  "rule": "Adds range to the unit above.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "shield",
+  "name": "Shield",
+  "kind": "defender",
+  "rule": "Absorbs up to N enemy damage per turn in its column.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "basic",
+  "name": "Plain",
+  "kind": "pattern",
+  "rule": "No special rule; the stat line is the whole card.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "front",
+  "name": "Front-liner",
+  "kind": "pattern",
+  "rule": "Straight with short range and high ATK; belongs in the front row.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "backline",
+  "name": "Backline",
+  "kind": "pattern",
+  "rule": "Works from the back row thanks to long or unlimited range.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "overkill_global",
+  "name": "Overkill (old global rule)",
+  "kind": "rule",
+  "rule": "Leftover damage from a Straight/Spread kill carries to the enemy behind. RECOMMENDATION: remove as a default rule; it becomes Rend.",
+  "current": true,
+  "status": "proposed",
+  "note": "Currently engine.js dealDamage; to be restricted."
+ },
+ {
+  "id": "rend",
+  "name": "Rend",
+  "kind": "unit",
+  "rule": "Leftover damage from this unit's kill carries to the enemy behind, capped at 3. The only source of overkill.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "spill",
+  "name": "Spill (relic/item rule)",
+  "kind": "rule",
+  "rule": "Rend leftover also spills to the front enemies beside the one that fell.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "herald",
+  "name": "Herald",
+  "kind": "unit_buffer",
+  "rule": "Adjacent allies of the named family (or element) get +1 ATK.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "herald_element",
+  "name": "Element Herald",
+  "kind": "unit_buffer",
+  "rule": "Adjacent allies of the named element get +1 ATK or +1 block.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "attune",
+  "name": "Attune",
+  "kind": "unit_converter",
+  "rule": "The unit above takes this unit's element for the battle.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "mirror",
+  "name": "Mirror",
+  "kind": "unit_copy",
+  "rule": "Copies the pattern and ATK of the unit to its left.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "column_captain",
+  "name": "Column Captain",
+  "kind": "unit_commander",
+  "rule": "Every attacker in its column gets +1 ATK.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "row_captain",
+  "name": "Row Captain",
+  "kind": "unit_commander",
+  "rule": "Every attacker in its row gets +1 ATK.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "molt",
+  "name": "Molt",
+  "kind": "unit_growth",
+  "rule": "Gains +1 ATK each turn it survives (max +3).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "offering",
+  "name": "Offering",
+  "kind": "unit_sacrifice",
+  "rule": "On Fight, consumes one adjacent Common ally for the battle: +2 ATK. The ally returns next battle.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "latecomer",
+  "name": "Latecomer",
+  "kind": "unit_placement",
+  "rule": "+2 ATK if it was the last card you placed this turn.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "firstborn",
+  "name": "Firstborn",
+  "kind": "unit_placement",
+  "rule": "+2 ATK if it was the first card you placed this turn.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "swap",
+  "name": "Swap",
+  "kind": "unit_positioning",
+  "rule": "After attacking, swaps places with an ally (stated on the card).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "resonance",
+  "name": "Resonance",
+  "kind": "unit_scaling",
+  "rule": "+1 to its main stat per other ally of its element (max +3).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "herd",
+  "name": "Herd",
+  "kind": "unit_scaling",
+  "rule": "+1 to its main stat per other ally of its family (max +2).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "howl",
+  "name": "Howl",
+  "kind": "unit_scaling",
+  "rule": "+1 ATK per other Packs unit in its row (max +2).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "decoy",
+  "name": "Decoy",
+  "kind": "unit_defender",
+  "rule": "Takes the first enemy strike in its column; Shield value applies.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "skyfall",
+  "name": "Skyfall",
+  "kind": "unit_pattern",
+  "rule": "Straight with unlimited range.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "chain",
+  "name": "Chain",
+  "kind": "unit_secondary",
+  "rule": "The same damage jumps to the lowest-HP enemy beside the target.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "mark",
+  "name": "Mark",
+  "kind": "unit_secondary",
+  "rule": "The target is Marked: the next hit on it deals +1.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "hold",
+  "name": "Hold",
+  "kind": "unit_control",
+  "rule": "The hit enemy cannot strike this turn.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "mimic",
+  "name": "Mimic",
+  "kind": "unit_converter",
+  "rule": "Takes the element of the first enemy it hits until battle end.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "tribute",
+  "name": "Tribute",
+  "kind": "unit_economy",
+  "rule": "+1 Soul for each kill.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "bloom",
+  "name": "Bloom",
+  "kind": "unit_sustain",
+  "rule": "Heals the hero 1 at the end of each turn.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "echo",
+  "name": "Echo",
+  "kind": "unit_pattern",
+  "rule": "Attacks twice; the second hit deals half ATK (round up).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "echo_up",
+  "name": "Echo Drum",
+  "kind": "unit_support",
+  "rule": "The unit above attacks twice (second hit at half ATK).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "brood",
+  "name": "Brood",
+  "kind": "unit_summon",
+  "rule": "Every 2nd turn spawns a 1-ATK Drone in an empty adjacent tile.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "carapace",
+  "name": "Carapace",
+  "kind": "unit_defender",
+  "rule": "Shield value grows +1 each turn it is not struck (max +3).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "current",
+  "name": "Current",
+  "kind": "unit_control",
+  "rule": "The hit enemy is pushed one column sideways (swaps with whoever is there).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "scorch",
+  "name": "Scorch",
+  "kind": "unit_status",
+  "rule": "The hit enemy Burns: 1 damage at the end of each turn for 2 turns.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "chill",
+  "name": "Chill",
+  "kind": "unit_status",
+  "rule": "The hit enemy loses 1 ATK for the battle (min 1).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "venom",
+  "name": "Venom",
+  "kind": "unit_status",
+  "rule": "The hit enemy takes 1 poison each turn; stacks up to 3.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "trample",
+  "name": "Trample",
+  "kind": "unit_secondary",
+  "rule": "Also deals 1 damage to the enemy behind the target (not overkill).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "pounce",
+  "name": "Pounce",
+  "kind": "unit_conditional",
+  "rule": "+2 damage against an enemy at full HP.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "swift",
+  "name": "Swift",
+  "kind": "unit_placement",
+  "rule": "Attacks before the front row does.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "bastion",
+  "name": "Bastion",
+  "kind": "unit_hybrid",
+  "rule": "Shield and a short attack from the same tile.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "relay",
+  "name": "Relay",
+  "kind": "unit_support",
+  "rule": "Boosts the unit above and the unit above that.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "sunder",
+  "name": "Sunder",
+  "kind": "unit_secondary",
+  "rule": "The hit enemy loses 1 armor for the battle.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "ward",
+  "name": "Ward",
+  "kind": "unit_defender",
+  "rule": "Negates the first strike against the hero each battle.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "rebirth",
+  "name": "Rebirth",
+  "kind": "unit_sustain",
+  "rule": "Once per run, the hero rises at half HP.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "bond",
+  "name": "Bond",
+  "kind": "unit_synergy",
+  "rule": "While its folklore partner is on the board, both get +1 ATK.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "reaction",
+  "name": "Reaction",
+  "kind": "unit_element",
+  "rule": "Element pairs trigger a named effect on hit or when adjacent; see elements.json.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "evolve",
+  "name": "Evolve",
+  "kind": "unit_progression",
+  "rule": "At mastery and star thresholds the unit gains an extension; it never changes its fundamental type.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "mentor",
+  "name": "Mentor",
+  "kind": "unit_synergy",
+  "rule": "An adjacent unit of a lower stage counts as one stage higher for its extension this battle.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "armored_e",
+  "name": "Armored N",
+  "kind": "enemy",
+  "rule": "Each hit deals N less damage.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "barrel_e",
+  "name": "Barrel",
+  "kind": "enemy",
+  "rule": "1 HP; explodes for 2 to orthogonal neighbours and chains.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "healer_e",
+  "name": "Healer",
+  "kind": "enemy",
+  "rule": "Heals adjacent enemies 2 each turn.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "splitter_e",
+  "name": "Splitter",
+  "kind": "enemy",
+  "rule": "Splits into two 1-HP enemies when destroyed.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "summoner_e",
+  "name": "Summoner",
+  "kind": "enemy",
+  "rule": "Adds a minion to the nearest empty tile each turn.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "bulwark_e",
+  "name": "Bulwark",
+  "kind": "enemy",
+  "rule": "Armored. Blocks Pierce and Rend from passing to the tile behind it (was: overkill and Pierce).",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "guarded_e",
+  "name": "Guarded",
+  "kind": "enemy",
+  "rule": "Takes no damage while its guard lives. Rework: the guard's death removes the ward; no overkill needed.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "regrow_e",
+  "name": "Regrow",
+  "kind": "enemy",
+  "rule": "Heads grow back once.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "hide_e",
+  "name": "Hide",
+  "kind": "enemy",
+  "rule": "Hits weaker than N do nothing.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "gaze_e",
+  "name": "Gaze",
+  "kind": "enemy",
+  "rule": "Attackers in its column lose 1 ATK.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "sweep_e",
+  "name": "Sweep",
+  "kind": "enemy",
+  "rule": "Also strikes both neighbouring columns for half damage.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "tide_e",
+  "name": "Tide",
+  "kind": "enemy",
+  "rule": "Rows drift sideways each turn.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "regenerate_e",
+  "name": "Regenerate",
+  "kind": "enemy",
+  "rule": "Heals about 12% HP each turn.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "fury_e",
+  "name": "Fury",
+  "kind": "enemy",
+  "rule": "+1 ATK per turn survived.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "harden_e",
+  "name": "Harden",
+  "kind": "enemy",
+  "rule": "+1 armor per turn (max 3).",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "stride_e",
+  "name": "Stride",
+  "kind": "enemy",
+  "rule": "Sidesteps one column per turn.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "veiled_e",
+  "name": "Veiled",
+  "kind": "enemy",
+  "rule": "Cannot be hurt on turn 1.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "enrage_e",
+  "name": "Enrage",
+  "kind": "enemy",
+  "rule": "Surviving enemies get +1 ATK each turn.",
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "elemental_e",
+  "name": "Elemental variant",
+  "kind": "enemy",
+  "rule": "Enemy carries an element from its bestiary variant; reactions apply to it.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "wet_e",
+  "name": "Wet / Burning / Frozen status",
+  "kind": "enemy",
+  "rule": "Statuses set by reactions; they are what the reaction table reads on enemies.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "alpha_e",
+  "name": "Alpha",
+  "kind": "enemy",
+  "rule": "Strengthens nearby kin (+1 ATK to same-family enemies beside it).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "ghost_e",
+  "name": "Ghost",
+  "kind": "enemy",
+  "rule": "Plain hits do 1 less; Light and Purge reveal it.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "swarm_e",
+  "name": "Swarm",
+  "kind": "enemy",
+  "rule": "Packs of 1-HP bodies; weak to Spread and Chain.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "corrupted_e",
+  "name": "Corrupted",
+  "kind": "enemy",
+  "rule": "Spreads blight: adjacent player tiles lose 1 boost until cleansed by Light.",
+  "current": false,
+  "status": "proposed"
+ }
+]

@@ -1,0 +1,684 @@
+[
+ {
+  "id": "cur_atk",
+  "name": "Fang/Feather/Horn/Charm (ATK item)",
+  "slot": "weapon",
+  "rarity": "common-epic",
+  "text": "+1/+2/+3 ATK to one unit type; generated per sub-area. Item names will follow the new units.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_block",
+  "name": "Scale/Hide/Plate (block item)",
+  "slot": "armor",
+  "rarity": "common-epic",
+  "text": "+1/+2/+3 Shield block.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_hp",
+  "name": "Heart/Bone/Mantle (HP item)",
+  "slot": "armor",
+  "rarity": "common-epic",
+  "text": "+2/+4/+6 max HP.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_souls",
+  "name": "Seal/Bead/Offering (Souls item)",
+  "slot": "ring",
+  "rarity": "common-epic",
+  "text": "+8/+15/+25 Souls per run battle reward.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_amount",
+  "name": "Drumskin/Pennant/Lens (support item)",
+  "slot": "banner",
+  "rarity": "rare-epic",
+  "text": "+1/+2 to a support type's bonus.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_supplies",
+  "name": "Satchel/Flask (Rations item)",
+  "slot": "ring",
+  "rarity": "rare-epic",
+  "text": "+1/+2 Rations.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_range",
+  "name": "Sigil/Crest/Rune (range item)",
+  "slot": "weapon",
+  "rarity": "rare-epic",
+  "text": "+1 range to one unit type.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_spill",
+  "name": "Cleaver (boss legendary)",
+  "slot": "weapon",
+  "rarity": "legendary",
+  "text": "Overkill spills to the enemies beside. REWORK: applies to Rend only.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_opening",
+  "name": "Opening Fang (boss legendary)",
+  "slot": "weapon",
+  "rarity": "legendary",
+  "text": "First shot of every battle deals double.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_soften",
+  "name": "Thick Hide (boss legendary)",
+  "slot": "armor",
+  "rarity": "legendary",
+  "text": "Every enemy strike deals 1 less.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_stand",
+  "name": "Last Breath (boss legendary)",
+  "slot": "armor",
+  "rarity": "legendary",
+  "text": "Once per battle a lethal blow leaves 1 HP.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_horn",
+  "name": "Great Horn (boss legendary)",
+  "slot": "banner",
+  "rarity": "legendary",
+  "text": "First War Horn is x3.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_blast",
+  "name": "Powder Charm (boss legendary)",
+  "slot": "ring",
+  "rarity": "legendary",
+  "text": "Barrels explode for 4.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_sunder",
+  "name": "Sunder Band (boss legendary)",
+  "slot": "ring",
+  "rarity": "legendary",
+  "text": "Hits ignore 1 armor.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "cur_mend",
+  "name": "Lifebloom (boss legendary)",
+  "slot": "ring",
+  "rarity": "legendary",
+  "text": "Heal 1 HP each turn.",
+  "ties": [],
+  "current": true,
+  "status": "proposed"
+ },
+ {
+  "id": "new_ember_collar",
+  "name": "Ember Collar",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Fire units' Scorch lasts 1 turn longer.",
+  "ties": [
+   "element:fire"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_tidal_pearl",
+  "name": "Tidal Pearl",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Water units' Chain jumps deal +1.",
+  "ties": [
+   "element:water"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_rime_charm",
+  "name": "Rime Charm",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Frost units' Chill also hits the enemy behind.",
+  "ties": [
+   "element:frost"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_thunder_drum",
+  "name": "Thunder Drum",
+  "slot": "banner",
+  "rarity": "rare",
+  "text": "Storm chains reach 1 tile further.",
+  "ties": [
+   "element:storm"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_feather_fan",
+  "name": "Feather Fan",
+  "slot": "banner",
+  "rarity": "rare",
+  "text": "Wind units get +1 range.",
+  "ties": [
+   "element:wind"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_heartwood_seed",
+  "name": "Heartwood Seed",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Wood units' Molt cap +1.",
+  "ties": [
+   "element:wood"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_stone_anklet",
+  "name": "Stone Anklet",
+  "slot": "armor",
+  "rarity": "rare",
+  "text": "Earth Shields block +1.",
+  "ties": [
+   "element:earth"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_lantern_of_dawn",
+  "name": "Lantern of Dawn",
+  "slot": "banner",
+  "rarity": "epic",
+  "text": "Light Heralds and Bonds give +1 more.",
+  "ties": [
+   "element:light"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_dusk_veil",
+  "name": "Dusk Veil",
+  "slot": "armor",
+  "rarity": "epic",
+  "text": "Shadow Hold also affects the neighbouring enemy.",
+  "ties": [
+   "element:shadow"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_reaction_lens",
+  "name": "Reaction Lens",
+  "slot": "weapon",
+  "rarity": "epic",
+  "text": "Hit reactions deal +1 damage.",
+  "ties": [
+   "reactions"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_catalyst_flask",
+  "name": "Catalyst Flask",
+  "slot": "ring",
+  "rarity": "epic",
+  "text": "Adjacent reactions also trigger diagonally.",
+  "ties": [
+   "reactions"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_wing_feather_cord",
+  "name": "Wing Feather Cord",
+  "slot": "banner",
+  "rarity": "rare",
+  "text": "Wings Heralds reach the diagonals.",
+  "ties": [
+   "family:wings"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_hoofprint_horseshoe",
+  "name": "Hoofprint Horseshoe",
+  "slot": "weapon",
+  "rarity": "rare",
+  "text": "Hooves are Swift on turn 1.",
+  "ties": [
+   "family:hooves"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_fang_necklace",
+  "name": "Fang Necklace",
+  "slot": "weapon",
+  "rarity": "epic",
+  "text": "Fangs gain Rend; Rend cap +1.",
+  "ties": [
+   "family:fangs",
+   "overkill"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_scale_ring",
+  "name": "Scale Ring",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Coils' Venom stacks to 4.",
+  "ties": [
+   "family:coils"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_shell_plate",
+  "name": "Shell Plate",
+  "slot": "armor",
+  "rarity": "rare",
+  "text": "Shells' Carapace max +1.",
+  "ties": [
+   "family:shells"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_foxfire_bell",
+  "name": "Foxfire Bell",
+  "slot": "banner",
+  "rarity": "rare",
+  "text": "Packs Mark spreads to the neighbour column.",
+  "ties": [
+   "family:packs"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_fish_scale_net",
+  "name": "Fish-Scale Net",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Fins count as Water for reactions.",
+  "ties": [
+   "family:fins"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_cocoon_pouch",
+  "name": "Cocoon Pouch",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Chitin cost 1 less Command Point (min 1).",
+  "ties": [
+   "family:chitin"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_wild_charm",
+  "name": "Wild Charm",
+  "slot": "banner",
+  "rarity": "rare",
+  "text": "One Wilds unit counts as any family for sets.",
+  "ties": [
+   "family:wilds"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_evolution_seed",
+  "name": "Evolution Seed",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Unlocks the next evolution extension for one unit for this run.",
+  "ties": [
+   "evolution"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_moulting_husk",
+  "name": "Moulting Husk",
+  "slot": "ring",
+  "rarity": "epic",
+  "text": "All units evolve one stage for the first turn of each battle.",
+  "ties": [
+   "evolution"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_dragon_gate_pearl",
+  "name": "Dragon-Gate Pearl",
+  "slot": "ring",
+  "rarity": "legendary",
+  "text": "A Fins unit becomes Coils for the run (carp-to-dragon in a shrine).",
+  "ties": [
+   "evolution",
+   "family:coils"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_mentor_cord",
+  "name": "Mentor Cord",
+  "slot": "banner",
+  "rarity": "rare",
+  "text": "Mentor: the lowest-stage unit counts as one stage higher.",
+  "ties": [
+   "evolution"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_bond_knot",
+  "name": "Bond Knot",
+  "slot": "banner",
+  "rarity": "rare",
+  "text": "Bond partners need not be on the board; Bond pairs count if both are in the squad.",
+  "ties": [
+   "bond"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_red_thread",
+  "name": "Red Thread",
+  "slot": "banner",
+  "rarity": "epic",
+  "text": "All Bonds give +2 ATK instead of +1.",
+  "ties": [
+   "bond"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_whetstone",
+  "name": "Whetstone",
+  "slot": "weapon",
+  "rarity": "rare",
+  "text": "Rend units' cap +1.",
+  "ties": [
+   "overkill"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_hunter_s_trophy",
+  "name": "Hunter's Trophy",
+  "slot": "weapon",
+  "rarity": "rare",
+  "text": "A Rend kill gives that unit +1 ATK this battle (max +2).",
+  "ties": [
+   "overkill"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_splitting_axe",
+  "name": "Splitting Axe",
+  "slot": "weapon",
+  "rarity": "epic",
+  "text": "Rend carries to the enemies beside as well (the old Spill, Rend only).",
+  "ties": [
+   "overkill"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_rooted_boots",
+  "name": "Rooted Boots",
+  "slot": "armor",
+  "rarity": "rare",
+  "text": "Earth beside Wood: Roots gives +2 block.",
+  "ties": [
+   "reactions",
+   "element:earth"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_sunlit_mantle",
+  "name": "Sunlit Mantle",
+  "slot": "armor",
+  "rarity": "rare",
+  "text": "Light beside any unit: the hero gets +2 max HP per Light unit.",
+  "ties": [
+   "element:light"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_frozen_locket",
+  "name": "Frozen Locket",
+  "slot": "armor",
+  "rarity": "rare",
+  "text": "First enemy strike each turn is Chilled.",
+  "ties": [
+   "element:frost"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_windchime_pendant",
+  "name": "Windchime Pendant",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Wind pushes also Chill 1 turn.",
+  "ties": [
+   "element:wind"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_scorched_gauntlet",
+  "name": "Scorched Gauntlet",
+  "slot": "weapon",
+  "rarity": "rare",
+  "text": "Fire hits on a Wood enemy deal +1.",
+  "ties": [
+   "element:fire",
+   "reactions"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_oracle_shell",
+  "name": "Oracle Shell",
+  "slot": "armor",
+  "rarity": "epic",
+  "text": "See the next turn's enemy telegraph for Hide and Veiled enemies.",
+  "ties": [
+   "family:shells"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_drover_s_whistle",
+  "name": "Drover's Whistle",
+  "slot": "banner",
+  "rarity": "rare",
+  "text": "Swap units may swap twice per turn.",
+  "ties": [
+   "keyword:swap"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_mirror_pool",
+  "name": "Mirror Pool",
+  "slot": "ring",
+  "rarity": "epic",
+  "text": "Mirror also copies the neighbour's keyword.",
+  "ties": [
+   "keyword:mirror"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_offering_bowl",
+  "name": "Offering Bowl",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Offering returns the ally this same battle at half effect.",
+  "ties": [
+   "keyword:offering"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_tribute_purse",
+  "name": "Tribute Purse",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Tribute gives +1 extra Soul.",
+  "ties": [
+   "keyword:tribute"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_healer_s_gourd",
+  "name": "Healer's Gourd",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Bloom heals +1.",
+  "ties": [
+   "keyword:bloom"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_hive_honey",
+  "name": "Hive Honey",
+  "slot": "ring",
+  "rarity": "rare",
+  "text": "Brood spawns every turn.",
+  "ties": [
+   "keyword:brood"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_wild_garland",
+  "name": "Wild Garland",
+  "slot": "armor",
+  "rarity": "rare",
+  "text": "Molt units start at +1.",
+  "ties": [
+   "keyword:molt"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_echo_chime",
+  "name": "Echo Chime",
+  "slot": "weapon",
+  "rarity": "epic",
+  "text": "Echo second hit deals full ATK minus 1.",
+  "ties": [
+   "keyword:echo"
+  ],
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "new_beast_keeper_s_whistle",
+  "name": "Beast-keeper's Whistle",
+  "slot": "banner",
+  "rarity": "epic",
+  "text": "Once per battle swap two units of the same family for free.",
+  "ties": [
+   "hero:beastkeeper"
+  ],
+  "current": false,
+  "status": "proposed"
+ }
+]
