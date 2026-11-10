@@ -1,0 +1,6224 @@
+{
+ "id": "regions",
+ "status": "proposed",
+ "note": "Gameplay progression proposal for regions 1 to 10. Design data only; no game code changed.",
+ "levelRule": {
+  "ordinary": "[bossLv - 2, bossLv - 1]",
+  "elite": "Greenvale: ordinary max; from region 2: bossLv",
+  "boss": "bossLv",
+  "extension": "Regions 3 to 10 add 5 boss levels each (16 to 55), sub-area boss levels non-decreasing with repeats; w(L) = (L/5)^1.5 continues (needs validation past Lv15)"
+ },
+ "teachingCurve": {
+  "1": {
+   "elements": "Wood, Water, Earth, Wind pips; Storm at the finale",
+   "reactions": "Wildfire (Oak Wood), Bloom (Lake), Roots (Ruins), Conduct (Highlands) = 4",
+   "keywords": "armor, barrel, Guarded, Mirage, Thorn, Stride/Tide, Healer, Fuse, Bulwark, Summoner, Regrow, Splitter",
+   "units": "Straight, Spread, Pierce, Boost, Shield as pure roles; Swift, Pounce; family sets at 2",
+   "evolution": "Stage 1 animals; a shrine shows one run-only evolution",
+   "rend": "First Fangs unit in the first reward; Rend on Piggyback; Bulwark (Ruins) stops Rend and Pierce"
+  },
+  "2": {
+   "elements": "Fire, Earth, Light, Shadow",
+   "reactions": "Mud (Palms), Smother (Wadi, a warning), Fan (Erg), Purge and Dusk (Tomb), Sunfire (Citadel) = 6, total 10",
+   "keywords": "Chief, Skewer, Grudge, Leech, Ghost, armor 2",
+   "units": "First hybrids (Guard plus Attack), Captains, Decoy, Skyfall, Herald",
+   "evolution": "Stage 2 (Mastery 3, 2 stars) reachable; shrines evolve one unit per run",
+   "rend": "Rend against armor 2; Whetstone Camp upgrade after Ashkara"
+  },
+  "3": {
+   "elements": "Frost, with Wind, Water",
+   "reactions": "Freeze, Steam, Blizzard = 3, total 13",
+   "keywords": "Harden, Regenerate, Alpha, Skeleton rise, stronger Guarded, Sweep",
+   "units": "Chill, Hold, Mark, Howl, Carapace; resonance at 4",
+   "evolution": "First Element Seal (Frost); stage 2 common",
+   "rend": "Hunter's Moon offered (Fangs Rend cap 4); Rend against Harden"
+  },
+  "4": {
+   "elements": "Fire, Earth (stone, metal, magma), Storm",
+   "reactions": "Ground = 1, total 14; Smother and Steam used in earnest",
+   "keywords": "Fury, Enrage, Gaze, Regrow sealed by Burn, Skewer, Bulwark walls",
+   "units": "Scorch, Trample, Pounce, Echo; Bastion in the front row",
+   "evolution": "First stage 3 (Mythic) reachable",
+   "rend": "Rend plus Spill against Bulwark; Whetstone +1 cap"
+  },
+  "5": {
+   "elements": "Water, Storm, Shadow",
+   "reactions": "Mist = 1, total 15; Wet then Storm then Freeze chains",
+   "keywords": "Tide, Swarm, Summoner again, Hold, Veiled, Stride",
+   "units": "Chain, Current, Row Captain, Fins sets, Bloom",
+   "evolution": "Water Seal; stage 2 broadly held",
+   "rend": "Rend through swarms of small bodies"
+  },
+  "6": {
+   "elements": "Wood (Venom), Water, Earth",
+   "reactions": "Pollen = 1, total 16; Wildfire chains on full Wood rows",
+   "keywords": "Hide, Grudge, Corrupted, Swarm plus Summoner, Regrow plus Healer",
+   "units": "Brood, Offering, Molt, Relay, Mentor, Herald",
+   "evolution": "Stage 2 branch choice (two extensions)",
+   "rend": "Rend cap 4 helps break Hide with big hits"
+  },
+  "7": {
+   "elements": "Shadow, Light",
+   "reactions": "none new; Purge and Mist revisited",
+   "keywords": "Ghost, Leech, stronger Gaze, Shapeshift/Mimic, flicker Veiled, Deathless",
+   "units": "Attune, Mimic, Swap; Ward and Rebirth appear",
+   "evolution": "Mentor (lower-stage ally counts +1)",
+   "rend": "Rend cannot cross Ghost: Purge first"
+  },
+  "8": {
+   "elements": "Earth (metal, stone), Light, Fire",
+   "reactions": "none new; Sunfire, Dusk, Smother in a dense castle",
+   "keywords": "Bulwark, Guarded, Healer, Chief, Harden in formation",
+   "units": "Mirror, Echo Drum, Relay, Bastion, Ward",
+   "evolution": "Two stage 3 lines expected",
+   "rend": "Wall exam: Rend, Pierce and Sunder against Bulwark"
+  },
+  "9": {
+   "elements": "Storm, Wind, Light, Earth (crystal)",
+   "reactions": "Squall = 1, total 17 (all reactions taught)",
+   "keywords": "Stride, Veiled, Sweep, Healer in the open, Crystal shards",
+   "units": "Skyfall, Spyglass, Wings sets of 4; Legendary born mythic",
+   "evolution": "Complete stage 3 lines; Legendary 2 stages",
+   "rend": "Rend with long-range Skyfall kills"
+  },
+  "10": {
+   "elements": "Light and Shadow at depth; every element",
+   "reactions": "none new; every reaction in one hour",
+   "keywords": "all, plus element resistance on elites and bosses (open)",
+   "units": "Legendary hubs, Rebirth and Ward, full builds",
+   "evolution": "All lines; Seals of every element",
+   "rend": "Rend cap 4 plus Whetstone against late walls"
+  }
+ },
+ "regions": [
+  {
+   "id": "greenvale",
+   "number": 1,
+   "name": "Greenvale",
+   "slot": {
+    "dir": "N",
+    "ring": 1
+   },
+   "kind": "open",
+   "structureType": null,
+   "structureNote": null,
+   "terrain": "Japanese-Korean countryside: meadow, oak wood, bamboo, lake, paddies, shrine ruins, marsh, highland",
+   "cultures": [
+    "Japanese",
+    "Korean",
+    "Chinese",
+    "Slavic",
+    "Maya (minor)"
+   ],
+   "monsterFamilies": [
+    "Shapeshifters and tricksters",
+    "Plants and forest spirits",
+    "Water-folk",
+    "Undead",
+    "Giants and ogres",
+    "Household and object spirits"
+   ],
+   "dominantElements": [
+    "Wood",
+    "Water",
+    "Wind",
+    "Fire"
+   ],
+   "levelBand": {
+    "bossFirst": 4,
+    "bossLast": 9,
+    "ordinaryFirst": 1,
+    "ordinaryLast": 8
+   },
+   "expectedRuns": 6,
+   "teaches": [
+    "Core verbs: attack, range, boost",
+    "Shield, armor, Mirage, Thorn, Swift/Tide",
+    "Healer, Fuse, Bulwark, Summoner, Splitter",
+    "Element pips; first reactions Wildfire, Bloom, Roots, Conduct",
+    "Family sets at 2; Rend arrives with the first Fangs unit"
+   ],
+   "unlocks": {
+    "elements": [
+     "Wood",
+     "Water",
+     "Wind",
+     "Storm (Raiju, Highlands)"
+    ],
+    "families": [
+     "Hooves",
+     "Fangs",
+     "Wings",
+     "Wilds"
+    ],
+    "nudge": "Fangs for Rend; Wood beside Water for Bloom; one Fire unit for Wildfire"
+   },
+   "origin": "existing (kept at 8 sub-areas)",
+   "subareas": [
+    {
+     "id": "greenvale-sunny-meadows",
+     "slug": "sunny-meadows",
+     "name": "Sunny Meadows",
+     "theme": "Rolling wildflower grass with a pond",
+     "landmark": "Lone blossom tree and flower-arch farm gate",
+     "elements": [
+      "Wood",
+      "Wind",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Kamaitachi",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Hitotsume-kozō",
+       "variant": "",
+       "element": null
+      },
+      {
+       "base": "Tanuki",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Chōchin-obake",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Alux",
+       "variant": "wood",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Tanuki",
+      "variant": "wood",
+      "element": "Wood",
+      "gimmick": "Guarded by a Jangsan-beom tiger: no damage while the guard lives",
+      "familiarity": "③"
+     },
+     "idea": "Core verbs: attack, range, boost; barrels",
+     "arc": "B1-2 plain pairs; B3 Tanuki (boost); B4 barrel lane; B5 range plus Rend; B6 Blossom Brute; boss. Script: ENEMY_REVAMP B1 (boss was Sansin + Baihu, both removed)",
+     "bossLv": 4,
+     "ordinaryLv": [
+      1,
+      2
+     ],
+     "eliteLv": 2,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "greenvale-old-oak-wood",
+     "slug": "old-oak-wood",
+     "name": "Old Oak Wood",
+     "theme": "Dense oak forest, dappled light",
+     "landmark": "Sacred oak with shimenawa, door in a hollow trunk",
+     "elements": [
+      "Wood",
+      "Wind"
+     ],
+     "roster": [
+      {
+       "base": "Kodama",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Leshy",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Jangsan-beom",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Kasa-obake",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Karasu-tengu",
+       "variant": "wind",
+       "element": "Wind"
+      }
+     ],
+     "boss": {
+      "base": "Karasu-tengu",
+      "variant": "wind",
+      "element": "Wind",
+      "gimmick": "Veiled on turn 1 (Mirage)",
+      "familiarity": "③"
+     },
+     "idea": "Shield, armor and Mirage; first Wildfire (Fire vs Wood)",
+     "arc": "B1 Kodama guard; B2 armor; B3 Mirage; B4 barrel row; B5 armor behind front; elite Ancient Leshy; boss Tengu. ENEMY_REVAMP B2; elite Sansin becomes Jangsan-beom elder",
+     "bossLv": 5,
+     "ordinaryLv": [
+      3,
+      4
+     ],
+     "eliteLv": 4,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "greenvale-bamboo-valley",
+     "slug": "bamboo-valley",
+     "name": "Bamboo Valley",
+     "theme": "Bamboo groves either side of a stream",
+     "landmark": "Plank bridge and thatched hut gate",
+     "elements": [
+      "Wood",
+      "Wind",
+      "Earth",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Shanxiao",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Nekomata",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Nurikabe",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Nian",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Hundun",
+       "variant": "wood",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Qiongqi",
+      "variant": "wood",
+      "element": "Wood",
+      "gimmick": "Thorn: each hit on it costs the hero 1 HP",
+      "familiarity": "④"
+     },
+     "idea": "Thorn: weigh the cost of clicking; Pollen preview",
+     "arc": "B1 Shanxiao; B2 armored; B3 Nian barrel; B4 thorn row; B5 stampede; elite tiger (was Baihu, removed); boss Qiongqi. Map file names Jorogumo as boss; ENEMY_REVAMP wins. Yutu and Baize (Benevolent) dropped",
+     "bossLv": 5,
+     "ordinaryLv": [
+      3,
+      4
+     ],
+     "eliteLv": 4,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "greenvale-mirror-lake",
+     "slug": "mirror-lake",
+     "name": "Mirror Lake",
+     "theme": "Large lake with lily pads and willows",
+     "landmark": "Vermilion torii standing in the water, jetty and boathouse",
+     "elements": [
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Kappa",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Rusalka",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Siren",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Kappa",
+       "variant": "water armoured",
+       "element": "Water"
+      },
+      {
+       "base": "Jingwei",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Imugi",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Stride: sidesteps a column each turn",
+      "familiarity": "③"
+     },
+     "idea": "Swift and Tide; Bloom (Water beside Wood)",
+     "arc": "B1 kappa; B2 siren back row; B3 Swift; B4 tide drift; B5 armored kappa; elite Vodyanoy slot becomes Rusalka alpha; boss Imugi. Baku (Benevolent) dropped",
+     "bossLv": 6,
+     "ordinaryLv": [
+      4,
+      5
+     ],
+     "eliteLv": 5,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "greenvale-rice-terraces",
+     "slug": "rice-terraces",
+     "name": "Rice Terraces",
+     "theme": "Stepped flooded paddies and a waterwheel",
+     "landmark": "Waterwheel flume and white kura gate",
+     "elements": [
+      "Wood",
+      "Earth",
+      "Fire",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Dokkaebi",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Kitsune",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Shanxiao",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Nurikabe",
+       "variant": "stone armoured",
+       "element": "Earth"
+      },
+      {
+       "base": "Jingwei",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Bulgasari",
+      "variant": "metal",
+      "element": "Earth",
+      "gimmick": "Harden: +1 armor each turn (max 3)",
+      "familiarity": "④"
+     },
+     "idea": "Healer; Mud (Earth on Wet) in the paddies",
+     "arc": "B1 dokkaebi; B2 healer behind; B3 kitsune; B4 mud row; B5 healer plus armor; elite Gumiho; boss Bulgasari. Xuanwu (removed) replaced by armored Nurikabe",
+     "bossLv": 7,
+     "ordinaryLv": [
+      5,
+      6
+     ],
+     "eliteLv": 6,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "greenvale-mossy-ruins",
+     "slug": "mossy-ruins",
+     "name": "Mossy Ruins",
+     "theme": "Crumbled shrine walls under cedars and low mist",
+     "landmark": "Broken torii and glowing stone lanterns",
+     "elements": [
+      "Shadow",
+      "Fire",
+      "Earth",
+      "Wind"
+     ],
+     "roster": [
+      {
+       "base": "Jiangshi",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Chōchin-obake",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Nurikabe",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Tsuchigumo",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Kasa-obake",
+       "variant": "wind",
+       "element": "Wind"
+      }
+     ],
+     "boss": {
+      "base": "Gashadokuro",
+      "variant": "shadow giant",
+      "element": "Shadow",
+      "gimmick": "Giant skeleton that sweeps both neighbour columns",
+      "familiarity": "④"
+     },
+     "idea": "Fuse and Bulwark; Roots (Earth beside Wood)",
+     "arc": "B1 jiangshi; B2 Fuse lantern; B3 Bulwark wall (stops Rend and Pierce); B4 mixed; B5 wall plus fuse; elite Anubis slot becomes Mummy; boss Gashadokuro. Ushabti (construct) dropped",
+     "bossLv": 8,
+     "ordinaryLv": [
+      6,
+      7
+     ],
+     "eliteLv": 7,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "greenvale-firefly-marsh",
+     "slug": "firefly-marsh",
+     "name": "Firefly Marsh",
+     "theme": "Murky wetland at dusk with boardwalks",
+     "landmark": "Boardwalk islands and stilt-hut gate",
+     "elements": [
+      "Water",
+      "Shadow",
+      "Wood"
+     ],
+     "roster": [
+      {
+       "base": "Mul Gwisin",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Dalgyal Gwisin",
+       "variant": "shadow ghost",
+       "element": "Shadow"
+      },
+      {
+       "base": "Rokurokubi",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Kikimora",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Imugi",
+       "variant": "venom",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Yamata no Orochi",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Regrow: heads grow back once; summons",
+      "familiarity": "③"
+     },
+     "idea": "Summoner; Ghost (Light reveals)",
+     "arc": "B1 gwisin; B2 summoner; B3 ghost; B4 regrow head; B5 two summoners; elite Rokurokubi alpha; boss Orochi. ENEMY_REVAMP B7",
+     "bossLv": 8,
+     "ordinaryLv": [
+      6,
+      7
+     ],
+     "eliteLv": 7,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "greenvale-misty-highlands",
+     "slug": "misty-highlands",
+     "name": "Misty Highlands",
+     "theme": "Ochre rocky pasture, grey cliffs and mist",
+     "landmark": "Standing stones with shimenawa, stone mountain gate",
+     "elements": [
+      "Storm",
+      "Earth",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Oni",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Hundun",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Kamaitachi",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Chōchin-obake",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Nekomata",
+       "variant": "storm",
+       "element": "Storm"
+      }
+     ],
+     "boss": {
+      "base": "Nue",
+      "variant": "storm",
+      "element": "Storm",
+      "gimmick": "Splitter: breaks into three 1-HP parts (monkey, tanuki, snake)",
+      "familiarity": "③"
+     },
+     "idea": "Splitter; Conduct (Storm on Wet) and the first Storm unit",
+     "arc": "B1 oni; B2 splitter; B3 storm kamaitachi; B4 wet plus storm; B5 oni pair; elite Nekomata (was Haetae); boss Nue (was Raijin, removed). ENEMY_REVAMP B8",
+     "bossLv": 9,
+     "ordinaryLv": [
+      7,
+      8
+     ],
+     "eliteLv": 8,
+     "origin": "existing",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  },
+  {
+   "id": "ashkara",
+   "number": 2,
+   "name": "Ashkara",
+   "slot": {
+    "dir": "N",
+    "ring": 2
+   },
+   "kind": "open",
+   "structureType": null,
+   "structureNote": null,
+   "terrain": "Sun-scoured desert: dunes, oasis, salt flat, red wadi, bazaar city, tomb avenue, glass citadel",
+   "cultures": [
+    "Egyptian",
+    "Arabian",
+    "Maya",
+    "Mesopotamian",
+    "Greek"
+   ],
+   "monsterFamilies": [
+    "Undead and revenants",
+    "Insects and spiders",
+    "Guardian beasts",
+    "Giants and ogres",
+    "Chimeras and hybrids",
+    "Demons"
+   ],
+   "dominantElements": [
+    "Earth",
+    "Shadow",
+    "Fire",
+    "Water"
+   ],
+   "levelBand": {
+    "bossFirst": 10,
+    "bossLast": 15,
+    "ordinaryFirst": 8,
+    "ordinaryLast": 14
+   },
+   "expectedRuns": 7,
+   "teaches": [
+    "Chief, Skewer, Grudge, Leech",
+    "Armor 2, Healer reuse",
+    "Fire, Earth, Light, Shadow pips",
+    "Mud, Smother, Fan, Purge, Dusk, Sunfire",
+    "Hybrid roles; stage 2 units"
+   ],
+   "unlocks": {
+    "elements": [
+     "Fire",
+     "Earth",
+     "Light",
+     "Shadow (Raven Pair, Cat Sidhe)"
+    ],
+    "families": [
+     "Coils",
+     "Chitin",
+     "Shells",
+     "Packs"
+    ],
+    "nudge": "Hybrid Guard-Attack units; Light beside Shadow or Fire; keep Fire away from Earth"
+   },
+   "origin": "existing (kept at 8 sub-areas)",
+   "subareas": [
+    {
+     "id": "ashkara-dune-shallows",
+     "slug": "dune-shallows",
+     "name": "Dune Shallows",
+     "theme": "Pale dunes and fossil sand",
+     "landmark": "Half-buried caravan wagon and a cairn",
+     "elements": [
+      "Earth",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Scarab beetle",
+       "variant": "sand",
+       "element": "Earth"
+      },
+      {
+       "base": "Spotted hyena",
+       "variant": "sand",
+       "element": "Earth"
+      },
+      {
+       "base": "Black mamba",
+       "variant": "sand",
+       "element": "Earth"
+      },
+      {
+       "base": "Mongolian Death Worm",
+       "variant": "sand",
+       "element": "Earth"
+      },
+      {
+       "base": "Sekhmet",
+       "variant": "fire",
+       "element": "Fire"
+      }
+     ],
+     "boss": {
+      "base": "Apep (Apophis)",
+      "variant": "sand",
+      "element": "Earth",
+      "gimmick": "Armor 2 shell; sand-bury",
+      "familiarity": "③"
+     },
+     "idea": "Armor 2 (Greenvale's armor, doubled); Fire and Earth pips first seen",
+     "arc": "Scavenger pairs; armor; sting; elite Sekhmet; boss Apep. ENEMY_REVAMP B9 (Serket, Khepri, Wadjet are Benevolent: dropped)",
+     "bossLv": 10,
+     "ordinaryLv": [
+      8,
+      9
+     ],
+     "eliteLv": 10,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "ashkara-seven-palms",
+     "slug": "seven-palms",
+     "name": "Seven Palms",
+     "theme": "Oasis pool ringed by date palms",
+     "landmark": "Pool and shaduf",
+     "elements": [
+      "Earth",
+      "Water",
+      "Wind"
+     ],
+     "roster": [
+      {
+       "base": "Nile crocodile",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Ghoul",
+       "variant": "sand",
+       "element": "Earth"
+      },
+      {
+       "base": "Sacred ibis",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Sobek",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Dromedary camel",
+       "variant": "sand",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Set",
+      "variant": "sand",
+      "element": "Earth",
+      "gimmick": "Chief: adjacent enemies +1 ATK",
+      "familiarity": "③"
+     },
+     "idea": "Chief and Skewer; Mud (Earth on Water/Wet)",
+     "arc": "Palm court; chief aura; skewer ignores Shield; elite Sobek; boss Set. ENEMY_REVAMP B10 (Bes dropped, Papyrus Jar has no bestiary entry)",
+     "bossLv": 11,
+     "ordinaryLv": [
+      9,
+      10
+     ],
+     "eliteLv": 11,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "ashkara-singing-erg",
+     "slug": "singing-erg",
+     "name": "Singing Erg",
+     "theme": "Rippled dune sea with slip-face ridges",
+     "landmark": "Singing dune with chime poles",
+     "elements": [
+      "Earth",
+      "Wind",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Dokkaebi",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Oni",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Talos",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Manticore",
+       "variant": "sand",
+       "element": "Earth"
+      },
+      {
+       "base": "Mongolian Death Worm",
+       "variant": "sand",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Cabrakan",
+      "variant": "sand",
+      "element": "Earth",
+      "gimmick": "Grudge: +2 ATK when a neighbour dies",
+      "familiarity": "④"
+     },
+     "idea": "Grudge; Fan (Wind on Burning)",
+     "arc": "Dune shifts; Grudge chain; kill order; elite Talos; boss Cabrakan. ENEMY_REVAMP B11 (Bulgae Benevolent: dropped)",
+     "bossLv": 11,
+     "ordinaryLv": [
+      9,
+      10
+     ],
+     "eliteLv": 11,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "ashkara-salt-mirror",
+     "slug": "salt-mirror",
+     "name": "Salt Mirror",
+     "theme": "Blinding salt lake with a mirage island",
+     "landmark": "Mirage island over brine",
+     "elements": [
+      "Light",
+      "Earth",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Kui",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Zipacna",
+       "variant": "crystal",
+       "element": "Earth"
+      },
+      {
+       "base": "Hundun",
+       "variant": "crystal",
+       "element": "Earth"
+      },
+      {
+       "base": "Chupacabra",
+       "variant": "blood",
+       "element": "Water"
+      },
+      {
+       "base": "Nue",
+       "variant": "light",
+       "element": "Light"
+      }
+     ],
+     "boss": {
+      "base": "Vucub Caquix",
+      "variant": "light",
+      "element": "Light",
+      "gimmick": "Gaze and Mirage: attackers in its column lose 1 ATK",
+      "familiarity": "④"
+     },
+     "idea": "Mirage and gaze; light pips and Purge preview",
+     "arc": "Mirage pairs; crystal armor; gaze column; elite Zipacna; boss Vucub Caquix. ENEMY_REVAMP B12 (Pixiu Benevolent: dropped)",
+     "bossLv": 12,
+     "ordinaryLv": [
+      10,
+      11
+     ],
+     "eliteLv": 12,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "ashkara-red-wadi",
+     "slug": "red-wadi",
+     "name": "Red Wadi",
+     "theme": "Red sandstone shelves, arches and dry river gravel",
+     "landmark": "Rock-cut tomb facade",
+     "elements": [
+      "Shadow",
+      "Water",
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Cadejo",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Balam",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Chupacabra",
+       "variant": "blood",
+       "element": "Water"
+      },
+      {
+       "base": "Manticore",
+       "variant": "sand",
+       "element": "Earth"
+      },
+      {
+       "base": "Gumiho",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Camazotz",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Leech: heals 2 when it hits the hero",
+      "familiarity": "③"
+     },
+     "idea": "Leech and Skewer; Smother (Earth on Fire, a warning pair)",
+     "arc": "Night things; leech; skewer; elite Balam; boss Camazotz (replaces Ah Puch and Buluc Chabtan, removed). ENEMY_REVAMP B13",
+     "bossLv": 13,
+     "ordinaryLv": [
+      11,
+      12
+     ],
+     "eliteLv": 13,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "ashkara-dust-bazaar",
+     "slug": "dust-bazaar",
+     "name": "Dust Bazaar",
+     "theme": "Mud-brick market city",
+     "landmark": "Bazaar gate and awning rows",
+     "elements": [
+      "Earth",
+      "Shadow",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Gumiho",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Cerberus",
+       "variant": "sand",
+       "element": "Earth"
+      },
+      {
+       "base": "Cyclops",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Hulijing",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Lamia",
+       "variant": "sand",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Loki",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Trickster: swaps two enemies each turn",
+      "familiarity": "①"
+     },
+     "idea": "Mixed kinds; Mimic/Swap preview",
+     "arc": "Stall rows; mixed kinds; elite Cyclops; boss Loki. ENEMY_REVAMP B14 (Jowangshin removed, Fenghuang dropped)",
+     "bossLv": 13,
+     "ordinaryLv": [
+      11,
+      12
+     ],
+     "eliteLv": 13,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "ashkara-tomb-approach",
+     "slug": "tomb-approach",
+     "name": "Tomb Approach",
+     "theme": "Sphinx avenue into a pylon tomb, partly indoors",
+     "landmark": "Sealed tomb pylon and sphinx row",
+     "elements": [
+      "Shadow",
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Mummy",
+       "variant": "shadow mummified",
+       "element": "Shadow"
+      },
+      {
+       "base": "Medjed",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Sphinx",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Ghoul",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Cerberus",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Mummy",
+      "variant": "shadow mummified",
+      "element": "Shadow",
+      "gimmick": "Ghost: plain hits do 1 less; Light and Purge remove it",
+      "familiarity": "①"
+     },
+     "idea": "Ghost; Purge and Dusk (Light with Shadow)",
+     "arc": "Avenue; ghost wall; Purge test; elite Sphinx; boss Mummy (Anubis and Isis are Benevolent). ENEMY_REVAMP B15",
+     "bossLv": 14,
+     "ordinaryLv": [
+      12,
+      13
+     ],
+     "eliteLv": 14,
+     "origin": "existing",
+     "status": "proposed"
+    },
+    {
+     "id": "ashkara-sun-citadel",
+     "slug": "sun-citadel",
+     "name": "Sun Citadel",
+     "theme": "Fused glass desert and obelisks",
+     "landmark": "Golden citadel gate",
+     "elements": [
+      "Fire",
+      "Earth",
+      "Light"
+     ],
+     "roster": [
+      {
+       "base": "Huay Chivo",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Minotaur",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Taotie",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Salamander",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Sphinx of Thebes",
+       "variant": "light",
+       "element": "Light"
+      }
+     ],
+     "boss": {
+      "base": "Sekhmet",
+      "variant": "fire",
+      "element": "Fire",
+      "gimmick": "Final exam: heal, chief, skewer and enrage together",
+      "familiarity": "③"
+     },
+     "idea": "Final exam of kinds; Sunfire (Light beside Fire)",
+     "arc": "Glass courts; every kind; elite Minotaur; boss Sekhmet (Ra is Benevolent). ENEMY_REVAMP B16 (Djinn removed)",
+     "bossLv": 15,
+     "ordinaryLv": [
+      13,
+      14
+     ],
+     "eliteLv": 15,
+     "origin": "existing",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  },
+  {
+   "id": "frostmarch",
+   "number": 3,
+   "name": "Frostmarch",
+   "slot": {
+    "dir": "NE",
+    "ring": 3
+   },
+   "kind": "open",
+   "structureType": null,
+   "structureNote": null,
+   "terrain": "Arctic tundra, fjord and taiga: snowdrifts, frozen fjord, hot springs, mountain pass, steppe, ice halls, barrows",
+   "cultures": [
+    "Norse",
+    "Finnish and Sámi",
+    "Mongol and Siberian",
+    "Japanese"
+   ],
+   "monsterFamilies": [
+    "Giants and ogres",
+    "Hounds and wolves",
+    "Hags and lures",
+    "Dragons and great serpents",
+    "Undead and revenants",
+    "Real beasts"
+   ],
+   "dominantElements": [
+    "Frost",
+    "Wind",
+    "Water",
+    "Fire"
+   ],
+   "levelBand": {
+    "bossFirst": 16,
+    "bossLast": 20,
+    "ordinaryFirst": 14,
+    "ordinaryLast": 19
+   },
+   "expectedRuns": 9,
+   "teaches": [
+    "Frost pip; Chill",
+    "Freeze (Frost on Wet), Steam (Fire on Frost), Blizzard (Frost beside Wind)",
+    "Harden, Regenerate, Alpha",
+    "Howl and Packs; Mark",
+    "Stage 2 beasts common; first Element Seal (Frost)"
+   ],
+   "unlocks": {
+    "elements": [
+     "Frost"
+    ],
+    "families": [
+     "Packs (Winter Wolf, Cu Sidhe)",
+     "Shells (Divine Tortoise)"
+    ],
+    "nudge": "Bring Fire to Frost enemies (Steam) and Water to Frost allies (Freeze); Wind beside Frost for Blizzard"
+   },
+   "origin": "new",
+   "subareas": [
+    {
+     "id": "frostmarch-snowdrift-steading",
+     "slug": "snowdrift-steading",
+     "name": "Snowdrift Steading",
+     "theme": "Half-buried longhouse village",
+     "landmark": "Hearth-hall smoke pillar",
+     "elements": [
+      "Frost"
+     ],
+     "roster": [
+      {
+       "base": "Wolf",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Wolverine",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Nisse",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Yuki-onna",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Troll",
+       "variant": "frost armoured",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Troll",
+      "variant": "frost alpha",
+      "element": "Frost",
+      "gimmick": "Alpha: wolves and trolls beside it hit +1",
+      "familiarity": "①"
+     },
+     "idea": "Read the Frost pip; Chill lowers ATK",
+     "arc": "Wolf pair (Chill) ▸ wolf plus Nisse ▸ elite armoured Troll ▸ boss Troll with wolves",
+     "bossLv": 16,
+     "ordinaryLv": [
+      14,
+      15
+     ],
+     "eliteLv": 16,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "frostmarch-glasswater-fjord",
+     "slug": "glasswater-fjord",
+     "name": "Glasswater Fjord",
+     "theme": "Frozen fjord with black leads",
+     "landmark": "Rimed longship wedged in ice",
+     "elements": [
+      "Frost",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Näkki",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Draugen",
+       "variant": "frost ghost",
+       "element": "Frost"
+      },
+      {
+       "base": "Polar bear",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Selkie",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Kappa",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Kelpie",
+      "variant": "frost",
+      "element": "Frost",
+      "gimmick": "Stride: sidesteps a column each turn; a frozen Kelpie cannot",
+      "familiarity": "②"
+     },
+     "idea": "Freeze: Frost on a Wet enemy skips its strike",
+     "arc": "Wet Näkki pair (Freeze) ▸ polar bear behind Wet row ▸ elite Selkie alpha ▸ boss Kelpie (freeze to pin it)",
+     "bossLv": 16,
+     "ordinaryLv": [
+      14,
+      15
+     ],
+     "eliteLv": 16,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "frostmarch-steam-hollow",
+     "slug": "steam-hollow",
+     "name": "Steam Hollow Onsen",
+     "theme": "Hot springs steaming in snow",
+     "landmark": "Stone-ringed pool",
+     "elements": [
+      "Frost",
+      "Fire",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Yuki-onna",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Kappa",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Oni",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Nekomata",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Jorōgumo",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Yuki-onna",
+      "variant": "frost elder",
+      "element": "Frost",
+      "gimmick": "Regenerate: heals about 12% each turn",
+      "familiarity": "③"
+     },
+     "idea": "Steam: Fire on Frost +2, thaws, neighbours -1 ATK",
+     "arc": "Frost row with one Oni ▸ Steam a lone Frost ▸ elite Jorōgumo pair ▸ boss Yuki-onna (Steam stops regeneration)",
+     "bossLv": 17,
+     "ordinaryLv": [
+      15,
+      16
+     ],
+     "eliteLv": 17,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "frostmarch-howling-pass",
+     "slug": "howling-pass",
+     "name": "Howling Pass",
+     "theme": "Gale-scoured saddle between peaks",
+     "landmark": "Wind-carved ice arch",
+     "elements": [
+      "Wind",
+      "Frost"
+     ],
+     "roster": [
+      {
+       "base": "Karasu-tengu",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Sköll and Hati",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Snow leopard",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Harpy",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Yeti",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Griffin",
+      "variant": "wind alpha",
+      "element": "Wind",
+      "gimmick": "Sweep: also strikes both neighbour columns for half",
+      "familiarity": "①"
+     },
+     "idea": "Blizzard: Frost beside Wind spreads Chill",
+     "arc": "Wind pair ▸ wolf plus wind lane ▸ elite Yeti ▸ boss Griffin (sweep punishes wide rows)",
+     "bossLv": 17,
+     "ordinaryLv": [
+      15,
+      16
+     ],
+     "eliteLv": 17,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "frostmarch-tusk-steppe",
+     "slug": "tusk-steppe",
+     "name": "Tusk Steppe",
+     "theme": "Frozen steppe of herd beasts",
+     "landmark": "Ring of mammoth tusks",
+     "elements": [
+      "Frost",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Mammoth",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Yak",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Wolf",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Albasty",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Siberian tiger",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Mammoth",
+      "variant": "frost elder",
+      "element": "Frost",
+      "gimmick": "Harden: +1 armor each turn (max 3)",
+      "familiarity": "①"
+     },
+     "idea": "Kill before armor grows; Rend against armor",
+     "arc": "Yak herd ▸ tiger behind mammoth ▸ elite Albasty plus herd ▸ boss Mammoth (burst on turn 1)",
+     "bossLv": 18,
+     "ordinaryLv": [
+      16,
+      17
+     ],
+     "eliteLv": 18,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "frostmarch-jotunn-hall",
+     "slug": "jotunn-hall",
+     "name": "Jötunn Hall",
+     "theme": "Feast halls of frost giants",
+     "landmark": "Overturned giant table",
+     "elements": [
+      "Frost"
+     ],
+     "roster": [
+      {
+       "base": "Jötunn",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Troll",
+       "variant": "frost armoured",
+       "element": "Frost"
+      },
+      {
+       "base": "Stállu",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Wolverine",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Draugr",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Jötunn",
+      "variant": "frost giant",
+      "element": "Frost",
+      "gimmick": "Guarded by two Draugr housecarls",
+      "familiarity": "③"
+     },
+     "idea": "Guarded and Bulwark wall: clear the guard first",
+     "arc": "Troll wall ▸ Draugr pair guarding ▸ elite armoured Jötunn ▸ boss Jötunn (kill guards, then strike)",
+     "bossLv": 18,
+     "ordinaryLv": [
+      16,
+      17
+     ],
+     "eliteLv": 18,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "frostmarch-snowline-crags",
+     "slug": "snowline-crags",
+     "name": "Snowline Crags",
+     "theme": "Cliffs above the tree line",
+     "landmark": "Rope-bridge cairn",
+     "elements": [
+      "Frost"
+     ],
+     "roster": [
+      {
+       "base": "Yeti",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Snow leopard",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Karasu-tengu",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Siberian tiger",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Nekomata",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Yeti",
+      "variant": "frost alpha",
+      "element": "Frost",
+      "gimmick": "Alpha: beasts beside it hit +1",
+      "familiarity": "①"
+     },
+     "idea": "Mark and Pounce: hit the full-HP leader first",
+     "arc": "Cats in a column ▸ leopard plus Yeti ▸ elite tiger pair ▸ boss Yeti pack",
+     "bossLv": 19,
+     "ordinaryLv": [
+      17,
+      18
+     ],
+     "eliteLv": 19,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "frostmarch-pohjola-muskeg",
+     "slug": "pohjola-muskeg",
+     "name": "Pohjola Muskeg",
+     "theme": "Frozen bog of the dark north",
+     "landmark": "Skeletal reindeer arch",
+     "elements": [
+      "Frost"
+     ],
+     "roster": [
+      {
+       "base": "Louhi",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Näkki",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Hiiden hirvi",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Peikko",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Aitvaras",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Louhi",
+      "variant": "frost",
+      "element": "Frost",
+      "gimmick": "Summoner: adds a minion each turn",
+      "familiarity": "④"
+     },
+     "idea": "Freeze chains across Wet rows; Summoner",
+     "arc": "Wet rows ▸ chain freeze ▸ elite Hiiden hirvi ▸ boss Louhi (cut summons by freezing)",
+     "bossLv": 19,
+     "ordinaryLv": [
+      17,
+      18
+     ],
+     "eliteLv": 19,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "frostmarch-frozen-barrows",
+     "slug": "frozen-barrows",
+     "name": "Frozen Barrows",
+     "theme": "Burial mounds under snow",
+     "landmark": "Mound with a split door",
+     "elements": [
+      "Frost"
+     ],
+     "roster": [
+      {
+       "base": "Draugr",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Haugbui",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Dead of Helheim",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Troll",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Lindworm",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Lindworm",
+      "variant": "frost skeleton",
+      "element": "Frost",
+      "gimmick": "Skeleton: rises once; Steam or Purge stops it",
+      "familiarity": "③"
+     },
+     "idea": "Undead rise once: Fire or Light",
+     "arc": "Draugr pair ▸ rising haugbui ▸ elite Dead of Helheim ▸ boss Lindworm (burn the bones)",
+     "bossLv": 20,
+     "ordinaryLv": [
+      18,
+      19
+     ],
+     "eliteLv": 20,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "frostmarch-rime-roots",
+     "slug": "rime-roots",
+     "name": "Rime Roots",
+     "theme": "Cavern under a frozen world tree",
+     "landmark": "Arching tree root over an ice cavern",
+     "elements": [
+      "Frost",
+      "Wind"
+     ],
+     "roster": [
+      {
+       "base": "Níðhöggr",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Jötunn",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Lindworm",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Hræsvelgr",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Draugr",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Níðhöggr",
+      "variant": "frost skeleton elder",
+      "element": "Frost",
+      "gimmick": "Harden plus Regrow",
+      "familiarity": "③"
+     },
+     "idea": "Region exam: Freeze, Steam, Blizzard together",
+     "arc": "Mixed halls ▸ healer plus wall ▸ elite Jötunn plus Troll ▸ boss Níðhöggr (gnaws the wall, Steam it)",
+     "bossLv": 20,
+     "ordinaryLv": [
+      18,
+      19
+     ],
+     "eliteLv": 20,
+     "origin": "new",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  },
+  {
+   "id": "emberreach",
+   "number": 4,
+   "name": "Emberreach",
+   "slot": {
+    "dir": "E",
+    "ring": 4
+   },
+   "kind": "open",
+   "structureType": null,
+   "structureNote": null,
+   "terrain": "Volcanic caldera: ash plain, sulphur springs, basalt causeway, forges, obsidian gallery, magma shore, fire temples",
+   "cultures": [
+    "Greek",
+    "Norse",
+    "Aztec and Mesoamerican",
+    "Persian",
+    "Chinese"
+   ],
+   "monsterFamilies": [
+    "Dragons and great serpents",
+    "Elementals and storm beasts",
+    "Giants and ogres",
+    "Chimeras and hybrids",
+    "Demons"
+   ],
+   "dominantElements": [
+    "Fire",
+    "Earth",
+    "Storm",
+    "Wood"
+   ],
+   "levelBand": {
+    "bossFirst": 21,
+    "bossLast": 25,
+    "ordinaryFirst": 19,
+    "ordinaryLast": 24
+   },
+   "expectedRuns": 10,
+   "teaches": [
+    "Fire pip; Burn and Scorch",
+    "Fury, Enrage clock, Gaze",
+    "Ground (Earth on Storm); Smother as a warning",
+    "Steam from the Frost side",
+    "Rend against armor; Whetstone"
+   ],
+   "unlocks": {
+    "elements": [
+     "Fire",
+     "Earth (stone, metal, magma)"
+    ],
+    "families": [
+     "Coils (Ddraig Goch)",
+     "Fangs (Singha, Suanni)",
+     "Hooves (Rakhsh, Karkadann)"
+    ],
+    "nudge": "Earth for Ground; Frost to counter Fire; Fangs sets for Rend"
+   },
+   "origin": "new",
+   "subareas": [
+    {
+     "id": "emberreach-cinder-flats",
+     "slug": "cinder-flats",
+     "name": "Cinder Flats",
+     "theme": "Black ash plain with fumaroles",
+     "landmark": "Cracked obsidian waystone",
+     "elements": [
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Salamander",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Bifang",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Black Shuck",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Xiuhcoatl",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Cockatrice",
+       "variant": "fire",
+       "element": "Fire"
+      }
+     ],
+     "boss": {
+      "base": "Chimera",
+      "variant": "fire",
+      "element": "Fire",
+      "gimmick": "Sweep: three heads strike neighbouring columns",
+      "familiarity": "②"
+     },
+     "idea": "Burn tick on your tiles; Smother: Earth removes Fire's Burn",
+     "arc": "Salamander pair ▸ Burn row ▸ elite Xiuhcoatl ▸ boss Chimera",
+     "bossLv": 21,
+     "ordinaryLv": [
+      19,
+      20
+     ],
+     "eliteLv": 21,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "emberreach-sulphur-springs",
+     "slug": "sulphur-springs",
+     "name": "Sulphur Springs",
+     "theme": "Yellow pools and geysers",
+     "landmark": "Geyser clock",
+     "elements": [
+      "Wood",
+      "Fire",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Python",
+       "variant": "venom",
+       "element": "Wood"
+      },
+      {
+       "base": "Tatzelwurm",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Salamander",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Basilisk",
+       "variant": "venom",
+       "element": "Wood"
+      },
+      {
+       "base": "Bashe",
+       "variant": "venom",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Hydra of Lerna",
+      "variant": "venom",
+      "element": "Wood",
+      "gimmick": "Regrow: heads return once; Burn seals them",
+      "familiarity": "①"
+     },
+     "idea": "Burn stops Regrow",
+     "arc": "Python pair ▸ geyser Wet tiles ▸ elite Basilisk ▸ boss Hydra (Scorch each head)",
+     "bossLv": 21,
+     "ordinaryLv": [
+      19,
+      20
+     ],
+     "eliteLv": 21,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "emberreach-basalt-causeway",
+     "slug": "basalt-causeway",
+     "name": "Basalt Causeway",
+     "theme": "Hexagonal columns over a lava river",
+     "landmark": "Stone bridge arch",
+     "elements": [
+      "Earth",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Talos",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Cyclops",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Dvergr",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Troll",
+       "variant": "magma",
+       "element": "Fire"
+      },
+      {
+       "base": "Golem",
+       "variant": "stone",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Cyclops",
+      "variant": "magma",
+      "element": "Fire",
+      "gimmick": "Fury: +1 ATK per turn survived",
+      "familiarity": "①"
+     },
+     "idea": "Fury clock: kill early",
+     "arc": "Talos wall ▸ Dvergr pair ▸ elite Troll ▸ boss Cyclops (burst before it grows)",
+     "bossLv": 22,
+     "ordinaryLv": [
+      20,
+      21
+     ],
+     "eliteLv": 22,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "emberreach-thunderhead-crater",
+     "slug": "thunderhead-crater",
+     "name": "Thunderhead Crater",
+     "theme": "Volcanic lightning storm in a crater",
+     "landmark": "Lightning-rod pillars",
+     "elements": [
+      "Storm"
+     ],
+     "roster": [
+      {
+       "base": "Impundulu",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Hōkioi",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Kui",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Raijū",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Pouākai",
+       "variant": "storm",
+       "element": "Storm"
+      }
+     ],
+     "boss": {
+      "base": "Pazuzu",
+      "variant": "storm",
+      "element": "Storm",
+      "gimmick": "Chain: lightning jumps to a neighbour",
+      "familiarity": "③"
+     },
+     "idea": "Ground: Earth on Storm +1, cancels chain",
+     "arc": "Storm pair ▸ chain row ▸ elite Hōkioi ▸ boss Pazuzu (Earth ally cancels the chain)",
+     "bossLv": 22,
+     "ordinaryLv": [
+      20,
+      21
+     ],
+     "eliteLv": 22,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "emberreach-dwarven-forge",
+     "slug": "dwarven-forge",
+     "name": "Dwarven Forge",
+     "theme": "Magma-fed forge halls",
+     "landmark": "Anvil bell and chain lifts",
+     "elements": [
+      "Earth",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Dvergr",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Golem",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Knocker",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Troll",
+       "variant": "magma",
+       "element": "Fire"
+      },
+      {
+       "base": "Talos",
+       "variant": "metal",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Fáfnir",
+      "variant": "metal",
+      "element": "Earth",
+      "gimmick": "Harden hoard: +1 armor per turn (max 3)",
+      "familiarity": "③"
+     },
+     "idea": "Armor wall: Rend and Pierce blocked by Bulwark",
+     "arc": "Golem wall ▸ Knocker pair ▸ elite Troll ▸ boss Fáfnir (strip hoard early)",
+     "bossLv": 23,
+     "ordinaryLv": [
+      21,
+      22
+     ],
+     "eliteLv": 23,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "emberreach-obsidian-gallery",
+     "slug": "obsidian-gallery",
+     "name": "Obsidian Gallery",
+     "theme": "Glass-black statue galleries",
+     "landmark": "Statue row with mirror panels",
+     "elements": [
+      "Earth",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Graeae",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Lamia",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Stheno",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Euryale",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Basilisk",
+       "variant": "stone",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Medusa",
+      "variant": "stone",
+      "element": "Earth",
+      "gimmick": "Gaze: attackers in its column lose 1 ATK",
+      "familiarity": "①"
+     },
+     "idea": "Placement vs Gaze: pick the column",
+     "arc": "Statue pairs ▸ gaze lane ▸ elite Stheno ▸ boss Medusa (hit from the side)",
+     "bossLv": 23,
+     "ordinaryLv": [
+      21,
+      22
+     ],
+     "eliteLv": 23,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "emberreach-magma-shore",
+     "slug": "magma-shore",
+     "name": "Magma Shore",
+     "theme": "Shore of a molten lake",
+     "landmark": "Crust bridge over glowing cracks",
+     "elements": [
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Muspell's fire giants",
+       "variant": "magma",
+       "element": "Fire"
+      },
+      {
+       "base": "Salamander",
+       "variant": "magma",
+       "element": "Fire"
+      },
+      {
+       "base": "Xiuhcoatl",
+       "variant": "magma",
+       "element": "Fire"
+      },
+      {
+       "base": "Bifang",
+       "variant": "magma",
+       "element": "Fire"
+      },
+      {
+       "base": "Taotie",
+       "variant": "magma",
+       "element": "Fire"
+      }
+     ],
+     "boss": {
+      "base": "Salamander (elemental)",
+      "variant": "magma elder",
+      "element": "Fire",
+      "gimmick": "Enrage: survivors +1 ATK per turn",
+      "familiarity": "②"
+     },
+     "idea": "Enrage clock: burst or lose",
+     "arc": "Magma pair ▸ giants ▸ elite fire giant ▸ boss Salamander (finish in 3 turns)",
+     "bossLv": 24,
+     "ordinaryLv": [
+      22,
+      23
+     ],
+     "eliteLv": 24,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "emberreach-sunstone-steps",
+     "slug": "sunstone-steps",
+     "name": "Sunstone Steps",
+     "theme": "Terraced stepped slope of old ruins",
+     "landmark": "Stepped altar and lava trough",
+     "elements": [
+      "Fire",
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Xiuhcoatl",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Chac Mool",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Camazotz",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Huay Chivo",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Feathered serpent (Teotihuacan)",
+       "variant": "fire",
+       "element": "Fire"
+      }
+     ],
+     "boss": {
+      "base": "Feathered serpent (Teotihuacan)",
+      "variant": "fire",
+      "element": "Fire",
+      "gimmick": "Stride plus Fury",
+      "familiarity": "③"
+     },
+     "idea": "Moving targets that grow: Hold and Mark",
+     "arc": "Statue guards ▸ stride row ▸ elite Huay Chivo ▸ boss feathered serpent",
+     "bossLv": 24,
+     "ordinaryLv": [
+      22,
+      23
+     ],
+     "eliteLv": 24,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "emberreach-fire-temple-ruins",
+     "slug": "fire-temple-ruins",
+     "name": "Fire Temple Ruins",
+     "theme": "Persian brazier terraces",
+     "landmark": "Cold brazier court",
+     "elements": [
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Div",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Zahhak",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Pishacha",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Rakshasa",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Manticore",
+       "variant": "fire",
+       "element": "Fire"
+      }
+     ],
+     "boss": {
+      "base": "Manticore",
+      "variant": "fire",
+      "element": "Fire",
+      "gimmick": "Skewer: its strike ignores Shield",
+      "familiarity": "②"
+     },
+     "idea": "Skewer: Shield is not the answer",
+     "arc": "Brazier guards ▸ skewer lane ▸ elite Zahhak ▸ boss Manticore",
+     "bossLv": 25,
+     "ordinaryLv": [
+      23,
+      24
+     ],
+     "eliteLv": 25,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "emberreach-typhons-maw",
+     "slug": "typhons-maw",
+     "name": "Typhon's Maw",
+     "theme": "Caldera throat and smoking crown",
+     "landmark": "Giant's fallen shoulder",
+     "elements": [
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Chimera",
+       "variant": "magma",
+       "element": "Fire"
+      },
+      {
+       "base": "Echidna",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Hydra of Lerna",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Muspell's fire giants",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Surtr",
+       "variant": "fire",
+       "element": "Fire"
+      }
+     ],
+     "boss": {
+      "base": "Typhon",
+      "variant": "magma elder",
+      "element": "Fire",
+      "gimmick": "Summoner plus Enrage plus Sweep",
+      "familiarity": "③"
+     },
+     "idea": "Region exam: Fire, Ground, Gaze, Fury together",
+     "arc": "Monster brood ▸ summon lane ▸ elite Surtr ▸ boss Typhon",
+     "bossLv": 25,
+     "ordinaryLv": [
+      23,
+      24
+     ],
+     "eliteLv": 25,
+     "origin": "new",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  },
+  {
+   "id": "tidewrack",
+   "number": 5,
+   "name": "Tidewrack",
+   "slot": {
+    "dir": "SE",
+    "ring": 5
+   },
+   "kind": "open",
+   "structureType": null,
+   "structureNote": null,
+   "terrain": "Coast and open sea: pebble strand, kelp, sea cliffs, wrecks, floating bazaar, straits, sunken harbour, abyss, maelstrom",
+   "cultures": [
+    "Celtic",
+    "Polynesian and Māori",
+    "Greek",
+    "Filipino",
+    "Japanese"
+   ],
+   "monsterFamilies": [
+    "Sea monsters",
+    "Water-folk and river spirits",
+    "Shapeshifters",
+    "Birds and winged beasts",
+    "Ghosts and wailing spirits"
+   ],
+   "dominantElements": [
+    "Water",
+    "Shadow",
+    "Storm",
+    "Wind"
+   ],
+   "levelBand": {
+    "bossFirst": 26,
+    "bossLast": 30,
+    "ordinaryFirst": 24,
+    "ordinaryLast": 29
+   },
+   "expectedRuns": 12,
+   "teaches": [
+    "Water, Storm, Shadow pips; Wet status",
+    "Tide (rows drift), Swarm, Summoner, Hold",
+    "Reaction chains (Wet then Storm then Freeze)",
+    "Mist (Shadow beside Water)",
+    "Fins family sets; Captains"
+   ],
+   "unlocks": {
+    "elements": [
+     "Water",
+     "Storm (Thor's Goats)"
+    ],
+    "families": [
+     "Fins (Dolphin, Humpback Cantor, Salmon, Hammerhead, Shachihoko)",
+     "Shells (Geobuk, Honu)"
+    ],
+    "nudge": "Two Fins for Chain +1; Storm beside Water; Row Captain in a wide row"
+   },
+   "origin": "new",
+   "subareas": [
+    {
+     "id": "tidewrack-pebble-strand",
+     "slug": "pebble-strand",
+     "name": "Pebble Strand",
+     "theme": "Tide pools and driftwood",
+     "landmark": "Wrecked rowboat",
+     "elements": [
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Coconut crab",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Hammerhead shark",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Merrow",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Nuckelavee",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Green sea turtle",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Siren",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Gaze: attackers in its column lose 1 ATK (the song)",
+      "familiarity": "①"
+     },
+     "idea": "Wet status from Water hits",
+     "arc": "Crab pair ▸ Wet row ▸ elite Nuckelavee ▸ boss Siren",
+     "bossLv": 26,
+     "ordinaryLv": [
+      24,
+      25
+     ],
+     "eliteLv": 26,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "tidewrack-kelp-maze",
+     "slug": "kelp-maze",
+     "name": "Kelp Maze",
+     "theme": "Drifting kelp forest",
+     "landmark": "Floating buoy chain",
+     "elements": [
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Siren",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Nereid",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Cadborosaurus",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Merrow",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Hammerhead shark",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Scylla",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Sweep: six heads strike neighbouring columns",
+      "familiarity": "②"
+     },
+     "idea": "Chain and Spread against wide rows",
+     "arc": "Nereid pair ▸ shoal row ▸ elite Cadborosaurus ▸ boss Scylla",
+     "bossLv": 26,
+     "ordinaryLv": [
+      24,
+      25
+     ],
+     "eliteLv": 26,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "tidewrack-stormwatch-cliffs",
+     "slug": "stormwatch-cliffs",
+     "name": "Stormwatch Cliffs",
+     "theme": "Sea cliffs under black clouds",
+     "landmark": "Lighthouse",
+     "elements": [
+      "Storm",
+      "Wind"
+     ],
+     "roster": [
+      {
+       "base": "Harpy",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Hōkioi",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Impundulu",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Siren",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Kui",
+       "variant": "storm",
+       "element": "Storm"
+      }
+     ],
+     "boss": {
+      "base": "Pouākai",
+      "variant": "storm",
+      "element": "Storm",
+      "gimmick": "Chain: lightning jumps through Wet tiles",
+      "familiarity": "④"
+     },
+     "idea": "Conduct over a Wet row: chain half damage",
+     "arc": "Harpy pair ▸ Wet plus Storm ▸ elite Hōkioi ▸ boss Pouākai",
+     "bossLv": 27,
+     "ordinaryLv": [
+      25,
+      26
+     ],
+     "eliteLv": 27,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "tidewrack-shipwreck-graveyard",
+     "slug": "shipwreck-graveyard",
+     "name": "Shipwreck Graveyard",
+     "theme": "Rotting hulls on a reef",
+     "landmark": "Skeletal galleon",
+     "elements": [
+      "Shadow",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Draugen",
+       "variant": "shadow ghost",
+       "element": "Shadow"
+      },
+      {
+       "base": "Draugr",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Nuckelavee",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Dead of Helheim",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Black Shuck",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Charybdis",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Tide: rows drift sideways each turn",
+      "familiarity": "②"
+     },
+     "idea": "Tide: leave room for the drift; Current",
+     "arc": "Draugr wall ▸ drift lanes ▸ elite Draugen ▸ boss Charybdis",
+     "bossLv": 27,
+     "ordinaryLv": [
+      25,
+      26
+     ],
+     "eliteLv": 27,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "tidewrack-coral-bazaar",
+     "slug": "coral-bazaar",
+     "name": "Coral Bazaar",
+     "theme": "Floating market on coral flats",
+     "landmark": "Rope-bridge stalls",
+     "elements": [
+      "Water",
+      "Wind",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Manananggal",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Santelmo",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Marakihau",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Tikbalang",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Merrow",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Taniwha",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Summoner: adds a minion each turn",
+      "familiarity": "③"
+     },
+     "idea": "Swarm: Spread, Chain and Rend through small bodies",
+     "arc": "Stall guards ▸ summon lane ▸ elite Marakihau ▸ boss Taniwha",
+     "bossLv": 28,
+     "ordinaryLv": [
+      26,
+      27
+     ],
+     "eliteLv": 28,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "tidewrack-fogbank-sound",
+     "slug": "fogbank-sound",
+     "name": "Fogbank Sound",
+     "theme": "Sound wrapped in fog",
+     "landmark": "Bell buoy in mist",
+     "elements": [
+      "Shadow",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Blue Men of the Minch",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Selkie",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Each-uisge",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Nuckelavee",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Merrow",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Black Shuck",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Veiled on turn 1",
+      "familiarity": "③"
+     },
+     "idea": "Mist: Shadow beside Water cuts a column by 1",
+     "arc": "Selkie pair ▸ veiled ▸ elite Each-uisge ▸ boss Black Shuck",
+     "bossLv": 28,
+     "ordinaryLv": [
+      26,
+      27
+     ],
+     "eliteLv": 28,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "tidewrack-umibozu-straits",
+     "slug": "umibozu-straits",
+     "name": "Umibōzu Straits",
+     "theme": "Narrow straits and rock stacks",
+     "landmark": "Torii on a rock stack",
+     "elements": [
+      "Water",
+      "Wind",
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Shachihoko",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Jingwei",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Nurikabe",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Kappa",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Umibōzu",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Umibōzu",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Tide plus Guarded by rock stacks",
+      "familiarity": "④"
+     },
+     "idea": "Fins family: Chain plus Captain",
+     "arc": "Shachihoko pair ▸ Wet stack wall ▸ elite Nurikabe ▸ boss Umibōzu",
+     "bossLv": 29,
+     "ordinaryLv": [
+      27,
+      28
+     ],
+     "eliteLv": 29,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "tidewrack-sunken-harbour",
+     "slug": "sunken-harbour",
+     "name": "Sunken Harbour",
+     "theme": "Drowned Greek harbour city",
+     "landmark": "Toppled lighthouse colonnade",
+     "elements": [
+      "Water",
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Nereid",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Talos",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Siren",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Laestrygonians",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Medusa",
+       "variant": "stone",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Hammerhead shark",
+      "variant": "water alpha",
+      "element": "Water",
+      "gimmick": "Alpha: shoal beside it hits +1",
+      "familiarity": "②"
+     },
+     "idea": "Swarm plus Alpha: kill the leader",
+     "arc": "Nereid pair ▸ shoal ▸ elite Talos ▸ boss Hammerhead matriarch",
+     "bossLv": 29,
+     "ordinaryLv": [
+      27,
+      28
+     ],
+     "eliteLv": 29,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "tidewrack-abyssal-trench",
+     "slug": "abyssal-trench",
+     "name": "Abyssal Trench",
+     "theme": "Lightless trench lit by bone lamps",
+     "landmark": "Whale-fall cairn",
+     "elements": [
+      "Shadow",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Cadborosaurus",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Kulullu",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Iku-Turso",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Bakunawa",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Te Wheke-a-Muturangi",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Te Wheke-a-Muturangi",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Hold: the hit unit cannot attack",
+      "familiarity": "④"
+     },
+     "idea": "Hold from below: spread your attackers",
+     "arc": "Trench pair ▸ hold lane ▸ elite Iku-Turso ▸ boss Te Wheke",
+     "bossLv": 30,
+     "ordinaryLv": [
+      28,
+      29
+     ],
+     "eliteLv": 30,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "tidewrack-maelstrom-reach",
+     "slug": "maelstrom-reach",
+     "name": "Maelstrom Reach",
+     "theme": "Whirlpool at the sea's edge",
+     "landmark": "Spinning rock ring",
+     "elements": [
+      "Storm",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Charybdis",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Scylla",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Iku-Turso",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Bakunawa",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Jörmungandr",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Jörmungandr",
+      "variant": "storm elder",
+      "element": "Storm",
+      "gimmick": "Tide plus Enrage plus Sweep",
+      "familiarity": "②"
+     },
+     "idea": "Region exam: Wet, Storm, Freeze, Tide",
+     "arc": "Mixed tides ▸ chain storms ▸ elite Bakunawa ▸ boss Jörmungandr",
+     "bossLv": 30,
+     "ordinaryLv": [
+      28,
+      29
+     ],
+     "eliteLv": 30,
+     "origin": "new",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  },
+  {
+   "id": "jade-canopy",
+   "number": 6,
+   "name": "Jade Canopy",
+   "slot": {
+    "dir": "S",
+    "ring": 6
+   },
+   "kind": "open",
+   "structureType": null,
+   "structureNote": null,
+   "terrain": "Rainforest: river landing, orchid hollow, rope bridges, step-pyramid ruins, waterfalls, gorge, spider glade, cenote, overgrown palace",
+   "cultures": [
+    "Maya",
+    "Andean",
+    "Southeast Asian",
+    "African",
+    "Hindu and Indian",
+    "Aztec"
+   ],
+   "monsterFamilies": [
+    "Cats",
+    "Dragons and great serpents",
+    "Insects and spiders",
+    "Beast-men and wild men",
+    "Demons",
+    "Lake monsters and cryptids"
+   ],
+   "dominantElements": [
+    "Wood",
+    "Water",
+    "Shadow",
+    "Earth"
+   ],
+   "levelBand": {
+    "bossFirst": 31,
+    "bossLast": 35,
+    "ordinaryFirst": 29,
+    "ordinaryLast": 34
+   },
+   "expectedRuns": 13,
+   "teaches": [
+    "Wood pip; Venom; Wildfire chain on full Wood rows",
+    "Hide (hits under N do nothing)",
+    "Pollen (Wind beside Wood)",
+    "Brood, Offering, Molt",
+    "Evolution branches at stage 2"
+   ],
+   "unlocks": {
+    "elements": [
+     "Wood (Plume Herald, Giant Panda, Axolotl)"
+    ],
+    "families": [
+     "Chitin (Honeybee Hive, Mantis)",
+     "Wilds (Brown Bear, Langur)",
+     "Coils (Rain Dragon)"
+    ],
+    "nudge": "Wind beside Wood for Pollen; Fire to burn full Wood rows; a Chitin pair for Drones"
+   },
+   "origin": "new",
+   "subareas": [
+    {
+     "id": "jade-canopy-traders-landing",
+     "slug": "traders-landing",
+     "name": "Trader's Landing",
+     "theme": "Wooden dock on a brown river",
+     "landmark": "Rotting ferry pier",
+     "elements": [
+      "Water",
+      "Wood",
+      "Wind"
+     ],
+     "roster": [
+      {
+       "base": "Nile crocodile",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Spider monkey",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Kongamato",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Tokoloshe",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Mokele-mbembe",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Mokele-mbembe",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Stride: sidesteps a column each turn",
+      "familiarity": "③"
+     },
+     "idea": "Wildfire chain across a Wood row",
+     "arc": "Monkey rows (Wood) ▸ burn the row ▸ elite Tokoloshe ▸ boss Mokele-mbembe",
+     "bossLv": 31,
+     "ordinaryLv": [
+      29,
+      30
+     ],
+     "eliteLv": 31,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "jade-canopy-orchid-hollow",
+     "slug": "orchid-hollow",
+     "name": "Orchid Hollow",
+     "theme": "Giant orchids and mist",
+     "landmark": "Orchid arch",
+     "elements": [
+      "Wood",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Xtabay",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Cadejo",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Balam",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Spider monkey",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Jaguar",
+       "variant": "venom",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Jaguar",
+      "variant": "shadow alpha",
+      "element": "Shadow",
+      "gimmick": "Hide: hits weaker than 3 do nothing",
+      "familiarity": "①"
+     },
+     "idea": "Hide: bring big hitters, Boost or Echo",
+     "arc": "Camouflaged pair ▸ hide wall ▸ elite Balam ▸ boss Jaguar",
+     "bossLv": 31,
+     "ordinaryLv": [
+      29,
+      30
+     ],
+     "eliteLv": 31,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "jade-canopy-canopy-bridges",
+     "slug": "canopy-bridges",
+     "name": "Canopy Bridges",
+     "theme": "Rope bridges high in the trees",
+     "landmark": "Rope-bridge junction",
+     "elements": [
+      "Wood",
+      "Wind"
+     ],
+     "roster": [
+      {
+       "base": "Ahool",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Sisimito",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Orang Pendek",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Chullachaqui",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Spider monkey",
+       "variant": "wind",
+       "element": "Wind"
+      }
+     ],
+     "boss": {
+      "base": "Mapinguari",
+      "variant": "wood",
+      "element": "Wood",
+      "gimmick": "Stride plus Hide",
+      "familiarity": "④"
+     },
+     "idea": "Pollen: Wind beside Wood extends buffs one tile",
+     "arc": "Bridge pair ▸ wood plus wind ▸ elite Sisimito ▸ boss Mapinguari",
+     "bossLv": 32,
+     "ordinaryLv": [
+      30,
+      31
+     ],
+     "eliteLv": 32,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "jade-canopy-stepped-ruins",
+     "slug": "stepped-ruins",
+     "name": "Stepped Ruins",
+     "theme": "Overgrown step pyramids",
+     "landmark": "Collapsed ball court",
+     "elements": [
+      "Earth",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Chac Mool",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Camazotz",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Sisimito",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Alux",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Balam",
+       "variant": "stone",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Olmec were-jaguar",
+      "variant": "stone",
+      "element": "Earth",
+      "gimmick": "Grudge: +2 ATK when a neighbour dies",
+      "familiarity": "④"
+     },
+     "idea": "Grudge: kill order in stone ranks",
+     "arc": "Statue pair ▸ grudge chain ▸ elite Camazotz ▸ boss were-jaguar",
+     "bossLv": 32,
+     "ordinaryLv": [
+      30,
+      31
+     ],
+     "eliteLv": 32,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "jade-canopy-venom-falls",
+     "slug": "venom-falls",
+     "name": "Venom Falls",
+     "theme": "Waterfalls over green pools",
+     "landmark": "Rainbow of spray",
+     "elements": [
+      "Wood"
+     ],
+     "roster": [
+      {
+       "base": "Sachamama",
+       "variant": "venom",
+       "element": "Wood"
+      },
+      {
+       "base": "Bashe",
+       "variant": "venom",
+       "element": "Wood"
+      },
+      {
+       "base": "King cobra",
+       "variant": "venom",
+       "element": "Wood"
+      },
+      {
+       "base": "Tatzelwurm",
+       "variant": "venom",
+       "element": "Wood"
+      },
+      {
+       "base": "Ninki Nanka",
+       "variant": "venom",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Yacumama",
+      "variant": "venom",
+      "element": "Wood",
+      "gimmick": "Corrupted: adjacent boosts are lost until cleansed",
+      "familiarity": "④"
+     },
+     "idea": "Venom stacks; keep boosts clean",
+     "arc": "Cobra pair ▸ venom lane ▸ elite Bashe ▸ boss Yacumama",
+     "bossLv": 33,
+     "ordinaryLv": [
+      31,
+      32
+     ],
+     "eliteLv": 33,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "jade-canopy-grootslang-gorge",
+     "slug": "grootslang-gorge",
+     "name": "Grootslang Gorge",
+     "theme": "Deep stone gorge with diamond veins",
+     "landmark": "Gem-studded cave mouth",
+     "elements": [
+      "Earth",
+      "Wood",
+      "Storm"
+     ],
+     "roster": [
+      {
+       "base": "Impundulu",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Mngwa",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Tokoloshe",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "African elephant",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Gorilla",
+       "variant": "wood",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Grootslang",
+      "variant": "stone",
+      "element": "Earth",
+      "gimmick": "Armor 3 hide, Trample",
+      "familiarity": "④"
+     },
+     "idea": "Armor: Pierce and Sunder; Roots with Earth",
+     "arc": "Gorilla pair ▸ armored elephant ▸ elite Mngwa ▸ boss Grootslang",
+     "bossLv": 33,
+     "ordinaryLv": [
+      31,
+      32
+     ],
+     "eliteLv": 33,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "jade-canopy-weavers-glade",
+     "slug": "weavers-glade",
+     "name": "Weaver's Glade",
+     "theme": "Web-hung clearing",
+     "landmark": "Giant web cradle",
+     "elements": [
+      "Wood"
+     ],
+     "roster": [
+      {
+       "base": "Nazca spider",
+       "variant": "venom",
+       "element": "Wood"
+      },
+      {
+       "base": "Jorōgumo",
+       "variant": "venom",
+       "element": "Wood"
+      },
+      {
+       "base": "Tsuchigumo",
+       "variant": "venom",
+       "element": "Wood"
+      },
+      {
+       "base": "Scarab beetle",
+       "variant": "venom swarm",
+       "element": "Wood"
+      },
+      {
+       "base": "Mongolian Death Worm",
+       "variant": "venom",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Tsuchigumo",
+      "variant": "venom elder",
+      "element": "Wood",
+      "gimmick": "Summoner: spiderlings plus Swarm",
+      "familiarity": "④"
+     },
+     "idea": "Brood and Chitin sets against swarms",
+     "arc": "Spider pair ▸ swarm lane ▸ elite Jorōgumo ▸ boss Tsuchigumo",
+     "bossLv": 34,
+     "ordinaryLv": [
+      32,
+      33
+     ],
+     "eliteLv": 34,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "jade-canopy-jade-cenote",
+     "slug": "jade-cenote",
+     "name": "Jade Cenote",
+     "theme": "Water-filled sinkholes",
+     "landmark": "Ladder shaft",
+     "elements": [
+      "Water",
+      "Wood"
+     ],
+     "roster": [
+      {
+       "base": "Ahuizotl",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Chaneque",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Nile crocodile",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Xtabay",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Cipactli",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Cipactli",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Tide plus Hold",
+      "familiarity": "④"
+     },
+     "idea": "Hold and Wet: Freeze and Conduct again",
+     "arc": "Cenote pair ▸ drift ▸ elite Ahuizotl ▸ boss Cipactli",
+     "bossLv": 34,
+     "ordinaryLv": [
+      32,
+      33
+     ],
+     "eliteLv": 34,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "jade-canopy-rakshasa-court",
+     "slug": "rakshasa-court",
+     "name": "Rakshasa Court",
+     "theme": "Overgrown stone palace",
+     "landmark": "Tiger-gate courtyard",
+     "elements": [
+      "Wood",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Rakshasa",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Bhoot",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Pishacha",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Tikbalang",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Manticore",
+       "variant": "wood",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Rakshasa",
+      "variant": "wood",
+      "element": "Wood",
+      "gimmick": "Shapeshift: changes element after each hit",
+      "familiarity": "③"
+     },
+     "idea": "Read the element pip every turn",
+     "arc": "Court pair ▸ shifting row ▸ elite Pishacha ▸ boss Rakshasa",
+     "bossLv": 35,
+     "ordinaryLv": [
+      33,
+      34
+     ],
+     "eliteLv": 35,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "jade-canopy-ceiba-heart",
+     "slug": "ceiba-heart",
+     "name": "Heart of the Ceiba",
+     "theme": "World tree in the canopy",
+     "landmark": "Giant ceiba trunk",
+     "elements": [
+      "Wood",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Sisimito",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Mapinguari",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Runamula",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Sachamama",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Jaguar",
+       "variant": "wood",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Sachamama",
+      "variant": "wood elder",
+      "element": "Wood",
+      "gimmick": "Regrow plus Healer",
+      "familiarity": "④"
+     },
+     "idea": "Region exam: Wildfire, Pollen, Hide, Venom",
+     "arc": "Mixed canopy ▸ healer wall ▸ elite Mapinguari ▸ boss Sachamama",
+     "bossLv": 35,
+     "ordinaryLv": [
+      33,
+      34
+     ],
+     "eliteLv": 35,
+     "origin": "new",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  },
+  {
+   "id": "gloamfen",
+   "number": 7,
+   "name": "Gloamfen",
+   "slot": {
+    "dir": "SW",
+    "ring": 7
+   },
+   "kind": "open",
+   "structureType": null,
+   "structureNote": null,
+   "terrain": "Haunted fen, moor and wood: causeway, willows, heath, orchard, pinelands, barrows, mere, hollow hill",
+   "cultures": [
+    "Slavic",
+    "Celtic",
+    "Southeast Asian",
+    "Modern cryptids",
+    "Finnish"
+   ],
+   "monsterFamilies": [
+    "Ghosts and wailing spirits",
+    "Hags and lures",
+    "Hounds and wolves",
+    "Undead and revenants",
+    "Goblins and little folk",
+    "Lake monsters and cryptids"
+   ],
+   "dominantElements": [
+    "Shadow",
+    "Wood",
+    "Water",
+    "Storm"
+   ],
+   "levelBand": {
+    "bossFirst": 36,
+    "bossLast": 40,
+    "ordinaryFirst": 34,
+    "ordinaryLast": 39
+   },
+   "expectedRuns": 14,
+   "teaches": [
+    "Shadow pip; Ghost; Light reveals",
+    "Purge and Mist revisited",
+    "Leech, Corrupted, Gaze (stronger)",
+    "Attune and Mimic (converters); Swap",
+    "Rebirth and Ward appear"
+   ],
+   "unlocks": {
+    "elements": [
+     "Shadow (Raven Pair, Cat Sidhe, Reynard, Nazca Weaver)",
+     "Light (Kotuku, White Hart, Moon Hare)"
+    ],
+    "families": [
+     "Packs trickster line (Tanuki, Reynard, Nine-Tail Fox)",
+     "Wings (Raven Pair, Huma)"
+    ],
+    "nudge": "Light for Purge on Shadow; Fox line for Attune; keep a Mimic for flipping elements"
+   },
+   "origin": "new",
+   "subareas": [
+    {
+     "id": "gloamfen-reedbed-causeway",
+     "slug": "reedbed-causeway",
+     "name": "Reedbed Causeway",
+     "theme": "Plank causeway over black water",
+     "landmark": "Sunken signpost",
+     "elements": [
+      "Shadow",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Kikimora",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Hantu Air",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Näkki",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Vila",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Mul Gwisin",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Rusalka",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Ghost: plain hits do 1 less",
+      "familiarity": "③"
+     },
+     "idea": "Ghost: Light reveals; Purge",
+     "arc": "Kikimora pair ▸ ghost lane ▸ elite Vila ▸ boss Rusalka",
+     "bossLv": 36,
+     "ordinaryLv": [
+      34,
+      35
+     ],
+     "eliteLv": 36,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "gloamfen-willow-wake",
+     "slug": "willow-wake",
+     "name": "Wake of Willows",
+     "theme": "Haunted willow stand",
+     "landmark": "Hut on chicken legs",
+     "elements": [
+      "Wood",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Mavka",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Leshy",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Kikimora",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Likho",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Poludnitsa",
+       "variant": "wood",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Baba Yaga",
+      "variant": "wood",
+      "element": "Wood",
+      "gimmick": "Summoner: hut adds a minion",
+      "familiarity": "②"
+     },
+     "idea": "Summoner plus Wood: Wildfire the brood",
+     "arc": "Leshy pair ▸ summon lane ▸ elite Likho ▸ boss Baba Yaga",
+     "bossLv": 36,
+     "ordinaryLv": [
+      34,
+      35
+     ],
+     "eliteLv": 36,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "gloamfen-barghest-moor",
+     "slug": "barghest-moor",
+     "name": "Barghest Moor",
+     "theme": "Heather moor with standing stones",
+     "landmark": "Stone circle at dusk",
+     "elements": [
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Barghest",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Gwyllgi",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Cŵn Annwn",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Black Shuck",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Sluagh",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Banshee",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Gaze: attackers in its column lose 1 ATK",
+      "familiarity": "②"
+     },
+     "idea": "Placement vs Gaze; Purge",
+     "arc": "Hound pair ▸ gaze lane ▸ elite Cŵn Annwn ▸ boss Banshee",
+     "bossLv": 37,
+     "ordinaryLv": [
+      35,
+      36
+     ],
+     "eliteLv": 37,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "gloamfen-pontianak-orchard",
+     "slug": "pontianak-orchard",
+     "name": "Pontianak's Orchard",
+     "theme": "Moonlit fruit orchard",
+     "landmark": "Banana grove shrine",
+     "elements": [
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Pontianak",
+       "variant": "shadow ghost",
+       "element": "Shadow"
+      },
+      {
+       "base": "Kuntilanak",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Pocong",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Phi Krasue",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Manananggal",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Pontianak",
+      "variant": "shadow ghost",
+      "element": "Shadow",
+      "gimmick": "Leech: heals when it hits the hero",
+      "familiarity": "③"
+     },
+     "idea": "Leech: do not let it connect; Light cleanses",
+     "arc": "Pocong pair ▸ leech lane ▸ elite Phi Krasue ▸ boss Pontianak",
+     "bossLv": 37,
+     "ordinaryLv": [
+      35,
+      36
+     ],
+     "eliteLv": 37,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "gloamfen-strange-roads",
+     "slug": "strange-roads",
+     "name": "Strange Roads",
+     "theme": "Pine barrens and lonely highways",
+     "landmark": "Roadside diner sign",
+     "elements": [
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Jersey Devil",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Fresno Nightcrawler",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Dover Demon",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Flatwoods Monster",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Owlman",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Mothman",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Stride plus Veiled (flicker)",
+      "familiarity": "②"
+     },
+     "idea": "Range: Spyglass and Wings find unseen targets",
+     "arc": "Cryptid pair ▸ flicker lane ▸ elite Flatwoods ▸ boss Mothman",
+     "bossLv": 38,
+     "ordinaryLv": [
+      36,
+      37
+     ],
+     "eliteLv": 38,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "gloamfen-mavkas-glade",
+     "slug": "mavkas-glade",
+     "name": "Mavka's Glade",
+     "theme": "Glade of dancing wood nymphs",
+     "landmark": "Ring of mushrooms",
+     "elements": [
+      "Wood"
+     ],
+     "roster": [
+      {
+       "base": "Vila",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Dryad",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Polevik",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Skogsrå",
+       "variant": "wood",
+       "element": "Wood"
+      },
+      {
+       "base": "Huldra",
+       "variant": "wood",
+       "element": "Wood"
+      }
+     ],
+     "boss": {
+      "base": "Mavka",
+      "variant": "wood",
+      "element": "Wood",
+      "gimmick": "Guarded by dryads",
+      "familiarity": "③"
+     },
+     "idea": "Bloom and Pollen to outlast; Guarded",
+     "arc": "Dryad pair ▸ guard row ▸ elite Huldra ▸ boss Mavka",
+     "bossLv": 38,
+     "ordinaryLv": [
+      36,
+      37
+     ],
+     "eliteLv": 38,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "gloamfen-barrow-downs",
+     "slug": "barrow-downs",
+     "name": "Barrow Downs",
+     "theme": "Mist-covered burial mounds",
+     "landmark": "Open barrow door",
+     "elements": [
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Draugr",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Haugbui",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Upyr",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Bhoot",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Strzyga",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Koschei",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Deathless: rises once unless Purged",
+      "familiarity": "③"
+     },
+     "idea": "Purge on rebirth; Rebirth for you",
+     "arc": "Draugr pair ▸ rising haugbui ▸ elite Strzyga ▸ boss Koschei",
+     "bossLv": 39,
+     "ordinaryLv": [
+      37,
+      38
+     ],
+     "eliteLv": 39,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "gloamfen-fomorian-mere",
+     "slug": "fomorian-mere",
+     "name": "Fomorian Mere",
+     "theme": "Black mere with drowned towers",
+     "landmark": "Broken causeway tower",
+     "elements": [
+      "Water",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Fomorians",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Glaistig",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Bean-nighe",
+       "variant": "water ghost",
+       "element": "Water"
+      },
+      {
+       "base": "Afanc",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Each-uisge",
+       "variant": "water",
+       "element": "Water"
+      }
+     ],
+     "boss": {
+      "base": "Balor",
+      "variant": "shadow giant",
+      "element": "Shadow",
+      "gimmick": "Gaze: attackers in its column lose 2 ATK",
+      "familiarity": "③"
+     },
+     "idea": "Strong Gaze: bait with Decoy, hit from sides",
+     "arc": "Mere pair ▸ eye column ▸ elite Fomorian ▸ boss Balor",
+     "bossLv": 39,
+     "ordinaryLv": [
+      37,
+      38
+     ],
+     "eliteLv": 39,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "gloamfen-wild-hunt-road",
+     "slug": "wild-hunt-road",
+     "name": "Wild Hunt Road",
+     "theme": "Night road of spectral riders",
+     "landmark": "Antler gate",
+     "elements": [
+      "Shadow",
+      "Storm"
+     ],
+     "roster": [
+      {
+       "base": "Hellequin",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Gabriel Hounds",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Åsgårdsreia",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Sluagh",
+       "variant": "shadow swarm",
+       "element": "Shadow"
+      },
+      {
+       "base": "Dullahan",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Dullahan",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Sweep and Stride: riders cut across",
+      "familiarity": "③"
+     },
+     "idea": "Swarm plus Sweep: Spread and Chain",
+     "arc": "Hound pair ▸ riders ▸ elite Hellequin ▸ boss Dullahan",
+     "bossLv": 40,
+     "ordinaryLv": [
+      38,
+      39
+     ],
+     "eliteLv": 40,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "gloamfen-hollow-hill-court",
+     "slug": "hollow-hill-court",
+     "name": "Hollow Hill Court",
+     "theme": "Fairy mound under a thorn hill",
+     "landmark": "Mound door of ferns",
+     "elements": [
+      "Shadow",
+      "Earth",
+      "Water",
+      "Light"
+     ],
+     "roster": [
+      {
+       "base": "Spriggan",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Redcap",
+       "variant": "blood",
+       "element": "Water"
+      },
+      {
+       "base": "Leprechaun",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Fear Dearg",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Púca",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Púca",
+      "variant": "shadow elder",
+      "element": "Shadow",
+      "gimmick": "Mimic: takes the element of the first unit that hit it",
+      "familiarity": "③"
+     },
+     "idea": "Converters: Attune and Mimic flip elements",
+     "arc": "Spriggan pair ▸ shifting reds ▸ elite Redcap ▸ boss Púca",
+     "bossLv": 40,
+     "ordinaryLv": [
+      38,
+      39
+     ],
+     "eliteLv": 40,
+     "origin": "new",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  },
+  {
+   "id": "hollowgate-keep",
+   "number": 8,
+   "name": "Hollowgate Keep",
+   "slot": {
+    "dir": "W",
+    "ring": 8
+   },
+   "kind": "structure",
+   "structureType": "castle",
+   "structureNote": "Horizontal siege castle of stone and iron: outer works to inner keep, portcullis and door gates, courtyards and open roofs between roofed halls. Medieval, Celtic and Slavic undead; indoor lantern light, flag stone floors.",
+   "terrain": "A ruined siege castle: moat, gatehouse, wards, tourney yard, hall, cellars, library, armoury, crypt, dungeons, battlements, throne hall",
+   "cultures": [
+    "Medieval European",
+    "Celtic",
+    "Slavic",
+    "Greek",
+    "Norse"
+   ],
+   "monsterFamilies": [
+    "Constructs and golems",
+    "Undead and revenants",
+    "Demons",
+    "Chimeras and hybrids",
+    "Dragons and great serpents",
+    "Guardian beasts"
+   ],
+   "dominantElements": [
+    "Earth",
+    "Shadow",
+    "Fire",
+    "Light"
+   ],
+   "levelBand": {
+    "bossFirst": 41,
+    "bossLast": 45,
+    "ordinaryFirst": 39,
+    "ordinaryLast": 44
+   },
+   "expectedRuns": 17,
+   "teaches": [
+    "Line breakers: Bulwark, Guarded, Healer, Chief in formation",
+    "Armor chains; Rend and Pierce against walls",
+    "Dusk and Sunfire revisit in Light and Fire rooms",
+    "Mirror, Mentor, Echo Drum, Ward",
+    "Bastion hybrids hold the line"
+   ],
+   "unlocks": {
+    "elements": [
+     "Earth/metal",
+     "Light (revisit)"
+    ],
+    "families": [
+     "Shells (Bastion, Coconut Crab)",
+     "Hooves (White Hart, Audhumbla)"
+    ],
+    "nudge": "Attack plus Guard hybrids; Ward to blunt hero strikes; Rend through walls"
+   },
+   "origin": "new",
+   "subareas": [
+    {
+     "id": "hollowgate-keep-moat-and-drawbridge",
+     "slug": "moat-and-drawbridge",
+     "name": "Moat and Drawbridge",
+     "theme": "Black moat and a raised bridge",
+     "landmark": "Raised drawbridge",
+     "elements": [
+      "Earth",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Gargoyle",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Golem",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Redcap",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Afanc",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Spriggan",
+       "variant": "stone",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Afanc",
+      "variant": "water armoured",
+      "element": "Water",
+      "gimmick": "Armored plus Tide: moat currents",
+      "familiarity": "④"
+     },
+     "idea": "Gate puzzle: Bulwark intro",
+     "arc": "Gargoyle pair ▸ golem wall ▸ elite Redcap ▸ boss Afanc",
+     "bossLv": 41,
+     "ordinaryLv": [
+      39,
+      40
+     ],
+     "eliteLv": 41,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-gatehouse-barbican",
+     "slug": "gatehouse-barbican",
+     "name": "Gatehouse and Barbican",
+     "theme": "Narrow gate passage with portcullis",
+     "landmark": "Murder-holes ceiling",
+     "elements": [
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Golem",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Gargoyle",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Dvergr",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Redcap",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Talos",
+       "variant": "metal",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Golem",
+      "variant": "metal",
+      "element": "Earth",
+      "gimmick": "Bulwark: portcullis blocks Rend and Pierce",
+      "familiarity": "②"
+     },
+     "idea": "Rend and Pierce vs walls",
+     "arc": "Golem wall ▸ gargoyle behind ▸ elite Talos ▸ boss Golem",
+     "bossLv": 41,
+     "ordinaryLv": [
+      39,
+      40
+     ],
+     "eliteLv": 41,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-outer-ward",
+     "slug": "outer-ward",
+     "name": "Outer Ward",
+     "theme": "Barracks and stables",
+     "landmark": "Collapsed stable roof",
+     "elements": [
+      "Shadow",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Upyr",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Strzyga",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Redcap",
+       "variant": "blood",
+       "element": "Water"
+      },
+      {
+       "base": "Brownie",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Bhoot",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Loup-garou",
+      "variant": "blood",
+      "element": "Water",
+      "gimmick": "Shapeshift on hit; Leech",
+      "familiarity": "③"
+     },
+     "idea": "Healer and Chief together",
+     "arc": "Barracks pair ▸ chief aura ▸ elite Strzyga ▸ boss Loup-garou",
+     "bossLv": 42,
+     "ordinaryLv": [
+      40,
+      41
+     ],
+     "eliteLv": 42,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-tourney-yard",
+     "slug": "tourney-yard",
+     "name": "Tourney Yard",
+     "theme": "Jousting lists in the courtyard",
+     "landmark": "Empty heralds' stand",
+     "elements": [
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Heraldic lion rampant",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Griffin",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Hippogriff",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Centaur",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Manticore",
+       "variant": "metal",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Heraldic lion rampant",
+      "variant": "metal alpha",
+      "element": "Earth",
+      "gimmick": "Chief: adjacent +1 ATK",
+      "familiarity": "②"
+     },
+     "idea": "Chief and Alpha: kill the leader",
+     "arc": "Champion pair ▸ chief lane ▸ elite Griffin ▸ boss lion",
+     "bossLv": 42,
+     "ordinaryLv": [
+      40,
+      41
+     ],
+     "eliteLv": 42,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-great-hall",
+     "slug": "great-hall",
+     "name": "Great Hall",
+     "theme": "Long feast hall with burnt banners",
+     "landmark": "Hearth under hanging banners",
+     "elements": [
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Wyvern",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Cockatrice",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Troll",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Draugr",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Redcap",
+       "variant": "fire",
+       "element": "Fire"
+      }
+     ],
+     "boss": {
+      "base": "Wyvern",
+      "variant": "fire",
+      "element": "Fire",
+      "gimmick": "Sweep plus Fury",
+      "familiarity": "③"
+     },
+     "idea": "Fire vs hall: Steam and Smother again",
+     "arc": "Wyvern pair ▸ fury lane ▸ elite Troll ▸ boss Wyvern",
+     "bossLv": 43,
+     "ordinaryLv": [
+      41,
+      42
+     ],
+     "eliteLv": 43,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-kitchens-and-cellars",
+     "slug": "kitchens-and-cellars",
+     "name": "Kitchens and Cellars",
+     "theme": "Vaults of barrels and cold hearths",
+     "landmark": "Giant cauldron",
+     "elements": [
+      "Shadow",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Bannik",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Ittan-momen",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Kasa-obake",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Brownie",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Basilisk",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Basilisk",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Gaze: attackers in its column lose 1 ATK",
+      "familiarity": "②"
+     },
+     "idea": "Barrels again: Fuse chains",
+     "arc": "Cask pair ▸ barrel lane ▸ elite Bannik ▸ boss Basilisk",
+     "bossLv": 43,
+     "ordinaryLv": [
+      41,
+      42
+     ],
+     "eliteLv": 43,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-library-of-whispers",
+     "slug": "library-of-whispers",
+     "name": "Library of Whispers",
+     "theme": "Towering shelves of murmuring tomes",
+     "landmark": "Spiral stair of books",
+     "elements": [
+      "Light",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Noppera-bō",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Alebrije",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Golem",
+       "variant": "clockwork",
+       "element": null
+      },
+      {
+       "base": "Owl of Athena",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Gargoyle",
+       "variant": "light",
+       "element": "Light"
+      }
+     ],
+     "boss": {
+      "base": "Sphinx of Thebes",
+      "variant": "light",
+      "element": "Light",
+      "gimmick": "Veiled and Hide: riddle wards",
+      "familiarity": "①"
+     },
+     "idea": "Hide plus Veiled; Light pips",
+     "arc": "Scribe pair ▸ hide lane ▸ elite Alebrije ▸ boss Sphinx",
+     "bossLv": 44,
+     "ordinaryLv": [
+      42,
+      43
+     ],
+     "eliteLv": 44,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-armoury-and-forge",
+     "slug": "armoury-and-forge",
+     "name": "Armoury and Forge",
+     "theme": "Racks of animated armour",
+     "landmark": "Armour-stand hall",
+     "elements": [
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Talos",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Golem",
+       "variant": "clockwork",
+       "element": null
+      },
+      {
+       "base": "Gargoyle",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Dvergr",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Knocker",
+       "variant": "metal",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Talos",
+      "variant": "metal",
+      "element": "Earth",
+      "gimmick": "Harden plus Bulwark",
+      "familiarity": "③"
+     },
+     "idea": "Armor chains: Sunder and Sunfire",
+     "arc": "Armour pair ▸ wall ▸ elite Dvergr ▸ boss Talos",
+     "bossLv": 44,
+     "ordinaryLv": [
+      42,
+      43
+     ],
+     "eliteLv": 44,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-crypt",
+     "slug": "crypt",
+     "name": "The Crypt",
+     "theme": "Underground burial vaults",
+     "landmark": "Open sarcophagus",
+     "elements": [
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Upyr",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Strzyga",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Banshee",
+       "variant": "shadow ghost",
+       "element": "Shadow"
+      },
+      {
+       "base": "Ghoul",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Bhoot",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Strzyga",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Leech plus Ghost",
+      "familiarity": "④"
+     },
+     "idea": "Dusk and Purge in the dark",
+     "arc": "Crypt pair ▸ ghost lane ▸ elite Banshee ▸ boss Strzyga",
+     "bossLv": 44,
+     "ordinaryLv": [
+      42,
+      43
+     ],
+     "eliteLv": 44,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-dungeons",
+     "slug": "dungeons",
+     "name": "The Dungeons",
+     "theme": "Cells, chains and an oubliette",
+     "landmark": "Barred cell door",
+     "elements": [
+      "Earth",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Lamia",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Medusa",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Echidna",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Graeae",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Basilisk",
+       "variant": "stone",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Echidna",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Summoner: brood of monsters",
+      "familiarity": "③"
+     },
+     "idea": "Summoner plus Guarded",
+     "arc": "Cell pair ▸ summon lane ▸ elite Medusa ▸ boss Echidna",
+     "bossLv": 45,
+     "ordinaryLv": [
+      43,
+      44
+     ],
+     "eliteLv": 45,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-battlements-and-belfry",
+     "slug": "battlements-and-belfry",
+     "name": "Battlements and Belfry",
+     "theme": "Wall-walks and a bell tower",
+     "landmark": "Cracked bell",
+     "elements": [
+      "Earth",
+      "Wind",
+      "Storm"
+     ],
+     "roster": [
+      {
+       "base": "Gargoyle",
+       "variant": "stone",
+       "element": "Earth"
+      },
+      {
+       "base": "Harpy",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Wyvern",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Hippogriff",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Gargoyle",
+       "variant": "storm",
+       "element": "Storm"
+      }
+     ],
+     "boss": {
+      "base": "Gargoyle",
+      "variant": "stone elder",
+      "element": "Earth",
+      "gimmick": "Veiled until turn 2 (a statue)",
+      "familiarity": "①"
+     },
+     "idea": "Sky enemies on stone: Wind reach",
+     "arc": "Gargoyle pair ▸ sky lane ▸ elite Wyvern ▸ boss Gargoyle",
+     "bossLv": 45,
+     "ordinaryLv": [
+      43,
+      44
+     ],
+     "eliteLv": 45,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "hollowgate-keep-throne-hall",
+     "slug": "throne-hall",
+     "name": "Throne Hall",
+     "theme": "Hall of the broken king",
+     "landmark": "Empty throne under a chandelier",
+     "elements": [
+      "Fire",
+      "Earth",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Dragon (Saint George's)",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Golem",
+       "variant": "metal",
+       "element": "Earth"
+      },
+      {
+       "base": "Dullahan",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Wyvern",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Cockatrice",
+       "variant": "fire",
+       "element": "Fire"
+      }
+     ],
+     "boss": {
+      "base": "Dragon (Saint George's)",
+      "variant": "fire armoured elder",
+      "element": "Fire",
+      "gimmick": "Phases: wall, then fury, then fire",
+      "familiarity": "①"
+     },
+     "idea": "Region exam: walls, healers, chiefs, fire",
+     "arc": "Hall guards ▸ wall plus healer ▸ elite Dullahan ▸ boss Dragon",
+     "bossLv": 45,
+     "ordinaryLv": [
+      43,
+      44
+     ],
+     "eliteLv": 45,
+     "origin": "new",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  },
+  {
+   "id": "skyreach",
+   "number": 9,
+   "name": "Skyreach",
+   "slot": {
+    "dir": "NW",
+    "ring": 9
+   },
+   "kind": "open",
+   "structureType": null,
+   "structureNote": null,
+   "terrain": "High steppe rising into floating sky isles: windswept grass, eagle tors, cloud sea, hanging gardens, thunder isles, crystal spires, ziggurat in the clouds",
+   "cultures": [
+    "Mongol and Turkic",
+    "Persian",
+    "Mesopotamian",
+    "Chinese",
+    "Slavic",
+    "Polynesian"
+   ],
+   "monsterFamilies": [
+    "Birds and winged beasts",
+    "Elementals and storm beasts",
+    "Dragons and great serpents",
+    "Demons",
+    "Giants and ogres",
+    "Chimeras and hybrids"
+   ],
+   "dominantElements": [
+    "Wind",
+    "Storm",
+    "Light",
+    "Earth"
+   ],
+   "levelBand": {
+    "bossFirst": 46,
+    "bossLast": 50,
+    "ordinaryFirst": 44,
+    "ordinaryLast": 49
+   },
+   "expectedRuns": 18,
+   "teaches": [
+    "Storm and Wind pips together; Squall (Storm with a Wind ally)",
+    "Flying enemies: Stride and Veiled in the open",
+    "Skyfall and Wings sets of 4",
+    "Legendary units born at stage 2",
+    "Stage 3 mythic lines complete"
+   ],
+   "unlocks": {
+    "elements": [
+     "Storm (Kunpeng, Pegasus, Thor's Goats)",
+     "Wind (Cheonma, Tulpar, Sleipnir)"
+    ],
+    "families": [
+     "Wings (Khan Garid, Quetzal, Phoenix)",
+     "Hooves (Sleipnir, Tulpar)"
+    ],
+    "nudge": "Storm beside Wind for Squall; four Wings for first shot ignores Guarded; Legendary unit"
+   },
+   "origin": "new",
+   "subareas": [
+    {
+     "id": "skyreach-windswept-steppe",
+     "slug": "windswept-steppe",
+     "name": "Windswept Steppe",
+     "theme": "Sea of grass with felt tents",
+     "landmark": "Eagle-perch cairn",
+     "elements": [
+      "Wind"
+     ],
+     "roster": [
+      {
+       "base": "Almas",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Albasty",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Przewalski's horse",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Zilant",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Saiga antelope",
+       "variant": "wind",
+       "element": "Wind"
+      }
+     ],
+     "boss": {
+      "base": "Golden eagle",
+      "variant": "wind alpha",
+      "element": "Wind",
+      "gimmick": "Stride: moves a column each turn",
+      "familiarity": "②"
+     },
+     "idea": "Wind pip: pushes, reach",
+     "arc": "Wind pair ▸ rider lane ▸ elite Zilant ▸ boss Golden eagle",
+     "bossLv": 46,
+     "ordinaryLv": [
+      44,
+      45
+     ],
+     "eliteLv": 46,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "skyreach-eagle-tors",
+     "slug": "eagle-tors",
+     "name": "Eagle Tors",
+     "theme": "Spires of rock in the wind",
+     "landmark": "Eyrie of white feathers",
+     "elements": [
+      "Storm",
+      "Wind"
+     ],
+     "roster": [
+      {
+       "base": "Caucasian Eagle",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Impundulu",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Hōkioi",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Saker falcon",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Harpy",
+       "variant": "storm",
+       "element": "Storm"
+      }
+     ],
+     "boss": {
+      "base": "Roc",
+      "variant": "wind",
+      "element": "Wind",
+      "gimmick": "Veiled on turn 1 (cloud cover)",
+      "familiarity": "②"
+     },
+     "idea": "Squall: Storm hit with a Wind ally pushes back a row",
+     "arc": "Falcon pair ▸ cloud lane ▸ elite Impundulu ▸ boss Roc",
+     "bossLv": 46,
+     "ordinaryLv": [
+      44,
+      45
+     ],
+     "eliteLv": 46,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "skyreach-cloud-sea-pass",
+     "slug": "cloud-sea-pass",
+     "name": "Cloud Sea Pass",
+     "theme": "Mountain pass above a cloud sea",
+     "landmark": "Cable bridge",
+     "elements": [
+      "Wind",
+      "Storm"
+     ],
+     "roster": [
+      {
+       "base": "Pazuzu",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Kui",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Harpy",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Sirin",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Karasu-tengu",
+       "variant": "wind",
+       "element": "Wind"
+      }
+     ],
+     "boss": {
+      "base": "Anzû",
+      "variant": "storm",
+      "element": "Storm",
+      "gimmick": "Sweep plus Stride",
+      "familiarity": "③"
+     },
+     "idea": "Sweep over wide rows",
+     "arc": "Harpy pair ▸ sweep lane ▸ elite Pazuzu ▸ boss Anzû",
+     "bossLv": 47,
+     "ordinaryLv": [
+      45,
+      46
+     ],
+     "eliteLv": 47,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "skyreach-hanging-gardens",
+     "slug": "hanging-gardens",
+     "name": "Hanging Gardens",
+     "theme": "Floating gardens of vines",
+     "landmark": "Terraced garden stair",
+     "elements": [
+      "Wind",
+      "Light"
+     ],
+     "roster": [
+      {
+       "base": "Sylph",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Sirin",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Alkonost",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Aitvaras",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Cockatrice",
+       "variant": "wind",
+       "element": "Wind"
+      }
+     ],
+     "boss": {
+      "base": "Hippogriff",
+      "variant": "wind",
+      "element": "Wind",
+      "gimmick": "Healer: heals adjacent 2 each turn",
+      "familiarity": "②"
+     },
+     "idea": "Healer in the open: Pollen reach",
+     "arc": "Sylph pair ▸ heal lane ▸ elite Alkonost ▸ boss Hippogriff",
+     "bossLv": 47,
+     "ordinaryLv": [
+      45,
+      46
+     ],
+     "eliteLv": 47,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "skyreach-thunder-isles",
+     "slug": "thunder-isles",
+     "name": "Thunder Isles",
+     "theme": "Sky isles cloaked in storm",
+     "landmark": "Lightning-rod tower",
+     "elements": [
+      "Storm"
+     ],
+     "roster": [
+      {
+       "base": "Inkanyamba",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Impundulu",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Raijū",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Nue",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Kui",
+       "variant": "storm",
+       "element": "Storm"
+      }
+     ],
+     "boss": {
+      "base": "Bull of Heaven",
+      "variant": "storm",
+      "element": "Storm",
+      "gimmick": "Fury plus Chain",
+      "familiarity": "③"
+     },
+     "idea": "Ground against Storm at scale",
+     "arc": "Storm pair ▸ chain lane ▸ elite Nue ▸ boss Bull of Heaven",
+     "bossLv": 48,
+     "ordinaryLv": [
+      46,
+      47
+     ],
+     "eliteLv": 48,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "skyreach-dragons-roost",
+     "slug": "dragons-roost",
+     "name": "Dragon's Roost",
+     "theme": "High eyrie of wyverns",
+     "landmark": "Skull of a dead wyrm",
+     "elements": [
+      "Wind",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Wyvern",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Lindworm",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Dragon (Saint George's)",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Zilant",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Zduhać",
+       "variant": "wind",
+       "element": "Wind"
+      }
+     ],
+     "boss": {
+      "base": "Zmey Gorynych",
+      "variant": "fire",
+      "element": "Fire",
+      "gimmick": "Regrow: three heads return once",
+      "familiarity": "③"
+     },
+     "idea": "Burn seals heads again, at scale",
+     "arc": "Wyvern pair ▸ head lane ▸ elite Lindworm ▸ boss Zmey",
+     "bossLv": 48,
+     "ordinaryLv": [
+      46,
+      47
+     ],
+     "eliteLv": 48,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "skyreach-bifrost-ruin",
+     "slug": "bifrost-ruin",
+     "name": "Bifröst Ruin",
+     "theme": "Fallen rainbow bridge",
+     "landmark": "Cracked glass arch",
+     "elements": [
+      "Wind",
+      "Storm"
+     ],
+     "roster": [
+      {
+       "base": "Jötunn",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Åsgårdsreia",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Hræsvelgr",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Eikþyrnir",
+       "variant": "wind",
+       "element": "Wind"
+      },
+      {
+       "base": "Sköll and Hati",
+       "variant": "storm",
+       "element": "Storm"
+      }
+     ],
+     "boss": {
+      "base": "Hræsvelgr",
+      "variant": "wind giant",
+      "element": "Wind",
+      "gimmick": "Guarded plus Sweep",
+      "familiarity": "⑤"
+     },
+     "idea": "Break the guard then reach",
+     "arc": "Giant pair ▸ rider lane ▸ elite Jötunn ▸ boss Hræsvelgr",
+     "bossLv": 49,
+     "ordinaryLv": [
+      47,
+      48
+     ],
+     "eliteLv": 49,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "skyreach-crystal-spires",
+     "slug": "crystal-spires",
+     "name": "Crystal Spires",
+     "theme": "Gem-grown rock spires",
+     "landmark": "Humming crystal pillar",
+     "elements": [
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Gnome",
+       "variant": "crystal",
+       "element": "Earth"
+      },
+      {
+       "base": "Dvergr",
+       "variant": "crystal",
+       "element": "Earth"
+      },
+      {
+       "base": "Golem",
+       "variant": "crystal",
+       "element": "Earth"
+      },
+      {
+       "base": "Chimera",
+       "variant": "crystal",
+       "element": "Earth"
+      },
+      {
+       "base": "Talos",
+       "variant": "crystal",
+       "element": "Earth"
+      }
+     ],
+     "boss": {
+      "base": "Gnome",
+      "variant": "crystal elder",
+      "element": "Earth",
+      "gimmick": "Crystal: shatters and hurts neighbours",
+      "familiarity": "②"
+     },
+     "idea": "Chain-explosion rows (barrels again)",
+     "arc": "Gnome pair ▸ shard lane ▸ elite Chimera ▸ boss Gnome",
+     "bossLv": 49,
+     "ordinaryLv": [
+      47,
+      48
+     ],
+     "eliteLv": 49,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "skyreach-eclipse-terrace",
+     "slug": "eclipse-terrace",
+     "name": "Eclipse Terrace",
+     "theme": "Terrace where the moon is eaten",
+     "landmark": "Dark disc over an altar",
+     "elements": [
+      "Light"
+     ],
+     "roster": [
+      {
+       "base": "Nian",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Kui",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Sylph",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Aitvaras",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Bakunawa",
+       "variant": "light",
+       "element": "Light"
+      }
+     ],
+     "boss": {
+      "base": "Bakunawa",
+      "variant": "light",
+      "element": "Light",
+      "gimmick": "Veiled plus Enrage: the eclipse clock",
+      "familiarity": "④"
+     },
+     "idea": "Enrage clock in Light",
+     "arc": "Light pair ▸ veiled lane ▸ elite Bakunawa ▸ boss Bakunawa dragon",
+     "bossLv": 50,
+     "ordinaryLv": [
+      48,
+      49
+     ],
+     "eliteLv": 50,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "skyreach-etemenanki",
+     "slug": "etemenanki",
+     "name": "Etemenanki",
+     "theme": "Ziggurat stair in the clouds",
+     "landmark": "Seven-stage ziggurat",
+     "elements": [
+      "Storm"
+     ],
+     "roster": [
+      {
+       "base": "Anzû",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Pazuzu",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Ugallu",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Gallu",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Bull of Heaven",
+       "variant": "storm",
+       "element": "Storm"
+      }
+     ],
+     "boss": {
+      "base": "Lamashtu",
+      "variant": "storm",
+      "element": "Storm",
+      "gimmick": "Summoner plus Enrage",
+      "familiarity": "③"
+     },
+     "idea": "Region exam: Squall, Ground, Stride, Healer",
+     "arc": "Tower guards ▸ summon lane ▸ elite Anzû ▸ boss Lamashtu",
+     "bossLv": 50,
+     "ordinaryLv": [
+      48,
+      49
+     ],
+     "eliteLv": 50,
+     "origin": "new",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  },
+  {
+   "id": "necropolis",
+   "number": 10,
+   "name": "The Necropolis of Twelve Hours",
+   "slot": {
+    "dir": "N",
+    "ring": 10
+   },
+   "kind": "structure",
+   "structureType": "underworld temple-city",
+   "structureNote": "Vertical descent. Twelve hours of night, one sub-area each, down a stair of gates. Egyptian Duat, Mesopotamian Irkalla, Greek Hades, Norse Helheim, Maya Xibalba, Korean afterlife and Welsh Annwn share one city. Cold fire and river light; each gate is a tollgate.",
+   "terrain": "A vast underworld temple-city, descended hour by hour: gate, causeway, rivers, halls of judgement, houses of trial, seven gates, bridge, furnace, throne",
+   "cultures": [
+    "Egyptian",
+    "Mesopotamian",
+    "Greek",
+    "Norse",
+    "Maya",
+    "Korean",
+    "Celtic"
+   ],
+   "monsterFamilies": [
+    "Death omens and psychopomps",
+    "Undead and revenants",
+    "Demons",
+    "Hounds and wolves",
+    "Dragons and great serpents",
+    "Ghosts and wailing spirits"
+   ],
+   "dominantElements": [
+    "Shadow",
+    "Light",
+    "Frost",
+    "Fire"
+   ],
+   "levelBand": {
+    "bossFirst": 51,
+    "bossLast": 55,
+    "ordinaryFirst": 49,
+    "ordinaryLast": 54
+   },
+   "expectedRuns": 20,
+   "teaches": [
+    "Light and Shadow pips at depth; Purge and Dusk",
+    "Every reaction once more in a single hour",
+    "Element resistances on elites and bosses (open decision)",
+    "Ward and Rebirth to survive the end",
+    "Full builds: Legendary hubs, stage 3, Rend caps"
+   ],
+   "unlocks": {
+    "elements": [
+     "Light/Shadow mastery (Huma, Raven Pair, Cat Sidhe)"
+    ],
+    "families": [
+     "All families"
+    ],
+    "nudge": "Legendary hubs; a Light and a Shadow pair; Rebirth and Ward to survive the deepest bosses"
+   },
+   "origin": "new",
+   "subareas": [
+    {
+     "id": "necropolis-gate-of-dusk",
+     "slug": "gate-of-dusk",
+     "name": "Gate of Dusk",
+     "theme": "Threshold gate with hound statues",
+     "landmark": "Twin hound pillars",
+     "elements": [
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Ba",
+       "variant": "shadow ghost",
+       "element": "Shadow"
+      },
+      {
+       "base": "Medjed",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Cŵn Annwn",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Hundun",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Gallu",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Cerberus",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Guarded: three heads, one ward",
+      "familiarity": "①"
+     },
+     "idea": "Guard rotation",
+     "arc": "Ba pair ▸ ward lane ▸ elite Gallu ▸ boss Cerberus",
+     "bossLv": 51,
+     "ordinaryLv": [
+      49,
+      50
+     ],
+     "eliteLv": 51,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-helheim-causeway",
+     "slug": "helheim-causeway",
+     "name": "Helheim Causeway",
+     "theme": "Frozen causeway of the Norse dead",
+     "landmark": "Bridge of bone",
+     "elements": [
+      "Frost"
+     ],
+     "roster": [
+      {
+       "base": "Draugr",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Dead of Helheim",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Haugbui",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Níðhöggr",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Lindworm",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Draugr",
+      "variant": "frost alpha",
+      "element": "Frost",
+      "gimmick": "Alpha plus Skeleton rise",
+      "familiarity": "②"
+     },
+     "idea": "Freeze and Steam at depth",
+     "arc": "Draugr pair ▸ rising lane ▸ elite Níðhöggr ▸ boss Draugr",
+     "bossLv": 51,
+     "ordinaryLv": [
+      49,
+      50
+     ],
+     "eliteLv": 51,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-river-of-forgetting",
+     "slug": "river-of-forgetting",
+     "name": "River of Forgetting",
+     "theme": "Black river and a ferry",
+     "landmark": "Moored ferry",
+     "elements": [
+      "Water",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Lamia",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Ba",
+       "variant": "water ghost",
+       "element": "Water"
+      },
+      {
+       "base": "Siren",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Empusa",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Harpy",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Charon",
+      "variant": "water",
+      "element": "Water",
+      "gimmick": "Tide: rows drift on the river",
+      "familiarity": "②"
+     },
+     "idea": "Tide plus Mist",
+     "arc": "Ferry pair ▸ drift lane ▸ elite Empusa ▸ boss Charon",
+     "bossLv": 52,
+     "ordinaryLv": [
+      50,
+      51
+     ],
+     "eliteLv": 52,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-hall-of-two-truths",
+     "slug": "hall-of-two-truths",
+     "name": "Hall of Two Truths",
+     "theme": "Scales of judgement",
+     "landmark": "Great scales",
+     "elements": [
+      "Light"
+     ],
+     "roster": [
+      {
+       "base": "Medjed",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Ba",
+       "variant": "light ghost",
+       "element": "Light"
+      },
+      {
+       "base": "Sphinx",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Mummy",
+       "variant": "light mummified",
+       "element": "Light"
+      },
+      {
+       "base": "Ammit",
+       "variant": "light",
+       "element": "Light"
+      }
+     ],
+     "boss": {
+      "base": "Ammit",
+      "variant": "light",
+      "element": "Light",
+      "gimmick": "Gaze plus Harden",
+      "familiarity": "③"
+     },
+     "idea": "Purge on Light-bound ghosts",
+     "arc": "Judge pair ▸ gaze lane ▸ elite Sphinx ▸ boss Ammit",
+     "bossLv": 52,
+     "ordinaryLv": [
+      50,
+      51
+     ],
+     "eliteLv": 52,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-houses-of-trial",
+     "slug": "houses-of-trial",
+     "name": "Houses of Trial",
+     "theme": "Xibalba's trial chambers",
+     "landmark": "Razor house door",
+     "elements": [
+      "Shadow",
+      "Fire"
+     ],
+     "roster": [
+      {
+       "base": "Kisin",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Camazotz",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Balam",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Cadejo",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Sisimito",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Kisin",
+      "variant": "fire",
+      "element": "Fire",
+      "gimmick": "Fury plus Hide",
+      "familiarity": "④"
+     },
+     "idea": "Hide plus Fury: burst at depth",
+     "arc": "Trial pair ▸ hide lane ▸ elite Camazotz ▸ boss Kisin",
+     "bossLv": 53,
+     "ordinaryLv": [
+      51,
+      52
+     ],
+     "eliteLv": 53,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-mictlan-rivers",
+     "slug": "mictlan-rivers",
+     "name": "Mictlan Rivers",
+     "theme": "Nine rivers of the dog-guided dead",
+     "landmark": "Dog-bridge",
+     "elements": [
+      "Shadow",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Black Shuck",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "La Llorona",
+       "variant": "water ghost",
+       "element": "Water"
+      },
+      {
+       "base": "La Lechuza",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Cipactli",
+       "variant": "water",
+       "element": "Water"
+      },
+      {
+       "base": "Cadejo",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "La Llorona",
+      "variant": "water ghost",
+      "element": "Water",
+      "gimmick": "Ghost plus Tide",
+      "familiarity": "③"
+     },
+     "idea": "Ghost plus Tide: Light and Current",
+     "arc": "Hound pair ▸ ghost lane ▸ elite Lechuza ▸ boss Llorona",
+     "bossLv": 53,
+     "ordinaryLv": [
+      51,
+      52
+     ],
+     "eliteLv": 53,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-seven-gates",
+     "slug": "seven-gates",
+     "name": "The Seven Gates",
+     "theme": "Irkalla's seven doors",
+     "landmark": "Stripped-regalia doorway",
+     "elements": [
+      "Shadow",
+      "Fire",
+      "Storm",
+      "Earth"
+     ],
+     "roster": [
+      {
+       "base": "Gallu",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Namtar",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Ugallu",
+       "variant": "storm",
+       "element": "Storm"
+      },
+      {
+       "base": "Lamashtu",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Edimmu",
+       "variant": "shadow ghost",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Asag",
+      "variant": "stone",
+      "element": "Earth",
+      "gimmick": "Armored plus Enrage",
+      "familiarity": "④"
+     },
+     "idea": "Armor chains at depth",
+     "arc": "Gate pair ▸ wall lane ▸ elite Ugallu ▸ boss Asag",
+     "bossLv": 54,
+     "ordinaryLv": [
+      52,
+      53
+     ],
+     "eliteLv": 54,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-gjoll-bridge",
+     "slug": "gjoll-bridge",
+     "name": "Gjöll Bridge",
+     "theme": "Gleaming bridge over a roaring river",
+     "landmark": "Golden-roofed bridge",
+     "elements": [
+      "Frost"
+     ],
+     "roster": [
+      {
+       "base": "Dead of Helheim",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Níðhöggr",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Draugr",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Sköll and Hati",
+       "variant": "frost",
+       "element": "Frost"
+      },
+      {
+       "base": "Hræsvelgr",
+       "variant": "frost",
+       "element": "Frost"
+      }
+     ],
+     "boss": {
+      "base": "Garmr",
+      "variant": "frost",
+      "element": "Frost",
+      "gimmick": "Leech: heals when it hits",
+      "familiarity": "③"
+     },
+     "idea": "Leech plus Frost: Steam it",
+     "arc": "Bridge pair ▸ leech lane ▸ elite Níðhöggr ▸ boss Garmr",
+     "bossLv": 54,
+     "ordinaryLv": [
+      52,
+      53
+     ],
+     "eliteLv": 54,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-jeoseung-road",
+     "slug": "jeoseung-road",
+     "name": "Jeoseung Road",
+     "theme": "Dusty road of the Korean dead",
+     "landmark": "Lantern posts",
+     "elements": [
+      "Shadow",
+      "Water"
+     ],
+     "roster": [
+      {
+       "base": "Dalgyal Gwisin",
+       "variant": "shadow ghost",
+       "element": "Shadow"
+      },
+      {
+       "base": "Mul Gwisin",
+       "variant": "water ghost",
+       "element": "Water"
+      },
+      {
+       "base": "Cheonyeo Gwisin",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Gaeksin",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Gumiho",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Oni",
+      "variant": "shadow elder",
+      "element": "Shadow",
+      "gimmick": "Summoner of ghosts",
+      "familiarity": "②"
+     },
+     "idea": "Ghost plus Summoner: Purge sweep",
+     "arc": "Ghost pair ▸ summon lane ▸ elite Cheonyeo ▸ boss Oni",
+     "bossLv": 54,
+     "ordinaryLv": [
+      52,
+      53
+     ],
+     "eliteLv": 54,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-annwn-hunt",
+     "slug": "annwn-hunt",
+     "name": "Annwn Hunt",
+     "theme": "Hall of the hunting dead",
+     "landmark": "Hound kennels",
+     "elements": [
+      "Light"
+     ],
+     "roster": [
+      {
+       "base": "Cŵn Annwn",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Sluagh",
+       "variant": "light swarm",
+       "element": "Light"
+      },
+      {
+       "base": "Gwyllgi",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Gabriel Hounds",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Hellequin",
+       "variant": "light",
+       "element": "Light"
+      }
+     ],
+     "boss": {
+      "base": "Cŵn Annwn",
+      "variant": "light alpha",
+      "element": "Light",
+      "gimmick": "Alpha plus Swarm",
+      "familiarity": "④"
+     },
+     "idea": "Alpha swarm in Light",
+     "arc": "Hound pair ▸ swarm lane ▸ elite Hellequin ▸ boss Cŵn Annwn",
+     "bossLv": 55,
+     "ordinaryLv": [
+      53,
+      54
+     ],
+     "eliteLv": 55,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-tartarus-furnace",
+     "slug": "tartarus-furnace",
+     "name": "Tartarus Furnace",
+     "theme": "Bronze pit and fire",
+     "landmark": "Pit mouth",
+     "elements": [
+      "Fire",
+      "Shadow"
+     ],
+     "roster": [
+      {
+       "base": "Cerberus",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Echidna",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Python",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Cyclops",
+       "variant": "fire",
+       "element": "Fire"
+      },
+      {
+       "base": "Harpy",
+       "variant": "fire",
+       "element": "Fire"
+      }
+     ],
+     "boss": {
+      "base": "Hydra of Lerna",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Regrow: Purge stops heads",
+      "familiarity": "①"
+     },
+     "idea": "Regrow plus Shadow: Light cures",
+     "arc": "Pit pair ▸ head lane ▸ elite Echidna ▸ boss Hydra",
+     "bossLv": 55,
+     "ordinaryLv": [
+      53,
+      54
+     ],
+     "eliteLv": 55,
+     "origin": "new",
+     "status": "proposed"
+    },
+    {
+     "id": "necropolis-throne-of-dusk",
+     "slug": "throne-of-dusk",
+     "name": "Throne of Dusk",
+     "theme": "Last hall of the city",
+     "landmark": "Empty throne of black glass",
+     "elements": [
+      "Shadow",
+      "Light"
+     ],
+     "roster": [
+      {
+       "base": "Cerberus",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Thanatos",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Persephone",
+       "variant": "light",
+       "element": "Light"
+      },
+      {
+       "base": "Lamashtu",
+       "variant": "shadow",
+       "element": "Shadow"
+      },
+      {
+       "base": "Garmr",
+       "variant": "shadow",
+       "element": "Shadow"
+      }
+     ],
+     "boss": {
+      "base": "Hades",
+      "variant": "shadow",
+      "element": "Shadow",
+      "gimmick": "Two phases: ward, then fury at half HP",
+      "familiarity": "①"
+     },
+     "idea": "Final exam: every reaction and keyword",
+     "arc": "Guards ▸ wall plus summon ▸ elite Cerberus pair ▸ boss Hades",
+     "bossLv": 55,
+     "ordinaryLv": [
+      53,
+      54
+     ],
+     "eliteLv": 55,
+     "origin": "new",
+     "status": "proposed"
+    }
+   ],
+   "status": "proposed"
+  }
+ ]
+}
