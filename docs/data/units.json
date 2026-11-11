@@ -542,7 +542,7 @@
   "name": "Kunpeng",
   "culture": "Chinese",
   "baseAnimal": "Kun fish",
-  "element": "wind",
+  "element": "lightning",
   "family": "wings",
   "rarity": "legendary",
   "commandCost": 4,
@@ -574,7 +574,6 @@
    }
   ],
   "status": "proposed",
-  "flavour": "lightning",
   "behaviours": [
    {
     "p": "attack",
@@ -1157,7 +1156,7 @@
   "name": "Pegasus",
   "culture": "Greek",
   "baseAnimal": "Horse",
-  "element": "wind",
+  "element": "lightning",
   "family": "hooves",
   "rarity": "rare",
   "commandCost": 2,
@@ -1168,7 +1167,7 @@
    "guard": 0
   },
   "powerBudget": 10,
-  "ability": "Straight, unlimited range, ATK 1; chain reaction on Water targets.",
+  "ability": "Straight, unlimited range, ATK 1; Lightning (Conducts through Water enemies as a weakness hit).",
   "synergyTags": [
    "skyfall",
    "lightning"
@@ -1189,7 +1188,6 @@
    }
   ],
   "status": "proposed",
-  "flavour": "lightning",
   "impl": "pending",
   "implNote": "Step 3: skyfall plus reactRider (chain on Water)."
  },
@@ -3893,7 +3891,7 @@
   "name": "Thor's Goats",
   "culture": "Norse",
   "baseAnimal": "Goat",
-  "element": "wind",
+  "element": "lightning",
   "family": "wilds",
   "rarity": "rare",
   "commandCost": 2,
@@ -3925,7 +3923,6 @@
    }
   ],
   "status": "proposed",
-  "flavour": "lightning",
   "behaviours": [
    {
     "p": "attack",
@@ -3945,7 +3942,7 @@
   "name": "Raiju",
   "culture": "Japanese",
   "baseAnimal": "Weasel",
-  "element": "wind",
+  "element": "lightning",
   "family": "wilds",
   "rarity": "rare",
   "commandCost": 2,
@@ -3977,7 +3974,6 @@
    }
   ],
   "status": "proposed",
-  "flavour": "lightning",
   "behaviours": [
    {
     "p": "attack",

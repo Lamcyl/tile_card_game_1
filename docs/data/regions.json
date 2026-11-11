@@ -1,7 +1,7 @@
 {
  "id": "regions",
  "status": "proposed",
- "note": "Gameplay progression proposal for regions 1 to 10. Design data only; no game code changed. V2.1: 7 elements (Frost = Water/Ice, Storm = Wind/Lightning), 5 families; every sub-area has an elite with footprint; bosses carry footprint and bossRow.",
+ "note": "Gameplay progression proposal for regions 1 to 10. Design data only; no game code changed. V2.2: 8 elements (Frost = Water/Ice, Storm = Lightning), affinity chart, 12 weakness hits, column merges, 5 families; every sub-area has an elite with footprint; bosses carry footprint and bossRow.",
  "levelRule": {
   "ordinary": "[bossLv - 2, bossLv - 1]",
   "elite": "Greenvale: ordinary max; from region 2: bossLv",
@@ -11,8 +11,8 @@
  },
  "teachingCurve": {
   "1": {
-   "elements": "Wood, Water, Earth, Wind pips; Lightning (Wind flavour) at the finale",
-   "reactions": "Wildfire (Oak Wood), Bloom (Lake), Roots (Ruins), Conduct (Highlands) = 4",
+   "elements": "Wood, Water, Earth, Wind pips; Lightning pips at the Highlands",
+   "affinity": "Affinity arrows on enemy cards (weak x1.5, resist x0.5); Wildfire (Oak Wood), Sap (Mirror Lake), Bloom merge (Mirror Lake, the column rule) = 3",
    "keywords": "armor, barrel, Guarded, Mirage, Thorn, Stride/Tide, Healer, Fuse, Bulwark, Summoner, Regrow, Splitter",
    "units": "Straight, Spread, Pierce, Boost, Shield as pure roles; Swift, Pounce; family sets at 2; Kin buffers",
    "evolution": "Stage 1 animals; a shrine shows one run-only evolution",
@@ -21,7 +21,7 @@
   },
   "2": {
    "elements": "Fire, Earth, Light, Shadow",
-   "reactions": "Steam (Palms), Smother (Wadi, a warning), Fan (Erg), Eclipse (Tomb), Sunfire (Citadel) = 5, total 9",
+   "affinity": "Smother (Wadi), Dawn (Salt Mirror, Tomb); merges Resonance (Palms), Eclipse (Tomb) = 4 new, total 7",
    "keywords": "Chief, Skewer, Grudge, Leech, Ghost, armor 2, Big, Wide, Deep, Heavy",
    "units": "First hybrids (Guard plus Attack), Captains, Decoy, Skyfall, Herald",
    "evolution": "Stage 2 (Mastery 3, 2 stars) reachable; shrines evolve one unit per run",
@@ -30,7 +30,7 @@
   },
   "3": {
    "elements": "Water (Ice flavour), with Wind, Fire",
-   "reactions": "Mist = 1, total 10; Freeze (Ice on Wet) and Steam-on-Ice taught as flavour rules",
+   "affinity": "Steam (Hollow), Erode (Pass); merges Scald, Mist, Mire = 5 new, total 12; Freeze (second Ice hit) as a flavour rule",
    "keywords": "Harden, Regenerate, Alpha, Skeleton rise, stronger Guarded, Sweep",
    "units": "Chill, Hold, Mark, Howl, Carapace; resonance at 4",
    "evolution": "First Element Seal (Water); stage 2 common",
@@ -38,8 +38,8 @@
    "bigEnemies": "3 wide or deep elites; first 2x2 boss (Níðhöggr)"
   },
   "4": {
-   "elements": "Fire, Earth (stone, metal, magma), Wind (Lightning)",
-   "reactions": "Ground = 1, total 11; Smother and Steam used in earnest",
+   "elements": "Fire, Earth (stone, metal, magma), Lightning",
+   "affinity": "Roots (Basalt), Ground (Crater); merges Magma, Kindle, Blaze = 5 new, total 17",
    "keywords": "Fury, Enrage, Gaze, Regrow sealed by Burn, Skewer, Bulwark walls",
    "units": "Scorch, Trample, Pounce, Echo; Bastion in the front row",
    "evolution": "First stage 3 (Mythic) reachable",
@@ -47,8 +47,8 @@
    "bigEnemies": "First 2x2 elite (fire giants); Trample and Rend on deep bodies"
   },
   "5": {
-   "elements": "Water, Wind (Lightning), Shadow",
-   "reactions": "none new (11); Wet then Lightning then Freeze chains",
+   "elements": "Water, Lightning, Wind, Shadow",
+   "affinity": "Conduct (Stormwatch), Static (Coral Bazaar); merges Surge, Plasma, Tempest = 5 new, total 22",
    "keywords": "Tide, Swarm, Summoner again, Hold, Veiled, Stride",
    "units": "Chain, Current, Row Captain, Scales sets, Bloom",
    "evolution": "Water Seal; stage 2 broadly held",
@@ -57,7 +57,7 @@
   },
   "6": {
    "elements": "Wood (Venom), Water, Earth",
-   "reactions": "Pollen = 1, total 12 (all reactions taught); Wildfire chains on full Wood rows",
+   "affinity": "Uproot (Bridges); merges Spores, Grove, Charge = 4 new, total 26; Wildfire spreads on full Wood rows",
    "keywords": "Hide, Grudge, Corrupted, Swarm plus Summoner, Regrow plus Healer",
    "units": "Brood, Offering, Molt, Relay, Mentor, Herald",
    "evolution": "Stage 2 branch choice (two extensions)",
@@ -65,8 +65,8 @@
    "bigEnemies": "King cobra and elephant elites; 3x1 Yacumama"
   },
   "7": {
-   "elements": "Shadow, Light",
-   "reactions": "none new; Eclipse and Mist revisited",
+   "elements": "Shadow, Wood, Water",
+   "affinity": "Twilight (Light + Shadow) = 1 new, total 27; Dawn and Eclipse revisited at depth",
    "keywords": "Ghost, Leech, stronger Gaze, Shapeshift/Mimic, flicker Veiled, Deathless",
    "units": "Attune, Mimic, Swap; Ward and Rebirth appear",
    "evolution": "Mentor (lower-stage ally counts +1)",
@@ -74,8 +74,8 @@
    "bigEnemies": "Boss rows dominate (Baba Yaga, Banshee, Koschei): clear the column, then the boss"
   },
   "8": {
-   "elements": "Earth (metal, stone), Light, Fire",
-   "reactions": "none new; Sunfire, Eclipse, Smother in a dense castle",
+   "elements": "Earth (metal, stone), Light, Fire, Lightning",
+   "affinity": "Gloom (Crypt); Radiance (Light + X, six variants as one name) = 2 new, total 29 (all 12 weakness hits taught); Steam and Smother in the castle",
    "keywords": "Bulwark, Guarded, Healer, Chief, Harden in formation",
    "units": "Mirror, Echo Drum, Relay, Bastion, Ward",
    "evolution": "Two stage 3 lines expected",
@@ -84,7 +84,7 @@
   },
   "9": {
    "elements": "Wind, Lightning, Light, Earth (crystal)",
-   "reactions": "none new (all 12 taught); Fan, Ground, Conduct in open air",
+   "affinity": "Sandstorm, Quake = 2 new, total 31 (all 15 natural pairs taught); Static, Ground, Conduct in open air",
    "keywords": "Stride, Veiled, Sweep, Healer in the open, Crystal shards",
    "units": "Skyfall, Spyglass, Wings sets of 4; Legendary born mythic",
    "evolution": "Complete stage 3 lines; Legendary 2 stages",
@@ -93,7 +93,7 @@
   },
   "10": {
    "elements": "Light and Shadow at depth; every element",
-   "reactions": "none new; every reaction in one hour",
+   "affinity": "none new; every weakness hit and merge in one hour; affinity override on bosses (open decision)",
    "keywords": "all, plus element resistance on elites and bosses (open)",
    "units": "Legendary hubs, Rebirth and Ward, full builds",
    "evolution": "All lines; Seals of every element",
@@ -133,6 +133,7 @@
     "Wood",
     "Water",
     "Wind",
+    "Lightning",
     "Fire"
    ],
    "levelBand": {
@@ -144,9 +145,9 @@
    "expectedRuns": 6,
    "teaches": [
     "Core verbs: attack, range, boost",
+    "Affinity arrows (weak and resist); first weakness hits Wildfire and Sap; column merge rule with Bloom",
     "Shield, armor, Mirage, Thorn, Swift/Tide",
     "Healer, Fuse, Bulwark, Summoner, Splitter",
-    "Element pips; first reactions Wildfire, Bloom, Roots, Conduct",
     "Family sets at 2; Rend arrives with the first Fangs unit",
     "First wide elite (Nurikabe, 2x1) late in the region; first boss row (Orochi) at the finale"
    ],
@@ -155,7 +156,7 @@
      "Wood",
      "Water",
      "Wind",
-     "Lightning (Wind flavour: Raiju, Highlands)"
+     "Lightning (Raiju, Highlands)"
     ],
     "families": [
      "Hooves",
@@ -163,7 +164,7 @@
      "Wings",
      "Wilds"
     ],
-    "nudge": "Fangs for Rend; Wood beside Water for Bloom; one Fire unit for Wildfire; Spread against the wide Nurikabe"
+    "nudge": "Fangs for Rend; Water and Wood in one column for Bloom; one Fire unit for Wildfire; Spread against the wide Nurikabe"
    },
    "origin": "existing (kept at 8 sub-areas)",
    "subareas": [
@@ -344,7 +345,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Thorn: weigh the cost of clicking; Pollen preview",
+     "idea": "Thorn: weigh the cost of clicking; read the arrows (Wood is weak to Fire and Wind)",
      "arc": "B1 Shanxiao; B2 armored; B3 Nian barrel; B4 thorn row; B5 stampede; elite tiger (was Baihu, removed); boss Qiongqi. Map file names Jorogumo as boss; ENEMY_REVAMP wins. Yutu and Baize (Benevolent) dropped",
      "bossLv": 5,
      "ordinaryLv": [
@@ -407,7 +408,7 @@
       "footprint": "2x1",
       "bossRow": false
      },
-     "idea": "Swift and Tide; Bloom (Water beside Wood)",
+     "idea": "Swift and Tide; Sap (Wood on Water) and the Bloom merge (Water + Wood in one column)",
      "arc": "B1 kappa; B2 siren back row; B3 Swift; B4 tide drift; B5 armored kappa; elite Vodyanoy slot becomes Rusalka alpha; boss Imugi. Baku (Benevolent) dropped",
      "bossLv": 6,
      "ordinaryLv": [
@@ -473,8 +474,8 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Healer; Bloom revisited in the paddies",
-     "arc": "B1 dokkaebi; B2 healer behind; B3 kitsune; B4 Wet row; B5 healer plus armor; elite Gumiho; boss Bulgasari. Xuanwu (removed) replaced by armored Nurikabe",
+     "idea": "Healer; Bloom merge revisited in the paddies",
+     "arc": "B1 dokkaebi; B2 healer behind; B3 kitsune; B4 Water row; B5 healer plus armor; elite Gumiho; boss Bulgasari. Xuanwu (removed) replaced by armored Nurikabe",
      "bossLv": 7,
      "ordinaryLv": [
       5,
@@ -539,7 +540,7 @@
       "footprint": "1x2",
       "bossRow": false
      },
-     "idea": "Fuse and Bulwark; Roots (Earth beside Wood)",
+     "idea": "Fuse and Bulwark; resist arrows (Earth resists Fire)",
      "arc": "B1 jiangshi; B2 Fuse lantern; B3 Bulwark wall (stops Rend and Pierce); B4 mixed; B5 wall plus fuse; elite Nurikabe 2x1; boss Gashadokuro. Ushabti (construct) dropped",
      "bossLv": 8,
      "ordinaryLv": [
@@ -629,7 +630,7 @@
      "theme": "Ochre rocky pasture, grey cliffs and mist",
      "landmark": "Standing stones with shimenawa, stone mountain gate",
      "elements": [
-      "Wind",
+      "Lightning",
       "Earth",
       "Fire"
      ],
@@ -647,8 +648,7 @@
       {
        "base": "Kamaitachi",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Chōchin-obake",
@@ -658,22 +658,20 @@
       {
        "base": "Nekomata",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       }
      ],
      "boss": {
       "base": "Nue",
       "variant": "storm",
-      "element": "Wind",
+      "element": "Lightning",
       "gimmick": "Splitter: breaks into three 1-HP parts (monkey, tanuki, snake)",
       "familiarity": "③",
-      "flavour": "lightning",
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Splitter; Conduct (Lightning on Wet) and the first Lightning unit",
-     "arc": "B1 oni; B2 splitter; B3 lightning kamaitachi; B4 Wet plus Lightning; B5 oni pair; elite Nekomata (was Haetae); boss Nue (was Raijin, removed). ENEMY_REVAMP B8",
+     "idea": "Splitter; the first Lightning unit and the first Lightning enemy pip",
+     "arc": "B1 oni; B2 splitter; B3 lightning kamaitachi; B4 Water plus Lightning; B5 oni pair; elite Nekomata (was Haetae); boss Nue (was Raijin, removed). ENEMY_REVAMP B8",
      "bossLv": 9,
      "ordinaryLv": [
       7,
@@ -685,8 +683,7 @@
      "elite": {
       "base": "Nekomata",
       "variant": "storm",
-      "element": "Wind",
-      "flavour": "lightning",
+      "element": "Lightning",
       "footprint": "1x1",
       "bossRow": false
      }
@@ -736,9 +733,9 @@
    "expectedRuns": 7,
    "teaches": [
     "Chief, Skewer, Grudge, Leech",
+    "Weakness hits Smother and Dawn; merges Resonance (same element twice) and Eclipse (Shadow + any attacker)",
     "Armor 2, Healer reuse",
     "Fire, Earth, Light, Shadow pips",
-    "Steam, Smother, Fan, Eclipse, Sunfire",
     "Hybrid roles; stage 2 units",
     "Deep (1x2) and wide (2x1) elites; boss row with a Guarded escort"
    ],
@@ -754,7 +751,7 @@
      "Wilds (Scarab Roller, Honeybee Hive)",
      "Fangs (Cat Sidhe, Cu Sidhe)"
     ],
-    "nudge": "Hybrid Guard-Attack units; Light beside Shadow or Fire; keep Fire away from Earth; Fire on Water for Steam"
+    "nudge": "Hybrid Guard-Attack units; two attackers of one element in a column (Resonance); Light on Shadow enemies (Dawn); Earth on Fire enemies (Smother)"
    },
    "origin": "existing (kept at 8 sub-areas)",
    "subareas": [
@@ -869,7 +866,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Chief and Skewer; Steam (Fire on Water or Wet)",
+     "idea": "Chief and Skewer; Resonance merge (two Fire or two Water attackers in one column)",
      "arc": "Palm court; chief aura; skewer ignores Shield; elite Nile crocodile 2x1; boss Set. ENEMY_REVAMP B10 (Bes dropped, Papyrus Jar has no bestiary entry)",
      "bossLv": 11,
      "ordinaryLv": [
@@ -934,7 +931,7 @@
       "footprint": "1x2",
       "bossRow": false
      },
-     "idea": "Grudge; Fan (Wind on Burning)",
+     "idea": "Grudge; Resonance merge revisited",
      "arc": "Dune shifts; Grudge chain; kill order; elite Talos; boss Cabrakan. ENEMY_REVAMP B11 (Bulgae Benevolent: dropped)",
      "bossLv": 11,
      "ordinaryLv": [
@@ -999,7 +996,7 @@
       "footprint": "1x1",
       "bossRow": true
      },
-     "idea": "Mirage and gaze; light pips and Eclipse preview",
+     "idea": "Mirage and gaze; Light pips and Dawn preview (Light on Shadow)",
      "arc": "Mirage pairs; crystal armor; gaze column; elite Zipacna; boss Vucub Caquix. ENEMY_REVAMP B12 (Pixiu Benevolent: dropped)",
      "bossLv": 12,
      "ordinaryLv": [
@@ -1064,7 +1061,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Leech and Skewer; Smother (Earth on Fire, a warning pair)",
+     "idea": "Leech and Skewer; Smother (Earth on Fire enemies)",
      "arc": "Night things; leech; skewer; elite Balam; boss Camazotz (replaces Ah Puch and Buluc Chabtan, removed). ENEMY_REVAMP B13",
      "bossLv": 13,
      "ordinaryLv": [
@@ -1193,7 +1190,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Ghost; Eclipse and Eclipse (Light with Shadow)",
+     "idea": "Ghost; Dawn (Light on Shadow) and the Eclipse merge (Shadow + any attacker ignores armour)",
      "arc": "Avenue; ghost wall; Eclipse test; elite Sphinx; boss Mummy (Anubis and Isis are Benevolent). ENEMY_REVAMP B15",
      "bossLv": 14,
      "ordinaryLv": [
@@ -1258,7 +1255,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Final exam of kinds; Sunfire (Light beside Fire)",
+     "idea": "Final exam of kinds; Dawn, Smother, Resonance and Eclipse together",
      "arc": "Glass courts; every kind; elite Minotaur; boss Sekhmet (Ra is Benevolent). ENEMY_REVAMP B16 (Djinn removed)",
      "bossLv": 15,
      "ordinaryLv": [
@@ -1319,7 +1316,7 @@
    "expectedRuns": 9,
    "teaches": [
     "Ice flavour (Water): Chill",
-    "Freeze (Ice on Wet), Steam on Ice, Mist",
+    "Ice flavour: Chill and Freeze; weakness hits Steam and Erode; merges Scald, Mist, Mire",
     "Harden, Regenerate, Alpha",
     "Howl and Fangs packs; Mark",
     "Stage 2 beasts common; first Element Seal (Water)",
@@ -1333,7 +1330,7 @@
      "Fangs (Winter Wolf, Cu Sidhe)",
      "Scales (Divine Tortoise)"
     ],
-    "nudge": "Bring Fire to Ice enemies (Steam) and Ice to Wet enemies (Freeze); Shadow beside Water for Mist"
+    "nudge": "Water on Fire enemies (Steam) and on Earth enemies (Erode); two Ice hits to Freeze; Water + Wind in one column for Mist"
    },
    "origin": "new",
    "subareas": [
@@ -1457,8 +1454,8 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Freeze: an Ice hit on a Wet enemy skips its strike",
-     "arc": "Wet Näkki pair (Freeze) ▸ polar bear behind Wet row ▸ elite Polar bear 2x1 ▸ boss Kelpie (freeze to pin it)",
+     "idea": "Freeze: a second Ice hit on a Chilled enemy skips its strike",
+     "arc": "Näkki pair (Freeze) ▸ polar bear behind Water row ▸ elite Polar bear 2x1 ▸ boss Kelpie (freeze to pin it)",
      "bossLv": 16,
      "ordinaryLv": [
       14,
@@ -1525,8 +1522,8 @@
       "footprint": "1x1",
       "bossRow": true
      },
-     "idea": "Steam revisited on Ice: Fire thaws it, +2, neighbours -1 ATK",
-     "arc": "Ice row with one Oni ▸ Steam a lone Ice enemy ▸ elite Jorōgumo pair ▸ boss Yuki-onna (Steam stops regeneration)",
+     "idea": "Steam (Water on Fire enemies: -1 ATK this turn); Water and Fire resist Water",
+     "arc": "Ice row with one Oni ▸ Steam a lone Ice enemy ▸ elite Jorōgumo pair ▸ boss Yuki-onna (Steam weakens it)",
      "bossLv": 17,
      "ordinaryLv": [
       15,
@@ -1592,7 +1589,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Mist: Shadow beside Water takes 1 off the column; Ice beside Wind spreads Chill",
+     "idea": "Erode (Water on Earth); Mist merge (Water + Wind) takes 1 off the column",
      "arc": "Wind pair ▸ wolf plus wind lane ▸ elite Yeti ▸ boss Griffin (sweep punishes wide rows)",
      "bossLv": 17,
      "ordinaryLv": [
@@ -1872,8 +1869,8 @@
       "footprint": "1x1",
       "bossRow": true
      },
-     "idea": "Freeze chains across Wet rows; Summoner",
-     "arc": "Wet rows ▸ chain freeze ▸ elite Hiiden hirvi ▸ boss Louhi (cut summons by freezing)",
+     "idea": "Scald and Mire merges on a Water column; Summoner",
+     "arc": "Water rows ▸ chain freeze ▸ elite Hiiden hirvi ▸ boss Louhi (cut summons by freezing)",
      "bossLv": 19,
      "ordinaryLv": [
       17,
@@ -2012,7 +2009,7 @@
       "footprint": "2x2",
       "bossRow": false
      },
-     "idea": "Region exam: Freeze, Steam, Mist together",
+     "idea": "Region exam: Steam, Erode, Freeze and Mist together",
      "arc": "Mixed halls ▸ healer plus wall ▸ elite Jötunn plus Troll ▸ boss Níðhöggr (gnaws the wall, Steam it)",
      "bossLv": 20,
      "ordinaryLv": [
@@ -2063,7 +2060,7 @@
    "dominantElements": [
     "Fire",
     "Earth",
-    "Wind",
+    "Lightning",
     "Wood"
    ],
    "levelBand": {
@@ -2075,9 +2072,8 @@
    "expectedRuns": 10,
    "teaches": [
     "Fire pip; Burn and Scorch",
+    "Weakness hits Roots and Ground; merges Magma, Kindle, Blaze; Smother and Steam used in earnest",
     "Fury, Enrage clock, Gaze",
-    "Ground (Earth on Wind or Lightning); Smother as a warning",
-    "Steam from the Ice side",
     "Rend against armor; Whetstone",
     "Wide and 2x2 bodies hit from several columns"
    ],
@@ -2091,7 +2087,7 @@
      "Fangs (Singha, Suanni)",
      "Hooves (Rakhsh, Karkadann)"
     ],
-    "nudge": "Earth for Ground; Ice to counter Fire; Fangs sets for Rend"
+    "nudge": "Earth on Lightning enemies (Ground); Wood on Earth enemies (Roots); Fire + Earth, Fire + Wood or Fire + Wind in one column"
    },
    "origin": "new",
    "subareas": [
@@ -2140,7 +2136,7 @@
       "footprint": "2x1",
       "bossRow": false
      },
-     "idea": "Burn tick on your tiles; Smother: Earth removes Fire's Burn",
+     "idea": "Burn tick on your tiles; Smother revisited; Magma merge (Fire + Earth)",
      "arc": "Salamander pair ▸ Burn row ▸ elite Xiuhcoatl ▸ boss Chimera",
      "bossLv": 21,
      "ordinaryLv": [
@@ -2206,7 +2202,7 @@
       "bossRow": true
      },
      "idea": "Burn stops Regrow",
-     "arc": "Python pair ▸ geyser Wet tiles ▸ elite Python 2x1 ▸ boss Hydra (Scorch each head)",
+     "arc": "Python pair ▸ geyser Water tiles ▸ elite Python 2x1 ▸ boss Hydra (Scorch each head)",
      "bossLv": 21,
      "ordinaryLv": [
       19,
@@ -2269,7 +2265,7 @@
       "footprint": "1x2",
       "bossRow": false
      },
-     "idea": "Fury clock: kill early",
+     "idea": "Fury clock: kill early; Roots (Wood on Earth) and Kindle merge (Fire + Wood)",
      "arc": "Talos wall ▸ Dvergr pair ▸ elite Golem 1x2 ▸ boss Cyclops (burst before it grows)",
      "bossLv": 22,
      "ordinaryLv": [
@@ -2294,51 +2290,45 @@
      "theme": "Volcanic lightning storm in a crater",
      "landmark": "Lightning-rod pillars",
      "elements": [
-      "Wind"
+      "Lightning"
      ],
      "roster": [
       {
        "base": "Impundulu",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Hōkioi",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Kui",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Raijū",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Pouākai",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       }
      ],
      "boss": {
       "base": "Pazuzu",
       "variant": "storm",
-      "element": "Wind",
+      "element": "Lightning",
       "gimmick": "Chain: lightning jumps to a neighbour",
       "familiarity": "③",
-      "flavour": "lightning",
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Ground: Earth on a Wind or Lightning enemy +1, cancels chain",
+     "idea": "Ground: Earth on a Lightning enemy x1.5, cancels its chain; Blaze merge (Fire + Wind)",
      "arc": "Lightning pair ▸ chain row ▸ elite Hōkioi ▸ boss Pazuzu (Earth ally cancels the chain)",
      "bossLv": 22,
      "ordinaryLv": [
@@ -2351,8 +2341,7 @@
      "elite": {
       "base": "Hōkioi",
       "variant": "storm",
-      "element": "Wind",
-      "flavour": "lightning",
+      "element": "Lightning",
       "footprint": "1x1",
       "bossRow": false
      }
@@ -2770,7 +2759,8 @@
    "dominantElements": [
     "Water",
     "Shadow",
-    "Wind"
+    "Wind",
+    "Lightning"
    ],
    "levelBand": {
     "bossFirst": 26,
@@ -2780,9 +2770,8 @@
    },
    "expectedRuns": 12,
    "teaches": [
-    "Water, Lightning, Shadow pips; Wet status",
     "Tide (rows drift), Swarm, Summoner, Hold",
-    "Reaction chains (Wet then Lightning then Freeze)",
+    "Weakness hits Conduct and Static; merges Surge, Plasma, Tempest; Scales sets",
     "Scales family sets; Captains",
     "Boss row gate puzzles"
    ],
@@ -2794,7 +2783,7 @@
     "families": [
      "Scales (Dolphin, Humpback Cantor, Salmon, Hammerhead, Shachihoko, Geobuk, Honu)"
     ],
-    "nudge": "Two Scales for second-target +1; Wind beside Water; Row Captain in a wide row"
+    "nudge": "Lightning on Water enemies (Conduct) and on Wind enemies (Static); Water + Lightning in one column for Surge"
    },
    "origin": "new",
    "subareas": [
@@ -2843,8 +2832,8 @@
       "footprint": "1x1",
       "bossRow": true
      },
-     "idea": "Wet status from Water hits",
-     "arc": "Crab pair ▸ Wet row ▸ elite Nuckelavee ▸ boss Siren",
+     "idea": "Water pips: Lightning is weak against Earth, strong against Water (Conduct preview)",
+     "arc": "Crab pair ▸ Water row ▸ elite Nuckelavee ▸ boss Siren",
      "bossLv": 26,
      "ordinaryLv": [
       24,
@@ -2931,26 +2920,24 @@
      "theme": "Sea cliffs under black clouds",
      "landmark": "Lighthouse",
      "elements": [
-      "Wind"
+      "Wind",
+      "Lightning"
      ],
      "roster": [
       {
        "base": "Harpy",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Hōkioi",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Impundulu",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Siren",
@@ -2960,22 +2947,20 @@
       {
        "base": "Kui",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       }
      ],
      "boss": {
       "base": "Pouākai",
       "variant": "storm",
-      "element": "Wind",
-      "gimmick": "Chain: lightning jumps through Wet tiles",
+      "element": "Lightning",
+      "gimmick": "Chain: lightning jumps through Water tiles",
       "familiarity": "④",
-      "flavour": "lightning",
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Conduct over a Wet row: chain half damage",
-     "arc": "Harpy pair ▸ Wet plus Lightning ▸ elite Hōkioi ▸ boss Pouākai",
+     "idea": "Conduct (Lightning on Water enemies): the hit jumps to a neighbour",
+     "arc": "Harpy pair ▸ Water plus Lightning ▸ elite Hōkioi ▸ boss Pouākai",
      "bossLv": 27,
      "ordinaryLv": [
       25,
@@ -2987,8 +2972,7 @@
      "elite": {
       "base": "Hōkioi",
       "variant": "storm",
-      "element": "Wind",
-      "flavour": "lightning",
+      "element": "Lightning",
       "footprint": "1x1",
       "bossRow": false
      }
@@ -3104,7 +3088,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Swarm: Spread, Chain and Rend through small bodies",
+     "idea": "Swarm: Spread, Chain and Rend through small bodies; Static (Lightning on Wind)",
      "arc": "Stall guards ▸ summon lane ▸ elite Marakihau ▸ boss Taniwha",
      "bossLv": 28,
      "ordinaryLv": [
@@ -3168,7 +3152,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Mist: Shadow beside Water cuts a column by 1",
+     "idea": "Surge merge (Water + Lightning) and Plasma (Fire + Lightning)",
      "arc": "Selkie pair ▸ veiled ▸ elite Each-uisge ▸ boss Black Shuck",
      "bossLv": 28,
      "ordinaryLv": [
@@ -3234,7 +3218,7 @@
       "bossRow": false
      },
      "idea": "Scales family: Chain plus Captain",
-     "arc": "Shachihoko pair ▸ Wet stack wall ▸ elite Nurikabe ▸ boss Umibōzu",
+     "arc": "Shachihoko pair ▸ Water stack wall ▸ elite Nurikabe ▸ boss Umibōzu",
      "bossLv": 29,
      "ordinaryLv": [
       27,
@@ -3386,33 +3370,29 @@
      "theme": "Whirlpool at the sea's edge",
      "landmark": "Spinning rock ring",
      "elements": [
-      "Wind",
+      "Lightning",
       "Water"
      ],
      "roster": [
       {
        "base": "Charybdis",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Scylla",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Iku-Turso",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Bakunawa",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Jörmungandr",
@@ -3423,14 +3403,13 @@
      "boss": {
       "base": "Jörmungandr",
       "variant": "storm elder",
-      "element": "Wind",
+      "element": "Lightning",
       "gimmick": "Tide plus Enrage plus Sweep",
       "familiarity": "②",
-      "flavour": "lightning",
       "footprint": "3x1",
       "bossRow": false
      },
-     "idea": "Region exam: Wet, Lightning, Freeze, Tide",
+     "idea": "Region exam: Conduct, Static, Surge, Tempest, Tide",
      "arc": "Mixed tides ▸ chain storms ▸ elite Bakunawa ▸ boss Jörmungandr",
      "bossLv": 30,
      "ordinaryLv": [
@@ -3443,8 +3422,7 @@
      "elite": {
       "base": "Bakunawa",
       "variant": "storm",
-      "element": "Wind",
-      "flavour": "lightning",
+      "element": "Lightning",
       "footprint": "1x1",
       "bossRow": false
      }
@@ -3494,9 +3472,8 @@
    },
    "expectedRuns": 13,
    "teaches": [
-    "Wood pip; Venom; Wildfire chain on full Wood rows",
     "Hide (hits under N do nothing)",
-    "Pollen (Wind beside Wood) completes the 12 reactions",
+    "Weakness hit Uproot; merges Spores, Grove, Charge; Wildfire chains on Wood rows",
     "Brood, Offering, Molt",
     "Evolution branches at stage 2"
    ],
@@ -3508,7 +3485,7 @@
      "Wilds (Honeybee Hive, Mantis, Brown Bear, Langur)",
      "Scales (Rain Dragon)"
     ],
-    "nudge": "Wind beside Wood for Pollen; Fire to burn full Wood rows; two Wilds for the flexible set"
+    "nudge": "Wind on Wood enemies (Uproot); Fire to burn full Wood rows; Wood + Wind, Wood + Earth or Wood + Lightning in one column"
    },
    "origin": "new",
    "subareas": [
@@ -3559,7 +3536,7 @@
       "footprint": "2x1",
       "bossRow": false
      },
-     "idea": "Wildfire chain across a Wood row",
+     "idea": "Wildfire spreading across a Wood row",
      "arc": "Monkey rows (Wood) ▸ burn the row ▸ elite Tokoloshe ▸ boss Mokele-mbembe",
      "bossLv": 31,
      "ordinaryLv": [
@@ -3687,7 +3664,7 @@
       "footprint": "1x2",
       "bossRow": false
      },
-     "idea": "Pollen: Wind beside Wood extends buffs one tile",
+     "idea": "Uproot (Wind on Wood) and the Spores merge (Wood + Wind)",
      "arc": "Bridge pair ▸ wood plus wind ▸ elite Sisimito ▸ boss Mapinguari",
      "bossLv": 32,
      "ordinaryLv": [
@@ -3841,14 +3818,13 @@
      "elements": [
       "Earth",
       "Wood",
-      "Wind"
+      "Lightning"
      ],
      "roster": [
       {
        "base": "Impundulu",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Mngwa",
@@ -3880,7 +3856,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Armor: Pierce and Sunder; Roots with Earth",
+     "idea": "Armor: Pierce and Sunder; Grove merge (Wood + Earth)",
      "arc": "Gorilla pair ▸ armored elephant ▸ elite African elephant 2x1 ▸ boss Grootslang",
      "bossLv": 33,
      "ordinaryLv": [
@@ -4007,7 +3983,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Hold and Wet: Freeze and Conduct again",
+     "idea": "Hold; Sap and Conduct again; Charge merge (Wood + Lightning)",
      "arc": "Cenote pair ▸ drift ▸ elite Nile crocodile 2x1 ▸ boss Cipactli",
      "bossLv": 34,
      "ordinaryLv": [
@@ -4135,7 +4111,7 @@
       "footprint": "3x1",
       "bossRow": true
      },
-     "idea": "Region exam: Wildfire, Pollen, Hide, Venom",
+     "idea": "Region exam: Wildfire, Uproot, Spores, Hide, Venom",
      "arc": "Mixed canopy ▸ healer wall ▸ elite Mapinguari ▸ boss Sachamama",
      "bossLv": 35,
      "ordinaryLv": [
@@ -4186,8 +4162,7 @@
    "dominantElements": [
     "Shadow",
     "Wood",
-    "Water",
-    "Wind"
+    "Water"
    ],
    "levelBand": {
     "bossFirst": 36,
@@ -4198,7 +4173,7 @@
    "expectedRuns": 14,
    "teaches": [
     "Shadow pip; Ghost; Light reveals",
-    "Eclipse and Mist revisited",
+    "Twilight merge; Dawn and Eclipse revisited at depth; Gloom previewed",
     "Leech, Corrupted, Gaze (stronger)",
     "Attune and Mimic (converters); Swap",
     "Rebirth and Ward appear"
@@ -4212,7 +4187,7 @@
      "Fangs trickster line (Tanuki, Reynard, Nine-Tail Fox)",
      "Wings (Raven Pair, Huma)"
     ],
-    "nudge": "Light for Eclipse on Shadow; Fox line for Attune; keep a Mimic for flipping elements"
+    "nudge": "Light for Dawn on Shadow enemies; Light + Shadow in one column for Twilight; Fox line for Attune; a Mimic flips elements"
    },
    "origin": "new",
    "subareas": [
@@ -4262,7 +4237,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Ghost: Light reveals; Eclipse",
+     "idea": "Ghost: Dawn reveals it; Eclipse merge",
      "arc": "Kikimora pair ▸ ghost lane ▸ elite Vila ▸ boss Rusalka",
      "bossLv": 36,
      "ordinaryLv": [
@@ -4389,7 +4364,7 @@
       "footprint": "1x1",
       "bossRow": true
      },
-     "idea": "Placement vs Gaze; Eclipse",
+     "idea": "Placement vs Gaze; Twilight merge (Light + Shadow in one column)",
      "arc": "Hound pair ▸ gaze lane ▸ elite Barghest 2x1 ▸ boss Banshee",
      "bossLv": 37,
      "ordinaryLv": [
@@ -4578,7 +4553,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Bloom and Pollen to outlast; Guarded",
+     "idea": "Bloom and Sap to outlast; Guarded",
      "arc": "Dryad pair ▸ guard row ▸ elite Huldra ▸ boss Mavka",
      "bossLv": 38,
      "ordinaryLv": [
@@ -4641,7 +4616,7 @@
       "footprint": "1x1",
       "bossRow": true
      },
-     "idea": "Eclipse on rebirth; Rebirth for you",
+     "idea": "Dawn on rebirth; Rebirth for you",
      "arc": "Draugr pair ▸ rising haugbui ▸ elite Strzyga ▸ boss Koschei",
      "bossLv": 39,
      "ordinaryLv": [
@@ -4731,7 +4706,7 @@
      "landmark": "Antler gate",
      "elements": [
       "Shadow",
-      "Wind"
+      "Lightning"
      ],
      "roster": [
       {
@@ -4747,8 +4722,7 @@
       {
        "base": "Åsgårdsreia",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Sluagh",
@@ -4888,7 +4862,8 @@
     "Earth",
     "Shadow",
     "Fire",
-    "Light"
+    "Light",
+    "Lightning"
    ],
    "levelBand": {
     "bossFirst": 41,
@@ -4899,8 +4874,8 @@
    "expectedRuns": 17,
    "teaches": [
     "Line breakers: Bulwark, Guarded, Healer, Chief in formation",
+    "Weakness hit Gloom (Shadow on Light); Radiance merge (Light + any attacker); Steam and Smother in the castle",
     "Armor chains; Rend and Pierce against walls",
-    "Eclipse and Sunfire revisit in Light and Fire rooms",
     "Mirror, Mentor, Echo Drum, Ward",
     "Bastion hybrids hold the line",
     "Wide Bulwarks and boss-row gates in the castle"
@@ -4914,7 +4889,7 @@
      "Scales (Bastion, Coconut Crab)",
      "Hooves (White Hart, Audhumbla)"
     ],
-    "nudge": "Attack plus Guard hybrids; Ward to blunt hero strikes; Rend through walls"
+    "nudge": "Shadow on Light enemies (Gloom); Light beside any attacker for Radiance; Rend through walls"
    },
    "origin": "new",
    "subareas": [
@@ -5408,7 +5383,7 @@
       "footprint": "1x2",
       "bossRow": false
      },
-     "idea": "Armor chains: Sunder and Sunfire",
+     "idea": "Armor chains: Sunder, Eclipse and the Radiance merge (Light + X)",
      "arc": "Armour pair ▸ wall ▸ elite Golem 2x2 ▸ boss Talos",
      "bossLv": 44,
      "ordinaryLv": [
@@ -5471,7 +5446,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Eclipse and Eclipse in the dark",
+     "idea": "Gloom (Shadow on Light) and Dawn in the dark",
      "arc": "Crypt pair ▸ ghost lane ▸ elite Banshee ▸ boss Strzyga",
      "bossLv": 44,
      "ordinaryLv": [
@@ -5561,7 +5536,8 @@
      "landmark": "Cracked bell",
      "elements": [
       "Earth",
-      "Wind"
+      "Wind",
+      "Lightning"
      ],
      "roster": [
       {
@@ -5577,8 +5553,7 @@
       {
        "base": "Wyvern",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Hippogriff",
@@ -5588,8 +5563,7 @@
       {
        "base": "Gargoyle",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       }
      ],
      "boss": {
@@ -5614,8 +5588,7 @@
      "elite": {
       "base": "Wyvern",
       "variant": "storm",
-      "element": "Wind",
-      "flavour": "lightning",
+      "element": "Lightning",
       "footprint": "1x1",
       "bossRow": false
      }
@@ -5718,6 +5691,7 @@
    ],
    "dominantElements": [
     "Wind",
+    "Lightning",
     "Light",
     "Earth"
    ],
@@ -5729,8 +5703,8 @@
    },
    "expectedRuns": 18,
    "teaches": [
-    "Wind and Lightning together; Fan and Ground in the open",
     "Flying enemies: Stride and Veiled in the open",
+    "Merges Sandstorm and Quake complete the 15 natural pairs; Wind and Lightning together (Static, Ground)",
     "Skyfall and Wings sets of 4",
     "Legendary units born at stage 2",
     "Stage 3 mythic lines complete"
@@ -5744,7 +5718,7 @@
      "Wings (Khan Garid, Quetzal, Phoenix)",
      "Hooves (Sleipnir, Tulpar)"
     ],
-    "nudge": "Earth beside Wind for Ground; four Wings for first shot ignores Guarded; Legendary unit"
+    "nudge": "Earth on Lightning enemies (Ground); Lightning on Wind enemies (Static); Earth + Wind or Earth + Lightning in one column; four Wings; Legendary unit"
    },
    "origin": "new",
    "subareas": [
@@ -5818,20 +5792,19 @@
      "theme": "Spires of rock in the wind",
      "landmark": "Eyrie of white feathers",
      "elements": [
-      "Wind"
+      "Wind",
+      "Lightning"
      ],
      "roster": [
       {
        "base": "Caucasian Eagle",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Impundulu",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Hōkioi",
@@ -5846,8 +5819,7 @@
       {
        "base": "Harpy",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       }
      ],
      "boss": {
@@ -5859,7 +5831,7 @@
       "footprint": "3x1",
       "bossRow": false
      },
-     "idea": "Fan and Ground in open air: Wind reach, lightning on the wing",
+     "idea": "Static and Ground in open air: Wind reach, lightning on the wing; Sandstorm merge (Earth + Wind)",
      "arc": "Falcon pair ▸ cloud lane ▸ elite Caucasian Eagle 2x1 ▸ boss Roc",
      "bossLv": 46,
      "ordinaryLv": [
@@ -5872,8 +5844,7 @@
      "elite": {
       "base": "Caucasian Eagle",
       "variant": "storm",
-      "element": "Wind",
-      "flavour": "lightning",
+      "element": "Lightning",
       "footprint": "2x1",
       "bossRow": false
      }
@@ -5885,7 +5856,8 @@
      "theme": "Mountain pass above a cloud sea",
      "landmark": "Cable bridge",
      "elements": [
-      "Wind"
+      "Wind",
+      "Lightning"
      ],
      "roster": [
       {
@@ -5896,8 +5868,7 @@
       {
        "base": "Kui",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Harpy",
@@ -5918,10 +5889,9 @@
      "boss": {
       "base": "Anzû",
       "variant": "storm",
-      "element": "Wind",
+      "element": "Lightning",
       "gimmick": "Sweep plus Stride",
       "familiarity": "③",
-      "flavour": "lightning",
       "footprint": "1x1",
       "bossRow": false
      },
@@ -5989,7 +5959,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Healer in the open: Pollen reach",
+     "idea": "Healer in the open: Uproot",
      "arc": "Sylph pair ▸ heal lane ▸ elite Alkonost ▸ boss Hippogriff",
      "bossLv": 47,
      "ordinaryLv": [
@@ -6014,47 +5984,41 @@
      "theme": "Sky isles cloaked in storm",
      "landmark": "Lightning-rod tower",
      "elements": [
-      "Wind"
+      "Lightning"
      ],
      "roster": [
       {
        "base": "Inkanyamba",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Impundulu",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Raijū",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Nue",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Kui",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       }
      ],
      "boss": {
       "base": "Bull of Heaven",
       "variant": "storm",
-      "element": "Wind",
+      "element": "Lightning",
       "gimmick": "Fury plus Chain",
       "familiarity": "③",
-      "flavour": "lightning",
       "footprint": "2x1",
       "bossRow": false
      },
@@ -6071,8 +6035,7 @@
      "elite": {
       "base": "Nue",
       "variant": "storm",
-      "element": "Wind",
-      "flavour": "lightning",
+      "element": "Lightning",
       "footprint": "1x1",
       "bossRow": false
      }
@@ -6148,7 +6111,8 @@
      "theme": "Fallen rainbow bridge",
      "landmark": "Cracked glass arch",
      "elements": [
-      "Wind"
+      "Wind",
+      "Lightning"
      ],
      "roster": [
       {
@@ -6159,8 +6123,7 @@
       {
        "base": "Åsgårdsreia",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Hræsvelgr",
@@ -6175,8 +6138,7 @@
       {
        "base": "Sköll and Hati",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       }
      ],
      "boss": {
@@ -6339,51 +6301,45 @@
      "theme": "Ziggurat stair in the clouds",
      "landmark": "Seven-stage ziggurat",
      "elements": [
-      "Wind"
+      "Lightning"
      ],
      "roster": [
       {
        "base": "Anzû",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Pazuzu",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Ugallu",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Gallu",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Bull of Heaven",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       }
      ],
      "boss": {
       "base": "Lamashtu",
       "variant": "storm",
-      "element": "Wind",
+      "element": "Lightning",
       "gimmick": "Summoner plus Enrage",
       "familiarity": "③",
-      "flavour": "lightning",
       "footprint": "1x1",
       "bossRow": true
      },
-     "idea": "Region exam: Fan, Ground, Stride, Healer",
+     "idea": "Region exam: Static, Ground, Quake, Tempest, Stride, Healer",
      "arc": "Tower guards ▸ summon lane ▸ elite Bull of Heaven 2x2 ▸ boss Lamashtu",
      "bossLv": 50,
      "ordinaryLv": [
@@ -6396,8 +6352,7 @@
      "elite": {
       "base": "Bull of Heaven",
       "variant": "storm",
-      "element": "Wind",
-      "flavour": "lightning",
+      "element": "Lightning",
       "footprint": "2x2",
       "bossRow": false
      }
@@ -6449,8 +6404,7 @@
    "expectedRuns": 20,
    "teaches": [
     "Light and Shadow pips at depth; Eclipse",
-    "Every reaction once more in a single hour",
-    "Element resistances on elites and bosses (open decision)",
+    "Every weakness hit and merge once more in a single hour; optional single weakness removed on bosses (open decision)",
     "Ward and Rebirth to survive the end",
     "Full builds: Legendary hubs, stage 3, Rend caps"
    ],
@@ -6461,7 +6415,7 @@
     "families": [
      "All five families"
     ],
-    "nudge": "Legendary hubs; a Light and a Shadow pair; Rebirth and Ward to survive the deepest bosses"
+    "nudge": "Legendary hubs; a three-element column for three merges; Rebirth and Ward to survive the deepest bosses"
    },
    "origin": "new",
    "subareas": [
@@ -6707,7 +6661,7 @@
       "footprint": "2x1",
       "bossRow": false
      },
-     "idea": "Eclipse on Light-bound ghosts",
+     "idea": "Gloom on Light-bound ghosts",
      "arc": "Judge pair ▸ gaze lane ▸ elite Sphinx ▸ boss Ammit",
      "bossLv": 52,
      "ordinaryLv": [
@@ -6862,7 +6816,7 @@
      "elements": [
       "Shadow",
       "Fire",
-      "Wind",
+      "Lightning",
       "Earth"
      ],
      "roster": [
@@ -6879,8 +6833,7 @@
       {
        "base": "Ugallu",
        "variant": "storm",
-       "element": "Wind",
-       "flavour": "lightning"
+       "element": "Lightning"
       },
       {
        "base": "Lamashtu",
@@ -7036,7 +6989,7 @@
       "footprint": "1x1",
       "bossRow": false
      },
-     "idea": "Ghost plus Summoner: Eclipse sweep",
+     "idea": "Ghost plus Summoner: Dawn sweep",
      "arc": "Ghost pair ▸ summon lane ▸ elite Cheonyeo ▸ boss Oni",
      "bossLv": 54,
      "ordinaryLv": [
@@ -7227,7 +7180,7 @@
       "footprint": "2x1",
       "bossRow": true
      },
-     "idea": "Final exam: every reaction and keyword",
+     "idea": "Final exam: every weakness hit, merge and keyword",
      "arc": "Guards ▸ wall plus summon ▸ elite Cerberus 3x1 ▸ boss Hades",
      "bossLv": 55,
      "ordinaryLv": [

@@ -26,7 +26,7 @@ regionsData.regions.forEach((r) => {
   regionItems.push(Object.assign({ _t: 'region', _region: r.name }, r));
   r.subareas.forEach((s) => regionItems.push(Object.assign({ _t: 'subarea', _region: r.name, _rid: r.id }, s)));
 });
-const elemItems = elementsData.elements.map((e) => Object.assign({ _t: 'element' }, e)).concat(elementsData.reactions.map((e) => Object.assign({ _t: 'reaction' }, e)));
+const elemItems = elementsData.elements.map((e) => Object.assign({ _t: 'element' }, e)).concat((elementsData.weaknessHits || []).map((e) => Object.assign({ _t: 'weakness hit' }, e)), (elementsData.merges || []).map((e) => Object.assign({ _t: 'merge' }, e)));
 const bestiaryItems = bestiaryData.entries.map((e) => Object.assign({ _src: e.culture || e.set }, e));
 const rosterLine = (s) => (s.roster || []).map((m) => m.base + (m.variant ? ' (' + m.variant + ')' : '')).join(', ');
 const bossLine = (b) => (b ? b.base + (b.variant ? ' (' + b.variant + ')' : '') + (b.gimmick ? ': ' + b.gimmick : '') : '');
@@ -37,11 +37,11 @@ const LISTS = [
     card: (u) => ({ title: u.name, tags: [tag(u.element, 'el-' + u.element), tag(u.family), tag(u.rarity, 'rar-' + u.rarity), tag('CP ' + u.commandCost)],
       body: line('Role', u.roles ? 'ATK ' + u.roles.atk + ' / Buff ' + u.roles.buff + ' / Guard ' + u.roles.guard : '') + line('Ability', u.ability) + line('Culture', u.culture + (u.baseAnimal ? ' · base ' + u.baseAnimal : '') + (u.nature ? ' · ' + u.nature : '')) +
         '<ol class="dz-evo">' + (u.evolution || []).map((e) => '<li><b>' + esc(e.name) + '</b> ' + esc(e.extends) + '</li>').join('') + '</ol>' }) },
-  { id: 'elements', label: 'Elements and reactions', data: elemItems, search: (e) => [e.name, e.theme, e.note, e.resonance, e.hit, e.adjacent, e.mode, arr(e.pair).join(' ')],
-    filters: [['type', 'Type', (e) => e._t], ['element', 'Element', (e) => (e._t === 'reaction' ? arr(e.pair) : e.id)]],
+  { id: 'elements', label: 'Elements and reactions', data: elemItems, search: (e) => [e.name, e.theme, e.note, e.resonance, e.text, e.kind, arr(e.pair || [e.attacker, e.defender]).join(' ')],
+    filters: [['type', 'Type', (e) => e._t], ['element', 'Element', (e) => (e._t !== 'element' ? arr(e.pair || [e.attacker, e.defender]) : e.id)]],
     intro: () => '<details class="dz-det dz-intro"><summary>Notes on the element system</summary><div class="body"><div class="dz-l">' + esc(elementsData.recommended) + '</div><div class="dz-l"><b>Apply rule</b> ' + esc(elementsData.applyRule) + '</div><div class="dz-l"><b>Considered and dropped</b> ' + esc(elementsData.consideredAndDropped) + '</div></div></details>',
     card: (e) => e._t === 'element' ? { title: (e.glyph || '') + ' ' + e.name, tags: [tag('element')], body: line('Theme', e.theme) + line('Note', e.note) + line('Resonance', e.resonance) + line('Bestiary variants', e.bestiaryVariants) }
-      : { title: e.name, tags: [tag('reaction'), tag(arr(e.pair).join(' + ')), tag(e.mode)], body: line('Hit', e.hit) + line('Adjacent', e.adjacent) } },
+      : { title: e.name, tags: [tag(e._t), tag(arr(e.pair || [e.attacker, e.defender]).join(e.pair ? ' + ' : ' on ')), tag(e.kind)], body: line('Effect', e.text) } },
   { id: 'families', label: 'Families', data: families, search: (f) => [f.name, f.animals, f.signature, f.setBonus, f.typicalKeywords],
     filters: [], card: (f) => ({ title: f.name, tags: [tag(f.animals), tag(unitCount[f.id] != null ? unitCount[f.id] + ' units' : '')], body: line('Signature', f.signature) + line('Set bonus', f.setBonus) + line('Keywords', f.typicalKeywords) }) },
   { id: 'keywords', label: 'Keywords', data: keywords, search: (k) => [k.name, k.kind, k.rule],

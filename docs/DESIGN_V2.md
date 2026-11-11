@@ -1,20 +1,20 @@
-# Design V2.1: Guardian Beasts, Reactions and Big Enemies
+# Design V2.2: Guardian Beasts, Affinities, Merges and Big Enemies
 
-Version: **V2.1** (revises V2). Status: proposal for vetting. No game code changed. Data lives in `docs/data/*.json` (every entry `"status": "proposed"`, stable `id`). Counts: 89 units, **7 elements, 12 reactions, 5 families**, 91 keywords, 59 items (38 normal, 12 elite, 5 boss, 4 secret-boss sources), 49 relics, 12 heroes; 100 sub-areas each with an elite and a boss (30 big elites, 56 big bosses).
+Version: **V2.2** (revises V2.1: elements, strengths and weaknesses, column merges). Status: proposal for vetting. No game code changed. Data lives in `docs/data/*.json` (every entry `"status": "proposed"`, stable `id`). Counts: 89 units, **8 elements, a nature-based weakness chart, 12 named weakness hits, 36 column merges, 5 families**, 92 keywords, 59 items (38 normal, 12 elite, 5 boss, 4 secret-boss sources), 49 relics, 12 heroes; 100 sub-areas each with an elite and a boss (30 big elites, 56 big bosses).
 
-Decided by the user: guardian beasts that evolve from animals; evolution extends, never escalates; roles may mix; game-like elements with natural reactions and no strength wheel; **at most 7 elements; at most 5 families; buffers buff everyone with a Kin bonus; items have no base rarity; big elites and bosses.**
+Decided by the user: guardian beasts that evolve from animals; evolution extends, never escalates; roles may mix; **V2.2: 8 elements (Wind and Lightning separate, Ice stays a Water flavour); enemies have strengths and weaknesses from nature, not a wheel; reactions are replaced by named weakness hits and by merges between your own attackers in one column;** at most 5 families; buffers buff everyone with a Kin bonus; items have no base rarity; big elites and bosses.
 
-## 0. Design pillars (V2.1)
+## 0. Design pillars (V2.2)
 
 Simple to read, deep when combined, not restricting. Three systems carry the game; everything else is a keyword on a card.
 
 | Pillar | System | Why it combines |
 |---|---|---|
-| 1 | **Elements** (7, 12 reactions): place the unit that reacts to the target or to its neighbour | Any element is playable alone; pairs are bonuses, not requirements |
+| 1 | **Elements** (8): the right element hits an enemy's weakness; different elements in one column merge | Any element is playable alone; merges and weaknesses are bonuses, not requirements |
 | 2 | **Families** (5): set bonuses at 2 and 4; buffers help everyone and help kin more | A mixed squad still gets buffed; a themed squad gets more |
 | 3 | **Placement**: patterns, Captains, columns; big enemies change what a column means | One board, three rows of enemies, simple geometry |
 
-Cut to keep team building free: the hybrid tax; "Fangs are the only Rend family" (any unit can gain Rend); family changes on evolution; the Command Point surcharge at stage 3; Bond needing both partners on the board; family-only buffers (now Kin bonus); Frost and Storm as separate elements; separate Coils, Fins, Shells, Packs and Chitin families. Rarer layers (Evolution, Bond, Converters) stay optional.
+Cut to keep team building free: the hybrid tax; "Fangs are the only Rend family" (any unit can gain Rend); family changes on evolution; the Command Point surcharge at stage 3; Bond needing both partners on the board; family-only buffers (now Kin bonus); Frost as a separate element (Storm is now the Lightning element); the V2.1 attacker-versus-target and adjacent-ally reactions; separate Coils, Fins, Shells, Packs and Chitin families. Rarer layers (Evolution, Bond, Converters) stay optional.
 
 ---
 
@@ -33,43 +33,94 @@ Concept alternatives (spirit court, beast-folk tribes, summoned totems) stay as 
 
 ---
 
-## 2. Elements (7, reactions instead of a wheel)
+## 2. Elements (8), affinities and merges (V2.2)
 
-**Fire, Water, Wood, Earth, Wind, Light, Shadow.** Earth also covers stone, sand, metal and crystal. Shadow is mostly an enemy and trickster element. Two elements carry a **flavour** instead of being separate:
+**Fire, Water, Wood, Earth, Wind, Lightning, Light, Shadow.** Earth also covers stone, sand, metal and crystal. Shadow is mostly an enemy and trickster element. **Ice is a flavour of Water** (Chill; a second Ice hit on a Chilled enemy Freezes it) and follows the Water chart. Wind (push, reach) and Lightning (chain, burst) are separate elements since V2.2. Units and enemies keep a `flavour` tag (`ice`) in the data; bestiary variant "frost" is Water/Ice, "storm" is **Lightning**.
 
-| Element | Flavour | Rule (one line) | Replaces |
-|---|---|---|---|
-| Water | **Ice** | Applies Chill (-1 ATK); an Ice hit on a Wet enemy Freezes it (skips its strike); Fire thaws it (Steam) | Frost |
-| Wind | **Lightning** | Chains to a neighbour; on a Water or Wet enemy it chains for half damage (Conduct); Earth grounds it | Storm |
-
-Units and enemies keep a `flavour` tag (`ice`, `lightning`) in the data; a bestiary variant "frost" is Water/Ice, "storm" is Wind/Lightning.
+Unit split (89): Earth 17, Fire 15, Water 18 (13 plus 5 Ice), Wood 13, Wind 9, Light 7, Shadow 6, **Lightning 4** (Kunpeng, Pegasus, Thor's Goats, Raiju). Lightning is thin; see open decision 4.
 
 ### How elements work in battle
 
-1. Every unit and every enemy has one element (enemies from their bestiary variant; plain monsters have none).
-2. **Hit reaction:** the attacker's element meets the target's element or status (Burning, Wet, Chilled, Frozen). Fires once per hit.
-3. **Adjacent reaction:** two allied units with the paired elements stand orthogonally adjacent. Applied once per turn in the Boost phase, shown on the card before Fight.
-4. **Resonance** (same element count on the board) gives squad bonuses at 2 and 4 units.
-5. No element is simply better. Some pairs have no reaction; Smother is the one warning pair.
+1. Every unit and every enemy has one element (enemies from their bestiary variant; plain monsters have none and take x1).
+2. **Affinity:** each hit is multiplied by the attacker's element against the enemy's element (x1.5 weak, x0.5 resists, x1 otherwise).
+3. **Weakness hit:** a weak hit also triggers a named effect (one small extra, once per hit).
+4. **Column merge:** attackers of different elements in the same column (not necessarily adjacent) fire named merges.
+5. **Element sets** (2 and 4 units of an element on the squad, formerly "resonance") are unchanged and still in `elements.json` (`resonance` key). Not to be confused with the **Resonance merge**.
+6. No element is simply better; the V2.1 attacker-versus-target and adjacent-ally reactions are removed.
 
-### Reaction table (12, natural pairs)
+### Affinity chart (enemy element: weak to / resists)
+
+| Enemy | Weak to (x1.5) | Resists (x0.5) |
+|---|---|---|
+| Fire | Water, Earth | Fire, Wood |
+| Water (and Ice) | Lightning, Wood | Fire, Water |
+| Wood | Fire, Wind | Water, Earth |
+| Earth | Water, Wood | Lightning, Fire |
+| Wind | Lightning | Earth |
+| Lightning | Earth | Wind, Lightning |
+| Light | Shadow | Light |
+| Shadow | Light | Shadow |
+
+Stored as an 8x8 matrix `affinity[attacker][defender]` in `elements.json` (editable on the dev page). **Rounding:** weak = `ceil(dmg x 1.5)` (1 to 2, 2 to 3, 3 to 5, 4 to 6); resist = `max(1, ceil(dmg x 0.5))` (1 stays 1, 2 to 1, 3 to 2, 5 to 3), so a resisted hit never reaches 0 by itself. The multiplier applies once per hit, after buffs, marks and merge bonus damage and before armour; Spread, Pierce, Chain, Echo and Rend hits are each judged by their own element. **Elites and bosses use the same chart** (no altered affinities in V2.2); an optional data field `affinityOverride` may later remove one weakness on region 10 bosses, never an immunity.
+
+### Named weakness hits (12)
+
+| Attacker on enemy | Name | Extra effect (on top of x1.5) |
+|---|---|---|
+| Water on Fire | **Steam** | Target loses 1 ATK this turn |
+| Earth on Fire | **Smother** | Removes Fury or Enrage stacks, stops Regrow this turn |
+| Lightning on Water | **Conduct** | Jumps to the lowest-HP neighbour for half damage |
+| Wood on Water | **Sap** | The hero heals 1 (once per turn) |
+| Fire on Wood | **Wildfire** | Burn 1 (2 turns); Burn spreads to neighbouring Wood enemies |
+| Wind on Wood | **Uproot** | Pushes the target one column |
+| Water on Earth | **Erode** | Armour -1 for the battle |
+| Wood on Earth | **Roots** | Held: skips its next strike (not again for 1 turn) |
+| Lightning on Wind | **Static** | Marked: the next hit on it deals +1 |
+| Earth on Lightning | **Ground** | Its Chain and Fury are cancelled for the battle |
+| Light on Shadow | **Dawn** | Removes Hide, Veiled and Ghost |
+| Shadow on Light | **Gloom** | Target loses 1 ATK for the battle (cap -2) |
+
+### Column merges
+
+**Rule.** A merge needs two attackers in the **same column**; rows and adjacency do not matter, so a column of three can hold three elements. An **attacker** is a placed card that fires this turn (an attack behaviour and ATK 1 or more after boosts); supports, Shields and 0-ATK cards never count; a hybrid (Bastion) counts once with its one element; Attune and Mimic change the element before merges are read; elementless classic cards never merge. Each **distinct pair** of elements in the column fires once; an element present twice or more adds one **Resonance** for it. Three attackers of three elements give 3 merges; A, A, B give Resonance(A) and A+B; A, A, A give one Resonance. **Cap: 3 merges per column per turn** (also the natural maximum). The **carrier** is the front-most attacker of the pair (Resonance: the front-most of that element); the effect rides on its primary hit, or on the next attacker of the pair if the carrier cannot strike. **Overlap:** the same effect from two merges on one hit does not stack (strongest wins); flat bonus damage from merges on one hit is capped at +2; area parts apply once per attack action. Merges are computed in the Boost phase (shown in the preview) and resolve in the Fire phase.
+
+**Natural pairs (15)**
 
 | Pair | Name | One line |
 |---|---|---|
-| Fire + Wood | **Wildfire** | Burn on a Wood or Burning enemy spreads to neighbours; Wood beside Fire +1 ATK |
-| Fire + Water | **Steam** | Fire hit on a Water, Wet or Ice enemy +2, thaws, neighbours -1 ATK; Fire beside Water: hero +1 block |
-| Water + Wood | **Bloom** | Wood beside Water: +1 ATK and the hero heals 1 per turn |
-| Water + Wind | **Conduct** | Lightning hit on a Water or Wet enemy chains half damage; Wind beside Water chains to a neighbour |
-| Wind + Fire | **Fan** | Wind hit on a Burning enemy doubles the tick; Wind beside Fire: Fire +1 ATK |
-| Earth + Fire | **Smother** | Earth hit on a Fire enemy removes Fury or Burn, +1; Earth beside Fire: Scorch smothered (warning) |
-| Earth + Wood | **Roots** | Earth beside Wood: Shields in either tile block +1 |
-| Wind + Wood | **Pollen** | Wind beside Wood: the Wood unit's buff or heal reaches one tile further |
-| Earth + Wind | **Ground** | Earth hit on a Wind or Lightning enemy +1, cancels chain or Fury; Earth beside Wind: chain reach +1 |
-| Light + Shadow | **Eclipse** | Light hit on a Shadow enemy +2 and removes Hide, Veiled, Ghost; Light beside Shadow: both +1 ATK |
-| Light + Fire | **Sunfire** | Light beside Fire: both ignore 1 armor |
-| Shadow + Water | **Mist** | Shadow beside Water: the column takes 1 less enemy damage |
+| Fire + Water | **Scald** | Carrier hit +1 and the target loses 1 ATK this turn |
+| Fire + Wood | **Kindle** | Burn ticks 2 instead of 1 |
+| Fire + Earth | **Magma** | Burn ticks twice per turn; the hit ignores 1 armour |
+| Fire + Wind | **Blaze** | Burn is also applied to every neighbour of the target |
+| Fire + Lightning | **Plasma** | +2 damage on the carrier hit |
+| Water + Wood | **Bloom** | Hero heals 2; the column's attackers get +1 ATK next turn |
+| Water + Earth | **Mire** | Target loses 1 ATK for the battle (cap -2) |
+| Water + Wind | **Mist** | The enemy strike on this column deals 1 less this turn |
+| Water + Lightning | **Surge** | The Lightning jump deals full damage instead of half |
+| Wood + Earth | **Grove** | This column blocks 1 more enemy damage this turn |
+| Wood + Wind | **Spores** | Poison is also applied to the target's neighbours |
+| Wood + Lightning | **Charge** | Column attackers get +1 ATK next turn (cap +2) |
+| Earth + Wind | **Sandstorm** | The target is Marked (next hit +1) |
+| Earth + Lightning | **Quake** | The enemy behind the target takes half damage |
+| Wind + Lightning | **Tempest** | The hit lands again on the same target for half damage |
 
-Resonance at 2 / 4: Fire (+1 ATK turn 1 / Scorch +1 turn), Water (Chain +1 / hero heals 1), Wood (Molt cap +1 / Bloom +1), Earth (Shield +1 / ignore 1 armor), Wind (all attackers +1 range / first hit each turn doubled), Light (Eclipse reveals / Herald +1), Shadow (Hold hits neighbour / no strike turn 1). Full text in `elements.json`.
+**Light, Shadow and same-element pairs**
+
+| Pair | Name | Effect |
+|---|---|---|
+| Light + X (6) | **Radiance** | Strengthens X's own effect: Fire Burn lasts 3 turns, Water heal 2, Wood Poison 2, Earth armour -2, Wind push 2 columns, Lightning jump at full damage |
+| Shadow + X (6) | **Eclipse** | The carrier hit ignores up to 2 armour and Hide, Veiled, Ghost |
+| Light + Shadow | **Twilight** | Removes Hide, Veiled, Ghost and the target is Held |
+| X + X (8) | **Resonance** | X's own effect doubled: Fire Burn 2, Water heal 2 and +1 column block, Wood Poison 2 and cap +1, Earth armour -2 and +1 block, Wind push 2 and Mark, Lightning full jump plus a half jump; Light: +1 damage and strips Hide; Shadow: Held |
+
+### Affinity versus merges (two modes, a dev-page switch)
+
+| Mode | Rule |
+|---|---|
+| **Own element** (default, recommended) | Each hit is judged by its own attacker's element against the enemy (multiplier and weakness hit). Merge effects are additional and ride on the carrier hit, which is judged by the carrier's own element |
+| **Best of column** (alternative, test only) | Every hit from an attacker in the column uses the best multiplier among the column's attacker elements (x1.5 beats x1 beats x0.5; a resist applies only if every attacker resists). The named weakness hit comes from the front-most attacker whose element gives the best multiplier, once per hit. A one-element column behaves as Own element |
+
+Recommendation: **Own element**. It keeps every unit's element meaningful and makes the choice of the front attacker matter; Best of column lets one off-element unit carry a whole column and removes the reason to field the right element. No new affinities are defined for merged elements.
 
 ### Monster variants carry elements
 
@@ -79,9 +130,9 @@ Resonance at 2 / 4: Fire (+1 ATK turn 1 / Scorch +1 turn), Water (Chain +1 / her
 | water, blood | Water | wood, venom | Wood |
 | **frost** | **Water (Ice)** | light | Light |
 | wind | Wind | shadow | Shadow |
-| **storm** | **Wind (Lightning)** | | |
+| **storm** | **Lightning** | | |
 
-A "frost skeleton dragon" is a Water/Ice enemy, so Fire hits trigger Steam on it; a "storm kamaitachi" is Wind/Lightning, so a Water ally invites Conduct. The element is a pip on the enemy card (with a small ❄ or ⚡ for the flavour).
+A "frost skeleton dragon" is a Water/Ice enemy: weak to Lightning and Wood, resists Fire and Water. A "storm kamaitachi" is Lightning: weak to Earth, resists Wind and Lightning. The element is a pip on the enemy card, with small arrows for what it is weak to and what it resists (and a ❄ for Ice).
 
 ---
 
@@ -195,16 +246,16 @@ In a run, Evolution Seeds and shrines can evolve one unit for that run only.
 
 | System | Depth | Complexity | Phone readability |
 |---|---|---|---|
-| **1. Element reactions and resonance** (7 elements, 12 reactions) | High | Medium | Good: a reaction icon on the tile line |
+| **1. Affinity, weakness hits and column merges** (8 elements, 12 weakness hits, 36 merges) | High | Medium | Good: arrows on the enemy card, a merge icon on the column |
 | **2. Family sets and Kin buffers** (5 families) | Medium | Low | Excellent: a counter in the squad bar |
 | **3. Formation shapes** (Captains, Howl, columns, big-enemy lanes) | High | Medium | Fair: ghost-lines on the board |
 | 4. Evolution branches | High | Medium | Good, one choice at a time |
 | 5. Bond pairs (squad-wide) | Medium | Low | Excellent |
 | 6. Converters (Attune, Mimic) | High | High | Hard: two units only |
 
-Core: 1, 2, 3. Layers 4-6 are optional. Variation estimate: 5 families x 7 elements x 21 behaviours x 3 stages, filtered by 15 tiles and 12 reactions, still yields thousands of builds.
+Core: 1, 2, 3. Layers 4-6 are optional. Variation estimate: 5 families x 8 elements x 21 behaviours x 3 stages, filtered by 15 tiles and 36 merges, still yields thousands of builds.
 
-Example builds: **Burn garden** (Wood and Fire: Wildfire, Sun Crow, Bulgae, Rain Dragon); **Frozen tide** (Water/Ice: Freeze on Wet enemies, Geobuk, Reindeer); **Lightning pond** (Water and Wind: Conduct, Raijū, Dolphin); **Pack tactics** (3 Fangs in a row with Howl and Rend); **Hive** (Wilds: Brood and Offering).
+Example builds: **Burn garden** (Wood and Fire: Kindle, Wildfire, Sun Crow, Bulgae, Rain Dragon); **Frozen tide** (Water/Ice: two Ice hits Freeze, Geobuk, Reindeer); **Lightning pond** (Water and Lightning in one column: Surge, Conduct on Water enemies, Raijū, Dolphin); **Pack tactics** (3 Fangs in a row with Howl and Rend); **Hive** (Wilds: Brood and Offering).
 
 ---
 
@@ -253,9 +304,9 @@ A sub-effect is drawn from the slot's pool, never repeating a tag and never the 
 
 | Slot | Pool tags (value at iLv 1) |
 |---|---|
-| Weapon | `atk_type` +1 ATK to a unit type; `range` +1 range to a type (region 2+); `rend_cap` Rend cap +1; `reaction_dmg` hit reactions +1; `full_hp_bonus` +1 vs full-HP enemy; `bane_big` +1 vs Big bodies |
+| Weapon | `atk_type` +1 ATK to a unit type; `range` +1 range to a type (region 2+); `rend_cap` Rend cap +1; `weak_dmg` weakness hits +1; `full_hp_bonus` +1 vs full-HP enemy; `bane_big` +1 vs Big bodies |
 | Armor | `max_hp` +2; `block` Shields +1; `shield_type` +1 block to one Shield type; `hero_block_t1` +2 block on turn 1; `burn_ward` ignore first Burn; `lane_guard` -1 from each lane of a Wide strike |
-| Banner | `support_amount` +1 to a support type; `kin_bonus` Kin bonus +1; `adjacent_reaction` adjacent reactions +1; `herald_reach` buffs reach one more tile; `bond_atk` Bond +1; `first_turn_atk` first turn attackers +1 |
+| Banner | `support_amount` +1 to a support type; `kin_bonus` Kin bonus +1; `merge_power` merge effects +1 power; `herald_reach` buffs reach one more tile; `bond_atk` Bond +1; `first_turn_atk` first turn attackers +1 |
 | Ring | `souls_pct` +4%; `rations` +1; `dust_find` +1 Dust per salvage; `regen_after_battle` heal 1; `resonance_count` +1 counted unit for resonance; `gold_pct` +5% |
 
 ### 9.3 Source tiers and base power
@@ -295,7 +346,7 @@ Unique affixes are listed per item in `items.json` as `{grade: minor|major, text
 | Sets | Region set unchanged; set tiers count items, not rarity | no change |
 | Keys | Elite and boss wins give a Key (max 3); a secret boss needs 2 | Sealed Cache needed 1 |
 
-Heroes, relics and Camp: relics (49) are remapped to 7 elements and 5 families; Camp adds Whetstone (+1 Rend cap), Nursery (evolve a level earlier), Bestiary Hall (reveal enemy elements and footprints).
+Heroes, relics and Camp: relics (49) are remapped to 8 elements and 5 families; Camp adds Whetstone (+1 Rend cap), Nursery (evolve a level earlier), Bestiary Hall (reveal enemy elements and footprints).
 
 ---
 
@@ -327,8 +378,8 @@ Boss-row bodies are always D=1 (1x1, 2x1 or 3x1) and `bossRow: true`. A battle h
 | B4 Pierce | In its column it hits every distinct living body in range once; a deep body counts once. |
 | B5 Chain, Trample, Rend | Chain jumps to the lowest-HP living **other** body touching the target on any side. Trample and Rend work along the struck column: they affect the first living body behind the **rear edge** of the target. A Rend carry happens only when the hit kills the whole body. |
 | B6 Armor, Hide | Armor and Hide apply per hit (so Spread ATK 1 into Armored 1 still does nothing, and Hide N is checked per hit). |
-| B7 Statuses | Once per attack action per body: Burn, Venom, Chill, Mark, Hold and area reactions apply once even if several columns hit. Burn and Venom tick once per turn per body. Mark is consumed by the first hit. Hold or Freeze skips the entire strike (all lanes). Chill lowers ATK per lane (min 1). |
-| B8 Reactions | A hit reaction fires on each hit (Steam +2 applies per column hit); neighbour effects (Wildfire spread, Steam -1 ATK) fire once per action. |
+| B7 Statuses | Once per attack action per body: Burn, Venom, Chill, Mark, Hold and area effects (weakness hit and merge areas) apply once even if several columns hit. Burn and Venom tick once per turn per body. Mark is consumed by the first hit. Hold or Freeze skips the entire strike (all lanes). Chill lowers ATK per lane (min 1). |
+| B8 Affinity | The affinity multiplier and the weakness hit fire on each hit (x1.5 applies per column hit); area parts (Wildfire spread, Conduct jump, merge neighbours) fire once per action. |
 | B9 Heavy | Big bodies cannot be pushed (Current), swapped, drifted (Tide) or Stridden. They are not Splitters or Barrels by default. |
 
 **Why count Spread hits per column (twice).** It is the simplest rule (no dedupe set; each column is an independent hit), it keeps cheap ATK-1 Spread units (Hammerhead, Kamaitachi, Firebird) useful against the bodies that are supposed to be "hit from several columns", and it gives a readable counter: Pierce and Straight hit once, armor cancels each tiny hit. The risk is bounded (at most 3 hits) and is priced into the footprint HP multipliers (10.5). Statuses are limited to once per action so Venom and Burn cannot stack from one Spread.
@@ -388,7 +439,7 @@ Round ATK per lane to at least 1. Elites use the elite factor (x1.6 HP), bosses 
 How the prototype engine (`prototype/js/engine.js`) implements section 10, and the rules chosen where the section is silent. Tests: `node tools/test-big-enemies.js`.
 
 - **Coordinates.** Engine rows are 0 = back (spec row 2), 1 = front (spec row 1), and the boss row is row -1. A body is `{ row, col }` = its front-left anchor plus `w` and `d` (set only for Big bodies; every 1x1 stays a plain object). The boss row counts as the back row for range (distance `playerRow - max(row, 0)`). `Engine.validateLayout` rejects bodies that overflow, overlap, or are two rows deep in the boss row.
-- **Spread** returns one hit per column lookup (so a 3x1 can be hit three times by one Spread); the `fire` and `hit` events carry the column. Armor, Hide (ward) and reactions-per-hit are evaluated per hit. A body that dies mid-volley is not hit again.
+- **Spread** returns one hit per column lookup (so a 3x1 can be hit three times by one Spread); the `fire` and `hit` events carry the column. Armor, Hide (ward) and the affinity multiplier are evaluated per hit. A body that dies mid-volley is not hit again.
 - **Pierce** hits each distinct body in rows 1-0 once; the boss row is reached only when the column has no living enemy in rows 1-0 (the gate is evaluated at the moment of the shot, whether or not that enemy was in range).
 - **Overkill / Rend carry** happens only when the hit kills the whole body, goes along the struck column to the first body behind the rear edge (so a back-row kill carries into the boss row, R4), and a Bulwark body blocks it. The carried hit never carries again. The Spill relic spills along the front row beside the struck column.
 - **Chain** (Storm Mage) jumps to the lowest-HP other body touching any tile of a struck body; a boss-row body counts as touching only through a gate-open column, checked after the hit (so a kill can open the gate for the chain).
@@ -396,7 +447,7 @@ How the prototype engine (`prototype/js/engine.js`) implements section 10, and t
 - **Attacks.** One strike per covered column, resolved column by column, front to back inside a column (the existing order; it only differs from A2 across columns, and Shields are per column). Sweep hits the column beside each end of the footprint for `ceil(atk / 2)`. Enrage and end-of-turn gimmicks (Fury, Harden, Regenerate) act once per body. Gaze weakens attackers in every covered column. The threat preview sums lanes.
 - **Healer / Summoner / Splitter.** A healer mends every neighbouring body once (a Big healer: every body touching any of its tiles). Summoner minions use only empty tiles of rows 1-0 (R6); a Splitter that dies in the boss row puts its two minions in the nearest empty tiles of rows 1-0; a Big Splitter splits into its anchor tile and a free neighbour. Regrow waits until every tile of the body is free.
 - **Heavy (B9).** Big bodies do not Stride and are not swapped by a Strider (a blocked strider turns round and stays). Tide never carries Big bodies or the boss row, and a row that holds a Big body does not drift at all, so nothing drifts into it.
-- **Not in the prototype engine yet:** Burn, Venom, Chill, Mark, Hold, Freeze, Steam and the other reactions, Trample, Skyfall and Decoy do not exist, so B7 and B8 are only represented by Armor, Hide, Veil, Guard and the once-per-body gimmicks above. They should reuse the same per-hit versus per-action split when they arrive.
+- **Not in the prototype engine yet:** Burn, Venom, Chill, Mark, Hold, Freeze, affinity, weakness hits, merges, Trample, Skyfall and Decoy do not exist, so B7 and B8 are only represented by Armor, Hide, Veil, Guard and the once-per-body gimmicks above. They should reuse the same per-hit versus per-action split when they arrive.
 - **Budget.** `Engine.FOOTPRINTS` / `Engine.applyBudget` hold the 10.5 multipliers (HP x, ATK per lane x, at least 1). `gen.js` applies them to a layout char listed in a boss-def's `foot`; the dev builder applies them to new and re-footprinted bodies.
 - **UI.** A Big body is one card in its anchor tile spanning `w x d` cells with one HP tag, one status row and `ATK x lanes`; lane markers sit under each covered column, the boss row is a 0.8-cell strip with art overlapping upward, gated boss-row columns show a chain and open ones glow. Highlights cover the whole body when any tile is targeted; damage numbers and projectiles use the struck column.
 
@@ -404,19 +455,19 @@ How the prototype engine (`prototype/js/engine.js`) implements section 10, and t
 
 ## 11. Open decisions
 
-Decided in V2.1 and removed: nine elements (now 7), Storm needing more units, nine families, Chitin and real insects, the family-change on evolution, the stage-3 Command Point surcharge, Bond on the board, removing the old traits, Fangs being the only Rend family, hybrid tax (cut), item base rarity (cut).
+Decided in V2.1 and removed: nine elements (V2.2: 8), Storm needing more units, nine families, Chitin and real insects, the family-change on evolution, the stage-3 Command Point surcharge, Bond on the board, removing the old traits, Fangs being the only Rend family, hybrid tax (cut), item base rarity (cut).
 
 1. **Level curve and rewards past Lv20.** The enemy stat rule is set (`WORLD_PROGRESSION.md` 4.1); the reward curve w(L) = (L/5)^1.5 reaches 36x at Lv55. Propose capping the exponent after Lv20 or by flattening Souls; needs the campaign sim.
 2. **Spread counts once per column** (10.2). Confirm the "twice" rule, or switch to once per body and raise Spread-unit ATK.
 3. **Boss-row gate with no exceptions** (10.4). Confirm that Pierce cannot bypass it, or allow Pierce to reach it when exactly one enemy stands in front.
-4. **Reactions:** keep adjacent reactions automatic, or require a tap? Keep Smother as the one warning pair?
+4. **Affinity and merges (V2.2):** (a) confirm the chart and the 12 weakness hits; (b) confirm Own element as the default and keep Best of column as a test switch only; (c) are merges automatic or does the player tap to fire them (recommended: automatic, shown in the preview)? (d) Lightning has only 4 units: add 2 to 3 (Thunderbird-style Wings, a Hooves Lightning beast) in a later unit pass; (e) merge power vs unit count: the 3-merge column is the strongest board shape, tune in step 5; (f) Radiance and Eclipse repeat across six pairs: keep uniform or give each its own flavour?
 5. **Rend:** confirm cap 3 and that any unit can gain it by item, relic and Camp.
 6. **Hybrid tax removal:** check in the sim that free hybrids do not dominate (the budget cap is the only limit now).
 7. **Evolution:** automatic at mastery or a choice at stage 2 with two branches? Legendary born at stage 2 or all lines three stages?
 8. **Scales is the largest family** (25 units against 12 Hooves): rebalance by adding Hooves and Wings units or moving the shells.
 9. **Secret bosses:** one per region behind a Sealed Cache with 2 Keys (9.3); confirm count, art and whether they appear in the 100 sub-areas or as extras.
 10. **Item pity and Forge prices** (9.5) are placeholders for `tools/sim-runs.js`; step-up chances in 9.1 likewise.
-11. **Elite and boss resistance** to reactions (a Shadow boss immune to Eclipse): only in the Necropolis, or never?
+11. **Elite and boss affinity:** recommended none (same chart as their element); optionally at most one weakness removed (x1) per Necropolis boss via `affinityOverride`, never an immunity.
 12. **Every enemy has an element,** or plain monsters stay elementless?
 13. **Art:** Long, Fenghuang, Baihu and Xuanwu art was dropped; use Yong, Rồng or the zodiac Dragon for dragon lines. Big-body art needs 2x1, 1x2, 2x2 and 3x1 crops for 30 elites and 42 bosses.
 14. **Ambivalent animals** (tiger, wolf, bear) on the player side as "wild guardians"?

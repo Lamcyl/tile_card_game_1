@@ -13,7 +13,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -92,7 +92,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -133,7 +133,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -153,7 +153,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -182,7 +182,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -268,7 +268,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -443,7 +443,7 @@
   "slot": "banner",
   "text": "Lightning chains reach 1 tile further.",
   "ties": [
-   "element:wind"
+   "element:lightning"
   ],
   "current": false,
   "status": "proposed",
@@ -452,7 +452,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -474,7 +474,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -540,7 +540,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -589,47 +589,47 @@
  },
  {
   "id": "new_reaction_lens",
-  "name": "Reaction Lens",
+  "name": "Affinity Lens",
   "slot": "weapon",
-  "text": "Hit reactions deal +1 damage.",
+  "text": "Weakness hits deal +1 damage.",
   "ties": [
-   "reactions"
+   "affinity"
   ],
   "current": false,
   "status": "proposed",
   "sourceTier": "elite",
-  "baseEffect": "Hit reactions deal +1 damage.",
+  "baseEffect": "Weakness hits deal +1 damage.",
   "subPool": [
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
   "uniqueAffixes": [
    {
     "grade": "minor",
-    "text": "Hit reactions on Big enemies deal +1 more."
+    "text": "Weakness hits on Big enemies deal +1 more."
    },
    {
     "grade": "minor",
-    "text": "Reactions on elites deal +2."
+    "text": "Weakness hits on elites deal +2."
    }
   ]
  },
  {
   "id": "new_catalyst_flask",
-  "name": "Catalyst Flask",
+  "name": "Merge Flask",
   "slot": "ring",
-  "text": "Adjacent reactions also trigger diagonally.",
+  "text": "The second merge on a carrier hit is one power stronger.",
   "ties": [
-   "reactions"
+   "affinity"
   ],
   "current": false,
   "status": "proposed",
   "sourceTier": "elite",
-  "baseEffect": "Adjacent reactions also trigger diagonally.",
+  "baseEffect": "The second merge on a carrier hit is one power stronger.",
   "subPool": [
    "souls_pct",
    "rations",
@@ -641,7 +641,7 @@
   "uniqueAffixes": [
    {
     "grade": "minor",
-    "text": "Adjacent reactions also give the hero +1 block."
+    "text": "Each merge in a column also gives the hero +1 block this turn."
    },
    {
     "grade": "minor",
@@ -664,7 +664,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -687,7 +687,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -710,7 +710,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -784,7 +784,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -850,7 +850,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -957,7 +957,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -979,7 +979,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -1001,7 +1001,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -1033,7 +1033,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -1055,7 +1055,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -1077,7 +1077,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -1096,15 +1096,15 @@
   "id": "new_rooted_boots",
   "name": "Rooted Boots",
   "slot": "armor",
-  "text": "Earth beside Wood: Roots gives +2 block.",
+  "text": "Earth and Wood attackers in one column (Grove) give +2 block.",
   "ties": [
-   "reactions",
+   "affinity",
    "element:earth"
   ],
   "current": false,
   "status": "proposed",
   "sourceTier": "normal",
-  "baseEffect": "Earth beside Wood: Roots gives +2 block.",
+  "baseEffect": "Earth and Wood attackers in one column (Grove) give +2 block.",
   "subPool": [
    "max_hp",
    "block",
@@ -1188,7 +1188,7 @@
   "text": "Fire hits on a Wood enemy deal +1.",
   "ties": [
    "element:fire",
-   "reactions"
+   "affinity"
   ],
   "current": false,
   "status": "proposed",
@@ -1198,7 +1198,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -1250,7 +1250,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"
@@ -1284,7 +1284,7 @@
    },
    {
     "grade": "minor",
-    "text": "Mirror also copies the neighbour's reaction."
+    "text": "Mirror also copies the neighbour's element for merges."
    }
   ]
  },
@@ -1414,7 +1414,7 @@
    "atk_type",
    "range",
    "rend_cap",
-   "reaction_dmg",
+   "weak_dmg",
    "full_hp_bonus",
    "bane_big"
   ],
@@ -1444,7 +1444,7 @@
   "subPool": [
    "support_amount",
    "kin_bonus",
-   "adjacent_reaction",
+   "merge_power",
    "herald_reach",
    "bond_atk",
    "first_turn_atk"

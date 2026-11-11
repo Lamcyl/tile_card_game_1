@@ -91,12 +91,12 @@
  },
  {
   "id": "gale_caller",
-  "name": "Gale Caller",
+  "name": "Storm Caller",
   "current": false,
-  "unlock": "win with 4 Wind units",
-  "passive": "Reactions with Wind deal +1",
+  "unlock": "win with 4 Lightning units",
+  "passive": "Lightning merges and Conduct deal +1",
   "ability": "Thunderclap: strike one enemy and chain once",
-  "fiction": "A rainmaker.",
+  "fiction": "A rainmaker who calls the thunder.",
   "status": "proposed"
  },
  {

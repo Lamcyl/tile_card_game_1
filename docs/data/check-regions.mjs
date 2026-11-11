@@ -1,5 +1,5 @@
 // Design-data check (no game code). Usage: node docs/data/check-regions.mjs
-// Also checks the 7-element rule, flavour tags, elite/boss footprints and the big-enemy shares.
+// Also checks the 8-element rule (V2.2), flavour tags, elite/boss footprints and the big-enemy shares.
 // Verifies every roster and boss base name in regions.json exists in BESTIARY.md,
 // is not in "Removed for sensitivity", is Malevolent or Ambivalent, and is not flagged yellow/red.
 import fs from "fs";
@@ -34,9 +34,9 @@ for (let i = removedStart; i < bestiary.length; i++) {
   if (cur.trim()) removed.add(baseOf(cur));
 }
 
-const ELEMENT_OF = { fire:"Fire", magma:"Fire", water:"Water", blood:"Water", frost:"Water", storm:"Wind", wind:"Wind", wood:"Wood", venom:"Wood", stone:"Earth", sand:"Earth", metal:"Earth", crystal:"Earth", light:"Light", shadow:"Shadow" };
-const SEVEN = new Set(["Fire", "Water", "Wood", "Earth", "Wind", "Light", "Shadow"]);
-const FLAVOUR_OF = { frost: "ice", storm: "lightning" };
+const ELEMENT_OF = { fire:"Fire", magma:"Fire", water:"Water", blood:"Water", frost:"Water", storm:"Lightning", wind:"Wind", wood:"Wood", venom:"Wood", stone:"Earth", sand:"Earth", metal:"Earth", crystal:"Earth", light:"Light", shadow:"Shadow" };
+const SEVEN = new Set(["Fire", "Water", "Wood", "Earth", "Wind", "Lightning", "Light", "Shadow"]); // V2.2: eight elements (name kept for the diff)
+const FLAVOUR_OF = { frost: "ice" }; // Lightning is an element since V2.2
 const FOOTPRINTS = new Set(["1x1", "2x1", "1x2", "2x2", "3x1"]);
 const STATES = new Set(["skeleton","undead","ghost","armoured","giant","swarm","lesser","elder","ancient","corrupted","crystal","clockwork","plague","mutant","mummified","whelp","adult","alpha"]);
 
@@ -62,7 +62,7 @@ function checkShape(where, e, isBoss, region, idx, n) {
   if (isBoss && (fp !== "1x1" || e.bossRow)) stats.bossBig++;
   if (isBoss && e.bossRow) stats.bossRow++;
   if (isBoss && fp !== "1x1") stats.bossMulti++;
-  if (e.element && !SEVEN.has(e.element)) misses.push(`${where}: element ${e.element} is not one of the 7`);
+  if (e.element && !SEVEN.has(e.element)) misses.push(`${where}: element ${e.element} is not one of the 8`);
 }
 function checkEntry(where, e, isBoss) {
   entries++;
@@ -88,7 +88,7 @@ for (const r of data.regions) {
     if (s.roster.length < 4 || s.roster.length > 6) misses.push(`${s.id}: roster size ${s.roster.length} (need 4-6)`);
     s.roster.forEach((e) => checkEntry(s.id, e, false));
     checkEntry(s.id + " (boss)", s.boss, true);
-    s.roster.forEach((e) => { if (e.element && !SEVEN.has(e.element)) misses.push(`${s.id}: roster element ${e.element} is not one of the 7`); });
+    s.roster.forEach((e) => { if (e.element && !SEVEN.has(e.element)) misses.push(`${s.id}: roster element ${e.element} is not one of the 8`); });
     if (!s.elite) misses.push(`${s.id}: elite missing`);
     else {
       if (!s.roster.some((e) => e.base === s.elite.base)) misses.push(`${s.id}: elite ${s.elite.base} not in roster`);
@@ -98,7 +98,7 @@ for (const r of data.regions) {
     checkShape(s.id + " (boss)", s.boss, true, r.number, 0, 0);
     const pr = (perRegion[r.number] ||= { n: 0, eliteBig: 0, bossBig: 0 });
     pr.n++; if (s.elite && s.elite.footprint !== "1x1") pr.eliteBig++; if (s.boss.footprint !== "1x1" || s.boss.bossRow) pr.bossBig++;
-    if (s.elements.some((el) => !SEVEN.has(el))) misses.push(`${s.id}: sub-area elements outside the 7`);
+    if (s.elements.some((el) => !SEVEN.has(el))) misses.push(`${s.id}: sub-area elements outside the 8`);
     for (const t of [...s.roster, s.boss]) { const f = (t.variant || "").split(/\s+/).map((v) => FLAVOUR_OF[v]).find(Boolean); if ((f || null) !== (t.flavour || null)) misses.push(`${s.id}: ${t.base} flavour ${t.flavour} does not match variant "${t.variant}"`); }
     const derived = new Set([...s.roster, s.boss].flatMap((e) => (e.variant || "").split(/\s+/).map((t) => ELEMENT_OF[t]).filter(Boolean)));
     for (const el of s.elements) if (!derived.has(el)) misses.push(`${s.id}: element ${el} not carried by any roster variant`);

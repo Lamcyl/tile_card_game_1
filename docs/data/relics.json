@@ -138,7 +138,7 @@
   "id": "new_unquenched_ember",
   "name": "Unquenched Ember",
   "myth": "Slavic",
-  "text": "Fire reactions deal +1 and Burn ticks twice.",
+  "text": "Fire weakness hits deal +1 and Burn ticks twice.",
   "current": false,
   "ties": [
    "element:fire"
@@ -149,11 +149,11 @@
   "id": "new_tide_mirror",
   "name": "Tide Mirror",
   "myth": "Polynesian",
-  "text": "Conduct and Steam trigger on every Water unit in the squad.",
+  "text": "Water merges (Scald, Bloom, Mire, Mist, Surge) are one power stronger.",
   "current": false,
   "ties": [
    "element:water",
-   "reactions"
+   "affinity"
   ],
   "status": "proposed"
  },
@@ -175,7 +175,7 @@
   "text": "The first Lightning chain each battle is doubled.",
   "current": false,
   "ties": [
-   "element:wind"
+   "element:lightning"
   ],
   "status": "proposed"
  },
@@ -236,12 +236,12 @@
  },
  {
   "id": "new_reaction_codex",
-  "name": "Reaction Codex",
+  "name": "Affinity Codex",
   "myth": "Greek",
-  "text": "Each reaction a unit triggers gives +1 Soul (max 5 per battle).",
+  "text": "Each weakness hit or merge you trigger gives +1 Soul (max 5 per battle).",
   "current": false,
   "ties": [
-   "reactions"
+   "affinity"
   ],
   "status": "proposed"
  },
@@ -249,10 +249,10 @@
   "id": "new_alchemist_s_crucible",
   "name": "Alchemist's Crucible",
   "myth": "Egyptian",
-  "text": "Adjacent reactions also trigger across a row gap.",
+  "text": "One merge each turn may use an attacker from the neighbouring column.",
   "current": false,
   "ties": [
-   "reactions"
+   "affinity"
   ],
   "status": "proposed"
  },
@@ -317,7 +317,7 @@
   "id": "new_river_lantern",
   "name": "River Lantern",
   "myth": "Chinese",
-  "text": "Scales units count as Water for reactions (even before the 4-set).",
+  "text": "Scales units count as Water for merges (even before the 4-set).",
   "current": false,
   "ties": [
    "family:scales"

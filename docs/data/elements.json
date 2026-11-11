@@ -1,7 +1,8 @@
 {
- "recommended": "game-like, 7 elements",
- "consideredAndDropped": "The classic five (wood, fire, earth, metal, water) with a generating and overcoming cycle was dropped: a cycle forces rigid counters. Frost and Storm were dropped as separate elements in V2.1 (cap of 7): they are the Ice flavour of Water and the Lightning flavour of Wind.",
- "applyRule": "No strength/weakness wheel. 12 reactions fire when an attacker's element meets a target's element or status (hit), or when two allied elements stand orthogonally adjacent (adjacent, once per turn at the Boost phase). A reaction triggers once per hit event; area effects once per attack action. Same-element resonance has thresholds at 2 and 4. Enemies carry the element of their bestiary variant (frost = Water/Ice, storm = Wind/Lightning). Flavours add rules but never a new element.",
+ "recommended": "game-like, 8 elements (V2.2)",
+ "version": "V2.2",
+ "consideredAndDropped": "The classic five with a generating and overcoming cycle was dropped (rigid counters). Frost stays the Ice flavour of Water. Wind and Lightning were one element in V2.1 and are now separate (V2.2).",
+ "applyRule": "V2.2: no wheel, a short nature chart. Enemies are weak (x1.5) or resist (x0.5) by element; a weak hit also triggers a named weakness hit. Reactions between attackers and adjacent allies are removed. Instead, attackers of different elements in the same column fire merges (named pair effects). Element sets at 2 and 4 on the squad are unchanged. Enemies carry the element of their bestiary variant (frost = Water/Ice, storm = Lightning). Flavours add rules but never a new element.",
  "elements": [
   {
    "id": "fire",
@@ -20,7 +21,7 @@
    "id": "water",
    "name": "Water",
    "glyph": "💧",
-   "theme": "Flow, chain, heal. Ice flavour chills and freezes.",
+   "theme": "Flow, heal. Ice flavour chills and freezes.",
    "bestiaryVariants": [
     "water",
     "blood",
@@ -37,7 +38,7 @@
      "variants": [
       "frost"
      ],
-     "rule": "Ice units and enemies are Water. An Ice hit applies Chill (-1 ATK); an Ice hit on a Wet enemy Freezes it (skips its next strike). Fire hits thaw Ice via Steam."
+     "rule": "Ice units and enemies are Water. An Ice hit applies Chill (-1 ATK, cap -2); a second Ice hit on an already Chilled enemy Freezes it (skips its next strike, not again for 2 turns). Ice follows the Water chart."
     }
    ]
   },
@@ -65,7 +66,7 @@
     "metal",
     "crystal"
    ],
-   "note": "Defence and armor.",
+   "note": "Defence and armor. Grounds Lightning.",
    "status": "proposed",
    "resonance": "2: Shields block +1. 4: hits ignore 1 armor."
   },
@@ -73,25 +74,25 @@
    "id": "wind",
    "name": "Wind",
    "glyph": "🌀",
-   "theme": "Push, fan, reach, spark. Lightning flavour chains.",
+   "theme": "Push, fan, reach.",
    "bestiaryVariants": [
-    "wind",
+    "wind"
+   ],
+   "note": "Reach and repositioning. Weak points: Lightning.",
+   "status": "proposed",
+   "resonance": "2: all attackers +1 range. 4: the first hit each turn is doubled."
+  },
+  {
+   "id": "lightning",
+   "name": "Lightning",
+   "glyph": "⚡",
+   "theme": "Chain, jump, spark.",
+   "bestiaryVariants": [
     "storm"
    ],
-   "note": "Reach and repositioning. Two flavours: Gust (default) and Lightning.",
+   "note": "Chains and burst; Earth grounds it.",
    "status": "proposed",
-   "resonance": "2: all attackers +1 range. 4: the first hit each turn is doubled.",
-   "flavours": [
-    {
-     "id": "lightning",
-     "name": "Lightning",
-     "glyph": "⚡",
-     "variants": [
-      "storm"
-     ],
-     "rule": "Lightning units and enemies are Wind. A Lightning hit Chains to a neighbour; on a Water or Wet enemy it chains for half damage (Conduct). Earth grounds it (Ground)."
-    }
-   ]
+   "resonance": "2: chain jumps +1 damage. 4: the first chain each turn deals full damage."
   },
   {
    "id": "light",
@@ -118,31 +119,414 @@
    "resonance": "2: Hold also affects the neighbour. 4: the hero cannot be struck on turn 1."
   }
  ],
- "reactions": [
-  {
-   "id": "wildfire",
-   "name": "Wildfire",
-   "pair": [
-    "fire",
-    "wood"
-   ],
-   "mode": "both",
-   "hit": "Hit: Burn on a Wood or Burning enemy also spreads to its neighbours.",
-   "adjacent": "Wood beside a Fire ally: +1 ATK.",
-   "line": "Fire spreads through Wood.",
-   "status": "proposed"
+ "affinity": {
+  "fire": {
+   "fire": 0.5,
+   "water": 0.5,
+   "wood": 1.5,
+   "earth": 0.5,
+   "wind": 1,
+   "lightning": 1,
+   "light": 1,
+   "shadow": 1
   },
+  "water": {
+   "fire": 1.5,
+   "water": 0.5,
+   "wood": 0.5,
+   "earth": 1.5,
+   "wind": 1,
+   "lightning": 1,
+   "light": 1,
+   "shadow": 1
+  },
+  "wood": {
+   "fire": 0.5,
+   "water": 1.5,
+   "wood": 1,
+   "earth": 1.5,
+   "wind": 1,
+   "lightning": 1,
+   "light": 1,
+   "shadow": 1
+  },
+  "earth": {
+   "fire": 1.5,
+   "water": 1,
+   "wood": 0.5,
+   "earth": 1,
+   "wind": 0.5,
+   "lightning": 1.5,
+   "light": 1,
+   "shadow": 1
+  },
+  "wind": {
+   "fire": 1,
+   "water": 1,
+   "wood": 1.5,
+   "earth": 1,
+   "wind": 1,
+   "lightning": 0.5,
+   "light": 1,
+   "shadow": 1
+  },
+  "lightning": {
+   "fire": 1,
+   "water": 1.5,
+   "wood": 1,
+   "earth": 0.5,
+   "wind": 1.5,
+   "lightning": 0.5,
+   "light": 1,
+   "shadow": 1
+  },
+  "light": {
+   "fire": 1,
+   "water": 1,
+   "wood": 1,
+   "earth": 1,
+   "wind": 1,
+   "lightning": 1,
+   "light": 0.5,
+   "shadow": 1.5
+  },
+  "shadow": {
+   "fire": 1,
+   "water": 1,
+   "wood": 1,
+   "earth": 1,
+   "wind": 1,
+   "lightning": 1,
+   "light": 1.5,
+   "shadow": 0.5
+  }
+ },
+ "affinityRules": {
+  "meaning": "affinity[attacker][defender] is the damage multiplier of one hit: 1.5 weak, 0.5 resist, 1 neutral. Enemies without an element are x1.",
+  "rounding": "Weak: ceil(damage x 1.5), so 1 becomes 2, 2 becomes 3, 3 becomes 5. Resist: max(1, ceil(damage x 0.5)), so 1 stays 1, 2 becomes 1, 3 becomes 2, 5 becomes 3. Applied once per hit after buffs, marks and merge bonus damage and before armour. Spread, pierce, chain, echo and Rend hits are each judged on their own element.",
+  "weakHit": "A weak hit also triggers the named weakness hit once per hit event (area parts once per attack action).",
+  "bossesAndElites": "Elites and bosses use the same chart as their element. No altered affinities in V2.2. Optional later data field `affinityOverride` ({element: multiplier}) is allowed for at most one entry per boss in region 10, never below x0.5 and never an immunity.",
+  "enemyCap": "Chilled and similar status effects from weakness hits use the existing caps (Chill -2 total)."
+ },
+ "weaknessHits": [
   {
    "id": "steam",
    "name": "Steam",
+   "attacker": "water",
+   "defender": "fire",
+   "text": "Target loses 1 ATK this turn.",
+   "effect": {
+    "p": "onHit",
+    "status": "chill",
+    "n": 1,
+    "turns": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "smother",
+   "name": "Smother",
+   "attacker": "earth",
+   "defender": "fire",
+   "text": "Removes its Fury or Enrage stacks and stops its Regrow this turn.",
+   "effect": {
+    "p": "onHit",
+    "op": "cleanse",
+    "what": [
+     "fury",
+     "enrage",
+     "regrow"
+    ],
+    "turns": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "conduct",
+   "name": "Conduct",
+   "attacker": "lightning",
+   "defender": "water",
+   "text": "Jumps to the lowest-HP neighbour for half damage.",
+   "effect": {
+    "p": "chain",
+    "factor": 0.5,
+    "jumps": 1,
+    "viaWeakness": true
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "sap",
+   "name": "Sap",
+   "attacker": "wood",
+   "defender": "water",
+   "text": "The hero heals 1 (once per turn).",
+   "effect": {
+    "p": "heroHeal",
+    "n": 1,
+    "oncePerTurn": true
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "wildfire",
+   "name": "Wildfire",
+   "attacker": "fire",
+   "defender": "wood",
+   "text": "Burns the target (1 per turn, 2 turns); Burn spreads to neighbouring Wood enemies.",
+   "effect": {
+    "p": "onHit",
+    "status": "burn",
+    "n": 1,
+    "turns": 2,
+    "spreadTo": {
+     "element": "wood"
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "uproot",
+   "name": "Uproot",
+   "attacker": "wind",
+   "defender": "wood",
+   "text": "Pushes the target one column sideways.",
+   "effect": {
+    "p": "push",
+    "columns": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "erode",
+   "name": "Erode",
+   "attacker": "water",
+   "defender": "earth",
+   "text": "Armour -1 for the rest of the battle (min 0).",
+   "effect": {
+    "p": "onHit",
+    "status": "sunder",
+    "n": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "roots",
+   "name": "Roots",
+   "attacker": "wood",
+   "defender": "earth",
+   "text": "Held: skips its next strike (cannot be Held again for 1 turn).",
+   "effect": {
+    "p": "onHit",
+    "status": "hold",
+    "turns": 1,
+    "cooldown": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "static",
+   "name": "Static",
+   "attacker": "lightning",
+   "defender": "wind",
+   "text": "Marked: the next hit on it deals +1.",
+   "effect": {
+    "p": "onHit",
+    "status": "mark",
+    "n": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "ground",
+   "name": "Ground",
+   "attacker": "earth",
+   "defender": "lightning",
+   "text": "Its Chain and Fury are cancelled for the battle.",
+   "effect": {
+    "p": "onHit",
+    "op": "cleanse",
+    "what": [
+     "chain",
+     "fury"
+    ],
+    "turns": 99
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "dawn",
+   "name": "Dawn",
+   "attacker": "light",
+   "defender": "shadow",
+   "text": "Removes Hide, Veiled and Ghost from the target.",
+   "effect": {
+    "p": "onHit",
+    "op": "cleanse",
+    "what": [
+     "hide",
+     "veiled",
+     "ghost"
+    ],
+    "turns": 99
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "gloom",
+   "name": "Gloom",
+   "attacker": "shadow",
+   "defender": "light",
+   "text": "Target loses 1 ATK for the rest of the battle (cap -2).",
+   "effect": {
+    "p": "onHit",
+    "status": "chill",
+    "n": 1,
+    "turns": 99
+   },
+   "status": "proposed"
+  }
+ ],
+ "signatures": {
+  "fire": {
+   "name": "Burn",
+   "base": "Burn 1 for 2 turns",
+   "radiance": "Burn 1 for 3 turns",
+   "resonance": "Burn 2 for 2 turns"
+  },
+  "water": {
+   "name": "Mend",
+   "base": "hero heals 1",
+   "radiance": "hero heals 2",
+   "resonance": "hero heals 2 and this column blocks 1 more"
+  },
+  "wood": {
+   "name": "Venom",
+   "base": "Poison 1 (cap 3)",
+   "radiance": "Poison 2",
+   "resonance": "Poison 2 and +1 cap"
+  },
+  "earth": {
+   "name": "Sunder",
+   "base": "armour -1 for the battle",
+   "radiance": "armour -2",
+   "resonance": "armour -2 and +1 block on this column"
+  },
+  "wind": {
+   "name": "Push",
+   "base": "push 1 column",
+   "radiance": "push 2 columns",
+   "resonance": "push 2 columns and the target is Marked"
+  },
+  "lightning": {
+   "name": "Chain",
+   "base": "jump to the lowest-HP neighbour for half damage",
+   "radiance": "jump for full damage",
+   "resonance": "jump for full damage and a second jump at half"
+  }
+ },
+ "merges": [
+  {
+   "id": "scald",
+   "name": "Scald",
    "pair": [
     "fire",
     "water"
    ],
-   "mode": "both",
-   "hit": "Hit: a Fire hit on a Water, Wet or Ice enemy deals +2, thaws it and its neighbours lose 1 ATK.",
-   "adjacent": "Fire beside a Water ally: the hero gets +1 block.",
-   "line": "Fire on Water bursts into steam.",
+   "kind": "natural",
+   "text": "Target loses 1 ATK this turn and takes +1 damage.",
+   "effect": {
+    "p": "compose",
+    "parts": [
+     {
+      "p": "onHit",
+      "status": "chill",
+      "n": 1,
+      "turns": 1
+     },
+     {
+      "p": "bonusDmg",
+      "n": 1
+     }
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "kindle",
+   "name": "Kindle",
+   "pair": [
+    "fire",
+    "wood"
+   ],
+   "kind": "natural",
+   "text": "Burn ticks 2 instead of 1 (2 turns).",
+   "effect": {
+    "p": "onHit",
+    "status": "burn",
+    "n": 2,
+    "turns": 2
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "magma",
+   "name": "Magma",
+   "pair": [
+    "fire",
+    "earth"
+   ],
+   "kind": "natural",
+   "text": "Burn ticks twice per turn and the hit ignores 1 armour.",
+   "effect": {
+    "p": "compose",
+    "parts": [
+     {
+      "p": "onHit",
+      "status": "burn",
+      "n": 1,
+      "turns": 2,
+      "tickMult": 2
+     },
+     {
+      "p": "ignoreArmor",
+      "n": 1
+     }
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "blaze",
+   "name": "Blaze",
+   "pair": [
+    "fire",
+    "wind"
+   ],
+   "kind": "natural",
+   "text": "Burn is also applied to every neighbour of the target.",
+   "effect": {
+    "p": "onHit",
+    "status": "burn",
+    "n": 1,
+    "turns": 2,
+    "area": "neighbours"
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "plasma",
+   "name": "Plasma",
+   "pair": [
+    "fire",
+    "lightning"
+   ],
+   "kind": "natural",
+   "text": "+2 damage on the carrier hit.",
+   "effect": {
+    "p": "bonusDmg",
+    "n": 2
+   },
    "status": "proposed"
   },
   {
@@ -152,137 +536,651 @@
     "water",
     "wood"
    ],
-   "mode": "adjacent",
-   "hit": null,
-   "adjacent": "Wood beside a Water ally: +1 ATK and the hero heals 1 per turn.",
-   "line": "Water feeds Wood.",
+   "kind": "natural",
+   "text": "The hero heals 2 and the column attackers get +1 ATK next turn.",
+   "effect": {
+    "p": "compose",
+    "parts": [
+     {
+      "p": "heroHeal",
+      "n": 2
+     },
+     {
+      "p": "buff",
+      "target": "column",
+      "effect": "atk",
+      "amount": 1,
+      "nextTurn": true
+     }
+    ]
+   },
    "status": "proposed"
   },
   {
-   "id": "conduct",
-   "name": "Conduct",
+   "id": "mire",
+   "name": "Mire",
    "pair": [
     "water",
-    "wind"
+    "earth"
    ],
-   "mode": "both",
-   "hit": "Hit: a Lightning hit on a Water or Wet enemy chains half damage (min 1). An Ice-Water ally beside a Wind ally spreads its Chill to the target's neighbours.",
-   "adjacent": "Wind beside a Water ally: its chain reaches one neighbour.",
-   "line": "Wet things carry sparks and cold.",
-   "status": "proposed"
-  },
-  {
-   "id": "fan",
-   "name": "Fan",
-   "pair": [
-    "wind",
-    "fire"
-   ],
-   "mode": "both",
-   "hit": "Hit: a Wind hit on a Burning enemy doubles the Burn tick.",
-   "adjacent": "Wind beside a Fire ally: Fire +1 ATK.",
-   "line": "Wind feeds a flame.",
-   "status": "proposed"
-  },
-  {
-   "id": "smother",
-   "name": "Smother",
-   "pair": [
-    "earth",
-    "fire"
-   ],
-   "mode": "both",
-   "hit": "Hit: an Earth hit on a Fire enemy removes its Fury or Burn, +1 damage.",
-   "adjacent": "Earth beside a Fire ally: Scorch is smothered (a warning pair).",
-   "line": "Earth snuffs fire (the one negative pair).",
-   "status": "proposed"
-  },
-  {
-   "id": "roots",
-   "name": "Roots",
-   "pair": [
-    "earth",
-    "wood"
-   ],
-   "mode": "adjacent",
-   "hit": null,
-   "adjacent": "Earth beside a Wood ally: Shields in either tile block +1.",
-   "line": "Roots hold the wall.",
-   "status": "proposed"
-  },
-  {
-   "id": "pollen",
-   "name": "Pollen",
-   "pair": [
-    "wind",
-    "wood"
-   ],
-   "mode": "adjacent",
-   "hit": null,
-   "adjacent": "Wind beside a Wood ally: the Wood unit's buff or heal reaches one tile further.",
-   "line": "Wind carries pollen.",
-   "status": "proposed"
-  },
-  {
-   "id": "ground",
-   "name": "Ground",
-   "pair": [
-    "earth",
-    "wind"
-   ],
-   "mode": "both",
-   "hit": "Hit: an Earth hit on a Wind or Lightning enemy deals +1 and cancels its chain or Fury.",
-   "adjacent": "Earth beside a Wind ally: chain reach +1.",
-   "line": "Earth grounds the storm.",
-   "status": "proposed"
-  },
-  {
-   "id": "eclipse",
-   "name": "Eclipse",
-   "pair": [
-    "light",
-    "shadow"
-   ],
-   "mode": "both",
-   "hit": "Hit: a Light hit on a Shadow enemy deals +2 and removes Hide, Veiled or Ghost.",
-   "adjacent": "Light beside a Shadow ally: both +1 ATK.",
-   "line": "Light and dark trade places.",
-   "status": "proposed"
-  },
-  {
-   "id": "sunfire",
-   "name": "Sunfire",
-   "pair": [
-    "light",
-    "fire"
-   ],
-   "mode": "adjacent",
-   "hit": null,
-   "adjacent": "Light beside a Fire ally: both ignore 1 armor.",
-   "line": "Light sharpens flame.",
+   "kind": "natural",
+   "text": "Target loses 1 ATK for the rest of the battle (cap -2).",
+   "effect": {
+    "p": "onHit",
+    "status": "chill",
+    "n": 1,
+    "turns": 99
+   },
    "status": "proposed"
   },
   {
    "id": "mist",
    "name": "Mist",
    "pair": [
+    "water",
+    "wind"
+   ],
+   "kind": "natural",
+   "text": "The enemy strike on this column deals 1 less this turn.",
+   "effect": {
+    "p": "colGuard",
+    "block": 1,
+    "turns": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "surge",
+   "name": "Surge",
+   "pair": [
+    "water",
+    "lightning"
+   ],
+   "kind": "natural",
+   "text": "The Lightning jump deals full damage instead of half.",
+   "effect": {
+    "p": "chain",
+    "factor": 1,
+    "jumps": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "grove",
+   "name": "Grove",
+   "pair": [
+    "wood",
+    "earth"
+   ],
+   "kind": "natural",
+   "text": "This column blocks 1 more enemy damage this turn.",
+   "effect": {
+    "p": "colGuard",
+    "block": 1,
+    "turns": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "spores",
+   "name": "Spores",
+   "pair": [
+    "wood",
+    "wind"
+   ],
+   "kind": "natural",
+   "text": "Poison is also applied to the neighbours of the target.",
+   "effect": {
+    "p": "onHit",
+    "status": "venom",
+    "n": 1,
+    "area": "neighbours"
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "charge",
+   "name": "Charge",
+   "pair": [
+    "wood",
+    "lightning"
+   ],
+   "kind": "natural",
+   "text": "All attackers in the column get +1 ATK next turn (cap +2).",
+   "effect": {
+    "p": "buff",
+    "target": "column",
+    "effect": "atk",
+    "amount": 1,
+    "nextTurn": true,
+    "cap": 2
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "sandstorm",
+   "name": "Sandstorm",
+   "pair": [
+    "earth",
+    "wind"
+   ],
+   "kind": "natural",
+   "text": "The target is Marked (next hit +1).",
+   "effect": {
+    "p": "onHit",
+    "status": "mark",
+    "n": 1
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "quake",
+   "name": "Quake",
+   "pair": [
+    "earth",
+    "lightning"
+   ],
+   "kind": "natural",
+   "text": "The enemy behind the target takes half damage.",
+   "effect": {
+    "p": "trample",
+    "behind": 0.5
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "tempest",
+   "name": "Tempest",
+   "pair": [
+    "wind",
+    "lightning"
+   ],
+   "kind": "natural",
+   "text": "The hit lands again on the same target for half damage.",
+   "effect": {
+    "p": "echo",
+    "factor": 0.5
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "radiance_fire",
+   "name": "Radiance",
+   "pair": [
+    "light",
+    "fire"
+   ],
+   "kind": "radiance",
+   "text": "Light strengthens Fire: Burn 1 for 3 turns (base Burn 1 for 2 turns).",
+   "effect": {
+    "p": "amplify",
+    "of": "fire",
+    "effect": {
+     "p": "onHit",
+     "status": "burn",
+     "n": 1,
+     "turns": 3
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "radiance_water",
+   "name": "Radiance",
+   "pair": [
+    "light",
+    "water"
+   ],
+   "kind": "radiance",
+   "text": "Light strengthens Water: hero heals 2 (base hero heals 1).",
+   "effect": {
+    "p": "amplify",
+    "of": "water",
+    "effect": {
+     "p": "heroHeal",
+     "n": 2
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "radiance_wood",
+   "name": "Radiance",
+   "pair": [
+    "light",
+    "wood"
+   ],
+   "kind": "radiance",
+   "text": "Light strengthens Wood: Poison 2 (base Poison 1 (cap 3)).",
+   "effect": {
+    "p": "amplify",
+    "of": "wood",
+    "effect": {
+     "p": "onHit",
+     "status": "venom",
+     "n": 2
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "radiance_earth",
+   "name": "Radiance",
+   "pair": [
+    "light",
+    "earth"
+   ],
+   "kind": "radiance",
+   "text": "Light strengthens Earth: armour -2 (base armour -1 for the battle).",
+   "effect": {
+    "p": "amplify",
+    "of": "earth",
+    "effect": {
+     "p": "onHit",
+     "status": "sunder",
+     "n": 2
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "radiance_wind",
+   "name": "Radiance",
+   "pair": [
+    "light",
+    "wind"
+   ],
+   "kind": "radiance",
+   "text": "Light strengthens Wind: push 2 columns (base push 1 column).",
+   "effect": {
+    "p": "amplify",
+    "of": "wind",
+    "effect": {
+     "p": "push",
+     "columns": 2
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "radiance_lightning",
+   "name": "Radiance",
+   "pair": [
+    "light",
+    "lightning"
+   ],
+   "kind": "radiance",
+   "text": "Light strengthens Lightning: jump for full damage (base jump to the lowest-HP neighbour for half damage).",
+   "effect": {
+    "p": "amplify",
+    "of": "lightning",
+    "effect": {
+     "p": "chain",
+     "factor": 1,
+     "jumps": 1
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "eclipse_fire",
+   "name": "Eclipse",
+   "pair": [
+    "shadow",
+    "fire"
+   ],
+   "kind": "eclipse",
+   "text": "The carrier hit ignores up to 2 armour and Hide, Veiled and Ghost.",
+   "effect": {
+    "p": "ignoreArmor",
+    "n": 2,
+    "andIgnore": [
+     "hide",
+     "veiled",
+     "ghost"
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "eclipse_water",
+   "name": "Eclipse",
+   "pair": [
     "shadow",
     "water"
    ],
-   "mode": "adjacent",
-   "hit": null,
-   "adjacent": "Shadow beside a Water ally: the column takes 1 less enemy damage.",
-   "line": "Shadow hides in vapour.",
+   "kind": "eclipse",
+   "text": "The carrier hit ignores up to 2 armour and Hide, Veiled and Ghost.",
+   "effect": {
+    "p": "ignoreArmor",
+    "n": 2,
+    "andIgnore": [
+     "hide",
+     "veiled",
+     "ghost"
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "eclipse_wood",
+   "name": "Eclipse",
+   "pair": [
+    "shadow",
+    "wood"
+   ],
+   "kind": "eclipse",
+   "text": "The carrier hit ignores up to 2 armour and Hide, Veiled and Ghost.",
+   "effect": {
+    "p": "ignoreArmor",
+    "n": 2,
+    "andIgnore": [
+     "hide",
+     "veiled",
+     "ghost"
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "eclipse_earth",
+   "name": "Eclipse",
+   "pair": [
+    "shadow",
+    "earth"
+   ],
+   "kind": "eclipse",
+   "text": "The carrier hit ignores up to 2 armour and Hide, Veiled and Ghost.",
+   "effect": {
+    "p": "ignoreArmor",
+    "n": 2,
+    "andIgnore": [
+     "hide",
+     "veiled",
+     "ghost"
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "eclipse_wind",
+   "name": "Eclipse",
+   "pair": [
+    "shadow",
+    "wind"
+   ],
+   "kind": "eclipse",
+   "text": "The carrier hit ignores up to 2 armour and Hide, Veiled and Ghost.",
+   "effect": {
+    "p": "ignoreArmor",
+    "n": 2,
+    "andIgnore": [
+     "hide",
+     "veiled",
+     "ghost"
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "eclipse_lightning",
+   "name": "Eclipse",
+   "pair": [
+    "shadow",
+    "lightning"
+   ],
+   "kind": "eclipse",
+   "text": "The carrier hit ignores up to 2 armour and Hide, Veiled and Ghost.",
+   "effect": {
+    "p": "ignoreArmor",
+    "n": 2,
+    "andIgnore": [
+     "hide",
+     "veiled",
+     "ghost"
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "twilight",
+   "name": "Twilight",
+   "pair": [
+    "light",
+    "shadow"
+   ],
+   "kind": "twilight",
+   "text": "Removes Hide, Veiled and Ghost, and the target is Held (skips its next strike).",
+   "effect": {
+    "p": "compose",
+    "parts": [
+     {
+      "p": "onHit",
+      "op": "cleanse",
+      "what": [
+       "hide",
+       "veiled",
+       "ghost"
+      ],
+      "turns": 99
+     },
+     {
+      "p": "onHit",
+      "status": "hold",
+      "turns": 1
+     }
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "resonance_fire",
+   "name": "Resonance",
+   "pair": [
+    "fire",
+    "fire"
+   ],
+   "kind": "resonance",
+   "text": "Fire twice: Burn 2 for 2 turns (base Burn 1 for 2 turns).",
+   "effect": {
+    "p": "amplify",
+    "of": "fire",
+    "effect": {
+     "p": "onHit",
+     "status": "burn",
+     "n": 2,
+     "turns": 2
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "resonance_water",
+   "name": "Resonance",
+   "pair": [
+    "water",
+    "water"
+   ],
+   "kind": "resonance",
+   "text": "Water twice: hero heals 2 and this column blocks 1 more (base hero heals 1).",
+   "effect": {
+    "p": "amplify",
+    "of": "water",
+    "effect": {
+     "p": "heroHeal",
+     "n": 2,
+     "andBlock": 1
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "resonance_wood",
+   "name": "Resonance",
+   "pair": [
+    "wood",
+    "wood"
+   ],
+   "kind": "resonance",
+   "text": "Wood twice: Poison 2 and +1 cap (base Poison 1 (cap 3)).",
+   "effect": {
+    "p": "amplify",
+    "of": "wood",
+    "effect": {
+     "p": "onHit",
+     "status": "venom",
+     "n": 2,
+     "capPlus": 1
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "resonance_earth",
+   "name": "Resonance",
+   "pair": [
+    "earth",
+    "earth"
+   ],
+   "kind": "resonance",
+   "text": "Earth twice: armour -2 and +1 block on this column (base armour -1 for the battle).",
+   "effect": {
+    "p": "amplify",
+    "of": "earth",
+    "effect": {
+     "p": "onHit",
+     "status": "sunder",
+     "n": 2,
+     "andBlock": 1
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "resonance_wind",
+   "name": "Resonance",
+   "pair": [
+    "wind",
+    "wind"
+   ],
+   "kind": "resonance",
+   "text": "Wind twice: push 2 columns and the target is Marked (base push 1 column).",
+   "effect": {
+    "p": "amplify",
+    "of": "wind",
+    "effect": {
+     "p": "push",
+     "columns": 2,
+     "andStatus": "mark"
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "resonance_lightning",
+   "name": "Resonance",
+   "pair": [
+    "lightning",
+    "lightning"
+   ],
+   "kind": "resonance",
+   "text": "Lightning twice: jump for full damage and a second jump at half (base jump to the lowest-HP neighbour for half damage).",
+   "effect": {
+    "p": "amplify",
+    "of": "lightning",
+    "effect": {
+     "p": "chain",
+     "factor": 1,
+     "jumps": 1,
+     "second": 0.5
+    }
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "resonance_light",
+   "name": "Resonance",
+   "pair": [
+    "light",
+    "light"
+   ],
+   "kind": "resonance",
+   "text": "Light twice: the carrier hit deals +1 and strips Hide, Veiled and Ghost.",
+   "effect": {
+    "p": "compose",
+    "parts": [
+     {
+      "p": "bonusDmg",
+      "n": 1
+     },
+     {
+      "p": "onHit",
+      "op": "cleanse",
+      "what": [
+       "hide",
+       "veiled",
+       "ghost"
+      ],
+      "turns": 99
+     }
+    ]
+   },
+   "status": "proposed"
+  },
+  {
+   "id": "resonance_shadow",
+   "name": "Resonance",
+   "pair": [
+    "shadow",
+    "shadow"
+   ],
+   "kind": "resonance",
+   "text": "Shadow twice: the target is Held (skips its next strike; once per 2 turns).",
+   "effect": {
+    "p": "onHit",
+    "status": "hold",
+    "turns": 1,
+    "cooldown": 1
+   },
    "status": "proposed"
   }
  ],
+ "mergeRules": {
+  "scope": "Same column of the player board. Attackers need not be adjacent. Rows do not matter except for the carrier.",
+  "attacker": "A placed card that fires this turn: it has an attack behaviour and ATK >= 1 after boosts. Pure supports, Shields and 0-ATK cards never count. A hybrid (Bastion, Guard plus Attack) counts as one attacker with its single element. Attune and Mimic change the element before merges are read. Classic cards and cards without an element never merge.",
+  "pairs": "Distinct element pairs among the column attackers fire once each; an element with two or more attackers adds one Resonance for that element. So 3 attackers of 3 elements = 3 merges; A, A, B = Resonance(A) + A+B; A, A, A = one Resonance.",
+  "cap": {
+   "perColumnPerTurn": 3,
+   "note": "3 is also the natural maximum with 3 attackers in a column. No merge fires twice in a column in one turn."
+  },
+  "carrier": "The front-most attacker of the pair (nearest the enemies). Resonance: the front-most of that element. The effect rides on the carrier's primary hit; if the carrier cannot strike (Held, no target) the next attacker of the pair carries it, else it is lost. A carrier with two merges gets both on the same hit.",
+  "overlap": "The same status or effect from two merges on one hit does not stack: the strongest applies. Flat bonus damage from merges on one hit is capped at +2. Area effects (neighbours, jumps) apply once per attack action (B7).",
+  "timing": "Merges are computed in the Boost phase and shown in the preview; they resolve in the Fire phase on the carrier hit, before armour.",
+  "modes": {
+   "default": "own",
+   "options": [
+    {
+     "id": "own",
+     "name": "Own element",
+     "rule": "Each hit is judged by its own attacker's element against the enemy (affinity multiplier and named weakness hit). Merge effects are additional and ride on the carrier hit, which is judged by the carrier's own element."
+    },
+    {
+     "id": "best",
+     "name": "Best of column",
+     "rule": "Every hit from an attacker in the column uses the best multiplier among the elements of the column's attackers (x1.5 beats x1 beats x0.5, so a resist applies only when every attacker resists). The named weakness hit comes from the front-most attacker whose element gives the best multiplier, once per hit. Merges are unchanged. A column with one element behaves as Own. No affinity is created for merged elements."
+    }
+   ],
+   "recommended": "own",
+   "why": "Own element keeps every unit's element meaningful and makes the front-line choice matter; Best of column lets one off-element unit carry a whole column and removes the reason to field the right element. Offered as a dev-page switch only."
+  }
+ },
  "variantMap": {
   "fire": "fire",
   "magma": "fire",
   "water": "water",
   "blood": "water",
   "frost": "water",
-  "storm": "wind",
+  "storm": "lightning",
   "wind": "wind",
   "wood": "wood",
   "venom": "wood",
@@ -294,8 +1192,7 @@
   "shadow": "shadow"
  },
  "flavourMap": {
-  "frost": "ice",
-  "storm": "lightning"
+  "frost": "ice"
  },
  "status": "proposed"
 }

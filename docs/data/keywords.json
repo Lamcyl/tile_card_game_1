@@ -204,7 +204,7 @@
   "id": "resonance",
   "name": "Resonance",
   "kind": "unit_scaling",
-  "rule": "+1 to its main stat per other ally of its element (max +3).",
+  "rule": "+1 to its main stat per other ally of its element (max +3). Not the same as the Resonance merge (two attackers of one element in a column).",
   "current": false,
   "status": "proposed"
  },
@@ -244,7 +244,7 @@
   "id": "chain",
   "name": "Chain",
   "kind": "unit_secondary",
-  "rule": "The same damage jumps to the lowest-HP enemy beside the target.",
+  "rule": "The same damage jumps to the lowest-HP enemy beside the target. Lightning on a Water enemy Conducts (weakness hit) and always jumps.",
   "current": false,
   "status": "proposed"
  },
@@ -425,14 +425,6 @@
   "status": "proposed"
  },
  {
-  "id": "reaction",
-  "name": "Reaction",
-  "kind": "unit_element",
-  "rule": "Element pairs trigger a named effect on hit or when adjacent; 12 reactions, see elements.json.",
-  "current": false,
-  "status": "proposed"
- },
- {
   "id": "evolve",
   "name": "Evolve",
   "kind": "unit_progression",
@@ -596,15 +588,31 @@
   "id": "elemental_e",
   "name": "Elemental variant",
   "kind": "enemy",
-  "rule": "Enemy carries an element from its bestiary variant (frost = Water/Ice, storm = Wind/Lightning); reactions apply to it.",
+  "rule": "Enemy carries an element from its bestiary variant (frost = Water/Ice, storm = Lightning); it follows the affinity chart (weak x1.5, resists x0.5).",
   "current": false,
   "status": "proposed"
  },
  {
-  "id": "wet_e",
-  "name": "Wet / Burning / Chilled / Frozen status",
-  "kind": "enemy",
-  "rule": "Statuses set by reactions and flavours; they are what the reaction table reads on enemies.",
+  "id": "affinity",
+  "name": "Affinity (weak and resist)",
+  "kind": "rule",
+  "rule": "Each enemy element is weak to some elements (x1.5 damage) and resists others (x0.5), shown as arrows on the enemy card. Rounding: weak ceil(dmg x 1.5), resist max(1, ceil(dmg x 0.5)). Table in elements.json `affinity`.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "weakness_hit",
+  "name": "Weakness hit",
+  "kind": "rule",
+  "rule": "A weak hit also triggers a named effect once per hit (Steam, Conduct, Wildfire and so on, 12 in elements.json).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "merge",
+  "name": "Merge (column)",
+  "kind": "rule",
+  "rule": "Attackers of different elements in the same column fire named merges (Scald, Bloom, Eclipse, Resonance and so on, 36 in elements.json), up to 3 per column per turn; the front-most attacker of the pair carries it.",
   "current": false,
   "status": "proposed"
  },
@@ -660,15 +668,15 @@
   "id": "ice",
   "name": "Ice (Water flavour)",
   "kind": "unit_flavour",
-  "rule": "Water unit or enemy with Chill and Freeze: Chill -1 ATK, Freeze on a Wet target. Thawed by Fire (Steam).",
+  "rule": "Water unit or enemy with Chill and Freeze: Chill -1 ATK; a second Ice hit on a Chilled enemy Freezes it. Follows the Water chart.",
   "current": false,
   "status": "proposed"
  },
  {
   "id": "lightning",
-  "name": "Lightning (Wind flavour)",
-  "kind": "unit_flavour",
-  "rule": "Wind unit or enemy that Chains; on a Water or Wet target it chains for half damage (Conduct). Grounded by Earth.",
+  "name": "Lightning (element)",
+  "kind": "unit_element",
+  "rule": "Eighth element, split from Wind in V2.2. Chains and bursts. Weak to Earth; resists Wind and Lightning. A Lightning hit on a Water enemy Conducts (weakness hit).",
   "current": false,
   "status": "proposed"
  },
@@ -716,7 +724,7 @@
   "id": "per_column_hit",
   "name": "Per-column hits",
   "kind": "rule",
-  "rule": "Each column an attack lands in is a separate hit on the target there: a Spread that reaches 2 tiles of one Big body deals its damage twice. Armor and reactions apply per hit.",
+  "rule": "Each column an attack lands in is a separate hit on the target there: a Spread that reaches 2 tiles of one Big body deals its damage twice. Armor and the affinity multiplier apply per hit.",
   "current": false,
   "status": "proposed"
  },
@@ -724,7 +732,7 @@
   "id": "once_per_action",
   "name": "Once per action",
   "kind": "rule",
-  "rule": "Statuses (Burn, Venom, Chill, Mark, Hold) and area reactions apply once per attack action per body, however many columns hit it.",
+  "rule": "Statuses (Burn, Venom, Chill, Mark, Hold) and area effects (weakness hit and merge areas) apply once per attack action per body, however many columns hit it.",
   "current": false,
   "status": "proposed"
  }
