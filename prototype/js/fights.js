@@ -42,6 +42,30 @@
     return { save, ref, mods: ref.mods, army, maxHp: ref.hp, volley: army.reduce((n, c) => n + (c.atk || 0), 0) };
   }
 
+  // ---------- V2 reference squad (step 4; the balance step tunes it) ----------
+  // The same idea with the guardian beasts: three elements in the first column set (Fire, Water, Wood), more join as levels pass, one Herald and Shields as support.
+  // Each attacker is raised to P(L) through `mods.atk` and each Shield to shieldBlock(L); stage, Mastery and stars stay at 1.
+  const ATTACKERS_V2 = [['singha', 1], ['hongsa', 1], ['amur_tiger', 1], ['reindeer_hauler', 4], ['rakhsh', 8], ['dolphin_chain', 12]];
+  const SUPPORT_V2 = [['zodiac_hound', 1], ['bixi', 1], ['river_hippo', 6], ['audhumbla', 14]];
+  function referenceV2(L, V2) {
+    V2 = V2 || root.V2 || (typeof require === 'function' ? require('./v2.js') : null);
+    const ids = ATTACKERS_V2.concat(SUPPORT_V2).filter((x) => L >= x[1]).map((x) => x[0]);
+    const squad = ids.map((id) => ({ id, stage: 1, level: 1, stars: 1 })), mods = {}, hit = playerHit(L), blk = shieldBlock(L);
+    for (const c of V2.army(squad)) {
+      if (c.pattern && c.atk !== undefined) { const b = Math.max(0, round(hit - c.atk)); if (b) mods[c.id] = { atk: b }; }
+      else if (c.block !== undefined) { const b = Math.max(0, blk - c.block); if (b) mods[c.id] = { block: b }; }
+    }
+    const cp = V2.army(squad).reduce((n, c) => n + c.cp, 0);
+    return { level: L, squad, mods, hp: heroHp(L), hit: Math.round(hit * 10) / 10, block: blk, upgrades: cp > 8 ? { command: cp - 8 } : {}, v2: true };
+  }
+  function referenceSaveV2(L, Progress, V2) {
+    V2 = V2 || root.V2 || require('./v2.js');
+    const P = Progress || root.Progress || require('./progress.js'), ref = referenceV2(L, V2), save = P.freshSave();
+    save.squad = []; save.upgrades = Object.assign({}, ref.upgrades); save.hero = null; save.owned = P.ROSTER.map((u) => u.id);
+    const army = V2.army(ref.squad, ref.mods);
+    return { save, ref, mods: ref.mods, army, maxHp: ref.hp, volley: army.reduce((n, c) => n + (c.pattern ? c.atk || 0 : 0), 0) };
+  }
+
   // ---------- Fight data ----------
   let FIGHTS = [], REGIONS = [], BY_ID = {}, SUB_BY = {}, ART = {};
   const slug = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -97,7 +121,7 @@
   }
 
   const Fights = {
-    baseHp, baseAtk, playerHit, heroHp, shieldBlock, reference, referenceSave, load, stage, register, typeKey, slug,
+    baseHp, baseAtk, playerHit, heroHp, shieldBlock, reference, referenceSave, referenceV2, referenceSaveV2, ATTACKERS_V2, SUPPORT_V2, load, stage, register, typeKey, slug,
     get all() { return FIGHTS; }, get regions() { return REGIONS; }, byId: (id) => BY_ID[id], sub: (id) => SUB_BY[id], get art() { return ART; },
   };
   root.Fights = Fights;

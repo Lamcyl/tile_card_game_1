@@ -473,3 +473,4 @@ Decided in V2.1 and removed: nine elements (V2.2: 8), Storm needing more units, 
 14. **Ambivalent animals** (tiger, wolf, bear) on the player side as "wild guardians"?
 15. **Hero:** one default (Beast-keeper) or choose from the list? Real animals as filler units acceptable?
 16. **Dev page follow-up (code, not done):** `prototype/design.js` filters items by the removed `rarity` field and ties items to the old text; update it when code work is allowed.
+17. **V2 dev page (done, `V2_UNITS_PLAN.md` step 4):** the dev page has a Classic / V2 rules switch, a V2 team editor, the editable 8x8 weakness chart and the merge-mode switch, and the battle screen shows element chips, weak / resist badges, merge previews, statuses and an inspect card under `rules.v2`. Classic mode is unchanged.

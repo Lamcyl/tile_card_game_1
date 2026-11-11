@@ -1,0 +1,471 @@
+{
+ "note": "Placeholder drawings (prototype/assets/units) per V2 unit id. exact = same name as a drawing, close = a word of the name is a drawing, fallback = family pool by name hash. Run tools/build-unit-art.mjs.",
+ "stats": {
+  "exact": 17,
+  "close": 0,
+  "fallback": 75,
+  "total": 92
+ },
+ "units": {
+  "plume_herald": {
+   "art": "samjok-o",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "sun_crow": {
+   "art": "samjok-o",
+   "match": "exact",
+   "via": "Samjok-o"
+  },
+  "thousand_year_crane": {
+   "art": "samjok-o",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "raven_pair": {
+   "art": "vucub-caquix",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "firebird": {
+   "art": "firebird",
+   "match": "exact",
+   "via": "Firebird"
+  },
+  "phoenix": {
+   "art": "griffin",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "khan_garid": {
+   "art": "firebird",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "huma": {
+   "art": "firebird",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "pelican_of_mercy": {
+   "art": "samjok-o",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "hongsa": {
+   "art": "vucub-caquix",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "kotuku": {
+   "art": "alkonost",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "tui_mimic": {
+   "art": "firebird",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "kunpeng": {
+   "art": "vucub-caquix",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "sarimanok": {
+   "art": "griffin",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "gongjak_banner": {
+   "art": "firebird",
+   "match": "fallback",
+   "via": "wings"
+  },
+  "ceryneian_hind": {
+   "art": "minotaur",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "white_hart": {
+   "art": "minotaur",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "rakhsh": {
+   "art": "haetae",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "cheonma": {
+   "art": "sleipnir",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "tulpar": {
+   "art": "baku",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "audhumbla": {
+   "art": "pixiu",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "indrik": {
+   "art": "sleipnir",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "qilin": {
+   "art": "baize",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "karkadann": {
+   "art": "minotaur",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "reindeer_hauler": {
+   "art": "pixiu",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "pegasus": {
+   "art": "minotaur",
+   "match": "fallback",
+   "via": "hooves"
+  },
+  "sleipnir": {
+   "art": "sleipnir",
+   "match": "exact",
+   "via": "Sleipnir"
+  },
+  "singha": {
+   "art": "balam",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "haetae": {
+   "art": "haetae",
+   "match": "exact",
+   "via": "Haetae"
+  },
+  "pixiu": {
+   "art": "pixiu",
+   "match": "exact",
+   "via": "Pixiu"
+  },
+  "suanni": {
+   "art": "balam",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "yali": {
+   "art": "jangsan-beom",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "jaguar_moon": {
+   "art": "jangsan-beom",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "amur_tiger": {
+   "art": "tanuki",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "snow_leopard": {
+   "art": "balam",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "puma_of_the_andes": {
+   "art": "cadejo",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "cat_sidhe": {
+   "art": "cerberus",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "dragon_gate_carp": {
+   "art": "wadjet",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "chiwen": {
+   "art": "lindworm",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "wadjet": {
+   "art": "wadjet",
+   "match": "exact",
+   "via": "Wadjet"
+  },
+  "ddraig_goch": {
+   "art": "scylla",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "rain_dragon_chen": {
+   "art": "lindworm",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "qiuniu": {
+   "art": "orochi",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "yazi": {
+   "art": "kappa",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "long_of_the_rain_rong": {
+   "art": "hydra",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "bian": {
+   "art": "sobek",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "komodo": {
+   "art": "jingwei",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "geobuk": {
+   "art": "nidhogg",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "divine_tortoise": {
+   "art": "lindworm",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "golden_turtle": {
+   "art": "hydra",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "bixi": {
+   "art": "sobek",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "honu": {
+   "art": "scylla",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "softshell_elder": {
+   "art": "jormungandr",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "coconut_crab": {
+   "art": "kappa",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "nine_tail_fox": {
+   "art": "kitsune",
+   "match": "exact",
+   "via": "Kitsune"
+  },
+  "tanuki_trickster": {
+   "art": "tanuki",
+   "match": "exact",
+   "via": "Tanuki (狸)"
+  },
+  "reynard": {
+   "art": "cerberus",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "xolo_guide": {
+   "art": "kamaitachi",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "zodiac_hound": {
+   "art": "cadejo",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "cu_sidhe": {
+   "art": "gumiho",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "simargl": {
+   "art": "baihu",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "bulgae": {
+   "art": "bulgae",
+   "match": "exact",
+   "via": "Bulgae"
+  },
+  "fennec_fox": {
+   "art": "kamaitachi",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "winter_wolf": {
+   "art": "baihu",
+   "match": "fallback",
+   "via": "fangs"
+  },
+  "dolphin_chain": {
+   "art": "jingwei",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "salmon_of_knowledge": {
+   "art": "jingwei",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "humpback_cantor": {
+   "art": "scylla",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "hammerhead": {
+   "art": "jormungandr",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "axolotl": {
+   "art": "hydra",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "shachihoko": {
+   "art": "wadjet",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "salamander": {
+   "art": "jormungandr",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "river_hippo": {
+   "art": "xuanwu",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "scarab_roller": {
+   "art": "khepri",
+   "match": "exact",
+   "via": "Khepri"
+  },
+  "khepri": {
+   "art": "khepri",
+   "match": "exact",
+   "via": "Khepri"
+  },
+  "nazca_weaver": {
+   "art": "nemean-lion",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "honeybee_hive": {
+   "art": "jangsan-beom",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "firefly_lantern": {
+   "art": "nemean-lion",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "mantis_ambusher": {
+   "art": "nemean-lion",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "giant_panda": {
+   "art": "cadejo",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "brown_bear": {
+   "art": "ratatoskr",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "polar_bear": {
+   "art": "tanuki",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "thor_s_goats": {
+   "art": "kodama",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "raiju": {
+   "art": "serket",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "kamaitachi_trio": {
+   "art": "kamaitachi",
+   "match": "exact",
+   "via": "Kamaitachi (鎌鼬)"
+  },
+  "ratatoskr": {
+   "art": "ratatoskr",
+   "match": "exact",
+   "via": "Ratatoskr"
+  },
+  "langur_mirror": {
+   "art": "leshy",
+   "match": "fallback",
+   "via": "wilds"
+  },
+  "baku": {
+   "art": "baku",
+   "match": "exact",
+   "via": "Baku"
+  },
+  "bai_ze": {
+   "art": "baize",
+   "match": "exact",
+   "via": "Bai Ze"
+  },
+  "moon_hare": {
+   "art": "yutu",
+   "match": "exact",
+   "via": "Yutu (玉兔)"
+  },
+  "kui": {
+   "art": "kui",
+   "match": "exact",
+   "via": "Kui"
+  },
+  "electric_eel": {
+   "art": "jingwei",
+   "match": "fallback",
+   "via": "scales"
+  },
+  "storm_petrel": {
+   "art": "samjok-o",
+   "match": "fallback",
+   "via": "wings"
+  }
+ }
+}

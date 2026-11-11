@@ -115,7 +115,7 @@ const Items = () => root.Items;
 const gear = (s) => (Items() ? Items().bonuses(s) : { atk: {}, amount: {}, range: {}, block: 0, hp: 0, supplies: 0, souls: 0, rules: {}, horn: false });
 
   const SAVE_KEY = 'tile-defense-world-v4';
-  const UNIT_CP = (id) => RARITY[ROSTER_BY[id].rarity].cp;
+  const UNIT_CP = (id) => (ROSTER_BY[id] ? RARITY[ROSTER_BY[id].rarity].cp : (root.V2 && root.V2.UNITS[id] ? RARITY[root.V2.UNITS[id].rarity].cp : 0)); // V2 beasts (dev page) are not in the classic roster
 
   function freshSave() {
     return {

@@ -612,6 +612,23 @@
     const queue = T.after; T.after = [];
     for (const f of queue) f(); // the after queue is FIFO and never re-triggers a weakness hit or a merge (jump hits carry fromEffect)
   }
+  // UI helper (step 4): the multiplier a placed attacker `s` would get against enemy `e` on this board (same element choice as the hit, mode own or best).
+  function preview(stats, s, e, rules) {
+    const ee = lower(e && e.element);
+    if (!ee || !elOf(s)) return null;
+    const T = { stats, state: { rules }, sets: SETS.get(stats) || { f: {}, own: {}, fam: {} } };
+    let mult = 1, he = null;
+    for (const el of hitElements(T, s)) { const m = multOf(rules, el, ee); if (he === null || m > mult) { mult = m; he = el; } }
+    return { mult, el: he, name: mult > 1 && he && WEAK[he + '>' + ee] ? WEAK[he + '>' + ee].name : null };
+  }
+  // Army cards for a squad list [{ id, stage, level, stars }] with run bonuses { unitId: { atk, range, block } } (the dev page and the reference squads).
+  function army(entries, mods) {
+    return (entries || []).filter((x) => UNITS[x.id]).map((x) => {
+      const c = card(x.id, x), m = (mods || {})[x.id];
+      if (m) { if (m.atk && c.atk !== undefined) c.atk += m.atk; if (m.range && c.range !== undefined) c.range += m.range; if (m.block && c.block !== undefined) c.block += m.block; }
+      return c;
+    });
+  }
   function hit(T, x) { x.state = T.state; x.events = T.events; T.sets = SETS.get(T.stats) || { f: {}, own: {}, fam: {} }; T.after = T.after || []; hitOne(T, x); }
 
   // Damage of the chain jump: the behaviour's factor (the Conduct weakness hit carries its own 0.5), plus the Chain set bonuses.
@@ -776,7 +793,7 @@
     }
   }
 
-  const V2 = { load, card, implemented, maxStage, applyPatches, initStat, boost, finish, order, hitBonus, chainDmg, afterFire, endTurn, startTurn, hit, statusPhase, preStrike, afterStrike,
+  const V2 = { load, card, preview, army, implemented, maxStage, applyPatches, initStat, boost, finish, order, hitBonus, chainDmg, afterFire, endTurn, startTurn, hit, statusPhase, preStrike, afterStrike,
     guardOf, suppressed, passMerges, applyMoves, rebirth, merges, mul, multOf, colAttackers, computeSets, ELEMENT_SETS,
     get UNITS() { return UNITS; }, get ELEMENTS() { return ELEMENTS; }, get FAMILIES() { return FAMILIES; }, get AFFINITY() { return AFFINITY; }, get WEAKNESS_HITS() { return WEAK; }, get MERGES() { return MERGES; }, get MERGE_RULES() { return MERGE_RULES; } };
   if (E) E.hooks.v2 = V2;

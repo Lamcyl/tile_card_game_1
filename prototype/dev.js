@@ -20,6 +20,11 @@ import './js/battle.js';
 import './js/items.js';
 import './js/relics.js';
 import { Design } from './design.js';
+import unitsData from '../docs/data/units.json';
+import elementsData from '../docs/data/elements.json';
+import familiesData from '../docs/data/families.json';
+import keywordsData from '../docs/data/keywords.json';
+import v2art from './data/v2-unit-art.json';
 
 // V2 fights (tools/build-fights.mjs): 7 fights per sub-area, bundled with the page (no fetch).
 const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: true, import: 'default' });
@@ -39,6 +44,18 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } },
   };
 
+  // ---------- V2 rules data (docs/data, bundled): units, elements, chart ----------
+  const V2 = window.V2;
+  V2.load(unitsData, elementsData, familiesData);
+  window.Art.setV2(v2art.units);
+  Battle.setKeywords(Object.fromEntries(keywordsData.map((k) => [k.id, k.rule])));
+  const ELS = elementsData.elements.map((e) => e.id), ELMAP = Object.fromEntries(elementsData.elements.map((e) => [e.id, e]));
+  const DEFAULT_AFF = JSON.parse(JSON.stringify(elementsData.affinity));
+  const MODES = elementsData.mergeRules.modes.options;
+  const FAMS = familiesData.map((f) => f.id), FAMMAP = Object.fromEntries(familiesData.map((f) => [f.id, f]));
+  const IMPL = (u) => (u.notYet ? 'not yet' : u.impl === 'full' ? 'full' : u.impl === 'simplified' ? 'simplified' : 'not yet');
+  const validAff = (a) => !!a && typeof a === 'object' && ELS.every((x) => a[x] && typeof a[x] === 'object' && ELS.every((y) => [0.5, 1, 1.5].includes(a[x][y])));
+
   const SUBS = World.SUBAREAS, RARS = ['common', 'rare', 'epic', 'legendary'];
   const ORIG_U = Object.fromEntries(P.ROSTER.map((u) => [u.id, u.rarity])), ORIG_I = Object.fromEntries(Items.ALL.map((i) => [i.id, i.rarity]));
   const ROLES = ['basic', 'tough', 'armored', 'barrel', 'boss'], KINDS = Object.keys(E.ENEMY_KINDS), GIMMICKS = Object.keys(E.ENEMY_GIMMICKS);
@@ -50,7 +67,8 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
     save.owned = P.ROSTER.map((u) => u.id); save.souls = 999; save.crystals = 99; save.dust = 99;
     return {
       save, run: { seed: 'dev', hp: null, hpBonus: 0, relics: [], mods: {}, reviveUsed: 0, gold: 0 }, seeds: {}, rar: { unit: {}, item: {} }, placement: {},
-      custom: { sub: SUBS[0].id, level: 5, enemies: [], sel: [1, 2], bossRow: false, newFp: '1x1', warn: '' }, ui: { tab: 'enemies', open: {}, f: { q: '', rar: '', slot: '', owned: false } },
+      rules: 'classic', v2squad: Fights.referenceV2(5).squad.map((x) => x.id), v2cfg: {}, affinity: null, mergeMode: 'own',
+      custom: { sub: SUBS[0].id, level: 5, enemies: [], sel: [1, 2], bossRow: false, newFp: '1x1', warn: '' }, ui: { tab: 'enemies', open: {}, f: { q: '', rar: '', slot: '', owned: false }, v2f: { q: '', el: '', fam: '', rar: '', impl: '', sq: false }, affSel: '' },
     };
   }
   function restore(data) {
@@ -61,6 +79,12 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
     s.ui = Object.assign(d.ui, data.ui || {}); s.ui.f = Object.assign(d.ui.f, (data.ui || {}).f || {}); s.rar = Object.assign({ unit: {}, item: {} }, data.rar || {});
     if (!SUBS.some((x) => x.id === s.custom.sub)) s.custom.sub = SUBS[0].id;
     s.save.squad = (s.save.squad || []).filter((id) => P.ROSTER_BY[id]);
+    s.rules = data.rules === 'v2' ? 'v2' : 'classic';
+    s.v2squad = (Array.isArray(data.v2squad) ? data.v2squad : d.v2squad).filter((id, i, a) => V2.UNITS[id] && a.indexOf(id) === i);
+    s.v2cfg = {}; for (const id of Object.keys(data.v2cfg || {})) if (V2.UNITS[id]) { const c = data.v2cfg[id] || {}; s.v2cfg[id] = { stage: clamp(num(c.stage, 1), 1, 3), level: clamp(num(c.level, 1), 1, 5), stars: clamp(num(c.stars, 1), 1, 5) }; }
+    s.affinity = validAff(data.affinity) ? data.affinity : null;
+    s.mergeMode = data.mergeMode === 'best' ? 'best' : 'own';
+    s.ui.v2f = Object.assign(d.ui.v2f, (data.ui || {}).v2f || {});
     Items.migrate(s.save);
     return s;
   }
@@ -75,17 +99,26 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
     for (const id in ORIG_I) Items.BY_ID[id].rarity = RARS.includes(S.rar.item[id]) ? S.rar.item[id] : ORIG_I[id];
   }
 
+  // ---------- V2 rules: squad, chart and mode as the next fight reads them ----------
+  const isV2 = () => S.rules === 'v2';
+  const rulesSave = () => (isV2() ? Object.assign({}, S.save, { squad: [] }) : S.save); // the classic squad's traits and rules do not apply under V2
+  const cfgOf = (id) => Object.assign({ stage: 1, level: 1, stars: 1 }, S.v2cfg[id]);
+  const v2entries = () => S.v2squad.map((id) => Object.assign({ id }, cfgOf(id)));
+  const chart = () => S.affinity || DEFAULT_AFF;
+  const v2Rules = () => ({ mergeMode: S.mergeMode, affinity: JSON.parse(JSON.stringify(chart())) }); // the full 8x8, read by the next fight only
+
   // ---------- Battle launching ----------
   function runObj() { return { relics: S.run.relics.slice(), mods: S.run.mods, reviveUsed: S.run.reviveUsed, gold: S.run.gold }; }
   let current = null;
   function fight(key, title, subtitle, biome, gen) {
     applyOverrides();
-    const save = S.save, run = runObj(), maxHp = Math.max(1, P.maxHp(save) + num(S.run.hpBonus, 0));
+    const save = rulesSave(), run = runObj(), maxHp = Math.max(1, P.maxHp(save) + num(S.run.hpBonus, 0));
     const hp = S.run.hp == null || S.run.hp === '' ? maxHp : clamp(num(S.run.hp, maxHp), 1, 999);
-    const stage = Object.assign({ heroHp: hp, heroMaxHp: Math.max(maxHp, hp), rules: P.rulesFor(save, run) }, P.heroStage(save), gen);
+    const rules = Object.assign({}, P.rulesFor(save, run)); if (isV2()) rules.v2 = v2Rules();
+    const stage = Object.assign({ heroHp: hp, heroMaxHp: Math.max(maxHp, hp), rules }, P.heroStage(save), gen);
     current = key;
     document.body.classList.add('in-battle'); $('#dev-exit').hidden = false;
-    Battle.start({ title, subtitle, stage, biome, army: P.buildArmy(save, S.run.mods), hero: P.heroOf(save), placement: S.placement, relics: run.relics, onEnd: (state, stars) => finish(state, stars) });
+    Battle.start({ title, subtitle, stage, biome, army: isV2() ? V2.army(v2entries(), S.run.mods) : P.buildArmy(save, S.run.mods), hero: P.heroOf(save), placement: S.placement, relics: run.relics, onEnd: (state, stars) => finish(state, stars) });
   }
   function leave() { S.placement = Battle.placement(); Battle.hide(); document.body.classList.remove('in-battle'); $('#dev-exit').hidden = true; persist(); }
   function finish(state, stars) {
@@ -262,6 +295,7 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
   }
   function refInfo() {
     const L = FV().ref; if (!L) return 'No reference applied: your own squad and stats are used.';
+    if (isV2()) { const r = Fights.referenceV2(L); return 'V2 reference squad Lv ' + L + ' applied: ' + r.squad.length + ' beasts, ' + r.hit + ' damage per attacker hit, Shield block ' + r.block + ', hero HP ' + r.hp + '. Edit the squad in Team, the chart in Chart.'; }
     const r = Fights.reference(L, P);
     return 'Reference squad Lv ' + L + ' applied: ' + r.squad.length + ' units, ' + r.hit + ' damage per attacker hit, Shield block ' + r.block + ', hero HP ' + r.hp + '. You can still edit everything in Team, Camp, Gear and Run.';
   }
@@ -275,12 +309,20 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
   }
   function launchV2(f, extra) {
     const sub = Fights.sub(f.sub);
-    fight('v2:' + f.id, f.name, sub.name + ' · Lv' + f.level, sub.biome, Object.assign(Fights.stage(f), v2Intro(f), extra || {}));
+    fight('v2:' + f.id, f.name, sub.name + ' · Lv' + f.level, sub.biome, Object.assign(Fights.stage(f, isV2() ? { v2: true } : undefined), v2Intro(f), extra || {}));
   }
   function applyRef(L) {
+    if (isV2()) { applyRefV2(L); return; }
     const ref = Fights.reference(L, P), save = S.save;
     save.squad = ref.squad.slice(); save.upgrades = Object.assign({}, ref.upgrades); save.hero = null; save.units = {}; save.loadout = Items.emptyLoadout(); save.heat = []; save.descend = 0;
     S.run.mods = JSON.parse(JSON.stringify(ref.mods)); S.run.relics = []; S.run.hp = null; S.run.reviveUsed = 0; S.run.hpBonus = ref.hp - P.maxHp(save);
+    FV().ref = L;
+  }
+  function applyRefV2(L) {
+    const ref = Fights.referenceV2(L), save = S.save;
+    S.v2squad = ref.squad.map((x) => x.id); S.v2cfg = {}; ref.squad.forEach((x) => { S.v2cfg[x.id] = { stage: x.stage, level: x.level, stars: x.stars }; });
+    save.upgrades = Object.assign({}, ref.upgrades); save.hero = null; save.units = {}; save.loadout = Items.emptyLoadout(); save.heat = []; save.descend = 0;
+    S.run.mods = JSON.parse(JSON.stringify(ref.mods)); S.run.relics = []; S.run.hp = null; S.run.reviveUsed = 0; S.run.hpBonus = ref.hp - P.maxHp(rulesSave());
     FV().ref = L;
   }
   function v2ToBuilder(id) {
@@ -291,7 +333,7 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
   }
   // Mini-run: the 7 fights of a sub-area in order with the hero's HP carried over.
   function startChain(subId) {
-    const sub = Fights.sub(subId), maxHp = Math.max(1, P.maxHp(S.save) + num(S.run.hpBonus, 0)), hp = S.run.hp == null || S.run.hp === '' ? maxHp : clamp(num(S.run.hp, maxHp), 1, 999);
+    const sub = Fights.sub(subId), maxHp = Math.max(1, P.maxHp(rulesSave()) + num(S.run.hpBonus, 0)), hp = S.run.hp == null || S.run.hp === '' ? maxHp : clamp(num(S.run.hp, maxHp), 1, 999);
     chain = { sub: subId, idx: 0, hp, maxHp: Math.max(maxHp, hp), start: hp, rows: [], key: null, over: null, rest: FV().rest }; lastChain = null;
     chainLaunch();
   }
@@ -342,10 +384,13 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
 
   // ---------- Team ----------
   function summaryLine() {
-    const s = S.save, cp = P.squadCp(s), cap = P.commandCap(s), prob = P.squadProblem(s);
+    const s = S.save;
+    if (isV2()) { const cp = P.squadCp(s, S.v2squad), cap = P.commandCap(s); return 'V2 rules (dev only): squad ' + S.v2squad.length + ' beasts, CP ' + cp + '/' + cap + (cp > cap ? ' (over cap, allowed here)' : '') + '. Max HP ' + (P.maxHp(rulesSave()) + num(S.run.hpBonus, 0)) + '. Hero: ' + P.heroOf(s).name + '. Merge mode: ' + (S.mergeMode === 'best' ? 'Best of column' : 'Own element') + (S.affinity ? ', edited chart' : '') + '.'; }
+    const cp = P.squadCp(s), cap = P.commandCap(s), prob = P.squadProblem(s);
     return 'Squad ' + s.squad.length + ' units, CP ' + cp + '/' + cap + (cp > cap ? ' (over cap, allowed here)' : '') + '. Max HP ' + (P.maxHp(s) + num(S.run.hpBonus, 0)) + '. Hero: ' + P.heroOf(s).name + '.' + (prob && !prob.includes('Command Points') ? ' Warning: ' + prob : '');
   }
   function tabTeam() {
+    if (isV2()) return tabTeamV2();
     const s = S.save;
     let h = '<div class="d-card"><div class="d-mini">Tick a unit to put it in the squad (no Command Point limit here). Rarity changes its Command Point cost and look; Stars (1-5) and Mastery (1-5) are the duplicate and battle-xp growth that add stats.</div>' +
       '<div class="d-row"><button class="sm" data-a="squadall">All in squad</button><button class="sm" data-a="squadnone">Empty squad</button><button class="sm" data-a="squadstart">Starter squad</button><button class="sm" data-a="maxall">All Stars 5 + Mastery 5</button></div></div>';
@@ -358,6 +403,65 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
     h += '</table>';
     const tc = P.traitCounts(s), act = P.activeTraits(s);
     h += '<h4>Traits</h4><div class="d-mini">' + Object.keys(P.TRAITS).map((t) => P.TRAITS[t].icon + ' ' + t + ' ' + (tc[t] || 0)).join(' · ') + '</div>' + act.map((a) => '<div class="d-mini">' + a.trait + ' ' + a.step + ': ' + esc(a.text) + '</div>').join('');
+    return h;
+  }
+
+  // ---------- V2 team editor ----------
+  const chipEl = (el) => (el ? '<span class="chip el-' + esc(el) + '" title="' + esc((ELMAP[el] || {}).name || el) + '">' + esc((ELMAP[el] || {}).glyph || '') + ' ' + esc((ELMAP[el] || {}).name || el) + '</span>' : '');
+  const SET_AT = [2, 4];
+  function squadBar() {
+    const cards = V2.army(v2entries()), el = {}, fam = {};
+    for (const c of cards) { el[c.element] = (el[c.element] || 0) + 1; fam[c.family] = (fam[c.family] || 0) + 1; }
+    const lit = (n) => (n >= 4 ? ' lit4' : n >= 2 ? ' lit2' : '');
+    const cp = P.squadCp(S.save, S.v2squad), cap = P.commandCap(S.save);
+    return '<div class="d-card"><b>Squad: ' + cards.length + ' beasts · CP ' + cp + '/' + cap + '</b><div class="d-mini">Command Points are shown, not enforced. Set bonuses at 2 and 4 of an element or family light up.</div>' +
+      '<div class="d-chips">' + ELS.filter((e) => el[e]).map((e) => '<span class="sb' + lit(el[e]) + '" title="' + esc(ELMAP[e].resonance || '') + '">' + ELMAP[e].glyph + ' ' + el[e] + '</span>').join('') + FAMS.filter((f) => fam[f]).map((f) => '<span class="sb' + lit(fam[f]) + '" title="' + esc(FAMMAP[f].setBonus || '') + '">' + esc(FAMMAP[f].name) + ' ' + fam[f] + '</span>').join('') + '</div>' +
+      '<div class="d-mini">' + (cards.map((c) => esc(c.name) + (c.stage > 1 || c.level > 1 || c.stars > 1 ? ' (s' + c.stage + ' m' + c.level + ' ★' + c.stars + ')' : '')).join(', ') || 'empty') + '</div></div>';
+  }
+  function v2Filtered() {
+    const f = S.ui.v2f, q = f.q.trim().toLowerCase();
+    return unitsData.filter((u) => (!q || (u.name + ' ' + u.ability + ' ' + (u.baseAnimal || '') + ' ' + (u.culture || '')).toLowerCase().includes(q)) && (!f.el || u.element === f.el) && (!f.fam || u.family === f.fam) && (!f.rar || u.rarity === f.rar) && (!f.impl || IMPL(u) === f.impl) && (!f.sq || S.v2squad.includes(u.id)));
+  }
+  function unitCard(u) {
+    const inSq = S.v2squad.includes(u.id), c = cfgOf(u.id), art = window.Art.unit({ v2: true, unit: u.id, name: u.name }), r = u.roles || { atk: 0, buff: 0, guard: 0 }, ms = V2.maxStage(u);
+    const evo = (u.evolution || []).map((e) => '<span class="' + (e.stage === Math.min(c.stage, ms) ? 'evo-on' : '') + '">S' + e.stage + ' ' + esc(e.name) + (e.stage > 1 ? ' <i>' + esc(e.extends) + '</i>' : '') + '</span>').join(' → ');
+    const im = IMPL(u);
+    return '<div class="d-card v2u' + (inSq ? ' in' : '') + '"><div class="v2u-top"><label class="v2u-in"><input type="checkbox" data-c="v2in" data-id="' + u.id + '"' + (inSq ? ' checked' : '') + '></label>' +
+      (art.url ? '<img class="v2u-art" src="' + art.url + '" alt="' + esc(u.name) + '" title="Placeholder drawing (' + esc((art.match || '') + ' match') + ')">' : '') +
+      '<div class="v2u-main"><b class="rar-' + u.rarity + '">' + esc(u.name) + '</b> ' + chipEl(u.element) + '<span class="tag">' + esc(FAMMAP[u.family].name) + '</span><span class="tag">' + esc(u.rarity) + '</span><span class="tag">CP ' + (u.commandCost || 0) + '</span>' +
+      (im !== 'full' ? '<span class="tag impl-' + im.replace(' ', '-') + '" title="' + esc(u.implNote || '') + '">' + im + '</span>' : '') + '<div class="d-mini">' + esc(u.ability) + '</div>' + (im !== 'full' && u.implNote ? '<div class="d-mini"><i>Simplified: ' + esc(u.implNote) + '</i></div>' : '') +
+      '<div class="d-mini roles" title="Role split">⚔ ' + r.atk + ' · ✚ ' + r.buff + ' · 🛡 ' + r.guard + ' <span class="rbar"><i class="a" style="width:' + r.atk + '%"></i><i class="b" style="width:' + r.buff + '%"></i><i class="g" style="width:' + r.guard + '%"></i></span> · ' + esc(u.type) + '</div>' +
+      '<div class="d-mini evo">' + evo + '</div></div></div>' +
+      '<div class="d-row v2u-ctl"><label>Stage <select data-c="v2cfg" data-k="stage" data-id="' + u.id + '">' + opt(Array.from({ length: ms }, (_, i) => i + 1), Math.min(c.stage, ms)) + '</select></label><label>Mastery <select data-c="v2cfg" data-k="level" data-id="' + u.id + '">' + opt([1, 2, 3, 4, 5], c.level) + '</select></label><label>Stars <select data-c="v2cfg" data-k="stars" data-id="' + u.id + '">' + opt([1, 2, 3, 4, 5], c.stars) + '</select></label></div></div>';
+  }
+  function tabTeamV2() {
+    const f = S.ui.v2f, list = v2Filtered();
+    let h = '<div class="d-card"><div class="d-mini">V2 team editor: the 92 guardian beasts. Tick a beast to put it in the squad; Stage is its evolution (1-3), Mastery and Stars add stats as in the classic roster. Drawings are placeholders: the label is the real beast.</div>' +
+      '<div class="d-row"><input type="text" placeholder="search name or ability" data-c="v2q" value="' + esc(f.q) + '"></div>' +
+      '<div class="d-row"><select data-c="v2el">' + opt([['', 'any element']].concat(elementsData.elements.map((e) => [e.id, e.glyph + ' ' + e.name])), f.el) + '</select><select data-c="v2fam">' + opt([['', 'any family']].concat(familiesData.map((x) => [x.id, x.name])), f.fam) + '</select>' +
+      '<select data-c="v2rar">' + opt([['', 'any rarity']].concat(RARS), f.rar) + '</select><select data-c="v2impl">' + opt([['', 'any status'], 'full', 'simplified', 'not yet'], f.impl) + '</select><label><input type="checkbox" data-c="v2sq"' + (f.sq ? ' checked' : '') + '> in squad</label></div>' +
+      '<div class="d-row"><button class="sm" data-a="v2addf">Add the ' + list.length + ' shown</button><button class="sm" data-a="v2clear">Empty squad</button><button class="sm" data-a="v2max">Stage max, Mastery 5, Stars 5 (squad)</button><label>Reference <select data-c="v2refl">' + opt([1, 4, 8, 12, 20, 30], FV().ref || 1) + '</select></label><button class="sm" data-a="v2ref">Apply</button></div></div>' + squadBar();
+    h += '<div class="d-mini">' + list.length + ' of ' + unitsData.length + ' beasts</div>' + list.map(unitCard).join('');
+    return h;
+  }
+
+  // ---------- Weakness chart and merge mode (V2) ----------
+  const WH = Object.fromEntries((elementsData.weaknessHits || []).map((w) => [w.attacker + '>' + w.defender, w]));
+  function tabChart() {
+    const a = chart(), mode = MODES.find((m) => m.id === S.mergeMode) || MODES[0];
+    let h = '<div class="d-card"><b>Merge mode</b> <span class="d-mini">(V2 rules; applies to the next fight)</span><div class="d-row">' + MODES.map((m) => '<button class="' + (m.id === S.mergeMode ? 'on' : '') + '" data-a="mm" data-id="' + m.id + '">' + esc(m.name) + '</button>').join('') + '</div><div class="d-mini">' + esc(mode.rule) + '</div></div>';
+    h += '<div class="d-card"><b>Weakness chart</b> <span class="d-mini">rows = attacker element, columns = enemy element. Tap a cell to cycle ×0.5 / ×1 / ×1.5. Saved in the dev state and applied to the <b>next</b> fight (the full 8×8 is passed as <code>rules.v2.affinity</code>). A ×1.5 pair with a named weakness hit fires that hit; others only get the bonus.</span>';
+    h += '<div class="aff"><span class="aff-h"></span>' + ELS.map((d) => '<span class="aff-h" title="Enemy ' + esc(ELMAP[d].name) + '">' + ELMAP[d].glyph + '</span>').join('');
+    for (const x of ELS) {
+      h += '<span class="aff-h" title="Attacker ' + esc(ELMAP[x].name) + '">' + ELMAP[x].glyph + '</span>';
+      for (const y of ELS) {
+        const v = a[x][y], dflt = DEFAULT_AFF[x][y], wh = WH[x + '>' + y];
+        h += '<button class="aff-c v' + String(v).replace('.', '_') + (v !== dflt ? ' chg' : '') + '" data-a="aff" data-x="' + x + '" data-y="' + y + '" title="' + esc(ELMAP[x].name + ' on ' + ELMAP[y].name + (wh ? ' (' + wh.name + ')' : '') + (v !== dflt ? ', default ×' + dflt : '')) + '">' + v + (v > 1 && wh ? '<i>' + esc(wh.name.slice(0, 5)) + '</i>' : '') + '</button>';
+      }
+    }
+    h += '</div><div class="d-mini">' + (S.ui.affSel ? esc(S.ui.affSel) : 'Green = weak (×1.5), red = resist (×0.5), outlined = changed from the default.') + '</div>' +
+      '<div class="d-row"><button class="sm" data-a="affreset">Reset to default</button><button class="sm" data-a="affexport">Export (copy)</button><button class="sm" data-a="affimport">Import</button></div>' +
+      '<textarea id="aff-json" rows="5" spellcheck="false" placeholder="paste a chart here, then Import">' + esc(S.ui.affText || '') + '</textarea>' + (S.ui.affMsg ? '<div class="d-mini"><b>' + esc(S.ui.affMsg) + '</b></div>' : '') + '</div>';
     return h;
   }
 
@@ -400,11 +504,19 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
   }
 
   // ---------- Run state ----------
+  function runModsV2() {
+    const cards = V2.army(v2entries());
+    let h = '<h3>In-run unit bonuses (V2 squad)</h3><div class="d-row"><button class="sm" data-a="teamatk" data-n="1">All attackers +1 ATK</button><button class="sm" data-a="teamatk" data-n="-1">-1</button><button class="sm danger" data-a="clearmods">Clear all</button></div>';
+    h += '<table class="d-table"><tr><th>Beast</th><th>+ATK</th><th>+Range</th><th>+Block</th></tr>';
+    for (const c of cards) { const m = S.run.mods[c.id] || {}, cell = (k, ok) => '<td>' + (ok ? '<input type="number" min="-9" max="99" data-c="mod" data-id="' + c.id + '" data-k="' + k + '" value="' + (m[k] || 0) + '">' : '') + '</td>'; h += '<tr><td>' + esc(c.name) + '</td>' + cell('atk', !!c.pattern) + cell('range', !!c.pattern) + cell('block', c.block !== undefined) + '</tr>'; }
+    return h + '</table><h3>Resulting rules and army</h3><div class="d-mini">Engine rules: ' + esc(JSON.stringify(Object.assign({}, P.rulesFor(rulesSave(), runObj()), { v2: v2Rules() }))).slice(0, 700) + '...</div><div class="d-mini">' + V2.army(v2entries(), S.run.mods).map((c) => esc(c.id + ' atk ' + (c.atk === undefined ? '-' : c.atk) + ' range ' + (c.range === undefined ? '-' : c.range) + ' block ' + (c.block === undefined ? '-' : c.block))).join('<br>') + '</div>';
+  }
   function tabRun() {
     const s = S.save, r = S.run, squad = s.squad.filter((id) => P.ROSTER_BY[id]);
     let h = '<div class="d-card"><div class="d-row"><label>Current HP (blank = full) <input type="number" min="1" max="999" data-c="rhp" value="' + (r.hp == null ? '' : r.hp) + '"></label><label>Max HP bonus <input type="number" min="-50" max="999" data-c="rhpb" value="' + r.hpBonus + '"></label>' +
-      '<label>Revives already spent <input type="number" min="0" max="9" data-c="rrev" value="' + r.reviveUsed + '"></label></div><div class="d-mini">Max HP from Camp/gear/traits is ' + P.maxHp(s) + '. These apply to every fight (HP does not carry between fights here).</div></div>';
+      '<label>Revives already spent <input type="number" min="0" max="9" data-c="rrev" value="' + r.reviveUsed + '"></label></div><div class="d-mini">Max HP from Camp/gear/traits is ' + P.maxHp(rulesSave()) + '. These apply to every fight (HP does not carry between fights here).</div></div>';
     h += '<h3>Relics (' + r.relics.length + ' on)</h3><div class="d-grid">' + Relics.LIST.map((x) => '<button class="' + (r.relics.includes(x.id) ? 'on' : '') + '" data-a="relic" data-id="' + x.id + '"><b>' + x.glyph + ' ' + esc(x.name) + '</b><br><span class="d-mini">' + esc(x.text) + '</span></button>').join('') + '</div>';
+    if (isV2()) return h + runModsV2();
     h += '<h3>In-run unit bonuses</h3><div class="d-row"><button class="sm" data-a="teamatk" data-n="1">All attackers +1 ATK</button><button class="sm" data-a="teamatk" data-n="-1">-1</button><button class="sm danger" data-a="clearmods">Clear all</button></div>';
     h += '<table class="d-table"><tr><th>Unit</th><th>+ATK</th><th>+Range</th><th>+Block</th><th>+Boost</th></tr>';
     for (const id of squad) {
@@ -426,12 +538,12 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
   }
 
   // ---------- Render ----------
-  const TABS = [['enemies', 'Enemies'], ['fights', 'V2 Fights'], ['builder', 'Builder'], ['team', 'Team'], ['camp', 'Camp'], ['gear', 'Gear'], ['run', 'Run'], ['presets', 'Presets'], ['design', 'Design']];
-  const TAB_FN = { enemies: tabEnemies, fights: tabFights, builder: tabBuilder, team: tabTeam, camp: tabCamp, gear: tabGear, run: tabRun, presets: tabPresets, design: () => '<div id="design-root"></div>' };
+  const TABS = [['enemies', 'Enemies'], ['fights', 'V2 Fights'], ['builder', 'Builder'], ['team', 'Team'], ['chart', 'Chart'], ['camp', 'Camp'], ['gear', 'Gear'], ['run', 'Run'], ['presets', 'Presets'], ['design', 'Design']];
+  const TAB_FN = { enemies: tabEnemies, fights: tabFights, builder: tabBuilder, team: tabTeam, chart: tabChart, camp: tabCamp, gear: tabGear, run: tabRun, presets: tabPresets, design: () => '<div id="design-root"></div>' };
   function render() {
     applyOverrides();
     const root = $('#dev'), keep = window.scrollY;
-    root.innerHTML = '<div class="d-head"><h1>Tile Defense dev test page</h1><div class="d-sum">' + esc(summaryLine()) + '</div><div class="d-tabs">' +
+    root.innerHTML = '<div class="d-head"><h1>Tile Defense dev test page</h1><div class="d-rules">Rules <button class="sm' + (!isV2() ? ' on' : '') + '" data-a="rules" data-id="classic">Classic</button><button class="sm' + (isV2() ? ' on' : '') + '" data-a="rules" data-id="v2">V2 (guardian beasts)</button></div><div class="d-sum">' + (isV2() ? '<b class="v2-banner">V2 rules, dev only</b> ' : '') + esc(summaryLine()) + '</div><div class="d-tabs">' +
       TABS.map(([id, label]) => '<button class="sm' + (S.ui.tab === id ? ' on' : '') + '" data-a="tab" data-id="' + id + '">' + label + '</button>').join('') + '</div></div><div id="dev-body">' + TAB_FN[S.ui.tab]() + '</div>';
     if (S.ui.tab === 'design') { if (!S.design || typeof S.design !== 'object') S.design = { marks: {}, sub: 'units' }; Design.mount($('#design-root'), S.design, persist); }
     window.scrollTo(0, keep);
@@ -446,6 +558,28 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
       const n = World.byId[el.dataset.id], sub = World.SUB_BY[n.sub], gen = Gen.generateBattle(n, seedOf(n.id), genOpts()), lv = Gen.scaled(n, genOpts()).level;
       fight(n.id, nodeName(n, sub), sub.name + ' · Lv' + lv, sub.biome, gen);
     },
+    rules(el) { S.rules = el.dataset.id === 'v2' ? 'v2' : 'classic'; change(); },
+    mm(el) { S.mergeMode = el.dataset.id === 'best' ? 'best' : 'own'; change(); },
+    aff(el) {
+      const x = el.dataset.x, y = el.dataset.y; if (!S.affinity) S.affinity = JSON.parse(JSON.stringify(DEFAULT_AFF));
+      const v = S.affinity[x][y]; S.affinity[x][y] = v === 1 ? 1.5 : v === 1.5 ? 0.5 : 1;
+      if (JSON.stringify(S.affinity) === JSON.stringify(DEFAULT_AFF)) S.affinity = null;
+      const nv = chart()[x][y], wh = WH[x + '>' + y];
+      S.ui.affSel = ELMAP[x].name + ' on ' + ELMAP[y].name + ': ×' + nv + (nv > 1 && wh ? ' (' + wh.name + ': ' + wh.text + ')' : nv > 1 ? ' (bonus only, no named hit for this pair)' : '') + ' [default ×' + DEFAULT_AFF[x][y] + ']';
+      change();
+    },
+    affreset() { S.affinity = null; S.ui.affSel = 'Chart reset to the default of elements.json.'; S.ui.affMsg = ''; change(); },
+    affexport() { S.ui.affText = JSON.stringify(chart()); S.ui.affMsg = 'Exported below' + (navigator.clipboard && navigator.clipboard.writeText ? ' and copied.' : '.'); try { navigator.clipboard.writeText(S.ui.affText).catch(() => {}); } catch (e) { /* no clipboard */ } change(); },
+    affimport() {
+      const ta = $('#aff-json'), txt = ta ? ta.value : S.ui.affText || '';
+      try { const a = JSON.parse(txt); if (!validAff(a)) throw new Error('needs an 8x8 object of attacker -> defender with values 0.5, 1 or 1.5 for ' + ELS.join(', ')); S.affinity = JSON.stringify(a) === JSON.stringify(DEFAULT_AFF) ? null : a; S.ui.affMsg = 'Imported. It applies to the next fight.'; S.ui.affText = txt; }
+      catch (e) { S.ui.affMsg = 'Import failed: ' + e.message; S.ui.affText = txt; }
+      change();
+    },
+    v2addf() { for (const u of v2Filtered()) if (!S.v2squad.includes(u.id)) S.v2squad.push(u.id); change(); },
+    v2clear() { S.v2squad = []; change(); },
+    v2max() { for (const id of S.v2squad) S.v2cfg[id] = { stage: V2.maxStage(V2.UNITS[id]), level: 5, stars: 5 }; change(); },
+    v2ref() { applyRefV2(num(S.ui.v2refl, 1)); change(); },
     fvregion(el) { FV().region = el.dataset.id; change(); },
     fvfight(el) { launchV2(Fights.byId(el.dataset.id)); },
     fvref(el) { applyRef(num(el.dataset.lv, 1)); change(); },
@@ -478,7 +612,7 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
     remove(el) { const id = el.dataset.id; Items.unequip(S.save, id); S.save.items = S.save.items.filter((x) => x !== id); delete S.save.itemData[id]; change(); },
     removeall() { S.save.items = []; S.save.itemData = {}; S.save.loadout = Items.emptyLoadout(); change(); },
     relic(el) { const id = el.dataset.id, r = S.run.relics; S.run.relics = r.includes(id) ? r.filter((x) => x !== id) : r.concat(id); change(); },
-    teamatk(el) { const n = num(el.dataset.n, 1); for (const id of S.save.squad) if (E.CARD_TYPES[P.ROSTER_BY[id].type].role === 'attacker') { const m = S.run.mods[id] || (S.run.mods[id] = {}); m.atk = (m.atk || 0) + n; } change(); },
+    teamatk(el) { const n = num(el.dataset.n, 1); if (isV2()) { for (const c of V2.army(v2entries())) if (c.pattern) { const m = S.run.mods[c.id] || (S.run.mods[c.id] = {}); m.atk = (m.atk || 0) + n; } change(); return; } for (const id of S.save.squad) if (E.CARD_TYPES[P.ROSTER_BY[id].type].role === 'attacker') { const m = S.run.mods[id] || (S.run.mods[id] = {}); m.atk = (m.atk || 0) + n; } change(); },
     clearmods() { S.run.mods = {}; change(); },
     psave() {
       const name = ($('#pname').value || '').trim(); if (!name) { msg = 'Enter a preset name first.'; render(); return; }
@@ -490,6 +624,10 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
   };
   const setMod = (id, k, v) => { const m = S.run.mods[id] || (S.run.mods[id] = {}); m[k] = v; if (!v) delete m[k]; };
   const CH = {
+    v2in(el) { const id = el.dataset.id, q = S.v2squad; S.v2squad = el.checked ? (q.includes(id) ? q : q.concat(id)) : q.filter((x) => x !== id); },
+    v2cfg(el) { const id = el.dataset.id, c = Object.assign(cfgOf(id), { [el.dataset.k]: num(el.value, 1) }); S.v2cfg[id] = c; },
+    v2q(el) { S.ui.v2f.q = el.value; }, v2el(el) { S.ui.v2f.el = el.value; }, v2fam(el) { S.ui.v2f.fam = el.value; }, v2rar(el) { S.ui.v2f.rar = el.value; }, v2impl(el) { S.ui.v2f.impl = el.value; }, v2sq(el) { S.ui.v2f.sq = el.checked; },
+    v2refl(el) { S.ui.v2refl = num(el.value, 1); },
     fvrest(el) { FV().rest = el.checked; },
     seed(el) { S.run.seed = el.value.trim() || 'dev'; },
     csub(el) { C().sub = el.value; },
@@ -551,5 +689,5 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
 
   Design.bind($('#dev'));
   render();
-  window.DevTest = { get state() { return S; }, results, get chain() { return chain || lastChain; }, Fights };
+  window.DevTest = { get state() { return S; }, V2, results, get chain() { return chain || lastChain; }, Fights };
 })();

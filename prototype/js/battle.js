@@ -16,7 +16,7 @@
   };
   const SPEEDS = [1, 2, 4];
 
-  const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null, report: null, hero: null, aiming: false };
+  const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null, report: null, hero: null, aiming: false, inspect: false };
 
   // Board cells are built once; their contents are redrawn on every render.
   // `boss` adds the optional boss row (row -1) above the two enemy rows; it exists only in battles that have one.
@@ -38,9 +38,24 @@
   buildBoard(E.ROWS, false);
 
   const cellEl = (k) => root.querySelector('.cell[data-key="' + k + '"]');
-  const cardById = (id) => game.army.find((c) => c.id === id);
-  const tileOf = (id) => Object.keys(game.placement).find((k) => game.placement[k] === id) || null;
+  const v2on = (s) => !!(s && s.rules && s.rules.v2);
+  const lc = (x) => String(x || '').toLowerCase();
+  // V2 swaps and spawned Drones live in rules.v2mem.moves and are replayed by the engine each turn: the board the player sees is that replay (eff).
+  // Rearranging bakes the replay into the layout and clears the list (docs/V2_UNITS_PLAN.md step 3 hand-off).
+  function eff() {
+    const s = game.state, mem = s && s.rules && s.rules.v2 && s.rules.v2mem;
+    if (mem && mem.moves && mem.moves.length && window.V2) return window.V2.applyMoves(game.placement, game.army, s.rules);
+    return { placement: game.placement, army: game.army };
+  }
+  function bake() {
+    const s = game.state, mem = s && s.rules && s.rules.v2 && s.rules.v2mem;
+    if (!mem || !mem.moves || !mem.moves.length) return;
+    const e = eff(); game.placement = Object.assign({}, e.placement); game.army = e.army; mem.moves = [];
+  }
+  const cardById = (id) => eff().army.find((c) => c.id === id);
+  const tileOf = (id) => { const pl = eff().placement; return Object.keys(pl).find((k) => pl[k] === id) || null; };
   const current = () => game.view || game.state;
+  const turnArg = (s) => (v2on(s) ? s.turn : undefined);
 
   function start(opts) {
     game.army = opts.army;
@@ -49,7 +64,7 @@
     game.view = null;
     game.selected = null;
     game.busy = false;
-    game.aiming = false;
+    game.aiming = false; game.inspect = false;
     game.hero = opts.hero || null;
     game.onEnd = opts.onEnd;
     game.report = { shields: false, overkills: 0, bossOverkill: false, explosions: 0, turns: 0 }; // read by bounties (app.js)
@@ -76,11 +91,12 @@
       introEl.innerHTML = '<span class="intro-name">' + (intro.rule === 'Elite' ? '💀 ' : '👑 ') + intro.name + (intro.rule ? ' <i>' + (intro.badge ? intro.badge + ' ' : '') + intro.rule + '</i>' : '') + '</span> ' + intro.text;
       log((intro.rule === 'Elite' ? 'Elite: ' : 'Boss: ') + intro.name + (intro.rule && intro.rule !== 'Elite' ? ' (' + intro.rule + ')' : '') + '. ' + intro.text, 'bad');
     } else introEl.textContent = rules.length ? rules.join(' ') : Object.keys(kept).length ? 'Your last layout is ready. Adjust it, then press Fight.' : 'Place your squad, then press Fight.';
+    setupV2UI(v2on(game.state));
     root.hidden = false;
     render();
     fit();
   }
-  const placement = () => Object.assign({}, game.placement);
+  const placement = () => Object.assign({}, eff().placement);
 
   // ---------- Battle log (design 20) ----------
   const logEl = $('#b-log-lines');
@@ -92,11 +108,30 @@
     logEl.scrollTop = logEl.scrollHeight;
   }
   const nameOf = (view, id) => { const e = view.enemies.find((en) => en.id === id); return e ? E.ENEMY_TYPES[e.type].name + (e.kind ? ' ' + E.ENEMY_KINDS[e.kind].badge : '') : 'Enemy'; };
-  const cardName = (key) => { const c = cardById(game.placement[key]); if (!c) return 'Unit'; const u = window.Art ? Art.unit(c) : null; return (u && u.name) || E.CARD_TYPES[c.type].name; };
+  const cardName = (key) => { const c = cardById(eff().placement[key]); if (!c) return 'Unit'; const u = window.Art ? Art.unit(c) : null; return (u && u.name) || E.CARD_TYPES[c.type].name; };
+  const lastWeak = {}; // enemy id -> the weakness / resist event just before its hit (V2)
+  const STATUS_TEXT = { burn: 'is burning', poison: 'is poisoned', chill: 'is chilled (-1 ATK)', mark: 'is marked (+1 next hit)', hold: 'is held (skips its strike)', sunder: 'loses armour', cleanse: 'is stripped' };
+  function logV2(ev, view) {
+    if (ev.t === 'weak') { lastWeak[ev.id] = ev; log('&nbsp;&nbsp;' + (ev.mult > 1 ? '<b>' + (ev.name ? ev.name + '!' : 'Weak!') + '</b> ' + elName(ev.element) + ' hits ' + nameOf(view, ev.id) + ' for ×' + ev.mult : nameOf(view, ev.id) + ' resists ' + elName(ev.element) + ' (×' + ev.mult + ')'), ev.mult > 1 ? 'good' : 'bad'); }
+    else if (ev.t === 'merge') log('Merge <b>' + ev.name + '</b> in column ' + (ev.col + 1), 'good');
+    else if (ev.t === 'status') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' ' + (ev.skipped ? 'is held and skips its strike' : (STATUS_TEXT[ev.status] || ev.status) + (ev.n > 1 && ev.status !== 'cleanse' ? ' (' + ev.n + ')' : '')));
+    else if (ev.t === 'tick') log('&nbsp;&nbsp;' + (ev.status === 'burn' ? 'Burn' : 'Poison') + ' ticks on ' + nameOf(view, ev.id) + ' (' + ev.n + ')');
+    else if (ev.t === 'freeze') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + (ev.skipped ? ' is frozen and skips its strike' : ' freezes solid'), 'good');
+    else if (ev.t === 'swap') log('Two units swap places');
+    else if (ev.t === 'drone') log('A Drone joins the board', 'good');
+    else if (ev.t === 'mimic') log(cardName(ev.key) + ' takes the ' + elName(ev.element) + ' element');
+    else if (ev.t === 'negate') log('A strike in column ' + (ev.col + 1) + ' is negated (' + ev.amount + ')', 'good');
+    else if (ev.t === 'souls') log('+' + ev.n + ' souls', 'good');
+    else if (ev.t === 'grudge') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' grows angry (⚔' + ev.atk + ')', 'bad');
+    else if (ev.t === 'thorn') log('&nbsp;&nbsp;Thorns bite you: -1 HP', 'bad');
+    else return false;
+    return true;
+  }
   function logEvent(ev, view) {
+    if (logV2(ev, view)) return;
     if (ev.t === 'fire') log(ev.targets.length ? cardName(ev.key) + ' fires for ⚔' + ev.atk : cardName(ev.key) + ' has no target in range', ev.targets.length ? '' : 'bad');
     else if (ev.t === 'hit' && ev.warded) log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' is untouched (' + WARD_TEXT[ev.warded] + ')', 'bad');
-    else if (ev.t === 'hit') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' takes ' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' (armor)' : '') + (ev.killed ? ', defeated' : ' (' + ev.hp + ' left)'), ev.killed ? 'good' : '');
+    else if (ev.t === 'hit') { const w = lastWeak[ev.id]; delete lastWeak[ev.id]; log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' takes ' + ev.dmg + (w ? (w.mult > 1 ? ' ▲' : ' ▼') : '') + (ev.armor && ev.amount > ev.dmg ? ' (armor)' : '') + (ev.killed ? ', defeated' : ' (' + ev.hp + ' left)'), ev.killed ? 'good' : ''); }
     else if (ev.t === 'overkill') log('&nbsp;&nbsp;Overkill: ' + ev.amount + ' carries to the ' + nameOf(view, ev.id));
     else if (ev.t === 'explode') log('&nbsp;&nbsp;Barrel explodes' + (ev.echo ? ' again (Mjölnir Shard)' : '') + ' for ' + ev.amount + ' to its neighbours');
     else if (ev.t === 'feast') log("Fenrir's Fang: attackers now have +" + ev.n + ' ATK', 'good');
@@ -107,14 +142,14 @@
     else if (ev.t === 'rage') log(nameOf(view, ev.id) + ' is in a fury: +' + ev.amount + ' ⚔', 'bad');
     else if (ev.t === 'harden') log(nameOf(view, ev.id) + ' hardens: armor ' + ev.armor, 'bad');
     else if (ev.t === 'regrow') log(nameOf(view, ev.id) + ' grows back (' + ev.hp + ' HP)', 'bad');
-    else if (ev.t === 'move') log(nameOf(view, ev.id) + ' steps to column ' + (ev.to[1] + 1), 'bad');
+    else if (ev.t === 'move') log(nameOf(view, ev.id) + (ev.push ? ' is pushed to column ' : ' steps to column ') + (ev.to[1] + 1), 'bad');
     else if (ev.t === 'tide') log('The tide carries every enemy one column', 'bad');
     else if (ev.t === 'ability' && ev.target) log('&nbsp;&nbsp;Target: ' + nameOf(view, ev.target));
     else if (ev.t === 'stand') log('Last Breath: you cling on at 1 HP!', 'good');
     else if (ev.t === 'revive') log('Phoenix Rebirth: you rise again with ' + ev.hp + ' HP!', 'good');
     else if (ev.t === 'chain') log('Lightning leaps to another enemy', 'hit');
     else if (ev.t === 'mend' && ev.source === 'ration') log('Field rations restore ' + ev.amount + ' HP', 'good');
-    else if (ev.t === 'mend') log('Lifebloom heals ' + ev.amount + ' HP', 'good');
+    else if (ev.t === 'mend') log((ev.source === 'v2' ? 'Healing' : 'Lifebloom') + ' restores ' + ev.amount + ' HP', 'good');
     else if (ev.t === 'enrage') { if (ev.ids.length) log('Survivors enrage: +1 ⚔', 'bad'); }
     else if (ev.t === 'cleared') log('Stage cleared!', 'good');
     else if (ev.t === 'defeated') log('Your hero has fallen.', 'bad');
@@ -138,7 +173,7 @@
 
   function render() {
     const s = current();
-    const stats = E.computeStats(game.placement, game.army, s.enemies, s.rules);
+    const bd = eff(), stats = E.computeStats(bd.placement, bd.army, s.enemies, s.rules, turnArg(s));
     $('#b-turn').textContent = s.turn;
     $('#b-hpfill').style.width = (100 * s.hp / s.maxHp) + '%';
     $('#b-hptext').textContent = s.hp + ' / ' + s.maxHp + (s.barrier ? ' · 🔰' + s.barrier : '');
@@ -160,17 +195,18 @@
         if (r < 2) {
           cell.innerHTML = body && body.row === r && body.col === c ? enemyHTML(body, s) : '';
         } else {
-          const id = game.placement[k];
+          const id = bd.placement[k];
           cell.innerHTML = id ? cardHTML(cardById(id), stats[k], k) : '';
         }
       }
     }
-    const hand = game.army.filter((c) => !tileOf(c.id));
+    const hand = bd.army.filter((c) => !tileOf(c.id));
     $('#b-hand').innerHTML = hand.length
       ? hand.map(handSlotHTML).join('')
       : '<div class="hand-empty">Squad placed. Drop a card here to take it back.</div>';
     renderThreat(s, stats);
     paintBodies(rng);
+    paintV2(s, rng);
     $('#b-fight').disabled = game.busy || s.status !== 'playing';
     $('#b-clear').disabled = game.busy || s.status !== 'playing';
     $('#b-speed').textContent = game.speed + '×';
@@ -179,7 +215,7 @@
   // Which tiles the focused unit reaches / will hit / boosts. While dragging (or with an unplaced unit selected and a
   // tile hovered) the unit is previewed on the tile under the pointer, buffs from its would-be neighbours included.
   function rangeFor(s, stats) {
-    const out = { reach: new Set(), willHit: new Set(), boost: new Set() };
+    const out = { reach: new Set(), willHit: new Set(), boost: new Set(), stats: null, st: null };
     if (game.busy) return out;
     let focusKey = null, st = null;
     const dragId = drag && drag.ghost ? drag.id : null;
@@ -188,24 +224,25 @@
       const k = dragId ? (drag.over && drag.over.dataset.key) : game.hover;
       const rowOf = k ? E.parseKey(k)[0] : -1;
       if (k && rowOf >= 2 && !E.tileBlocked(s.rules, k)) {
-        const p = Object.assign({}, game.placement), from = tileOf(probe), occ = p[k];
+        const bd = eff(), p = Object.assign({}, bd.placement), from = tileOf(probe), occ = p[k];
         if (from) delete p[from];
         p[k] = probe;
         if (occ && from && occ !== probe) p[from] = occ;
-        const hs = E.computeStats(p, game.army, s.enemies, s.rules);
-        focusKey = k; st = hs[k];
+        const hs = E.computeStats(p, bd.army, s.enemies, s.rules, turnArg(s));
+        focusKey = k; st = hs[k]; out.stats = hs; // out.stats: the board as it would be (merge preview)
       }
     } else {
-      focusKey = game.hover && game.placement[game.hover] ? game.hover : (game.selected && tileOf(game.selected)) || null;
+      focusKey = game.hover && eff().placement[game.hover] ? game.hover : (game.selected && tileOf(game.selected)) || null;
       st = focusKey ? stats[focusKey] : null;
     }
+    out.st = st;
     if (!st) return out;
-    if (st.type.role === 'attacker') {
+    if (E.isAttacker(st)) {
       E.reachableTiles(st, s.bossRow).forEach((k) => out.reach.add(k));
       // A targeted Big body is highlighted whole: every tile it covers, not only the struck column.
       E.targetsFor(st, s.enemies).forEach((e) => E.cellsOf(e).forEach(([r, c]) => out.willHit.add(E.key(r, c))));
       for (const e of s.enemies) if (e.alive && E.isBig(e) && E.cellsOf(e).some(([r, c]) => out.reach.has(E.key(r, c)))) E.cellsOf(e).forEach(([r, c]) => out.reach.add(E.key(r, c)));
-    } else if (st.type.role === 'support') st.boosts.forEach((k) => out.boost.add(k));
+    } else if (E.isSupport(st) && st.boosts) st.boosts.forEach((k) => out.boost.add(k));
     return out;
   }
   // Big bodies are one element over several tiles: mirror the tile highlights onto the card itself.
@@ -218,7 +255,7 @@
   }
   // Lightweight refresh of the highlight classes only (no card re-render), used on every drag move.
   function paintRange() {
-    const s = current(), rng = rangeFor(s, E.computeStats(game.placement, game.army, s.enemies, s.rules));
+    const s = current(), bd = eff(), stats = E.computeStats(bd.placement, bd.army, s.enemies, s.rules, turnArg(s)), rng = rangeFor(s, stats);
     for (let r = game.top; r < game.rows; r++) for (let c = 0; c < E.COLS; c++) {
       const k = E.key(r, c), cell = cellEl(k);
       cell.classList.toggle('reach', rng.reach.has(k));
@@ -226,6 +263,7 @@
       cell.classList.toggle('boost-target', rng.boost.has(k));
     }
     paintBodies(rng);
+    paintV2(s, rng, stats);
   }
 
   // Hero panel (WP15): placeholder seal portrait, passive, and the once-per-battle ability button.
@@ -254,7 +292,7 @@
     const inc = E.incomingByColumn(s.enemies);
     for (let c = 0; c < E.COLS; c++) {
       const incoming = inc[c];
-      const block = E.playerRowsFor(s.rules).map((r) => stats[E.key(r, c)]).filter((st) => st && st.type.role === 'defender').reduce((n, st) => n + st.block, 0);
+      const block = E.playerRowsFor(s.rules).map((r) => stats[E.key(r, c)]).filter((st) => st && E.isDefender(st)).reduce((n, st) => n + st.block, 0);
       const dmg = Math.max(0, incoming - block);
       total += dmg;
       cols.push(incoming === 0 ? '<div class="muted">–</div>' : '<div class="' + (dmg ? 'dmg' : 'safe') + '">' + (dmg ? '−' + dmg : '✓') + '</div>');
@@ -265,7 +303,7 @@
     $('#b-threat-total').className = total ? 'dmg' : 'safe';
   }
 
-  const EL_COLOR = { Wood: '#5a8a3a', Water: '#3f6fb0', Fire: '#d2542b', Earth: '#a07a3a', Wind: '#3f9d93', Light: '#d9a62b', Shadow: '#6b4a8a' };
+  const EL_COLOR = { wood: '#5a8a3a', water: '#3f6fb0', fire: '#d2542b', earth: '#a07a3a', wind: '#3f9d93', lightning: '#7a5fd0', light: '#d9a62b', shadow: '#6b4a8a' }; // the 8 elements (V2.2)
   const TXT = '︎'; // force text (not emoji) glyph rendering for stat symbols
   const artImg = (url, alt) => '<img src="' + url + '" alt="' + alt + '" draggable="false">';
 
@@ -278,7 +316,7 @@
         face + '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">💥' + t.blast + '</span></div></div>';
     }
     // V2 fights (js/fights.js): the placeholder drawing is labelled with the monster's real name and an element dot.
-    const label = t.v2 ? '<span class="e-name"' + (t.element ? ' style="--el:' + (EL_COLOR[t.element] || '#999') + '"' : '') + '>' + (t.element ? '<i></i>' : '') + t.name + '</span>' : '';
+    const label = t.v2 ? '<span class="e-name"' + (t.element ? ' style="--el:' + (EL_COLOR[lc(t.element)] || '#999') + '"' : '') + '>' + (t.element ? '<i></i>' : '') + t.name + '</span>' : '';
     const gim = e.gimmick ? E.ENEMY_GIMMICKS[e.gimmick] : null;
     const kind = e.kind ? E.ENEMY_KINDS[e.kind] : gim ? { name: gim.name, badge: gim.badge, text: E.gimmickText(e) } : null;
     const guard = e.guardian ? ' guardian' : '';
@@ -290,13 +328,14 @@
     const gates = e.row === E.BOSS_ROW && s ? '<div class="gates" aria-hidden="true">' + Array.from({ length: E.wOf(e) }, (_, i) => E.gateOpen(s.enemies, e.col + i) ? '<span class="open" title="Open: nothing stands in front">✦</span>' : '<span title="Gated: an enemy stands in front">⛓</span>').join('') + '</div>' : '';
     const atkTxt = e.atk + (lanes > 1 ? '×' + lanes : '');
     return '<div class="enemy' + bigCls + (t.boss ? ' boss' : '') + (e.kind ? ' kind-' + e.kind : '') + (gim ? ' gimmick gimmick-' + e.gimmick : '') + guard + '" title="' + t.name + (kind ? ' (' + kind.name + ': ' + kind.text + ')' : '') + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' + (lanes > 1 ? ' in each of ' + lanes + ' columns' : '') + (big ? ', footprint ' + fp : '') + (e.row === E.BOSS_ROW ? ', boss row: can be hit only through a column with no enemy in front' : '') +
-      (e.armor ? ', armor ' + e.armor : '') + (t.v2 && (t.element || t.variant) ? ' [' + [t.element, t.variant, t.flavour].filter(Boolean).join(' · ') + ']' : '') + '"' + bigAttr + '>' + face + label + laneMarks + gates +
+      (e.armor ? ', armor ' + e.armor : '') + (t.v2 && (t.element || t.variant) ? ' [' + [t.element, t.variant, t.flavour].filter(Boolean).join(' · ') + ']' : '') + '"' + bigAttr + '>' + face + label + enemyV2HTML(e, s || current(), t) + laneMarks + gates +
       (kind ? '<span class="kind-badge" aria-label="' + kind.name + '">' + kind.badge + '</span>' : '') + (e.guardian ? '<span class="guard-badge" title="Guard: the boss takes no damage while this enemy lives">♜</span>' : '') +
       (e.armor ? '<span class="tag armor">🛡' + TXT + e.armor + '</span>' : '') + (t.boss ? '<span class="crown">👑</span>' : '') +
       '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">⚔' + TXT + atkTxt + '</span></div></div>';
   }
 
   function cardHTML(card, st, from) {
+    if (card.v2) return cardHTMLV2(card, st, from);
     const t = E.CARD_TYPES[card.type];
     const unit = window.Art ? Art.unit(card) : { url: null, name: null };
     let main = '', sub = '', desc = t.name + ': ', extra = '';
@@ -334,21 +373,184 @@
   }
   const handSlotHTML = (c) => {
     const t = E.CARD_TYPES[c.type], u = window.Art ? Art.unit(c) : { name: null };
+    if (c.v2) return '<div class="slot">' + cardHTMLV2(c, null, 'hand') + '<div class="c-name">' + esc2(c.name) + '</div></div>';
     return '<div class="slot">' + cardHTML(c, null, 'hand') + '<div class="c-name">' + (u.name || t.name) + '</div></div>';
   };
+
+  // ---------- V2 rules UI (dev page, rules.v2): element chips, statuses, merge preview, weak / resist, inspect card ----------
+  const EL_GLYPH = { fire: '🔥', water: '💧', wood: '🌿', earth: '⛰', wind: '🌀', lightning: '⚡', light: '✨', shadow: '🌑' };
+  const elColor = (el) => EL_COLOR[lc(el)] || '#999';
+  const elGlyph = (el) => (window.V2 && window.V2.ELEMENTS[lc(el)] && window.V2.ELEMENTS[lc(el)].glyph) || EL_GLYPH[lc(el)] || '●';
+  const elName = (el) => (window.V2 && window.V2.ELEMENTS[lc(el)] && window.V2.ELEMENTS[lc(el)].name) || lc(el);
+  const elChip = (el, cls) => (el ? '<span class="el-chip ' + (cls || '') + '" style="--el:' + elColor(el) + '" title="' + elName(el) + '">' + elGlyph(el) + '</span>' : '');
+  const affOf = (rules) => (rules && rules.v2 && typeof rules.v2 === 'object' && rules.v2.affinity) || (window.V2 ? window.V2.AFFINITY : {});
+  // Attacker elements that hit `el` for more (weak) or less (resist) with the chart of the current fight.
+  function matchups(rules, el) {
+    const aff = affOf(rules), d = lc(el), weak = [], resist = [];
+    if (!d) return { weak, resist };
+    for (const a of Object.keys(aff)) { const m = aff[a] && aff[a][d] !== undefined ? aff[a][d] : 1; if (m > 1) weak.push(a); else if (m < 1) resist.push(a); }
+    return { weak, resist };
+  }
+  // What a unit of element `el` hits for more / less.
+  function strengths(rules, el) {
+    const row = affOf(rules)[lc(el)] || {}, good = [], bad = [];
+    for (const d of Object.keys(row)) { if (row[d] > 1) good.push(d); else if (row[d] < 1) bad.push(d); }
+    return { good, bad };
+  }
+  const glyphs = (list) => list.map(elGlyph).join('');
+  // Status icons of an enemy (e.st from the V2 engine) and a keyword list.
+  function statusList(e) {
+    const st = e.st || {}, out = [];
+    if (st.frozen) out.push(['🧊', 'Frozen', 'Frozen: skips its next strike']);
+    if (st.hold) out.push(['⛓', 'Held', 'Held: skips its next strike']);
+    if (st.burn && st.burn.turns > 0) out.push(['🔥', st.burn.n + '', 'Burning ' + st.burn.n + ' per turn, ' + st.burn.turns + ' turn(s) left']);
+    if (st.poison) out.push(['☠', st.poison + '', 'Poisoned ' + st.poison + ' per turn']);
+    if (st.chill && st.chill.length) out.push(['❄', '-' + st.chill.length, 'Chilled: -' + st.chill.length + ' ATK per lane']);
+    if (st.mark) out.push(['🎯', '', 'Marked: +1 on the next hit']);
+    if (st.shred) out.push(['⛏', '-' + st.shred, 'Armour shredded by ' + st.shred]);
+    return out;
+  }
+  const enemyStatusHTML = (e) => { const l = statusList(e); return l.length ? '<div class="st-row">' + l.slice(0, 3).map((x) => '<span title="' + x[2] + '">' + x[0] + x[1] + '</span>').join('') + (l.length > 3 ? '<span>+' + (l.length - 3) + '</span>' : '') + '</div>' : ''; };
+  function enemyV2HTML(e, s, t) {
+    if (!v2on(s)) return '';
+    const el = lc(e.element || t.element);
+    let h = el ? elChip(el, 'on-enemy') : '';
+    if (el) { const m = matchups(s.rules, el); if (m.weak.length) h += '<span class="wk" title="Weak to ' + m.weak.map(elName).join(', ') + '">▲' + glyphs(m.weak.slice(0, 3)) + '</span>'; }
+    return h + enemyStatusHTML(e);
+  }
+  // Compact stats and ability text of a V2 card (board, hand and inspect).
+  const behNames = (card) => [...new Set((card.beh || []).map((b) => b.p))];
+  function cardHTMLV2(card, st, from) {
+    const unit = window.Art ? Art.unit(card) : { url: null, name: null };
+    const atkr = !!card.pattern, def = (card.beh || []).some((b) => b.p === 'shield'), buf = (card.beh || []).find((b) => b.p === 'buff' || b.p === 'grant');
+    let main, sub = '', role;
+    if (atkr) {
+      const atk = st ? st.atk : card.atk, range = st ? st.range : card.range, pat = (st && st.pattern) || card.pattern;
+      main = '<span class="' + (st && st.atk !== st.baseAtk ? 'boosted' : '') + '">⚔' + TXT + atk + '</span>';
+      sub = '<span>' + (PATTERN_GLYPH[pat] || '↑') + '</span><span class="' + (st && st.rangeBonus ? 'boosted' : '') + '">R' + (range >= 99 ? '∞' : range) + '</span>' + (def ? '<span>🛡' + TXT + (st ? st.block : card.block) + '</span>' : '');
+      role = 'attacker';
+    } else if (def) { main = '🛡' + TXT + (st ? st.block : card.block); sub = buf ? '<span>✚</span>' : '<span>↕</span>'; role = 'defender'; }
+    else { main = buf && buf.amount ? '+' + buf.amount : '✦'; sub = '<span>' + (buf ? ({ atk: '⚔', range: 'R', block: '🛡' }[buf.effect] || '✚') : '✦') + '</span>'; role = 'support'; }
+    const el = lc((st && st.element) || card.element);
+    const mg = st && st.merges && st.merges.length ? '<div class="mg-wrap">' + mergeIcons(st.merges) + '</div>' : '';
+    const desc = (card.name || '') + ' · ' + (card.sub || '') + ' · ' + elName(el) + ' · ' + (card.family || '') + (window.V2 && window.V2.UNITS[card.unit] ? ' — ' + window.V2.UNITS[card.unit].ability : '');
+    const cls = 'card v2card role-' + role + (game.selected === card.id ? ' selected' : '') + (card.drone ? ' drone' : '') + (card.rarity && card.rarity !== 'common' ? ' rar-' + card.rarity : '');
+    const face = '<div class="c-art">' + (unit.url ? artImg(unit.url, card.name) : '<span class="e-icon">🐾</span>') + '</div>';
+    return '<div class="' + cls + '" data-card="' + card.id + '" data-from="' + from + '" title="' + esc2(desc) + '">' + face + '<span class="c-role">' + esc2(card.name || card.sub) + '</span>' + elChip(el, 'on-card') + mg +
+      '<div class="tags"><span class="tag main">' + main + '</span><span class="tag sub">' + sub + '</span></div></div>';
+  }
+  const esc2 = (x) => String(x == null ? '' : x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // At most 2 merge icons per tile (the rest are in the line under the board, the log and the inspect card).
+  function mergeIcons(list) {
+    const shown = list.slice(0, 2).map((m) => '<span class="mg" style="--a:' + elColor(m.pair[0]) + ';--b:' + elColor(m.pair[1]) + '" title="' + esc2(m.name + ' (' + elName(m.pair[0]) + ' + ' + elName(m.pair[1]) + ')') + '">' + elGlyph(m.pair[0]) + elGlyph(m.pair[1]) + '</span>').join('');
+    return shown + (list.length > 2 ? '<span class="mg more">+' + (list.length - 2) + '</span>' : '');
+  }
+  // Preview layer, repainted after every render and on every drag move: merge icons on carriers, the one-line list under the board, multiplier badges on the targets.
+  function paintV2(s, rng, stats0) {
+    const line = $('#b-merges');
+    root.querySelectorAll('.pv').forEach((n) => n.remove());
+    if (!v2on(s)) { if (line) { line.textContent = ''; } return; }
+    const stats = (rng && rng.stats) || stats0 || (function () { const bd = eff(); return E.computeStats(bd.placement, bd.army, s.enemies, s.rules, turnArg(s)); })();
+    // merge icons for the probed board (drag or selection): the carriers' own tile icons come from render(); while probing they are redrawn here
+    root.querySelectorAll('.cell > .mg-wrap.live').forEach((n) => n.remove());
+    const lines = {};
+    for (const st of Object.values(stats)) {
+      if (!st.merges || !st.merges.length) continue;
+      for (const m of st.merges) (lines[m.col] = lines[m.col] || []).push(m);
+      if (rng && rng.stats) { const cell = cellEl(st.key); if (cell && !cell.querySelector('.mg-wrap')) cell.insertAdjacentHTML('beforeend', '<div class="mg-wrap live">' + mergeIcons(st.merges) + '</div>'); }
+    }
+    if (rng && rng.stats) root.querySelectorAll('.cell > .card .mg-wrap').forEach((n) => { const cell = n.closest('.cell'), st = stats[cell.dataset.key]; if (!st || !st.merges || !st.merges.length) n.remove(); }); // a probe can break a merge the board had
+    const cols = Object.keys(lines).sort();
+    if (line) {
+      line.innerHTML = cols.map((c) => '<b>Col ' + (+c + 1) + '</b> ' + lines[c].map((m) => '<span class="mgl" title="' + esc2(m.name) + '">' + elGlyph(m.pair[0]) + elGlyph(m.pair[1]) + ' ' + esc2(m.name) + '</span>').join(', ')).join(' · ');
+      line.title = cols.map((c) => 'Column ' + (+c + 1) + ': ' + lines[c].map((m) => m.name + ' (' + elName(m.pair[0]) + ' + ' + elName(m.pair[1]) + ')').join(', ')).join('\n');
+    }
+    // multiplier on the targets of the focused attacker
+    const st = rng && rng.st;
+    if (st && E.isAttacker(st) && !game.busy) {
+      for (const e of E.targetsFor(st, s.enemies)) {
+        const pv = window.V2.preview(stats, st, e, s.rules);
+        if (!pv || pv.mult === 1) continue;
+        const el = root.querySelector('.enemy[data-id="' + e.id + '"]');
+        if (el) el.insertAdjacentHTML('beforeend', '<span class="pv ' + (pv.mult > 1 ? 'weak' : 'resist') + '" title="' + esc2(elName(pv.el) + ' on ' + elName(e.element) + (pv.name ? ': ' + pv.name : '')) + '">' + (pv.mult > 1 ? '▲×' : '▼×') + pv.mult + '</span>');
+      }
+    }
+  }
+  // Inspect card: tap an enemy, or switch on the 🔍 button and tap a unit.
+  function setupV2UI(on) {
+    let line = $('#b-merges');
+    if (on && !line) { line = document.createElement('p'); line.id = 'b-merges'; line.className = 'b-merges'; line.title = 'Merges this layout will fire (tap to expand)'; $('#b-msg').before(line); line.addEventListener('click', () => line.classList.toggle('open')); }
+    if (line) { line.textContent = ''; line.hidden = !on; }
+    let btn = $('#b-inspect-toggle');
+    if (on && !btn) {
+      btn = document.createElement('button'); btn.id = 'b-inspect-toggle'; btn.type = 'button'; btn.textContent = '🔍'; btn.title = 'Inspect mode: tap a unit or an enemy for its card';
+      btn.addEventListener('click', () => { game.inspect = !game.inspect; btn.classList.toggle('on', game.inspect); $('#b-msg').textContent = game.inspect ? 'Inspect mode: tap a unit or an enemy. Tap 🔍 again to place cards.' : ''; closeInspect(); });
+      $('#b-log-toggle').before(btn);
+    }
+    if (btn) { btn.hidden = !on; btn.classList.toggle('on', game.inspect); }
+    closeInspect();
+  }
+  function closeInspect() { const n = $('#b-inspect'); if (n) n.remove(); }
+  const KW = { map: {} };
+  const chips = (list, fn) => list.map((x) => '<span class="ins-chip">' + fn(x) + '</span>').join('') || '<span class="d-none">none</span>';
+  function inspectHTMLEnemy(e, s) {
+    const t = E.ENEMY_TYPES[e.type], el = lc(e.element || t.element), m = matchups(s.rules, el), art = window.Art ? Art.enemy(e.type) : null;
+    const kind = e.kind ? E.ENEMY_KINDS[e.kind] : null, gim = e.gimmick ? E.ENEMY_GIMMICKS[e.gimmick] : null, sl = statusList(e);
+    return '<div class="ins-head">' + (art ? artImg(art, t.name) : '<span class="e-icon">' + t.icon + '</span>') + '<div><b>' + esc2(t.name) + '</b> ' + elChip(el) + (e.flavour || t.flavour ? '<span class="ins-chip">' + esc2(e.flavour || t.flavour) + '</span>' : '') +
+      '<div class="ins-sub">♥ ' + e.hp + ' · ⚔ ' + e.atk + (e.armor ? ' · 🛡 ' + e.armor : '') + (t.variant ? ' · ' + esc2(t.variant) : '') + (t.boss ? ' · boss' : '') + '</div></div><button class="ins-x" type="button" aria-label="Close">✕</button></div>' +
+      '<div class="ins-row"><span>Element</span>' + (el ? elChip(el) + ' ' + elName(el) : '<i>none</i>') + '</div>' +
+      '<div class="ins-row"><span>Weak to ▲</span>' + chips(m.weak, (a) => elChip(a) + ' ' + elName(a) + ' ×' + affOf(s.rules)[a][el]) + '</div>' +
+      '<div class="ins-row"><span>Resists ▼</span>' + chips(m.resist, (a) => elChip(a) + ' ' + elName(a) + ' ×' + affOf(s.rules)[a][el]) + '</div>' +
+      '<div class="ins-row"><span>Keywords</span>' + chips((e.kw || []).concat(kind ? [kind.name] : [], gim ? [gim.name] : []), (k) => '<b>' + esc2(k) + '</b>' + (KW.map[k + '_e'] || KW.map[k] ? ' ' + esc2(KW.map[k + '_e'] || KW.map[k]) : (kind && k === kind.name ? ' ' + esc2(kind.text) : gim && k === gim.name ? ' ' + esc2(E.gimmickText(e)) : ''))) + '</div>' +
+      '<div class="ins-row"><span>Statuses</span>' + chips(sl, (x) => x[0] + ' ' + esc2(x[2])) + '</div>';
+  }
+  function inspectHTMLCard(card, st, s) {
+    const u = window.V2 && window.V2.UNITS[card.unit], el = lc((st && st.element) || card.element), sg = strengths(s.rules, el), m = matchups(s.rules, el), unit = window.Art ? Art.unit(card) : {};
+    const evo = u && u.evolution ? u.evolution.map((x) => (x.stage === card.stage ? '<b>' : '') + 'S' + x.stage + ' ' + esc2(x.name) + (x.stage === card.stage ? '</b>' : '')).join(' → ') : '';
+    const r = card.role || {};
+    return '<div class="ins-head">' + (unit.url ? artImg(unit.url, card.name) : '') + '<div><b>' + esc2(card.name) + '</b> ' + elChip(el) + '<span class="ins-chip">' + esc2(card.family || '') + '</span><span class="ins-chip">' + esc2(card.rarity || '') + '</span>' +
+      '<div class="ins-sub">' + (card.pattern ? '⚔ ' + (st ? st.atk : card.atk) + ' · R' + ((st ? st.range : card.range) >= 99 ? '∞' : (st ? st.range : card.range)) + ' · ' + card.pattern : '') + (card.block !== undefined ? ' · 🛡 ' + (st ? st.block : card.block) : '') + ' · stage ' + card.stage + ' · mastery ' + card.level + ' · ★' + card.stars + '</div></div><button class="ins-x" type="button" aria-label="Close">✕</button></div>' +
+      '<div class="ins-row"><span>Ability</span>' + esc2(u ? u.ability : card.drone ? 'A 1-ATK Drone spawned by a Honeybee Hive.' : '') + '</div>' +
+      '<div class="ins-row"><span>Roles</span>⚔ ' + (r.atk || 0) + ' · ✚ ' + (r.buff || 0) + ' · 🛡 ' + (r.guard || 0) + '</div>' +
+      (evo ? '<div class="ins-row"><span>Stages</span>' + evo + '</div>' : '') +
+      '<div class="ins-row"><span>Keywords</span>' + chips(behNames(card), (k) => '<b>' + esc2(k) + '</b>' + (KW.map[k] ? ' ' + esc2(KW.map[k]) : '')) + '</div>' +
+      '<div class="ins-row"><span>Hits harder ▲</span>' + chips(sg.good, (d) => elChip(d) + ' ' + elName(d)) + '</div>' +
+      '<div class="ins-row"><span>Hits softer ▼</span>' + chips(sg.bad, (d) => elChip(d) + ' ' + elName(d)) + '</div>' +
+      '<div class="ins-row"><span>Weak to ▲</span>' + chips(m.weak, (a) => elChip(a) + ' ' + elName(a)) + '</div>' +
+      '<div class="ins-row"><span>Resists ▼</span>' + chips(m.resist, (a) => elChip(a) + ' ' + elName(a)) + '</div>' +
+      '<div class="ins-row"><span>Merges now</span>' + chips((st && st.merges) || [], (x) => '<b>' + esc2(x.name) + '</b> ' + elGlyph(x.pair[0]) + '+' + elGlyph(x.pair[1])) + '</div>';
+  }
+  function openInspect(kind, id) {
+    const s = current(); if (!v2on(s)) return;
+    let html = '';
+    if (kind === 'enemy') { const e = s.enemies.find((x) => x.id === +id || x.id === id); if (!e) return; html = inspectHTMLEnemy(e, s); }
+    else {
+      const card = cardById(id); if (!card || !card.v2) return;
+      const bd = eff(), stats = E.computeStats(bd.placement, bd.army, s.enemies, s.rules, turnArg(s)), k = tileOf(id);
+      html = inspectHTMLCard(card, k ? stats[k] : null, s);
+    }
+    closeInspect();
+    const box = document.createElement('div'); box.id = 'b-inspect'; box.className = 'b-inspect'; box.innerHTML = html; root.appendChild(box);
+    box.addEventListener('click', (ev) => { if (ev.target.closest('.ins-x') || ev.target === box) closeInspect(); });
+  }
+  root.addEventListener('click', (ev) => {
+    if (!game.state || !v2on(game.state) || game.aiming || ev.target.closest('#b-inspect')) return;
+    if (game.inspect) { const c = ev.target.closest('[data-card]'); if (c) openInspect('card', c.dataset.card); }
+  });
 
   // ---------- Placement input (drag, or tap a card then a tile) ----------
 
   function placeCard(id, k) {
     const from = tileOf(id);
     if (game.state && E.tileBlocked(game.state.rules, k)) return; // Heat: the closed column holds no card
+    bake();
     const occupant = game.placement[k];
     if (occupant === id) return;
     if (from) delete game.placement[from];
     game.placement[k] = id;
     if (occupant && from) game.placement[from] = occupant;
   }
-  function returnCard(id) { const from = tileOf(id); if (from) delete game.placement[from]; }
+  function returnCard(id) { bake(); const from = tileOf(id); if (from) delete game.placement[from]; }
 
   let drag = null;
   function dropTargetAt(x, y) {
@@ -365,8 +567,9 @@
     }
     if (game.busy || !game.state || game.state.status !== 'playing' || ev.button > 0 || drag) return;
     if (!ev.target.closest('#b-board, #b-hand')) return;
+    if (game.inspect && ev.target.closest('[data-card]')) return; // inspect mode: the click opens the card, nothing is picked up
     const card = ev.target.closest('[data-card]');
-    drag = { id: card ? card.dataset.card : null, el: card, fromHand: !card || card.dataset.from === 'hand', x0: ev.clientX, y0: ev.clientY, pid: ev.pointerId, touch: ev.pointerType !== 'mouse', ghost: null, over: null };
+    drag = { id: card ? card.dataset.card : null, el: card, fromHand: !card || card.dataset.from === 'hand', enemy: ((ev.target.closest('#b-board .enemy[data-id]') || { dataset: {} }).dataset.id) || null, x0: ev.clientX, y0: ev.clientY, pid: ev.pointerId, touch: ev.pointerType !== 'mouse', ghost: null, over: null };
     if (card && !drag.touch) ev.preventDefault();
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerup', onPointerUp, { once: true });
@@ -433,6 +636,7 @@
       game.selected = null;
     } else game.selected = null;
     render();
+    if (d.enemy && !d.ghost && !cancelled && !d.id && v2on(game.state)) openInspect('enemy', d.enemy); // V2: tapping an enemy opens its card
   }
   function onPointerUp(ev) { finishDrag(ev, false); }
   function onPointerCancel(ev) { finishDrag(ev, true); }
@@ -482,7 +686,7 @@
     const { state, events } = E.resolveTurn(before, game.placement, game.army);
     { // bounty bookkeeping
       const rep = game.report; rep.turns += 1;
-      if (Object.values(game.placement).some((id) => { const c = cardById(id); return c && E.CARD_TYPES[c.type].role === 'defender'; })) rep.shields = true;
+      if (Object.values(eff().placement).some((id) => { const c = cardById(id); return c && (c.v2 ? !!c.block : E.CARD_TYPES[c.type].role === 'defender'); })) rep.shields = true;
       for (const ev of events) {
         if (ev.t === 'overkill') rep.overkills += 1;
         else if (ev.t === 'explode') rep.explosions += 1;
@@ -543,7 +747,31 @@
   });
 
 
+  const pendingWeak = {};
+  const STATUS_ICON = { burn: '🔥 Burn', poison: '☠ Poison', chill: '❄ Chill', mark: '🎯 Mark', hold: '⛓ Held', sunder: '⛏ Sunder', cleanse: '✨ Cleanse' };
+  async function playV2(ev, view) {
+    if (ev.t === 'weak') {
+      pendingWeak[ev.id] = ev;
+      const el = laneCell(view, ev.id);
+      floatText(el, ev.mult > 1 ? (ev.name || 'Weak') + ' ×' + ev.mult + ' ▲' : 'Resist ×' + ev.mult + ' ▼', ev.mult > 1 ? 'weak' : 'resist');
+      if (ev.mult > 1) flash(el, 'weak-flash', 500);
+      await sleep(320);
+    } else if (ev.t === 'merge') { const c = cellEl(ev.key); if (c) { flash(c, 'merge-flash', 500); floatText(c, '✦ ' + ev.name, 'merge'); } await sleep(300); }
+    else if (ev.t === 'status') { if (!ev.skipped) floatText(enemyCell(view, ev.id), STATUS_ICON[ev.status] || ev.status, 'info'); await sleep(200); }
+    else if (ev.t === 'tick') { await sleep(120); }
+    else if (ev.t === 'freeze') { floatText(enemyCell(view, ev.id), '🧊 ' + (ev.skipped ? 'skips' : 'Frozen'), 'info'); await sleep(260); }
+    else if (ev.t === 'swap') { await sleep(150); }
+    else if (ev.t === 'drone') { const c = cellEl(ev.key); if (c) floatText(c, 'Drone!', 'info'); await sleep(200); }
+    else if (ev.t === 'negate') { floatText($('#b-hero'), 'Negated', 'block'); await sleep(260); }
+    else if (ev.t === 'mimic') { const c = cellEl(ev.key); if (c) floatText(c, elGlyph(ev.element) + ' Mimic', 'info'); await sleep(240); }
+    else if (ev.t === 'thorn') { view.hp = ev.hp; floatText($('#b-hero'), '−1 ♥ thorns', 'dmg'); await sleep(240); }
+    else if (ev.t === 'grudge') { const e = view.enemies.find((en) => en.id === ev.id); if (e) e.atk = ev.atk; await sleep(120); }
+    else if (ev.t === 'souls') { floatText($('#b-hero'), '+' + ev.n + ' souls', 'heal'); await sleep(200); }
+    else return false;
+    return true;
+  }
   async function playEvent(ev, view, stats) {
+    if (v2on(game.state) && await playV2(ev, view)) return;
     if (ev.t === 'fire') {
       const el = cellEl(ev.key);
       el.classList.add('firing');
@@ -554,7 +782,8 @@
       const e = view.enemies.find((en) => en.id === ev.id), el = enemyCell(view, ev.id);
       e.hp = ev.hp;
       flash(el, 'shake', 300);
-      floatText(laneCell(view, ev.id, ev.col), ev.warded ? (ev.warded === 'ward' ? 'Too weak!' : ev.warded === 'guard' ? 'Guarded ♜' : 'Veiled ☁') : '−' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' 🛡' : ''), ev.warded ? 'info' : 'dmg');
+      const pw = pendingWeak[ev.id]; delete pendingWeak[ev.id];
+      floatText(laneCell(view, ev.id, ev.col), ev.warded ? (ev.warded === 'ward' ? 'Too weak!' : ev.warded === 'guard' ? 'Guarded ♜' : 'Veiled ☁') : '−' + ev.dmg + (pw ? (pw.mult > 1 ? ' ▲' : ' ▼') : '') + (ev.armor && ev.amount > ev.dmg ? ' 🛡' : ''), ev.warded ? 'info' : pw && pw.mult > 1 ? 'dmg weakhit' : 'dmg');
       if (ev.killed) e.alive = false;
       render(); await sleep(300);
     } else if (ev.t === 'overkill') {
@@ -651,11 +880,12 @@
   if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
 
   $('#b-fight').addEventListener('click', fight);
-  $('#b-clear').addEventListener('click', () => { game.placement = {}; game.selected = null; render(); });
+  $('#b-clear').addEventListener('click', () => { bake(); game.placement = {}; game.selected = null; render(); });
   $('#b-speed').addEventListener('click', () => { game.speed = SPEEDS[(SPEEDS.indexOf(game.speed) + 1) % SPEEDS.length]; render(); });
 
   window.Battle = {
-    start, placement, fit, hide: () => { root.hidden = true; },
+    start, placement, fit, hide: () => { root.hidden = true; closeInspect(); },
+    setKeywords: (m) => { KW.map = m || {}; }, // keyword id -> rule text, for the inspect card (dev page)
     // Current fight, read by automated tests.
     debug: () => ({ state: game.state, army: game.army }),
   };

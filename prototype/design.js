@@ -20,6 +20,8 @@ const curTag = (x) => (x.current === true ? tag('current', 'dz-cur') : x.current
 const curVal = (x) => (x.current === true ? 'current' : x.current === false ? 'new' : '');
 
 // ---------- Lists ----------
+// V2 implementation status of a unit (units.json `impl`, set by the V2 units work): full, simplified (text changed, see implNote) or not yet.
+const IMPL_LABEL = (u) => (u.notYet ? 'not yet' : u.impl === 'full' ? 'full' : u.impl === 'simplified' ? 'simplified' : 'not yet');
 const unitCount = {}; units.forEach((u) => { unitCount[u.family] = (unitCount[u.family] || 0) + 1; });
 const regionItems = []; // regions then their sub-areas, flattened so each can carry a mark
 regionsData.regions.forEach((r) => {
@@ -33,9 +35,9 @@ const bossLine = (b) => (b ? b.base + (b.variant ? ' (' + b.variant + ')' : '') 
 
 const LISTS = [
   { id: 'units', label: 'Units', data: units, search: (u) => [u.name, u.culture, u.baseAnimal, u.ability, u.type, (u.synergyTags || []).join(' '), (u.evolution || []).map((e) => e.name + ' ' + e.extends).join(' ')],
-    filters: [['element', 'Element', (u) => u.element], ['family', 'Family', (u) => u.family], ['rarity', 'Rarity', (u) => u.rarity, ['common', 'rare', 'epic', 'legendary']], ['culture', 'Culture', (u) => u.culture], ['nature', 'Nature', (u) => u.nature]],
-    card: (u) => ({ title: u.name, tags: [tag(u.element, 'el-' + u.element), tag(u.family), tag(u.rarity, 'rar-' + u.rarity), tag('CP ' + u.commandCost)],
-      body: line('Role', u.roles ? 'ATK ' + u.roles.atk + ' / Buff ' + u.roles.buff + ' / Guard ' + u.roles.guard : '') + line('Ability', u.ability) + line('Culture', u.culture + (u.baseAnimal ? ' · base ' + u.baseAnimal : '') + (u.nature ? ' · ' + u.nature : '')) +
+    filters: [['element', 'Element', (u) => u.element], ['family', 'Family', (u) => u.family], ['rarity', 'Rarity', (u) => u.rarity, ['common', 'rare', 'epic', 'legendary']], ['culture', 'Culture', (u) => u.culture], ['nature', 'Nature', (u) => u.nature], ['impl', 'Implemented', (u) => IMPL_LABEL(u)]],
+    card: (u) => ({ title: u.name, tags: [tag(u.element, 'el-' + u.element), tag(u.family), tag(u.rarity, 'rar-' + u.rarity), tag('CP ' + u.commandCost), tag(IMPL_LABEL(u), 'impl-' + IMPL_LABEL(u).replace(' ', '-'))],
+      body: line('Implemented', u.implNote ? IMPL_LABEL(u) + ': ' + u.implNote : IMPL_LABEL(u)) + line('Role', u.roles ? 'ATK ' + u.roles.atk + ' / Buff ' + u.roles.buff + ' / Guard ' + u.roles.guard : '') + line('Ability', u.ability) + line('Culture', u.culture + (u.baseAnimal ? ' · base ' + u.baseAnimal : '') + (u.nature ? ' · ' + u.nature : '')) +
         '<ol class="dz-evo">' + (u.evolution || []).map((e) => '<li><b>' + esc(e.name) + '</b> ' + esc(e.extends) + '</li>').join('') + '</ol>' }) },
   { id: 'elements', label: 'Elements and reactions', data: elemItems, search: (e) => [e.name, e.theme, e.note, e.resonance, e.text, e.kind, arr(e.pair || [e.attacker, e.defender]).join(' ')],
     filters: [['type', 'Type', (e) => e._t], ['element', 'Element', (e) => (e._t !== 'element' ? arr(e.pair || [e.attacker, e.defender]) : e.id)]],

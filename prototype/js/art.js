@@ -25,10 +25,13 @@ const BACKDROPS = Object.fromEntries(Object.entries(backdrops).map(([path, u]) =
 const BACKDROP_ALIAS = { marsh: 'coral', highlands: 'forest', saltflat: 'dunes', canyon: 'dunes', rice: 'meadow', ruins: 'forest', palms: 'dunes', citadel: 'temple' };
 
 const url = (name) => URLS[name] || null;
+let V2ART = {}; // V2 unit id -> { art, match }, registered by the dev page from data/v2-unit-art.json
 window.Art = {
   url,
+  setV2(map) { V2ART = map || {}; },
   // { url, name } for a squad card; card = { id, type }.
   unit(card) {
+    if (card.v2) { const a = V2ART[card.unit || card.id]; return { url: a ? url(a.art) : null, name: card.name || null, match: a ? a.match : null }; } // V2 beasts: placeholder drawing by exact / close / family match (dev page)
     const u = UNITS[card.id];
     return { url: url(u ? u[0] : BY_TYPE[card.type]), name: u ? u[1] : null };
   },
