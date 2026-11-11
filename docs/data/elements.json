@@ -1,7 +1,7 @@
 {
- "recommended": "game-like",
- "consideredAndDropped": "The classic five (wood, fire, earth, metal, water) with a generating and overcoming cycle was considered and dropped: a cycle forces rigid counters and has no home for storm, wind, frost or light.",
- "applyRule": "No strength/weakness wheel. Interactions are Reactions (see reactions): they fire when an attacker's element meets a target's element or status (hit), or when two allied elements stand orthogonally adjacent (adjacent, once per turn at the Boost phase). Same-element resonance has thresholds (resonance). Enemies carry the element of their bestiary variant.",
+ "recommended": "game-like, 7 elements",
+ "consideredAndDropped": "The classic five (wood, fire, earth, metal, water) with a generating and overcoming cycle was dropped: a cycle forces rigid counters. Frost and Storm were dropped as separate elements in V2.1 (cap of 7): they are the Ice flavour of Water and the Lightning flavour of Wind.",
+ "applyRule": "No strength/weakness wheel. 12 reactions fire when an attacker's element meets a target's element or status (hit), or when two allied elements stand orthogonally adjacent (adjacent, once per turn at the Boost phase). A reaction triggers once per hit event; area effects once per attack action. Same-element resonance has thresholds at 2 and 4. Enemies carry the element of their bestiary variant (frost = Water/Ice, storm = Wind/Lightning). Flavours add rules but never a new element.",
  "elements": [
   {
    "id": "fire",
@@ -20,50 +20,26 @@
    "id": "water",
    "name": "Water",
    "glyph": "💧",
-   "theme": "Flow, conduct, heal.",
+   "theme": "Flow, chain, heal. Ice flavour chills and freezes.",
    "bestiaryVariants": [
     "water",
-    "blood"
-   ],
-   "note": "Currents and chains.",
-   "status": "proposed",
-   "resonance": "2: Chain jump +1 damage. 4: the hero heals 1 per turn."
-  },
-  {
-   "id": "frost",
-   "name": "Frost",
-   "glyph": "❄",
-   "theme": "Chill, freeze, slow.",
-   "bestiaryVariants": [
+    "blood",
     "frost"
    ],
-   "note": "Control and attrition.",
+   "note": "Currents, chains and cold. Two flavours: Tide (default) and Ice.",
    "status": "proposed",
-   "resonance": "2: Chill also hits the enemy behind. 4: the first enemy to strike each turn is Frozen."
-  },
-  {
-   "id": "storm",
-   "name": "Storm",
-   "glyph": "⚡",
-   "theme": "Chain, strike, fast.",
-   "bestiaryVariants": [
-    "storm"
-   ],
-   "note": "Lightning jumps.",
-   "status": "proposed",
-   "resonance": "2: Chain reaches 1 tile further. 4: the first hit each turn is doubled."
-  },
-  {
-   "id": "wind",
-   "name": "Wind",
-   "glyph": "🌀",
-   "theme": "Push, fan, reach.",
-   "bestiaryVariants": [
-    "wind"
-   ],
-   "note": "Reach and repositioning.",
-   "status": "proposed",
-   "resonance": "2: all attackers +1 range. 4: Push also swaps the enemy with the one behind."
+   "resonance": "2: Chain jump +1 damage. 4: the hero heals 1 per turn.",
+   "flavours": [
+    {
+     "id": "ice",
+     "name": "Ice",
+     "glyph": "❄",
+     "variants": [
+      "frost"
+     ],
+     "rule": "Ice units and enemies are Water. An Ice hit applies Chill (-1 ATK); an Ice hit on a Wet enemy Freezes it (skips its next strike). Fire hits thaw Ice via Steam."
+    }
+   ]
   },
   {
    "id": "wood",
@@ -92,6 +68,30 @@
    "note": "Defence and armor.",
    "status": "proposed",
    "resonance": "2: Shields block +1. 4: hits ignore 1 armor."
+  },
+  {
+   "id": "wind",
+   "name": "Wind",
+   "glyph": "🌀",
+   "theme": "Push, fan, reach, spark. Lightning flavour chains.",
+   "bestiaryVariants": [
+    "wind",
+    "storm"
+   ],
+   "note": "Reach and repositioning. Two flavours: Gust (default) and Lightning.",
+   "status": "proposed",
+   "resonance": "2: all attackers +1 range. 4: the first hit each turn is doubled.",
+   "flavours": [
+    {
+     "id": "lightning",
+     "name": "Lightning",
+     "glyph": "⚡",
+     "variants": [
+      "storm"
+     ],
+     "rule": "Lightning units and enemies are Wind. A Lightning hit Chains to a neighbour; on a Water or Wet enemy it chains for half damage (Conduct). Earth grounds it (Ground)."
+    }
+   ]
   },
   {
    "id": "light",
@@ -127,32 +127,9 @@
     "wood"
    ],
    "mode": "both",
-   "hit": "Hit: a Burn on a Wood or Burning enemy also spreads to its neighbours.",
-   "adjacent": "Wood unit beside a Fire ally gets +1 ATK.",
-   "status": "proposed"
-  },
-  {
-   "id": "conduct",
-   "name": "Conduct",
-   "pair": [
-    "water",
-    "storm"
-   ],
-   "mode": "both",
-   "hit": "Hit: Storm hit on a Water or Wet enemy chains half damage (min 1) to a neighbour.",
-   "adjacent": "Storm unit beside a Water ally chains to one neighbouring enemy.",
-   "status": "proposed"
-  },
-  {
-   "id": "freeze",
-   "name": "Freeze",
-   "pair": [
-    "frost",
-    "water"
-   ],
-   "mode": "both",
-   "hit": "Hit: Frost hit on a Water or Wet enemy freezes it: it skips its strike.",
-   "adjacent": "Water unit beside a Frost ally also Chills its target.",
+   "hit": "Hit: Burn on a Wood or Burning enemy also spreads to its neighbours.",
+   "adjacent": "Wood beside a Fire ally: +1 ATK.",
+   "line": "Fire spreads through Wood.",
    "status": "proposed"
   },
   {
@@ -160,47 +137,38 @@
    "name": "Steam",
    "pair": [
     "fire",
-    "frost"
+    "water"
    ],
    "mode": "both",
-   "hit": "Hit: Fire hit on a Frost or Frozen enemy deals +2 and thaws it; the enemies beside it lose 1 ATK this turn.",
-   "adjacent": "Fire beside Frost: the hero gets +1 block this turn.",
+   "hit": "Hit: a Fire hit on a Water, Wet or Ice enemy deals +2, thaws it and its neighbours lose 1 ATK.",
+   "adjacent": "Fire beside a Water ally: the hero gets +1 block.",
+   "line": "Fire on Water bursts into steam.",
    "status": "proposed"
   },
   {
-   "id": "ground",
-   "name": "Ground",
+   "id": "bloom",
+   "name": "Bloom",
    "pair": [
-    "earth",
-    "storm"
-   ],
-   "mode": "both",
-   "hit": "Hit: Earth hit on a Storm enemy deals +1 and cancels its chain or Fury.",
-   "adjacent": "Earth beside Storm: the Storm unit's chain gets +1 reach.",
-   "status": "proposed"
-  },
-  {
-   "id": "purge",
-   "name": "Purge",
-   "pair": [
-    "light",
-    "shadow"
-   ],
-   "mode": "hit",
-   "hit": "Hit: Light hit on a Shadow enemy deals +2 and removes Hide, Veiled or Ghost.",
-   "adjacent": null,
-   "status": "proposed"
-  },
-  {
-   "id": "dusk",
-   "name": "Dusk",
-   "pair": [
-    "light",
-    "shadow"
+    "water",
+    "wood"
    ],
    "mode": "adjacent",
    "hit": null,
-   "adjacent": "Light beside Shadow: both get +1 ATK.",
+   "adjacent": "Wood beside a Water ally: +1 ATK and the hero heals 1 per turn.",
+   "line": "Water feeds Wood.",
+   "status": "proposed"
+  },
+  {
+   "id": "conduct",
+   "name": "Conduct",
+   "pair": [
+    "water",
+    "wind"
+   ],
+   "mode": "both",
+   "hit": "Hit: a Lightning hit on a Water or Wet enemy chains half damage (min 1). An Ice-Water ally beside a Wind ally spreads its Chill to the target's neighbours.",
+   "adjacent": "Wind beside a Water ally: its chain reaches one neighbour.",
+   "line": "Wet things carry sparks and cold.",
    "status": "proposed"
   },
   {
@@ -211,8 +179,9 @@
     "fire"
    ],
    "mode": "both",
-   "hit": "Hit: Wind hit on a Burning enemy doubles that Burn tick.",
-   "adjacent": "Wind beside Fire: the Fire unit gets +1 ATK.",
+   "hit": "Hit: a Wind hit on a Burning enemy doubles the Burn tick.",
+   "adjacent": "Wind beside a Fire ally: Fire +1 ATK.",
+   "line": "Wind feeds a flame.",
    "status": "proposed"
   },
   {
@@ -223,80 +192,9 @@
     "fire"
    ],
    "mode": "both",
-   "hit": "Hit: Earth hit on a Fire enemy removes its Fury or Burn and deals +1.",
-   "adjacent": "Earth beside Fire: the Fire unit's Scorch is smothered (warning pair).",
-   "status": "proposed"
-  },
-  {
-   "id": "bloom_r",
-   "name": "Bloom",
-   "pair": [
-    "water",
-    "wood"
-   ],
-   "mode": "adjacent",
-   "hit": null,
-   "adjacent": "Water beside Wood: the Wood unit gets +1 ATK and the hero heals 1 per turn.",
-   "status": "proposed"
-  },
-  {
-   "id": "pollen",
-   "name": "Pollen",
-   "pair": [
-    "wind",
-    "wood"
-   ],
-   "mode": "adjacent",
-   "hit": null,
-   "adjacent": "Wind beside Wood: the Wood unit's buff or heal reaches one tile further.",
-   "status": "proposed"
-  },
-  {
-   "id": "blizzard",
-   "name": "Blizzard",
-   "pair": [
-    "frost",
-    "wind"
-   ],
-   "mode": "both",
-   "hit": "Hit: Frost hit on an enemy beside a Wind ally also Chills that enemy's neighbours.",
-   "adjacent": "Frost beside Wind: its Chill spreads to adjacent enemies.",
-   "status": "proposed"
-  },
-  {
-   "id": "squall",
-   "name": "Squall",
-   "pair": [
-    "storm",
-    "wind"
-   ],
-   "mode": "both",
-   "hit": "Hit: Storm hit with a Wind ally beside it pushes the target one row back (swaps).",
-   "adjacent": "Storm beside Wind: the Storm chain jumps one tile further.",
-   "status": "proposed"
-  },
-  {
-   "id": "sunfire",
-   "name": "Sunfire",
-   "pair": [
-    "light",
-    "fire"
-   ],
-   "mode": "adjacent",
-   "hit": null,
-   "adjacent": "Light beside Fire: the Fire unit's hits ignore 1 armor.",
-   "status": "proposed"
-  },
-  {
-   "id": "mist",
-   "name": "Mist",
-   "pair": [
-    "shadow",
-    "water"
-   ],
-   "mode": "adjacent",
-   "hit": null,
-   "adjacent": "Shadow beside Water: the pair's column takes 1 less enemy damage.",
+   "hit": "Hit: an Earth hit on a Fire enemy removes its Fury or Burn, +1 damage.",
+   "adjacent": "Earth beside a Fire ally: Scorch is smothered (a warning pair).",
+   "line": "Earth snuffs fire (the one negative pair).",
    "status": "proposed"
   },
   {
@@ -308,19 +206,73 @@
    ],
    "mode": "adjacent",
    "hit": null,
-   "adjacent": "Earth beside Wood: Shields in either unit's tile get +1 block.",
+   "adjacent": "Earth beside a Wood ally: Shields in either tile block +1.",
+   "line": "Roots hold the wall.",
    "status": "proposed"
   },
   {
-   "id": "mud",
-   "name": "Mud",
+   "id": "pollen",
+   "name": "Pollen",
+   "pair": [
+    "wind",
+    "wood"
+   ],
+   "mode": "adjacent",
+   "hit": null,
+   "adjacent": "Wind beside a Wood ally: the Wood unit's buff or heal reaches one tile further.",
+   "line": "Wind carries pollen.",
+   "status": "proposed"
+  },
+  {
+   "id": "ground",
+   "name": "Ground",
    "pair": [
     "earth",
+    "wind"
+   ],
+   "mode": "both",
+   "hit": "Hit: an Earth hit on a Wind or Lightning enemy deals +1 and cancels its chain or Fury.",
+   "adjacent": "Earth beside a Wind ally: chain reach +1.",
+   "line": "Earth grounds the storm.",
+   "status": "proposed"
+  },
+  {
+   "id": "eclipse",
+   "name": "Eclipse",
+   "pair": [
+    "light",
+    "shadow"
+   ],
+   "mode": "both",
+   "hit": "Hit: a Light hit on a Shadow enemy deals +2 and removes Hide, Veiled or Ghost.",
+   "adjacent": "Light beside a Shadow ally: both +1 ATK.",
+   "line": "Light and dark trade places.",
+   "status": "proposed"
+  },
+  {
+   "id": "sunfire",
+   "name": "Sunfire",
+   "pair": [
+    "light",
+    "fire"
+   ],
+   "mode": "adjacent",
+   "hit": null,
+   "adjacent": "Light beside a Fire ally: both ignore 1 armor.",
+   "line": "Light sharpens flame.",
+   "status": "proposed"
+  },
+  {
+   "id": "mist",
+   "name": "Mist",
+   "pair": [
+    "shadow",
     "water"
    ],
-   "mode": "hit",
-   "hit": "Hit: Earth or Water hit on a Wet or Earth enemy slows it: -1 ATK and it cannot Stride or swap.",
-   "adjacent": null,
+   "mode": "adjacent",
+   "hit": null,
+   "adjacent": "Shadow beside a Water ally: the column takes 1 less enemy damage.",
+   "line": "Shadow hides in vapour.",
    "status": "proposed"
   }
  ],
@@ -329,8 +281,8 @@
   "magma": "fire",
   "water": "water",
   "blood": "water",
-  "frost": "frost",
-  "storm": "storm",
+  "frost": "water",
+  "storm": "wind",
   "wind": "wind",
   "wood": "wood",
   "venom": "wood",
@@ -340,6 +292,10 @@
   "crystal": "earth",
   "light": "light",
   "shadow": "shadow"
+ },
+ "flavourMap": {
+  "frost": "ice",
+  "storm": "lightning"
  },
  "status": "proposed"
 }

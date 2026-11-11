@@ -407,6 +407,8 @@ Equipment drops randomly from enemies (more often from elites and bosses) and is
 - **Unique effects change rules**, for example "Overkill also carries sideways", "Barrels explode for 4" or "Your first War Horn gives ×3". These are what players farm bosses for.
 - **Item level** depends on the danger of the node it dropped from, so pushing further always finds better items.
 
+> **V2.1 note:** the rarity table above is superseded by `DESIGN_V2.md` section 9: no base rarity, every item drops Common and rolls up, source tiers (normal, elite, boss, secret boss) set base power and unique affixes, and Salvage, Forge and pity are adjusted there.
+
 ### 13.3 Sets
 
 Items can belong to sets. Example: **Wolfpack**. With 2 pieces, Banners also boost diagonally. With 4 pieces, every attacker next to a Banner gets +1 ATK.

@@ -64,7 +64,7 @@
   "name": "Dragon-Gate Keeper",
   "current": false,
   "unlock": "evolve a carp to a dragon",
-  "passive": "Fins evolve one mastery level earlier",
+  "passive": "Scales evolve one mastery level earlier",
   "ability": "Leap: one unit gains its next extension for this battle",
   "fiction": "Guards the waterfall where carp leap to become dragons.",
   "status": "proposed"
@@ -73,7 +73,7 @@
   "id": "fox_priest",
   "name": "Fox Priestess",
   "current": false,
-  "unlock": "win with a Packs-heavy squad",
+  "unlock": "win with a Fangs-heavy squad",
   "passive": "Attune also works on the unit below",
   "ability": "Foxfire: change the element of any one unit this turn",
   "fiction": "Messenger of the fox shrine; bargains with tricksters.",
@@ -90,11 +90,11 @@
   "status": "proposed"
  },
  {
-  "id": "storm_caller",
-  "name": "Storm Caller",
+  "id": "gale_caller",
+  "name": "Gale Caller",
   "current": false,
-  "unlock": "win with 4 Storm units",
-  "passive": "Reactions with Storm deal +1",
+  "unlock": "win with 4 Wind units",
+  "passive": "Reactions with Wind deal +1",
   "ability": "Thunderclap: strike one enemy and chain once",
   "fiction": "A rainmaker.",
   "status": "proposed"

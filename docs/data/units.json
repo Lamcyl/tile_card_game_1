@@ -14,8 +14,8 @@
    "buff": 70,
    "guard": 0
   },
-  "powerBudget": 9,
-  "ability": "Adjacent Wings get +1 ATK.",
+  "powerBudget": 10,
+  "ability": "Adjacent allies get +1 ATK; adjacent Wings get +2 (Kin bonus).",
   "synergyTags": [
    "herald",
    "wings"
@@ -40,7 +40,8 @@
     "extends": "boosted Wings also gain +1 range"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "buffer": "kin"
  },
  {
   "id": "sun_crow",
@@ -85,7 +86,7 @@
   "name": "Thousand-Year Crane",
   "culture": "Japanese",
   "baseAnimal": "Red-crowned crane",
-  "element": "earth",
+  "element": "wind",
   "family": "wings",
   "rarity": "common",
   "commandCost": 1,
@@ -247,7 +248,7 @@
   "name": "Khan Garid",
   "culture": "Mongol",
   "baseAnimal": "Golden eagle",
-  "element": "earth",
+  "element": "wind",
   "family": "wings",
   "rarity": "rare",
   "commandCost": 2,
@@ -480,9 +481,8 @@
   "name": "Kunpeng",
   "culture": "Chinese",
   "baseAnimal": "Kun fish",
-  "element": "storm",
+  "element": "wind",
   "family": "wings",
-  "earlyFamily": "fins",
   "rarity": "legendary",
   "commandCost": 4,
   "type": "pierce",
@@ -492,7 +492,7 @@
    "guard": 10
   },
   "powerBudget": 14,
-  "ability": "Pierce R5, ATK 3; while still a Kun fish (stage 1) it counts as Fins.",
+  "ability": "Pierce R5, ATK 3; the Kun fish becomes the Peng at stage 2 (same family throughout).",
   "synergyTags": [
    "metamorph",
    "pierce"
@@ -512,7 +512,8 @@
     "extends": "Pierce range +1 and chains once to a neighbour"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "flavour": "lightning"
  },
  {
   "id": "sarimanok",
@@ -642,8 +643,8 @@
    "buff": 50,
    "guard": 50
   },
-  "powerBudget": 9,
-  "ability": "Blocks 2 in its column; adjacent Hooves get +1 ATK.",
+  "powerBudget": 10,
+  "ability": "Blocks 2 in its column; adjacent allies get +1 ATK, adjacent Hooves +2 (Kin bonus).",
   "synergyTags": [
    "herald",
    "hooves",
@@ -664,7 +665,8 @@
     "extends": "the buff also gives +1 block to adjacent Shields"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "buffer": "kin"
  },
  {
   "id": "rakhsh",
@@ -870,8 +872,8 @@
    "buff": 50,
    "guard": 0
   },
-  "powerBudget": 13,
-  "ability": "Straight R3, ATK 2; all Hooves and Wings get +1 ATK.",
+  "powerBudget": 14,
+  "ability": "Straight R3, ATK 2; Kin only: every Hooves ally on the board gets +2 ATK.",
   "synergyTags": [
    "herald",
    "aura",
@@ -889,10 +891,11 @@
    {
     "stage": 2,
     "name": "Qilin",
-    "extends": "its buff also reaches Fangs and Packs on adjacent tiles"
+    "extends": "its Kin buff also gives +1 range"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "buffer": "exclusive"
  },
  {
   "id": "karkadann",
@@ -936,7 +939,7 @@
   "name": "Reindeer Hauler",
   "culture": "Finnish",
   "baseAnimal": "Reindeer",
-  "element": "frost",
+  "element": "water",
   "family": "hooves",
   "rarity": "common",
   "commandCost": 1,
@@ -950,7 +953,7 @@
   "ability": "Straight R2; the hit enemy loses 1 ATK for the battle (min 1).",
   "synergyTags": [
    "chill",
-   "frost"
+   "ice"
   ],
   "bestiary": "Reindeer",
   "realAnimal": false,
@@ -967,14 +970,15 @@
     "extends": "Chill reaches the enemy behind"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "flavour": "ice"
  },
  {
   "id": "pegasus",
   "name": "Pegasus",
   "culture": "Greek",
   "baseAnimal": "Horse",
-  "element": "storm",
+  "element": "wind",
   "family": "hooves",
   "rarity": "rare",
   "commandCost": 2,
@@ -988,7 +992,7 @@
   "ability": "Straight, unlimited range, ATK 1; chain reaction on Water targets.",
   "synergyTags": [
    "skyfall",
-   "storm"
+   "lightning"
   ],
   "bestiary": "Pegasus",
   "realAnimal": false,
@@ -1005,7 +1009,8 @@
     "extends": "hit chains 1 damage to a neighbour"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "flavour": "lightning"
  },
  {
   "id": "sleipnir",
@@ -1314,7 +1319,7 @@
   "name": "Snow Leopard",
   "culture": "Mongol",
   "baseAnimal": "Snow leopard",
-  "element": "frost",
+  "element": "water",
   "family": "fangs",
   "rarity": "common",
   "commandCost": 1,
@@ -1328,7 +1333,7 @@
   "ability": "Straight R2; the hit enemy loses 1 ATK for the battle (min 1).",
   "synergyTags": [
    "chill",
-   "frost"
+   "ice"
   ],
   "bestiary": "Snow leopard",
   "realAnimal": false,
@@ -1345,7 +1350,8 @@
     "extends": "Chill also reaches the enemy behind"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "flavour": "ice"
  },
  {
   "id": "puma_of_the_andes",
@@ -1428,8 +1434,7 @@
   "culture": "Chinese",
   "baseAnimal": "Carp",
   "element": "water",
-  "family": "coils",
-  "earlyFamily": "fins",
+  "family": "scales",
   "rarity": "epic",
   "commandCost": 3,
   "type": "straight",
@@ -1439,7 +1444,7 @@
    "guard": 0
   },
   "powerBudget": 12,
-  "ability": "Straight R2, ATK 2. Counts as Fins until stage 3, then as Coils.",
+  "ability": "Straight R2, ATK 2; the carp becomes the dragon over its stages (always Scales).",
   "synergyTags": [
    "metamorph",
    "carp-dragon"
@@ -1464,7 +1469,8 @@
     "extends": "chips 1 to the enemy behind and gains a rain-cloud Chill"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil"
  },
  {
   "id": "chiwen",
@@ -1472,7 +1478,7 @@
   "culture": "Chinese",
   "baseAnimal": "Gecko",
   "element": "water",
-  "family": "coils",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "shield",
@@ -1502,7 +1508,8 @@
     "extends": "doused column includes adjacent columns"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil"
  },
  {
   "id": "wadjet",
@@ -1510,7 +1517,7 @@
   "culture": "Egyptian",
   "baseAnimal": "Egyptian cobra",
   "element": "fire",
-  "family": "coils",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "venom",
@@ -1539,7 +1546,8 @@
     "extends": "poison cap 4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil"
  },
  {
   "id": "ddraig_goch",
@@ -1547,7 +1555,7 @@
   "culture": "Welsh",
   "baseAnimal": "Grass snake",
   "element": "fire",
-  "family": "coils",
+  "family": "scales",
   "rarity": "epic",
   "commandCost": 3,
   "type": "pierce",
@@ -1577,7 +1585,8 @@
     "extends": "Burns the front enemy it hits"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil"
  },
  {
   "id": "rain_dragon_chen",
@@ -1585,7 +1594,7 @@
   "culture": "Chinese",
   "baseAnimal": "Lizard",
   "element": "wood",
-  "family": "coils",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "boost",
@@ -1595,7 +1604,7 @@
    "guard": 0
   },
   "powerBudget": 10,
-  "ability": "The unit above gets +1 ATK; Wood units get +2.",
+  "ability": "The unit above gets +1 ATK; Wood units get +2 (Kin bonus).",
   "synergyTags": [
    "boost",
    "wood"
@@ -1615,7 +1624,9 @@
     "extends": "the buff reaches the upper-left tile"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil",
+  "buffer": "kin"
  },
  {
   "id": "qiuniu",
@@ -1623,7 +1634,7 @@
   "culture": "Chinese",
   "baseAnimal": "Drum lizard",
   "element": "earth",
-  "family": "coils",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "echo_up",
@@ -1653,7 +1664,8 @@
     "extends": "the second hit is at full ATK minus 1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil"
  },
  {
   "id": "yazi",
@@ -1661,7 +1673,7 @@
   "culture": "Chinese",
   "baseAnimal": "Wolf-lizard",
   "element": "earth",
-  "family": "coils",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "molt",
@@ -1691,7 +1703,8 @@
     "extends": "max +4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil"
  },
  {
   "id": "long_of_the_rain_rong",
@@ -1699,7 +1712,7 @@
   "culture": "Vietnamese",
   "baseAnimal": "Water snake",
   "element": "water",
-  "family": "coils",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "chain",
@@ -1729,7 +1742,8 @@
     "extends": "jump damage +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil"
  },
  {
   "id": "bian",
@@ -1737,7 +1751,7 @@
   "culture": "Chinese",
   "baseAnimal": "Mudskipper",
   "element": "earth",
-  "family": "coils",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "decoy",
@@ -1767,7 +1781,8 @@
     "extends": "Shield 4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil"
  },
  {
   "id": "komodo",
@@ -1775,7 +1790,7 @@
   "culture": "Indonesian",
   "baseAnimal": "Komodo dragon",
   "element": "earth",
-  "family": "coils",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "venom",
@@ -1804,7 +1819,8 @@
     "extends": "poison cap 4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "coil"
  },
  {
   "id": "geobuk",
@@ -1812,7 +1828,7 @@
   "culture": "Korean",
   "baseAnimal": "Pond turtle",
   "element": "water",
-  "family": "shells",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "carapace",
@@ -1842,15 +1858,16 @@
     "extends": "max +4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "shell"
  },
  {
   "id": "divine_tortoise",
   "name": "Divine Tortoise",
   "culture": "Chinese",
   "baseAnimal": "Tortoise",
-  "element": "frost",
-  "family": "shells",
+  "element": "water",
+  "family": "scales",
   "rarity": "epic",
   "commandCost": 3,
   "type": "herald",
@@ -1860,10 +1877,10 @@
    "guard": 80
   },
   "powerBudget": 12,
-  "ability": "Shields in its column and adjacent Shells get +1 block.",
+  "ability": "Kin only: Shields of Scales allies in its column and beside it block +2.",
   "synergyTags": [
    "herald",
-   "shells",
+   "scales",
    "shield"
   ],
   "bestiary": "Divine tortoise (Gui)",
@@ -1881,7 +1898,10 @@
     "extends": "also reaches adjacent columns"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "shell",
+  "flavour": "ice",
+  "buffer": "exclusive"
  },
  {
   "id": "golden_turtle",
@@ -1889,7 +1909,7 @@
   "culture": "Vietnamese",
   "baseAnimal": "River turtle",
   "element": "earth",
-  "family": "shells",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "boost",
@@ -1919,7 +1939,8 @@
     "extends": "the buff reaches the upper-left tile"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "shell"
  },
  {
   "id": "bixi",
@@ -1927,7 +1948,7 @@
   "culture": "Chinese",
   "baseAnimal": "Tortoise",
   "element": "earth",
-  "family": "shells",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "shield",
@@ -1956,7 +1977,8 @@
     "extends": "Shield 4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "shell"
  },
  {
   "id": "honu",
@@ -1964,7 +1986,7 @@
   "culture": "Hawaiian",
   "baseAnimal": "Green sea turtle",
   "element": "water",
-  "family": "shells",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "bloom",
@@ -1993,7 +2015,8 @@
     "extends": "heals 2 if the hero is below half HP"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "shell"
  },
  {
   "id": "softshell_elder",
@@ -2001,7 +2024,7 @@
   "culture": "Mesopotamian",
   "baseAnimal": "Euphrates softshell turtle",
   "element": "wood",
-  "family": "shells",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "carapace",
@@ -2030,7 +2053,8 @@
     "extends": "max +4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "shell"
  },
  {
   "id": "coconut_crab",
@@ -2038,7 +2062,7 @@
   "culture": "Polynesian",
   "baseAnimal": "Coconut crab",
   "element": "fire",
-  "family": "shells",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "bastion",
@@ -2068,7 +2092,8 @@
     "extends": "Shield 2"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "shell"
  },
  {
   "id": "nine_tail_fox",
@@ -2076,7 +2101,7 @@
   "culture": "Japanese",
   "baseAnimal": "Fox",
   "element": "fire",
-  "family": "packs",
+  "family": "fangs",
   "rarity": "epic",
   "commandCost": 3,
   "type": "attune",
@@ -2112,7 +2137,8 @@
     "extends": "attuned units gain +1 ATK"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack"
  },
  {
   "id": "tanuki_trickster",
@@ -2120,7 +2146,7 @@
   "culture": "Japanese",
   "baseAnimal": "Raccoon dog",
   "element": "wood",
-  "family": "packs",
+  "family": "fangs",
   "rarity": "rare",
   "commandCost": 2,
   "type": "mimic",
@@ -2150,7 +2176,8 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack"
  },
  {
   "id": "reynard",
@@ -2158,7 +2185,7 @@
   "culture": "Medieval",
   "baseAnimal": "Red fox",
   "element": "shadow",
-  "family": "packs",
+  "family": "fangs",
   "rarity": "rare",
   "commandCost": 2,
   "type": "swap",
@@ -2188,7 +2215,8 @@
     "extends": "swaps with any ally in its row"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack"
  },
  {
   "id": "xolo_guide",
@@ -2196,7 +2224,7 @@
   "culture": "Aztec",
   "baseAnimal": "Hairless dog",
   "element": "earth",
-  "family": "packs",
+  "family": "fangs",
   "rarity": "common",
   "commandCost": 1,
   "type": "decoy",
@@ -2226,7 +2254,8 @@
     "extends": "Shield 3"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack"
  },
  {
   "id": "zodiac_hound",
@@ -2234,7 +2263,7 @@
   "culture": "Chinese",
   "baseAnimal": "Dog",
   "element": "earth",
-  "family": "packs",
+  "family": "fangs",
   "rarity": "common",
   "commandCost": 1,
   "type": "herald",
@@ -2244,10 +2273,10 @@
    "guard": 0
   },
   "powerBudget": 8,
-  "ability": "Adjacent Packs get +1 ATK.",
+  "ability": "Adjacent allies get +1 ATK; adjacent Fangs +2 (Kin bonus).",
   "synergyTags": [
    "herald",
-   "packs"
+   "fangs"
   ],
   "bestiary": "Dog (Xu)",
   "realAnimal": false,
@@ -2261,10 +2290,12 @@
    {
     "stage": 2,
     "name": "Dog (Xu)",
-    "extends": "also +1 range to adjacent Packs"
+    "extends": "also +1 range to adjacent Fangs"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack",
+  "buffer": "kin"
  },
  {
   "id": "cu_sidhe",
@@ -2272,7 +2303,7 @@
   "culture": "Celtic",
   "baseAnimal": "Irish wolfhound",
   "element": "wood",
-  "family": "packs",
+  "family": "fangs",
   "rarity": "rare",
   "commandCost": 2,
   "type": "howl",
@@ -2282,10 +2313,10 @@
    "guard": 0
   },
   "powerBudget": 10,
-  "ability": "Straight R2, ATK 1; +1 ATK per other Packs unit in its row (max +2).",
+  "ability": "Straight R2, ATK 1; +1 ATK per other Fangs unit in its row (max +2).",
   "synergyTags": [
    "howl",
-   "packs"
+   "fangs"
   ],
   "bestiary": "Cú Sídhe",
   "realAnimal": false,
@@ -2302,7 +2333,8 @@
     "extends": "max +3"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack"
  },
  {
   "id": "simargl",
@@ -2310,7 +2342,7 @@
   "culture": "Slavic",
   "baseAnimal": "Grey wolf",
   "element": "wind",
-  "family": "packs",
+  "family": "fangs",
   "rarity": "epic",
   "commandCost": 3,
   "type": "pierce",
@@ -2340,7 +2372,8 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack"
  },
  {
   "id": "bulgae",
@@ -2348,7 +2381,7 @@
   "culture": "Korean",
   "baseAnimal": "Dog",
   "element": "fire",
-  "family": "packs",
+  "family": "fangs",
   "rarity": "common",
   "commandCost": 1,
   "type": "scorch",
@@ -2377,7 +2410,8 @@
     "extends": "Burn lasts 3 turns"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack"
  },
  {
   "id": "fennec_fox",
@@ -2385,7 +2419,7 @@
   "culture": "African",
   "baseAnimal": "Fennec fox",
   "element": "earth",
-  "family": "packs",
+  "family": "fangs",
   "rarity": "common",
   "commandCost": 1,
   "type": "latecomer",
@@ -2414,15 +2448,16 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack"
  },
  {
   "id": "winter_wolf",
   "name": "Winter Wolf",
   "culture": "Norse",
   "baseAnimal": "Wolf",
-  "element": "frost",
-  "family": "packs",
+  "element": "water",
+  "family": "fangs",
   "rarity": "common",
   "commandCost": 1,
   "type": "pounce",
@@ -2435,7 +2470,7 @@
   "ability": "Straight R1, ATK 2; +2 against an enemy at full HP.",
   "synergyTags": [
    "pounce",
-   "frost"
+   "ice"
   ],
   "bestiary": "Wolf",
   "realAnimal": false,
@@ -2452,7 +2487,9 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "pack",
+  "flavour": "ice"
  },
  {
   "id": "dolphin_chain",
@@ -2460,7 +2497,7 @@
   "culture": "Greek",
   "baseAnimal": "Dolphin",
   "element": "water",
-  "family": "fins",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "chain",
@@ -2490,7 +2527,8 @@
     "extends": "jump damage +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "fin"
  },
  {
   "id": "salmon_of_knowledge",
@@ -2498,7 +2536,7 @@
   "culture": "Celtic",
   "baseAnimal": "Salmon",
   "element": "water",
-  "family": "fins",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "firstborn",
@@ -2527,7 +2565,8 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "fin"
  },
  {
   "id": "humpback_cantor",
@@ -2535,7 +2574,7 @@
   "culture": "Polynesian",
   "baseAnimal": "Humpback whale",
   "element": "water",
-  "family": "fins",
+  "family": "scales",
   "rarity": "epic",
   "commandCost": 3,
   "type": "row_captain",
@@ -2565,15 +2604,16 @@
     "extends": "also +1 range to the row"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "fin"
  },
  {
   "id": "hammerhead",
   "name": "Hammerhead",
   "culture": "Polynesian",
   "baseAnimal": "Hammerhead shark",
-  "element": "earth",
-  "family": "fins",
+  "element": "water",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "spread",
@@ -2602,7 +2642,8 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "fin"
  },
  {
   "id": "axolotl",
@@ -2610,7 +2651,7 @@
   "culture": "Aztec",
   "baseAnimal": "Axolotl",
   "element": "wood",
-  "family": "fins",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "molt",
@@ -2640,7 +2681,8 @@
     "extends": "max +4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "fin"
  },
  {
   "id": "shachihoko",
@@ -2648,7 +2690,7 @@
   "culture": "Japanese",
   "baseAnimal": "Carp",
   "element": "water",
-  "family": "fins",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "bastion",
@@ -2678,7 +2720,8 @@
     "extends": "Burn immunity covers adjacent columns"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "fin"
  },
  {
   "id": "salamander",
@@ -2686,7 +2729,7 @@
   "culture": "Medieval",
   "baseAnimal": "Salamander",
   "element": "fire",
-  "family": "fins",
+  "family": "scales",
   "rarity": "rare",
   "commandCost": 2,
   "type": "herald_element",
@@ -2696,7 +2739,7 @@
    "guard": 0
   },
   "powerBudget": 10,
-  "ability": "Adjacent Fire units get +1 ATK.",
+  "ability": "Kin only: adjacent Fire allies get +2 ATK.",
   "synergyTags": [
    "herald",
    "fire"
@@ -2716,7 +2759,9 @@
     "extends": "the buff also reaches diagonals"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "fin",
+  "buffer": "exclusive"
  },
  {
   "id": "river_hippo",
@@ -2724,7 +2769,7 @@
   "culture": "Egyptian",
   "baseAnimal": "Hippopotamus",
   "element": "earth",
-  "family": "fins",
+  "family": "scales",
   "rarity": "common",
   "commandCost": 1,
   "type": "shield",
@@ -2753,7 +2798,8 @@
     "extends": "Shield 4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "fin"
  },
  {
   "id": "scarab_roller",
@@ -2761,7 +2807,7 @@
   "culture": "Egyptian",
   "baseAnimal": "Scarab beetle",
   "element": "earth",
-  "family": "chitin",
+  "family": "wilds",
   "rarity": "rare",
   "commandCost": 2,
   "type": "offering",
@@ -2791,7 +2837,8 @@
     "extends": "+3 ATK from the offering"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "chitin"
  },
  {
   "id": "khepri",
@@ -2799,7 +2846,7 @@
   "culture": "Egyptian",
   "baseAnimal": "Dung beetle",
   "element": "fire",
-  "family": "chitin",
+  "family": "wilds",
   "rarity": "epic",
   "commandCost": 3,
   "type": "molt",
@@ -2829,7 +2876,8 @@
     "extends": "max +4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "chitin"
  },
  {
   "id": "nazca_weaver",
@@ -2837,7 +2885,7 @@
   "culture": "Andean",
   "baseAnimal": "Spider",
   "element": "shadow",
-  "family": "chitin",
+  "family": "wilds",
   "rarity": "rare",
   "commandCost": 2,
   "type": "hold",
@@ -2867,7 +2915,8 @@
     "extends": "holds the enemy beside it too"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "chitin"
  },
  {
   "id": "honeybee_hive",
@@ -2875,7 +2924,7 @@
   "culture": "Real animal",
   "baseAnimal": "Honeybee",
   "element": "wood",
-  "family": "chitin",
+  "family": "wilds",
   "rarity": "common",
   "commandCost": 1,
   "type": "brood",
@@ -2905,7 +2954,8 @@
     "extends": "spawns every turn"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "chitin"
  },
  {
   "id": "firefly_lantern",
@@ -2913,7 +2963,7 @@
   "culture": "Real animal",
   "baseAnimal": "Firefly",
   "element": "light",
-  "family": "chitin",
+  "family": "wilds",
   "rarity": "common",
   "commandCost": 1,
   "type": "boost",
@@ -2943,7 +2993,8 @@
     "extends": "the buff also applies to the unit beside it"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "chitin"
  },
  {
   "id": "mantis_ambusher",
@@ -2951,7 +3002,7 @@
   "culture": "Real animal",
   "baseAnimal": "Praying mantis",
   "element": "wind",
-  "family": "chitin",
+  "family": "wilds",
   "rarity": "rare",
   "commandCost": 2,
   "type": "firstborn",
@@ -2980,7 +3031,8 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "branch": "chitin"
  },
  {
   "id": "giant_panda",
@@ -3062,7 +3114,7 @@
   "name": "Polar Bear",
   "culture": "Norse",
   "baseAnimal": "Polar bear",
-  "element": "frost",
+  "element": "water",
   "family": "wilds",
   "rarity": "rare",
   "commandCost": 2,
@@ -3072,11 +3124,11 @@
    "buff": 30,
    "guard": 70
   },
-  "powerBudget": 9,
-  "ability": "Shield 3; adjacent Frost units get +1 block or +1 ATK.",
+  "powerBudget": 10,
+  "ability": "Shield 3; adjacent allies block +1, adjacent Water allies +1 more (block or ATK) (Kin bonus).",
   "synergyTags": [
    "herald",
-   "frost"
+   "ice"
   ],
   "bestiary": "Polar bear",
   "realAnimal": false,
@@ -3093,14 +3145,16 @@
     "extends": "buff reaches diagonals"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "flavour": "ice",
+  "buffer": "kin"
  },
  {
   "id": "thor_s_goats",
   "name": "Thor's Goats",
   "culture": "Norse",
   "baseAnimal": "Goat",
-  "element": "storm",
+  "element": "wind",
   "family": "wilds",
   "rarity": "rare",
   "commandCost": 2,
@@ -3114,7 +3168,7 @@
   "ability": "Straight R2; attacks twice (second hit at half ATK).",
   "synergyTags": [
    "echo",
-   "storm"
+   "lightning"
   ],
   "bestiary": "Tanngrisnir and Tanngnjóstr",
   "realAnimal": false,
@@ -3131,14 +3185,15 @@
     "extends": "second hit at full ATK minus 1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "flavour": "lightning"
  },
  {
   "id": "raiju",
   "name": "Raiju",
   "culture": "Japanese",
   "baseAnimal": "Weasel",
-  "element": "storm",
+  "element": "wind",
   "family": "wilds",
   "rarity": "rare",
   "commandCost": 2,
@@ -3152,7 +3207,7 @@
   "ability": "Straight R2; the same damage jumps to the lowest-HP neighbour of the target.",
   "synergyTags": [
    "chain",
-   "storm"
+   "lightning"
   ],
   "bestiary": "Raijū (雷獣)",
   "realAnimal": false,
@@ -3169,7 +3224,8 @@
     "extends": "jump damage +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "flavour": "lightning"
  },
  {
   "id": "kamaitachi_trio",

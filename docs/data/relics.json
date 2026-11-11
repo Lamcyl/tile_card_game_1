@@ -149,7 +149,7 @@
   "id": "new_tide_mirror",
   "name": "Tide Mirror",
   "myth": "Polynesian",
-  "text": "Conduct and Freeze trigger on every Water unit in the squad.",
+  "text": "Conduct and Steam trigger on every Water unit in the squad.",
   "current": false,
   "ties": [
    "element:water",
@@ -161,10 +161,10 @@
   "id": "new_pale_aurora",
   "name": "Pale Aurora",
   "myth": "Finnish",
-  "text": "Frost units' Chill stacks to -2 ATK.",
+  "text": "Ice units' Chill stacks to -2 ATK.",
   "current": false,
   "ties": [
-   "element:frost"
+   "element:water"
   ],
   "status": "proposed"
  },
@@ -172,10 +172,10 @@
   "id": "new_thunder_egg",
   "name": "Thunder Egg",
   "myth": "Maya",
-  "text": "The first Storm chain each battle is doubled.",
+  "text": "The first Lightning chain each battle is doubled.",
   "current": false,
   "ties": [
-   "element:storm"
+   "element:wind"
   ],
   "status": "proposed"
  },
@@ -282,11 +282,11 @@
   "id": "new_dragon_gate_scroll",
   "name": "Dragon-Gate Scroll",
   "myth": "Chinese",
-  "text": "Carp and Fins units evolve one stage at once in a shrine this run.",
+  "text": "Carp and Scales units evolve one stage at once in a shrine this run.",
   "current": false,
   "ties": [
    "evolution",
-   "family:coils"
+   "family:scales"
   ],
   "status": "proposed"
  },
@@ -294,10 +294,10 @@
   "id": "new_turtle_back_chart",
   "name": "Turtle-Back Chart",
   "myth": "Vietnamese",
-  "text": "Shells' Carapace starts at +1.",
+  "text": "Scales' Carapace starts at +1.",
   "current": false,
   "ties": [
-   "family:shells"
+   "family:scales"
   ],
   "status": "proposed"
  },
@@ -308,7 +308,7 @@
   "text": "Attune also grants the converted unit +1 ATK.",
   "current": false,
   "ties": [
-   "family:packs",
+   "family:fangs",
    "keyword:attune"
   ],
   "status": "proposed"
@@ -317,10 +317,10 @@
   "id": "new_river_lantern",
   "name": "River Lantern",
   "myth": "Chinese",
-  "text": "Fins and Coils count as Water for reactions.",
+  "text": "Scales units count as Water for reactions (even before the 4-set).",
   "current": false,
   "ties": [
-   "family:fins"
+   "family:scales"
   ],
   "status": "proposed"
  },
@@ -331,7 +331,7 @@
   "text": "Brood Drones get +1 ATK; Offering gives +3.",
   "current": false,
   "ties": [
-   "family:chitin"
+   "family:wilds"
   ],
   "status": "proposed"
  },
@@ -383,7 +383,7 @@
   "id": "new_twin_ravens_pact",
   "name": "Twin Ravens' Pact",
   "myth": "Norse",
-  "text": "Raven and Wolf units form a Bond.",
+  "text": "Raven and Fangs-wolf units form a Bond.",
   "current": false,
   "ties": [
    "bond"

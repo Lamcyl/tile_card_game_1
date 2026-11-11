@@ -100,7 +100,7 @@
   "id": "rend",
   "name": "Rend",
   "kind": "unit",
-  "rule": "Leftover damage from this unit's kill carries to the enemy behind, capped at 3. The only source of overkill.",
+  "rule": "Leftover damage from this unit's kill carries to the enemy behind, capped at 3. Fangs' signature; any unit can gain it from the 2-Fangs set, items, relics and Camp.",
   "current": false,
   "status": "proposed"
  },
@@ -116,7 +116,7 @@
   "id": "herald",
   "name": "Herald",
   "kind": "unit_buffer",
-  "rule": "Adjacent allies of the named family (or element) get +1 ATK.",
+  "rule": "Buffer: adjacent allies get +1 ATK; adjacent allies of the named family get +1 more (Kin bonus).",
   "current": false,
   "status": "proposed"
  },
@@ -124,7 +124,7 @@
   "id": "herald_element",
   "name": "Element Herald",
   "kind": "unit_buffer",
-  "rule": "Adjacent allies of the named element get +1 ATK or +1 block.",
+  "rule": "Element buffer: adjacent allies get +1 ATK or +1 block; adjacent allies of the named element get +1 more (Kin bonus).",
   "current": false,
   "status": "proposed"
  },
@@ -220,7 +220,7 @@
   "id": "howl",
   "name": "Howl",
   "kind": "unit_scaling",
-  "rule": "+1 ATK per other Packs unit in its row (max +2).",
+  "rule": "+1 ATK per other Fangs unit in its row (max +2).",
   "current": false,
   "status": "proposed"
  },
@@ -340,7 +340,7 @@
   "id": "chill",
   "name": "Chill",
   "kind": "unit_status",
-  "rule": "The hit enemy loses 1 ATK for the battle (min 1).",
+  "rule": "Ice flavour: the hit enemy loses 1 ATK for the battle (min 1). An Ice hit on a Wet enemy Freezes it (skips its next strike).",
   "current": false,
   "status": "proposed"
  },
@@ -420,7 +420,7 @@
   "id": "bond",
   "name": "Bond",
   "kind": "unit_synergy",
-  "rule": "While its folklore partner is on the board, both get +1 ATK.",
+  "rule": "While its folklore partner is in the squad (on the board or not), both get +1 ATK.",
   "current": false,
   "status": "proposed"
  },
@@ -428,7 +428,7 @@
   "id": "reaction",
   "name": "Reaction",
   "kind": "unit_element",
-  "rule": "Element pairs trigger a named effect on hit or when adjacent; see elements.json.",
+  "rule": "Element pairs trigger a named effect on hit or when adjacent; 12 reactions, see elements.json.",
   "current": false,
   "status": "proposed"
  },
@@ -492,7 +492,7 @@
   "id": "bulwark_e",
   "name": "Bulwark",
   "kind": "enemy",
-  "rule": "Armored. Blocks Pierce and Rend from passing to the tile behind it (was: overkill and Pierce).",
+  "rule": "Armored. Blocks Pierce and Rend from passing to the tile behind it; a wide Bulwark blocks every column it covers.",
   "current": true,
   "status": "proposed"
  },
@@ -532,7 +532,7 @@
   "id": "sweep_e",
   "name": "Sweep",
   "kind": "enemy",
-  "rule": "Also strikes both neighbouring columns for half damage.",
+  "rule": "Also strikes both neighbouring columns for half damage (for a Big body: the columns beside the whole footprint).",
   "current": true,
   "status": "proposed"
  },
@@ -540,7 +540,7 @@
   "id": "tide_e",
   "name": "Tide",
   "kind": "enemy",
-  "rule": "Rows drift sideways each turn.",
+  "rule": "Rows drift sideways each turn (Heavy bodies do not drift and block the drift of their row).",
   "current": true,
   "status": "proposed"
  },
@@ -572,7 +572,7 @@
   "id": "stride_e",
   "name": "Stride",
   "kind": "enemy",
-  "rule": "Sidesteps one column per turn.",
+  "rule": "Sidesteps one column per turn (Heavy bodies never do).",
   "current": true,
   "status": "proposed"
  },
@@ -596,15 +596,15 @@
   "id": "elemental_e",
   "name": "Elemental variant",
   "kind": "enemy",
-  "rule": "Enemy carries an element from its bestiary variant; reactions apply to it.",
+  "rule": "Enemy carries an element from its bestiary variant (frost = Water/Ice, storm = Wind/Lightning); reactions apply to it.",
   "current": false,
   "status": "proposed"
  },
  {
   "id": "wet_e",
-  "name": "Wet / Burning / Frozen status",
+  "name": "Wet / Burning / Chilled / Frozen status",
   "kind": "enemy",
-  "rule": "Statuses set by reactions; they are what the reaction table reads on enemies.",
+  "rule": "Statuses set by reactions and flavours; they are what the reaction table reads on enemies.",
   "current": false,
   "status": "proposed"
  },
@@ -637,6 +637,94 @@
   "name": "Corrupted",
   "kind": "enemy",
   "rule": "Spreads blight: adjacent player tiles lose 1 boost until cleansed by Light.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "kin",
+  "name": "Kin bonus",
+  "kind": "rule",
+  "rule": "A buffer's base effect reaches every ally in its area; allies of its own family (or element) get +1 more. Costs 1 budget point.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "exclusive",
+  "name": "Kin only (exclusive buffer)",
+  "kind": "unit_buffer",
+  "rule": "Kin only: the buff reaches only allies of the buffer's own family or element, but is stronger (usually +2 and a wider area). Rare and strong; at most one per rarity band.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "ice",
+  "name": "Ice (Water flavour)",
+  "kind": "unit_flavour",
+  "rule": "Water unit or enemy with Chill and Freeze: Chill -1 ATK, Freeze on a Wet target. Thawed by Fire (Steam).",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "lightning",
+  "name": "Lightning (Wind flavour)",
+  "kind": "unit_flavour",
+  "rule": "Wind unit or enemy that Chains; on a Water or Wet target it chains for half damage (Conduct). Grounded by Earth.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "big_e",
+  "name": "Big body",
+  "kind": "enemy",
+  "rule": "Elite or boss occupying more than one tile (footprint WxD: 2x1, 1x2, 2x2, 3x1). One HP pool, one ATK, one status set. Anchor = front-left tile.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "wide_e",
+  "name": "Wide",
+  "kind": "enemy",
+  "rule": "Width 2 or 3. Strikes once per covered column (a lane), ATK per lane, each lane absorbed by its own column's Shield. Hit from every covered column.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "deep_e",
+  "name": "Deep",
+  "kind": "enemy",
+  "rule": "Depth 2 (front and back row of one column). One lane; blocks both rows of its column. Pierce and Straight hit it once per attack.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "heavy_e",
+  "name": "Heavy",
+  "kind": "enemy",
+  "rule": "All Big bodies: cannot be pushed, swapped, Stridden or drifted by Tide; immune to Current. Hold, Chill, Burn and Venom work normally.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "boss_row_e",
+  "name": "Boss row (gate)",
+  "kind": "enemy",
+  "rule": "Body in the extra third enemy row. Hit only through a column with no living enemy in rows 1-2 (the gate). Range counts it as the back row.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "per_column_hit",
+  "name": "Per-column hits",
+  "kind": "rule",
+  "rule": "Each column an attack lands in is a separate hit on the target there: a Spread that reaches 2 tiles of one Big body deals its damage twice. Armor and reactions apply per hit.",
+  "current": false,
+  "status": "proposed"
+ },
+ {
+  "id": "once_per_action",
+  "name": "Once per action",
+  "kind": "rule",
+  "rule": "Statuses (Burn, Venom, Chill, Mark, Hold) and area reactions apply once per attack action per body, however many columns hit it.",
   "current": false,
   "status": "proposed"
  }

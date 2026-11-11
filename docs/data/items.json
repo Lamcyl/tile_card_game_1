@@ -3,682 +3,1461 @@
   "id": "cur_atk",
   "name": "Fang/Feather/Horn/Charm (ATK item)",
   "slot": "weapon",
-  "rarity": "common-epic",
   "text": "+1/+2/+3 ATK to one unit type; generated per sub-area. Item names will follow the new units.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "+1/+2/+3 ATK to one unit type; generated per sub-area. Item names will follow the new units.",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "cur_block",
   "name": "Scale/Hide/Plate (block item)",
   "slot": "armor",
-  "rarity": "common-epic",
   "text": "+1/+2/+3 Shield block.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "+1/+2/+3 Shield block.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "cur_hp",
   "name": "Heart/Bone/Mantle (HP item)",
   "slot": "armor",
-  "rarity": "common-epic",
   "text": "+2/+4/+6 max HP.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "+2/+4/+6 max HP.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "cur_souls",
   "name": "Seal/Bead/Offering (Souls item)",
   "slot": "ring",
-  "rarity": "common-epic",
   "text": "+8/+15/+25 Souls per run battle reward.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "+8/+15/+25 Souls per run battle reward.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "cur_amount",
   "name": "Drumskin/Pennant/Lens (support item)",
   "slot": "banner",
-  "rarity": "rare-epic",
   "text": "+1/+2 to a support type's bonus.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "+1/+2 to a support type's bonus.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "cur_supplies",
   "name": "Satchel/Flask (Rations item)",
   "slot": "ring",
-  "rarity": "rare-epic",
   "text": "+1/+2 Rations.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "+1/+2 Rations.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "cur_range",
   "name": "Sigil/Crest/Rune (range item)",
   "slot": "weapon",
-  "rarity": "rare-epic",
   "text": "+1 range to one unit type.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "+1 range to one unit type.",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "cur_spill",
   "name": "Cleaver (boss legendary)",
   "slot": "weapon",
-  "rarity": "legendary",
-  "text": "Overkill spills to the enemies beside. REWORK: applies to Rend only.",
+  "text": "Base: +3 ATK to one unit type. Unique: Rend leftover also spills to the front enemies beside the one that fell.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "boss",
+  "baseEffect": "+3 ATK to one unit type",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "major",
+    "text": "Rend leftover also spills to the front enemies beside the one that fell."
+   },
+   {
+    "grade": "minor",
+    "text": "Spill deals +1 to Guarded bodies."
+   }
+  ]
  },
  {
   "id": "cur_opening",
   "name": "Opening Fang (boss legendary)",
   "slot": "weapon",
-  "rarity": "legendary",
-  "text": "First shot of every battle deals double.",
+  "text": "Base: +4 ATK to one unit type. Unique: The first shot of every battle deals double.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "secretBoss",
+  "baseEffect": "+4 ATK to one unit type",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "major",
+    "text": "The first shot of every battle deals double."
+   },
+   {
+    "grade": "minor",
+    "text": "The first shot ignores Veiled."
+   }
+  ]
  },
  {
   "id": "cur_soften",
   "name": "Thick Hide (boss legendary)",
   "slot": "armor",
-  "rarity": "legendary",
-  "text": "Every enemy strike deals 1 less.",
+  "text": "Base: +6 max HP. Unique: Every enemy strike deals 1 less (per lane).",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "boss",
+  "baseEffect": "+6 max HP",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "major",
+    "text": "Every enemy strike deals 1 less (per lane)."
+   },
+   {
+    "grade": "minor",
+    "text": "Strikes from Big bodies deal 1 less more."
+   }
+  ]
  },
  {
   "id": "cur_stand",
   "name": "Last Breath (boss legendary)",
   "slot": "armor",
-  "rarity": "legendary",
-  "text": "Once per battle a lethal blow leaves 1 HP.",
+  "text": "Base: +8 max HP. Unique: Once per battle a lethal blow leaves 1 HP.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "secretBoss",
+  "baseEffect": "+8 max HP",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "major",
+    "text": "Once per battle a lethal blow leaves 1 HP."
+   },
+   {
+    "grade": "minor",
+    "text": "The saved turn also removes one lane from a Wide strike."
+   }
+  ]
  },
  {
   "id": "cur_horn",
   "name": "Great Horn (boss legendary)",
   "slot": "banner",
-  "rarity": "legendary",
-  "text": "First War Horn is x3.",
+  "text": "Base: +2 to a support type's bonus. Unique: The first War Horn each battle is x3.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "boss",
+  "baseEffect": "+2 to a support type's bonus",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "major",
+    "text": "The first War Horn each battle is x3."
+   },
+   {
+    "grade": "minor",
+    "text": "War Horn also +1 range for one turn."
+   }
+  ]
  },
  {
   "id": "cur_blast",
   "name": "Powder Charm (boss legendary)",
   "slot": "ring",
-  "rarity": "legendary",
-  "text": "Barrels explode for 4.",
+  "text": "Base: +25% Souls. Unique: Barrels explode for 4.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "boss",
+  "baseEffect": "+25% Souls",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "major",
+    "text": "Barrels explode for 4."
+   },
+   {
+    "grade": "minor",
+    "text": "A barrel explosion hits a Big body once per tile it touches."
+   }
+  ]
  },
  {
   "id": "cur_sunder",
   "name": "Sunder Band (boss legendary)",
   "slot": "ring",
-  "rarity": "legendary",
-  "text": "Hits ignore 1 armor.",
+  "text": "Base: +31% Souls. Unique: Hits ignore 1 armor.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "secretBoss",
+  "baseEffect": "+31% Souls",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "major",
+    "text": "Hits ignore 1 armor."
+   },
+   {
+    "grade": "minor",
+    "text": "Hits ignore 1 more armor on Big bodies."
+   }
+  ]
  },
  {
   "id": "cur_mend",
   "name": "Lifebloom (boss legendary)",
   "slot": "ring",
-  "rarity": "legendary",
-  "text": "Heal 1 HP each turn.",
+  "text": "Base: +2 Rations. Unique: Heal 1 HP at the end of every turn.",
   "ties": [],
   "current": true,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "boss",
+  "baseEffect": "+2 Rations",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "major",
+    "text": "Heal 1 HP at the end of every turn."
+   },
+   {
+    "grade": "minor",
+    "text": "Heal 2 when a Big body falls."
+   }
+  ]
  },
  {
   "id": "new_ember_collar",
   "name": "Ember Collar",
   "slot": "ring",
-  "rarity": "rare",
   "text": "Fire units' Scorch lasts 1 turn longer.",
   "ties": [
    "element:fire"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Fire units' Scorch lasts 1 turn longer.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_tidal_pearl",
   "name": "Tidal Pearl",
   "slot": "ring",
-  "rarity": "rare",
   "text": "Water units' Chain jumps deal +1.",
   "ties": [
    "element:water"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Water units' Chain jumps deal +1.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_rime_charm",
   "name": "Rime Charm",
   "slot": "ring",
-  "rarity": "rare",
-  "text": "Frost units' Chill also hits the enemy behind.",
+  "text": "Ice units' Chill also hits the enemy behind.",
   "ties": [
-   "element:frost"
+   "element:water"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Ice units' Chill also hits the enemy behind.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_thunder_drum",
   "name": "Thunder Drum",
   "slot": "banner",
-  "rarity": "rare",
-  "text": "Storm chains reach 1 tile further.",
+  "text": "Lightning chains reach 1 tile further.",
   "ties": [
-   "element:storm"
+   "element:wind"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Lightning chains reach 1 tile further.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_feather_fan",
   "name": "Feather Fan",
   "slot": "banner",
-  "rarity": "rare",
   "text": "Wind units get +1 range.",
   "ties": [
    "element:wind"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Wind units get +1 range.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_heartwood_seed",
   "name": "Heartwood Seed",
   "slot": "ring",
-  "rarity": "rare",
   "text": "Wood units' Molt cap +1.",
   "ties": [
    "element:wood"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Wood units' Molt cap +1.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_stone_anklet",
   "name": "Stone Anklet",
   "slot": "armor",
-  "rarity": "rare",
   "text": "Earth Shields block +1.",
   "ties": [
    "element:earth"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Earth Shields block +1.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_lantern_of_dawn",
   "name": "Lantern of Dawn",
   "slot": "banner",
-  "rarity": "epic",
   "text": "Light Heralds and Bonds give +1 more.",
   "ties": [
    "element:light"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "Light Heralds and Bonds give +1 more.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "+1 damage to Ghost and Veiled enemies."
+   },
+   {
+    "grade": "minor",
+    "text": "Light Heralds also reach the diagonals."
+   }
+  ]
  },
  {
   "id": "new_dusk_veil",
   "name": "Dusk Veil",
   "slot": "armor",
-  "rarity": "epic",
   "text": "Shadow Hold also affects the neighbouring enemy.",
   "ties": [
    "element:shadow"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "Shadow Hold also affects the neighbouring enemy.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Held Big enemies skip their whole strike."
+   },
+   {
+    "grade": "minor",
+    "text": "A Held enemy takes +1 from the next hit."
+   }
+  ]
  },
  {
   "id": "new_reaction_lens",
   "name": "Reaction Lens",
   "slot": "weapon",
-  "rarity": "epic",
   "text": "Hit reactions deal +1 damage.",
   "ties": [
    "reactions"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "Hit reactions deal +1 damage.",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Hit reactions on Big enemies deal +1 more."
+   },
+   {
+    "grade": "minor",
+    "text": "Reactions on elites deal +2."
+   }
+  ]
  },
  {
   "id": "new_catalyst_flask",
   "name": "Catalyst Flask",
   "slot": "ring",
-  "rarity": "epic",
   "text": "Adjacent reactions also trigger diagonally.",
   "ties": [
    "reactions"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "Adjacent reactions also trigger diagonally.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Adjacent reactions also give the hero +1 block."
+   },
+   {
+    "grade": "minor",
+    "text": "Eclipse and Sunfire trigger diagonally."
+   }
+  ]
  },
  {
   "id": "new_wing_feather_cord",
   "name": "Wing Feather Cord",
   "slot": "banner",
-  "rarity": "rare",
   "text": "Wings Heralds reach the diagonals.",
   "ties": [
    "family:wings"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Wings Heralds reach the diagonals.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_hoofprint_horseshoe",
   "name": "Hoofprint Horseshoe",
   "slot": "weapon",
-  "rarity": "rare",
   "text": "Hooves are Swift on turn 1.",
   "ties": [
    "family:hooves"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Hooves are Swift on turn 1.",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_fang_necklace",
   "name": "Fang Necklace",
   "slot": "weapon",
-  "rarity": "epic",
   "text": "Fangs gain Rend; Rend cap +1.",
   "ties": [
    "family:fangs",
    "overkill"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "Fangs gain Rend; Rend cap +1.",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Rend cap +1 against Big enemies."
+   },
+   {
+    "grade": "minor",
+    "text": "A Rend kill heals the hero 1."
+   }
+  ]
  },
  {
   "id": "new_scale_ring",
   "name": "Scale Ring",
   "slot": "ring",
-  "rarity": "rare",
-  "text": "Coils' Venom stacks to 4.",
+  "text": "Scales' Venom stacks to 4.",
   "ties": [
-   "family:coils"
+   "family:scales"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Scales' Venom stacks to 4.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_shell_plate",
   "name": "Shell Plate",
   "slot": "armor",
-  "rarity": "rare",
-  "text": "Shells' Carapace max +1.",
+  "text": "Scales' Carapace max +1.",
   "ties": [
-   "family:shells"
+   "family:scales"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Scales' Carapace max +1.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_foxfire_bell",
   "name": "Foxfire Bell",
   "slot": "banner",
-  "rarity": "rare",
-  "text": "Packs Mark spreads to the neighbour column.",
+  "text": "Howl also counts the row beside.",
   "ties": [
-   "family:packs"
+   "family:fangs"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Howl also counts the row beside.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_fish_scale_net",
   "name": "Fish-Scale Net",
   "slot": "ring",
-  "rarity": "rare",
-  "text": "Fins count as Water for reactions.",
+  "text": "Scales' Chain jumps deal +1.",
   "ties": [
-   "family:fins"
+   "family:scales"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Scales' Chain jumps deal +1.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_cocoon_pouch",
   "name": "Cocoon Pouch",
   "slot": "ring",
-  "rarity": "rare",
-  "text": "Chitin cost 1 less Command Point (min 1).",
+  "text": "Brood units cost 1 less Command Point (min 1).",
   "ties": [
-   "family:chitin"
+   "family:wilds"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Brood units cost 1 less Command Point (min 1).",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_wild_charm",
   "name": "Wild Charm",
   "slot": "banner",
-  "rarity": "rare",
   "text": "One Wilds unit counts as any family for sets.",
   "ties": [
    "family:wilds"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "One Wilds unit counts as any family for sets.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_evolution_seed",
   "name": "Evolution Seed",
   "slot": "ring",
-  "rarity": "rare",
   "text": "Unlocks the next evolution extension for one unit for this run.",
   "ties": [
    "evolution"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Unlocks the next evolution extension for one unit for this run.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_moulting_husk",
   "name": "Moulting Husk",
   "slot": "ring",
-  "rarity": "epic",
   "text": "All units evolve one stage for the first turn of each battle.",
   "ties": [
    "evolution"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "All units evolve one stage for the first turn of each battle.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Evolved units gain +1 ATK on turn 1."
+   },
+   {
+    "grade": "minor",
+    "text": "The temporary extension lasts two turns."
+   }
+  ]
  },
  {
   "id": "new_dragon_gate_pearl",
   "name": "Dragon-Gate Pearl",
   "slot": "ring",
-  "rarity": "legendary",
-  "text": "A Fins unit becomes Coils for the run (carp-to-dragon in a shrine).",
+  "text": "Base: +3 Rations. Unique: A Scales unit gains its next evolution extension for the whole run.",
   "ties": [
    "evolution",
-   "family:coils"
+   "family:scales"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "secretBoss",
+  "baseEffect": "+3 Rations",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "major",
+    "text": "A Scales unit gains its next evolution extension for the whole run."
+   },
+   {
+    "grade": "minor",
+    "text": "Evolved Scales units gain +1 ATK on turn 1."
+   }
+  ]
  },
  {
   "id": "new_mentor_cord",
   "name": "Mentor Cord",
   "slot": "banner",
-  "rarity": "rare",
   "text": "Mentor: the lowest-stage unit counts as one stage higher.",
   "ties": [
    "evolution"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Mentor: the lowest-stage unit counts as one stage higher.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_bond_knot",
   "name": "Bond Knot",
   "slot": "banner",
-  "rarity": "rare",
-  "text": "Bond partners need not be on the board; Bond pairs count if both are in the squad.",
+  "text": "Bond partners also gain +1 range.",
   "ties": [
    "bond"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Bond partners also gain +1 range.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_red_thread",
   "name": "Red Thread",
   "slot": "banner",
-  "rarity": "epic",
   "text": "All Bonds give +2 ATK instead of +1.",
   "ties": [
    "bond"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "All Bonds give +2 ATK instead of +1.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Bond partners share the higher block value."
+   },
+   {
+    "grade": "minor",
+    "text": "Bond partners also gain +1 range."
+   }
+  ]
  },
  {
   "id": "new_whetstone",
   "name": "Whetstone",
   "slot": "weapon",
-  "rarity": "rare",
   "text": "Rend units' cap +1.",
   "ties": [
    "overkill"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Rend units' cap +1.",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_hunter_s_trophy",
   "name": "Hunter's Trophy",
   "slot": "weapon",
-  "rarity": "rare",
   "text": "A Rend kill gives that unit +1 ATK this battle (max +2).",
   "ties": [
    "overkill"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "A Rend kill gives that unit +1 ATK this battle (max +2).",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_splitting_axe",
   "name": "Splitting Axe",
   "slot": "weapon",
-  "rarity": "epic",
   "text": "Rend carries to the enemies beside as well (the old Spill, Rend only).",
   "ties": [
    "overkill"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "Rend carries to the enemies beside as well (the old Spill, Rend only).",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Rend spill also hits the escort of a Big enemy."
+   },
+   {
+    "grade": "minor",
+    "text": "Spill deals +1 to Heavy bodies."
+   }
+  ]
  },
  {
   "id": "new_rooted_boots",
   "name": "Rooted Boots",
   "slot": "armor",
-  "rarity": "rare",
   "text": "Earth beside Wood: Roots gives +2 block.",
   "ties": [
    "reactions",
    "element:earth"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Earth beside Wood: Roots gives +2 block.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_sunlit_mantle",
   "name": "Sunlit Mantle",
   "slot": "armor",
-  "rarity": "rare",
   "text": "Light beside any unit: the hero gets +2 max HP per Light unit.",
   "ties": [
    "element:light"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Light beside any unit: the hero gets +2 max HP per Light unit.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_frozen_locket",
   "name": "Frozen Locket",
   "slot": "armor",
-  "rarity": "rare",
   "text": "First enemy strike each turn is Chilled.",
   "ties": [
-   "element:frost"
+   "element:water"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "First enemy strike each turn is Chilled.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_windchime_pendant",
   "name": "Windchime Pendant",
   "slot": "ring",
-  "rarity": "rare",
   "text": "Wind pushes also Chill 1 turn.",
   "ties": [
    "element:wind"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Wind pushes also Chill 1 turn.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_scorched_gauntlet",
   "name": "Scorched Gauntlet",
   "slot": "weapon",
-  "rarity": "rare",
   "text": "Fire hits on a Wood enemy deal +1.",
   "ties": [
    "element:fire",
    "reactions"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Fire hits on a Wood enemy deal +1.",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_oracle_shell",
   "name": "Oracle Shell",
   "slot": "armor",
-  "rarity": "epic",
   "text": "See the next turn's enemy telegraph for Hide and Veiled enemies.",
   "ties": [
-   "family:shells"
+   "family:scales"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "See the next turn's enemy telegraph for Hide and Veiled enemies.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Scales Shields block +1 against Wide strikes."
+   },
+   {
+    "grade": "minor",
+    "text": "Reveals which lanes a Big body will strike."
+   }
+  ]
  },
  {
   "id": "new_drover_s_whistle",
   "name": "Drover's Whistle",
   "slot": "banner",
-  "rarity": "rare",
   "text": "Swap units may swap twice per turn.",
   "ties": [
    "keyword:swap"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Swap units may swap twice per turn.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_mirror_pool",
   "name": "Mirror Pool",
   "slot": "ring",
-  "rarity": "epic",
   "text": "Mirror also copies the neighbour's keyword.",
   "ties": [
    "keyword:mirror"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "Mirror also copies the neighbour's keyword.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Mirror also copies range."
+   },
+   {
+    "grade": "minor",
+    "text": "Mirror also copies the neighbour's reaction."
+   }
+  ]
  },
  {
   "id": "new_offering_bowl",
   "name": "Offering Bowl",
   "slot": "ring",
-  "rarity": "rare",
   "text": "Offering returns the ally this same battle at half effect.",
   "ties": [
    "keyword:offering"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Offering returns the ally this same battle at half effect.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_tribute_purse",
   "name": "Tribute Purse",
   "slot": "ring",
-  "rarity": "rare",
   "text": "Tribute gives +1 extra Soul.",
   "ties": [
    "keyword:tribute"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Tribute gives +1 extra Soul.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_healer_s_gourd",
   "name": "Healer's Gourd",
   "slot": "ring",
-  "rarity": "rare",
   "text": "Bloom heals +1.",
   "ties": [
    "keyword:bloom"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Bloom heals +1.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_hive_honey",
   "name": "Hive Honey",
   "slot": "ring",
-  "rarity": "rare",
   "text": "Brood spawns every turn.",
   "ties": [
    "keyword:brood"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Brood spawns every turn.",
+  "subPool": [
+   "souls_pct",
+   "rations",
+   "dust_find",
+   "regen_after_battle",
+   "resonance_count",
+   "gold_pct"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_wild_garland",
   "name": "Wild Garland",
   "slot": "armor",
-  "rarity": "rare",
   "text": "Molt units start at +1.",
   "ties": [
    "keyword:molt"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "normal",
+  "baseEffect": "Molt units start at +1.",
+  "subPool": [
+   "max_hp",
+   "block",
+   "shield_type",
+   "hero_block_t1",
+   "burn_ward",
+   "lane_guard"
+  ],
+  "uniqueAffixes": []
  },
  {
   "id": "new_echo_chime",
   "name": "Echo Chime",
   "slot": "weapon",
-  "rarity": "epic",
   "text": "Echo second hit deals full ATK minus 1.",
   "ties": [
    "keyword:echo"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "Echo second hit deals full ATK minus 1.",
+  "subPool": [
+   "atk_type",
+   "range",
+   "rend_cap",
+   "reaction_dmg",
+   "full_hp_bonus",
+   "bane_big"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "Echo's second hit ignores armor."
+   },
+   {
+    "grade": "minor",
+    "text": "Echo's second hit applies Chill."
+   }
+  ]
  },
  {
   "id": "new_beast_keeper_s_whistle",
   "name": "Beast-keeper's Whistle",
   "slot": "banner",
-  "rarity": "epic",
   "text": "Once per battle swap two units of the same family for free.",
   "ties": [
    "hero:beastkeeper"
   ],
   "current": false,
-  "status": "proposed"
+  "status": "proposed",
+  "sourceTier": "elite",
+  "baseEffect": "Once per battle swap two units of the same family for free.",
+  "subPool": [
+   "support_amount",
+   "kin_bonus",
+   "adjacent_reaction",
+   "herald_reach",
+   "bond_atk",
+   "first_turn_atk"
+  ],
+  "uniqueAffixes": [
+   {
+    "grade": "minor",
+    "text": "A free swap also swaps the units' elements."
+   },
+   {
+    "grade": "minor",
+    "text": "Wilds may swap twice per battle."
+   }
+  ]
  }
 ]

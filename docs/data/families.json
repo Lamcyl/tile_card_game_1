@@ -3,9 +3,10 @@
   "id": "wings",
   "name": "Wings",
   "animals": "birds",
-  "signature": "Flock: Wings ignore column limits when stated; supporters among them are plentiful.",
-  "signatureKeyword": "Flock",
+  "signature": "Reach: Skyfall, range and Heralds that lift the squad.",
+  "signatureKeyword": "Reach",
   "setBonus": "2: Wings +1 range. 4: Wings' first shot each turn ignores Guarded and Hide.",
+  "branches": [],
   "typicalKeywords": "Skyfall, herald, mark",
   "status": "proposed"
  },
@@ -13,80 +14,52 @@
   "id": "hooves",
   "name": "Hooves",
   "animals": "hooved beasts",
-  "signature": "Charge: Straight attackers that move or push; fast and wide support.",
+  "signature": "Charge: Swift, push and wide support.",
   "signatureKeyword": "Charge",
   "setBonus": "2: Hooves +1 ATK on the first turn. 4: Swift for all Hooves.",
+  "branches": [],
   "typicalKeywords": "Swift, trample, current",
   "status": "proposed"
  },
  {
   "id": "fangs",
   "name": "Fangs",
-  "animals": "lions and cats",
-  "signature": "Pounce and Rend: the only family that can carry overkill.",
+  "animals": "cats, hounds, foxes (packs)",
+  "signature": "Pounce, Pack and Rend: hit hard first, hit together, carry overkill.",
   "signatureKeyword": "Rend",
-  "setBonus": "2: Fangs Straight attackers gain Rend. 4: Rend cap 3 becomes 4 and Pounce +1.",
-  "typicalKeywords": "Pounce, rend, hold",
+  "setBonus": "2: Fangs Straight attackers gain Rend; Howl counts every Fangs unit in the squad. 4: Rend cap 4 and Pounce +1.",
+  "branches": [
+   "pack"
+  ],
+  "typicalKeywords": "Pounce, rend, howl, attune, swap",
   "status": "proposed"
  },
  {
-  "id": "coils",
-  "name": "Coils",
-  "animals": "serpents and dragons",
-  "signature": "Coil: Pierce and poison; many evolve from fish or lizards.",
-  "signatureKeyword": "Coil",
-  "setBonus": "2: Pierce hits deal +1 to the second enemy. 4: Venom stacks to 4.",
-  "typicalKeywords": "Pierce, venom, echo_up, boost",
-  "status": "proposed"
- },
- {
-  "id": "shells",
-  "name": "Shells",
-  "animals": "tortoises and crabs",
-  "signature": "Carapace: slow growth and column defence.",
-  "signatureKeyword": "Carapace",
-  "setBonus": "2: Shields +1 block. 4: first strike each turn on the hero is halved.",
-  "typicalKeywords": "Shield, carapace, bastion",
-  "status": "proposed"
- },
- {
-  "id": "packs",
-  "name": "Packs",
-  "animals": "foxes and hounds",
-  "signature": "Howl: strongest when several stand in a row; tricksters live here.",
-  "signatureKeyword": "Howl",
-  "setBonus": "2: Packs +1 ATK in a row of 2+. 4: Mark spreads to the neighbour column.",
-  "typicalKeywords": "Howl, attune, swap, mimic",
-  "status": "proposed"
- },
- {
-  "id": "fins",
-  "name": "Fins",
-  "animals": "fish and water beasts",
-  "signature": "Current: chains and row buffs; Fins thrive next to Water.",
-  "signatureKeyword": "Current",
-  "setBonus": "2: Chain jump +1. 4: every Fins unit counts as Water for reactions.",
-  "typicalKeywords": "Chain, captains, bastion",
-  "status": "proposed"
- },
- {
-  "id": "chitin",
-  "name": "Chitin",
-  "animals": "insects and spiders",
-  "signature": "Swarm: many small bodies; cheap squad cost for brood units.",
-  "signatureKeyword": "Swarm",
-  "setBonus": "2: Drones get +1 ATK. 4: Chitin cost 1 less Command Point (min 1).",
-  "typicalKeywords": "Brood, offering, hold",
+  "id": "scales",
+  "name": "Scales",
+  "animals": "serpents and dragons (coils), fish (fins), tortoises and crabs (shells)",
+  "signature": "Layers: Pierce and Venom (coils), Chain (fins), Shields and Carapace (shells).",
+  "signatureKeyword": "Layers",
+  "setBonus": "2: every Scales unit's secondary number +1 (Venom cap, Chain damage, second-target damage, Shield block). 4: Scales also count as Water for reactions.",
+  "branches": [
+   "coil",
+   "fin",
+   "shell"
+  ],
+  "typicalKeywords": "Pierce, venom, chain, carapace, bastion",
   "status": "proposed"
  },
  {
   "id": "wilds",
   "name": "Wilds",
-  "animals": "bears, apes and small mammals",
-  "signature": "Wild Card: solitary beasts that fill any hole; tricksters and oddities.",
+  "animals": "insects and spiders (chitin), bears, apes, plants and oddities",
+  "signature": "Wild Card: odd, flexible beasts that fill any hole and swarm.",
   "signatureKeyword": "Wild Card",
   "setBonus": "2: one Wilds unit counts as any family for sets. 4: two do.",
-  "typicalKeywords": "Mirror, relay, mark, bloom",
+  "branches": [
+   "chitin"
+  ],
+  "typicalKeywords": "Brood, offering, molt, mirror, relay",
   "status": "proposed"
  }
 ]
