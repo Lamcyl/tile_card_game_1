@@ -313,3 +313,36 @@
 
 /* Camp Board track (WP16): a 4th player row, so the cells shrink a little to keep the Fight button on screen */
 
+
+/* Big enemies and the boss row (DESIGN_V2 section 10). A Big body is one card drawn in its anchor (front-left) tile and sized over the whole footprint
+   with --w columns and --d rows; the tiles it covers stay empty underneath. The boss row is a shorter strip above row 0 (only in battles that have one). */
+.cell.row-boss { height: calc(var(--cell) * .8); }
+.cell.row-boss .c-art { top: -8px; bottom: 0; } /* the art overlaps upward by 8px so the strip stays slim */
+.boss-board .board::before { top: calc(var(--cell) * 2.8 + var(--b-gap) / 2 - 24px); }
+.cell > .enemy.big {
+  position: absolute; left: 3px; bottom: 3px; z-index: 3; box-sizing: border-box;
+  width: calc(var(--cell) * var(--w) - 6px); height: calc(var(--cell) * var(--d) - 6px);
+  border-radius: 14px; background: rgba(251, 244, 226, .3); box-shadow: 0 0 0 2px rgba(110, 82, 48, .7), 0 2px 6px rgba(60, 40, 20, .3);
+}
+.cell.row-boss > .enemy.big { height: calc(var(--cell) * .8 - 6px); }
+.cell.row-boss > .enemy { z-index: 3; }
+
+
+.enemy.big .tags { bottom: 1px; }
+.enemy.big .tag { height: calc(var(--cell) * .26); font-size: calc(var(--cell) * .18); }
+.enemy .lanes { position: absolute; left: 0; right: 0; bottom: calc(var(--cell) * .25); display: flex; z-index: 2; pointer-events: none; }
+.enemy .lanes span { flex: 1; text-align: center; font: 700 calc(var(--cell) * .15)/1 system-ui, sans-serif; color: #c2301f; text-shadow: 0 0 2px #fbf4e2; }
+.enemy .gates { position: absolute; left: 0; right: 0; top: -2px; display: flex; z-index: 2; pointer-events: none; }
+.enemy:not(.big) .gates { left: 0; }
+.enemy .gates span { flex: 1; text-align: center; font: 700 12px/1 system-ui, sans-serif; color: #4d5a6a; text-shadow: 0 0 2px #fbf4e2; }
+.enemy .gates span.open { color: #d9951b; }
+.cell.gate-open::before { box-shadow: 0 0 10px rgba(245, 198, 62, .8), inset 0 0 8px rgba(245, 214, 120, .5); }
+.enemy.big.body-reach { box-shadow: 0 0 0 2px rgba(194, 48, 31, .75), 0 0 8px rgba(194, 48, 31, .35); }
+.enemy.big.body-hit { box-shadow: 0 0 0 3px #8f1410, 0 0 14px rgba(200, 53, 43, .75); background: rgba(255, 227, 216, .45); }
+/* The art of a Big body is drawn in a box larger than the footprint where it helps (a wide body is only one row tall): it overlaps its neighbours a little, like any sprite. */
+.enemy.big .c-art { grid-template: 100% / 100%; } /* percent sizes of the image need a definite track (a 2:1 card used to stretch the square art) */
+.enemy.big-2x1 .c-art { top: calc(var(--cell) * -.38); }
+.enemy.big-3x1 .c-art { top: calc(var(--cell) * -.55); }
+.enemy.big-1x2 .c-art { left: calc(var(--cell) * -.15); right: calc(var(--cell) * -.15); }
+.enemy.big.wide .c-art img { transform: none; }
+.cell.row-boss > .enemy.big-2x1 .c-art, .cell.row-boss > .enemy.big-3x1 .c-art { top: calc(var(--cell) * -.3); }

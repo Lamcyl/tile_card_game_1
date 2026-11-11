@@ -9,6 +9,40 @@
   // Rows 0-1 belong to enemies (0 = back, 1 = front).
   // Rows 2-4 belong to the player (2 = front, 4 = back).
   const ENEMY_ROWS = [1, 0];
+  // Big enemies (DESIGN_V2 section 10). The optional boss row is row -1, behind row 0; it counts as the back row for range (R3).
+  // Scan order front to back for column lookups and strikes. A boss-row body is only reached through a column with no living enemy in rows 1 and 0 (R1, the gate).
+  const BOSS_ROW = -1;
+  const SCAN_ROWS = [1, 0, BOSS_ROW];
+  // Footprint WxD: W columns wide, D rows deep (D grows toward the back). The anchor (e.row, e.col) is the front-left tile. Budget = section 10.5 multipliers on HP and ATK per lane.
+  const FOOTPRINTS = {
+    '1x1': { w: 1, d: 1, hp: 1.0, atk: 1.0 },
+    '2x1': { w: 2, d: 1, hp: 1.5, atk: 0.6 },
+    '1x2': { w: 1, d: 2, hp: 1.4, atk: 1.0 },
+    '2x2': { w: 2, d: 2, hp: 2.0, atk: 0.6 },
+    '3x1': { w: 3, d: 1, hp: 1.8, atk: 0.5 },
+  };
+  const wOf = (e) => e.w || 1;
+  const dOf = (e) => e.d || 1;
+  const footprintOf = (e) => wOf(e) + 'x' + dOf(e);
+  const isBig = (e) => wOf(e) > 1 || dOf(e) > 1;
+  // Strike lanes = covered columns (A1). 1 for every 1x1 and every deep body.
+  const lanesOf = (e) => wOf(e);
+  // HP and ATK per lane of a footprint relative to a 1x1 of the same tier (ATK at least 1).
+  function applyBudget(footprint, hp, atk) {
+    const f = FOOTPRINTS[footprint] || FOOTPRINTS['1x1'];
+    return { hp: Math.max(1, Math.round(hp * f.hp)), atk: Math.max(1, Math.round(atk * f.atk)) };
+  }
+  // Does the (living or dead) body cover this tile?
+  const coversTile = (e, row, col) => (e.w === undefined && e.d === undefined
+    ? e.row === row && e.col === col
+    : col >= e.col && col < e.col + wOf(e) && row <= e.row && row > e.row - dOf(e));
+  function cellsOf(e) {
+    const out = [];
+    for (let dr = 0; dr < dOf(e); dr++) for (let dc = 0; dc < wOf(e); dc++) out.push([e.row - dr, e.col + dc]);
+    return out;
+  }
+  // Row used for range: the boss row counts as the back row.
+  const distRow = (er) => Math.max(er, 0);
   const PLAYER_ROWS = [2, 3, 4];
   // Camp track Board (WP16): rule flag `deepRow` adds a 4th player row (row 5, behind row 4). Everything that walks the board asks these.
   const rowsFor = (rules) => (rules && rules.deepRow ? ROWS + 1 : ROWS);
@@ -104,9 +138,11 @@
       barrier: Math.max(0, (stage.rules && stage.rules.barrier) || 0), // Camp Ward (WP16): soaks the first damage of this battle
       reviveUsed: 0,                  // revives spent in this battle (Phoenix Archer, Camp Second Wind); rules.revive = revives still available
       status: 'playing', // 'playing' | 'cleared' | 'defeated'
+      bossRow: !!stage.bossRow || stage.enemies.some((e) => e.row === BOSS_ROW) || undefined, // the battle has the optional third enemy row
       enemies: stage.enemies.map((e, i) => {
         const t = ENEMY_TYPES[e.type];
-        return {
+        const fp = e.footprint && e.footprint !== '1x1' ? FOOTPRINTS[e.footprint] : null;
+        return Object.assign({
           id: 'e' + i,
           type: e.type,
           row: e.row,
@@ -126,7 +162,7 @@
           guardian: !!e.guardian,
           dir: e.dir || 1,
           lives: e.gimmick === 'regrow' ? 1 : 0,
-        };
+        }, fp && (fp.w > 1 || fp.d > 1) ? { w: fp.w, d: fp.d } : null);
       }),
     };
   }
@@ -172,7 +208,7 @@
         s.atk = (s.baseAtk + s.plus) * s.mult;
         s.range = s.baseRange + s.rangeBonus;
         // A gazing enemy weakens every attacker in its column.
-        const gaze = (enemies || []).filter((e) => e.alive && e.gimmick === 'gaze' && e.col === s.c).reduce((n, e) => n + e.gp, 0);
+        const gaze = (enemies || []).filter((e) => e.alive && e.gimmick === 'gaze' && e.col <= s.c && s.c < e.col + wOf(e)).reduce((n, e) => n + e.gp, 0);
         if (gaze) { s.gazed = Math.min(gaze, s.atk); s.atk -= s.gazed; }
       } else if (s.type.role === 'defender') {
         s.block = cardStat(s.card, 'block') + (rules.plate || 0);
@@ -192,56 +228,65 @@
       .map(([tr, tc]) => key(tr, tc));
   }
 
+  // The living body covering a tile (any tile of a Big body returns the same body).
   function enemyAt(enemies, row, col) {
-    return enemies.find((e) => e.alive && e.row === row && e.col === col) || null;
+    return enemies.find((e) => e.alive && coversTile(e, row, col)) || null;
   }
+  // Gate (R1/R2): no living enemy in rows 1 and 0 of this column.
+  const gateOpen = (enemies, col) => !enemyAt(enemies, 1, col) && !enemyAt(enemies, 0, col);
 
-  // Distance from a player tile up to an enemy row.
-  const distance = (playerRow, enemyRow) => playerRow - enemyRow;
+  // Distance from a player tile up to an enemy row (the boss row counts as the back row).
+  const distance = (playerRow, enemyRow) => playerRow - distRow(enemyRow);
 
-  // The first living enemy in a column, if it is within range.
+  // The first living body in a column, if it is within range (distance to the body's nearest tile). The boss row is scanned last, so the gate falls out of the scan order.
   function firstInColumn(enemies, col, r, range) {
-    for (const er of ENEMY_ROWS) {
+    for (const er of SCAN_ROWS) {
       const e = enemyAt(enemies, er, col);
-      if (e) return distance(r, er) <= range ? e : null;
+      if (e) return distance(r, e.row) <= range ? e : null;
     }
     return null;
   }
 
-  // Which enemies an attacker would hit given the current board.
-  function targetsFor(s, enemies) {
+  // Every hit an attacker deals, as [{ e, col }]: one entry per column lookup, so a Spread that lands twice on one Big body hits it twice (B3).
+  function hitsFor(s, enemies) {
     const { r, c, range } = s;
     const pattern = s.pattern || s.type.pattern;
     if (pattern === 'straight') {
       const e = firstInColumn(enemies, c, r, range);
-      return e ? [e] : [];
+      return e ? [{ e, col: c }] : [];
     }
     if (pattern === 'pierce') {
-      const hit = ENEMY_ROWS
-        .map((er) => (distance(r, er) <= range ? enemyAt(enemies, er, c) : null))
-        .filter(Boolean);
+      // Every distinct body in rows 1-0 once (a deep body counts once); the boss row only when the column is clear of them (R1: Pierce cannot skip a living enemy).
+      const bodies = [];
+      for (const er of ENEMY_ROWS) { const e = enemyAt(enemies, er, c); if (e && !bodies.includes(e)) bodies.push(e); }
+      if (!bodies.length) { const boss = enemyAt(enemies, BOSS_ROW, c); if (boss) bodies.push(boss); }
+      const hit = bodies.filter((e) => distance(r, e.row) <= range);
       // A Bulwark in the front row stops the shot there.
-      return hit[0] && hit[0].kind === 'bulwark' && hit[0].row === 1 ? [hit[0]] : hit;
+      return (hit[0] && hit[0].kind === 'bulwark' && hit[0].row === 1 ? [hit[0]] : hit).map((e) => ({ e, col: c }));
     }
     if (pattern === 'spread') {
       const out = [];
       for (const cc of [c - 1, c, c + 1]) {
         if (cc < 0 || cc >= COLS) continue;
         const e = firstInColumn(enemies, cc, r, range);
-        if (e) out.push(e);
+        if (e) out.push({ e, col: cc });
       }
       return out;
     }
     return [];
   }
+  // Which bodies an attacker would hit given the current board (a Big body appears once per hit).
+  function targetsFor(s, enemies) {
+    return hitsFor(s, enemies).map((h) => h.e);
+  }
 
-  // Enemy tiles an attacker can reach at all (for range preview).
-  function reachableTiles(s) {
+  // Enemy tiles an attacker can reach at all (for range preview). The boss row is listed only with `bossRow` (a battle that has one).
+  function reachableTiles(s, bossRow) {
     const cols = (s.pattern || s.type.pattern) === 'spread' ? [s.c - 1, s.c, s.c + 1] : [s.c];
     const out = [];
     for (const cc of cols) {
       if (cc < 0 || cc >= COLS) continue;
-      for (const er of ENEMY_ROWS) {
+      for (const er of bossRow ? SCAN_ROWS : ENEMY_ROWS) {
         if (distance(s.r, er) <= s.range) out.push(key(er, cc));
       }
     }
@@ -256,7 +301,8 @@
     return null;
   }
 
-  function dealDamage(state, e, amount, canCarry, events, source, ignoreArmor) {
+  function dealDamage(state, e, amount, canCarry, events, source, ignoreArmor, col) {
+    if (col === undefined) col = e.col; // the column the hit came through (a Big body may be struck in any covered column)
     const armor = ignoreArmor ? 0 : source === 'explode' ? e.armor : Math.max(0, e.armor - ((state.rules && state.rules.sunder) || 0));
     let dmg = Math.max(0, amount - armor);
     const warded = wardReason(state, e, amount);
@@ -264,7 +310,7 @@
     const before = e.hp;
     e.hp = Math.max(0, e.hp - dmg);
     const killed = !warded && dmg >= before;
-    events.push({ t: 'hit', id: e.id, amount, dmg, armor: e.armor, hp: e.hp, killed, source, warded });
+    events.push({ t: 'hit', id: e.id, amount, dmg, armor: e.armor, hp: e.hp, killed, source, warded, col });
     if (!killed) return;
     e.alive = false;
     if (source === 'overkill' && state.rules && state.rules.feast && (state.rules.feastN || 0) < 3) {
@@ -272,21 +318,22 @@
       events.push({ t: 'feast', n: state.rules.feastN });
     }
     const leftover = dmg - before;
-    // Overkill: leftover damage carries to the enemy directly behind.
-    if (canCarry && leftover > 0 && e.row === 1) {
-      const behind = enemyAt(state.enemies, 0, e.col);
+    // Overkill: leftover damage carries along the struck column to the first body behind the rear edge of the one that died (B5), only when the whole body falls.
+    // A kill in the back row can carry into the boss row (R4); a Bulwark in front still blocks it.
+    if (canCarry && leftover > 0 && e.row - dOf(e) + 1 >= 0) {
+      const behind = enemyAt(state.enemies, e.row - dOf(e), col);
       if (behind && e.kind === 'bulwark') events.push({ t: 'bulwark', id: e.id, amount: leftover });
       else if (behind) {
-        events.push({ t: 'overkill', from: e.id, id: behind.id, amount: leftover });
-        dealDamage(state, behind, leftover, false, events, 'overkill');
+        events.push({ t: 'overkill', from: e.id, id: behind.id, amount: leftover, col });
+        dealDamage(state, behind, leftover, false, events, 'overkill', false, col);
       }
-      // Legendary rule "spill": the leftover also hits the front-row enemies on either side.
-      if (state.rules && state.rules.spill) {
+      // Legendary rule "spill": the leftover also hits the front-row enemies on either side of the struck column.
+      if (state.rules && state.rules.spill && e.row === 1) {
         for (const dc of [-1, 1]) {
-          const side = enemyAt(state.enemies, 1, e.col + dc);
+          const side = enemyAt(state.enemies, 1, col + dc);
           if (!side) continue;
-          events.push({ t: 'overkill', from: e.id, id: side.id, amount: leftover, side: true });
-          dealDamage(state, side, leftover, false, events, 'overkill');
+          events.push({ t: 'overkill', from: e.id, id: side.id, amount: leftover, side: true, col: col + dc });
+          dealDamage(state, side, leftover, false, events, 'overkill', false, col + dc);
         }
       }
     }
@@ -317,10 +364,18 @@
     return born;
   }
 
-  // Splitter: two 1-HP enemies, one in its own tile and one in an empty neighbouring enemy tile.
+  // Splitter: two 1-HP enemies, one in its own (anchor) tile and one in an empty neighbouring enemy tile. Summons never enter the boss row (R6):
+  // a boss-row splitter drops both into the nearest empty tiles of rows 1-0 instead.
   function splitInto(state, e, events) {
-    const spot = [[1 - e.row, e.col], [e.row, e.col - 1], [e.row, e.col + 1]]
-      .find(([r, c]) => c >= 0 && c < COLS && !enemyAt(state.enemies, r, c));
+    const free = (r, c) => c >= 0 && c < COLS && ENEMY_ROWS.includes(r) && !enemyAt(state.enemies, r, c);
+    if (e.row < 0) {
+      const spots = [];
+      for (const r of ENEMY_ROWS) for (let c = 0; c < COLS; c++) if (free(r, c)) spots.push({ r, c, d: Math.abs(c - e.col) + (r === 0 ? 0 : 1) });
+      spots.sort((a, b) => a.d - b.d || a.c - b.c || b.r - a.r);
+      spots.slice(0, 2).forEach((p) => spawn(state, e, p.r, p.c, 1, events, 'split'));
+      return;
+    }
+    const spot = [[1 - e.row, e.col], [e.row, e.col - 1], [e.row, e.col + 1]].find(([r, c]) => free(r, c));
     spawn(state, e, e.row, e.col, 1, events, 'split');
     if (spot) spawn(state, e, spot[0], spot[1], 1, events, 'split');
   }
@@ -330,8 +385,8 @@
     const out = new Array(COLS).fill(0);
     for (const e of enemies) {
       if (!isThreat(e)) continue;
-      out[e.col] += e.atk;
-      if (e.gimmick === 'sweep') for (const c of [e.col - 1, e.col + 1]) if (c >= 0 && c < COLS) out[c] += Math.ceil(e.atk / 2);
+      for (let c = e.col; c < e.col + lanesOf(e); c++) out[c] += e.atk; // one lane per covered column (A1)
+      if (e.gimmick === 'sweep') for (const c of [e.col - 1, e.col + lanesOf(e)]) if (c >= 0 && c < COLS) out[c] += Math.ceil(e.atk / 2); // beside each end of the footprint (A4)
     }
     return out;
   }
@@ -380,20 +435,22 @@
       .sort((a, b) => a.r - b.r || a.c - b.c);
     let opened = false;
     for (const s of attackers) {
-      const targets = targetsFor(s, state.enemies);
+      const hits = hitsFor(s, state.enemies), targets = hits.map((h) => h.e);
       // Legendary rule "opening": the first shot that finds a target in the first turn deals double damage.
       const dmg = state.rules.opening && state.turn === 1 && !opened && targets.length ? (opened = true, s.atk * 2) : s.atk;
-      events.push({ t: 'fire', key: s.key, atk: dmg, targets: targets.map((e) => e.id) });
+      events.push({ t: 'fire', key: s.key, atk: dmg, targets: targets.map((e) => e.id), cols: hits.map((h) => h.col) });
       const noArmor = !!(s.fx && s.fx.ignoreArmor); // Longbowman: arrows ignore armor
-      for (const e of targets) {
-        if (!e.alive) continue; // killed earlier in this same volley (e.g. by a blast)
-        dealDamage(state, e, dmg, s.pattern !== 'pierce', events, s.key, noArmor);
+      for (const { e, col } of hits) {
+        if (!e.alive) continue; // killed earlier in this same volley (e.g. by a blast, or by an earlier hit of the same Spread)
+        dealDamage(state, e, dmg, s.pattern !== 'pierce', events, s.key, noArmor, col);
       }
       // Storm Mage: lightning leaps to one more enemy next to a struck one (lowest HP first), for the same damage.
       if (s.fx && s.fx.chain && targets.length) {
         const hit = new Set(targets.map((e) => e.id));
+        // Jumps to the lowest-HP other body touching a struck one on any side (B5); a boss-row body is only reachable through a gate-open column (R1).
+        const touches = (t, o) => cellsOf(t).some(([tr, tc]) => cellsOf(o).some(([or, oc]) => Math.abs(tr - or) + Math.abs(tc - oc) === 1 && (or !== BOSS_ROW || gateOpen(state.enemies, oc))));
         const next = state.enemies.filter((o) => o.alive && !hit.has(o.id) && !ENEMY_TYPES[o.type].barrel &&
-          targets.some((t) => Math.abs(t.row - o.row) + Math.abs(t.col - o.col) === 1)).sort((a, b) => a.hp - b.hp)[0];
+          targets.some((t) => touches(t, o))).sort((a, b) => a.hp - b.hp)[0];
         if (next) {
           events.push({ t: 'chain', key: s.key, from: targets[0].id, id: next.id });
           dealDamage(state, next, dmg, false, events, s.key, noArmor);
@@ -428,15 +485,15 @@
       events.push({ t: 'strike', id: e.id, atk, blocked, warded, dmg, shields: shieldsOf[col], hp: state.hp, col, splash });
     };
     for (let col = 0; col < COLS; col++) {
-      for (const er of ENEMY_ROWS) {
+      for (const er of SCAN_ROWS) {
         const e = enemyAt(state.enemies, er, col);
-        if (!e || !isThreat(e) || e.atk <= 0) continue;
+        if (!e || e.row !== er || !isThreat(e) || e.atk <= 0) continue; // a deep body is met first at its anchor row: one lane per covered column
         strike(e, col, e.atk, false);
       }
     }
     // Sweepers also strike the neighbouring columns for half damage (after every direct strike).
     for (const e of state.enemies.filter((x) => isThreat(x) && x.gimmick === 'sweep' && x.atk > 0)) {
-      for (const col of [e.col - 1, e.col + 1]) if (col >= 0 && col < COLS) strike(e, col, Math.ceil(e.atk / 2), true);
+      for (const col of [e.col - 1, e.col + lanesOf(e)]) if (col >= 0 && col < COLS) strike(e, col, Math.ceil(e.atk / 2), true);
     }
 
     if (state.rules.brace) delete state.rules.brace; // Brace lasts for one strike
@@ -470,9 +527,12 @@
     // Healers mend their neighbours, then Summoners call reinforcements (they act at the end of the turn).
     for (const h of state.enemies.filter((e) => e.alive && e.kind === 'healer')) {
       const healed = [];
-      for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
-        const n = enemyAt(state.enemies, h.row + dr, h.col + dc);
-        if (!n || n.hp >= n.maxHp) continue;
+      const seen = new Set([h.id]); // every neighbouring body once, a Big body included
+      for (const [hr, hc] of cellsOf(h)) for (const [dr, dc] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+        const n = enemyAt(state.enemies, hr + dr, hc + dc);
+        if (!n || seen.has(n.id)) continue;
+        seen.add(n.id);
+        if (n.hp >= n.maxHp) continue;
         const amount = Math.min(2, n.maxHp - n.hp);
         n.hp += amount;
         healed.push({ id: n.id, amount, hp: n.hp });
@@ -492,7 +552,7 @@
     }
     // Regrow: a fallen head grows back once, in its own tile if it is still free.
     for (const e of state.enemies.filter((x) => !x.alive && x.gimmick === 'regrow' && x.lives > 0)) {
-      if (enemyAt(state.enemies, e.row, e.col)) continue;
+      if (cellsOf(e).some(([r, c]) => enemyAt(state.enemies, r, c))) continue;
       e.lives -= 1; e.alive = true; e.hp = Math.min(e.maxHp, e.gp || e.maxHp);
       events.push({ t: 'regrow', id: e.id, hp: e.hp });
     }
@@ -501,6 +561,7 @@
       let to = e.col + e.dir;
       if (to < 0 || to >= COLS) { e.dir = -e.dir; to = e.col + e.dir; }
       const other = enemyAt(state.enemies, e.row, to);
+      if (isBig(e) || (other && isBig(other))) { e.dir = -e.dir; continue; } // Big bodies are Heavy: they neither stride nor get swapped (B9)
       const from = e.col;
       if (other) other.col = from;
       e.col = to;
@@ -508,12 +569,14 @@
     }
     if (state.enemies.some((x) => x.alive && x.gimmick === 'tide')) {
       const moves = [];
-      for (const e of state.enemies.filter((x) => x.alive)) {
+      // Big bodies and the boss row are Heavy (B9): they never drift, and a row that holds a Big body stays put so nobody drifts into it.
+      const bigRows = new Set(); state.enemies.filter((x) => x.alive && isBig(x)).forEach((x) => cellsOf(x).forEach(([r]) => bigRows.add(r)));
+      for (const e of state.enemies.filter((x) => x.alive && x.row >= 0 && !bigRows.has(x.row))) {
         const d = e.row === 0 ? -1 : 1;
         moves.push({ id: e.id, to: [e.row, (e.col + d + COLS) % COLS] });
       }
       moves.forEach((m) => { state.enemies.find((x) => x.id === m.id).col = m.to[1]; });
-      events.push({ t: 'tide', moves });
+      if (moves.length) events.push({ t: 'tide', moves });
     }
     // Legendary rule "mend": heal 1 HP at the end of every turn survived.
     if (state.rules.mend && state.hp < state.maxHp) { state.hp = Math.min(state.maxHp, state.hp + healFor(state.rules, state.rules.mend)); events.push({ t: 'mend', amount: healFor(state.rules, state.rules.mend), hp: state.hp }); }
@@ -522,8 +585,28 @@
     return { state, events };
   }
 
+  // Layout check for a list of enemy definitions ({ row, col, footprint }) or live bodies: on the board, no overlap, boss-row bodies one row deep (10.1).
+  // Returns a list of problems (empty = fine).
+  function validateLayout(list) {
+    const problems = [], used = new Map();
+    list.forEach((e, i) => {
+      const fp = FOOTPRINTS[e.footprint || footprintOf(e)];
+      if (!fp) { problems.push('enemy ' + (i + 1) + ': unknown footprint ' + e.footprint); return; }
+      if (e.row === BOSS_ROW && fp.d > 1) problems.push('enemy ' + (i + 1) + ': a boss-row body is one row deep');
+      if (e.row !== BOSS_ROW && (e.row < 0 || e.row > 1)) problems.push('enemy ' + (i + 1) + ': row ' + e.row + ' is not an enemy row');
+      if (e.row - fp.d + 1 < 0 && e.row !== BOSS_ROW) problems.push('enemy ' + (i + 1) + ' (' + (e.footprint || '1x1') + ') does not fit: it is ' + fp.d + ' rows deep');
+      if (e.col < 0 || e.col + fp.w > COLS) problems.push('enemy ' + (i + 1) + ' (' + (e.footprint || '1x1') + ') does not fit: it is ' + fp.w + ' columns wide');
+      for (let dr = 0; dr < fp.d; dr++) for (let dc = 0; dc < fp.w; dc++) {
+        const k = key(e.row - dr, e.col + dc);
+        if (used.has(k)) problems.push('enemy ' + (i + 1) + ' overlaps enemy ' + used.get(k) + ' at ' + k);
+        else used.set(k, i + 1);
+      }
+    });
+    return problems;
+  }
+
   const Engine = {
-    COLS, ROWS, ENEMY_ROWS, PLAYER_ROWS, rowsFor, playerRowsFor, lostColsFor, tileBlocked, playerTilesFor, healFor, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, HERO_ABILITIES, gimmickText, incomingByColumn,
+    COLS, ROWS, ENEMY_ROWS, BOSS_ROW, SCAN_ROWS, FOOTPRINTS, wOf, dOf, footprintOf, isBig, lanesOf, applyBudget, coversTile, cellsOf, enemyAt, gateOpen, hitsFor, validateLayout, PLAYER_ROWS, rowsFor, playerRowsFor, lostColsFor, tileBlocked, playerTilesFor, healFor, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, HERO_ABILITIES, gimmickText, incomingByColumn,
     key, parseKey, clone, cardStat,
     createState, computeStats, targetsFor, reachableTiles, resolveTurn, useAbility, abilityProblem, isThreat,
   };

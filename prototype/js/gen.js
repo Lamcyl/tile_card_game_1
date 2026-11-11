@@ -128,7 +128,11 @@
     const adj = def.adj || [1, 1];
     const unitHp = (2.2 + L * 0.95) * ramp * fightHp(L) * tune('hp', L) * adj[0] * (isBoss ? 1 : 0.75), unitAtk = (1.5 + L * 0.42 + rampAtk) * tune('atk', L) * adj[1];
     const enemies = [];
-    [[0, def.back], [1, def.front]].forEach(([row, str]) => {
+    // Optional extras (DESIGN_V2 section 10): `top` is the boss row (row -1, one char per column, same chars as back / front) and
+    // `foot` maps a layout char to a footprint ({ B: '2x1' }). A Big body is written at its anchor (front-left) tile; the tiles it also covers must be '.'.
+    // HP and ATK per lane follow the footprint budget (10.5) after the usual numbers. Without either field nothing below changes.
+    const foot = def.foot || {};
+    [[0, def.back], [1, def.front]].concat(def.top ? [[-1, def.top]] : []).forEach(([row, str]) => {
       for (let i = 0; i < 5; i++) {
         const ch = str[i];
         if (ch === '.') continue;
@@ -166,12 +170,21 @@
         enemies.push(en);
       }
     });
+    for (const en of enemies) {
+      const fp = foot[({ 1: def.front, 0: def.back, '-1': def.top })[en.row][en.col]];
+      if (!fp || fp === '1x1' || en.type.endsWith('_barrel')) continue;
+      const b = E.applyBudget(fp, en.hp, en.atk);
+      Object.assign(en, { footprint: fp, hp: b.hp, atk: b.atk });
+      if (en.gimmick === 'regrow') en.gp = Math.max(2, Math.round(en.hp * 0.6));
+    }
+    const problems = E.validateLayout(enemies);
+    if (problems.length) throw new Error('boss layout ' + def.name + ': ' + problems.join('; '));
     const name = def.name;
     const g = def.gimmick ? E.ENEMY_GIMMICKS[def.gimmick] : def.kind ? E.ENEMY_KINDS[def.kind] : null;
     const intro = isBoss
       ? { name, rule: g ? g.name : '', badge: g ? g.badge : '', text: def.intro }
       : { name, rule: 'Elite', badge: '', text: def.note };
-    return { enemies, template: (isBoss ? 'boss ' : 'elite ') + sub, intro };
+    return Object.assign({ enemies, template: (isBoss ? 'boss ' : 'elite ') + sub, intro }, def.top ? { bossRow: true } : null);
   }
 
   // ---------- Heat and Descend (WP18, design 15) ----------
@@ -188,6 +201,12 @@
       if (heat.includes('armor')) e.armor = (e.armor || 0) + 1;
     }
     return gen;
+  }
+
+  // A fight from a custom boss / elite definition (tools and the dev page): same generator as the handcrafted fights.
+  function generateFromDef(node0, def, runSeed, isBoss, opts) {
+    const node = scaled(node0, opts), R = World.rng(runSeed + ':' + node.id);
+    return applyHeat(fromDef(node, isBoss ? def : Object.assign({ bossHp: 1, bossAtk: 1 }, def), R, !!isBoss), opts && opts.heat);
   }
 
   function generateBattle(node0, runSeed, opts) {
@@ -242,7 +261,7 @@
   const runCap = (L) => ({ atk: Math.max(4, Math.round(1.5 + 0.3 * L)), block: Math.round(1 + 0.2 * L), amount: Math.round(1 + 0.15 * L) });
   const clipTo = (cur, step, cap) => Math.max(0, Math.min(step, cap - (cur || 0)));
 
-  const Gen = { DESCEND_LV, rewardFor, runCap, clipTo, scaled, generateBattle, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
+  const Gen = { DESCEND_LV, rewardFor, runCap, clipTo, scaled, generateBattle, generateFromDef, soulsFor, starsFor, goldFor, CACHE_GOLD, GUARD_GOLD, TEMPLATES, BOSS_BONUS_SOULS, CACHE_SOULS };
   root.Gen = Gen;
   if (typeof module !== 'undefined' && module.exports) module.exports = Gen;
 })(typeof window !== 'undefined' ? window : globalThis);

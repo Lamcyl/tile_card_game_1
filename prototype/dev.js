@@ -42,7 +42,7 @@ import { Design } from './design.js';
     save.owned = P.ROSTER.map((u) => u.id); save.souls = 999; save.crystals = 99; save.dust = 99;
     return {
       save, run: { seed: 'dev', hp: null, hpBonus: 0, relics: [], mods: {}, reviveUsed: 0, gold: 0 }, seeds: {}, rar: { unit: {}, item: {} }, placement: {},
-      custom: { sub: SUBS[0].id, level: 5, enemies: [], sel: [1, 2] }, ui: { tab: 'enemies', open: {}, f: { q: '', rar: '', slot: '', owned: false } },
+      custom: { sub: SUBS[0].id, level: 5, enemies: [], sel: [1, 2], bossRow: false, newFp: '1x1', warn: '' }, ui: { tab: 'enemies', open: {}, f: { q: '', rar: '', slot: '', owned: false } },
     };
   }
   function restore(data) {
@@ -94,7 +94,7 @@ import { Design } from './design.js';
   const typeName = (t) => (E.ENEMY_TYPES[t] ? E.ENEMY_TYPES[t].name : t);
   function summarize(enemies) {
     const by = {};
-    for (const e of enemies) { const k = typeName(e.type) + (e.kind ? ' ' + E.ENEMY_KINDS[e.kind].badge + e.kind : '') + (e.gimmick ? ' ' + E.ENEMY_GIMMICKS[e.gimmick].badge + e.gimmick : '') + (e.guardian ? ' guard' : ''); by[k] = (by[k] || 0) + 1; }
+    for (const e of enemies) { const k = typeName(e.type) + (e.footprint ? ' ' + e.footprint : '') + (e.row === E.BOSS_ROW ? ' boss-row' : '') + (e.kind ? ' ' + E.ENEMY_KINDS[e.kind].badge + e.kind : '') + (e.gimmick ? ' ' + E.ENEMY_GIMMICKS[e.gimmick].badge + e.gimmick : '') + (e.guardian ? ' guard' : ''); by[k] = (by[k] || 0) + 1; }
     return Object.entries(by).map(([k, v]) => v + '× ' + k).join(', ');
   }
   function resultHtml(key) {
@@ -130,21 +130,38 @@ import { Design } from './design.js';
 
   // ---------- Custom battle builder ----------
   const C = () => S.custom;
-  const enemyAt = (r, c) => C().enemies.find((e) => e.row === r && e.col === c);
+  // Builder enemies carry an optional footprint; a Big body occupies several tiles (anchor = front-left, depth grows toward the back, the boss row is row -1).
+  const FPS = Object.keys(E.FOOTPRINTS);
+  const fpOf = (e) => E.FOOTPRINTS[e.footprint || '1x1'];
+  const coversAt = (e, r, c) => { const f = fpOf(e); return c >= e.col && c < e.col + f.w && r <= e.row && r > e.row - f.d; };
+  const enemyAt = (r, c) => C().enemies.find((e) => coversAt(e, r, c));
+  const rowName = (r) => (r === E.BOSS_ROW ? 'boss row' : r === 0 ? 'back' : 'front');
   function defaultsFor(role, L) {
     const base = 2.2 + L * 0.95, ramp = L > 7 ? 1 + 0.07 * (L - 7) : 1, atk = Math.round(1.5 + L * 0.42) + (L > 7 ? Math.floor((L - 7) * 0.35) : 0);
     if (role === 'barrel') return { hp: 1, atk: 0, armor: 0 };
     const m = { basic: [1, 0, 0], tough: [1.4, L >= 5 ? 1 : 0, 0], armored: [0.9, 0, L >= 9 ? 2 : 1], boss: [3.5, 1, 0] }[role];
     return { hp: Math.max(1, Math.round(base * ramp * m[0])), atk: Math.max(1, atk + m[1]), armor: m[2] };
   }
+  // HP and ATK of a role at the level, scaled by the footprint budget (DESIGN_V2 10.5). Barrels stay 1x1.
+  function statsFor(role, fp, L) {
+    const d = defaultsFor(role, L);
+    if (role === 'barrel' || fp === '1x1') return d;
+    const b = E.applyBudget(fp, d.hp, d.atk);
+    return Object.assign(d, { hp: b.hp, atk: b.atk });
+  }
   function addEnemy(role, kind) {
     const [r, c] = C().sel; if (enemyAt(r, c)) return;
-    C().enemies.push(Object.assign({ role, kind: kind || '', gimmick: '', gp: 0, guardian: false, row: r, col: c }, defaultsFor(role, C().level)));
+    const fp = role === 'barrel' ? '1x1' : C().newFp || '1x1';
+    const e = Object.assign({ role, kind: kind || '', gimmick: '', gp: 0, guardian: false, row: r, col: c, footprint: fp }, statsFor(role, fp, C().level));
+    const problems = E.validateLayout(C().enemies.concat(e));
+    if (problems.length) { C().warn = 'Cannot place a ' + fp + ' here: ' + problems[0].replace(/^enemy \d+ ?/, ''); return; }
+    C().warn = ''; C().enemies.push(e);
   }
   function buildCustom() {
     const sub = C().sub;
     const enemies = C().enemies.map((e) => {
       const o = { type: sub + '_' + e.role, row: e.row, col: e.col, hp: e.role === 'barrel' ? 1 : Math.max(1, e.hp), atk: e.role === 'barrel' ? 0 : Math.max(0, e.atk), armor: e.armor || 0 };
+      if (e.footprint && e.footprint !== '1x1' && e.role !== 'barrel') o.footprint = e.footprint;
       if (e.kind) o.kind = e.kind;
       if (e.gimmick) { o.gimmick = e.gimmick; o.gp = e.gp || 0; }
       if (e.guardian) o.guardian = true;
@@ -152,12 +169,13 @@ import { Design } from './design.js';
       if (e.kind === 'summoner') o.minion = { type: sub + '_basic', hp: Math.max(2, Math.round(o.hp * 0.4)), atk: Math.max(1, Math.round(o.atk * 0.6)) };
       return o;
     });
-    return { enemies, template: 'custom' };
+    return Object.assign({ enemies, template: 'custom' }, C().bossRow ? { bossRow: true } : null);
   }
   function loadIntoBuilder(id) {
     const n = World.byId[id], gen = Gen.generateBattle(n, seedOf(id), genOpts());
     C().sub = n.sub; C().level = Gen.scaled(n, genOpts()).level;
-    C().enemies = gen.enemies.map((e) => ({ role: e.type.slice(n.sub.length + 1), kind: e.kind || '', gimmick: e.gimmick || '', gp: e.gp || 0, guardian: !!e.guardian, row: e.row, col: e.col, hp: e.hp, atk: e.atk, armor: e.armor || 0 }));
+    C().bossRow = !!gen.bossRow; C().warn = '';
+    C().enemies = gen.enemies.map((e) => ({ role: e.type.slice(n.sub.length + 1), footprint: e.footprint || '1x1', kind: e.kind || '', gimmick: e.gimmick || '', gp: e.gp || 0, guardian: !!e.guardian, row: e.row, col: e.col, hp: e.hp, atk: e.atk, armor: e.armor || 0 }));
     S.ui.tab = 'builder';
   }
   const opt = (list, cur) => list.map((v) => { const [val, label] = Array.isArray(v) ? v : [v, v]; return '<option value="' + esc(val) + '"' + (String(val) === String(cur) ? ' selected' : '') + '>' + esc(label) + '</option>'; }).join('');
@@ -165,25 +183,33 @@ import { Design } from './design.js';
     const c = C(), sub = SUBS.find((s) => s.id === c.sub);
     let h = '<div class="d-card"><div class="d-row"><label>Sub-area (creatures, backdrop) <select data-c="csub">' + opt(SUBS.map((s) => [s.id, s.region + ': ' + s.name]), c.sub) + '</select></label>' +
       '<label>Level <input type="number" min="1" max="30" data-c="clevel" value="' + c.level + '"></label></div>' +
-      '<div class="d-mini">Back row on top, front row below (your side is at the bottom). Tap a tile, then add an enemy. Stats start from the level\'s curve; edit them freely.</div>';
-    h += '<div class="d-board">';
-    for (let r = 0; r < 2; r++) for (let col = 0; col < 5; col++) {
+      '<div class="d-row"><label><input type="checkbox" data-c="cbossrow"' + (c.bossRow ? ' checked' : '') + '> Boss row (third row behind the others; hit only through a column with no enemy in rows 1-2)</label></div>' +
+      '<div class="d-mini">Boss row and back row on top, front row below (your side is at the bottom). Tap a tile, then add an enemy. Big bodies (2x1, 1x2, 2x2, 3x1) grow right and back from the front-left tile. Stats start from the level\'s curve and the footprint budget; edit them freely.</div>';
+    const top = c.bossRow ? E.BOSS_ROW : 0, nrows = 2 - top;
+    h += '<div class="d-board" style="grid-template-rows: repeat(' + nrows + ', minmax(62px, auto))">';
+    for (let r = top; r < 2; r++) for (let col = 0; col < 5; col++) {
       const e = enemyAt(r, col), sel = c.sel[0] === r && c.sel[1] === col;
-      h += '<button class="' + (sel ? 'sel' : '') + '" data-a="csel" data-r="' + r + '" data-col="' + col + '">' + (e ? (E.ENEMY_TYPES[sub.id + '_' + e.role] || {}).icon + '<br>' + e.role + (e.kind ? ' ' + E.ENEMY_KINDS[e.kind].badge : '') + (e.gimmick ? ' ' + E.ENEMY_GIMMICKS[e.gimmick].badge : '') + '<br>' + (e.role === 'barrel' ? 'barrel' : e.hp + 'hp ' + e.atk + 'atk') : '<span class="d-mini">empty</span>') + '</button>';
+      const f = e ? fpOf(e) : { w: 1, d: 1 };
+      if (e && (e.row !== r || e.col !== col)) continue; // covered by a Big body drawn once at its anchor
+      const place = 'grid-column: ' + (col + 1) + ' / span ' + f.w + '; grid-row: ' + (r - f.d + 1 - top + 1) + ' / span ' + f.d + ';';
+      const selBody = e && c.sel[0] !== undefined && enemyAt(c.sel[0], c.sel[1]) === e;
+      h += '<button class="' + (sel || selBody ? 'sel' : '') + (e && f.w * f.d > 1 ? ' big' : '') + '" style="' + place + '" data-a="csel" data-r="' + r + '" data-col="' + col + '">' + (e ? (E.ENEMY_TYPES[sub.id + '_' + e.role] || {}).icon + '<br>' + e.role + (e.footprint && e.footprint !== '1x1' ? ' ' + e.footprint : '') + (e.kind ? ' ' + E.ENEMY_KINDS[e.kind].badge : '') + (e.gimmick ? ' ' + E.ENEMY_GIMMICKS[e.gimmick].badge : '') + '<br>' + (e.role === 'barrel' ? 'barrel' : e.hp + 'hp ' + e.atk + 'atk' + (f.w > 1 ? '×' + f.w : '')) : '<span class="d-mini">' + (r === E.BOSS_ROW ? 'boss row' : 'empty') + '</span>') + '</button>';
     }
     h += '</div>';
+    if (c.warn) h += '<div class="d-mini"><b>' + esc(c.warn) + '</b></div>';
     const e = enemyAt(c.sel[0], c.sel[1]);
     if (!e) {
-      h += '<h4>Add to tile ' + (c.sel[0] === 0 ? 'back' : 'front') + ' ' + (c.sel[1] + 1) + '</h4><div class="d-chips">' + ROLES.map((r) => '<button class="sm" data-a="cadd" data-role="' + r + '">' + r + '</button>').join('') +
+      h += '<h4>Add to tile ' + rowName(c.sel[0]) + ' ' + (c.sel[1] + 1) + '</h4><div class="d-row"><label>Footprint <select data-c="cnewfp">' + opt(FPS, c.newFp) + '</select></label></div><div class="d-chips">' + ROLES.map((r) => '<button class="sm" data-a="cadd" data-role="' + r + '">' + r + '</button>').join('') +
         KINDS.map((k) => '<button class="sm" data-a="cadd" data-role="basic" data-kind="' + k + '">' + E.ENEMY_KINDS[k].badge + ' ' + k + '</button>').join('') + '</div>';
     } else {
       const f = (label, key, extra) => '<label>' + label + ' <input type="number" min="0" max="999" data-c="cfield" data-k="' + key + '" value="' + e[key] + '"' + (extra || '') + '></label>';
-      h += '<h4>Edit tile ' + (c.sel[0] === 0 ? 'back' : 'front') + ' ' + (c.sel[1] + 1) + '</h4><div class="d-row"><label>Type <select data-c="cfield" data-k="role">' + opt(ROLES, e.role) + '</select></label>' +
+      h += '<h4>Edit ' + (e.footprint && e.footprint !== '1x1' ? e.footprint + ' ' : '') + 'tile ' + rowName(e.row) + ' ' + (e.col + 1) + '</h4><div class="d-row"><label>Type <select data-c="cfield" data-k="role">' + opt(ROLES, e.role) + '</select></label>' +
+        '<label>Footprint <select data-c="cfield" data-k="footprint">' + opt(FPS, e.footprint || '1x1') + '</select></label>' +
         '<label>Kind <select data-c="cfield" data-k="kind">' + opt([['', 'none']].concat(KINDS.map((k) => [k, k])), e.kind) + '</select></label>' +
         '<label>Gimmick <select data-c="cfield" data-k="gimmick">' + opt([['', 'none']].concat(GIMMICKS.map((k) => [k, k])), e.gimmick) + '</select></label></div>' +
-        '<div class="d-row">' + f('HP', 'hp') + f('ATK', 'atk') + f('Armor', 'armor') + f('Gimmick N', 'gp') + '<label><input type="checkbox" data-c="cguard"' + (e.guardian ? ' checked' : '') + '> guard escort</label></div>' +
+        '<div class="d-row">' + f('HP', 'hp') + f('ATK per lane', 'atk') + f('Armor', 'armor') + f('Gimmick N', 'gp') + '<label><input type="checkbox" data-c="cguard"' + (e.guardian ? ' checked' : '') + '> guard escort</label></div>' +
         '<div class="d-row"><button class="sm" data-a="cauto">Reset stats to level</button><button class="sm danger" data-a="cdel">Remove</button></div>' +
-        '<div class="d-mini">' + (e.kind ? esc(E.ENEMY_KINDS[e.kind].name + ': ' + E.ENEMY_KINDS[e.kind].text) + '. ' : '') + (e.gimmick ? esc(E.ENEMY_GIMMICKS[e.gimmick].name + ': ' + E.ENEMY_GIMMICKS[e.gimmick].text.replace('{n}', e.gp)) : '') + '</div>';
+        '<div class="d-mini">' + (fpOf(e).w > 1 ? 'Strikes once per covered column (' + fpOf(e).w + ' lanes). ' : '') + (e.kind ? esc(E.ENEMY_KINDS[e.kind].name + ': ' + E.ENEMY_KINDS[e.kind].text) + '. ' : '') + (e.gimmick ? esc(E.ENEMY_GIMMICKS[e.gimmick].name + ': ' + E.ENEMY_GIMMICKS[e.gimmick].text.replace('{n}', e.gp)) : '') + '</div>';
     }
     h += '<div class="d-row"><button class="primary" data-a="cfight"' + (c.enemies.length ? '' : ' disabled') + '>Fight custom battle</button><button class="sm danger" data-a="cclear">Clear board</button> ' + resultHtml('custom') + '</div></div>';
     return h;
@@ -299,12 +325,16 @@ import { Design } from './design.js';
     rerollall() { S.run.seed = rndSeed(); S.seeds = {}; change(); },
     clearseeds() { S.seeds = {}; change(); },
     tobuilder(el) { loadIntoBuilder(el.dataset.id); change(); },
-    csel(el) { C().sel = [num(el.dataset.r, 0), num(el.dataset.col, 0)]; render(); },
+    csel(el) { const r = num(el.dataset.r, 0), col = num(el.dataset.col, 0), e = enemyAt(r, col); C().sel = e ? [e.row, e.col] : [r, col]; C().warn = ''; render(); },
     cadd(el) { addEnemy(el.dataset.role, el.dataset.kind); change(); },
-    cdel() { const [r, c] = C().sel; C().enemies = C().enemies.filter((e) => !(e.row === r && e.col === c)); change(); },
-    cauto() { const e = enemyAt(...C().sel); if (e) Object.assign(e, defaultsFor(e.role, C().level)); change(); },
-    cclear() { C().enemies = []; change(); },
-    cfight() { const sub = World.SUB_BY[C().sub]; fight('custom', 'Custom battle', sub.name + ' · Lv' + C().level, sub.biome, buildCustom()); },
+    cdel() { const e = enemyAt(...C().sel); C().enemies = C().enemies.filter((x) => x !== e); C().warn = ''; change(); },
+    cauto() { const e = enemyAt(...C().sel); if (e) Object.assign(e, statsFor(e.role, e.footprint || '1x1', C().level)); change(); },
+    cclear() { C().enemies = []; C().warn = ''; change(); },
+    cfight() {
+      const sub = World.SUB_BY[C().sub], gen = buildCustom(), problems = E.validateLayout(gen.enemies.map((o, i) => Object.assign({}, o, { footprint: o.footprint || '1x1' })));
+      if (problems.length) { C().warn = 'Fix the layout first: ' + problems[0]; change(); return; }
+      C().warn = ''; fight('custom', 'Custom battle', sub.name + ' · Lv' + C().level, sub.biome, gen);
+    },
     squadall() { S.save.squad = P.ROSTER.map((u) => u.id); change(); },
     squadnone() { S.save.squad = []; change(); },
     squadstart() { S.save.squad = P.ROSTER.filter((u) => u.start).map((u) => u.id); change(); },
@@ -333,12 +363,20 @@ import { Design } from './design.js';
     clevel(el) { C().level = clamp(num(el.value, 5), 1, 30); },
     cfield(el) {
       const e = enemyAt(...C().sel); if (!e) return; const k = el.dataset.k;
-      if (k === 'role') { e.role = el.value; Object.assign(e, defaultsFor(e.role, C().level)); }
+      if (k === 'role') { if (el.value === 'barrel') e.footprint = '1x1'; e.role = el.value; Object.assign(e, statsFor(e.role, e.footprint || '1x1', C().level)); }
+      else if (k === 'footprint') {
+        const old = fpOf(e), fp = el.value, next = Object.assign({}, e, { footprint: fp });
+        const problems = e.role === 'barrel' ? ['barrels are 1x1'] : E.validateLayout(C().enemies.map((x) => (x === e ? next : x)));
+        if (problems.length) C().warn = 'A ' + fp + ' does not fit here: ' + problems[0].replace(/^enemy \d+ ?/, '');
+        else { const nf = E.FOOTPRINTS[fp]; e.footprint = fp; e.hp = Math.max(1, Math.round(e.hp * nf.hp / old.hp)); if (e.atk > 0) e.atk = Math.max(1, Math.round(e.atk * nf.atk / old.atk)); C().warn = ''; }
+      }
       else if (k === 'kind' || k === 'gimmick') {
         e[k] = el.value;
         if (k === 'gimmick') e.gp = { ward: 3, veil: 1, gaze: 1, rage: 1, harden: 2, guard: 0, regen: Math.max(1, Math.round(e.hp * 0.12)), regrow: Math.max(2, Math.round(e.hp * 0.6)) }[el.value] || 0;
       } else e[k] = clamp(num(el.value, 0), 0, 999);
     },
+    cbossrow(el) { C().bossRow = el.checked; if (!el.checked) { C().enemies = C().enemies.filter((e) => e.row !== E.BOSS_ROW); if (C().sel[0] === E.BOSS_ROW) C().sel = [1, 2]; } C().warn = ''; },
+    cnewfp(el) { C().newFp = FPS.includes(el.value) ? el.value : '1x1'; },
     cguard(el) { const e = enemyAt(...C().sel); if (e) e.guardian = el.checked; },
     squad(el) { const id = el.dataset.id, q = S.save.squad; S.save.squad = el.checked ? (q.includes(id) ? q : q.concat(id)) : q.filter((x) => x !== id); },
     urar(el) { if (el.value === ORIG_U[el.dataset.id]) delete S.rar.unit[el.dataset.id]; else S.rar.unit[el.dataset.id] = el.value; },

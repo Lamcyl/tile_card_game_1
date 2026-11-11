@@ -195,6 +195,10 @@ See `docs/WP20_PLAN.md` (Step notes). The overworld is a generated tile map (Gre
 
 
 
+## Big enemies and the boss row (DESIGN_V2 section 10, engine and battle UI)
+
+Implemented in `js/engine.js` (optional enemy `footprint` 1x1 / 2x1 / 1x2 / 2x2 / 3x1, stored as `w` / `d` only on Big bodies; optional boss row = row -1, `state.bossRow`), `js/battle.js` + `battle.css` (one merged card per body, lane markers, gate chains, whole-body highlights, a boss strip above the board), `js/gen.js` (boss-defs may add `top` = boss row layout and `foot` = footprint per layout char; `Gen.generateFromDef`), `tools/solve.js` / `validate-gen.js` (threat counts lanes; `node tools/validate-gen.js big` solves five fixture fights) and the dev builder. Existing battles are unchanged: `validate-gen.js 40` 200/200 and `bosses` 36/36 before and after, and `tools/test-big-enemies.js` fuzzes 1555 classic turns against the pre-change engine with identical states and events. Rules the spec left open (explosions, Tide, Stride, summons, Chain, statuses not yet in the engine) are listed in `DESIGN_V2.md` "Section 10 implementation notes". Still open: real Big elites and bosses in `boss-defs.js` for the regions (the fixtures in `validate-gen.js` are only for the tools) and a tap-to-inspect card for enemies.
+
 ## Add a region (WP20 checklist)
 
 Proven by the step-6 dry run: a copy of Ashkara with prefixed sub-area ids at `{NE, ring 1}` built, checked and rendered with no JS edits (the file was removed afterwards).

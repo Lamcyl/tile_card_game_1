@@ -383,6 +383,23 @@ Round ATK per lane to at least 1. Elites use the elite factor (x1.6 HP), bosses 
 | Tap | Any tile of the body opens the same info card (name, element, footprint, lanes, statuses) |
 | Enemies around it | Tiles in front or behind keep their normal 70 px size; the body never hides the tile it overlaps because its card is drawn inside the grid cells |
 
+## Section 10 implementation notes
+
+How the prototype engine (`prototype/js/engine.js`) implements section 10, and the rules chosen where the section is silent. Tests: `node tools/test-big-enemies.js`.
+
+- **Coordinates.** Engine rows are 0 = back (spec row 2), 1 = front (spec row 1), and the boss row is row -1. A body is `{ row, col }` = its front-left anchor plus `w` and `d` (set only for Big bodies; every 1x1 stays a plain object). The boss row counts as the back row for range (distance `playerRow - max(row, 0)`). `Engine.validateLayout` rejects bodies that overflow, overlap, or are two rows deep in the boss row.
+- **Spread** returns one hit per column lookup (so a 3x1 can be hit three times by one Spread); the `fire` and `hit` events carry the column. Armor, Hide (ward) and reactions-per-hit are evaluated per hit. A body that dies mid-volley is not hit again.
+- **Pierce** hits each distinct body in rows 1-0 once; the boss row is reached only when the column has no living enemy in rows 1-0 (the gate is evaluated at the moment of the shot, whether or not that enemy was in range).
+- **Overkill / Rend carry** happens only when the hit kills the whole body, goes along the struck column to the first body behind the rear edge (so a back-row kill carries into the boss row, R4), and a Bulwark body blocks it. The carried hit never carries again. The Spill relic spills along the front row beside the struck column.
+- **Chain** (Storm Mage) jumps to the lowest-HP other body touching any tile of a struck body; a boss-row body counts as touching only through a gate-open column, checked after the hit (so a kill can open the gate for the chain).
+- **Explosions (barrels)** hit each neighbouring body once through the four orthogonal tiles of the barrel, a boss-row body above a back-row barrel included (an explosion is not a "pattern", so the gate does not apply). Barrels are always 1x1.
+- **Attacks.** One strike per covered column, resolved column by column, front to back inside a column (the existing order; it only differs from A2 across columns, and Shields are per column). Sweep hits the column beside each end of the footprint for `ceil(atk / 2)`. Enrage and end-of-turn gimmicks (Fury, Harden, Regenerate) act once per body. Gaze weakens attackers in every covered column. The threat preview sums lanes.
+- **Healer / Summoner / Splitter.** A healer mends every neighbouring body once (a Big healer: every body touching any of its tiles). Summoner minions use only empty tiles of rows 1-0 (R6); a Splitter that dies in the boss row puts its two minions in the nearest empty tiles of rows 1-0; a Big Splitter splits into its anchor tile and a free neighbour. Regrow waits until every tile of the body is free.
+- **Heavy (B9).** Big bodies do not Stride and are not swapped by a Strider (a blocked strider turns round and stays). Tide never carries Big bodies or the boss row, and a row that holds a Big body does not drift at all, so nothing drifts into it.
+- **Not in the prototype engine yet:** Burn, Venom, Chill, Mark, Hold, Freeze, Steam and the other reactions, Trample, Skyfall and Decoy do not exist, so B7 and B8 are only represented by Armor, Hide, Veil, Guard and the once-per-body gimmicks above. They should reuse the same per-hit versus per-action split when they arrive.
+- **Budget.** `Engine.FOOTPRINTS` / `Engine.applyBudget` hold the 10.5 multipliers (HP x, ATK per lane x, at least 1). `gen.js` applies them to a layout char listed in a boss-def's `foot`; the dev builder applies them to new and re-footprinted bodies.
+- **UI.** A Big body is one card in its anchor tile spanning `w x d` cells with one HP tag, one status row and `ATK x lanes`; lane markers sit under each covered column, the boss row is a 0.8-cell strip with art overlapping upward, gated boss-row columns show a chain and open ones glow. Highlights cover the whole body when any tile is targeted; damage numbers and projectiles use the struck column.
+
 ---
 
 ## 11. Open decisions

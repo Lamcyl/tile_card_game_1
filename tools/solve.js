@@ -32,7 +32,7 @@ function score(state, placement, army) {
   const { state: s } = Engine.resolveTurn(state, placement, army);
   if (s.status === 'cleared') return { value: -1, s };
   const threat = s.enemies.filter(Engine.isThreat);
-  const atk = threat.reduce((n, e) => n + e.atk, 0);
+  const atk = threat.reduce((n, e) => n + e.atk * Engine.lanesOf(e), 0); // a wide body strikes once per covered column
   const hp = threat.reduce((n, e) => n + e.hp, 0);
   const dmg = state.hp - s.hp;
   return { value: dmg + 0.6 * atk + 0.15 * hp + (s.status === 'defeated' ? 100 : 0), s };
@@ -83,6 +83,15 @@ function solve(state, army, depth = 0, maxTurns = 4, effort = {}) {
   return best;
 }
 
+// Text picture of the enemy side (boss row on top when the battle has one); a Big body shows its first letter on every tile it covers.
+function drawEnemies(state) {
+  const rows = state.bossRow ? [Engine.BOSS_ROW].concat(Engine.ENEMY_ROWS.slice().reverse()) : Engine.ENEMY_ROWS.slice().reverse();
+  return rows.map((r) => '   ' + Array.from({ length: Engine.COLS }, (_, c) => {
+    const e = Engine.enemyAt(state.enemies, r, c);
+    return (e ? e.type.split('_').pop().slice(0, 4) + (Engine.isBig(e) ? '*' : '') + e.hp : '.').padEnd(8);
+  }).join('')).join('\n');
+}
+
 function draw(placement, army) {
   const byId = Object.fromEntries(army.map((c) => [c.id, c]));
   const rows = [];
@@ -114,7 +123,7 @@ function randomClearRate(state, army, n = 200) {
   return ok / n;
 }
 
-module.exports = { anneal, solve, score, oneTurnClear, randomClearRate, randomPlacement, draw };
+module.exports = { anneal, solve, score, oneTurnClear, randomClearRate, randomPlacement, draw, drawEnemies };
 
 if (require.main === module) {
   const only = process.argv[2];

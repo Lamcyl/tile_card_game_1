@@ -113,10 +113,10 @@ function runMods(save, node) {
 }
 // The solver is stochastic: one unlucky search can miss a good line. A failure on cost is only final when two stronger
 // searches (more restarts and iterations) agree; the best line over all tries counts. A found one-turn clear is always real.
-function checkFight(node, effort) {
+function checkFight(node, effort, genOverride) {
   const save = bossSave(node), army = Progress.buildArmy(save, runMods(save, node));
   const maxHp = Progress.maxHp(save) + powerAt(node.level, node).hp;
-  const gen = Gen.generateBattle(node, 'validate-fight');
+  const gen = genOverride || Gen.generateBattle(node, 'validate-fight');
   const state = Engine.createState(Object.assign({ heroHp: maxHp, heroMaxHp: maxHp, rules: Object.assign(Progress.rulesFor(save), powerAt(node.level, node).rules) }, gen));
   const boss = node.type === 'boss';
   const rec = { id: node.id, level: node.level, boss, maxHp, fails: [], enemies: gen.enemies.length, hp: gen.enemies.reduce((n, e) => n + (e.type.endsWith('_barrel') ? 0 : e.hp), 0) };
@@ -151,7 +151,34 @@ function bossMain(args) {
   console.log('\nAll ' + nodes.length + ' boss and elite fights pass.');
 }
 
+// ---------- Big enemies and the boss row (DESIGN_V2 section 10) ----------
+// Fixture fights written with the optional `foot` (footprint per layout char) and `top` (boss row) fields of boss-defs.js, generated for real and
+// solved like any boss / elite. They check that the solver and the engine cope with Big bodies and the gate, and give a first balance reading
+// (the footprint HP / ATK budget of 10.5 is applied by the generator). Usage: node tools/validate-gen.js big
+const BIG_FIXTURES = [
+  { id: 'big-elite-2x1', level: 7, sub: 'forest', type: 'elite', def: { name: 'Twin-crest', back: 'b...b', front: '.tE..', foot: { E: '2x1' }, hp: 0.5, atk: 1, note: 'A wide elite.' }, boss: false },
+  { id: 'big-elite-1x2', level: 8, sub: 'lake', type: 'elite', def: { name: 'Pillar', back: 'b....', front: 'b.E.b', foot: { E: '1x2' }, hp: 0.5, atk: 1, note: 'A deep elite.' }, boss: false },
+  { id: 'big-elite-2x2', level: 14, sub: 'tomb', type: 'elite', def: { name: 'Colossus', back: 'b...b', front: '.E.b.', foot: { E: '2x2' }, hp: 0.5, atk: 1, note: 'A 2x2 elite.' }, boss: false },
+  { id: 'big-boss-row', level: 8, sub: 'forest', type: 'boss', def: { name: 'Throne', back: 'b...b', front: 'b.b.b', top: '..B..', hp: 0.5, atk: 1, bossHp: 1.8, bossAtk: 1.1, gimmick: 'ward', gp: 2, intro: 'x' }, boss: true },
+  { id: 'big-boss-3x1-row', level: 8, sub: 'forest', type: 'boss', def: { name: 'Wyrm', back: '.b.b.', front: 'b...b', top: 'B....', foot: { B: '3x1' }, hp: 0.5, atk: 1, bossHp: 1.8, bossAtk: 1.1, gimmick: 'regen', gpHp: 0.1, intro: 'x' }, boss: true },
+];
+function bigMain() {
+  const effort = { restarts: 10, iters: 1200, first: 10 };
+  let bad = 0;
+  for (const f of BIG_FIXTURES) {
+    const node = { id: f.id, type: f.type, level: f.level, sub: f.sub };
+    const gen = Gen.generateFromDef(node, f.def, 'validate-big', f.boss);
+    let rec = checkFight(node, effort, gen);
+    if (rec.fails.length) rec = checkFight(node, effort, gen);
+    console.log(`${rec.id.padEnd(18)} Lv${String(rec.level).padEnd(3)} ${rec.boss ? 'boss ' : 'elite'} enemies ${rec.enemies} hp ${String(rec.hp).padEnd(4)} ref HP ${rec.maxHp} best cost ${String(rec.cost).padEnd(3)} turns ${rec.turns} oneTurn ${rec.clear ? 'yes' : 'no '} ${rec.fails.length ? 'FAIL ' + rec.fails.join('; ') : ''}`);
+    if (rec.fails.length) bad++;
+  }
+  if (bad) { console.log('\n' + bad + ' big-enemy fixtures fail'); process.exit(1); }
+  console.log('\nAll ' + BIG_FIXTURES.length + ' big-enemy fixtures pass.');
+}
+
 function main() {
+  if (process.argv[2] === 'big') return bigMain();
   if (process.argv[2] === 'bosses') return bossMain(process.argv.slice(3));
   const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
   const verbose = process.argv.includes('--verbose');

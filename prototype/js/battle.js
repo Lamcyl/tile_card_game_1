@@ -19,21 +19,23 @@
   const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null, report: null, hero: null, aiming: false };
 
   // Board cells are built once; their contents are redrawn on every render.
-  function buildBoard(rows) {
+  // `boss` adds the optional boss row (row -1) above the two enemy rows; it exists only in battles that have one.
+  function buildBoard(rows, boss) {
     const board = $('#b-board');
     board.innerHTML = '';
-    for (let r = 0; r < rows; r++) {
+    for (let r = boss ? E.BOSS_ROW : 0; r < rows; r++) {
       for (let c = 0; c < E.COLS; c++) {
         const cell = document.createElement('div');
-        cell.className = 'cell row-' + r + (r < 2 ? ' enemy-zone' : ' player-zone');
+        cell.className = 'cell ' + (r < 0 ? 'row-boss' : 'row-' + r) + (r < 2 ? ' enemy-zone' : ' player-zone');
         cell.dataset.key = E.key(r, c);
         board.appendChild(cell);
       }
     }
-    game.rows = rows;
+    game.rows = rows; game.boss = !!boss; game.top = boss ? E.BOSS_ROW : 0;
     root.classList.toggle('deep-board', rows > E.ROWS);
+    root.classList.toggle('boss-board', !!boss);
   }
-  buildBoard(E.ROWS);
+  buildBoard(E.ROWS, false);
 
   const cellEl = (k) => root.querySelector('.cell[data-key="' + k + '"]');
   const cardById = (id) => game.army.find((c) => c.id === id);
@@ -43,7 +45,7 @@
   function start(opts) {
     game.army = opts.army;
     game.state = E.createState(opts.stage);
-    if (game.rows !== E.rowsFor(game.state.rules)) buildBoard(E.rowsFor(game.state.rules)); // Camp Board track: a 4th player row
+    if (game.rows !== E.rowsFor(game.state.rules) || game.boss !== !!game.state.bossRow) buildBoard(E.rowsFor(game.state.rules), game.state.bossRow); // Camp Board track: a 4th player row; boss row: a 3rd enemy row
     game.view = null;
     game.selected = null;
     game.busy = false;
@@ -143,19 +145,20 @@
     renderHero(s);
 
     const rng = rangeFor(s, stats);
-    for (let r = 0; r < game.rows; r++) {
+    for (let r = game.top; r < game.rows; r++) {
       for (let c = 0; c < E.COLS; c++) {
         const k = E.key(r, c);
         const cell = cellEl(k);
         cell.classList.toggle('reach', rng.reach.has(k));
         cell.classList.toggle('will-hit', rng.willHit.has(k));
         cell.classList.toggle('boost-target', rng.boost.has(k));
-        cell.classList.toggle('can-target', game.aiming && r < 2 && !!s.enemies.find((en) => en.alive && en.row === r && en.col === c));
+        const body = r < 2 ? E.enemyAt(s.enemies, r, c) : null; // a Big body covers several tiles; its card is drawn once, in the anchor tile
+        cell.classList.toggle('can-target', game.aiming && !!body);
+        cell.classList.toggle('gate-open', !!body && r === E.BOSS_ROW && E.gateOpen(s.enemies, c));
         cell.classList.toggle('closed', r >= 2 && E.tileBlocked(s.rules, k)); // Heat "Flooded Lane"
         cell.classList.toggle('can-drop', r >= 2 && !E.tileBlocked(s.rules, k) && !!game.selected && !game.busy);
         if (r < 2) {
-          const e = s.enemies.find((en) => en.alive && en.row === r && en.col === c);
-          cell.innerHTML = e ? enemyHTML(e) : '';
+          cell.innerHTML = body && body.row === r && body.col === c ? enemyHTML(body, s) : '';
         } else {
           const id = game.placement[k];
           cell.innerHTML = id ? cardHTML(cardById(id), stats[k], k) : '';
@@ -167,6 +170,7 @@
       ? hand.map(handSlotHTML).join('')
       : '<div class="hand-empty">Squad placed. Drop a card here to take it back.</div>';
     renderThreat(s, stats);
+    paintBodies(rng);
     $('#b-fight').disabled = game.busy || s.status !== 'playing';
     $('#b-clear').disabled = game.busy || s.status !== 'playing';
     $('#b-speed').textContent = game.speed + '×';
@@ -197,20 +201,31 @@
     }
     if (!st) return out;
     if (st.type.role === 'attacker') {
-      E.reachableTiles(st).forEach((k) => out.reach.add(k));
-      E.targetsFor(st, s.enemies).forEach((e) => out.willHit.add(E.key(e.row, e.col)));
+      E.reachableTiles(st, s.bossRow).forEach((k) => out.reach.add(k));
+      // A targeted Big body is highlighted whole: every tile it covers, not only the struck column.
+      E.targetsFor(st, s.enemies).forEach((e) => E.cellsOf(e).forEach(([r, c]) => out.willHit.add(E.key(r, c))));
+      for (const e of s.enemies) if (e.alive && E.isBig(e) && E.cellsOf(e).some(([r, c]) => out.reach.has(E.key(r, c)))) E.cellsOf(e).forEach(([r, c]) => out.reach.add(E.key(r, c)));
     } else if (st.type.role === 'support') st.boosts.forEach((k) => out.boost.add(k));
     return out;
+  }
+  // Big bodies are one element over several tiles: mirror the tile highlights onto the card itself.
+  function paintBodies(rng) {
+    root.querySelectorAll('.enemy.big').forEach((el) => {
+      const cells = el.dataset.cells.split(' ');
+      el.classList.toggle('body-hit', cells.some((k) => rng.willHit.has(k)));
+      el.classList.toggle('body-reach', cells.some((k) => rng.reach.has(k)));
+    });
   }
   // Lightweight refresh of the highlight classes only (no card re-render), used on every drag move.
   function paintRange() {
     const s = current(), rng = rangeFor(s, E.computeStats(game.placement, game.army, s.enemies, s.rules));
-    for (let r = 0; r < game.rows; r++) for (let c = 0; c < E.COLS; c++) {
+    for (let r = game.top; r < game.rows; r++) for (let c = 0; c < E.COLS; c++) {
       const k = E.key(r, c), cell = cellEl(k);
       cell.classList.toggle('reach', rng.reach.has(k));
       cell.classList.toggle('will-hit', rng.willHit.has(k));
       cell.classList.toggle('boost-target', rng.boost.has(k));
     }
+    paintBodies(rng);
   }
 
   // Hero panel (WP15): placeholder seal portrait, passive, and the once-per-battle ability button.
@@ -253,7 +268,7 @@
   const TXT = '︎'; // force text (not emoji) glyph rendering for stat symbols
   const artImg = (url, alt) => '<img src="' + url + '" alt="' + alt + '" draggable="false">';
 
-  function enemyHTML(e) {
+  function enemyHTML(e, s) {
     const t = E.ENEMY_TYPES[e.type];
     const art = window.Art ? Art.enemy(e.type) : null;
     const face = '<div class="c-art">' + (art ? artImg(art, t.name) : '<span class="e-icon">' + t.icon + '</span>') + '</div>';
@@ -264,11 +279,18 @@
     const gim = e.gimmick ? E.ENEMY_GIMMICKS[e.gimmick] : null;
     const kind = e.kind ? E.ENEMY_KINDS[e.kind] : gim ? { name: gim.name, badge: gim.badge, text: E.gimmickText(e) } : null;
     const guard = e.guardian ? ' guardian' : '';
-    return '<div class="enemy' + (t.boss ? ' boss' : '') + (e.kind ? ' kind-' + e.kind : '') + (gim ? ' gimmick gimmick-' + e.gimmick : '') + guard + '" title="' + t.name + (kind ? ' (' + kind.name + ': ' + kind.text + ')' : '') + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' +
-      (e.armor ? ', armor ' + e.armor : '') + '">' + face +
+    const big = E.isBig(e), lanes = E.lanesOf(e), fp = E.footprintOf(e);
+    const bigCls = big ? ' big big-' + fp + (E.wOf(e) > 1 ? ' wide' : '') + (e.row === E.BOSS_ROW ? ' in-boss' : '') : e.row === E.BOSS_ROW ? ' in-boss' : '';
+    // One merged card over the footprint: sized in cells, anchored at the front-left tile (see battle.css .enemy.big).
+    const bigAttr = ' data-id="' + e.id + '" data-cells="' + E.cellsOf(e).map(([r, c]) => E.key(r, c)).join(' ') + '"' + (big ? ' style="--w:' + E.wOf(e) + ';--d:' + E.dOf(e) + '"' : '');
+    const laneMarks = big && lanes > 1 ? '<div class="lanes" aria-hidden="true">' + '<span>▼</span>'.repeat(lanes) + '</div>' : '';
+    const gates = e.row === E.BOSS_ROW && s ? '<div class="gates" aria-hidden="true">' + Array.from({ length: E.wOf(e) }, (_, i) => E.gateOpen(s.enemies, e.col + i) ? '<span class="open" title="Open: nothing stands in front">✦</span>' : '<span title="Gated: an enemy stands in front">⛓</span>').join('') + '</div>' : '';
+    const atkTxt = e.atk + (lanes > 1 ? '×' + lanes : '');
+    return '<div class="enemy' + bigCls + (t.boss ? ' boss' : '') + (e.kind ? ' kind-' + e.kind : '') + (gim ? ' gimmick gimmick-' + e.gimmick : '') + guard + '" title="' + t.name + (kind ? ' (' + kind.name + ': ' + kind.text + ')' : '') + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' + (lanes > 1 ? ' in each of ' + lanes + ' columns' : '') + (big ? ', footprint ' + fp : '') + (e.row === E.BOSS_ROW ? ', boss row: can be hit only through a column with no enemy in front' : '') +
+      (e.armor ? ', armor ' + e.armor : '') + '"' + bigAttr + '>' + face + laneMarks + gates +
       (kind ? '<span class="kind-badge" aria-label="' + kind.name + '">' + kind.badge + '</span>' : '') + (e.guardian ? '<span class="guard-badge" title="Guard: the boss takes no damage while this enemy lives">♜</span>' : '') +
       (e.armor ? '<span class="tag armor">🛡' + TXT + e.armor + '</span>' : '') + (t.boss ? '<span class="crown">👑</span>' : '') +
-      '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">⚔' + TXT + e.atk + '</span></div></div>';
+      '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">⚔' + TXT + atkTxt + '</span></div></div>';
   }
 
   function cardHTML(card, st, from) {
@@ -335,7 +357,7 @@
   root.addEventListener('pointerdown', (ev) => {
     if (game.aiming && !game.busy && game.state && game.state.status === 'playing' && ev.target.closest('#b-board')) { // ability targeting (WP15): pick on press, the board re-renders on release
       const cell = ev.target.closest('.cell.can-target');
-      if (cell) { const [r, c] = E.parseKey(cell.dataset.key), en = game.state.enemies.find((x) => x.alive && x.row === r && x.col === c); if (en) { ev.preventDefault(); castAbility(en.id); } }
+      if (cell) { const [r, c] = E.parseKey(cell.dataset.key), en = E.enemyAt(game.state.enemies, r, c); if (en) { ev.preventDefault(); castAbility(en.id); } }
       return;
     }
     if (game.busy || !game.state || game.state.status !== 'playing' || ev.button > 0 || drag) return;
@@ -445,6 +467,8 @@
   }
   function flash(el, cls, ms) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); setTimeout(() => el.classList.remove(cls), ms / game.speed); }
   const enemyCell = (view, id) => { const e = view.enemies.find((en) => en.id === id); return cellEl(E.key(e.row, e.col)); };
+  // The tile of a body in the column a hit or strike went through (the anchor tile when no column is given): floats and projectiles use it.
+  const laneCell = (view, id, col) => { const e = view.enemies.find((en) => en.id === id); return cellEl(E.key(e.row, col !== undefined && col >= e.col && col < e.col + E.wOf(e) ? col : e.col)); };
 
   async function fight() {
     if (game.busy || game.state.status !== 'playing') return;
@@ -521,24 +545,24 @@
       const el = cellEl(ev.key);
       el.classList.add('firing');
       if (!ev.targets.length) { floatText(el, 'no target', 'info'); await sleep(420); }
-      else await Promise.all(ev.targets.map((id) => projectile(el, enemyCell(view, id))));
+      else await Promise.all(ev.targets.map((id, i) => projectile(el, laneCell(view, id, ev.cols && ev.cols[i]))));
       el.classList.remove('firing');
     } else if (ev.t === 'hit') {
       const e = view.enemies.find((en) => en.id === ev.id), el = enemyCell(view, ev.id);
       e.hp = ev.hp;
       flash(el, 'shake', 300);
-      floatText(el, ev.warded ? (ev.warded === 'ward' ? 'Too weak!' : ev.warded === 'guard' ? 'Guarded ♜' : 'Veiled ☁') : '−' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' 🛡' : ''), ev.warded ? 'info' : 'dmg');
+      floatText(laneCell(view, ev.id, ev.col), ev.warded ? (ev.warded === 'ward' ? 'Too weak!' : ev.warded === 'guard' ? 'Guarded ♜' : 'Veiled ☁') : '−' + ev.dmg + (ev.armor && ev.amount > ev.dmg ? ' 🛡' : ''), ev.warded ? 'info' : 'dmg');
       if (ev.killed) e.alive = false;
       render(); await sleep(300);
     } else if (ev.t === 'overkill') {
-      const from = enemyCell(view, ev.from);
+      const from = laneCell(view, ev.from, ev.col);
       floatText(from, (ev.side ? 'Spill ' : 'Overkill ') + ev.amount + '!', 'info');
-      await projectile(from, enemyCell(view, ev.id));
+      await projectile(from, laneCell(view, ev.id, ev.col));
     } else if (ev.t === 'explode') {
       const el = enemyCell(view, ev.id);
       flash(el, 'boom-flash', 450); floatText(el, '💥', 'boom'); await sleep(360);
     } else if (ev.t === 'strike') {
-      const el = enemyCell(view, ev.id), hero = $('#b-hero');
+      const el = laneCell(view, ev.id, ev.col), hero = $('#b-hero'); // a wide body strikes from each lane's column
       const target = ev.blocked && ev.shields.length ? cellEl(ev.shields[0]) : hero;
       await projectile(el, target, 'enemy-shot');
       if (ev.blocked) {
@@ -611,7 +635,7 @@
   function fit() {
     if (root.hidden) return;
     const cap = Math.min(root.clientWidth || innerWidth, 480) - 26;
-    let lo = 28, hi = Math.min(game.rows > E.ROWS ? 64 : 72, cap / 5);
+    let lo = 28, hi = Math.min(game.rows > E.ROWS || game.boss ? 64 : 72, cap / 5);
     for (let i = 0; i < 9; i++) {
       const mid = (lo + hi) / 2;
       root.style.setProperty('--cell', mid + 'px');

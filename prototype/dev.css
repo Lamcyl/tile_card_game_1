@@ -74,3 +74,5 @@ details.dz-det { border: 1.5px solid var(--line); border-radius: 10px; margin: 8
 details.dz-det > summary { cursor: pointer; padding: 8px 10px; font-weight: 700; }
 details.dz-det > summary small { font-weight: 500; color: var(--muted); }
 details.dz-det > .body { padding: 0 8px 8px; }
+.d-board button.big { background: var(--paper-deep); font-weight: 700; }
+.tag.tier-elite { background: #e8c9a0; } .tag.tier-boss { background: #e9b5ad; } .tag.tier-secretBoss { background: #cdb8e0; }
