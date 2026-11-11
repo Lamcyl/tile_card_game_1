@@ -62,7 +62,19 @@
     horn:      { name: 'War Horn',  role: 'support',  icon: '📯', effect: 'mult',  amount: 2, target: 'up' },
     spyglass:  { name: 'Spyglass',  role: 'support',  icon: '🔭', effect: 'range', amount: 1, target: 'up' },
     shield:    { name: 'Shield',    role: 'defender', icon: '🛡️', block: 3 },
+    // V2 units (rules.v2, js/v2.js): one card type whose roles come from the card's behaviours, so one tile can attack and shield at once.
+    v2:        { name: 'V2 unit',    role: 'hybrid',   icon: '🐾' },
   };
+
+  // Role tests go through these helpers. For classic cards they are exactly the old `type.role ===` tests; a V2 (hybrid) card is judged by its behaviours.
+  const hasBeh = (card, p) => !!(card.beh && card.beh.some((b) => b.p === p));
+  const roleIs = (s, role) => s.type.role === role;
+  const isAttacker = (s) => (roleIs(s, 'hybrid') ? !!s.card.pattern : roleIs(s, 'attacker'));
+  const isSupport = (s) => (roleIs(s, 'hybrid') ? hasBeh(s.card, 'buff') || hasBeh(s.card, 'grant') : roleIs(s, 'support'));
+  const isDefender = (s) => (roleIs(s, 'hybrid') ? hasBeh(s.card, 'shield') : roleIs(s, 'defender'));
+  // Hook registry: js/v2.js installs itself here (hooks.v2) and every use is guarded by `rules.v2`, so the flag-off engine runs the old instructions.
+  const hooks = { v2: null };
+  const v2on = (rules) => !!(rules && rules.v2 && hooks.v2);
 
   const ENEMY_TYPES = {
     goblin:  { name: 'Goblin',   icon: '👺' },
@@ -169,6 +181,7 @@
 
   // Final numbers for every placed card after supporters are applied.
   // Rule: add all + bonuses first, then apply all × multipliers.
+  const isAttackerCard = (card, type) => (type.role === 'hybrid' ? !!card.pattern : type.role === 'attacker');
   function computeStats(placement, army, enemies, rules) {
     rules = rules || {};
     const byId = {};
@@ -186,15 +199,16 @@
         // WP10: a card may carry its own firing pattern and unit effects (fx: ignoreArmor, chain) from its roster entry.
         pattern: card.pattern || type.pattern,
         fx: card.fx || null,
-        plus: type.role === 'attacker' ? rules.bonusAtk || 0 : 0, mult: 1, rangeBonus: type.role === 'attacker' ? rules.reach || 0 : 0,
+        plus: isAttackerCard(card, type) ? rules.bonusAtk || 0 : 0, mult: 1, rangeBonus: isAttackerCard(card, type) ? rules.reach || 0 : 0,
         boostedBy: [], boosts: [],
       };
+      if (card.v2 && v2on(rules)) hooks.v2.initStat(stats[k], rules);
     }
     for (const s of Object.values(stats)) {
-      if (s.type.role !== 'support') continue;
+      if (!roleIs(s, 'support')) continue;
       for (const tk of supportTargets(s.type.target, s.r, s.c, rules.diagAll || (rules.diag && s.card.type === 'banner'), rowsFor(rules))) {
         const t = stats[tk];
-        if (!t || t.type.role !== 'attacker') continue;
+        if (!t || !isAttacker(t)) continue;
         const amount = cardStat(s.card, 'amount');
         if (s.type.effect === 'atk') t.plus += amount + (rules.bannerBite && s.card.type === 'banner' ? rules.bannerBite : 0);
         else if (s.type.effect === 'mult') t.mult *= amount;
@@ -203,17 +217,20 @@
         s.boosts.push(tk);
       }
     }
+    if (v2on(rules)) hooks.v2.boost(stats, rules);
     for (const s of Object.values(stats)) {
-      if (s.type.role === 'attacker') {
+      if (isAttacker(s)) {
         s.atk = (s.baseAtk + s.plus) * s.mult;
         s.range = s.baseRange + s.rangeBonus;
         // A gazing enemy weakens every attacker in its column.
         const gaze = (enemies || []).filter((e) => e.alive && e.gimmick === 'gaze' && e.col <= s.c && s.c < e.col + wOf(e)).reduce((n, e) => n + e.gp, 0);
         if (gaze) { s.gazed = Math.min(gaze, s.atk); s.atk -= s.gazed; }
-      } else if (s.type.role === 'defender') {
+      }
+      if (isDefender(s)) {
         s.block = cardStat(s.card, 'block') + (rules.plate || 0);
       }
     }
+    if (v2on(rules)) hooks.v2.finish(stats, rules);
     return stats;
   }
 
@@ -430,9 +447,11 @@
     const stats = computeStats(placement, army, state.enemies, state.rules);
 
     // Attackers fire front row first, then left to right.
-    const attackers = Object.values(stats)
-      .filter((s) => s.type.role === 'attacker')
+    let attackers = Object.values(stats)
+      .filter(isAttacker)
       .sort((a, b) => a.r - b.r || a.c - b.c);
+    const v2 = v2on(state.rules);
+    if (v2) attackers = hooks.v2.order(attackers);
     let opened = false;
     for (const s of attackers) {
       const hits = hitsFor(s, state.enemies), targets = hits.map((h) => h.e);
@@ -442,7 +461,7 @@
       const noArmor = !!(s.fx && s.fx.ignoreArmor); // Longbowman: arrows ignore armor
       for (const { e, col } of hits) {
         if (!e.alive) continue; // killed earlier in this same volley (e.g. by a blast, or by an earlier hit of the same Spread)
-        dealDamage(state, e, dmg, s.pattern !== 'pierce', events, s.key, noArmor, col);
+        dealDamage(state, e, v2 ? dmg + hooks.v2.hitBonus(s, e) : dmg, s.pattern !== 'pierce', events, s.key, noArmor, col);
       }
       // Storm Mage: lightning leaps to one more enemy next to a struck one (lowest HP first), for the same damage.
       if (s.fx && s.fx.chain && targets.length) {
@@ -453,9 +472,10 @@
           targets.some((t) => touches(t, o))).sort((a, b) => a.hp - b.hp)[0];
         if (next) {
           events.push({ t: 'chain', key: s.key, from: targets[0].id, id: next.id });
-          dealDamage(state, next, dmg, false, events, s.key, noArmor);
+          dealDamage(state, next, v2 ? hooks.v2.chainDmg(s, dmg, next) : dmg, false, events, s.key, noArmor);
         }
       }
+      if (v2) hooks.v2.afterFire({ state, s, hits, dmg, events, noArmor, dealDamage, hitsFor, enemyAt, gateOpen, dOf });
       if (!state.enemies.some(isThreat)) break;
     }
 
@@ -470,7 +490,7 @@
     const pools = [];
     const shieldsOf = [];
     for (let col = 0; col < COLS; col++) {
-      shieldsOf[col] = playerRowsFor(state.rules).map((r) => key(r, col)).filter((k) => stats[k] && stats[k].type.role === 'defender');
+      shieldsOf[col] = playerRowsFor(state.rules).map((r) => key(r, col)).filter((k) => stats[k] && isDefender(stats[k]));
       pools[col] = shieldsOf[col].reduce((sum, k) => sum + stats[k].block, 0);
       if (state.rules.aegis && state.turn === 1) pools[col] *= 2; // relic "aegis": Shields block double on the first turn
     }
@@ -580,6 +600,7 @@
     }
     // Legendary rule "mend": heal 1 HP at the end of every turn survived.
     if (state.rules.mend && state.hp < state.maxHp) { state.hp = Math.min(state.maxHp, state.hp + healFor(state.rules, state.rules.mend)); events.push({ t: 'mend', amount: healFor(state.rules, state.rules.mend), hp: state.hp }); }
+    if (v2) hooks.v2.endTurn(state, stats, events);
     state.turn += 1;
     syncBonus(state.rules, state.turn);
     return { state, events };
@@ -607,7 +628,7 @@
 
   const Engine = {
     COLS, ROWS, ENEMY_ROWS, BOSS_ROW, SCAN_ROWS, FOOTPRINTS, wOf, dOf, footprintOf, isBig, lanesOf, applyBudget, coversTile, cellsOf, enemyAt, gateOpen, hitsFor, validateLayout, PLAYER_ROWS, rowsFor, playerRowsFor, lostColsFor, tileBlocked, playerTilesFor, healFor, CARD_TYPES, ENEMY_TYPES, ENEMY_KINDS, ENEMY_GIMMICKS, HERO_ABILITIES, gimmickText, incomingByColumn,
-    key, parseKey, clone, cardStat,
+    key, parseKey, clone, cardStat, isAttacker, isSupport, isDefender, hasBeh, hooks,
     createState, computeStats, targetsFor, reachableTiles, resolveTurn, useAbility, abilityProblem, isThreat,
   };
 

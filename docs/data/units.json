@@ -41,7 +41,20 @@
    }
   ],
   "status": "proposed",
-  "buffer": "kin"
+  "buffer": "kin",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "adjacent",
+    "effect": "atk",
+    "amount": 1,
+    "kin": {
+     "by": "family",
+     "amt": 1
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "sun_crow",
@@ -79,7 +92,9 @@
     "extends": "Burn lasts 3 turns"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: onHit burn."
  },
  {
   "id": "thousand_year_crane",
@@ -117,7 +132,16 @@
     "extends": "the unit beside it also gets +1 range"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "up",
+    "effect": "range",
+    "amount": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "raven_pair",
@@ -160,7 +184,9 @@
     "extends": "Marks the front enemy of a second column"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: onHit mark."
  },
  {
   "id": "firebird",
@@ -203,7 +229,9 @@
     "extends": "side targets also Burn"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: onHit burn."
  },
  {
   "id": "phoenix",
@@ -241,7 +269,9 @@
     "extends": "Pierce range +1 and the revived hero keeps one Shield"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: heroGuard rebirth."
  },
  {
   "id": "khan_garid",
@@ -279,7 +309,14 @@
     "extends": "hit enemy is Marked"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "skyfall",
+    "atk": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "huma",
@@ -322,7 +359,9 @@
     "extends": "heals 1 more on a kill"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: onKill heal."
  },
  {
   "id": "pelican_of_mercy",
@@ -360,7 +399,9 @@
     "extends": "heals 2 if the hero was struck that turn"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: heroHeal."
  },
  {
   "id": "hongsa",
@@ -398,7 +439,16 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 3
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "kotuku",
@@ -436,7 +486,9 @@
     "extends": "also negates the first strike in the next column"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: heroGuard negate."
  },
  {
   "id": "tui_mimic",
@@ -474,7 +526,16 @@
     "extends": "the buff also applies to the unit beside it"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "up",
+    "effect": "atk",
+    "amount": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "kunpeng",
@@ -513,7 +574,17 @@
    }
   ],
   "status": "proposed",
-  "flavour": "lightning"
+  "flavour": "lightning",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "pierce",
+    "atk": 3,
+    "range": 5
+   }
+  ],
+  "impl": "simplified",
+  "implNote": "Stage-2 flavour text (Kun fish becomes the Peng) removed; the family never changes."
  },
  {
   "id": "sarimanok",
@@ -551,7 +622,9 @@
     "extends": "+2 Souls on a boss kill"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: onKill souls."
  },
  {
   "id": "gongjak_banner",
@@ -589,7 +662,16 @@
     "extends": "also gives +1 range"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "adjacent",
+    "effect": "atk",
+    "amount": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "ceryneian_hind",
@@ -626,7 +708,19 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "swift"
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "white_hart",
@@ -666,7 +760,24 @@
    }
   ],
   "status": "proposed",
-  "buffer": "kin"
+  "buffer": "kin",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 2
+   },
+   {
+    "p": "buff",
+    "target": "adjacent",
+    "effect": "atk",
+    "amount": 1,
+    "kin": {
+     "by": "family",
+     "amt": 1
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "rakhsh",
@@ -703,7 +814,20 @@
     "extends": "the splash is 2"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "trample",
+    "behind": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "cheonma",
@@ -741,7 +865,9 @@
     "extends": "also pushes the neighbour it lands next to"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: push."
  },
  {
   "id": "tulpar",
@@ -779,7 +905,9 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: swap."
  },
  {
   "id": "audhumbla",
@@ -817,7 +945,19 @@
     "extends": "the max is +3"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 2,
+    "perKin": {
+     "by": "family",
+     "amt": 1,
+     "cap": 2
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "indrik",
@@ -855,7 +995,16 @@
     "extends": "also gives +1 range to the column"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "column",
+    "effect": "atk",
+    "amount": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "qilin",
@@ -895,7 +1044,26 @@
    }
   ],
   "status": "proposed",
-  "buffer": "exclusive"
+  "buffer": "exclusive",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 3
+   },
+   {
+    "p": "buff",
+    "target": "board",
+    "effect": "atk",
+    "amount": 2,
+    "kinOnly": true,
+    "kin": {
+     "by": "family"
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "karkadann",
@@ -932,7 +1100,16 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "pierce",
+    "atk": 2,
+    "range": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "reindeer_hauler",
@@ -971,7 +1148,9 @@
    }
   ],
   "status": "proposed",
-  "flavour": "ice"
+  "flavour": "ice",
+  "impl": "pending",
+  "implNote": "Step 3: onHit chill."
  },
  {
   "id": "pegasus",
@@ -1010,7 +1189,9 @@
    }
   ],
   "status": "proposed",
-  "flavour": "lightning"
+  "flavour": "lightning",
+  "impl": "pending",
+  "implNote": "Step 3: skyfall plus reactRider (chain on Water)."
  },
  {
   "id": "sleipnir",
@@ -1047,7 +1228,20 @@
     "extends": "second hit at full ATK minus 1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "echo",
+    "factor": 0.5
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "singha",
@@ -1085,7 +1279,16 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 3,
+    "range": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "haetae",
@@ -1123,7 +1326,21 @@
     "extends": "Burn immunity covers adjacent columns"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 1,
+    "range": 1
+   },
+   {
+    "p": "shield",
+    "block": 2
+   }
+  ],
+  "impl": "simplified",
+  "implNote": "Drops \"Burn never hurts allies in its column\" (no enemy burns player tiles yet); Shield and attack stay."
  },
  {
   "id": "pixiu",
@@ -1161,7 +1378,9 @@
     "extends": "Soul bonus applies to the whole squad's kills this turn"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: onKill souls."
  },
  {
   "id": "suanni",
@@ -1198,7 +1417,21 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 1
+   },
+   {
+    "p": "scale",
+    "when": "fullHp",
+    "bonus": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "yali",
@@ -1236,7 +1469,24 @@
     "extends": "Shield 3"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 1
+   },
+   {
+    "p": "trample",
+    "behind": 1
+   },
+   {
+    "p": "shield",
+    "block": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "jaguar_moon",
@@ -1274,7 +1524,21 @@
     "extends": "hides: enemies cannot Mark it"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "scale",
+    "when": "fullHp",
+    "bonus": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "amur_tiger",
@@ -1312,7 +1576,21 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 1
+   },
+   {
+    "p": "scale",
+    "when": "fullHp",
+    "bonus": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "snow_leopard",
@@ -1351,7 +1629,9 @@
    }
   ],
   "status": "proposed",
-  "flavour": "ice"
+  "flavour": "ice",
+  "impl": "pending",
+  "implNote": "Step 3: onHit chill."
  },
  {
   "id": "puma_of_the_andes",
@@ -1388,7 +1668,21 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "scale",
+    "when": "lastPlaced",
+    "bonus": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "cat_sidhe",
@@ -1426,7 +1720,9 @@
     "extends": "also holds the enemy beside it"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: onHit hold."
  },
  {
   "id": "dragon_gate_carp",
@@ -1470,7 +1766,16 @@
    }
   ],
   "status": "proposed",
-  "branch": "coil"
+  "branch": "coil",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "chiwen",
@@ -1509,7 +1814,15 @@
    }
   ],
   "status": "proposed",
-  "branch": "coil"
+  "branch": "coil",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 2
+   }
+  ],
+  "impl": "simplified",
+  "implNote": "Drops \"douse Burn on allies in its column\" (no enemy burns player tiles yet); Shield stays."
  },
  {
   "id": "wadjet",
@@ -1547,7 +1860,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "coil"
+  "branch": "coil",
+  "impl": "pending",
+  "implNote": "Step 3: onHit venom."
  },
  {
   "id": "ddraig_goch",
@@ -1586,7 +1901,16 @@
    }
   ],
   "status": "proposed",
-  "branch": "coil"
+  "branch": "coil",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "pierce",
+    "atk": 2,
+    "range": 3
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "rain_dragon_chen",
@@ -1626,7 +1950,21 @@
   ],
   "status": "proposed",
   "branch": "coil",
-  "buffer": "kin"
+  "buffer": "kin",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "up",
+    "effect": "atk",
+    "amount": 1,
+    "kin": {
+     "by": "element",
+     "amt": 1,
+     "value": "wood"
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "qiuniu",
@@ -1665,7 +2003,15 @@
    }
   ],
   "status": "proposed",
-  "branch": "coil"
+  "branch": "coil",
+  "behaviours": [
+   {
+    "p": "grant",
+    "target": "up",
+    "gives": "echo"
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "yazi",
@@ -1704,7 +2050,21 @@
    }
   ],
   "status": "proposed",
-  "branch": "coil"
+  "branch": "coil",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 1,
+    "range": 1
+   },
+   {
+    "p": "molt",
+    "per": 1,
+    "cap": 3
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "long_of_the_rain_rong",
@@ -1743,7 +2103,22 @@
    }
   ],
   "status": "proposed",
-  "branch": "coil"
+  "branch": "coil",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "chain",
+    "factor": 1,
+    "wetFactor": 0.5,
+    "jumps": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "bian",
@@ -1782,7 +2157,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "coil"
+  "branch": "coil",
+  "impl": "pending",
+  "implNote": "Step 3: decoy."
  },
  {
   "id": "komodo",
@@ -1820,7 +2197,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "coil"
+  "branch": "coil",
+  "impl": "pending",
+  "implNote": "Step 3: onHit venom."
  },
  {
   "id": "geobuk",
@@ -1859,7 +2238,18 @@
    }
   ],
   "status": "proposed",
-  "branch": "shell"
+  "branch": "shell",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 2,
+    "grow": {
+     "per": 1,
+     "cap": 3
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "divine_tortoise",
@@ -1901,7 +2291,35 @@
   "status": "proposed",
   "branch": "shell",
   "flavour": "ice",
-  "buffer": "exclusive"
+  "buffer": "exclusive",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 2
+   },
+   {
+    "p": "buff",
+    "target": "column",
+    "effect": "block",
+    "amount": 2,
+    "kinOnly": true,
+    "kin": {
+     "by": "family"
+    }
+   },
+   {
+    "p": "buff",
+    "target": "adjacent",
+    "effect": "block",
+    "amount": 2,
+    "kinOnly": true,
+    "kin": {
+     "by": "family"
+    }
+   }
+  ],
+  "impl": "simplified",
+  "implNote": "Text gives no base block; a base Shield 2 is assumed. Kin buff is Scales Shields in the column and the four sides."
  },
  {
   "id": "golden_turtle",
@@ -1940,7 +2358,22 @@
    }
   ],
   "status": "proposed",
-  "branch": "shell"
+  "branch": "shell",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "up",
+    "effect": "atk",
+    "amount": 1
+   },
+   {
+    "p": "buff",
+    "target": "up",
+    "effect": "range",
+    "amount": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "bixi",
@@ -1978,7 +2411,14 @@
    }
   ],
   "status": "proposed",
-  "branch": "shell"
+  "branch": "shell",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 3
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "honu",
@@ -2016,7 +2456,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "shell"
+  "branch": "shell",
+  "impl": "pending",
+  "implNote": "Step 3: heroHeal."
  },
  {
   "id": "softshell_elder",
@@ -2054,7 +2496,18 @@
    }
   ],
   "status": "proposed",
-  "branch": "shell"
+  "branch": "shell",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 1,
+    "grow": {
+     "per": 1,
+     "cap": 3
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "coconut_crab",
@@ -2093,7 +2546,20 @@
    }
   ],
   "status": "proposed",
-  "branch": "shell"
+  "branch": "shell",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 1
+   },
+   {
+    "p": "shield",
+    "block": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "nine_tail_fox",
@@ -2138,7 +2604,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "pack"
+  "branch": "pack",
+  "impl": "pending",
+  "implNote": "Step 3: attune."
  },
  {
   "id": "tanuki_trickster",
@@ -2177,7 +2645,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "pack"
+  "branch": "pack",
+  "impl": "pending",
+  "implNote": "Step 3: mimic."
  },
  {
   "id": "reynard",
@@ -2216,7 +2686,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "pack"
+  "branch": "pack",
+  "impl": "pending",
+  "implNote": "Step 3: swap."
  },
  {
   "id": "xolo_guide",
@@ -2255,7 +2727,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "pack"
+  "branch": "pack",
+  "impl": "pending",
+  "implNote": "Step 3: decoy."
  },
  {
   "id": "zodiac_hound",
@@ -2295,7 +2769,20 @@
   ],
   "status": "proposed",
   "branch": "pack",
-  "buffer": "kin"
+  "buffer": "kin",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "adjacent",
+    "effect": "atk",
+    "amount": 1,
+    "kin": {
+     "by": "family",
+     "amt": 1
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "cu_sidhe",
@@ -2334,7 +2821,23 @@
    }
   ],
   "status": "proposed",
-  "branch": "pack"
+  "branch": "pack",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 1,
+    "range": 2
+   },
+   {
+    "p": "scale",
+    "when": "perFamilyInRow",
+    "family": "fangs",
+    "bonus": 1,
+    "cap": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "simargl",
@@ -2373,7 +2876,16 @@
    }
   ],
   "status": "proposed",
-  "branch": "pack"
+  "branch": "pack",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "pierce",
+    "atk": 2,
+    "range": 3
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "bulgae",
@@ -2411,7 +2923,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "pack"
+  "branch": "pack",
+  "impl": "pending",
+  "implNote": "Step 3: onHit burn."
  },
  {
   "id": "fennec_fox",
@@ -2449,7 +2963,21 @@
    }
   ],
   "status": "proposed",
-  "branch": "pack"
+  "branch": "pack",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "scale",
+    "when": "lastPlaced",
+    "bonus": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "winter_wolf",
@@ -2489,7 +3017,21 @@
   ],
   "status": "proposed",
   "branch": "pack",
-  "flavour": "ice"
+  "flavour": "ice",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 1
+   },
+   {
+    "p": "scale",
+    "when": "fullHp",
+    "bonus": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "dolphin_chain",
@@ -2528,7 +3070,22 @@
    }
   ],
   "status": "proposed",
-  "branch": "fin"
+  "branch": "fin",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "chain",
+    "factor": 1,
+    "wetFactor": 0.5,
+    "jumps": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "salmon_of_knowledge",
@@ -2566,7 +3123,21 @@
    }
   ],
   "status": "proposed",
-  "branch": "fin"
+  "branch": "fin",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "scale",
+    "when": "firstPlaced",
+    "bonus": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "humpback_cantor",
@@ -2605,7 +3176,16 @@
    }
   ],
   "status": "proposed",
-  "branch": "fin"
+  "branch": "fin",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "row",
+    "effect": "atk",
+    "amount": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "hammerhead",
@@ -2643,7 +3223,16 @@
    }
   ],
   "status": "proposed",
-  "branch": "fin"
+  "branch": "fin",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "spread",
+    "atk": 1,
+    "range": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "axolotl",
@@ -2682,7 +3271,21 @@
    }
   ],
   "status": "proposed",
-  "branch": "fin"
+  "branch": "fin",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 1,
+    "range": 1
+   },
+   {
+    "p": "molt",
+    "per": 1,
+    "cap": 3
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "shachihoko",
@@ -2721,7 +3324,21 @@
    }
   ],
   "status": "proposed",
-  "branch": "fin"
+  "branch": "fin",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 1,
+    "range": 1
+   },
+   {
+    "p": "shield",
+    "block": 2
+   }
+  ],
+  "impl": "simplified",
+  "implNote": "Drops \"Burn never hurts allies in its column\" (no enemy burns player tiles yet); Shield and attack stay."
  },
  {
   "id": "salamander",
@@ -2761,7 +3378,21 @@
   ],
   "status": "proposed",
   "branch": "fin",
-  "buffer": "exclusive"
+  "buffer": "exclusive",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "adjacent",
+    "effect": "atk",
+    "amount": 2,
+    "kinOnly": true,
+    "kin": {
+     "by": "element",
+     "value": "fire"
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "river_hippo",
@@ -2799,7 +3430,14 @@
    }
   ],
   "status": "proposed",
-  "branch": "fin"
+  "branch": "fin",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 3
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "scarab_roller",
@@ -2838,7 +3476,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "chitin"
+  "branch": "chitin",
+  "impl": "pending",
+  "implNote": "Step 3: offering."
  },
  {
   "id": "khepri",
@@ -2877,7 +3517,22 @@
    }
   ],
   "status": "proposed",
-  "branch": "chitin"
+  "branch": "chitin",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 1
+   },
+   {
+    "p": "molt",
+    "per": 1,
+    "cap": 3
+   }
+  ],
+  "impl": "simplified",
+  "implNote": "Flavour \"rises with the sun\" removed."
  },
  {
   "id": "nazca_weaver",
@@ -2916,7 +3571,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "chitin"
+  "branch": "chitin",
+  "impl": "pending",
+  "implNote": "Step 3: onHit hold."
  },
  {
   "id": "honeybee_hive",
@@ -2955,7 +3612,9 @@
    }
   ],
   "status": "proposed",
-  "branch": "chitin"
+  "branch": "chitin",
+  "impl": "pending",
+  "implNote": "Step 3: brood."
  },
  {
   "id": "firefly_lantern",
@@ -2994,7 +3653,16 @@
    }
   ],
   "status": "proposed",
-  "branch": "chitin"
+  "branch": "chitin",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "up",
+    "effect": "atk",
+    "amount": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "mantis_ambusher",
@@ -3032,7 +3700,21 @@
    }
   ],
   "status": "proposed",
-  "branch": "chitin"
+  "branch": "chitin",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 1
+   },
+   {
+    "p": "scale",
+    "when": "firstPlaced",
+    "bonus": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "giant_panda",
@@ -3070,7 +3752,19 @@
     "extends": "max +4"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 2,
+    "perKin": {
+     "by": "element",
+     "amt": 1,
+     "cap": 3
+    }
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "brown_bear",
@@ -3107,7 +3801,16 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 3,
+    "range": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "polar_bear",
@@ -3147,7 +3850,37 @@
   ],
   "status": "proposed",
   "flavour": "ice",
-  "buffer": "kin"
+  "buffer": "kin",
+  "behaviours": [
+   {
+    "p": "shield",
+    "block": 3
+   },
+   {
+    "p": "buff",
+    "target": "adjacent",
+    "effect": "block",
+    "amount": 1,
+    "kin": {
+     "by": "element",
+     "amt": 1,
+     "value": "water"
+    }
+   },
+   {
+    "p": "buff",
+    "target": "adjacent",
+    "effect": "atk",
+    "amount": 1,
+    "kinOnly": true,
+    "kin": {
+     "by": "element",
+     "value": "water"
+    }
+   }
+  ],
+  "impl": "simplified",
+  "implNote": "Reading: adjacent Shields block +1 (Water +2); adjacent Water attackers get +1 ATK."
  },
  {
   "id": "thor_s_goats",
@@ -3186,7 +3919,20 @@
    }
   ],
   "status": "proposed",
-  "flavour": "lightning"
+  "flavour": "lightning",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "echo",
+    "factor": 0.5
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "raiju",
@@ -3225,7 +3971,22 @@
    }
   ],
   "status": "proposed",
-  "flavour": "lightning"
+  "flavour": "lightning",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "straight",
+    "atk": 2,
+    "range": 2
+   },
+   {
+    "p": "chain",
+    "factor": 1,
+    "wetFactor": 0.5,
+    "jumps": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "kamaitachi_trio",
@@ -3263,7 +4024,16 @@
     "extends": "range +1"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "attack",
+    "pattern": "spread",
+    "atk": 1,
+    "range": 2
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "ratatoskr",
@@ -3301,7 +4071,16 @@
     "extends": "boost magnitude +1 on the far unit"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "behaviours": [
+   {
+    "p": "buff",
+    "target": "up2",
+    "effect": "atk",
+    "amount": 1
+   }
+  ],
+  "impl": "full"
  },
  {
   "id": "langur_mirror",
@@ -3339,7 +4118,9 @@
     "extends": "also copies +1 range"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: mirror."
  },
  {
   "id": "baku",
@@ -3377,7 +4158,9 @@
     "extends": "Hide and Veiled enemies lose their rule when hit"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: onHit sunder."
  },
  {
   "id": "bai_ze",
@@ -3415,7 +4198,9 @@
     "extends": "Marks the neighbour column front"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: onHit mark column."
  },
  {
   "id": "moon_hare",
@@ -3454,6 +4239,8 @@
     "extends": "heals 2 if the hero is below half HP"
    }
   ],
-  "status": "proposed"
+  "status": "proposed",
+  "impl": "pending",
+  "implNote": "Step 3: heroHeal and Bond."
  }
 ]

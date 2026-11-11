@@ -7,6 +7,7 @@ import './camp.css';
 import './battle.css';
 import './dev.css';
 import './js/engine.js';
+import './js/v2.js';
 import './js/world-boot.js';
 import './js/world-data.js';
 import './js/art.js';
