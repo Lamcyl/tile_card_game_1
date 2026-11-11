@@ -13,13 +13,20 @@ import './js/art.js';
 import './js/progress.js';
 import './js/boss-defs.js';
 import './js/gen.js';
+import './js/fights.js';
+import fightsArt from './data/fights/art-map.json';
 import './js/battle.js';
 import './js/items.js';
 import './js/relics.js';
 import { Design } from './design.js';
 
+// V2 fights (tools/build-fights.mjs): 7 fights per sub-area, bundled with the page (no fetch).
+const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: true, import: 'default' });
+
 (function () {
   'use strict';
+  const Fights = window.Fights;
+  Fights.load(Object.keys(FIGHT_FILES).sort().map((k) => FIGHT_FILES[k]), fightsArt);
   const E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items, Relics = window.Relics, Defs = window.BossDefs, Battle = window.Battle;
   const KEY = 'tile-defense-dev-v1', PKEY = 'tile-defense-dev-presets-v1'; // never 'tile-defense-world-v4' (the game save)
   const $ = (s) => document.querySelector(s);
@@ -81,11 +88,13 @@ import { Design } from './design.js';
   }
   function leave() { S.placement = Battle.placement(); Battle.hide(); document.body.classList.remove('in-battle'); $('#dev-exit').hidden = true; persist(); }
   function finish(state, stars) {
+    const key = current;
     leave();
-    results[current] = { won: state.status === 'cleared', stars: stars || 0, turns: state.turn, dmg: state.damageTaken };
+    results[key] = { won: state.status === 'cleared', stars: stars || 0, turns: state.turn, dmg: state.damageTaken, hp: state.hp };
+    if (chain && chain.key === key) { chainStep(key, state); return; }
     render();
   }
-  $('#dev-exit').addEventListener('click', () => { leave(); results[current] = { quit: true }; render(); });
+  $('#dev-exit').addEventListener('click', () => { leave(); results[current] = { quit: true }; if (chain && chain.key === current) { chain.over = 'aborted'; chain.key = null; S.ui.tab = 'fights'; } render(); });
 
   // ---------- Enemy browser ----------
   const genOpts = () => P.genOpts(S.save);
@@ -160,13 +169,14 @@ import { Design } from './design.js';
   function buildCustom() {
     const sub = C().sub;
     const enemies = C().enemies.map((e) => {
-      const o = { type: sub + '_' + e.role, row: e.row, col: e.col, hp: e.role === 'barrel' ? 1 : Math.max(1, e.hp), atk: e.role === 'barrel' ? 0 : Math.max(0, e.atk), armor: e.armor || 0 };
+      const o = { type: e.vt || sub + '_' + e.role, row: e.row, col: e.col, hp: e.role === 'barrel' ? 1 : Math.max(1, e.hp), atk: e.role === 'barrel' ? 0 : Math.max(0, e.atk), armor: e.armor || 0 };
       if (e.footprint && e.footprint !== '1x1' && e.role !== 'barrel') o.footprint = e.footprint;
       if (e.kind) o.kind = e.kind;
       if (e.gimmick) { o.gimmick = e.gimmick; o.gp = e.gp || 0; }
       if (e.guardian) o.guardian = true;
-      if (e.kind === 'splitter') o.minion = { type: sub + '_basic', hp: 1, atk: Math.max(1, Math.round(o.atk * 0.6)) };
-      if (e.kind === 'summoner') o.minion = { type: sub + '_basic', hp: Math.max(2, Math.round(o.hp * 0.4)), atk: Math.max(1, Math.round(o.atk * 0.6)) };
+      if (e.mn) o.minion = Object.assign({}, e.mn);
+      else if (e.kind === 'splitter') o.minion = { type: sub + '_basic', hp: 1, atk: Math.max(1, Math.round(o.atk * 0.6)) };
+      else if (e.kind === 'summoner') o.minion = { type: sub + '_basic', hp: Math.max(2, Math.round(o.hp * 0.4)), atk: Math.max(1, Math.round(o.atk * 0.6)) };
       return o;
     });
     return Object.assign({ enemies, template: 'custom' }, C().bossRow ? { bossRow: true } : null);
@@ -182,7 +192,7 @@ import { Design } from './design.js';
   function tabBuilder() {
     const c = C(), sub = SUBS.find((s) => s.id === c.sub);
     let h = '<div class="d-card"><div class="d-row"><label>Sub-area (creatures, backdrop) <select data-c="csub">' + opt(SUBS.map((s) => [s.id, s.region + ': ' + s.name]), c.sub) + '</select></label>' +
-      '<label>Level <input type="number" min="1" max="30" data-c="clevel" value="' + c.level + '"></label></div>' +
+      '<label>Level <input type="number" min="1" max="55" data-c="clevel" value="' + c.level + '"></label></div>' +
       '<div class="d-row"><label><input type="checkbox" data-c="cbossrow"' + (c.bossRow ? ' checked' : '') + '> Boss row (third row behind the others; hit only through a column with no enemy in rows 1-2)</label></div>' +
       '<div class="d-mini">Boss row and back row on top, front row below (your side is at the bottom). Tap a tile, then add an enemy. Big bodies (2x1, 1x2, 2x2, 3x1) grow right and back from the front-left tile. Stats start from the level\'s curve and the footprint budget; edit them freely.</div>';
     const top = c.bossRow ? E.BOSS_ROW : 0, nrows = 2 - top;
@@ -193,7 +203,7 @@ import { Design } from './design.js';
       if (e && (e.row !== r || e.col !== col)) continue; // covered by a Big body drawn once at its anchor
       const place = 'grid-column: ' + (col + 1) + ' / span ' + f.w + '; grid-row: ' + (r - f.d + 1 - top + 1) + ' / span ' + f.d + ';';
       const selBody = e && c.sel[0] !== undefined && enemyAt(c.sel[0], c.sel[1]) === e;
-      h += '<button class="' + (sel || selBody ? 'sel' : '') + (e && f.w * f.d > 1 ? ' big' : '') + '" style="' + place + '" data-a="csel" data-r="' + r + '" data-col="' + col + '">' + (e ? (E.ENEMY_TYPES[sub.id + '_' + e.role] || {}).icon + '<br>' + e.role + (e.footprint && e.footprint !== '1x1' ? ' ' + e.footprint : '') + (e.kind ? ' ' + E.ENEMY_KINDS[e.kind].badge : '') + (e.gimmick ? ' ' + E.ENEMY_GIMMICKS[e.gimmick].badge : '') + '<br>' + (e.role === 'barrel' ? 'barrel' : e.hp + 'hp ' + e.atk + 'atk' + (f.w > 1 ? '×' + f.w : '')) : '<span class="d-mini">' + (r === E.BOSS_ROW ? 'boss row' : 'empty') + '</span>') + '</button>';
+      h += '<button class="' + (sel || selBody ? 'sel' : '') + (e && f.w * f.d > 1 ? ' big' : '') + '" style="' + place + '" data-a="csel" data-r="' + r + '" data-col="' + col + '">' + (e ? (E.ENEMY_TYPES[e.vt || sub.id + '_' + e.role] || {}).icon + '<br>' + e.role + (e.footprint && e.footprint !== '1x1' ? ' ' + e.footprint : '') + (e.kind ? ' ' + E.ENEMY_KINDS[e.kind].badge : '') + (e.gimmick ? ' ' + E.ENEMY_GIMMICKS[e.gimmick].badge : '') + '<br>' + (e.role === 'barrel' ? 'barrel' : e.hp + 'hp ' + e.atk + 'atk' + (f.w > 1 ? '×' + f.w : '')) : '<span class="d-mini">' + (r === E.BOSS_ROW ? 'boss row' : 'empty') + '</span>') + '</button>';
     }
     h += '</div>';
     if (c.warn) h += '<div class="d-mini"><b>' + esc(c.warn) + '</b></div>';
@@ -212,6 +222,120 @@ import { Design } from './design.js';
         '<div class="d-mini">' + (fpOf(e).w > 1 ? 'Strikes once per covered column (' + fpOf(e).w + ' lanes). ' : '') + (e.kind ? esc(E.ENEMY_KINDS[e.kind].name + ': ' + E.ENEMY_KINDS[e.kind].text) + '. ' : '') + (e.gimmick ? esc(E.ENEMY_GIMMICKS[e.gimmick].name + ': ' + E.ENEMY_GIMMICKS[e.gimmick].text.replace('{n}', e.gp)) : '') + '</div>';
     }
     h += '<div class="d-row"><button class="primary" data-a="cfight"' + (c.enemies.length ? '' : ' disabled') + '>Fight custom battle</button><button class="sm danger" data-a="cclear">Clear board</button> ' + resultHtml('custom') + '</div></div>';
+    return h;
+  }
+
+  // ---------- V2 fights (data/fights, tools/build-fights.mjs) ----------
+  // 7 fights per sub-area (intro, intro II, combine, combine II, pre-elite, elite, boss) for all 100 sub-areas, with the real monster names over placeholder drawings.
+  const FV = () => S.ui.fv || (S.ui.fv = { region: Fights.regions[0].id, open: {}, rest: false, ref: null });
+  let chain = null, lastChain = null; // the mini-run in progress, and the summary of the last one
+  const chip = (el) => (el ? '<span class="chip el-' + esc(el) + '">' + esc(el) + '</span>' : '');
+  const STEP_TAG = { intro: 'normal', intro2: 'normal', combine: 'normal', combine2: 'normal', preelite: 'normal', elite: 'elite', boss: 'boss' };
+  const V2_BUILDER_ROLE = { basic: 'basic', weak: 'basic', healer: 'basic', splitter: 'basic', summoner: 'basic', head: 'basic', tough: 'tough', heavy: 'tough', guard: 'tough', armored: 'armored', bulwark: 'armored', barrel: 'barrel', elite: 'boss', boss: 'boss' };
+  function v2Lines(f) {
+    const groups = new Map();
+    for (const e of f.enemies) {
+      const key = [e.mon, e.variant || '', e.element || '', e.role, e.fp || '1x1', e.kind || '', e.gimmick || '', e.r === E.BOSS_ROW ? 'row' : ''].join('|');
+      const g = groups.get(key) || { e, n: 0 }; g.n++; groups.set(key, g);
+    }
+    return [...groups.values()].map(({ e, n }) => {
+      const kind = e.kind ? E.ENEMY_KINDS[e.kind] : null, gim = e.gimmick ? E.ENEMY_GIMMICKS[e.gimmick] : null;
+      return '<div class="fv-en">' + n + '× <b>' + esc(e.mon) + '</b>' + (e.variant ? ' <span class="d-mini">(' + esc(e.variant) + ')</span>' : '') + ' ' + chip(e.element) + (e.flavour ? '<span class="tag">' + esc(e.flavour) + '</span>' : '') +
+        ' <span class="tag">' + esc(kind ? kind.badge + ' ' + kind.name : e.role) + '</span>' + (gim ? '<span class="tag">' + gim.badge + ' ' + esc(gim.name) + (e.gp && ['ward', 'veil', 'gaze', 'harden'].includes(e.gimmick) ? ' ' + e.gp : '') + '</span>' : '') +
+        ((e.fp && e.fp !== '1x1') ? '<span class="tag">' + e.fp + '</span>' : '') + (e.r === E.BOSS_ROW ? '<span class="tag">boss row</span>' : '') + (e.guardian ? '<span class="tag">♜ guard</span>' : '') +
+        (e.role === 'barrel' ? '' : ' <span class="d-mini">' + e.hp + ' HP · ' + e.atk + ' ATK' + (e.armor ? ' · armor ' + e.armor : '') + '</span>') + ((e.inert || []).map((k) => '<span class="tag inert" title="Engine rule not built yet: inert tag">' + esc(k) + '</span>').join('')) + '</div>';
+    }).join('');
+  }
+  function v2Row(f) {
+    const key = 'v2:' + f.id, gridRows = (f.bossRow ? [f.layout.top] : []).concat([f.layout.back, f.layout.front]);
+    return '<div class="d-node fv-fight"><div class="info"><span class="tag ' + STEP_TAG[f.step] + '">' + (f.n) + '. ' + f.step + '</span><b>' + esc(f.name) + '</b> Lv ' + f.level + ' ' + resultHtml(key) +
+      '<div class="fv-lines">' + v2Lines(f) + '</div><pre class="fv-grid" title="Layout: boss row (if any), back row, front row. b basic, w weak, t tough, h heavy, a armored, k bulwark, m healer, s splitter, u summoner, x barrel, E elite, B boss, G guard, H head">' + gridRows.join('\n') + '</pre>' +
+      (f.step === 'boss' && f.gimmickText ? '<div class="d-mini">Trick: ' + esc(f.gimmickText) + (f.approx ? ' <i>(engine gimmick: ' + esc(f.approx) + ')</i>' : '') + '</div>' : f.note ? '<div class="d-mini">' + esc(f.note) + '</div>' : '') + '</div>' +
+      '<div class="d-row"><button class="primary" data-a="fvfight" data-id="' + f.id + '">Fight</button><button class="sm" data-a="fvref" data-lv="' + f.level + '" title="Set the dev squad and stats to the reference squad of Lv ' + f.level + '">Ref Lv ' + f.level + '</button><button class="sm" data-a="fvbuilder" data-id="' + f.id + '" title="Copy into the custom builder">→ Builder</button></div></div>';
+  }
+  function v2SubBody(sub) {
+    const lv = sub.levels, refLv = lv.ordinary[1];
+    return '<div class="d-mini"><b>Landmark:</b> ' + esc(sub.landmark) + '</div><div class="d-mini"><b>Arc:</b> ' + esc(sub.arc) + '</div>' +
+      '<div class="d-row"><button class="primary" data-a="fvplay" data-id="' + sub.id + '">▶ Play sub-area (7 fights)</button><button class="sm" data-a="fvref" data-lv="' + refLv + '">Reference squad for Lv ' + refLv + '</button></div>' +
+      sub.fights.map(v2Row).join('');
+  }
+  function refInfo() {
+    const L = FV().ref; if (!L) return 'No reference applied: your own squad and stats are used.';
+    const r = Fights.reference(L, P);
+    return 'Reference squad Lv ' + L + ' applied: ' + r.squad.length + ' units, ' + r.hit + ' damage per attacker hit, Shield block ' + r.block + ', hero HP ' + r.hp + '. You can still edit everything in Team, Camp, Gear and Run.';
+  }
+  function v2Intro(f) {
+    if (f.step === 'boss') {
+      const b = f.enemies.find((e) => e.role === 'boss'), g = b.gimmick ? E.ENEMY_GIMMICKS[b.gimmick] : b.kind ? E.ENEMY_KINDS[b.kind] : null;
+      return { intro: { name: b.mon, rule: g ? g.name : '', badge: g ? g.badge : '', text: (f.gimmickText || '') + (f.approx ? ' (engine rule used: ' + f.approx + ')' : '') } };
+    }
+    if (f.step === 'elite') { const b = f.enemies.find((e) => e.role === 'elite'); return { intro: { name: b.mon, rule: 'Elite', badge: '', text: f.note || 'An elite.' } }; }
+    return null;
+  }
+  function launchV2(f, extra) {
+    const sub = Fights.sub(f.sub);
+    fight('v2:' + f.id, f.name, sub.name + ' · Lv' + f.level, sub.biome, Object.assign(Fights.stage(f), v2Intro(f), extra || {}));
+  }
+  function applyRef(L) {
+    const ref = Fights.reference(L, P), save = S.save;
+    save.squad = ref.squad.slice(); save.upgrades = Object.assign({}, ref.upgrades); save.hero = null; save.units = {}; save.loadout = Items.emptyLoadout(); save.heat = []; save.descend = 0;
+    S.run.mods = JSON.parse(JSON.stringify(ref.mods)); S.run.relics = []; S.run.hp = null; S.run.reviveUsed = 0; S.run.hpBonus = ref.hp - P.maxHp(save);
+    FV().ref = L;
+  }
+  function v2ToBuilder(id) {
+    const f = Fights.byId(id), sub = Fights.sub(f.sub), st = Fights.stage(f), bsub = SUBS.find((x) => x.biome === sub.biome) || SUBS[0];
+    C().sub = bsub.id; C().level = f.level; C().bossRow = !!f.bossRow; C().warn = ''; C().sel = [1, 2];
+    C().enemies = st.enemies.map((o) => ({ role: V2_BUILDER_ROLE[f.enemies[st.enemies.indexOf(o)].role] || 'basic', vt: o.type, mn: o.minion || null, footprint: o.footprint || '1x1', kind: o.kind || '', gimmick: o.gimmick || '', gp: o.gp || 0, guardian: !!o.guardian, row: o.row, col: o.col, hp: o.hp, atk: o.atk, armor: o.armor || 0 }));
+    S.ui.tab = 'builder';
+  }
+  // Mini-run: the 7 fights of a sub-area in order with the hero's HP carried over.
+  function startChain(subId) {
+    const sub = Fights.sub(subId), maxHp = Math.max(1, P.maxHp(S.save) + num(S.run.hpBonus, 0)), hp = S.run.hp == null || S.run.hp === '' ? maxHp : clamp(num(S.run.hp, maxHp), 1, 999);
+    chain = { sub: subId, idx: 0, hp, maxHp: Math.max(maxHp, hp), start: hp, rows: [], key: null, over: null, rest: FV().rest }; lastChain = null;
+    chainLaunch();
+  }
+  function chainLaunch() {
+    const f = Fights.sub(chain.sub).fights[chain.idx];
+    chain.key = 'v2:' + f.id;
+    launchV2(f, { heroHp: chain.hp, heroMaxHp: chain.maxHp });
+  }
+  function chainStep(key, state) {
+    const sub = Fights.sub(chain.sub), f = sub.fights[chain.idx], won = state.status === 'cleared';
+    chain.rows.push({ name: f.name, level: f.level, won, turns: state.turn, dmg: state.damageTaken, hp: state.hp, stars: results[key].stars });
+    chain.key = null; S.ui.tab = 'fights'; FV().region = sub.regionId; FV().open[chain.sub] = true;
+    if (!won) { chain.over = 'lost'; lastChain = chain; chain = null; render(); return; }
+    chain.hp = chain.rest ? Math.min(chain.maxHp, state.hp + Math.ceil(chain.maxHp * 0.3)) : state.hp;
+    chain.idx++;
+    if (chain.idx >= sub.fights.length) { chain.over = 'cleared'; lastChain = chain; chain = null; }
+    render();
+    const panel = document.querySelector('.fv-chain'); if (panel) panel.scrollIntoView({ block: 'start' });
+  }
+  function chainPanel() {
+    const c = chain || lastChain; if (!c) return '';
+    const sub = Fights.sub(c.sub);
+    let h = '<div class="d-card fv-chain"><b>Mini-run: ' + esc(sub.name) + '</b> ';
+    if (chain) {
+      const f = sub.fights[c.idx];
+      h += '<span class="d-mini">fight ' + (c.idx + 1) + ' of ' + sub.fights.length + ' · HP ' + c.hp + '/' + c.maxHp + '</span><div class="d-row"><button class="primary" data-a="fvnext">Start fight ' + (c.idx + 1) + ': ' + esc(f.name) + '</button><button class="sm danger" data-a="fvabort">Abort</button></div>';
+    } else h += '<span class="' + (c.over === 'cleared' ? 'res-w' : 'res-l') + '">' + (c.over === 'cleared' ? 'SUB-AREA CLEARED' : c.over === 'lost' ? 'DEFEATED' : 'ABORTED') + '</span>';
+    if (c.rows.length) {
+      h += '<table class="d-table"><tr><th>#</th><th>Fight</th><th>Lv</th><th>Result</th><th>Turns</th><th>HP lost</th><th>HP left</th></tr>' +
+        c.rows.map((r, i) => '<tr><td>' + (i + 1) + '</td><td>' + esc(r.name) + '</td><td>' + r.level + '</td><td>' + (r.won ? '<span class="res-w">win ' + '★'.repeat(r.stars) + '</span>' : '<span class="res-l">lose</span>') + '</td><td>' + r.turns + '</td><td>' + r.dmg + '</td><td>' + r.hp + '/' + c.maxHp + '</td></tr>').join('') + '</table>';
+      if (!chain) { const lost = c.rows.reduce((n, r) => n + r.dmg, 0); h += '<div class="d-mini">Fights won ' + c.rows.filter((r) => r.won).length + '/' + sub.fights.length + ' · total HP lost ' + lost + ' · started at ' + c.start + ' HP, ended with ' + c.rows[c.rows.length - 1].hp + '/' + c.maxHp + (c.rest ? ' · campfire +30% between fights' : '') + '.</div>'; }
+    }
+    return h + '</div>';
+  }
+  function tabFights() {
+    const fv = FV(), reg = Fights.regions.find((r) => r.id === fv.region) || Fights.regions[0], rf = Fights.all.filter((f) => Fights.sub(f.sub).regionId === reg.id);
+    let h = '<div class="d-card"><div class="d-mini">All 100 sub-areas, 7 fights each (' + Fights.all.length + ' in total), generated by <code>tools/build-fights.mjs</code> from the world progression: stats follow WORLD_PROGRESSION 4.1, enemy kinds and gimmicks are the ones the engine runs today (other keywords are inert grey tags). Drawings are placeholders: the label shows the real monster. ' +
+      esc(refInfo()) + '</div><div class="d-row"><label><input type="checkbox" data-c="fvrest"' + (fv.rest ? ' checked' : '') + '> Mini-run: campfire heals 30% max HP between fights</label></div></div>' + chainPanel();
+    h += '<div class="d-chips">' + Fights.regions.map((r) => '<button class="sm' + (r.id === reg.id ? ' on' : '') + '" data-a="fvregion" data-id="' + r.id + '">' + r.number + '. ' + esc(r.name) + '</button>').join('') + '</div>';
+    h += '<h3>' + reg.number + '. ' + esc(reg.name) + ' <small class="d-mini">boss Lv ' + esc(reg.levelBand.bossFirst + '-' + reg.levelBand.bossLast) + '</small></h3><div class="d-mini">' + esc(reg.terrain) + '</div>';
+    for (const sub of Array.from(new Set(rf.map((f) => f.sub))).map((id) => Fights.sub(id))) {
+      const open = !!fv.open[sub.id], lv = sub.levels;
+      h += '<details class="d-sub fv-sub" data-fsub="' + sub.id + '"' + (open ? ' open' : '') + '><summary>' + esc(sub.name) + ' <small>Lv ' + lv.ordinary[0] + '-' + lv.ordinary[1] + ', elite ' + lv.elite + ', boss ' + lv.boss + ' · ' + esc(sub.theme) + '</small> ' + sub.elements.map(chip).join('') +
+        '<div class="d-mini">Idea: ' + esc(sub.idea) + '</div></summary><div class="body">' + (open ? v2SubBody(sub) : '') + '</div></details>';
+    }
     return h;
   }
 
@@ -301,8 +425,8 @@ import { Design } from './design.js';
   }
 
   // ---------- Render ----------
-  const TABS = [['enemies', 'Enemies'], ['builder', 'Builder'], ['team', 'Team'], ['camp', 'Camp'], ['gear', 'Gear'], ['run', 'Run'], ['presets', 'Presets'], ['design', 'Design']];
-  const TAB_FN = { enemies: tabEnemies, builder: tabBuilder, team: tabTeam, camp: tabCamp, gear: tabGear, run: tabRun, presets: tabPresets, design: () => '<div id="design-root"></div>' };
+  const TABS = [['enemies', 'Enemies'], ['fights', 'V2 Fights'], ['builder', 'Builder'], ['team', 'Team'], ['camp', 'Camp'], ['gear', 'Gear'], ['run', 'Run'], ['presets', 'Presets'], ['design', 'Design']];
+  const TAB_FN = { enemies: tabEnemies, fights: tabFights, builder: tabBuilder, team: tabTeam, camp: tabCamp, gear: tabGear, run: tabRun, presets: tabPresets, design: () => '<div id="design-root"></div>' };
   function render() {
     applyOverrides();
     const root = $('#dev'), keep = window.scrollY;
@@ -321,6 +445,13 @@ import { Design } from './design.js';
       const n = World.byId[el.dataset.id], sub = World.SUB_BY[n.sub], gen = Gen.generateBattle(n, seedOf(n.id), genOpts()), lv = Gen.scaled(n, genOpts()).level;
       fight(n.id, nodeName(n, sub), sub.name + ' · Lv' + lv, sub.biome, gen);
     },
+    fvregion(el) { FV().region = el.dataset.id; change(); },
+    fvfight(el) { launchV2(Fights.byId(el.dataset.id)); },
+    fvref(el) { applyRef(num(el.dataset.lv, 1)); change(); },
+    fvbuilder(el) { v2ToBuilder(el.dataset.id); change(); },
+    fvplay(el) { startChain(el.dataset.id); },
+    fvnext() { if (chain && !chain.key) chainLaunch(); },
+    fvabort() { if (chain) { chain.over = 'aborted'; lastChain = chain; chain = null; } change(); },
     reroll(el) { S.seeds[el.dataset.id] = rndSeed(); change(); },
     rerollall() { S.run.seed = rndSeed(); S.seeds = {}; change(); },
     clearseeds() { S.seeds = {}; change(); },
@@ -358,12 +489,13 @@ import { Design } from './design.js';
   };
   const setMod = (id, k, v) => { const m = S.run.mods[id] || (S.run.mods[id] = {}); m[k] = v; if (!v) delete m[k]; };
   const CH = {
+    fvrest(el) { FV().rest = el.checked; },
     seed(el) { S.run.seed = el.value.trim() || 'dev'; },
     csub(el) { C().sub = el.value; },
-    clevel(el) { C().level = clamp(num(el.value, 5), 1, 30); },
+    clevel(el) { C().level = clamp(num(el.value, 5), 1, 55); },
     cfield(el) {
       const e = enemyAt(...C().sel); if (!e) return; const k = el.dataset.k;
-      if (k === 'role') { if (el.value === 'barrel') e.footprint = '1x1'; e.role = el.value; Object.assign(e, statsFor(e.role, e.footprint || '1x1', C().level)); }
+      if (k === 'role') { delete e.vt; delete e.mn; if (el.value === 'barrel') e.footprint = '1x1'; e.role = el.value; Object.assign(e, statsFor(e.role, e.footprint || '1x1', C().level)); }
       else if (k === 'footprint') {
         const old = fpOf(e), fp = el.value, next = Object.assign({}, e, { footprint: fp });
         const problems = e.role === 'barrel' ? ['barrels are 1x1'] : E.validateLayout(C().enemies.map((x) => (x === e ? next : x)));
@@ -410,6 +542,7 @@ import { Design } from './design.js';
   // Sub-area lists render lazily when opened (16 areas of generated fights).
   document.addEventListener('toggle', (ev) => {
     const d = ev.target; if (!d.matches || !d.matches('details.d-sub')) return;
+    if (d.matches('.fv-sub')) { const id = d.dataset.fsub; if (!!FV().open[id] === d.open) return; FV().open[id] = d.open; persist(); if (d.open) d.querySelector('.body').innerHTML = v2SubBody(Fights.sub(id)); return; }
     const id = d.dataset.sub; if (!!S.ui.open[id] === d.open) return;
     S.ui.open[id] = d.open; persist();
     if (d.open) { const sub = World.SUB_BY[id]; d.querySelector('.body').innerHTML = World.nodes.filter((n) => n.sub === id && ['battle', 'elite', 'boss'].includes(n.type)).map((n) => nodeRow(n, sub)).join(''); }
@@ -417,5 +550,5 @@ import { Design } from './design.js';
 
   Design.bind($('#dev'));
   render();
-  window.DevTest = { get state() { return S; }, results };
+  window.DevTest = { get state() { return S; }, results, get chain() { return chain || lastChain; }, Fights };
 })();

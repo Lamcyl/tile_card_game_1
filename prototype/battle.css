@@ -346,3 +346,8 @@
 .enemy.big-1x2 .c-art { left: calc(var(--cell) * -.15); right: calc(var(--cell) * -.15); }
 .enemy.big.wide .c-art img { transform: none; }
 .cell.row-boss > .enemy.big-2x1 .c-art, .cell.row-boss > .enemy.big-3x1 .c-art { top: calc(var(--cell) * -.3); }
+
+/* V2 fights: real monster name over the placeholder drawing (js/battle.js enemyHTML, only for Engine.ENEMY_TYPES entries with v2). */
+.enemy .e-name { position: absolute; left: 0; right: 0; bottom: 19px; z-index: 2; text-align: center; font: 700 8px/1.15 var(--b-serif, serif); color: #2b2118; background: rgba(251, 244, 226, .82); padding: 0 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; pointer-events: none; }
+.enemy .e-name i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 2px; background: var(--el, #999); }
+.enemy.big .e-name { font-size: 10px; bottom: 21px; }

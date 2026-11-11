@@ -1,7 +1,7 @@
 // Unit tests for Big enemies and the boss row (DESIGN_V2 section 10) on the pure rules engine.
 // Usage: node tools/test-big-enemies.js      (exit code 1 on any failure)
 // Also runs a differential fuzz against the engine at git HEAD~0 of this file's baseline when the original is available
-// (env BASE_ENGINE=<path to the pre-change engine.js>; otherwise it is read from `git show <rev>:prototype/js/engine.js`, rev = BASE_REV or the last commit that did not touch footprints).
+// (env BASE_ENGINE=<path to the pre-change engine.js>; otherwise it is read from `git show <rev>:prototype/js/engine.js`, rev = BASE_REV or the pinned commit 36726ff, the last one before footprints).
 'use strict';
 const assert = require('assert');
 const fs = require('fs');
@@ -381,7 +381,7 @@ test('Regrow waits until every tile of the body is free', () => {
 // ---------- classic battles are unchanged ----------
 function baseEngine() {
   if (process.env.BASE_ENGINE) return process.env.BASE_ENGINE;
-  const rev = process.env.BASE_REV || 'HEAD';
+  const rev = process.env.BASE_REV || '36726ff'; // the commit before the engine change (footprints / boss row)
   const dir = fs.mkdtempSync(path.join(require('os').tmpdir(), 'base-engine-'));
   const file = path.join(dir, 'engine.js');
   try { fs.writeFileSync(file, execSync('git show ' + rev + ':prototype/js/engine.js', { cwd: path.join(__dirname, '..'), stdio: ['ignore', 'pipe', 'ignore'] })); } catch (err) { return null; }

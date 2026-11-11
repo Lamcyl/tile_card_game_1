@@ -76,3 +76,14 @@ details.dz-det > summary small { font-weight: 500; color: var(--muted); }
 details.dz-det > .body { padding: 0 8px 8px; }
 .d-board button.big { background: var(--paper-deep); font-weight: 700; }
 .tag.tier-elite { background: #e8c9a0; } .tag.tier-boss { background: #e9b5ad; } .tag.tier-secretBoss { background: #cdb8e0; }
+
+/* V2 fights tab */
+.chip { display: inline-block; font-size: 11px; font-weight: 800; padding: 0 6px; border-radius: 8px; color: #fff; margin-right: 3px; background: #888; }
+.chip.el-Wood { background: #5a8a3a; } .chip.el-Water { background: #3f6fb0; } .chip.el-Fire { background: #d2542b; } .chip.el-Earth { background: #a07a3a; }
+.chip.el-Wind { background: #3f9d93; } .chip.el-Light { background: #d9a62b; } .chip.el-Shadow { background: #6b4a8a; }
+.fv-en { font-size: 12.5px; margin: 1px 0; }
+.fv-grid { font: 12px/1.15 monospace; margin: 3px 0; letter-spacing: 3px; color: var(--ink-soft); }
+.tag.inert { background: #e4e0d4; color: #777; border-style: dashed; font-weight: 600; }
+.fv-chain { border-color: var(--indigo); }
+.fv-fight { align-items: flex-start; }
+.fv-chain { scroll-margin-top: 175px; }

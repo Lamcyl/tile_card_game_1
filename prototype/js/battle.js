@@ -265,6 +265,7 @@
     $('#b-threat-total').className = total ? 'dmg' : 'safe';
   }
 
+  const EL_COLOR = { Wood: '#5a8a3a', Water: '#3f6fb0', Fire: '#d2542b', Earth: '#a07a3a', Wind: '#3f9d93', Light: '#d9a62b', Shadow: '#6b4a8a' };
   const TXT = '︎'; // force text (not emoji) glyph rendering for stat symbols
   const artImg = (url, alt) => '<img src="' + url + '" alt="' + alt + '" draggable="false">';
 
@@ -276,6 +277,8 @@
       return '<div class="enemy barrel" title="' + t.name + ': explodes for ' + t.blast + ' damage to every adjacent enemy when destroyed. It does not attack.">' +
         face + '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">💥' + t.blast + '</span></div></div>';
     }
+    // V2 fights (js/fights.js): the placeholder drawing is labelled with the monster's real name and an element dot.
+    const label = t.v2 ? '<span class="e-name"' + (t.element ? ' style="--el:' + (EL_COLOR[t.element] || '#999') + '"' : '') + '>' + (t.element ? '<i></i>' : '') + t.name + '</span>' : '';
     const gim = e.gimmick ? E.ENEMY_GIMMICKS[e.gimmick] : null;
     const kind = e.kind ? E.ENEMY_KINDS[e.kind] : gim ? { name: gim.name, badge: gim.badge, text: E.gimmickText(e) } : null;
     const guard = e.guardian ? ' guardian' : '';
@@ -287,7 +290,7 @@
     const gates = e.row === E.BOSS_ROW && s ? '<div class="gates" aria-hidden="true">' + Array.from({ length: E.wOf(e) }, (_, i) => E.gateOpen(s.enemies, e.col + i) ? '<span class="open" title="Open: nothing stands in front">✦</span>' : '<span title="Gated: an enemy stands in front">⛓</span>').join('') + '</div>' : '';
     const atkTxt = e.atk + (lanes > 1 ? '×' + lanes : '');
     return '<div class="enemy' + bigCls + (t.boss ? ' boss' : '') + (e.kind ? ' kind-' + e.kind : '') + (gim ? ' gimmick gimmick-' + e.gimmick : '') + guard + '" title="' + t.name + (kind ? ' (' + kind.name + ': ' + kind.text + ')' : '') + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' + (lanes > 1 ? ' in each of ' + lanes + ' columns' : '') + (big ? ', footprint ' + fp : '') + (e.row === E.BOSS_ROW ? ', boss row: can be hit only through a column with no enemy in front' : '') +
-      (e.armor ? ', armor ' + e.armor : '') + '"' + bigAttr + '>' + face + laneMarks + gates +
+      (e.armor ? ', armor ' + e.armor : '') + (t.v2 && (t.element || t.variant) ? ' [' + [t.element, t.variant, t.flavour].filter(Boolean).join(' · ') + ']' : '') + '"' + bigAttr + '>' + face + label + laneMarks + gates +
       (kind ? '<span class="kind-badge" aria-label="' + kind.name + '">' + kind.badge + '</span>' : '') + (e.guardian ? '<span class="guard-badge" title="Guard: the boss takes no damage while this enemy lives">♜</span>' : '') +
       (e.armor ? '<span class="tag armor">🛡' + TXT + e.armor + '</span>' : '') + (t.boss ? '<span class="crown">👑</span>' : '') +
       '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">⚔' + TXT + atkTxt + '</span></div></div>';
