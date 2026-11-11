@@ -1188,8 +1188,14 @@
    }
   ],
   "status": "proposed",
-  "impl": "pending",
-  "implNote": "Step 3: skyfall plus reactRider (chain on Water)."
+  "behaviours": [
+   {
+    "p": "skyfall",
+    "atk": 1
+   }
+  ],
+  "impl": "simplified",
+  "implNote": "V2.2: a plain Skyfall (its Water interaction is the Conduct weakness hit). The stage 2 neighbour chain is not authored yet (step 3)."
  },
  {
   "id": "sleipnir",
@@ -2112,10 +2118,6 @@
    {
     "p": "chain",
     "factor": 1,
-    "wetFactor": 0.5,
-    "wetVs": [
-     "water"
-    ],
     "jumps": 1
    }
   ],
@@ -3082,10 +3084,6 @@
    {
     "p": "chain",
     "factor": 1,
-    "wetFactor": 0.5,
-    "wetVs": [
-     "water"
-    ],
     "jumps": 1
    }
   ],
@@ -3984,10 +3982,6 @@
    {
     "p": "chain",
     "factor": 1,
-    "wetFactor": 0.5,
-    "wetVs": [
-     "water"
-    ],
     "jumps": 1
    }
   ],

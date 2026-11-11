@@ -12,7 +12,8 @@ const E = require('../prototype/js/engine.js');
 const V2 = require('../prototype/js/v2.js');
 const DATA = path.join(__dirname, '..', 'docs', 'data');
 const read = (f) => JSON.parse(fs.readFileSync(path.join(DATA, f), 'utf8'));
-V2.load(read('units.json'), read('elements.json'), read('families.json'));
+const ELEMENTS_DOC = read('elements.json'), FAMILIES_DOC = read('families.json');
+V2.load(read('units.json'), ELEMENTS_DOC, FAMILIES_DOC);
 
 let passed = 0, failed = 0;
 function test(name, fn) {
@@ -21,7 +22,7 @@ function test(name, fn) {
 const noFuzz = process.argv.includes('--no-fuzz');
 
 // ---------- helpers ----------
-const RULES = { v2: 1 };
+const RULES = { v2: { sets: false } }; // the step 1 tests run without family and element set bonuses; the set tests use { v2: {} }
 function foe(row, col, o) { return Object.assign({ type: 'goblin', row, col, hp: 10, atk: 2, armor: 0 }, o); }
 function battle(enemies, rules) {
   const st = E.createState({ heroHp: 100, heroMaxHp: 100, enemies, rules: Object.assign({}, RULES, rules) });
@@ -73,7 +74,7 @@ test('stage patches: add, set, inc; stage is clamped to the evolution line', () 
     behaviours: [{ p: 'attack', pattern: 'straight', atk: 2, range: 1 }, { p: 'shield', block: 1 }],
     stages: { 2: [{ op: 'inc', p: 'attack', field: 'range', by: 1 }, { op: 'add', beh: { p: 'swift' } }], 3: [{ op: 'set', p: 'attack', set: { pattern: 'pierce' } }, { op: 'inc', p: 'shield', field: 'block' }] } };
   const keep = V2.UNITS;
-  V2.load(Object.assign({}, keep, { tst: unit }));
+  V2.load(Object.assign({}, keep, { tst: unit }), ELEMENTS_DOC, FAMILIES_DOC);
   try {
     const s1 = V2.card('tst'), s2 = V2.card('tst', { stage: 2 }), s3 = V2.card('tst', { stage: 3 }), s9 = V2.card('tst', { stage: 9 });
     assert.deepStrictEqual([s1.range, s1.beh.length], [1, 2]);
@@ -81,7 +82,7 @@ test('stage patches: add, set, inc; stage is clamped to the evolution line', () 
     assert.deepStrictEqual([s3.pattern, s3.block], ['pierce', 2]);
     assert.strictEqual(s9.stage, 3);
     assert.strictEqual(V2.UNITS.tst.behaviours[0].range, 1, 'patching never mutates the data');
-  } finally { V2.load(keep); }
+  } finally { V2.load(keep, ELEMENTS_DOC, FAMILIES_DOC); }
 });
 test('role helpers: bastion is attacker and defender, herald only support, classic cards unchanged', () => {
   const st = battle([foe(1, 0)]), sq = squad([[2, 0, 'coconut_crab'], [3, 0, 'plume_herald'], [4, 0, classic('swordsman')], [4, 1, classic('shield')], [4, 2, classic('drummer')]]);
@@ -120,10 +121,12 @@ test('trample: 1 damage to the enemy behind the target, and not as overkill', ()
   const sq = squad([[2, 0, 'rakhsh']]);
   const r = turn(battle([foe(1, 0, { hp: 10 }), foe(0, 0, { hp: 10 })]), sq);
   assert.deepStrictEqual(hits(r.events).map((h) => [h.id, h.amount, h.dmg]), [['e0', 2, 2], ['e1', 1, 1]]);
-  // a kill: the 2-damage hit kills the front enemy (HP 1), no overkill carry (leftover 1 would carry) is added
+  // a kill: the 2-damage hit kills the front enemy (HP 1); a V2 card without Rend carries no overkill, so the enemy behind only takes the Trample 1
   const r2 = turn(battle([foe(1, 0, { hp: 1 }), foe(0, 0, { hp: 10 })]), sq);
-  assert.ok(r2.events.some((e) => e.t === 'overkill'), 'classic overkill carry still happens');
-  assert.strictEqual(byId(r2.state, 'e1').hp, 10 - 1 - 1);
+  assert.ok(!r2.events.some((e) => e.t === 'overkill'), 'no Rend, no carry');
+  assert.strictEqual(byId(r2.state, 'e1').hp, 10 - 1);
+  const r3 = turn(battle([foe(1, 0, { hp: 1 }), foe(0, 0, { hp: 10 })]), squad([[2, 0, classic('swordsman')]]));
+  assert.ok(r3.events.some((e) => e.t === 'overkill'), 'classic cards still carry overkill under the flag');
 });
 test('trample: a boss-row body behind a living enemy is not reached (gate)', () => {
   const sq = squad([[2, 0, 'rakhsh']]);
@@ -145,16 +148,14 @@ test('echo: a second volley at half ATK rounded up; Echo Drum grants it to the u
   r = turn(battle([foe(1, 0, { hp: 20 })]), squad([[2, 0, 'hongsa']]));
   assert.deepStrictEqual(hits(r.events).map((h) => h.amount), [2]);
 });
-test('chain: the same damage jumps to the lowest-HP neighbour; half on a Water or Wet target', () => {
+test('chain: the same damage jumps to the lowest-HP neighbour (full damage on Water: Conduct is a separate hit)', () => {
   const sq = squad([[2, 1, 'dolphin_chain']]);
   let r = turn(battle([foe(1, 1, { hp: 20 }), foe(1, 0, { hp: 9 }), foe(1, 2, { hp: 5 })]), sq);
   assert.deepStrictEqual(hits(r.events).map((h) => [h.id, h.amount]), [['e0', 2], ['e2', 2]]);
   assert.ok(r.events.some((e) => e.t === 'chain'));
-  r = turn(battle([foe(1, 1, { hp: 20 }), foe(1, 2, { hp: 5, element: 'water' })]), squad([[2, 1, 'dolphin_chain', { stars: 3 }]])); // ATK 3
+  r = turn(battle([foe(1, 1, { hp: 20 }), foe(1, 2, { hp: 5, element: 'water' })]), squad([[2, 1, 'dolphin_chain', { stars: 3 }]])); // ATK 3, Water vs Water resists x0.5
   assert.deepStrictEqual(hits(r.events).map((h) => [h.id, h.amount]), [['e0', 3], ['e1', 2]]);
-  const wet = battle([foe(1, 1, { hp: 20 }), foe(1, 2, { hp: 5 })]); wet.enemies[1].st = { wet: 2 };
-  r = turn(wet, sq);
-  assert.deepStrictEqual(hits(r.events).map((h) => h.amount), [2, 1]);
+  assert.ok(V2.UNITS.dolphin_chain.behaviours.every((b) => b.wetVs === undefined), 'the legacy wetVs data is gone');
 });
 
 // ---------- scale and molt ----------
@@ -255,6 +256,322 @@ test('shield: classic Shield gets V2 block buffs; Divine Tortoise is Kin only', 
   const sq = squad([[3, 0, 'divine_tortoise'], [4, 0, classic('shield')], [3, 1, 'bixi'], [3, 2, 'hongsa']]);
   assert.strictEqual(stat(st, sq, '3,1').block, 3 + 2);
   assert.strictEqual(stat(st, sq, '4,0').block, 3, 'a classic card has no family');
+});
+
+// ---------- step 2: elements, affinity, weakness hits, statuses, sets, keywords ----------
+// A hand-made V2 attacker (family 'x' so no family set applies); extra fields override.
+const U = (el, o) => Object.assign({ id: 'u', type: 'v2', v2: true, unit: 'u', element: el, family: 'x', pattern: 'straight', atk: 2, range: 3, cp: 1, beh: [{ p: 'attack', pattern: 'straight', atk: 2, range: 3 }] }, o);
+const SH = (n, o) => Object.assign({ id: 'sh', type: 'v2', v2: true, unit: 'sh', element: null, family: 'x', block: n || 2, cp: 1, beh: [{ p: 'shield', block: n || 2 }] }, o);
+const SETS_ON = { v2: {} };
+const ev = (events, t) => events.filter((e) => e.t === t);
+const play = (enemies, list, rules, turns, hp) => { let st = battle(enemies, rules), all = []; if (hp) st.hp = hp; const sq = squad(list); for (let i = 0; i < (turns || 1) && st.status === 'playing'; i++) { const r = turn(st, sq); all = all.concat(r.events); st = r.state; } return { st, events: all, sq }; };
+
+test('affinity: weak, resist, neutral and elementless enemies; rounding table 1 to 6', () => {
+  assert.deepStrictEqual([1, 2, 3, 4, 5, 6].map((d) => V2.mul(d, 1.5)), [2, 3, 5, 6, 8, 9]);
+  assert.deepStrictEqual([1, 2, 3, 4, 5, 6].map((d) => V2.mul(d, 0.5)), [1, 1, 2, 2, 3, 3]);
+  const one = (att, def, atk) => { const r = play([foe(1, 0, { hp: 30, element: def })], [[2, 0, U(att, { atk })]]); return hits(r.events)[0].amount; };
+  assert.strictEqual(one('water', 'fire', 3), 5, 'weak x1.5: 3 -> 5');
+  assert.strictEqual(one('fire', 'water', 3), 2, 'resist x0.5: 3 -> 2');
+  assert.strictEqual(one('fire', 'wind', 3), 3, 'neutral');
+  assert.strictEqual(one('fire', undefined, 3), 3, 'an enemy without an element is x1');
+  assert.strictEqual(one('fire', 'water', 1), 1, 'resist never goes below 1');
+  assert.strictEqual(one('water', 'fire', 1), 2, 'weak: 1 -> 2');
+});
+test('affinity: the matrix is read from the rules, so a per-fight override applies', () => {
+  const r = play([foe(1, 0, { hp: 30, element: 'wind' })], [[2, 0, U('fire', { atk: 2 })]], { v2: { affinity: { fire: { wind: 1.5 } } } });
+  assert.strictEqual(hits(r.events)[0].amount, 3);
+  assert.strictEqual(ev(r.events, 'weak')[0].mult, 1.5);
+});
+test('affinity: armour, Hide and Rend come after the multiplier', () => {
+  const r = play([foe(1, 0, { hp: 30, element: 'fire', armor: 2 })], [[2, 0, U('water', { atk: 2 })]]);
+  assert.deepStrictEqual([hits(r.events)[0].amount, hits(r.events)[0].dmg], [3, 1]);
+});
+
+const WHIT = {
+  steam: ['water', 'fire'], smother: ['earth', 'fire'], conduct: ['lightning', 'water'], sap: ['wood', 'water'], wildfire: ['fire', 'wood'], uproot: ['wind', 'wood'],
+  erode: ['water', 'earth'], roots: ['wood', 'earth'], static: ['lightning', 'wind'], ground: ['earth', 'lightning'], dawn: ['light', 'shadow'], gloom: ['shadow', 'light'],
+};
+test('weakness hits: all 12 are in the data and read from it', () => {
+  assert.deepStrictEqual(Object.keys(V2.WEAKNESS_HITS).length, 12);
+  for (const [id, [a, d]] of Object.entries(WHIT)) assert.strictEqual(V2.WEAKNESS_HITS[a + '>' + d].id, id);
+});
+function wk(id, check, o) {
+  test('weakness hit ' + id, () => {
+    const [a, d] = WHIT[id];
+    o = Object.assign({ atk: 2, enemies: [foe(1, 0, { hp: 30, atk: 3, element: d }), foe(1, 1, { hp: 5, atk: 3 })], rules: null, turns: 1 }, o);
+    const r = play(o.enemies, [[2, 0, U(a, { atk: o.atk })]], o.rules, o.turns, o.hp);
+    check(r, byId(r.st, 'e0'), byId(r.st, 'e1'));
+    assert.ok(ev(r.events, 'weak').some((w) => w.name && w.name.toLowerCase() === V2.WEAKNESS_HITS[a + '>' + d].name.toLowerCase()), 'a weak event names ' + id);
+  });
+}
+wk('steam', (r, e0) => { assert.strictEqual(ev(r.events, 'strike').find((s) => s.id === 'e0').atk, 2, 'Chilled: ATK 3 -> 2 this turn'); assert.deepStrictEqual(e0.st.chill, [], 'expires at the end of the turn'); });
+wk('smother', (r, e0) => assert.strictEqual(e0.atk, 3, 'its enrage is stopped this turn'), { enemies: [foe(1, 0, { hp: 30, atk: 3, element: 'fire', gimmick: 'rage', gp: 2 })] });
+wk('conduct', (r) => { const h = hits(r.events); assert.deepStrictEqual(h.map((x) => [x.id, x.amount]), [['e0', 3], ['e1', 1]], 'half of the base 2 jumps to the lowest-HP neighbour'); }, { atk: 2 });
+wk('sap', (r) => assert.strictEqual(ev(r.events, 'mend')[0].amount, 1), { enemies: [foe(1, 0, { hp: 30, atk: 3, element: 'water' })], hp: 50 });
+wk('wildfire', (r, e0, e1) => { assert.deepStrictEqual([e0.st.burn.n, e0.st.burn.turns], [1, 1]); assert.ok(e1.st && e1.st.burn, 'spreads to a Wood neighbour'); }, { enemies: [foe(1, 0, { hp: 30, atk: 1, element: 'wood' }), foe(1, 1, { hp: 9, atk: 1, element: 'wood' })] });
+wk('uproot', (r, e0) => assert.strictEqual(e0.col, 1, 'pushed one column'), { enemies: [foe(1, 0, { hp: 30, atk: 1, element: 'wood' })] });
+wk('erode', (r, e0) => assert.strictEqual(e0.st.shred, 1));
+wk('roots', (r, e0) => { assert.ok(!ev(r.events, 'strike').some((s) => s.id === 'e0'), 'held: no strike'); assert.strictEqual(e0.st.holdCd, 1, 'cooldown 1: cannot be held again next turn'); });
+wk('static', (r, e0) => assert.strictEqual(e0.st.mark, true));
+wk('ground', (r, e0) => assert.ok(!ev(r.events, 'strike').some((s) => s.col === 1 && s.splash), 'its chain keyword is cleansed'), { enemies: [foe(1, 0, { hp: 30, atk: 4, element: 'lightning', kw: ['chain'] })] });
+wk('dawn', (r, e0) => { assert.ok(!e0.kw.includes('ghost')); assert.strictEqual(e0.st.noward, true); }, { enemies: [foe(1, 0, { hp: 30, atk: 1, element: 'shadow', kw: ['ghost'] })] });
+wk('gloom', (r, e0) => assert.deepStrictEqual(e0.st.chill, [{ t: null }], 'Chilled for the battle'));
+// the enemy fixtures need `kw` copied by createState
+test('createState copies element, flavour and kw only when given (classic stages are unchanged)', () => {
+  const st = E.createState({ heroHp: 5, heroMaxHp: 5, enemies: [{ type: 'goblin', row: 1, col: 0, hp: 1, atk: 1 }, { type: 'goblin', row: 1, col: 1, hp: 1, atk: 1, element: 'Fire', flavour: 'ice', kw: ['chill'] }] });
+  assert.deepStrictEqual(Object.keys(st.enemies[0]).filter((k) => ['element', 'flavour', 'kw'].includes(k)), []);
+  assert.deepStrictEqual([st.enemies[1].element, st.enemies[1].flavour, st.enemies[1].kw], ['Fire', 'ice', ['chill']]);
+});
+test('Fights.stage copies element, flavour and keywords only with { v2: true }', () => {
+  const Fights = require('../prototype/js/fights.js');
+  const dir = path.join(__dirname, '..', 'prototype', 'data', 'fights');
+  Fights.load(fs.readdirSync(dir).filter((f) => /^region-.*\.json$/.test(f)).sort().map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))), {});
+  const fight = Fights.all.find((f) => f.enemies.some((e) => e.element) && f.enemies.some((e) => e.inert && e.inert.length));
+  assert.ok(fight);
+  const a = Fights.stage(fight), b = Fights.stage(fight, { v2: true });
+  assert.ok(a.enemies.every((e) => e.element === undefined && e.kw === undefined));
+  assert.ok(b.enemies.some((e) => e.element) && b.enemies.some((e) => e.kw && e.kw.length));
+  assert.ok(E.createState({ heroHp: 9, heroMaxHp: 9, enemies: b.enemies }).enemies.some((e) => e.kw));
+});
+
+test('status: Burn ticks at the start of the enemy phase for 2 turns, refreshes and does not stack', () => {
+  const burner = U('fire', { atk: 1, beh: [{ p: 'attack', pattern: 'straight', atk: 1, range: 3 }, { p: 'onHit', status: 'burn', n: 1, turns: 2 }] });
+  const r = play([foe(1, 0, { hp: 20, atk: 1 })], [[2, 0, burner]], null, 3);
+  assert.deepStrictEqual(ev(r.events, 'tick').map((t) => [t.status, t.n]), [['burn', 1], ['burn', 1], ['burn', 1]], 'refreshed by every hit, never doubled');
+  assert.deepStrictEqual(hits(r.events).filter((h) => h.source === 'burn').map((h) => h.dmg), [1, 1, 1]);
+});
+test('status: Poison is permanent, +1 per hit, cap 3, ignores armour', () => {
+  const venom = U('wood', { atk: 1, beh: [{ p: 'attack', pattern: 'straight', atk: 1, range: 3 }, { p: 'onHit', status: 'venom', n: 1 }] });
+  const r = play([foe(1, 0, { hp: 60, atk: 1, armor: 5 })], [[2, 0, venom]], null, 5);
+  assert.deepStrictEqual(ev(r.events, 'tick').map((t) => t.n), [1, 2, 3, 3, 3]);
+  assert.ok(hits(r.events).filter((h) => h.source === 'poison').every((h) => h.dmg === h.amount), 'armour 5 ignored');
+});
+test('status: Chill is -1 ATK per source, cap -2, min 1; a second Ice hit on a Chilled body Freezes (skips the strike), no refreeze for 2 turns', () => {
+  const ice = U('water', { atk: 1, beh: [{ p: 'attack', pattern: 'straight', atk: 1, range: 3 }, { p: 'onHit', status: 'chill', n: 1 }] });
+  const r = play([foe(1, 0, { hp: 60, atk: 5 })], [[2, 0, ice], [3, 0, ice], [4, 0, ice]], null, 1);
+  assert.strictEqual(ev(r.events, 'strike').length, 0, 'turn 1: the 2nd Ice hit Freezes: no strike at all (all lanes)');
+  assert.ok(ev(r.events, 'freeze').some((f) => f.skipped));
+  assert.strictEqual(r.st.enemies[0].st.chill.length, 2, 'Chill is capped at -2');
+  const one = play([foe(1, 0, { hp: 60, atk: 5 })], [[2, 0, ice]], null, 3);
+  assert.deepStrictEqual(ev(one.events, 'strike').map((s) => s.atk), [4, 5], 'turn 1 Chill -1; turn 2 the 2nd Ice hit Freezes (skipped); turn 3 ATK 7 with Chill -2 and no refreeze yet');
+});
+test('status: Marked takes +1 on the first hit and is consumed; Hold skips the strike with a cooldown; Sunder shreds armour', () => {
+  const mk = U('wind', { atk: 1, beh: [{ p: 'attack', pattern: 'straight', atk: 1, range: 3 }, { p: 'onHit', status: 'mark' }] });
+  let r = play([foe(1, 0, { hp: 30, atk: 1 })], [[2, 0, mk]], null, 2);
+  assert.deepStrictEqual(hits(r.events).map((h) => h.amount), [1, 2], 'the mark lands after turn 1 and adds +1 on the turn 2 hit (and is re-applied)');
+  const hold = U('shadow', { atk: 1, beh: [{ p: 'attack', pattern: 'straight', atk: 1, range: 3 }, { p: 'onHit', status: 'hold', turns: 1, cooldown: 1 }] });
+  r = play([foe(1, 0, { hp: 30, atk: 3 })], [[2, 0, hold]], null, 3);
+  assert.deepStrictEqual(ev(r.events, 'strike').map((s) => s.id).length, 1, 'held on turn 1, cooling on turn 2, held again on turn 3');
+  const sun = U('earth', { atk: 2, beh: [{ p: 'attack', pattern: 'straight', atk: 2, range: 3 }, { p: 'onHit', status: 'sunder' }] });
+  r = play([foe(1, 0, { hp: 30, atk: 1, armor: 2 })], [[2, 0, sun]], null, 3);
+  assert.deepStrictEqual(hits(r.events).map((h) => h.dmg), [0, 1, 2], 'armour -1 per application');
+});
+test('status: a Big body takes a status once per attack action and ticks once per turn', () => {
+  const spread = U('wood', { atk: 1, pattern: 'spread', beh: [{ p: 'attack', pattern: 'spread', atk: 1, range: 3 }, { p: 'onHit', status: 'venom', n: 1 }] });
+  const r = play([foe(1, 0, { hp: 30, atk: 1, footprint: '2x1' })], [[2, 1, spread]], null, 1);
+  assert.strictEqual(hits(r.events).filter((h) => h.id === 'e0' && h.source !== 'poison').length, 2, 'hit in both covered columns');
+  assert.strictEqual(r.st.enemies[0].st.poison, 1, 'Poison applied once');
+  assert.strictEqual(ev(r.events, 'tick').length, 1);
+});
+
+test('Rend: V2 cards carry overkill only with Rend, capped at 3 (4 with the Fangs 4-set); classic cards unchanged', () => {
+  const rend = U('fire', { atk: 9, beh: [{ p: 'attack', pattern: 'straight', atk: 9, range: 3 }, { p: 'rend', cap: 3 }] });
+  let r = play([foe(1, 0, { hp: 1 }), foe(0, 0, { hp: 20 })], [[2, 0, rend]]);
+  assert.deepStrictEqual(ev(r.events, 'overkill').map((o) => o.amount), [3], 'leftover 8 capped at 3');
+  r = play([foe(1, 0, { hp: 1 }), foe(0, 0, { hp: 20 })], [[2, 0, U('fire', { atk: 9 })]]);
+  assert.strictEqual(ev(r.events, 'overkill').length, 0);
+  const fangs = (n) => Array.from({ length: n }, (_, i) => [2 + (i > 2 ? 1 : 0), i % 3 === 0 ? 0 : i % 3, U('fire', { family: 'fangs', atk: 9, beh: [{ p: 'attack', pattern: 'straight', atk: 9, range: 3 }, { p: 'rend', cap: 3 }] })]);
+  r = play([foe(1, 0, { hp: 1 }), foe(0, 0, { hp: 20 })], fangs(4).map(([r0, c, u], i) => [2 + (i > 1 ? 1 : 0), i % 2 ? 1 : 0, u]), SETS_ON);
+  assert.ok(ev(r.events, 'overkill').some((o) => o.amount === 4), 'Fangs 4-set: Rend cap 4');
+});
+
+test('element sets: Fire 2 (+1 ATK turn 1), Wind 2 (+1 range) and 4 (first hit doubled), Earth 2 (+1 block) and 4 (ignore 1 armour), Water 4 heals, Shadow 4 safe turn 1', () => {
+  const st = battle([foe(1, 0, { hp: 99 })], SETS_ON);
+  let sq = squad([[2, 0, U('fire')], [2, 1, U('fire')], [2, 2, U('water')]]);
+  assert.deepStrictEqual([stat(st, sq, '2,0').atk, stat(st, sq, '2,2').atk], [3, 2]);
+  assert.strictEqual(E.computeStats(sq.placement, sq.army, st.enemies, st.rules, 2)['2,0'].atk, 2, 'only on turn 1');
+  sq = squad([[2, 0, U('wind')], [2, 1, U('wind')]]);
+  assert.strictEqual(stat(st, sq, '2,0').range, 4);
+  sq = squad([[2, 0, U('earth')], [3, 0, SH(2, { element: 'earth' })]]);
+  assert.strictEqual(stat(st, sq, '3,0').block, 3);
+  let r = play([0, 1, 2, 3].map((c) => foe(1, c, { hp: 99, armor: 2 })), [[2, 0, U('earth')], [2, 1, U('earth')], [2, 2, U('earth')], [2, 3, U('earth')]], SETS_ON);
+  assert.deepStrictEqual(hits(r.events).slice(0, 4).map((h) => h.dmg), [1, 1, 1, 1], 'Earth 4: 2 - (2 - 1) = 1');
+  r = play([foe(1, 0, { hp: 99 })], [[2, 0, U('wind', { atk: 1 })], [2, 1, U('wind')], [3, 0, U('wind')], [3, 1, U('wind')]], SETS_ON);
+  assert.strictEqual(hits(r.events)[0].amount, 2, 'Wind 4: the first hit of the turn is doubled (1 -> 2)');
+  const hurt = battle([foe(1, 0, { hp: 99, atk: 1 })], SETS_ON); hurt.hp = 50;
+  r = turn(hurt, squad([[2, 0, U('water')], [2, 1, U('water')], [2, 2, U('water')], [2, 3, U('water')]]));
+  assert.ok(ev(r.events, 'mend').some((m) => m.amount === 1), 'Water 4: the hero heals 1 per turn');
+  r = play([foe(1, 0, { hp: 99, atk: 5 })], [[2, 0, U('shadow')], [2, 1, U('shadow')], [2, 2, U('shadow')], [2, 3, U('shadow')]], SETS_ON);
+  assert.ok(ev(r.events, 'strike').every((s) => s.dmg === 0), 'Shadow 4: the hero cannot be struck on turn 1');
+});
+test('family sets: Wings 2 range, Hooves 2 ATK on turn 1 and 4 Swift, Fangs 2 Rend, Scales 2 block, Wilds count as any family', () => {
+  const st = battle([foe(1, 0, { hp: 99 })], SETS_ON), F = (f, o) => U('none', Object.assign({ family: f }, o));
+  let sq = squad([[2, 0, F('wings')], [2, 1, F('wings')]]);
+  assert.strictEqual(stat(st, sq, '2,0').range, 4);
+  sq = squad([[2, 0, F('hooves')], [2, 1, F('hooves')], [2, 2, F('hooves')], [2, 3, F('hooves')]]);
+  assert.deepStrictEqual([stat(st, sq, '2,0').atk, !!stat(st, sq, '2,0').v2.swift], [3, true]);
+  sq = squad([[2, 0, F('fangs')], [2, 1, F('fangs')]]);
+  assert.strictEqual(stat(st, sq, '2,0').v2.rend, 3);
+  sq = squad([[3, 0, SH(2, { family: 'scales' })], [3, 1, SH(2, { family: 'scales' })]]);
+  assert.strictEqual(stat(st, sq, '3,0').block, 3);
+  sq = squad([[2, 0, F('wings')], [2, 1, F('wilds')], [2, 2, F('wilds')]]);
+  assert.strictEqual(stat(st, sq, '2,0').range, 4, '2 Wilds: one counts as a Wings unit, so the 2-set of Wings is on');
+  sq = squad([[2, 0, F('wings')], [2, 1, F('wilds')]]);
+  assert.strictEqual(stat(st, sq, '2,0').range, 3, 'one Wilds alone gives nothing');
+});
+
+test('keywords: chill, chain, ghost, skewer, leech, chief, grudge, thorn', () => {
+  let r = play([foe(1, 0, { hp: 99, atk: 1, kw: ['chill'] })], [[2, 0, U('fire')]], null, 2);
+  assert.deepStrictEqual(hits(r.events).map((h) => h.amount), [2, 1], 'struck column loses 1 ATK next turn');
+  r = play([foe(1, 2, { hp: 99, atk: 4, kw: ['chain'] })], [[2, 2, U('fire', { atk: 1 })]]);
+  assert.deepStrictEqual(ev(r.events, 'strike').map((s) => [s.col, s.atk]), [[2, 4], [1, 2], [3, 2]]);
+  r = play([foe(1, 0, { hp: 99, kw: ['ghost'] })], [[2, 0, U('fire', { atk: 3 })]]);
+  assert.strictEqual(hits(r.events)[0].amount, 2, 'plain hit: 1 less');
+  r = play([foe(1, 0, { hp: 99, kw: ['ghost'], element: 'wood' })], [[2, 0, U('fire', { atk: 3 })]]);
+  assert.strictEqual(hits(r.events)[0].amount, 5, 'a weak hit is not plain');
+  r = play([foe(1, 0, { hp: 99, kw: ['ghost'] })], [[2, 0, U('light', { atk: 3 })]]);
+  assert.strictEqual(hits(r.events)[0].amount, 3, 'Light reveals it');
+  r = play([foe(1, 0, { hp: 99, atk: 3, kw: ['skewer'] })], [[2, 0, U('fire')], [3, 0, SH(5)]]);
+  assert.strictEqual(ev(r.events, 'strike')[0].blocked, 0);
+  r = play([foe(1, 0, { hp: 99, atk: 3, kw: ['leech'], maxHp: 99 })], [[2, 0, U('fire', { atk: 1 })]]);
+  assert.strictEqual(r.st.enemies[0].hp, 99 - 1 + 1);
+  r = play([foe(1, 0, { hp: 99, atk: 3 }), foe(1, 1, { hp: 99, atk: 3, kw: ['chief'] })], [[2, 3, U('fire', { atk: 1 })]]);
+  assert.strictEqual(ev(r.events, 'strike').find((s) => s.id === 'e0').atk, 4, 'a Chief beside it: +1 ATK');
+  r = play([foe(1, 0, { hp: 1, atk: 3 }), foe(1, 1, { hp: 99, atk: 3, kw: ['grudge'] })], [[2, 0, U('fire', { atk: 5 })]]);
+  assert.strictEqual(ev(r.events, 'strike').find((s) => s.id === 'e1').atk, 5, 'a neighbour died: +2 ATK');
+  const th = battle([foe(1, 0, { hp: 99, atk: 1, kw: ['thorn'] })]);
+  assert.strictEqual(turn(th, squad([[2, 0, U('fire')], [2, 1, U('fire')]])).events.filter((e) => e.t === 'thorn').length, 1, 'once per turn per body');
+});
+
+// ---------- step 2b: column merges ----------
+const col0 = (...els) => els.map((el, i) => [2 + i, 0, typeof el === 'string' ? U(el) : el]); // a column: first = front
+const mergesOf = (list, rules) => { const st = battle([foe(1, 0, { hp: 99 })], rules), sq = squad(list); const stats = E.computeStats(sq.placement, sq.army, st.enemies, st.rules, 1); return Object.fromEntries(Object.entries(stats).filter(([, s]) => s.merges).map(([k, s]) => [k, s.merges.map((m) => m.id)])); };
+test('merges: all 36 pairs resolve from the data; the front-most attacker of the pair carries', () => {
+  const doc = ELEMENTS_DOC.merges;
+  assert.strictEqual(doc.length, 36);
+  for (const m of doc) {
+    const [a, b] = m.pair;
+    const list = a === b ? col0(a, a) : col0(b, a); // the second element of the pair in front
+    const got = mergesOf(list);
+    assert.deepStrictEqual(got, { '2,0': [m.id] }, m.id);
+  }
+});
+test('merges: pairs of a mixed column (A,A,B = Resonance(A) + A+B; A,B,C = three pairs), cap 3, one merge once per column', () => {
+  assert.deepStrictEqual(mergesOf(col0('fire', 'fire', 'water')), { '2,0': ['scald', 'resonance_fire'] });
+  assert.deepStrictEqual(mergesOf(col0('fire', 'fire', 'fire')), { '2,0': ['resonance_fire'] });
+  const m3 = mergesOf(col0('fire', 'water', 'wood'));
+  assert.deepStrictEqual(m3, { '2,0': ['scald', 'kindle'], '3,0': ['bloom'] }, 'fire+water and fire+wood ride on the front fire card, water+wood on the water card');
+  const old = ELEMENTS_DOC.mergeRules.cap.perColumnPerTurn;
+  V2.load(V2.UNITS, Object.assign({}, ELEMENTS_DOC, { mergeRules: Object.assign({}, ELEMENTS_DOC.mergeRules, { cap: { perColumnPerTurn: 2 } }) }), FAMILIES_DOC);
+  try { assert.strictEqual(Object.values(mergesOf(col0('fire', 'water', 'wood'))).flat().length, 2, 'the cap is data'); } finally { V2.load(V2.UNITS, ELEMENTS_DOC, FAMILIES_DOC); }
+  assert.strictEqual(old, 3);
+});
+test('merges: Shields, pure supports, 0-ATK cards, classic and elementless cards never merge; columns are independent', () => {
+  assert.deepStrictEqual(mergesOf([[2, 0, U('fire')], [3, 0, SH(2, { element: 'water' })]]), {});
+  assert.deepStrictEqual(mergesOf([[2, 0, U('fire')], [3, 0, U('water', { atk: 0, beh: [{ p: 'attack', pattern: 'straight', atk: 0, range: 3 }] })]]), {});
+  assert.deepStrictEqual(mergesOf([[2, 0, U('fire')], [3, 0, classic('swordsman')]]), {});
+  assert.deepStrictEqual(mergesOf([[2, 0, U('fire')], [3, 0, U(null)]]), {});
+  assert.deepStrictEqual(mergesOf([[2, 0, U('fire')], [2, 1, U('water')]]), {}, 'Same column only');
+  assert.deepStrictEqual(mergesOf([[2, 0, U('fire')], [4, 0, U('water')]]), { '2,0': ['scald'] }, 'attackers need not be adjacent');
+  assert.deepStrictEqual(mergesOf([[2, 0, U('fire', { atk: 0, beh: [{ p: 'attack', pattern: 'straight', atk: 0, range: 3 }] })], [3, 0, U('water')], [4, 0, U('wood')]]), { '3,0': ['bloom'] }, '0-ATK card is out of the pair list');
+  const hy = U('fire', { block: 2, beh: [{ p: 'attack', pattern: 'straight', atk: 2, range: 3 }, { p: 'shield', block: 2 }] });
+  assert.deepStrictEqual(mergesOf([[2, 0, hy], [3, 0, U('water')]]), { '2,0': ['scald'] }, 'a hybrid counts once, with its single element');
+});
+const dmgs = (r) => hits(r.events).filter((h) => !['burn', 'poison'].includes(h.source)).map((h) => [h.id, h.amount]);
+test('merge effects: Plasma +2, Scald chill and +1, bonus damage capped at +2, overlap keeps the strongest', () => {
+  let r = play([foe(1, 0, { hp: 99, atk: 4 })], col0('lightning', 'fire'));
+  assert.deepStrictEqual(dmgs(r)[0], ['e0', 4], 'Plasma: carrier 2 + 2');
+  r = play([foe(1, 0, { hp: 99, atk: 4 })], col0('water', 'fire'));
+  assert.deepStrictEqual([dmgs(r)[0][1], r.st.enemies[0].st.chill.length], [3, 0]);
+  assert.strictEqual(ev(r.events, 'strike')[0].atk, 3, 'Scald: -1 ATK this turn');
+  r = play([foe(1, 0, { hp: 99 })], col0('fire', 'lightning', 'water'));
+  assert.strictEqual(dmgs(r)[0][1], 2 + 2, 'Plasma (+2) and Scald (+1) on one carrier: capped at +2');
+  r = play([foe(1, 0, { hp: 99 })], col0('fire', 'wood', 'earth'));
+  assert.strictEqual(r.st.enemies[0].st.burn.n * r.st.enemies[0].st.burn.mult, 2, 'Kindle (n2) and Magma (n1 x2 ticks) are the same status: one burn of 2 per tick, not 4');
+});
+test('merge effects: Magma, Blaze, Spores, Sandstorm, Quake, Tempest, Surge', () => {
+  let r = play([foe(1, 0, { hp: 99, armor: 2 })], col0('fire', 'earth'));
+  assert.strictEqual(hits(r.events)[0].dmg, 1, 'Magma: the hit ignores 1 armour (2 - 1)');
+  r = play([foe(1, 0, { hp: 99 }), foe(1, 1, { hp: 99 })], col0('fire', 'wind'));
+  assert.ok(byId(r.st, 'e1').st.burn, 'Blaze: neighbours burn');
+  r = play([foe(1, 0, { hp: 99 }), foe(1, 1, { hp: 99 })], col0('wood', 'wind'));
+  assert.strictEqual(byId(r.st, 'e1').st.poison, 1, 'Spores: venom on the neighbours');
+  r = play([foe(1, 0, { hp: 99 })], col0('earth', 'wind'));
+  assert.deepStrictEqual(dmgs(r).map((d) => d[1]), [2, 3], 'Sandstorm: Marked by the carrier, the next hit deals +1');
+  r = play([foe(1, 0, { hp: 99 }), foe(0, 0, { hp: 99 })], col0('earth', 'lightning'));
+  assert.deepStrictEqual(dmgs(r).map((d) => d[1]).slice(0, 2), [2, 1], 'Quake: half behind the target');
+  r = play([foe(1, 0, { hp: 99 })], col0('wind', 'lightning'));
+  assert.strictEqual(ev(r.events, 'echo').length, 1, 'Tempest: an echo volley');
+  r = play([foe(1, 0, { hp: 99 }), foe(1, 1, { hp: 99 })], col0('water', 'lightning'));
+  assert.ok(ev(r.events, 'chain').length >= 1, 'Surge: a full jump');
+});
+test('merge effects: Bloom, Charge, Mist, Grove (column effects), Radiance, Eclipse, Twilight', () => {
+  let st = battle([foe(1, 0, { hp: 99, atk: 3 })]); st.hp = 50;
+  const sq = squad(col0('water', 'wood'));
+  let r = turn(st, sq);
+  assert.ok(ev(r.events, 'mend').some((m) => m.amount === 2), 'Bloom: hero heals 2');
+  assert.strictEqual(stat(r.state, sq, '2,0').atk, 3, 'Bloom: +1 ATK to the column next turn');
+  r = play([foe(1, 0, { hp: 99, atk: 3 })], col0('water', 'wind'));
+  assert.strictEqual(ev(r.events, 'strike')[0].blocked, 1, 'Mist: the column blocks 1');
+  r = play([foe(1, 0, { hp: 99, atk: 3 })], col0('wood', 'earth'));
+  assert.strictEqual(ev(r.events, 'strike')[0].blocked, 1, 'Grove: the column blocks 1');
+  r = play([foe(1, 0, { hp: 99, atk: 1 })], col0('wood', 'lightning'));
+  const st2 = battle([foe(1, 0, { hp: 99, atk: 1 })]), sq2 = squad(col0('wood', 'lightning'));
+  assert.strictEqual(stat(turn(st2, sq2).state, sq2, '2,0').atk, 3, 'Charge: +1 next turn');
+  r = play([foe(1, 0, { hp: 99 })], col0('light', 'fire'));
+  assert.deepStrictEqual([r.st.enemies[0].st.burn.n, r.st.enemies[0].st.burn.turns], [1, 2], 'Radiance (Fire): Burn 1 for 3 turns, one tick already paid');
+  r = play([foe(1, 0, { hp: 99 })], col0('light', 'wood'));
+  assert.strictEqual(r.st.enemies[0].st.poison, 2, 'Radiance (Wood): Poison 2');
+  r = play([foe(1, 0, { hp: 99, armor: 3, gimmick: 'ward', gp: 5 })], col0('shadow', 'fire'));
+  assert.deepStrictEqual([hits(r.events)[0].warded, hits(r.events)[0].dmg], [null, 1], 'Eclipse: ignores Hide; armour 3 - 2 = 1 absorbs 1 of the 2 damage');
+  r = play([foe(1, 0, { hp: 99, atk: 3, kw: ['ghost'] })], col0('light', 'shadow'));
+  assert.ok(r.st.enemies[0].st.hold === false && ev(r.events, 'strike').length === 0, 'Twilight: held');
+  assert.ok(!r.st.enemies[0].kw.includes('ghost'));
+});
+test('merge effects: Resonance of each element', () => {
+  let r = play([foe(1, 0, { hp: 99 })], col0('fire', 'fire'));
+  assert.strictEqual(r.st.enemies[0].st.burn.n, 2);
+  let st = battle([foe(1, 0, { hp: 99, atk: 4 })]); st.hp = 50;
+  r = turn(st, squad(col0('water', 'water')));
+  assert.ok(ev(r.events, 'mend').some((m) => m.amount === 2) && ev(r.events, 'strike')[0].blocked === 1, 'Water: heal 2 and +1 column block');
+  r = play([foe(1, 0, { hp: 99 })], col0('wood', 'wood'));
+  assert.strictEqual(r.st.enemies[0].st.poison, 2);
+  r = play([foe(1, 0, { hp: 99, atk: 4 })], col0('earth', 'earth'));
+  assert.deepStrictEqual([r.st.enemies[0].st.shred, ev(r.events, 'strike')[0].blocked], [2, 1], 'Earth: armour -2 and +1 block');
+  r = play([foe(1, 0, { hp: 99 })], col0('wind', 'wind'));
+  assert.deepStrictEqual([r.st.enemies[0].col, r.st.enemies[0].st.mark], [2, true], 'Wind: pushed 2 columns and Marked');
+  r = play([foe(1, 1, { hp: 99 }), foe(1, 2, { hp: 99 }), foe(1, 3, { hp: 99 })], [[2, 1, U('lightning')], [3, 1, U('lightning')]]);
+  assert.strictEqual(ev(r.events, 'chain').length, 2, 'Lightning: a full jump plus a half jump');
+  r = play([foe(1, 0, { hp: 99, kw: ['ghost'] })], col0('light', 'light'));
+  assert.deepStrictEqual([hits(r.events)[0].amount, r.st.enemies[0].kw.includes('ghost')], [3, false], 'Light: +1 damage and strips Hide and ghost');
+  r = play([foe(1, 0, { hp: 99, atk: 3 })], col0('shadow', 'shadow'));
+  assert.strictEqual(r.st.enemies[0].st.holdCd, 1, 'Shadow: Held, and cooling for the next turn');
+});
+test('merge carrier: if the carrier has no target the next attacker of the pair carries it, else it is lost', () => {
+  const short = U('fire', { range: 1, beh: [{ p: 'attack', pattern: 'straight', atk: 2, range: 1 }] }), far = U('water', { range: 4, beh: [{ p: 'attack', pattern: 'straight', atk: 2, range: 4 }] });
+  let r = play([foe(0, 0, { hp: 99 })], [[2, 0, short], [3, 0, far]]);
+  assert.ok(r.st.enemies[0].st && r.st.enemies[0].st.chill.length >= 0 && ev(r.events, 'merge').length === 1);
+  assert.strictEqual(dmgs(r)[0][1], 2 + 1, 'Scald passed to the water card: +1 damage');
+  r = play([foe(0, 0, { hp: 99 })], [[2, 0, short], [3, 0, U('water', { range: 1, beh: [{ p: 'attack', pattern: 'straight', atk: 2, range: 1 }] })]]);
+  assert.strictEqual(hits(r.events).length, 0);
+});
+test('merge mode: Own element judges each hit by its attacker; Best of column by the best element of the column; resists only if all resist', () => {
+  const run = (mode, front, back, enemy) => hits(play([foe(1, 0, { hp: 99, element: enemy })], col0(front, back), { v2: { sets: false, mergeMode: mode } }).events).filter((h) => h.source !== 'burn').map((h) => h.amount);
+  assert.deepStrictEqual(run('own', 'wood', 'fire', 'wood'), [2, 3], 'own: wood vs wood x1, fire vs wood x1.5 (Wildfire)');
+  assert.deepStrictEqual(run('best', 'wood', 'fire', 'wood'), [3, 3], 'best: both hits use Fire');
+  assert.deepStrictEqual(run('own', 'fire', 'water', 'fire'), [2, 3], 'own: the fire carrier resists itself (3 = 2 + Scald +1, halved to 2)');
+  assert.deepStrictEqual(run('best', 'fire', 'water', 'fire'), [5, 3], 'best: Water beats the resist for both hits (Steam)');
+  assert.deepStrictEqual(run('own', 'fire', 'wood', 'water'), [1, 3], 'own: fire resists water, wood is weak');
+  assert.deepStrictEqual(run('best', 'fire', 'wood', 'water'), [3, 3], 'best: Wood lifts the fire hit too');
+  assert.deepStrictEqual(run('best', 'fire', 'fire', 'fire'), run('own', 'fire', 'fire', 'fire'), 'a one-element column behaves as own (and a resist stays when every attacker resists)');
+  const weakEv = (mode) => ev(play([foe(1, 0, { hp: 99, element: 'wood' })], col0('wood', 'fire'), { v2: { sets: false, mergeMode: mode } }).events, 'weak').map((w) => w.name);
+  assert.deepStrictEqual(weakEv('own'), ['Wildfire'], 'only the fire hit fires the weakness hit');
+  assert.deepStrictEqual(weakEv('best'), ['Wildfire', 'Wildfire'], 'best: one weakness hit per hit, from the best element');
+  assert.strictEqual(V2.MERGE_RULES.modes.default, 'own');
+});
+test('column merges are deterministic and leave classic states alone', () => {
+  const run = () => { let st = battle([foe(1, 0, { hp: 30 }), foe(1, 1, { hp: 30 }), foe(0, 0, { hp: 20 })]), out = []; const sq = squad([...col0('fire', 'wood', 'water'), [2, 1, U('earth')], [3, 1, U('wind')]]); for (let t = 0; t < 4 && st.status === 'playing'; t++) { const r = turn(st, sq); out.push(r); st = r.state; } return JSON.stringify(out); };
+  assert.strictEqual(run(), run());
 });
 
 // ---------- determinism and smoke ----------
@@ -376,7 +693,7 @@ function fuzz(flagOn) {
 }
 if (!noFuzz) {
   test('fuzz: with rules.v2 off the engine is byte-identical to commit 33b83f5 (random Big/boss-row stages and the real V2 fights)', () => fuzz(false));
-  test('fuzz: with rules.v2 on, classic cards and elementless enemies still match 33b83f5 (no Rend change in this step)', () => fuzz(true));
+  test('fuzz: with rules.v2 on, classic cards and elementless enemies still match 33b83f5 (classic cards keep carrying overkill; Rend applies to V2 cards only)', () => fuzz(true));
 }
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

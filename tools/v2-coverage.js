@@ -2,7 +2,7 @@
 // Usage: node tools/v2-coverage.js [--list]       (exit code 1 if a unit has behaviours but no impl, or an unknown primitive)
 'use strict';
 const units = require('../docs/data/units.json');
-const PRIMS = ['attack', 'skyfall', 'trample', 'swift', 'echo', 'chain', 'scale', 'molt', 'onHit', 'push', 'buff', 'grant', 'shield', 'decoy', 'heroHeal', 'heroGuard', 'onKill', 'attune', 'swap', 'reactRider', 'ignoreArmor', 'rend', 'mimic', 'mirror', 'offering', 'brood'];
+const PRIMS = ['attack', 'skyfall', 'trample', 'swift', 'echo', 'chain', 'scale', 'molt', 'onHit', 'push', 'buff', 'grant', 'shield', 'decoy', 'heroHeal', 'heroGuard', 'onKill', 'attune', 'swap', 'ignoreArmor', 'rend', 'mimic', 'mirror', 'offering', 'brood'];
 const tally = {}, byFamily = {}, prim = {};
 let bad = 0;
 for (const u of units) {

@@ -174,7 +174,9 @@
           guardian: !!e.guardian,
           dir: e.dir || 1,
           lives: e.gimmick === 'regrow' ? 1 : 0,
-        }, fp && (fp.w > 1 || fp.d > 1) ? { w: fp.w, d: fp.d } : null);
+        }, fp && (fp.w > 1 || fp.d > 1) ? { w: fp.w, d: fp.d } : null,
+        // V2 (rules.v2): element, flavour and keywords copied by Fights.stage(fight, { v2: true }); absent in classic stages, so classic states are unchanged.
+        e.element ? { element: e.element, flavour: e.flavour || '' } : null, e.kw && e.kw.length ? { kw: e.kw.slice() } : null);
       }),
     };
   }
@@ -182,7 +184,7 @@
   // Final numbers for every placed card after supporters are applied.
   // Rule: add all + bonuses first, then apply all × multipliers.
   const isAttackerCard = (card, type) => (type.role === 'hybrid' ? !!card.pattern : type.role === 'attacker');
-  function computeStats(placement, army, enemies, rules) {
+  function computeStats(placement, army, enemies, rules, turn) {
     rules = rules || {};
     const byId = {};
     army.forEach((c) => { byId[c.id] = c; });
@@ -217,7 +219,7 @@
         s.boosts.push(tk);
       }
     }
-    if (v2on(rules)) hooks.v2.boost(stats, rules);
+    if (v2on(rules)) hooks.v2.boost(stats, rules, army, turn || 1);
     for (const s of Object.values(stats)) {
       if (isAttacker(s)) {
         s.atk = (s.baseAtk + s.plus) * s.mult;
@@ -311,18 +313,23 @@
   }
 
   // Why a hit does nothing at all (boss gimmicks), or null.
-  function wardReason(state, e, amount) {
-    if (e.gimmick === 'guard' && state.enemies.some((o) => o.alive && o.guardian)) return 'guard';
-    if (e.gimmick === 'ward' && amount < e.gp) return 'ward';
-    if (e.gimmick === 'veil' && state.turn <= e.gp) return 'veil';
+  // `bypass` (V2 only): names of wards this hit ignores ('guard', 'ward', 'veil'); e.st.noward / e.st.noveil are the cleansed (Dawn, Twilight) Hide and Veil.
+  function wardReason(state, e, amount, bypass) {
+    const by = (n) => bypass && bypass.includes(n);
+    if (e.gimmick === 'guard' && state.enemies.some((o) => o.alive && o.guardian) && !by('guard')) return 'guard';
+    if (e.gimmick === 'ward' && amount < e.gp && !by('ward') && !(e.st && e.st.noward)) return 'ward';
+    if (e.gimmick === 'veil' && state.turn <= e.gp && !by('veil') && !(e.st && e.st.noveil)) return 'veil';
     return null;
   }
 
-  function dealDamage(state, e, amount, canCarry, events, source, ignoreArmor, col) {
+  // V2 only: `canCarry` may be a number (Rend cap: the carried leftover is at most that), `ignoreArmor` may be a number (ignores that much armour),
+  // `bypass` lists wards the hit ignores, e.st.shred is Armour shred. Classic callers pass booleans and no `bypass`, so nothing changes for them.
+  function dealDamage(state, e, amount, canCarry, events, source, ignoreArmor, col, bypass) {
     if (col === undefined) col = e.col; // the column the hit came through (a Big body may be struck in any covered column)
-    const armor = ignoreArmor ? 0 : source === 'explode' ? e.armor : Math.max(0, e.armor - ((state.rules && state.rules.sunder) || 0));
+    const full = source === 'explode' ? e.armor : Math.max(0, e.armor - ((state.rules && state.rules.sunder) || 0) - ((e.st && e.st.shred) || 0));
+    const armor = ignoreArmor === true ? 0 : typeof ignoreArmor === 'number' ? Math.max(0, full - ignoreArmor) : ignoreArmor ? 0 : full;
     let dmg = Math.max(0, amount - armor);
-    const warded = wardReason(state, e, amount);
+    const warded = wardReason(state, e, amount, bypass);
     if (warded) dmg = 0;
     const before = e.hp;
     e.hp = Math.max(0, e.hp - dmg);
@@ -334,7 +341,7 @@
       state.rules.feastN = (state.rules.feastN || 0) + 1; syncBonus(state.rules, state.turn);
       events.push({ t: 'feast', n: state.rules.feastN });
     }
-    const leftover = dmg - before;
+    const leftover = typeof canCarry === 'number' ? Math.min(canCarry, dmg - before) : dmg - before;
     // Overkill: leftover damage carries along the struck column to the first body behind the rear edge of the one that died (B5), only when the whole body falls.
     // A kill in the back row can carry into the boss row (R4); a Bulwark in front still blocks it.
     if (canCarry && leftover > 0 && e.row - dOf(e) + 1 >= 0) {
@@ -444,7 +451,7 @@
     const state = clone(state0);
     if (!state.rules) state.rules = {};
     const events = [];
-    const stats = computeStats(placement, army, state.enemies, state.rules);
+    const stats = computeStats(placement, army, state.enemies, state.rules, state.turn);
 
     // Attackers fire front row first, then left to right.
     let attackers = Object.values(stats)
@@ -452,16 +459,21 @@
       .sort((a, b) => a.r - b.r || a.c - b.c);
     const v2 = v2on(state.rules);
     if (v2) attackers = hooks.v2.order(attackers);
+    // V2 toolbox handed to every hook of this turn (per-turn scratch included); never exists with the flag off.
+    const T = v2 ? { state, stats, events, dealDamage, hitsFor, enemyAt, gateOpen, dOf, cellsOf, healFor, BOSS_ROW, ENEMY_TYPES, scratch: {} } : null;
+    if (v2) hooks.v2.startTurn(T);
     let opened = false;
     for (const s of attackers) {
       const hits = hitsFor(s, state.enemies), targets = hits.map((h) => h.e);
+      if (v2 && !hits.length) hooks.v2.passMerges(attackers, s); // a carrier with no target hands its merges to the next attacker of the pair
       // Legendary rule "opening": the first shot that finds a target in the first turn deals double damage.
       const dmg = state.rules.opening && state.turn === 1 && !opened && targets.length ? (opened = true, s.atk * 2) : s.atk;
       events.push({ t: 'fire', key: s.key, atk: dmg, targets: targets.map((e) => e.id), cols: hits.map((h) => h.col) });
       const noArmor = !!(s.fx && s.fx.ignoreArmor); // Longbowman: arrows ignore armor
       for (const { e, col } of hits) {
         if (!e.alive) continue; // killed earlier in this same volley (e.g. by a blast, or by an earlier hit of the same Spread)
-        dealDamage(state, e, v2 ? dmg + hooks.v2.hitBonus(s, e) : dmg, s.pattern !== 'pierce', events, s.key, noArmor, col);
+        if (v2) hooks.v2.hit(T, { s, e, col, dmg, noArmor, canCarry: s.pattern !== 'pierce' });
+        else dealDamage(state, e, dmg, s.pattern !== 'pierce', events, s.key, noArmor, col);
       }
       // Storm Mage: lightning leaps to one more enemy next to a struck one (lowest HP first), for the same damage.
       if (s.fx && s.fx.chain && targets.length) {
@@ -472,12 +484,14 @@
           targets.some((t) => touches(t, o))).sort((a, b) => a.hp - b.hp)[0];
         if (next) {
           events.push({ t: 'chain', key: s.key, from: targets[0].id, id: next.id });
-          dealDamage(state, next, v2 ? hooks.v2.chainDmg(s, dmg, next) : dmg, false, events, s.key, noArmor);
+          if (v2) hooks.v2.hit(T, { s, e: next, dmg: hooks.v2.chainDmg(T, s, dmg, next), noArmor, canCarry: false, fromEffect: true });
+          else dealDamage(state, next, dmg, false, events, s.key, noArmor);
         }
       }
-      if (v2) hooks.v2.afterFire({ state, s, hits, dmg, events, noArmor, dealDamage, hitsFor, enemyAt, gateOpen, dOf });
+      if (v2) hooks.v2.afterFire(T, { s, hits, dmg, noArmor });
       if (!state.enemies.some(isThreat)) break;
     }
+    if (v2) hooks.v2.statusPhase(T); // Burn and Poison tick before the enemies strike
 
     if (!state.enemies.some(isThreat)) {
       state.status = 'cleared';
@@ -493,28 +507,38 @@
       shieldsOf[col] = playerRowsFor(state.rules).map((r) => key(r, col)).filter((k) => stats[k] && isDefender(stats[k]));
       pools[col] = shieldsOf[col].reduce((sum, k) => sum + stats[k].block, 0);
       if (state.rules.aegis && state.turn === 1) pools[col] *= 2; // relic "aegis": Shields block double on the first turn
+      if (v2) pools[col] += hooks.v2.guardOf(state, col); // column guards from merges (Mist, Grove) and Resonance
     }
+    const sk = v2 ? hooks.v2.preStrike(T) : null; // frozen / held / chilled / aura / grudge for this strike phase
     const strike = (e, col, atk, splash) => {
-      const blocked = Math.min(pools[col], atk);
+      const blocked = v2 && sk.skewer(e) ? 0 : Math.min(pools[col], atk);
       pools[col] -= blocked;
       let dmg = Math.max(0, atk - blocked - (state.rules.soften || 0) - (state.rules.brace || 0));
+      if (v2 && sk.safe) dmg = 0;
       const warded = Math.min(state.barrier || 0, dmg);
       if (warded) { state.barrier -= warded; dmg -= warded; }
       state.hp = Math.max(0, state.hp - dmg);
       state.damageTaken += dmg;
       events.push({ t: 'strike', id: e.id, atk, blocked, warded, dmg, shields: shieldsOf[col], hp: state.hp, col, splash });
+      if (v2) hooks.v2.afterStrike(T, e, col, dmg);
     };
     for (let col = 0; col < COLS; col++) {
       for (const er of SCAN_ROWS) {
         const e = enemyAt(state.enemies, er, col);
         if (!e || e.row !== er || !isThreat(e) || e.atk <= 0) continue; // a deep body is met first at its anchor row: one lane per covered column
-        strike(e, col, e.atk, false);
+        const a = v2 ? sk.atk(e) : e.atk;
+        if (a <= 0) continue;
+        strike(e, col, a, false);
       }
     }
     // Sweepers also strike the neighbouring columns for half damage (after every direct strike).
     for (const e of state.enemies.filter((x) => isThreat(x) && x.gimmick === 'sweep' && x.atk > 0)) {
-      for (const col of [e.col - 1, e.col + lanesOf(e)]) if (col >= 0 && col < COLS) strike(e, col, Math.ceil(e.atk / 2), true);
+      const a = v2 ? sk.atk(e) : e.atk;
+      if (a <= 0) continue;
+      for (const col of [e.col - 1, e.col + lanesOf(e)]) if (col >= 0 && col < COLS) strike(e, col, Math.ceil(a / 2), true);
     }
+    // V2 keyword "chain": the enemy's lightning also hits both neighbouring columns for half (after the direct strikes, like a sweep).
+    if (v2) for (const e of sk.chainers()) for (const col of [e.col - 1, e.col + lanesOf(e)]) if (col >= 0 && col < COLS) strike(e, col, Math.ceil(sk.atk(e) / 2), true);
 
     if (state.rules.brace) delete state.rules.brace; // Brace lasts for one strike
     // Legendary rule "stand": once per battle a lethal blow leaves 1 HP.
@@ -532,11 +556,11 @@
     // Survivors enrage, so long fights get expensive.
     const raged = state.enemies.filter(isThreat);
     const enrageBy = 1 + (state.rules.enrageMore || 0); // Heat: enrage gives +2 instead of +1
-    raged.forEach((e) => { e.atk += enrageBy; });
+    raged.forEach((e) => { if (!(v2 && hooks.v2.suppressed(e, 'enrage'))) e.atk += enrageBy; });
     events.push({ t: 'enrage', ids: raged.map((e) => e.id) });
     // Boss gimmicks that act at the end of the turn.
     for (const e of raged) {
-      if (e.gimmick === 'rage') { e.atk += e.gp; events.push({ t: 'rage', id: e.id, amount: e.gp, atk: e.atk }); }
+      if (e.gimmick === 'rage' && !(v2 && hooks.v2.suppressed(e, 'fury'))) { e.atk += e.gp; events.push({ t: 'rage', id: e.id, amount: e.gp, atk: e.atk }); }
       if (e.gimmick === 'harden' && e.armor < e.gp) { e.armor += 1; events.push({ t: 'harden', id: e.id, armor: e.armor }); }
       if (e.gimmick === 'regen' && e.hp < e.maxHp) {
         const amount = Math.min(e.gp, e.maxHp - e.hp); e.hp += amount;
@@ -571,7 +595,7 @@
       if (best) spawn(state, sm, best.r, best.c, (sm.minion && sm.minion.hp) || 2, events, 'summon');
     }
     // Regrow: a fallen head grows back once, in its own tile if it is still free.
-    for (const e of state.enemies.filter((x) => !x.alive && x.gimmick === 'regrow' && x.lives > 0)) {
+    for (const e of state.enemies.filter((x) => !x.alive && x.gimmick === 'regrow' && x.lives > 0 && !(v2 && hooks.v2.suppressed(x, 'regrow')))) {
       if (cellsOf(e).some(([r, c]) => enemyAt(state.enemies, r, c))) continue;
       e.lives -= 1; e.alive = true; e.hp = Math.min(e.maxHp, e.gp || e.maxHp);
       events.push({ t: 'regrow', id: e.id, hp: e.hp });
@@ -600,7 +624,7 @@
     }
     // Legendary rule "mend": heal 1 HP at the end of every turn survived.
     if (state.rules.mend && state.hp < state.maxHp) { state.hp = Math.min(state.maxHp, state.hp + healFor(state.rules, state.rules.mend)); events.push({ t: 'mend', amount: healFor(state.rules, state.rules.mend), hp: state.hp }); }
-    if (v2) hooks.v2.endTurn(state, stats, events);
+    if (v2) hooks.v2.endTurn(T);
     state.turn += 1;
     syncBonus(state.rules, state.turn);
     return { state, events };

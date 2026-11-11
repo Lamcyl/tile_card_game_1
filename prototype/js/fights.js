@@ -78,7 +78,9 @@
     return FIGHTS.length;
   }
   // The stage fields of a fight (enemy list in the engine's format). Registers the enemy types on first use.
-  function stage(fight) {
+  // `o.v2` (rules.v2): the enemies also carry their `element`, `flavour` and keywords (`kw`, from the fight's inert tags, which V2 makes live); classic stages are unchanged.
+  function stage(fight, o) {
+    const v2 = !!(o && o.v2);
     const enemies = fight.enemies.map((e) => {
       const boss = e.role === 'boss' || e.role === 'elite';
       const o = { type: register(e, boss), row: e.r, col: e.c, hp: e.hp, atk: e.role === 'barrel' ? 0 : e.atk, armor: e.armor || 0 };
@@ -86,6 +88,8 @@
       if (e.kind) o.kind = e.kind;
       if (e.gimmick) { o.gimmick = e.gimmick; o.gp = e.gp || 0; }
       if (e.guardian) o.guardian = true;
+      if (v2 && e.element) { o.element = e.element; if (e.flavour) o.flavour = e.flavour; }
+      if (v2 && e.inert && e.inert.length) o.kw = e.inert.map((k) => (typeof k === 'string' ? k : k.id));
       if (e.minion) o.minion = { type: register({ role: 'basic', mon: e.mon, variant: e.variant, art: e.art }, false), hp: e.minion.hp, atk: e.minion.atk };
       return o;
     });
