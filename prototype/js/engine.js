@@ -451,6 +451,7 @@
     const state = clone(state0);
     if (!state.rules) state.rules = {};
     const events = [];
+    if (v2on(state.rules)) { const mv = hooks.v2.applyMoves(placement, army, state.rules); placement = mv.placement; army = mv.army; } // V2: earlier swaps and spawned Drones
     const stats = computeStats(placement, army, state.enemies, state.rules, state.turn);
 
     // Attackers fire front row first, then left to right.
@@ -511,10 +512,12 @@
     }
     const sk = v2 ? hooks.v2.preStrike(T) : null; // frozen / held / chilled / aura / grudge for this strike phase
     const strike = (e, col, atk, splash) => {
-      const blocked = v2 && sk.skewer(e) ? 0 : Math.min(pools[col], atk);
-      pools[col] -= blocked;
+      const pooled = v2 && sk.skewer(e) ? 0 : Math.min(pools[col], atk);
+      pools[col] -= pooled;
+      const blocked = pooled + (v2 ? sk.decoy(e, col, atk - pooled) : 0); // V2 Decoy: the first strike in its column
       let dmg = Math.max(0, atk - blocked - (state.rules.soften || 0) - (state.rules.brace || 0));
       if (v2 && sk.safe) dmg = 0;
+      if (v2) dmg = sk.negate(col, dmg); // V2 Ward: the first strike of the battle is negated
       const warded = Math.min(state.barrier || 0, dmg);
       if (warded) { state.barrier -= warded; dmg -= warded; }
       state.hp = Math.max(0, state.hp - dmg);
@@ -547,6 +550,7 @@
     if (state.hp <= 0 && (state.rules.revive || 0) > (state.reviveUsed || 0)) {
       state.hp = Math.max(1, Math.ceil(state.maxHp / 2)); state.reviveUsed = (state.reviveUsed || 0) + 1; events.push({ t: 'revive', hp: state.hp });
     }
+    if (v2 && state.hp <= 0) hooks.v2.rebirth(T); // V2 Rebirth
     if (state.hp <= 0) {
       state.status = 'defeated';
       events.push({ t: 'defeated' });

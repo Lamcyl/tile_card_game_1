@@ -49,7 +49,7 @@ const classic = (type, o) => Object.assign({ type }, o);
 // ---------- data and cards ----------
 test('units.json: every unit has impl; implemented units use known primitives', () => {
   const units = read('units.json');
-  assert.strictEqual(units.length, 89);
+  assert.strictEqual(units.length, 92);
   for (const u of units) {
     assert.ok(['full', 'simplified', 'pending'].includes(u.impl), u.id);
     if (u.impl !== 'pending') assert.ok(V2.implemented(u), u.id);
@@ -572,6 +572,262 @@ test('merge mode: Own element judges each hit by its attacker; Best of column by
 test('column merges are deterministic and leave classic states alone', () => {
   const run = () => { let st = battle([foe(1, 0, { hp: 30 }), foe(1, 1, { hp: 30 }), foe(0, 0, { hp: 20 })]), out = []; const sq = squad([...col0('fire', 'wood', 'water'), [2, 1, U('earth')], [3, 1, U('wind')]]); for (let t = 0; t < 4 && st.status === 'playing'; t++) { const r = turn(st, sq); out.push(r); st = r.state; } return JSON.stringify(out); };
   assert.strictEqual(run(), run());
+});
+
+// ---------- step 3: remaining behaviours, evolution stages, Lightning units ----------
+const NOSETS = { v2: { sets: false } };
+const cs = (list, rules) => { const sq = squad(list); return E.computeStats(sq.placement, sq.army, [], rules || NOSETS); };
+const strikes = (out) => out.events.filter((e) => e.t === 'strike');
+test('data: every unit is implemented (full or simplified); every evolution entry has a stage patch that matches a behaviour', () => {
+  for (const u of Object.values(V2.UNITS)) {
+    assert.ok(['full', 'simplified'].includes(u.impl) && !u.notYet, u.id + ' ' + u.impl);
+    const n = V2.maxStage(u);
+    for (let stage = 2; stage <= n; stage++) {
+      assert.ok(u.stages && u.stages[stage] && u.stages[stage].length, u.id + ' has no patch for stage ' + stage);
+      const beh = V2.applyPatches(u.behaviours, u.stages, stage - 1);
+      for (const patch of u.stages[stage]) {
+        if (patch.op === 'add') { beh.push(JSON.parse(JSON.stringify(patch.beh))); continue; }
+        assert.ok(beh.filter((b) => b.p === patch.p)[patch.i || 0], u.id + ' stage ' + stage + ' patch matches nothing: ' + JSON.stringify(patch));
+      }
+    }
+  }
+});
+test('evolution extends and never escalates: family, element, base ATK and pattern never change; range and block grow by at most 1 per stage', () => {
+  for (const u of Object.values(V2.UNITS)) {
+    const base = V2.card(u.id, { stage: 1 });
+    for (let stage = 2; stage <= V2.maxStage(u); stage++) {
+      const c = V2.card(u.id, { stage });
+      assert.strictEqual(c.family, base.family, u.id); assert.strictEqual(c.element, base.element, u.id);
+      assert.strictEqual(c.atk, base.atk, u.id + ' base ATK must not change with stage');
+      assert.strictEqual(c.pattern, base.pattern, u.id + ' pattern must not change with stage');
+      assert.ok((c.range || 0) - (base.range || 0) <= stage - 1 && (c.block || 0) - (base.block || 0) <= stage - 1, u.id + ' range or block jumps too far');
+    }
+  }
+});
+test('Lightning units: Kui, Electric Eel and Storm Petrel are the three additions (7 in all); the petrel is the Lightning Kin buffer', () => {
+  assert.strictEqual(Object.values(V2.UNITS).filter((u) => u.element === 'lightning').length, 7);
+  for (const id of ['kui', 'electric_eel', 'storm_petrel']) assert.ok(V2.UNITS[id] && V2.UNITS[id].element === 'lightning' && V2.UNITS[id].nature !== 'Malevolent', id);
+  const s = cs([[2, 0, 'raiju'], [3, 0, 'storm_petrel'], [2, 1, 'hongsa'], [3, 1, 'storm_petrel']]);
+  assert.strictEqual(s['2,0'].plus, 2); assert.strictEqual(s['2,1'].plus, 1);
+});
+test('onHit units: Sun Crow Burn 1 for 2 turns (3 at stage 2); Reindeer and Snow Leopard Chill for the battle (stage 2 also the body behind)', () => {
+  const st = battle([foe(1, 0, { hp: 20 }), foe(0, 0, { hp: 20 })]);
+  let out = turn(st, squad([[2, 0, 'sun_crow']]));
+  assert.strictEqual(byId(out.state, 'e0').st.burn.turns, 1); // 2 turns, one tick spent already
+  out = turn(st, squad([[2, 0, V2.card('sun_crow', { stage: 2 })]]));
+  assert.strictEqual(byId(out.state, 'e0').st.burn.turns, 2);
+  out = turn(st, squad([[2, 0, 'reindeer_hauler']]));
+  assert.strictEqual(byId(out.state, 'e0').st.chill.length, 1); assert.ok(!byId(out.state, 'e1').st);
+  out = turn(st, squad([[2, 0, V2.card('snow_leopard', { stage: 2 })]]));
+  assert.strictEqual(byId(out.state, 'e1').st.chill.length, 1);
+});
+test('onHit units: Firebird Spread burns the centre target only (stage 3: the sides too); Ddraig Goch stage 2 burns only the front body of its Pierce', () => {
+  const foes = () => battle([foe(1, 0, { hp: 20 }), foe(1, 1, { hp: 20 }), foe(1, 2, { hp: 20 })]);
+  const burning = (out, id) => out.events.some((e) => e.t === 'status' && e.status === 'burn' && e.id === id);
+  let out = turn(foes(), squad([[2, 1, 'firebird']]));
+  assert.ok(burning(out, 'e1') && !burning(out, 'e0') && !burning(out, 'e2'));
+  out = turn(foes(), squad([[2, 1, V2.card('firebird', { stage: 3 })]]));
+  assert.ok(burning(out, 'e0') && burning(out, 'e1') && burning(out, 'e2'));
+  out = turn(battle([foe(1, 0, { hp: 20 }), foe(0, 0, { hp: 20 })]), squad([[2, 0, V2.card('ddraig_goch', { stage: 2 })]]));
+  assert.ok(burning(out, 'e0') && !burning(out, 'e1'));
+});
+test('Mark units: Raven Pair mark lapses at the end of the turn (stage 2 lasts into the next, stage 3 marks a second column); Bai Ze marks the column; Kui stage 2 marks behind', () => {
+  const col = () => battle([foe(1, 0, { hp: 20 }), foe(0, 0, { hp: 20 })]);
+  let out = turn(col(), squad([[2, 0, 'raven_pair']]));
+  assert.ok(!byId(out.state, 'e0').st.mark);
+  out = turn(col(), squad([[2, 0, V2.card('raven_pair', { stage: 2 })]]));
+  assert.ok(byId(out.state, 'e0').st.mark);
+  out = turn(out.state, squad([[2, 3, 'hongsa']])); // nobody spends it: it lapses after its second turn
+  assert.ok(!byId(out.state, 'e0').st.mark);
+  out = turn(battle([foe(1, 0, { hp: 20 }), foe(1, 1, { hp: 20 })]), squad([[2, 0, V2.card('raven_pair', { stage: 3 })]]));
+  assert.ok(out.events.some((e) => e.t === 'status' && e.status === 'mark' && e.id === 'e1'));
+  out = turn(col(), squad([[2, 0, 'bai_ze']]));
+  assert.ok(out.events.filter((e) => e.t === 'status' && e.status === 'mark').length === 2);
+  out = turn(col(), squad([[2, 0, 'kui']]));
+  assert.ok(!out.events.some((e) => e.t === 'status' && e.status === 'mark' && e.id === 'e1'));
+  out = turn(col(), squad([[2, 0, V2.card('kui', { stage: 2 })]]));
+  assert.ok(out.events.some((e) => e.t === 'status' && e.status === 'mark' && e.id === 'e1'));
+  out = turn(battle([foe(1, 0, { hp: 20 })]), squad([[2, 0, V2.card('khan_garid', { stage: 2 })]]));
+  assert.ok(out.events.some((e) => e.t === 'status' && e.status === 'mark'));
+});
+test('Hold units: Cat Sidhe, Nazca Weaver and Electric Eel hold the hit enemy (not again the next turn); stage 2 also the one beside', () => {
+  const foes = () => battle([foe(1, 0, { hp: 90, atk: 3 }), foe(1, 1, { hp: 90, atk: 3 })]);
+  const held = (out) => out.events.filter((e) => e.t === 'status' && e.status === 'hold' && e.skipped).map((e) => e.id);
+  assert.deepStrictEqual(held(turn(foes(), squad([[2, 0, 'cat_sidhe']]))), ['e0']);
+  assert.deepStrictEqual(held(turn(foes(), squad([[2, 0, V2.card('nazca_weaver', { stage: 2 })]]))).sort(), ['e0', 'e1']);
+  const out = turn(foes(), squad([[2, 0, 'electric_eel']]));
+  assert.deepStrictEqual(held(out), ['e0']);
+  assert.deepStrictEqual(held(turn(out.state, squad([[2, 0, 'electric_eel']]))), []); // cooldown 1
+});
+test('Venom units: Wadjet and Komodo poison cap 3 (stage 2: 4); Baku Sunder shreds armour (stage 2 strips Hide and Veil)', () => {
+  const sq3 = squad([[2, 0, 'wadjet']]);
+  let st = battle([foe(1, 0, { hp: 99, atk: 0 })]);
+  for (let i = 0; i < 5; i++) st = turn(st, sq3).state;
+  assert.strictEqual(byId(st, 'e0').st.poison, 3);
+  const sq4 = squad([[2, 0, V2.card('wadjet', { stage: 2 })]]);
+  st = battle([foe(1, 0, { hp: 99, atk: 0 })]);
+  for (let i = 0; i < 5; i++) st = turn(st, sq4).state;
+  assert.strictEqual(byId(st, 'e0').st.poison, 4);
+  assert.strictEqual(V2.card('komodo', { stage: 2 }).beh.find((b) => b.p === 'onHit').capPlus, 1);
+  assert.strictEqual(byId(turn(battle([foe(1, 0, { hp: 20, armor: 2 })]), squad([[2, 0, 'baku']])).state, 'e0').st.shred, 1);
+  const hid = battle([foe(1, 0, { hp: 20 })]); hid.enemies[0].gimmick = 'guard'; hid.enemies[0].gp = 1;
+  const o2 = turn(hid, squad([[2, 0, V2.card('baku', { stage: 2 })]]));
+  assert.ok(o2.events.some((e) => e.t === 'status' && e.status === 'cleanse' && e.what.includes('hide')));
+});
+test('Cheonma pushes the hit enemy a column sideways (stage 2 also the body beside it)', () => {
+  let out = turn(battle([foe(1, 0, { hp: 20 })]), squad([[2, 0, 'cheonma']]));
+  assert.strictEqual(byId(out.state, 'e0').col, 1);
+  out = turn(battle([foe(1, 0, { hp: 20 }), foe(1, 1, { hp: 20 })]), squad([[2, 0, 'cheonma']]));
+  assert.strictEqual(out.events.filter((e) => e.t === 'move' && e.push).length, 1);
+  out = turn(battle([foe(1, 0, { hp: 20 }), foe(1, 1, { hp: 20 })]), squad([[2, 0, V2.card('cheonma', { stage: 2 })]]));
+  assert.strictEqual(out.events.filter((e) => e.t === 'move' && e.push).length, 2);
+});
+test('Bloom heals 1 each turn; stage 2 heals 2 if the hero was struck (Pelican) or is below half HP (Honu, Moon Hare)', () => {
+  const heal = (card, hp, foes) => { const st = battle(foes); st.hp = hp; return turn(st, squad([[3, 3, card]])).events.filter((e) => e.t === 'mend' && e.source === 'v2').reduce((n, e) => n + e.amount, 0); };
+  assert.strictEqual(heal('pelican_of_mercy', 50, [foe(1, 0, { hp: 20, atk: 3 })]), 1);
+  assert.strictEqual(heal(V2.card('pelican_of_mercy', { stage: 2 }), 50, [foe(1, 0, { hp: 20, atk: 3 })]), 2);
+  assert.strictEqual(heal(V2.card('pelican_of_mercy', { stage: 2 }), 50, [foe(1, 0, { hp: 20, atk: 0 })]), 1);
+  assert.strictEqual(heal(V2.card('honu', { stage: 2 }), 40, [foe(1, 0, { hp: 20, atk: 1 })]), 2);
+  assert.strictEqual(heal(V2.card('moon_hare', { stage: 2 }), 90, [foe(1, 0, { hp: 20, atk: 1 })]), 1);
+});
+test('Ward: Kotuku negates the first damaging strike of the battle (stage 2 one more in another column); Phoenix raises the hero once at half HP (stage 2 with a Shield)', () => {
+  const foes = () => battle([foe(1, 0, { hp: 90, atk: 4 }), foe(1, 1, { hp: 90, atk: 4 }), foe(1, 2, { hp: 90, atk: 4 })]);
+  const hurt = (out) => strikes(out).reduce((n, e) => n + e.dmg, 0);
+  assert.strictEqual(hurt(turn(foes(), squad([[3, 3, 'kotuku']]))), 8);
+  assert.strictEqual(hurt(turn(foes(), squad([[3, 3, V2.card('kotuku', { stage: 2 })]]))), 4);
+  const mk = () => { const st = battle([foe(1, 0, { hp: 90, atk: 30 })]); st.hp = 5; st.maxHp = 40; return st; };
+  let out = turn(mk(), squad([[3, 3, 'phoenix']]));
+  assert.strictEqual(out.state.status, 'playing'); assert.strictEqual(out.state.hp, 20);
+  assert.ok(out.events.some((e) => e.t === 'revive' && e.source === 'rebirth'));
+  out = turn(out.state, squad([[3, 3, 'phoenix']]));
+  assert.strictEqual(out.state.status, 'defeated');
+  assert.strictEqual(turn(mk(), squad([[3, 3, V2.card('phoenix', { stage: 2 })]])).state.barrier, 1);
+});
+test('onKill: Sarimanok +1 Soul per kill (stage 2 +2 more on an elite or boss kill), Pixiu +1 (+1 elite; stage 2 counts every kill); Huma heals 1 on the first kill each turn (stage 3: 2)', () => {
+  let out = turn(battle([foe(1, 0, { hp: 2 })]), squad([[2, 0, 'sarimanok']]));
+  assert.strictEqual(out.state.soulsBonus, 1); assert.ok(out.events.some((e) => e.t === 'souls' && e.n === 1));
+  const eliteFoe = () => { const st = battle([foe(1, 0, { hp: 2 })]); E.ENEMY_TYPES.goblin_boss_test = { name: 'Boss', icon: '*', boss: true }; st.enemies[0].type = 'goblin_boss_test'; return st; };
+  out = turn(eliteFoe(), squad([[2, 0, 'pixiu']]));
+  delete E.ENEMY_TYPES.goblin_boss_test;
+  assert.strictEqual(out.state.soulsBonus, 2);
+  out = turn(battle([foe(1, 0, { hp: 2 })]), squad([[2, 0, 'hongsa'], [2, 1, 'pixiu']]));
+  assert.ok(!out.state.soulsBonus);
+  out = turn(battle([foe(1, 0, { hp: 2 })]), squad([[2, 0, 'hongsa'], [2, 1, V2.card('pixiu', { stage: 2 })]]));
+  assert.strictEqual(out.state.soulsBonus, 1);
+  const two = () => { const st = battle([foe(1, 0, { hp: 2 }), foe(1, 1, { hp: 2 })]); st.hp = 50; return st; };
+  const heals = (card) => turn(two(), squad([[2, 0, 'hongsa'], [2, 1, 'hongsa'], [3, 3, card]])).events.filter((e) => e.t === 'mend' && e.source === 'v2');
+  assert.strictEqual(heals('huma').length, 1); assert.strictEqual(heals('huma')[0].amount, 1);
+  assert.strictEqual(heals(V2.card('huma', { stage: 3 }))[0].amount, 2);
+});
+test('Decoy: Bi\'an takes the first strike in its column (its block on top of the column pool): Shield 3 and 3 against a 6 strike, only the first strike', () => {
+  const one = (id) => strikes(turn(battle([foe(1, 0, { hp: 90, atk: 6 })]), squad([[2, 0, id]])))[0];
+  assert.strictEqual(one('bian').blocked, 6); assert.strictEqual(one('bian').dmg, 0);
+  assert.strictEqual(one('bixi').blocked, 3);
+  const two = strikes(turn(battle([foe(1, 0, { hp: 90, atk: 6 }), foe(0, 0, { hp: 90, atk: 6 })]), squad([[2, 0, 'bian']])));
+  assert.strictEqual(two[0].dmg, 0); assert.ok(two[1].dmg > 0);
+  assert.strictEqual(V2.card('bian', { stage: 2 }).block, 4); assert.strictEqual(V2.card('xolo_guide', { stage: 2 }).block, 3);
+});
+test('Attune: the unit above takes the element (stage 2 also below, stage 3 +1 ATK); merges read the new element', () => {
+  let s = cs([[2, 0, 'hongsa'], [3, 0, 'nine_tail_fox'], [4, 0, 'amur_tiger']]);
+  assert.strictEqual(s['2,0'].element, 'fire'); assert.ok(!s['4,0'].element);
+  s = cs([[2, 0, 'hongsa'], [3, 0, V2.card('nine_tail_fox', { stage: 3 })], [4, 0, 'amur_tiger']]);
+  assert.strictEqual(s['4,0'].element, 'fire'); assert.strictEqual(s['2,0'].plus, 1); assert.strictEqual(s['4,0'].plus, 1);
+  s = cs([[2, 0, 'hongsa'], [3, 0, 'nine_tail_fox'], [4, 0, 'singha']]);
+  assert.ok((s['2,0'].merges || []).length === 1 && s['2,0'].merges[0].pair.join() === 'fire,fire'); // Water Hongsa now Fire: Resonance of Fire with Singha
+});
+test('Swap: Tulpar trades tiles with the ally behind after attacking; Reynard with an adjacent ally (stage 2 any ally in its row); the swap persists on the next turns', () => {
+  const sq = squad([[2, 0, 'tulpar'], [3, 0, 'hongsa']]);
+  let out = turn(battle([foe(1, 0, { hp: 90 })]), sq);
+  assert.ok(out.events.some((e) => e.t === 'swap' && e.a === '2,0' && e.b === '3,0'));
+  const moved = V2.applyMoves(sq.placement, sq.army, out.state.rules).placement; // what the next turn sees: the two units trade tiles
+  assert.strictEqual(moved['2,0'], sq.placement['3,0']); assert.strictEqual(moved['3,0'], sq.placement['2,0']);
+  out = turn(out.state, sq);
+  assert.ok(!out.events.some((e) => e.t === 'swap')); // Tulpar now stands at 3,0 with nobody behind it: no second swap
+  out = turn(battle([foe(1, 1, { hp: 90 })]), squad([[2, 1, 'reynard'], [2, 2, 'hongsa']]));
+  assert.ok(out.events.some((e) => e.t === 'swap' && e.a === '2,1' && e.b === '2,2'));
+  out = turn(battle([foe(1, 0, { hp: 90 })]), squad([[2, 0, V2.card('reynard', { stage: 2 })], [2, 3, 'hongsa']]));
+  assert.ok(out.events.some((e) => e.t === 'swap' && e.a === '2,0' && e.b === '2,3'));
+  assert.ok(!turn(battle([foe(1, 0, { hp: 90 })]), squad([[2, 0, 'tulpar']])).events.some((e) => e.t === 'swap'));
+});
+test('Mimic: Tanuki takes the element of the first enemy it hits for the rest of the battle', () => {
+  const sq = squad([[2, 0, 'tanuki_trickster']]);
+  let st = battle([foe(1, 0, { hp: 90, element: 'fire' })]);
+  assert.ok(!stat(st, sq, '2,0').element);
+  st = turn(st, sq).state;
+  assert.strictEqual(stat(st, sq, '2,0').element, 'fire');
+});
+test('Mirror: Langur copies pattern, base ATK and range of the unit to its left (stage 2 +1 range); nothing to copy means no attack', () => {
+  let s = cs([[2, 0, 'hammerhead'], [2, 1, 'langur_mirror']]);
+  assert.strictEqual(s['2,1'].pattern, 'spread'); assert.strictEqual(s['2,1'].atk, 1); assert.strictEqual(s['2,1'].range, 2); assert.ok(E.isAttacker(s['2,1']));
+  assert.strictEqual(cs([[2, 0, 'hammerhead'], [2, 1, V2.card('langur_mirror', { stage: 2 })]])['2,1'].range, 3);
+  assert.ok(!E.isAttacker(cs([[2, 0, 'bixi'], [2, 1, 'langur_mirror']])['2,1']));
+  assert.ok(!E.isAttacker(cs([[2, 1, 'langur_mirror']])['2,1']));
+});
+test('Offering: Scarab Roller consumes the first adjacent Common ally for +2 ATK (stage 2 +3); rarer allies are left alone', () => {
+  let s = cs([[2, 0, 'scarab_roller'], [3, 0, 'hongsa']]);
+  assert.ok(!s['3,0']); assert.strictEqual(s['2,0'].atk, 3);
+  assert.strictEqual(cs([[2, 0, V2.card('scarab_roller', { stage: 2 })], [3, 0, 'hongsa']])['2,0'].atk, 4);
+  s = cs([[2, 0, 'scarab_roller'], [3, 0, 'raiju']]);
+  assert.ok(s['3,0']); assert.strictEqual(s['2,0'].atk, 1);
+});
+test('Brood: Honeybee Hive spawns a 1-ATK Drone every 2nd turn (stage 2 every turn) in an empty adjacent tile; Drones fire and are deterministic', () => {
+  const sq = squad([[3, 1, 'honeybee_hive']]);
+  let st = battle([foe(1, 1, { hp: 99, atk: 0 })]);
+  st = turn(st, sq).state; assert.ok(!(st.rules.v2mem && st.rules.v2mem.moves && st.rules.v2mem.moves.length));
+  let out = turn(st, sq);
+  assert.ok(out.events.some((e) => e.t === 'drone' && e.key === '2,1'));
+  out = turn(out.state, sq);
+  assert.ok(out.events.some((e) => e.t === 'fire' && e.key === '2,1'));
+  assert.ok(turn(battle([foe(1, 1, { hp: 99, atk: 0 })]), squad([[3, 1, V2.card('honeybee_hive', { stage: 2 })]])).events.some((e) => e.t === 'drone'));
+  const run = () => { const q = squad([[3, 1, V2.card('honeybee_hive', { stage: 2 })]]); let s = battle([foe(1, 1, { hp: 99, atk: 0 })]); for (let i = 0; i < 6; i++) s = turn(s, q).state; return JSON.stringify(s); };
+  assert.strictEqual(run(), run());
+  assert.ok(JSON.parse(run()).rules.v2mem.moves.filter((m) => m.op === 'drone').length <= 3, 'at most 3 drones per hive');
+});
+test('Bond: Moon Hare gives an adjacent Sun Crow +1 ATK', () => {
+  const s = cs([[2, 0, 'sun_crow'], [2, 1, 'moon_hare']]);
+  assert.strictEqual(s['2,0'].plus, 1);
+});
+test('stage numbers: Echo at full ATK minus 1, Chain jump +1 and flat 1 (Pegasus), Kunpeng chains at half', () => {
+  const amounts = (card, foes) => hits(turn(battle(foes || [foe(1, 0, { hp: 99 })]), squad([[2, 0, card]])).events).map((x) => x.amount);
+  const big = { level: 5, stars: 3 }; // ATK 4
+  assert.deepStrictEqual(amounts(V2.card('sleipnir', big)), [4, 2]);
+  assert.deepStrictEqual(amounts(V2.card('sleipnir', Object.assign({ stage: 2 }, big))), [4, 3]);
+  assert.deepStrictEqual(amounts(V2.card('thor_s_goats', Object.assign({ stage: 2 }, big))), [4, 3]);
+  const two = () => [foe(1, 0, { hp: 99 }), foe(1, 1, { hp: 99 })];
+  assert.deepStrictEqual(amounts('raiju', two()), [2, 2]);
+  assert.deepStrictEqual(amounts(V2.card('raiju', { stage: 2 }), two()), [2, 3]);
+  assert.deepStrictEqual(amounts(V2.card('pegasus', { stage: 2 }), two()), [1, 1]);
+  assert.deepStrictEqual(amounts(V2.card('kunpeng', { stage: 2 }), two()), [3, 2]);
+  const q = (stage) => squad([[2, 0, V2.card('hongsa', big)], [3, 0, V2.card('qiuniu', { stage })]]);
+  const st = () => battle([foe(1, 0, { hp: 99 })]);
+  assert.deepStrictEqual(hits(turn(st(), q(1)).events).map((x) => x.amount), [4, 2]);
+  assert.deepStrictEqual(hits(turn(st(), q(2)).events).map((x) => x.amount), [4, 3]);
+});
+test('stage buffs: Plume Herald diagonals (stage 3 +1 range for Wings), Crane, Tui and Firefly beside, Golden Turtle and Rain Dragon upper-left, Ratatoskr far unit, Divine Tortoise side columns', () => {
+  assert.strictEqual(cs([[3, 1, V2.card('plume_herald', { stage: 2 })], [2, 0, 'amur_tiger']])['2,0'].plus, 1);
+  assert.strictEqual(cs([[3, 1, 'plume_herald'], [2, 0, 'amur_tiger']])['2,0'].plus, 0);
+  assert.strictEqual(cs([[3, 1, V2.card('plume_herald', { stage: 3 })], [2, 0, 'hongsa']])['2,0'].rangeBonus, 1); // Wings only
+  assert.strictEqual(cs([[3, 1, V2.card('plume_herald', { stage: 3 })], [2, 0, 'amur_tiger']])['2,0'].rangeBonus, 0);
+  assert.strictEqual(cs([[3, 1, V2.card('thousand_year_crane', { stage: 2 })], [3, 0, 'hongsa']])['3,0'].rangeBonus, 1);
+  assert.strictEqual(cs([[3, 1, V2.card('tui_mimic', { stage: 2 })], [3, 2, 'hongsa']])['3,2'].plus, 1);
+  assert.strictEqual(cs([[3, 1, V2.card('golden_turtle', { stage: 2 })], [2, 0, 'hongsa']])['2,0'].rangeBonus, 1);
+  assert.strictEqual(cs([[4, 1, V2.card('rain_dragon_chen', { stage: 2 })], [3, 0, 'hongsa']])['3,0'].plus, 1);
+  assert.strictEqual(cs([[4, 1, V2.card('ratatoskr', { stage: 2 })], [2, 1, 'hongsa']])['2,1'].plus, 2); // up2 plus the far unit's extra
+  assert.strictEqual(cs([[3, 1, V2.card('divine_tortoise', { stage: 2 })], [2, 0, 'bixi']])['2,0'].block, 5);
+  assert.strictEqual(cs([[3, 1, 'divine_tortoise'], [2, 0, 'bixi']])['2,0'].block, 3);
+});
+test('ignoreArmor behaviour works on a hand-built card', () => {
+  const card = { id: 'ia', type: 'v2', v2: true, unit: 'ia', element: 'fire', family: 'wilds', pattern: 'straight', atk: 3, range: 2, beh: [{ p: 'attack', pattern: 'straight', atk: 3, range: 2 }, { p: 'ignoreArmor', n: 2 }] };
+  assert.strictEqual(hits(turn(battle([foe(1, 0, { hp: 20, armor: 2 })]), squad([[2, 0, card]])).events)[0].dmg, 3);
+});
+test('step 3 states are deterministic across all units and stages (two runs, 4 turns, JSON equal)', () => {
+  const run = (id, stage) => {
+    const sq = squad([[2, 1, V2.card(id, { stage, level: 3, stars: 3 })], [3, 1, 'plume_herald'], [3, 2, 'bixi'], [2, 2, classic('swordsman')], [4, 1, 'honu']]);
+    let st = battle([foe(1, 0, { hp: 9 }), foe(1, 1, { hp: 14, element: 'water' }), foe(0, 1, { hp: 14 }), foe(1, 2, { hp: 9 })]);
+    for (let t = 0; t < 4 && st.status === 'playing'; t++) st = turn(st, sq).state;
+    return JSON.stringify(st);
+  };
+  for (const u of Object.values(V2.UNITS)) for (let stage = 1; stage <= V2.maxStage(u); stage++) assert.strictEqual(run(u.id, stage), run(u.id, stage), u.id);
 });
 
 // ---------- determinism and smoke ----------

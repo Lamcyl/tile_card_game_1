@@ -91,7 +91,7 @@
     const placed = Object.values(stats).filter((s) => s.card.v2);
     const out = { fam: {}, own: {}, f: {}, wild: 0, counts: {} };
     if (cfg(rules).sets === false) return out; // dev switch: no family or element set bonuses
-    const squad = (army || []).filter((c) => c && c.v2), pool = squad.length ? squad : placed.map((s) => s.card);
+    const squad = (army || []).filter((c) => c && c.v2 && !c.drone), pool = squad.length ? squad : placed.map((s) => s.card).filter((c) => !c.drone);
     const count = {}; pool.forEach((c) => { count[c.family] = (count[c.family] || 0) + 1; });
     // Wilds: 2 Wilds units let one count as any family, 4 let two (greedy: the family set it lifts most, ties by count then id).
     const wilds = FAMILIES.wilds ? 'wilds' : null;
@@ -123,7 +123,7 @@
   function initStat(s, rules) {
     const v = { echo: false, swift: false, pounce: 0, trample: 0, chain: null, blockBonus: 0, rend: 0, secPlus: 0 };
     for (const b of s.card.beh || []) {
-      if (b.p === 'echo') v.echo = b.factor || 0.5;
+      if (b.p === 'echo') { v.echo = b.factor || 0.5; v.echoMinus = b.minus || 0; }
       else if (b.p === 'swift') v.swift = true;
       else if (b.p === 'scale' && b.when === 'fullHp') v.pounce += b.bonus || 0;
       else if (b.p === 'trample') v.trample = b.behind || 1;
@@ -142,6 +142,10 @@
     if (tgt === 'up') cells = [[r - 1, c]];
     else if (tgt === 'up2') cells = [[r - 1, c], [r - 2, c]];
     else if (tgt === 'adjacent') cells = [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]].concat(diag ? [[r - 1, c - 1], [r - 1, c + 1], [r + 1, c - 1], [r + 1, c + 1]] : []);
+    else if (tgt === 'beside') cells = [[r, c - 1], [r, c + 1]];
+    else if (tgt === 'upleft') cells = [[r - 1, c - 1]];
+    else if (tgt === 'far') cells = [[r - 2, c]];
+    else if (tgt === 'sidecols') cells = rows.flatMap((rr) => [[rr, c - 1], [rr, c + 1]]);
     else if (tgt === 'column') cells = rows.map((rr) => [rr, c]);
     else if (tgt === 'row') cells = Array.from({ length: E.COLS }, (_, cc) => [r, cc]);
     else if (tgt === 'board') cells = rows.flatMap((rr) => Array.from({ length: E.COLS }, (_, cc) => [rr, cc]));
@@ -159,7 +163,39 @@
 
   // Boost phase for V2 cards, after the classic support loop: sets, buffs and grants, scale bonuses, molt, stored next-turn buffs.
   // Adds to plus / rangeBonus / blockBonus (add first, multiply later).
+  // Converters first, so sets, buffs and merges see the final elements and patterns:
+  // Offering (consumes the first adjacent Common ally: up, left, right, down), Mirror (copies pattern, ATK and range of the left unit), Attune (the unit above, with `both` also below), Mimic (element kept in rules.v2mem.mimic).
+  const NEIGH = [[-1, 0], [0, -1], [0, 1], [1, 0]];
+  function convert(stats, rules) {
+    const ordered = Object.values(stats).filter((s) => s.card.v2).sort((a, b) => a.r - b.r || a.c - b.c), mem = rules.v2mem;
+    for (const s of ordered) for (const b of behOf(s, 'offering')) {
+      if (!stats[s.key]) continue;
+      const hit = NEIGH.map(([dr, dc]) => stats[E.key(s.r + dr, s.c + dc)]).find((t) => t && t !== s && t.card.v2 && t.card.rarity === 'common' && !behOf(t, 'offering').length);
+      if (!hit) continue;
+      delete stats[hit.key]; s.plus += b.n || 2; s.v2.offered = hit.key;
+    }
+    for (const s of ordered) for (const b of behOf(s, 'mirror')) {
+      const left = stats[E.key(s.r, s.c - 1)];
+      if (!stats[s.key] || !left || !E.isAttacker(left)) continue;
+      s.card = Object.assign({}, s.card, { pattern: left.pattern }); s.pattern = left.pattern;
+      s.baseAtk = left.baseAtk; s.baseRange = left.baseRange + (b.range || 0); s.v2.mirrors = left.key;
+    }
+    for (const s of ordered) for (const b of behOf(s, 'attune')) {
+      if (!stats[s.key]) continue;
+      const cells = [[-1, 0]].concat(b.both ? [[1, 0]] : []);
+      for (const [dr, dc] of cells) {
+        const t = stats[E.key(s.r + dr, s.c + dc)];
+        if (!t || t === s) continue;
+        t.element = s.card.element; t.v2 = t.v2 || { blockBonus: 0 }; t.v2.attunedBy = s.key;
+        if (b.atk && E.isAttacker(t)) t.plus += b.atk;
+        s.boosts.push(t.key);
+      }
+    }
+    if (mem && mem.mimic) for (const s of ordered) if (stats[s.key] && mem.mimic[s.card.id] && behOf(s, 'mimic').length) s.element = mem.mimic[s.card.id];
+  }
+
   function boost(stats, rules, army, turn) {
+    convert(stats, rules);
     const keys = Object.keys(stats), mem = rules.v2mem;
     const cards = Object.values(stats).filter((s) => s.card.v2);
     const sets = computeSets(stats, army, rules); SETS.set(stats, sets);
@@ -187,6 +223,7 @@
           for (const tk of targetTiles(b.target, s, rules, b.diag)) {
             const t = stats[tk];
             if (!t) continue;
+            if (b.only && t.card.unit !== b.only) continue; // Bond: only the named partner
             const kin = kinMatch(b, s, t);
             if (b.kinOnly && !kin) continue;
             const amount = b.amount + (kin && !b.kinOnly && b.kin.amt ? b.kin.amt : 0) + plusHerald;
@@ -201,7 +238,7 @@
             const t = stats[tk];
             if (!t || !E.isAttacker(t)) continue;
             t.v2 = t.v2 || { blockBonus: 0 };
-            if (b.gives === 'echo') t.v2.echo = t.v2.echo || 0.5;
+            if (b.gives === 'echo') { t.v2.echo = t.v2.echo || b.factor || 0.5; t.v2.echoMinus = Math.max(t.v2.echoMinus || 0, b.minus || 0); }
             else if (b.gives === 'swift') t.v2.swift = true;
             t.boostedBy.push(s.key); s.boosts.push(tk);
           }
@@ -327,6 +364,16 @@
   }
   function emit(T, ev) { T.events.push(ev); }
 
+  // The body behind e in column col (past its rear edge), the front body of a column, and the bodies in a column.
+  function behindOf(T, e, col) {
+    let behind = null;
+    for (let r = e.row - T.dOf(e); r >= -1 && !behind; r--) behind = T.enemyAt(T.state.enemies, r, col);
+    if (!behind || behind === e || (behind.row === -1 && !T.gateOpen(T.state.enemies, col))) return null;
+    return behind;
+  }
+  const frontOf = (T, col) => [1, 0, -1].map((r) => T.enemyAt(T.state.enemies, r, col)).find(Boolean) || null; // the boss row is only found when rows 1 and 0 are empty (gate)
+  const inColumn = (T, col) => T.state.enemies.filter((o) => o.alive && !isBarrel(T, o) && T.cellsOf(o).some(([, c]) => c === col));
+
   // Apply one status leaf to a body (statuses live in e.st).
   function applyStatus(T, ctx, e, leaf) {
     if (!e.alive || isBarrel(T, e)) return;
@@ -345,7 +392,7 @@
       if (list.length < 2) list.push({ t });
       if (had && ctx.unit && !st.freezeCd) { st.frozen = true; st.freezeCd = 3; emit(T, { t: 'freeze', id: e.id, key: s.key }); } // an Ice hit on a Chilled body
     } else if (name === 'sunder') st.shred = (st.shred || 0) + n;
-    else if (name === 'mark') st.mark = true;
+    else if (name === 'mark') { st.mark = true; if (leaf.turns) st.markT = Math.max(st.markT || 0, leaf.turns); else delete st.markT; } // a unit Mark with `turns` lapses at the end of that turn
     else if (name === 'hold') {
       if (st.holdCd > 0 || st.hold) return;
       st.hold = true; st.holdCool = leaf.cooldown || 0;
@@ -404,7 +451,14 @@
     if (leaf.andBlock && once(v, 'guard+')) { const m = mem(); m.guard = m.guard || {}; m.guard[s.c] = (m.guard[s.c] || 0) + leaf.andBlock; } // Resonance of Water and Earth: this column blocks more
     if (leaf.p === 'onHit') {
       if (leaf.op === 'cleanse') { if (once(v, 'cleanse:' + e.id)) cleanse(T, ctx, e, leaf.what, leaf.turns); return; }
+      if (leaf.centreOnly && ctx.col !== undefined && ctx.col !== s.c) return; // Spread: only the centre target
+      if (leaf.frontOnly && !once(v, 'front:' + leaf.status)) return; // Pierce: only the first (front) body it hits
       const targets = [e];
+      // unit extensions per stage: the whole column, the front body of the neighbouring column, the body behind, the bodies beside
+      if (leaf.column && once(v, 'column:' + leaf.status)) targets.push(...inColumn(T, s.c).filter((o) => o !== e));
+      if (leaf.alsoColumn && once(v, 'alsoCol:' + leaf.status)) { const f = frontOf(T, s.c + 1 < E.COLS ? s.c + 1 : s.c - 1); if (f && !targets.includes(f)) targets.push(f); }
+      if (leaf.alsoBehind) { const b = behindOf(T, e, ctx.col !== undefined ? ctx.col : e.col); if (b && !targets.includes(b)) targets.push(b); }
+      if (leaf.alsoBeside) for (const o of neighbours(T, e).filter((x) => x.row === e.row && !targets.includes(x))) targets.push(o);
       if (leaf.area === 'neighbours' && once(v, 'area:' + leaf.status)) targets.push(...neighbours(T, e));
       if (leaf.spreadTo && once(v, 'spread:' + leaf.status)) targets.push(...neighbours(T, e).filter((o) => lower(o.element) === leaf.spreadTo.element));
       for (const t of targets) applyStatus(T, ctx, t, leaf);
@@ -417,13 +471,73 @@
       else if (!once(v, 'heal')) return;
       heal(T, leaf.n, 'v2');
     } else if (leaf.p === 'push') {
-      if (once(v, 'push:' + e.id)) T.after.push(() => { push(T, e, leaf.columns || 1); if (leaf.andStatus) applyStatus(T, ctx, e, { status: leaf.andStatus }); });
+      if (once(v, 'push:' + e.id)) {
+        const side = leaf.alsoNeighbour ? neighbours(T, e).find((o) => o.row === e.row) : null; // Cheonma stage 2: the body beside it is pushed too
+        T.after.push(() => { push(T, e, leaf.columns || 1); if (side) push(T, side, leaf.columns || 1); if (leaf.andStatus) applyStatus(T, ctx, e, { status: leaf.andStatus }); });
+      }
     } else if (leaf.p === 'buff') {
       if (leaf.nextTurn && leaf.effect === 'atk' && once(v, 'buffNext')) { const m = mem(); m.buffNext = m.buffNext || {}; m.buffNext[s.c] = Math.min(leaf.cap || 99, (m.buffNext[s.c] || 0) + leaf.amount); }
     } else if (leaf.p === 'colGuard') {
       if (once(v, 'guard')) { const m = mem(); m.guard = m.guard || {}; m.guard[s.c] = (m.guard[s.c] || 0) + leaf.block; }
     } else if (leaf.p === 'echo') v.echo = Math.max(v.echo || 0, leaf.factor || 0.5);
     else if (leaf.p === 'trample') v.trample = Math.max(v.trample || 0, leaf.behind || 1);
+  }
+
+  // ---------- kills, rebirth, moves ----------
+  // onKill leaves: Souls (a run currency, counted in state.soulsBonus), hero heal. A leaf with `any` counts every kill on the board, else only the owner's.
+  function onKill(T, s, e) {
+    const state = T.state, ty = T.ENEMY_TYPES[e.type] || {}, elite = !!ty.boss;
+    for (const o of Object.values(T.stats)) {
+      if (!o.card.v2) continue;
+      for (const b of behOf(o, 'onKill')) {
+        if (o !== s && !b.any) continue;
+        const n = (b.souls || 0) + (elite ? b.eliteExtra || 0 : 0) + (elite && e.row === T.BOSS_ROW ? b.bossExtra || 0 : 0);
+        if (n > 0) { state.soulsBonus = (state.soulsBonus || 0) + n; emit(T, { t: 'souls', n, id: e.id, key: o.key }); }
+        if (b.healHero) {
+          const k = 'kheal:' + o.key;
+          if (b.once && T.scratch[k]) continue;
+          T.scratch[k] = true; heal(T, b.healHero, 'v2');
+        }
+      }
+    }
+  }
+  // Rebirth: once per battle a Phoenix on the board raises the hero at half HP (the engine calls this when the hero fell).
+  function rebirth(T) {
+    const state = T.state;
+    if (state.hp > 0) return;
+    for (const s of Object.values(T.stats)) for (const b of behOf(s, 'heroGuard')) {
+      if (!b.rebirth) continue;
+      const mem = memOf(state.rules);
+      if (mem.reborn) return;
+      mem.reborn = 1; state.hp = Math.max(1, Math.ceil(state.maxHp / 2));
+      if (b.keepShield) state.barrier = (state.barrier || 0) + b.keepShield;
+      emit(T, { t: 'revive', hp: state.hp, source: 'rebirth', key: s.key });
+      return;
+    }
+  }
+  // Swaps and Drones change the board for the rest of the battle: they are stored as a move list in rules.v2mem.moves and replayed on the placement
+  // at the start of every turn (a placement is the same object turn after turn; a UI that lets the player rearrange must clear the list).
+  const droneCard = (id) => ({ id, type: 'v2', v2: true, unit: 'drone', name: 'Drone', element: '', family: '', sub: 'drone', role: { atk: 100, buff: 0, guard: 0 }, stage: 1, level: 1, stars: 1,
+    rarity: 'common', cp: 0, drone: true, beh: [{ p: 'attack', pattern: 'straight', atk: 1, range: 2 }], pattern: 'straight', atk: 1, range: 2 });
+  function applyMoves(placement, army, rules) {
+    const mem = rules.v2mem;
+    if (!mem || !mem.moves || !mem.moves.length) return { placement, army };
+    const pl = Object.assign({}, placement), extra = [];
+    for (const m of mem.moves) {
+      if (m.op === 'swap') { const a = pl[m.a], b = pl[m.b]; if (b === undefined) delete pl[m.a]; else pl[m.a] = b; if (a === undefined) delete pl[m.b]; else pl[m.b] = a; }
+      else if (m.op === 'drone') { pl[m.key] = m.id; extra.push(droneCard(m.id)); }
+    }
+    return { placement: pl, army: army.concat(extra) };
+  }
+  // The partner tile a Swap unit trades with: 'behind', 'adjacent' (left, right, up, down) or 'row' (nearest in its row, ties left).
+  function swapPartner(T, s, how) {
+    const has = (r, c) => { const t = T.stats[E.key(r, c)]; return t && t !== s && !T.scratch.moved[t.key] ? t.key : null; };
+    if (how === 'behind') return has(s.r + 1, s.c);
+    if (how === 'row') {
+      for (let d = 1; d < E.COLS; d++) { const k = has(s.r, s.c - d) || has(s.r, s.c + d); if (k) return k; }
+      return null;
+    }
+    return has(s.r, s.c - 1) || has(s.r, s.c + 1) || has(s.r - 1, s.c) || has(s.r + 1, s.c);
   }
 
   // ---------- the hit ----------
@@ -457,6 +571,7 @@
         else if (l.p === 'ignoreArmor') { armorN = Math.max(armorN, l.n || 0); for (const w of l.andIgnore || []) bypass.push(w === 'hide' ? 'ward' : w === 'veiled' ? 'veil' : w); }
       }
     }
+    for (const b of behOf(s, 'ignoreArmor')) armorN = Math.max(armorN, b.n || 1);
     // flat parts, then the affinity multiplier
     const st = e.st;
     let base = x.dmg + hitBonus(s, e) + bonus;
@@ -477,11 +592,18 @@
     const armor = x.noArmor === true ? true : Math.max(armorN, sets.f.armorIgnore || 0) || false;
     const carry = s.card.v2 ? (x.canCarry && v.rend ? v.rend : false) : x.canCarry;
     ctx.base = base;
+    const wasAlive = e.alive;
     T.dealDamage(state, e, dmg, carry, events, s.key, armor, x.col, bypass.length ? bypass : undefined);
+    if (wasAlive && !e.alive) onKill(T, s, e);
+    // Mimic: the first body it hits gives it that element for the battle
+    if (!fromEffect && ee && s.card.v2 && behOf(s, 'mimic').length) {
+      const m = memOf(rules); m.mimic = m.mimic || {};
+      if (!m.mimic[s.card.id]) { m.mimic[s.card.id] = ee; s.element = ee; emit(T, { t: 'mimic', key: s.key, element: ee }); }
+    }
     // effects after the hit
     ctx.unit = true;
     T.after = [];
-    if (s.card.v2) for (const b of behOf(s, 'onHit')) applyLeaf(T, ctx, b);
+    if (s.card.v2) for (const b of s.card.beh || []) if (b.p === 'onHit' || b.p === 'push') applyLeaf(T, ctx, b);
     ctx.unit = false;
     if (!fromEffect && weak) { ctx.src = 'weakness'; for (const l of flatten(weak.effect)) applyLeaf(T, ctx, l); }
     if (leaves.length) { ctx.src = 'merge'; for (const l of leaves) if (l.p !== 'bonusDmg' && l.p !== 'ignoreArmor') applyLeaf(T, ctx, l); }
@@ -495,7 +617,8 @@
   // Damage of the chain jump: the behaviour's factor (the Conduct weakness hit carries its own 0.5), plus the Chain set bonuses.
   function chainDmg(T, s, dmg, target) {
     const ch = (s.v2 && s.v2.chain) || { factor: 1 }, f = ch.factor !== undefined ? ch.factor : 1, sets = SETS.get(T.stats) || { f: {} };
-    return (f === 1 ? dmg : Math.max(1, Math.ceil(dmg * f))) + (sets.f.chainPlus || 0) + ((s.v2 && s.v2.secPlus) || 0);
+    const base = ch.flat !== undefined ? ch.flat : f === 1 ? dmg : Math.max(1, Math.ceil(dmg * f)); // `flat`: a fixed jump (Pegasus stage 2)
+    return base + (ch.plus || 0) + (sets.f.chainPlus || 0) + ((s.v2 && s.v2.secPlus) || 0);
   }
 
   // Start of the Fire phase: set up the toolbox, announce merges, Purge (Light 2-set).
@@ -512,6 +635,12 @@
   function afterFire(T, x) {
     const { s, hits, dmg, noArmor } = x, v = s.v2, state = T.state;
     if (!v) return;
+    if (hits.length && s.card.v2) for (const b of behOf(s, 'swap')) { // Swap: after attacking, trade tiles with an ally (applied at the end of the turn)
+      T.scratch.moved = T.scratch.moved || {}; T.scratch.swaps = T.scratch.swaps || [];
+      if (T.scratch.moved[s.key]) continue;
+      const k = swapPartner(T, s, b.with || 'adjacent');
+      if (k) { T.scratch.moved[s.key] = T.scratch.moved[k] = true; T.scratch.swaps.push([s.key, k]); }
+    }
     if (v.trample) {
       const amt = v.trample < 1 ? Math.max(1, Math.ceil(dmg * v.trample)) : v.trample + (v.secPlus || 0);
       for (const { e, col } of hits) {
@@ -523,7 +652,7 @@
       }
     }
     if (v.echo) {
-      const half = Math.ceil(dmg * v.echo), again = T.hitsFor(s, state.enemies);
+      const half = Math.max(1, Math.ceil(dmg * v.echo) - (v.echoMinus || 0)), again = T.hitsFor(s, state.enemies);
       T.events.push({ t: 'echo', key: s.key, atk: half, targets: again.map((h) => h.e.id) });
       for (const { e, col } of again) {
         if (!e.alive) continue;
@@ -569,9 +698,27 @@
       atks.set(e.id, skip.has(e.id) ? 0 : a);
       if (!skip.has(e.id) && hasKw(e, 'chain')) chainers.push(e);
     }
+    // Decoy: the first strike in the decoy's column is also taken by the decoy (its block value, on top of the column pool; skewer ignores it).
+    // Ward (heroGuard negate): the first strike of the battle that would hurt is negated; `second` adds one more in a different column.
+    const placed = Object.values(T.stats).filter((o) => o.card.v2), decoyBlock = {}, decoyUsed = {};
+    for (const o of placed) if (behOf(o, 'decoy').length) decoyBlock[o.c] = (decoyBlock[o.c] || 0) + (o.block || 0);
+    let negates = 0;
+    for (const o of placed) for (const b of behOf(o, 'heroGuard')) if (b.negate) negates += 1 + (b.second ? 1 : 0);
     return {
       atk: (e) => (atks.has(e.id) ? atks.get(e.id) : e.atk), skewer: (e) => hasKw(e, 'skewer'), safe: state.turn === 1 && !!sets.f.safeT1,
       chainers: () => chainers.filter((e) => e.alive),
+      decoy: (e, col, remaining) => {
+        if (!decoyBlock[col] || decoyUsed[col]) return 0;
+        decoyUsed[col] = true;
+        return hasKw(e, 'skewer') ? 0 : Math.max(0, Math.min(remaining, decoyBlock[col]));
+      },
+      negate: (col, dmg) => {
+        if (!negates || dmg <= 0) return dmg;
+        const mem = memOf(state.rules), used = mem.negated || (mem.negated = []);
+        if (used.length >= negates || used.includes(col)) return dmg;
+        used.push(col); T.events.push({ t: 'negate', col, amount: dmg });
+        return 0;
+      },
     };
   }
   function afterStrike(T, e, col, dmg) {
@@ -585,12 +732,32 @@
   function endTurn(T) {
     const { state, stats, events } = T, sets = SETS.get(stats) || { f: {} };
     let healN = sets.f.healTurn || 0;
-    for (const s of Object.values(stats)) if (s.card.v2) for (const b of behOf(s, 'heroHeal')) healN += b.n + (sets.f.bloomPlus || 0);
+    const hurt = events.some((ev) => ev.t === 'strike' && ev.dmg > 0);
+    for (const s of Object.values(stats)) if (s.card.v2) for (const b of behOf(s, 'heroHeal')) {
+      const more = b.n2 && ((b.when2 === 'struck' && hurt) || (b.when2 === 'belowHalf' && state.hp * 2 < state.maxHp)); // stage 2 Bloom: heals more when it matters
+      healN += (more ? b.n2 : b.n) + (sets.f.bloomPlus || 0);
+    }
     if (healN) heal(T, healN, 'v2');
+    // Swaps and Brood: stored as moves, replayed on the placement from the next turn
+    const mv = (T.scratch.swaps && T.scratch.swaps.length) || Object.values(stats).some((s) => s.card.v2 && behOf(s, 'brood').length) ? memOf(state.rules) : null; // no memory unless something moves
+    for (const [a, b] of T.scratch.swaps || []) { (mv.moves = mv.moves || []).push({ op: 'swap', a, b }); emit(T, { t: 'swap', a, b }); }
+    if (mv) for (const s of Object.values(stats)) for (const b of behOf(s, 'brood')) {
+      if (!s.card.v2 || state.turn % (b.every || 2) !== 0) continue;
+      const mine = (mv.moves || []).filter((m) => m.op === 'drone' && m.from === s.card.id).length;
+      if (mine >= (b.cap || 3)) continue;
+      const taken = new Set(Object.keys(stats).concat((mv.moves || []).filter((m) => m.op === 'drone').map((m) => m.key)));
+      const spot = NEIGH.map(([dr, dc]) => E.key(s.r + dr, s.c + dc)).find((k) => E.playerTilesFor(state.rules).includes(k) && !taken.has(k));
+      if (!spot) continue;
+      mv.droneN = (mv.droneN || 0) + 1;
+      const id = 'drone:' + mv.droneN;
+      (mv.moves = mv.moves || []).push({ op: 'drone', key: spot, id, from: s.card.id });
+      emit(T, { t: 'drone', key: spot, id, from: s.key });
+    }
     for (const e of state.enemies) {
       const st = e.st;
       if (!st) continue;
       if (st.chill) st.chill = st.chill.map((c) => (c.t === null ? c : { t: c.t - 1 })).filter((c) => c.t === null || c.t > 0);
+      if (st.markT) { st.markT -= 1; if (st.markT <= 0) { st.mark = false; delete st.markT; } }
       if (st.holdCd > 0) st.holdCd -= 1;
       if (st.freezeCd > 0) st.freezeCd -= 1;
       st.hold = false;
@@ -610,7 +777,7 @@
   }
 
   const V2 = { load, card, implemented, maxStage, applyPatches, initStat, boost, finish, order, hitBonus, chainDmg, afterFire, endTurn, startTurn, hit, statusPhase, preStrike, afterStrike,
-    guardOf, suppressed, passMerges, merges, mul, multOf, colAttackers, computeSets, ELEMENT_SETS,
+    guardOf, suppressed, passMerges, applyMoves, rebirth, merges, mul, multOf, colAttackers, computeSets, ELEMENT_SETS,
     get UNITS() { return UNITS; }, get ELEMENTS() { return ELEMENTS; }, get FAMILIES() { return FAMILIES; }, get AFFINITY() { return AFFINITY; }, get WEAKNESS_HITS() { return WEAK; }, get MERGES() { return MERGES; }, get MERGE_RULES() { return MERGE_RULES; } };
   if (E) E.hooks.v2 = V2;
   root.V2 = V2;

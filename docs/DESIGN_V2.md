@@ -37,7 +37,7 @@ Concept alternatives (spirit court, beast-folk tribes, summoned totems) stay as 
 
 **Fire, Water, Wood, Earth, Wind, Lightning, Light, Shadow.** Earth also covers stone, sand, metal and crystal. Shadow is mostly an enemy and trickster element. **Ice is a flavour of Water** (Chill; a second Ice hit on a Chilled enemy Freezes it) and follows the Water chart. Wind (push, reach) and Lightning (chain, burst) are separate elements since V2.2. Units and enemies keep a `flavour` tag (`ice`) in the data; bestiary variant "frost" is Water/Ice, "storm" is **Lightning**.
 
-Unit split (89): Earth 17, Fire 15, Water 18 (13 plus 5 Ice), Wood 13, Wind 9, Light 7, Shadow 6, **Lightning 4** (Kunpeng, Pegasus, Thor's Goats, Raiju). Lightning is thin; see open decision 4.
+Unit split (92): Earth 17, Fire 15, Water 18 (13 plus 5 Ice), Wood 13, Wind 9, Light 7, Shadow 6, **Lightning 7** (Kunpeng, Pegasus, Thor's Goats, Raiju, plus Kui, Electric Eel and Storm Petrel added in the step 3 unit pass; open decision 4d closed).
 
 ### How elements work in battle
 
@@ -460,7 +460,7 @@ Decided in V2.1 and removed: nine elements (V2.2: 8), Storm needing more units, 
 1. **Level curve and rewards past Lv20.** The enemy stat rule is set (`WORLD_PROGRESSION.md` 4.1); the reward curve w(L) = (L/5)^1.5 reaches 36x at Lv55. Propose capping the exponent after Lv20 or by flattening Souls; needs the campaign sim.
 2. **Spread counts once per column** (10.2). Confirm the "twice" rule, or switch to once per body and raise Spread-unit ATK.
 3. **Boss-row gate with no exceptions** (10.4). Confirm that Pierce cannot bypass it, or allow Pierce to reach it when exactly one enemy stands in front.
-4. **Affinity and merges (V2.2):** (a) confirm the chart and the 12 weakness hits; (b) confirm Own element as the default and keep Best of column as a test switch only; (c) are merges automatic or does the player tap to fire them (recommended: automatic, shown in the preview)? (d) Lightning has only 4 units: add 2 to 3 (Thunderbird-style Wings, a Hooves Lightning beast) in a later unit pass; (e) merge power vs unit count: the 3-merge column is the strongest board shape, tune in step 5; (f) Radiance and Eclipse repeat across six pairs: keep uniform or give each its own flavour?
+4. **Affinity and merges (V2.2):** (a) confirm the chart and the 12 weakness hits; (b) confirm Own element as the default and keep Best of column as a test switch only; (c) are merges automatic or does the player tap to fire them (recommended: automatic, shown in the preview)? (d) Lightning had only 4 units: **done in step 3, three added** (Kui Hooves, Electric Eel Scales, Storm Petrel Wings Kin buffer); (e) merge power vs unit count: the 3-merge column is the strongest board shape, tune in step 5; (f) Radiance and Eclipse repeat across six pairs: keep uniform or give each its own flavour?
 5. **Rend:** confirm cap 3 and that any unit can gain it by item, relic and Camp.
 6. **Hybrid tax removal:** check in the sim that free hybrids do not dominate (the budget cap is the only limit now).
 7. **Evolution:** automatic at mastery or a choice at stage 2 with two branches? Legendary born at stage 2 or all lines three stages?
