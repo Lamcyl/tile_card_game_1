@@ -1,6 +1,6 @@
 # V2 Units and Reactions: Implementation Plan
 
-Status: plan only, no code changed. Source design: `DESIGN_V2.md` (V2.1) and `docs/data/*.json`. Target: the developer test page (`prototype/dev.js`, `design.js`, `js/fights.js`) behind a rules flag. The overworld (`index.html`) keeps the current roster and rules untouched.
+Status: step 1 done (core data and engine seam); steps 2 to 5 open. Source design: `DESIGN_V2.md` (V2.1) and `docs/data/*.json`. Target: the developer test page (`prototype/dev.js`, `design.js`, `js/fights.js`) behind a rules flag. The overworld (`index.html`) keeps the current roster and rules untouched.
 
 ## 0. Principles
 
@@ -197,3 +197,19 @@ Steps are strictly sequential (each depends on the previous). Each step ends wit
 | Family count on squad vs board | Squad for family sets, board for resonance (as DESIGN_V2 3 and 2). Confirm during the balance step |
 | Elite and boss reaction resistance | Never in this work; enemies have no immunities unless tagged |
 | `wet`, `chill`, `chain` keyword meaning on enemies | Interpreted as above (starts Wet; strike chills; strike chains); confirm with the author of `build-fights.mjs` |
+
+## 10. Step notes
+
+### Step 1 (core data and engine seam)
+
+Done: `CARD_TYPES.v2` (role `hybrid`) and helpers `isAttacker/isSupport/isDefender` in `engine.js` (the only raw `.role ===` left in the engine is inside the helpers; the UI files `battle.js`, `app.js`, `dev.js` still test `type.role` and are step 4 work); `prototype/js/v2.js` (`load`, `card`, stage patches, hooks); `Engine.hooks.v2` registry, every call guarded by `rules.v2`; behaviours for 58 units (51 full, 7 simplified), 31 marked `impl: 'pending'`; `tools/v2-coverage.js`; `tools/test-v2.js` (25 tests incl. two fuzz runs against `git show 33b83f5`, ~1050 battles each, real V2 fights included); `dev.js` imports `v2.js`.
+
+Decisions and readings:
+- `impl` also has the value `pending` (behaviours not authored yet, step 3 or later); `implNote` says which primitive is missing. Pegasus is pending because of its Water reaction rider.
+- Primitives done: attack, skyfall (range 99), trample, swift, echo (second volley, half ATK rounded up, repeats the pattern fresh), chain (as classic `fx.chain`), scale (fullHp as per-hit Pounce; lastPlaced, firstPlaced, perFamilyInRow, perFamily, perElement), molt, buff (up, up2, adjacent, column, row, board; effects atk, range, block; `kin` and `kinOnly`; `diag` for patches), grant (echo, swift), shield (`perKin`, `grow`).
+- Units with no stated ATK use ATK 2. Divine Tortoise has no stated base block, so Shield 2 is assumed (simplified). Polar Bear reads as: adjacent Shields +1 block (Water +2), adjacent Water attackers +1 ATK.
+- Latecomer/Firstborn use the key order of `placement` (insertion order). The UI must build the placement in the order cards were placed.
+- Molt and Carapace counters live in `state.rules.v2mem` (per card id, created only when such a unit is on the board). Molt counts turns on the board; Carapace grows on turns with no enemy strike in its column and never shrinks.
+- Chain halves against a target that is Wet or whose element is in the behaviour's `wetVs` list (data: `["water"]`). Element ids are never listed in code: they come from `elements.json` and unit data, because the element list may change (Wind and Lightning may split; enemy strengths and weaknesses are not implemented).
+- `Progress.squadCp` V2 lookup is not done (step 4, with the team editor).
+- With the flag on and classic cards the engine still matches 33b83f5 exactly (Rend is step 2).
