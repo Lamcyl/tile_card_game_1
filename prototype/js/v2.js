@@ -179,7 +179,7 @@
   // Damage of the chain jump: factor, or the wet factor against a Water or Wet target.
   function chainDmg(s, dmg, target) {
     const ch = (s.v2 && s.v2.chain) || { factor: 1 };
-    const wet = target.element === 'water' || !!(target.st && target.st.wet);
+    const wet = (ch.wetVs || []).includes(target.element) || !!(target.st && target.st.wet); // element ids come from the unit data (elements.json), never a list here
     const f = wet && ch.wetFactor !== undefined ? ch.wetFactor : ch.factor !== undefined ? ch.factor : 1;
     return f === 1 ? dmg : Math.max(1, Math.ceil(dmg * f));
   }

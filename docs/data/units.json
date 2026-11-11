@@ -2115,6 +2115,9 @@
     "p": "chain",
     "factor": 1,
     "wetFactor": 0.5,
+    "wetVs": [
+     "water"
+    ],
     "jumps": 1
    }
   ],
@@ -3082,6 +3085,9 @@
     "p": "chain",
     "factor": 1,
     "wetFactor": 0.5,
+    "wetVs": [
+     "water"
+    ],
     "jumps": 1
    }
   ],
@@ -3983,6 +3989,9 @@
     "p": "chain",
     "factor": 1,
     "wetFactor": 0.5,
+    "wetVs": [
+     "water"
+    ],
     "jumps": 1
    }
   ],

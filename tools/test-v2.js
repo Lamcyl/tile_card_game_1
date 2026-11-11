@@ -16,7 +16,7 @@ V2.load(read('units.json'), read('elements.json'), read('families.json'));
 
 let passed = 0, failed = 0;
 function test(name, fn) {
-  try { fn(); passed++; console.log('ok   ' + name); } catch (err) { failed++; console.log('FAIL ' + name + '\n     ' + String(err.stack || err).split('\n').slice(0, 4).join('\n     ')); }
+  try { fn(); passed++; console.log('ok   ' + name); } catch (err) { failed++; console.log('FAIL ' + name + '\n     ' + String(err.stack || err).split('\n').slice(0, 9).join('\n     ')); }
 }
 const noFuzz = process.argv.includes('--no-fuzz');
 
@@ -96,7 +96,7 @@ test('role helpers: bastion is attacker and defender, herald only support, class
 
 // ---------- attack patterns ----------
 test('attack: straight, spread and pierce hit as in the classic rules', () => {
-  const sq = squad([[2, 1, 'hongsa'], [2, 3, 'hammerhead'], [3, 4, 'karkadann']]);
+  const sq = squad([[2, 1, 'hongsa'], [2, 3, 'hammerhead'], [2, 4, 'karkadann']]);
   const st = battle([foe(1, 1), foe(0, 1), foe(1, 2), foe(1, 4), foe(0, 4), foe(1, 3)]);
   const r = turn(st, sq);
   const dm = (id) => hits(r.events).filter((h) => h.id === id).map((h) => h.amount);
@@ -326,6 +326,7 @@ function fuzz(flagOn) {
   const file = baseEngine();
   if (!file) { console.log('     (skipped: no base engine)'); return; }
   const Old = require(file);
+  globalThis.Engine = E; // requiring the old engine overwrote the global that fights.js reads
   const rng = makeRng(flagOn ? 777 : 2024);
   let compared = 0, battles = 0;
   const bigFp = ['1x1', '1x1', '1x1', '2x1', '1x2', '2x2', '3x1'];
