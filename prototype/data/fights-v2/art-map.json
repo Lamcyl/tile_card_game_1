@@ -1,0 +1,1047 @@
+{
+ "note": "Placeholder drawings (prototype/assets/units) per monster name. match: exact = same name, close = the drawing's name is part of the monster name (or the reverse), fallback = same family / kind, picked by name hash.",
+ "stats": {
+  "exact": 66,
+  "close": 6,
+  "fallback": 187,
+  "total": 259
+ },
+ "monsters": {
+  "Afanc": {
+   "art": "jingwei",
+   "match": "fallback"
+  },
+  "African elephant": {
+   "art": "baihu",
+   "match": "fallback"
+  },
+  "Ahool": {
+   "art": "scylla",
+   "match": "fallback"
+  },
+  "Ahuizotl": {
+   "art": "kappa",
+   "match": "fallback"
+  },
+  "Aitvaras": {
+   "art": "kasa-obake",
+   "match": "fallback"
+  },
+  "Albasty": {
+   "art": "jangseung",
+   "match": "fallback"
+  },
+  "Alebrije": {
+   "art": "jangseung",
+   "match": "fallback"
+  },
+  "Alkonost": {
+   "art": "alkonost",
+   "match": "exact"
+  },
+  "Almas": {
+   "art": "minotaur",
+   "match": "fallback"
+  },
+  "Ammit": {
+   "art": "ammit",
+   "match": "exact"
+  },
+  "Anzû": {
+   "art": "ravens",
+   "match": "fallback"
+  },
+  "Apep (Apophis)": {
+   "art": "apep",
+   "match": "exact"
+  },
+  "Asag": {
+   "art": "buluc-chabtan",
+   "match": "fallback"
+  },
+  "Ba": {
+   "art": "cheonyeo-gwisin",
+   "match": "fallback"
+  },
+  "Baba Yaga": {
+   "art": "medusa",
+   "match": "fallback"
+  },
+  "Bakunawa": {
+   "art": "jormungandr",
+   "match": "fallback"
+  },
+  "Balam": {
+   "art": "balam",
+   "match": "exact"
+  },
+  "Balor": {
+   "art": "dvergr",
+   "match": "fallback"
+  },
+  "Bannik": {
+   "art": "bannik",
+   "match": "exact"
+  },
+  "Banshee": {
+   "art": "dalgyal-gwisin",
+   "match": "fallback"
+  },
+  "Barghest": {
+   "art": "kamaitachi",
+   "match": "fallback"
+  },
+  "Bashe": {
+   "art": "nidhogg",
+   "match": "fallback"
+  },
+  "Basilisk": {
+   "art": "imugi",
+   "match": "fallback"
+  },
+  "Bean-nighe": {
+   "art": "mul-gwisin",
+   "match": "fallback"
+  },
+  "Bhoot": {
+   "art": "gashadokuro",
+   "match": "fallback"
+  },
+  "Bifang": {
+   "art": "yuki-onna",
+   "match": "fallback"
+  },
+  "Black Shuck": {
+   "art": "kamaitachi",
+   "match": "fallback"
+  },
+  "Black mamba": {
+   "art": "nidhogg",
+   "match": "fallback"
+  },
+  "Blue Men of the Minch": {
+   "art": "kappa",
+   "match": "fallback"
+  },
+  "Bulgasari": {
+   "art": "bulgasari",
+   "match": "exact"
+  },
+  "Bull of Heaven": {
+   "art": "xuanwu",
+   "match": "fallback"
+  },
+  "Cabrakan": {
+   "art": "cabrakan",
+   "match": "exact"
+  },
+  "Cadborosaurus": {
+   "art": "rusalka",
+   "match": "fallback"
+  },
+  "Cadejo": {
+   "art": "cadejo",
+   "match": "exact"
+  },
+  "Camazotz": {
+   "art": "camazotz",
+   "match": "exact"
+  },
+  "Caucasian Eagle": {
+   "art": "minotaur",
+   "match": "fallback"
+  },
+  "Centaur": {
+   "art": "dvergr",
+   "match": "fallback"
+  },
+  "Cerberus": {
+   "art": "cerberus",
+   "match": "exact"
+  },
+  "Chac Mool": {
+   "art": "nurikabe",
+   "match": "fallback"
+  },
+  "Chaneque": {
+   "art": "siren",
+   "match": "fallback"
+  },
+  "Charon": {
+   "art": "hel",
+   "match": "fallback"
+  },
+  "Charybdis": {
+   "art": "jingwei",
+   "match": "fallback"
+  },
+  "Cheonyeo Gwisin": {
+   "art": "cheonyeo-gwisin",
+   "match": "exact"
+  },
+  "Chimera": {
+   "art": "chimera",
+   "match": "exact"
+  },
+  "Chupacabra": {
+   "art": "jingwei",
+   "match": "fallback"
+  },
+  "Chōchin-obake": {
+   "art": "chochin-obake",
+   "match": "exact"
+  },
+  "Cipactli": {
+   "art": "apep",
+   "match": "fallback"
+  },
+  "Cockatrice": {
+   "art": "orochi",
+   "match": "fallback"
+  },
+  "Coconut crab": {
+   "art": "jangsan-beom",
+   "match": "fallback"
+  },
+  "Cyclops": {
+   "art": "cyclops",
+   "match": "exact"
+  },
+  "Cŵn Annwn": {
+   "art": "cadejo",
+   "match": "fallback"
+  },
+  "Dalgyal Gwisin": {
+   "art": "dalgyal-gwisin",
+   "match": "exact"
+  },
+  "Dead of Helheim": {
+   "art": "draugr",
+   "match": "fallback"
+  },
+  "Div": {
+   "art": "kui",
+   "match": "fallback"
+  },
+  "Dokkaebi": {
+   "art": "dokkaebi",
+   "match": "exact"
+  },
+  "Dover Demon": {
+   "art": "jingwei",
+   "match": "fallback"
+  },
+  "Dragon (Saint George's)": {
+   "art": "zmey",
+   "match": "fallback"
+  },
+  "Draugen": {
+   "art": "mummy",
+   "match": "fallback"
+  },
+  "Draugr": {
+   "art": "draugr",
+   "match": "exact"
+  },
+  "Dryad": {
+   "art": "jangseung",
+   "match": "fallback"
+  },
+  "Dullahan": {
+   "art": "koschei",
+   "match": "fallback"
+  },
+  "Dvergr": {
+   "art": "dvergr",
+   "match": "exact"
+  },
+  "Each-uisge": {
+   "art": "alux",
+   "match": "fallback"
+  },
+  "Echidna": {
+   "art": "hydra",
+   "match": "fallback"
+  },
+  "Eikþyrnir": {
+   "art": "jangsan-beom",
+   "match": "fallback"
+  },
+  "Empusa": {
+   "art": "jorogumo",
+   "match": "fallback"
+  },
+  "Feathered serpent (Teotihuacan)": {
+   "art": "apep",
+   "match": "fallback"
+  },
+  "Fomorians": {
+   "art": "dvergr",
+   "match": "fallback"
+  },
+  "Fresno Nightcrawler": {
+   "art": "kappa",
+   "match": "fallback"
+  },
+  "Fáfnir": {
+   "art": "apep",
+   "match": "fallback"
+  },
+  "Gabriel Hounds": {
+   "art": "bannik",
+   "match": "fallback"
+  },
+  "Gallu": {
+   "art": "kui",
+   "match": "fallback"
+  },
+  "Gargoyle": {
+   "art": "nurikabe",
+   "match": "fallback"
+  },
+  "Garmr": {
+   "art": "haetae",
+   "match": "fallback"
+  },
+  "Gashadokuro": {
+   "art": "gashadokuro",
+   "match": "exact"
+  },
+  "Ghoul": {
+   "art": "hel",
+   "match": "fallback"
+  },
+  "Glaistig": {
+   "art": "bannik",
+   "match": "fallback"
+  },
+  "Gnome": {
+   "art": "chochin-obake",
+   "match": "fallback"
+  },
+  "Golden eagle": {
+   "art": "tengu",
+   "match": "fallback"
+  },
+  "Golem": {
+   "art": "jangseung",
+   "match": "fallback"
+  },
+  "Gorilla": {
+   "art": "komainu",
+   "match": "fallback"
+  },
+  "Graeae": {
+   "art": "morana",
+   "match": "fallback"
+  },
+  "Griffin": {
+   "art": "griffin",
+   "match": "exact"
+  },
+  "Grootslang": {
+   "art": "hydra",
+   "match": "fallback"
+  },
+  "Gumiho": {
+   "art": "gumiho",
+   "match": "exact"
+  },
+  "Gwyllgi": {
+   "art": "komainu",
+   "match": "fallback"
+  },
+  "Hades": {
+   "art": "poseidon",
+   "match": "fallback"
+  },
+  "Hammerhead shark": {
+   "art": "mul-gwisin",
+   "match": "fallback"
+  },
+  "Hantu Air": {
+   "art": "dalgyal-gwisin",
+   "match": "fallback"
+  },
+  "Harpy": {
+   "art": "harpy",
+   "match": "exact"
+  },
+  "Haugbui": {
+   "art": "hel",
+   "match": "fallback"
+  },
+  "Hellequin": {
+   "art": "mul-gwisin",
+   "match": "fallback"
+  },
+  "Heraldic lion rampant": {
+   "art": "jangsan-beom",
+   "match": "fallback"
+  },
+  "Hiiden hirvi": {
+   "art": "sleipnir",
+   "match": "fallback"
+  },
+  "Hippogriff": {
+   "art": "bennu",
+   "match": "fallback"
+  },
+  "Hitotsume-kozō": {
+   "art": "hitotsume-kozo",
+   "match": "exact"
+  },
+  "Hræsvelgr": {
+   "art": "cyclops",
+   "match": "fallback"
+  },
+  "Huay Chivo": {
+   "art": "huay-chivo",
+   "match": "exact"
+  },
+  "Huldra": {
+   "art": "jorogumo",
+   "match": "fallback"
+  },
+  "Hundun": {
+   "art": "hundun",
+   "match": "exact"
+  },
+  "Hydra of Lerna": {
+   "art": "hydra",
+   "match": "close"
+  },
+  "Hōkioi": {
+   "art": "tengu",
+   "match": "fallback"
+  },
+  "Iku-Turso": {
+   "art": "kappa",
+   "match": "fallback"
+  },
+  "Impundulu": {
+   "art": "tengu",
+   "match": "fallback"
+  },
+  "Imugi": {
+   "art": "imugi",
+   "match": "exact"
+  },
+  "Inkanyamba": {
+   "art": "imugi",
+   "match": "fallback"
+  },
+  "Ittan-momen": {
+   "art": "jangseung",
+   "match": "fallback"
+  },
+  "Jaguar": {
+   "art": "balam",
+   "match": "fallback"
+  },
+  "Jangsan-beom": {
+   "art": "jangsan-beom",
+   "match": "exact"
+  },
+  "Jersey Devil": {
+   "art": "sobek",
+   "match": "fallback"
+  },
+  "Jiangshi": {
+   "art": "koschei",
+   "match": "fallback"
+  },
+  "Jingwei": {
+   "art": "jingwei",
+   "match": "exact"
+  },
+  "Jorōgumo": {
+   "art": "jorogumo",
+   "match": "exact"
+  },
+  "Jörmungandr": {
+   "art": "jormungandr",
+   "match": "exact"
+  },
+  "Jötunn": {
+   "art": "jotunn",
+   "match": "exact"
+  },
+  "Kamaitachi": {
+   "art": "kamaitachi",
+   "match": "exact"
+  },
+  "Kappa": {
+   "art": "kappa",
+   "match": "exact"
+  },
+  "Karasu-tengu": {
+   "art": "tengu",
+   "match": "close"
+  },
+  "Kasa-obake": {
+   "art": "kasa-obake",
+   "match": "exact"
+  },
+  "Kelpie": {
+   "art": "nisse",
+   "match": "fallback"
+  },
+  "Kikimora": {
+   "art": "alux",
+   "match": "fallback"
+  },
+  "King cobra": {
+   "art": "hydra",
+   "match": "fallback"
+  },
+  "Kisin": {
+   "art": "ah-puch",
+   "match": "fallback"
+  },
+  "Kitsune": {
+   "art": "kitsune",
+   "match": "exact"
+  },
+  "Knocker": {
+   "art": "hitotsume-kozo",
+   "match": "fallback"
+  },
+  "Kodama": {
+   "art": "kodama",
+   "match": "exact"
+  },
+  "Kongamato": {
+   "art": "jingwei",
+   "match": "fallback"
+  },
+  "Koschei": {
+   "art": "koschei",
+   "match": "exact"
+  },
+  "Kui": {
+   "art": "kui",
+   "match": "exact"
+  },
+  "Kulullu": {
+   "art": "dvergr",
+   "match": "fallback"
+  },
+  "Kuntilanak": {
+   "art": "ushabti",
+   "match": "fallback"
+  },
+  "La Lechuza": {
+   "art": "dalgyal-gwisin",
+   "match": "fallback"
+  },
+  "La Llorona": {
+   "art": "bannik",
+   "match": "fallback"
+  },
+  "Laestrygonians": {
+   "art": "taotie",
+   "match": "fallback"
+  },
+  "Lamashtu": {
+   "art": "oni",
+   "match": "fallback"
+  },
+  "Lamia": {
+   "art": "medusa",
+   "match": "fallback"
+  },
+  "Leprechaun": {
+   "art": "tanuki",
+   "match": "fallback"
+  },
+  "Leshy": {
+   "art": "leshy",
+   "match": "exact"
+  },
+  "Likho": {
+   "art": "alux",
+   "match": "fallback"
+  },
+  "Lindworm": {
+   "art": "lindworm",
+   "match": "exact"
+  },
+  "Loki": {
+   "art": "loki",
+   "match": "exact"
+  },
+  "Louhi": {
+   "art": "medusa",
+   "match": "fallback"
+  },
+  "Loup-garou": {
+   "art": "tanuki",
+   "match": "fallback"
+  },
+  "Mammoth": {
+   "art": "jangsan-beom",
+   "match": "fallback"
+  },
+  "Manananggal": {
+   "art": "morana",
+   "match": "fallback"
+  },
+  "Manticore": {
+   "art": "griffin",
+   "match": "fallback"
+  },
+  "Mapinguari": {
+   "art": "taotie",
+   "match": "fallback"
+  },
+  "Marakihau": {
+   "art": "scylla",
+   "match": "fallback"
+  },
+  "Mavka": {
+   "art": "jorogumo",
+   "match": "fallback"
+  },
+  "Medjed": {
+   "art": "cheonyeo-gwisin",
+   "match": "fallback"
+  },
+  "Medusa": {
+   "art": "medusa",
+   "match": "exact"
+  },
+  "Merrow": {
+   "art": "nisse",
+   "match": "fallback"
+  },
+  "Minotaur": {
+   "art": "minotaur",
+   "match": "exact"
+  },
+  "Mngwa": {
+   "art": "balam",
+   "match": "fallback"
+  },
+  "Mokele-mbembe": {
+   "art": "mul-gwisin",
+   "match": "fallback"
+  },
+  "Mongolian Death Worm": {
+   "art": "scylla",
+   "match": "fallback"
+  },
+  "Mothman": {
+   "art": "siren",
+   "match": "fallback"
+  },
+  "Mul Gwisin": {
+   "art": "mul-gwisin",
+   "match": "exact"
+  },
+  "Mummy": {
+   "art": "mummy",
+   "match": "exact"
+  },
+  "Muspell's fire giants": {
+   "art": "minotaur",
+   "match": "fallback"
+  },
+  "Namtar": {
+   "art": "leshy",
+   "match": "fallback"
+  },
+  "Nazca spider": {
+   "art": "jorogumo",
+   "match": "fallback"
+  },
+  "Nekomata": {
+   "art": "loki",
+   "match": "fallback"
+  },
+  "Nereid": {
+   "art": "jingwei",
+   "match": "fallback"
+  },
+  "Nian": {
+   "art": "nian",
+   "match": "exact"
+  },
+  "Nile crocodile": {
+   "art": "sleipnir",
+   "match": "fallback"
+  },
+  "Nisse": {
+   "art": "nisse",
+   "match": "exact"
+  },
+  "Noppera-bō": {
+   "art": "mul-gwisin",
+   "match": "fallback"
+  },
+  "Nuckelavee": {
+   "art": "surtr",
+   "match": "fallback"
+  },
+  "Nue": {
+   "art": "minotaur",
+   "match": "fallback"
+  },
+  "Nurikabe": {
+   "art": "nurikabe",
+   "match": "exact"
+  },
+  "Näkki": {
+   "art": "siren",
+   "match": "fallback"
+  },
+  "Níðhöggr": {
+   "art": "nidhogg",
+   "match": "close"
+  },
+  "Olmec were-jaguar": {
+   "art": "balam",
+   "match": "fallback"
+  },
+  "Oni": {
+   "art": "oni",
+   "match": "exact"
+  },
+  "Orang Pendek": {
+   "art": "komainu",
+   "match": "fallback"
+  },
+  "Pazuzu": {
+   "art": "ah-puch",
+   "match": "fallback"
+  },
+  "Persephone": {
+   "art": "ra",
+   "match": "fallback"
+  },
+  "Phi Krasue": {
+   "art": "gashadokuro",
+   "match": "fallback"
+  },
+  "Pishacha": {
+   "art": "oni",
+   "match": "fallback"
+  },
+  "Pocong": {
+   "art": "ushabti",
+   "match": "fallback"
+  },
+  "Polar bear": {
+   "art": "balam",
+   "match": "fallback"
+  },
+  "Polevik": {
+   "art": "jangseung",
+   "match": "fallback"
+  },
+  "Poludnitsa": {
+   "art": "kodama",
+   "match": "fallback"
+  },
+  "Pontianak": {
+   "art": "draugr",
+   "match": "fallback"
+  },
+  "Pouākai": {
+   "art": "bennu",
+   "match": "fallback"
+  },
+  "Przewalski's horse": {
+   "art": "cadejo",
+   "match": "fallback"
+  },
+  "Python": {
+   "art": "typhon",
+   "match": "fallback"
+  },
+  "Púca": {
+   "art": "nisse",
+   "match": "fallback"
+  },
+  "Qiongqi": {
+   "art": "qiongqi",
+   "match": "exact"
+  },
+  "Raijū": {
+   "art": "firebird",
+   "match": "fallback"
+  },
+  "Rakshasa": {
+   "art": "troll",
+   "match": "fallback"
+  },
+  "Redcap": {
+   "art": "kitsune",
+   "match": "fallback"
+  },
+  "Roc": {
+   "art": "fenghuang",
+   "match": "fallback"
+  },
+  "Rokurokubi": {
+   "art": "morana",
+   "match": "fallback"
+  },
+  "Runamula": {
+   "art": "taotie",
+   "match": "fallback"
+  },
+  "Rusalka": {
+   "art": "rusalka",
+   "match": "exact"
+  },
+  "Sachamama": {
+   "art": "zmey",
+   "match": "fallback"
+  },
+  "Sacred ibis": {
+   "art": "firebird",
+   "match": "fallback"
+  },
+  "Saker falcon": {
+   "art": "haetae",
+   "match": "fallback"
+  },
+  "Salamander": {
+   "art": "raijin",
+   "match": "fallback"
+  },
+  "Salamander (elemental)": {
+   "art": "raijin",
+   "match": "fallback"
+  },
+  "Santelmo": {
+   "art": "bannik",
+   "match": "fallback"
+  },
+  "Scarab beetle": {
+   "art": "khepri",
+   "match": "fallback"
+  },
+  "Scylla": {
+   "art": "scylla",
+   "match": "exact"
+  },
+  "Sekhmet": {
+   "art": "sekhmet",
+   "match": "exact"
+  },
+  "Selkie": {
+   "art": "hitotsume-kozo",
+   "match": "fallback"
+  },
+  "Set": {
+   "art": "set",
+   "match": "exact"
+  },
+  "Shachihoko": {
+   "art": "jangsan-beom",
+   "match": "fallback"
+  },
+  "Shanxiao": {
+   "art": "shanxiao",
+   "match": "exact"
+  },
+  "Siberian tiger": {
+   "art": "nemean-lion",
+   "match": "fallback"
+  },
+  "Siren": {
+   "art": "siren",
+   "match": "exact"
+  },
+  "Sirin": {
+   "art": "griffin",
+   "match": "fallback"
+  },
+  "Sisimito": {
+   "art": "surtr",
+   "match": "fallback"
+  },
+  "Sköll and Hati": {
+   "art": "kamaitachi",
+   "match": "fallback"
+  },
+  "Sluagh": {
+   "art": "ushabti",
+   "match": "fallback"
+  },
+  "Snow leopard": {
+   "art": "balam",
+   "match": "fallback"
+  },
+  "Sphinx": {
+   "art": "sphinx",
+   "match": "exact"
+  },
+  "Sphinx of Thebes": {
+   "art": "sphinx",
+   "match": "close"
+  },
+  "Spider monkey": {
+   "art": "nemean-lion",
+   "match": "fallback"
+  },
+  "Spotted hyena": {
+   "art": "komainu",
+   "match": "fallback"
+  },
+  "Spriggan": {
+   "art": "tanuki",
+   "match": "fallback"
+  },
+  "Stheno": {
+   "art": "morana",
+   "match": "fallback"
+  },
+  "Strzyga": {
+   "art": "mummy",
+   "match": "fallback"
+  },
+  "Stállu": {
+   "art": "taotie",
+   "match": "fallback"
+  },
+  "Surtr": {
+   "art": "surtr",
+   "match": "exact"
+  },
+  "Sylph": {
+   "art": "firebird",
+   "match": "fallback"
+  },
+  "Talos": {
+   "art": "talos",
+   "match": "exact"
+  },
+  "Taniwha": {
+   "art": "jingwei",
+   "match": "fallback"
+  },
+  "Tanuki": {
+   "art": "tanuki",
+   "match": "exact"
+  },
+  "Taotie": {
+   "art": "taotie",
+   "match": "exact"
+  },
+  "Tatzelwurm": {
+   "art": "taotie",
+   "match": "fallback"
+  },
+  "Te Wheke-a-Muturangi": {
+   "art": "mul-gwisin",
+   "match": "fallback"
+  },
+  "Thanatos": {
+   "art": "ushabti",
+   "match": "fallback"
+  },
+  "Tikbalang": {
+   "art": "surtr",
+   "match": "fallback"
+  },
+  "Tokoloshe": {
+   "art": "nisse",
+   "match": "fallback"
+  },
+  "Troll": {
+   "art": "troll",
+   "match": "exact"
+  },
+  "Tsuchigumo": {
+   "art": "jorogumo",
+   "match": "fallback"
+  },
+  "Typhon": {
+   "art": "typhon",
+   "match": "exact"
+  },
+  "Ugallu": {
+   "art": "ah-puch",
+   "match": "fallback"
+  },
+  "Umibōzu": {
+   "art": "kappa",
+   "match": "fallback"
+  },
+  "Upyr": {
+   "art": "mummy",
+   "match": "fallback"
+  },
+  "Vila": {
+   "art": "nisse",
+   "match": "fallback"
+  },
+  "Vucub Caquix": {
+   "art": "vucub-caquix",
+   "match": "exact"
+  },
+  "Wolf": {
+   "art": "cadejo",
+   "match": "fallback"
+  },
+  "Wolverine": {
+   "art": "baihu",
+   "match": "fallback"
+  },
+  "Wyvern": {
+   "art": "apep",
+   "match": "fallback"
+  },
+  "Xiuhcoatl": {
+   "art": "nidhogg",
+   "match": "fallback"
+  },
+  "Xtabay": {
+   "art": "yuki-onna",
+   "match": "fallback"
+  },
+  "Yacumama": {
+   "art": "zmey",
+   "match": "fallback"
+  },
+  "Yak": {
+   "art": "cadejo",
+   "match": "fallback"
+  },
+  "Yamata no Orochi": {
+   "art": "orochi",
+   "match": "close"
+  },
+  "Yeti": {
+   "art": "cadejo",
+   "match": "fallback"
+  },
+  "Yuki-onna": {
+   "art": "yuki-onna",
+   "match": "exact"
+  },
+  "Zahhak": {
+   "art": "jormungandr",
+   "match": "fallback"
+  },
+  "Zilant": {
+   "art": "troll",
+   "match": "fallback"
+  },
+  "Zipacna": {
+   "art": "zipacna",
+   "match": "exact"
+  },
+  "Zmey Gorynych": {
+   "art": "zmey",
+   "match": "close"
+  },
+  "Åsgårdsreia": {
+   "art": "mul-gwisin",
+   "match": "fallback"
+  }
+ }
+}

@@ -21,7 +21,12 @@ const ROOT = path.resolve(path.dirname(HERE), '..');
 const args = process.argv.slice(2);
 const opt = (name, d) => { const a = args.find((x) => x.startsWith('--' + name + '=')); return a ? a.split('=')[1] : d; };
 const flag = (name) => args.includes('--' + name);
-const DATA = path.join(ROOT, 'prototype/data/fights');
+const V2MODE = opt('rules', 'classic') === 'v2';          // --rules=v2: V2 fights (data/fights-v2), the V2 reference squad and rules.v2 (docs/V2_UNITS_PLAN.md step 5)
+const MERGE_MODE = opt('merge', 'own');                    // --merge=best: Best of column instead of Own element (V2 only; a report, not the pass target)
+const SQUAD = opt('squad', 'ref');                         // --squad=weak|neutral|resist (V2): each attacker takes an element by its multiplier against the fight's enemies (affinity study, see v2-study notes)
+const MERGE_CAP = opt('mergecap', null);                   // --mergecap=0..3 (V2): the per-column merge cap (0 = merges off) for the merge study
+const DATA = path.join(ROOT, V2MODE ? 'prototype/data/fights-v2' : 'prototype/data/fights');
+const TUNE_SUFFIX = V2MODE ? '.v2' : '';
 
 // Limits per step: max share of the hero's HP the best line may cost, turn band, one-turn clear allowed.
 const BANDS = {
@@ -46,6 +51,11 @@ function setup() {
   const Fights = require('../prototype/js/fights.js');
   const Solve = require('./solve.js');
   Fights.load(loadAll(), {});
+  if (V2MODE) {
+    const V2 = require('../prototype/js/v2.js'), rd = (f) => JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/data', f), 'utf8'));
+    V2.load(rd('units.json'), rd('elements.json'), rd('families.json'));
+    if (MERGE_CAP !== null) { if (Number(MERGE_CAP) === 0) for (const k of Object.keys(V2.MERGES)) delete V2.MERGES[k]; else V2.MERGE_RULES.cap.perColumnPerTurn = Number(MERGE_CAP); }
+  }
   return { Engine, P, Fights, Solve };
 }
 
@@ -53,11 +63,37 @@ function setup() {
 function seeded(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const hashStr = (s) => { let h = 2166136261; for (const ch of String(s)) { h ^= ch.codePointAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
 
+// Affinity study: give each attacker (cycling) one of the three elements that score best (weak), nearest to x1 (neutral) or worst (resist) against the fight's enemies by HP-weighted chart multiplier.
+function retag(env, army, fight) {
+  const aff = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/data/elements.json'), 'utf8')).affinity, els = Object.keys(aff);
+  const real = fight.enemies.filter((e) => e.role !== 'barrel' && e.element).map((e) => ({ hp: e.hp, element: String(e.element).toLowerCase() }));
+  const score = (x) => real.reduce((n, e) => n + e.hp * ((aff[x] || {})[e.element] || 1), 0) / Math.max(1, real.reduce((n, e) => n + e.hp, 0));
+  const ranked = els.map((x) => ({ x, m: score(x) })).sort((a, b) => (SQUAD === 'weak' ? b.m - a.m : SQUAD === 'resist' ? a.m - b.m : Math.abs(a.m - 1) - Math.abs(b.m - 1)) || els.indexOf(a.x) - els.indexOf(b.x));
+  const pick = ranked.slice(0, 3);
+  let i = 0;
+  for (const c of army) if (c.pattern && c.atk !== undefined) { c.element = pick[i % 3].x; i++; }
+  fight.__m = Math.round(pick.reduce((n, p) => n + p.m, 0) / 3 * 100) / 100;
+}
+function mergeHist(Engine, state, line, army) {
+  const h = [0, 0, 0, 0, {}]; let s = state;
+  for (const pl of line) {
+    const out = Engine.resolveTurn(s, pl, army);
+    const per = {};
+    for (const ev of out.events) if (ev.t === 'merge') { per[ev.col] = (per[ev.col] || 0) + 1; h[4][ev.id] = (h[4][ev.id] || 0) + 1; }
+    for (const n of Object.values(per)) h[Math.min(3, n)]++;
+    s = out.state;
+    if (s.status !== 'playing') break;
+  }
+  return h;
+}
 function checkFight(env, fight, quick) {
   const { Engine, P, Fights, Solve } = env;
-  const L = fight.level, rs = Fights.referenceSave(L, P), army = rs.army, maxHp = rs.maxHp;
-  const stage = Fights.stage(fight);
-  const state = Engine.createState(Object.assign({ heroHp: maxHp, heroMaxHp: maxHp, rules: P.rulesFor(rs.save, {}) }, stage));
+  const L = fight.level, rs = V2MODE ? Fights.referenceSaveV2(L, P) : Fights.referenceSave(L, P), army = rs.army, maxHp = rs.maxHp;
+  const stage = Fights.stage(fight, V2MODE ? { v2: true } : undefined);
+  const rules = P.rulesFor(rs.save, {});
+  if (V2MODE) rules.v2 = { mergeMode: MERGE_MODE };
+  if (V2MODE && SQUAD !== 'ref') retag(env, army, fight);
+  const state = Engine.createState(Object.assign({ heroHp: maxHp, heroMaxHp: maxHp, rules }, stage));
   const band = BANDS[fight.step];
   const effort = quick ? { restarts: 5, iters: 900, first: 6 } : { restarts: 10, iters: 1200, first: 10 };
   Math.random = seeded(hashStr(fight.id));
@@ -74,7 +110,8 @@ function checkFight(env, fight, quick) {
   const volley = army.reduce((n, c) => n + (c.atk || 0), 0);
   const hpTotal = real.reduce((n, e) => n + e.hp * (1 + 0.12 * (e.armor || 0)), 0);
   const threat = real.reduce((n, e) => n + e.atk * ((Engine.FOOTPRINTS[e.fp || '1x1'] || { w: 1 }).w), 0);
-  const rec = { id: fight.id, step: fight.step, level: L, maxHp, cost: best.total, turns: best.line.length, oneTurn, load: Math.round((hpTotal / Math.max(1, volley)) * 100) / 100, threat: Math.round((threat / maxHp) * 100) / 100, hp: hpTotal, fails: [] };
+  const hist = V2MODE ? mergeHist(Engine, state, best.line, army) : null;
+  const rec = { id: fight.id, mult: fight.__m, hist, step: fight.step, level: L, maxHp, cost: best.total, turns: best.line.length, oneTurn, load: Math.round((hpTotal / Math.max(1, volley)) * 100) / 100, threat: Math.round((threat / maxHp) * 100) / 100, hp: hpTotal, fails: [] };
   if (best.total >= 99) rec.fails.push('unwinnable in ' + MAX_TURNS + ' turns');
   else {
     if (best.total > limit) rec.fails.push('costs ' + best.total + ' of ' + maxHp + ' HP (limit ' + Math.floor(limit) + ')');
@@ -111,7 +148,7 @@ async function main() {
   await new Promise((resolve) => {
     let alive = jobs;
     for (let j = 0; j < jobs; j++) {
-      const w = fork(HERE, ['--worker'], { stdio: ['ignore', 'inherit', 'inherit', 'ipc'] });
+      const w = fork(HERE, ['--worker', ...args.filter((a) => a !== '--worker')], { stdio: ['ignore', 'inherit', 'inherit', 'ipc'] });
       const next = () => { const id = queue.shift(); if (id === undefined) { w.send({ done: true }); return; } w.send({ id, quick }); };
       w.on('message', (m) => { if (m.ready) next(); else { recs[m.rec.id] = m.rec; if (++done % 50 === 0) console.log(`  ${done}/${list.length} (${Math.round((Date.now() - t0) / 1000)}s)`); next(); } });
       w.on('exit', () => { if (--alive === 0) resolve(); });
@@ -151,6 +188,15 @@ function report(env, list, recs, t0) {
   }
   out.push('step       n   pass   avg cost (% HP)   avg turns   one-turn clears');
   for (const r of stepRows) out.push(`${r.step.padEnd(9)} ${String(r.n).padStart(4)} ${String(r.pass).padStart(5)}   ${r.cost.toFixed(1).padStart(5)} (${(100 * r.costPct).toFixed(0).padStart(2)}%)      ${r.turns.toFixed(2)}        ${r.oneTurn}`);
+  if (V2MODE) {
+    const H = [0, 0, 0, 0]; for (const r of all) if (r.hist) for (let i = 1; i < 4; i++) H[i] += r.hist[i];
+    const MID = {}; for (const r of all) if (r.hist) for (const [k, v] of Object.entries(r.hist[4] || {})) MID[k] = (MID[k] || 0) + v;
+    const midTotal = Object.values(MID).reduce((n, x) => n + x, 0) || 1, midTop = Object.entries(MID).sort((a, b) => b[1] - a[1]).slice(0, 6);
+    out.push(`merge use in the best lines (${midTotal} merge events, ${Object.keys(MID).length} different merges): ` + midTop.map(([k, v]) => `${k} ${(100 * v / midTotal).toFixed(0)}%`).join(', '));
+    const costAll = all.reduce((n, r) => n + r.cost / r.maxHp, 0) / Math.max(1, all.length), turnsAll = all.reduce((n, r) => n + r.turns, 0) / Math.max(1, all.length);
+    const m = all.filter((r) => r.mult); 
+    out.push(`V2 study: squad=${SQUAD} merge mode=${MERGE_MODE} merge cap=${MERGE_CAP === null ? 'data' : MERGE_CAP}; mean cost ${(100 * costAll).toFixed(1)}% of max HP, mean turns ${turnsAll.toFixed(2)}, win ${all.filter((r) => r.cost < 99).length}/${all.length}` + (m.length ? `, mean enemy multiplier of the squad's elements x${(m.reduce((n, r) => n + r.mult, 0) / m.length).toFixed(2)}` : '') + `; merge columns in the best lines (1 / 2 / 3 merges): ${H[1]} / ${H[2]} / ${H[3]}`);
+  }
   const subTotal = Object.keys(bySub).length;
   const risePass = subTotal - new Set(subFails.filter((x) => x.kind === 'rise').map((x) => x.sub)).size;
   const bossPass = subTotal - subFails.filter((x) => x.kind === 'boss<elite').length;
@@ -169,8 +215,11 @@ function report(env, list, recs, t0) {
   if (flag('write') && all.length > 600) {
     const MD = path.join(ROOT, 'docs/data/fights-unsupported.md');
     let md = fs.readFileSync(MD, 'utf8');
-    let b = '<!-- BALANCE:START -->\n';
-    b += `Last run of \`node tools/validate-fights.mjs --write\` over ${all.length} fights with the reference squad of each level (js/fights.js \`reference(L)\`, P(L) of WORLD_PROGRESSION 4.1 mapped onto the current units).\n\n`;
+    const TAG = V2MODE ? 'BALANCE_V2' : 'BALANCE';
+    if (V2MODE && !md.includes('<!-- BALANCE_V2:START -->')) md = md.replace(/\s*$/, '\n') + '\n## Balance validation, V2 rules (tools/validate-fights.mjs --rules=v2)\n\n<!-- BALANCE_V2:START -->\n<!-- BALANCE_V2:END -->\n';
+    let b = `<!-- ${TAG}:START -->\n`;
+    if (V2MODE) b += `Last run of \`node tools/validate-fights.mjs --rules=v2 --write\` over ${all.length} V2 fights (\`prototype/data/fights-v2\`, tuned by \`tools/fights-tune.v2.json\` and \`fights-adjust.v2.json\`) with the V2 reference squad of each level (js/fights.js \`referenceV2(L)\`), rules.v2 with Own element merges and the default chart.\n\n`;
+    else b += `Last run of \`node tools/validate-fights.mjs --write\` over ${all.length} fights with the reference squad of each level (js/fights.js \`reference(L)\`, P(L) of WORLD_PROGRESSION 4.1 mapped onto the current units).\n\n`;
     b += `- Fights passing every check (beatable, non-trivial from the combine fights on, turns in band): **${pass}/${all.length}** (${(100 * pass / all.length).toFixed(1)}%).\n`;
     b += `- Sub-areas where difficulty rises along the 7 fights: **${risePass}/${subTotal}**; boss harder than elite: **${bossPass}/${subTotal}**.\n\n`;
     b += '| Step | Fights | Pass | Avg cost (HP, % of max) | Avg turns | One-turn clears |\n|---|---|---|---|---|---|\n';
@@ -178,17 +227,17 @@ function report(env, list, recs, t0) {
     b += '\nBy region: ' + Object.entries(perRegion).map(([k, v]) => `R${k} ${v.ok}/${v.n}`).join(', ') + '.\n';
     if (bad.length) b += `\n### Remaining failing fights (${bad.length})\n\n` + lines.map((l) => '-' + l.slice(1)).join('\n') + '\n';
     if (subFails.length) b += `\n### Remaining sub-area check failures (${subFails.length})\n\n` + subFails.map((x) => `- ${x.sub}: ${x.kind}: ${x.msg}`).join('\n') + '\n';
-    b += '<!-- BALANCE:END -->';
-    md = md.replace(/<!-- BALANCE:START -->[\s\S]*<!-- BALANCE:END -->/, () => b);
+    b += `<!-- ${TAG}:END -->`;
+    md = md.replace(new RegExp(`<!-- ${TAG}:START -->[\\s\\S]*<!-- ${TAG}:END -->`), () => b);
     fs.writeFileSync(MD, md);
-    console.log('wrote the BALANCE block of docs/data/fights-unsupported.md');
+    console.log('wrote the ' + TAG + ' block of docs/data/fights-unsupported.md');
   }
   process.exitCode = bad.length ? 1 : 0;
 }
 
 // --suggest: turn the failures into per-fight corrections (tools/fights-adjust.json: atk / hp factors) for the next `node tools/build-fights.mjs`.
 function suggest(bad, subFails, all) {
-  const file = path.join(ROOT, 'tools/fights-adjust.json');
+  const file = path.join(ROOT, 'tools/fights-adjust' + TUNE_SUFFIX + '.json');
   const adj = JSON.parse(fs.readFileSync(file, 'utf8'));
   const bump = (id, key, f) => { const a = adj[id] || (adj[id] = {}); const lim = key === 'atk' ? [0.4, 1.7] : [0.6, 1.5]; a[key] = Math.round(Math.max(lim[0], Math.min(lim[1], (a[key] || 1) * f)) * 100) / 100; };
   let n = 0;
@@ -205,5 +254,5 @@ function suggest(bad, subFails, all) {
     bump(id, 'atk', 1.15); n++;
   }
   fs.writeFileSync(file, JSON.stringify(adj, null, 0).replace(/},"/g, '},\n"') + '\n');
-  console.log('suggested ' + n + ' corrections; fights-adjust.json now holds ' + Object.keys(adj).length + ' entries');
+  console.log('suggested ' + n + ' corrections; fights-adjust' + TUNE_SUFFIX + '.json now holds ' + Object.keys(adj).length + ' entries');
 }

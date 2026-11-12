@@ -62,3 +62,24 @@ Last run of `node tools/validate-fights.mjs --write` over 700 fights with the re
 
 By region: R1 56/56, R2 56/56, R3 70/70, R4 70/70, R5 70/70, R6 70/70, R7 70/70, R8 84/84, R9 70/70, R10 84/84.
 <!-- BALANCE:END -->
+
+## Balance validation, V2 rules (tools/validate-fights.mjs --rules=v2)
+
+<!-- BALANCE_V2:START -->
+Last run of `node tools/validate-fights.mjs --rules=v2 --write` over 700 V2 fights (`prototype/data/fights-v2`, tuned by `tools/fights-tune.v2.json` and `fights-adjust.v2.json`) with the V2 reference squad of each level (js/fights.js `referenceV2(L)`), rules.v2 with Own element merges and the default chart.
+
+- Fights passing every check (beatable, non-trivial from the combine fights on, turns in band): **700/700** (100.0%).
+- Sub-areas where difficulty rises along the 7 fights: **100/100**; boss harder than elite: **100/100**.
+
+| Step | Fights | Pass | Avg cost (HP, % of max) | Avg turns | One-turn clears |
+|---|---|---|---|---|---|
+| intro | 100 | 100 | 0.1 (0%) | 1.02 | 98 |
+| intro2 | 100 | 100 | 0.1 (0%) | 1.09 | 91 |
+| combine | 100 | 100 | 1.0 (2%) | 2.13 | 0 |
+| combine2 | 100 | 100 | 2.3 (5%) | 2.41 | 0 |
+| preelite | 100 | 100 | 3.1 (8%) | 2.31 | 0 |
+| elite | 100 | 100 | 0.1 (0%) | 2.60 | 0 |
+| boss | 100 | 100 | 3.9 (9%) | 3.32 | 0 |
+
+By region: R1 56/56, R2 56/56, R3 70/70, R4 70/70, R5 70/70, R6 70/70, R7 70/70, R8 84/84, R9 70/70, R10 84/84.
+<!-- BALANCE_V2:END -->

@@ -27,12 +27,17 @@ import keywordsData from '../docs/data/keywords.json';
 import v2art from './data/v2-unit-art.json';
 
 // V2 fights (tools/build-fights.mjs): 7 fights per sub-area, bundled with the page (no fetch).
+// Two tuned sets: data/fights (classic rules) and data/fights-v2 (V2 rules, tools/fights-tune.v2.json); the Rules switch loads the one that matches.
 const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: true, import: 'default' });
+const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eager: true, import: 'default' });
 
 (function () {
   'use strict';
   const Fights = window.Fights;
-  Fights.load(Object.keys(FIGHT_FILES).sort().map((k) => FIGHT_FILES[k]), fightsArt);
+  let fightSet = 'classic';
+  const loadFights = (set) => { if (set === fightSet && Fights.all.length) return; const files = set === 'v2' ? FIGHT_FILES_V2 : FIGHT_FILES; Fights.load(Object.keys(files).sort().map((k) => files[k]), fightsArt); fightSet = set; };
+  fightSet = '';
+  loadFights('classic');
   const E = window.Engine, World = window.World, P = window.Progress, Gen = window.Gen, Items = window.Items, Relics = window.Relics, Defs = window.BossDefs, Battle = window.Battle;
   const KEY = 'tile-defense-dev-v1', PKEY = 'tile-defense-dev-presets-v1'; // never 'tile-defense-world-v4' (the game save)
   const $ = (s) => document.querySelector(s);
@@ -541,6 +546,7 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
   const TABS = [['enemies', 'Enemies'], ['fights', 'V2 Fights'], ['builder', 'Builder'], ['team', 'Team'], ['chart', 'Chart'], ['camp', 'Camp'], ['gear', 'Gear'], ['run', 'Run'], ['presets', 'Presets'], ['design', 'Design']];
   const TAB_FN = { enemies: tabEnemies, fights: tabFights, builder: tabBuilder, team: tabTeam, chart: tabChart, camp: tabCamp, gear: tabGear, run: tabRun, presets: tabPresets, design: () => '<div id="design-root"></div>' };
   function render() {
+    loadFights(S.rules === 'v2' ? 'v2' : 'classic'); // the tuned fight set that matches the rules
     applyOverrides();
     const root = $('#dev'), keep = window.scrollY;
     root.innerHTML = '<div class="d-head"><h1>Tile Defense dev test page</h1><div class="d-rules">Rules <button class="sm' + (!isV2() ? ' on' : '') + '" data-a="rules" data-id="classic">Classic</button><button class="sm' + (isV2() ? ' on' : '') + '" data-a="rules" data-id="v2">V2 (guardian beasts)</button></div><div class="d-sum">' + (isV2() ? '<b class="v2-banner">V2 rules, dev only</b> ' : '') + esc(summaryLine()) + '</div><div class="d-tabs">' +
@@ -558,7 +564,7 @@ const FIGHT_FILES = import.meta.glob('./data/fights/region-*.json', { eager: tru
       const n = World.byId[el.dataset.id], sub = World.SUB_BY[n.sub], gen = Gen.generateBattle(n, seedOf(n.id), genOpts()), lv = Gen.scaled(n, genOpts()).level;
       fight(n.id, nodeName(n, sub), sub.name + ' · Lv' + lv, sub.biome, gen);
     },
-    rules(el) { S.rules = el.dataset.id === 'v2' ? 'v2' : 'classic'; change(); },
+    rules(el) { S.rules = el.dataset.id === 'v2' ? 'v2' : 'classic'; loadFights(S.rules); change(); },
     mm(el) { S.mergeMode = el.dataset.id === 'best' ? 'best' : 'own'; change(); },
     aff(el) {
       const x = el.dataset.x, y = el.dataset.y; if (!S.affinity) S.affinity = JSON.parse(JSON.stringify(DEFAULT_AFF));

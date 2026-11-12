@@ -45,7 +45,7 @@
   // ---------- V2 reference squad (step 4; the balance step tunes it) ----------
   // The same idea with the guardian beasts: three elements in the first column set (Fire, Water, Wood), more join as levels pass, one Herald and Shields as support.
   // Each attacker is raised to P(L) through `mods.atk` and each Shield to shieldBlock(L); stage, Mastery and stars stay at 1.
-  const ATTACKERS_V2 = [['singha', 1], ['hongsa', 1], ['amur_tiger', 1], ['reindeer_hauler', 4], ['rakhsh', 8], ['dolphin_chain', 12]];
+  const ATTACKERS_V2 = [['singha', 1], ['hongsa', 1], ['amur_tiger', 1], ['reindeer_hauler', 4], ['rakhsh', 8], ['kamaitachi_trio', 12]];
   const SUPPORT_V2 = [['zodiac_hound', 1], ['bixi', 1], ['river_hippo', 6], ['audhumbla', 14]];
   function referenceV2(L, V2) {
     V2 = V2 || root.V2 || (typeof require === 'function' ? require('./v2.js') : null);

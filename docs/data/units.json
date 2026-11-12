@@ -164,7 +164,7 @@
    "guard": 0
   },
   "powerBudget": 8,
-  "ability": "The unit above gets +1 range.",
+  "ability": "The unit above gets +1 range and +1 ATK.",
   "synergyTags": [
    "range",
    "support"
@@ -190,6 +190,12 @@
     "p": "buff",
     "target": "up",
     "effect": "range",
+    "amount": 1
+   },
+   {
+    "p": "buff",
+    "target": "up",
+    "effect": "atk",
     "amount": 1
    }
   ],
@@ -302,7 +308,7 @@
    "guard": 0
   },
   "powerBudget": 10,
-  "ability": "Spread R3, ATK 1; the centre target Burns 1.",
+  "ability": "Spread R1, ATK 1; the centre target Burns 1.",
   "synergyTags": [
    "burn",
    "spread"
@@ -334,7 +340,7 @@
     "p": "attack",
     "pattern": "spread",
     "atk": 1,
-    "range": 3
+    "range": 1
    },
    {
     "p": "onHit",
@@ -588,7 +594,7 @@
    "guard": 60
   },
   "powerBudget": 9,
-  "ability": "Heals the hero 1 each turn.",
+  "ability": "Heals the hero 2 each turn.",
   "synergyTags": [
    "heal",
    "support"
@@ -613,7 +619,7 @@
   "behaviours": [
    {
     "p": "heroHeal",
-    "n": 1
+    "n": 2
    }
   ],
   "stages": {
@@ -622,7 +628,7 @@
      "op": "set",
      "p": "heroHeal",
      "set": {
-      "n2": 2,
+      "n2": 3,
       "when2": "struck"
      }
     }
@@ -1067,7 +1073,7 @@
    "guard": 50
   },
   "powerBudget": 10,
-  "ability": "Blocks 2 in its column; adjacent allies get +1 ATK, adjacent Hooves +2 (Kin bonus).",
+  "ability": "Blocks 1 in its column; adjacent allies get +1 ATK, adjacent Hooves +2 (Kin bonus).",
   "synergyTags": [
    "herald",
    "hooves",
@@ -1093,7 +1099,7 @@
   "behaviours": [
    {
     "p": "shield",
-    "block": 2
+    "block": 1
    },
    {
     "p": "buff",
@@ -1579,7 +1585,7 @@
    "guard": 0
   },
   "powerBudget": 8,
-  "ability": "Straight R2; the hit enemy loses 1 ATK for the battle (min 1).",
+  "ability": "Straight R2; the hit enemy loses 1 ATK for 2 turns (min 1).",
   "synergyTags": [
    "chill",
    "ice"
@@ -1612,7 +1618,7 @@
    {
     "p": "onHit",
     "status": "chill",
-    "turns": 99
+    "turns": 2
    }
   ],
   "stages": {
@@ -2197,7 +2203,7 @@
    "guard": 0
   },
   "powerBudget": 8,
-  "ability": "Straight R2; the hit enemy loses 1 ATK for the battle (min 1).",
+  "ability": "Straight R2; the hit enemy loses 1 ATK for 2 turns (min 1).",
   "synergyTags": [
    "chill",
    "ice"
@@ -2230,7 +2236,7 @@
    {
     "p": "onHit",
     "status": "chill",
-    "turns": 99
+    "turns": 2
    }
   ],
   "stages": {
@@ -2322,7 +2328,7 @@
    "guard": 0
   },
   "powerBudget": 9,
-  "ability": "Straight R2; the hit enemy cannot strike this turn.",
+  "ability": "Straight R2; the hit enemy cannot strike this turn (not again for 2 turns).",
   "synergyTags": [
    "hold",
    "control"
@@ -2354,7 +2360,7 @@
    {
     "p": "onHit",
     "status": "hold",
-    "cooldown": 1
+    "cooldown": 2
    }
   ],
   "stages": {
@@ -2385,7 +2391,7 @@
    "guard": 0
   },
   "powerBudget": 12,
-  "ability": "Straight R2, ATK 2; the carp becomes the dragon over its stages (always Scales).",
+  "ability": "Straight R2, ATK 3; the carp becomes the dragon over its stages (always Scales).",
   "synergyTags": [
    "metamorph",
    "carp-dragon"
@@ -2416,7 +2422,7 @@
    {
     "p": "attack",
     "pattern": "straight",
-    "atk": 2,
+    "atk": 3,
     "range": 2
    }
   ],
@@ -2585,7 +2591,7 @@
    "guard": 0
   },
   "powerBudget": 12,
-  "ability": "Pierce R3, ATK 2.",
+  "ability": "Pierce R3, ATK 3.",
   "synergyTags": [
    "pierce",
    "dragon"
@@ -2611,7 +2617,7 @@
    {
     "p": "attack",
     "pattern": "pierce",
-    "atk": 2,
+    "atk": 3,
     "range": 3
    }
   ],
@@ -2778,7 +2784,7 @@
    "guard": 0
   },
   "powerBudget": 8,
-  "ability": "Straight R1, ATK 1; +1 ATK each turn it survives (max +3).",
+  "ability": "Straight R1, ATK 2; +1 ATK each turn it survives (max +3).",
   "synergyTags": [
    "molt",
    "growth"
@@ -2804,7 +2810,7 @@
    {
     "p": "attack",
     "pattern": "straight",
-    "atk": 1,
+    "atk": 2,
     "range": 1
    },
    {
@@ -2906,7 +2912,7 @@
    "guard": 100
   },
   "powerBudget": 8,
-  "ability": "Shield 3 in its column; takes the first enemy strike there.",
+  "ability": "Shield 2 in its column; takes the first enemy strike there.",
   "synergyTags": [
    "decoy",
    "shield"
@@ -2932,7 +2938,7 @@
   "behaviours": [
    {
     "p": "shield",
-    "block": 3
+    "block": 2
    },
    {
     "p": "decoy"
@@ -3029,7 +3035,7 @@
    "guard": 80
   },
   "powerBudget": 10,
-  "ability": "Shield 2, +1 block each turn it is not struck (max +3).",
+  "ability": "Shield 3, +1 block each turn it is not struck (max +3).",
   "synergyTags": [
    "carapace",
    "shield"
@@ -3054,7 +3060,7 @@
   "behaviours": [
    {
     "p": "shield",
-    "block": 2,
+    "block": 3,
     "grow": {
      "per": 1,
      "cap": 3
@@ -3175,7 +3181,7 @@
    "guard": 20
   },
   "powerBudget": 10,
-  "ability": "The unit above gets +1 ATK and +1 range.",
+  "ability": "The unit above gets +2 ATK and +1 range.",
   "synergyTags": [
    "boost",
    "range"
@@ -3202,7 +3208,7 @@
     "p": "buff",
     "target": "up",
     "effect": "atk",
-    "amount": 1
+    "amount": 2
    },
    {
     "p": "buff",
@@ -3306,7 +3312,7 @@
    "guard": 70
   },
   "powerBudget": 7,
-  "ability": "Heals the hero 1 each turn.",
+  "ability": "Heals the hero 2 each turn.",
   "synergyTags": [
    "heal"
   ],
@@ -3331,7 +3337,7 @@
   "behaviours": [
    {
     "p": "heroHeal",
-    "n": 1
+    "n": 2
    }
   ],
   "stages": {
@@ -3340,7 +3346,7 @@
      "op": "set",
      "p": "heroHeal",
      "set": {
-      "n2": 2,
+      "n2": 3,
       "when2": "belowHalf"
      }
     }
@@ -3363,7 +3369,7 @@
    "guard": 100
   },
   "powerBudget": 8,
-  "ability": "Shield 1, +1 block each turn it is not struck (max +3).",
+  "ability": "Shield 2, +1 block each turn it is not struck (max +3).",
   "synergyTags": [
    "carapace"
   ],
@@ -3387,7 +3393,7 @@
   "behaviours": [
    {
     "p": "shield",
-    "block": 1,
+    "block": 2,
     "grow": {
      "per": 1,
      "cap": 3
@@ -3882,7 +3888,7 @@
    "guard": 0
   },
   "powerBudget": 12,
-  "ability": "Pierce R3, ATK 2.",
+  "ability": "Pierce R3, ATK 3.",
   "synergyTags": [
    "pierce",
    "wind"
@@ -3908,7 +3914,7 @@
    {
     "p": "attack",
     "pattern": "pierce",
-    "atk": 2,
+    "atk": 3,
     "range": 3
    }
   ],
@@ -4130,7 +4136,7 @@
    "guard": 0
   },
   "powerBudget": 8,
-  "ability": "Straight R2; the same damage jumps to the lowest-HP neighbour of the target.",
+  "ability": "Straight R1; half the damage (at least 1) jumps to the lowest-HP neighbour of the target.",
   "synergyTags": [
    "chain",
    "water"
@@ -4157,11 +4163,11 @@
     "p": "attack",
     "pattern": "straight",
     "atk": 2,
-    "range": 2
+    "range": 1
    },
    {
     "p": "chain",
-    "factor": 1,
+    "factor": 0.5,
     "jumps": 1
    }
   ],
@@ -4317,7 +4323,7 @@
    "guard": 0
   },
   "powerBudget": 8,
-  "ability": "Spread R2, ATK 1.",
+  "ability": "Spread R1, ATK 1.",
   "synergyTags": [
    "spread"
   ],
@@ -4343,7 +4349,7 @@
     "p": "attack",
     "pattern": "spread",
     "atk": 1,
-    "range": 2
+    "range": 1
    }
   ],
   "impl": "full",
@@ -4374,7 +4380,7 @@
    "guard": 0
   },
   "powerBudget": 10,
-  "ability": "Straight R1, ATK 1; +1 ATK each turn it survives (max +3).",
+  "ability": "Straight R1, ATK 2; +1 ATK each turn it survives (max +3).",
   "synergyTags": [
    "molt",
    "growth"
@@ -4400,7 +4406,7 @@
    {
     "p": "attack",
     "pattern": "straight",
-    "atk": 1,
+    "atk": 2,
     "range": 1
    },
    {
@@ -4685,7 +4691,7 @@
    "guard": 0
   },
   "powerBudget": 12,
-  "ability": "Straight R1, ATK 2; +1 ATK each turn it survives (max +3); rises with the sun.",
+  "ability": "Straight R1, ATK 3; +1 ATK each turn it survives (max +3); rises with the sun.",
   "synergyTags": [
    "molt",
    "rebirth"
@@ -4711,7 +4717,7 @@
    {
     "p": "attack",
     "pattern": "straight",
-    "atk": 2,
+    "atk": 3,
     "range": 1
    },
    {
@@ -4750,7 +4756,7 @@
    "guard": 0
   },
   "powerBudget": 9,
-  "ability": "Straight R2; the hit enemy cannot strike this turn.",
+  "ability": "Straight R2; the hit enemy cannot strike this turn (not again for 2 turns).",
   "synergyTags": [
    "hold",
    "web"
@@ -4783,7 +4789,7 @@
    {
     "p": "onHit",
     "status": "hold",
-    "cooldown": 1
+    "cooldown": 2
    }
   ],
   "stages": {
@@ -4814,7 +4820,7 @@
    "guard": 0
   },
   "powerBudget": 7,
-  "ability": "Every 2nd turn spawns a 1-ATK Drone in an empty adjacent tile.",
+  "ability": "Every turn spawns a 1-ATK Drone in an empty adjacent tile (max 3).",
   "synergyTags": [
    "brood",
    "swarm"
@@ -4831,7 +4837,7 @@
    {
     "stage": 2,
     "name": "Queen bee",
-    "extends": "spawns every turn"
+    "extends": "up to 4 Drones"
    }
   ],
   "status": "proposed",
@@ -4840,7 +4846,7 @@
   "behaviours": [
    {
     "p": "brood",
-    "every": 2
+    "every": 1
    }
   ],
   "implNote": "Brood: a 1-ATK R2 elementless Drone every Nth turn (max 3 per hive), stored in rules.v2mem.moves.",
@@ -4850,7 +4856,7 @@
      "op": "set",
      "p": "brood",
      "set": {
-      "every": 1
+      "cap": 4
      }
     }
    ]
@@ -5637,7 +5643,7 @@
    "guard": 40
   },
   "powerBudget": 9,
-  "ability": "Heals the hero 1 each turn; Bond with Sun Crow: both +1 ATK.",
+  "ability": "Heals the hero 2 each turn; Bond with Sun Crow: both +1 ATK.",
   "synergyTags": [
    "bond",
    "sun-moon",
@@ -5663,7 +5669,7 @@
   "behaviours": [
    {
     "p": "heroHeal",
-    "n": 1
+    "n": 2
    },
    {
     "p": "buff",
@@ -5680,7 +5686,7 @@
      "op": "set",
      "p": "heroHeal",
      "set": {
-      "n2": 2,
+      "n2": 3,
       "when2": "belowHalf"
      }
     }

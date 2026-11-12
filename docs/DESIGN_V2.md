@@ -212,7 +212,7 @@ Patterns kept: Straight, Spread, Pierce, Boost, Cross Boost, Multiplier, Spyglas
 | 14 | **Chain / Mark / Hold / Mimic** | Jumps / +1 next hit / skip strike / take target's element | Dolphin, Raven Pair, Cat Sidhe, Tanuki |
 | 15 | **Tribute / Bloom** | +1 Soul per kill / heal hero 1 per turn | Pixiu, Honu |
 | 16 | **Echo / Echo Drum** | Attacks twice (second at half) / buffs the unit above to do so | Sleipnir, Qiuniu |
-| 17 | **Brood / Carapace / Current** | Drone every 2nd turn / growing Shield / push one column | Honeybee, Geobuk, Cheonma |
+| 17 | **Brood / Carapace / Current** | Drone every turn (max 3) / growing Shield / push one column | Honeybee, Geobuk, Cheonma |
 | 18 | **Scorch / Chill / Venom** | Burn, ATK -1 (Ice), stacking poison | Sun Crow, Reindeer, Wadjet |
 | 19 | **Trample / Pounce / Swift / Bastion / Relay** | Hit behind / +2 vs full HP / first / Shield + attack / boost two tiles up | Rakhsh, Tigers, Hind, Coconut Crab, Ratatoskr |
 | 20 | **Rend** | Overkill carries (see Section 8) | Fangs and items |

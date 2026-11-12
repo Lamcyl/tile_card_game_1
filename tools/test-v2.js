@@ -148,13 +148,13 @@ test('echo: a second volley at half ATK rounded up; Echo Drum grants it to the u
   r = turn(battle([foe(1, 0, { hp: 20 })]), squad([[2, 0, 'hongsa']]));
   assert.deepStrictEqual(hits(r.events).map((h) => h.amount), [2]);
 });
-test('chain: the same damage jumps to the lowest-HP neighbour (full damage on Water: Conduct is a separate hit)', () => {
+test('chain: half the damage (at least 1) jumps to the lowest-HP neighbour (Dolphin; Conduct is a separate hit)', () => {
   const sq = squad([[2, 1, 'dolphin_chain']]);
   let r = turn(battle([foe(1, 1, { hp: 20 }), foe(1, 0, { hp: 9 }), foe(1, 2, { hp: 5 })]), sq);
-  assert.deepStrictEqual(hits(r.events).map((h) => [h.id, h.amount]), [['e0', 2], ['e2', 2]]);
+  assert.deepStrictEqual(hits(r.events).map((h) => [h.id, h.amount]), [['e0', 2], ['e2', 1]]);
   assert.ok(r.events.some((e) => e.t === 'chain'));
   r = turn(battle([foe(1, 1, { hp: 20 }), foe(1, 2, { hp: 5, element: 'water' })]), squad([[2, 1, 'dolphin_chain', { stars: 3 }]])); // ATK 3, Water vs Water resists x0.5
-  assert.deepStrictEqual(hits(r.events).map((h) => [h.id, h.amount]), [['e0', 3], ['e1', 2]]);
+  assert.deepStrictEqual(hits(r.events).map((h) => [h.id, h.amount]), [['e0', 3], ['e1', 1]]); // jump ceil(3 x 0.5) = 2, resisted by Water to 1
   assert.ok(V2.UNITS.dolphin_chain.behaviours.every((b) => b.wetVs === undefined), 'the legacy wetVs data is gone');
 });
 
@@ -189,7 +189,7 @@ test('molt: +1 ATK each turn survived, up to +3', () => {
   const sq = squad([[2, 0, 'yazi']]);
   let st = battle([foe(1, 0, { hp: 99, atk: 1 })]), seen = [];
   for (let t = 0; t < 6; t++) { seen.push(stat(st, sq, '2,0').atk); st = turn(st, sq).state; }
-  assert.deepStrictEqual(seen, [1, 2, 3, 4, 4, 4]);
+  assert.deepStrictEqual(seen, [2, 3, 4, 5, 5, 5]);
 });
 
 // ---------- buffs and shields ----------
@@ -242,11 +242,11 @@ test('shield: Herd and Resonance guard count other Kin, Carapace grows when unst
   sq = squad([[3, 4, 'geobuk']]); // nobody strikes column 4: grows every turn
   let s2 = battle([foe(1, 0, { hp: 99, atk: 1 })]), seen = [];
   for (let t = 0; t < 5; t++) { seen.push(stat(s2, sq, '3,4').block); s2 = turn(s2, sq).state; }
-  assert.deepStrictEqual(seen, [2, 3, 4, 5, 5]);
+  assert.deepStrictEqual(seen, [3, 4, 5, 6, 6]);
   sq = squad([[3, 0, 'geobuk']]); // struck every turn: stays
   s2 = battle([foe(1, 0, { hp: 99, atk: 1 })]); seen = [];
   for (let t = 0; t < 3; t++) { seen.push(stat(s2, sq, '3,0').block); s2 = turn(s2, sq).state; }
-  assert.deepStrictEqual(seen, [2, 2, 2]);
+  assert.deepStrictEqual(seen, [3, 3, 3]);
   sq = squad([[3, 1, 'polar_bear'], [3, 0, 'bixi'], [3, 2, 'river_hippo'], [2, 1, 'hongsa']]);
   assert.deepStrictEqual([stat(st, sq, '3,0').block, stat(st, sq, '3,2').block, stat(st, sq, '3,1').block], [4, 4, 3]);
   assert.strictEqual(stat(st, sq, '2,1').atk, 3, 'hongsa is Water: polar bear gives +1 ATK to Water attackers');
@@ -610,7 +610,7 @@ test('Lightning units: Kui, Electric Eel and Storm Petrel are the three addition
   const s = cs([[2, 0, 'raiju'], [3, 0, 'storm_petrel'], [2, 1, 'hongsa'], [3, 1, 'storm_petrel']]);
   assert.strictEqual(s['2,0'].plus, 2); assert.strictEqual(s['2,1'].plus, 1);
 });
-test('onHit units: Sun Crow Burn 1 for 2 turns (3 at stage 2); Reindeer and Snow Leopard Chill for the battle (stage 2 also the body behind)', () => {
+test('onHit units: Sun Crow Burn 1 for 2 turns (3 at stage 2); Reindeer and Snow Leopard Chill for 2 turns (stage 2 also the body behind)', () => {
   const st = battle([foe(1, 0, { hp: 20 }), foe(0, 0, { hp: 20 })]);
   let out = turn(st, squad([[2, 0, 'sun_crow']]));
   assert.strictEqual(byId(out.state, 'e0').st.burn.turns, 1); // 2 turns, one tick spent already
@@ -682,13 +682,13 @@ test('Cheonma pushes the hit enemy a column sideways (stage 2 also the body besi
   out = turn(battle([foe(1, 0, { hp: 20 }), foe(1, 1, { hp: 20 })]), squad([[2, 0, V2.card('cheonma', { stage: 2 })]]));
   assert.strictEqual(out.events.filter((e) => e.t === 'move' && e.push).length, 2);
 });
-test('Bloom heals 1 each turn; stage 2 heals 2 if the hero was struck (Pelican) or is below half HP (Honu, Moon Hare)', () => {
+test('Bloom heals 2 each turn; stage 2 heals 3 if the hero was struck (Pelican) or is below half HP (Honu, Moon Hare)', () => {
   const heal = (card, hp, foes) => { const st = battle(foes); st.hp = hp; return turn(st, squad([[3, 3, card]])).events.filter((e) => e.t === 'mend' && e.source === 'v2').reduce((n, e) => n + e.amount, 0); };
-  assert.strictEqual(heal('pelican_of_mercy', 50, [foe(1, 0, { hp: 20, atk: 3 })]), 1);
-  assert.strictEqual(heal(V2.card('pelican_of_mercy', { stage: 2 }), 50, [foe(1, 0, { hp: 20, atk: 3 })]), 2);
-  assert.strictEqual(heal(V2.card('pelican_of_mercy', { stage: 2 }), 50, [foe(1, 0, { hp: 20, atk: 0 })]), 1);
-  assert.strictEqual(heal(V2.card('honu', { stage: 2 }), 40, [foe(1, 0, { hp: 20, atk: 1 })]), 2);
-  assert.strictEqual(heal(V2.card('moon_hare', { stage: 2 }), 90, [foe(1, 0, { hp: 20, atk: 1 })]), 1);
+  assert.strictEqual(heal('pelican_of_mercy', 50, [foe(1, 0, { hp: 20, atk: 3 })]), 2);
+  assert.strictEqual(heal(V2.card('pelican_of_mercy', { stage: 2 }), 50, [foe(1, 0, { hp: 20, atk: 3 })]), 3);
+  assert.strictEqual(heal(V2.card('pelican_of_mercy', { stage: 2 }), 50, [foe(1, 0, { hp: 20, atk: 0 })]), 2);
+  assert.strictEqual(heal(V2.card('honu', { stage: 2 }), 40, [foe(1, 0, { hp: 20, atk: 1 })]), 3);
+  assert.strictEqual(heal(V2.card('moon_hare', { stage: 2 }), 90, [foe(1, 0, { hp: 20, atk: 1 })]), 2);
 });
 test('Ward: Kotuku negates the first damaging strike of the battle (stage 2 one more in another column); Phoenix raises the hero once at half HP (stage 2 with a Shield)', () => {
   const foes = () => battle([foe(1, 0, { hp: 90, atk: 4 }), foe(1, 1, { hp: 90, atk: 4 }), foe(1, 2, { hp: 90, atk: 4 })]);
@@ -719,13 +719,13 @@ test('onKill: Sarimanok +1 Soul per kill (stage 2 +2 more on an elite or boss ki
   assert.strictEqual(heals('huma').length, 1); assert.strictEqual(heals('huma')[0].amount, 1);
   assert.strictEqual(heals(V2.card('huma', { stage: 3 }))[0].amount, 2);
 });
-test('Decoy: Bi\'an takes the first strike in its column (its block on top of the column pool): Shield 3 and 3 against a 6 strike, only the first strike', () => {
+test('Decoy: Bi\'an takes the first strike in its column (its block on top of the column pool): Shield 2 and 2 against a 4 strike, only the first strike', () => {
   const one = (id) => strikes(turn(battle([foe(1, 0, { hp: 90, atk: 6 })]), squad([[2, 0, id]])))[0];
-  assert.strictEqual(one('bian').blocked, 6); assert.strictEqual(one('bian').dmg, 0);
+  assert.strictEqual(one('bian').blocked, 4); assert.strictEqual(one('bian').dmg, 2);
   assert.strictEqual(one('bixi').blocked, 3);
   const two = strikes(turn(battle([foe(1, 0, { hp: 90, atk: 6 }), foe(0, 0, { hp: 90, atk: 6 })]), squad([[2, 0, 'bian']])));
-  assert.strictEqual(two[0].dmg, 0); assert.ok(two[1].dmg > 0);
-  assert.strictEqual(V2.card('bian', { stage: 2 }).block, 4); assert.strictEqual(V2.card('xolo_guide', { stage: 2 }).block, 3);
+  assert.strictEqual(two[0].dmg, 2); assert.ok(two[1].dmg > two[0].dmg);
+  assert.strictEqual(V2.card('bian', { stage: 2 }).block, 3); assert.strictEqual(V2.card('xolo_guide', { stage: 2 }).block, 3);
 });
 test('Attune: the unit above takes the element (stage 2 also below, stage 3 +1 ATK); merges read the new element', () => {
   let s = cs([[2, 0, 'hongsa'], [3, 0, 'nine_tail_fox'], [4, 0, 'amur_tiger']]);
@@ -758,8 +758,8 @@ test('Mimic: Tanuki takes the element of the first enemy it hits for the rest of
 });
 test('Mirror: Langur copies pattern, base ATK and range of the unit to its left (stage 2 +1 range); nothing to copy means no attack', () => {
   let s = cs([[2, 0, 'hammerhead'], [2, 1, 'langur_mirror']]);
-  assert.strictEqual(s['2,1'].pattern, 'spread'); assert.strictEqual(s['2,1'].atk, 1); assert.strictEqual(s['2,1'].range, 2); assert.ok(E.isAttacker(s['2,1']));
-  assert.strictEqual(cs([[2, 0, 'hammerhead'], [2, 1, V2.card('langur_mirror', { stage: 2 })]])['2,1'].range, 3);
+  assert.strictEqual(s['2,1'].pattern, 'spread'); assert.strictEqual(s['2,1'].atk, 1); assert.strictEqual(s['2,1'].range, 1); assert.ok(E.isAttacker(s['2,1']));
+  assert.strictEqual(cs([[2, 0, 'hammerhead'], [2, 1, V2.card('langur_mirror', { stage: 2 })]])['2,1'].range, 2);
   assert.ok(!E.isAttacker(cs([[2, 0, 'bixi'], [2, 1, 'langur_mirror']])['2,1']));
   assert.ok(!E.isAttacker(cs([[2, 1, 'langur_mirror']])['2,1']));
 });
@@ -770,10 +770,9 @@ test('Offering: Scarab Roller consumes the first adjacent Common ally for +2 ATK
   s = cs([[2, 0, 'scarab_roller'], [3, 0, 'raiju']]);
   assert.ok(s['3,0']); assert.strictEqual(s['2,0'].atk, 1);
 });
-test('Brood: Honeybee Hive spawns a 1-ATK Drone every 2nd turn (stage 2 every turn) in an empty adjacent tile; Drones fire and are deterministic', () => {
+test('Brood: Honeybee Hive spawns a 1-ATK Drone every turn (max 3, stage 2 max 4) in an empty adjacent tile; Drones fire and are deterministic', () => {
   const sq = squad([[3, 1, 'honeybee_hive']]);
   let st = battle([foe(1, 1, { hp: 99, atk: 0 })]);
-  st = turn(st, sq).state; assert.ok(!(st.rules.v2mem && st.rules.v2mem.moves && st.rules.v2mem.moves.length));
   let out = turn(st, sq);
   assert.ok(out.events.some((e) => e.t === 'drone' && e.key === '2,1'));
   out = turn(out.state, sq);
@@ -781,7 +780,9 @@ test('Brood: Honeybee Hive spawns a 1-ATK Drone every 2nd turn (stage 2 every tu
   assert.ok(turn(battle([foe(1, 1, { hp: 99, atk: 0 })]), squad([[3, 1, V2.card('honeybee_hive', { stage: 2 })]])).events.some((e) => e.t === 'drone'));
   const run = () => { const q = squad([[3, 1, V2.card('honeybee_hive', { stage: 2 })]]); let s = battle([foe(1, 1, { hp: 99, atk: 0 })]); for (let i = 0; i < 6; i++) s = turn(s, q).state; return JSON.stringify(s); };
   assert.strictEqual(run(), run());
-  assert.ok(JSON.parse(run()).rules.v2mem.moves.filter((m) => m.op === 'drone').length <= 3, 'at most 3 drones per hive');
+  assert.ok(JSON.parse(run()).rules.v2mem.moves.filter((m) => m.op === 'drone').length === 4, 'at most 4 drones per stage 2 hive');
+  const run1 = () => { const q = squad([[3, 1, 'honeybee_hive']]); let s = battle([foe(1, 1, { hp: 99, atk: 0 })]); for (let i = 0; i < 6; i++) s = turn(s, q).state; return s; };
+  assert.strictEqual(run1().rules.v2mem.moves.filter((m) => m.op === 'drone').length, 3, 'at most 3 drones per hive');
 });
 test('Bond: Moon Hare gives an adjacent Sun Crow +1 ATK', () => {
   const s = cs([[2, 0, 'sun_crow'], [2, 1, 'moon_hare']]);
