@@ -194,6 +194,20 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .resbox .inv{justify-content:center;margin:8px 0}
 .resbox .btns{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .gold{color:var(--warn);font-weight:800}
+.tile .pw{position:absolute;left:8%;bottom:8%;width:17%;height:17%;border-radius:50%;border:1.5px solid var(--panel)}
+.tile.wheelto{box-shadow:0 0 0 3px var(--gold)}
+.tile.sandw{box-shadow:0 0 0 3px var(--gold)}
+.tile.sandw::before{content:'×2';position:absolute;left:50%;top:-8px;transform:translateX(-50%);background:var(--gold);color:#1c1500;font-size:11px;font-weight:900;border-radius:8px;padding:0 5px;z-index:3;line-height:15px}
+.tile.brR::after,.tile.brL::after,.tile.brT::after,.tile.brB::after{content:'';position:absolute;border:0 solid var(--gold);z-index:2;pointer-events:none}
+.tile.brR::after{right:2px;top:10%;bottom:10%;width:11px;border-width:5px 5px 5px 0;border-radius:0 9px 9px 0}
+.tile.brL::after{left:2px;top:10%;bottom:10%;width:11px;border-width:5px 0 5px 5px;border-radius:9px 0 0 9px}
+.tile.brB::after{bottom:2px;left:10%;right:10%;height:11px;border-width:0 5px 5px 5px;border-radius:0 0 9px 9px}
+.tile.brT::after{top:2px;left:10%;right:10%;height:11px;border-width:5px 5px 0 5px;border-radius:9px 9px 0 0}
+.strip{display:flex;align-items:center;gap:8px;font-size:11.5px;line-height:1.25;color:var(--ink);padding:4px 8px;border-radius:10px;background:var(--panel);border:1px solid var(--line);min-height:32px}
+.strip .t{flex:1;min-width:0}.strip b{color:var(--ink)}
+.wheelsvg{width:38px;height:38px;flex:none}
+.ecd{position:absolute;left:3px;top:2px}.ecd .dot{width:14px;height:14px}
+.mini{position:relative}.mini .ecd{left:2px;top:2px}
 @media (max-height:760px){.etile{height:44px}}
 </style>
 </head>
@@ -224,9 +238,9 @@ var CONFIG = {
   maxColourless: 3,                 /* colourless tiles allowed in the bag before a run */
   heroHp: [30, 40, 50],             /* by area */
   areas: [
-    { name: 'Meadow', cols: 3, hp: 6,  atk: 2, coin: 1, lvl: 1 },   /* hp = per enemy column at step 0 */
-    { name: 'Quarry', cols: 4, hp: 11, atk: 3, coin: 2, lvl: 2 },
-    { name: 'Spire',  cols: 5, hp: 16, atk: 4, coin: 3, lvl: 3 }
+    { name: 'Meadow', cols: 3, hp: 4.9,  atk: 2, coin: 1, lvl: 1 },   /* hp = per enemy column at step 0 */
+    { name: 'Quarry', cols: 4, hp: 8, atk: 3, coin: 2, lvl: 2 },
+    { name: 'Spire',  cols: 5, hp: 8.5, atk: 4, coin: 3, lvl: 3 }
   ],
   bossEvery: 4,                     /* steps per segment: (bossEvery-1) fights, then a boss */
   offers: 3, offerTwoChance: 0.25,
@@ -235,7 +249,7 @@ var CONFIG = {
   blockChance: 0.25,
   bonusCount: [0.3, 0.45, 0.25],    /* chance of 0,1,2 bonus cells */
   bonusTypes: { p1: 0.45, p2: 0.3, x2: 0.25 },
-  growth: 0.06,                     /* hp/atk growth per fight won in a run */
+  growth: 0.08,                     /* hp/atk growth per fight won in a run */
   jitter: 0.3,
   normal: { hp: 1, atk: 1, coin: 1, tile: 0.25 },
   elite:  { hp: 1.5, atk: 1.3, coin: 2, tile: 0.7 },
@@ -247,7 +261,10 @@ var CONFIG = {
   levelCost: { 2: 30, 3: 70 }, unlockCost: 40,
   startCoins: 0,
   longPressMs: 450,
-  react: { contrast: 1, spectrum: 1, relay: 2, prism: 3, cluster: 1, loner: 2, vanguard: 2, airy: 1, tower: 1, hub: 2, diag: 2, pure: 3 }
+  reactionMode: 'sandwich',          /* 'sandwich' | 'melds' | 'wheel' | 'none' (Settings switch) */
+  enemyColours: false,               /* optional: tiles of an enemy's colour deal double to it */
+  wheel: 2,                          /* wheel: bonus to each touching Strike/Fork of the next colour */
+  meld: { flush: 2, run: 3, set: 3, both: 5, rowFactor: 0.4 }  /* melds: bonus per line; a row line gives round(bonus*rowFactor) to each of its 3 columns */
 };
 var SHAPES = {
   strike: { name: 'Strike', kind: 'attack', short: 'STRIKE', desc: 'Hits the enemy in its own column.' },
@@ -258,36 +275,30 @@ var SHAPES = {
 };
 var COLOR_IDS = ['r', 'b', 'g', 'y', 'p'];
 var COLORS = { r: 'Red', b: 'Blue', g: 'Green', y: 'Yellow', p: 'Purple', x: 'Colourless' };
-var REACTS = {
-  vanguard: { name: 'Front',    line: '+2 while in the front row',                 hint: 'Wants tiles in the front row.' },
-  cluster:  { name: 'Cluster',  line: '+1 per touching tile of its own colour',    hint: 'Wants its colour side by side.' },
-  splash:   { name: 'Spill',    line: 'Damage above an enemy\'s HP spills to the enemies beside it', hint: 'Wants big hits next to weak enemies.' },
-  contrast: { name: 'Mosaic',   line: '+1 per touching tile of another colour',    hint: 'Wants a checkerboard of colours.' },
-  airy:     { name: 'Space',    line: '+1 per empty cell touching it',             hint: 'Wants room around it: spread out.' },
-  hub:      { name: 'Core',     line: '+2 when not in an outer column',            hint: 'Wants the middle columns.' },
-  prism:    { name: 'Prism',    line: '+3 to its column if every tile in it is a different colour', hint: 'Wants columns with 2-3 different colours.' },
-  tower:    { name: 'Tower',    line: '+1 per tile behind it in its column',       hint: 'Wants full columns, itself in front.' },
-  diag:     { name: 'Lattice',  line: '+2 per own-colour tile touching its corner', hint: 'Wants own colour on the diagonals.' },
-  spectrum: { name: 'Spectrum', line: '+1 per other colour in its row',            hint: 'Wants rows with many colours.' },
-  loner:    { name: 'Loner',    line: '+2 when no touching tile shares its colour', hint: 'Wants to be apart from its own colour.' },
-  relay:    { name: 'Relay',    line: '+2 if the tile in front is another colour', hint: 'Wants a different colour in front of it.' },
-  pure:     { name: 'Pure',     line: '+3 to its column if all its tiles share this colour', hint: 'Wants whole columns of one colour.' }
+var MODES = {
+  sandwich: { name: 'Sandwich', line: 'A tile between two tiles of one other colour, in a row or column, is doubled.' },
+  melds:    { name: 'Melds',    line: 'Three in a line: Flush (one colour), Run (1-2-3) or Set (3 equal) add a bonus to the line\'s columns.' },
+  wheel:    { name: 'Wheel',    line: 'Each tile gives a bonus to touching Strikes and Forks of the next colour on the wheel (its dot).' },
+  none:     { name: 'No rule',  line: 'No reaction rule: totals are just the numbers.' }
 };
+var WHEEL = ['r', 'b', 'g', 'y', 'p'];
+function wheelNext(c) { return WHEEL[(WHEEL.indexOf(c) + 1) % 5]; }
+function wheelPrev(c) { return WHEEL[(WHEEL.indexOf(c) + 4) % 5]; }
 /* kit: groups separated by | are added at level 1, 2, 3.  S strike, F fork, P plus, R row, D double (x2) */
 var UNITS = [
-  { id: 'ember',  name: 'Ember',  c: 'r', react: 'vanguard', kit: 'S2 S3 S3 S4|F3 P1|S5 D2' },
-  { id: 'brand',  name: 'Brand',  c: 'r', react: 'cluster',  kit: 'S3 S3 S3 S4|P1 P2|R1 D2' },
-  { id: 'cinder', name: 'Cinder', c: 'r', react: 'splash',   kit: 'S3 S4 S5 S5|F3 S6|F4 D2' },
-  { id: 'tide',   name: 'Tide',   c: 'b', react: 'contrast', kit: 'S2 S3 S3 S4|F2 P1|P2 D2' },
-  { id: 'mist',   name: 'Mist',   c: 'b', react: 'airy',     kit: 'S3 S3 S4 S4|F3 R1|D2 P1' },
-  { id: 'drift',  name: 'Drift',  c: 'b', react: 'hub',      kit: 'S2 S3 S4 S4|F2 F3|P1 D2' },
-  { id: 'moss',   name: 'Moss',   c: 'g', react: 'prism',    kit: 'S2 S3 S3 S4|P1 F2|R1 D2' },
-  { id: 'thorn',  name: 'Thorn',  c: 'g', react: 'tower',    kit: 'S2 S3 S3 S3|P1 P1|R1 D2' },
-  { id: 'vale',   name: 'Vale',   c: 'g', react: 'diag',     kit: 'S3 S3 S4 S4|F3 P1|R2 D2' },
-  { id: 'glint',  name: 'Glint',  c: 'y', react: 'spectrum', kit: 'S2 S3 S3 S4|F2 P1|R1 D2' },
-  { id: 'spark',  name: 'Spark',  c: 'y', react: 'loner',    kit: 'S3 S3 S4 S4|F3 F2|P1 D2' },
-  { id: 'dusk',   name: 'Dusk',   c: 'p', react: 'relay',    kit: 'S2 S3 S4 S4|F3 P1|R1 D2' },
-  { id: 'hex',    name: 'Hex',    c: 'p', react: 'pure',     kit: 'S3 S3 S3 S4|P1 R1|F3 D2' }
+  { id: 'ember',  name: 'Ember',  c: 'r', kit: 'S2 S3 S3 S4|F3 P1|S5 D2' },
+  { id: 'brand',  name: 'Brand',  c: 'r', kit: 'S2 S3 S4 S4|P1 P2|R1 D2' },
+  { id: 'cinder', name: 'Cinder', c: 'r', kit: 'S3 S4 S5 S5|F3 S6|F4 D2' },
+  { id: 'tide',   name: 'Tide',   c: 'b', kit: 'S2 S3 S3 S4|F2 P1|P2 D2' },
+  { id: 'mist',   name: 'Mist',   c: 'b', kit: 'S3 S3 S4 S4|F3 R1|D2 P1' },
+  { id: 'drift',  name: 'Drift',  c: 'b', kit: 'S2 S3 S4 S4|F2 F3|P1 D2' },
+  { id: 'moss',   name: 'Moss',   c: 'g', kit: 'S1 S2 S3 S4|P1 F2|R1 D2' },
+  { id: 'thorn',  name: 'Thorn',  c: 'g', kit: 'S2 S2 S3 S5|P1 P1|R1 D2' },
+  { id: 'vale',   name: 'Vale',   c: 'g', kit: 'S3 S3 S4 S4|F3 P1|R2 D2' },
+  { id: 'glint',  name: 'Glint',  c: 'y', kit: 'S1 S3 S4 S5|F2 P1|R1 D2' },
+  { id: 'spark',  name: 'Spark',  c: 'y', kit: 'S3 S3 S4 S4|F3 F2|P1 D2' },
+  { id: 'dusk',   name: 'Dusk',   c: 'p', kit: 'S2 S3 S4 S5|F3 P1|R1 D2' },
+  { id: 'hex',    name: 'Hex',    c: 'p', kit: 'S3 S4 S4 S5|P1 R1|F3 D2' }
 ];
 var UNIT_BY_ID = {};
 UNITS.forEach(function (u) { UNIT_BY_ID[u.id] = u; });
@@ -306,93 +317,93 @@ function tileLabel(t, v) { var n = v === undefined ? t.n : v; return t.s === 'db
 function mkTile(run, c, u, s, n, bonus) { run.nid = (run.nid || 0) + 1; return { id: run.nid, c: c, u: u, s: s, n: n, spent: false, bonus: !!bonus }; }
 
 /* ---- evaluate: everything resolves at once.  board = array(cols*rows) of tile|null, index = row*cols+col, row 0 is the front ---- */
-function evaluate(F, board, rx, opts) {
+function evaluate(F, board, opts) {
   opts = opts || {};
-  var cols = F.cols, R = CONFIG.rows, N = cols * R, mom = opts.momentum || 0, det = !!opts.detail, K = CONFIG.react, i, j, c, k;
+  var cols = F.cols, R = CONFIG.rows, N = cols * R, mom = opts.momentum || 0, det = !!opts.detail, mode = CONFIG.reactionMode, ecol = CONFIG.enemyColours, i, j, c, k;
   var ok = [], ea = [];
   for (i = 0; i < N; i++) ok[i] = true;
   (F.blocked || []).forEach(function (b) { ok[b] = false; });
   F.enemies.forEach(function (e, ek) { for (var cc = e.c; cc < e.c + e.w; cc++) ea[cc] = ek; });
   function orth(q) { var r = (q / cols) | 0, cc = q % cols, o = []; if (r > 0) o.push(q - cols); if (cc > 0) o.push(q - 1); if (cc < cols - 1) o.push(q + 1); if (r < R - 1) o.push(q + cols); return o; }
-  function diag(q) { var r = (q / cols) | 0, cc = q % cols, o = []; for (var dr = -1; dr <= 1; dr += 2) for (var dc = -1; dc <= 1; dc += 2) { var rr = r + dr, c2 = cc + dc; if (rr >= 0 && rr < R && c2 >= 0 && c2 < cols) o.push(rr * cols + c2); } return o; }
-  function reactOf(q) {
-    var t = board[q]; if (!t || t.c === 'x' || t.s === 'dbl') return 0;
-    var id = rx[t.c]; if (!id) return 0;
-    var r = (q / cols) | 0, cc = q % cols, o, n = 0, z, tt;
-    switch (id) {
-      case 'contrast': o = orth(q); for (z = 0; z < o.length; z++) { tt = board[o[z]]; if (tt && tt.c !== 'x' && tt.c !== t.c) n++; } return n * K.contrast;
-      case 'cluster': o = orth(q); for (z = 0; z < o.length; z++) { tt = board[o[z]]; if (tt && tt.c === t.c) n++; } return n * K.cluster;
-      case 'loner': o = orth(q); for (z = 0; z < o.length; z++) { tt = board[o[z]]; if (tt && tt.c === t.c) return 0; } return K.loner;
-      case 'spectrum': var seen = {}; for (z = 0; z < cols; z++) { tt = board[r * cols + z]; if (tt && tt.c !== 'x' && tt.c !== t.c && !seen[tt.c]) { seen[tt.c] = 1; n++; } } return n * K.spectrum;
-      case 'relay': if (r > 0) { tt = board[q - cols]; if (tt && tt.c !== 'x' && tt.c !== t.c) return K.relay; } return 0;
-      case 'vanguard': return r === 0 ? K.vanguard : 0;
-      case 'airy': o = orth(q); for (z = 0; z < o.length; z++) if (ok[o[z]] && !board[o[z]]) n++; return n * K.airy;
-      case 'tower': for (z = r + 1; z < R; z++) if (board[z * cols + cc]) n++; return n * K.tower;
-      case 'hub': return (cc > 0 && cc < cols - 1) ? K.hub : 0;
-      case 'diag': o = diag(q); for (z = 0; z < o.length; z++) { tt = board[o[z]]; if (tt && tt.c === t.c) n++; } return n * K.diag;
-    }
-    return 0;
-  }
-  var rb = [], cadd = [], mult = [], boost = [], power = [], val = [], parts = det ? [] : null;
+  function colr(q) { var t = board[q]; return t && t.c !== 'x' ? t.c : null; }
+  var cadd = [], mult = [], boost = [], power = [], val = [], wadd = [], sand = [], parts = det ? [] : null;
+  var marks = { sand: [], wheel: [], melds: [] };
   for (i = 0; i < N; i++) {
-    rb[i] = board[i] ? reactOf(i) : 0;
     var bc = F.bonus && F.bonus[i];
     cadd[i] = bc === 'p1' ? 1 : bc === 'p2' ? 2 : 0;
-    mult[i] = bc === 'x2' ? 2 : 1; boost[i] = 0; power[i] = 0; val[i] = 0;
+    mult[i] = bc === 'x2' ? 2 : 1; boost[i] = 0; power[i] = 0; val[i] = 0; wadd[i] = 0; sand[i] = 1;
     if (board[i] && board[i].s === 'dbl') { cadd[i] = 0; mult[i] = 1; }
   }
   for (i = cols; i < N; i++) if (board[i] && board[i].s === 'dbl' && board[i - cols] && board[i - cols].s !== 'dbl') mult[i - cols] *= board[i].n;
+  var cb = [];
+  for (c = 0; c < cols; c++) cb[c] = 0;
+  if (mode === 'sandwich') {
+    for (i = 0; i < N; i++) {
+      var m = board[i]; if (!m || m.c === 'x' || m.s === 'dbl') continue;
+      var r = (i / cols) | 0, cc = i % cols, pairs = [];
+      if (cc > 0 && cc < cols - 1) pairs.push([i - 1, i + 1]);
+      if (r > 0 && r < R - 1) pairs.push([i - cols, i + cols]);
+      for (k = 0; k < pairs.length; k++) {
+        var pa = colr(pairs[k][0]), pb = colr(pairs[k][1]);
+        if (pa && pa === pb && pa !== m.c) { sand[i] = 2; marks.sand.push({ mid: i, a: pairs[k][0], b: pairs[k][1] }); }
+      }
+    }
+  } else if (mode === 'wheel') {
+    for (i = 0; i < N; i++) {
+      var w = board[i]; if (!isAttack(w) || w.c === 'x') continue;
+      var o = orth(i), pv = wheelPrev(w.c);
+      for (k = 0; k < o.length; k++) if (colr(o[k]) === pv) { wadd[i] += CONFIG.wheel; marks.wheel.push({ from: o[k], to: i }); }
+    }
+  } else if (mode === 'melds') {
+    var lines = [], M = CONFIG.meld;
+    for (c = 0; c < cols; c++) for (var r0 = 0; r0 + 3 <= R; r0++) lines.push({ cells: [r0 * cols + c, (r0 + 1) * cols + c, (r0 + 2) * cols + c], row: false });
+    for (var rr = 0; rr < R; rr++) for (var c0 = 0; c0 + 3 <= cols; c0++) lines.push({ cells: [rr * cols + c0, rr * cols + c0 + 1, rr * cols + c0 + 2], row: true });
+    lines.forEach(function (L) {
+      var ts = L.cells.map(function (q) { return board[q]; });
+      if (!ts[0] || !ts[1] || !ts[2]) return;
+      var ns = ts.map(function (t) { return t.n; }).sort(function (a, b) { return a - b; });
+      var flush = ts[0].c !== 'x' && ts[0].c === ts[1].c && ts[1].c === ts[2].c;
+      var set = ns[0] === ns[1] && ns[1] === ns[2], run = ns[1] === ns[0] + 1 && ns[2] === ns[1] + 1;
+      if (!flush && !set && !run) return;
+      var b = flush && (set || run) ? M.both : flush ? M.flush : run ? M.run : M.set;
+      var label = (flush ? 'Flush' : '') + (flush && (set || run) ? ' ' : '') + (set ? 'Set' : run ? 'Run' : '');
+      var colsOf = L.cells.map(function (q) { return q % cols; });
+      if (L.row) { var each = Math.max(1, Math.round(b * M.rowFactor)); colsOf.forEach(function (cc2) { cb[cc2] += each; }); marks.melds.push({ cells: L.cells, label: label, bonus: each, row: true }); }
+      else { cb[colsOf[0]] += b; marks.melds.push({ cells: L.cells, label: label, bonus: b, row: false }); }
+    });
+  }
   for (i = 0; i < N; i++) {
     var t = board[i]; if (!t || !isBoost(t)) continue;
-    var p = (t.n + rb[i] + cadd[i] + mom) * mult[i]; power[i] = p;
+    var p = (t.n + cadd[i] + mom) * mult[i] * sand[i]; power[i] = p;
     var tg = [];
     if (t.s === 'plus') tg = orth(i);
-    else { var r0 = (i / cols) | 0; for (j = r0 * cols; j < r0 * cols + cols; j++) if (j !== i) tg.push(j); }
+    else { var r1 = (i / cols) | 0; for (j = r1 * cols; j < r1 * cols + cols; j++) if (j !== i) tg.push(j); }
     for (k = 0; k < tg.length; k++) if (isAttack(board[tg[k]])) boost[tg[k]] += p;
-    if (det) parts[i] = [['base', t.n], ['reaction', rb[i]], ['cell +', cadd[i]], ['momentum', mom], ['multiplier ×', mult[i]]];
+    if (det) parts[i] = [['base', t.n], ['cell +', cadd[i]], ['momentum', mom], ['bonus cell / Double ×', mult[i]], ['sandwich ×', sand[i]]];
   }
-  var tot = [], src = [], cb = [], splashC = [];
-  for (c = 0; c < cols; c++) { tot[c] = 0; src[c] = 0; cb[c] = 0; splashC[c] = false; }
+  var tot = [], src = [], matched = [];
+  for (c = 0; c < cols; c++) { tot[c] = 0; src[c] = 0; }
   for (i = 0; i < N; i++) {
-    var a = board[i]; if (!a || !isAttack(a)) continue;
+    var a = board[i]; if (!isAttack(a)) continue;
     c = i % cols;
-    var v = (a.n + rb[i] + cadd[i] + mom + boost[i]) * mult[i]; val[i] = v;
-    if (det) parts[i] = [['base', a.n], ['reaction', rb[i]], ['cell +', cadd[i]], ['momentum', mom], ['boosters', boost[i]], ['multiplier ×', mult[i]]];
+    var v = (a.n + cadd[i] + mom + boost[i] + wadd[i]) * mult[i] * sand[i]; val[i] = v;
+    if (det) parts[i] = [['base', a.n], ['cell +', cadd[i]], ['momentum', mom], ['boosters', boost[i]], ['wheel', wadd[i]], ['bonus cell / Double ×', mult[i]], ['sandwich ×', sand[i]]];
     var outs = a.s === 'strike' ? [c] : [c - 1, c + 1];
     for (k = 0; k < outs.length; k++) {
       var oc = outs[k]; if (oc < 0 || oc >= cols) continue;
-      tot[oc] += v; src[oc]++;
-      if (a.c !== 'x' && rx[a.c] === 'splash') splashC[oc] = true;
+      var ek = ea[oc], x2 = ecol && a.c !== 'x' && ek !== undefined && F.enemies[ek].col === a.c;
+      tot[oc] += x2 ? v * 2 : v; src[oc]++;
+      if (x2) matched.push({ cell: i, enemy: ek });
     }
   }
-  for (c = 0; c < cols; c++) {
-    var list = [], colours = {}, ndist = 0, allCol = true;
-    for (j = 0; j < R; j++) { var q = board[j * cols + c]; if (q) { list.push(q); if (q.c === 'x') allCol = false; else if (!colours[q.c]) { colours[q.c] = 1; ndist++; } } }
-    if (list.length >= 2 && allCol) {
-      if (ndist === list.length) { for (k = 0; k < list.length; k++) if (rx[list[k].c] === 'prism') { cb[c] += K.prism; break; } }
-      else if (ndist === 1 && rx[list[0].c] === 'pure') cb[c] += K.pure;
-    }
-  }
-  var raw = [], sr = [], gOk = [], sp = [], spillIn = [], spillSrc = [];
-  F.enemies.forEach(function (e, ek) {
-    var rw = 0, s = 0, spl = false;
-    for (var cc = e.c; cc < e.c + e.w; cc++) { rw += tot[cc] + cb[cc]; s += src[cc]; if (splashC[cc]) spl = true; }
-    raw[ek] = rw; sr[ek] = s; gOk[ek] = e.kind !== 'g' || s >= 2; sp[ek] = spl; spillIn[ek] = 0; spillSrc[ek] = 0;
-  });
-  F.enemies.forEach(function (e, ek) {
-    if (!sp[ek] || !gOk[ek] || raw[ek] <= 0) return;
-    var over = e.dead ? raw[ek] : raw[ek] - Math.max(0, e.hp);
-    if (over <= 0) return;
-    [ea[e.c - 1], ea[e.c + e.w]].forEach(function (nk) {
-      if (nk !== undefined && nk !== ek && !F.enemies[nk].dead) { spillIn[nk] += over; spillSrc[nk]++; }
-    });
-  });
   var en = F.enemies.map(function (e, ek) {
-    var s = sr[ek] + spillSrc[ek], dmg = 0;
-    if (!e.dead && !(e.kind === 'g' && s < 2)) dmg = raw[ek] + spillIn[ek];
-    return { dmg: dmg, raw: raw[ek], src: s, spillIn: spillIn[ek], kill: !e.dead && dmg >= e.hp, guardBlocked: !e.dead && e.kind === 'g' && s < 2 };
+    var rw = 0, s = 0;
+    for (var cc = e.c; cc < e.c + e.w; cc++) { rw += tot[cc] + cb[cc]; s += src[cc]; }
+    var dmg = (e.dead || (e.kind === 'g' && s < 2)) ? 0 : rw;
+    return { dmg: dmg, raw: rw, src: s, kill: !e.dead && dmg >= e.hp && e.hp > 0, guardBlocked: !e.dead && e.kind === 'g' && s < 2 };
   });
-  return { tot: tot, cb: cb, val: val, power: power, rb: rb, boost: boost, mult: mult, en: en, enemyAt: ea, ok: ok, parts: parts };
+  marks.matched = matched;
+  return { tot: tot, cb: cb, val: val, power: power, boost: boost, mult: mult, sand: sand, wadd: wadd, en: en, enemyAt: ea, ok: ok, parts: parts, marks: marks };
 }
 
 /* ---- fights ---- */
@@ -417,7 +428,7 @@ function genFight(run, kind, rnd) {
     var isBoss = kind === 'boss' && !bossDone && w === (cols >= 5 ? 3 : 2); if (isBoss) bossDone = true;
     var hp = A.hp * scale * w * K.hp * (1 - CONFIG.jitter / 2 + CONFIG.jitter * rnd()) * (isBoss ? 1 : (kind === 'boss' ? 0.6 : 1));
     var atk = A.atk * (1 + 0.5 * CONFIG.growth * run.won) * K.atk * (w > 1 ? 1.3 : 1) * (isBoss ? 1 : (kind === 'boss' ? 0.5 : 1));
-    var e = { c: c, w: w, hp: 0, max: 0, atk: Math.max(1, Math.round(atk)), kind: 'p', boss: isBoss, ph2: 0, dead: false };
+    var e = { c: c, w: w, col: pick(COLOR_IDS, rnd), hp: 0, max: 0, atk: Math.max(1, Math.round(atk)), kind: 'p', boss: isBoss, ph2: 0, dead: false };
     if (!isBoss && w === 1 && rnd() < CONFIG.guardChance[run.area - 1] * (kind === 'elite' ? 1.8 : 1) && kind !== 'boss') { e.kind = 'g'; hp *= 0.8; }
     e.hp = e.max = Math.max(3, Math.round(hp));
     if (isBoss) e.ph2 = Math.round(e.hp * CONFIG.boss.phase2);
@@ -449,9 +460,9 @@ function genOffers(run, rnd) {
 }
 function newRun(area, team, levels, colourless, rnd) {
   rnd = rnd || Math.random;
-  var A = CONFIG.areas[area - 1], run = { area: area, A: A, nid: 0, bag: [], rx: {}, team: team, step: 0, depth: 0, won: 0, fights: 0, coins: 0, loot: [], mom: 0, over: null };
+  var A = CONFIG.areas[area - 1], run = { area: area, A: A, nid: 0, bag: [], team: team, step: 0, depth: 0, won: 0, fights: 0, coins: 0, loot: [], mom: 0, over: null };
   COLOR_IDS.forEach(function (c) {
-    var u = UNIT_BY_ID[team[c]]; run.rx[c] = u.react;
+    var u = UNIT_BY_ID[team[c]];
     kitFor(u, levels[u.id] || 1).forEach(function (k) { run.bag.push(mkTile(run, c, u.id, k.s, k.n)); });
   });
   colourless.slice(0, CONFIG.maxColourless).forEach(function (k) { run.bag.push(mkTile(run, 'x', 'x', k.s, k.n)); });
@@ -466,7 +477,7 @@ function startFight(run, fight) {
 }
 function bagLeft(run) { return run.bag.filter(function (t) { return !t.spent; }).length; }
 function resolveAttack(run, fs, board) {
-  var F = fs.F, res = evaluate(F, board, run.rx, { momentum: fs.mom });
+  var F = fs.F, res = evaluate(F, board, { momentum: fs.mom });
   var info = { res: res, used: 0, kills: [], risen: [], before: F.enemies.map(function (e) { return { hp: e.hp, max: e.max, dead: e.dead }; }), heroBefore: run.hp, hit: [], win: false, lose: null, mom: fs.mom };
   board.forEach(function (t) { if (t) { t.spent = true; info.used++; } });
   F.enemies.forEach(function (e, k) {
@@ -522,7 +533,7 @@ var store = null, SPEED = 1;
 function defaultStore() {
   var units = {}, team = {};
   UNITS.forEach(function (u) { var first = !team[u.c]; if (first) team[u.c] = u.id; units[u.id] = { u: first, l: 1 }; });
-  return { coins: CONFIG.startCoins, units: units, team: team, inv: [{ s: 'strike', n: 3 }, { s: 'strike', n: 3 }, { s: 'plus', n: 1 }], bag: [0, 1, 2], best: { 1: 0, 2: 0, 3: 0 }, set: { momentum: true, value: 1 } };
+  return { coins: CONFIG.startCoins, units: units, team: team, inv: [{ s: 'strike', n: 3 }, { s: 'strike', n: 3 }, { s: 'plus', n: 1 }], bag: [0, 1, 2], best: { 1: 0, 2: 0, 3: 0 }, set: { momentum: true, value: 1, mode: 'sandwich', ecol: false } };
 }
 function load() {
   var s = defaultStore();
@@ -530,7 +541,7 @@ function load() {
   return s;
 }
 function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(store)); } catch (e) {} }
-function applySettings() { CONFIG.momentum.on = !!store.set.momentum; CONFIG.momentum.bonus = store.set.value || 1; }
+function applySettings() { CONFIG.momentum.on = !!store.set.momentum; CONFIG.momentum.bonus = store.set.value || 1; CONFIG.reactionMode = MODES[store.set.mode] ? store.set.mode : 'sandwich'; CONFIG.enemyColours = !!store.set.ecol; }
 store = load(); applySettings();
 function sleep(ms) { return new Promise(function (r) { setTimeout(r, S.skip ? 6 : ms * SPEED); }); }
 
@@ -556,8 +567,9 @@ function tileHTML(t, o) {
   o = o || {};
   var k = SHAPES[t.s].kind, cls = '', num = tileLabel(t, o.shown !== undefined ? o.shown : t.n);
   if (o.shown !== undefined && o.shown !== t.n) cls += ' chg';
+  var pw = CONFIG.reactionMode === 'wheel' && t.c !== 'x' && !o.nopw ? '<span class="pw" style="background:var(--' + wheelNext(t.c) + ')"></span>' : '';
   return '<div class="tile k-' + k + ' c-' + t.c + cls + (o.cls ? ' ' + o.cls : '') + '" style="' + (o.ts ? '--ts:' + o.ts + 'px;' : '') + '" ' + (o.attrs || '') + ' aria-label="' + COLORS[t.c] + ' ' + SHAPES[t.s].name + ' ' + num + '">' +
-    glyphSvg(t.s) + symSvg(t.c) + '<b class="num">' + num + '</b><i class="nm">' + SHAPES[t.s].short + '</i></div>';
+    glyphSvg(t.s) + symSvg(t.c) + pw + '<b class="num">' + num + '</b><i class="nm">' + SHAPES[t.s].short + '</i></div>';
 }
 function dotHTML(c) { return '<span class="dot c-' + c + '">' + symSvg(c).replace('class="sym"', '') + '</span>'; }
 function hpBar(hp, max) { return '<div class="hpbar"><i style="width:' + Math.max(0, hp / max * 100) + '%"></i><span>' + hp + ' / ' + max + '</span></div>'; }
@@ -595,16 +607,16 @@ function kitHTML(u, lvl) {
 }
 function renderTeam() {
   var h = '<header class="top"><button class="hbtn" data-act="home" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="ttl">Team</div><span class="hbtn"></span></header>';
-  h += '<p class="sub">One unit per colour. <b class="gold">' + store.coins + ' coins</b>. Faded tiles arrive at a higher level.</p>';
+  h += '<p class="sub">One unit per colour; units differ only by their tiles. <b class="gold">' + store.coins + ' coins</b>. Faded tiles arrive at a higher level.</p>';
   COLOR_IDS.forEach(function (c) {
     h += '<h2>' + dotHTML(c) + ' ' + COLORS[c] + '</h2>';
     UNITS.filter(function (u) { return u.c === c; }).forEach(function (u) {
-      var st = store.units[u.id], R = REACTS[u.react], picked = store.team[c] === u.id;
+      var st = store.units[u.id], picked = store.team[c] === u.id;
       h += '<div class="ucard c-' + c + (picked ? ' pick' : '') + (st.u ? '' : ' locked') + '"><div class="uhead">' + dotHTML(c) + '<b>' + u.name + '</b><span class="lvl">' + (st.u ? 'Level ' + st.l : 'Locked') + '</span><span class="grow"></span>';
       if (!st.u) h += '<button class="btn sm" data-act="unlock" data-u="' + u.id + '"' + (store.coins < CONFIG.unlockCost ? ' disabled' : '') + '>Unlock ' + CONFIG.unlockCost + '</button>';
       else if (picked) h += '<span class="lvl" style="color:var(--ok)">In team</span>';
       else h += '<button class="btn sm" data-act="pick" data-u="' + u.id + '">Pick</button>';
-      h += '</div><div class="rline" data-card="ru:' + u.id + '"><i>' + R.name + ':</i> ' + R.line + '</div>' + kitHTML(u, st.l) + '<div class="row"><span class="ctext grow">' + kitFor(u, st.l).length + ' tiles' + (st.l < 3 ? ', next level adds ' + (kitFor(u, st.l + 1).length - kitFor(u, st.l).length) : ', max level') + '</span>';
+      h += '</div>' + kitHTML(u, st.l) + '<div class="row"><span class="ctext grow">' + kitFor(u, st.l).length + ' tiles' + (st.l < 3 ? ', next level adds ' + (kitFor(u, st.l + 1).length - kitFor(u, st.l).length) : ', max level') + '</span>';
       if (st.u && st.l < 3) h += '<button class="btn sm" data-act="level" data-u="' + u.id + '"' + (store.coins < CONFIG.levelCost[st.l + 1] ? ' disabled' : '') + '>Level ' + (st.l + 1) + ': ' + CONFIG.levelCost[st.l + 1] + '</button>';
       h += '</div></div>';
     });
@@ -619,7 +631,7 @@ function offerHTML(o, i) {
   F.enemies.forEach(function (e) { hpSum += e.hp; });
   var h = '<div class="offer ' + o.kind + '" data-offer="' + i + '"><div class="ohead"><span class="tag">' + label + '</span><b>' + hpSum + ' HP</b><span class="rew"><span>' + o.reward.coins + ' coins</span>' + (o.reward.tile ? tileHTML({ c: 'x', s: o.reward.tile.s, n: o.reward.tile.n }, { cls: 'small', attrs: 'data-card="ot:' + i + '"' }) : '') + '</span></div>';
   h += '<div class="oen" style="grid-template-columns:repeat(' + F.cols + ',1fr)">';
-  F.enemies.forEach(function (e, k) { h += '<div class="mini' + (e.kind === 'g' ? ' g' : '') + '" style="grid-column:span ' + e.w + '" data-card="oe:' + i + ':' + k + '"><b>' + e.hp + '</b><small>atk ' + e.atk + (e.kind === 'g' ? ' guard' : '') + (e.boss ? ' phase 2' : '') + '</small></div>'; });
+  F.enemies.forEach(function (e, k) { h += '<div class="mini' + (e.kind === 'g' ? ' g' : '') + '" style="grid-column:span ' + e.w + '" data-card="oe:' + i + ':' + k + '">' + (CONFIG.enemyColours ? '<span class="ecd">' + dotHTML(e.col) + '</span>' : '') + '<b>' + e.hp + '</b><small>atk ' + e.atk + (e.kind === 'g' ? ' guard' : '') + (e.boss ? ' phase 2' : '') + '</small></div>'; });
   h += '</div><div class="ofoot">';
   var bonus = Object.keys(F.bonus);
   bonus.forEach(function (q) { h += '<span class="bcb" data-card="bc:' + F.bonus[q] + '">' + bcText(F.bonus[q]) + '</span>'; });
@@ -653,7 +665,7 @@ function startRunUI(area) {
 /* ---------- fight ---------- */
 function boardTiles() { return S.board.map(function (id) { return id >= 0 ? tileById(id) : null; }); }
 function tileById(id) { for (var i = 0; i < S.run.bag.length; i++) if (S.run.bag[i].id === id) return S.run.bag[i]; return null; }
-function evalNow(detail) { return evaluate(S.fs.F, boardTiles(), S.run.rx, { momentum: S.fs.mom, detail: detail }); }
+function evalNow(detail) { return evaluate(S.fs.F, boardTiles(), { momentum: S.fs.mom, detail: detail }); }
 function startFightUI(i) {
   var run = S.run, o = run.offers[i];
   S.fs = startFight(run, o);
@@ -667,14 +679,18 @@ function cellSize(cols) { var w = Math.min(document.documentElement.clientWidth 
 function renderFight() {
   var run = S.run, fs = S.fs, F = fs.F, cols = F.cols, i, k;
   var f = $('#fight'); f.style.setProperty('--cs', cellSize(cols) + 'px'); f.style.setProperty('--n', cols);
-  var bt = boardTiles(), res = evaluate(F, bt, run.rx, { momentum: fs.mom, detail: true }), placed = bt.filter(Boolean).length;
+  var bt = boardTiles(), res = evaluate(F, bt, { momentum: fs.mom, detail: true }), placed = bt.filter(Boolean).length;
+  var mk = {};
+  res.marks.sand.forEach(function (m) { mk[m.mid] = (mk[m.mid] || '') + ' sandw'; var hz = m.b - m.a === 2; mk[m.a] = (mk[m.a] || '') + (hz ? ' brR' : ' brB'); mk[m.b] = (mk[m.b] || '') + (hz ? ' brL' : ' brT'); });
+  res.marks.wheel.forEach(function (m) { mk[m.to] = (mk[m.to] || '') + ' wheelto'; });
   $('#fhead').innerHTML = '<span class="stat">Hero</span>' + hpBar(run.hp, run.maxHp) + '<span class="stat">Bag ' + (bagLeft(run) - placed) + '</span>' + (fs.mom > 0 ? '<span class="mombadge" data-card="mom">Momentum +' + fs.mom + '</span>' : '') + '<button class="hbtn" data-act="fmenu" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>';
   var h = '';
   F.enemies.forEach(function (e, ek) {
     var r = res.en[ek], pct = Math.max(0, e.hp / e.max * 100), dpct = Math.min(e.hp, r.dmg) / e.max * 100;
-    var pill = e.dead ? 'down' : r.guardBlocked ? 'needs 2 hits' : r.dmg > 0 ? (r.kill ? 'KO  -' + r.dmg : '-' + r.dmg) : '0';
+    var mc = res.marks.matched.filter(function (m) { return m.enemy === ek; }).length;
+    var pill = e.dead ? 'down' : r.guardBlocked ? '2 hits' : r.dmg > 0 ? (r.kill ? 'KO  -' + r.dmg : '-' + r.dmg) + (mc ? ' \u00d72' : '') : '0';
     h += '<div class="enemy' + (e.kind === 'g' ? ' guard' : '') + (e.boss ? ' boss' : '') + (e.dead ? ' dead' : '') + (r.kill ? ' kill' : '') + (r.dmg > 0 ? ' has' : '') + '" style="grid-column:span ' + e.w + '" data-en="' + ek + '" data-card="e:' + ek + '">' +
-      '<div class="etile"><span class="atk">' + SPIKE + e.atk + '</span><b class="hpn">' + (e.dead ? 0 : e.hp) + '</b><i>' + (e.kind === 'g' ? 'GUARD' : e.boss ? (e.phase === 2 ? 'BOSS II' : 'BOSS') : e.w > 1 ? 'WIDE' : 'HP') + '</i></div>' +
+      '<div class="etile">' + (CONFIG.enemyColours ? '<span class="ecd">' + dotHTML(e.col) + '</span>' : '') + '<span class="atk">' + SPIKE + e.atk + '</span><b class="hpn">' + (e.dead ? 0 : e.hp) + '</b><i>' + (e.kind === 'g' ? 'GUARD' : e.boss ? (e.phase === 2 ? 'BOSS II' : 'BOSS') : e.w > 1 ? 'WIDE' : 'HP') + '</i></div>' +
       '<div class="ebar"><i style="width:' + pct + '%"></i><u style="left:' + Math.max(0, pct - dpct) + '%;width:' + dpct + '%"></u></div><div class="pill">' + pill + '</div></div>';
   });
   $('#fen').innerHTML = h;
@@ -684,14 +700,16 @@ function renderFight() {
     h += '<div class="cell' + (blocked ? ' x' : ' free') + (bn ? ' bonus' : '') + (t ? ' occ' : '') + '" data-cell="' + i + '"' + (bn ? ' data-card="bc:' + bn + '"' : '') + '>';
     if (t) {
       var shown = isAttack(t) ? res.val[i] : isBoost(t) ? res.power[i] : t.n;
-      h += tileHTML(t, { shown: shown, attrs: 'data-cell="' + i + '" data-card="t:' + t.id + '"', cls: cellSize(cols) < 60 ? 'small' : '' }).replace('style="', 'style="--ts:' + cellSize(cols) + 'px;');
+      h += tileHTML(t, { shown: shown, attrs: 'data-cell="' + i + '" data-card="t:' + t.id + '"', cls: (cellSize(cols) < 60 ? 'small' : '') + (mk[i] || '') }).replace('style="', 'style="--ts:' + cellSize(cols) + 'px;');
     } else if (bn) h += '<span class="bb">' + bcText(bn) + '</span>';
     h += '<span class="pv"></span></div>';
   }
   $('#fboard').innerHTML = h;
   h = '';
-  COLOR_IDS.forEach(function (c) { var u = UNIT_BY_ID[run.team[c]], R = REACTS[u.react]; h += '<div class="rrow c-' + c + '" data-card="rx:' + c + '">' + dotHTML(c) + '<b>' + R.name + '</b><span class="t">' + R.line + '</span></div>'; });
+  var M = MODES[CONFIG.reactionMode];
+  h = '<div class="strip" data-card="mode">' + (CONFIG.reactionMode === 'wheel' ? wheelSvg() : '') + '<span class="t"><b>' + M.name + ':</b> ' + M.line + '</span></div>';
   $('#rbar').innerHTML = h;
+  drawMarks(res);
   /* tabs */
   var ids = COLOR_IDS.concat(['x']), tabs = '';
   if (!handOf(S.tab).length) { var ft = firstTab(); if (handOf(ft).length) S.tab = ft; }
@@ -712,13 +730,32 @@ function renderFight() {
   $('#finfo').textContent = info;
   if (S.sel >= 0) showHold(tileById(S.sel), -1);
 }
+function wheelSvg() {
+  var h = '<svg class="wheelsvg" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="13" fill="none" stroke="var(--line)" stroke-width="1.5"/>';
+  WHEEL.forEach(function (c, k) { var a = -Math.PI / 2 + k * 2 * Math.PI / 5; h += '<circle cx="' + (13 * Math.cos(a)).toFixed(1) + '" cy="' + (13 * Math.sin(a)).toFixed(1) + '" r="4.6" style="fill:var(--' + c + ')"/>'; });
+  var a0 = -Math.PI / 2 + 0.55, a1 = -Math.PI / 2 + 2 * Math.PI / 5 - 0.55;
+  h += '<path d="M' + (13 * Math.cos(a0)).toFixed(1) + ' ' + (13 * Math.sin(a0)).toFixed(1) + ' A13 13 0 0 1 ' + (13 * Math.cos(a1)).toFixed(1) + ' ' + (13 * Math.sin(a1)).toFixed(1) + '" fill="none" stroke="var(--ink)" stroke-width="2"/></svg>';
+  return h;
+}
+function drawMarks(res) {
+  var old = $('#marks'); if (old) old.remove();
+  if (!res.marks.melds.length) return;
+  var wrap = $('#bwrap'), wr = wrap.getBoundingClientRect(), h = '<svg id="marks" width="' + wr.width + '" height="' + wr.height + '" style="position:absolute;left:0;top:0;pointer-events:none;overflow:visible">';
+  res.marks.melds.forEach(function (m) {
+    var pts = m.cells.map(function (q) { var el = $('#fboard .cell[data-cell="' + q + '"]'), r = el.getBoundingClientRect(); return { x: r.left - wr.left + r.width / 2 + (m.row ? 0 : r.width * 0.34), y: r.top - wr.top + r.height / 2 + (m.row ? r.height * 0.34 : 0), h: r.height }; });
+    var mid = m.row ? pts[1] : { x: pts[2].x - 26, y: pts[2].y + pts[2].h * 0.34 }, lab = m.label + ' +' + m.bonus + (m.row ? ' each' : ''), w = lab.length * 6.4 + 12;
+    h += '<polyline points="' + pts.map(function (q) { return q.x + ',' + q.y; }).join(' ') + '" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>' +
+      '<rect x="' + (mid.x - w / 2) + '" y="' + (mid.y - 9) + '" width="' + w + '" height="18" rx="9" fill="var(--gold)"/><text x="' + mid.x + '" y="' + (mid.y + 4) + '" text-anchor="middle" font-size="11" font-weight="800" fill="#1c1500">' + lab + '</text>';
+  });
+  wrap.insertAdjacentHTML('beforeend', h + '</svg>');
+}
 function showHold(t, from) {
   clearHold(); if (!t) return;
   var F = S.fs.F, bt = boardTiles(); if (from >= 0) bt[from] = null;
-  var base = evaluate(F, bt, S.run.rx, { momentum: S.fs.mom });
+  var base = evaluate(F, bt, { momentum: S.fs.mom });
   $$('#fboard .cell').forEach(function (el) {
     var i = +el.dataset.cell; if (F.blocked.indexOf(i) >= 0 || bt[i]) return;
-    var b2 = bt.slice(); b2[i] = t; var r2 = evaluate(F, b2, S.run.rx, { momentum: S.fs.mom }), best = -1, bd = 0, kill = false;
+    var b2 = bt.slice(); b2[i] = t; var r2 = evaluate(F, b2, { momentum: S.fs.mom }), best = -1, bd = 0, kill = false;
     F.enemies.forEach(function (e, k) { var d = r2.en[k].dmg - base.en[k].dmg; if (d > bd) { bd = d; best = k; } if (r2.en[k].kill && !base.en[k].kill) kill = true; });
     el.classList.add('hold'); el.querySelector('.pv').textContent = best >= 0 ? '→' + r2.en[best].dmg : '';
     if (kill) el.classList.add('glow');
@@ -827,8 +864,9 @@ function hideCard() { var c = $('#card'); c.hidden = true; if ($('#modal').hidde
 function showCard(html) { $('#card').innerHTML = html; $('#card').hidden = false; $('#dim').hidden = false; }
 function tileCardHTML(t, parts, extra) {
   var h = tileHTML(t, { cls: 'cardtile' }).replace('class="tile', 'class="cardtile tile') + '<h3>' + COLORS[t.c] + ' ' + SHAPES[t.s].name + ' ' + tileLabel(t) + '</h3><p>' + SHAPES[t.s].desc + '</p>';
-  if (t.c !== 'x') { var u = UNIT_BY_ID[t.u]; if (u) h += '<p><b>' + u.name + '</b> (' + REACTS[u.react].name + '): ' + REACTS[u.react].line + '</p>'; }
-  else h += '<p class="muted">Colourless: no reaction, and it does not count as a colour.</p>';
+  if (t.c === 'x') h += '<p class="muted">Colourless: never counts as a colour (sandwich, flush, wheel), but its number counts for Runs and Sets.</p>';
+  else if (CONFIG.reactionMode === 'wheel') h += '<p class="muted">Its dot: it powers touching ' + COLORS[wheelNext(t.c)] + ' Strikes and Forks.</p>';
+  if (CONFIG.enemyColours && t.c !== 'x') h += '<p class="muted">Deals double to ' + COLORS[t.c] + ' enemies.</p>';
   if (parts) { var rows = parts.filter(function (p) { return p[1] && !(p[0].indexOf('×') >= 0 && p[1] === 1); }); if (rows.length) h += '<table>' + rows.map(function (p) { return '<tr><td>' + p[0] + '</td><td>' + (p[0].indexOf('×') >= 0 ? '×' : '+') + p[1] + '</td></tr>'; }).join('') + '</table>'; }
   return h + (extra || '');
 }
@@ -846,16 +884,16 @@ function cardFor(key) {
   if (p[0] === 'e' || p[0] === 'oe') {
     var e = p[0] === 'e' ? S.fs.F.enemies[+p[1]] : run.offers[+p[1]].F.enemies[+p[2]];
     h = '<h3>' + (e.boss ? 'Boss' : e.kind === 'g' ? 'Guard' : e.w > 1 ? 'Wide enemy' : 'Enemy') + '</h3><p>HP <b>' + (e.dead ? 0 : e.hp) + '</b>. Attack <b>' + e.atk + '</b>: if it survives your attack it hits your hero for that much.</p>';
+    if (CONFIG.enemyColours) h += '<p>Colour ' + COLORS[e.col] + ': ' + COLORS[e.col] + ' tiles deal double to it.</p>';
     if (e.kind === 'g') h += '<p>Guard: takes damage only if at least 2 separate tiles hit it in one attack.</p>';
     if (e.w > 1) h += '<p>Wide: covers ' + e.w + ' columns with one shared HP pool.</p>';
     if (e.boss) h += '<p>' + (e.phase === 2 ? 'Second phase.' : 'When its HP runs out it rises once more with ' + Math.max(e.ph2, 0) + ' HP.') + '</p>';
     return h + '<p class="muted">HP stays between attacks.</p>';
   }
   if (p[0] === 'bc') return '<h3>Bonus cell ' + bcText(p[1]) + '</h3><p>' + (p[1] === 'x2' ? 'A Strike, Fork or booster placed here is doubled.' : 'A Strike, Fork or booster placed here gets ' + bcText(p[1]) + '.') + '</p><p class="muted">Applies before Doubles and boosters. Doubles ignore it.</p>';
-  if (p[0] === 'rx' || p[0] === 'ru') {
-    var uu = p[0] === 'rx' ? UNIT_BY_ID[run.team[p[1]]] : UNIT_BY_ID[p[1]], R = REACTS[uu.react];
-    return '<h3>' + dotHTML(uu.c) + ' ' + uu.name + ': ' + R.name + '</h3><p>' + R.line + '.</p><p class="muted">' + R.hint + ' A unit\'s reaction says what its tiles gain from the tiles around them. Always extra damage.</p>';
-  }
+  if (p[0] === 'mode') { var MM = MODES[CONFIG.reactionMode], long = CONFIG.reactionMode === 'sandwich' ? 'Row or column. The two outer tiles show brackets; the doubled tile is outlined. Applies to Strikes, Forks and boosters (not Doubles). Colourless tiles are not a colour.' : CONFIG.reactionMode === 'melds' ? 'Lines are a whole column of 3, or 3 side by side in a row. Flush +' + CONFIG.meld.flush + ', Run +' + CONFIG.meld.run + ', Set +' + CONFIG.meld.set + ', Flush with Run or Set +' + CONFIG.meld.both + '. A column line adds to its column; a row line adds +' + Math.max(1, Math.round(CONFIG.meld.run * CONFIG.meld.rowFactor)) + ' (Flush +' + Math.max(1, Math.round(CONFIG.meld.flush * CONFIG.meld.rowFactor)) + ') to each of its three columns. The tile number counts, colourless tiles count for Run and Set but not Flush.' : CONFIG.reactionMode === 'wheel' ? 'Order: red, blue, green, yellow, purple, back to red. A tile adds +' + CONFIG.wheel + ' to each touching Strike or Fork of the next colour. Colourless tiles do not take part.' : 'Pick a rule in Settings to compare.';
+    return '<h3>' + MM.name + '</h3><p>' + MM.line + '</p><p class="muted">' + long + ' Always pure damage, included in the live totals. Change the rule in Settings.</p>'; }
+  if (p[0] === 'ec') return '';
   if (p[0] === 'mom') return '<h3>Momentum</h3><p>You cleared the last fight in one attack. Every tile gets +' + CONFIG.momentum.bonus + ' on the first attack of this fight.</p>';
   return '';
 }
@@ -875,7 +913,7 @@ function targetOf(el) {
   return null;
 }
 function longPress() {
-  if (!P || !P.tg.card) return; P.long = true; lpAt = Date.now();
+  if (!P || !P.tg.card) return; P.long = true;
   var h = cardFor(P.tg.card); if (!h) return; showCard(h);
   if (navigator.vibrate) try { navigator.vibrate(12); } catch (e) {}
 }
@@ -908,7 +946,7 @@ function endPointer(e, cancel) {
   if (ghost) { ghost.remove(); ghost = null; }
   if (p.tg.kind === 'board' && p.tg.el) p.tg.el.classList.remove('dragging');
   if (cancel) { if (p.moved) { clearHold(); renderFight(); } return; }
-  if (p.long) return;
+  if (p.long) { lpAt = Date.now(); return; }
   var tg = p.tg;
   if (p.moved) {
     clearHold();
@@ -935,13 +973,15 @@ function helpHTML() {
     '<li>Enemies sit above the columns with <b>HP</b> and an <b>attack</b>. Place tiles, press <b>Attack</b>. Each column\'s total hits its enemy. HP stays between attacks; survivors then hit your hero.</li>' +
     '<li>Tap a tile, then a cell, or drag it. Tap a placed tile to take it back. Hold anything for a card.</li>' +
     '<li><b>Strike</b> hits its own column. <b>Fork</b> hits both neighbours. <b>Plus</b> and <b>Row</b> boost Strikes and Forks. <b>Double</b> doubles the tile in front of it.</li>' +
-    '<li>Your team is five units, one per colour. A unit\'s reaction says what its tiles gain from the tiles around them. The five reactions are listed under the board.</li>' +
+    '<li>Your team is five units, one per colour; units differ only by their tiles, and stronger units bring more tile types. One reaction rule (shown under the board) rewards clever layouts with extra damage.</li>' +
     '<li><b>Every tile you attack with is spent</b> for the rest of the run. Win with as few as you can. Beating a boss brings them all back, sometimes with extra.</li>' +
     '<li>Guard enemies need 2 hits at once. Bonus cells (+1, +2, ×2) boost the tile on them. Winning in one attack gives momentum for the next fight.</li>' +
     '<li>Bank your loot and leave at any time, or go deeper. Dying keeps only part of it.</li></ol><div class="btnrow"><button class="btn main" data-act="close">Got it</button></div>';
 }
 function settingsHTML() {
   var h = '<h3>Settings and test</h3><div class="set"><label>Momentum</label><input type="checkbox" id="setmom"' + (store.set.momentum ? ' checked' : '') + '> <select id="setmomv">' + CONFIG.momentum.values.map(function (v) { return '<option' + (v === store.set.value ? ' selected' : '') + '>' + v + '</option>'; }).join('') + '</select></div>';
+  h += '<div class="set"><label>Reaction rule</label><select id="setmode">' + Object.keys(MODES).map(function (k) { return '<option value="' + k + '"' + (CONFIG.reactionMode === k ? ' selected' : '') + '>' + MODES[k].name + '</option>'; }).join('') + '</select></div>';
+  h += '<div class="set"><label>Enemy colours (same colour deals double)</label><input type="checkbox" id="setecol"' + (store.set.ecol ? ' checked' : '') + '></div>';
   h += '<div class="btnrow"><button class="btn sm" data-act="unlockall">Unlock all units</button><button class="btn sm" data-act="coins">+100 coins</button><button class="btn sm" data-act="tiles">+3 colourless tiles</button></div>';
   h += '<div class="muted" style="font-size:12px">Coins: ' + store.coins + '. Set a unit level (0 = locked):</div>';
   UNITS.forEach(function (u) { var st = store.units[u.id]; h += '<div class="set">' + dotHTML(u.c) + '<label>' + u.name + '</label><select data-ulv="' + u.id + '">' + [0, 1, 2, 3].map(function (l) { return '<option value="' + l + '"' + ((st.u ? st.l : 0) === l ? ' selected' : '') + '>' + (l ? 'Level ' + l : 'Locked') + '</option>'; }).join('') + '</select></div>'; });
@@ -951,7 +991,7 @@ function settingsHTML() {
 
 /* ---------- clicks ---------- */
 document.addEventListener('click', function (e) {
-  if (Date.now() - lpAt < 450) { e.stopPropagation(); e.preventDefault(); return; }
+  if (Date.now() - lpAt < 350) { e.stopPropagation(); e.preventDefault(); return; }
   var t = e.target, el;
   if (!$('#card').hidden) return;
   if ((el = t.closest && t.closest('[data-tab]'))) { S.tab = el.dataset.tab; S.sel = -1; clearHold(); renderFight(); return; }
@@ -989,13 +1029,15 @@ document.addEventListener('click', function (e) {
 document.addEventListener('change', function (e) {
   var t = e.target;
   if (t.id === 'setmom') { store.set.momentum = t.checked; applySettings(); save(); }
+  else if (t.id === 'setmode') { store.set.mode = t.value; applySettings(); save(); }
+  else if (t.id === 'setecol') { store.set.ecol = t.checked; applySettings(); save(); }
   else if (t.id === 'setmomv') { store.set.value = +t.value; applySettings(); save(); }
   else if (t.dataset && t.dataset.ulv) { var st = store.units[t.dataset.ulv], v = +t.value; st.u = v > 0; if (v > 0) st.l = v; if (!st.u && store.team[UNIT_BY_ID[t.dataset.ulv].c] === t.dataset.ulv) { store.team[UNIT_BY_ID[t.dataset.ulv].c] = UNITS.filter(function (u) { return u.c === UNIT_BY_ID[t.dataset.ulv].c && store.units[u.id].u; }).map(function (u) { return u.id; })[0] || t.dataset.ulv; } save(); renderHome(); }
 });
 $('#dim').addEventListener('click', function () { if (!$('#card').hidden) return; closeModal(); });
 window.addEventListener('resize', function () { if (S.screen === 'fight' && S.phase === 'edit') renderFight(); });
 show('home');
-window.TR = { S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: startFightUI, place: place, attack: attack, render: renderFight, show: show, save: save, UNITS: UNITS };
+window.TR = { genOffers: function () { S.run.offers = genOffers(S.run); }, S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: startFightUI, place: place, attack: attack, render: renderFight, show: show, save: save, UNITS: UNITS };
 })();
 </script>
 </body>

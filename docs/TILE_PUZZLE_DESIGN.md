@@ -135,3 +135,17 @@ No named reactions, no status effects.
 - Missed column: costs hero HP, or strict pass or fail?
 - Keep Guard enemies and the Double tile?
 - Fixed or free unit colours.
+
+## 8. Decisions for the run prototype
+
+Prototype: `prototype/samples/tile-run.html`, rules as built in `docs/TILE_RUN_PROTOTYPE.md`.
+
+- **Unit = colour with a fixed kit that grows with level.** One unit per colour, no repeats, a team is five units. A higher level adds tiles and more tile types (level 1 mostly Strikes; Forks, boosters, Doubles arrive at levels 2 and 3). Units differ only by their kit.
+- **Colourless inventory tiles.** Universal tiles kept in a persisted inventory, earned as loot; up to 3 go in the bag before a run.
+- **Reactions.** The Mix/Chain pair was rejected (it collapses into one colour per row). Per-unit reactions (five different effects per team) were tried next and rejected as too hard to remember. Replaced by one universal, pure-damage reaction rule at a time, shown in a strip under the board. The prototype offers three to compare: **Sandwich** (a tile between two tiles of one other colour is doubled; default), **Melds** (Flush, Run, Set in a line of three), **Wheel** (a tile boosts touching Strike/Fork tiles of the next colour on a five-colour ring), plus "none". An optional **enemy colour** match (same colour deals double) is a separate toggle, default off. Colourless tiles are never a colour for these rules (they count by number for Run and Set).
+- **Tiles deplete over a run and replace rations.** A tile on the board at Attack is spent for the run; the bag is the resource and fights are chosen with that in mind.
+- **Bosses replenish**, sometimes beyond the starting bag (bonus colourless tiles for the rest of the run), and heal some HP. The run then goes deeper; the player can bank and leave at any time, defeat keeps half.
+- **The hero HP bar stays** across the run; enemy HP persists between attacks; surviving enemies hit back.
+- **Columns grow per area (3, 4, 5)** as a balancing matter, not a rule.
+- **Momentum is experimental and tunable** (win in one attack: +N to every tile on the next fight's first attack); toggle and value in Settings.
+- **Bonus cells are level design** (+1, +2, x2), generated per fight. **Guard and Double stay. Exact is dropped.**
