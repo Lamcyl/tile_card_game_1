@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tile Run Prototype</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<style>
+:root{color-scheme:light dark;
+ --bg:#eef1f5;--panel:#ffffff;--panel2:#e4e9f0;--ink:#1c2635;--muted:#566377;--line:#c9d1dc;--cellbg:#f8fafc;
+ --r:#d2473f;--b:#2e6bd3;--g:#23874f;--y:#e0a800;--p:#7b4bc4;--x:#6b7488;
+ --rt:#d2473f;--bt:#2e6bd3;--gt:#23874f;--yt:#8a6500;--pt:#7b4bc4;--xt:#5b6478;
+ --ron:#fff;--bon:#fff;--gon:#fff;--yon:#1c1500;--pon:#fff;--xon:#fff;
+ --ok:#1b8a4a;--bad:#c23a3a;--warn:#b86a00;--enemy:#33405a;--enemyink:#ffffff;
+ --btn:#1c2635;--btnink:#ffffff;--shadow:rgba(20,30,50,.18);--okbg:#dff3e6;--badbg:#fbe3e3;--gold:#e0a100;--hp:#c23a3a;--hpbg:#e9d3d3}
+@media (prefers-color-scheme: dark){:root{
+ --bg:#151a24;--panel:#212838;--panel2:#2b3448;--ink:#eef2f8;--muted:#a6b1c4;--line:#3a4560;--cellbg:#1b2130;
+ --r:#e0584f;--b:#4f86e6;--g:#2f9d5f;--y:#e8b923;--p:#9468de;--x:#7d869b;
+ --rt:#ee7b73;--bt:#7aa5f0;--gt:#4cc27c;--yt:#f2c94c;--pt:#b391ee;--xt:#a6afc2;
+ --ron:#fff;--bon:#fff;--gon:#fff;--yon:#1c1500;--pon:#fff;--xon:#10131b;
+ --ok:#4cc27c;--bad:#ef6a6a;--warn:#e2a03a;--enemy:#3b4a69;--enemyink:#ffffff;
+ --btn:#eef2f8;--btnink:#151a24;--shadow:rgba(0,0,0,.5);--okbg:#1f3a2c;--badbg:#412428;--gold:#f0b429;--hp:#ef6a6a;--hpbg:#4a2c31}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden}
+body{min-height:100vh;min-height:100dvh;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+button,select{font:inherit;color:var(--ink);background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:0;cursor:pointer}
+select{padding:4px 6px;border-radius:8px;border-width:1px}
+#app{width:100%;max-width:440px;margin:0 auto;min-height:100vh;min-height:100dvh;padding:0 12px 12px;display:flex;flex-direction:column}
+[hidden]{display:none!important}
+h1{margin:16px 0 2px;font-size:30px;letter-spacing:-.02em;color:var(--ink)}
+h2{margin:14px 0 6px;font-size:16px;color:var(--ink)}
+.sub{color:var(--muted);margin:0 0 10px;font-size:14px}
+.muted{color:var(--muted)}
+.btn{height:46px;border-radius:14px;font-weight:800;font-size:16px;padding:0 14px}
+.btn.main{background:var(--btn);color:var(--btnink);border-color:var(--btn)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.sm{height:34px;font-size:13px;border-radius:10px;padding:0 10px}
+.row{display:flex;gap:8px;align-items:center}
+.grow{flex:1}
+.panel{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:10px}
+header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
+.hbtn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:12px;flex:none}
+.hbtn svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ttl{flex:1;text-align:center;font-weight:800;font-size:16px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* tiles */
+.tile{position:relative;width:var(--ts);height:var(--ts);border-radius:calc(var(--ts)*.18);display:flex;align-items:center;justify-content:center;background:var(--tc);color:var(--on);box-shadow:0 2px 0 var(--shadow);touch-action:none;cursor:grab;flex:none}
+.c-r{--tc:var(--r);--on:var(--ron);--tt:var(--rt)}.c-b{--tc:var(--b);--on:var(--bon);--tt:var(--bt)}.c-g{--tc:var(--g);--on:var(--gon);--tt:var(--gt)}
+.c-y{--tc:var(--y);--on:var(--yon);--tt:var(--yt)}.c-p{--tc:var(--p);--on:var(--pon);--tt:var(--pt)}.c-x{--tc:var(--x);--on:var(--xon);--tt:var(--xt)}
+.tile.k-boost{background:var(--panel);color:var(--tt);border:3px solid var(--tc)}
+.tile.k-mod{background:var(--panel);color:var(--tt);border:3px dashed var(--tc)}
+.tile .num{font-size:calc(var(--ts)*.42);line-height:1;font-weight:800;margin-top:calc(var(--ts)*-.05);font-variant-numeric:tabular-nums}
+.tile.k-boost .num,.tile.k-mod .num{font-size:calc(var(--ts)*.36)}
+.tile .glyph{position:absolute;left:8%;top:8%;width:30%;height:30%}
+.tile .sym{position:absolute;right:8%;top:8%;width:19%;height:19%}
+.tile .nm{position:absolute;left:0;right:0;bottom:6%;text-align:center;font-style:normal;font-size:calc(var(--ts)*.125);font-weight:800;letter-spacing:.05em}
+.tile.small .nm{display:none}
+.tile.chg{box-shadow:0 0 0 3px var(--gold)}
+.tile.dragging{opacity:.35}
+.tile.spent{opacity:.28;filter:grayscale(1)}
+.tile.fade{opacity:.4}
+.ghost{position:fixed;z-index:80;pointer-events:none;transform:translate(-50%,-60%) scale(1.12);opacity:.92}
+.pulse{animation:pulse .34s ease-out}
+@keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes lunge{0%{transform:translateY(0)}40%{transform:translateY(10px)}100%{transform:translateY(0)}}
+@keyframes glow{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes fly{0%{opacity:0;transform:translate(-50%,-50%)}15%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy)))}}
+.shake{animation:shake .35s}
+/* home */
+.areas{display:flex;flex-direction:column;gap:8px}
+.area{display:flex;align-items:center;gap:10px;width:100%;min-height:62px;text-align:left;padding:8px 14px;background:var(--panel);border:2px solid var(--line);border-radius:14px;box-shadow:0 2px 0 var(--shadow)}
+.area b{font-size:17px;color:var(--ink)}.area small{display:block;font-size:12px;color:var(--muted)}
+.area .go{margin-left:auto;font-weight:800;color:var(--btnink);background:var(--btn);border-radius:10px;padding:6px 12px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.uchip{display:flex;align-items:center;gap:5px;background:var(--panel2);border-radius:10px;padding:4px 8px;font-size:12px;font-weight:700;color:var(--ink)}
+.dot{display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--tc);color:var(--on);align-items:center;justify-content:center;flex:none}
+.dot svg{width:11px;height:11px}
+.inv{display:flex;flex-wrap:wrap;gap:6px}
+.inv .tile{--ts:46px}
+.inv .tile.sel{outline:3px solid var(--ink);outline-offset:2px}
+.linkrow{display:flex;gap:8px;margin-top:4px}
+.linkrow .btn{flex:1}
+/* team */
+.ucard{border:2px solid var(--line);border-radius:14px;padding:8px;margin-bottom:8px;background:var(--panel)}
+.ucard.pick{border-color:var(--tt);box-shadow:inset 0 0 0 1px var(--tt)}
+.ucard.locked{opacity:.85}
+.uhead{display:flex;align-items:center;gap:8px}
+.uhead b{font-size:15px;color:var(--ink)}
+.lvl{font-size:11px;font-weight:800;color:var(--muted);background:var(--panel2);border-radius:8px;padding:1px 6px}
+.rline{font-size:12.5px;color:var(--ink);margin:4px 0}
+.rline i{font-style:normal;font-weight:800;color:var(--tt)}
+.kit{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 6px}
+.kit .tile{--ts:34px;box-shadow:none}
+.kit .tile .num{font-size:calc(var(--ts)*.46)}
+.ctext{font-size:12px;color:var(--muted)}
+/* map */
+.hpbar{position:relative;height:18px;border-radius:9px;background:var(--hpbg);overflow:hidden;flex:1;min-width:90px}
+.hpbar i{position:absolute;left:0;top:0;bottom:0;background:var(--hp);transition:width .5s}
+.hpbar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.path{display:flex;align-items:center;gap:6px;margin:4px 0 10px}
+.node{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);background:var(--panel)}
+.node.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.node.cur{border-color:var(--ink);color:var(--ink)}
+.node.boss{border-radius:8px}
+.seg{flex:1;height:3px;background:var(--line)}
+.offer{display:block;width:100%;text-align:left;background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:10px;margin-bottom:10px;box-shadow:0 2px 0 var(--shadow);cursor:pointer}
+.offer.elite{border-color:var(--warn)}.offer.boss{border-color:var(--bad)}
+.ohead{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.ohead b{font-size:15px;color:var(--ink)}
+.tag{font-size:10.5px;font-weight:800;letter-spacing:.05em;border-radius:8px;padding:1px 6px;background:var(--panel2);color:var(--muted)}
+.offer.elite .tag{background:var(--warn);color:#fff}.offer.boss .tag{background:var(--bad);color:#fff}
+.rew{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:800;color:var(--ink)}
+.rew .tile{--ts:26px;box-shadow:none;border-width:2px}
+.rew .tile .glyph,.rew .tile .sym{display:none}
+.rew .tile .num{font-size:12px;margin:0}
+.oen{display:grid;gap:5px}
+.mini{background:var(--enemy);color:var(--enemyink);border-radius:10px;padding:4px 2px;text-align:center;min-width:0}
+.mini b{display:block;font-size:20px;line-height:1.05;color:var(--enemyink)}
+.mini small{font-size:10px;color:var(--enemyink);opacity:.9;font-weight:700}
+.mini.g{outline:2px dashed var(--gold);outline-offset:-3px}
+.ofoot{display:flex;gap:6px;margin-top:6px;font-size:11.5px;color:var(--muted);align-items:center;flex-wrap:wrap}
+.bcb{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:18px;border-radius:6px;font-size:11px;font-weight:800;padding:0 4px;background:var(--gold);color:#1c1500}
+/* fight */
+#fight{padding-top:0}
+#fhead{display:flex;align-items:center;gap:8px;height:46px;flex:none}
+.stat{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+.mombadge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;background:var(--gold);color:#1c1500;border-radius:9px;padding:2px 8px;animation:glow 1.4s infinite}
+#fen,#fboard{display:grid;grid-template-columns:repeat(var(--n),var(--cs));gap:6px;justify-content:center}
+.enemy{display:flex;flex-direction:column;gap:3px;min-width:0;position:relative}
+.etile{position:relative;height:50px;border-radius:12px;background:var(--enemy);color:var(--enemyink);border:3px solid var(--enemy);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.etile b{font-size:24px;line-height:.95;font-weight:800;color:var(--enemyink);font-variant-numeric:tabular-nums}
+.etile i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;color:var(--enemyink);opacity:.9}
+.etile .atk{position:absolute;right:4px;top:2px;font-size:11px;font-weight:800;color:var(--enemyink);display:flex;align-items:center;gap:1px}
+.etile .atk svg{width:9px;height:9px;fill:var(--enemyink)}
+.enemy.guard .etile{border-style:dashed;border-color:var(--gold)}
+.enemy.boss .etile{border-color:var(--bad)}
+.enemy.dead .etile{background:var(--panel2);border-color:var(--line);opacity:.6}.enemy.dead .etile b,.enemy.dead .etile i,.enemy.dead .atk{color:var(--muted)}
+.enemy.hit .etile{animation:lunge .4s}
+.ebar{position:relative;height:9px;border-radius:5px;background:var(--hpbg);overflow:hidden}
+.ebar i{position:absolute;left:0;top:0;bottom:0;background:var(--hp);transition:width .5s}
+.ebar u{position:absolute;top:0;bottom:0;background:var(--gold);opacity:.85;transition:width .3s;text-decoration:none}
+.pill{height:22px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;background:var(--panel2);color:var(--muted);border:2px solid var(--line);padding:0 5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.enemy.kill .pill{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.enemy.has .pill{color:var(--ink)}
+.enemy.kill .etile{border-color:var(--ok)}
+#bwrap{position:relative;margin-top:6px}
+.cell{position:relative;width:var(--cs);height:var(--cs);border-radius:12px;background:var(--cellbg);border:2px dashed var(--line);display:flex;align-items:center;justify-content:center}
+.cell.x{border:2px solid var(--line);background:repeating-linear-gradient(45deg,var(--panel2) 0 6px,var(--cellbg) 6px 12px)}
+.cell.occ{border:none;background:transparent}
+.cell .bb{position:absolute;left:3px;bottom:2px;font-size:11px;font-weight:800;color:var(--warn);pointer-events:none}
+.cell.bonus{background:color-mix(in srgb,var(--gold) 20%,var(--cellbg));border-color:var(--gold)}
+.cell.occ.bonus{background:transparent}
+.cell.occ .bb{display:none}
+.cell .pv{position:absolute;right:4px;bottom:2px;font-size:12px;font-weight:800;color:var(--ink);pointer-events:none}
+.cell.hold.free{border-style:solid;border-color:var(--ink)}
+.cell.glow{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 25%,var(--cellbg));animation:glow 1s ease-in-out infinite}
+.cell.glow .pv{color:var(--ok)}
+.fly{position:fixed;z-index:70;font-weight:900;font-size:19px;color:var(--ink);pointer-events:none;transform:translate(-50%,-50%);text-shadow:0 0 4px var(--bg),0 0 4px var(--bg),0 0 8px var(--bg);animation:fly .75s ease-in forwards}
+.fly.bad{color:var(--bad)}
+#rbar{margin-top:6px;display:flex;flex-direction:column;gap:2px}
+.rrow{display:flex;align-items:center;gap:6px;font-size:11.5px;line-height:1.2;color:var(--ink);padding:2px 4px;border-radius:8px;background:var(--panel)}
+.rrow b{color:var(--tt);white-space:nowrap}
+.rrow span.t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#finfo{min-height:32px;font-size:12.5px;line-height:1.3;text-align:center;color:var(--ink);padding:5px 4px 2px;flex:none}
+#ftabs{display:flex;gap:5px;justify-content:center;margin-top:2px;flex:none}
+.tab{min-width:48px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:4px;font-weight:800;font-size:13px;padding:0 6px;background:var(--panel);color:var(--ink);border:2px solid var(--line)}
+.tab.on{border-color:var(--tt);background:var(--panel2)}
+.tab.empty{opacity:.4}
+#fhand{display:grid;grid-template-columns:repeat(auto-fill,54px);gap:6px;justify-content:space-between;margin-top:6px;overflow-y:auto;flex:1;min-height:60px;align-content:start;padding:2px}
+#fhand .tile{--ts:54px}
+#fhand .tile.sel{outline:4px solid var(--ink);outline-offset:2px;transform:translateY(-3px)}
+#fbar{display:flex;gap:10px;padding-top:8px;flex:none}
+#fbar .btn{height:48px}
+#fclear{flex:1}#fatk{flex:2.2}
+/* cards, modals */
+#dim{position:fixed;inset:0;background:rgba(10,15,25,.5);z-index:55}
+#card,#modal{position:fixed;left:50%;transform:translateX(-50%);z-index:60;width:min(350px,calc(100vw - 28px));background:var(--panel);color:var(--ink);border:2px solid var(--ink);border-radius:16px;padding:14px;box-shadow:0 8px 28px var(--shadow)}
+#card{top:30%;z-index:65}
+#card h3,#modal h3{margin:0 0 6px;font-size:17px;color:var(--ink)}
+#card p{margin:4px 0;font-size:14px;line-height:1.35;color:var(--ink)}
+#card .cardtile{float:left;margin:0 12px 4px 0;--ts:56px}
+#card table{width:100%;border-collapse:collapse;font-size:13px;clear:both}#card td{padding:2px 0;color:var(--ink)}#card td:last-child{text-align:right;font-weight:800}
+#modal{top:50%;transform:translate(-50%,-50%);max-height:88vh;overflow:auto;-webkit-user-select:text;user-select:text}
+#modal ol{margin:0;padding-left:20px}#modal li{margin:6px 0;font-size:14px;line-height:1.35;color:var(--ink)}
+#modal .set{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px;color:var(--ink)}
+#modal .set label{flex:1}
+#modal .btnrow{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+#modal .btnrow .btn{flex:1;min-width:110px}
+.big{font-size:22px;font-weight:800;color:var(--ink)}
+.resbox{margin-top:12px;background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+.resbox.win{border-color:var(--ok)}.resbox.lose{border-color:var(--bad)}
+.resbox h2{font-size:24px;margin:0 0 6px}
+.resbox p{font-size:14px;margin:4px 0;color:var(--ink)}
+.resbox .inv{justify-content:center;margin:8px 0}
+.resbox .btns{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.gold{color:var(--warn);font-weight:800}
+@media (max-height:760px){.etile{height:44px}}
+</style>
+</head>
+<body>
+<div id="app">
+  <section id="home" class="screen"></section>
+  <section id="team" class="screen" hidden></section>
+  <section id="map" class="screen" hidden></section>
+  <section id="fight" class="screen" hidden>
+    <div id="fhead"></div>
+    <div id="fen"></div>
+    <div id="bwrap"><div id="fboard"></div></div>
+    <div id="rbar"></div>
+    <div id="finfo"></div>
+    <div id="ftabs"></div>
+    <div id="fhand"></div>
+    <div id="fbar"><button class="btn" id="fclear">Clear</button><button class="btn main" id="fatk">Attack</button></div>
+  </section>
+  <section id="result" class="screen" hidden></section>
+</div>
+<div id="dim" hidden></div>
+<div id="modal" hidden></div>
+<div id="card" hidden></div>
+<script>
+/*RULES-START*/
+var CONFIG = {
+  rows: 3,
+  maxColourless: 3,                 /* colourless tiles allowed in the bag before a run */
+  heroHp: [30, 40, 50],             /* by area */
+  areas: [
+    { name: 'Meadow', cols: 3, hp: 6,  atk: 2, coin: 1, lvl: 1 },   /* hp = per enemy column at step 0 */
+    { name: 'Quarry', cols: 4, hp: 11, atk: 3, coin: 2, lvl: 2 },
+    { name: 'Spire',  cols: 5, hp: 16, atk: 4, coin: 3, lvl: 3 }
+  ],
+  bossEvery: 4,                     /* steps per segment: (bossEvery-1) fights, then a boss */
+  offers: 3, offerTwoChance: 0.25,
+  eliteChance: 0.3, wideChance: 0.3,
+  guardChance: [0.12, 0.2, 0.25],
+  blockChance: 0.25,
+  bonusCount: [0.3, 0.45, 0.25],    /* chance of 0,1,2 bonus cells */
+  bonusTypes: { p1: 0.45, p2: 0.3, x2: 0.25 },
+  growth: 0.06,                     /* hp/atk growth per fight won in a run */
+  jitter: 0.3,
+  normal: { hp: 1, atk: 1, coin: 1, tile: 0.25 },
+  elite:  { hp: 1.5, atk: 1.3, coin: 2, tile: 0.7 },
+  boss:   { hp: 2, atk: 1.6, coin: 4, tile: 1, phase2: 0.5, bonusChance: 0.6, bonusMax: 2, heal: 0.4 },
+  coinBase: 5, coinDepth: 0.12,
+  healPerFight: 2,
+  deathKeep: 0.5,                   /* fraction of run coins and loot kept when the run ends in defeat */
+  momentum: { on: true, bonus: 1, values: [1, 2, 3] },
+  levelCost: { 2: 30, 3: 70 }, unlockCost: 40,
+  startCoins: 0,
+  longPressMs: 450,
+  react: { contrast: 1, spectrum: 1, relay: 2, prism: 3, cluster: 1, loner: 2, vanguard: 2, airy: 1, tower: 1, hub: 2, diag: 2, pure: 3 }
+};
+var SHAPES = {
+  strike: { name: 'Strike', kind: 'attack', short: 'STRIKE', desc: 'Hits the enemy in its own column.' },
+  fork:   { name: 'Fork',   kind: 'attack', short: 'FORK',   desc: 'Hits the enemies in both neighbouring columns, not its own.' },
+  plus:   { name: 'Plus',   kind: 'boost',  short: 'PLUS',   desc: 'Booster: adds its number to each Strike and Fork touching it (up, down, left, right).' },
+  row:    { name: 'Row',    kind: 'boost',  short: 'ROW',    desc: 'Booster: adds its number to every Strike and Fork in its row.' },
+  dbl:    { name: 'Double', kind: 'mod',    short: 'DOUBLE', desc: 'Doubles the tile in front of it (the row nearer the enemies). Ignores bonus cells.' }
+};
+var COLOR_IDS = ['r', 'b', 'g', 'y', 'p'];
+var COLORS = { r: 'Red', b: 'Blue', g: 'Green', y: 'Yellow', p: 'Purple', x: 'Colourless' };
+var REACTS = {
+  vanguard: { name: 'Front',    line: '+2 while in the front row',                 hint: 'Wants tiles in the front row.' },
+  cluster:  { name: 'Cluster',  line: '+1 per touching tile of its own colour',    hint: 'Wants its colour side by side.' },
+  splash:   { name: 'Spill',    line: 'Damage above an enemy\'s HP spills to the enemies beside it', hint: 'Wants big hits next to weak enemies.' },
+  contrast: { name: 'Mosaic',   line: '+1 per touching tile of another colour',    hint: 'Wants a checkerboard of colours.' },
+  airy:     { name: 'Space',    line: '+1 per empty cell touching it',             hint: 'Wants room around it: spread out.' },
+  hub:      { name: 'Core',     line: '+2 when not in an outer column',            hint: 'Wants the middle columns.' },
+  prism:    { name: 'Prism',    line: '+3 to its column if every tile in it is a different colour', hint: 'Wants columns with 2-3 different colours.' },
+  tower:    { name: 'Tower',    line: '+1 per tile behind it in its column',       hint: 'Wants full columns, itself in front.' },
+  diag:     { name: 'Lattice',  line: '+2 per own-colour tile touching its corner', hint: 'Wants own colour on the diagonals.' },
+  spectrum: { name: 'Spectrum', line: '+1 per other colour in its row',            hint: 'Wants rows with many colours.' },
+  loner:    { name: 'Loner',    line: '+2 when no touching tile shares its colour', hint: 'Wants to be apart from its own colour.' },
+  relay:    { name: 'Relay',    line: '+2 if the tile in front is another colour', hint: 'Wants a different colour in front of it.' },
+  pure:     { name: 'Pure',     line: '+3 to its column if all its tiles share this colour', hint: 'Wants whole columns of one colour.' }
+};
+/* kit: groups separated by | are added at level 1, 2, 3.  S strike, F fork, P plus, R row, D double (x2) */
+var UNITS = [
+  { id: 'ember',  name: 'Ember',  c: 'r', react: 'vanguard', kit: 'S2 S3 S3 S4|F3 P1|S5 D2' },
+  { id: 'brand',  name: 'Brand',  c: 'r', react: 'cluster',  kit: 'S3 S3 S3 S4|P1 P2|R1 D2' },
+  { id: 'cinder', name: 'Cinder', c: 'r', react: 'splash',   kit: 'S3 S4 S5 S5|F3 S6|F4 D2' },
+  { id: 'tide',   name: 'Tide',   c: 'b', react: 'contrast', kit: 'S2 S3 S3 S4|F2 P1|P2 D2' },
+  { id: 'mist',   name: 'Mist',   c: 'b', react: 'airy',     kit: 'S3 S3 S4 S4|F3 R1|D2 P1' },
+  { id: 'drift',  name: 'Drift',  c: 'b', react: 'hub',      kit: 'S2 S3 S4 S4|F2 F3|P1 D2' },
+  { id: 'moss',   name: 'Moss',   c: 'g', react: 'prism',    kit: 'S2 S3 S3 S4|P1 F2|R1 D2' },
+  { id: 'thorn',  name: 'Thorn',  c: 'g', react: 'tower',    kit: 'S2 S3 S3 S3|P1 P1|R1 D2' },
+  { id: 'vale',   name: 'Vale',   c: 'g', react: 'diag',     kit: 'S3 S3 S4 S4|F3 P1|R2 D2' },
+  { id: 'glint',  name: 'Glint',  c: 'y', react: 'spectrum', kit: 'S2 S3 S3 S4|F2 P1|R1 D2' },
+  { id: 'spark',  name: 'Spark',  c: 'y', react: 'loner',    kit: 'S3 S3 S4 S4|F3 F2|P1 D2' },
+  { id: 'dusk',   name: 'Dusk',   c: 'p', react: 'relay',    kit: 'S2 S3 S4 S4|F3 P1|R1 D2' },
+  { id: 'hex',    name: 'Hex',    c: 'p', react: 'pure',     kit: 'S3 S3 S3 S4|P1 R1|F3 D2' }
+];
+var UNIT_BY_ID = {};
+UNITS.forEach(function (u) { UNIT_BY_ID[u.id] = u; });
+var SHCODE = { S: 'strike', F: 'fork', P: 'plus', R: 'row', D: 'dbl' };
+function kitFor(u, lvl) {
+  var out = [];
+  u.kit.split('|').forEach(function (g, i) {
+    if (i >= lvl) return;
+    g.trim().split(/\s+/).forEach(function (tok) { out.push({ s: SHCODE[tok.charAt(0)], n: +tok.slice(1), lv: i + 1 }); });
+  });
+  return out;
+}
+function isAttack(t) { return t && SHAPES[t.s].kind === 'attack'; }
+function isBoost(t) { return t && SHAPES[t.s].kind === 'boost'; }
+function tileLabel(t, v) { var n = v === undefined ? t.n : v; return t.s === 'dbl' ? '×' + n : isBoost(t) ? '+' + n : String(n); }
+function mkTile(run, c, u, s, n, bonus) { run.nid = (run.nid || 0) + 1; return { id: run.nid, c: c, u: u, s: s, n: n, spent: false, bonus: !!bonus }; }
+
+/* ---- evaluate: everything resolves at once.  board = array(cols*rows) of tile|null, index = row*cols+col, row 0 is the front ---- */
+function evaluate(F, board, rx, opts) {
+  opts = opts || {};
+  var cols = F.cols, R = CONFIG.rows, N = cols * R, mom = opts.momentum || 0, det = !!opts.detail, K = CONFIG.react, i, j, c, k;
+  var ok = [], ea = [];
+  for (i = 0; i < N; i++) ok[i] = true;
+  (F.blocked || []).forEach(function (b) { ok[b] = false; });
+  F.enemies.forEach(function (e, ek) { for (var cc = e.c; cc < e.c + e.w; cc++) ea[cc] = ek; });
+  function orth(q) { var r = (q / cols) | 0, cc = q % cols, o = []; if (r > 0) o.push(q - cols); if (cc > 0) o.push(q - 1); if (cc < cols - 1) o.push(q + 1); if (r < R - 1) o.push(q + cols); return o; }
+  function diag(q) { var r = (q / cols) | 0, cc = q % cols, o = []; for (var dr = -1; dr <= 1; dr += 2) for (var dc = -1; dc <= 1; dc += 2) { var rr = r + dr, c2 = cc + dc; if (rr >= 0 && rr < R && c2 >= 0 && c2 < cols) o.push(rr * cols + c2); } return o; }
+  function reactOf(q) {
+    var t = board[q]; if (!t || t.c === 'x' || t.s === 'dbl') return 0;
+    var id = rx[t.c]; if (!id) return 0;
+    var r = (q / cols) | 0, cc = q % cols, o, n = 0, z, tt;
+    switch (id) {
+      case 'contrast': o = orth(q); for (z = 0; z < o.length; z++) { tt = board[o[z]]; if (tt && tt.c !== 'x' && tt.c !== t.c) n++; } return n * K.contrast;
+      case 'cluster': o = orth(q); for (z = 0; z < o.length; z++) { tt = board[o[z]]; if (tt && tt.c === t.c) n++; } return n * K.cluster;
+      case 'loner': o = orth(q); for (z = 0; z < o.length; z++) { tt = board[o[z]]; if (tt && tt.c === t.c) return 0; } return K.loner;
+      case 'spectrum': var seen = {}; for (z = 0; z < cols; z++) { tt = board[r * cols + z]; if (tt && tt.c !== 'x' && tt.c !== t.c && !seen[tt.c]) { seen[tt.c] = 1; n++; } } return n * K.spectrum;
+      case 'relay': if (r > 0) { tt = board[q - cols]; if (tt && tt.c !== 'x' && tt.c !== t.c) return K.relay; } return 0;
+      case 'vanguard': return r === 0 ? K.vanguard : 0;
+      case 'airy': o = orth(q); for (z = 0; z < o.length; z++) if (ok[o[z]] && !board[o[z]]) n++; return n * K.airy;
+      case 'tower': for (z = r + 1; z < R; z++) if (board[z * cols + cc]) n++; return n * K.tower;
+      case 'hub': return (cc > 0 && cc < cols - 1) ? K.hub : 0;
+      case 'diag': o = diag(q); for (z = 0; z < o.length; z++) { tt = board[o[z]]; if (tt && tt.c === t.c) n++; } return n * K.diag;
+    }
+    return 0;
+  }
+  var rb = [], cadd = [], mult = [], boost = [], power = [], val = [], parts = det ? [] : null;
+  for (i = 0; i < N; i++) {
+    rb[i] = board[i] ? reactOf(i) : 0;
+    var bc = F.bonus && F.bonus[i];
+    cadd[i] = bc === 'p1' ? 1 : bc === 'p2' ? 2 : 0;
+    mult[i] = bc === 'x2' ? 2 : 1; boost[i] = 0; power[i] = 0; val[i] = 0;
+    if (board[i] && board[i].s === 'dbl') { cadd[i] = 0; mult[i] = 1; }
+  }
+  for (i = cols; i < N; i++) if (board[i] && board[i].s === 'dbl' && board[i - cols] && board[i - cols].s !== 'dbl') mult[i - cols] *= board[i].n;
+  for (i = 0; i < N; i++) {
+    var t = board[i]; if (!t || !isBoost(t)) continue;
+    var p = (t.n + rb[i] + cadd[i] + mom) * mult[i]; power[i] = p;
+    var tg = [];
+    if (t.s === 'plus') tg = orth(i);
+    else { var r0 = (i / cols) | 0; for (j = r0 * cols; j < r0 * cols + cols; j++) if (j !== i) tg.push(j); }
+    for (k = 0; k < tg.length; k++) if (isAttack(board[tg[k]])) boost[tg[k]] += p;
+    if (det) parts[i] = [['base', t.n], ['reaction', rb[i]], ['cell +', cadd[i]], ['momentum', mom], ['multiplier ×', mult[i]]];
+  }
+  var tot = [], src = [], cb = [], splashC = [];
+  for (c = 0; c < cols; c++) { tot[c] = 0; src[c] = 0; cb[c] = 0; splashC[c] = false; }
+  for (i = 0; i < N; i++) {
+    var a = board[i]; if (!a || !isAttack(a)) continue;
+    c = i % cols;
+    var v = (a.n + rb[i] + cadd[i] + mom + boost[i]) * mult[i]; val[i] = v;
+    if (det) parts[i] = [['base', a.n], ['reaction', rb[i]], ['cell +', cadd[i]], ['momentum', mom], ['boosters', boost[i]], ['multiplier ×', mult[i]]];
+    var outs = a.s === 'strike' ? [c] : [c - 1, c + 1];
+    for (k = 0; k < outs.length; k++) {
+      var oc = outs[k]; if (oc < 0 || oc >= cols) continue;
+      tot[oc] += v; src[oc]++;
+      if (a.c !== 'x' && rx[a.c] === 'splash') splashC[oc] = true;
+    }
+  }
+  for (c = 0; c < cols; c++) {
+    var list = [], colours = {}, ndist = 0, allCol = true;
+    for (j = 0; j < R; j++) { var q = board[j * cols + c]; if (q) { list.push(q); if (q.c === 'x') allCol = false; else if (!colours[q.c]) { colours[q.c] = 1; ndist++; } } }
+    if (list.length >= 2 && allCol) {
+      if (ndist === list.length) { for (k = 0; k < list.length; k++) if (rx[list[k].c] === 'prism') { cb[c] += K.prism; break; } }
+      else if (ndist === 1 && rx[list[0].c] === 'pure') cb[c] += K.pure;
+    }
+  }
+  var raw = [], sr = [], gOk = [], sp = [], spillIn = [], spillSrc = [];
+  F.enemies.forEach(function (e, ek) {
+    var rw = 0, s = 0, spl = false;
+    for (var cc = e.c; cc < e.c + e.w; cc++) { rw += tot[cc] + cb[cc]; s += src[cc]; if (splashC[cc]) spl = true; }
+    raw[ek] = rw; sr[ek] = s; gOk[ek] = e.kind !== 'g' || s >= 2; sp[ek] = spl; spillIn[ek] = 0; spillSrc[ek] = 0;
+  });
+  F.enemies.forEach(function (e, ek) {
+    if (!sp[ek] || !gOk[ek] || raw[ek] <= 0) return;
+    var over = e.dead ? raw[ek] : raw[ek] - Math.max(0, e.hp);
+    if (over <= 0) return;
+    [ea[e.c - 1], ea[e.c + e.w]].forEach(function (nk) {
+      if (nk !== undefined && nk !== ek && !F.enemies[nk].dead) { spillIn[nk] += over; spillSrc[nk]++; }
+    });
+  });
+  var en = F.enemies.map(function (e, ek) {
+    var s = sr[ek] + spillSrc[ek], dmg = 0;
+    if (!e.dead && !(e.kind === 'g' && s < 2)) dmg = raw[ek] + spillIn[ek];
+    return { dmg: dmg, raw: raw[ek], src: s, spillIn: spillIn[ek], kill: !e.dead && dmg >= e.hp, guardBlocked: !e.dead && e.kind === 'g' && s < 2 };
+  });
+  return { tot: tot, cb: cb, val: val, power: power, rb: rb, boost: boost, mult: mult, en: en, enemyAt: ea, ok: ok, parts: parts };
+}
+
+/* ---- fights ---- */
+function pick(a, rnd) { return a[(rnd() * a.length) | 0]; }
+function genColourless(depth, rnd) {
+  var r = rnd(), s = r < 0.5 ? 'strike' : r < 0.7 ? 'fork' : r < 0.85 ? 'plus' : r < 0.93 ? 'row' : 'dbl';
+  var n = s === 'strike' ? 2 + ((rnd() * (2 + Math.min(2, depth))) | 0) : s === 'fork' ? 2 + ((rnd() * 2) | 0) : s === 'plus' ? 1 + (rnd() < 0.4 ? 1 : 0) : s === 'row' ? 1 : 2;
+  return { s: s, n: n };
+}
+function genFight(run, kind, rnd) {
+  rnd = rnd || Math.random;
+  var A = CONFIG.areas[run.area - 1], cols = A.cols, scale = 1 + CONFIG.growth * run.won, K = CONFIG[kind];
+  var widths = [], left = cols, i;
+  if (kind === 'boss') {
+    var bw = cols >= 5 ? 3 : 2; widths = [bw]; for (i = bw; i < cols; i++) widths.push(1);
+    if (rnd() < 0.5) widths.reverse();
+  } else {
+    while (left > 0) { var w = (left >= 2 && rnd() < CONFIG.wideChance) ? 2 : 1; widths.push(w); left -= w; }
+  }
+  var enemies = [], c = 0, bossDone = false;
+  widths.forEach(function (w) {
+    var isBoss = kind === 'boss' && !bossDone && w === (cols >= 5 ? 3 : 2); if (isBoss) bossDone = true;
+    var hp = A.hp * scale * w * K.hp * (1 - CONFIG.jitter / 2 + CONFIG.jitter * rnd()) * (isBoss ? 1 : (kind === 'boss' ? 0.6 : 1));
+    var atk = A.atk * (1 + 0.5 * CONFIG.growth * run.won) * K.atk * (w > 1 ? 1.3 : 1) * (isBoss ? 1 : (kind === 'boss' ? 0.5 : 1));
+    var e = { c: c, w: w, hp: 0, max: 0, atk: Math.max(1, Math.round(atk)), kind: 'p', boss: isBoss, ph2: 0, dead: false };
+    if (!isBoss && w === 1 && rnd() < CONFIG.guardChance[run.area - 1] * (kind === 'elite' ? 1.8 : 1) && kind !== 'boss') { e.kind = 'g'; hp *= 0.8; }
+    e.hp = e.max = Math.max(3, Math.round(hp));
+    if (isBoss) e.ph2 = Math.round(e.hp * CONFIG.boss.phase2);
+    enemies.push(e); c += w;
+  });
+  var N = cols * CONFIG.rows, blocked = [], bonus = {}, cells = [];
+  for (i = 0; i < N; i++) cells.push(i);
+  if (rnd() < CONFIG.blockChance) { var bi = (rnd() * N) | 0; blocked.push(bi); }
+  var free = cells.filter(function (q) { return blocked.indexOf(q) < 0; });
+  var rr = rnd(), nb = rr < CONFIG.bonusCount[0] ? 0 : rr < CONFIG.bonusCount[0] + CONFIG.bonusCount[1] ? 1 : 2;
+  for (i = 0; i < nb; i++) {
+    var q = free.splice((rnd() * free.length) | 0, 1)[0], x = rnd(), tt = CONFIG.bonusTypes;
+    bonus[q] = x < tt.p1 ? 'p1' : x < tt.p1 + tt.p2 ? 'p2' : 'x2';
+  }
+  var coins = Math.round(CONFIG.coinBase * A.coin * K.coin * (1 + CONFIG.coinDepth * run.depth));
+  var tile = rnd() < K.tile ? genColourless(run.depth, rnd) : null;
+  return { kind: kind, F: { cols: cols, enemies: enemies, blocked: blocked, bonus: bonus }, reward: { coins: coins, tile: tile } };
+}
+function genOffers(run, rnd) {
+  rnd = rnd || Math.random;
+  if (run.step >= CONFIG.bossEvery - 1) return [genFight(run, 'boss', rnd)];
+  var n = CONFIG.offers - (rnd() < CONFIG.offerTwoChance ? 1 : 0), out = [], elite = false;
+  for (var i = 0; i < n; i++) {
+    var kind = (!elite && run.step >= 1 && rnd() < CONFIG.eliteChance) ? 'elite' : 'normal';
+    if (kind === 'elite') elite = true;
+    out.push(genFight(run, kind, rnd));
+  }
+  return out;
+}
+function newRun(area, team, levels, colourless, rnd) {
+  rnd = rnd || Math.random;
+  var A = CONFIG.areas[area - 1], run = { area: area, A: A, nid: 0, bag: [], rx: {}, team: team, step: 0, depth: 0, won: 0, fights: 0, coins: 0, loot: [], mom: 0, over: null };
+  COLOR_IDS.forEach(function (c) {
+    var u = UNIT_BY_ID[team[c]]; run.rx[c] = u.react;
+    kitFor(u, levels[u.id] || 1).forEach(function (k) { run.bag.push(mkTile(run, c, u.id, k.s, k.n)); });
+  });
+  colourless.slice(0, CONFIG.maxColourless).forEach(function (k) { run.bag.push(mkTile(run, 'x', 'x', k.s, k.n)); });
+  run.startBag = run.bag.length; run.maxHp = run.hp = CONFIG.heroHp[area - 1];
+  run.offers = genOffers(run, rnd);
+  return run;
+}
+function startFight(run, fight) {
+  var F = JSON.parse(JSON.stringify(fight.F));
+  var fs = { kind: fight.kind, F: F, reward: fight.reward, turn: 0, mom: run.mom, used: 0 };
+  run.mom = 0; return fs;
+}
+function bagLeft(run) { return run.bag.filter(function (t) { return !t.spent; }).length; }
+function resolveAttack(run, fs, board) {
+  var F = fs.F, res = evaluate(F, board, run.rx, { momentum: fs.mom });
+  var info = { res: res, used: 0, kills: [], risen: [], before: F.enemies.map(function (e) { return { hp: e.hp, max: e.max, dead: e.dead }; }), heroBefore: run.hp, hit: [], win: false, lose: null, mom: fs.mom };
+  board.forEach(function (t) { if (t) { t.spent = true; info.used++; } });
+  F.enemies.forEach(function (e, k) {
+    if (e.dead) return;
+    e.hp -= res.en[k].dmg;
+    if (e.hp <= 0) {
+      if (e.ph2 > 0) { e.hp = e.max = e.ph2; e.ph2 = 0; e.phase = 2; info.risen.push(k); }
+      else { e.hp = 0; e.dead = true; info.kills.push(k); }
+    }
+  });
+  fs.mom = 0; fs.turn++; fs.used += info.used;
+  var alive = F.enemies.filter(function (e) { return !e.dead; });
+  if (!alive.length) info.win = true;
+  else {
+    F.enemies.forEach(function (e, k) { if (!e.dead) { run.hp -= e.atk; info.hit.push(k); } });
+    if (run.hp < 0) run.hp = 0;
+    if (run.hp <= 0) info.lose = 'hp'; else if (!bagLeft(run)) info.lose = 'tiles';
+  }
+  info.heroDmg = info.heroBefore - run.hp;
+  return info;
+}
+function replenish(run, rnd) {
+  rnd = rnd || Math.random;
+  var returned = 0, bonus = [], B = CONFIG.boss;
+  run.bag.forEach(function (t) { if (t.spent) { t.spent = false; returned++; } });
+  for (var i = 0; i < B.bonusMax; i++) if (rnd() < B.bonusChance) { var g = genColourless(run.depth + 1, rnd); bonus.push(g); run.bag.push(mkTile(run, 'x', 'x', g.s, g.n, true)); }
+  var heal = Math.min(run.maxHp - run.hp, Math.ceil(run.maxHp * B.heal)); run.hp += heal;
+  return { returned: returned, bonus: bonus, heal: heal };
+}
+function finishFight(run, fs, rnd) {
+  var out = { coins: fs.reward.coins, tile: fs.reward.tile, heal: 0, mom: 0, boss: fs.kind === 'boss', rep: null, attacks: fs.turn, used: fs.used };
+  run.coins += out.coins; if (out.tile) run.loot.push(out.tile);
+  out.heal = Math.min(CONFIG.healPerFight, run.maxHp - run.hp); run.hp += out.heal;
+  run.won++; run.fights++;
+  if (CONFIG.momentum.on && fs.turn === 1) { run.mom = CONFIG.momentum.bonus; out.mom = run.mom; }
+  if (out.boss) { out.rep = replenish(run, rnd); run.depth++; run.step = 0; out.heal += out.rep.heal; }
+  else run.step++;
+  run.offers = genOffers(run, rnd);
+  return out;
+}
+function settle(run, how) {   /* how: 'bank' or 'dead' -> what the player keeps */
+  var keep = how === 'bank' ? 1 : CONFIG.deathKeep;
+  return { coins: Math.floor(run.coins * keep), tiles: run.loot.slice(0, Math.floor(run.loot.length * keep)) };
+}
+/*RULES-END*/
+
+(function () {
+'use strict';
+var $ = function (s, r) { return (r || document).querySelector(s); };
+var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+var LS_KEY = 'tileRunPrototype.v1';
+var store = null, SPEED = 1;
+function defaultStore() {
+  var units = {}, team = {};
+  UNITS.forEach(function (u) { var first = !team[u.c]; if (first) team[u.c] = u.id; units[u.id] = { u: first, l: 1 }; });
+  return { coins: CONFIG.startCoins, units: units, team: team, inv: [{ s: 'strike', n: 3 }, { s: 'strike', n: 3 }, { s: 'plus', n: 1 }], bag: [0, 1, 2], best: { 1: 0, 2: 0, 3: 0 }, set: { momentum: true, value: 1 } };
+}
+function load() {
+  var s = defaultStore();
+  try { var j = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); if (j && j.units && j.team) { s = j; var d = defaultStore(); for (var k in d) if (s[k] === undefined) s[k] = d[k]; UNITS.forEach(function (u) { if (!s.units[u.id]) s.units[u.id] = d.units[u.id]; }); } } catch (e) {}
+  return s;
+}
+function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(store)); } catch (e) {} }
+function applySettings() { CONFIG.momentum.on = !!store.set.momentum; CONFIG.momentum.bonus = store.set.value || 1; }
+store = load(); applySettings();
+function sleep(ms) { return new Promise(function (r) { setTimeout(r, S.skip ? 6 : ms * SPEED); }); }
+
+var S = { run: null, fs: null, board: [], sel: -1, tab: 'r', phase: 'edit', skip: false, hold: null, screen: 'home', lastOut: null };
+
+/* ---------- svg bits ---------- */
+function symSvg(c) {
+  var p = { r: '<circle cx="5" cy="5" r="4"/>', b: '<path d="M5 .8 L9.4 9 L.6 9Z"/>', g: '<rect x="1.2" y="1.2" width="7.6" height="7.6" rx="1"/>', y: '<path d="M5 .5 L9.5 5 L5 9.5 L.5 5Z"/>', p: '<path d="M2.6 1 H7.4 L9.6 5 L7.4 9 H2.6 L.4 5Z"/>', x: '<circle cx="5" cy="5" r="3.3" fill="none" stroke="currentColor" stroke-width="1.6"/>' }[c];
+  return '<svg class="sym" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">' + p + '</svg>';
+}
+var GLYPH = { strike: [[0, 1], [2, 1]], fork: [[0, 0], [1, 0], [2, 0], [0, 2], [1, 2], [2, 2]], plus: [[0, 1], [2, 1], [1, 0], [1, 2]], row: [[1, 0], [1, 2]], dbl: [[0, 1]] };
+function glyphSvg(s) {
+  var on = GLYPH[s], h = '<svg class="glyph" viewBox="0 0 12 12" aria-hidden="true">';
+  for (var r = 0; r < 3; r++) for (var c = 0; c < 3; c++) {
+    var lit = on.some(function (p) { return p[0] === r && p[1] === c; });
+    if (r === 1 && c === 1) h += '<rect x="4.6" y="4.6" width="2.8" height="2.8" rx=".8" fill="none" stroke="currentColor" stroke-width="1"/>';
+    else h += '<rect x="' + (c * 4 + .4) + '" y="' + (r * 4 + .4) + '" width="3.2" height="3.2" rx=".8" fill="currentColor"' + (lit ? '' : ' opacity=".25"') + '/>';
+  }
+  return h + '</svg>';
+}
+var SPIKE = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6.4 3.6 L10 5 L6.4 6.4 L5 10 L3.6 6.4 L0 5 L3.6 3.6Z"/></svg>';
+function tileHTML(t, o) {
+  o = o || {};
+  var k = SHAPES[t.s].kind, cls = '', num = tileLabel(t, o.shown !== undefined ? o.shown : t.n);
+  if (o.shown !== undefined && o.shown !== t.n) cls += ' chg';
+  return '<div class="tile k-' + k + ' c-' + t.c + cls + (o.cls ? ' ' + o.cls : '') + '" style="' + (o.ts ? '--ts:' + o.ts + 'px;' : '') + '" ' + (o.attrs || '') + ' aria-label="' + COLORS[t.c] + ' ' + SHAPES[t.s].name + ' ' + num + '">' +
+    glyphSvg(t.s) + symSvg(t.c) + '<b class="num">' + num + '</b><i class="nm">' + SHAPES[t.s].short + '</i></div>';
+}
+function dotHTML(c) { return '<span class="dot c-' + c + '">' + symSvg(c).replace('class="sym"', '') + '</span>'; }
+function hpBar(hp, max) { return '<div class="hpbar"><i style="width:' + Math.max(0, hp / max * 100) + '%"></i><span>' + hp + ' / ' + max + '</span></div>'; }
+
+/* ---------- navigation ---------- */
+function show(name) {
+  S.screen = name;
+  ['home', 'team', 'map', 'fight', 'result'].forEach(function (n) { $('#' + n).hidden = n !== name; });
+  window.scrollTo(0, 0);
+  if (name === 'home') renderHome(); else if (name === 'team') renderTeam(); else if (name === 'map') renderMap();
+}
+function teamValid() { return COLOR_IDS.every(function (c) { var u = UNIT_BY_ID[store.team[c]]; return u && u.c === c && store.units[u.id].u; }); }
+function chosenColourless() { return store.bag.filter(function (i) { return store.inv[i]; }).slice(0, CONFIG.maxColourless).map(function (i) { return store.inv[i]; }); }
+function bagSize() { var n = chosenColourless().length; COLOR_IDS.forEach(function (c) { n += kitFor(UNIT_BY_ID[store.team[c]], store.units[store.team[c]].l).length; }); return n; }
+function invHTML() {
+  if (!store.inv.length) return '<div class="ctext">No colourless tiles yet. Earn them as loot.</div>';
+  return '<div class="inv">' + store.inv.map(function (t, i) { return tileHTML({ c: 'x', s: t.s, n: t.n }, { cls: 'small' + (store.bag.indexOf(i) >= 0 ? ' sel' : ''), attrs: 'data-inv="' + i + '" data-card="it:' + i + '"' }); }).join('') + '</div>';
+}
+function renderHome() {
+  var h = '<h1>Tile Run</h1><p class="sub">Place tiles, attack, and make your bag last. <b class="gold">' + store.coins + ' coins</b></p>';
+  h += '<h2>Areas</h2><div class="areas">';
+  CONFIG.areas.forEach(function (A, i) {
+    h += '<button class="area" data-act="start" data-area="' + (i + 1) + '"' + (teamValid() ? '' : ' disabled') + '><div><b>Area ' + (i + 1) + ': ' + A.name + '</b><small>' + A.cols + ' columns, hero ' + CONFIG.heroHp[i] + ' HP, suggested unit level ' + A.lvl + (store.best[i + 1] ? ', best depth ' + store.best[i + 1] : '') + '</small></div><span class="go">Run</span></button>';
+  });
+  h += '</div><h2>Team</h2><div class="panel"><div class="chips">';
+  COLOR_IDS.forEach(function (c) { var u = UNIT_BY_ID[store.team[c]]; h += '<span class="uchip">' + dotHTML(c) + u.name + ' L' + store.units[u.id].l + '</span>'; });
+  h += '</div><div class="ctext" style="margin-top:6px">Bag: ' + bagSize() + ' tiles (' + chosenColourless().length + '/' + CONFIG.maxColourless + ' colourless)</div><div class="linkrow"><button class="btn sm" data-act="team">Edit team and levels</button></div></div>';
+  h += '<h2>Colourless inventory</h2><div class="panel"><div class="ctext" style="margin-bottom:6px">Tap to put up to ' + CONFIG.maxColourless + ' in your bag. Hold a tile for details.</div>' + invHTML() + '</div>';
+  h += '<div class="linkrow"><button class="btn" data-act="help">How to play</button><button class="btn" data-act="settings">Settings and test</button></div>';
+  $('#home').innerHTML = h;
+}
+function kitHTML(u, lvl) {
+  var all = kitFor(u, 3);
+  return '<div class="kit">' + all.map(function (k) { return tileHTML({ c: u.c, s: k.s, n: k.n }, { cls: 'small' + (k.lv > lvl ? ' fade' : ''), attrs: 'data-card="kt:' + u.id + ':' + k.s + ':' + k.n + ':' + k.lv + '"' }); }).join('') + '</div>';
+}
+function renderTeam() {
+  var h = '<header class="top"><button class="hbtn" data-act="home" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="ttl">Team</div><span class="hbtn"></span></header>';
+  h += '<p class="sub">One unit per colour. <b class="gold">' + store.coins + ' coins</b>. Faded tiles arrive at a higher level.</p>';
+  COLOR_IDS.forEach(function (c) {
+    h += '<h2>' + dotHTML(c) + ' ' + COLORS[c] + '</h2>';
+    UNITS.filter(function (u) { return u.c === c; }).forEach(function (u) {
+      var st = store.units[u.id], R = REACTS[u.react], picked = store.team[c] === u.id;
+      h += '<div class="ucard c-' + c + (picked ? ' pick' : '') + (st.u ? '' : ' locked') + '"><div class="uhead">' + dotHTML(c) + '<b>' + u.name + '</b><span class="lvl">' + (st.u ? 'Level ' + st.l : 'Locked') + '</span><span class="grow"></span>';
+      if (!st.u) h += '<button class="btn sm" data-act="unlock" data-u="' + u.id + '"' + (store.coins < CONFIG.unlockCost ? ' disabled' : '') + '>Unlock ' + CONFIG.unlockCost + '</button>';
+      else if (picked) h += '<span class="lvl" style="color:var(--ok)">In team</span>';
+      else h += '<button class="btn sm" data-act="pick" data-u="' + u.id + '">Pick</button>';
+      h += '</div><div class="rline" data-card="ru:' + u.id + '"><i>' + R.name + ':</i> ' + R.line + '</div>' + kitHTML(u, st.l) + '<div class="row"><span class="ctext grow">' + kitFor(u, st.l).length + ' tiles' + (st.l < 3 ? ', next level adds ' + (kitFor(u, st.l + 1).length - kitFor(u, st.l).length) : ', max level') + '</span>';
+      if (st.u && st.l < 3) h += '<button class="btn sm" data-act="level" data-u="' + u.id + '"' + (store.coins < CONFIG.levelCost[st.l + 1] ? ' disabled' : '') + '>Level ' + (st.l + 1) + ': ' + CONFIG.levelCost[st.l + 1] + '</button>';
+      h += '</div></div>';
+    });
+  });
+  h += '<h2>Colourless slots</h2><div class="panel"><div class="ctext" style="margin-bottom:6px">Bag: ' + bagSize() + ' tiles. Choose up to ' + CONFIG.maxColourless + ' colourless tiles (' + chosenColourless().length + ' chosen).</div>' + invHTML() + '</div>';
+  $('#team').innerHTML = h;
+}
+
+/* ---------- run map ---------- */
+function offerHTML(o, i) {
+  var F = o.F, label = o.kind === 'boss' ? 'BOSS' : o.kind === 'elite' ? 'ELITE' : 'FIGHT', hpSum = 0;
+  F.enemies.forEach(function (e) { hpSum += e.hp; });
+  var h = '<div class="offer ' + o.kind + '" data-offer="' + i + '"><div class="ohead"><span class="tag">' + label + '</span><b>' + hpSum + ' HP</b><span class="rew"><span>' + o.reward.coins + ' coins</span>' + (o.reward.tile ? tileHTML({ c: 'x', s: o.reward.tile.s, n: o.reward.tile.n }, { cls: 'small', attrs: 'data-card="ot:' + i + '"' }) : '') + '</span></div>';
+  h += '<div class="oen" style="grid-template-columns:repeat(' + F.cols + ',1fr)">';
+  F.enemies.forEach(function (e, k) { h += '<div class="mini' + (e.kind === 'g' ? ' g' : '') + '" style="grid-column:span ' + e.w + '" data-card="oe:' + i + ':' + k + '"><b>' + e.hp + '</b><small>atk ' + e.atk + (e.kind === 'g' ? ' guard' : '') + (e.boss ? ' phase 2' : '') + '</small></div>'; });
+  h += '</div><div class="ofoot">';
+  var bonus = Object.keys(F.bonus);
+  bonus.forEach(function (q) { h += '<span class="bcb" data-card="bc:' + F.bonus[q] + '">' + bcText(F.bonus[q]) + '</span>'; });
+  if (bonus.length) h += '<span>bonus cell' + (bonus.length > 1 ? 's' : '') + '</span>';
+  if (F.blocked.length) h += '<span>' + F.blocked.length + ' blocked</span>';
+  if (!bonus.length && !F.blocked.length) h += '<span>plain board</span>';
+  return h + '</div></div>';
+}
+function bcText(t) { return t === 'p1' ? '+1' : t === 'p2' ? '+2' : '×2'; }
+function renderMap() {
+  var run = S.run, h = '<header class="top"><button class="hbtn" data-act="leave" aria-label="Leave run"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="ttl">Area ' + run.area + ': ' + run.A.name + '</div><button class="hbtn" data-act="help" aria-label="How to play"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4.500 2.600c-1 .6-1.500 1.200-1.500 2.400M12 18v.5"/></svg></button></header>';
+  h += '<div class="row" style="margin-bottom:6px"><span class="stat">Hero</span>' + hpBar(run.hp, run.maxHp) + '</div>';
+  h += '<div class="row stat" style="margin-bottom:4px;justify-content:space-between"><span>Bag ' + bagLeft(run) + ' / ' + run.bag.length + ' tiles</span><span>Depth ' + run.depth + '</span><span>Loot ' + run.coins + ' coins' + (run.loot.length ? ', ' + run.loot.length + ' tile' + (run.loot.length > 1 ? 's' : '') : '') + '</span></div>';
+  if (run.mom > 0) h += '<div style="margin-bottom:4px"><span class="mombadge" data-card="mom">Momentum +' + run.mom + ' on your first attack</span></div>';
+  h += '<div class="path">';
+  for (var i = 0; i < CONFIG.bossEvery; i++) {
+    var boss = i === CONFIG.bossEvery - 1;
+    h += (i ? '<span class="seg"></span>' : '') + '<span class="node' + (i < run.step ? ' done' : i === run.step ? ' cur' : '') + (boss ? ' boss' : '') + '">' + (boss ? 'B' : i + 1) + '</span>';
+  }
+  h += '</div><h2>' + (run.step >= CONFIG.bossEvery - 1 ? 'Boss ahead' : 'Choose your fight') + '</h2>';
+  run.offers.forEach(function (o, i) { h += offerHTML(o, i); });
+  h += '<button class="btn" data-act="bank" style="width:100%">Bank and leave (keep everything)</button>';
+  $('#map').innerHTML = h;
+}
+function startRunUI(area) {
+  if (!teamValid()) return;
+  S.run = newRun(area, store.team, (function () { var l = {}; for (var k in store.units) l[k] = store.units[k].l; return l; })(), chosenColourless());
+  show('map');
+}
+
+/* ---------- fight ---------- */
+function boardTiles() { return S.board.map(function (id) { return id >= 0 ? tileById(id) : null; }); }
+function tileById(id) { for (var i = 0; i < S.run.bag.length; i++) if (S.run.bag[i].id === id) return S.run.bag[i]; return null; }
+function evalNow(detail) { return evaluate(S.fs.F, boardTiles(), S.run.rx, { momentum: S.fs.mom, detail: detail }); }
+function startFightUI(i) {
+  var run = S.run, o = run.offers[i];
+  S.fs = startFight(run, o);
+  S.board = []; for (var q = 0; q < o.F.cols * CONFIG.rows; q++) S.board.push(-1);
+  S.sel = -1; S.phase = 'edit'; S.skip = false; S.hold = null; S.tab = firstTab();
+  show('fight'); renderFight();
+}
+function firstTab() { var ids = COLOR_IDS.concat(['x']); for (var i = 0; i < ids.length; i++) if (handOf(ids[i]).length) return ids[i]; return 'r'; }
+function handOf(c) { return S.run.bag.filter(function (t) { return !t.spent && t.c === c && S.board.indexOf(t.id) < 0; }); }
+function cellSize(cols) { var w = Math.min(document.documentElement.clientWidth || 390, 440) - 24; return Math.max(44, Math.min(76, Math.floor((w - 6 * (cols - 1)) / cols))); }
+function renderFight() {
+  var run = S.run, fs = S.fs, F = fs.F, cols = F.cols, i, k;
+  var f = $('#fight'); f.style.setProperty('--cs', cellSize(cols) + 'px'); f.style.setProperty('--n', cols);
+  var bt = boardTiles(), res = evaluate(F, bt, run.rx, { momentum: fs.mom, detail: true }), placed = bt.filter(Boolean).length;
+  $('#fhead').innerHTML = '<span class="stat">Hero</span>' + hpBar(run.hp, run.maxHp) + '<span class="stat">Bag ' + (bagLeft(run) - placed) + '</span>' + (fs.mom > 0 ? '<span class="mombadge" data-card="mom">Momentum +' + fs.mom + '</span>' : '') + '<button class="hbtn" data-act="fmenu" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>';
+  var h = '';
+  F.enemies.forEach(function (e, ek) {
+    var r = res.en[ek], pct = Math.max(0, e.hp / e.max * 100), dpct = Math.min(e.hp, r.dmg) / e.max * 100;
+    var pill = e.dead ? 'down' : r.guardBlocked ? 'needs 2 hits' : r.dmg > 0 ? (r.kill ? 'KO  -' + r.dmg : '-' + r.dmg) : '0';
+    h += '<div class="enemy' + (e.kind === 'g' ? ' guard' : '') + (e.boss ? ' boss' : '') + (e.dead ? ' dead' : '') + (r.kill ? ' kill' : '') + (r.dmg > 0 ? ' has' : '') + '" style="grid-column:span ' + e.w + '" data-en="' + ek + '" data-card="e:' + ek + '">' +
+      '<div class="etile"><span class="atk">' + SPIKE + e.atk + '</span><b class="hpn">' + (e.dead ? 0 : e.hp) + '</b><i>' + (e.kind === 'g' ? 'GUARD' : e.boss ? (e.phase === 2 ? 'BOSS II' : 'BOSS') : e.w > 1 ? 'WIDE' : 'HP') + '</i></div>' +
+      '<div class="ebar"><i style="width:' + pct + '%"></i><u style="left:' + Math.max(0, pct - dpct) + '%;width:' + dpct + '%"></u></div><div class="pill">' + pill + '</div></div>';
+  });
+  $('#fen').innerHTML = h;
+  h = '';
+  for (i = 0; i < cols * CONFIG.rows; i++) {
+    var blocked = F.blocked.indexOf(i) >= 0, bn = F.bonus[i], t = S.board[i] >= 0 ? tileById(S.board[i]) : null;
+    h += '<div class="cell' + (blocked ? ' x' : ' free') + (bn ? ' bonus' : '') + (t ? ' occ' : '') + '" data-cell="' + i + '"' + (bn ? ' data-card="bc:' + bn + '"' : '') + '>';
+    if (t) {
+      var shown = isAttack(t) ? res.val[i] : isBoost(t) ? res.power[i] : t.n;
+      h += tileHTML(t, { shown: shown, attrs: 'data-cell="' + i + '" data-card="t:' + t.id + '"', cls: cellSize(cols) < 60 ? 'small' : '' }).replace('style="', 'style="--ts:' + cellSize(cols) + 'px;');
+    } else if (bn) h += '<span class="bb">' + bcText(bn) + '</span>';
+    h += '<span class="pv"></span></div>';
+  }
+  $('#fboard').innerHTML = h;
+  h = '';
+  COLOR_IDS.forEach(function (c) { var u = UNIT_BY_ID[run.team[c]], R = REACTS[u.react]; h += '<div class="rrow c-' + c + '" data-card="rx:' + c + '">' + dotHTML(c) + '<b>' + R.name + '</b><span class="t">' + R.line + '</span></div>'; });
+  $('#rbar').innerHTML = h;
+  /* tabs */
+  var ids = COLOR_IDS.concat(['x']), tabs = '';
+  if (!handOf(S.tab).length) { var ft = firstTab(); if (handOf(ft).length) S.tab = ft; }
+  ids.forEach(function (c) {
+    var n = handOf(c).length; if (c === 'x' && !run.bag.some(function (t) { return t.c === 'x'; })) return;
+    tabs += '<button class="tab c-' + c + (S.tab === c ? ' on' : '') + (n ? '' : ' empty') + '" data-tab="' + c + '">' + dotHTML(c) + n + '</button>';
+  });
+  $('#ftabs').innerHTML = tabs;
+  var hand = handOf(S.tab).sort(function (a, b) { return a.s < b.s ? -1 : a.s > b.s ? 1 : a.n - b.n; });
+  $('#fhand').innerHTML = hand.length ? hand.map(function (t) { return tileHTML(t, { attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: 'small' + (S.sel === t.id ? ' sel' : '') }); }).join('') : '<div class="ctext" style="grid-column:1/-1;text-align:center;padding:10px">' + (bagLeft(run) - placed ? 'No tiles of this colour left.' : 'No tiles left in your bag.') + '</div>';
+  $('#fatk').disabled = !placed || S.phase !== 'edit'; $('#fclear').disabled = !placed || S.phase !== 'edit';
+  $('#fatk').textContent = placed ? 'Attack with ' + placed + ' tile' + (placed > 1 ? 's' : '') : 'Attack';
+  var info = '';
+  if (S.sel >= 0) { var st = tileById(S.sel); info = 'Tap a cell for ' + SHAPES[st.s].name + ' ' + st.n + '. Glowing cells would finish an enemy.'; }
+  else if (!placed) info = fs.turn === 0 ? 'Tap a tile, then a cell (or drag it). Hold anything for details.' : 'Enemies hit back. Place more tiles, or the rest of your bag is all you have.';
+  else info = 'Tap a placed tile to take it back. Tiles you attack with are spent for this run.';
+  if (fs.mom > 0) info = 'Momentum: every tile gets +' + fs.mom + ' on this attack. ' + info;
+  $('#finfo').textContent = info;
+  if (S.sel >= 0) showHold(tileById(S.sel), -1);
+}
+function showHold(t, from) {
+  clearHold(); if (!t) return;
+  var F = S.fs.F, bt = boardTiles(); if (from >= 0) bt[from] = null;
+  var base = evaluate(F, bt, S.run.rx, { momentum: S.fs.mom });
+  $$('#fboard .cell').forEach(function (el) {
+    var i = +el.dataset.cell; if (F.blocked.indexOf(i) >= 0 || bt[i]) return;
+    var b2 = bt.slice(); b2[i] = t; var r2 = evaluate(F, b2, S.run.rx, { momentum: S.fs.mom }), best = -1, bd = 0, kill = false;
+    F.enemies.forEach(function (e, k) { var d = r2.en[k].dmg - base.en[k].dmg; if (d > bd) { bd = d; best = k; } if (r2.en[k].kill && !base.en[k].kill) kill = true; });
+    el.classList.add('hold'); el.querySelector('.pv').textContent = best >= 0 ? '→' + r2.en[best].dmg : '';
+    if (kill) el.classList.add('glow');
+  });
+  S.hold = t;
+}
+function clearHold() { S.hold = null; $$('#fboard .cell').forEach(function (el) { el.classList.remove('hold', 'glow'); var p = el.querySelector('.pv'); if (p) p.textContent = ''; }); }
+function place(id, cell) {
+  if (S.phase !== 'edit' || S.fs.F.blocked.indexOf(cell) >= 0) return;
+  var old = S.board[cell], from = S.board.indexOf(id);
+  if (from >= 0) S.board[from] = old; /* swap when moving a board tile onto another */
+  S.board[cell] = id; S.sel = -1; clearHold(); renderFight();
+}
+function unplace(cell) { S.board[cell] = -1; S.sel = -1; clearHold(); renderFight(); }
+function clearBoard() { S.board = S.board.map(function () { return -1; }); S.sel = -1; clearHold(); renderFight(); }
+
+/* ---------- animation helpers ---------- */
+function centerOf(el) { var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }
+function fly(text, from, to, cls) {
+  var el = document.createElement('div'); el.className = 'fly ' + (cls || ''); el.textContent = text;
+  el.style.left = from.x + 'px'; el.style.top = from.y + 'px';
+  el.style.setProperty('--dx', (to.x - from.x) + 'px'); el.style.setProperty('--dy', (to.y - from.y) + 'px');
+  document.body.appendChild(el); setTimeout(function () { el.remove(); }, 900 * SPEED + 80);
+}
+function pulseEl(el) { if (!el) return; el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
+async function attack() {
+  if (S.phase !== 'edit') return;
+  var bt = boardTiles(); if (!bt.some(Boolean)) return;
+  var run = S.run, fs = S.fs;
+  S.phase = 'anim'; S.skip = false; S.sel = -1; clearHold(); hideCard();
+  $('#fatk').disabled = true; $('#fclear').disabled = true;
+  var cells = bt.map(function (t, i) { return t ? i : -1; }).filter(function (i) { return i >= 0; });
+  var info = resolveAttack(run, fs, bt), res = info.res, F = fs.F;
+  S.board = S.board.map(function () { return -1; });
+  try {
+    /* 1: tiles pulse, numbers fly to the enemy columns */
+    var enEl = function (k) { return $('.enemy[data-en="' + k + '"]'); };
+    cells.forEach(function (i) {
+      var el = $('#fboard .tile[data-cell="' + i + '"]'); if (!el) return; pulseEl(el);
+      var t = bt[i]; if (!isAttack(t)) return;
+      var c = i % F.cols, outs = t.s === 'strike' ? [c] : [c - 1, c + 1];
+      outs.forEach(function (oc) { var k = res.enemyAt[oc]; if (oc < 0 || oc >= F.cols || k === undefined) return; var to = centerOf($('.etile', enEl(k))); fly('+' + res.val[i], centerOf(el), to); });
+    });
+    await sleep(520);
+    /* 2: totals count up, HP drops, enemies crack */
+    for (var step = 1; step <= 6; step++) {
+      F.enemies.forEach(function (e, k) { var d = res.en[k].dmg; if (d > 0) { var pl = $('.pill', enEl(k)); pl.textContent = '-' + Math.round(d * step / 6); } });
+      await sleep(55);
+    }
+    F.enemies.forEach(function (e, k) {
+      var el = enEl(k), b = info.before[k]; if (!el) return;
+      var left = e.dead ? 0 : e.hp, rs = info.risen.indexOf(k) >= 0;
+      $('.ebar i', el).style.width = (rs ? 100 : left / e.max * 100) + '%'; var u = $('.ebar u', el); if (u) u.style.width = '0';
+      $('.hpn', el).textContent = left;
+      if (e.dead && !b.dead) { el.classList.add('dead'); }
+      if (rs) { $('.etile i', el).textContent = 'BOSS II'; pulseEl(el); fly('PHASE 2', centerOf(el), { x: centerOf(el).x, y: centerOf(el).y - 30 }); }
+    });
+    await sleep(650);
+    /* 3: survivors hit back */
+    if (info.hit.length) {
+      info.hit.forEach(function (k) { var el = enEl(k); if (el) { el.classList.add('hit'); fly('-' + F.enemies[k].atk, centerOf(el), { x: centerOf($('#fhead .hpbar')).x, y: centerOf($('#fhead .hpbar')).y }, 'bad'); } });
+      await sleep(260);
+      $('#fhead .hpbar').outerHTML = hpBar(run.hp, run.maxHp);
+      $('#fight').classList.add('shake'); await sleep(380); $('#fight').classList.remove('shake');
+    } else await sleep(150);
+  } catch (e) { /* animation must never block the game */ }
+  S.lastOut = info;
+  if (info.lose) { endRun(info.lose); return; }
+  if (info.win) { var out = finishFight(run, fs); S.lastOut = out; showFightResult(out); return; }
+  S.phase = 'edit'; renderFight();
+}
+
+/* ---------- results ---------- */
+function resTile(t) { return tileHTML({ c: 'x', s: t.s, n: t.n }, { cls: 'small', ts: 46 }); }
+function showFightResult(out) {
+  var run = S.run, h = '';
+  if (out.boss) {
+    h = '<div class="resbox win"><h2>Boss defeated</h2><p>Your bag is replenished: <b>' + out.rep.returned + '</b> spent tiles returned' + (out.rep.bonus.length ? ', plus <b>' + out.rep.bonus.length + ' bonus colourless tile' + (out.rep.bonus.length > 1 ? 's' : '') + '</b> for the rest of this run' : ', no bonus tiles this time') + '.</p>';
+    if (out.rep.bonus.length) h += '<div class="inv">' + out.rep.bonus.map(resTile).join('') + '</div>';
+    h += '<p>Healed ' + out.heal + ' HP. Hero ' + run.hp + ' / ' + run.maxHp + '. Bag ' + bagLeft(run) + ' tiles.</p>';
+  } else h = '<div class="resbox win"><h2>Victory</h2><p>' + (out.attacks === 1 ? 'Won in one attack' : 'Won in ' + out.attacks + ' attacks') + ', ' + out.used + ' tile' + (out.used > 1 ? 's' : '') + ' spent. Bag ' + bagLeft(run) + ' / ' + run.bag.length + '. Hero ' + run.hp + ' / ' + run.maxHp + (out.heal ? ' (healed ' + out.heal + ')' : '') + '.</p>';
+  h += '<p class="gold">+' + out.coins + ' coins' + (out.tile ? ' and a colourless tile' : '') + '</p>' + (out.tile ? '<div class="inv">' + resTile(out.tile) + '</div>' : '');
+  if (out.mom) h += '<p><span class="mombadge" data-card="mom">Momentum +' + out.mom + '</span><br><span class="ctext">Cleared in one attack: your next fight\'s first attack gets +' + out.mom + ' on every tile.</span></p>';
+  h += '<div class="btns"><button class="btn main" data-act="cont">' + (out.boss ? 'Go deeper' : 'Continue') + '</button>' + (out.boss ? '<button class="btn" data-act="bank">Bank and leave</button>' : '') + '</div></div>';
+  $('#result').innerHTML = h; show('result');
+}
+function commitRun(how) {
+  var run = S.run, k = settle(run, how);
+  store.coins += k.coins; k.tiles.forEach(function (t) { store.inv.push({ s: t.s, n: t.n }); });
+  if (run.depth > (store.best[run.area] || 0)) store.best[run.area] = run.depth;
+  save(); return k;
+}
+function endRun(reason) {
+  var run = S.run, k = commitRun('dead'); S.phase = 'over';
+  var h = '<div class="resbox lose"><h2>Run over</h2><p>' + (reason === 'hp' ? 'Your hero ran out of HP.' : 'Your bag is empty.') + '</p><p>Fights won: <b>' + run.fights + '</b>, depth <b>' + run.depth + '</b>.</p><p class="gold">Kept ' + k.coins + ' of ' + run.coins + ' coins' + (run.loot.length ? ' and ' + k.tiles.length + ' of ' + run.loot.length + ' loot tiles' : '') + '.</p><div class="btns"><button class="btn main" data-act="home">Home</button></div></div>';
+  $('#result').innerHTML = h; S.run.over = reason; show('result');
+}
+function bankRun() {
+  var run = S.run, k = commitRun('bank'); S.phase = 'over'; run.over = 'bank';
+  $('#result').innerHTML = '<div class="resbox win"><h2>Banked</h2><p>Fights won: <b>' + run.fights + '</b>, depth <b>' + run.depth + '</b>.</p><p class="gold">+' + k.coins + ' coins' + (k.tiles.length ? ' and ' + k.tiles.length + ' colourless tile' + (k.tiles.length > 1 ? 's' : '') : '') + ' saved.</p><div class="btns"><button class="btn main" data-act="home">Home</button></div></div>';
+  show('result');
+}
+
+/* ---------- cards ---------- */
+function hideCard() { var c = $('#card'); c.hidden = true; if ($('#modal').hidden) $('#dim').hidden = true; }
+function showCard(html) { $('#card').innerHTML = html; $('#card').hidden = false; $('#dim').hidden = false; }
+function tileCardHTML(t, parts, extra) {
+  var h = tileHTML(t, { cls: 'cardtile' }).replace('class="tile', 'class="cardtile tile') + '<h3>' + COLORS[t.c] + ' ' + SHAPES[t.s].name + ' ' + tileLabel(t) + '</h3><p>' + SHAPES[t.s].desc + '</p>';
+  if (t.c !== 'x') { var u = UNIT_BY_ID[t.u]; if (u) h += '<p><b>' + u.name + '</b> (' + REACTS[u.react].name + '): ' + REACTS[u.react].line + '</p>'; }
+  else h += '<p class="muted">Colourless: no reaction, and it does not count as a colour.</p>';
+  if (parts) { var rows = parts.filter(function (p) { return p[1] && !(p[0].indexOf('×') >= 0 && p[1] === 1); }); if (rows.length) h += '<table>' + rows.map(function (p) { return '<tr><td>' + p[0] + '</td><td>' + (p[0].indexOf('×') >= 0 ? '×' : '+') + p[1] + '</td></tr>'; }).join('') + '</table>'; }
+  return h + (extra || '');
+}
+function cardFor(key) {
+  var p = key.split(':'), run = S.run, h = '';
+  if (p[0] === 't') {
+    var t = run && tileById(+p[1]); if (!t) return '';
+    var cell = S.board.indexOf(t.id), parts = null;
+    if (cell >= 0 && S.screen === 'fight') parts = evalNow(true).parts[cell];
+    return tileCardHTML(t, parts);
+  }
+  if (p[0] === 'kt') { var u = UNIT_BY_ID[p[1]]; return tileCardHTML({ c: u.c, u: u.id, s: p[2], n: +p[3] }, null, '<p class="muted">Arrives at unit level ' + p[4] + '.</p>'); }
+  if (p[0] === 'it') { var it = store.inv[+p[1]]; return it ? tileCardHTML({ c: 'x', s: it.s, n: it.n }) : ''; }
+  if (p[0] === 'ot') { var ot = run.offers[+p[1]].reward.tile; return tileCardHTML({ c: 'x', s: ot.s, n: ot.n }, null, '<p class="muted">Reward: goes into your inventory when the run ends.</p>'); }
+  if (p[0] === 'e' || p[0] === 'oe') {
+    var e = p[0] === 'e' ? S.fs.F.enemies[+p[1]] : run.offers[+p[1]].F.enemies[+p[2]];
+    h = '<h3>' + (e.boss ? 'Boss' : e.kind === 'g' ? 'Guard' : e.w > 1 ? 'Wide enemy' : 'Enemy') + '</h3><p>HP <b>' + (e.dead ? 0 : e.hp) + '</b>. Attack <b>' + e.atk + '</b>: if it survives your attack it hits your hero for that much.</p>';
+    if (e.kind === 'g') h += '<p>Guard: takes damage only if at least 2 separate tiles hit it in one attack.</p>';
+    if (e.w > 1) h += '<p>Wide: covers ' + e.w + ' columns with one shared HP pool.</p>';
+    if (e.boss) h += '<p>' + (e.phase === 2 ? 'Second phase.' : 'When its HP runs out it rises once more with ' + Math.max(e.ph2, 0) + ' HP.') + '</p>';
+    return h + '<p class="muted">HP stays between attacks.</p>';
+  }
+  if (p[0] === 'bc') return '<h3>Bonus cell ' + bcText(p[1]) + '</h3><p>' + (p[1] === 'x2' ? 'A Strike, Fork or booster placed here is doubled.' : 'A Strike, Fork or booster placed here gets ' + bcText(p[1]) + '.') + '</p><p class="muted">Applies before Doubles and boosters. Doubles ignore it.</p>';
+  if (p[0] === 'rx' || p[0] === 'ru') {
+    var uu = p[0] === 'rx' ? UNIT_BY_ID[run.team[p[1]]] : UNIT_BY_ID[p[1]], R = REACTS[uu.react];
+    return '<h3>' + dotHTML(uu.c) + ' ' + uu.name + ': ' + R.name + '</h3><p>' + R.line + '.</p><p class="muted">' + R.hint + ' A unit\'s reaction says what its tiles gain from the tiles around them. Always extra damage.</p>';
+  }
+  if (p[0] === 'mom') return '<h3>Momentum</h3><p>You cleared the last fight in one attack. Every tile gets +' + CONFIG.momentum.bonus + ' on the first attack of this fight.</p>';
+  return '';
+}
+
+/* ---------- pointer handling ---------- */
+var P = null, ghost = null, lpAt = 0;
+function targetOf(el) {
+  if (!el || !el.closest) return null;
+  var x, tg = { card: null };
+  var cardEl = el.closest('[data-card]'); if (cardEl) tg.card = cardEl.dataset.card;
+  if (S.screen === 'fight' && S.phase === 'edit') {
+    if ((x = el.closest('[data-h]'))) { tg.kind = 'hand'; tg.id = +x.dataset.h; tg.el = x; return tg; }
+    if ((x = el.closest('.tile[data-cell]'))) { tg.kind = 'board'; tg.cell = +x.dataset.cell; tg.id = S.board[tg.cell]; tg.el = x; return tg; }
+    if ((x = el.closest('.cell[data-cell]'))) { tg.kind = 'cell'; tg.cell = +x.dataset.cell; tg.el = x; return tg; }
+  }
+  if (cardEl) { tg.kind = 'card'; tg.el = cardEl; return tg; }
+  return null;
+}
+function longPress() {
+  if (!P || !P.tg.card) return; P.long = true; lpAt = Date.now();
+  var h = cardFor(P.tg.card); if (!h) return; showCard(h);
+  if (navigator.vibrate) try { navigator.vibrate(12); } catch (e) {}
+}
+document.addEventListener('pointerdown', function (e) {
+  if (!$('#card').hidden) { hideCard(); P = { dead: true }; lpAt = Date.now(); return; }
+  if (S.phase === 'anim' && S.screen === 'fight') { S.skip = true; return; }
+  if (!$('#modal').hidden && !$('#modal').contains(e.target)) return;
+  var tg = targetOf(e.target); if (!tg) { P = null; return; }
+  P = { tg: tg, x: e.clientX, y: e.clientY, moved: false, long: false };
+  if (tg.card) P.timer = setTimeout(longPress, CONFIG.longPressMs);
+  if (tg.kind === 'cell' && S.sel >= 0) { /* preview already shown */ }
+});
+document.addEventListener('pointermove', function (e) {
+  if (!P || P.dead || P.long) return;
+  var dx = e.clientX - P.x, dy = e.clientY - P.y;
+  if (!P.moved && dx * dx + dy * dy > 100 && (P.tg.kind === 'hand' || P.tg.kind === 'board')) {
+    P.moved = true; clearTimeout(P.timer);
+    ghost = P.tg.el.cloneNode(true); ghost.classList.add('ghost'); ghost.removeAttribute('data-h'); ghost.removeAttribute('data-cell'); ghost.removeAttribute('data-card');
+    document.body.appendChild(ghost);
+    if (P.tg.kind === 'board') P.tg.el.classList.add('dragging');
+    S.sel = -1; $$('#fhand .tile.sel').forEach(function (n) { n.classList.remove('sel'); });
+    showHold(tileById(P.tg.id), P.tg.kind === 'board' ? P.tg.cell : -1);
+  }
+  if (P.moved && ghost) { ghost.style.left = e.clientX + 'px'; ghost.style.top = e.clientY + 'px'; }
+});
+function endPointer(e, cancel) {
+  if (!P) return;
+  var p = P; P = null; clearTimeout(p.timer);
+  if (p.dead) return;
+  if (ghost) { ghost.remove(); ghost = null; }
+  if (p.tg.kind === 'board' && p.tg.el) p.tg.el.classList.remove('dragging');
+  if (cancel) { if (p.moved) { clearHold(); renderFight(); } return; }
+  if (p.long) return;
+  var tg = p.tg;
+  if (p.moved) {
+    clearHold();
+    var under = document.elementFromPoint(e.clientX, e.clientY), cell = under && under.closest && under.closest('.cell[data-cell]');
+    if (cell) place(tg.id, +cell.dataset.cell);
+    else if (tg.kind === 'board' && under && under.closest && under.closest('#fhand,#ftabs')) unplace(tg.cell);
+    else renderFight();
+    return;
+  }
+  if (S.screen !== 'fight' || S.phase !== 'edit') return;
+  if (tg.kind === 'hand') { S.sel = S.sel === tg.id ? -1 : tg.id; clearHold(); renderFight(); }
+  else if (tg.kind === 'cell') { if (S.sel >= 0 && S.fs.F.blocked.indexOf(tg.cell) < 0) place(S.sel, tg.cell); else { tg.el.classList.remove('shake'); void tg.el.offsetWidth; tg.el.classList.add('shake'); } }
+  else if (tg.kind === 'board') { if (S.sel >= 0) place(S.sel, tg.cell); else unplace(tg.cell); }
+}
+document.addEventListener('pointerup', function (e) { endPointer(e, false); });
+document.addEventListener('pointercancel', function (e) { endPointer(e, true); });
+document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+/* ---------- modals ---------- */
+function openModal(html) { $('#modal').innerHTML = html; $('#modal').hidden = false; $('#dim').hidden = false; }
+function closeModal() { $('#modal').hidden = true; if ($('#card').hidden) $('#dim').hidden = true; }
+function helpHTML() {
+  return '<h3>How to play</h3><ol>' +
+    '<li>Enemies sit above the columns with <b>HP</b> and an <b>attack</b>. Place tiles, press <b>Attack</b>. Each column\'s total hits its enemy. HP stays between attacks; survivors then hit your hero.</li>' +
+    '<li>Tap a tile, then a cell, or drag it. Tap a placed tile to take it back. Hold anything for a card.</li>' +
+    '<li><b>Strike</b> hits its own column. <b>Fork</b> hits both neighbours. <b>Plus</b> and <b>Row</b> boost Strikes and Forks. <b>Double</b> doubles the tile in front of it.</li>' +
+    '<li>Your team is five units, one per colour. A unit\'s reaction says what its tiles gain from the tiles around them. The five reactions are listed under the board.</li>' +
+    '<li><b>Every tile you attack with is spent</b> for the rest of the run. Win with as few as you can. Beating a boss brings them all back, sometimes with extra.</li>' +
+    '<li>Guard enemies need 2 hits at once. Bonus cells (+1, +2, ×2) boost the tile on them. Winning in one attack gives momentum for the next fight.</li>' +
+    '<li>Bank your loot and leave at any time, or go deeper. Dying keeps only part of it.</li></ol><div class="btnrow"><button class="btn main" data-act="close">Got it</button></div>';
+}
+function settingsHTML() {
+  var h = '<h3>Settings and test</h3><div class="set"><label>Momentum</label><input type="checkbox" id="setmom"' + (store.set.momentum ? ' checked' : '') + '> <select id="setmomv">' + CONFIG.momentum.values.map(function (v) { return '<option' + (v === store.set.value ? ' selected' : '') + '>' + v + '</option>'; }).join('') + '</select></div>';
+  h += '<div class="btnrow"><button class="btn sm" data-act="unlockall">Unlock all units</button><button class="btn sm" data-act="coins">+100 coins</button><button class="btn sm" data-act="tiles">+3 colourless tiles</button></div>';
+  h += '<div class="muted" style="font-size:12px">Coins: ' + store.coins + '. Set a unit level (0 = locked):</div>';
+  UNITS.forEach(function (u) { var st = store.units[u.id]; h += '<div class="set">' + dotHTML(u.c) + '<label>' + u.name + '</label><select data-ulv="' + u.id + '">' + [0, 1, 2, 3].map(function (l) { return '<option value="' + l + '"' + ((st.u ? st.l : 0) === l ? ' selected' : '') + '>' + (l ? 'Level ' + l : 'Locked') + '</option>'; }).join('') + '</select></div>'; });
+  h += '<div class="btnrow"><button class="btn sm" data-act="reset">Reset save</button><button class="btn main sm" data-act="close">Close</button></div>';
+  return h;
+}
+
+/* ---------- clicks ---------- */
+document.addEventListener('click', function (e) {
+  if (Date.now() - lpAt < 450) { e.stopPropagation(); e.preventDefault(); return; }
+  var t = e.target, el;
+  if (!$('#card').hidden) return;
+  if ((el = t.closest && t.closest('[data-tab]'))) { S.tab = el.dataset.tab; S.sel = -1; clearHold(); renderFight(); return; }
+  if ((el = t.closest && t.closest('[data-inv]'))) {
+    var i = +el.dataset.inv, at = store.bag.indexOf(i);
+    if (at >= 0) store.bag.splice(at, 1); else if (store.bag.length < CONFIG.maxColourless) store.bag.push(i); else { store.bag.shift(); store.bag.push(i); }
+    save(); show(S.screen); return;
+  }
+  if ((el = t.closest && t.closest('[data-offer]'))) { startFightUI(+el.dataset.offer); return; }
+  el = t.closest && t.closest('[data-act],#fatk,#fclear'); if (!el) return;
+  var act = el.dataset.act || el.id;
+  switch (act) {
+    case 'start': startRunUI(+el.dataset.area); break;
+    case 'team': show('team'); break;
+    case 'home': show('home'); break;
+    case 'help': openModal(helpHTML()); break;
+    case 'settings': openModal(settingsHTML()); break;
+    case 'close': closeModal(); break;
+    case 'pick': store.team[UNIT_BY_ID[el.dataset.u].c] = el.dataset.u; save(); renderTeam(); break;
+    case 'unlock': if (store.coins >= CONFIG.unlockCost) { store.coins -= CONFIG.unlockCost; store.units[el.dataset.u].u = true; save(); renderTeam(); } break;
+    case 'level': var us = store.units[el.dataset.u], cost = CONFIG.levelCost[us.l + 1]; if (us.l < 3 && store.coins >= cost) { store.coins -= cost; us.l++; save(); renderTeam(); } break;
+    case 'cont': show('map'); break;
+    case 'bank': bankRun(); break;
+    case 'leave': openModal('<h3>Leave the run?</h3><p style="font-size:14px;color:var(--ink)">You bank everything you collected so far.</p><div class="btnrow"><button class="btn main" data-act="bank">Bank and leave</button><button class="btn" data-act="close">Keep playing</button></div>'); break;
+    case 'fmenu': openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="help">How to play</button><button class="btn" data-act="bank">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
+    case 'fatk': attack(); break;
+    case 'fclear': clearBoard(); break;
+    case 'unlockall': UNITS.forEach(function (u) { store.units[u.id].u = true; }); save(); $('#modal').innerHTML = settingsHTML(); break;
+    case 'coins': store.coins += 100; save(); $('#modal').innerHTML = settingsHTML(); break;
+    case 'tiles': for (var q = 0; q < 3; q++) store.inv.push(genColourless(1, Math.random)); save(); $('#modal').innerHTML = settingsHTML(); break;
+    case 'reset': if (el.dataset.sure) { try { localStorage.removeItem(LS_KEY); } catch (er) {} store = defaultStore(); applySettings(); save(); closeModal(); show('home'); } else { el.dataset.sure = 1; el.textContent = 'Tap again to confirm'; } break;
+  }
+  if ((act === 'bank' || act === 'help' || act === 'cont') && !$('#modal').hidden && act !== 'help') closeModal();
+});
+document.addEventListener('change', function (e) {
+  var t = e.target;
+  if (t.id === 'setmom') { store.set.momentum = t.checked; applySettings(); save(); }
+  else if (t.id === 'setmomv') { store.set.value = +t.value; applySettings(); save(); }
+  else if (t.dataset && t.dataset.ulv) { var st = store.units[t.dataset.ulv], v = +t.value; st.u = v > 0; if (v > 0) st.l = v; if (!st.u && store.team[UNIT_BY_ID[t.dataset.ulv].c] === t.dataset.ulv) { store.team[UNIT_BY_ID[t.dataset.ulv].c] = UNITS.filter(function (u) { return u.c === UNIT_BY_ID[t.dataset.ulv].c && store.units[u.id].u; }).map(function (u) { return u.id; })[0] || t.dataset.ulv; } save(); renderHome(); }
+});
+$('#dim').addEventListener('click', function () { if (!$('#card').hidden) return; closeModal(); });
+window.addEventListener('resize', function () { if (S.screen === 'fight' && S.phase === 'edit') renderFight(); });
+show('home');
+window.TR = { S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: startFightUI, place: place, attack: attack, render: renderFight, show: show, save: save, UNITS: UNITS };
+})();
+</script>
+</body>
+</html>
