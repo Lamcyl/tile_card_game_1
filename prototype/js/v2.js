@@ -460,7 +460,7 @@
       if (leaf.alsoBehind) { const b = behindOf(T, e, ctx.col !== undefined ? ctx.col : e.col); if (b && !targets.includes(b)) targets.push(b); }
       if (leaf.alsoBeside) for (const o of neighbours(T, e).filter((x) => x.row === e.row && !targets.includes(x))) targets.push(o);
       if (leaf.area === 'neighbours' && once(v, 'area:' + leaf.status)) targets.push(...neighbours(T, e));
-      if (leaf.spreadTo && once(v, 'spread:' + leaf.status)) targets.push(...neighbours(T, e).filter((o) => lower(o.element) === leaf.spreadTo.element));
+      if (leaf.spreadTo && once(v, 'spread:' + leaf.status)) targets.push(...neighbours(T, e).filter((o) => enemyEl(T.state.rules, o) === leaf.spreadTo.element));
       for (const t of targets) applyStatus(T, ctx, t, leaf);
       if (leaf.andStatus) applyStatus(T, ctx, e, { status: leaf.andStatus });
     } else if (leaf.p === 'chain') {
@@ -544,6 +544,8 @@
   // Damage after the multiplier: weak = ceil(x1.5), resist = max(1, ceil(x0.5)) (elements.json affinityRules.rounding).
   const mul = (d, m) => (d <= 0 || m === 1 ? d : m > 1 ? Math.ceil(d * m) : Math.max(1, Math.ceil(d * m)));
   const affOf = (rules) => cfg(rules).affinity || AFFINITY;
+  // Enemy elements are PARKED (docs/DESIGN_V2.md "Parked / later"): rules.v2.enemyElements must be true to bring back affinity multipliers, weakness hits and the Mimic source.
+  const enemyEl = (rules, e) => (cfg(rules).enemyElements && e ? lower(e.element) : '');
   const multOf = (rules, a, d) => { const row = affOf(rules)[a]; return row && row[d] !== undefined ? row[d] : 1; };
   // Elements that judge this tile's hits: its own (Scales 4-set also counts as the element its family names), or in 'best' mode every attacker of the column.
   function hitElements(T, s) {
@@ -577,7 +579,7 @@
     let base = x.dmg + hitBonus(s, e) + bonus;
     if (st && st.mark) { base += 1; st.mark = false; }
     if (sets.f.firstDouble && !fromEffect && !T.scratch.doubled) { base *= 2; T.scratch.doubled = true; } // Wind 4-set: the first hit each turn is doubled
-    const ee = lower(e.element);
+    const ee = enemyEl(rules, e);
     let mult = 1, he = null;
     if (ee) {
       for (const el of hitElements(T, s)) { const m = multOf(rules, el, ee); if (he === null || m > mult) { mult = m; he = el; } }
@@ -614,7 +616,7 @@
   }
   // UI helper (step 4): the multiplier a placed attacker `s` would get against enemy `e` on this board (same element choice as the hit, mode own or best).
   function preview(stats, s, e, rules) {
-    const ee = lower(e && e.element);
+    const ee = enemyEl(rules, e);
     if (!ee || !elOf(s)) return null;
     const T = { stats, state: { rules }, sets: SETS.get(stats) || { f: {}, own: {}, fam: {} } };
     let mult = 1, he = null;
