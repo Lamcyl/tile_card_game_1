@@ -65,4 +65,15 @@
 "necropolis-annwn-hunt/combine2":{"hp":0.88},
 "ashkara-sun-citadel/combine2":{"hp":1.26},
 "ashkara-sun-citadel/preelite":{"hp":1.19},
-"frostmarch-rime-roots/preelite":{"hp":1.1}}
+"frostmarch-rime-roots/preelite":{"hp":1.1},
+"greenvale-misty-highlands/combine":{"hp":0.85},
+"greenvale-misty-highlands/combine2":{"hp":0.72},
+"ashkara-salt-mirror/boss":{"atk":0.74},
+"ashkara-salt-mirror/preelite":{"atk":1.15},
+"frostmarch-howling-pass/combine":{"hp":1.2},
+"frostmarch-jotunn-hall/combine":{"hp":1.2},
+"frostmarch-jotunn-hall/preelite":{"hp":1.2},
+"emberreach-cinder-flats/combine":{"hp":1.2},
+"tidewrack-sunken-harbour/combine":{"hp":0.85},
+"jade-canopy-weavers-glade/combine2":{"hp":0.85},
+"emberreach-dwarven-forge/boss":{"atk":1.32}}

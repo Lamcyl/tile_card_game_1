@@ -41,14 +41,14 @@ Unit split (92): Earth 17, Fire 15, Water 18 (13 plus 5 Ice), Wood 13, Wind 9, L
 
 ### How elements work in battle
 
-1. Every unit and every enemy has one element (enemies from their bestiary variant; plain monsters have none and take x1).
-2. **Affinity:** each hit is multiplied by the attacker's element against the enemy's element (x1.5 weak, x0.5 resists, x1 otherwise).
-3. **Weakness hit:** a weak hit also triggers a named effect (one small extra, once per hit).
+1. Every unit has one element. **Enemies have none for now** (parked, see "Parked / later" at the end): no affinity multiplier, no named weakness hits, no chips or badges. The data and code stay behind the switch `rules.v2.enemyElements` (default off).
+2. ~~Affinity~~ *(parked)*: each hit is multiplied by the attacker's element against the enemy's element (x1.5 weak, x0.5 resists, x1 otherwise).
+3. ~~Weakness hit~~ *(parked)*: a weak hit also triggers a named effect (one small extra, once per hit).
 4. **Column merge:** attackers of different elements in the same column (not necessarily adjacent) fire named merges.
 5. **Element sets** (2 and 4 units of an element on the squad, formerly "resonance") are unchanged and still in `elements.json` (`resonance` key). Not to be confused with the **Resonance merge**.
 6. No element is simply better; the V2.1 attacker-versus-target and adjacent-ally reactions are removed.
 
-### Affinity chart (enemy element: weak to / resists)
+### Affinity chart (enemy element: weak to / resists) - PARKED, see the end of this document
 
 | Enemy | Weak to (x1.5) | Resists (x0.5) |
 |---|---|---|
@@ -63,7 +63,7 @@ Unit split (92): Earth 17, Fire 15, Water 18 (13 plus 5 Ice), Wood 13, Wind 9, L
 
 Stored as an 8x8 matrix `affinity[attacker][defender]` in `elements.json` (editable on the dev page). **Rounding:** weak = `ceil(dmg x 1.5)` (1 to 2, 2 to 3, 3 to 5, 4 to 6); resist = `max(1, ceil(dmg x 0.5))` (1 stays 1, 2 to 1, 3 to 2, 5 to 3), so a resisted hit never reaches 0 by itself. The multiplier applies once per hit, after buffs, marks and merge bonus damage and before armour; Spread, Pierce, Chain, Echo and Rend hits are each judged by their own element. **Elites and bosses use the same chart** (no altered affinities in V2.2); an optional data field `affinityOverride` may later remove one weakness on region 10 bosses, never an immunity.
 
-### Named weakness hits (12)
+### Named weakness hits (12) - PARKED
 
 | Attacker on enemy | Name | Extra effect (on top of x1.5) |
 |---|---|---|
@@ -460,7 +460,7 @@ Decided in V2.1 and removed: nine elements (V2.2: 8), Storm needing more units, 
 1. **Level curve and rewards past Lv20.** The enemy stat rule is set (`WORLD_PROGRESSION.md` 4.1); the reward curve w(L) = (L/5)^1.5 reaches 36x at Lv55. Propose capping the exponent after Lv20 or by flattening Souls; needs the campaign sim.
 2. **Spread counts once per column** (10.2). Confirm the "twice" rule, or switch to once per body and raise Spread-unit ATK.
 3. **Boss-row gate with no exceptions** (10.4). Confirm that Pierce cannot bypass it, or allow Pierce to reach it when exactly one enemy stands in front.
-4. **Affinity and merges (V2.2):** (a) confirm the chart and the 12 weakness hits; (b) confirm Own element as the default and keep Best of column as a test switch only; (c) are merges automatic or does the player tap to fire them (recommended: automatic, shown in the preview)? (d) Lightning had only 4 units: **done in step 3, three added** (Kui Hooves, Electric Eel Scales, Storm Petrel Wings Kin buffer); (e) merge power vs unit count: the 3-merge column is the strongest board shape, tune in step 5; (f) Radiance and Eclipse repeat across six pairs: keep uniform or give each its own flavour?
+4. **Affinity and merges (V2.2; the affinity half is parked, see the end):** (a) confirm the chart and the 12 weakness hits; (b) confirm Own element as the default and keep Best of column as a test switch only; (c) are merges automatic or does the player tap to fire them (recommended: automatic, shown in the preview)? (d) Lightning had only 4 units: **done in step 3, three added** (Kui Hooves, Electric Eel Scales, Storm Petrel Wings Kin buffer); (e) merge power vs unit count: the 3-merge column is the strongest board shape, tune in step 5; (f) Radiance and Eclipse repeat across six pairs: keep uniform or give each its own flavour?
 5. **Rend:** confirm cap 3 and that any unit can gain it by item, relic and Camp.
 6. **Hybrid tax removal:** check in the sim that free hybrids do not dominate (the budget cap is the only limit now).
 7. **Evolution:** automatic at mastery or a choice at stage 2 with two branches? Legendary born at stage 2 or all lines three stages?
@@ -474,3 +474,7 @@ Decided in V2.1 and removed: nine elements (V2.2: 8), Storm needing more units, 
 15. **Hero:** one default (Beast-keeper) or choose from the list? Real animals as filler units acceptable?
 16. **Dev page follow-up (code, not done):** `prototype/design.js` filters items by the removed `rarity` field and ties items to the old text; update it when code work is allowed.
 17. **V2 dev page (done, `V2_UNITS_PLAN.md` step 4):** the dev page has a Classic / V2 rules switch, a V2 team editor, the editable 8x8 weakness chart and the merge-mode switch, and the battle screen shows element chips, weak / resist badges, merge previews, statuses and an inspect card under `rules.v2`. Classic mode is unchanged.
+
+## Parked / later
+
+**Enemy strengths and weaknesses (V2.2 chart, 12 named weakness hits, affinity-versus-merges modes, enemy element chips and the ▲/▼ placement badges).** Parked after the first phone test: the weakness chart was not intuitive. Enemies carry no element in play; only the player's own column merges (reactions) remain. Everything stays in the data (`elements.json` affinity and weaknessHits, enemy `element` fields in the fights) and in the code behind one switch, `rules.v2.enemyElements` (default off; the dev page's Chart tab has the toggle). With it on, the sections "Affinity chart" and "Named weakness hits" above describe the behaviour. The reaction merges are shown as icons in a row under each column of the player's board (long-press an icon for its name and effect).
