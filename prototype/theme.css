@@ -33,5 +33,19 @@
   --gold: #c9a23a;
   --font-display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, "Times New Roman", serif;
   --font-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  color-scheme: only light;
+  color-scheme: light dark; /* declares dark support so forced-dark browsers (Samsung Internet, Chrome Force Dark) leave the page alone; the dark block below keeps the parchment look */
+}
+
+/* Dark support without a dark theme: same light colours, set explicitly, so a dark-mode phone shows the page unchanged
+   and the browser's own force-darkening (Samsung Internet, Chrome) has nothing to invert. Mirror every change of :root here. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #efe6d2; --panel: #f7f0e0; --panel-2: #ece1c8; --line: #b9a98a; --text: #2b2a35; --muted: #7a7260;
+    --paper: #f7f0e0; --paper-deep: #e6d9bb; --ink: #2b2a35; --ink-soft: #4a4858;
+    color-scheme: light dark;
+  }
+  html, body { background-color: #efe6d2; color: #2b2a35; }
+  button { background-color: #f7f0e0; color: #2b2a35; }
+  input, select, textarea { background-color: #fffaf0; color: #2b2a35; border-color: #b9a98a; }
+  input::placeholder, textarea::placeholder { color: #7a7260; }
 }

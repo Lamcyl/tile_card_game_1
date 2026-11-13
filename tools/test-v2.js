@@ -25,7 +25,9 @@ const noFuzz = process.argv.includes('--no-fuzz');
 const RULES = { v2: { sets: false } }; // the step 1 tests run without family and element set bonuses; the set tests use { v2: {} }
 function foe(row, col, o) { return Object.assign({ type: 'goblin', row, col, hp: 10, atk: 2, armor: 0 }, o); }
 function battle(enemies, rules) {
-  const st = E.createState({ heroHp: 100, heroMaxHp: 100, enemies, rules: Object.assign({}, RULES, rules) });
+  const rl = Object.assign({}, RULES, rules);
+  if (rl.v2 && typeof rl.v2 === 'object' && rl.v2.enemyElements === undefined) rl.v2 = Object.assign({ enemyElements: true }, rl.v2); // enemy elements are parked (default off): the element tests run with the switch on
+  const st = E.createState({ heroHp: 100, heroMaxHp: 100, enemies, rules: rl });
   st.enemies.forEach((e, i) => { if (enemies[i].maxHp) e.maxHp = enemies[i].maxHp; if (enemies[i].element) e.element = enemies[i].element; });
   return st;
 }
@@ -265,6 +267,14 @@ const SH = (n, o) => Object.assign({ id: 'sh', type: 'v2', v2: true, unit: 'sh',
 const SETS_ON = { v2: {} };
 const ev = (events, t) => events.filter((e) => e.t === t);
 const play = (enemies, list, rules, turns, hp) => { let st = battle(enemies, rules), all = []; if (hp) st.hp = hp; const sq = squad(list); for (let i = 0; i < (turns || 1) && st.status === 'playing'; i++) { const r = turn(st, sq); all = all.concat(r.events); st = r.state; } return { st, events: all, sq }; };
+
+test('enemy elements are parked: with rules.v2.enemyElements off (the default) enemies take plain damage, no weak events; merges still fire', () => {
+  const off = (v2) => play([foe(1, 0, { hp: 30, element: 'wind' })], [[2, 0, U('water', { atk: 3 })], [3, 0, U('fire', { atk: 3 })]], { v2: Object.assign({ sets: false }, v2) });
+  const a = off({ enemyElements: false }), b = off({});
+  assert.strictEqual(ev(a.events, 'weak').length, 0); assert.strictEqual(JSON.stringify(a.events), JSON.stringify(b.events), 'default is off');
+  assert.ok(ev(a.events, 'merge').length >= 1, 'column merges are unaffected');
+  assert.ok(ev(off({ enemyElements: true, affinity: { water: { wind: 1.5 }, fire: { wind: 1.5 } } }).events, 'weak').length >= 1, 'switch on brings the chart back');
+});
 
 test('affinity: weak, resist, neutral and elementless enemies; rounding table 1 to 6', () => {
   assert.deepStrictEqual([1, 2, 3, 4, 5, 6].map((d) => V2.mul(d, 1.5)), [2, 3, 5, 6, 8, 9]);

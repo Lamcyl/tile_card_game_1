@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-  <meta name="color-scheme" content="only light">
-  <meta name="supported-color-schemes" content="light">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
   <title>Tile Defense - Dev test page</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,10 +20,7 @@
       </header>
       <div id="b-arena" class="arena">
         <div id="b-board" class="board"></div>
-        <div class="threat-wrap">
-          <div class="threat-label">If nothing dies, you take <b id="b-threat-total">0</b></div>
-          <div id="b-threat" class="threat"></div>
-        </div>
+        <div id="b-react" class="react-row" aria-label="Column reactions"></div>
         <div id="b-hero" class="hero">
           <span id="b-hero-seal" class="hero-seal" aria-hidden="true">命</span>
           <div class="hero-info"><b id="b-hero-name">Hero</b><small id="b-hero-passive"></small></div>
@@ -36,13 +33,10 @@
       <div id="b-hand" class="hand"></div>
       <div class="b-controls">
         <button id="b-clear" type="button">Return all</button>
-        <button id="b-log-toggle" type="button" aria-expanded="false" aria-controls="b-log" title="Battle log">📜</button>
+        <button id="b-retreat" type="button" hidden>Retreat</button>
         <button id="b-speed" type="button" title="Animation speed">2×</button>
         <button id="b-fight" type="button" class="primary grow">⚔ Fight</button>
       </div>
-      <section id="b-log" class="b-log collapsed" aria-label="Battle log">
-        <div id="b-log-lines" class="log-lines" role="log"></div>
-      </section>
     </section>
   <script type="module" src="./dev.js"></script>
 </body>

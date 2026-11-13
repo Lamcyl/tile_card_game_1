@@ -17,6 +17,8 @@ const out = [
   '<!DOCTYPE html>',
   '<html lang="en"><meta charset="utf-8">',
   '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">',
+  '<meta name="color-scheme" content="light dark">', // declares dark support (with the prefers-color-scheme block in theme.css) so forced-dark browsers leave the page alone
+  '<meta name="supported-color-schemes" content="light dark">',
   title,
   '<meta name="claude:viewport-fit-sides" content="cover">',
   `<style>\n${css}\n</style>`,

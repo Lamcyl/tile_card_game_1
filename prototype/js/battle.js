@@ -7,7 +7,6 @@
   const root = document.getElementById('battle');
   const $ = (sel) => root.querySelector(sel);
 
-  const WARD_TEXT = { guard: 'its guard still stands', ward: 'hit too weak', veil: 'veiled this turn' };
   const PATTERN_GLYPH = { straight: '↑', pierce: '⇈', spread: '↖↑↗' };
   const PATTERN_TEXT = {
     straight: 'hits the first enemy in its column',
@@ -16,7 +15,7 @@
   };
   const SPEEDS = [1, 2, 4];
 
-  const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null, report: null, hero: null, aiming: false, inspect: false };
+  const game = { army: [], state: null, view: null, placement: {}, selected: null, hover: null, busy: false, speed: 2, onEnd: null, report: null, hero: null, aiming: false };
 
   // Board cells are built once; their contents are redrawn on every render.
   // `boss` adds the optional boss row (row -1) above the two enemy rows; it exists only in battles that have one.
@@ -39,6 +38,7 @@
 
   const cellEl = (k) => root.querySelector('.cell[data-key="' + k + '"]');
   const v2on = (s) => !!(s && s.rules && s.rules.v2);
+  const enemyEls = (s) => !!(s && s.rules && s.rules.v2 && s.rules.v2.enemyElements); // enemy elements are parked (docs/DESIGN_V2.md): chips, weak-to glyphs, badges and inspect rows only with this switch
   const lc = (x) => String(x || '').toLowerCase();
   // V2 swaps and spawned Drones live in rules.v2mem.moves and are replayed by the engine each turn: the board the player sees is that replay (eff).
   // Rearranging bakes the replay into the layout and clears the list (docs/V2_UNITS_PLAN.md step 3 hand-off).
@@ -64,20 +64,19 @@
     game.view = null;
     game.selected = null;
     game.busy = false;
-    game.aiming = false; game.inspect = false;
+    game.aiming = false;
     game.hero = opts.hero || null;
     game.onEnd = opts.onEnd;
+    game.onRetreat = opts.onRetreat || null; game.rations = opts.rations; retreatArm(false);
     game.report = { shields: false, overkills: 0, bossOverkill: false, explosions: 0, turns: 0 }; // read by bounties (app.js)
-    logEl.innerHTML = '';
-    $('#b-log').classList.add('collapsed'); $('#b-log-toggle').setAttribute('aria-expanded', 'false'); $('#b-msg').classList.remove('open'); // log and hints are toggles: the board gets the height
-    log('Fight begins: place your squad.', 'turn');
+    $('#b-msg').classList.remove('open'); // the hint line is a toggle: the board gets the height
     // Keep the player's last layout for cards that are still in the squad.
     const kept = {};
     for (const [k, id] of Object.entries(opts.placement || {})) if (cardById(id) && !E.tileBlocked(game.state.rules, k)) kept[k] = id;
     game.placement = kept;
     setBiome(opts.biome);
     $('#b-name').textContent = opts.title;
-    { const ids = opts.relics || [], el = $('#b-relics'); el.hidden = !ids.length; el.innerHTML = ids.map((id) => { const rl = window.Relics.BY_ID[id]; return '<span class="relic-ic sm" title="' + rl.name + ': ' + rl.text + '">' + rl.glyph + '</span>'; }).join(''); if (ids.length) log('Relics: ' + ids.map((id) => window.Relics.BY_ID[id].name).join(', '), 'turn'); }
+    { const ids = opts.relics || [], el = $('#b-relics'); el.hidden = !ids.length; el.innerHTML = ids.map((id) => { const rl = window.Relics.BY_ID[id]; return '<span class="relic-ic sm" title="' + rl.name + ': ' + rl.text + '">' + rl.glyph + '</span>'; }).join(''); }
     $('#b-sub').textContent = opts.subtitle;
     const kinds = [...new Set(game.state.enemies.map((e) => e.kind).filter(Boolean))];
     const intro = opts.stage.intro;
@@ -89,75 +88,15 @@
     const introEl = $('#b-msg');
     if (intro) {
       introEl.innerHTML = '<span class="intro-name">' + (intro.rule === 'Elite' ? '💀 ' : '👑 ') + intro.name + (intro.rule ? ' <i>' + (intro.badge ? intro.badge + ' ' : '') + intro.rule + '</i>' : '') + '</span> ' + intro.text;
-      log((intro.rule === 'Elite' ? 'Elite: ' : 'Boss: ') + intro.name + (intro.rule && intro.rule !== 'Elite' ? ' (' + intro.rule + ')' : '') + '. ' + intro.text, 'bad');
     } else introEl.textContent = rules.length ? rules.join(' ') : Object.keys(kept).length ? 'Your last layout is ready. Adjust it, then press Fight.' : 'Place your squad, then press Fight.';
-    setupV2UI(v2on(game.state));
+    closeInspect();
     root.hidden = false;
     render();
     fit();
   }
   const placement = () => Object.assign({}, eff().placement);
 
-  // ---------- Battle log (design 20) ----------
-  const logEl = $('#b-log-lines');
-  function log(html, cls) {
-    const line = document.createElement('div');
-    if (cls) line.className = cls;
-    line.innerHTML = html;
-    logEl.appendChild(line);
-    logEl.scrollTop = logEl.scrollHeight;
-  }
-  const nameOf = (view, id) => { const e = view.enemies.find((en) => en.id === id); return e ? E.ENEMY_TYPES[e.type].name + (e.kind ? ' ' + E.ENEMY_KINDS[e.kind].badge : '') : 'Enemy'; };
-  const cardName = (key) => { const c = cardById(eff().placement[key]); if (!c) return 'Unit'; const u = window.Art ? Art.unit(c) : null; return (u && u.name) || E.CARD_TYPES[c.type].name; };
-  const lastWeak = {}; // enemy id -> the weakness / resist event just before its hit (V2)
-  const STATUS_TEXT = { burn: 'is burning', poison: 'is poisoned', chill: 'is chilled (-1 ATK)', mark: 'is marked (+1 next hit)', hold: 'is held (skips its strike)', sunder: 'loses armour', cleanse: 'is stripped' };
-  function logV2(ev, view) {
-    if (ev.t === 'weak') { lastWeak[ev.id] = ev; log('&nbsp;&nbsp;' + (ev.mult > 1 ? '<b>' + (ev.name ? ev.name + '!' : 'Weak!') + '</b> ' + elName(ev.element) + ' hits ' + nameOf(view, ev.id) + ' for ×' + ev.mult : nameOf(view, ev.id) + ' resists ' + elName(ev.element) + ' (×' + ev.mult + ')'), ev.mult > 1 ? 'good' : 'bad'); }
-    else if (ev.t === 'merge') log('Merge <b>' + ev.name + '</b> in column ' + (ev.col + 1), 'good');
-    else if (ev.t === 'status') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' ' + (ev.skipped ? 'is held and skips its strike' : (STATUS_TEXT[ev.status] || ev.status) + (ev.n > 1 && ev.status !== 'cleanse' ? ' (' + ev.n + ')' : '')));
-    else if (ev.t === 'tick') log('&nbsp;&nbsp;' + (ev.status === 'burn' ? 'Burn' : 'Poison') + ' ticks on ' + nameOf(view, ev.id) + ' (' + ev.n + ')');
-    else if (ev.t === 'freeze') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + (ev.skipped ? ' is frozen and skips its strike' : ' freezes solid'), 'good');
-    else if (ev.t === 'swap') log('Two units swap places');
-    else if (ev.t === 'drone') log('A Drone joins the board', 'good');
-    else if (ev.t === 'mimic') log(cardName(ev.key) + ' takes the ' + elName(ev.element) + ' element');
-    else if (ev.t === 'negate') log('A strike in column ' + (ev.col + 1) + ' is negated (' + ev.amount + ')', 'good');
-    else if (ev.t === 'souls') log('+' + ev.n + ' souls', 'good');
-    else if (ev.t === 'grudge') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' grows angry (⚔' + ev.atk + ')', 'bad');
-    else if (ev.t === 'thorn') log('&nbsp;&nbsp;Thorns bite you: -1 HP', 'bad');
-    else return false;
-    return true;
-  }
-  function logEvent(ev, view) {
-    if (logV2(ev, view)) return;
-    if (ev.t === 'fire') log(ev.targets.length ? cardName(ev.key) + ' fires for ⚔' + ev.atk : cardName(ev.key) + ' has no target in range', ev.targets.length ? '' : 'bad');
-    else if (ev.t === 'hit' && ev.warded) log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' is untouched (' + WARD_TEXT[ev.warded] + ')', 'bad');
-    else if (ev.t === 'hit') { const w = lastWeak[ev.id]; delete lastWeak[ev.id]; log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' takes ' + ev.dmg + (w ? (w.mult > 1 ? ' ▲' : ' ▼') : '') + (ev.armor && ev.amount > ev.dmg ? ' (armor)' : '') + (ev.killed ? ', defeated' : ' (' + ev.hp + ' left)'), ev.killed ? 'good' : ''); }
-    else if (ev.t === 'overkill') log('&nbsp;&nbsp;Overkill: ' + ev.amount + ' carries to the ' + nameOf(view, ev.id));
-    else if (ev.t === 'explode') log('&nbsp;&nbsp;Barrel explodes' + (ev.echo ? ' again (Mjölnir Shard)' : '') + ' for ' + ev.amount + ' to its neighbours');
-    else if (ev.t === 'feast') log("Fenrir's Fang: attackers now have +" + ev.n + ' ATK', 'good');
-    else if (ev.t === 'strike') log(nameOf(view, ev.id) + ' attacks for ⚔' + ev.atk + (ev.blocked ? ', shield blocks ' + ev.blocked : '') + (ev.warded ? ', ward absorbs ' + ev.warded : '') + (ev.dmg ? ', you take ' + ev.dmg : ''), ev.dmg ? 'bad' : '');
-    else if (ev.t === 'bulwark') log('&nbsp;&nbsp;' + nameOf(view, ev.id) + ' blocks the overkill (' + ev.amount + ' wasted)', 'bad');
-    else if (ev.t === 'spawn') log(ev.reason === 'split' ? '&nbsp;&nbsp;' + nameOf(view, ev.from) + ' splits: a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' appears' : nameOf(view, ev.from) + ' summons a ' + E.ENEMY_TYPES[ev.enemy.type].name + ' (♥' + ev.enemy.hp + ' ⚔' + ev.enemy.atk + ')', 'bad');
-    else if (ev.t === 'heal') log(nameOf(view, ev.id) + ' heals ' + ev.targets.map((h) => nameOf(view, h.id) + ' +' + h.amount).join(', '), 'bad');
-    else if (ev.t === 'rage') log(nameOf(view, ev.id) + ' is in a fury: +' + ev.amount + ' ⚔', 'bad');
-    else if (ev.t === 'harden') log(nameOf(view, ev.id) + ' hardens: armor ' + ev.armor, 'bad');
-    else if (ev.t === 'regrow') log(nameOf(view, ev.id) + ' grows back (' + ev.hp + ' HP)', 'bad');
-    else if (ev.t === 'move') log(nameOf(view, ev.id) + (ev.push ? ' is pushed to column ' : ' steps to column ') + (ev.to[1] + 1), 'bad');
-    else if (ev.t === 'tide') log('The tide carries every enemy one column', 'bad');
-    else if (ev.t === 'ability' && ev.target) log('&nbsp;&nbsp;Target: ' + nameOf(view, ev.target));
-    else if (ev.t === 'stand') log('Last Breath: you cling on at 1 HP!', 'good');
-    else if (ev.t === 'revive') log('Phoenix Rebirth: you rise again with ' + ev.hp + ' HP!', 'good');
-    else if (ev.t === 'chain') log('Lightning leaps to another enemy', 'hit');
-    else if (ev.t === 'mend' && ev.source === 'ration') log('Field rations restore ' + ev.amount + ' HP', 'good');
-    else if (ev.t === 'mend') log((ev.source === 'v2' ? 'Healing' : 'Lifebloom') + ' restores ' + ev.amount + ' HP', 'good');
-    else if (ev.t === 'enrage') { if (ev.ids.length) log('Survivors enrage: +1 ⚔', 'bad'); }
-    else if (ev.t === 'cleared') log('Stage cleared!', 'good');
-    else if (ev.t === 'defeated') log('Your hero has fallen.', 'bad');
-  }
-  $('#b-log-toggle').addEventListener('click', () => {
-    const open = $('#b-log').classList.toggle('collapsed') === false;
-    $('#b-log-toggle').setAttribute('aria-expanded', String(open));
-  });
+
 
   // Painted backdrop and stream style follow the biome of the fight.
   const STREAM_BY_BIOME = { meadow: 'water', forest: 'water', beach: 'sea', coral: 'sea', dunes: 'sand', temple: 'sand', snow: 'ice', glacier: 'ice', ash: 'lava', caldera: 'lava', marsh: 'water', highlands: 'water', saltflat: 'sand', canyon: 'sand' };
@@ -204,12 +143,12 @@
     $('#b-hand').innerHTML = hand.length
       ? hand.map(handSlotHTML).join('')
       : '<div class="hand-empty">Squad placed. Drop a card here to take it back.</div>';
-    renderThreat(s, stats);
     paintBodies(rng);
     paintV2(s, rng);
     $('#b-fight').disabled = game.busy || s.status !== 'playing';
     $('#b-clear').disabled = game.busy || s.status !== 'playing';
     $('#b-speed').textContent = game.speed + '×';
+    renderRetreat();
   }
 
   // Which tiles the focused unit reaches / will hit / boosts. While dragging (or with an unplaced unit selected and a
@@ -286,23 +225,6 @@
     btn.setAttribute('aria-label', btn.title);
   }
 
-  function renderThreat(s, stats) {
-    let total = 0;
-    const cols = [];
-    const inc = E.incomingByColumn(s.enemies);
-    for (let c = 0; c < E.COLS; c++) {
-      const incoming = inc[c];
-      const block = E.playerRowsFor(s.rules).map((r) => stats[E.key(r, c)]).filter((st) => st && E.isDefender(st)).reduce((n, st) => n + st.block, 0);
-      const dmg = Math.max(0, incoming - block);
-      total += dmg;
-      cols.push(incoming === 0 ? '<div class="muted">–</div>' : '<div class="' + (dmg ? 'dmg' : 'safe') + '">' + (dmg ? '−' + dmg : '✓') + '</div>');
-    }
-    $('#b-threat').innerHTML = cols.join('');
-    total = Math.max(0, total - (s.barrier || 0));
-    $('#b-threat-total').textContent = total;
-    $('#b-threat-total').className = total ? 'dmg' : 'safe';
-  }
-
   const EL_COLOR = { wood: '#5a8a3a', water: '#3f6fb0', fire: '#d2542b', earth: '#a07a3a', wind: '#3f9d93', lightning: '#7a5fd0', light: '#d9a62b', shadow: '#6b4a8a' }; // the 8 elements (V2.2)
   const TXT = '︎'; // force text (not emoji) glyph rendering for stat symbols
   const artImg = (url, alt) => '<img src="' + url + '" alt="' + alt + '" draggable="false">';
@@ -316,7 +238,7 @@
         face + '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">💥' + t.blast + '</span></div></div>';
     }
     // V2 fights (js/fights.js): the placeholder drawing is labelled with the monster's real name and an element dot.
-    const label = t.v2 ? '<span class="e-name"' + (t.element ? ' style="--el:' + (EL_COLOR[lc(t.element)] || '#999') + '"' : '') + '>' + (t.element ? '<i></i>' : '') + t.name + '</span>' : '';
+    const label = t.v2 ? '<span class="e-name"' + (t.element && enemyEls(s) ? ' style="--el:' + (EL_COLOR[lc(t.element)] || '#999') + '"' : '') + '>' + (t.element && enemyEls(s) ? '<i></i>' : '') + t.name + '</span>' : '';
     const gim = e.gimmick ? E.ENEMY_GIMMICKS[e.gimmick] : null;
     const kind = e.kind ? E.ENEMY_KINDS[e.kind] : gim ? { name: gim.name, badge: gim.badge, text: E.gimmickText(e) } : null;
     const guard = e.guardian ? ' guardian' : '';
@@ -328,7 +250,7 @@
     const gates = e.row === E.BOSS_ROW && s ? '<div class="gates" aria-hidden="true">' + Array.from({ length: E.wOf(e) }, (_, i) => E.gateOpen(s.enemies, e.col + i) ? '<span class="open" title="Open: nothing stands in front">✦</span>' : '<span title="Gated: an enemy stands in front">⛓</span>').join('') + '</div>' : '';
     const atkTxt = e.atk + (lanes > 1 ? '×' + lanes : '');
     return '<div class="enemy' + bigCls + (t.boss ? ' boss' : '') + (e.kind ? ' kind-' + e.kind : '') + (gim ? ' gimmick gimmick-' + e.gimmick : '') + guard + '" title="' + t.name + (kind ? ' (' + kind.name + ': ' + kind.text + ')' : '') + ': ' + e.hp + ' HP, deals ' + e.atk + ' damage' + (lanes > 1 ? ' in each of ' + lanes + ' columns' : '') + (big ? ', footprint ' + fp : '') + (e.row === E.BOSS_ROW ? ', boss row: can be hit only through a column with no enemy in front' : '') +
-      (e.armor ? ', armor ' + e.armor : '') + (t.v2 && (t.element || t.variant) ? ' [' + [t.element, t.variant, t.flavour].filter(Boolean).join(' · ') + ']' : '') + '"' + bigAttr + '>' + face + label + enemyV2HTML(e, s || current(), t) + laneMarks + gates +
+      (e.armor ? ', armor ' + e.armor : '') + (t.v2 && enemyEls(s || current()) && (t.element || t.variant) ? ' [' + [t.element, t.variant, t.flavour].filter(Boolean).join(' · ') + ']' : '') + '"' + bigAttr + '>' + face + label + enemyV2HTML(e, s || current(), t) + laneMarks + gates +
       (kind ? '<span class="kind-badge" aria-label="' + kind.name + '">' + kind.badge + '</span>' : '') + (e.guardian ? '<span class="guard-badge" title="Guard: the boss takes no damage while this enemy lives">♜</span>' : '') +
       (e.armor ? '<span class="tag armor">🛡' + TXT + e.armor + '</span>' : '') + (t.boss ? '<span class="crown">👑</span>' : '') +
       '<div class="tags"><span class="tag hp">♥' + TXT + e.hp + '</span><span class="tag atk">⚔' + TXT + atkTxt + '</span></div></div>';
@@ -413,7 +335,7 @@
   const enemyStatusHTML = (e) => { const l = statusList(e); return l.length ? '<div class="st-row">' + l.slice(0, 3).map((x) => '<span title="' + x[2] + '">' + x[0] + x[1] + '</span>').join('') + (l.length > 3 ? '<span>+' + (l.length - 3) + '</span>' : '') + '</div>' : ''; };
   function enemyV2HTML(e, s, t) {
     if (!v2on(s)) return '';
-    const el = lc(e.element || t.element);
+    const el = enemyEls(s) ? lc(e.element || t.element) : '';
     let h = el ? elChip(el, 'on-enemy') : '';
     if (el) { const m = matchups(s.rules, el); if (m.weak.length) h += '<span class="wk" title="Weak to ' + m.weak.map(elName).join(', ') + '">▲' + glyphs(m.weak.slice(0, 3)) + '</span>'; }
     return h + enemyStatusHTML(e);
@@ -432,42 +354,28 @@
     } else if (def) { main = '🛡' + TXT + (st ? st.block : card.block); sub = buf ? '<span>✚</span>' : '<span>↕</span>'; role = 'defender'; }
     else { main = buf && buf.amount ? '+' + buf.amount : '✦'; sub = '<span>' + (buf ? ({ atk: '⚔', range: 'R', block: '🛡' }[buf.effect] || '✚') : '✦') + '</span>'; role = 'support'; }
     const el = lc((st && st.element) || card.element);
-    const mg = st && st.merges && st.merges.length ? '<div class="mg-wrap">' + mergeIcons(st.merges) + '</div>' : '';
     const desc = (card.name || '') + ' · ' + (card.sub || '') + ' · ' + elName(el) + ' · ' + (card.family || '') + (window.V2 && window.V2.UNITS[card.unit] ? ' — ' + window.V2.UNITS[card.unit].ability : '');
     const cls = 'card v2card role-' + role + (game.selected === card.id ? ' selected' : '') + (card.drone ? ' drone' : '') + (card.rarity && card.rarity !== 'common' ? ' rar-' + card.rarity : '');
     const face = '<div class="c-art">' + (unit.url ? artImg(unit.url, card.name) : '<span class="e-icon">🐾</span>') + '</div>';
-    return '<div class="' + cls + '" data-card="' + card.id + '" data-from="' + from + '" title="' + esc2(desc) + '">' + face + '<span class="c-role">' + esc2(card.name || card.sub) + '</span>' + elChip(el, 'on-card') + mg +
+    return '<div class="' + cls + '" data-card="' + card.id + '" data-from="' + from + '" title="' + esc2(desc) + '">' + face + '<span class="c-role">' + esc2(card.name || card.sub) + '</span>' + elChip(el, 'on-card') +
       '<div class="tags"><span class="tag main">' + main + '</span><span class="tag sub">' + sub + '</span></div></div>';
   }
   const esc2 = (x) => String(x == null ? '' : x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  // At most 2 merge icons per tile (the rest are in the line under the board, the log and the inspect card).
-  function mergeIcons(list) {
-    const shown = list.slice(0, 2).map((m) => '<span class="mg" style="--a:' + elColor(m.pair[0]) + ';--b:' + elColor(m.pair[1]) + '" title="' + esc2(m.name + ' (' + elName(m.pair[0]) + ' + ' + elName(m.pair[1]) + ')') + '">' + elGlyph(m.pair[0]) + elGlyph(m.pair[1]) + '</span>').join('');
-    return shown + (list.length > 2 ? '<span class="mg more">+' + (list.length - 2) + '</span>' : '');
-  }
-  // Preview layer, repainted after every render and on every drag move: merge icons on carriers, the one-line list under the board, multiplier badges on the targets.
+  // Reaction icon: the two element glyphs of the merge on a gradient of their colours; long-press shows its card.
+  const mergeIcon = (m) => '<span class="mg" data-mg="' + esc2(m.id) + '" data-pair="' + esc2(m.pair.join(',')) + '" style="--a:' + elColor(m.pair[0]) + ';--b:' + elColor(m.pair[1]) + '" title="' + esc2(m.name) + '">' + elGlyph(m.pair[0]) + elGlyph(m.pair[1]) + '</span>';
+  // Preview layer, repainted after every render and on every drag move: the reactions of each column in the row under the board, and (enemy elements on) multiplier badges on the targets.
   function paintV2(s, rng, stats0) {
-    const line = $('#b-merges');
+    const row = $('#b-react');
     root.querySelectorAll('.pv').forEach((n) => n.remove());
-    if (!v2on(s)) { if (line) { line.textContent = ''; } return; }
-    const stats = (rng && rng.stats) || stats0 || (function () { const bd = eff(); return E.computeStats(bd.placement, bd.army, s.enemies, s.rules, turnArg(s)); })();
-    // merge icons for the probed board (drag or selection): the carriers' own tile icons come from render(); while probing they are redrawn here
-    root.querySelectorAll('.cell > .mg-wrap.live').forEach((n) => n.remove());
-    const lines = {};
-    for (const st of Object.values(stats)) {
-      if (!st.merges || !st.merges.length) continue;
-      for (const m of st.merges) (lines[m.col] = lines[m.col] || []).push(m);
-      if (rng && rng.stats) { const cell = cellEl(st.key); if (cell && !cell.querySelector('.mg-wrap')) cell.insertAdjacentHTML('beforeend', '<div class="mg-wrap live">' + mergeIcons(st.merges) + '</div>'); }
-    }
-    if (rng && rng.stats) root.querySelectorAll('.cell > .card .mg-wrap').forEach((n) => { const cell = n.closest('.cell'), st = stats[cell.dataset.key]; if (!st || !st.merges || !st.merges.length) n.remove(); }); // a probe can break a merge the board had
-    const cols = Object.keys(lines).sort();
-    if (line) {
-      line.innerHTML = cols.map((c) => '<b>Col ' + (+c + 1) + '</b> ' + lines[c].map((m) => '<span class="mgl" title="' + esc2(m.name) + '">' + elGlyph(m.pair[0]) + elGlyph(m.pair[1]) + ' ' + esc2(m.name) + '</span>').join(', ')).join(' · ');
-      line.title = cols.map((c) => 'Column ' + (+c + 1) + ': ' + lines[c].map((m) => m.name + ' (' + elName(m.pair[0]) + ' + ' + elName(m.pair[1]) + ')').join(', ')).join('\n');
-    }
+    if (!v2on(s)) { row.innerHTML = ''; row.hidden = true; return; }
+    const stats = (rng && rng.stats) || stats0 || (function () { const bd = eff(); return E.computeStats(bd.placement, bd.army, s.enemies, s.rules, turnArg(s)); })(); // the probe board while dragging or with a hand card selected
+    const lines = [];
+    for (const st of Object.values(stats)) for (const m of st.merges || []) { const l = (lines[m.col] = lines[m.col] || []); if (!l.some((x) => x.id === m.id && x.pair.join() === m.pair.join())) l.push(m); }
+    row.hidden = false;
+    row.innerHTML = Array.from({ length: E.COLS }, (_, c) => '<div class="react-col">' + (lines[c] || []).map(mergeIcon).join('') + '</div>').join('');
     // multiplier on the targets of the focused attacker
     const st = rng && rng.st;
-    if (st && E.isAttacker(st) && !game.busy) {
+    if (st && E.isAttacker(st) && !game.busy && enemyEls(s)) {
       for (const e of E.targetsFor(st, s.enemies)) {
         const pv = window.V2.preview(stats, st, e, s.rules);
         if (!pv || pv.mult === 1) continue;
@@ -476,31 +384,17 @@
       }
     }
   }
-  // Inspect card: tap an enemy, or switch on the 🔍 button and tap a unit.
-  function setupV2UI(on) {
-    let line = $('#b-merges');
-    if (on && !line) { line = document.createElement('p'); line.id = 'b-merges'; line.className = 'b-merges'; line.title = 'Merges this layout will fire (tap to expand)'; $('#b-msg').before(line); line.addEventListener('click', () => line.classList.toggle('open')); }
-    if (line) { line.textContent = ''; line.hidden = !on; }
-    let btn = $('#b-inspect-toggle');
-    if (on && !btn) {
-      btn = document.createElement('button'); btn.id = 'b-inspect-toggle'; btn.type = 'button'; btn.textContent = '🔍'; btn.title = 'Inspect mode: tap a unit or an enemy for its card';
-      btn.addEventListener('click', () => { game.inspect = !game.inspect; btn.classList.toggle('on', game.inspect); $('#b-msg').textContent = game.inspect ? 'Inspect mode: tap a unit or an enemy. Tap 🔍 again to place cards.' : ''; closeInspect(); });
-      $('#b-log-toggle').before(btn);
-    }
-    if (btn) { btn.hidden = !on; btn.classList.toggle('on', game.inspect); }
-    closeInspect();
-  }
   function closeInspect() { const n = $('#b-inspect'); if (n) n.remove(); }
   const KW = { map: {} };
   const chips = (list, fn) => list.map((x) => '<span class="ins-chip">' + fn(x) + '</span>').join('') || '<span class="d-none">none</span>';
   function inspectHTMLEnemy(e, s) {
-    const t = E.ENEMY_TYPES[e.type], el = lc(e.element || t.element), m = matchups(s.rules, el), art = window.Art ? Art.enemy(e.type) : null;
+    const t = E.ENEMY_TYPES[e.type], on = enemyEls(s), el = on ? lc(e.element || t.element) : '', m = matchups(s.rules, el), art = window.Art ? Art.enemy(e.type) : null;
     const kind = e.kind ? E.ENEMY_KINDS[e.kind] : null, gim = e.gimmick ? E.ENEMY_GIMMICKS[e.gimmick] : null, sl = statusList(e);
-    return '<div class="ins-head">' + (art ? artImg(art, t.name) : '<span class="e-icon">' + t.icon + '</span>') + '<div><b>' + esc2(t.name) + '</b> ' + elChip(el) + (e.flavour || t.flavour ? '<span class="ins-chip">' + esc2(e.flavour || t.flavour) + '</span>' : '') +
-      '<div class="ins-sub">♥ ' + e.hp + ' · ⚔ ' + e.atk + (e.armor ? ' · 🛡 ' + e.armor : '') + (t.variant ? ' · ' + esc2(t.variant) : '') + (t.boss ? ' · boss' : '') + '</div></div><button class="ins-x" type="button" aria-label="Close">✕</button></div>' +
-      '<div class="ins-row"><span>Element</span>' + (el ? elChip(el) + ' ' + elName(el) : '<i>none</i>') + '</div>' +
+    return '<div class="ins-head">' + (art ? artImg(art, t.name) : '<span class="e-icon">' + t.icon + '</span>') + '<div><b>' + esc2(t.name) + '</b> ' + elChip(el) + (on && (e.flavour || t.flavour) ? '<span class="ins-chip">' + esc2(e.flavour || t.flavour) + '</span>' : '') +
+      '<div class="ins-sub">♥ ' + e.hp + ' · ⚔ ' + e.atk + (e.armor ? ' · 🛡 ' + e.armor : '') + (on && t.variant ? ' · ' + esc2(t.variant) : '') + (t.boss ? ' · boss' : '') + '</div></div><button class="ins-x" type="button" aria-label="Close">✕</button></div>' +
+      (on ? '<div class="ins-row"><span>Element</span>' + (el ? elChip(el) + ' ' + elName(el) : '<i>none</i>') + '</div>' +
       '<div class="ins-row"><span>Weak to ▲</span>' + chips(m.weak, (a) => elChip(a) + ' ' + elName(a) + ' ×' + affOf(s.rules)[a][el]) + '</div>' +
-      '<div class="ins-row"><span>Resists ▼</span>' + chips(m.resist, (a) => elChip(a) + ' ' + elName(a) + ' ×' + affOf(s.rules)[a][el]) + '</div>' +
+      '<div class="ins-row"><span>Resists ▼</span>' + chips(m.resist, (a) => elChip(a) + ' ' + elName(a) + ' ×' + affOf(s.rules)[a][el]) + '</div>' : '') +
       '<div class="ins-row"><span>Keywords</span>' + chips((e.kw || []).concat(kind ? [kind.name] : [], gim ? [gim.name] : []), (k) => '<b>' + esc2(k) + '</b>' + (KW.map[k + '_e'] || KW.map[k] ? ' ' + esc2(KW.map[k + '_e'] || KW.map[k]) : (kind && k === kind.name ? ' ' + esc2(kind.text) : gim && k === gim.name ? ' ' + esc2(E.gimmickText(e)) : ''))) + '</div>' +
       '<div class="ins-row"><span>Statuses</span>' + chips(sl, (x) => x[0] + ' ' + esc2(x[2])) + '</div>';
   }
@@ -514,29 +408,53 @@
       '<div class="ins-row"><span>Roles</span>⚔ ' + (r.atk || 0) + ' · ✚ ' + (r.buff || 0) + ' · 🛡 ' + (r.guard || 0) + '</div>' +
       (evo ? '<div class="ins-row"><span>Stages</span>' + evo + '</div>' : '') +
       '<div class="ins-row"><span>Keywords</span>' + chips(behNames(card), (k) => '<b>' + esc2(k) + '</b>' + (KW.map[k] ? ' ' + esc2(KW.map[k]) : '')) + '</div>' +
-      '<div class="ins-row"><span>Hits harder ▲</span>' + chips(sg.good, (d) => elChip(d) + ' ' + elName(d)) + '</div>' +
+      (enemyEls(s) ? '<div class="ins-row"><span>Hits harder ▲</span>' + chips(sg.good, (d) => elChip(d) + ' ' + elName(d)) + '</div>' +
       '<div class="ins-row"><span>Hits softer ▼</span>' + chips(sg.bad, (d) => elChip(d) + ' ' + elName(d)) + '</div>' +
       '<div class="ins-row"><span>Weak to ▲</span>' + chips(m.weak, (a) => elChip(a) + ' ' + elName(a)) + '</div>' +
-      '<div class="ins-row"><span>Resists ▼</span>' + chips(m.resist, (a) => elChip(a) + ' ' + elName(a)) + '</div>' +
+      '<div class="ins-row"><span>Resists ▼</span>' + chips(m.resist, (a) => elChip(a) + ' ' + elName(a)) + '</div>' : '') +
       '<div class="ins-row"><span>Merges now</span>' + chips((st && st.merges) || [], (x) => '<b>' + esc2(x.name) + '</b> ' + elGlyph(x.pair[0]) + '+' + elGlyph(x.pair[1])) + '</div>';
   }
-  function openInspect(kind, id) {
-    const s = current(); if (!v2on(s)) return;
+  // The inspect card (long-press): V2 cards and enemies have full cards; classic units and enemies show their name and the tile's text.
+  function openInspect(kind, id, pairText) {
+    const s = current(); if (!s) return;
     let html = '';
-    if (kind === 'enemy') { const e = s.enemies.find((x) => x.id === +id || x.id === id); if (!e) return; html = inspectHTMLEnemy(e, s); }
-    else {
-      const card = cardById(id); if (!card || !card.v2) return;
-      const bd = eff(), stats = E.computeStats(bd.placement, bd.army, s.enemies, s.rules, turnArg(s)), k = tileOf(id);
-      html = inspectHTMLCard(card, k ? stats[k] : null, s);
+    const X = '<button class="ins-x" type="button" aria-label="Close">✕</button>';
+    if (kind === 'reaction') {
+      const m = window.V2 && Object.values(window.V2.MERGES).find((x) => x.id === id), pair = (pairText || '').split(',');
+      if (!m) return;
+      html = '<div class="ins-head"><div><b>' + esc2(m.name) + '</b> ' + pair.map((x) => elChip(x)).join('') + '<div class="ins-sub">Reaction · ' + pair.map(elName).join(' + ') + '</div></div>' + X + '</div><div class="ins-row">' + esc2(m.text || '') + '</div>';
+    } else if (v2on(s)) {
+      if (kind === 'enemy') { const e = s.enemies.find((x) => x.id === +id || x.id === id); if (!e) return; html = inspectHTMLEnemy(e, s); }
+      else {
+        const card = cardById(id); if (!card || !card.v2) return;
+        const bd = eff(), stats = E.computeStats(bd.placement, bd.army, s.enemies, s.rules, turnArg(s)), k = tileOf(id);
+        html = inspectHTMLCard(card, k ? stats[k] : null, s);
+      }
+    } else {
+      const el = root.querySelector(kind === 'enemy' ? '.enemy[data-id="' + id + '"]' : '[data-card="' + id + '"]'); if (!el) return;
+      const img = el.querySelector('img'), name = kind === 'enemy' ? (el.title || '').split(':')[0] : (el.querySelector('.c-role') || {}).textContent;
+      html = '<div class="ins-head">' + (img ? artImg(img.getAttribute('src'), name || '') : '') + '<div><b>' + esc2(name || '') + '</b></div>' + X + '</div><div class="ins-row">' + esc2(el.title || '') + '</div>';
     }
     closeInspect();
     const box = document.createElement('div'); box.id = 'b-inspect'; box.className = 'b-inspect'; box.innerHTML = html; root.appendChild(box);
     box.addEventListener('click', (ev) => { if (ev.target.closest('.ins-x') || ev.target === box) closeInspect(); });
   }
-  root.addEventListener('click', (ev) => {
-    if (!game.state || !v2on(game.state) || game.aiming || ev.target.closest('#b-inspect')) return;
-    if (game.inspect) { const c = ev.target.closest('[data-card]'); if (c) openInspect('card', c.dataset.card); }
+
+  // ---------- Long-press to inspect (touch and mouse): a press held ~450 ms on a unit, an enemy or a reaction icon opens its card ----------
+  const LONG_MS = 450;
+  let lp = null; // { t, x, y, pid, fired }
+  function lpCancel() { if (lp && !lp.fired) { clearTimeout(lp.t); lp = null; } }
+  function lpArm(ev, fn) { lpCancel(); lp = { x: ev.clientX, y: ev.clientY, pid: ev.pointerId, fired: false, t: setTimeout(() => { lp.fired = true; if (navigator.vibrate) { try { navigator.vibrate(10); } catch (e) { /* ignore */ } } fn(); }, LONG_MS) }; }
+  function lpTake() { const f = !!(lp && lp.fired); if (lp) clearTimeout(lp.t); lp = null; return f; } // true when the press just ended was a long-press (its tap action is skipped)
+  root.addEventListener('pointermove', (ev) => { if (lp && !lp.fired && ev.pointerId === lp.pid && Math.hypot(ev.clientX - lp.x, ev.clientY - lp.y) > DRAG_PX) lpCancel(); });
+  window.addEventListener('scroll', lpCancel, true);
+  root.addEventListener('contextmenu', (ev) => ev.preventDefault()); // no browser menu or text-selection callout on a long press
+  root.addEventListener('pointerdown', (ev) => { // reaction icons are outside the board and the hand, so they arm here
+    const mg = ev.target.closest('.mg[data-mg]');
+    if (mg && ev.button <= 0) lpArm(ev, () => openInspect('reaction', mg.dataset.mg, mg.dataset.pair));
   });
+  root.addEventListener('pointerup', () => { if (!drag) lpTake(); });
+  root.addEventListener('pointercancel', lpCancel);
 
   // ---------- Placement input (drag, or tap a card then a tile) ----------
 
@@ -567,10 +485,10 @@
     }
     if (game.busy || !game.state || game.state.status !== 'playing' || ev.button > 0 || drag) return;
     if (!ev.target.closest('#b-board, #b-hand')) return;
-    if (game.inspect && ev.target.closest('[data-card]')) return; // inspect mode: the click opens the card, nothing is picked up
     const card = ev.target.closest('[data-card]');
     drag = { id: card ? card.dataset.card : null, el: card, fromHand: !card || card.dataset.from === 'hand', enemy: ((ev.target.closest('#b-board .enemy[data-id]') || { dataset: {} }).dataset.id) || null, x0: ev.clientX, y0: ev.clientY, pid: ev.pointerId, touch: ev.pointerType !== 'mouse', ghost: null, over: null };
     if (card && !drag.touch) ev.preventDefault();
+    if (card || drag.enemy) lpArm(ev, () => openInspect(card ? 'card' : 'enemy', card ? card.dataset.card : drag.enemy)); // long-press: inspect; moving more than DRAG_PX cancels it
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerup', onPointerUp, { once: true });
     window.addEventListener('pointercancel', onPointerCancel, { once: true });
@@ -599,7 +517,7 @@
     if (!drag.ghost) {
       const dx = ev.clientX - drag.x0, dy = ev.clientY - drag.y0;
       if (Math.hypot(dx, dy) <= DRAG_PX) return;
-      startGhost(ev);
+      lpCancel(); startGhost(ev);
     }
     if (ev.cancelable) ev.preventDefault();
     drag.ghost.style.left = (ev.clientX - drag.ghost.offsetWidth / 2) + 'px';
@@ -615,9 +533,11 @@
   function finishDrag(ev, cancelled) {
     endDragListeners();
     const d = drag; drag = null;
+    const wasLong = lpTake();
     if (!d) return;
     if (d.over) d.over.classList.remove('drop-hover');
     root.classList.remove('is-dragging');
+    if (wasLong && !d.ghost) return; // a long-press opened the inspect card: no tap action
     const target = cancelled ? null : dropTargetAt(ev.clientX, ev.clientY - (d.ghost && d.touch ? 18 : 0));
     if (d.ghost) {
       d.ghost.remove();
@@ -636,7 +556,6 @@
       game.selected = null;
     } else game.selected = null;
     render();
-    if (d.enemy && !d.ghost && !cancelled && !d.id && v2on(game.state)) openInspect('enemy', d.enemy); // V2: tapping an enemy opens its card
   }
   function onPointerUp(ev) { finishDrag(ev, false); }
   function onPointerCancel(ev) { finishDrag(ev, true); }
@@ -695,9 +614,8 @@
     }
     game.view = E.clone(before);
     $('#b-msg').textContent = '';
-    log('Turn ' + before.turn, 'turn');
     render();
-    for (const ev of events) { logEvent(ev, game.view); await playEvent(ev, game.view, stats); }
+    for (const ev of events) { await playEvent(ev, game.view, stats); }
     await settle(before, state);
   }
 
@@ -713,7 +631,6 @@
         stars = window.Gen ? Gen.starsFor(state.damageTaken) : 1;
         const note = ['', 'cleared', 'at most 3 damage taken', 'no damage taken'][stars];
         $('#b-msg').innerHTML = 'Victory! <span class="stars" aria-label="' + stars + ' stars">' + '★'.repeat(stars) + '<i>' + '★'.repeat(3 - stars) + '</i></span> ' + note;
-        log('Rating: ' + '★'.repeat(stars) + ' (' + note + ')', 'good');
       } else $('#b-msg').textContent = 'Your hero has fallen.';
       await sleep(stars ? 1400 : 700);
       game.onEnd(state, stars, game.report);
@@ -729,9 +646,8 @@
     game.busy = true; game.selected = null;
     for (const ev of out.events) if (ev.t === 'explode') game.report.explosions += 1;
     game.view = E.clone(before);
-    log((game.hero ? game.hero.name : 'Hero') + ' uses ' + ab.name + ': ' + ab.text, 'good');
     render();
-    for (const ev of out.events) { logEvent(ev, game.view); await playEvent(ev, game.view, null); }
+    for (const ev of out.events) { await playEvent(ev, game.view, null); }
     if (out.state.status !== 'playing') { await settle(before, out.state); return; }
     game.state = out.state; game.view = null; game.busy = false;
     $('#b-msg').textContent = ab.name + ' is spent for this battle. ' + (before.ability === 'rally' ? 'Attackers hit harder this turn: press Fight.' : before.ability === 'brace' ? 'Enemy strikes are weakened this turn: press Fight.' : 'Rearrange and press Fight.');
@@ -862,7 +778,7 @@
   // The hint / result line is one line; tap it to read the rest.
   $('#b-msg').addEventListener('click', () => $('#b-msg').classList.toggle('open'));
 
-  // Size the board from the real viewport: the largest --cell for which the whole screen (header, board, threat,
+  // Size the board from the real viewport: the largest --cell for which the whole screen (header, board,
   // hero, hand, controls) fits without scrolling. Everything else scales from --cell in battle.css.
   function fit() {
     if (root.hidden) return;
@@ -879,6 +795,27 @@
   window.addEventListener('orientationchange', () => setTimeout(fit, 120));
   if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
 
+  // Retreat: ends the fight without a win or a loss. The caller (opts.onRetreat) keeps the HP, takes the Ration and returns to where the fight started. Needs 1 Ration (opts.rations); one confirming tap.
+  let retreatTimer = null;
+  function retreatArm(on) {
+    clearTimeout(retreatTimer); game.retreatArmed = !!on;
+    if (on) retreatTimer = setTimeout(() => { game.retreatArmed = false; renderRetreat(); }, 3000);
+    renderRetreat();
+  }
+  function renderRetreat() {
+    const b = $('#b-retreat'), s = game.state, none = game.rations !== undefined && game.rations <= 0;
+    b.hidden = !game.onRetreat;
+    if (b.hidden) return;
+    b.disabled = game.busy || !s || s.status !== 'playing' || none;
+    b.classList.toggle('armed', !!game.retreatArmed);
+    b.textContent = none ? 'No rations' : game.retreatArmed ? 'Retreat? −1 🍙' : 'Retreat';
+    b.title = none ? 'You need 1 Ration to retreat.' : 'Leave this fight without a win or a loss: you keep your HP, lose 1 Ration and get no rewards.';
+  }
+  $('#b-retreat').addEventListener('click', () => {
+    if (game.busy || !game.onRetreat || !game.state || game.state.status !== 'playing') return;
+    if (!game.retreatArmed) { retreatArm(true); return; }
+    retreatArm(false); game.onRetreat(game.state);
+  });
   $('#b-fight').addEventListener('click', fight);
   $('#b-clear').addEventListener('click', () => { bake(); game.placement = {}; game.selected = null; render(); });
   $('#b-speed').addEventListener('click', () => { game.speed = SPEEDS[(SPEEDS.indexOf(game.speed) + 1) % SPEEDS.length]; render(); });

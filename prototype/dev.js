@@ -71,8 +71,8 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
     save.bossesBeaten = SUBS.map((s) => s.id); save.unlocked = SUBS.map((s) => s.id); save.runs = 10;
     save.owned = P.ROSTER.map((u) => u.id); save.souls = 999; save.crystals = 99; save.dust = 99;
     return {
-      save, run: { seed: 'dev', hp: null, hpBonus: 0, relics: [], mods: {}, reviveUsed: 0, gold: 0 }, seeds: {}, rar: { unit: {}, item: {} }, placement: {},
-      rules: 'classic', v2squad: Fights.referenceV2(5).squad.map((x) => x.id), v2cfg: {}, affinity: null, mergeMode: 'own',
+      save, run: { seed: 'dev', rations: 10, hp: null, hpBonus: 0, relics: [], mods: {}, reviveUsed: 0, gold: 0 }, seeds: {}, rar: { unit: {}, item: {} }, placement: {},
+      rules: 'classic', v2squad: Fights.referenceV2(5).squad.map((x) => x.id), v2cfg: {}, affinity: null, mergeMode: 'own', enemyElements: false,
       custom: { sub: SUBS[0].id, level: 5, enemies: [], sel: [1, 2], bossRow: false, newFp: '1x1', warn: '' }, ui: { tab: 'enemies', open: {}, f: { q: '', rar: '', slot: '', owned: false }, v2f: { q: '', el: '', fam: '', rar: '', impl: '', sq: false }, affSel: '' },
     };
   }
@@ -89,6 +89,7 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
     s.v2cfg = {}; for (const id of Object.keys(data.v2cfg || {})) if (V2.UNITS[id]) { const c = data.v2cfg[id] || {}; s.v2cfg[id] = { stage: clamp(num(c.stage, 1), 1, 3), level: clamp(num(c.level, 1), 1, 5), stars: clamp(num(c.stars, 1), 1, 5) }; }
     s.affinity = validAff(data.affinity) ? data.affinity : null;
     s.mergeMode = data.mergeMode === 'best' ? 'best' : 'own';
+    s.enemyElements = data.enemyElements === true;
     s.ui.v2f = Object.assign(d.ui.v2f, (data.ui || {}).v2f || {});
     Items.migrate(s.save);
     return s;
@@ -110,7 +111,7 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
   const cfgOf = (id) => Object.assign({ stage: 1, level: 1, stars: 1 }, S.v2cfg[id]);
   const v2entries = () => S.v2squad.map((id) => Object.assign({ id }, cfgOf(id)));
   const chart = () => S.affinity || DEFAULT_AFF;
-  const v2Rules = () => ({ mergeMode: S.mergeMode, affinity: JSON.parse(JSON.stringify(chart())) }); // the full 8x8, read by the next fight only
+  const v2Rules = () => ({ mergeMode: S.mergeMode, enemyElements: !!S.enemyElements, affinity: JSON.parse(JSON.stringify(chart())) }); // the full 8x8, read by the next fight only
 
   // ---------- Battle launching ----------
   function runObj() { return { relics: S.run.relics.slice(), mods: S.run.mods, reviveUsed: S.run.reviveUsed, gold: S.run.gold }; }
@@ -123,7 +124,7 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
     const stage = Object.assign({ heroHp: hp, heroMaxHp: Math.max(maxHp, hp), rules }, P.heroStage(save), gen);
     current = key;
     document.body.classList.add('in-battle'); $('#dev-exit').hidden = false;
-    Battle.start({ title, subtitle, stage, biome, army: isV2() ? V2.army(v2entries(), S.run.mods) : P.buildArmy(save, S.run.mods), hero: P.heroOf(save), placement: S.placement, relics: run.relics, onEnd: (state, stars) => finish(state, stars) });
+    Battle.start({ title, subtitle, stage, biome, army: isV2() ? V2.army(v2entries(), S.run.mods) : P.buildArmy(save, S.run.mods), hero: P.heroOf(save), placement: S.placement, relics: run.relics, onEnd: (state, stars) => finish(state, stars), rations: num(S.run.rations, 10), onRetreat: retreat });
   }
   function leave() { S.placement = Battle.placement(); Battle.hide(); document.body.classList.remove('in-battle'); $('#dev-exit').hidden = true; persist(); }
   function finish(state, stars) {
@@ -132,6 +133,16 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
     results[key] = { won: state.status === 'cleared', stars: stars || 0, turns: state.turn, dmg: state.damageTaken, hp: state.hp };
     if (chain && chain.key === key) { chainStep(key, state); return; }
     render();
+  }
+  // Retreat (the battle screen's button): no win or loss. The HP left carries (the mini-run's HP while a chain runs, else the Run tab's current HP), 1 Ration is spent, the fight stays to be tried again. "Exit battle" below leaves without any of that.
+  function retreat(state) {
+    const key = current;
+    leave();
+    S.run.rations = Math.max(0, num(S.run.rations, 10) - 1);
+    results[key] = { retreat: true, hp: state.hp };
+    if (chain && chain.key === key) { chain.hp = state.hp; chain.key = null; S.ui.tab = 'fights'; }
+    else S.run.hp = state.hp;
+    persist(); render();
   }
   $('#dev-exit').addEventListener('click', () => { leave(); results[current] = { quit: true }; if (chain && chain.key === current) { chain.over = 'aborted'; chain.key = null; S.ui.tab = 'fights'; } render(); });
 
@@ -148,6 +159,7 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
   function resultHtml(key) {
     const r = results[key]; if (!r) return '';
     if (r.quit) return '<span class="d-mini">left the fight</span>';
+    if (r.retreat) return '<span class="d-mini">retreated at ' + r.hp + ' HP</span>';
     return r.won ? '<span class="res-w">WIN ' + '★'.repeat(r.stars) + '☆'.repeat(3 - r.stars) + '</span> <span class="d-mini">' + r.turns + ' turn' + (r.turns === 1 ? '' : 's') + ', -' + r.dmg + ' HP</span>' : '<span class="res-l">LOSE</span> <span class="d-mini">turn ' + r.turns + ', -' + r.dmg + ' HP</span>';
   }
   function nodeRow(n, sub) {
@@ -455,6 +467,8 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
   function tabChart() {
     const a = chart(), mode = MODES.find((m) => m.id === S.mergeMode) || MODES[0];
     let h = '<div class="d-card"><b>Merge mode</b> <span class="d-mini">(V2 rules; applies to the next fight)</span><div class="d-row">' + MODES.map((m) => '<button class="' + (m.id === S.mergeMode ? 'on' : '') + '" data-a="mm" data-id="' + m.id + '">' + esc(m.name) + '</button>').join('') + '</div><div class="d-mini">' + esc(mode.rule) + '</div></div>';
+    h += '<div class="d-card"><b>Enemy elements: parked</b> <span class="d-mini">Enemies have no element, so there is no weakness chart in play: the weakness / resist multipliers, named weakness hits and the ▲/▼ badges are off. Column merges between your own attackers are unaffected. The switch below (<code>rules.v2.enemyElements</code>) brings the old behaviour back for testing.</span><div class="d-row"><button class="' + (S.enemyElements ? 'on' : '') + '" data-a="ee">Enemy elements: ' + (S.enemyElements ? 'ON' : 'off (parked)') + '</button></div></div>';
+    if (!S.enemyElements) return h;
     h += '<div class="d-card"><b>Weakness chart</b> <span class="d-mini">rows = attacker element, columns = enemy element. Tap a cell to cycle ×0.5 / ×1 / ×1.5. Saved in the dev state and applied to the <b>next</b> fight (the full 8×8 is passed as <code>rules.v2.affinity</code>). A ×1.5 pair with a named weakness hit fires that hit; others only get the bonus.</span>';
     h += '<div class="aff"><span class="aff-h"></span>' + ELS.map((d) => '<span class="aff-h" title="Enemy ' + esc(ELMAP[d].name) + '">' + ELMAP[d].glyph + '</span>').join('');
     for (const x of ELS) {
@@ -519,7 +533,7 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
   function tabRun() {
     const s = S.save, r = S.run, squad = s.squad.filter((id) => P.ROSTER_BY[id]);
     let h = '<div class="d-card"><div class="d-row"><label>Current HP (blank = full) <input type="number" min="1" max="999" data-c="rhp" value="' + (r.hp == null ? '' : r.hp) + '"></label><label>Max HP bonus <input type="number" min="-50" max="999" data-c="rhpb" value="' + r.hpBonus + '"></label>' +
-      '<label>Revives already spent <input type="number" min="0" max="9" data-c="rrev" value="' + r.reviveUsed + '"></label></div><div class="d-mini">Max HP from Camp/gear/traits is ' + P.maxHp(rulesSave()) + '. These apply to every fight (HP does not carry between fights here).</div></div>';
+      '<label>Rations <input type="number" min="0" max="99" data-c="rrat" value="' + r.rations + '"></label><label>Revives already spent <input type="number" min="0" max="9" data-c="rrev" value="' + r.reviveUsed + '"></label></div><div class="d-mini">Max HP from Camp/gear/traits is ' + P.maxHp(rulesSave()) + '. These apply to every fight. Retreating from a battle keeps the HP left here (or in the running mini-run) and spends 1 Ration; winning or losing does not change HP or Rations.</div></div>';
     h += '<h3>Relics (' + r.relics.length + ' on)</h3><div class="d-grid">' + Relics.LIST.map((x) => '<button class="' + (r.relics.includes(x.id) ? 'on' : '') + '" data-a="relic" data-id="' + x.id + '"><b>' + x.glyph + ' ' + esc(x.name) + '</b><br><span class="d-mini">' + esc(x.text) + '</span></button>').join('') + '</div>';
     if (isV2()) return h + runModsV2();
     h += '<h3>In-run unit bonuses</h3><div class="d-row"><button class="sm" data-a="teamatk" data-n="1">All attackers +1 ATK</button><button class="sm" data-a="teamatk" data-n="-1">-1</button><button class="sm danger" data-a="clearmods">Clear all</button></div>';
@@ -565,6 +579,7 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
       fight(n.id, nodeName(n, sub), sub.name + ' · Lv' + lv, sub.biome, gen);
     },
     rules(el) { S.rules = el.dataset.id === 'v2' ? 'v2' : 'classic'; loadFights(S.rules); change(); },
+    ee() { S.enemyElements = !S.enemyElements; change(); },
     mm(el) { S.mergeMode = el.dataset.id === 'best' ? 'best' : 'own'; change(); },
     aff(el) {
       const x = el.dataset.x, y = el.dataset.y; if (!S.affinity) S.affinity = JSON.parse(JSON.stringify(DEFAULT_AFF));
@@ -671,6 +686,7 @@ const FIGHT_FILES_V2 = import.meta.glob('./data/fights-v2/region-*.json', { eage
       Items.BY_ID[id].rarity = el.value; const d = S.save.itemData[id]; if (d) d.subs = Items.newData(Items.BY_ID[id], d.lv, 'dev' + el.value).subs;
     },
     rhp(el) { S.run.hp = el.value === '' ? null : clamp(num(el.value, 1), 1, 999); },
+    rrat(el) { S.run.rations = clamp(num(el.value, 10), 0, 99); },
     rhpb(el) { S.run.hpBonus = clamp(num(el.value, 0), -50, 999); },
     rrev(el) { S.run.reviveUsed = clamp(num(el.value, 0), 0, 9); },
     mod(el) { setMod(el.dataset.id, el.dataset.k, clamp(num(el.value, 0), -9, 99)); },

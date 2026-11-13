@@ -781,6 +781,7 @@
       title: nodeTitle(n), subtitle: World.SUB_BY[n.sub].name + ' · Lv' + n.level, stage, biome: World.SUB_BY[n.sub].biome,
       army: P.buildArmy(save, r.mods), hero: P.heroOf(save), placement: r.placement, relics: r.relics || [],
       onEnd: (state, stars, report) => battleOver(n, state, stars, report),
+      rations: r.supplies, onRetreat: (state) => retreat(state),
     });
   }
 
@@ -802,6 +803,20 @@
       r.supplies += after.supplies - before.supplies; r.startSupplies += after.supplies - before.supplies;
     }
     return true;
+  }
+
+  // Retreat (Battle's button): no win, no loss. The hero keeps the HP he has now, the fight costs 1 Ration, nothing is earned and the node stays open, so the player is back on the map to choose another fight.
+  function retreat(state) {
+    const r = run();
+    if (!r || r.supplies <= 0) return;
+    r.placement = Battle.placement();
+    Battle.hide(); document.body.classList.remove('in-battle'); WorldMap.setActive(true);
+    r.hp = state.hp;
+    if (state.reviveUsed) r.reviveUsed = (Number(r.reviveUsed) || 0) + state.reviveUsed;
+    r.supplies -= 1;
+    persist(); renderAll();
+    if (r.supplies <= 0) { outOfSupplies('You retreat', 'You left the fight without a result: no rewards, and your HP stays as it is.', '<p class="supply-line">🍙 Spent <b>1 Ration</b> · 0 left.</p>'); return; }
+    toast('Retreated: 🍙 −1, ' + r.hp + ' HP kept');
   }
 
   function battleOver(n, state, stars, report) {

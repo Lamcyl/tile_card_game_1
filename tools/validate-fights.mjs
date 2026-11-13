@@ -91,7 +91,7 @@ function checkFight(env, fight, quick) {
   const L = fight.level, rs = V2MODE ? Fights.referenceSaveV2(L, P) : Fights.referenceSave(L, P), army = rs.army, maxHp = rs.maxHp;
   const stage = Fights.stage(fight, V2MODE ? { v2: true } : undefined);
   const rules = P.rulesFor(rs.save, {});
-  if (V2MODE) rules.v2 = { mergeMode: MERGE_MODE };
+  if (V2MODE) rules.v2 = { mergeMode: MERGE_MODE, enemyElements: opt('enemyelements', 'off') === 'on' }; // enemy elements are parked: --enemyelements=on brings them back for the affinity study
   if (V2MODE && SQUAD !== 'ref') retag(env, army, fight);
   const state = Engine.createState(Object.assign({ heroHp: maxHp, heroMaxHp: maxHp, rules }, stage));
   const band = BANDS[fight.step];
