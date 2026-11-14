@@ -235,3 +235,51 @@ Decisions:
 - **Forge and every upgrade choice show the whole bag** (colour tabs, tiles on offer highlighted).
 - **The test panel** gets "unlock all stages" and unit levels 0 to 5 with the branch choice.
 - Kept: no-run-out tiles (rest for the fight), tile stars (still an experiment), momentum (still experimental), rarity, picks of three, nodes, Runner and Guard.
+
+## 12. Where to take it next: combining with the older designs (brainstorm, not coded)
+
+Test for every idea: does it add fun without adding a rule the player must remember? Anything new
+must be visible on the tile, the board or one always-shown line.
+
+### 12.1 Give it faces (from DESIGN_V2 and the bestiary)
+- **Units become guardian beasts.** The 15 units map onto beasts from `docs/data/units.json`; the
+  five colours are five elements (red Fire, blue Water, green Wood, yellow Light, purple Shadow).
+  The level-5 branch is the beast's evolution. The portrait sits on the unit card and small on its
+  tiles; rules stay number, edge marks and colour.
+- **Enemies become bestiary monsters.** Wide bodies and bosses already match the old multi-tile
+  footprints. Each region draws its monsters from one culture set.
+
+### 12.2 Put it on the map (from WP20 and WORLD_PROGRESSION)
+- The ten stages are the ten regions; a stage's four steps and boss are spots in one sub-area of
+  the tile map that already exists for Greenvale and Ashkara.
+- **Puzzle shrines:** hand-made one-attack puzzles with a fixed hand (the first sample), found on
+  the map, one-time reward. A daily shrine with a shared seed.
+
+### 12.3 One hero button (from the hero design)
+- A hero has one ability, usable once per fight, shown as a single button: "every tile +1 this
+  attack", "one rested tile comes back", "one tile counts as any colour this attack".
+- Heroes are collectible and change how a team is built.
+
+### 12.4 Relics as run perks (from the relic list; left out of the prototype so far)
+- At most three per run, picked after elites and bosses, always listed under the board.
+- All about layout and damage: "sandwiches triple", "the front row gets +1", "a x4 sandwich heals 2",
+  "Forks also hit their own column".
+
+### 12.5 Items are tiles with extra marks (from the item design: all drop common, roll up)
+- A colourless tile that rolls Rare or Epic gains extra edge marks (another lane, another boost
+  side) instead of text sub-effects, so an item is read like any tile.
+- Each boss drops its own signature shape, which nothing else drops.
+
+### 12.6 Camp (from the Camp design)
+- Coins also buy permanent upgrades between stages: hero HP, a fourth colourless slot, a better
+  first pick, a camp forge that stars a colourless tile permanently.
+
+### 12.7 Needed fixes before any of this
+- Cap multiplier stacking (late layouts reach thousands of damage).
+- Big tiles are too small to read in the hand.
+- Rebalance stage 9's boss and Endless.
+
+### 12.8 Suggested order
+1. Fixes in 12.7. 2. Hero button and relics (most fun per rule added). 3. Beasts and monsters as
+faces with existing placeholder art. 4. Puzzle shrines. 5. Map as the stage select. 6. Camp and
+item marks.
