@@ -149,3 +149,56 @@ Prototype: `prototype/samples/tile-run.html`, rules as built in `docs/TILE_RUN_P
 - **Columns grow per area (3, 4, 5)** as a balancing matter, not a rule.
 - **Momentum is experimental and tunable** (win in one attack: +N to every tile on the next fight's first attack); toggle and value in Settings.
 - **Bonus cells are level design** (+1, +2, x2), generated per fight. **Guard and Double stay. Exact is dropped.**
+
+## 9. Feedback on the run prototype, and ideas (brainstorm, not coded)
+
+Owner feedback after playing `prototype/samples/tile-run.html`:
+- Sandwich is OK. Melds, Wheel and enemy colours are rejected.
+- Fun at the start, then tiring and repetitive.
+- Progression is underwhelming: the unit tile types never change, even at the end.
+
+Likely causes: every fight asks the same question; the bag only shrinks, so play turns into
+careful saving; nothing new arrives during a run; a level only adds more of the same five shapes.
+
+### 9.1 Progression: units that become different
+
+- **Signature shape per unit.** Each unit has one reach pattern no other unit has, unlocked at
+  level 3, drawn on the tile glyph so it needs no text. Candidates: Lance (own column, counts
+  twice against wide enemies), Diagonal (the two columns diagonally ahead), Sweep (own column and
+  both neighbours at half), Pillar (booster for its whole column), Echo (copies the number of the
+  tile in front), Giant (large number, takes two cells).
+- **Evolution choice.** At level 5 a unit picks one of two branches (for example more big Strikes,
+  or boosters and a second signature tile). Two players' Ember differ.
+- **Tile stars.** Duplicate loot merges into a tile for +1, so every drop matters.
+- **Rare colourless tiles.** Loot has rarity; rare ones carry unusual shapes. This is the item
+  chase and reuses the "all drop common, roll up" idea from DESIGN_V2.
+
+### 9.2 Runs that grow instead of only shrinking
+
+- **Pick one of three after every fight:** a new tile for this run, an upgrade to a tile (+2, or a
+  second colour so it sandwiches more easily), or return two spent tiles.
+- **Run perks (few, chosen, always shown):** "sandwiches triple instead of double", "Forks also
+  hit their own column", "the first tile each fight is not spent". At most three per run.
+- **Node variety:** forge (upgrade a tile), rest (return tiles or heal), shop, treasure, event.
+  Fewer plain fights between them.
+
+### 9.3 Fights that differ
+
+Enemy types, each shown by one icon and all about damage:
+- **Bomb:** when killed, deals its max HP to both neighbours. Chain kills.
+- **Grower:** gains HP every turn it survives. Kill it first.
+- **Runner:** leaves after one turn; killing it gives a bonus tile. Optional greed.
+- **Charger:** attacks only every second turn, but hard. A visible countdown.
+Bosses get one hand-designed trick each instead of only a second HP bar.
+
+### 9.4 Less chore, more payoff
+
+- Normal fights in an area you out-level end in one attack; the thinking is saved for elites and bosses.
+- Per-fight bonus goal ("win with 3 tiles or fewer") that returns a spent tile.
+- Overkill carries over: damage beyond a kill is stored as a bonus for the next fight.
+- Count and reward sandwiches made in a run.
+
+### 9.5 Recommended next build
+
+Signature shapes and the level-5 choice; pick one of three after each fight; Bomb, Grower and
+Runner enemies; forge and rest nodes; rare colourless tiles. Remove Melds, Wheel and enemy colours.
