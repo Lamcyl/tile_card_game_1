@@ -218,3 +218,20 @@ Prototype: `prototype/samples/tile-run.html`, rules as built in `docs/TILE_RUN_P
 - **New enemy: Runner** (leaves after the first attack; killing it gives a bonus colourless tile). Guard and wide stay.
 - **Dropped for now:** Bomb, Grower, bonus goals and overkill carry-over (owner said no), shop and event nodes, run perks.
 - **The run is saved**, so a reload resumes it. Momentum stays, with its toggle. The HP bar persists across a run; columns grow per area (3, 4, 5) as a balancing matter.
+
+## 11. Third prototype: general tiles and the 10-stage campaign
+
+Prototype: `prototype/samples/tile-run.html`, rules as built in `docs/TILE_RUN_PROTOTYPE.md`.
+
+Owner feedback after playing to the end game: each stage is too long because it never ends; the endless mode can be another game type, the main campaign must be shorter and more casual with progression stages (up to 10) covering tiles, units and board size; the corner mini-grid on tiles is misleading; Sandwich should multiply across both axes; a blue/green tile between two greens was not doubled (bug); the owner wants "all possible combinations" of tile reach rather than a fixed list; the Diagonal tile is not wanted; the upgrade choice needs the whole bag on screen.
+
+Decisions:
+- **Sandwich across both axes:** a tile is doubled once for its row and once for its column (x4 at most), with the middle tile sandwiched when the outer pair shares a colour X and the middle tile has a colour that is not X (two-colour tiles count as both colours, colourless never counts). For multi-cell tiles it is enough that one line through the tile on an axis has matching outer tiles at both ends of the tile's span in that line; each axis counts once.
+- **Diagonal removed.** With one row of enemies it equalled Fork.
+- **Tile faces show what a tile does on its edges** (arrows on the top edge for lanes, plus dots for boosts, dashed x dots for multipliers, an equals dot for copies, bars for whole rows or columns, true polyomino shapes); names are only in cards. A reach overlay on hold complements it. The corner mini-grid is dropped.
+- **General tile model:** attack lanes (any of own, left, right), boosts and multipliers on any subset of the four neighbours or a whole row, column or both, copies (one direction, resolved last, never copy a copy), and polyominoes of 2 to 4 cells (rotations are separate tiles). Old names are special cases. Rare and Epic loot and run picks draw from the whole space with a number budget in CONFIG (wider reach means a lower number).
+- **Campaign is the main mode: ten short stages** (about 4 choices then a boss, 6 to 9 attacks), each with its own board (3x2 up to 6x4), colour count (3, 4, 5), unit level cap (1 to 5), newly introduced tile types and a boss with one visible layout trick. Clearing a stage ends the run, banks the loot, unlocks the next stage and pays a one-time reward; defeat keeps half. Tile types a stage has not introduced do not appear in kits, loot or picks; locked kit tiles show their stage.
+- **Endless is a separate mode,** unlocked after stage 3, with the previous never-ending structure on the board of any cleared stage and its own best depth.
+- **Forge and every upgrade choice show the whole bag** (colour tabs, tiles on offer highlighted).
+- **The test panel** gets "unlock all stages" and unit levels 0 to 5 with the branch choice.
+- Kept: no-run-out tiles (rest for the fight), tile stars (still an experiment), momentum (still experimental), rarity, picks of three, nodes, Runner and Guard.
