@@ -202,3 +202,19 @@ Bosses get one hand-designed trick each instead of only a second HP bar.
 
 Signature shapes and the level-5 choice; pick one of three after each fight; Bomb, Grower and
 Runner enemies; forge and rest nodes; rare colourless tiles. Remove Melds, Wheel and enemy colours.
+
+## 10. Decisions for the second run prototype
+
+Prototype: `prototype/samples/tile-run.html`, rules as built in `docs/TILE_RUN_PROTOTYPE.md` (answers section 9).
+
+- **Sandwich is the only reaction.** Melds, Wheel, the "none" mode and enemy colours were removed after the owner's play test. A two-colour tile counts as both colours for Sandwich.
+- **Tiles no longer run out.** Default: a tile used in an attack rests until the end of that fight and the whole bag is back for the next fight (`tileReturn = fight`); the switch `turn` makes everything available every attack, for comparison. Boss replenish, bag-empty defeat and bag-conservation text are gone; a run ends by hero HP or by banking. Reason: "reward creativity, not bad thinking": bad layouts now cost HP, not tiles. In the bot runs `turn` is clearly easier (first boss beaten 100 percent against 78 percent in Area 1 at level 1).
+- **Fewer tiles per colour.** 3 at level 1, then 5, 7, 8 and 10 at level 5 (15 to 50 in a team bag).
+- **Unit progression in five levels.** Levels 1 and 2 basic shapes; level 3 the unit's signature shape (Diagonal, Sweep, Pillar, Echo, wide or tall Giant) with its reach drawn on the glyph; level 4 a stronger tile; level 5 a choice of two branches (Heavy or Support), saved and changeable in the test panel. Units of one colour differ by signature and kit.
+- **Rare colourless tiles.** Loot has rarity (Common, Rare, Epic), shown by a gem. Rare and Epic carry signature shapes with bigger numbers; elites and bosses have better odds, bosses always give Rare or better. Up to 3 colourless tiles go into the bag.
+- **Tile stars are an experiment** (Settings toggle, default on): a duplicate colourless loot tile merges into a star, +1 to its number, cap 3. Needs playtesting.
+- **Runs grow.** After every won fight pick one of three: a new tile for the run, an upgrade (+2 or a second colour) or a heal. Forge, Rest and Treasure nodes sit between fights, so there are fewer plain fights per boss.
+- **Bosses have one hand-designed layout trick each**: Area 1 twin bodies that must die in the same attack, Area 2 a blocked back cell each turn with a telegraph, Area 3 an armoured boss that needs 3 different tiles. Guaranteed Rare-or-better tile and a heal.
+- **New enemy: Runner** (leaves after the first attack; killing it gives a bonus colourless tile). Guard and wide stay.
+- **Dropped for now:** Bomb, Grower, bonus goals and overkill carry-over (owner said no), shop and event nodes, run perks.
+- **The run is saved**, so a reload resumes it. Momentum stays, with its toggle. The HP bar persists across a run; columns grow per area (3, 4, 5) as a balancing matter.

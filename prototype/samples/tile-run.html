@@ -209,6 +209,60 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .ecd{position:absolute;left:3px;top:2px}.ecd .dot{width:14px;height:14px}
 .mini{position:relative}.mini .ecd{left:2px;top:2px}
 @media (max-height:760px){.etile{height:44px}}
+
+.tile{box-shadow:inset 0 0 0 2px var(--rarc,transparent),0 2px 0 var(--shadow)}
+.tile.chg{box-shadow:inset 0 0 0 2px var(--rarc,transparent),0 0 0 3px var(--gold)}
+.tile.sandw{box-shadow:inset 0 0 0 2px var(--rarc,transparent),0 0 0 3px var(--gold)}
+.tile.rar-1{--rarc:#35c3e6}.tile.rar-2{--rarc:#e056d8}
+.d-r{--tc2:var(--r)}.d-b{--tc2:var(--b)}.d-g{--tc2:var(--g)}.d-y{--tc2:var(--y)}.d-p{--tc2:var(--p)}
+.tile.two{background:linear-gradient(135deg,var(--tc) 50%,var(--tc2) 50%);color:#fff}
+.tile.two .num,.tile.two .nm{text-shadow:0 1px 2px rgba(0,0,0,.55)}
+.tile.k-boost.two,.tile.k-mod.two{background:var(--panel);color:var(--tt);border-color:var(--tc) var(--tc2) var(--tc2) var(--tc)}
+.tile .sym2{right:29%}
+.tile .gem{position:absolute;left:50%;top:5%;width:17%;height:17%;transform:translateX(-50%)}
+.gem.g1{fill:#35c3e6;stroke:#fff;stroke-width:.8}.gem.g2{fill:#e056d8;stroke:#ffe27a;stroke-width:1}
+.tile.rar-2{animation:glow 2.4s ease-in-out infinite}
+.tile.added{outline:2px dotted var(--gold);outline-offset:1px}
+.tile.sigt{outline:2px solid var(--gold);outline-offset:1px}
+.tile .stars{position:absolute;left:7%;bottom:5%;font-size:calc(var(--ts)*.19);line-height:1;color:var(--gold);letter-spacing:-1px;text-shadow:0 0 2px rgba(0,0,0,.7)}
+.tile .upm{position:absolute;right:8%;bottom:5%;font-size:calc(var(--ts)*.17);line-height:1;color:var(--gold);text-shadow:0 0 2px rgba(0,0,0,.7)}
+.tile.rested{opacity:.3;filter:grayscale(.7)}
+.tile.big-h{width:calc(var(--ts)*2 + 6px)}.tile.big-v{height:calc(var(--ts)*2 + 6px)}
+.tile.big-h .num,.tile.big-v .num{font-size:calc(var(--ts)*.62)}
+.tile.big-h .glyph,.tile.big-v .glyph{width:19%;height:19%}.tile.big-h .nm,.tile.big-v .nm{font-size:calc(var(--ts)*.15)}
+.cell.spanh{width:auto}.cell.spanv{height:auto}
+.cell.tb{border:2px solid var(--bad);background:repeating-linear-gradient(45deg,var(--badbg) 0 6px,var(--cellbg) 6px 12px)}
+.cell.tn{border:3px dotted var(--bad)}
+.cell.tb .bb,.cell.tn .bb{color:var(--bad)}
+.cell .bb{left:50%;transform:translateX(-50%);bottom:3px;white-space:nowrap}
+.cell.bonus .bb{left:3px;transform:none}
+.enemy.runner .etile{border-style:dotted;border-color:var(--warn)}
+.enemy.gone{opacity:.35}
+.enemy.twin .etile{border-color:var(--p)}
+.ecd{position:absolute;left:3px;top:2px;color:var(--enemyink);z-index:2}.ecd svg{width:13px;height:13px;display:block}
+.trick{margin-top:6px;font-size:11.5px;line-height:1.3;color:var(--ink);background:var(--badbg);border-radius:8px;padding:4px 8px}
+.trickstrip{margin-top:3px;background:var(--badbg);border-color:var(--bad)}
+.offer.nodec{display:block}
+.nicon{width:26px;height:26px;display:inline-flex;color:var(--ink)}.nicon svg{width:24px;height:24px}
+.offer.forge{border-color:var(--warn)}.offer.rest{border-color:var(--ok)}.offer.treasure{border-color:#35c3e6}
+.mini.run{background:var(--panel2);color:var(--ink);outline:2px dotted var(--warn);outline-offset:-3px}.mini.run b,.mini.run small{color:var(--ink)}
+.mini.twin{outline:2px solid var(--p);outline-offset:-3px}
+.picks{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.pickc{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:10px;border-radius:14px;background:var(--panel);border:2px solid var(--line);box-shadow:0 2px 0 var(--shadow);color:var(--ink)}
+.pickc .tile{--ts:58px}
+.pickc .pk{font-weight:800;font-size:14px;color:var(--ink)}
+.pickc .ctext{text-align:center}
+.ups{display:flex;align-items:center;gap:10px}.ups .tile{--ts:50px}.arrow{font-size:22px;font-weight:800;color:var(--ink)}
+.bigheal{font-size:30px;font-weight:800;color:var(--ok)}
+.brrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:2px 0;padding:3px 4px;border-radius:10px;border:1px dashed var(--line)}
+.brrow.on{border:2px solid var(--tt)}
+.brrow .kit.inl{margin:0;display:inline-flex}
+.brrow .btn{margin-left:auto}
+.bagrow{display:flex;align-items:flex-start;gap:6px;margin:6px 0}
+#modal .inv .tile,.resbox .inv .tile{box-shadow:inset 0 0 0 2px var(--rarc,transparent),0 2px 0 var(--shadow)}
+.resbox .picks .pickc{text-align:center}
+.strip{margin-top:0}
+#rbar{gap:3px}
 </style>
 </head>
 <body>
@@ -236,207 +290,295 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 var CONFIG = {
   rows: 3,
   maxColourless: 3,                 /* colourless tiles allowed in the bag before a run */
+  tileReturn: 'fight',              /* 'fight': a tile used in an attack rests until the fight ends; 'turn': everything is available every attack */
   heroHp: [30, 40, 50],             /* by area */
   areas: [
-    { name: 'Meadow', cols: 3, hp: 4.9,  atk: 2, coin: 1, lvl: 1 },   /* hp = per enemy column at step 0 */
-    { name: 'Quarry', cols: 4, hp: 8, atk: 3, coin: 2, lvl: 2 },
-    { name: 'Spire',  cols: 5, hp: 8.5, atk: 4, coin: 3, lvl: 3 }
+    { name: 'Meadow', cols: 3, hp: 11, atk: 2, coin: 1, lvl: 1 },   /* hp = per enemy column at step 0 */
+    { name: 'Quarry', cols: 4, hp: 34, atk: 3, coin: 2, lvl: 3 },
+    { name: 'Spire',  cols: 5, hp: 48, atk: 4, coin: 3, lvl: 4 }
   ],
-  bossEvery: 4,                     /* steps per segment: (bossEvery-1) fights, then a boss */
-  offers: 3, offerTwoChance: 0.25,
+  bossEvery: 4,                     /* steps per segment: (bossEvery-1) steps, then the boss */
+  offerTwoChance: 0.2,
+  nodeChance: 0.55,                 /* chance that a step also offers a Forge, Rest or Treasure */
+  nodeWeights: { forge: 1, rest: 1, treasure: 1 },
   eliteChance: 0.3, wideChance: 0.3,
   guardChance: [0.12, 0.2, 0.25],
+  runnerChance: [0.25, 0.3, 0.3],
   blockChance: 0.25,
   bonusCount: [0.3, 0.45, 0.25],    /* chance of 0,1,2 bonus cells */
   bonusTypes: { p1: 0.45, p2: 0.3, x2: 0.25 },
-  growth: 0.08,                     /* hp/atk growth per fight won in a run */
+  growth: 0.12,                     /* enemy HP grows by this factor per fight won in a run (attack by half of it) */
   jitter: 0.3,
-  normal: { hp: 1, atk: 1, coin: 1, tile: 0.25 },
-  elite:  { hp: 1.5, atk: 1.3, coin: 2, tile: 0.7 },
-  boss:   { hp: 2, atk: 1.6, coin: 4, tile: 1, phase2: 0.5, bonusChance: 0.6, bonusMax: 2, heal: 0.4 },
+  normal: { hp: 1, atk: 1, coin: 1, tile: 0.2 },
+  elite:  { hp: 1.5, atk: 1.3, coin: 2, tile: 0.6 },
+  boss:   { hp: 2, atk: 1.4, coin: 4, tile: 1, heal: 0.4 },
   coinBase: 5, coinDepth: 0.12,
-  healPerFight: 2,
+  healPerFight: 0,
+  growHeal: 0.35,                   /* the "heal" choice after a fight (fraction of max HP) */
+  restHeal: 0.4,
   deathKeep: 0.5,                   /* fraction of run coins and loot kept when the run ends in defeat */
   momentum: { on: true, bonus: 1, values: [1, 2, 3] },
-  levelCost: { 2: 30, 3: 70 }, unlockCost: 40,
+  levelCost: { 2: 30, 3: 70, 4: 120, 5: 200 }, unlockCost: 40,
   startCoins: 0,
   longPressMs: 450,
-  reactionMode: 'sandwich',          /* 'sandwich' | 'melds' | 'wheel' | 'none' (Settings switch) */
-  enemyColours: false,               /* optional: tiles of an enemy's colour deal double to it */
-  wheel: 2,                          /* wheel: bonus to each touching Strike/Fork of the next colour */
-  meld: { flush: 2, run: 3, set: 3, both: 5, rowFactor: 0.4 }  /* melds: bonus per line; a row line gives round(bonus*rowFactor) to each of its 3 columns */
+  stars: { on: true, cap: 3 },      /* identical looted colourless tiles merge into a star: +1 number per star */
+  /* rarity odds [common, rare, epic] by source; depthShift is added to rare per boss depth (a third of it to epic) */
+  rarity: { normal: [0.92, 0.075, 0.005], elite: [0.5, 0.4, 0.1], boss: [0, 0.75, 0.25], treasure: [0.5, 0.38, 0.12], runner: [0.6, 0.34, 0.06], depthShift: 0.03 },
+  /* number of signature-type tiles by rarity index: 0 common (unit kits and run tiles), 1 rare, 2 epic */
+  sigNum: { diag: [4, 5, 7], sweep: [4, 6, 8], pillar: [2, 3, 4], echo: [0, 2, 4], giantH: [5, 7, 9], giantV: [8, 11, 14] },
+  pick: { sigBase: 0.1, sigDepth: 0.08, sigMax: 0.45, up2: 0.55 }
 };
 var SHAPES = {
   strike: { name: 'Strike', kind: 'attack', short: 'STRIKE', desc: 'Hits the enemy in its own column.' },
   fork:   { name: 'Fork',   kind: 'attack', short: 'FORK',   desc: 'Hits the enemies in both neighbouring columns, not its own.' },
-  plus:   { name: 'Plus',   kind: 'boost',  short: 'PLUS',   desc: 'Booster: adds its number to each Strike and Fork touching it (up, down, left, right).' },
-  row:    { name: 'Row',    kind: 'boost',  short: 'ROW',    desc: 'Booster: adds its number to every Strike and Fork in its row.' },
+  diag:   { name: 'Diagonal', kind: 'attack', sig: true, short: 'DIAG', desc: 'Hits diagonally ahead: in the front row its own column; one row back the columns one to the left and right; two rows back, two to the left and right.' },
+  sweep:  { name: 'Sweep',  kind: 'attack', sig: true, short: 'SWEEP',  desc: 'Hits its own column in full and both neighbouring columns for half (rounded up).' },
+  echo:   { name: 'Echo',   kind: 'attack', sig: true, short: 'ECHO',   desc: 'Copies the shown number of the tile in front of it (nearer the enemies) and hits its own column with it. Its own number is added on top.' },
+  giantH: { name: 'Giant',  kind: 'attack', sig: true, big: 'h', short: 'GIANT', desc: 'A big tile covering two cells side by side. Hits both columns it covers, each for its full number.' },
+  giantV: { name: 'Giant',  kind: 'attack', sig: true, big: 'v', short: 'GIANT', desc: 'A huge tile covering two cells, one behind the other. Hits its own column once for its big number.' },
+  plus:   { name: 'Plus',   kind: 'boost',  short: 'PLUS',   desc: 'Booster: adds its number to each Strike-type tile touching it (up, down, left, right).' },
+  row:    { name: 'Row',    kind: 'boost',  short: 'ROW',    desc: 'Booster: adds its number to every attacking tile in its row.' },
+  pillar: { name: 'Pillar', kind: 'boost',  sig: true, short: 'PILLAR', desc: 'Booster: adds its number to every attacking tile in its column.' },
   dbl:    { name: 'Double', kind: 'mod',    short: 'DOUBLE', desc: 'Doubles the tile in front of it (the row nearer the enemies). Ignores bonus cells.' }
 };
+var SIGS = ['diag', 'sweep', 'pillar', 'echo', 'giantH', 'giantV'];
 var COLOR_IDS = ['r', 'b', 'g', 'y', 'p'];
 var COLORS = { r: 'Red', b: 'Blue', g: 'Green', y: 'Yellow', p: 'Purple', x: 'Colourless' };
-var MODES = {
-  sandwich: { name: 'Sandwich', line: 'A tile between two tiles of one other colour, in a row or column, is doubled.' },
-  melds:    { name: 'Melds',    line: 'Three in a line: Flush (one colour), Run (1-2-3) or Set (3 equal) add a bonus to the line\'s columns.' },
-  wheel:    { name: 'Wheel',    line: 'Each tile gives a bonus to touching Strikes and Forks of the next colour on the wheel (its dot).' },
-  none:     { name: 'No rule',  line: 'No reaction rule: totals are just the numbers.' }
-};
-var WHEEL = ['r', 'b', 'g', 'y', 'p'];
-function wheelNext(c) { return WHEEL[(WHEEL.indexOf(c) + 1) % 5]; }
-function wheelPrev(c) { return WHEEL[(WHEEL.indexOf(c) + 4) % 5]; }
-/* kit: groups separated by | are added at level 1, 2, 3.  S strike, F fork, P plus, R row, D double (x2) */
+var RARITY = ['Common', 'Rare', 'Epic'];
+var SANDWICH = 'A tile between two tiles of one other colour, in a row or column, is doubled.';
+/* kit groups separated by | are added at unit level 1, 2, 3, 4.  br.a / br.b are the two level 5 branches.
+   S strike, F fork, P plus, R row, D double (x), X diagonal, W sweep, L pillar, E echo (+own), G giant (2 side by side), V giant (2 stacked) */
 var UNITS = [
-  { id: 'ember',  name: 'Ember',  c: 'r', kit: 'S2 S3 S3 S4|F3 P1|S5 D2' },
-  { id: 'brand',  name: 'Brand',  c: 'r', kit: 'S2 S3 S4 S4|P1 P2|R1 D2' },
-  { id: 'cinder', name: 'Cinder', c: 'r', kit: 'S3 S4 S5 S5|F3 S6|F4 D2' },
-  { id: 'tide',   name: 'Tide',   c: 'b', kit: 'S2 S3 S3 S4|F2 P1|P2 D2' },
-  { id: 'mist',   name: 'Mist',   c: 'b', kit: 'S3 S3 S4 S4|F3 R1|D2 P1' },
-  { id: 'drift',  name: 'Drift',  c: 'b', kit: 'S2 S3 S4 S4|F2 F3|P1 D2' },
-  { id: 'moss',   name: 'Moss',   c: 'g', kit: 'S1 S2 S3 S4|P1 F2|R1 D2' },
-  { id: 'thorn',  name: 'Thorn',  c: 'g', kit: 'S2 S2 S3 S5|P1 P1|R1 D2' },
-  { id: 'vale',   name: 'Vale',   c: 'g', kit: 'S3 S3 S4 S4|F3 P1|R2 D2' },
-  { id: 'glint',  name: 'Glint',  c: 'y', kit: 'S1 S3 S4 S5|F2 P1|R1 D2' },
-  { id: 'spark',  name: 'Spark',  c: 'y', kit: 'S3 S3 S4 S4|F3 F2|P1 D2' },
-  { id: 'dusk',   name: 'Dusk',   c: 'p', kit: 'S2 S3 S4 S5|F3 P1|R1 D2' },
-  { id: 'hex',    name: 'Hex',    c: 'p', kit: 'S3 S4 S4 S5|P1 R1|F3 D2' }
+  { id: 'ember',  name: 'Ember',  c: 'r', sig: 'giantH', kit: 'S3 S4 S4|F3 S5|G5 P1|S6',  br: { a: { name: 'Heavy',   kit: 'S7 G7' }, b: { name: 'Support', kit: 'P2 G6' } } },
+  { id: 'brand',  name: 'Brand',  c: 'r', sig: 'sweep',  kit: 'S2 S3 S4|P1 P2|W4 S4|S5',  br: { a: { name: 'Heavy',   kit: 'S6 W6' }, b: { name: 'Support', kit: 'P2 W5' } } },
+  { id: 'cinder', name: 'Cinder', c: 'r', sig: 'giantV', kit: 'S3 S4 S5|F3 S6|V8 F4|S7',  br: { a: { name: 'Heavy',   kit: 'S8 V11' }, b: { name: 'Support', kit: 'P2 V9' } } },
+  { id: 'tide',   name: 'Tide',   c: 'b', sig: 'diag',   kit: 'S2 S3 S3|F2 P1|X4 F3|X5',  br: { a: { name: 'Heavy',   kit: 'S5 X6' }, b: { name: 'Support', kit: 'P2 X5' } } },
+  { id: 'mist',   name: 'Mist',   c: 'b', sig: 'pillar', kit: 'S3 S3 S4|F3 R1|L2 D2|L3',  br: { a: { name: 'Heavy',   kit: 'S6 S6' }, b: { name: 'Support', kit: 'L2 R2' } } },
+  { id: 'drift',  name: 'Drift',  c: 'b', sig: 'echo',   kit: 'S2 S3 S4|F2 F3|E0 P1|E2',  br: { a: { name: 'Heavy',   kit: 'S6 S6' }, b: { name: 'Support', kit: 'E1 P2' } } },
+  { id: 'moss',   name: 'Moss',   c: 'g', sig: 'echo',   kit: 'S2 S3 S3|P1 F2|E0 R1|S5',  br: { a: { name: 'Heavy',   kit: 'S6 E2' }, b: { name: 'Support', kit: 'P2 E1' } } },
+  { id: 'thorn',  name: 'Thorn',  c: 'g', sig: 'sweep',  kit: 'S2 S2 S3|P1 P1|W4 R1|W5',  br: { a: { name: 'Heavy',   kit: 'S6 S6' }, b: { name: 'Support', kit: 'L2 P2' } } },
+  { id: 'vale',   name: 'Vale',   c: 'g', sig: 'diag',   kit: 'S3 S3 S4|F3 P1|X4 X3|R2',  br: { a: { name: 'Heavy',   kit: 'S6 X6' }, b: { name: 'Support', kit: 'P2 R2' } } },
+  { id: 'glint',  name: 'Glint',  c: 'y', sig: 'giantH', kit: 'S1 S3 S5|F2 P1|G5 R1|G6',  br: { a: { name: 'Heavy',   kit: 'S6 S7' }, b: { name: 'Support', kit: 'P2 R2' } } },
+  { id: 'spark',  name: 'Spark',  c: 'y', sig: 'pillar', kit: 'S3 S3 S4|F3 F2|L2 P1|L3',  br: { a: { name: 'Heavy',   kit: 'S6 S6' }, b: { name: 'Support', kit: 'L2 R2' } } },
+  { id: 'dusk',   name: 'Dusk',   c: 'p', sig: 'diag',   kit: 'S2 S3 S4|F3 P1|X4 R1|X5',  br: { a: { name: 'Heavy',   kit: 'S6 X6' }, b: { name: 'Support', kit: 'P2 D2' } } },
+  { id: 'hex',    name: 'Hex',    c: 'p', sig: 'giantV', kit: 'S3 S4 S4|P1 R1|V8 D2|V9',  br: { a: { name: 'Heavy',   kit: 'S7 V11' }, b: { name: 'Support', kit: 'P2 D2' } } }
 ];
 var UNIT_BY_ID = {};
 UNITS.forEach(function (u) { UNIT_BY_ID[u.id] = u; });
-var SHCODE = { S: 'strike', F: 'fork', P: 'plus', R: 'row', D: 'dbl' };
-function kitFor(u, lvl) {
+var SHCODE = { S: 'strike', F: 'fork', P: 'plus', R: 'row', D: 'dbl', X: 'diag', W: 'sweep', L: 'pillar', E: 'echo', G: 'giantH', V: 'giantV' };
+function parseKit(str, lv) {
+  return str.trim().split(/\s+/).map(function (tok) { return { s: SHCODE[tok.charAt(0)], n: +tok.slice(1), lv: lv }; });
+}
+/* the tiles of a unit at a level (1-5); br = 'a' | 'b' | null (level 5 only) */
+function kitFor(u, lvl, br) {
   var out = [];
-  u.kit.split('|').forEach(function (g, i) {
-    if (i >= lvl) return;
-    g.trim().split(/\s+/).forEach(function (tok) { out.push({ s: SHCODE[tok.charAt(0)], n: +tok.slice(1), lv: i + 1 }); });
-  });
+  u.kit.split('|').forEach(function (g, i) { if (i < lvl) out = out.concat(parseKit(g, i + 1)); });
+  if (lvl >= 5 && br && u.br[br]) out = out.concat(parseKit(u.br[br].kit, 5));
   return out;
 }
-function isAttack(t) { return t && SHAPES[t.s].kind === 'attack'; }
-function isBoost(t) { return t && SHAPES[t.s].kind === 'boost'; }
-function tileLabel(t, v) { var n = v === undefined ? t.n : v; return t.s === 'dbl' ? '×' + n : isBoost(t) ? '+' + n : String(n); }
-function mkTile(run, c, u, s, n, bonus) { run.nid = (run.nid || 0) + 1; return { id: run.nid, c: c, u: u, s: s, n: n, spent: false, bonus: !!bonus }; }
+function isAttack(t) { return !!t && SHAPES[t.s].kind === 'attack'; }
+function isBoost(t) { return !!t && SHAPES[t.s].kind === 'boost'; }
+function tileLabel(t, v) {
+  if (t.s === 'echo') return v === undefined ? (t.n ? '=+' + t.n : '=') : '=' + v;
+  var n = v === undefined ? t.n : v;
+  return t.s === 'dbl' ? '×' + n : isBoost(t) ? '+' + n : String(n);
+}
+function mkTile(run, c, u, s, n, extra) {
+  run.nid = (run.nid || 0) + 1;
+  var t = { id: run.nid, c: c, u: u, s: s, n: n, rest: false };
+  if (extra) for (var k in extra) t[k] = extra[k];
+  return t;
+}
+function tileColours(t) { var o = []; if (t && t.c && t.c !== 'x') o.push(t.c); if (t && t.c2) o.push(t.c2); return o; }
+function sandOk(mid, a, b) {
+  var cm = tileColours(mid), ca = tileColours(a), cb = tileColours(b);
+  if (!cm.length) return false;
+  for (var i = 0; i < ca.length; i++) if (cb.indexOf(ca[i]) >= 0 && cm.indexOf(ca[i]) < 0) return true;
+  return false;
+}
+/* cells a tile covers when its anchor (front-left cell) is a; null if it does not fit */
+function cellsFor(t, a, cols, R) {
+  var sh = SHAPES[t.s], r = (a / cols) | 0, c = a % cols;
+  if (sh.big === 'h') return c + 1 < cols ? [a, a + 1] : null;
+  if (sh.big === 'v') return r + 1 < R ? [a, a + cols] : null;
+  return [a];
+}
 
-/* ---- evaluate: everything resolves at once.  board = array(cols*rows) of tile|null, index = row*cols+col, row 0 is the front ---- */
+/* ---- evaluate: everything resolves at once.  board = array(cols*rows) of tile|null (a Giant is in two cells), index = row*cols+col, row 0 is the front ---- */
 function evaluate(F, board, opts) {
   opts = opts || {};
-  var cols = F.cols, R = CONFIG.rows, N = cols * R, mom = opts.momentum || 0, det = !!opts.detail, mode = CONFIG.reactionMode, ecol = CONFIG.enemyColours, i, j, c, k;
+  var cols = F.cols, R = CONFIG.rows, N = cols * R, mom = opts.momentum || 0, det = !!opts.detail, i, j, k, c;
   var ok = [], ea = [];
   for (i = 0; i < N; i++) ok[i] = true;
   (F.blocked || []).forEach(function (b) { ok[b] = false; });
+  if (F.tb !== undefined && F.tb >= 0) ok[F.tb] = false;
   F.enemies.forEach(function (e, ek) { for (var cc = e.c; cc < e.c + e.w; cc++) ea[cc] = ek; });
   function orth(q) { var r = (q / cols) | 0, cc = q % cols, o = []; if (r > 0) o.push(q - cols); if (cc > 0) o.push(q - 1); if (cc < cols - 1) o.push(q + 1); if (r < R - 1) o.push(q + cols); return o; }
-  function colr(q) { var t = board[q]; return t && t.c !== 'x' ? t.c : null; }
-  var cadd = [], mult = [], boost = [], power = [], val = [], wadd = [], sand = [], parts = det ? [] : null;
-  var marks = { sand: [], wheel: [], melds: [] };
+  var cellG = [], G = [];
   for (i = 0; i < N; i++) {
-    var bc = F.bonus && F.bonus[i];
-    cadd[i] = bc === 'p1' ? 1 : bc === 'p2' ? 2 : 0;
-    mult[i] = bc === 'x2' ? 2 : 1; boost[i] = 0; power[i] = 0; val[i] = 0; wadd[i] = 0; sand[i] = 1;
-    if (board[i] && board[i].s === 'dbl') { cadd[i] = 0; mult[i] = 1; }
+    var t0 = board[i]; if (!t0 || cellG[i] !== undefined) continue;
+    var cl = [];
+    for (j = i; j < N; j++) if (board[j] === t0) { cl.push(j); cellG[j] = G.length; }
+    G.push({ t: t0, cells: cl, a: i, r: (i / cols) | 0, c: i % cols, last: cl[cl.length - 1], add: 0, mul: 1, sand: 1, boost: 0, v: 0, pw: 0, dealt: 0, copy: 0, outs: [], targets: 0 });
   }
-  for (i = cols; i < N; i++) if (board[i] && board[i].s === 'dbl' && board[i - cols] && board[i - cols].s !== 'dbl') mult[i - cols] *= board[i].n;
-  var cb = [];
-  for (c = 0; c < cols; c++) cb[c] = 0;
-  if (mode === 'sandwich') {
-    for (i = 0; i < N; i++) {
-      var m = board[i]; if (!m || m.c === 'x' || m.s === 'dbl') continue;
-      var r = (i / cols) | 0, cc = i % cols, pairs = [];
-      if (cc > 0 && cc < cols - 1) pairs.push([i - 1, i + 1]);
-      if (r > 0 && r < R - 1) pairs.push([i - cols, i + cols]);
-      for (k = 0; k < pairs.length; k++) {
-        var pa = colr(pairs[k][0]), pb = colr(pairs[k][1]);
-        if (pa && pa === pb && pa !== m.c) { sand[i] = 2; marks.sand.push({ mid: i, a: pairs[k][0], b: pairs[k][1] }); }
-      }
-    }
-  } else if (mode === 'wheel') {
-    for (i = 0; i < N; i++) {
-      var w = board[i]; if (!isAttack(w) || w.c === 'x') continue;
-      var o = orth(i), pv = wheelPrev(w.c);
-      for (k = 0; k < o.length; k++) if (colr(o[k]) === pv) { wadd[i] += CONFIG.wheel; marks.wheel.push({ from: o[k], to: i }); }
-    }
-  } else if (mode === 'melds') {
-    var lines = [], M = CONFIG.meld;
-    for (c = 0; c < cols; c++) for (var r0 = 0; r0 + 3 <= R; r0++) lines.push({ cells: [r0 * cols + c, (r0 + 1) * cols + c, (r0 + 2) * cols + c], row: false });
-    for (var rr = 0; rr < R; rr++) for (var c0 = 0; c0 + 3 <= cols; c0++) lines.push({ cells: [rr * cols + c0, rr * cols + c0 + 1, rr * cols + c0 + 2], row: true });
-    lines.forEach(function (L) {
-      var ts = L.cells.map(function (q) { return board[q]; });
-      if (!ts[0] || !ts[1] || !ts[2]) return;
-      var ns = ts.map(function (t) { return t.n; }).sort(function (a, b) { return a - b; });
-      var flush = ts[0].c !== 'x' && ts[0].c === ts[1].c && ts[1].c === ts[2].c;
-      var set = ns[0] === ns[1] && ns[1] === ns[2], run = ns[1] === ns[0] + 1 && ns[2] === ns[1] + 1;
-      if (!flush && !set && !run) return;
-      var b = flush && (set || run) ? M.both : flush ? M.flush : run ? M.run : M.set;
-      var label = (flush ? 'Flush' : '') + (flush && (set || run) ? ' ' : '') + (set ? 'Set' : run ? 'Run' : '');
-      var colsOf = L.cells.map(function (q) { return q % cols; });
-      if (L.row) { var each = Math.max(1, Math.round(b * M.rowFactor)); colsOf.forEach(function (cc2) { cb[cc2] += each; }); marks.melds.push({ cells: L.cells, label: label, bonus: each, row: true }); }
-      else { cb[colsOf[0]] += b; marks.melds.push({ cells: L.cells, label: label, bonus: b, row: false }); }
-    });
-  }
-  for (i = 0; i < N; i++) {
-    var t = board[i]; if (!t || !isBoost(t)) continue;
-    var p = (t.n + cadd[i] + mom) * mult[i] * sand[i]; power[i] = p;
-    var tg = [];
-    if (t.s === 'plus') tg = orth(i);
-    else { var r1 = (i / cols) | 0; for (j = r1 * cols; j < r1 * cols + cols; j++) if (j !== i) tg.push(j); }
-    for (k = 0; k < tg.length; k++) if (isAttack(board[tg[k]])) boost[tg[k]] += p;
-    if (det) parts[i] = [['base', t.n], ['cell +', cadd[i]], ['momentum', mom], ['bonus cell / Double ×', mult[i]], ['sandwich ×', sand[i]]];
-  }
-  var tot = [], src = [], matched = [];
-  for (c = 0; c < cols; c++) { tot[c] = 0; src[c] = 0; }
-  for (i = 0; i < N; i++) {
-    var a = board[i]; if (!isAttack(a)) continue;
-    c = i % cols;
-    var v = (a.n + cadd[i] + mom + boost[i] + wadd[i]) * mult[i] * sand[i]; val[i] = v;
-    if (det) parts[i] = [['base', a.n], ['cell +', cadd[i]], ['momentum', mom], ['boosters', boost[i]], ['wheel', wadd[i]], ['bonus cell / Double ×', mult[i]], ['sandwich ×', sand[i]]];
-    var outs = a.s === 'strike' ? [c] : [c - 1, c + 1];
-    for (k = 0; k < outs.length; k++) {
-      var oc = outs[k]; if (oc < 0 || oc >= cols) continue;
-      var ek = ea[oc], x2 = ecol && a.c !== 'x' && ek !== undefined && F.enemies[ek].col === a.c;
-      tot[oc] += x2 ? v * 2 : v; src[oc]++;
-      if (x2) matched.push({ cell: i, enemy: ek });
-    }
-  }
-  var en = F.enemies.map(function (e, ek) {
-    var rw = 0, s = 0;
-    for (var cc = e.c; cc < e.c + e.w; cc++) { rw += tot[cc] + cb[cc]; s += src[cc]; }
-    var dmg = (e.dead || (e.kind === 'g' && s < 2)) ? 0 : rw;
-    return { dmg: dmg, raw: rw, src: s, kill: !e.dead && dmg >= e.hp && e.hp > 0, guardBlocked: !e.dead && e.kind === 'g' && s < 2 };
+  G.forEach(function (g) {
+    if (g.t.s === 'dbl') return;
+    g.cells.forEach(function (q) { var bc = F.bonus && F.bonus[q]; if (bc === 'p1') g.add += 1; else if (bc === 'p2') g.add += 2; else if (bc === 'x2') g.mul *= 2; });
   });
-  marks.matched = matched;
-  return { tot: tot, cb: cb, val: val, power: power, boost: boost, mult: mult, sand: sand, wadd: wadd, en: en, enemyAt: ea, ok: ok, parts: parts, marks: marks };
+  G.forEach(function (g) {
+    if (g.t.s !== 'dbl') return;
+    var f = g.a - cols; if (f < 0 || cellG[f] === undefined) return;
+    var ft = G[cellG[f]]; if (ft.t.s === 'dbl') return;
+    ft.mul *= g.t.n;
+  });
+  var marks = [];
+  G.forEach(function (g) {
+    var t = g.t, sh = SHAPES[t.s]; if (t.s === 'dbl' || !tileColours(t).length) return;
+    var pairs = [];
+    if (sh.big !== 'v' && g.c > 0 && g.last % cols < cols - 1) pairs.push([g.a - 1, g.last + 1, true]);
+    if (sh.big !== 'h' && g.r > 0 && ((g.last / cols) | 0) < R - 1) pairs.push([g.a - cols, g.last + cols, false]);
+    pairs.forEach(function (p) {
+      var x = board[p[0]], y = board[p[1]];
+      if (x && y && sandOk(t, x, y)) { g.sand = 2; marks.push({ mid: g.a, a: G[cellG[p[0]]].a, b: G[cellG[p[1]]].a, h: p[2] }); }
+    });
+  });
+  G.forEach(function (g, gi) {
+    var t = g.t, sh = SHAPES[t.s]; if (sh.kind !== 'boost') return;
+    g.pw = (t.n + g.add + mom) * g.mul * g.sand;
+    var cs = [];
+    if (t.s === 'plus') cs = orth(g.a);
+    else if (t.s === 'row') { for (j = g.r * cols; j < g.r * cols + cols; j++) if (j !== g.a) cs.push(j); }
+    else { for (j = g.c; j < N; j += cols) if (j !== g.a) cs.push(j); }
+    var seen = {};
+    cs.forEach(function (q) { var gj = cellG[q]; if (gj !== undefined && gj !== gi && SHAPES[G[gj].t.s].kind === 'attack') seen[gj] = 1; });
+    for (var gj in seen) { G[gj].boost += g.pw; g.targets++; }
+  });
+  G.forEach(function (g) { if (isAttack(g.t) && g.t.s !== 'echo') g.v = (g.t.n + g.add + mom + g.boost) * g.mul * g.sand; });
+  G.filter(function (g) { return g.t.s === 'echo'; }).sort(function (a, b) { return a.a - b.a; }).forEach(function (g) {
+    var f = g.a - cols, fv = 0;
+    if (f >= 0 && cellG[f] !== undefined) { var fg = G[cellG[f]]; fv = isAttack(fg.t) ? fg.v : isBoost(fg.t) ? fg.pw : 0; }
+    g.copy = fv; g.v = (g.t.n + fv + g.add + g.boost) * g.mul * g.sand;
+  });
+  var tot = [], srcE = [];
+  for (c = 0; c < cols; c++) tot[c] = 0;
+  F.enemies.forEach(function () { srcE.push(0); });
+  var sandExtra = 0, sigDealt = 0, allDealt = 0;
+  G.forEach(function (g) {
+    var t = g.t; if (!isAttack(t)) { if (SHAPES[t.s].sig) sigDealt += g.pw * g.targets; return; }
+    var v = g.v, outs;
+    switch (t.s) {
+      case 'fork': outs = [[g.c - 1, v], [g.c + 1, v]]; break;
+      case 'sweep': var h = Math.ceil(v / 2); outs = [[g.c, v], [g.c - 1, h], [g.c + 1, h]]; break;
+      case 'diag': outs = g.r === 0 ? [[g.c, v]] : [[g.c - g.r, v], [g.c + g.r, v]]; break;
+      case 'giantH': outs = [[g.c, v], [g.c + 1, v]]; break;
+      default: outs = [[g.c, v]];
+    }
+    var hit = {};
+    outs = outs.filter(function (o) { return o[0] >= 0 && o[0] < cols; });
+    outs.forEach(function (o) { tot[o[0]] += o[1]; g.dealt += o[1]; var ek = ea[o[0]]; if (ek !== undefined) hit[ek] = 1; });
+    g.outs = outs;
+    for (var ek in hit) srcE[ek]++;
+    allDealt += g.dealt; if (g.sand === 2) sandExtra += g.dealt / 2; if (SHAPES[t.s].sig) sigDealt += g.dealt;
+  });
+  var en = F.enemies.map(function (e, ek) {
+    var rw = 0; for (var cc = e.c; cc < e.c + e.w; cc++) rw += tot[cc];
+    var need = e.need || 1, blocked = !e.dead && srcE[ek] < need, dmg = (e.dead || blocked) ? 0 : rw;
+    return { dmg: dmg, raw: rw, src: srcE[ek], need: need, kill: !e.dead && dmg >= e.hp && e.hp > 0, guardBlocked: blocked && need > 1 && rw > 0 };
+  });
+  var val = [], power = [], sandA = [], parts = det ? [] : null;
+  G.forEach(function (g) {
+    val[g.a] = g.v; power[g.a] = g.pw; sandA[g.a] = g.sand;
+    if (det) parts[g.a] = isAttack(g.t) ? [['base', g.t.n], ['copied number', g.copy], ['cell +', g.add], ['momentum', g.t.s === 'echo' ? 0 : mom], ['boosters', g.boost], ['bonus cell / Double ×', g.mul], ['sandwich ×', g.sand]] : [['base', g.t.n], ['cell +', g.add], ['momentum', mom], ['bonus cell / Double ×', g.mul], ['sandwich ×', g.sand]];
+  });
+  return { tot: tot, val: val, power: power, sand: sandA, en: en, enemyAt: ea, ok: ok, parts: parts, marks: marks, G: G, cellG: cellG,
+           stats: { sandExtra: sandExtra, sigDealt: sigDealt, dealt: allDealt } };
+}
+
+/* ---- loot ---- */
+function pick(a, rnd) { return a[(rnd() * a.length) | 0]; }
+function rollRarity(odds, depth, rnd, min) {
+  var d = CONFIG.rarity.depthShift * depth, rare = odds[1] + d, epic = odds[2] + d / 3, x = rnd();
+  var r = x < epic ? 2 : x < epic + rare ? 1 : 0;
+  return Math.max(r, min || 0);
+}
+function genColourless(rar, rnd) {
+  var s, n;
+  if (rar === 0) {
+    var r = rnd(); s = r < 0.5 ? 'strike' : r < 0.7 ? 'fork' : r < 0.85 ? 'plus' : r < 0.93 ? 'row' : 'dbl';
+    n = s === 'strike' ? 2 + ((rnd() * 3) | 0) : s === 'fork' ? 2 + ((rnd() * 2) | 0) : s === 'plus' ? 1 + (rnd() < 0.4 ? 1 : 0) : s === 'row' ? 1 : 2;
+  } else { s = pick(SIGS, rnd); n = CONFIG.sigNum[s][rar]; }
+  return { s: s, n: n, rar: rar, st: 0 };
+}
+function lootTile(source, depth, rnd, min) { return genColourless(rollRarity(CONFIG.rarity[source], depth, rnd, min), rnd); }
+function genRunTile(run, rnd) {
+  var c = pick(COLOR_IDS, rnd), sigP = Math.min(CONFIG.pick.sigMax, CONFIG.pick.sigBase + CONFIG.pick.sigDepth * run.depth), s, n, d = run.depth;
+  if (rnd() < sigP) { s = pick(SIGS, rnd); n = CONFIG.sigNum[s][d >= 3 ? 1 : 0]; }
+  else {
+    var r = rnd(); s = r < 0.5 ? 'strike' : r < 0.7 ? 'fork' : r < 0.85 ? 'plus' : r < 0.93 ? 'row' : 'dbl';
+    n = s === 'strike' ? 3 + ((rnd() * 3) | 0) + ((d / 2) | 0) : s === 'fork' ? 3 + ((rnd() * 2) | 0) + ((d / 2) | 0) : s === 'plus' ? 1 + (rnd() < 0.4 + 0.1 * d ? 1 : 0) : s === 'row' ? 1 + (d >= 2 ? 1 : 0) : 2;
+  }
+  return { c: c, u: run.team[c], s: s, n: n };
+}
+/* an upgrade for one bag tile (never a Double): +2 (+1 for boosters) or a second colour */
+function genUpgrade(run, rnd, avoid) {
+  var cands = run.bag.filter(function (t) { return t.s !== 'dbl' && (!avoid || avoid.indexOf(t.id) < 0); });
+  if (!cands.length) return null;
+  var t = pick(cands, rnd), col = null;
+  if (!t.c2 && rnd() >= CONFIG.pick.up2) {
+    var opts = COLOR_IDS.filter(function (x) { return x !== t.c; }); col = pick(opts, rnd);
+  }
+  return col ? { type: 'up', tid: t.id, kind: 'col', col: col } : { type: 'up', tid: t.id, kind: 'n2', amt: isBoost(t) ? 1 : 2 };
+}
+function applyUpgrade(t, o) {
+  if (o.kind === 'n2') { t.n += o.amt; t.up = (t.up || 0) + o.amt; }
+  else if (t.c === 'x') { t.c = o.col; t.u = o.col; t.cx = true; } else { t.c2 = o.col; }
+  return t;
+}
+function genPicks(run, rnd) {
+  var out = [{ type: 'tile', tile: genRunTile(run, rnd) }], up = genUpgrade(run, rnd);
+  if (up) out.push(up);
+  out.push({ type: 'heal', amt: Math.ceil(run.maxHp * CONFIG.growHeal) });
+  return out;
 }
 
 /* ---- fights ---- */
-function pick(a, rnd) { return a[(rnd() * a.length) | 0]; }
-function genColourless(depth, rnd) {
-  var r = rnd(), s = r < 0.5 ? 'strike' : r < 0.7 ? 'fork' : r < 0.85 ? 'plus' : r < 0.93 ? 'row' : 'dbl';
-  var n = s === 'strike' ? 2 + ((rnd() * (2 + Math.min(2, depth))) | 0) : s === 'fork' ? 2 + ((rnd() * 2) | 0) : s === 'plus' ? 1 + (rnd() < 0.4 ? 1 : 0) : s === 'row' ? 1 : 2;
-  return { s: s, n: n };
-}
+function mkEnemy(c, w, hp, atk, kind) { return { c: c, w: w, hp: hp, max: hp, atk: atk, kind: kind || 'p', need: 1, boss: false, twin: 0, dead: false, gone: false }; }
 function genFight(run, kind, rnd) {
   rnd = rnd || Math.random;
-  var A = CONFIG.areas[run.area - 1], cols = A.cols, scale = 1 + CONFIG.growth * run.won, K = CONFIG[kind];
-  var widths = [], left = cols, i;
+  var A = CONFIG.areas[run.area - 1], cols = A.cols, scale = Math.pow(1 + CONFIG.growth, run.won), K = CONFIG[kind], i, enemies = [], trick = null;
+  var jit = function () { return 1 - CONFIG.jitter / 2 + CONFIG.jitter * rnd(); };
+  var atkOf = function (w, f) { return Math.max(1, Math.round(A.atk * Math.pow(1 + 0.5 * CONFIG.growth, run.won) * K.atk * (w > 1 ? 1.3 : 1) * (f || 1))); };
+  var hpOf = function (w, f) { return Math.max(3, Math.round(A.hp * scale * w * K.hp * jit() * (f || 1))); };
   if (kind === 'boss') {
-    var bw = cols >= 5 ? 3 : 2; widths = [bw]; for (i = bw; i < cols; i++) widths.push(1);
-    if (rnd() < 0.5) widths.reverse();
+    if (run.area === 1) {
+      trick = 'twin';
+      var a = mkEnemy(0, 1, hpOf(1, 1.1), atkOf(1), 'p'), m = mkEnemy(1, 1, hpOf(1, 0.7), atkOf(1, 0.6), 'p'), b = mkEnemy(2, 1, a.hp, atkOf(1), 'p');
+      a.boss = b.boss = true; a.twin = b.twin = 1;
+      enemies = [a, m, b];
+    } else {
+      var bw = run.area === 2 ? 2 : 3, pos = rnd() < 0.5 ? 0 : cols - bw, bo = mkEnemy(pos, bw, hpOf(bw, 1), atkOf(bw), 'p');
+      bo.boss = true; trick = run.area === 2 ? 'block' : 'aegis'; if (trick === 'aegis') { bo.need = 3; bo.kind = 'g'; }
+      for (i = 0; i < cols;) { if (i === pos) { enemies.push(bo); i += bw; } else { enemies.push(mkEnemy(i, 1, hpOf(1, 0.6), atkOf(1, 0.5), 'p')); i++; } }
+    }
   } else {
+    var widths = [], left = cols;
     while (left > 0) { var w = (left >= 2 && rnd() < CONFIG.wideChance) ? 2 : 1; widths.push(w); left -= w; }
+    var c0 = 0, runnerAt = -1;
+    if (kind === 'normal' && rnd() < CONFIG.runnerChance[run.area - 1]) { var singles = []; widths.forEach(function (w2, k) { if (w2 === 1) singles.push(k); }); if (singles.length) runnerAt = pick(singles, rnd); }
+    widths.forEach(function (w2, k) {
+      var e;
+      if (k === runnerAt) { e = mkEnemy(c0, 1, hpOf(1, 0.6), 0, 'r'); }
+      else {
+        var guard = w2 === 1 && rnd() < CONFIG.guardChance[run.area - 1] * (kind === 'elite' ? 1.8 : 1);
+        e = mkEnemy(c0, w2, hpOf(w2, guard ? 0.8 : 1), atkOf(w2), guard ? 'g' : 'p'); if (guard) e.need = 2;
+      }
+      enemies.push(e); c0 += w2;
+    });
   }
-  var enemies = [], c = 0, bossDone = false;
-  widths.forEach(function (w) {
-    var isBoss = kind === 'boss' && !bossDone && w === (cols >= 5 ? 3 : 2); if (isBoss) bossDone = true;
-    var hp = A.hp * scale * w * K.hp * (1 - CONFIG.jitter / 2 + CONFIG.jitter * rnd()) * (isBoss ? 1 : (kind === 'boss' ? 0.6 : 1));
-    var atk = A.atk * (1 + 0.5 * CONFIG.growth * run.won) * K.atk * (w > 1 ? 1.3 : 1) * (isBoss ? 1 : (kind === 'boss' ? 0.5 : 1));
-    var e = { c: c, w: w, col: pick(COLOR_IDS, rnd), hp: 0, max: 0, atk: Math.max(1, Math.round(atk)), kind: 'p', boss: isBoss, ph2: 0, dead: false };
-    if (!isBoss && w === 1 && rnd() < CONFIG.guardChance[run.area - 1] * (kind === 'elite' ? 1.8 : 1) && kind !== 'boss') { e.kind = 'g'; hp *= 0.8; }
-    e.hp = e.max = Math.max(3, Math.round(hp));
-    if (isBoss) e.ph2 = Math.round(e.hp * CONFIG.boss.phase2);
-    enemies.push(e); c += w;
-  });
+  enemies.forEach(function (e) { e.max = e.hp; });
   var N = cols * CONFIG.rows, blocked = [], bonus = {}, cells = [];
   for (i = 0; i < N; i++) cells.push(i);
-  if (rnd() < CONFIG.blockChance) { var bi = (rnd() * N) | 0; blocked.push(bi); }
+  if (kind !== 'boss' && rnd() < CONFIG.blockChance) blocked.push((rnd() * N) | 0);
   var free = cells.filter(function (q) { return blocked.indexOf(q) < 0; });
   var rr = rnd(), nb = rr < CONFIG.bonusCount[0] ? 0 : rr < CONFIG.bonusCount[0] + CONFIG.bonusCount[1] ? 1 : 2;
   for (i = 0; i < nb; i++) {
@@ -444,83 +586,129 @@ function genFight(run, kind, rnd) {
     bonus[q] = x < tt.p1 ? 'p1' : x < tt.p1 + tt.p2 ? 'p2' : 'x2';
   }
   var coins = Math.round(CONFIG.coinBase * A.coin * K.coin * (1 + CONFIG.coinDepth * run.depth));
-  var tile = rnd() < K.tile ? genColourless(run.depth, rnd) : null;
-  return { kind: kind, F: { cols: cols, enemies: enemies, blocked: blocked, bonus: bonus }, reward: { coins: coins, tile: tile } };
+  var tile = null;
+  if (kind === 'boss') tile = lootTile('boss', run.depth, rnd, 1);
+  else if (rnd() < K.tile) tile = lootTile(kind === 'elite' ? 'elite' : 'normal', run.depth, rnd);
+  return { kind: kind, F: { cols: cols, enemies: enemies, blocked: blocked, bonus: bonus, trick: trick, tb: -1, tn: -1 }, reward: { coins: coins, tile: tile } };
+}
+function pickNode(run, rnd) {
+  var w = CONFIG.nodeWeights, opts = [];
+  if (run.bag.some(function (t) { return t.s !== 'dbl'; })) for (var i = 0; i < w.forge; i++) opts.push('forge');
+  if (run.hp < run.maxHp * 0.9) for (i = 0; i < w.rest; i++) opts.push('rest');
+  for (i = 0; i < w.treasure; i++) opts.push('treasure');
+  return pick(opts, rnd);
 }
 function genOffers(run, rnd) {
   rnd = rnd || Math.random;
   if (run.step >= CONFIG.bossEvery - 1) return [genFight(run, 'boss', rnd)];
-  var n = CONFIG.offers - (rnd() < CONFIG.offerTwoChance ? 1 : 0), out = [], elite = false;
-  for (var i = 0; i < n; i++) {
-    var kind = (!elite && run.step >= 1 && rnd() < CONFIG.eliteChance) ? 'elite' : 'normal';
-    if (kind === 'elite') elite = true;
-    out.push(genFight(run, kind, rnd));
-  }
+  var out = [genFight(run, 'normal', rnd)];
+  out.push(genFight(run, (run.step >= 1 && rnd() < CONFIG.eliteChance) ? 'elite' : 'normal', rnd));
+  if (rnd() < CONFIG.nodeChance) out.push({ node: pickNode(run, rnd) });
+  else if (rnd() >= CONFIG.offerTwoChance) out.push(genFight(run, 'normal', rnd));
   return out;
 }
-function newRun(area, team, levels, colourless, rnd) {
+function newRun(area, team, units, colourless, rnd) {
   rnd = rnd || Math.random;
-  var A = CONFIG.areas[area - 1], run = { area: area, A: A, nid: 0, bag: [], team: team, step: 0, depth: 0, won: 0, fights: 0, coins: 0, loot: [], mom: 0, over: null };
+  var run = { area: area, nid: 0, bag: [], team: team, step: 0, depth: 0, won: 0, fights: 0, coins: 0, loot: [], mom: 0, over: null, pending: null, fs: null, board: null };
   COLOR_IDS.forEach(function (c) {
-    var u = UNIT_BY_ID[team[c]];
-    kitFor(u, levels[u.id] || 1).forEach(function (k) { run.bag.push(mkTile(run, c, u.id, k.s, k.n)); });
+    var u = UNIT_BY_ID[team[c]], st = units[u.id] || { l: 1 };
+    kitFor(u, st.l || 1, st.br).forEach(function (k) { run.bag.push(mkTile(run, c, u.id, k.s, k.n)); });
   });
-  colourless.slice(0, CONFIG.maxColourless).forEach(function (k) { run.bag.push(mkTile(run, 'x', 'x', k.s, k.n)); });
-  run.startBag = run.bag.length; run.maxHp = run.hp = CONFIG.heroHp[area - 1];
+  colourless.slice(0, CONFIG.maxColourless).forEach(function (k) { run.bag.push(mkTile(run, 'x', 'x', k.s, k.n + (k.st || 0), { rar: k.rar || 0, st: k.st || 0 })); });
+  run.maxHp = run.hp = CONFIG.heroHp[area - 1];
   run.offers = genOffers(run, rnd);
   return run;
 }
-function startFight(run, fight) {
-  var F = JSON.parse(JSON.stringify(fight.F));
-  var fs = { kind: fight.kind, F: F, reward: fight.reward, turn: 0, mom: run.mom, used: 0 };
-  run.mom = 0; return fs;
+function pickBlock(F, rnd, not) {
+  var base = (CONFIG.rows - 1) * F.cols, c;
+  do { c = base + ((rnd() * F.cols) | 0); } while (c === not && F.cols > 1);
+  return c;
 }
-function bagLeft(run) { return run.bag.filter(function (t) { return !t.spent; }).length; }
-function resolveAttack(run, fs, board) {
+function startFight(run, offer, rnd) {
+  rnd = rnd || Math.random;
+  var F = JSON.parse(JSON.stringify(offer.F));
+  if (F.trick === 'block') { F.tb = pickBlock(F, rnd, -1); F.tn = pickBlock(F, rnd, F.tb); }
+  var fs = { kind: offer.kind, F: F, reward: offer.reward, turn: 0, mom: run.mom, used: 0, extra: [], hpStart: run.hp };
+  run.mom = 0; run.bag.forEach(function (t) { t.rest = false; });
+  return fs;
+}
+function available(run) { return run.bag.filter(function (t) { return !t.rest; }); }
+function resolveAttack(run, fs, board, rnd) {
+  rnd = rnd || Math.random;
   var F = fs.F, res = evaluate(F, board, { momentum: fs.mom });
-  var info = { res: res, used: 0, kills: [], risen: [], before: F.enemies.map(function (e) { return { hp: e.hp, max: e.max, dead: e.dead }; }), heroBefore: run.hp, hit: [], win: false, lose: null, mom: fs.mom };
-  board.forEach(function (t) { if (t) { t.spent = true; info.used++; } });
+  var info = { res: res, used: 0, kills: [], left: [], revived: [], before: F.enemies.map(function (e) { return { hp: e.hp, max: e.max, dead: e.dead }; }), heroBefore: run.hp, hit: [], win: false, lose: null, mom: fs.mom, regroup: false, runnerLoot: [], blockMoved: false };
+  var seen = {};
+  board.forEach(function (t) { if (t && !seen[t.id]) { seen[t.id] = 1; info.used++; if (CONFIG.tileReturn === 'fight') t.rest = true; } });
   F.enemies.forEach(function (e, k) {
     if (e.dead) return;
     e.hp -= res.en[k].dmg;
     if (e.hp <= 0) {
-      if (e.ph2 > 0) { e.hp = e.max = e.ph2; e.ph2 = 0; e.phase = 2; info.risen.push(k); }
-      else { e.hp = 0; e.dead = true; info.kills.push(k); }
+      e.hp = 0; e.dead = true; info.kills.push(k);
+      if (e.kind === 'r') { var lt = lootTile('runner', run.depth, rnd); fs.extra.push(lt); info.runnerLoot.push(lt); }
     }
   });
   fs.mom = 0; fs.turn++; fs.used += info.used;
+  F.enemies.forEach(function (e, k) { if (!e.dead && e.kind === 'r') { e.dead = true; e.gone = true; info.left.push(k); } });
   var alive = F.enemies.filter(function (e) { return !e.dead; });
   if (!alive.length) info.win = true;
   else {
     F.enemies.forEach(function (e, k) { if (!e.dead) { run.hp -= e.atk; info.hit.push(k); } });
     if (run.hp < 0) run.hp = 0;
-    if (run.hp <= 0) info.lose = 'hp'; else if (!bagLeft(run)) info.lose = 'tiles';
+    if (run.hp <= 0) info.lose = 'hp';
+    if (F.trick === 'twin') {
+      var down = F.enemies.filter(function (e) { return e.twin && e.dead; }), up = F.enemies.filter(function (e) { return e.twin && !e.dead; });
+      if (down.length && up.length) down.forEach(function (e) { e.dead = false; e.hp = e.max; info.revived.push(F.enemies.indexOf(e)); });
+    }
+    if (F.trick === 'block') { F.tb = F.tn; F.tn = pickBlock(F, rnd, F.tb); info.blockMoved = true; }
+    if (!info.lose && !available(run).length) { run.bag.forEach(function (t) { t.rest = false; }); info.regroup = true; }
   }
   info.heroDmg = info.heroBefore - run.hp;
   return info;
 }
-function replenish(run, rnd) {
-  rnd = rnd || Math.random;
-  var returned = 0, bonus = [], B = CONFIG.boss;
-  run.bag.forEach(function (t) { if (t.spent) { t.spent = false; returned++; } });
-  for (var i = 0; i < B.bonusMax; i++) if (rnd() < B.bonusChance) { var g = genColourless(run.depth + 1, rnd); bonus.push(g); run.bag.push(mkTile(run, 'x', 'x', g.s, g.n, true)); }
-  var heal = Math.min(run.maxHp - run.hp, Math.ceil(run.maxHp * B.heal)); run.hp += heal;
-  return { returned: returned, bonus: bonus, heal: heal };
-}
 function finishFight(run, fs, rnd) {
-  var out = { coins: fs.reward.coins, tile: fs.reward.tile, heal: 0, mom: 0, boss: fs.kind === 'boss', rep: null, attacks: fs.turn, used: fs.used };
-  run.coins += out.coins; if (out.tile) run.loot.push(out.tile);
-  out.heal = Math.min(CONFIG.healPerFight, run.maxHp - run.hp); run.hp += out.heal;
+  rnd = rnd || Math.random;
+  var boss = fs.kind === 'boss';
+  var out = { coins: fs.reward.coins, tile: fs.reward.tile, extra: fs.extra.slice(), heal: 0, mom: 0, boss: boss, kind: fs.kind, attacks: fs.turn, used: fs.used, hpLost: fs.hpStart - run.hp };
+  run.coins += out.coins;
+  if (out.tile) run.loot.push(out.tile);
+  out.extra.forEach(function (t) { run.loot.push(t); });
+  out.heal = Math.min(CONFIG.healPerFight + (boss ? Math.ceil(run.maxHp * CONFIG.boss.heal) : 0), run.maxHp - run.hp); run.hp += out.heal;
   run.won++; run.fights++;
   if (CONFIG.momentum.on && fs.turn === 1) { run.mom = CONFIG.momentum.bonus; out.mom = run.mom; }
-  if (out.boss) { out.rep = replenish(run, rnd); run.depth++; run.step = 0; out.heal += out.rep.heal; }
-  else run.step++;
-  run.offers = genOffers(run, rnd);
+  if (boss) { run.depth++; run.step = 0; } else run.step++;
+  run.fs = null; run.board = null;
+  run.pending = { type: 'win', out: out, picks: genPicks(run, rnd) };
   return out;
+}
+/* nodes: forge / rest / treasure.  Sets run.pending. */
+function chooseNode(run, kind, rnd) {
+  rnd = rnd || Math.random;
+  if (kind === 'forge') {
+    var picks = [], avoid = [];
+    for (var i = 0; i < 3; i++) { var u = genUpgrade(run, rnd, avoid); if (u) { picks.push(u); avoid.push(u.tid); } }
+    run.pending = { type: 'forge', picks: picks };
+  } else if (kind === 'rest') {
+    var h = Math.min(run.maxHp - run.hp, Math.ceil(run.maxHp * CONFIG.restHeal)); run.hp += h;
+    run.pending = { type: 'rest', heal: h, picks: null };
+  } else {
+    var t = lootTile('treasure', run.depth, rnd); run.loot.push(t);
+    run.pending = { type: 'treasure', tile: t, picks: null };
+  }
+  run.step++;
+}
+function applyPick(run, i, rnd) {
+  var p = run.pending, o = p && p.picks && p.picks[i];
+  if (o) {
+    if (o.type === 'tile') run.bag.push(mkTile(run, o.tile.c, o.tile.u, o.tile.s, o.tile.n, { added: true }));
+    else if (o.type === 'up') { var t = run.bag.filter(function (x) { return x.id === o.tid; })[0]; if (t) applyUpgrade(t, o); }
+    else if (o.type === 'heal') run.hp = Math.min(run.maxHp, run.hp + o.amt);
+  }
+  run.pending = null; run.offers = genOffers(run, rnd);
 }
 function settle(run, how) {   /* how: 'bank' or 'dead' -> what the player keeps */
   var keep = how === 'bank' ? 1 : CONFIG.deathKeep;
-  return { coins: Math.floor(run.coins * keep), tiles: run.loot.slice(0, Math.floor(run.loot.length * keep)) };
+  var sorted = run.loot.slice().sort(function (a, b) { return b.rar - a.rar; });
+  return { coins: Math.floor(run.coins * keep), tiles: sorted.slice(0, Math.floor(sorted.length * keep)) };
 }
 /*RULES-END*/
 
@@ -528,96 +716,160 @@ function settle(run, how) {   /* how: 'bank' or 'dead' -> what the player keeps 
 'use strict';
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-var LS_KEY = 'tileRunPrototype.v1';
+var LS_KEY = 'tileRunPrototype.v2';
 var store = null, SPEED = 1;
+var TRICKS = {
+  twin: 'Twin bodies: both must fall in the same attack, or the fallen one rises again.',
+  block: 'Each turn one back cell is blocked. The dotted frame shows which cell is blocked next turn.',
+  aegis: 'Armoured: it takes damage only if 3 or more different tiles hit it in one attack.'
+};
 function defaultStore() {
   var units = {}, team = {};
-  UNITS.forEach(function (u) { var first = !team[u.c]; if (first) team[u.c] = u.id; units[u.id] = { u: first, l: 1 }; });
-  return { coins: CONFIG.startCoins, units: units, team: team, inv: [{ s: 'strike', n: 3 }, { s: 'strike', n: 3 }, { s: 'plus', n: 1 }], bag: [0, 1, 2], best: { 1: 0, 2: 0, 3: 0 }, set: { momentum: true, value: 1, mode: 'sandwich', ecol: false } };
+  UNITS.forEach(function (u) { var first = !team[u.c]; if (first) team[u.c] = u.id; units[u.id] = { u: first, l: 1, br: null }; });
+  return { coins: CONFIG.startCoins, units: units, team: team, nid: 3, bag: [1, 2, 3], best: { 1: 0, 2: 0, 3: 0 }, run: null,
+    inv: [{ id: 1, s: 'strike', n: 3, rar: 0, st: 0 }, { id: 2, s: 'strike', n: 3, rar: 0, st: 0 }, { id: 3, s: 'plus', n: 1, rar: 0, st: 0 }],
+    set: { momentum: true, value: 1, ret: 'fight', stars: true } };
 }
 function load() {
   var s = defaultStore();
-  try { var j = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); if (j && j.units && j.team) { s = j; var d = defaultStore(); for (var k in d) if (s[k] === undefined) s[k] = d[k]; UNITS.forEach(function (u) { if (!s.units[u.id]) s.units[u.id] = d.units[u.id]; }); } } catch (e) {}
+  try {
+    var j = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
+    if (j && j.units && j.team && j.inv) {
+      var d = defaultStore(); s = j;
+      for (var k in d) if (s[k] === undefined) s[k] = d[k];
+      for (k in d.set) if (s.set[k] === undefined) s.set[k] = d.set[k];
+      UNITS.forEach(function (u) { if (!s.units[u.id]) s.units[u.id] = d.units[u.id]; });
+    }
+  } catch (e) {}
   return s;
 }
 function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(store)); } catch (e) {} }
-function applySettings() { CONFIG.momentum.on = !!store.set.momentum; CONFIG.momentum.bonus = store.set.value || 1; CONFIG.reactionMode = MODES[store.set.mode] ? store.set.mode : 'sandwich'; CONFIG.enemyColours = !!store.set.ecol; }
+function applySettings() {
+  CONFIG.momentum.on = !!store.set.momentum; CONFIG.momentum.bonus = store.set.value || 1;
+  CONFIG.tileReturn = store.set.ret === 'turn' ? 'turn' : 'fight'; CONFIG.stars.on = !!store.set.stars;
+}
 store = load(); applySettings();
 function sleep(ms) { return new Promise(function (r) { setTimeout(r, S.skip ? 6 : ms * SPEED); }); }
+var S = { run: null, fs: null, board: [], sel: -1, tab: 'r', phase: 'edit', skip: false, hold: null, screen: 'home' };
 
-var S = { run: null, fs: null, board: [], sel: -1, tab: 'r', phase: 'edit', skip: false, hold: null, screen: 'home', lastOut: null };
+/* ---------- inventory ---------- */
+function addInv(e) {
+  if (CONFIG.stars.on) {
+    var m = store.inv.filter(function (x) { return x.s === e.s && x.n === e.n && (x.rar || 0) === (e.rar || 0) && (x.st || 0) < CONFIG.stars.cap; })[0];
+    if (m) { m.st = (m.st || 0) + 1; return 'merged'; }
+  }
+  store.nid++; store.inv.push({ id: store.nid, s: e.s, n: e.n, rar: e.rar || 0, st: 0 }); return 'new';
+}
+function invTile(e) { return { c: 'x', u: 'x', s: e.s, n: e.n + (e.st || 0), st: e.st || 0, rar: e.rar || 0 }; }
+function invSorted() { return store.inv.slice().sort(function (a, b) { return (b.rar || 0) - (a.rar || 0) || (a.s < b.s ? -1 : a.s > b.s ? 1 : 0) || b.n - a.n; }); }
 
 /* ---------- svg bits ---------- */
-function symSvg(c) {
+function symSvg(c, cls) {
   var p = { r: '<circle cx="5" cy="5" r="4"/>', b: '<path d="M5 .8 L9.4 9 L.6 9Z"/>', g: '<rect x="1.2" y="1.2" width="7.6" height="7.6" rx="1"/>', y: '<path d="M5 .5 L9.5 5 L5 9.5 L.5 5Z"/>', p: '<path d="M2.6 1 H7.4 L9.6 5 L7.4 9 H2.6 L.4 5Z"/>', x: '<circle cx="5" cy="5" r="3.3" fill="none" stroke="currentColor" stroke-width="1.6"/>' }[c];
-  return '<svg class="sym" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">' + p + '</svg>';
+  return '<svg class="' + (cls || 'sym') + '" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">' + p + '</svg>';
 }
-var GLYPH = { strike: [[0, 1], [2, 1]], fork: [[0, 0], [1, 0], [2, 0], [0, 2], [1, 2], [2, 2]], plus: [[0, 1], [2, 1], [1, 0], [1, 2]], row: [[1, 0], [1, 2]], dbl: [[0, 1]] };
+var GLYPH = {
+  strike: [[0, 1], [2, 1]], fork: [[0, 0], [1, 0], [2, 0], [0, 2], [1, 2], [2, 2]], plus: [[0, 1], [2, 1], [1, 0], [1, 2]], row: [[1, 0], [1, 2]], pillar: [[0, 1], [2, 1]], dbl: [[0, 1]],
+  diag: [[0, 0], [0, 2]], sweep: [[0, 1], [2, 1], [0, 0, 'h'], [0, 2, 'h'], [1, 0, 'h'], [1, 2, 'h'], [2, 0, 'h'], [2, 2, 'h']], echo: [[0, 1, 'o'], [2, 1]],
+  giantH: [[0, 1], [0, 2], [1, 2], [1, 1, 'f']], giantV: [[0, 1], [2, 1], [1, 1, 'f']]
+};
 function glyphSvg(s) {
   var on = GLYPH[s], h = '<svg class="glyph" viewBox="0 0 12 12" aria-hidden="true">';
   for (var r = 0; r < 3; r++) for (var c = 0; c < 3; c++) {
-    var lit = on.some(function (p) { return p[0] === r && p[1] === c; });
-    if (r === 1 && c === 1) h += '<rect x="4.6" y="4.6" width="2.8" height="2.8" rx=".8" fill="none" stroke="currentColor" stroke-width="1"/>';
-    else h += '<rect x="' + (c * 4 + .4) + '" y="' + (r * 4 + .4) + '" width="3.2" height="3.2" rx=".8" fill="currentColor"' + (lit ? '' : ' opacity=".25"') + '/>';
+    var e = null; on.forEach(function (p) { if (p[0] === r && p[1] === c) e = p; });
+    var x = (c * 4 + .4), y = (r * 4 + .4);
+    if (r === 1 && c === 1) h += e && e[2] === 'f' ? '<rect x="4.2" y="4.2" width="3.6" height="3.6" rx=".8" fill="currentColor"/>' : '<rect x="4.6" y="4.6" width="2.8" height="2.8" rx=".8" fill="none" stroke="currentColor" stroke-width="1"/>';
+    else if (e && e[2] === 'o') h += '<rect x="' + (x + .5) + '" y="' + (y + .5) + '" width="2.2" height="2.2" rx=".6" fill="none" stroke="currentColor" stroke-width="1"/>';
+    else h += '<rect x="' + x + '" y="' + y + '" width="3.2" height="3.2" rx=".8" fill="currentColor"' + (e ? (e[2] === 'h' ? ' opacity=".55"' : '') : ' opacity=".22"') + '/>';
   }
   return h + '</svg>';
 }
-var SPIKE = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6.4 3.6 L10 5 L6.4 6.4 L5 10 L3.6 6.4 L0 5 L3.6 3.6Z"/></svg>';
+function gemSvg(rar) { return '<svg class="gem g' + rar + '" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 .6 L9.2 4 L5 9.4 L.8 4Z"/></svg>'; }
+function starsTxt(n) { var s = ''; for (var i = 0; i < n; i++) s += '★'; return s; }
 function tileHTML(t, o) {
   o = o || {};
-  var k = SHAPES[t.s].kind, cls = '', num = tileLabel(t, o.shown !== undefined ? o.shown : t.n);
-  if (o.shown !== undefined && o.shown !== t.n) cls += ' chg';
-  var pw = CONFIG.reactionMode === 'wheel' && t.c !== 'x' && !o.nopw ? '<span class="pw" style="background:var(--' + wheelNext(t.c) + ')"></span>' : '';
-  return '<div class="tile k-' + k + ' c-' + t.c + cls + (o.cls ? ' ' + o.cls : '') + '" style="' + (o.ts ? '--ts:' + o.ts + 'px;' : '') + '" ' + (o.attrs || '') + ' aria-label="' + COLORS[t.c] + ' ' + SHAPES[t.s].name + ' ' + num + '">' +
-    glyphSvg(t.s) + symSvg(t.c) + pw + '<b class="num">' + num + '</b><i class="nm">' + SHAPES[t.s].short + '</i></div>';
+  var sh = SHAPES[t.s], k = sh.kind, cls = '', num = tileLabel(t, o.shown);
+  if (o.shown !== undefined && (t.s === 'echo' ? true : o.shown !== t.n)) cls += ' chg';
+  if (t.c2) cls += ' two d-' + t.c2;
+  if (t.rar) cls += ' rar-' + t.rar;
+  if (t.added) cls += ' added';
+  if (t.rest && !o.noRest) cls += ' rested';
+  if (o.big) cls += ' big-' + o.big;
+  return '<div class="tile k-' + k + ' c-' + t.c + cls + (o.cls ? ' ' + o.cls : '') + '" style="' + (o.ts ? '--ts:' + o.ts + 'px;' : '') + '" ' + (o.attrs || '') + ' aria-label="' + COLORS[t.c] + ' ' + sh.name + ' ' + num + '">' +
+    glyphSvg(t.s) + symSvg(t.c) + (t.c2 ? symSvg(t.c2, 'sym sym2') : '') + (t.rar ? gemSvg(t.rar) : '') + (t.st ? '<span class="stars">' + starsTxt(t.st) + '</span>' : '') + (t.up ? '<span class="upm">▲</span>' : '') +
+    '<b class="num">' + num + '</b><i class="nm">' + sh.short + '</i></div>';
 }
 function dotHTML(c) { return '<span class="dot c-' + c + '">' + symSvg(c).replace('class="sym"', '') + '</span>'; }
 function hpBar(hp, max) { return '<div class="hpbar"><i style="width:' + Math.max(0, hp / max * 100) + '%"></i><span>' + hp + ' / ' + max + '</span></div>'; }
+var SPIKE = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6.4 3.6 L10 5 L6.4 6.4 L5 10 L3.6 6.4 L0 5 L3.6 3.6Z"/></svg>';
+var LINK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M5 7 L7 5 M3.8 8.2 a2 2 0 0 1 0-2.800 L5 4.200 M8.200 3.800 a2 2 0 0 1 0 2.800 L7 7.800" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round"/></svg>';
+var RUN = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h7M6 2.500L9.500 6 6 9.500" fill="none" stroke="currentColor" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var NODEICON = {
+  forge: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h14c0 3-2 4-4 4v3h3v3H8v-3h3v-3c-2 0-4-1-4-3z" fill="currentColor"/></svg>',
+  rest: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3a9 9 0 1 0 6 12 7 7 0 0 1-6-12z" fill="currentColor"/></svg>',
+  treasure: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 8-8 12L4 10z" fill="currentColor"/></svg>'
+};
 
 /* ---------- navigation ---------- */
 function show(name) {
   S.screen = name;
   ['home', 'team', 'map', 'fight', 'result'].forEach(function (n) { $('#' + n).hidden = n !== name; });
   window.scrollTo(0, 0);
-  if (name === 'home') renderHome(); else if (name === 'team') renderTeam(); else if (name === 'map') renderMap();
+  if (name === 'home') renderHome(); else if (name === 'team') renderTeam(); else if (name === 'map') renderMap(); else if (name === 'result') renderResult();
 }
+function persist() { if (S.run && !S.run.over) { S.run.board = S.board; store.run = S.run; save(); } }
 function teamValid() { return COLOR_IDS.every(function (c) { var u = UNIT_BY_ID[store.team[c]]; return u && u.c === c && store.units[u.id].u; }); }
-function chosenColourless() { return store.bag.filter(function (i) { return store.inv[i]; }).slice(0, CONFIG.maxColourless).map(function (i) { return store.inv[i]; }); }
-function bagSize() { var n = chosenColourless().length; COLOR_IDS.forEach(function (c) { n += kitFor(UNIT_BY_ID[store.team[c]], store.units[store.team[c]].l).length; }); return n; }
+function chosenColourless() { return store.bag.map(function (id) { return store.inv.filter(function (x) { return x.id === id; })[0]; }).filter(Boolean).slice(0, CONFIG.maxColourless); }
+function unitKit(u) { var st = store.units[u.id]; return kitFor(u, st.l, st.br); }
+function bagSize() { var n = chosenColourless().length; COLOR_IDS.forEach(function (c) { n += unitKit(UNIT_BY_ID[store.team[c]]).length; }); return n; }
 function invHTML() {
   if (!store.inv.length) return '<div class="ctext">No colourless tiles yet. Earn them as loot.</div>';
-  return '<div class="inv">' + store.inv.map(function (t, i) { return tileHTML({ c: 'x', s: t.s, n: t.n }, { cls: 'small' + (store.bag.indexOf(i) >= 0 ? ' sel' : ''), attrs: 'data-inv="' + i + '" data-card="it:' + i + '"' }); }).join('') + '</div>';
+  return '<div class="inv">' + invSorted().map(function (e) { return tileHTML(invTile(e), { cls: 'small' + (store.bag.indexOf(e.id) >= 0 ? ' sel' : ''), attrs: 'data-inv="' + e.id + '" data-card="it:' + e.id + '"' }); }).join('') + '</div>';
 }
 function renderHome() {
-  var h = '<h1>Tile Run</h1><p class="sub">Place tiles, attack, and make your bag last. <b class="gold">' + store.coins + ' coins</b></p>';
+  var h = '<h1>Tile Run</h1><p class="sub">Build layouts, make sandwiches, grow your bag. <b class="gold">' + store.coins + ' coins</b></p>';
+  if (store.run) {
+    var r = store.run;
+    h += '<div class="panel"><b>Run in progress</b><div class="ctext">Area ' + r.area + ', depth ' + r.depth + ', ' + r.fights + ' fights won, hero ' + r.hp + ' / ' + r.maxHp + '</div><div class="linkrow"><button class="btn main" data-act="resume">Continue run</button><button class="btn" data-act="bank">Bank and leave</button></div></div>';
+  }
   h += '<h2>Areas</h2><div class="areas">';
   CONFIG.areas.forEach(function (A, i) {
-    h += '<button class="area" data-act="start" data-area="' + (i + 1) + '"' + (teamValid() ? '' : ' disabled') + '><div><b>Area ' + (i + 1) + ': ' + A.name + '</b><small>' + A.cols + ' columns, hero ' + CONFIG.heroHp[i] + ' HP, suggested unit level ' + A.lvl + (store.best[i + 1] ? ', best depth ' + store.best[i + 1] : '') + '</small></div><span class="go">Run</span></button>';
+    h += '<button class="area" data-act="start" data-area="' + (i + 1) + '"' + (teamValid() && !store.run ? '' : ' disabled') + '><div><b>Area ' + (i + 1) + ': ' + A.name + '</b><small>' + A.cols + ' columns, hero ' + CONFIG.heroHp[i] + ' HP, suggested unit level ' + A.lvl + (store.best[i + 1] ? ', best depth ' + store.best[i + 1] : '') + '</small></div><span class="go">Run</span></button>';
   });
   h += '</div><h2>Team</h2><div class="panel"><div class="chips">';
   COLOR_IDS.forEach(function (c) { var u = UNIT_BY_ID[store.team[c]]; h += '<span class="uchip">' + dotHTML(c) + u.name + ' L' + store.units[u.id].l + '</span>'; });
   h += '</div><div class="ctext" style="margin-top:6px">Bag: ' + bagSize() + ' tiles (' + chosenColourless().length + '/' + CONFIG.maxColourless + ' colourless)</div><div class="linkrow"><button class="btn sm" data-act="team">Edit team and levels</button></div></div>';
-  h += '<h2>Colourless inventory</h2><div class="panel"><div class="ctext" style="margin-bottom:6px">Tap to put up to ' + CONFIG.maxColourless + ' in your bag. Hold a tile for details.</div>' + invHTML() + '</div>';
+  h += '<h2>Colourless inventory</h2><div class="panel"><div class="ctext" style="margin-bottom:6px">Tap to put up to ' + CONFIG.maxColourless + ' in your bag. A gem marks Rare and Epic. Hold a tile for details.</div>' + invHTML() + '</div>';
   h += '<div class="linkrow"><button class="btn" data-act="help">How to play</button><button class="btn" data-act="settings">Settings and test</button></div>';
   $('#home').innerHTML = h;
 }
-function kitHTML(u, lvl) {
-  var all = kitFor(u, 3);
-  return '<div class="kit">' + all.map(function (k) { return tileHTML({ c: u.c, s: k.s, n: k.n }, { cls: 'small' + (k.lv > lvl ? ' fade' : ''), attrs: 'data-card="kt:' + u.id + ':' + k.s + ':' + k.n + ':' + k.lv + '"' }); }).join('') + '</div>';
+function kitTileHTML(u, k, lvl, extra) {
+  return tileHTML({ c: u.c, u: u.id, s: k.s, n: k.n }, { cls: 'small' + (k.lv > lvl ? ' fade' : '') + (k.s === u.sig ? ' sigt' : '') + (extra || ''), attrs: 'data-card="kt:' + u.id + ':' + k.s + ':' + k.n + ':' + k.lv + '"' });
 }
 function renderTeam() {
   var h = '<header class="top"><button class="hbtn" data-act="home" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="ttl">Team</div><span class="hbtn"></span></header>';
-  h += '<p class="sub">One unit per colour; units differ only by their tiles. <b class="gold">' + store.coins + ' coins</b>. Faded tiles arrive at a higher level.</p>';
+  h += '<p class="sub">One unit per colour; units differ by their tiles. Level 3 unlocks a signature shape, level 5 a branch. <b class="gold">' + store.coins + ' coins</b></p>';
   COLOR_IDS.forEach(function (c) {
     h += '<h2>' + dotHTML(c) + ' ' + COLORS[c] + '</h2>';
     UNITS.filter(function (u) { return u.c === c; }).forEach(function (u) {
-      var st = store.units[u.id], picked = store.team[c] === u.id;
+      var st = store.units[u.id], picked = store.team[c] === u.id, sig = SHAPES[u.sig];
       h += '<div class="ucard c-' + c + (picked ? ' pick' : '') + (st.u ? '' : ' locked') + '"><div class="uhead">' + dotHTML(c) + '<b>' + u.name + '</b><span class="lvl">' + (st.u ? 'Level ' + st.l : 'Locked') + '</span><span class="grow"></span>';
       if (!st.u) h += '<button class="btn sm" data-act="unlock" data-u="' + u.id + '"' + (store.coins < CONFIG.unlockCost ? ' disabled' : '') + '>Unlock ' + CONFIG.unlockCost + '</button>';
       else if (picked) h += '<span class="lvl" style="color:var(--ok)">In team</span>';
       else h += '<button class="btn sm" data-act="pick" data-u="' + u.id + '">Pick</button>';
-      h += '</div>' + kitHTML(u, st.l) + '<div class="row"><span class="ctext grow">' + kitFor(u, st.l).length + ' tiles' + (st.l < 3 ? ', next level adds ' + (kitFor(u, st.l + 1).length - kitFor(u, st.l).length) : ', max level') + '</span>';
-      if (st.u && st.l < 3) h += '<button class="btn sm" data-act="level" data-u="' + u.id + '"' + (store.coins < CONFIG.levelCost[st.l + 1] ? ' disabled' : '') + '>Level ' + (st.l + 1) + ': ' + CONFIG.levelCost[st.l + 1] + '</button>';
+      h += '</div><div class="rline" data-card="sig:' + u.sig + '"><i>Level 3 signature:</i> ' + sig.name + (u.sig === 'giantH' ? ' (wide)' : u.sig === 'giantV' ? ' (tall)' : '') + '. Hold for the reach.</div>';
+      var groups = u.kit.split('|');
+      h += '<div class="kit">';
+      groups.forEach(function (g, gi) { parseKit(g, gi + 1).forEach(function (k) { h += kitTileHTML(u, k, st.l); }); });
+      h += '</div>';
+      ['a', 'b'].forEach(function (b) {
+        var on = st.l >= 5 && st.br === b, kit = parseKit(u.br[b].kit, 5);
+        h += '<div class="brrow' + (on ? ' on' : '') + '"><span class="ctext">Level 5 branch ' + b.toUpperCase() + ': <b>' + u.br[b].name + '</b></span><span class="kit inl">' + kit.map(function (k) { return kitTileHTML(u, k, on ? 5 : 4); }).join('') + '</span>';
+        if (st.u && st.l >= 5) h += '<button class="btn sm" data-act="branch" data-u="' + u.id + '" data-b="' + b + '">' + (on ? 'Chosen' : 'Choose') + '</button>';
+        h += '</div>';
+      });
+      h += '<div class="row"><span class="ctext grow">' + unitKit(u).length + ' tiles' + (st.l >= 5 && !st.br ? ', choose a branch' : '') + '</span>';
+      if (st.u && st.l < 5) h += '<button class="btn sm" data-act="level" data-u="' + u.id + '"' + (store.coins < CONFIG.levelCost[st.l + 1] ? ' disabled' : '') + '>Level ' + (st.l + 1) + ': ' + CONFIG.levelCost[st.l + 1] + '</button>';
       h += '</div></div>';
     });
   });
@@ -626,91 +878,117 @@ function renderTeam() {
 }
 
 /* ---------- run map ---------- */
+function bcText(t) { return t === 'p1' ? '+1' : t === 'p2' ? '+2' : '×2'; }
+function enemyTag(e) { return e.kind === 'r' ? 'runs' : e.need > 1 ? 'needs ' + e.need : ''; }
 function offerHTML(o, i) {
+  var run = S.run;
+  if (o.node) {
+    var T = { forge: ['Forge', 'Upgrade one tile for this run: choose one of three.'], rest: ['Rest', 'Heal ' + Math.min(run.maxHp - run.hp, Math.ceil(run.maxHp * CONFIG.restHeal)) + ' HP.'], treasure: ['Treasure', 'A colourless tile for your inventory. Rare ones are possible.'] }[o.node];
+    return '<div class="offer nodec ' + o.node + '" data-offer="' + i + '"><div class="ohead"><span class="nicon">' + NODEICON[o.node] + '</span><b>' + T[0] + '</b></div><div class="ctext">' + T[1] + '</div></div>';
+  }
   var F = o.F, label = o.kind === 'boss' ? 'BOSS' : o.kind === 'elite' ? 'ELITE' : 'FIGHT', hpSum = 0;
   F.enemies.forEach(function (e) { hpSum += e.hp; });
-  var h = '<div class="offer ' + o.kind + '" data-offer="' + i + '"><div class="ohead"><span class="tag">' + label + '</span><b>' + hpSum + ' HP</b><span class="rew"><span>' + o.reward.coins + ' coins</span>' + (o.reward.tile ? tileHTML({ c: 'x', s: o.reward.tile.s, n: o.reward.tile.n }, { cls: 'small', attrs: 'data-card="ot:' + i + '"' }) : '') + '</span></div>';
+  var h = '<div class="offer ' + o.kind + '" data-offer="' + i + '"><div class="ohead"><span class="tag">' + label + '</span><b>' + hpSum + ' HP</b><span class="rew"><span>' + o.reward.coins + ' coins</span>' + (o.reward.tile ? tileHTML(invTile(o.reward.tile), { cls: 'small', attrs: 'data-card="ot:' + i + '"' }) : '') + '</span></div>';
   h += '<div class="oen" style="grid-template-columns:repeat(' + F.cols + ',1fr)">';
-  F.enemies.forEach(function (e, k) { h += '<div class="mini' + (e.kind === 'g' ? ' g' : '') + '" style="grid-column:span ' + e.w + '" data-card="oe:' + i + ':' + k + '">' + (CONFIG.enemyColours ? '<span class="ecd">' + dotHTML(e.col) + '</span>' : '') + '<b>' + e.hp + '</b><small>atk ' + e.atk + (e.kind === 'g' ? ' guard' : '') + (e.boss ? ' phase 2' : '') + '</small></div>'; });
-  h += '</div><div class="ofoot">';
+  F.enemies.forEach(function (e, k) {
+    h += '<div class="mini' + (e.need > 1 ? ' g' : '') + (e.kind === 'r' ? ' run' : '') + (e.twin ? ' twin' : '') + '" style="grid-column:span ' + e.w + '" data-card="oe:' + i + ':' + k + '"><b>' + e.hp + '</b><small>' + (e.kind === 'r' ? 'runner' : 'atk ' + e.atk) + (e.need > 1 ? ' needs ' + e.need : '') + (e.twin ? ' linked' : '') + '</small></div>';
+  });
+  h += '</div>';
+  if (F.trick) h += '<div class="trick">' + TRICKS[F.trick] + '</div>';
+  h += '<div class="ofoot">';
   var bonus = Object.keys(F.bonus);
   bonus.forEach(function (q) { h += '<span class="bcb" data-card="bc:' + F.bonus[q] + '">' + bcText(F.bonus[q]) + '</span>'; });
   if (bonus.length) h += '<span>bonus cell' + (bonus.length > 1 ? 's' : '') + '</span>';
   if (F.blocked.length) h += '<span>' + F.blocked.length + ' blocked</span>';
-  if (!bonus.length && !F.blocked.length) h += '<span>plain board</span>';
+  if (F.enemies.some(function (e) { return e.kind === 'r'; })) h += '<span>kill the runner for a bonus tile</span>';
+  if (!bonus.length && !F.blocked.length && !F.trick) h += '<span>plain board</span>';
   return h + '</div></div>';
 }
-function bcText(t) { return t === 'p1' ? '+1' : t === 'p2' ? '+2' : '×2'; }
 function renderMap() {
-  var run = S.run, h = '<header class="top"><button class="hbtn" data-act="leave" aria-label="Leave run"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="ttl">Area ' + run.area + ': ' + run.A.name + '</div><button class="hbtn" data-act="help" aria-label="How to play"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4.500 2.600c-1 .6-1.500 1.200-1.500 2.400M12 18v.5"/></svg></button></header>';
-  h += '<div class="row" style="margin-bottom:6px"><span class="stat">Hero</span>' + hpBar(run.hp, run.maxHp) + '</div>';
-  h += '<div class="row stat" style="margin-bottom:4px;justify-content:space-between"><span>Bag ' + bagLeft(run) + ' / ' + run.bag.length + ' tiles</span><span>Depth ' + run.depth + '</span><span>Loot ' + run.coins + ' coins' + (run.loot.length ? ', ' + run.loot.length + ' tile' + (run.loot.length > 1 ? 's' : '') : '') + '</span></div>';
+  var run = S.run, A = CONFIG.areas[run.area - 1];
+  var h = '<header class="top"><button class="hbtn" data-act="leave" aria-label="Leave run"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="ttl">Area ' + run.area + ': ' + A.name + '</div><button class="hbtn" data-act="help" aria-label="How to play"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4.500 2.600c-1 .6-1.500 1.200-1.500 2.400M12 18v.5"/></svg></button></header>';
+  h += '<div class="row" style="margin-bottom:6px"><span class="stat">Hero</span>' + hpBar(run.hp, run.maxHp) + '<button class="btn sm" data-act="bag">Bag ' + run.bag.length + '</button></div>';
+  h += '<div class="row stat" style="margin-bottom:4px;justify-content:space-between"><span>Depth ' + run.depth + '</span><span>Fights won ' + run.fights + '</span><span>Loot ' + run.coins + ' coins' + (run.loot.length ? ', ' + run.loot.length + ' tile' + (run.loot.length > 1 ? 's' : '') : '') + '</span></div>';
   if (run.mom > 0) h += '<div style="margin-bottom:4px"><span class="mombadge" data-card="mom">Momentum +' + run.mom + ' on your first attack</span></div>';
   h += '<div class="path">';
   for (var i = 0; i < CONFIG.bossEvery; i++) {
     var boss = i === CONFIG.bossEvery - 1;
     h += (i ? '<span class="seg"></span>' : '') + '<span class="node' + (i < run.step ? ' done' : i === run.step ? ' cur' : '') + (boss ? ' boss' : '') + '">' + (boss ? 'B' : i + 1) + '</span>';
   }
-  h += '</div><h2>' + (run.step >= CONFIG.bossEvery - 1 ? 'Boss ahead' : 'Choose your fight') + '</h2>';
+  h += '</div><h2>' + (run.step >= CONFIG.bossEvery - 1 ? 'Boss ahead' : 'Choose your path') + '</h2>';
   run.offers.forEach(function (o, i) { h += offerHTML(o, i); });
   h += '<button class="btn" data-act="bank" style="width:100%">Bank and leave (keep everything)</button>';
-  $('#map').innerHTML = h;
+  $('#map').innerHTML = h; persist();
 }
+function runUnits() { var l = {}; for (var k in store.units) l[k] = { l: store.units[k].l, br: store.units[k].br }; return l; }
 function startRunUI(area) {
-  if (!teamValid()) return;
-  S.run = newRun(area, store.team, (function () { var l = {}; for (var k in store.units) l[k] = store.units[k].l; return l; })(), chosenColourless());
+  if (!teamValid() || store.run) return;
+  S.run = newRun(area, store.team, runUnits(), chosenColourless()); S.fs = null; S.board = [];
   show('map');
+}
+function resume() {
+  var r = store.run; if (!r) return false;
+  S.run = r; S.fs = r.fs || null; S.board = r.board || [];
+  if (r.pending) show('result');
+  else if (r.fs) { S.phase = 'edit'; S.sel = -1; S.hold = null; S.tab = firstTab(); show('fight'); renderFight(); }
+  else show('map');
+  return true;
+}
+function chooseOfferUI(i) {
+  var run = S.run, o = run.offers[i]; if (!o) return;
+  if (o.node) { chooseNode(run, o.node); show('result'); return; }
+  startFightUI(i);
 }
 
 /* ---------- fight ---------- */
-function boardTiles() { return S.board.map(function (id) { return id >= 0 ? tileById(id) : null; }); }
 function tileById(id) { for (var i = 0; i < S.run.bag.length; i++) if (S.run.bag[i].id === id) return S.run.bag[i]; return null; }
+function boardTiles() { return S.board.map(function (id) { return id >= 0 ? tileById(id) : null; }); }
 function evalNow(detail) { return evaluate(S.fs.F, boardTiles(), { momentum: S.fs.mom, detail: detail }); }
+function usable(F, q) { return F.blocked.indexOf(q) < 0 && F.tb !== q; }
 function startFightUI(i) {
   var run = S.run, o = run.offers[i];
-  S.fs = startFight(run, o);
+  S.fs = startFight(run, o); run.fs = S.fs;
   S.board = []; for (var q = 0; q < o.F.cols * CONFIG.rows; q++) S.board.push(-1);
   S.sel = -1; S.phase = 'edit'; S.skip = false; S.hold = null; S.tab = firstTab();
   show('fight'); renderFight();
 }
 function firstTab() { var ids = COLOR_IDS.concat(['x']); for (var i = 0; i < ids.length; i++) if (handOf(ids[i]).length) return ids[i]; return 'r'; }
-function handOf(c) { return S.run.bag.filter(function (t) { return !t.spent && t.c === c && S.board.indexOf(t.id) < 0; }); }
+function handOf(c, rested) { return S.run.bag.filter(function (t) { return t.c === c && !!t.rest === !!rested && S.board.indexOf(t.id) < 0; }); }
 function cellSize(cols) { var w = Math.min(document.documentElement.clientWidth || 390, 440) - 24; return Math.max(44, Math.min(76, Math.floor((w - 6 * (cols - 1)) / cols))); }
 function renderFight() {
-  var run = S.run, fs = S.fs, F = fs.F, cols = F.cols, i, k;
-  var f = $('#fight'); f.style.setProperty('--cs', cellSize(cols) + 'px'); f.style.setProperty('--n', cols);
-  var bt = boardTiles(), res = evaluate(F, bt, { momentum: fs.mom, detail: true }), placed = bt.filter(Boolean).length;
+  var run = S.run, fs = S.fs, F = fs.F, cols = F.cols, R = CONFIG.rows, i;
+  var f = $('#fight'), cs = cellSize(cols); f.style.setProperty('--cs', cs + 'px'); f.style.setProperty('--n', cols);
+  var bt = boardTiles(), res = evaluate(F, bt, { momentum: fs.mom, detail: true }), placed = res.G.length;
   var mk = {};
-  res.marks.sand.forEach(function (m) { mk[m.mid] = (mk[m.mid] || '') + ' sandw'; var hz = m.b - m.a === 2; mk[m.a] = (mk[m.a] || '') + (hz ? ' brR' : ' brB'); mk[m.b] = (mk[m.b] || '') + (hz ? ' brL' : ' brT'); });
-  res.marks.wheel.forEach(function (m) { mk[m.to] = (mk[m.to] || '') + ' wheelto'; });
-  $('#fhead').innerHTML = '<span class="stat">Hero</span>' + hpBar(run.hp, run.maxHp) + '<span class="stat">Bag ' + (bagLeft(run) - placed) + '</span>' + (fs.mom > 0 ? '<span class="mombadge" data-card="mom">Momentum +' + fs.mom + '</span>' : '') + '<button class="hbtn" data-act="fmenu" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>';
+  res.marks.forEach(function (m) { mk[m.mid] = (mk[m.mid] || '') + ' sandw'; mk[m.a] = (mk[m.a] || '') + (m.h ? ' brR' : ' brB'); mk[m.b] = (mk[m.b] || '') + (m.h ? ' brL' : ' brT'); });
+  $('#fhead').innerHTML = '<span class="stat">Hero</span>' + hpBar(run.hp, run.maxHp) + '<span class="stat">Attack ' + (fs.turn + 1) + '</span>' + (fs.mom > 0 ? '<span class="mombadge" data-card="mom">Momentum +' + fs.mom + '</span>' : '') + '<button class="hbtn" data-act="fmenu" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>';
   var h = '';
   F.enemies.forEach(function (e, ek) {
     var r = res.en[ek], pct = Math.max(0, e.hp / e.max * 100), dpct = Math.min(e.hp, r.dmg) / e.max * 100;
-    var mc = res.marks.matched.filter(function (m) { return m.enemy === ek; }).length;
-    var pill = e.dead ? 'down' : r.guardBlocked ? '2 hits' : r.dmg > 0 ? (r.kill ? 'KO  -' + r.dmg : '-' + r.dmg) + (mc ? ' \u00d72' : '') : '0';
-    h += '<div class="enemy' + (e.kind === 'g' ? ' guard' : '') + (e.boss ? ' boss' : '') + (e.dead ? ' dead' : '') + (r.kill ? ' kill' : '') + (r.dmg > 0 ? ' has' : '') + '" style="grid-column:span ' + e.w + '" data-en="' + ek + '" data-card="e:' + ek + '">' +
-      '<div class="etile">' + (CONFIG.enemyColours ? '<span class="ecd">' + dotHTML(e.col) + '</span>' : '') + '<span class="atk">' + SPIKE + e.atk + '</span><b class="hpn">' + (e.dead ? 0 : e.hp) + '</b><i>' + (e.kind === 'g' ? 'GUARD' : e.boss ? (e.phase === 2 ? 'BOSS II' : 'BOSS') : e.w > 1 ? 'WIDE' : 'HP') + '</i></div>' +
+    var pill = e.gone ? 'left' : e.dead ? 'down' : r.guardBlocked ? 'needs ' + r.need : r.dmg > 0 ? (r.kill ? 'KO  -' + r.dmg : '-' + r.dmg) : '0';
+    var lab = e.gone ? 'LEFT' : e.kind === 'r' ? 'RUNNER' : e.boss ? (e.twin ? 'TWIN' : e.need > 1 ? 'AEGIS' : 'BOSS') : e.need > 1 ? 'GUARD' : e.w > 1 ? 'WIDE' : 'HP';
+    h += '<div class="enemy' + (e.need > 1 ? ' guard' : '') + (e.boss ? ' boss' : '') + (e.kind === 'r' ? ' runner' : '') + (e.twin ? ' twin' : '') + (e.dead ? ' dead' : '') + (e.gone ? ' gone' : '') + (r.kill ? ' kill' : '') + (r.dmg > 0 ? ' has' : '') + '" style="grid-column:span ' + e.w + '" data-en="' + ek + '" data-card="e:' + ek + '">' +
+      '<div class="etile">' + (e.twin ? '<span class="ecd">' + LINK + '</span>' : e.kind === 'r' ? '<span class="ecd">' + RUN + '</span>' : '') + (e.kind === 'r' ? '' : '<span class="atk">' + SPIKE + e.atk + '</span>') + '<b class="hpn">' + (e.dead ? 0 : e.hp) + '</b><i>' + lab + '</i></div>' +
       '<div class="ebar"><i style="width:' + pct + '%"></i><u style="left:' + Math.max(0, pct - dpct) + '%;width:' + dpct + '%"></u></div><div class="pill">' + pill + '</div></div>';
   });
   $('#fen').innerHTML = h;
   h = '';
-  for (i = 0; i < cols * CONFIG.rows; i++) {
-    var blocked = F.blocked.indexOf(i) >= 0, bn = F.bonus[i], t = S.board[i] >= 0 ? tileById(S.board[i]) : null;
-    h += '<div class="cell' + (blocked ? ' x' : ' free') + (bn ? ' bonus' : '') + (t ? ' occ' : '') + '" data-cell="' + i + '"' + (bn ? ' data-card="bc:' + bn + '"' : '') + '>';
+  for (i = 0; i < cols * R; i++) {
+    var gi = res.cellG[i], g = gi !== undefined ? res.G[gi] : null;
+    if (g && g.a !== i) continue;
+    var blocked = F.blocked.indexOf(i) >= 0, tb = F.tb === i, tn = F.tn === i, bn = F.bonus[i], t = g ? g.t : null, sh = t ? SHAPES[t.s] : null;
+    var r0 = (i / cols) | 0, c0 = i % cols, spanw = sh && sh.big === 'h' ? 2 : 1, spanh = sh && sh.big === 'v' ? 2 : 1;
+    h += '<div class="cell' + (blocked || tb ? ' x' : ' free') + (tb ? ' tb' : '') + (tn ? ' tn' : '') + (bn ? ' bonus' : '') + (t ? ' occ' : '') + (spanw > 1 ? ' spanh' : '') + (spanh > 1 ? ' spanv' : '') + '" data-cell="' + i + '" style="grid-column:' + (c0 + 1) + ' / span ' + spanw + ';grid-row:' + (r0 + 1) + ' / span ' + spanh + '"' + (bn ? ' data-card="bc:' + bn + '"' : tb || tn ? ' data-card="tr:' + F.trick + '"' : '') + '>';
     if (t) {
-      var shown = isAttack(t) ? res.val[i] : isBoost(t) ? res.power[i] : t.n;
-      h += tileHTML(t, { shown: shown, attrs: 'data-cell="' + i + '" data-card="t:' + t.id + '"', cls: (cellSize(cols) < 60 ? 'small' : '') + (mk[i] || '') }).replace('style="', 'style="--ts:' + cellSize(cols) + 'px;');
-    } else if (bn) h += '<span class="bb">' + bcText(bn) + '</span>';
+      var shown = isAttack(t) ? res.val[i] : isBoost(t) ? res.power[i] : undefined;
+      h += tileHTML(t, { shown: shown, big: sh.big, attrs: 'data-cell="' + i + '" data-card="t:' + t.id + '"', cls: (cs < 60 ? 'small' : '') + (mk[i] || ''), noRest: true }).replace('style="', 'style="--ts:' + cs + 'px;');
+    } else if (tb) h += '<span class="bb">blocked</span>';
+    else if (tn) h += '<span class="bb">next</span>';
+    else if (bn) h += '<span class="bb">' + bcText(bn) + '</span>';
     h += '<span class="pv"></span></div>';
   }
   $('#fboard').innerHTML = h;
-  h = '';
-  var M = MODES[CONFIG.reactionMode];
-  h = '<div class="strip" data-card="mode">' + (CONFIG.reactionMode === 'wheel' ? wheelSvg() : '') + '<span class="t"><b>' + M.name + ':</b> ' + M.line + '</span></div>';
-  $('#rbar').innerHTML = h;
-  drawMarks(res);
-  /* tabs */
+  $('#rbar').innerHTML = '<div class="strip" data-card="mode"><span class="t"><b>Sandwich:</b> ' + SANDWICH + '</span></div>' + (F.trick ? '<div class="strip trickstrip" data-card="tr:' + F.trick + '"><span class="t"><b>Boss:</b> ' + TRICKS[F.trick] + '</span></div>' : '');
   var ids = COLOR_IDS.concat(['x']), tabs = '';
   if (!handOf(S.tab).length) { var ft = firstTab(); if (handOf(ft).length) S.tab = ft; }
   ids.forEach(function (c) {
@@ -718,44 +996,33 @@ function renderFight() {
     tabs += '<button class="tab c-' + c + (S.tab === c ? ' on' : '') + (n ? '' : ' empty') + '" data-tab="' + c + '">' + dotHTML(c) + n + '</button>';
   });
   $('#ftabs').innerHTML = tabs;
-  var hand = handOf(S.tab).sort(function (a, b) { return a.s < b.s ? -1 : a.s > b.s ? 1 : a.n - b.n; });
-  $('#fhand').innerHTML = hand.length ? hand.map(function (t) { return tileHTML(t, { attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: 'small' + (S.sel === t.id ? ' sel' : '') }); }).join('') : '<div class="ctext" style="grid-column:1/-1;text-align:center;padding:10px">' + (bagLeft(run) - placed ? 'No tiles of this colour left.' : 'No tiles left in your bag.') + '</div>';
+  var order = function (a, b) { return a.s < b.s ? -1 : a.s > b.s ? 1 : a.n - b.n; };
+  var hand = handOf(S.tab).sort(order), restT = handOf(S.tab, true).sort(order);
+  $('#fhand').innerHTML = hand.map(function (t) { return tileHTML(t, { attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: 'small' + (S.sel === t.id ? ' sel' : '') }); }).join('') +
+    restT.map(function (t) { return tileHTML(t, { attrs: 'data-card="t:' + t.id + '"', cls: 'small' }); }).join('') +
+    (!hand.length && !restT.length ? '<div class="ctext" style="grid-column:1/-1;text-align:center;padding:10px">No tiles of this colour.</div>' : '');
   $('#fatk').disabled = !placed || S.phase !== 'edit'; $('#fclear').disabled = !placed || S.phase !== 'edit';
   $('#fatk').textContent = placed ? 'Attack with ' + placed + ' tile' + (placed > 1 ? 's' : '') : 'Attack';
   var info = '';
-  if (S.sel >= 0) { var st = tileById(S.sel); info = 'Tap a cell for ' + SHAPES[st.s].name + ' ' + st.n + '. Glowing cells would finish an enemy.'; }
-  else if (!placed) info = fs.turn === 0 ? 'Tap a tile, then a cell (or drag it). Hold anything for details.' : 'Enemies hit back. Place more tiles, or the rest of your bag is all you have.';
-  else info = 'Tap a placed tile to take it back. Tiles you attack with are spent for this run.';
+  if (S.sel >= 0) { var st = tileById(S.sel); info = 'Tap a cell for ' + SHAPES[st.s].name + ' ' + tileLabel(st) + '. Glowing cells would finish an enemy.'; }
+  else if (!placed) info = fs.turn === 0 ? 'Tap a tile, then a cell (or drag it). Hold anything for details.' : 'Enemies hit back. Place tiles again' + (CONFIG.tileReturn === 'fight' ? ' (used tiles rest until this fight ends).' : '.');
+  else info = 'Tap a placed tile to take it back.';
   if (fs.mom > 0) info = 'Momentum: every tile gets +' + fs.mom + ' on this attack. ' + info;
   $('#finfo').textContent = info;
   if (S.sel >= 0) showHold(tileById(S.sel), -1);
+  drawNothing();
+  persist();
 }
-function wheelSvg() {
-  var h = '<svg class="wheelsvg" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="13" fill="none" stroke="var(--line)" stroke-width="1.5"/>';
-  WHEEL.forEach(function (c, k) { var a = -Math.PI / 2 + k * 2 * Math.PI / 5; h += '<circle cx="' + (13 * Math.cos(a)).toFixed(1) + '" cy="' + (13 * Math.sin(a)).toFixed(1) + '" r="4.6" style="fill:var(--' + c + ')"/>'; });
-  var a0 = -Math.PI / 2 + 0.55, a1 = -Math.PI / 2 + 2 * Math.PI / 5 - 0.55;
-  h += '<path d="M' + (13 * Math.cos(a0)).toFixed(1) + ' ' + (13 * Math.sin(a0)).toFixed(1) + ' A13 13 0 0 1 ' + (13 * Math.cos(a1)).toFixed(1) + ' ' + (13 * Math.sin(a1)).toFixed(1) + '" fill="none" stroke="var(--ink)" stroke-width="2"/></svg>';
-  return h;
-}
-function drawMarks(res) {
-  var old = $('#marks'); if (old) old.remove();
-  if (!res.marks.melds.length) return;
-  var wrap = $('#bwrap'), wr = wrap.getBoundingClientRect(), h = '<svg id="marks" width="' + wr.width + '" height="' + wr.height + '" style="position:absolute;left:0;top:0;pointer-events:none;overflow:visible">';
-  res.marks.melds.forEach(function (m) {
-    var pts = m.cells.map(function (q) { var el = $('#fboard .cell[data-cell="' + q + '"]'), r = el.getBoundingClientRect(); return { x: r.left - wr.left + r.width / 2 + (m.row ? 0 : r.width * 0.34), y: r.top - wr.top + r.height / 2 + (m.row ? r.height * 0.34 : 0), h: r.height }; });
-    var mid = m.row ? pts[1] : { x: pts[2].x - 26, y: pts[2].y + pts[2].h * 0.34 }, lab = m.label + ' +' + m.bonus + (m.row ? ' each' : ''), w = lab.length * 6.4 + 12;
-    h += '<polyline points="' + pts.map(function (q) { return q.x + ',' + q.y; }).join(' ') + '" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>' +
-      '<rect x="' + (mid.x - w / 2) + '" y="' + (mid.y - 9) + '" width="' + w + '" height="18" rx="9" fill="var(--gold)"/><text x="' + mid.x + '" y="' + (mid.y + 4) + '" text-anchor="middle" font-size="11" font-weight="800" fill="#1c1500">' + lab + '</text>';
-  });
-  wrap.insertAdjacentHTML('beforeend', h + '</svg>');
-}
+function drawNothing() { var old = $('#marks'); if (old) old.remove(); }
 function showHold(t, from) {
   clearHold(); if (!t) return;
-  var F = S.fs.F, bt = boardTiles(); if (from >= 0) bt[from] = null;
+  var F = S.fs.F, cols = F.cols, R = CONFIG.rows, bt = boardTiles().map(function (x) { return x && x.id === t.id ? null : x; });
   var base = evaluate(F, bt, { momentum: S.fs.mom });
   $$('#fboard .cell').forEach(function (el) {
-    var i = +el.dataset.cell; if (F.blocked.indexOf(i) >= 0 || bt[i]) return;
-    var b2 = bt.slice(); b2[i] = t; var r2 = evaluate(F, b2, { momentum: S.fs.mom }), best = -1, bd = 0, kill = false;
+    var i = +el.dataset.cell, cs = cellsFor(t, i, cols, R);
+    if (!cs || cs.some(function (q) { return !usable(F, q) || bt[q]; })) return;
+    var b2 = bt.slice(); cs.forEach(function (q) { b2[q] = t; });
+    var r2 = evaluate(F, b2, { momentum: S.fs.mom }), best = -1, bd = 0, kill = false;
     F.enemies.forEach(function (e, k) { var d = r2.en[k].dmg - base.en[k].dmg; if (d > bd) { bd = d; best = k; } if (r2.en[k].kill && !base.en[k].kill) kill = true; });
     el.classList.add('hold'); el.querySelector('.pv').textContent = best >= 0 ? '→' + r2.en[best].dmg : '';
     if (kill) el.classList.add('glow');
@@ -763,16 +1030,37 @@ function showHold(t, from) {
   S.hold = t;
 }
 function clearHold() { S.hold = null; $$('#fboard .cell').forEach(function (el) { el.classList.remove('hold', 'glow'); var p = el.querySelector('.pv'); if (p) p.textContent = ''; }); }
-function place(id, cell) {
-  if (S.phase !== 'edit' || S.fs.F.blocked.indexOf(cell) >= 0) return;
-  var old = S.board[cell], from = S.board.indexOf(id);
-  if (from >= 0) S.board[from] = old; /* swap when moving a board tile onto another */
-  S.board[cell] = id; S.sel = -1; clearHold(); renderFight();
+function setBoard(arr) { S.board = arr; if (S.run) S.run.board = arr; }
+function anchorFor(t, cell) {
+  var F = S.fs.F, cols = F.cols, R = CONFIG.rows, sh = SHAPES[t.s];
+  var tries = sh.big === 'h' ? [cell, cell - 1] : sh.big === 'v' ? [cell, cell - cols] : [cell];
+  for (var k = 0; k < tries.length; k++) {
+    var a = tries[k]; if (a < 0) continue;
+    if (sh.big === 'h' && ((a / cols) | 0) !== ((cell / cols) | 0)) continue;
+    var cs = cellsFor(t, a, cols, R);
+    if (cs && cs.every(function (q) { return usable(F, q); })) return cs;
+  }
+  return null;
 }
-function unplace(cell) { S.board[cell] = -1; S.sel = -1; clearHold(); renderFight(); }
-function clearBoard() { S.board = S.board.map(function () { return -1; }); S.sel = -1; clearHold(); renderFight(); }
+function shakeCell(i) { var el = $('#fboard .cell[data-cell="' + i + '"]'); if (el) { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); } }
+function place(id, cell) {
+  if (S.phase !== 'edit') return;
+  var t = tileById(id), B = S.board, cells = anchorFor(t, cell);
+  if (!cells) { shakeCell(cell); return; }
+  var from = []; B.forEach(function (x, i) { if (x === id) from.push(i); });
+  var occ = {}; cells.forEach(function (q) { if (B[q] >= 0 && B[q] !== id) occ[B[q]] = 1; });
+  var occIds = Object.keys(occ).map(Number);
+  from.forEach(function (q) { B[q] = -1; });
+  var single = function (x) { return !SHAPES[x.s].big; };
+  if (occIds.length === 1 && from.length === 1 && single(t) && single(tileById(occIds[0]))) { B.forEach(function (x, i) { if (x === occIds[0]) B[i] = -1; }); B[from[0]] = occIds[0]; }
+  else occIds.forEach(function (o) { B.forEach(function (x, i) { if (x === o) B[i] = -1; }); });
+  cells.forEach(function (q) { B[q] = id; });
+  S.sel = -1; clearHold(); renderFight();
+}
+function unplace(cell) { var id = S.board[cell]; S.board = S.board.map(function (x) { return x === id ? -1 : x; }); S.run.board = S.board; S.sel = -1; clearHold(); renderFight(); }
+function clearBoard() { setBoard(S.board.map(function () { return -1; })); S.sel = -1; clearHold(); renderFight(); }
 
-/* ---------- animation helpers ---------- */
+/* ---------- attack animation ---------- */
 function centerOf(el) { var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }
 function fly(text, from, to, cls) {
   var el = document.createElement('div'); el.className = 'fly ' + (cls || ''); el.textContent = text;
@@ -787,86 +1075,118 @@ async function attack() {
   var run = S.run, fs = S.fs;
   S.phase = 'anim'; S.skip = false; S.sel = -1; clearHold(); hideCard();
   $('#fatk').disabled = true; $('#fclear').disabled = true;
-  var cells = bt.map(function (t, i) { return t ? i : -1; }).filter(function (i) { return i >= 0; });
   var info = resolveAttack(run, fs, bt), res = info.res, F = fs.F;
-  S.board = S.board.map(function () { return -1; });
+  setBoard(S.board.map(function () { return -1; }));
   try {
-    /* 1: tiles pulse, numbers fly to the enemy columns */
     var enEl = function (k) { return $('.enemy[data-en="' + k + '"]'); };
-    cells.forEach(function (i) {
-      var el = $('#fboard .tile[data-cell="' + i + '"]'); if (!el) return; pulseEl(el);
-      var t = bt[i]; if (!isAttack(t)) return;
-      var c = i % F.cols, outs = t.s === 'strike' ? [c] : [c - 1, c + 1];
-      outs.forEach(function (oc) { var k = res.enemyAt[oc]; if (oc < 0 || oc >= F.cols || k === undefined) return; var to = centerOf($('.etile', enEl(k))); fly('+' + res.val[i], centerOf(el), to); });
+    res.G.forEach(function (g) {
+      var el = $('#fboard .tile[data-cell="' + g.a + '"]'); if (!el) return; pulseEl(el);
+      g.outs.forEach(function (o) { var k = res.enemyAt[o[0]]; if (k === undefined || !enEl(k)) return; fly('+' + o[1], centerOf(el), centerOf($('.etile', enEl(k)))); });
     });
     await sleep(520);
-    /* 2: totals count up, HP drops, enemies crack */
     for (var step = 1; step <= 6; step++) {
-      F.enemies.forEach(function (e, k) { var d = res.en[k].dmg; if (d > 0) { var pl = $('.pill', enEl(k)); pl.textContent = '-' + Math.round(d * step / 6); } });
+      F.enemies.forEach(function (e, k) { var d = res.en[k].dmg; if (d > 0 && enEl(k)) $('.pill', enEl(k)).textContent = '-' + Math.round(d * step / 6); });
       await sleep(55);
     }
     F.enemies.forEach(function (e, k) {
       var el = enEl(k), b = info.before[k]; if (!el) return;
-      var left = e.dead ? 0 : e.hp, rs = info.risen.indexOf(k) >= 0;
-      $('.ebar i', el).style.width = (rs ? 100 : left / e.max * 100) + '%'; var u = $('.ebar u', el); if (u) u.style.width = '0';
+      var rev = info.revived.indexOf(k) >= 0, left = e.dead ? 0 : e.hp;
+      $('.ebar i', el).style.width = (left / e.max * 100) + '%'; var u = $('.ebar u', el); if (u) u.style.width = '0';
       $('.hpn', el).textContent = left;
-      if (e.dead && !b.dead) { el.classList.add('dead'); }
-      if (rs) { $('.etile i', el).textContent = 'BOSS II'; pulseEl(el); fly('PHASE 2', centerOf(el), { x: centerOf(el).x, y: centerOf(el).y - 30 }); }
+      if (e.dead && !b.dead) el.classList.add('dead');
+      if (info.left.indexOf(k) >= 0) { el.classList.add('gone'); fly('runs away', centerOf(el), { x: centerOf(el).x, y: centerOf(el).y - 30 }); }
+      if (rev) { el.classList.remove('dead'); pulseEl(el); fly('rises!', centerOf(el), { x: centerOf(el).x, y: centerOf(el).y - 30 }); }
     });
     await sleep(650);
-    /* 3: survivors hit back */
     if (info.hit.length) {
-      info.hit.forEach(function (k) { var el = enEl(k); if (el) { el.classList.add('hit'); fly('-' + F.enemies[k].atk, centerOf(el), { x: centerOf($('#fhead .hpbar')).x, y: centerOf($('#fhead .hpbar')).y }, 'bad'); } });
+      info.hit.forEach(function (k) { var el = enEl(k); if (el) { el.classList.add('hit'); fly('-' + F.enemies[k].atk, centerOf(el), centerOf($('#fhead .hpbar')), 'bad'); } });
       await sleep(260);
       $('#fhead .hpbar').outerHTML = hpBar(run.hp, run.maxHp);
       $('#fight').classList.add('shake'); await sleep(380); $('#fight').classList.remove('shake');
     } else await sleep(150);
   } catch (e) { /* animation must never block the game */ }
-  S.lastOut = info;
   if (info.lose) { endRun(info.lose); return; }
-  if (info.win) { var out = finishFight(run, fs); S.lastOut = out; showFightResult(out); return; }
+  if (info.win) { finishFight(run, fs); S.fs = null; S.board = []; show('result'); return; }
   S.phase = 'edit'; renderFight();
+  if (info.regroup) $('#finfo').textContent = 'All your tiles are back for the next attack.';
+  if (info.blockMoved) $('#finfo').textContent = 'The boss blocks a new back cell. ' + $('#finfo').textContent;
 }
 
-/* ---------- results ---------- */
-function resTile(t) { return tileHTML({ c: 'x', s: t.s, n: t.n }, { cls: 'small', ts: 46 }); }
-function showFightResult(out) {
-  var run = S.run, h = '';
-  if (out.boss) {
-    h = '<div class="resbox win"><h2>Boss defeated</h2><p>Your bag is replenished: <b>' + out.rep.returned + '</b> spent tiles returned' + (out.rep.bonus.length ? ', plus <b>' + out.rep.bonus.length + ' bonus colourless tile' + (out.rep.bonus.length > 1 ? 's' : '') + '</b> for the rest of this run' : ', no bonus tiles this time') + '.</p>';
-    if (out.rep.bonus.length) h += '<div class="inv">' + out.rep.bonus.map(resTile).join('') + '</div>';
-    h += '<p>Healed ' + out.heal + ' HP. Hero ' + run.hp + ' / ' + run.maxHp + '. Bag ' + bagLeft(run) + ' tiles.</p>';
-  } else h = '<div class="resbox win"><h2>Victory</h2><p>' + (out.attacks === 1 ? 'Won in one attack' : 'Won in ' + out.attacks + ' attacks') + ', ' + out.used + ' tile' + (out.used > 1 ? 's' : '') + ' spent. Bag ' + bagLeft(run) + ' / ' + run.bag.length + '. Hero ' + run.hp + ' / ' + run.maxHp + (out.heal ? ' (healed ' + out.heal + ')' : '') + '.</p>';
-  h += '<p class="gold">+' + out.coins + ' coins' + (out.tile ? ' and a colourless tile' : '') + '</p>' + (out.tile ? '<div class="inv">' + resTile(out.tile) + '</div>' : '');
-  if (out.mom) h += '<p><span class="mombadge" data-card="mom">Momentum +' + out.mom + '</span><br><span class="ctext">Cleared in one attack: your next fight\'s first attack gets +' + out.mom + ' on every tile.</span></p>';
-  h += '<div class="btns"><button class="btn main" data-act="cont">' + (out.boss ? 'Go deeper' : 'Continue') + '</button>' + (out.boss ? '<button class="btn" data-act="bank">Bank and leave</button>' : '') + '</div></div>';
-  $('#result').innerHTML = h; show('result');
+/* ---------- results, picks, nodes ---------- */
+function pickHTML(o, i) {
+  var run = S.run, h = '<button class="pickc" data-pick="' + i + '">';
+  if (o.type === 'tile') {
+    var t = { c: o.tile.c, u: o.tile.u, s: o.tile.s, n: o.tile.n, added: true };
+    h += '<div class="pk">New tile for this run</div>' + tileHTML(t, { ts: 58, cls: 'small' }) + '<div class="ctext">' + COLORS[t.c] + ' ' + SHAPES[t.s].name + ' ' + tileLabel(t) + (SHAPES[t.s].sig ? ' (signature shape)' : '') + '</div>';
+  } else if (o.type === 'up') {
+    var tt = run.bag.filter(function (x) { return x.id === o.tid; })[0];
+    if (tt) {
+      var after = applyUpgrade(JSON.parse(JSON.stringify(tt)), o);
+      h += '<div class="pk">Upgrade a tile</div><div class="ups">' + tileHTML(tt, { ts: 50, cls: 'small', noRest: true }) + '<span class="arrow">→</span>' + tileHTML(after, { ts: 50, cls: 'small', noRest: true }) + '</div><div class="ctext">' + (o.kind === 'n2' ? '+' + o.amt + ' to its number' : 'second colour: ' + COLORS[o.col] + ' (counts as both for Sandwich)') + '</div>';
+    }
+  } else h += '<div class="pk">Heal</div><div class="bigheal">+' + o.amt + ' HP</div><div class="ctext">Hero ' + run.hp + ' / ' + run.maxHp + '</div>';
+  return h + '</button>';
 }
+function renderResult() {
+  var run = S.run, p = run.pending, h = '';
+  if (run.over) return;
+  if (!p) { show('map'); return; }
+  if (p.type === 'win') {
+    var out = p.out;
+    h = '<div class="resbox win"><h2>' + (out.boss ? 'Boss defeated' : 'Victory') + '</h2><p>' + (out.attacks === 1 ? 'Won in one attack' : 'Won in ' + out.attacks + ' attacks') + (out.hpLost > 0 ? ', lost ' + out.hpLost + ' HP' : ', no damage taken') + '. Hero ' + run.hp + ' / ' + run.maxHp + (out.heal ? ' (healed ' + out.heal + ')' : '') + '.</p>';
+    h += '<p class="gold">+' + out.coins + ' coins</p>';
+    var tiles = (out.tile ? [out.tile] : []).concat(out.extra || []);
+    if (tiles.length) h += '<p>Loot: colourless tile' + (tiles.length > 1 ? 's' : '') + (out.extra && out.extra.length ? ' (runner bonus included)' : '') + '</p><div class="inv">' + tiles.map(function (t) { return tileHTML(invTile(t), { cls: 'small', ts: 46 }); }).join('') + '</div>';
+    if (out.mom) h += '<p><span class="mombadge" data-card="mom">Momentum +' + out.mom + '</span><br><span class="ctext">Cleared in one attack: your next fight\'s first attack gets +' + out.mom + ' on every tile.</span></p>';
+    h += '<h2>Choose one</h2><div class="picks">' + p.picks.map(pickHTML).join('') + '</div></div>';
+  } else if (p.type === 'forge') {
+    h = '<div class="resbox win"><h2>Forge</h2><p>Choose one upgrade for this run.</p><div class="picks">' + p.picks.map(pickHTML).join('') + '</div></div>';
+  } else if (p.type === 'rest') {
+    h = '<div class="resbox win"><h2>Rest</h2><p>You healed <b>' + p.heal + '</b> HP. Hero ' + run.hp + ' / ' + run.maxHp + '.</p><div class="btns"><button class="btn main" data-act="cont">Continue</button></div></div>';
+  } else {
+    h = '<div class="resbox win"><h2>Treasure</h2><p>A ' + RARITY[p.tile.rar || 0].toLowerCase() + ' colourless tile, kept in your inventory when the run ends.</p><div class="inv">' + tileHTML(invTile(p.tile), { cls: 'small', ts: 56 }) + '</div><div class="btns"><button class="btn main" data-act="cont">Continue</button></div></div>';
+  }
+  $('#result').innerHTML = h; persist();
+}
+function takePick(i) { applyPick(S.run, i); S.fs = null; show('map'); }
 function commitRun(how) {
-  var run = S.run, k = settle(run, how);
-  store.coins += k.coins; k.tiles.forEach(function (t) { store.inv.push({ s: t.s, n: t.n }); });
+  var run = S.run, k = settle(run, how), merged = 0;
+  store.coins += k.coins; k.tiles.forEach(function (t) { if (addInv(t) === 'merged') merged++; });
   if (run.depth > (store.best[run.area] || 0)) store.best[run.area] = run.depth;
-  save(); return k;
+  run.over = how; store.run = null; save(); k.merged = merged; return k;
 }
 function endRun(reason) {
   var run = S.run, k = commitRun('dead'); S.phase = 'over';
-  var h = '<div class="resbox lose"><h2>Run over</h2><p>' + (reason === 'hp' ? 'Your hero ran out of HP.' : 'Your bag is empty.') + '</p><p>Fights won: <b>' + run.fights + '</b>, depth <b>' + run.depth + '</b>.</p><p class="gold">Kept ' + k.coins + ' of ' + run.coins + ' coins' + (run.loot.length ? ' and ' + k.tiles.length + ' of ' + run.loot.length + ' loot tiles' : '') + '.</p><div class="btns"><button class="btn main" data-act="home">Home</button></div></div>';
-  $('#result').innerHTML = h; S.run.over = reason; show('result');
+  $('#result').innerHTML = '<div class="resbox lose"><h2>Run over</h2><p>Your hero ran out of HP.</p><p>Fights won: <b>' + run.fights + '</b>, depth <b>' + run.depth + '</b>.</p><p class="gold">Kept ' + k.coins + ' of ' + run.coins + ' coins' + (run.loot.length ? ' and ' + k.tiles.length + ' of ' + run.loot.length + ' loot tiles' : '') + '.</p><div class="btns"><button class="btn main" data-act="home">Home</button></div></div>';
+  show('result');
 }
 function bankRun() {
-  var run = S.run, k = commitRun('bank'); S.phase = 'over'; run.over = 'bank';
-  $('#result').innerHTML = '<div class="resbox win"><h2>Banked</h2><p>Fights won: <b>' + run.fights + '</b>, depth <b>' + run.depth + '</b>.</p><p class="gold">+' + k.coins + ' coins' + (k.tiles.length ? ' and ' + k.tiles.length + ' colourless tile' + (k.tiles.length > 1 ? 's' : '') : '') + ' saved.</p><div class="btns"><button class="btn main" data-act="home">Home</button></div></div>';
+  if (!S.run && store.run) S.run = store.run;
+  var run = S.run, k = commitRun('bank'); S.phase = 'over';
+  $('#result').innerHTML = '<div class="resbox win"><h2>Banked</h2><p>Fights won: <b>' + run.fights + '</b>, depth <b>' + run.depth + '</b>.</p><p class="gold">+' + k.coins + ' coins' + (k.tiles.length ? ' and ' + k.tiles.length + ' colourless tile' + (k.tiles.length > 1 ? 's' : '') + (k.merged ? ' (' + k.merged + ' merged into stars)' : '') : '') + ' saved.</p><div class="btns"><button class="btn main" data-act="home">Home</button></div></div>';
   show('result');
+}
+function bagHTML() {
+  var run = S.run, h = '<h3>Bag: ' + run.bag.length + ' tiles</h3><div class="ctext">Gold dotted ring: added this run. Arrow: upgraded. Split colour: two colours. Faded: resting until the fight ends.</div>';
+  COLOR_IDS.concat(['x']).forEach(function (c) {
+    var ts = run.bag.filter(function (t) { return t.c === c; }); if (!ts.length) return;
+    h += '<div class="bagrow">' + dotHTML(c) + '<div class="inv">' + ts.map(function (t) { return tileHTML(t, { cls: 'small', ts: 46, attrs: 'data-card="t:' + t.id + '"' }); }).join('') + '</div></div>';
+  });
+  return h + '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
 }
 
 /* ---------- cards ---------- */
 function hideCard() { var c = $('#card'); c.hidden = true; if ($('#modal').hidden) $('#dim').hidden = true; }
 function showCard(html) { $('#card').innerHTML = html; $('#card').hidden = false; $('#dim').hidden = false; }
 function tileCardHTML(t, parts, extra) {
-  var h = tileHTML(t, { cls: 'cardtile' }).replace('class="tile', 'class="cardtile tile') + '<h3>' + COLORS[t.c] + ' ' + SHAPES[t.s].name + ' ' + tileLabel(t) + '</h3><p>' + SHAPES[t.s].desc + '</p>';
-  if (t.c === 'x') h += '<p class="muted">Colourless: never counts as a colour (sandwich, flush, wheel), but its number counts for Runs and Sets.</p>';
-  else if (CONFIG.reactionMode === 'wheel') h += '<p class="muted">Its dot: it powers touching ' + COLORS[wheelNext(t.c)] + ' Strikes and Forks.</p>';
-  if (CONFIG.enemyColours && t.c !== 'x') h += '<p class="muted">Deals double to ' + COLORS[t.c] + ' enemies.</p>';
+  var h = tileHTML(t, { cls: 'cardtile', noRest: true }) + '<h3>' + (t.rar ? RARITY[t.rar] + ' ' : '') + (t.c2 ? COLORS[t.c] + '/' + COLORS[t.c2] : COLORS[t.c]) + ' ' + SHAPES[t.s].name + ' ' + tileLabel(t) + '</h3><p>' + SHAPES[t.s].desc + '</p>';
+  if (t.c === 'x') h += '<p class="muted">Colourless: never counts as a colour for Sandwich.</p>';
+  if (t.c2) h += '<p class="muted">Two colours: counts as both for Sandwich.</p>';
+  if (t.st) h += '<p class="muted">' + starsTxt(t.st) + ' merged duplicates: +' + t.st + ' to its number.</p>';
+  if (t.up) h += '<p class="muted">Upgraded this run: +' + t.up + '.</p>';
+  if (t.added) h += '<p class="muted">Added to your bag for this run.</p>';
+  if (t.rest) h += '<p class="muted">Resting until this fight ends.</p>';
+  if (SHAPES[t.s].sig) h += '<p class="muted">Signature-type shape. The glyph shows its reach.</p>';
   if (parts) { var rows = parts.filter(function (p) { return p[1] && !(p[0].indexOf('×') >= 0 && p[1] === 1); }); if (rows.length) h += '<table>' + rows.map(function (p) { return '<tr><td>' + p[0] + '</td><td>' + (p[0].indexOf('×') >= 0 ? '×' : '+') + p[1] + '</td></tr>'; }).join('') + '</table>'; }
   return h + (extra || '');
 }
@@ -875,26 +1195,25 @@ function cardFor(key) {
   if (p[0] === 't') {
     var t = run && tileById(+p[1]); if (!t) return '';
     var cell = S.board.indexOf(t.id), parts = null;
-    if (cell >= 0 && S.screen === 'fight') parts = evalNow(true).parts[cell];
+    if (cell >= 0 && S.screen === 'fight') { var r = evalNow(true), gi = r.cellG[cell]; if (gi !== undefined) parts = r.parts[r.G[gi].a]; }
     return tileCardHTML(t, parts);
   }
-  if (p[0] === 'kt') { var u = UNIT_BY_ID[p[1]]; return tileCardHTML({ c: u.c, u: u.id, s: p[2], n: +p[3] }, null, '<p class="muted">Arrives at unit level ' + p[4] + '.</p>'); }
-  if (p[0] === 'it') { var it = store.inv[+p[1]]; return it ? tileCardHTML({ c: 'x', s: it.s, n: it.n }) : ''; }
-  if (p[0] === 'ot') { var ot = run.offers[+p[1]].reward.tile; return tileCardHTML({ c: 'x', s: ot.s, n: ot.n }, null, '<p class="muted">Reward: goes into your inventory when the run ends.</p>'); }
+  if (p[0] === 'kt') { var u = UNIT_BY_ID[p[1]]; return tileCardHTML({ c: u.c, u: u.id, s: p[2], n: +p[3] }, null, '<p class="muted">Arrives at unit level ' + (p[4] === '5' ? '5 (branch)' : p[4]) + '.</p>'); }
+  if (p[0] === 'sig') return tileCardHTML({ c: 'x', u: 'x', s: p[1], n: SHAPES[p[1]].kind === 'boost' ? CONFIG.sigNum[p[1]][0] : CONFIG.sigNum[p[1]][0] }, null, '<p class="muted">Signature shape: the unit gets one at level 3. Colourless Rare and Epic tiles can carry them too.</p>');
+  if (p[0] === 'it') { var it = store.inv.filter(function (x) { return x.id === +p[1]; })[0]; return it ? tileCardHTML(invTile(it)) : ''; }
+  if (p[0] === 'ot') { var ot = run.offers[+p[1]].reward.tile; return tileCardHTML(invTile(ot), null, '<p class="muted">Reward: goes into your inventory when the run ends.</p>'); }
   if (p[0] === 'e' || p[0] === 'oe') {
     var e = p[0] === 'e' ? S.fs.F.enemies[+p[1]] : run.offers[+p[1]].F.enemies[+p[2]];
-    h = '<h3>' + (e.boss ? 'Boss' : e.kind === 'g' ? 'Guard' : e.w > 1 ? 'Wide enemy' : 'Enemy') + '</h3><p>HP <b>' + (e.dead ? 0 : e.hp) + '</b>. Attack <b>' + e.atk + '</b>: if it survives your attack it hits your hero for that much.</p>';
-    if (CONFIG.enemyColours) h += '<p>Colour ' + COLORS[e.col] + ': ' + COLORS[e.col] + ' tiles deal double to it.</p>';
-    if (e.kind === 'g') h += '<p>Guard: takes damage only if at least 2 separate tiles hit it in one attack.</p>';
+    h = '<h3>' + (e.kind === 'r' ? 'Runner' : e.boss ? 'Boss body' : e.need > 1 ? 'Guard' : e.w > 1 ? 'Wide enemy' : 'Enemy') + '</h3><p>HP <b>' + (e.dead ? 0 : e.hp) + '</b>.' + (e.kind === 'r' ? ' It leaves after your first attack if it is still alive; it does not hit. Kill it for a bonus colourless tile.' : ' Attack <b>' + e.atk + '</b>: if it survives your attack it hits your hero for that much.') + '</p>';
+    if (e.need > 1) h += '<p>Takes damage only if at least ' + e.need + ' different tiles hit it in one attack.</p>';
     if (e.w > 1) h += '<p>Wide: covers ' + e.w + ' columns with one shared HP pool.</p>';
-    if (e.boss) h += '<p>' + (e.phase === 2 ? 'Second phase.' : 'When its HP runs out it rises once more with ' + Math.max(e.ph2, 0) + ' HP.') + '</p>';
+    if (e.twin) h += '<p>' + TRICKS.twin + '</p>';
     return h + '<p class="muted">HP stays between attacks.</p>';
   }
-  if (p[0] === 'bc') return '<h3>Bonus cell ' + bcText(p[1]) + '</h3><p>' + (p[1] === 'x2' ? 'A Strike, Fork or booster placed here is doubled.' : 'A Strike, Fork or booster placed here gets ' + bcText(p[1]) + '.') + '</p><p class="muted">Applies before Doubles and boosters. Doubles ignore it.</p>';
-  if (p[0] === 'mode') { var MM = MODES[CONFIG.reactionMode], long = CONFIG.reactionMode === 'sandwich' ? 'Row or column. The two outer tiles show brackets; the doubled tile is outlined. Applies to Strikes, Forks and boosters (not Doubles). Colourless tiles are not a colour.' : CONFIG.reactionMode === 'melds' ? 'Lines are a whole column of 3, or 3 side by side in a row. Flush +' + CONFIG.meld.flush + ', Run +' + CONFIG.meld.run + ', Set +' + CONFIG.meld.set + ', Flush with Run or Set +' + CONFIG.meld.both + '. A column line adds to its column; a row line adds +' + Math.max(1, Math.round(CONFIG.meld.run * CONFIG.meld.rowFactor)) + ' (Flush +' + Math.max(1, Math.round(CONFIG.meld.flush * CONFIG.meld.rowFactor)) + ') to each of its three columns. The tile number counts, colourless tiles count for Run and Set but not Flush.' : CONFIG.reactionMode === 'wheel' ? 'Order: red, blue, green, yellow, purple, back to red. A tile adds +' + CONFIG.wheel + ' to each touching Strike or Fork of the next colour. Colourless tiles do not take part.' : 'Pick a rule in Settings to compare.';
-    return '<h3>' + MM.name + '</h3><p>' + MM.line + '</p><p class="muted">' + long + ' Always pure damage, included in the live totals. Change the rule in Settings.</p>'; }
-  if (p[0] === 'ec') return '';
-  if (p[0] === 'mom') return '<h3>Momentum</h3><p>You cleared the last fight in one attack. Every tile gets +' + CONFIG.momentum.bonus + ' on the first attack of this fight.</p>';
+  if (p[0] === 'tr') return '<h3>Boss trick</h3><p>' + (TRICKS[p[1]] || '') + '</p>';
+  if (p[0] === 'bc') return '<h3>Bonus cell ' + bcText(p[1]) + '</h3><p>' + (p[1] === 'x2' ? 'A tile placed here is doubled.' : 'A tile placed here gets ' + bcText(p[1]) + '.') + '</p><p class="muted">Applies before Doubles and boosters. Doubles ignore it. A Giant on two bonus cells gets both.</p>';
+  if (p[0] === 'mode') return '<h3>Sandwich</h3><p>' + SANDWICH + '</p><p class="muted">Row or column. The two outer tiles show brackets; the doubled tile is outlined with a x2 chip. It applies to every attacking tile and booster, not to Doubles. A two-colour tile counts as both colours; a colourless tile is never a colour. A Giant is sandwiched along its long side. It is included in the live totals.</p>';
+  if (p[0] === 'mom') return '<h3>Momentum</h3><p>You cleared the last fight in one attack. Every tile gets +' + CONFIG.momentum.bonus + ' on the first attack of the next fight.</p>';
   return '';
 }
 
@@ -924,16 +1243,16 @@ document.addEventListener('pointerdown', function (e) {
   var tg = targetOf(e.target); if (!tg) { P = null; return; }
   P = { tg: tg, x: e.clientX, y: e.clientY, moved: false, long: false };
   if (tg.card) P.timer = setTimeout(longPress, CONFIG.longPressMs);
-  if (tg.kind === 'cell' && S.sel >= 0) { /* preview already shown */ }
 });
 document.addEventListener('pointermove', function (e) {
   if (!P || P.dead || P.long) return;
   var dx = e.clientX - P.x, dy = e.clientY - P.y;
   if (!P.moved && dx * dx + dy * dy > 100 && (P.tg.kind === 'hand' || P.tg.kind === 'board')) {
     P.moved = true; clearTimeout(P.timer);
-    ghost = P.tg.el.cloneNode(true); ghost.classList.add('ghost'); ghost.removeAttribute('data-h'); ghost.removeAttribute('data-cell'); ghost.removeAttribute('data-card');
+    ghost = P.tg.el.cloneNode(true); ghost.classList.add('ghost'); ghost.classList.remove('big-h', 'big-v'); ghost.removeAttribute('data-h'); ghost.removeAttribute('data-cell'); ghost.removeAttribute('data-card');
+    ghost.style.setProperty('--ts', '58px');
     document.body.appendChild(ghost);
-    if (P.tg.kind === 'board') P.tg.el.classList.add('dragging');
+    if (P.tg.kind === 'board') $$('#fboard .tile[data-cell="' + P.tg.cell + '"]').forEach(function (n) { n.classList.add('dragging'); });
     S.sel = -1; $$('#fhand .tile.sel').forEach(function (n) { n.classList.remove('sel'); });
     showHold(tileById(P.tg.id), P.tg.kind === 'board' ? P.tg.cell : -1);
   }
@@ -944,7 +1263,7 @@ function endPointer(e, cancel) {
   var p = P; P = null; clearTimeout(p.timer);
   if (p.dead) return;
   if (ghost) { ghost.remove(); ghost = null; }
-  if (p.tg.kind === 'board' && p.tg.el) p.tg.el.classList.remove('dragging');
+  $$('#fboard .tile.dragging').forEach(function (n) { n.classList.remove('dragging'); });
   if (cancel) { if (p.moved) { clearHold(); renderFight(); } return; }
   if (p.long) { lpAt = Date.now(); return; }
   var tg = p.tg;
@@ -958,7 +1277,7 @@ function endPointer(e, cancel) {
   }
   if (S.screen !== 'fight' || S.phase !== 'edit') return;
   if (tg.kind === 'hand') { S.sel = S.sel === tg.id ? -1 : tg.id; clearHold(); renderFight(); }
-  else if (tg.kind === 'cell') { if (S.sel >= 0 && S.fs.F.blocked.indexOf(tg.cell) < 0) place(S.sel, tg.cell); else { tg.el.classList.remove('shake'); void tg.el.offsetWidth; tg.el.classList.add('shake'); } }
+  else if (tg.kind === 'cell') { if (S.sel >= 0) place(S.sel, tg.cell); else shakeCell(tg.cell); }
   else if (tg.kind === 'board') { if (S.sel >= 0) place(S.sel, tg.cell); else unplace(tg.cell); }
 }
 document.addEventListener('pointerup', function (e) { endPointer(e, false); });
@@ -967,24 +1286,29 @@ document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 
 /* ---------- modals ---------- */
 function openModal(html) { $('#modal').innerHTML = html; $('#modal').hidden = false; $('#dim').hidden = false; }
-function closeModal() { $('#modal').hidden = true; if ($('#card').hidden) $('#dim').hidden = true; }
+function closeModal() { $('#modal').hidden = true; if ($('#card').hidden) $('#dim').hidden = true; if (S.screen === 'home') renderHome(); else if (S.screen === 'team') renderTeam(); }
 function helpHTML() {
   return '<h3>How to play</h3><ol>' +
-    '<li>Enemies sit above the columns with <b>HP</b> and an <b>attack</b>. Place tiles, press <b>Attack</b>. Each column\'s total hits its enemy. HP stays between attacks; survivors then hit your hero.</li>' +
-    '<li>Tap a tile, then a cell, or drag it. Tap a placed tile to take it back. Hold anything for a card.</li>' +
-    '<li><b>Strike</b> hits its own column. <b>Fork</b> hits both neighbours. <b>Plus</b> and <b>Row</b> boost Strikes and Forks. <b>Double</b> doubles the tile in front of it.</li>' +
-    '<li>Your team is five units, one per colour; units differ only by their tiles, and stronger units bring more tile types. One reaction rule (shown under the board) rewards clever layouts with extra damage.</li>' +
-    '<li><b>Every tile you attack with is spent</b> for the rest of the run. Win with as few as you can. Beating a boss brings them all back, sometimes with extra.</li>' +
-    '<li>Guard enemies need 2 hits at once. Bonus cells (+1, +2, ×2) boost the tile on them. Winning in one attack gives momentum for the next fight.</li>' +
-    '<li>Bank your loot and leave at any time, or go deeper. Dying keeps only part of it.</li></ol><div class="btnrow"><button class="btn main" data-act="close">Got it</button></div>';
+    '<li>Enemies sit above the columns with <b>HP</b> and an <b>attack</b>. Place tiles, press <b>Attack</b>. Each enemy takes the total of its column(s). HP stays between attacks; survivors hit your hero. Your hero HP is the only thing that ends a run.</li>' +
+    '<li>Tap a tile, then a cell, or drag it. Tap a placed tile to take it back. Hold anything for a card. Glowing cells would finish an enemy.</li>' +
+    '<li><b>Sandwich:</b> a tile between two tiles of one other colour, in a row or column, is doubled. Build layouts that make sandwiches.</li>' +
+    '<li>Shapes show their reach on the tile: Strike (own column), Fork (both neighbours), Plus, Row and Pillar (boosters), Double. Level 3 units add a <b>signature shape</b>: Diagonal, Sweep, Echo, Giant (two cells) or Pillar.</li>' +
+    '<li>Your whole bag is ready for every fight. Tiles you attack with rest until that fight ends (switch in Settings so they all come back every attack).</li>' +
+    '<li>After each win choose one of three: a new tile, an upgrade (+2 or a second colour), or a heal. Forges, rests and treasures sit on the path. Bosses have one trick and drop a Rare or better colourless tile.</li>' +
+    '<li>Runners leave after your first attack: kill them for a bonus tile. Guards need 2 different tiles to hit them.</li>' +
+    '<li>Bank and leave any time, or go deeper. Defeat keeps half of the loot. Coins level units between runs.</li></ol><div class="btnrow"><button class="btn main" data-act="close">Got it</button></div>';
 }
 function settingsHTML() {
   var h = '<h3>Settings and test</h3><div class="set"><label>Momentum</label><input type="checkbox" id="setmom"' + (store.set.momentum ? ' checked' : '') + '> <select id="setmomv">' + CONFIG.momentum.values.map(function (v) { return '<option' + (v === store.set.value ? ' selected' : '') + '>' + v + '</option>'; }).join('') + '</select></div>';
-  h += '<div class="set"><label>Reaction rule</label><select id="setmode">' + Object.keys(MODES).map(function (k) { return '<option value="' + k + '"' + (CONFIG.reactionMode === k ? ' selected' : '') + '>' + MODES[k].name + '</option>'; }).join('') + '</select></div>';
-  h += '<div class="set"><label>Enemy colours (same colour deals double)</label><input type="checkbox" id="setecol"' + (store.set.ecol ? ' checked' : '') + '></div>';
-  h += '<div class="btnrow"><button class="btn sm" data-act="unlockall">Unlock all units</button><button class="btn sm" data-act="coins">+100 coins</button><button class="btn sm" data-act="tiles">+3 colourless tiles</button></div>';
-  h += '<div class="muted" style="font-size:12px">Coins: ' + store.coins + '. Set a unit level (0 = locked):</div>';
-  UNITS.forEach(function (u) { var st = store.units[u.id]; h += '<div class="set">' + dotHTML(u.c) + '<label>' + u.name + '</label><select data-ulv="' + u.id + '">' + [0, 1, 2, 3].map(function (l) { return '<option value="' + l + '"' + ((st.u ? st.l : 0) === l ? ' selected' : '') + '>' + (l ? 'Level ' + l : 'Locked') + '</option>'; }).join('') + '</select></div>'; });
+  h += '<div class="set"><label>Tiles come back</label><select id="setret"><option value="fight"' + (CONFIG.tileReturn === 'fight' ? ' selected' : '') + '>After the fight</option><option value="turn"' + (CONFIG.tileReturn === 'turn' ? ' selected' : '') + '>Every attack</option></select></div>';
+  h += '<div class="set"><label>Tile stars (duplicates merge)</label><input type="checkbox" id="setstars"' + (store.set.stars ? ' checked' : '') + '></div>';
+  h += '<div class="btnrow"><button class="btn sm" data-act="unlockall">Unlock all units</button><button class="btn sm" data-act="coins">+100 coins</button><button class="btn sm" data-act="tiles">+3 colourless tiles</button><button class="btn sm" data-act="epic">+1 epic tile</button><button class="btn sm" data-act="dupe">Duplicate a tile (star)</button><button class="btn sm" data-act="clearrun">Abandon run</button></div>';
+  h += '<div class="muted" style="font-size:12px">Coins: ' + store.coins + '. Unit level (0 = locked) and level 5 branch:</div>';
+  UNITS.forEach(function (u) {
+    var st = store.units[u.id];
+    h += '<div class="set">' + dotHTML(u.c) + '<label>' + u.name + '</label><select data-ulv="' + u.id + '">' + [0, 1, 2, 3, 4, 5].map(function (l) { return '<option value="' + l + '"' + ((st.u ? st.l : 0) === l ? ' selected' : '') + '>' + (l ? 'Level ' + l : 'Locked') + '</option>'; }).join('') + '</select>' +
+      '<select data-ubr="' + u.id + '"><option value="">no branch</option><option value="a"' + (st.br === 'a' ? ' selected' : '') + '>A ' + u.br.a.name + '</option><option value="b"' + (st.br === 'b' ? ' selected' : '') + '>B ' + u.br.b.name + '</option></select></div>';
+  });
   h += '<div class="btnrow"><button class="btn sm" data-act="reset">Reset save</button><button class="btn main sm" data-act="close">Close</button></div>';
   return h;
 }
@@ -996,48 +1320,58 @@ document.addEventListener('click', function (e) {
   if (!$('#card').hidden) return;
   if ((el = t.closest && t.closest('[data-tab]'))) { S.tab = el.dataset.tab; S.sel = -1; clearHold(); renderFight(); return; }
   if ((el = t.closest && t.closest('[data-inv]'))) {
-    var i = +el.dataset.inv, at = store.bag.indexOf(i);
-    if (at >= 0) store.bag.splice(at, 1); else if (store.bag.length < CONFIG.maxColourless) store.bag.push(i); else { store.bag.shift(); store.bag.push(i); }
+    var id = +el.dataset.inv, at = store.bag.indexOf(id);
+    if (at >= 0) store.bag.splice(at, 1); else { store.bag.push(id); if (store.bag.length > CONFIG.maxColourless) store.bag.shift(); }
     save(); show(S.screen); return;
   }
-  if ((el = t.closest && t.closest('[data-offer]'))) { startFightUI(+el.dataset.offer); return; }
+  if ((el = t.closest && t.closest('[data-pick]'))) { takePick(+el.dataset.pick); return; }
+  if ((el = t.closest && t.closest('[data-offer]'))) { chooseOfferUI(+el.dataset.offer); return; }
   el = t.closest && t.closest('[data-act],#fatk,#fclear'); if (!el) return;
   var act = el.dataset.act || el.id;
   switch (act) {
     case 'start': startRunUI(+el.dataset.area); break;
+    case 'resume': resume(); break;
     case 'team': show('team'); break;
     case 'home': show('home'); break;
     case 'help': openModal(helpHTML()); break;
     case 'settings': openModal(settingsHTML()); break;
+    case 'bag': openModal(bagHTML()); break;
     case 'close': closeModal(); break;
     case 'pick': store.team[UNIT_BY_ID[el.dataset.u].c] = el.dataset.u; save(); renderTeam(); break;
     case 'unlock': if (store.coins >= CONFIG.unlockCost) { store.coins -= CONFIG.unlockCost; store.units[el.dataset.u].u = true; save(); renderTeam(); } break;
-    case 'level': var us = store.units[el.dataset.u], cost = CONFIG.levelCost[us.l + 1]; if (us.l < 3 && store.coins >= cost) { store.coins -= cost; us.l++; save(); renderTeam(); } break;
-    case 'cont': show('map'); break;
-    case 'bank': bankRun(); break;
+    case 'level': var us = store.units[el.dataset.u], cost = CONFIG.levelCost[us.l + 1]; if (us.l < 5 && store.coins >= cost) { store.coins -= cost; us.l++; save(); renderTeam(); } break;
+    case 'branch': store.units[el.dataset.u].br = el.dataset.b; save(); renderTeam(); break;
+    case 'cont': takePick(-1); break;
+    case 'bank': closeModal(); bankRun(); break;
     case 'leave': openModal('<h3>Leave the run?</h3><p style="font-size:14px;color:var(--ink)">You bank everything you collected so far.</p><div class="btnrow"><button class="btn main" data-act="bank">Bank and leave</button><button class="btn" data-act="close">Keep playing</button></div>'); break;
-    case 'fmenu': openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="help">How to play</button><button class="btn" data-act="bank">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
+    case 'fmenu': openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="bag">Bag</button><button class="btn" data-act="help">How to play</button><button class="btn" data-act="bank">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
     case 'fatk': attack(); break;
     case 'fclear': clearBoard(); break;
     case 'unlockall': UNITS.forEach(function (u) { store.units[u.id].u = true; }); save(); $('#modal').innerHTML = settingsHTML(); break;
     case 'coins': store.coins += 100; save(); $('#modal').innerHTML = settingsHTML(); break;
-    case 'tiles': for (var q = 0; q < 3; q++) store.inv.push(genColourless(1, Math.random)); save(); $('#modal').innerHTML = settingsHTML(); break;
-    case 'reset': if (el.dataset.sure) { try { localStorage.removeItem(LS_KEY); } catch (er) {} store = defaultStore(); applySettings(); save(); closeModal(); show('home'); } else { el.dataset.sure = 1; el.textContent = 'Tap again to confirm'; } break;
+    case 'tiles': for (var q = 0; q < 3; q++) addInv(lootTile(q === 2 ? 'elite' : 'normal', 1, Math.random)); save(); $('#modal').innerHTML = settingsHTML(); break;
+    case 'epic': addInv(genColourless(2, Math.random)); save(); $('#modal').innerHTML = settingsHTML(); break;
+    case 'dupe': if (store.inv.length) { var d = store.inv[store.inv.length - 1]; addInv({ s: d.s, n: d.n, rar: d.rar }); save(); } $('#modal').innerHTML = settingsHTML(); break;
+    case 'clearrun': store.run = null; S.run = null; save(); closeModal(); show('home'); break;
+    case 'reset': if (el.dataset.sure) { try { localStorage.removeItem(LS_KEY); } catch (er) {} store = defaultStore(); applySettings(); S.run = null; save(); closeModal(); show('home'); } else { el.dataset.sure = 1; el.textContent = 'Tap again to confirm'; } break;
   }
-  if ((act === 'bank' || act === 'help' || act === 'cont') && !$('#modal').hidden && act !== 'help') closeModal();
 });
 document.addEventListener('change', function (e) {
   var t = e.target;
   if (t.id === 'setmom') { store.set.momentum = t.checked; applySettings(); save(); }
-  else if (t.id === 'setmode') { store.set.mode = t.value; applySettings(); save(); }
-  else if (t.id === 'setecol') { store.set.ecol = t.checked; applySettings(); save(); }
   else if (t.id === 'setmomv') { store.set.value = +t.value; applySettings(); save(); }
-  else if (t.dataset && t.dataset.ulv) { var st = store.units[t.dataset.ulv], v = +t.value; st.u = v > 0; if (v > 0) st.l = v; if (!st.u && store.team[UNIT_BY_ID[t.dataset.ulv].c] === t.dataset.ulv) { store.team[UNIT_BY_ID[t.dataset.ulv].c] = UNITS.filter(function (u) { return u.c === UNIT_BY_ID[t.dataset.ulv].c && store.units[u.id].u; }).map(function (u) { return u.id; })[0] || t.dataset.ulv; } save(); renderHome(); }
+  else if (t.id === 'setret') { store.set.ret = t.value; applySettings(); save(); }
+  else if (t.id === 'setstars') { store.set.stars = t.checked; applySettings(); save(); }
+  else if (t.dataset && t.dataset.ulv) {
+    var u = UNIT_BY_ID[t.dataset.ulv], st = store.units[u.id], v = +t.value; st.u = v > 0; if (v > 0) st.l = v; if (v < 5) st.br = null;
+    if (!st.u && store.team[u.c] === u.id) store.team[u.c] = UNITS.filter(function (x) { return x.c === u.c && store.units[x.id].u; }).map(function (x) { return x.id; })[0] || u.id;
+    save(); renderHome();
+  } else if (t.dataset && t.dataset.ubr) { store.units[t.dataset.ubr].br = t.value || null; save(); }
 });
 $('#dim').addEventListener('click', function () { if (!$('#card').hidden) return; closeModal(); });
 window.addEventListener('resize', function () { if (S.screen === 'fight' && S.phase === 'edit') renderFight(); });
-show('home');
-window.TR = { genOffers: function () { S.run.offers = genOffers(S.run); }, S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: startFightUI, place: place, attack: attack, render: renderFight, show: show, save: save, UNITS: UNITS };
+if (!resume()) show('home');
+window.TR = { genFight: genFight, chooseNode: chooseNode, S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: chooseOfferUI, place: place, attack: attack, render: renderFight, show: show, save: save, persist: persist, takePick: takePick, UNITS: UNITS, resume: resume, evalNow: evalNow, lootTile: lootTile, addInv: addInv, genOffers: function () { S.run.offers = genOffers(S.run); }, newTile: function (c, s, n, extra) { var t = mkTile(S.run, c, S.run.team[c] || 'x', s, n, extra); S.run.bag.push(t); return t; } };
 })();
 </script>
 </body>
