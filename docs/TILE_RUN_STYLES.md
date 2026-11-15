@@ -106,3 +106,16 @@ Mockup: `prototype/samples/tile-run-home.html` (six tabs, light and dark, a togg
 - **F Daily:** a live miniature of today's puzzle on top, Continue, then a two-column chip list of modes.
 
 Recommendation: **A Board** as the default (clear hierarchy, directly the game's own language, easy to add modes), keeping **D Ladder** as the layout to grow into once the stage map is built. E Mosaic is the bold option if a signature look matters more than extensibility.
+
+## Main screen layouts, round two
+
+Feedback on round one: C (Focus) and D (Ladder) were liked, A, B, E, F were not. Read as: calm, one clear focus, lots of air, the campaign as the spine, secondary things small and quiet; no screens packed with coloured blocks, no fight mimicry. Mockup: `prototype/samples/tile-run-home2.html` (C and D kept for reference, then six new tabs; real stage and hero names; "Preview state" toggle; Sheet tab toggles by tapping its handle).
+
+- **1 Path:** the ten stages as a snake path over a 4 x 3 board of cells; cleared cells fill dark, the current cell is a raised tile, Puzzles and Endless are branch cells at the end of the path.
+- **2 Number:** the stage number as an enormous tappable numeral, a hairline progress bar, five small icon buttons on a thumb arc.
+- **3 Tower:** cleared stages are slim slabs stacking up from the bottom, ghost outlines above, the current stage the raised Continue tile; Puzzles, Daily and Endless sit beside it at the height they unlock.
+- **4 Cross:** the game's sandwich as a menu: the stage tile in the centre, Hero, Team, Puzzles and Endless around it joined by gold clamps; a locked neighbour is dashed with no clamp.
+- **5 Timeline:** one horizontal line with ten ticks, the current one grown into a tile, big quiet stage name above, a small mode grid below.
+- **6 Sheet:** almost empty; stage name and a big Continue at thumb height, a handle that pulls up a sheet with the other six destinations.
+
+Not built from the brief: carousel and the reach-glyph menu (the Cross covers the same spatial idea). Recommendation: **2 Number** if calm is the goal, **1 Path** for a compact progress-first screen; **6 Sheet** is the choice when the screen should hold nothing but Continue.
