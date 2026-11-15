@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Tile Run: sandwich highlight variants</title>
+<style>
+:root{--cbg:#e6eaf0;--cink:#1c2635;--cmut:#566377;--cline:#c9d1dc;--cpanel:#fff;--cbtn:#1c2635;--cbtnink:#fff}
+@media (prefers-color-scheme:dark){:root{--cbg:#0f131b;--cink:#eef2f8;--cmut:#a6b1c4;--cline:#3a4560;--cpanel:#212838;--cbtn:#eef2f8;--cbtnink:#151a24}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--cbg);color:var(--cink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+#tabs{position:sticky;top:0;z-index:20;display:flex;gap:4px;padding:8px 10px;background:var(--cbg);border-bottom:1px solid var(--cline);max-width:430px;margin:0 auto}
+#tabs button{flex:1;min-width:0;height:40px;border-radius:12px;border:2px solid var(--cline);background:var(--cpanel);font-weight:800;font-size:14px;padding:0}
+#tabs button[aria-selected=true]{background:var(--cbtn);color:var(--cbtnink);border-color:var(--cbtn)}
+.wrap{max-width:430px;margin:0 auto}
+.panel[hidden]{display:none}
+.ptitle{padding:10px 14px 8px;font-size:13px;color:var(--cmut)}
+.ptitle b{color:var(--cink);font-size:15px}
+.notes{padding:12px 16px 28px;font-size:13px;line-height:1.45;color:var(--cmut)}
+.notes p{margin:0 0 6px}
+.notes b{color:var(--cink)}
+
+/* ---------- mockup (shared structure) ---------- */
+.m{--gap:6px;--rad:12px;--cols:5;padding:2px 12px 14px;background:var(--bg);color:var(--ink);position:relative}
+.m *{box-sizing:border-box}
+.m .hd{display:flex;align-items:center;gap:8px;height:44px}
+.m .hb{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--panel);border:2px solid var(--line);padding:0}
+.m .hb svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.m .ttl{flex:1;text-align:center;font-weight:800;font-size:17px}
+.m .ttl small{display:block;font-weight:600;font-size:11px;color:var(--muted);margin-top:1px}
+.m .hint{min-height:30px;font-size:13px;line-height:1.3;color:var(--muted);text-align:center;padding:0 4px 4px}
+.m .enemies,.m .board,.m .hand{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:var(--gap)}
+.m .enemy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.m .etile{position:relative;height:54px;border-radius:var(--rad);background:var(--enemy);color:var(--enemyink);border:3px solid var(--enemy);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.m .etile b{font-size:28px;line-height:.95;font-weight:800;font-variant-numeric:tabular-nums}
+.m .etile i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;opacity:.85;white-space:nowrap}
+.m .etile em,.m .ebar{display:none}
+.m .pill{height:24px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:4px;font-weight:800;font-size:13px;background:var(--panel2);color:var(--ink);border:2px solid var(--line);padding:0 4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.m .pill small{font-size:10px;font-weight:700;color:var(--muted)}
+.m .enemy.ok .pill{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.m .enemy.ok .pill small{color:var(--ok)}
+.m .enemy.tgt .etile{outline:3px solid var(--gold);outline-offset:1px}
+.m .boardwrap{margin-top:8px}
+.m .cell{border-radius:var(--rad);background:var(--cellbg);border:2px dashed var(--line);aspect-ratio:1/1;transition:background .1s}
+.m .cell.x{border:2px solid var(--line);background:repeating-linear-gradient(45deg,var(--panel2) 0 6px,var(--cellbg) 6px 12px)}
+.m .cell.aff{background:color-mix(in srgb,var(--gold) 38%,var(--cellbg));border-color:var(--gold);border-style:solid}
+
+.m .tile{position:relative;border-radius:var(--rad);display:flex;align-items:center;justify-content:center;background:var(--tf);color:var(--ti);box-shadow:var(--tsh);cursor:pointer;min-width:0;align-self:stretch;-webkit-user-select:none;user-select:none}
+.m .slot{border-radius:var(--rad)}
+.m .slot.empty{border:2px dashed var(--line);opacity:.6}
+.m .c-r{--tc:var(--r);--tf:var(--rf);--ti:var(--ri)}
+.m .c-b{--tc:var(--b);--tf:var(--bf);--ti:var(--bi)}
+.m .c-g{--tc:var(--g);--tf:var(--gf);--ti:var(--gi)}
+.m .c-y{--tc:var(--y);--tf:var(--yf);--ti:var(--yi)}
+.m .c-p{--tc:var(--p);--tf:var(--pf);--ti:var(--pi)}
+.m .c-n{--tc:var(--n);--tf:var(--nf);--ti:var(--ni)}
+.m .tile.k-boost,.m .tile.k-mult{background:var(--panel);color:var(--tx);border:3px solid var(--tx)}
+.m .tile.k-mult{border-style:dashed}
+.m .tile.k-boost,.m .tile.k-mult{--gl:var(--tx);--sy:var(--tx)}
+.m .c-r{--tx:var(--rx)}.m .c-b{--tx:var(--bx)}.m .c-g{--tx:var(--gx)}.m .c-y{--tx:var(--yx)}.m .c-p{--tx:var(--px)}.m .c-n{--tx:var(--nx)}
+.m .tile .num{font-size:var(--numsz,29px);line-height:1;font-weight:800;margin-top:-4px;font-variant-numeric:tabular-nums;position:relative;z-index:1}
+.m .tile.k-boost .num,.m .tile.k-mult .num{font-size:calc(var(--numsz,29px) - 4px);margin-top:3px}
+.m .tile .glyph{position:absolute;left:5px;top:5px;width:20px;height:20px;color:var(--gl)}
+.m .tile .sym{position:absolute;right:5px;top:5px;width:12px;height:12px;color:var(--sy)}
+.m .tile .nm{position:absolute;left:0;right:0;bottom:4px;text-align:center;font-style:normal;font-size:9px;font-weight:800;letter-spacing:.05em;white-space:nowrap}
+.m .tile .chg{position:absolute;left:0;right:0;bottom:3px;margin:auto;width:max-content;max-width:94%;font-style:normal;font-size:10.5px;font-weight:800;line-height:1;white-space:nowrap;display:none;font-variant-numeric:tabular-nums}
+.m .tile .chg s{opacity:.75;font-weight:700;margin-right:2px;text-decoration-thickness:1.5px}
+.m .tile.has-chg .chg{display:block}
+.m .tile.has-chg .nm{display:none}
+.m .tile .mk{position:absolute;display:none;pointer-events:none}
+.m .tile .mk.dot.u{top:3px;left:50%;transform:translateX(-50%)}
+.m .tile .mk.dot.d{bottom:3px;left:50%;transform:translateX(-50%)}
+.m .tile .mk.dot.l{left:3px;top:50%;transform:translateY(-50%)}
+.m .tile .mk.dot.r{right:3px;top:50%;transform:translateY(-50%)}
+.m .tile .mk svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.m .tile.aff{outline:3px solid var(--gold);outline-offset:1px}
+.m .tile.sel{outline:3px solid var(--ink);outline-offset:2px;z-index:2}
+.m .tile.brL::after,.m .tile.brR::after{content:"";position:absolute;top:9px;bottom:9px;width:3px;border-radius:2px;background:var(--gold)}
+.m .tile.brL::after{right:calc(var(--gap) / -2 - 1.5px)}
+.m .tile.brR::after{left:calc(var(--gap) / -2 - 1.5px)}
+.m .poly{background:none!important;box-shadow:none!important;border:0!important;color:var(--ti)}
+.m .poly>svg.body{position:absolute;inset:0;width:100%;height:100%;overflow:visible;fill:var(--tf);stroke:var(--tf);stroke-width:24;stroke-linejoin:round;filter:drop-shadow(0 2px 0 var(--shadowc))}
+.m .poly .num{position:absolute;left:52%;top:2%;width:48%;height:48%;display:flex;align-items:center;justify-content:center;margin:0}
+.m .poly .glyph{left:5px;top:4px;width:18px;height:18px}
+.m .tile.poly .sym{right:auto;bottom:auto;left:76%;top:77%;transform:translate(-50%,-50%)}
+.m .poly>svg.ring{display:none;fill:currentColor;stroke:currentColor;stroke-width:30;stroke-linejoin:round;opacity:.22;color:var(--ti)}
+.m .poly .nm,.m .poly .chg{display:none!important}
+
+.m .goals{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}
+.m .goal{display:flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;color:var(--muted);background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:2px 8px 2px 5px;white-space:nowrap}
+.m .goal svg{width:13px;height:13px;fill:none;stroke:var(--muted);stroke-width:2;stroke-linejoin:round}
+.m .goal.live{border-color:var(--ok);color:var(--ok)}.m .goal.live svg{fill:var(--gold);stroke:var(--gold)}
+.m .hero{display:flex;align-items:center;gap:8px;margin-top:10px}
+.m .hero>svg{flex:none;width:20px;height:20px;fill:var(--r);color:var(--r)}
+.m .hpbar{flex:1;height:14px;border-radius:7px;background:var(--panel2);border:2px solid var(--line);overflow:hidden}
+.m .hpbar u{display:block;height:100%;background:var(--hpc);width:75%}
+.m .hpn{flex:none;font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;min-width:44px}
+.m .hpn small{color:var(--muted);font-weight:700}
+.m .abil{flex:none;height:36px;padding:0 12px;border-radius:12px;font-weight:800;font-size:14px;display:flex;align-items:center;gap:6px;background:var(--panel);border:2px solid var(--line);color:var(--ink)}
+.m .abil svg{width:14px;height:14px;fill:none;stroke:var(--g);stroke-width:3;stroke-linecap:round}
+.m .abil small{font-size:10px;color:var(--muted);font-weight:700}
+.m .hand{margin-top:10px}
+.m .bar{display:flex;gap:10px;margin-top:12px}
+.m .bar button{height:50px;border-radius:14px;font-weight:800;font-size:17px;padding:0;border:2px solid var(--line);background:var(--panel);color:var(--ink)}
+.m .bar .clear{flex:1;font-size:15px}
+.m .bar .go{flex:2.4;background:var(--btn);color:var(--btnink);border-color:var(--btn)}
+.m .bar .go small{font-weight:600;opacity:.8;font-size:12px;margin-left:4px}
+
+/* ---------- palettes ---------- */
+.m{--r:#d2473f;--b:#2e6bd3;--g:#23874f;--y:#b9800f;--p:#7a55c2;--n:#566377;
+ --rf:var(--r);--bf:var(--b);--gf:var(--g);--yf:var(--y);--pf:var(--p);--nf:var(--n);
+ --rx:var(--r);--bx:var(--b);--gx:var(--g);--yx:var(--y);--px:var(--p);--nx:var(--n);
+ --ri:#fff;--bi:#fff;--gi:#fff;--yi:#fff;--pi:#fff;--ni:#fff;--gl:#fff;--sy:#fff;
+ --bg:#eef1f5;--panel:#fff;--panel2:#e4e9f0;--ink:#1c2635;--muted:#566377;--line:#c9d1dc;--cellbg:#f8fafc;
+ --ok:#1b8a4a;--okbg:#dff3e6;--gold:#e0a100;--enemy:#33405a;--enemyink:#fff;--btn:#1c2635;--btnink:#fff;
+ --shadowc:rgba(20,30,50,.18);--tsh:0 2px 0 var(--shadowc);--hpc:var(--r)}
+@media (prefers-color-scheme:dark){.m{--r:#e0584f;--b:#4f86e6;--g:#2f9d5f;--y:#d19a22;--p:#9a78e0;--n:#7a879c;
+ --bg:#151a24;--panel:#212838;--panel2:#2b3448;--ink:#eef2f8;--muted:#a6b1c4;--line:#3a4560;--cellbg:#1b2130;
+ --ok:#4cc27c;--okbg:#1f3a2c;--gold:#f0b429;--enemy:#3b4a69;--btn:#eef2f8;--btnink:#151a24;--shadowc:rgba(0,0,0,.5)}}
+
+
+/* ===== round four: A2 (bar-pill) + sandwich highlight variants ===== */
+.m{--ringedge:rgba(21,26,36,.75);--chipbg:#151a24;--chipink:#ffd04a;--cs:calc((min(100vw,430px) - 24px - 4 * var(--gap)) / 5)}
+.m .tile{z-index:1}
+.m .board{grid-template-rows:repeat(3,var(--cs))}
+.m .hand{grid-template-rows:repeat(2,var(--cs));row-gap:var(--gap)}
+.m .enemy{position:relative}
+.m .chk{position:absolute;top:-8px;right:-7px;width:19px;height:19px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;border:2px solid var(--bg);z-index:3}
+.m .chk svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.m .enemy.ok .etile{border-color:var(--ok)}
+.m .etile{height:48px;gap:0}
+.m .etile b{font-size:25px}
+.m .etile i.gl{font-size:8px;letter-spacing:.01em}
+.m .pbar{position:relative;height:22px;border-radius:11px;background:var(--panel2);border:2px solid var(--line);overflow:hidden;margin-top:3px}
+.m .pbar u{position:absolute;left:0;top:0;bottom:0;background:var(--muted)}
+.m .enemy.ok .pbar{border-color:var(--ok)}.m .enemy.ok .pbar u{background:var(--ok)}
+.m .pbar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+.m .pbar span.inv{color:#fff}
+.m .hpn{min-width:0}
+.m .hpbar{height:22px;border-radius:11px;position:relative;overflow:hidden}
+.m .hpbar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12.5px;color:var(--ink)}
+.m .hpbar span.inv{color:#fff}
+.m .tile .base{position:absolute;right:5px;top:5px;min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:rgba(255,255,255,.26);color:#fff;font-size:10px;font-weight:800;line-height:15px;text-align:center;font-variant-numeric:tabular-nums;font-style:normal}
+.m .tile.k-boost .base,.m .tile.k-mult .base{background:color-mix(in srgb,var(--tx) 16%,transparent);color:var(--tx)}
+.m .tile.poly .base{right:6px}
+.m .tile .glyph{width:auto;height:auto}
+.m .tile .num sup{display:none;font-size:11px;font-weight:800;vertical-align:top;line-height:1;margin-left:1px;position:relative;top:-2px}
+.m .tile .chip,.m .tile .pin,.m .clamp{display:none}
+.m .tile .chip{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);background:var(--chipbg);color:var(--chipink);border:1.5px solid var(--gold);border-radius:9px;padding:0 6px;height:16px;line-height:13px;font-size:11px;font-weight:800;font-style:normal;white-space:nowrap}
+.m .band{display:none;z-index:0;margin:-3px;border-radius:15px;background:var(--gold);box-shadow:0 0 0 1.5px var(--ringedge)}
+.m .poly{--ti:#fff}
+.m .poly .num{font-size:29px}
+.m .poly .glyph{left:6px;top:5px}
+.m .tile .nm{max-width:100%}
+
+/* S1 ring */
+.s1 .tile.sw{box-shadow:0 0 0 3px var(--gold),0 0 0 4px var(--ringedge)}
+.s1 .tile.sw4{box-shadow:0 0 0 3px var(--gold),0 0 0 4px var(--ringedge),inset 0 0 0 3px var(--gold),inset 0 0 0 4.5px var(--ringedge)}
+.s1 .tile.sw .nm,.s4 .tile.sw .nm,.s6 .tile.sw .nm{display:none}
+.s1 .tile.sw .chip,.s4 .tile.sw .chip{display:block}
+/* S2 clamps */
+.s2 .clamp{display:block;position:absolute;background:var(--gold);box-shadow:0 0 0 1px var(--ringedge);border-radius:2px;z-index:3}
+.s2 .clamp.r,.s2 .clamp.l{width:5px}.s2 .clamp.t,.s2 .clamp.b{height:5px}
+.s2 .clamp.r{right:calc(var(--gap) / -2 - 2.5px)}.s2 .clamp.l{left:calc(var(--gap) / -2 - 2.5px)}
+.s2 .clamp.t{top:calc(var(--gap) / -2 - 2.5px)}.s2 .clamp.b{bottom:calc(var(--gap) / -2 - 2.5px)}
+/* S3 band */
+.s3 .band{display:block}
+/* S4 seam edge + chip */
+.s4 .tile.sw2{box-shadow:0 4px 0 var(--gold)}
+.s4 .tile.sw4{box-shadow:0 4px 0 var(--gold),inset 0 0 0 3px var(--gold)}
+.s4 .tile.sw4 .chip{font-size:13px;height:19px;line-height:16px;padding:0 8px;bottom:5px}
+/* S5 gold number */
+.s5 .tile.sw .num{color:#ffc933;-webkit-text-stroke:4px #151a24;paint-order:stroke fill}
+.s5 .tile.sw .num sup{display:inline-block;-webkit-text-stroke:3px #151a24;font-size:11px;vertical-align:bottom;top:0;margin-left:2px}
+.s5 .tile.sw2{box-shadow:inset 0 0 12px 1px rgba(255,214,64,.7),0 2px 0 var(--shadowc)}
+.s5 .tile.sw4{box-shadow:inset 0 0 0 2px #ffc933,inset 0 0 20px 6px rgba(255,214,64,.95),0 2px 0 var(--shadowc)}
+.s5 .tile.sw.k-boost{box-shadow:inset 0 0 12px 1px rgba(224,161,0,.55)}
+/* S6 pinch arrows */
+.s6 .tile.sw .pin{display:block;position:absolute;width:13px;height:13px}
+.s6 .pin svg{display:block;width:100%;height:100%;fill:var(--gold);stroke:#151a24;stroke-width:1.4;stroke-linejoin:round}
+.pin.pl{left:3px;top:calc(50% - 6.5px)}.pin.pr{right:3px;top:calc(50% - 6.5px);transform:rotate(180deg)}
+.pin.pt{top:3px;left:calc(50% - 6.5px);transform:rotate(90deg)}.pin.pb{bottom:3px;left:calc(50% - 6.5px);transform:rotate(-90deg)}
+</style>
+</head>
+<body>
+<nav id="tabs" role="tablist" aria-label="Variations"></nav>
+<div class="wrap" id="panels"></div>
+
+<script>
+/* ===== content shared by every tab ===== */
+// sand: 2 or 4 ; brk: clamps on the outer tiles [edge, from, to] (fractions along that edge)
+var BOARD = [
+ {id:'cpy', k:'copy',  c:'n', n:4, base:1, r:0, c0:0, reach:'d',  name:'ECHO', lane:true},
+ {id:'rt',  k:'a', c:'r', n:3, r:0, c0:1, reach:'f',  name:'STRIKE', brk:[['b']]},
+ {id:'fork',k:'a', c:'b', n:4, r:0, c0:2, reach:'lr', name:'FORK'},
+ {id:'yel', k:'a', c:'y', n:7, base:3, r:0, c0:3, reach:'f', name:'STRIKE', brk:[['b']]},
+ {id:'bl',  k:'a', c:'b', n:3, r:1, c0:0, reach:'f',  name:'STRIKE', brk:[['r']]},
+ {id:'gre', k:'a', c:'g', n:8, base:2, r:1, c0:1, reach:'f', name:'STRIKE', sand:4, axes:'rc'},
+ {id:'br',  k:'a', c:'b', n:2, r:1, c0:2, reach:'f',  name:'STRIKE', brk:[['l']]},
+ {id:'bst', k:'boost', c:'p', n:4, base:2, r:1, c0:3, reach:'u', name:'PLUS', sand:2, axes:'c'},
+ {id:'mul', k:'mult',  c:'p', n:2, r:2, c0:0, reach:'r',  name:'DOUBLE'},
+ {id:'red2',k:'a', c:'r', n:4, base:2, r:2, c0:1, reach:'f', name:'STRIKE', brk:[['t'],['r']]},
+ {id:'wid', k:'a', c:'y', n:6, base:3, r:2, c0:2, w:2, reach:'f', name:'BAR', sand:2, axes:'r', brk:[['t',.5,1]]},
+ {id:'red3',k:'a', c:'r', n:2, r:2, c0:4, reach:'f', name:'STRIKE', brk:[['l']]}
+];
+var BANDS = [ {r:1,c:0,w:3,h:1}, {r:0,c:1,w:1,h:3}, {r:0,c:3,w:1,h:3}, {r:2,c:1,w:4,h:1} ];
+var BLOCKED = [[0,4]];
+// hand: explicit grid placement (5 x 2 slots); L = 2x2 piece
+var HAND = [
+ {k:'a', c:'g', n:3, r:0, c0:0, w:2, h:2, poly:'L', reach:'f'},
+ {k:'a', c:'b', n:2, r:0, c0:2, w:3, reach:'f', name:'LINE'},
+ {k:'a', c:'r', n:4, r:1, c0:2, w:2, reach:'f', name:'BAR'},
+ {k:'boost', c:'p', n:1, r:1, c0:4, reach:'udlr', name:'PLUS'}
+];
+var HAND_EMPTY = [[1,0]];
+var ENEMIES = [
+ {c:0, w:1, hp:5,  label:'GUARD 2/2', dmg:[7], guard:true},
+ {c:1, w:1, hp:25, label:'HP',        dmg:[19]},
+ {c:2, w:2, hp:25, label:'HP · WIDE', dmg:[8,17]},
+ {c:4, w:1, hp:6,  label:'HP',        dmg:[2]}
+];
+var VARS = [
+ {key:'s1', tab:'S1', title:'Ring', sub:'Gold ring and a ×2 / ×4 chip',
+  notes:['<b>x2 vs x4:</b> x2 = one gold ring around the tile; x4 = a second ring inside the edge, a bigger chip, and the chip says ×4. The chip replaces the name; the base number stays in the corner.',
+   '<b>Note:</b> the chip is navy with a gold outline so it still reads on the yellow tile; rings sit in the board gap and do not touch neighbours.']},
+ {key:'s2', tab:'S2', title:'Clamps', sub:'Gold clamps on the facing edges of the two outer tiles',
+  notes:['<b>x2 vs x4:</b> two clamps grip the tile (left and right = row, top and bottom = column); x4 is gripped from all four sides. Axis is readable from where the clamps are.',
+   '<b>Note:</b> the clamps sit in the gap on the pale board, so yellow tiles are not a problem. The middle tile itself is untouched; the wide tile is gripped by one outer tile on one column only.']},
+ {key:'s3', tab:'S3', title:'Band', sub:'Gold line behind the three tiles',
+  notes:['<b>x2 vs x4:</b> a single band through three tiles = x2; where a row band and a column band cross, the middle tile is x4 (a plus shape). Boost uses a column band, the wide tile a row band.',
+   '<b>Note:</b> the band shows the whole sandwich, not just the middle tile, but it touches neighbouring tiles visually and gets busy on a full board.']},
+ {key:'s4', tab:'S4', title:'Gold edge + chip', sub:'Gold bottom edge replaces the soft edge',
+  notes:['<b>x2 vs x4:</b> x2 = gold bottom edge and a small ×2 chip; x4 = gold bottom edge plus a gold inner frame and a larger ×4 chip.',
+   '<b>Note:</b> the most like the original tile (same shape, just a different edge), so it is the quietest; the gold edge is thin on small tiles.']},
+ {key:'s5', tab:'S5', title:'Gold number', sub:'Gold number with a small ×N and an inner glow',
+  notes:['<b>x2 vs x4:</b> the number turns gold with a navy outline and a small ×2 / ×4 next to it; the glow is soft for x2 and strong with a gold frame for x4.',
+   '<b>Note:</b> no extra object on the board; the outline keeps the number readable on yellow and on white boost tiles. Reads at the number, which is where the eye already is.']},
+ {key:'s6', tab:'S6', title:'Pinch arrows', sub:'Gold arrows pointing inward from the squeezed sides',
+  notes:['<b>x2 vs x4:</b> two arrows pointing at each other (left-right = row, top-bottom = column); x4 has all four, a cross.',
+   '<b>Note:</b> shows the direction of the squeeze, which no number can; small navy-outlined triangles stay readable on every colour. The name is hidden on sandwiched tiles to make room.']}
+];
+
+/* ===== helpers ===== */
+function cellsOf(t){
+  if (t.poly==='L') return [[0,0],[0,1],[1,1]];
+  var w = t.w||1, a=[]; for (var j=0;j<w;j++) a.push([0,j]); return a;
+}
+function glyph(t){
+  var fp = cellsOf(t), W=0, H=0;
+  fp.forEach(function(p){ W=Math.max(W,p[1]+1); H=Math.max(H,p[0]+1); });
+  W += 2; H += 2;
+  fp = fp.map(function(p){return [p[0]+1,p[1]+1];});
+  var has = function(r,c){ return fp.some(function(p){return p[0]===r&&p[1]===c;}); };
+  var on = [];
+  if (t.k==='a'){
+    var cols = {}; fp.forEach(function(p){ if (cols[p[1]]==null || p[0]<cols[p[1]]) cols[p[1]]=p[0]; });
+    var cs = Object.keys(cols).map(Number), mn=Math.min.apply(null,cs), mx=Math.max.apply(null,cs);
+    if (t.reach.indexOf('f')>=0) cs.forEach(function(c){ on.push([cols[c]-1,c]); });
+    if (t.reach.indexOf('l')>=0) on.push([cols[mn]-1,mn-1]);
+    if (t.reach.indexOf('r')>=0) on.push([cols[mx]-1,mx+1]);
+  } else {
+    fp.forEach(function(p){
+      var r=p[0], c=p[1];
+      if (t.reach.indexOf('u')>=0 && !has(r-1,c)) on.push([r-1,c]);
+      if (t.reach.indexOf('d')>=0 && !has(r+1,c)) on.push([r+1,c]);
+      if (t.reach.indexOf('l')>=0 && !has(r,c-1)) on.push([r,c-1]);
+      if (t.reach.indexOf('r')>=0 && !has(r,c+1)) on.push([r,c+1]);
+    });
+    if (t.k==='copy' && t.lane) { /* lane is its own column, same cell as the top neighbour: not drawn twice */ }
+  }
+  var h = '<svg class="glyph" viewBox="0 0 '+W*4+' '+H*4+'" style="width:'+(W*6.6)+'px;height:'+(H*6.6)+'px" aria-hidden="true">';
+  for (var r=0;r<H;r++) for (var c=0;c<W;c++){
+    if (has(r,c)) { h += '<rect x="'+(c*4+.9)+'" y="'+(r*4+.9)+'" width="2.2" height="2.2" rx=".7" fill="none" stroke="currentColor" stroke-width="1"/>'; continue; }
+    var lit = on.some(function(p){return p[0]===r&&p[1]===c;});
+    h += '<rect x="'+(c*4+.4)+'" y="'+(r*4+.4)+'" width="3.2" height="3.2" rx=".8" fill="currentColor"'+(lit?'':' opacity=".25"')+'/>';
+  }
+  return h+'</svg>';
+}
+function numTxt(t){ return t.k==='boost' ? '+'+t.n : t.k==='mult' ? '×'+t.n : t.n; }
+function baseTxt(t){ return t.k==='boost' ? '+'+t.base : t.base; }
+function tileHTML(t){
+  var w=t.w||1, h=t.h||1;
+  var cls = 'tile c-'+t.c+' k-'+t.k+(t.poly?' poly':'')+(t.sand?' sw sw'+t.sand:'');
+  var body = '';
+  if (t.poly) body = '<svg class="ring" viewBox="0 0 100 100" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible"><polygon points="12,12 88,12 88,88 64,88 64,36 12,36"/></svg><svg class="body" viewBox="0 0 100 100" aria-hidden="true"><polygon points="12,12 88,12 88,88 64,88 64,36 12,36"/></svg>';
+  var pins = '';
+  if (t.sand) {
+    var ax = t.axes||'';
+    if (ax.indexOf('r')>=0) pins += '<span class="pin pl"><svg viewBox="0 0 12 12"><path d="M2 1.5 L10.5 6 L2 10.5Z"/></svg></span><span class="pin pr"><svg viewBox="0 0 12 12"><path d="M2 1.5 L10.5 6 L2 10.5Z"/></svg></span>';
+    if (ax.indexOf('c')>=0) pins += '<span class="pin pt"><svg viewBox="0 0 12 12"><path d="M2 1.5 L10.5 6 L2 10.5Z"/></svg></span><span class="pin pb"><svg viewBox="0 0 12 12"><path d="M2 1.5 L10.5 6 L2 10.5Z"/></svg></span>';
+  }
+  var clamps = (t.brk||[]).map(function(b){
+    var e=b[0], f=b[1]==null?0:b[1], to=b[2]==null?1:b[2], len=(to-f)*.64, st=f+(to-f)*.18;
+    var pos = (e==='l'||e==='r') ? 'top:'+(st*100)+'%;height:'+(len*100)+'%' : 'left:'+(st*100)+'%;width:'+(len*100)+'%';
+    return '<span class="clamp '+e+'" style="'+pos+'"></span>';
+  }).join('');
+  var sup = t.sand ? '<sup>×'+t.sand+'</sup>' : '';
+  return '<div class="'+cls+'" data-id="'+(t.id||'')+'" style="grid-column:'+(t.c0+1)+' / span '+w+';grid-row:'+(t.r+1)+' / span '+h+'">'
+   + body + glyph(t) + (t.base!=null?'<em class="base">'+baseTxt(t)+'</em>':'')
+   + '<b class="num">'+numTxt(t)+sup+'</b>' + (t.name?'<i class="nm">'+t.name+'</i>':'')
+   + (t.sand?'<em class="chip">×'+t.sand+'</em>':'') + pins + clamps + '</div>';
+}
+var CHK = '<span class="chk"><svg viewBox="0 0 12 12"><path d="M2 6.5l3 3 5-7"/></svg></span>';
+function enemyHTML(e){
+  var tot = e.dmg.reduce(function(x,y){return x+y;},0), ok = tot>=e.hp, pct = Math.min(100,tot/e.hp*100);
+  var txt = e.dmg.length>1 ? e.dmg.join(' + ')+' / '+e.hp : tot+' / '+e.hp;
+  return '<div class="enemy'+(ok?' ok':'')+'" data-c="'+e.c+'" data-w="'+e.w+'" style="grid-column:'+(e.c+1)+' / span '+e.w+'">'
+   + (ok?CHK:'') + '<div class="etile"><i'+(e.guard?' class="gl"':'')+'>'+e.label+'</i><b>'+e.hp+'</b></div>'
+   + '<div class="pbar"><u style="width:'+pct+'%"></u><span>'+txt+'</span><span class="inv" style="clip-path:inset(0 '+(100-pct)+'% 0 0)">'+txt+'</span></div></div>';
+}
+var IC = {
+ back:'<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>',
+ menu:'<svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"/></svg>',
+ heart:'<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/></svg>',
+ plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>'
+};
+function mockup(v){
+  var h = '<div class="m va '+v.key+'" style="--cols:5">';
+  h += '<div class="hd"><button class="hb" aria-label="Back">'+IC.back+'</button><div class="ttl">Mesa<small>Fight 3 of 5</small></div><button class="hb" aria-label="Menu">'+IC.menu+'</button></div>';
+  h += '<div class="hint">Tap a tile to see what it reaches.</div>';
+  h += '<div class="enemies" style="align-items:start">'+ENEMIES.map(enemyHTML).join('')+'</div>';
+  h += '<div class="boardwrap"><div class="board">';
+  var occ = {};
+  BOARD.forEach(function(t){ var w=t.w||1; for (var j=0;j<w;j++) occ[t.r+','+(t.c0+j)]=1; });
+  for (var r=0;r<3;r++) for (var c=0;c<5;c++){
+    var blocked = BLOCKED.some(function(b){return b[0]===r&&b[1]===c;});
+    if (occ[r+','+c]) continue;
+    h += '<div class="cell'+(blocked?' x':'')+'" data-r="'+r+'" data-c="'+c+'" style="grid-row:'+(r+1)+';grid-column:'+(c+1)+'"></div>';
+  }
+  BANDS.forEach(function(b){ h += '<div class="band" style="grid-row:'+(b.r+1)+' / span '+b.h+';grid-column:'+(b.c+1)+' / span '+b.w+'"></div>'; });
+  BOARD.forEach(function(t){ h += tileHTML(t); });
+  h += '</div></div>';
+  var txt = '18 / 24';
+  h += '<div class="hero">'+IC.heart+'<div class="hpbar"><u style="width:75%"></u><span>'+txt+'</span><span class="inv" style="clip-path:inset(0 25% 0 0)">'+txt+'</span></div><button class="abil">'+IC.plus+'Mend<small>1×</small></button></div>';
+  h += '<div class="hand">';
+  HAND_EMPTY.forEach(function(p){ h += '<div class="slot empty" style="grid-row:'+(p[0]+1)+';grid-column:'+(p[1]+1)+'"></div>'; });
+  HAND.forEach(function(t){ h += tileHTML(t); });
+  h += '</div>';
+  h += '<div class="bar"><button class="clear">Clear</button><button class="go">Attack<small>53</small></button></div>';
+  return h+'</div>';
+}
+/* ===== build page ===== */
+var tabs = document.getElementById('tabs'), panels = document.getElementById('panels');
+VARS.forEach(function(v,i){
+  var b = document.createElement('button'); b.textContent = v.tab; b.setAttribute('role','tab'); b.setAttribute('aria-selected', i===0); b.dataset.k = v.key;
+  b.onclick = function(){ show(v.key); }; tabs.appendChild(b);
+  var p = document.createElement('section'); p.className='panel'; p.id='p-'+v.key; p.hidden = i!==0;
+  p.innerHTML = '<div class="ptitle"><b>'+v.tab+' · '+v.title+'</b> — '+v.sub+'</div>' + mockup(v) + '<div class="notes">'+v.notes.map(function(n){return '<p>'+n+'</p>';}).join('')+'</div>';
+  panels.appendChild(p);
+});
+function show(k){
+  [].forEach.call(tabs.children, function(b){ b.setAttribute('aria-selected', b.dataset.k===k); });
+  [].forEach.call(panels.children, function(p){ p.hidden = p.id!=='p-'+k; });
+  history.replaceState(null,'','#'+k);
+}
+if (/^#s[1-6]$/.test(location.hash)) show(location.hash.slice(1));
+/* tap a board tile to highlight what it reaches */
+panels.addEventListener('click', function(e){
+  var t = e.target.closest('.tile'); var m = e.target.closest('.m'); if (!m) return;
+  var was = t && t.classList.contains('sel');
+  [].forEach.call(m.querySelectorAll('.sel,.aff,.tgt'), function(x){ x.classList.remove('sel','aff','tgt'); });
+  if (!t || was || !t.dataset.id) return;
+  var d = BOARD.filter(function(b){return b.id===t.dataset.id;})[0]; if (!d) return;
+  t.classList.add('sel');
+  var w = d.w||1;
+  var cellAt = function(r,c){ return m.querySelector('.cell[data-r="'+r+'"][data-c="'+c+'"]') || [].filter.call(m.querySelectorAll('.board .tile[data-id]'), function(x){ var b=BOARD.filter(function(q){return q.id===x.dataset.id;})[0]; return b.r===r && c>=b.c0 && c<b.c0+(b.w||1); })[0]; };
+  if (d.k==='a' || d.lane){
+    var cs=[]; if (d.lane || d.reach.indexOf('f')>=0) for (var j=0;j<w;j++) cs.push(d.c0+j);
+    if (d.k==='a' && d.reach.indexOf('l')>=0) cs.push(d.c0-1);
+    if (d.k==='a' && d.reach.indexOf('r')>=0) cs.push(d.c0+w);
+    [].forEach.call(m.querySelectorAll('.enemy'), function(en){ var c0=+en.dataset.c, ew=+en.dataset.w; if (cs.some(function(c){return c>=c0&&c<c0+ew;})) en.classList.add('tgt'); });
+  }
+  if (d.k!=='a'){
+    var r=d.reach, tg=[];
+    if (r.indexOf('u')>=0) for (var j2=0;j2<w;j2++) tg.push([d.r-1,d.c0+j2]);
+    if (r.indexOf('d')>=0) for (var j3=0;j3<w;j3++) tg.push([d.r+1,d.c0+j3]);
+    if (r.indexOf('l')>=0) tg.push([d.r,d.c0-1]);
+    if (r.indexOf('r')>=0) tg.push([d.r,d.c0+w]);
+    tg.forEach(function(p){ var el = cellAt(p[0],p[1]); if (el) el.classList.add('aff'); });
+  }
+});
+</script>
+</body>
+</html>
