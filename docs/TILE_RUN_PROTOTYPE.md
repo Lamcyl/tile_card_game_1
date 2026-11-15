@@ -38,7 +38,7 @@ A tile = cells (shape), number, kind, direction string. Rotations are separate t
 | Multiplier (x, xN) | same direction options | Multiplies the attacking tiles and boosters there by N. Multipliers do not multiply other multipliers; several multipliers on one tile multiply together. |
 | Copy (e, =) | one direction u d l r | Takes the shown (final) number of the tile there (attack value, or booster power; never another copy or a multiplier), adds its own number, hits its own column. |
 
-Value of an attack tile = (number + bonus cell + momentum + boosts) x min(multipliers x bonus-cell x2, `CONFIG.multCap`) x sandwich (the cap is new in the fourth version, see below). Old names are special cases (Strike = own lane, Fork = left+right, Plus = adjacent boost in all four directions, Row/Pillar = row/column boost, Double = front multiplier x2, Echo = copy). Multi-cell tiles are polyominoes: 2 cells (h2, v2), 3 cells (bars and the four L-trominoes) and 4 cells (square, bars, four T, S and Z shapes); an attack polyomino hits the lanes of the columns it covers (each top cell contributes its lanes, each column once). Names are in the cards only.
+Value of an attack tile = (number + bonus cell + momentum + boosts) x multipliers x bonus-cell x2 (no cap any more) x sandwich. Old names are special cases (Strike = own lane, Fork = left+right, Plus = adjacent boost in all four directions, Row/Pillar = row/column boost, Double = front multiplier x2, Echo = copy). Multi-cell tiles are polyominoes: 2 cells (h2, v2), 3 cells (bars and the four L-trominoes) and 4 cells (square, bars, four T, S and Z shapes); an attack polyomino hits the lanes of the columns it covers (each top cell contributes its lanes, each column once). Names are in the cards only.
 
 Token notation used in `UNITS` (kit strings): `a^4` attack own-lane 4; `a<>3` fork; `a<^>2` all three lanes; `pudlr2` boost all four neighbours; `pR1` row boost; `xu2` multiplier of the tile in front; `eu1` copy the tile in front plus 1; `#h2`, `#v3`, `#sq`, `#Tu` ... shape suffix.
 
@@ -55,7 +55,7 @@ Chosen look ("Round five", see TILE_RUN_STYLES.md). The old edge marks (arrowhea
 - **Reach glyph (top left of every tile):** a mini grid of (w+2) x (h+2) cells, the tile's bounding box plus one margin cell all round. Own cells outlined, reached cells lit, the rest faint. Attack: cells in front of the tile's top cells for each lane (forward, left, right). Boost/multiplier: neighbours on the acting sides; row/column/cross variants light the whole row/column edge to edge. Copy: its own attack lane lit plus the copied cell as a ring.
 - **Base chip (top right):** a small quiet chip with the base number ("+2" for boosts) shown only when the current value differs. Nothing when unchanged.
 - **Sandwich:** gold clamps drawn in the gaps between the sandwiched tile and each squeezing neighbour (left+right for a row, top+bottom for a column, four for x4), plus a navy chip with gold "x2"/"x4" where the name was. Clamps are slim capsules (gap minus 2 px thick, 42 % of a cell long) with a thin navy outline, centred on the shared edge of the bracketed row/column, drawn in a layer above the tiles from board geometry (so no tile can paint over them), de-duplicated when two sandwiched tiles share a gap. The board gap is 8 px.
-- Other marks: cyan edge = Rare, magenta glowing edge = Epic; stars (gold) replace the name on merged tiles; small triangle = upgraded this run; gold dotted ring = added this run; "max" chip = multiplier cap reached.
+- Other marks: cyan edge = Rare, magenta glowing edge = Epic; stars (gold) replace the name on merged tiles; small triangle = upgraded this run; gold dotted ring = added this run.
 - **Enemies:** navy rounded slab with a small uppercase label (HP, HP . WIDE, GUARD n/need, AEGIS, TWIN, RUNNER, BOSS, 2 COLOURS), big white number (current HP) and the attack value under it. Below it a bar-pill: a red fill (like the hero HP bar) shows the predicted damage against HP, text "19 / 25" (wide enemies show the total only; guard not met: "needs 2"), one text colour. Kill = green pill, green slab outline, check badge; zero damage = empty grey pill.
 - **Hero row:** heart, HP bar-pill ("18 / 24"), ability button. The Attack button shows the predicted total. The hand keeps dashed slots where tiles were placed.
 - **While a tile is selected, held or dragged**, the board still shows the footprint, the cells it would boost, the columns it hits and the glowing cells that would finish an enemy.
@@ -148,7 +148,7 @@ Unit tests (`tests.js`, 34 checks, all pass): row and column sandwich, x4, same-
 
 ## Fixes
 
-- **Multiplier cap (`CONFIG.multCap`, placeholder 4):** the combined multiplier a tile gets from multiplier tiles and x2 bonus cells is capped; Sandwich (up to x4, or x9 with the Triple relic) applies on top. A tile at the cap shows a small "max" chip and its long-press breakdown has a "max multiplier reached" row. One line in How to play.
+- **Multiplier cap: removed.** Multiplier tiles and x2 bonus cells multiply without a limit (this replaced the `CONFIG.multCap` cap of 4 and its "max" mark); Sandwich multiplies on top. Puzzle 12 was renamed "Stacked Multipliers" (its stored solution still wins; winning layouts 52 -> 54; no other puzzle changed).
 - **Big tiles readable everywhere:** multi-cell tiles are drawn at their true shape and proportion in the hand, bag, kit, pick cards and Forge (cell size shrinks only so a 4-long piece stays about 190 px). They wrap in the hand like other tiles and the hand scrolls.
 - **Two-colour tile contrast:** white number with a heavy dark outline and shadowed symbols.
 - **Enemy HP vs attack number on 6-column boards:** on narrow boards the attack badge sits at the top and the HP at the bottom of the enemy tile, and the label moves to the corner.
@@ -207,7 +207,7 @@ A "Puzzles" list on Home (a list, no map): one attack on a fixed board with fixe
 | 9 | Two Colours | 4 | a two-colour tile counts as both | 9, 5 | 8 | 2 |
 | 10 | Whole Lines | 5 | row and column boosts | 9, 5 | 24 | 2 |
 | 11 | Multiply | 6 | multipliers | 9, 5 | 36 | 4 |
-| 12 | The Cap | 6 | the multiplier cap | 9, 5 | 60 | 3 |
+| 12 | Stacked Multipliers | 6 | multipliers stack | 9, 5 | 60 | 3 |
 | 13 | Two Cells | 7 | multi-cell tiles | 10, 5 | 48 | 7 |
 | 14 | Copy That | 8 | copy tiles | 10, 5 | 48 | 0 |
 | 15 | Short Side | 8 | sandwich across a big tile's short side | 10, 5 | 8 | 0 |
@@ -218,7 +218,7 @@ No puzzle is solved by more than 34 of 3000 random fills (puzzle 2, 1.1 percent)
 
 ## CONFIG additions (placeholders)
 
-`multCap` (4), `relicMax` (3), `heroCost` (0, 40, 60, 80, 100), `puzzleCoins` (10), `dailyCoins` (15). Hero and relic definitions are `HEROES` and `RELICS` in the rules block; puzzles are the `PUZZLES` array between `/*PUZ-START*/` and `/*PUZ-END*/`.
+`relicMax` (3), `heroCost` (0, 40, 60, 80, 100), `puzzleCoins` (10), `dailyCoins` (15). Hero and relic definitions are `HEROES` and `RELICS` in the rules block; puzzles are the `PUZZLES` array between `/*PUZ-START*/` and `/*PUZ-END*/`.
 
 ## Fourth iteration rough spots
 
@@ -230,6 +230,10 @@ No puzzle is solved by more than 34 of 3000 random fills (puzzle 2, 1.1 percent)
 - The hand area scrolls when big pieces fill it (4-cell shapes need up to about 190 px).
 - Saves from the third version load (same key); new fields are filled with defaults.
 
-## Touch placement (fix)
+## Touch placement (fix, second round)
 
-Taps and drops on a gap between cells, in the rounded corner of a cell, or just outside the board hit nothing (cell hit areas are rounded and the gap is 8 px), so a tile stayed selected, showing its preview values, but was not placed. `cellUnder` now snaps any point within 12 px of a cell to the nearest cell (drops always, taps while a tile is selected), tapping a placed multi-cell tile with a selection places on the touched cell, the board is `touch-action:none`, and window resize re-renders are deferred during a gesture.
+Root cause of "the tile cannot be placed but the preview shows its value": `renderFight` threw `ReferenceError: CHK is not defined` (the check-badge markup from the mockup was never defined in the game) whenever the live preview predicted a kill. `place()` had already changed the board, then the render died halfway, so the screen kept the old state; it happened mostly on cluttered boards or after several sandwiches because those deal the damage that kills. `CHK` is defined now.
+
+Hardening done at the same time: the drop target is the cell under the dragged piece's first (anchor) cell as drawn by the ghost, and the highlighted footprint is computed by the same `dropOrigin` the drop uses (free cells first; only if no free fit exists does a drop displace other tiles, and the touch log says so); with no footprint at release nothing is placed and the tile visibly returns; per-move work is throttled to one animation frame with cached cell rects; the per-cell previews (`showHold`) are computed a few at a time; the 450 ms long-press timer bails out if any movement was seen or input is pending; pointer capture is taken by the body once a drag starts; all pointer handlers catch exceptions and report them. Earlier snapping of taps and drops in gaps and rounded corners to the nearest cell stays.
+
+Diagnostic: Settings, "Touch log" (off by default, kept in the save) shows the last six input events under the fight screen, e.g. "drag t12 → cell 9 placed", "drag t12 → no cell (x,y)", "cancel: pointercancel", "hold card", "error in pointerup: ...".

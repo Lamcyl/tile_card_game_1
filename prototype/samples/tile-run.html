@@ -311,7 +311,6 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .tile .chip{position:absolute;left:50%;bottom:calc(var(--u) * .06);transform:translateX(-50%);background:var(--chipbg);color:var(--chipink);border:1.5px solid var(--gold);border-radius:9px;padding:0 max(4px,calc(var(--u) * .09));height:max(13px,calc(var(--u) * .235));line-height:max(10px,calc(var(--u) * .18));font-size:max(9.5px,calc(var(--u) * .165));font-weight:800;font-style:normal;white-space:nowrap}
 .tile .upm{position:absolute;right:calc(var(--u) * .07);bottom:calc(var(--u) * .06);font-style:normal;font-size:max(7px,calc(var(--u) * .13));color:#ffd04a;line-height:1}
 .tile.k-p .upm,.tile.k-x .upm{color:var(--gold)}
-.tile .capm{position:absolute;left:50%;top:-8px;transform:translateX(-50%);background:var(--chipbg);color:var(--chipink);border-radius:8px;padding:0 5px;height:14px;line-height:14px;font-size:9.5px;font-weight:800;font-style:normal}
 .ups{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}.arrow{font-size:22px;font-weight:800;color:var(--ink)}
 /* hero row */
 #fhero{display:flex;align-items:center;gap:8px;margin-top:8px;flex:none}
@@ -325,6 +324,8 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .hbtn{box-shadow:0 2px 0 var(--shadow)}span.hbtn{box-shadow:none;background:none;border:0}
 @media (max-height:760px){.etile{height:56px}}
 @media (max-height:700px){.etile{height:52px}.etile b{font-size:20px}.etile b.n3{font-size:17px;margin-top:2px}.pill{height:19px}.pill span{font-size:11.5px}.hpbar{height:20px}.abil{height:32px}#fhero{margin-top:4px}}
+#tlog{font:10.5px/1.3 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);padding:4px 2px;word-break:break-word;flex:none}
+.tile.ghost{position:fixed;z-index:80;pointer-events:none;touch-action:none;transform:translate(-50%,-60%) scale(1.12);opacity:.92;cursor:grabbing}
 </style>
 </head>
 <body>
@@ -342,6 +343,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
     <div id="ftabs"></div>
     <div id="fhand"></div>
     <div id="fbar"><button class="btn" id="fclear">Clear</button><button class="btn main" id="fatk">Attack</button></div>
+    <div id="tlog" hidden></div>
   </section>
   <section id="result" class="screen" hidden></section>
 </div>
@@ -376,7 +378,6 @@ var CONFIG = {
   startCoins: 0,
   longPressMs: 450,
   stars: { on: true, cap: 3 },
-  multCap: 4,                       /* placeholder: most a tile can get from multiplier tiles and x2 bonus cells together; Sandwich applies on top */
   relicMax: 3,                      /* relics per run */
   heroCost: { rally: 0, wind: 40, prism: 60, overcharge: 80, guard: 100 },   /* placeholder coin costs */
   puzzleCoins: 10, dailyCoins: 15,  /* placeholders */      /* identical looted colourless tiles merge into a star: +1 number per star */
@@ -580,7 +581,7 @@ function evaluate(F, board, opts) {
   var ea = [];
   F.enemies.forEach(function (e, ek) { for (var cc = e.c; cc < e.c + e.w; cc++) ea[cc] = ek; });
   var relic = {}; (F.relics || []).forEach(function (r) { relic[r] = 1; });
-  var prismId = opts.prism || 0, overId = opts.over || 0, CAP = CONFIG.multCap;
+  var prismId = opts.prism || 0, overId = opts.over || 0;
   var nOf = function (t) { return t.id === overId ? t.n * 2 : t.n; };
   var colsOf = function (t) { return t.id === prismId ? COLOR_IDS.slice() : tileColours(t); };
   var sandOkL = function (m, a, b) { var cm = colsOf(m), ca = colsOf(a), cb = colsOf(b); if (!cm.length) return false; for (var i2 = 0; i2 < ca.length; i2++) if (cb.indexOf(ca[i2]) >= 0 && cm.some(function (c3) { return c3 !== ca[i2]; })) return true; return false; };
@@ -591,7 +592,7 @@ function evaluate(F, board, opts) {
     for (j = i; j < N; j++) if (board[j] === t0) { cl.push(j); cellG[j] = G.length; }
     var rows = {}, colsS = {}; cl.forEach(function (q) { rows[(q / cols) | 0] = 1; colsS[q % cols] = 1; });
     var top = cl.filter(function (q) { return cl.indexOf(q - cols) < 0; });
-    G.push({ t: t0, cells: cl, a: i, r: (i / cols) | 0, rows: Object.keys(rows).map(Number), colsU: Object.keys(colsS).map(Number), top: top, add: 0, radd: 0, mul: 1, mulRaw: 1, capped: false, sand: 1, boost: 0, v: 0, pw: 0, dealt: 0, copy: 0, outs: [], targets: 0, hv: false, vv: false });
+    G.push({ t: t0, cells: cl, a: i, r: (i / cols) | 0, rows: Object.keys(rows).map(Number), colsU: Object.keys(colsS).map(Number), top: top, add: 0, radd: 0, mul: 1, sand: 1, boost: 0, v: 0, pw: 0, dealt: 0, copy: 0, outs: [], targets: 0, hv: false, vv: false });
   }
   var marks = [];
   G.forEach(function (g) {
@@ -621,7 +622,6 @@ function evaluate(F, board, opts) {
     if (g.t.k !== 'x') return;
     targetsOf(g).forEach(function (gi) { if (G[gi].t.k !== 'x') { G[gi].mul *= g.t.n; g.targets++; } });
   });
-  G.forEach(function (g) { g.mulRaw = g.mul; if (g.mul >= CAP) g.capped = true; if (g.mul > CAP) g.mul = CAP; });
   var SF = relic.triple ? 3 : 2;
   /* sandwich: every row line and every column line through the tile counts once, if both ends of the tile's span on that line have matching outer tiles */
   G.forEach(function (g) {
@@ -696,8 +696,8 @@ function evaluate(F, board, opts) {
   var val = [], power = [], sandA = [], parts = det ? [] : null;
   G.forEach(function (g) {
     val[g.a] = g.v; power[g.a] = g.pw; sandA[g.a] = g.sand;
-    if (det) parts[g.a] = g.t.k === 'p' ? [['base', nOf(g.t)], ['cell +', g.add], ['momentum', mom], ['multipliers and bonus cell ×', g.mul], ['max multiplier reached ×', g.capped ? CAP : 0], ['sandwich ×', g.sand]] :
-      [['base', nOf(g.t)], ['copied number', g.copy], ['cell +', g.add], ['relics +', g.radd], ['momentum', g.t.k === 'e' ? 0 : mom], ['boosts', g.boost], ['multipliers and bonus cell ×', g.mul], ['max multiplier reached ×', g.capped ? CAP : 0], ['sandwich ×', g.sand]];
+    if (det) parts[g.a] = g.t.k === 'p' ? [['base', nOf(g.t)], ['cell +', g.add], ['momentum', mom], ['multipliers and bonus cell ×', g.mul], ['sandwich ×', g.sand]] :
+      [['base', nOf(g.t)], ['copied number', g.copy], ['cell +', g.add], ['relics +', g.radd], ['momentum', g.t.k === 'e' ? 0 : mom], ['boosts', g.boost], ['multipliers and bonus cell ×', g.mul], ['sandwich ×', g.sand]];
   });
   return { tot: tot, val: val, power: power, sand: sandA, en: en, enemyAt: ea, parts: parts, marks: marks, G: G, cellG: cellG,
            stats: { sandExtra: sandExtra, advDealt: advDealt, dealt: allDealt, boostAdd: boostAdd, x4: x4, both: both } };
@@ -1032,7 +1032,7 @@ function genDaily(seed, stage) {
   return null;
 }
 /*PUZ-START*/
-var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Match the numbers to the enemies. Each Strike hits the column above it.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^5"},{"c":"g","t":"a^2"}],"enemies":[[0,1,7],[1,1,10],[2,1,4]],"sol":[[2,3],[1,0],[0,2],[4,5],[3,1]],"reward":{"coins":10}},{"id":"p02","name":"Sandwich","teach":"A tile between two tiles of one other colour is doubled.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,5],[1,1,8],[2,1,3]],"sol":[[2,1],[1,5],[4,0],[0,3],[3,4]],"reward":{"coins":10}},{"id":"p03","name":"Both Ways","teach":"Sandwich in the row and in the column: x4.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^1"}],"enemies":[[0,1,2],[1,1,8],[2,1,5]],"sol":[[5,4],[1,1],[0,5],[3,7],[4,8],[2,3]],"reward":{"coins":15}},{"id":"p04","name":"Reach Sideways","teach":"Side lanes hit the neighbouring columns.","stage":2,"cols":3,"rows":3,"blocked":[4],"bonus":{},"hand":[{"c":"r","t":"a<>4"},{"c":"b","t":"a<>3"},{"c":"g","t":"a<2"},{"c":"g","t":"a>2"},{"c":"r","t":"a^3"}],"enemies":[[0,1,10],[1,1,4],[2,1,7]],"sol":[[3,3],[2,2],[1,7],[0,1],[4,6]],"reward":{"coins":15}},{"id":"p05","name":"Lucky Cells","teach":"Bonus cells boost the tile placed on them.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{"0":"x2","4":"p2","8":"p1"},"hand":[{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"r","t":"a^5"},{"c":"b","t":"a^2"}],"enemies":[[0,1,4],[1,1,5],[2,1,12]],"sol":[[0,5],[3,8],[4,0],[2,2],[1,4]],"reward":{"coins":15,"tile":"a^3"}},{"id":"p06","name":"Neighbours","teach":"A boost adds to the attackers touching its marked edges.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"pudlr2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"r","t":"a^2"},{"c":"y","t":"pu1"}],"enemies":[[0,1,4],[2,1,9],[3,1,6]],"sol":[[5,11],[1,2],[4,10],[2,7],[3,4],[0,6]],"reward":{"coins":20}},{"id":"p07","name":"Guard Duty","teach":"A guard only takes damage from 2 different tiles.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^4"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"},{"c":"y","t":"a<>3"},{"c":"r","t":"a^2"}],"enemies":[[0,1,7],[2,1,7],[3,1,5]],"sol":[[3,5],[4,11],[2,7],[1,4],[0,10]],"reward":{"coins":20}},{"id":"p08","name":"Three Lanes","teach":"A trident hits the column on each side and its own.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a<^>3"},{"c":"b","t":"a<^3"},{"c":"g","t":"a^>2"},{"c":"y","t":"a^4"},{"c":"r","t":"a<>2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,8],[1,1,19],[2,1,9],[3,1,2]],"sol":[[0,9],[2,10],[1,4],[3,5],[5,6],[4,1]],"reward":{"coins":25,"tile":"a<>3"}},{"id":"p09","name":"Two Colours","teach":"A two-colour tile counts as both colours for Sandwich.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","c2":"g","t":"a^4"},{"c":"b","t":"a^2"},{"c":"g","t":"a^2"}],"enemies":[[1,1,7],[2,1,8],[3,1,3]],"sol":[[4,5],[1,9],[2,10],[3,1],[0,11]],"reward":{"coins":25}},{"id":"p10","name":"Whole Lines","teach":"A row or column boost reaches every tile on its line.","stage":5,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"pR1"},{"c":"b","t":"pC1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^3"},{"c":"p","t":"a^4"}],"enemies":[[2,1,10],[3,1,4]],"sol":[[3,3],[2,12],[1,7],[4,2],[0,1]],"reward":{"coins":30,"tile":"pudlr1"}},{"id":"p11","name":"Multiply","teach":"A multiplier multiplies the attackers on its marked edges.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xu2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"y","t":"a^2"},{"c":"p","t":"a^3"}],"enemies":[[1,1,10],[2,1,3],[3,1,3]],"sol":[[0,6],[2,1],[3,11],[4,3],[1,12]],"reward":{"coins":30}},{"id":"p12","name":"The Cap","teach":"Multipliers stop at the cap (shown as max).","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xudlr2"},{"c":"g","t":"xudlr2"},{"c":"b","t":"xu2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^3"}],"enemies":[[1,1,12],[2,1,16]],"sol":[[0,1],[4,6],[1,7],[2,11],[3,2]],"reward":{"coins":30,"tile":"xu2"}},{"id":"p13","name":"Two Cells","teach":"A two-cell tile is one piece and hits every column it covers.","stage":7,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^6#h2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^5"}],"enemies":[[1,1,4],[2,1,9],[3,1,13]],"sol":[[4,18],[3,6],[2,8],[1,7],[0,12]],"reward":{"coins":35}},{"id":"p14","name":"Copy That","teach":"A copy tile takes the number of the tile it points at.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^5"},{"c":"b","t":"eu1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"p","t":"a^2"}],"enemies":[[1,1,14],[2,1,4],[3,1,2]],"sol":[[3,7],[2,16],[4,3],[1,6],[0,1]],"reward":{"coins":40,"tile":"a^4"}},{"id":"p15","name":"Short Side","teach":"A big tile is sandwiched across its short side too.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4#h2"},{"c":"g","t":"a^2"},{"c":"y","t":"a^3"}],"enemies":[[1,1,3],[2,1,8],[3,1,16]],"sol":[[3,3],[2,12],[0,8],[1,18],[4,1]],"reward":{"coins":40}}];
+var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Match the numbers to the enemies. Each Strike hits the column above it.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^5"},{"c":"g","t":"a^2"}],"enemies":[[0,1,7],[1,1,10],[2,1,4]],"sol":[[2,3],[1,0],[0,2],[4,5],[3,1]],"reward":{"coins":10}},{"id":"p02","name":"Sandwich","teach":"A tile between two tiles of one other colour is doubled.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,5],[1,1,8],[2,1,3]],"sol":[[2,1],[1,5],[4,0],[0,3],[3,4]],"reward":{"coins":10}},{"id":"p03","name":"Both Ways","teach":"Sandwich in the row and in the column: x4.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^1"}],"enemies":[[0,1,2],[1,1,8],[2,1,5]],"sol":[[5,4],[1,1],[0,5],[3,7],[4,8],[2,3]],"reward":{"coins":15}},{"id":"p04","name":"Reach Sideways","teach":"Side lanes hit the neighbouring columns.","stage":2,"cols":3,"rows":3,"blocked":[4],"bonus":{},"hand":[{"c":"r","t":"a<>4"},{"c":"b","t":"a<>3"},{"c":"g","t":"a<2"},{"c":"g","t":"a>2"},{"c":"r","t":"a^3"}],"enemies":[[0,1,10],[1,1,4],[2,1,7]],"sol":[[3,3],[2,2],[1,7],[0,1],[4,6]],"reward":{"coins":15}},{"id":"p05","name":"Lucky Cells","teach":"Bonus cells boost the tile placed on them.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{"0":"x2","4":"p2","8":"p1"},"hand":[{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"r","t":"a^5"},{"c":"b","t":"a^2"}],"enemies":[[0,1,4],[1,1,5],[2,1,12]],"sol":[[0,5],[3,8],[4,0],[2,2],[1,4]],"reward":{"coins":15,"tile":"a^3"}},{"id":"p06","name":"Neighbours","teach":"A boost adds to the attackers touching its marked edges.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"pudlr2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"r","t":"a^2"},{"c":"y","t":"pu1"}],"enemies":[[0,1,4],[2,1,9],[3,1,6]],"sol":[[5,11],[1,2],[4,10],[2,7],[3,4],[0,6]],"reward":{"coins":20}},{"id":"p07","name":"Guard Duty","teach":"A guard only takes damage from 2 different tiles.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^4"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"},{"c":"y","t":"a<>3"},{"c":"r","t":"a^2"}],"enemies":[[0,1,7],[2,1,7],[3,1,5]],"sol":[[3,5],[4,11],[2,7],[1,4],[0,10]],"reward":{"coins":20}},{"id":"p08","name":"Three Lanes","teach":"A trident hits the column on each side and its own.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a<^>3"},{"c":"b","t":"a<^3"},{"c":"g","t":"a^>2"},{"c":"y","t":"a^4"},{"c":"r","t":"a<>2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,8],[1,1,19],[2,1,9],[3,1,2]],"sol":[[0,9],[2,10],[1,4],[3,5],[5,6],[4,1]],"reward":{"coins":25,"tile":"a<>3"}},{"id":"p09","name":"Two Colours","teach":"A two-colour tile counts as both colours for Sandwich.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","c2":"g","t":"a^4"},{"c":"b","t":"a^2"},{"c":"g","t":"a^2"}],"enemies":[[1,1,7],[2,1,8],[3,1,3]],"sol":[[4,5],[1,9],[2,10],[3,1],[0,11]],"reward":{"coins":25}},{"id":"p10","name":"Whole Lines","teach":"A row or column boost reaches every tile on its line.","stage":5,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"pR1"},{"c":"b","t":"pC1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^3"},{"c":"p","t":"a^4"}],"enemies":[[2,1,10],[3,1,4]],"sol":[[3,3],[2,12],[1,7],[4,2],[0,1]],"reward":{"coins":30,"tile":"pudlr1"}},{"id":"p11","name":"Multiply","teach":"A multiplier multiplies the attackers on its marked edges.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xu2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"y","t":"a^2"},{"c":"p","t":"a^3"}],"enemies":[[1,1,10],[2,1,3],[3,1,3]],"sol":[[0,6],[2,1],[3,11],[4,3],[1,12]],"reward":{"coins":30}},{"id":"p12","name":"Stacked Multipliers","teach":"Multipliers stack without a limit: two doublers make x4.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xudlr2"},{"c":"g","t":"xudlr2"},{"c":"b","t":"xu2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^3"}],"enemies":[[1,1,12],[2,1,16]],"sol":[[0,1],[4,6],[1,7],[2,11],[3,2]],"reward":{"coins":30,"tile":"xu2"}},{"id":"p13","name":"Two Cells","teach":"A two-cell tile is one piece and hits every column it covers.","stage":7,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^6#h2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^5"}],"enemies":[[1,1,4],[2,1,9],[3,1,13]],"sol":[[4,18],[3,6],[2,8],[1,7],[0,12]],"reward":{"coins":35}},{"id":"p14","name":"Copy That","teach":"A copy tile takes the number of the tile it points at.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^5"},{"c":"b","t":"eu1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"p","t":"a^2"}],"enemies":[[1,1,14],[2,1,4],[3,1,2]],"sol":[[3,7],[2,16],[4,3],[1,6],[0,1]],"reward":{"coins":40,"tile":"a^4"}},{"id":"p15","name":"Short Side","teach":"A big tile is sandwiched across its short side too.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4#h2"},{"c":"g","t":"a^2"},{"c":"y","t":"a^3"}],"enemies":[[1,1,3],[2,1,8],[3,1,16]],"sol":[[3,3],[2,12],[0,8],[1,18],[4,1]],"reward":{"coins":40}}];
 /*PUZ-END*/
 /*RULES-END*/
 
@@ -1047,7 +1047,7 @@ function defaultStore() {
   UNITS.forEach(function (u) { var first = !team[u.c]; if (first) team[u.c] = u.id; units[u.id] = { u: first, l: 1, br: null }; });
   return { coins: 0, units: units, team: team, nid: 3, bag: [1, 2, 3], run: null, cleared: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, dailyDone: '',
     inv: [{ id: 1, k: 'a', d: '^', n: 3, sh: 'o', rar: 0, st: 0 }, { id: 2, k: 'a', d: '^', n: 3, sh: 'o', rar: 0, st: 0 }, { id: 3, k: 'p', d: 'udlr', n: 1, sh: 'o', rar: 0, st: 0 }],
-    set: { momentum: true, value: 1, ret: 'fight', stars: true } };
+    set: { momentum: true, value: 1, ret: 'fight', stars: true, tlog: false } };
 }
 function load() {
   var s = defaultStore();
@@ -1138,7 +1138,7 @@ function shapeRects(cells, set, ins, gu) {
   return s;
 }
 function tileName2(t) { return COLORS[t.c] + ' ' + tileName(t) + ' ' + tileLabel(t); }
-/* o: board (true = real size on the board, ts = cell px, gp = gap px), shown (live value), sx (sandwich chip), cap (max mark), cls, attrs */
+/* o: board (true = real size on the board, ts = cell px, gp = gap px), shown (live value), sx (sandwich chip), cls, attrs */
 function tileHTML(t, o) {
   o = o || {};
   var cells = cellsOf(t), dims = shapeDims(t), h = dims[0], w = dims[1], k = t.k, uid = ++uidc, multi = cells.length > 1, board = !!o.board;
@@ -1167,7 +1167,6 @@ function tileHTML(t, o) {
   else if (t.st) face += '<i class="nm st">' + new Array(t.st + 1).join('★') + '</i>';
   else if (rect && cellPx >= 48) face += '<i class="nm">' + shortName(t) + '</i>';
   if (t.up) face += '<em class="upm">▲</em>';
-  if (o.cap) face += '<em class="capm">max</em>';
   var c0 = cells[0], gstyle = 'left:calc((var(--u) + var(--tg)) * ' + c0[1] + ' + var(--u) * .075);top:calc((var(--u) + var(--tg)) * ' + c0[0] + ' + var(--u) * .075)';
   var cls = 'tile k-' + k + ' c-' + t.c + (t.c2 ? ' two d-' + t.c2 : '') + (t.rar ? ' rar-' + t.rar : '') + (t.added ? ' added' : '') + (t.rest && !o.noRest ? ' rested' : '') + (o.sx ? ' sandw' : '') + (o.cls ? ' ' + o.cls : '') + (board ? ' bd' : ' cp');
   var style = '--u:' + cellPx + 'px;--tg:' + gp + 'px;width:' + PX + 'px;height:' + PY + 'px;' + (board ? 'left:' + (o.left || 0) + 'px;top:' + (o.top || 0) + 'px;' : '');
@@ -1180,6 +1179,7 @@ function hpBar(hp, max) { return '<div class="hpbar"><i style="width:' + Math.ma
 var SPIKE = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6.4 3.6 L10 5 L6.4 6.4 L5 10 L3.6 6.4 L0 5 L3.6 3.6Z"/></svg>';
 var LINK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M5 7 L7 5 M3.8 8.2 a2 2 0 0 1 0-2.800 L5 4.200 M8.200 3.800 a2 2 0 0 1 0 2.800 L7 7.800" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round"/></svg>';
 var RUN = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h7M6 2.500L9.500 6 6 9.500" fill="none" stroke="currentColor" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var CHK = '<span class="chk"><svg viewBox="0 0 12 12"><path d="M2 6.5l3 3 5-7"/></svg></span>';
 var NODEICON = {
   forge: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h14c0 3-2 4-4 4v3h3v3H8v-3h3v-3c-2 0-4-1-4-4z" fill="currentColor"/></svg>',
   rest: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3a9 9 0 1 0 6 12 7 7 0 0 1-6-12z" fill="currentColor"/></svg>',
@@ -1456,7 +1456,7 @@ function renderFight() {
   res.G.forEach(function (g) {
     var t = g.t, minr = 99, minc = 99; g.cells.forEach(function (q) { minr = Math.min(minr, (q / cols) | 0); minc = Math.min(minc, q % cols); });
     var shown = t.k === 'p' ? res.power[g.a] : t.k === 'x' ? undefined : res.val[g.a];
-    th += tileHTML(t, { board: true, ts: cs, gp: gp, left: minc * (cs + gp), top: minr * (cs + gp), shown: shown, sx: g.sand > 1 ? g.sand : 0, cap: g.capped, attrs: 'data-cell="' + g.a + '" data-card="t:' + t.id + '"', cls: (fs.hero && fs.hero.target === t.id ? ' herot' : '') + (heroTargeting() ? ' tgtable' : ''), noRest: true });
+    th += tileHTML(t, { board: true, ts: cs, gp: gp, left: minc * (cs + gp), top: minr * (cs + gp), shown: shown, sx: g.sand > 1 ? g.sand : 0, attrs: 'data-cell="' + g.a + '" data-card="t:' + t.id + '"', cls: (fs.hero && fs.hero.target === t.id ? ' herot' : '') + (heroTargeting() ? ' tgtable' : ''), noRest: true });
   });
   $('#ftiles').innerHTML = th + clampsHTML(res, cols, cs, gp);
   var strip = '<div class="strip" data-card="mode"><span class="t"><b>Sandwich:</b> ' + SANDWICH + '</span></div>';
@@ -1496,12 +1496,14 @@ function renderFight() {
   if (fs.mom > 0) info = 'Momentum +' + fs.mom + ' on this attack. ' + info;
   $('#finfo').textContent = info;
   if (S.sel >= 0) showHold(tileById(S.sel), -1);
+  tlogShow();
   persist();
 }
 /* the cells a held tile would cover, boost/multiply/copy, and the columns it would hit */
 function showReach(t, origin) {
   $$('#fboard .cell.fp, #fboard .cell.tgt, .enemy.hitcol').forEach(function (el) { el.classList.remove('fp', 'tgt', 'hitcol'); });
   if (origin === null || origin === undefined) return;
+  if (origin < 0) return;
   var F = S.fs.F, rc = tileReach(t, origin, F.cols, F.rows); if (!rc) return;
   rc.cells.forEach(function (q) { var el = $('#fboard .cell[data-cell="' + q + '"]'); if (el) el.classList.add('fp'); });
   rc.targets.forEach(function (q) { var el = $('#fboard .cell[data-cell="' + q + '"]'); if (el) el.classList.add('tgt'); });
@@ -1517,28 +1519,36 @@ function originFor(t, cell, bt) {
   }
   return -1;
 }
+/* where a tile dropped on a cell lands: the first fit on free cells (the same one the preview shows), only when there is none the first fit that displaces other tiles */
+function dropOrigin(t, cell, bt) { var a = originFor(t, cell, bt); return a >= 0 ? a : originFor(t, cell, null); }
+var holdJob = 0;
 function showHold(t, from) {
   clearHold(); if (!t) return;
   var F = S.fs.F, bt = boardTiles().map(function (x) { return x && x.id === t.id ? null : x; });
-  var base = evaluate(F, bt, eo());
-  $$('#fboard .cell').forEach(function (el) {
-    var i = +el.dataset.cell; if (bt[i]) return;
-    var a = originFor(t, i, bt); if (a < 0) return;
-    var cells = placeCells(t, a, F.cols, F.rows), b2 = bt.slice(); cells.forEach(function (q) { b2[q] = t; });
-    var r2 = evaluate(F, b2, eo()), best = -1, bd = 0, kill = false;
-    F.enemies.forEach(function (e, k) { var d = r2.en[k].dmg - base.en[k].dmg; if (d > bd) { bd = d; best = k; } if (r2.en[k].kill && !base.en[k].kill) kill = true; });
-    el.classList.add('hold'); el.querySelector('.pv').textContent = best >= 0 ? '→' + r2.en[best].dmg : '';
-    if (kill) el.classList.add('glow');
-  });
+  var base = evaluate(F, bt, eo()), job = ++holdJob, idx = 0, cells = $$('#fboard .cell').filter(function (el) { return !bt[+el.dataset.cell]; });
   S.hold = t;
+  /* the per-cell previews are computed a few at a time so a drag never blocks the main thread */
+  (function step() {
+    if (job !== holdJob) return;
+    var t0 = performance.now();
+    while (idx < cells.length && (performance.now() - t0 < 6 || idx === 0)) {
+      var el = cells[idx++], i = +el.dataset.cell, a = originFor(t, i, bt); if (a < 0) continue;
+      var cl = placeCells(t, a, F.cols, F.rows), b2 = bt.slice(); cl.forEach(function (q) { b2[q] = t; });
+      var r2 = evaluate(F, b2, eo()), best = -1, bd = 0, kill = false;
+      F.enemies.forEach(function (e, k) { var d = r2.en[k].dmg - base.en[k].dmg; if (d > bd) { bd = d; best = k; } if (r2.en[k].kill && !base.en[k].kill) kill = true; });
+      el.classList.add('hold'); el.querySelector('.pv').textContent = best >= 0 ? '→' + r2.en[best].dmg : '';
+      if (kill) el.classList.add('glow');
+    }
+    if (idx < cells.length) setTimeout(step, 0);
+  })();
 }
-function clearHold() { S.hold = null; $$('#fboard .cell').forEach(function (el) { el.classList.remove('hold', 'glow', 'fp', 'tgt'); var p = el.querySelector('.pv'); if (p) p.textContent = ''; }); $$('.enemy.hitcol').forEach(function (el) { el.classList.remove('hitcol'); }); }
+function clearHold() { holdJob++; S.hold = null; $$('#fboard .cell').forEach(function (el) { el.classList.remove('hold', 'glow', 'fp', 'tgt'); var p = el.querySelector('.pv'); if (p) p.textContent = ''; }); $$('.enemy.hitcol').forEach(function (el) { el.classList.remove('hitcol'); }); }
 function setBoard(arr) { S.board = arr; if (S.run) S.run.board = arr; }
 function shakeCell(i) { var el = $('#fboard .cell[data-cell="' + i + '"]'); if (el) { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); } }
 function place(id, cell) {
-  if (S.phase !== 'edit') return;
-  var t = tileById(id), B = S.board, F = S.fs.F, a = originFor(t, cell, null);
-  if (a < 0) { shakeCell(cell); return; }
+  if (S.phase !== 'edit') return false;
+  var t = tileById(id), B = S.board, F = S.fs.F, a = dropOrigin(t, cell, boardTiles().map(function (x) { return x && x.id === id ? null : x; }));
+  if (a < 0) { shakeCell(cell); return false; }
   var cells = placeCells(t, a, F.cols, F.rows), from = [];
   B.forEach(function (x, i) { if (x === id) from.push(i); });
   var occ = {}; cells.forEach(function (q) { if (B[q] >= 0 && B[q] !== id) occ[B[q]] = 1; });
@@ -1548,7 +1558,9 @@ function place(id, cell) {
   if (occIds.length === 1 && from.length === 1 && single(t) && single(tileById(occIds[0]))) { B.forEach(function (x, i) { if (x === occIds[0]) B[i] = -1; }); B[from[0]] = occIds[0]; }
   else occIds.forEach(function (o) { B.forEach(function (x, i) { if (x === o) B[i] = -1; }); });
   cells.forEach(function (q) { B[q] = id; });
+  if (occIds.length) tlog('t' + id + ' displaced ' + occIds.length + ' tile' + (occIds.length > 1 ? 's' : ''));
   S.sel = -1; clearHold(); renderFight();
+  return true;
 }
 function unplace(cell) { var id = S.board[cell]; if (S.fs.hero && S.fs.hero.target === id) S.fs.hero.target = 0; S.board = S.board.map(function (x) { return x === id ? -1 : x; }); S.run.board = S.board; S.sel = -1; clearHold(); renderFight(); }
 function clearBoard() { if (S.fs.hero) S.fs.hero.target = 0; setBoard(S.board.map(function () { return -1; })); S.sel = -1; clearHold(); renderFight(); }
@@ -1753,7 +1765,18 @@ function cardFor(key) {
 }
 
 /* ---------- pointer handling ---------- */
-var P = null, ghost = null, lpAt = 0;
+var P = null, ghost = null, lpAt = 0, rectCache = null, rafId = 0, TLOG = [];
+/* touch log: the last few input events (Settings, Touch log) */
+function tlog(msg) { TLOG.push(msg); if (TLOG.length > 6) TLOG.shift(); tlogShow(); }
+function tlogShow() { var el = $('#tlog'); if (!el) return; var on = !!(store && store.set && store.set.tlog); el.hidden = !on; if (on) el.textContent = TLOG.length ? TLOG.join(' | ') : 'touch log on'; }
+function guarded(name, fn) {
+  return function (e) {
+    try { fn(e); } catch (err) {
+      tlog('error in ' + name + ': ' + (err && err.message));
+      try { P = null; if (ghost) { ghost.remove(); ghost = null; } rectCache = null; clearHold(); $$('#ftiles .tile.dragging').forEach(function (n) { n.classList.remove('dragging'); }); if (S.screen === 'fight') renderFight(); } catch (e2) { tlog('error recovering: ' + (e2 && e2.message)); }
+    }
+  };
+}
 function targetOf(el) {
   if (!el || !el.closest) return null;
   var x, tg = { card: null };
@@ -1767,22 +1790,37 @@ function targetOf(el) {
   return null;
 }
 function longPress() {
-  if (!P || !P.tg.card) return; P.long = true;
+  if (!P || P.dead || !P.tg.card || P.moved || P.moveSeen) return;
+  /* a pointermove may be queued behind a long task: never turn a drag into a hold card */
+  if (P.lpTries++ < 8 && navigator.scheduling && navigator.scheduling.isInputPending && navigator.scheduling.isInputPending()) { P.timer = setTimeout(longPress, 60); return; }
+  P.long = true; tlog('hold card');
   var h = cardFor(P.tg.card); if (!h) return; showCard(h);
   if (navigator.vibrate) try { navigator.vibrate(12); } catch (e) {}
 }
-/* the board cell under a point; a point in a gap, in a rounded corner or just outside the board snaps to the nearest cell */
+function cellRects() { return $$('#fboard .cell[data-cell]').map(function (el) { var r = el.getBoundingClientRect(); return { i: +el.dataset.cell, el: el, l: r.left, t: r.top, r: r.right, b: r.bottom }; }); }
+/* nearest board cell to a point (a point in a gap, a rounded corner or just outside snaps to it); cached rects during a drag */
+function cellAtPoint(x, y, fresh) {
+  var list = (!fresh && rectCache) || cellRects(), best = null, bd = 1e9;
+  list.forEach(function (c) { var dx = Math.max(c.l - x, 0, x - c.r), dy = Math.max(c.t - y, 0, y - c.b), d = Math.sqrt(dx * dx + dy * dy); if (d < bd) { bd = d; best = c; } });
+  return bd <= 12 ? best : null;
+}
 function cellUnder(x, y) {
   var els = document.elementsFromPoint(x, y);
   for (var i = 0; i < els.length; i++) { var c = els[i].closest && els[i].closest('#fboard .cell[data-cell]'); if (c) return c; }
-  var best = null, bd = 1e9, cells = $$('#fboard .cell[data-cell]'), tol = 12;
-  cells.forEach(function (el) {
-    var r = el.getBoundingClientRect(), dx = Math.max(r.left - x, 0, x - r.right), dy = Math.max(r.top - y, 0, y - r.bottom), d = Math.sqrt(dx * dx + dy * dy);
-    if (d < bd) { bd = d; best = el; }
-  });
-  return bd <= tol ? best : null;
+  var b = cellAtPoint(x, y, true); return b ? b.el : null;
 }
-document.addEventListener('pointerdown', function (e) {
+/* where the dragged piece's first (anchor) cell is, as drawn: the drop target is what the user sees */
+function ghostAnchor(t) {
+  var gr = ghost.getBoundingClientRect(), dm = shapeDims(t), u = parseFloat(ghost.style.getPropertyValue('--u')), g = parseFloat(ghost.style.getPropertyValue('--tg')), k = gr.width / (dm[1] * u + (dm[1] - 1) * g), c0 = cellsOf(t)[0];
+  return { x: gr.left + k * (c0[1] * (u + g) + u / 2), y: gr.top + k * (c0[0] * (u + g) + u / 2) };
+}
+function dragUpdate() {
+  rafId = 0; if (!P || !P.moved || !ghost) return;
+  var t = tileById(P.tg.id), a = ghostAnchor(t), c = cellAtPoint(a.x, a.y), key = c ? c.i : -1;
+  if (key === P.hover) return; P.hover = key;
+  showReach(t, key >= 0 ? dropOrigin(t, key, P.bt) : -1);
+}
+document.addEventListener('pointerdown', guarded('pointerdown', function (e) {
   if (!$('#card').hidden) { hideCard(); P = { dead: true }; lpAt = Date.now(); return; }
   if (S.phase === 'anim' && S.screen === 'fight') { S.skip = true; return; }
   if (!$('#modal').hidden && !$('#modal').contains(e.target)) return;
@@ -1790,53 +1828,58 @@ document.addEventListener('pointerdown', function (e) {
   if (!tg && S.screen === 'fight' && S.phase === 'edit' && S.sel >= 0) { var sc = cellUnder(e.clientX, e.clientY); if (sc) tg = { card: null, kind: 'cell', cell: +sc.dataset.cell, el: sc }; }
   if (!tg) { P = null; return; }
   if (tg.kind === 'board') { var tc = cellUnder(e.clientX, e.clientY); tg.tcell = tc ? +tc.dataset.cell : tg.cell; }
-  P = { tg: tg, x: e.clientX, y: e.clientY, moved: false, long: false };
+  P = { tg: tg, x: e.clientX, y: e.clientY, moved: false, long: false, moveSeen: false, lpTries: 0, hover: -2 };
   if (tg.card) P.timer = setTimeout(longPress, CONFIG.longPressMs);
-});
-document.addEventListener('pointermove', function (e) {
-  if (S.screen === 'fight' && S.phase === 'edit' && S.sel >= 0 && !P && e.pointerType === 'mouse') { var hc = cellUnder(e.clientX, e.clientY), t0 = tileById(S.sel); showReach(t0, hc ? originFor(t0, +hc.dataset.cell, boardTiles()) : null); }
+}));
+document.addEventListener('pointermove', guarded('pointermove', function (e) {
+  if (S.screen === 'fight' && S.phase === 'edit' && S.sel >= 0 && !P && e.pointerType === 'mouse') { var hc = cellUnder(e.clientX, e.clientY), t0 = tileById(S.sel); if (hc) { var bt0 = boardTiles(); showReach(t0, dropOrigin(t0, +hc.dataset.cell, bt0)); } else showReach(t0, -1); }
   if (!P || P.dead || P.long) return;
   var dx = e.clientX - P.x, dy = e.clientY - P.y;
+  if (!P.moved && dx * dx + dy * dy > 36) P.moveSeen = true;
   if (!P.moved && dx * dx + dy * dy > 100 && (P.tg.kind === 'hand' || P.tg.kind === 'board')) {
     P.moved = true; clearTimeout(P.timer);
-    var gw = document.createElement('div'); gw.innerHTML = tileHTML(tileById(P.tg.id), { ts: P.tg.kind === 'board' ? 46 : 54, noRest: true });
+    var t = tileById(P.tg.id);
+    var gw = document.createElement('div'); gw.innerHTML = tileHTML(t, { ts: P.tg.kind === 'board' ? 46 : 54, noRest: true });
     ghost = gw.firstChild; ghost.classList.add('ghost');
     document.body.appendChild(ghost);
+    try { document.body.setPointerCapture(e.pointerId); } catch (er) {}
+    rectCache = cellRects(); P.bt = boardTiles().map(function (x) { return x && x.id === t.id ? null : x; });
     if (P.tg.kind === 'board') $$('#ftiles .tile[data-cell="' + P.tg.cell + '"]').forEach(function (n) { n.classList.add('dragging'); });
     S.sel = -1; $$('#fhand .tile.sel').forEach(function (n) { n.classList.remove('sel'); });
-    showHold(tileById(P.tg.id), P.tg.kind === 'board' ? P.tg.cell : -1);
+    showHold(t, P.tg.kind === 'board' ? P.tg.cell : -1);
   }
   if (P.moved && ghost) {
     ghost.style.left = e.clientX + 'px'; ghost.style.top = e.clientY + 'px';
-    var c = cellUnder(e.clientX, e.clientY), t = tileById(P.tg.id), bt = boardTiles().map(function (x) { return x && x.id === t.id ? null : x; });
-    showReach(t, c ? originFor(t, +c.dataset.cell, bt) : null);
+    if (!rafId) rafId = requestAnimationFrame(guarded('drag', dragUpdate));
   }
-});
+}));
 function endPointer(e, cancel) {
-  if (!P) return;
-  var p = P; P = null; clearTimeout(p.timer);
+  if (!P) { if (cancel) tlog('cancel: ' + e.type + ' (no gesture)'); return; }
+  var p = P; P = null; clearTimeout(p.timer); if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
   if (p.dead) return;
+  var tg = p.tg, anchor = (p.moved && ghost) ? ghostAnchor(tileById(tg.id)) : null;
   if (ghost) { ghost.remove(); ghost = null; }
+  rectCache = null;
   $$('#ftiles .tile.dragging').forEach(function (n) { n.classList.remove('dragging'); });
-  if (cancel) { if (p.moved) { clearHold(); renderFight(); } return; }
+  if (cancel) { tlog('cancel: ' + e.type + (p.moved ? ' during drag t' + tg.id : '')); if (p.moved) { clearHold(); renderFight(); } return; }
   if (p.long) { lpAt = Date.now(); return; }
-  var tg = p.tg;
   if (p.moved) {
     clearHold();
-    var cell = cellUnder(e.clientX, e.clientY), under = document.elementFromPoint(e.clientX, e.clientY);
-    if (cell) place(tg.id, +cell.dataset.cell);
-    else if (tg.kind === 'board' && under && under.closest && under.closest('#fhand,#ftabs')) unplace(tg.cell);
-    else renderFight();
+    var c = anchor ? cellAtPoint(anchor.x, anchor.y, true) : null, under = document.elementFromPoint(e.clientX, e.clientY);
+    if (c) { var ok = place(tg.id, c.i); tlog('drag t' + tg.id + ' → cell ' + c.i + (ok ? ' placed' : ' does not fit')); if (!ok) renderFight(); }
+    else if (tg.kind === 'board' && under && under.closest && under.closest('#fhand,#ftabs')) { unplace(tg.cell); tlog('drag t' + tg.id + ' → back to hand'); }
+    else { tlog('drag t' + tg.id + ' → no cell (' + Math.round(e.clientX) + ',' + Math.round(e.clientY) + ')'); renderFight(); }
     return;
   }
   if (S.screen !== 'fight' || S.phase !== 'edit') return;
-  if (heroTargeting()) { if (tg.kind === 'board') { heroTarget(S.fs, tg.id); renderFight(); } return; }
-  if (tg.kind === 'hand') { S.sel = S.sel === tg.id ? -1 : tg.id; clearHold(); renderFight(); }
-  else if (tg.kind === 'cell') { if (S.sel >= 0) place(S.sel, tg.cell); else shakeCell(tg.cell); }
-  else if (tg.kind === 'board') { if (S.sel >= 0) place(S.sel, tg.tcell); else unplace(tg.cell); }
+  if (heroTargeting()) { if (tg.kind === 'board') { heroTarget(S.fs, tg.id); renderFight(); } else tlog('hero ability is aiming: tap a placed tile'); return; }
+  if (tg.kind === 'hand') { S.sel = S.sel === tg.id ? -1 : tg.id; clearHold(); renderFight(); tlog('tap t' + tg.id + (S.sel >= 0 ? ' selected' : ' deselected')); }
+  else if (tg.kind === 'cell') { if (S.sel >= 0) { var ok2 = place(S.sel, tg.cell); tlog('tap cell ' + tg.cell + (ok2 ? ' placed' : ' does not fit')); } else shakeCell(tg.cell); }
+  else if (tg.kind === 'board') { if (S.sel >= 0) { var ok3 = place(S.sel, tg.tcell); tlog('tap cell ' + tg.tcell + (ok3 ? ' placed' : ' does not fit')); } else { unplace(tg.cell); tlog('tap t' + tg.id + ' taken back'); } }
 }
-document.addEventListener('pointerup', function (e) { endPointer(e, false); });
-document.addEventListener('pointercancel', function (e) { endPointer(e, true); });
+document.addEventListener('pointerup', guarded('pointerup', function (e) { endPointer(e, false); }));
+document.addEventListener('pointercancel', guarded('pointercancel', function (e) { endPointer(e, true); }));
+document.addEventListener('lostpointercapture', function (e) { if (P && P.moved && e.target === document.body) tlog('lost pointer capture'); });
 document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 
 /* ---------- modals ---------- */
@@ -1854,13 +1897,14 @@ function helpHTML() {
     '<li>Clear a stage to unlock the next one, plus new tile types, colours and level caps. Defeat keeps half the loot. Coins level units up between runs. Endless is a separate mode.</li>' +
     '<li><b>Hero:</b> pick one hero before a run. Its ability is one button on the fight screen, once per fight. Tap-to-aim abilities show a Cancel; everything shows in the live totals before you attack.</li>' +
     '<li><b>Relics:</b> after an elite you choose one of three relics (after bosses too in Endless). At most 3 per run, listed under the board.</li>' +
-    '<li><b>Multiplier cap:</b> multiplier tiles and x2 bonus cells together stop at x' + CONFIG.multCap + ' (a "max" mark shows); Sandwich applies on top.</li>' +
+    '<li><b>Multipliers:</b> multiplier tiles and x2 bonus cells multiply without a limit; Sandwich multiplies on top.</li>' +
     '<li><b>Puzzles:</b> hand-made one-attack boards on the Home list, plus a daily one.</li></ol><div class="btnrow"><button class="btn main" data-act="close">Got it</button></div>';
 }
 function settingsHTML() {
   var h = '<h3>Settings and test</h3><div class="set"><label>Momentum</label><input type="checkbox" id="setmom"' + (store.set.momentum ? ' checked' : '') + '> <select id="setmomv">' + CONFIG.momentum.values.map(function (v) { return '<option' + (v === store.set.value ? ' selected' : '') + '>' + v + '</option>'; }).join('') + '</select></div>';
   h += '<div class="set"><label>Tiles come back</label><select id="setret"><option value="fight"' + (CONFIG.tileReturn === 'fight' ? ' selected' : '') + '>After the fight</option><option value="turn"' + (CONFIG.tileReturn === 'turn' ? ' selected' : '') + '>Every attack</option></select></div>';
   h += '<div class="set"><label>Tile stars (duplicates merge)</label><input type="checkbox" id="setstars"' + (store.set.stars ? ' checked' : '') + '></div>';
+  h += '<div class="set"><label>Touch log (shows the last inputs under the fight screen)</label><input type="checkbox" id="settlog"' + (store.set.tlog ? ' checked' : '') + '></div>';
   h += '<div class="btnrow"><button class="btn sm" data-act="unlockall">Unlock all units</button><button class="btn sm" data-act="allheroes">Unlock all heroes</button><button class="btn sm" data-act="allstages">' + (store.allStages ? 'Stages: all unlocked' : 'Unlock all stages') + '</button><button class="btn sm" data-act="coins">+100 coins</button><button class="btn sm" data-act="tiles">+3 colourless tiles</button><button class="btn sm" data-act="epic">+1 epic tile</button><button class="btn sm" data-act="dupe">Duplicate a tile (star)</button><button class="btn sm" data-act="clearrun">Abandon run</button></div>';
   h += '<div class="muted" style="font-size:12px">Coins: ' + store.coins + '. Stages cleared: ' + store.cleared + '. Unit level (0 = locked) and level 5 branch:</div>';
   UNITS.forEach(function (u) {
@@ -1939,6 +1983,7 @@ document.addEventListener('change', function (e) {
   else if (t.id === 'setmomv') { store.set.value = +t.value; applySettings(); save(); }
   else if (t.id === 'setret') { store.set.ret = t.value; applySettings(); save(); }
   else if (t.id === 'setstars') { store.set.stars = t.checked; applySettings(); save(); }
+  else if (t.id === 'settlog') { store.set.tlog = t.checked; save(); tlogShow(); }
   else if (t.dataset && t.dataset.ulv) {
     var u = UNIT_BY_ID[t.dataset.ulv], st = store.units[u.id], v = +t.value; st.u = v > 0; if (v > 0) st.l = v; if (v < 5) st.br = null;
     if (!st.u && store.team[u.c] === u.id) store.team[u.c] = UNITS.filter(function (x) { return x.c === u.c && store.units[x.id].u; }).map(function (x) { return x.id; })[0] || u.id;
