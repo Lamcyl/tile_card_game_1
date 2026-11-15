@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Tile Run: five variations of the puzzle look</title>
+<style>
+:root{--cbg:#e6eaf0;--cink:#1c2635;--cmut:#566377;--cline:#c9d1dc;--cpanel:#fff;--cbtn:#1c2635;--cbtnink:#fff}
+@media (prefers-color-scheme:dark){:root{--cbg:#0f131b;--cink:#eef2f8;--cmut:#a6b1c4;--cline:#3a4560;--cpanel:#212838;--cbtn:#eef2f8;--cbtnink:#151a24}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--cbg);color:var(--cink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+#tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;padding:8px 10px;background:var(--cbg);border-bottom:1px solid var(--cline);max-width:430px;margin:0 auto}
+#tabs button{flex:1;height:40px;border-radius:12px;border:2px solid var(--cline);background:var(--cpanel);font-weight:800;font-size:15px;padding:0}
+#tabs button[aria-selected=true]{background:var(--cbtn);color:var(--cbtnink);border-color:var(--cbtn)}
+.wrap{max-width:430px;margin:0 auto}
+.panel[hidden]{display:none}
+.ptitle{padding:10px 14px 8px;font-size:13px;color:var(--cmut)}
+.ptitle b{color:var(--cink);font-size:15px}
+.notes{padding:12px 16px 28px;font-size:13px;line-height:1.45;color:var(--cmut)}
+.notes p{margin:0 0 6px}
+.notes b{color:var(--cink)}
+
+/* ---------- mockup (shared structure) ---------- */
+.m{--gap:6px;--rad:12px;--cols:5;padding:2px 12px 14px;background:var(--bg);color:var(--ink);position:relative}
+.m *{box-sizing:border-box}
+.m .hd{display:flex;align-items:center;gap:8px;height:44px}
+.m .hb{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--panel);border:2px solid var(--line);padding:0}
+.m .hb svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.m .ttl{flex:1;text-align:center;font-weight:800;font-size:17px}
+.m .ttl small{display:block;font-weight:600;font-size:11px;color:var(--muted);margin-top:1px}
+.m .hint{min-height:30px;font-size:13px;line-height:1.3;color:var(--muted);text-align:center;padding:0 4px 4px}
+.m .enemies,.m .board,.m .hand{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:var(--gap)}
+.m .enemy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.m .etile{position:relative;height:54px;border-radius:var(--rad);background:var(--enemy);color:var(--enemyink);border:3px solid var(--enemy);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.m .etile b{font-size:28px;line-height:.95;font-weight:800;font-variant-numeric:tabular-nums}
+.m .etile i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;opacity:.85;white-space:nowrap}
+.m .etile em,.m .ebar{display:none}
+.m .pill{height:24px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:4px;font-weight:800;font-size:13px;background:var(--panel2);color:var(--ink);border:2px solid var(--line);padding:0 4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.m .pill small{font-size:10px;font-weight:700;color:var(--muted)}
+.m .enemy.ok .pill{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.m .enemy.ok .pill small{color:var(--ok)}
+.m .enemy.tgt .etile{outline:3px solid var(--gold);outline-offset:1px}
+.m .boardwrap{margin-top:8px}
+.m .cell{border-radius:var(--rad);background:var(--cellbg);border:2px dashed var(--line);aspect-ratio:1/1;transition:background .1s}
+.m .cell.x{border:2px solid var(--line);background:repeating-linear-gradient(45deg,var(--panel2) 0 6px,var(--cellbg) 6px 12px)}
+.m .cell.aff{background:color-mix(in srgb,var(--gold) 38%,var(--cellbg));border-color:var(--gold);border-style:solid}
+
+.m .tile{position:relative;border-radius:var(--rad);display:flex;align-items:center;justify-content:center;background:var(--tf);color:var(--ti);box-shadow:var(--tsh);cursor:pointer;min-width:0;align-self:stretch;-webkit-user-select:none;user-select:none}
+.m .hand .tile,.m .hand .slot{aspect-ratio:1/1}
+.m .slot{border-radius:var(--rad)}
+.m .slot.empty{border:2px dashed var(--line);opacity:.6}
+.m .c-r{--tc:var(--r);--tf:var(--rf);--ti:var(--ri)}
+.m .c-b{--tc:var(--b);--tf:var(--bf);--ti:var(--bi)}
+.m .c-g{--tc:var(--g);--tf:var(--gf);--ti:var(--gi)}
+.m .c-y{--tc:var(--y);--tf:var(--yf);--ti:var(--yi)}
+.m .c-p{--tc:var(--p);--tf:var(--pf);--ti:var(--pi)}
+.m .c-n{--tc:var(--n);--tf:var(--nf);--ti:var(--ni)}
+.m .tile.k-boost,.m .tile.k-mult{background:var(--panel);color:var(--tx);border:3px solid var(--tx)}
+.m .tile.k-mult{border-style:dashed}
+.m .tile.k-boost,.m .tile.k-mult{--gl:var(--tx);--sy:var(--tx)}
+.m .c-r{--tx:var(--rx)}.m .c-b{--tx:var(--bx)}.m .c-g{--tx:var(--gx)}.m .c-y{--tx:var(--yx)}.m .c-p{--tx:var(--px)}.m .c-n{--tx:var(--nx)}
+.m .tile .num{font-size:var(--numsz,29px);line-height:1;font-weight:800;margin-top:-4px;font-variant-numeric:tabular-nums;position:relative;z-index:1}
+.m .tile.k-boost .num,.m .tile.k-mult .num{font-size:calc(var(--numsz,29px) - 4px);margin-top:3px}
+.m .tile .glyph{position:absolute;left:5px;top:5px;width:20px;height:20px;color:var(--gl)}
+.m .tile .sym{position:absolute;right:5px;top:5px;width:12px;height:12px;color:var(--sy)}
+.m .tile .nm{position:absolute;left:0;right:0;bottom:4px;text-align:center;font-style:normal;font-size:9px;font-weight:800;letter-spacing:.05em;white-space:nowrap}
+.m .tile .chg{position:absolute;left:0;right:0;bottom:3px;margin:auto;width:max-content;max-width:94%;font-style:normal;font-size:10.5px;font-weight:800;line-height:1;white-space:nowrap;display:none;font-variant-numeric:tabular-nums}
+.m .tile .chg s{opacity:.75;font-weight:700;margin-right:2px;text-decoration-thickness:1.5px}
+.m .tile.has-chg .chg{display:block}
+.m .tile.has-chg .nm{display:none}
+.m .tile .mk{position:absolute;display:none;pointer-events:none}
+.m .tile .mk.dot.u{top:3px;left:50%;transform:translateX(-50%)}
+.m .tile .mk.dot.d{bottom:3px;left:50%;transform:translateX(-50%)}
+.m .tile .mk.dot.l{left:3px;top:50%;transform:translateY(-50%)}
+.m .tile .mk.dot.r{right:3px;top:50%;transform:translateY(-50%)}
+.m .tile .mk svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.m .tile.aff{outline:3px solid var(--gold);outline-offset:1px}
+.m .tile.sel{outline:3px solid var(--ink);outline-offset:2px;z-index:2}
+.m .tile.brL::after,.m .tile.brR::after{content:"";position:absolute;top:9px;bottom:9px;width:3px;border-radius:2px;background:var(--gold)}
+.m .tile.brL::after{right:calc(var(--gap) / -2 - 1.5px)}
+.m .tile.brR::after{left:calc(var(--gap) / -2 - 1.5px)}
+.m .poly{background:none!important;box-shadow:none!important;border:0!important;color:var(--ti)}
+.m .poly>svg.body{position:absolute;inset:0;width:100%;height:100%;overflow:visible;fill:var(--tf);stroke:var(--tf);stroke-width:24;stroke-linejoin:round;filter:drop-shadow(0 2px 0 var(--shadowc))}
+.m .poly .num{font-size:26px;position:absolute;left:52%;top:2%;width:48%;height:48%;display:flex;align-items:center;justify-content:center;margin:0}
+.m .poly .glyph{left:5px;top:4px;width:18px;height:18px}
+.m .tile.poly .sym{right:auto;bottom:auto;left:76%;top:77%;transform:translate(-50%,-50%)}
+.m .poly>svg.ring{display:none;fill:currentColor;stroke:currentColor;stroke-width:30;stroke-linejoin:round;opacity:.22;color:var(--ti)}
+.m .poly .nm,.m .poly .chg{display:none!important}
+
+.m .goals{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}
+.m .goal{display:flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;color:var(--muted);background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:2px 8px 2px 5px;white-space:nowrap}
+.m .goal svg{width:13px;height:13px;fill:none;stroke:var(--muted);stroke-width:2;stroke-linejoin:round}
+.m .goal.live{border-color:var(--ok);color:var(--ok)}.m .goal.live svg{fill:var(--gold);stroke:var(--gold)}
+.m .hero{display:flex;align-items:center;gap:8px;margin-top:10px}
+.m .hero>svg{flex:none;width:20px;height:20px;fill:var(--r);color:var(--r)}
+.m .hpbar{flex:1;height:14px;border-radius:7px;background:var(--panel2);border:2px solid var(--line);overflow:hidden}
+.m .hpbar u{display:block;height:100%;background:var(--hpc);width:75%}
+.m .hpn{flex:none;font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;min-width:44px}
+.m .hpn small{color:var(--muted);font-weight:700}
+.m .abil{flex:none;height:36px;padding:0 12px;border-radius:12px;font-weight:800;font-size:14px;display:flex;align-items:center;gap:6px;background:var(--panel);border:2px solid var(--line);color:var(--ink)}
+.m .abil svg{width:14px;height:14px;fill:none;stroke:var(--g);stroke-width:3;stroke-linecap:round}
+.m .abil small{font-size:10px;color:var(--muted);font-weight:700}
+.m .hand{margin-top:10px}
+.m .bar{display:flex;gap:10px;margin-top:12px}
+.m .bar button{height:50px;border-radius:14px;font-weight:800;font-size:17px;padding:0;border:2px solid var(--line);background:var(--panel);color:var(--ink)}
+.m .bar .clear{flex:1;font-size:15px}
+.m .bar .go{flex:2.4;background:var(--btn);color:var(--btnink);border-color:var(--btn)}
+.m .bar .go small{font-weight:600;opacity:.8;font-size:12px;margin-left:4px}
+
+/* ---------- palettes ---------- */
+.m{--r:#d2473f;--b:#2e6bd3;--g:#23874f;--y:#b9800f;--p:#7a55c2;--n:#566377;
+ --rf:var(--r);--bf:var(--b);--gf:var(--g);--yf:var(--y);--pf:var(--p);--nf:var(--n);
+ --rx:var(--r);--bx:var(--b);--gx:var(--g);--yx:var(--y);--px:var(--p);--nx:var(--n);
+ --ri:#fff;--bi:#fff;--gi:#fff;--yi:#fff;--pi:#fff;--ni:#fff;--gl:#fff;--sy:#fff;
+ --bg:#eef1f5;--panel:#fff;--panel2:#e4e9f0;--ink:#1c2635;--muted:#566377;--line:#c9d1dc;--cellbg:#f8fafc;
+ --ok:#1b8a4a;--okbg:#dff3e6;--gold:#e0a100;--enemy:#33405a;--enemyink:#fff;--btn:#1c2635;--btnink:#fff;
+ --shadowc:rgba(20,30,50,.18);--tsh:0 2px 0 var(--shadowc);--hpc:var(--r)}
+@media (prefers-color-scheme:dark){.m{--r:#e0584f;--b:#4f86e6;--g:#2f9d5f;--y:#d19a22;--p:#9a78e0;--n:#7a879c;
+ --bg:#151a24;--panel:#212838;--panel2:#2b3448;--ink:#eef2f8;--muted:#a6b1c4;--line:#3a4560;--cellbg:#1b2130;
+ --ok:#4cc27c;--okbg:#1f3a2c;--gold:#f0b429;--enemy:#3b4a69;--btn:#eef2f8;--btnink:#151a24;--shadowc:rgba(0,0,0,.5)}}
+
+/* B: edge marks, no names, bigger number */
+.vb{--numsz:36px}
+.vb .tile .glyph,.vb .tile .nm{display:none}
+.vb .tile .num{margin-top:-1px}
+.vb .tile .sym{top:auto;bottom:6px;right:6px;width:13px;height:13px}
+.vb .tile .chg{left:6px;right:auto;bottom:5px;margin:0;font-size:10px}
+.vb .tile .mk{display:block}
+.vb .tile .mk.chev{width:14px;height:10px;top:4px;color:#fff}
+.vb .tile .mk.chev.dl{left:5px;top:5px;transform:rotate(-42deg)}
+.vb .tile .mk.chev.dr{right:5px;top:5px;transform:rotate(42deg)}
+.vb .tile .mk.dot{border-radius:50%;background:var(--mkbg,var(--tc));color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1}
+.vb .tile.k-copy .mk.dot{background:#fff;color:var(--tc)}
+.vb .poly .mk.chev{top:3px}
+.vb .tile.k-boost .num,.vb .tile.k-mult .num{font-size:24px;margin-top:0}
+.vb .tile .mk.dot{width:12px;height:12px;font-size:10px}
+
+/* C: soft pastel, light enemy cards, thin bar, flat */
+.vc{--rad:14px;
+ --rf:#f6d3ce;--bf:#d0dff8;--gf:#cdeadb;--yf:#f6e5ba;--pf:#e0d6f4;--nf:#dde2ea;
+ --ri:#b2332b;--bi:#1d55b5;--gi:#146a3a;--yi:#855800;--pi:#5a37a3;--ni:#434f69;
+ --rx:#b2332b;--bx:#1d55b5;--gx:#146a3a;--yx:#855800;--px:#5a37a3;--nx:#434f69;
+ --gl:currentColor;--sy:currentColor;
+ --bg:#f4f6f9;--cellbg:#fbfcfd;--enemy:#fff;--enemyink:#27334d;--tsh:inset 0 0 0 2px color-mix(in srgb,var(--ti) 22%,transparent);--shadowc:transparent}
+@media (prefers-color-scheme:dark){.vc{
+ --rf:#5b3231;--bf:#2c4168;--gf:#224c36;--yf:#5b4519;--pf:#43355f;--nf:#394155;
+ --ri:#ffb9b2;--bi:#b0cbff;--gi:#a4e0bd;--yi:#f4d384;--pi:#d0bdff;--ni:#c8cfdc;
+ --rx:#ffb9b2;--bx:#b0cbff;--gx:#a4e0bd;--yx:#f4d384;--px:#d0bdff;--nx:#c8cfdc;
+ --bg:#161b26;--cellbg:#1b2130;--enemy:#232b3e;--enemyink:#e8edf6;--shadowc:transparent}}
+.vc .tile{--tsh:inset 0 0 0 2px color-mix(in srgb,var(--ti) 22%,transparent)}
+.vc .tile.k-boost,.vc .tile.k-mult{border-width:2.5px}
+.vc .tile .sym{width:15px;height:15px;right:6px;top:6px}
+.vc .tile .glyph{left:6px;top:6px}
+.vc .tile .nm{font-size:9.5px}
+.vc .poly>svg.body{filter:none;stroke-width:22}
+.vc .poly>svg.ring{display:block}
+.vc .etile{border:2px solid var(--line);background:var(--enemy)}
+.vc .etile i{opacity:.7}
+.vc .pill{display:none}
+.vc .ebar{display:block;height:7px;border-radius:4px;background:var(--panel2);overflow:hidden;margin-top:1px}
+.vc .ebar u{display:block;height:100%;border-radius:4px;background:var(--muted)}
+.vc .enemy.ok .ebar u{background:var(--ok)}
+.vc .etile em{display:block;font-style:normal;font-size:11px;font-weight:800;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+.vc .enemy.ok .etile em{color:var(--ok)}
+.vc .etile{height:66px;gap:0}
+.vc .etile b{font-size:26px}
+
+/* D: compact, shows a 6x4 board */
+.vd{--gap:4px;--rad:10px;--numsz:25px}
+.vd .hd{height:38px}
+.vd .hint{min-height:22px;font-size:12px;padding-bottom:2px}
+.vd .etile{height:44px;border-width:2px;border-radius:10px}
+.vd .etile b{font-size:22px}
+.vd .etile i{font-size:8px}
+.vd .etile em{display:none}
+.vd .pill{height:20px;font-size:11px;border-width:1.5px;padding:0 2px}
+.vd .pill small{font-size:9px}
+.vd .boardwrap{margin-top:6px}
+.vd .tile{border-radius:10px}
+.vd .cell,.vd .slot.empty{border-radius:10px;border-width:1.5px}
+.vd .tile .glyph{width:15px;height:15px;left:4px;top:4px}
+.vd .tile .sym{width:9px;height:9px;right:4px;top:4px}
+.vd .tile .nm{display:none}
+.vd .tile .num{margin-top:0;font-size:25px}
+.vd .tile.k-boost .num,.vd .tile.k-mult .num{font-size:21px}
+.vd .tile .chg{font-size:8.5px;bottom:3px;max-width:98%}
+.vd .tile.k-boost,.vd .tile.k-mult{border-width:2.5px}
+.vd .poly .glyph{width:13px;height:13px;left:3px;top:3px}
+.vd .poly .num{font-size:21px}
+.vd .goals{margin-top:6px;gap:4px;flex-wrap:nowrap}
+.vd .goal{font-size:10.5px;padding:1px 6px 1px 4px}
+.vd .hero{margin-top:7px;gap:6px}
+.vd .hpbar{height:12px}
+.vd .abil{height:32px;padding:0 9px;font-size:13px}
+.vd .hand{margin-top:7px}
+.vd .bar{margin-top:8px;gap:8px}
+.vd .bar button{height:44px;font-size:16px}
+
+/* E: raised, saturated, shape in a white disc, glyph and edge marks, no names */
+.ve{--numsz:30px;--gap:7px;
+ --r:#e0372b;--b:#1f66e8;--g:#17984a;--y:#cf8c00;--p:#7a4bdb;--n:#5a6881;
+ --enemy:#27324c;
+ --edge:rgba(0,0,0,.28);--tsh:0 4px 0 color-mix(in srgb,var(--tc) 62%,#000),inset 0 1px 0 rgba(255,255,255,.3)}
+@media (prefers-color-scheme:dark){.ve{--r:#ef5a4e;--b:#5b92f5;--g:#34b36c;--y:#e8ad1a;--p:#9d7af0;--n:#8190aa;--enemy:#38466a}}
+.ve .tile{--tsh:0 3px 0 color-mix(in srgb,var(--tc) 62%,#000),inset 0 1px 0 rgba(255,255,255,.3)}
+.ve .tile.k-boost,.ve .tile.k-mult{--tsh:0 3px 0 color-mix(in srgb,var(--tc) 55%,var(--panel2))}
+.ve .board,.ve .hand,.ve .enemies{row-gap:11px}
+.ve .tile .nm{display:none}
+.ve .tile .glyph{left:6px;top:6px;width:17px;height:17px}
+.ve .tile .sym{right:5px;top:5px;width:17px;height:17px;padding:3px;background:#fff;border-radius:50%;color:var(--tc)}
+.ve .tile.k-boost .sym,.ve .tile.k-mult .sym{background:var(--tc);color:#fff}
+.ve .tile .num{margin-top:3px}
+.ve .tile .chg{bottom:4px;font-size:10px}
+.ve .tile .mk{display:block}
+.ve .tile .mk.chev{width:14px;height:9px;top:5px;color:#fff;opacity:.95}
+.ve .tile .mk.chev.dl,.ve .tile .mk.chev.dr{display:none}
+.ve .tile .mk.dot{width:12px;height:12px;border-radius:50%;background:var(--tc);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1}
+.ve .tile.k-boost .num,.ve .tile.k-mult .num{font-size:23px;margin-top:5px}
+.ve .tile.k-copy .mk.dot{background:#fff;color:var(--tc)}
+.ve .poly>svg.body{filter:drop-shadow(0 3px 0 color-mix(in srgb,var(--tc) 62%,#000))}
+.ve .poly .sym{background:#fff;color:var(--tc);padding:2px;width:14px;height:14px}
+.ve .etile{height:70px;justify-content:center;padding-bottom:7px;gap:2px;border-radius:12px;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+.ve .etile em{display:block;font-style:normal;font-size:10.5px;font-weight:800;opacity:.9;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ve .etile b{font-size:27px}
+.ve .ebar{display:block;position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,.18)}
+.ve .ebar u{display:block;height:100%;background:#fff}
+.ve .enemy.ok .ebar u{background:#6be09a}
+.ve .pill{display:none}
+.ve .hero{margin-top:12px}
+.ve .hand{margin-top:12px}
+.ve .bar button.go{box-shadow:0 3px 0 rgba(0,0,0,.35)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="s-r" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4.2"/></symbol>
+  <symbol id="s-b" viewBox="0 0 10 10"><path d="M5 .6 L9.6 9 L.4 9Z"/></symbol>
+  <symbol id="s-g" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" rx="1.2"/></symbol>
+  <symbol id="s-y" viewBox="0 0 10 10"><path d="M5 .4 L9.6 5 L5 9.6 L.4 5Z"/></symbol>
+  <symbol id="s-p" viewBox="0 0 10 10"><path d="M5 .5 L9 3.4 L7.5 9 L2.5 9 L1 3.4Z"/></symbol>
+  <symbol id="s-n" viewBox="0 0 10 10"><circle cx="5" cy="5" r="3.4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+ </defs>
+</svg>
+<nav id="tabs" role="tablist" aria-label="Variations"></nav>
+<div class="wrap" id="panels"></div>
+
+<script>
+/* ===== content shared by every tab ===== */
+var COLS = { r:'r', b:'b', g:'g', y:'y', p:'p', n:'n' };
+// board tiles: r,c = top-left; shape cells in [dr,dc]; reach: attack = lanes of f,l,r ; others = sides u,d,l,r
+var BOARD = [
+ {id:'red',   k:'a', c:'r', n:5, r:0, c0:0, w:2, cells:[[0,0],[0,1]], reach:'f',  name:'PAIR'},
+ {id:'fork',  k:'a', c:'b', n:4, r:0, c0:2, reach:'lr', name:'FORK'},
+ {id:'yel',   k:'a', c:'y', n:5, base:3, how:'+2', r:0, c0:3, reach:'f', name:'STRIKE'},
+ {id:'b1',    k:'a', c:'b', n:6, base:3, how:'×2', r:1, c0:0, reach:'f', name:'STRIKE', br:'L'},
+ {id:'gre',   k:'a', c:'g', n:6, base:3, how:'×2', r:1, c0:1, reach:'f', name:'STRIKE', sand:true},
+ {id:'b2',    k:'a', c:'b', n:3, base:1, how:'+2', r:1, c0:2, reach:'f', name:'STRIKE', br:'R'},
+ {id:'bst',   k:'boost', c:'y', n:2, r:1, c0:3, reach:'ul', name:'PLUS'},
+ {id:'mul',   k:'mult',  c:'p', n:2, r:2, c0:0, reach:'u',  name:'DOUBLE'},
+ {id:'cpy',   k:'copy',  c:'n', n:7, r:2, c0:1, reach:'u',  name:'ECHO', lane:true}
+];
+var BLOCKED = [[0,4]];
+var HAND = [
+ {k:'a', c:'r', n:4, reach:'f', name:'STRIKE'},
+ {k:'a', c:'g', n:3, reach:'f', name:'CORNER', poly:'L'},
+ {k:'a', c:'n', n:2, reach:'lfr', name:'WAVE'},
+ {k:'boost', c:'p', n:1, reach:'udlr', name:'PLUS'},
+ {k:'mult', c:'y', n:2, reach:'lr', name:'DOUBLE'},
+ {k:'a', c:'b', n:3, reach:'lr', name:'FORK'},
+ {k:'a', c:'y', n:2, reach:'f', name:'STRIKE'}
+];
+var ENEMIES = [ // col, span, hp, label
+ {c:0, w:1, hp:11, label:'GUARD 2/2', dmg:[11]},
+ {c:1, w:1, hp:25, label:'HP',        dmg:[22]},
+ {c:2, w:2, hp:12, label:'HP · WIDE', dmg:[3,9]},
+ {c:4, w:1, hp:5,  label:'HP',        dmg:[0]}
+];
+var GOALS = [ {t:'One attack', on:true}, {t:'Use a sandwich', on:true}, {t:'No Guard left', on:false} ];
+
+/* ===== per-tab setup ===== */
+var VARS = [
+ {key:'a', tab:'A', title:'Baseline', sub:'The puzzle look, carried over as is',
+  notes:['<b>Changes:</b> nothing but content. Navy slabs with a label and a big number, a progress pill below, 3x3 reach glyph top-left, one shape per colour top-right, a small name at the bottom, soft 2 px bottom edge.',
+   '<b>Question it answers:</b> does the original look still hold with 5 colours, lanes, sides and a 2-cell tile? Yellow and purple get a diamond and a pentagon; colourless is a slate tile with a ring.']},
+ {key:'b', tab:'B', title:'Edge marks', sub:'The tile shows its reach on its own edges',
+  notes:['<b>Changes:</b> the 3x3 glyph and the name are gone. Attack lanes are chevrons on the top edge, boost / multiplier sides are dots ("+", "×") on the edges that act, copy shows "=". Number grows to 36 px, shape moves to the bottom-right.',
+   '<b>Question it answers:</b> the mark sits exactly where the effect goes and scales to 2-cell and L tiles, but there is no name to learn. Is that quicker to read than the glyph?']},
+ {key:'c', tab:'C', title:'Soft', sub:'Pastel tiles, light cards, thin damage bar',
+  notes:['<b>Changes:</b> flat pastel tiles with a coloured number and mark instead of white on solid, light enemy cards with a thin bar and "9 of 12" instead of the navy slab and pill. Shapes are a little bigger. Glyph and names kept.',
+   '<b>Question it answers:</b> calmer and friendlier with five colours on screen, but is the contrast of numbers on pastel still enough, and does a bar read as progress as well as the pill?']},
+ {key:'d', tab:'D', title:'Compact 6x4', sub:'Density test: same content on a 6 by 4 board',
+  notes:['<b>Changes:</b> the same pieces on a 6x4 board (extra column and row, one more enemy), smaller gaps, 44 px slabs with a small pill, no names, hand of 6 per row, ability and Attack kept in thumb reach.',
+   '<b>Question it answers:</b> the largest board of the game on a 390 px phone without scrolling the board; tiles are about 56 px, so is a 15 px glyph and a 25 px number still readable?']},
+ {key:'e', tab:'E', title:'Raised', sub:'Saturated, tactile edge, shape in a white disc',
+  notes:['<b>Changes:</b> more saturated colours, a 4 px raised edge with a top highlight, shape in a white disc (colour-blind safe at a glance), glyph and edge marks together, no names. Damage sits inside the navy slab with a bar along its bottom.',
+   '<b>Question it answers:</b> how much is too much? Both reach cues plus depth make the tile busy, but give the strongest touch target and the most colour-proof reading.']}
+];
+
+/* ===== helpers ===== */
+function svgSym(c){ return '<svg class="sym" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><use href="#s-'+c+'"/></svg>'; }
+// 3x3 glyph. cells: footprint relative to (o) ; reach cells list [row,col] in glyph coords
+function glyph(t, o){
+  var fp = (t.cells || [[0,0]]).map(function(p){return [p[0]+o[0], p[1]+o[1]];});
+  var on = [];
+  var has = function(r,c){ return fp.some(function(p){return p[0]===r&&p[1]===c;}); };
+  if (t.k === 'a') {
+    fp.forEach(function(p){ if (!has(p[0]-1,p[1]) ) { if (t.reach.indexOf('f')>=0) on.push([p[0]-1,p[1]]); } });
+    var top = Math.min.apply(null, fp.map(function(p){return p[0];}));
+    var tc = fp.filter(function(p){return p[0]===top;}).map(function(p){return p[1];});
+    if (t.reach.indexOf('l')>=0) on.push([top-1, Math.min.apply(null,tc)-1]);
+    if (t.reach.indexOf('r')>=0) on.push([top-1, Math.max.apply(null,tc)+1]);
+    if (t.k==='a' && t.cells && t.cells.length===3) { /* L: lanes of its two top cells handled above */ }
+  } else {
+    fp.forEach(function(p){
+      if (t.reach.indexOf('u')>=0 && !has(p[0]-1,p[1])) on.push([p[0]-1,p[1]]);
+      if (t.reach.indexOf('d')>=0 && !has(p[0]+1,p[1])) on.push([p[0]+1,p[1]]);
+      if (t.reach.indexOf('l')>=0 && !has(p[0],p[1]-1)) on.push([p[0],p[1]-1]);
+      if (t.reach.indexOf('r')>=0 && !has(p[0],p[1]+1)) on.push([p[0],p[1]+1]);
+    });
+    if (t.lane) fp.forEach(function(p){ if(!has(p[0]-1,p[1])) on.push([p[0]-1,p[1]]); });
+  }
+  var h = '<svg class="glyph" viewBox="0 0 12 12" aria-hidden="true">';
+  for (var r=0;r<3;r++) for (var c=0;c<3;c++){
+    if (has(r,c)) { h += '<rect x="'+(c*4+.9)+'" y="'+(r*4+.9)+'" width="2.2" height="2.2" rx=".7" fill="none" stroke="currentColor" stroke-width="1"/>'; continue; }
+    var lit = on.some(function(p){return p[0]===r&&p[1]===c;});
+    h += '<rect x="'+(c*4+.4)+'" y="'+(r*4+.4)+'" width="3.2" height="3.2" rx=".8" fill="currentColor"'+(lit?'':' opacity=".25"')+'/>';
+  }
+  return h+'</svg>';
+}
+function chev(cls, left){ return '<span class="mk chev '+cls+'"'+(left!=null?' style="left:calc('+left+'% - 7px)"':'')+'><svg viewBox="0 0 14 9"><path d="M2 7.5 L7 2 L12 7.5"/></svg></span>'; }
+function dot(pos, ch){ return '<span class="mk dot '+pos+'">'+ch+'</span>'; }
+function marks(t){
+  var h = '', w = t.w || (t.poly ? 2 : 1);
+  if (t.k === 'a') {
+    if (t.reach.indexOf('f')>=0) for (var j=0;j<w;j++) h += chev('', (j+.5)/w*100);
+    if (t.reach.indexOf('l')>=0) h += chev('dl');
+    if (t.reach.indexOf('r')>=0) h += chev('dr');
+  } else {
+    var ch = t.k==='boost' ? '+' : t.k==='mult' ? '×' : '=';
+    var s = t.reach;
+    if (s.indexOf('u')>=0) h += dot('u', ch);
+    if (s.indexOf('d')>=0) h += dot('d', ch);
+    if (s.indexOf('l')>=0) h += dot('l', ch);
+    if (s.indexOf('r')>=0) h += dot('r', ch);
+  }
+  return h;
+}
+function numTxt(t){ return t.k==='boost' ? '+'+t.n : t.k==='mult' ? '×'+t.n : t.n; }
+function tileHTML(t, extra){
+  var cls = 'tile c-'+t.c+' k-'+t.k+(t.poly?' poly':'')+(t.base!=null||t.sand?' has-chg':'')+(t.br?' br'+t.br:'')+(extra||'');
+  var o = t.poly ? [1,0] : t.w===2 ? [1,0] : [1,1];
+  var body = '';
+  if (t.poly) body = '<svg class="ring" viewBox="0 0 100 100" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible"><polygon points="12,12 88,12 88,88 64,88 64,36 12,36"/></svg><svg class="body" viewBox="0 0 100 100" aria-hidden="true"><polygon points="12,12 88,12 88,88 64,88 64,36 12,36"/></svg>';
+  var chg = '';
+  if (t.base!=null) chg = '<em class="chg"><s>'+t.base+'</s>'+t.how+'</em>';
+  var nm = '<i class="nm">'+t.name+'</i>';
+  return '<div class="'+cls+'" data-id="'+(t.id||'')+'" style="'+(t.w===2?'grid-column:'+(t.c0+1)+' / span 2;':'')+(t.id?'grid-row:'+(t.r+1)+';'+(t.w===2?'':'grid-column:'+(t.c0+1)+';'):'')+'">'
+   + body + glyph(t,o) + svgSym(t.c) + '<b class="num">'+numTxt(t)+'</b>' + nm + chg + marks(t) + '</div>';
+}
+function pill(e){
+  var tot = e.dmg.reduce(function(a,b){return a+b;},0);
+  var txt = e.dmg.length>1 ? e.dmg.join(' + ') : String(tot);
+  return {tot:tot, txt:txt};
+}
+function enemyHTML(e, key){
+  var p = pill(e), ok = p.tot >= e.hp, pct = Math.min(100, Math.round(p.tot/e.hp*100));
+  var shown = key==='d' || key==='e' ? (e.dmg.length>1 ? p.tot : p.tot) : p.txt;
+  return '<div class="enemy'+(ok?' ok':'')+'" data-c="'+e.c+'" data-w="'+e.w+'" style="grid-column:'+(e.c+1)+' / span '+e.w+'">'
+   + '<div class="etile"><i>'+e.label+'</i><b>'+e.hp+'</b><em>'+p.txt+' of '+e.hp+'</em><span class="ebar"><u style="width:'+pct+'%"></u></span></div>'
+   + '<div class="pill">'+(key==='d' ? p.tot+'<small>/</small>'+e.hp : p.txt+'<small>of</small>'+e.hp)+(ok?'':'')+'</div>'
+   + (key==='c' ? '<div class="ebar"><u style="width:'+pct+'%"></u></div>' : '')
+   + '</div>';
+}
+var IC = {
+ back:'<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>',
+ menu:'<svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"/></svg>',
+ star:'<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.2 6.6.7-5 4.5 1.5 6.6L12 17l-6 3.5 1.5-6.6-5-4.5 6.6-.7z"/></svg>',
+ heart:'<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/></svg>',
+ plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>'
+};
+function mockup(v){
+  var big = v.key==='d', cols = big?6:5, rows = big?4:3;
+  var en = ENEMIES.slice(); if (big) en.push({c:5,w:1,hp:4,label:'HP',dmg:[0]});
+  var h = '<div class="m v'+v.key+'" style="--cols:'+cols+'">';
+  h += '<div class="hd"><button class="hb" aria-label="Back">'+IC.back+'</button><div class="ttl">Mesa<small>Fight 3 of 5</small></div><button class="hb" aria-label="Menu">'+IC.menu+'</button></div>';
+  h += '<div class="hint">Tap a tile to see what it reaches.</div>';
+  h += '<div class="enemies">'+en.map(function(e){return enemyHTML(e,v.key);}).join('')+'</div>';
+  h += '<div class="boardwrap"><div class="board" data-cols="'+cols+'" data-rows="'+rows+'">';
+  var occ = {};
+  BOARD.forEach(function(t){ (t.cells||[[0,0]]).forEach(function(p){ occ[(t.r+p[0])+','+(t.c0+p[1])]=1; }); });
+  for (var r=0;r<rows;r++) for (var c=0;c<cols;c++){
+    var blocked = BLOCKED.some(function(b){return b[0]===r&&b[1]===c;}) || (big && r===3 && c===4);
+    if (occ[r+','+c]) continue;
+    h += '<div class="cell'+(blocked?' x':'')+'" data-r="'+r+'" data-c="'+c+'" style="grid-row:'+(r+1)+';grid-column:'+(c+1)+'"></div>';
+  }
+  BOARD.forEach(function(t){ h += tileHTML(t); });
+  h += '</div></div>';
+  h += '<div class="goals">'+GOALS.map(function(g){return '<span class="goal'+(g.on?' live':'')+'">'+IC.star+g.t+'</span>';}).join('')+'</div>';
+  h += '<div class="hero">'+IC.heart+'<div class="hpbar"><u></u></div><span class="hpn">18<small> / 24</small></span><button class="abil">'+IC.plus+'Mend<small>1×</small></button></div>';
+  var slots = big ? 12 : 10;
+  h += '<div class="hand">';
+  for (var i=0;i<slots;i++) h += i<HAND.length ? '<div class="slot">'+tileHTML(HAND[i])+'</div>' : '<div class="slot empty"></div>';
+  h += '</div>';
+  h += '<div class="bar"><button class="clear">Clear</button><button class="go">Attack<small>34</small></button></div>';
+  return h+'</div>';
+}
+/* ===== build page ===== */
+var tabs = document.getElementById('tabs'), panels = document.getElementById('panels');
+VARS.forEach(function(v,i){
+  var b = document.createElement('button'); b.textContent = v.tab; b.setAttribute('role','tab'); b.setAttribute('aria-selected', i===0); b.dataset.k = v.key;
+  b.onclick = function(){ show(v.key); }; tabs.appendChild(b);
+  var p = document.createElement('section'); p.className='panel'; p.id='p-'+v.key; p.hidden = i!==0;
+  p.innerHTML = '<div class="ptitle"><b>'+v.tab+' · '+v.title+'</b> — '+v.sub+'</div>' + mockup(v) + '<div class="notes">'+v.notes.map(function(n){return '<p>'+n+'</p>';}).join('')+'</div>';
+  panels.appendChild(p);
+});
+function show(k){
+  [].forEach.call(tabs.children, function(b){ b.setAttribute('aria-selected', b.dataset.k===k); });
+  [].forEach.call(panels.children, function(p){ p.hidden = p.id!=='p-'+k; });
+  history.replaceState(null,'','#'+k);
+}
+if (/^#[a-e]$/.test(location.hash)) show(location.hash.slice(1));
+/* tap a board tile to highlight what it reaches */
+panels.addEventListener('click', function(e){
+  var t = e.target.closest('.tile'); var m = e.target.closest('.m'); if (!m) return;
+  var was = t && t.classList.contains('sel');
+  [].forEach.call(m.querySelectorAll('.sel,.aff,.tgt'), function(x){ x.classList.remove('sel','aff','tgt'); });
+  if (!t || was || !t.dataset.id) return;
+  var d = BOARD.filter(function(b){return b.id===t.dataset.id;})[0]; if (!d) return;
+  t.classList.add('sel');
+  var w = d.w||1, cols = [];
+  var cellAt = function(r,c){ return m.querySelector('.cell[data-r="'+r+'"][data-c="'+c+'"]') || [].filter.call(m.querySelectorAll('.board .tile[data-id]'), function(x){ var b=BOARD.filter(function(q){return q.id===x.dataset.id;})[0]; return b.r===r && c>=b.c0 && c<b.c0+(b.w||1); })[0]; };
+  if (d.k==='a' || d.lane){
+    var cs=[]; if (!d.reach || d.reach.indexOf('f')>=0 || d.lane) for (var j=0;j<w;j++) cs.push(d.c0+j);
+    if (d.k==='a' && d.reach.indexOf('l')>=0) cs.push(d.c0-1);
+    if (d.k==='a' && d.reach.indexOf('r')>=0) cs.push(d.c0+w);
+    [].forEach.call(m.querySelectorAll('.enemy'), function(en){ var c0=+en.dataset.c, ew=+en.dataset.w; if (cs.some(function(c){return c>=c0&&c<c0+ew;})) en.classList.add('tgt'); });
+  }
+  if (d.k!=='a'){
+    var r=d.reach, tg=[];
+    if (r.indexOf('u')>=0) for (var j2=0;j2<w;j2++) tg.push([d.r-1,d.c0+j2]);
+    if (r.indexOf('d')>=0) for (var j3=0;j3<w;j3++) tg.push([d.r+1,d.c0+j3]);
+    if (r.indexOf('l')>=0) tg.push([d.r,d.c0-1]);
+    if (r.indexOf('r')>=0) tg.push([d.r,d.c0+w]);
+    tg.forEach(function(p){ var el = cellAt(p[0],p[1]); if (el) el.classList.add('aff'); });
+  }
+});
+</script>
+</body>
+</html>
