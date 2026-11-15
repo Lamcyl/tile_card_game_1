@@ -189,7 +189,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .herorow{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid var(--line)}.herorow.on{background:color-mix(in srgb,var(--p) 12%,transparent)}
 .herorow .hi{flex:1;display:flex;flex-direction:column}.herorow .hi b{font-size:14px;color:var(--ink)}.herorow .hi small{font-size:11.5px;color:var(--muted)}
 .strip.relic{min-height:0;padding:1px 6px;font-size:10.5px;border-color:var(--gold)}.strip.relic .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ghost{position:fixed;z-index:80;pointer-events:none;transform:translate(-50%,-60%) scale(1.12);opacity:.92}
+.ghost{touch-action:none;position:fixed;z-index:80;pointer-events:none;transform:translate(-50%,-60%) scale(1.12);opacity:.92}
 #fhand{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;justify-content:flex-start}
 .kit{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
 .kt{position:relative;display:inline-block}
@@ -197,7 +197,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .kit:has(.lk){padding-bottom:6px}
 #bgrid{position:relative;margin:0 auto}
 #fboard{display:grid;gap:6px;justify-content:center}
-#ftiles{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+#bgrid{touch-action:none}#ftiles{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
 .cell{height:var(--cs)}
 .cell.occ{border:none;background:transparent}
 .cell.fp{border:2px solid var(--ink);background:color-mix(in srgb,var(--ink) 12%,var(--cellbg))}
@@ -256,7 +256,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .enemy.dead .etile{background:var(--panel2);border-color:var(--line);opacity:.6}.enemy.dead .etile b,.enemy.dead .etile i,.enemy.dead .atk{color:var(--muted)}
 .enemy.hit .etile{animation:lunge .4s}
 .pill{position:relative;height:22px;border-radius:11px;background:var(--panel2);border:2px solid var(--line)}
-.pill u{position:absolute;left:0;top:0;bottom:0;border-radius:9px;background:var(--pshort);text-decoration:none;transition:width .3s}
+.pill u{position:absolute;left:0;top:0;bottom:0;border-radius:9px;background:var(--hpc);text-decoration:none;transition:width .3s}
 .pill span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted)}
 .enemy.has .pill span{color:var(--ink)}
 .enemy.kill .pill{border-color:var(--ok)}.enemy.kill .pill u{background:var(--pok)}
@@ -407,7 +407,7 @@ var CONFIG = {
 var COLOR_IDS = ['r', 'b', 'g', 'y', 'p'];
 var COLORS = { r: 'Red', b: 'Blue', g: 'Green', y: 'Yellow', p: 'Purple', x: 'Colourless' };
 var RARITY = ['Common', 'Rare', 'Epic'];
-var SANDWICH = 'A tile between two tiles of one other colour is doubled, once for its row and once for its column.';
+var SANDWICH = 'A tile between two tiles of one other colour is doubled, once for every row and column line it is squeezed on.';
 var HEROES = [
   { id: 'rally', name: 'Kiri', ab: 'Rally', line: 'Every tile gets +1 on this attack.', target: false },
   { id: 'wind', name: 'Sora', ab: 'Second Wind', line: 'All resting tiles come back now.', target: false },
@@ -623,20 +623,21 @@ function evaluate(F, board, opts) {
   });
   G.forEach(function (g) { g.mulRaw = g.mul; if (g.mul >= CAP) g.capped = true; if (g.mul > CAP) g.mul = CAP; });
   var SF = relic.triple ? 3 : 2;
-  /* sandwich: per axis at most once; a line through the tile counts if both ends of the tile's span in that line have matching outer tiles */
+  /* sandwich: every row line and every column line through the tile counts once, if both ends of the tile's span on that line have matching outer tiles */
   G.forEach(function (g) {
     var t = g.t; if (t.k === 'x' || !colsOf(t).length) return;
+    var nl = 0;
     g.rows.forEach(function (r) {
       var qs = g.cells.filter(function (q) { return ((q / cols) | 0) === r; }).map(function (q) { return q % cols; });
       var mn = Math.min.apply(null, qs), mx = Math.max.apply(null, qs);
-      if (mn > 0 && mx < cols - 1) { var x = board[r * cols + mn - 1], y = board[r * cols + mx + 1]; if (x && y && sandOkL(t, x, y)) { if (!g.hv) marks.push({ mid: g.a, a: G[cellG[r * cols + mn - 1]].a, b: G[cellG[r * cols + mx + 1]].a, h: true }); g.hv = true; } }
+      if (mn > 0 && mx < cols - 1) { var x = board[r * cols + mn - 1], y = board[r * cols + mx + 1]; if (x && y && sandOkL(t, x, y)) { marks.push({ mid: g.a, a: G[cellG[r * cols + mn - 1]].a, b: G[cellG[r * cols + mx + 1]].a, h: true, line: r, from: mn, to: mx }); g.hv = true; nl++; } }
     });
     g.colsU.forEach(function (cc) {
       var qs = g.cells.filter(function (q) { return q % cols === cc; }).map(function (q) { return (q / cols) | 0; });
       var mn = Math.min.apply(null, qs), mx = Math.max.apply(null, qs);
-      if (mn > 0 && mx < F.rows - 1) { var x = board[(mn - 1) * cols + cc], y = board[(mx + 1) * cols + cc]; if (x && y && sandOkL(t, x, y)) { if (!g.vv) marks.push({ mid: g.a, a: G[cellG[(mn - 1) * cols + cc]].a, b: G[cellG[(mx + 1) * cols + cc]].a, h: false }); g.vv = true; } }
+      if (mn > 0 && mx < F.rows - 1) { var x = board[(mn - 1) * cols + cc], y = board[(mx + 1) * cols + cc]; if (x && y && sandOkL(t, x, y)) { marks.push({ mid: g.a, a: G[cellG[(mn - 1) * cols + cc]].a, b: G[cellG[(mx + 1) * cols + cc]].a, h: false, line: cc, from: mn, to: mx }); g.vv = true; nl++; } }
     });
-    g.sand = (g.hv ? SF : 1) * (g.vv ? SF : 1);
+    g.sand = Math.pow(SF, nl);
   });
   var ncolN = 0; if (relic.colourful) { var seenC = {}; G.forEach(function (g) { tileColours(g.t).forEach(function (x) { seenC[x] = 1; }); }); ncolN = Object.keys(seenC).length; }
   G.forEach(function (g) {
@@ -1412,18 +1413,8 @@ function clampsHTML(res, cols, cs, gp) {
     out += '<span class="clamp ' + (vert ? 'cv' : 'ch') + '" style="left:' + (cx - w / 2) + 'px;top:' + (cy - h / 2) + 'px;width:' + w + 'px;height:' + h + 'px"></span>';
   };
   res.marks.forEach(function (m) {
-    var g = byA[m.mid]; if (!g) return;
-    if (m.h) {
-      for (var i = 0; i < g.rows.length; i++) {
-        var r = g.rows[i], qs = g.cells.filter(function (q) { return ((q / cols) | 0) === r; }).map(function (q) { return q % cols; }), mn = Math.min.apply(null, qs), mx = Math.max.apply(null, qs);
-        if (mn > 0 && mx < cols - 1 && anchor(r * cols + mn - 1) === m.a && anchor(r * cols + mx + 1) === m.b) { var cy = r * P + cs / 2; add(mn * P - gp / 2, cy, true); add((mx + 1) * P - gp / 2, cy, true); break; }
-      }
-    } else {
-      for (var j = 0; j < g.colsU.length; j++) {
-        var c = g.colsU[j], rs = g.cells.filter(function (q) { return q % cols === c; }).map(function (q) { return (q / cols) | 0; }), rn = Math.min.apply(null, rs), rx = Math.max.apply(null, rs);
-        if (rn > 0 && rx < S.fs.F.rows - 1 && anchor((rn - 1) * cols + c) === m.a && anchor((rx + 1) * cols + c) === m.b) { var cx = c * P + cs / 2; add(cx, rn * P - gp / 2, false); add(cx, (rx + 1) * P - gp / 2, false); break; }
-      }
-    }
+    if (m.h) { var cy = m.line * P + cs / 2; add(m.from * P - gp / 2, cy, true); add((m.to + 1) * P - gp / 2, cy, true); }
+    else { var cx = m.line * P + cs / 2; add(cx, m.from * P - gp / 2, false); add(cx, (m.to + 1) * P - gp / 2, false); }
   });
   return out;
 }
@@ -1438,7 +1429,6 @@ function renderFight() {
   F.enemies.forEach(function (e, ek) {
     var r = res.en[ek], gone = e.gone, hpn = e.dead ? 0 : e.hp, pct = (e.dead || gone) ? 0 : Math.min(100, r.dmg / Math.max(1, e.hp) * 100), txt = r.dmg + ' / ' + e.hp;
     if (gone) txt = 'left'; else if (e.dead) txt = 'down'; else if (r.guardBlocked) txt = r.needText;
-    else if (e.w > 1 && e.w <= 3 && r.dmg > 0) { var ps = []; for (var pc = e.c; pc < e.c + e.w; pc++) ps.push(res.tot[pc]); if (ps.filter(function (x) { return x > 0; }).length > 1) txt = ps.join(' + ') + ' / ' + e.hp; }
     var wide = e.w > 1 ? ' · WIDE' : '', cnt = Math.min(r.src, r.need) + '/' + r.need;
     var lab = gone ? 'LEFT' : e.kind === 'r' ? 'RUNNER' : e.boss ? (e.twin ? 'TWIN' : e.need > 1 ? 'AEGIS ' + cnt : e.cols2 ? '2 COLOURS' : 'BOSS') : e.need > 1 ? 'GUARD ' + cnt : e.cols2 ? '2 COLOURS' : 'HP' + wide;
     h += '<div class="enemy' + (e.need > 1 || e.cols2 ? ' guard' : '') + (e.boss ? ' boss' : '') + (e.kind === 'r' ? ' runner' : '') + (e.twin ? ' twin' : '') + (e.dead ? ' dead' : '') + (e.gone ? ' gone' : '') + (r.kill ? ' kill' : '') + (r.dmg > 0 ? ' has' : '') + '" style="grid-column:' + (e.c + 1) + ' / span ' + e.w + '" data-en="' + ek + '" data-c="' + e.c + '" data-w="' + e.w + '" data-card="e:' + ek + '">' + (r.kill ? CHK : '') +
@@ -1757,7 +1747,7 @@ function cardFor(key) {
   if (p[0] === 'hr') { var hh = HERO_BY_ID[p[1]]; return '<h3>Hero: ' + hh.name + ' (' + hh.ab + ')</h3><p>' + hh.line + '</p><p class="muted">Once per fight. ' + (hh.target ? 'Tap the button, then a placed tile; the button turns into Cancel.' : 'Tap the button to switch it on; tap again to undo before attacking.') + '</p>'; }
   if (p[0] === 'tr') return '<h3>Boss trick</h3><p>' + (TRICKS[p[1]] || '') + '</p>';
   if (p[0] === 'bc') return '<h3>Bonus cell ' + bcText(p[1]) + '</h3><p>' + (p[1] === 'x2' ? 'A tile placed here is doubled.' : 'A tile placed here gets ' + bcText(p[1]) + '.') + '</p><p class="muted">Counts every bonus cell under a multi-cell tile. Applies before multipliers.</p>';
-  if (p[0] === 'mode') return '<h3>Sandwich</h3><p>' + SANDWICH + '</p><p class="muted">Both rows and columns count: a tile sandwiched in its row and in its column is multiplied by 4. Gold clamps sit in the gaps between the sandwiched tile and its two outer tiles; the sandwiched tile shows a x2 or x4 chip. A multi-cell tile is sandwiched along an axis if any one line through it has matching outer tiles at both ends of its span (each axis counts once). A two-colour tile counts as both colours; a colourless tile is never a colour. Multipliers are not sandwiched. It is included in the live totals.</p>';
+  if (p[0] === 'mode') return '<h3>Sandwich</h3><p>' + SANDWICH + '</p><p class="muted">Every row line and every column line through a tile counts: each bracketed line doubles it, so a single cell tile gets x2 or x4, and a two-wide tile with three bracketed lines (one row, two columns) gets x8. Gold clamps sit in the gaps at both ends of each bracketed line; the sandwiched tile shows the total as a chip (x2, x4, x8 ...). A line is bracketed when the cells just beyond both ends of the tile span on that line belong to two tiles sharing a colour the tile does not count as. A two-colour tile counts as both colours; a colourless tile is never a colour. Multipliers are not sandwiched. It is included in the live totals.</p>';
   if (p[0] === 'mom') return '<h3>Momentum</h3><p>You cleared the last fight in one attack. Every tile gets +' + CONFIG.momentum.bonus + ' on the first attack of the next fight.</p>';
   return '';
 }
@@ -1781,16 +1771,25 @@ function longPress() {
   var h = cardFor(P.tg.card); if (!h) return; showCard(h);
   if (navigator.vibrate) try { navigator.vibrate(12); } catch (e) {}
 }
+/* the board cell under a point; a point in a gap, in a rounded corner or just outside the board snaps to the nearest cell */
 function cellUnder(x, y) {
   var els = document.elementsFromPoint(x, y);
   for (var i = 0; i < els.length; i++) { var c = els[i].closest && els[i].closest('#fboard .cell[data-cell]'); if (c) return c; }
-  return null;
+  var best = null, bd = 1e9, cells = $$('#fboard .cell[data-cell]'), tol = 12;
+  cells.forEach(function (el) {
+    var r = el.getBoundingClientRect(), dx = Math.max(r.left - x, 0, x - r.right), dy = Math.max(r.top - y, 0, y - r.bottom), d = Math.sqrt(dx * dx + dy * dy);
+    if (d < bd) { bd = d; best = el; }
+  });
+  return bd <= tol ? best : null;
 }
 document.addEventListener('pointerdown', function (e) {
   if (!$('#card').hidden) { hideCard(); P = { dead: true }; lpAt = Date.now(); return; }
   if (S.phase === 'anim' && S.screen === 'fight') { S.skip = true; return; }
   if (!$('#modal').hidden && !$('#modal').contains(e.target)) return;
-  var tg = targetOf(e.target); if (!tg) { P = null; return; }
+  var tg = targetOf(e.target);
+  if (!tg && S.screen === 'fight' && S.phase === 'edit' && S.sel >= 0) { var sc = cellUnder(e.clientX, e.clientY); if (sc) tg = { card: null, kind: 'cell', cell: +sc.dataset.cell, el: sc }; }
+  if (!tg) { P = null; return; }
+  if (tg.kind === 'board') { var tc = cellUnder(e.clientX, e.clientY); tg.tcell = tc ? +tc.dataset.cell : tg.cell; }
   P = { tg: tg, x: e.clientX, y: e.clientY, moved: false, long: false };
   if (tg.card) P.timer = setTimeout(longPress, CONFIG.longPressMs);
 });
@@ -1834,7 +1833,7 @@ function endPointer(e, cancel) {
   if (heroTargeting()) { if (tg.kind === 'board') { heroTarget(S.fs, tg.id); renderFight(); } return; }
   if (tg.kind === 'hand') { S.sel = S.sel === tg.id ? -1 : tg.id; clearHold(); renderFight(); }
   else if (tg.kind === 'cell') { if (S.sel >= 0) place(S.sel, tg.cell); else shakeCell(tg.cell); }
-  else if (tg.kind === 'board') { if (S.sel >= 0) place(S.sel, tg.cell); else unplace(tg.cell); }
+  else if (tg.kind === 'board') { if (S.sel >= 0) place(S.sel, tg.tcell); else unplace(tg.cell); }
 }
 document.addEventListener('pointerup', function (e) { endPointer(e, false); });
 document.addEventListener('pointercancel', function (e) { endPointer(e, true); });
@@ -1848,7 +1847,7 @@ function helpHTML() {
     '<li>Enemies sit above the columns with <b>HP</b> and an <b>attack</b>. Place tiles, press <b>Attack</b>. Each enemy takes the total of its column(s). HP stays between attacks; survivors hit your hero. Only hero HP ends a run.</li>' +
     '<li>Tap a tile, then a cell, or drag it. Tap a placed tile to take it back. Hold anything for a card. Glowing cells would finish an enemy.</li>' +
     '<li>A tile\'s big number is its <b>current value</b>; a small chip in its top right corner shows the base number when it differs. The little <b>map in the top left</b> is its reach: its own cells are outlined, the cells it reaches are lit. <b>Solid</b> tiles attack the lit cells in front of them (the columns they hit). <b>White tiles with a solid edge</b> (+N) add their number to the attacking tiles on the lit cells; a lit row or column means the whole line. <b>Dashed white tiles</b> (×N) multiply instead. A <b>copy</b> tile (ECHO) shows its own attack lane lit and the cell it copies as a ring. Big tiles cover several cells and are one piece. While you hold a tile the board shows what it would reach.</li>' +
-    '<li><b>Sandwich:</b> a tile between two tiles of one other colour is doubled, once for its row and once for its column (x4 at most). Gold <b>clamps</b> sit in the gaps on both sides, and a <b>×2 / ×4</b> chip appears on the tile. Two-colour tiles (split in two colours) count as both.</li>' +
+    '<li><b>Sandwich:</b> a tile between two tiles of one other colour is doubled, once for every row line and column line it is squeezed on (a single cell tile: x4 at most; a wide tile can reach x8 or more). Gold <b>clamps</b> sit in the gaps at both ends of each squeezed line, and a <b>×2 / ×4 / ×8</b> chip shows the total on the tile. Two-colour tiles (split in two colours) count as both.</li>' +
     '<li>Your whole bag is ready for every fight. Tiles you attack with rest until that fight ends (switch in Settings).</li>' +
     '<li>After each win choose one of three: a new tile, an upgrade (+2 or a second colour) or a heal. Forges, rests and treasures sit on the path. Every stage has a boss with one visible trick.</li>' +
     '<li>Runners leave after your first attack: kill them for a bonus tile. Guards need 2 different tiles to hit them.</li>' +
@@ -1947,7 +1946,7 @@ document.addEventListener('change', function (e) {
   } else if (t.dataset && t.dataset.ubr) { store.units[t.dataset.ubr].br = t.value || null; save(); }
 });
 $('#dim').addEventListener('click', function () { if (!$('#card').hidden) return; closeModal(); });
-window.addEventListener('resize', function () { if (S.screen === 'fight' && S.phase === 'edit') renderFight(); });
+window.addEventListener('resize', function () { if (S.screen === 'fight' && S.phase === 'edit') { if (P || ghost) { setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 300); return; } renderFight(); } });
 if (!resume()) show('home');
 window.TR = { startPuzzle: startPuzzleUI, genDaily: genDaily, PUZZLES: PUZZLES, tileHTML: tileHTML, genFight: genFight, chooseNode: chooseNode, S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: chooseOfferUI, place: place, attack: attack, render: renderFight, show: show, save: save, persist: persist, takePick: takePick, UNITS: UNITS, resume: resume, evalNow: evalNow, lootTile: lootTile, addInv: addInv, genOffers: function () { S.run.offers = genOffers(S.run); },
   newTile: function (c, spec, extra) { var p = typeof spec === 'string' ? parseTok(spec) : spec; var t = mkTile(S.run, c, S.run.team[c] || 'x', p, extra); S.run.bag.push(t); return t; }, finishStage: finishStage, rules: { evaluate: evaluate, parseTok: parseTok, placeCells: placeCells } };

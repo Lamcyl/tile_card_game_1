@@ -20,11 +20,11 @@ File: `prototype/samples/tile-run.html` (one file, inline CSS/JS, no network, no
 
 ## Sandwich (one sentence for the player)
 
-"A tile between two tiles of one other colour is doubled, once for its row and once for its column."
+"A tile between two tiles of one other colour is doubled, once for every row and column line it is squeezed on."
 
-- A row sandwich and a column sandwich on the same tile multiply: x4 (chip shows x2 or x4; gold clamps in the gaps).
+- Every bracketed line multiplies by 2 (3 with the Triple Bread relic): a single-cell tile has one row line and one column line, so x2 or x4 at most; a wide tile has one row line and one column line per column, so a two-wide tile can reach x8 (row + two columns) and larger pieces more. The chip shows the total (x2, x4, x8 ...); one pair of gold clamps per bracketed line, centred on that line in the gaps.
 - A tile is sandwiched along an axis if the two outer tiles share a colour X and the tile has at least one colour that is not X. A two-colour tile counts as both colours (a blue/green tile between two greens is doubled). A colourless tile is never a colour.
-- Multi-cell tiles: for each axis it is enough that ONE line through the tile on that axis has matching outer tiles at both ends of the tile's span in that line (so a wide tile can be sandwiched from above and below through either of its columns, as well as from its left and right ends). Each axis counts at most once: max x4.
+- Multi-cell tiles: each row the tile occupies is a row line and each column it occupies is a column line; a line counts when the cells just beyond both ends of the tile's span on that line belong to two tiles sharing a colour X while the tile has a colour that is not X (rule changed from "once per axis"; no puzzle changed: all 15 stored solutions still win and the number of winning layouts is unchanged).
 - Applies to attack, copy and boost tiles; multipliers are not sandwiched.
 
 ## Tile model
@@ -56,7 +56,7 @@ Chosen look ("Round five", see TILE_RUN_STYLES.md). The old edge marks (arrowhea
 - **Base chip (top right):** a small quiet chip with the base number ("+2" for boosts) shown only when the current value differs. Nothing when unchanged.
 - **Sandwich:** gold clamps drawn in the gaps between the sandwiched tile and each squeezing neighbour (left+right for a row, top+bottom for a column, four for x4), plus a navy chip with gold "x2"/"x4" where the name was. Clamps are slim capsules (gap minus 2 px thick, 42 % of a cell long) with a thin navy outline, centred on the shared edge of the bracketed row/column, drawn in a layer above the tiles from board geometry (so no tile can paint over them), de-duplicated when two sandwiched tiles share a gap. The board gap is 8 px.
 - Other marks: cyan edge = Rare, magenta glowing edge = Epic; stars (gold) replace the name on merged tiles; small triangle = upgraded this run; gold dotted ring = added this run; "max" chip = multiplier cap reached.
-- **Enemies:** navy rounded slab with a small uppercase label (HP, HP . WIDE, GUARD n/need, AEGIS, TWIN, RUNNER, BOSS, 2 COLOURS), big white number (current HP) and the attack value under it. Below it a bar-pill: the fill shows the predicted damage against HP, text "19 / 25" (wide: "8 + 17 / 25"; guard not met: "needs 2"), one text colour. Kill = green pill, green slab outline, check badge; zero damage = empty grey pill.
+- **Enemies:** navy rounded slab with a small uppercase label (HP, HP . WIDE, GUARD n/need, AEGIS, TWIN, RUNNER, BOSS, 2 COLOURS), big white number (current HP) and the attack value under it. Below it a bar-pill: a red fill (like the hero HP bar) shows the predicted damage against HP, text "19 / 25" (wide enemies show the total only; guard not met: "needs 2"), one text colour. Kill = green pill, green slab outline, check badge; zero damage = empty grey pill.
 - **Hero row:** heart, HP bar-pill ("18 / 24"), ability button. The Attack button shows the predicted total. The hand keeps dashed slots where tiles were placed.
 - **While a tile is selected, held or dragged**, the board still shows the footprint, the cells it would boost, the columns it hits and the glowing cells that would finish an enemy.
 
@@ -229,3 +229,7 @@ No puzzle is solved by more than 34 of 3000 random fills (puzzle 2, 1.1 percent)
 - The daily puzzle uses simple random hands, so some days are easier than others; the date is the device's local date.
 - The hand area scrolls when big pieces fill it (4-cell shapes need up to about 190 px).
 - Saves from the third version load (same key); new fields are filled with defaults.
+
+## Touch placement (fix)
+
+Taps and drops on a gap between cells, in the rounded corner of a cell, or just outside the board hit nothing (cell hit areas are rounded and the gap is 8 px), so a tile stayed selected, showing its preview values, but was not placed. `cellUnder` now snaps any point within 12 px of a cell to the nearest cell (drops always, taps while a tile is selected), tapping a placed multi-cell tile with a selection places on the touched cell, the board is `touch-action:none`, and window resize re-renders are deferred during a gesture.
