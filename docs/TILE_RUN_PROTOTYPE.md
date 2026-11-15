@@ -1,4 +1,6 @@
-# Tile Run prototype, third version (rules as built)
+# Tile Run prototype, fourth version (rules as built)
+
+> **Not balanced yet.** The fourth iteration (fixes, hero button, relics, puzzle shrines) was implemented and made to work, but stage numbers, hero and relic strengths, costs and rewards are placeholders. The balance tables below were measured on the third version.
 
 File: `prototype/samples/tile-run.html` (one file, inline CSS/JS, no network, no images, no build step). It replaces the second version (fixed shape list, never-ending runs). All tunables are in the `CONFIG` object at the top of the script. The rules code (CONFIG, tile model, units, `evaluate`, fight and run generation) sits between `/*RULES-START*/` and `/*RULES-END*/` with no DOM access, so the node balance and unit-test scripts load it directly.
 
@@ -36,7 +38,7 @@ A tile = cells (shape), number, kind, direction string. Rotations are separate t
 | Multiplier (x, xN) | same direction options | Multiplies the attacking tiles and boosters there by N. Multipliers do not multiply other multipliers; several multipliers on one tile multiply together. |
 | Copy (e, =) | one direction u d l r | Takes the shown (final) number of the tile there (attack value, or booster power; never another copy or a multiplier), adds its own number, hits its own column. |
 
-Value of an attack tile = (number + bonus cell + momentum + boosts) x multipliers x bonus-cell x2 x sandwich. Old names are special cases (Strike = own lane, Fork = left+right, Plus = adjacent boost in all four directions, Row/Pillar = row/column boost, Double = front multiplier x2, Echo = copy). Multi-cell tiles are polyominoes: 2 cells (h2, v2), 3 cells (bars and the four L-trominoes) and 4 cells (square, bars, four T, S and Z shapes); an attack polyomino hits the lanes of the columns it covers (each top cell contributes its lanes, each column once). Names are in the cards only.
+Value of an attack tile = (number + bonus cell + momentum + boosts) x min(multipliers x bonus-cell x2, `CONFIG.multCap`) x sandwich (the cap is new in the fourth version, see below). Old names are special cases (Strike = own lane, Fork = left+right, Plus = adjacent boost in all four directions, Row/Pillar = row/column boost, Double = front multiplier x2, Echo = copy). Multi-cell tiles are polyominoes: 2 cells (h2, v2), 3 cells (bars and the four L-trominoes) and 4 cells (square, bars, four T, S and Z shapes); an attack polyomino hits the lanes of the columns it covers (each top cell contributes its lanes, each column once). Names are in the cards only.
 
 Token notation used in `UNITS` (kit strings): `a^4` attack own-lane 4; `a<>3` fork; `a<^>2` all three lanes; `pudlr2` boost all four neighbours; `pR1` row boost; `xu2` multiplier of the tile in front; `eu1` copy the tile in front plus 1; `#h2`, `#v3`, `#sq`, `#Tu` ... shape suffix.
 
@@ -140,3 +142,90 @@ Unit tests (`tests.js`, 34 checks, all pass): row and column sandwich, x4, same-
 - The two-colour split tile text on yellow has low contrast. Enemy HP numbers can touch the attack value on 6-column boards at 360 px (a narrow style shrinks them).
 - Endless uses the stage's boss tricks (final boss phases included) with simple scaling; it is not balanced.
 - Reload during an attack animation resumes at the state before the attack. Drag on touch was tested with synthetic pointer events.
+
+
+# Fourth iteration additions
+
+## Fixes
+
+- **Multiplier cap (`CONFIG.multCap`, placeholder 4):** the combined multiplier a tile gets from multiplier tiles and x2 bonus cells is capped; Sandwich (up to x4, or x9 with the Triple relic) applies on top. A tile at the cap shows a small "max" chip and its long-press breakdown has a "max multiplier reached" row. One line in How to play.
+- **Big tiles readable everywhere:** multi-cell tiles are drawn at their true shape and proportion in the hand, bag, kit, pick cards and Forge (cell size shrinks only so a 4-long piece stays about 190 px). They wrap in the hand like other tiles and the hand scrolls.
+- **Two-colour tile contrast:** white number with a heavy dark outline and shadowed symbols.
+- **Enemy HP vs attack number on 6-column boards:** on narrow boards the attack badge sits at the top and the HP at the bottom of the enemy tile, and the label moves to the corner.
+- Fixed: multiplier tiles showed "x0" on the board (their live value is not a damage number).
+- Not touched: stage 9 boss and Endless balance.
+
+## Heroes (one button)
+
+One hero is chosen on the Home screen (persisted, `store.hero`), the first is owned, the others unlock for coins (`CONFIG.heroCost`: 0, 40, 60, 80, 100, placeholders) or with "Unlock all heroes" in the test panel. The ability is one full-width button under the board: ready, on (tap again to undo) or used. Everything shows in the live totals before attacking and is undone if cancelled.
+
+| Hero | Ability | Notes |
+|---|---|---|
+| Kiri | Rally: every tile gets +1 on this attack. | toggles on and off |
+| Sora | Second Wind: all resting tiles come back now. | undo puts them back to rest (and removes them from the board) |
+| Lumi | Prism: tap one placed tile; it counts as every colour on this attack. | targeting state with Cancel; the target is outlined; removing the tile returns to targeting |
+| Brak | Overcharge: tap one placed tile; its number is doubled on this attack. | same targeting |
+| Tove | Guard: enemies deal no damage after this attack. | toggles on and off |
+
+Once per fight (twice with the Second Chance relic). Hero state is saved with the fight, so a reload resumes it.
+
+## Relics (run perks)
+
+At most `CONFIG.relicMax` (3) per run, run-only. Offered as one of three **after each elite** (campaign stages 2 and up have one elite each) and **after each boss in Endless**; in the campaign the boss ends the stage, so no relic is offered there (an elite-only offer plays best with a 4-step stage). Listed under the board with one line each (long-press for the card) and on the run map. All are in the live totals (the heal one is reported in the info line after the attack).
+
+| Relic | Effect |
+|---|---|
+| Triple Bread | Sandwiches triple instead of double. |
+| Front Line | Attack tiles in the front row get +1. |
+| Back Line | Attack tiles in the back row get +2. |
+| Hearty | A tile sandwiched in both row and column heals you 2 HP. |
+| Full Fork | Forks (left and right attacks) also hit their own column. |
+| Palette | Every attack tile gets +1 per different colour on the board. |
+| Heavy Hand | Tiles covering 2 or more cells get +3. |
+| Lucky Cells | Bonus cells count twice. |
+| Second Chance | Your hero ability can be used twice per fight. |
+| Head Start | The first attack of each fight has momentum +1. |
+| Bright Boost | Boost tiles are +1 stronger. |
+| Echo Chamber | Copy tiles get +2. |
+
+Dropped as unclear to show: "the first tile placed each fight is doubled" (order dependent), "boosts also boost boosts", "colourless counts as a colour of your choice".
+
+## Puzzle shrines
+
+A "Puzzles" list on Home (a list, no map): one attack on a fixed board with fixed enemies and a fixed hand, using this game's rules; no hero, relics or bag; every enemy must be defeated; retry is instant (also in the puzzle menu). First solve pays coins (some also a colourless tile), replays pay nothing. A puzzle unlocks when its stage is unlocked (`stage` in the table). Stored solutions (not shown to the player) are used by the tests. All 15 were produced by a script that builds a hidden solution first, sets each enemy's HP to the damage that solution deals to its column, then **brute-forces every placement** (identical tiles interchangeable, leaving tiles unplaced allowed) with the same rules code the game uses.
+
+| # | Name | Stage | Teaches | Free cells, hand | Distinct winning layouts (solver) | Random fills that win (of 3000) |
+|---|---|---|---|---|---|---|
+| 1 | First Strike | 1 | numbers against HP | 6, 5 | 2 | 1 |
+| 2 | Sandwich | 1 | doubling between two colours | 6, 5 | 18 | 34 |
+| 3 | Both Ways | 2 | row and column sandwich, x4 | 9, 6 | 14 | 1 |
+| 4 | Reach Sideways | 2 | side lanes | 8, 5 | 64 | 2 |
+| 5 | Lucky Cells | 2 | bonus cells | 9, 5 | 32 | 3 |
+| 6 | Neighbours | 3 | adjacent boosts | 9, 6 | 14 | 0 |
+| 7 | Guard Duty | 3 | a guard needs 2 different tiles | 9, 5 | 40 | 4 |
+| 8 | Three Lanes | 4 | multi-lane attacks | 9, 6 | 4 | 0 |
+| 9 | Two Colours | 4 | a two-colour tile counts as both | 9, 5 | 8 | 2 |
+| 10 | Whole Lines | 5 | row and column boosts | 9, 5 | 24 | 2 |
+| 11 | Multiply | 6 | multipliers | 9, 5 | 36 | 4 |
+| 12 | The Cap | 6 | the multiplier cap | 9, 5 | 60 | 3 |
+| 13 | Two Cells | 7 | multi-cell tiles | 10, 5 | 48 | 7 |
+| 14 | Copy That | 8 | copy tiles | 10, 5 | 48 | 0 |
+| 15 | Short Side | 8 | sandwich across a big tile's short side | 10, 5 | 8 | 0 |
+
+No puzzle is solved by more than 34 of 3000 random fills (puzzle 2, 1.1 percent), most by 0 to 7. The solution counts are layouts, so symmetric mirror images count separately; some of the counts are higher than "one clever answer" would suggest, which is a tuning task for later (tighter HP slack, decoy tiles, more blocked cells).
+
+**Daily puzzle:** generated from the date (`year*10000+month*100+day`) as the seed with a hidden solution built first (4x3 board, 5 tiles drawn from the tile types of your furthest unlocked stage, minimum stage 3), so it is the same for everyone that day and always solvable; small reward (`CONFIG.dailyCoins`, 15) once per day. Checked by the solver for 5 stage settings x 4 dates (20 puzzles): all solvable (19 to 13 903 layouts), at most 48 of 1500 random fills win, the same seed gives the same puzzle and different days differ.
+
+## CONFIG additions (placeholders)
+
+`multCap` (4), `relicMax` (3), `heroCost` (0, 40, 60, 80, 100), `puzzleCoins` (10), `dailyCoins` (15). Hero and relic definitions are `HEROES` and `RELICS` in the rules block; puzzles are the `PUZZLES` array between `/*PUZ-START*/` and `/*PUZ-END*/`.
+
+## Fourth iteration rough spots
+
+- Not balanced: enemy numbers were not touched, so heroes, relics and the multiplier cap shift the stage clear rates measured in the third version.
+- Relics only appear after elites in the campaign (stage 1 has no elite, so none there).
+- Hero Second Wind undo removes the returned tiles from the board; Prism is only visible in totals when it creates or removes a sandwich.
+- Puzzle HP is exactly the hidden solution's damage, so some boards accept several layouts; there are no decoy tiles except where the hand has more tiles than needed.
+- The daily puzzle uses simple random hands, so some days are easier than others; the date is the device's local date.
+- The hand area scrolls when big pieces fill it (4-cell shapes need up to about 190 px).
+- Saves from the third version load (same key); new fields are filled with defaults.

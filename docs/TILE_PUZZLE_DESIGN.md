@@ -283,3 +283,13 @@ must be visible on the tile, the board or one always-shown line.
 1. Fixes in 12.7. 2. Hero button and relics (most fun per rule added). 3. Beasts and monsters as
 faces with existing placeholder art. 4. Puzzle shrines. 5. Map as the stage select. 6. Camp and
 item marks.
+
+## 13. Fourth prototype: fixes, heroes, relics and puzzle shrines
+
+Prototype: `prototype/samples/tile-run.html`, details in `docs/TILE_RUN_PROTOTYPE.md`. The owner asked for steps 1, 2 and 4 of 12.8 ("the map will be later; for now still maintain as a list"; "implement first, don't balance yet"). Nothing here is balanced.
+
+- **Fixes:** multiplier stacking is capped (`multCap`, placeholder 4; Sandwich applies on top; a "max" mark shows); big tiles are drawn at true shape and proportion in the hand, bag and pick cards; two-colour tiles got readable numbers; the enemy HP number no longer touches the attack number on 6-column boards. Stage 9's boss and Endless are not rebalanced.
+- **Hero button:** one hero per run (five, the first owned, others unlock for coins), one ability once per fight as a single button on the fight screen: Rally, Second Wind, Prism, Overcharge, Guard. Tap-to-aim abilities have a targeting state and Cancel; effects show in the live totals before attacking and are undone on cancel.
+- **Relics:** twelve run-only perks, at most three per run, one sentence each, always listed under the board and on the run map. Offered one of three after each elite and, in Endless, after each boss; in the campaign the boss ends the stage so relics come only after the stage's elite. Perks that were order dependent or hard to show (first tile doubled, boosts boosting boosts, free colour choice) were dropped.
+- **Puzzle shrines:** a "Puzzles" list on Home with 15 hand-made one-attack puzzles that use the game's rules, unlocked with the stages, each teaching one idea; first solve pays, replays are free, retry is instant. A brute-force solver script that shares the rules code verified every puzzle (2 to 64 layouts each; at most 1.1 percent of random fills win) and stored solutions are used for testing. A daily puzzle is generated from the date with a hidden solution built first, one small reward per day.
+- **Left for later (12.8):** beasts and monsters as faces, the map as stage select, camp and item marks. The puzzle shrines are a list on Home for now.
