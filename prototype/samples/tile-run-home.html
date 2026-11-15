@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tile Run: main screen layouts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<style>
+:root{color-scheme:light dark;
+ --bg:#eef1f5;--panel:#fff;--panel2:#e4e9f0;--ink:#1c2635;--muted:#566377;--line:#c9d1dc;--shadow:rgba(20,30,50,.18);
+ --r:#d2473f;--b:#2e6bd3;--g:#23874f;--y:#b9800f;--p:#7a55c2;--x:#566377;
+ --enemy:#33405a;--btn:#1c2635;--btnink:#fff;--gold:#e0a100;--chipbg:#151a24;--chipink:#ffd04a;--pillbg:#e9d3d3;--pillfill:#d99a96;--ok:#1b8a4a}
+@media (prefers-color-scheme:dark){:root{
+ --bg:#151a24;--panel:#212838;--panel2:#2b3448;--ink:#eef2f8;--muted:#a6b1c4;--line:#3a4560;--shadow:rgba(0,0,0,.5);
+ --r:#e0584f;--b:#4f86e6;--g:#2f9d5f;--y:#d19a22;--p:#9a78e0;--x:#7a879c;
+ --enemy:#3b4a69;--btn:#eef2f8;--btnink:#151a24;--gold:#f0b429;--chipbg:#0d1118;--pillbg:#4a2c31;--pillfill:#a8514f;--ok:#4cc27c}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden}
+body{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;margin:0;cursor:pointer;text-align:left}
+.top{max-width:430px;margin:0 auto;padding:6px 8px 0}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0 6px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;height:44px;padding:0 14px;border-radius:12px;background:var(--panel);box-shadow:0 2px 0 var(--shadow);font-weight:800;font-size:14px;color:var(--muted);white-space:nowrap}
+.tab[aria-selected=true]{background:var(--btn);color:var(--btnink)}
+.demo{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:0 2px 6px}
+.demo button{height:34px;padding:0 12px;border-radius:10px;background:var(--panel);box-shadow:0 2px 0 var(--shadow);font-weight:800;font-size:12px;color:var(--ink)}
+.wrap{max-width:430px;margin:0 auto}
+.scr{container-type:inline-size;position:relative;height:min(790px,calc(100dvh - 104px));min-height:600px;background:var(--bg);display:none;flex-direction:column;padding:6px 16px 16px;overflow:hidden}
+.scr.on{display:flex}
+.notes{max-width:430px;margin:0 auto;padding:14px 18px 40px;font-size:14px;line-height:1.45;color:var(--muted)}
+.notes b{color:var(--ink)}
+/* shared pieces */
+.hd{display:flex;align-items:center;gap:8px;height:48px;flex:none}
+.hd h1{margin:0;font-size:22px;letter-spacing:-.02em;flex:1}
+.coin{display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:18px;background:var(--panel);box-shadow:0 2px 0 var(--shadow);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums}
+.coin i{width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:inset 0 0 0 3px color-mix(in srgb,var(--gold) 60%,#000 0%),inset 0 0 0 4px var(--panel)}
+.coin i{background:var(--gold);box-shadow:none}
+.ib{width:44px;height:44px;border-radius:14px;background:var(--panel);box-shadow:0 2px 0 var(--shadow);display:flex;align-items:center;justify-content:center;flex:none}
+.ib svg,.ico{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.go{transition:transform .08s}
+.go:active,.go.press{transform:translateY(2px)}
+.t{--c:var(--x);--edge:color-mix(in srgb,var(--c) 70%,#000);position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;padding:10px 12px;border-radius:14px;background:var(--c);color:#fff;box-shadow:0 3px 0 var(--edge);min-width:0;min-height:44px}
+.t.r{--c:var(--r)}.t.b{--c:var(--b)}.t.g{--c:var(--g)}.t.y{--c:var(--y)}.t.p{--c:var(--p)}.t.x{--c:var(--x)}
+.t:active,.t.press{transform:translateY(2px);box-shadow:0 1px 0 var(--edge)}
+.t .lab{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.t .big{font-size:34px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.t .big small{font-size:15px;font-weight:700;opacity:.8;letter-spacing:0}
+.t .sm{font-size:12.5px;font-weight:700;opacity:.92;line-height:1.2}
+.t.out{background:var(--panel);color:var(--c);box-shadow:inset 0 0 0 2px var(--c),0 3px 0 var(--edge)}
+.t.dash{background:transparent;color:var(--muted);box-shadow:none;border:2px dashed var(--line);justify-content:center;align-items:center;text-align:center}
+.t.dash .lab{opacity:1}
+.t.white{background:var(--panel);color:var(--ink);box-shadow:0 3px 0 var(--shadow)}
+.t.navy{background:var(--enemy);color:#fff;box-shadow:0 3px 0 color-mix(in srgb,var(--enemy) 60%,#000)}
+.gl{position:absolute;left:7px;top:7px;display:grid;grid-template-columns:repeat(3,5px);gap:1.5px;opacity:.9}
+.gl i{width:5px;height:5px;border-radius:1px;border:1px solid rgba(255,255,255,.7)}
+.gl i.o{background:#fff;border-color:#fff}.gl i.f{background:rgba(255,255,255,.55);border-color:transparent}
+.pill{position:relative;height:18px;border-radius:9px;background:rgba(0,0,0,.26);overflow:hidden;flex:none}
+.pill u{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.4);border-radius:9px;text-decoration:none}
+.pill span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums;mix-blend-mode:normal;color:#fff;text-shadow:0 0 3px rgba(0,0,0,.45)}
+.pill.light{background:var(--panel2);border:2px solid var(--line);height:20px;border-radius:10px}
+.pill.light u{background:var(--pillfill);border-radius:8px}
+.pill.light span{color:var(--ink);text-shadow:none}
+.cta{height:56px;border-radius:16px;background:var(--btn);color:var(--btnink);font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 3px 0 color-mix(in srgb,var(--btn) 60%,#000);flex:none}
+.cta:active,.cta.press{transform:translateY(2px);box-shadow:0 1px 0 var(--btn)}
+.cta small{font-weight:700;opacity:.7;font-size:13px}
+.u{--c:var(--x);--edge:color-mix(in srgb,var(--c) 70%,#000);position:relative;background:var(--c);color:#fff;border-radius:12px;box-shadow:0 2px 0 var(--edge);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;aspect-ratio:1}
+.u.r{--c:var(--r)}.u.b{--c:var(--b)}.u.g{--c:var(--g)}.u.y{--c:var(--y)}.u.p{--c:var(--p)}
+.u .gl{left:4px;top:4px;transform:scale(.8);transform-origin:0 0}
+.u sup{position:absolute;right:4px;bottom:2px;font-size:9px;font-weight:800;opacity:.8;vertical-align:baseline}
+.lock{width:20px;height:20px}
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:var(--chipbg);color:#fff;padding:10px 18px;border-radius:14px;font-weight:800;font-size:14px;opacity:0;pointer-events:none;transition:.2s;z-index:9}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.sp{flex:1;min-height:8px}
+/* A board */
+.gA{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:calc((100cqw - 56px)/4);gap:8px;flex:1;min-height:0;grid-template-rows:repeat(5,minmax(0,1fr));margin-bottom:12px}
+.gA .t{min-height:0}
+.units{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;align-content:center;flex:1}
+.units .u{font-size:15px;border-radius:9px}
+.units .u .gl{display:none}
+/* B slabs */
+.slab{position:relative;display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-radius:14px;background:var(--enemy);color:#fff;box-shadow:0 3px 0 color-mix(in srgb,var(--enemy) 60%,#000);min-height:84px;flex:1;min-height:0;max-height:122px;justify-content:center}
+.slab.dash{background:transparent;color:var(--muted);box-shadow:none;border:2px dashed var(--line)}
+.slab .row{display:flex;align-items:baseline;gap:8px}
+.slab .row b{font-size:12px;letter-spacing:.07em;text-transform:uppercase;opacity:.8}
+.slab .row strong{font-size:28px;line-height:1;letter-spacing:-.02em;margin-left:auto}
+.slab .row strong small{font-size:14px;opacity:.7}
+.slab .chip{position:absolute;right:12px;top:-9px;height:24px;padding:0 10px;border-radius:12px;background:var(--chipbg);color:var(--chipink);font-size:12px;font-weight:800;display:flex;align-items:center}
+.slab .pill{background:rgba(0,0,0,.28);height:20px;border-radius:10px}.slab .pill u{border-radius:10px}
+.hand{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.hand .u{font-size:22px;border-radius:14px}
+.herobtn{display:flex;align-items:center;gap:12px;min-height:58px;padding:8px 14px;border-radius:14px;background:var(--panel);box-shadow:0 3px 0 var(--shadow)}
+.herobtn .av{width:38px;height:38px;border-radius:12px;background:var(--p);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;box-shadow:0 2px 0 color-mix(in srgb,var(--p) 70%,#000);flex:none}
+.herobtn b{display:block;font-size:15px}.herobtn small{font-size:12px;color:var(--muted)}
+.herobtn .ab{margin-left:auto;font-size:12px;font-weight:800;color:var(--p);border:2px solid var(--p);border-radius:10px;padding:5px 10px;white-space:nowrap}
+.lab2{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:2px 2px 6px}
+/* C focus */
+.focus{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:0}
+.big4{width:min(72cqw,280px);aspect-ratio:1;border-radius:36px;background:var(--btn);color:var(--btnink);box-shadow:0 5px 0 color-mix(in srgb,var(--btn) 55%,#000);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative}
+.big4:active,.big4.press{transform:translateY(3px);box-shadow:0 2px 0 var(--btn)}
+.big4 .gl{left:18px;top:18px;grid-template-columns:repeat(3,9px);gap:2.5px}.big4 .gl i{width:9px;height:9px;border-radius:2px;border-color:color-mix(in srgb,var(--btnink) 60%,transparent)}
+.big4 .gl i.o{background:var(--btnink)}.big4 .gl i.f{background:color-mix(in srgb,var(--btnink) 50%,transparent)}
+.big4 .n{font-size:min(30cqw,118px);font-weight:800;line-height:1;letter-spacing:-.04em}
+.big4 .l{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.65}
+.big4 .c{font-size:18px;font-weight:800}
+.pips{display:flex;gap:6px}
+.pips i{width:20px;height:8px;border-radius:4px;background:var(--line)}
+.pips i.d{background:var(--ink)}.pips i.c{background:var(--b)}
+.nm{font-size:14px;color:var(--muted);font-weight:700}
+.dock5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;flex:none}
+.dk{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:74px;border-radius:14px;background:var(--panel);box-shadow:0 3px 0 var(--shadow);font-size:11px;font-weight:800;color:var(--ink)}
+.dk .m{width:30px;height:30px;border-radius:9px;background:var(--c,var(--x));color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+.dk.dash{background:transparent;box-shadow:none;border:2px dashed var(--line);color:var(--muted)}
+.dk.dash .m{background:transparent;border:2px dashed var(--line);color:var(--muted)}
+.dk:active,.dk.press{transform:translateY(2px)}
+.dk em{font-style:normal;font-size:10px;color:var(--muted);font-weight:700}
+/* D ladder */
+.lad{flex:1;display:flex;flex-direction:column;min-height:0;padding:4px 0}
+.lr{flex:1;min-height:44px;max-height:56px;display:grid;grid-template-columns:1fr 34px 1fr;align-items:center;gap:10px;position:relative}
+.lr::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;background:var(--line)}
+.lr.d::before{background:var(--ink)}
+.lr:first-child::before{top:50%}.lr:last-child::before{bottom:50%}
+.nd{position:relative;z-index:1;width:30px;height:30px;justify-self:center;border-radius:10px;background:var(--panel);box-shadow:inset 0 0 0 2px var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--muted)}
+.nd.d{background:var(--ink);color:var(--bg);box-shadow:none}
+.nd.c{width:34px;height:34px;background:var(--b);color:#fff;box-shadow:0 2px 0 color-mix(in srgb,var(--b) 70%,#000)}
+.nd.k{border:2px dashed var(--line);box-shadow:none;background:var(--bg)}
+.lr .nm{font-size:13px}.lr .l{text-align:right}
+.br{display:flex;align-items:center;gap:8px;height:42px;padding:0 12px;border-radius:12px;font-weight:800;font-size:13px;color:#fff;background:var(--c);box-shadow:0 2px 0 color-mix(in srgb,var(--c) 70%,#000)}
+.br.g{--c:var(--g)}.br.y{--c:var(--y)}.br.b{--c:var(--b)}
+.br.dash{background:transparent;color:var(--muted);border:2px dashed var(--line);box-shadow:none}
+.br{white-space:nowrap}.br b{font-size:15px;margin-left:auto;display:flex}
+.br.go{min-height:44px;height:44px}
+.cur{height:44px;border-radius:14px;background:var(--btn);color:var(--btnink);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 color-mix(in srgb,var(--btn) 55%,#000)}
+.dockb{display:grid;grid-template-columns:1.3fr 1.3fr .8fr;gap:8px;flex:none;margin-top:8px}
+.dockb .t{min-height:62px;justify-content:center;padding:8px 12px}
+/* E mosaic */
+.mos{position:relative;--cw:calc((100cqw - 32px)/5);--ch:min(calc(var(--cw) * 1.25),calc((max(600px,min(790px,100dvh - 104px)) - 198px) / 7));margin-bottom:12px}
+.mos .piece{position:absolute;inset:0;pointer-events:none}
+.mos .cl{position:absolute;pointer-events:auto;background:var(--c);width:var(--cw);height:var(--ch)}
+.mos .cn{position:absolute;pointer-events:auto;background:var(--c)}
+.mos .piece{--edge:color-mix(in srgb,var(--c) 70%,#000)}
+.mos .piece{filter:drop-shadow(0 3px 0 var(--edge))}.mos .piece.dash{filter:none}.mos .piece.press{transform:translateY(2px)}
+.mos .piece.dash .cl{background:transparent;border:2px dashed var(--line);border-radius:14px}
+.mos .piece.dash .cn{display:none}
+.mos .tx{position:absolute;pointer-events:none;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;padding:9px 11px}
+.mos .piece.dash+.tx{color:var(--muted)}
+.mos .tx .lab{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.mos .tx .big{font-size:36px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.mos .tx .big small{font-size:15px;opacity:.8}
+.mos .tx .sm{font-size:12px;font-weight:700;opacity:.92}
+/* F daily */
+.dcard{background:var(--panel);border-radius:18px;box-shadow:0 3px 0 var(--shadow);padding:14px;display:flex;flex-direction:column;gap:10px;flex:none}
+.dcard h2{margin:0;font-size:17px}.dcard p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.dtop{display:flex;align-items:flex-start;gap:10px}
+.play{margin-left:auto;height:44px;padding:0 18px;border-radius:14px;background:var(--panel);box-shadow:inset 0 0 0 2px var(--ink),0 3px 0 var(--shadow);font-weight:800;font-size:15px;display:flex;align-items:center;flex:none}
+.eslab{background:var(--enemy);color:#fff;border-radius:12px;padding:8px 12px;display:flex;flex-direction:column;gap:6px;box-shadow:0 2px 0 color-mix(in srgb,var(--enemy) 60%,#000)}
+.eslab div{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.eslab div b{font-size:22px;letter-spacing:0}
+.eslab .pill{height:16px}
+.bd{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.bd .c{aspect-ratio:1;border-radius:12px;border:2px dashed var(--line);min-height:0}
+.bd .u{font-size:18px}
+.bd .bo{position:relative;aspect-ratio:1;border-radius:12px;background:var(--panel);box-shadow:inset 0 0 0 2px var(--g);color:var(--g);font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:none;grid-auto-rows:54px}
+.chips .t{flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:8px 12px;min-height:54px}
+.chips .t.dash .mini{align-items:flex-start}.chips .t .mini{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.chips .t .nmx{font-size:14px;font-weight:800;line-height:1.1}
+.chips .t .sm{font-size:12px;opacity:.9}
+.dots{display:flex;gap:3px;margin-top:3px}.dots i{width:11px;height:11px;border-radius:3px;background:var(--c);display:block}
+.dots i.r{--c:var(--r)}.dots i.b{--c:var(--b)}.dots i.g{--c:var(--g)}.dots i.y{--c:var(--y)}.dots i.p{--c:var(--p)}
+.t.white .dots i{box-shadow:0 1px 0 rgba(0,0,0,.2)}
+</style>
+</head>
+<body>
+<div class="top">
+ <div class="tabs" id="tabs" role="tablist"></div>
+ <div class="demo"><span>Preview state:</span><button id="st" class="go"></button></div>
+</div>
+<div class="wrap" id="wrap"></div>
+<div class="notes" id="notes"></div>
+<div id="toast" role="status"></div>
+<script>
+(function(){
+var S={open:false};
+var UN=[['r',3],['b',2],['g',2],['y',1],['p',1]];
+var IC={
+ gear:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>',
+ help:'<svg class="ico" viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4.5 2.6c-1 .6-1.5 1.1-1.5 2.4M12 17.5v.01"/></svg>',
+ lock:'<svg class="ico lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+ inf:'<svg class="ico" viewBox="0 0 24 24"><path d="M12 12c-2-3-3.5-4-5.5-4a4 4 0 0 0 0 8c2 0 3.5-1 5.5-4s3.500-4 5.500-4a4 4 0 0 1 0 8c-2 0-3.500-1-5.500-4z"/></svg>',
+ star:'<svg class="ico" viewBox="0 0 24 24"><path d="M12 4l2.4 5 5.4.7-4 3.7 1 5.400L12 16.200 7.200 18.800l1-5.400-4-3.700 5.400-.7z"/></svg>',
+ team:'<svg class="ico" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>'
+};
+function glyph(){return '<span class="gl"><i></i><i class="f"></i><i></i><i class="f"></i><i class="o"></i><i class="f"></i><i></i><i class="f"></i><i></i></span>'}
+function stage(){return S.open?4:3}
+function pillH(p,txt,cls){return '<div class="pill '+(cls||'')+'"><u style="width:'+p+'%"></u><span>'+txt+'</span></div>'}
+function coin(){return '<div class="coin"><i></i>235</div>'}
+function units(cls){return UN.map(function(u){return '<span class="u '+u[0]+'">'+glyph()+u[1]+'</span>'}).join('')}
+function endNote(){return S.open?'Best depth 12':'Clear stage 3 to unlock'}
+function G(go,inner,cls,st){return '<button class="go '+(cls||'')+'" data-go="'+go+'" style="'+(st||'')+'">'+inner+'</button>'}
+function hdr(extra){return '<div class="hd"><h1>Tile Run</h1>'+coin()+(extra||'')+'</div>'}
+function gearBtn(){return '<button class="ib go" data-go="Settings" aria-label="Settings">'+IC.gear+'</button>'}
+function cta(label,sub){return '<button class="cta go" data-go="Campaign">'+label+(sub?' <small>'+sub+'</small>':'')+'</button>'}
+
+var L=[];
+/* A: the board */
+L.push({n:'A . Board',
+ idea:'<b>The screen is a board.</b> Destinations are tiles on a 4 x 5 grid; size says importance (Campaign 2x2), numbers are progress, dashed cells are locked or empty.',
+ trade:'<b>Trade-off:</b> instantly on-brand and easy to scan, but every mode looks equally tile-like, so the big Continue button carries the hierarchy. Fixed grid limits future modes.',
+ html:function(){var s=stage(),lock=!S.open;
+  return hdr(gearBtn())+'<div class="gA">'+
+  G('Campaign','<span class="gl"><i></i><i class="f"></i><i></i><i class="f"></i><i class="o"></i><i class="f"></i><i></i><i class="f"></i><i></i></span><span class="lab">Campaign</span><span class="big">'+s+'<small> / 10</small></span>'+pillH((s-1)*10,(s-1)+' cleared'),'t b','grid-column:1/3;grid-row:1/3')+
+  G('Puzzles','<span class="lab">Puzzles</span><span class="big">7<small> / 15</small></span>','t g','grid-column:3/5;grid-row:1')+
+  G('Daily puzzle','<span class="lab">Daily</span><span class="sm">New today</span>','t out y','grid-column:3;grid-row:2;padding:8px 10px')+
+  (lock?G('Endless (locked)',IC.lock+'<span class="lab" style="margin-top:2px">Endless</span><span class="sm" style="font-size:11px">Stage 3</span>','t dash','grid-column:4;grid-row:2;padding:6px'):
+   G('Endless','<span class="lab">Endless</span><span class="big" style="font-size:26px">12</span><span class="sm" style="font-size:11px">best</span>','t x','grid-column:4;grid-row:2;padding:8px 10px'))+
+  G('Hero','<span class="gl"><i class="f"></i><i class="o"></i><i class="f"></i><i></i><i class="o"></i><i></i><i class="f"></i><i class="o"></i><i class="f"></i></span><span class="lab">Hero</span><span class="big" style="font-size:26px">Kiri</span><span class="sm">Rally: all tiles +1</span>','t p','grid-column:1/3;grid-row:3/5')+
+  G('Team','<span class="lab" style="margin-bottom:6px">Team</span><span class="units">'+units()+'</span>','t white','grid-column:3/5;grid-row:3/5;justify-content:space-between')+
+  G('Settings',IC.gear+'<span class="lab" style="margin-top:2px">Settings</span>','t x','grid-column:1;grid-row:5;align-items:center;justify-content:center;padding:6px')+
+  G('Help',IC.help+'<span class="lab" style="margin-top:2px">Help</span>','t x','grid-column:2;grid-row:5;align-items:center;justify-content:center;padding:6px')+
+  '<div class="t dash" style="grid-column:3/5;grid-row:5"><span class="lab">Map soon</span></div>'+
+  '</div>'+cta('Continue stage '+s)}});
+
+/* B: slabs and hand */
+L.push({n:'B . Slabs',
+ idea:'<b>Modes are enemy slabs, your team is the hand.</b> Three navy slabs with bar-pills as progress, the five colour tiles below as a hand, the hero as the ability button, Continue as the Attack button.',
+ trade:'<b>Trade-off:</b> reads exactly like the fight screen, so it teaches the UI. The three slabs are tall, and hero/team are shortcuts only.',
+ html:function(){var s=stage();
+  return hdr(gearBtn())+
+  '<div style="display:flex;flex-direction:column;gap:14px;flex:1;min-height:0;padding-top:6px">'+
+  G('Campaign','<div class="row"><b>Campaign</b><strong>Stage '+s+'<small> / 10</small></strong></div>'+pillH(0,(s-1)+' / 10 cleared','').replace('<u style="width:0%">','<u style="width:'+(s-1)*10+'%">'),'slab')+
+  G('Puzzles','<span class="chip">Daily: new</span><div class="row"><b>Puzzles</b><strong>7<small> / 15</small></strong></div><div class="pill"><u style="width:46%"></u><span>7 solved</span></div>','slab')+
+  (S.open?G('Endless','<div class="row"><b>Endless</b><strong>12<small> best</small></strong></div><div class="pill"><u style="width:60%"></u><span>boss every 5</span></div>','slab'):
+   G('Endless (locked)','<div class="row" style="align-items:center">'+IC.lock+'<b style="font-size:13px;opacity:1">Endless</b><span style="margin-left:auto;font-weight:800;font-size:14px">Clear stage 3</span></div><div class="pill" style="background:var(--panel2)"><u style="width:67%;background:var(--line)"></u><span style="color:var(--muted);text-shadow:none">2 / 3</span></div>','slab dash'))+
+  '</div>'+
+  '<div class="lab2" style="margin-top:12px">Your hand</div><button class="hand go" data-go="Team" style="width:100%">'+UN.map(function(u){return '<span class="u '+u[0]+'">'+glyph()+u[1]+'</span>'}).join('')+'</button>'+
+  '<button class="herobtn go" data-go="Hero" style="margin:10px 0 12px"><span class="av">K</span><span><b>Kiri</b><small>Hero</small></span><span class="ab">Rally +1</span></button>'+cta('Continue stage '+s)}});
+
+/* C: focus */
+L.push({n:'C . Focus',
+ idea:'<b>One giant Continue tile, nearly empty screen.</b> The stage number is the button; ten pips show the run; everything else is a single row of small tiles.',
+ trade:'<b>Trade-off:</b> the calmest and fastest for returning players. Secondary modes show almost no data (one number each), and new players see little of the game.',
+ html:function(){var s=stage();
+  var pips='';for(var i=1;i<=10;i++)pips+='<i class="'+(i<s?'d':i===s?'c':'')+'"></i>';
+  return hdr(gearBtn())+
+  '<div class="focus">'+
+  G('Campaign','<span class="gl"><i></i><i class="f"></i><i></i><i class="f"></i><i class="o"></i><i class="f"></i><i></i><i class="f"></i><i></i></span><span class="l">Stage</span><span class="n">'+s+'</span><span class="c">Continue</span>','big4')+
+  '<div class="pips">'+pips+'</div><div class="nm">'+(s-1)+' of 10 stages cleared</div></div>'+
+  '<div class="dock5">'+
+  G('Puzzles','<span class="m" style="--c:var(--g)">7</span>Puzzles<em>of 15</em>','dk')+
+  (S.open?G('Endless','<span class="m" style="--c:var(--x)">12</span>Endless<em>best</em>','dk'):G('Endless (locked)','<span class="m">'+IC.lock+'</span>Endless<em>stage 3</em>','dk dash'))+
+  G('Hero','<span class="m" style="--c:var(--p)">K</span>Hero<em>Rally</em>','dk')+
+  G('Team','<span class="m" style="--c:var(--b)">'+IC.team+'</span>Team<em>5 units</em>','dk')+
+  G('Settings','<span class="m" style="--c:var(--x)">'+IC.gear+'</span>More<em>help</em>','dk')+
+  '</div>'}});
+
+/* D: ladder */
+L.push({n:'D . Ladder',
+ idea:'<b>The campaign is the screen.</b> Ten stage nodes climb a spine; Continue sits on the current node; Puzzles and Endless branch off the spine (Endless hangs off stage 3, so its unlock is visible); Hero and Team dock at the bottom.',
+ trade:'<b>Trade-off:</b> best sense of progress and a natural home for the future map. Branches are small and fit only because ten stages is short; a longer campaign needs scrolling.',
+ html:function(){var s=stage(),rows='';
+  var nm=['Dawn Gate','Meadow','Grove','Stage 4','Stage 5','Stage 6','Stage 7','Stage 8','Stage 9','Stage 10'];
+  for(var n=10;n>=1;n--){
+   var cls=n<s?'d':n===s?'c':'k',left='',right='';
+   var lab='<span class="nm">Stage '+n+'</span>';
+   if(n===s){right=G('Campaign','Continue','cur go','');left='<span class="nm l"></span>'}
+   else if(n===2){left=G('Puzzles','Puzzles<b>7/15</b>','br g');right=lab}
+   else if(n===1){left=G('Daily puzzle','Daily<b>new</b>','br y');right=lab}
+   else{right=lab}
+   if(n===3){left=S.open?G('Endless','Endless<b>12</b>','br b'):G('Endless (locked)','Endless<b>'+IC.lock+'</b>','br dash')}
+   rows+='<div class="lr '+(n<s?'d':'')+'"><div>'+left+'</div><span class="nd '+cls+'">'+(n<s?'&#10003;':n)+'</span><div>'+right+'</div></div>';
+  }
+  return hdr(gearBtn())+'<div class="lad">'+rows+'</div>'+
+  '<div class="dockb">'+
+  G('Hero','<span class="lab">Hero</span><span class="sm" style="font-size:15px;font-weight:800;opacity:1">Kiri</span>','t p')+
+  G('Team','<span class="lab">Team</span><span class="dots">'+UN.map(function(u){return '<i class="'+u[0]+'"></i>'}).join('')+'</span>','t white')+
+  G('Settings','<span style="display:flex;justify-content:center">'+IC.gear+'</span>','t x','align-items:center')+
+  '</div>'}});
+
+/* E: mosaic */
+L.push({n:'E . Mosaic',
+ idea:'<b>Polyomino mosaic.</b> Differently shaped pieces interlock into one 5 x 7 rectangle: an L for Campaign, a 2x4 bar for Puzzles, a row of five single tiles for the team. Each piece is one destination.',
+ trade:'<b>Trade-off:</b> the most distinctive and puzzle-like screen, with a clear size hierarchy. Shapes must be re-fitted by hand when a mode is added, and the L has an awkward text area.',
+ html:function(){var s=stage();
+  var P=[];
+  function piece(go,cells,cls,colour,tx,txbox,cname){P.push({go:go,cells:cells,colour:colour,tx:tx,box:txbox,dash:cls==='dash',cell:cname})}
+  function rect(c0,r0,c1,r1){var a=[];for(var r=r0;r<=r1;r++)for(var c=c0;c<=c1;c++)a.push([c,r]);return a}
+  piece('Campaign',rect(0,0,2,2).concat(rect(0,3,1,3)),'', 'var(--b)','<span class="gl" style="left:11px;top:11px;grid-template-columns:repeat(3,8px)"><i></i><i class="f"></i><i></i><i class="f"></i><i class="o"></i><i class="f"></i><i></i><i class="f"></i><i></i></span><span class="lab">Campaign</span><span class="big">'+s+'<small> / 10</small></span><span class="sm">Continue</span>',[0,0,2,4]);
+  piece('Puzzles',rect(3,0,4,3),'','var(--g)','<span class="lab">Puzzles</span><span class="big">7<small>/15</small></span><span class="sm">solved</span>',[3,0,5,4]);
+  piece('Daily puzzle',[[2,3]],'','var(--y)','<span class="lab" style="font-size:10px">Daily</span>',[2,3,3,4]);
+  piece(S.open?'Endless':'Endless (locked)',rect(0,4,2,4),S.open?'':'dash',S.open?'var(--x)':'var(--line)',S.open?'<span class="lab">Endless</span><span class="sm">best 12</span>':'<span class="lab" style="display:flex;align-items:center;gap:6px;justify-content:center;width:100%">'+IC.lock+'Endless</span><span class="sm" style="text-align:center">Clear stage 3</span>',[0,4,3,5]);
+  piece('Hero',rect(3,4,4,4),'','var(--p)','<span class="lab">Hero</span><span class="sm" style="font-size:14px;font-weight:800">Kiri</span>',[3,4,5,5]);
+  P.push({go:'Team',cells:[[0,5],[1,5],[2,5],[3,5],[4,5]],units:true});
+  piece('Coming soon',[[3,6],[4,6]],'dash','var(--line)','<span class="lab" style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted)">Map soon</span>',[3,6,5,7]);
+  piece('Settings',[[0,6],[1,6]],'','var(--x)','<span class="lab" style="display:flex;align-items:center;gap:6px">'+IC.gear+'Settings</span>',[0,6,2,7]);
+  piece('Help',[[2,6]],'','var(--x)','<span class="lab" style="display:flex;justify-content:center">'+IC.help+'</span>',[2,6,3,7]);
+  var gp=8;
+  var CW='var(--cw)',CH='var(--ch)';
+  function X(c){return 'calc('+c+' * ('+CW+' + '+gp+'px))'}
+  function Y(r){return 'calc('+r+' * ('+CH+' + '+gp+'px))'}
+  var out='';
+  P.forEach(function(p){
+   var set={};p.cells.forEach(function(c){set[c[0]+','+c[1]]=1});
+   var has=function(c,r){return !!set[c+','+r]};
+   var h='<div class="piece go'+(p.dash?' dash':'')+'" data-go="'+p.go+'" style="--c:'+(p.colour||'var(--x)')+'">';
+   if(p.dash){
+    var xs=p.cells.map(function(c){return c[0]}),ys=p.cells.map(function(c){return c[1]});
+    var x0=Math.min.apply(0,xs),x1=Math.max.apply(0,xs),y0=Math.min.apply(0,ys),y1=Math.max.apply(0,ys);
+    h+='<span class="cl" style="left:'+X(x0)+';top:'+Y(y0)+';width:calc('+(x1-x0+1)+' * '+CW+' + '+(x1-x0)*gp+'px);height:calc('+(y1-y0+1)+' * '+CH+' + '+(y1-y0)*gp+'px)"></span>';
+   } else p.cells.forEach(function(c,i){
+    var x=c[0],y=c[1],R=14;
+    var tl=(has(x-1,y)||has(x,y-1))?0:R,tr=(has(x+1,y)||has(x,y-1))?0:R,br=(has(x+1,y)||has(x,y+1))?0:R,bl=(has(x-1,y)||has(x,y+1))?0:R;
+    var st='left:'+X(x)+';top:'+Y(y)+';border-radius:'+tl+'px '+tr+'px '+br+'px '+bl+'px';
+    if(p.units){var cc=UN[i][0];st+=';--c:var(--'+cc+');border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:24px'}
+    h+='<span class="cl" style="'+st+'">'+(p.units?'<span class="gl" style="left:7px;top:7px"><i></i><i class="f"></i><i></i><i class="f"></i><i class="o"></i><i class="f"></i><i></i><i class="f"></i><i></i></span>'+UN[i][1]:'')+'</span>';
+    if(!p.units){
+     if(has(x+1,y))h+='<span class="cn" style="left:calc('+X(x)+' + '+CW+');top:'+Y(y)+';width:'+gp+'px;height:'+CH+'"></span>';
+     if(has(x,y+1))h+='<span class="cn" style="left:'+X(x)+';top:calc('+Y(y)+' + '+CH+');height:'+gp+'px;width:'+CW+'"></span>';
+     if(has(x+1,y)&&has(x,y+1)&&has(x+1,y+1))h+='<span class="cn" style="left:calc('+X(x)+' + '+CW+');top:calc('+Y(y)+' + '+CH+');width:'+gp+'px;height:'+gp+'px"></span>';
+    }
+   });
+   h+='</div>';
+   if(p.tx){var b=p.box;h+='<div class="tx" style="left:'+X(b[0])+';top:'+Y(b[1])+';width:calc('+(b[2]-b[0])+' * ('+CW+' + '+gp+'px) - '+gp+'px);height:calc('+(b[3]-b[1])+' * ('+CH+' + '+gp+'px) - '+gp+'px)">'+p.tx+'</div>'}
+   out+=h;
+  });
+  return hdr(gearBtn())+'<div class="mos" style="flex:none;height:calc(7 * var(--ch) + 6 * 8px)">'+out+'</div><div class="sp"></div>'+cta('Continue stage '+s)}});
+
+/* F: daily first */
+L.push({n:'F . Daily',
+ idea:'<b>Today first.</b> A live miniature of today\'s one-attack puzzle (slab, bar-pill, a few placed tiles) is the hero of the screen; Continue stays the single dark button; modes are a compact 2-column chip list.',
+ trade:'<b>Trade-off:</b> gives a daily-return hook and shows the game at a glance. It promotes puzzles above the campaign, and the preview board needs to be generated each day.',
+ html:function(){var s=stage();
+  var bd='';var cells=[['',''],['b','3'],['',''],['r','4'],['',''],['g','+2'],['',''],['',''],['y','2'],['','']];
+  cells.forEach(function(c){bd+=!c[0]?'<span class="c"></span>':c[0]==='g'?'<span class="bo">+2</span>':'<span class="u '+c[0]+'">'+glyph()+c[1]+'</span>'});
+  return hdr(gearBtn())+
+  '<div class="dcard"><div class="dtop"><div><h2>Daily puzzle</h2><p>One attack. Beat 14 HP.</p></div>'+G('Daily puzzle','Play','play')+'</div>'+
+  '<div class="eslab"><div><span>Enemy</span><b>14</b></div><div class="pill"><u style="width:0"></u><span>0 / 14</span></div></div><div class="bd">'+bd+'</div></div>'+
+  '<div class="sp"></div>'+cta('Continue stage '+s,'stage '+(s-1)+' of 10 cleared')+
+  '<div class="chips" style="margin-top:12px">'+
+  G('Puzzles','<span class="mini"><span class="nmx">Puzzles</span><span class="sm">7 / 15 solved</span></span>','t g')+
+  (S.open?G('Endless','<span class="mini"><span class="nmx">Endless</span><span class="sm">best 12</span></span>','t x'):G('Endless (locked)',IC.lock+'<span class="mini"><span class="nmx">Endless</span><span class="sm">Clear stage 3</span></span>','t dash','color:var(--muted);justify-content:flex-start;text-align:left'))+
+  G('Hero','<span class="mini"><span class="nmx">Kiri</span><span class="sm">Rally +1</span></span>','t p')+
+  G('Team','<span class="mini"><span class="nmx">Team</span><span class="dots">'+UN.map(function(u){return '<i class="'+u[0]+'"></i>'}).join('')+'</span></span>','t white')+
+  G('Settings',IC.gear+'<span class="mini"><span class="nmx">Settings</span></span>','t x')+
+  G('Help',IC.help+'<span class="mini"><span class="nmx">How to play</span></span>','t x')+
+  '</div>'}});
+
+var tabs=document.getElementById('tabs'),wrap=document.getElementById('wrap'),notes=document.getElementById('notes'),cur=0;
+function render(){
+ tabs.innerHTML='';wrap.innerHTML='';
+ L.forEach(function(l,i){
+  var b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.setAttribute('aria-selected',i===cur);b.textContent=l.n;
+  b.onclick=function(){cur=i;render();window.scrollTo(0,0)};tabs.appendChild(b);
+  var d=document.createElement('div');d.className='scr'+(i===cur?' on':'');d.innerHTML=i===cur?l.html():'';wrap.appendChild(d);
+ });
+ notes.innerHTML='<p style="margin:0 0 8px">'+L[cur].idea+'</p><p style="margin:0">'+L[cur].trade+'</p>';
+ document.getElementById('st').textContent=S.open?'Stage 4, Endless open':'Stage 3, Endless locked';
+}
+document.getElementById('st').onclick=function(){S.open=!S.open;render()};
+var tt;
+document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(!g)return;var t=document.getElementById('toast');t.textContent='→ '+g.dataset.go;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},1300)});
+document.addEventListener('pointerdown',function(e){var p=e.target.closest('.piece');if(p){p.classList.add('press');var up=function(){p.classList.remove('press');document.removeEventListener('pointerup',up);document.removeEventListener('pointercancel',up)};document.addEventListener('pointerup',up);document.addEventListener('pointercancel',up)}});
+render();
+})();
+</script>
+</body>
+</html>

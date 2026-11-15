@@ -93,3 +93,16 @@ A short web pass (and general knowledge) gave these principles, each sibling app
 ## Implemented
 
 Tab "0 . Chosen" is implemented in `prototype/samples/tile-run.html` (visual change only; rules block, CONFIG, puzzles and save key untouched). Differences from the mockup: tiles are drawn for any polyomino (SVG body, HTML face); the sandwich clamps are no longer children of the squeezing tiles but a separate layer computed from the board geometry, with an 8 px board gap, which fixes the overlaps (clamps hidden under later tiles, offsets thrown off by borders, one clamp stacked on another when two neighbours are sandwiched). Enemy slabs are 58 px high with the attack value in a row under the number so the number never collides with it on 6-column boards. Colour symbols remain only on the small colour dots of tabs and chips.
+
+## Main screen layouts
+
+Mockup: `prototype/samples/tile-run-home.html` (six tabs, light and dark, a toggle for "Endless locked / open"). All use the settled look and the same data: campaign stage and progress, puzzles solved with Daily, Endless state and best, hero with ability, five team units with levels, settings and help, coins.
+
+- **A Board:** the screen is a 4 x 5 board of destination tiles; size means importance, dashed cells are locked or empty. Dark Continue button below.
+- **B Slabs:** modes as navy enemy slabs with bar-pills, the team as a hand of five tiles, the hero as the ability button, Continue as the Attack button. Mirrors the fight screen.
+- **C Focus:** one giant Continue tile with the stage number, ten pips, one row of small tiles for everything else. Calmest, least informative.
+- **D Ladder:** the campaign spine is the screen; Continue on the current node, Puzzles and Endless as branches (Endless hangs off stage 3), Hero and Team in a bottom dock. Best fit for a later map.
+- **E Mosaic:** polyomino pieces (L, 2x4 bar, row of five unit tiles) interlock into one rectangle, each piece a destination. Most distinctive; hardest to extend.
+- **F Daily:** a live miniature of today's puzzle on top, Continue, then a two-column chip list of modes.
+
+Recommendation: **A Board** as the default (clear hierarchy, directly the game's own language, easy to add modes), keeping **D Ladder** as the layout to grow into once the stage map is built. E Mosaic is the bold option if a signature look matters more than extensibility.
