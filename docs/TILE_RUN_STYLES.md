@@ -25,3 +25,15 @@ File: `prototype/samples/tile-run-styles2.html` (one file, about 32 KB, no netwo
 - **C. Soft.** Pastel flat tiles with coloured numbers, light enemy cards with a thin damage bar instead of the pill, slightly larger shapes. Tests calm and friendliness against number contrast.
 - **D. Compact 6x4.** Same pieces on the largest board (6x4), 4 px gaps, 44 px slabs, no names, hand of 6 per row. Tests density on a 390 px phone.
 - **E. Raised.** More saturated colours, 3 to 4 px raised edge, shape in a white disc, glyph and edge marks together, damage inside the navy slab with a bar. Tests how much depth and double reach cues the tile can take before it gets busy.
+
+## Round three: A's tiles, different enemy bars
+
+Feedback on round two: keep tab A's tiles, board, hand, buttons and palette; prefer the damage / HP bars of C, D and E over the "x of y" pill. File: `prototype/samples/tile-run-styles3.html` (one file, about 33 KB, light and dark). Tiles are identical in all seven tabs; only the enemy area and the hero HP bar change. The scene covers a Guard that was just broken (with 2 damage over), a plain enemy not yet dead, the wide enemy killed by two columns (3 + 9) and a plain enemy with 0 damage. Kill = green slab outline plus check badge; not enough = grey fill and the number short.
+
+- **A1** thin 7 px bar under the navy slab, "22 / 25" inside; gold tab = overkill.
+- **A2** the original pill becomes the bar (number over the fill), slimmer slab.
+- **A3** damage text and a bar along the bottom of the slab (E's idea, flat).
+- **A4** bar cut into chunks of 5 HP (hero: 4 HP) to count rather than read.
+- **A5** two tones, "-22" at the left end and "3 left" / "KILL +2" at the right.
+- **A6** bar inside the slab above the number; Guard shown as two pips.
+- **A7** light slab (white, navy number); the wide enemy's one bar has a shade per column.
