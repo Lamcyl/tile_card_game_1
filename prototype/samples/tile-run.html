@@ -9,18 +9,20 @@
 
 :root{color-scheme:light dark;
  --bg:#eef1f5;--panel:#ffffff;--panel2:#e4e9f0;--ink:#1c2635;--muted:#566377;--line:#c9d1dc;--cellbg:#f8fafc;
- --r:#d2473f;--b:#2e6bd3;--g:#23874f;--y:#e0a800;--p:#7b4bc4;--x:#6b7488;
- --rt:#d2473f;--bt:#2e6bd3;--gt:#23874f;--yt:#8a6500;--pt:#7b4bc4;--xt:#5b6478;
- --ron:#fff;--bon:#fff;--gon:#fff;--yon:#1c1500;--pon:#fff;--xon:#fff;
+ --r:#d2473f;--b:#2e6bd3;--g:#23874f;--y:#b9800f;--p:#7a55c2;--x:#566377;
+ --rt:#d2473f;--bt:#2e6bd3;--gt:#23874f;--yt:#8a6500;--pt:#7a55c2;--xt:#566377;
+ --ron:#fff;--bon:#fff;--gon:#fff;--yon:#fff;--pon:#fff;--xon:#fff;
  --ok:#1b8a4a;--bad:#c23a3a;--warn:#b86a00;--enemy:#33405a;--enemyink:#ffffff;
- --btn:#1c2635;--btnink:#ffffff;--shadow:rgba(20,30,50,.18);--okbg:#dff3e6;--badbg:#fbe3e3;--gold:#e0a100;--hp:#c23a3a;--hpbg:#e9d3d3}
+ --btn:#1c2635;--btnink:#ffffff;--shadow:rgba(20,30,50,.18);--okbg:#dff3e6;--badbg:#fbe3e3;--gold:#e0a100;--hp:#c23a3a;--hpbg:#e9d3d3;--accedge:#151a24;--chipbg:#151a24;--chipink:#ffd04a;
+ --pshort:color-mix(in srgb,var(--muted) 36%,var(--panel));--pok:color-mix(in srgb,var(--ok) 40%,var(--panel));--hpc:color-mix(in srgb,var(--r) 48%,var(--panel))}
 @media (prefers-color-scheme: dark){:root{
  --bg:#151a24;--panel:#212838;--panel2:#2b3448;--ink:#eef2f8;--muted:#a6b1c4;--line:#3a4560;--cellbg:#1b2130;
- --r:#e0584f;--b:#4f86e6;--g:#2f9d5f;--y:#e8b923;--p:#9468de;--x:#7d869b;
+ --r:#e0584f;--b:#4f86e6;--g:#2f9d5f;--y:#d19a22;--p:#9a78e0;--x:#7a879c;
  --rt:#ee7b73;--bt:#7aa5f0;--gt:#4cc27c;--yt:#f2c94c;--pt:#b391ee;--xt:#a6afc2;
- --ron:#fff;--bon:#fff;--gon:#fff;--yon:#1c1500;--pon:#fff;--xon:#10131b;
+ --ron:#fff;--bon:#fff;--gon:#fff;--yon:#fff;--pon:#fff;--xon:#fff;
  --ok:#4cc27c;--bad:#ef6a6a;--warn:#e2a03a;--enemy:#3b4a69;--enemyink:#ffffff;
- --btn:#eef2f8;--btnink:#151a24;--shadow:rgba(0,0,0,.5);--okbg:#1f3a2c;--badbg:#412428;--gold:#f0b429;--hp:#ef6a6a;--hpbg:#4a2c31}}
+ --btn:#eef2f8;--btnink:#151a24;--shadow:rgba(0,0,0,.5);--okbg:#1f3a2c;--badbg:#412428;--gold:#f0b429;--hp:#ef6a6a;--hpbg:#4a2c31;--accedge:#0d1118;--chipbg:#0d1118;--chipink:#ffd04a;
+ --pshort:color-mix(in srgb,var(--muted) 42%,var(--panel));--pok:color-mix(in srgb,var(--ok) 48%,var(--panel));--hpc:color-mix(in srgb,var(--r) 55%,var(--panel))}}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden}
 body{min-height:100vh;min-height:100dvh;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
@@ -74,9 +76,6 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .rline i{font-style:normal;font-weight:800;color:var(--tt)}
 .ctext{font-size:12px;color:var(--muted)}
 /* map */
-.hpbar{position:relative;height:18px;border-radius:9px;background:var(--hpbg);overflow:hidden;flex:1;min-width:90px}
-.hpbar i{position:absolute;left:0;top:0;bottom:0;background:var(--hp);transition:width .5s}
-.hpbar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
 .path{display:flex;align-items:center;gap:6px;margin:4px 0 10px}
 .node{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);background:var(--panel)}
 .node.done{background:var(--ok);border-color:var(--ok);color:#fff}
@@ -103,23 +102,6 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .stat{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
 .mombadge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;background:var(--gold);color:#1c1500;border-radius:9px;padding:2px 8px;animation:glow 1.4s infinite}
 #fen,#fboard{display:grid;grid-template-columns:repeat(var(--n),var(--cs));gap:6px;justify-content:center}
-.enemy{display:flex;flex-direction:column;gap:3px;min-width:0;position:relative}
-.etile{position:relative;height:50px;border-radius:12px;background:var(--enemy);color:var(--enemyink);border:3px solid var(--enemy);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
-.etile b{font-size:24px;line-height:.95;font-weight:800;color:var(--enemyink);font-variant-numeric:tabular-nums}
-.etile i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;color:var(--enemyink);opacity:.9}
-.etile .atk{position:absolute;right:4px;top:2px;font-size:11px;font-weight:800;color:var(--enemyink);display:flex;align-items:center;gap:1px}
-.etile .atk svg{width:9px;height:9px;fill:var(--enemyink)}
-.enemy.guard .etile{border-style:dashed;border-color:var(--gold)}
-.enemy.boss .etile{border-color:var(--bad)}
-.enemy.dead .etile{background:var(--panel2);border-color:var(--line);opacity:.6}.enemy.dead .etile b,.enemy.dead .etile i,.enemy.dead .atk{color:var(--muted)}
-.enemy.hit .etile{animation:lunge .4s}
-.ebar{position:relative;height:9px;border-radius:5px;background:var(--hpbg);overflow:hidden}
-.ebar i{position:absolute;left:0;top:0;bottom:0;background:var(--hp);transition:width .5s}
-.ebar u{position:absolute;top:0;bottom:0;background:var(--gold);opacity:.85;transition:width .3s;text-decoration:none}
-.pill{height:22px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;background:var(--panel2);color:var(--muted);border:2px solid var(--line);padding:0 5px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.enemy.kill .pill{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
-.enemy.has .pill{color:var(--ink)}
-.enemy.kill .etile{border-color:var(--ok)}
 #bwrap{position:relative;margin-top:6px}
 .cell{position:relative;width:var(--cs);height:var(--cs);border-radius:12px;background:var(--cellbg);border:2px dashed var(--line);display:flex;align-items:center;justify-content:center}
 .cell.x{border:2px solid var(--line);background:repeating-linear-gradient(45deg,var(--panel2) 0 6px,var(--cellbg) 6px 12px)}
@@ -170,12 +152,11 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .wheelsvg{width:38px;height:38px;flex:none}
 .ecd{position:absolute;left:3px;top:2px}.ecd .dot{width:14px;height:14px}
 .mini{position:relative}.mini .ecd{left:2px;top:2px}
-@media (max-height:760px){.etile{height:44px}}
+
 
 .cell.spanh{width:auto}.cell.spanv{height:auto}
 .cell .bb{left:50%;transform:translateX(-50%);bottom:3px;white-space:nowrap}
 .cell.bonus .bb{left:3px;transform:none}
-.enemy.runner .etile{border-style:dotted;border-color:var(--warn)}
 .enemy.gone{opacity:.35}
 .enemy.twin .etile{border-color:var(--p)}
 .ecd{position:absolute;left:3px;top:2px;color:var(--enemyink);z-index:2}.ecd svg{width:13px;height:13px;display:block}
@@ -204,72 +185,12 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .d-r{--tc2:var(--r)}.d-b{--tc2:var(--b)}.d-g{--tc2:var(--g)}.d-y{--tc2:var(--y)}.d-p{--tc2:var(--p)}
 :root{--hs:54px}
 .dot{background:var(--tc);color:var(--on)}.dot svg{width:11px;height:11px}
-.tile{position:relative;width:var(--ts);height:var(--ts);flex:none;touch-action:none;cursor:grab;overflow:visible}
-.tile svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.tile.bd{position:absolute;pointer-events:none}
-.tile.bd svg.tb *{pointer-events:visiblePainted}
-.tile .ring{fill:none;stroke:transparent;stroke-width:0}
-.tile .fillb{fill:var(--tc)}
-.tile.k-p .fillb{fill:var(--panel);stroke:var(--tc);stroke-width:9}
-.tile.k-x .fillb{fill:var(--panel);stroke:var(--tc);stroke-width:8;stroke-dasharray:14 9}
-.tile .fillb2{fill:var(--tc2)}
-.tile.k-p .fillb2,.tile.k-x .fillb2{fill:none;stroke:var(--tc2);stroke-width:9}
-.tile.k-a.rar-1 .fillb,.tile.k-e.rar-1 .fillb{stroke:#35c3e6;stroke-width:9}
-.tile.k-a.rar-2 .fillb,.tile.k-e.rar-2 .fillb{stroke:#e056d8;stroke-width:9}
-.tile.rar-2 .fillb{filter:drop-shadow(0 0 6px #e056d8)}
-.tile.chg .ring,.tile.sandw .ring{stroke:var(--gold);stroke-width:16}
-.tile.added .ring{stroke:var(--gold);stroke-width:14;stroke-dasharray:4 14;stroke-linecap:round}
-.tile.sel .ring{stroke:var(--ink);stroke-width:24}
-.tile.offer .ring{stroke:var(--gold);stroke-width:26}
-.tile.sel{transform:translateY(-3px)}
-.tile.dragging{opacity:.35}
-.tile.rested{opacity:.3;filter:grayscale(.7)}
-.tile.fade{opacity:.4}
-.tile .num{fill:var(--on);font-weight:800;paint-order:stroke;stroke:rgba(0,0,0,.28);stroke-width:5;stroke-linejoin:round;font-variant-numeric:tabular-nums;font-family:inherit}
-.tile.k-p .num,.tile.k-x .num{fill:var(--tt);stroke:none}
-.tile.two .num{fill:#fff;stroke:rgba(0,0,0,.55)}
-.tile .symg{fill:var(--on);color:var(--on)}
-.tile.k-p .symg,.tile.k-x .symg{fill:var(--tt);color:var(--tt)}
-.tile.two .symg{fill:#fff;color:#fff}
-.tile .arw{fill:#fff;stroke:rgba(0,0,0,.55);stroke-width:3;stroke-linejoin:round}
-.tile .pip{fill:var(--tc);stroke:var(--panel);stroke-width:3}
-.tile .pg{fill:none;stroke:#fff;stroke-width:4.5;stroke-linecap:round}
-.tile .pip.pipx{fill:var(--panel);stroke:var(--tc);stroke-width:3.5;stroke-dasharray:6 4}
-.tile .pg.pgx{stroke:var(--tt)}
-.tile .pip.pipe{fill:#fff;stroke:rgba(0,0,0,.55)}
-.tile .pg.pge{stroke:var(--tc)}
-.tile .bar{stroke:var(--tc);stroke-width:7;opacity:.6;stroke-linecap:round}
-.tile .bar.barx{stroke-dasharray:10 8}
-.tile .badge rect{fill:var(--panel);stroke:var(--ink);stroke-width:2.5}
-.tile .badge text{fill:var(--ink);font-weight:800;font-family:inherit}
-.tile .gem.g1{fill:#35c3e6;stroke:#fff;stroke-width:2}.tile .gem.g2{fill:#e056d8;stroke:#ffe27a;stroke-width:2.5}
-.tile .stars{fill:var(--gold);font-weight:900;stroke:rgba(0,0,0,.55);stroke-width:2;paint-order:stroke}
-.tile .upm{fill:var(--gold);stroke:rgba(0,0,0,.5);stroke-width:2;paint-order:stroke}
-.tile .chip rect{fill:var(--gold)}.tile .chip text{fill:#1c1500;font-weight:900;font-family:inherit}
-.tile .brk{fill:none;stroke:var(--gold);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
-.tile .cn{fill:var(--tc)}.tile.k-p .cn,.tile.k-x .cn{fill:var(--panel)}
-.tile .bridge{fill:var(--tc)}.tile.k-a.rar-1 .bridge,.tile.k-e.rar-1 .bridge{fill:#35c3e6}.tile.k-a.rar-2 .bridge,.tile.k-e.rar-2 .bridge{fill:#e056d8}
-#fight.narrow .etile b{font-size:17px}#fight.narrow .atk{font-size:9px;right:2px}#fight.narrow .atk svg{width:7px;height:7px}#fight.narrow .etile i{font-size:7px}
-.ups{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}.tile.k-a .bridge,.tile.k-e .bridge{display:none}.arrow{font-size:22px;font-weight:800;color:var(--ink)}
 .cell.occ.bonus{background:transparent}.cell.occ .bb{display:none}
-.tile.two .num{fill:#fff;stroke:rgba(0,0,0,.8);stroke-width:9}
-.tile.two .symg{filter:drop-shadow(0 0 1.5px #000) drop-shadow(0 0 1px #000)}
-#fight.narrow .etile{justify-content:flex-end;padding-bottom:3px}#fight.narrow .etile b{font-size:15px}#fight.narrow .atk{top:1px;right:1px}
-#fight.narrow .etile i{position:absolute;left:2px;top:2px;font-size:6.5px}
-.tile.herot .ring{stroke:var(--p);stroke-width:26}
-.tile.tgtable .ring{stroke:var(--gold);stroke-width:18;stroke-dasharray:8 8}
-#fhero{flex:none;margin-top:3px}
-.herobtn{display:block;width:100%;min-height:34px;border-radius:10px;padding:4px 8px;text-align:left;font-size:12px;line-height:1.25;background:var(--panel);border:2px solid var(--p);color:var(--ink)}
-.herobtn b{color:var(--pt)}.herobtn i{font-style:normal;font-weight:800;color:var(--ok);float:right}.herobtn u{font-weight:800}
-.herobtn.on{background:color-mix(in srgb,var(--p) 18%,var(--panel))}.herobtn.target{background:color-mix(in srgb,var(--gold) 22%,var(--panel));border-color:var(--gold)}
-.herobtn.used,.herobtn:disabled{opacity:.55}
 .herorow{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid var(--line)}.herorow.on{background:color-mix(in srgb,var(--p) 12%,transparent)}
 .herorow .hi{flex:1;display:flex;flex-direction:column}.herorow .hi b{font-size:14px;color:var(--ink)}.herorow .hi small{font-size:11.5px;color:var(--muted)}
 .strip.relic{min-height:0;padding:1px 6px;font-size:10.5px;border-color:var(--gold)}.strip.relic .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ghost{position:fixed;z-index:80;pointer-events:none;transform:translate(-50%,-60%) scale(1.12);opacity:.92}
-#fhand .tile{--ts:var(--hs)}
 #fhand{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;justify-content:flex-start}
-.inv .tile{--ts:46px}.kit .tile{--ts:34px}.rew .tile{--ts:30px}.bagview .tile{--ts:46px}.pickc .tile{--ts:58px}.ups .tile{--ts:50px}
 .kit{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
 .kt{position:relative;display:inline-block}
 .lk{position:absolute;left:-4px;right:-4px;bottom:-9px;text-align:center;font-style:normal;font-size:8.5px;font-weight:800;color:var(--muted);white-space:nowrap}
@@ -306,12 +227,104 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 #card .cardtile{float:left;margin:0 12px 6px 0}#card .cardtile .tile{--ts:56px}
 @media (max-height:700px){
  :root{--hs:46px}
- #fhead{height:38px}.etile{height:38px}.etile b{font-size:20px}.pill{height:19px;font-size:12px}
+ #fhead{height:38px}
  #finfo{min-height:0;font-size:11px;padding:2px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
  .strip{min-height:0;padding:2px 6px;font-size:10.5px}.trickstrip{padding:1px 6px}
  #fbar{padding-top:4px}#fbar .btn{height:42px}.tab{height:28px}#ftabs{margin-top:0}#fhand{margin-top:3px}
  #bwrap{margin-top:3px}#rbar{margin-top:3px}
 }
+/* ===== chosen look: solid tiles, navy enemy slabs with bar-pills, gold clamps ===== */
+.hpbar{position:relative;height:22px;border-radius:11px;background:var(--panel2);border:2px solid var(--line);flex:1;min-width:90px}
+.hpbar i{position:absolute;left:0;top:0;bottom:0;border-radius:9px;background:var(--hpc);transition:width .5s}
+.hpbar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+.ttl small{display:block;font-weight:600;font-size:11px;color:var(--muted);margin-top:1px}
+#fhead .ttl{font-size:17px}
+.btn small{font-weight:600;opacity:.8;font-size:12px;margin-left:5px}
+#fatk{flex:2.4}#fclear{flex:1;font-size:15px}
+/* enemies */
+.enemy{display:flex;flex-direction:column;gap:4px;min-width:0;position:relative}
+.etile{position:relative;height:58px;border-radius:12px;background:var(--enemy);color:var(--enemyink);border:3px solid var(--enemy);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:4px}
+.etile i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;color:var(--enemyink);opacity:.85;white-space:nowrap;line-height:1.15}
+.etile b{font-size:25px;line-height:1;font-weight:800;margin-top:1px;color:var(--enemyink);font-variant-numeric:tabular-nums}
+.etile b.n3{font-size:20px;margin-top:4px}
+.etile .atk{position:absolute;left:0;right:0;justify-content:center;bottom:3px;font-size:10px;font-weight:800;color:var(--enemyink);opacity:.85;display:flex;align-items:center;gap:1px;line-height:1}
+.etile .atk svg{width:8px;height:8px;fill:var(--enemyink)}
+.etile .ecd{left:auto;top:auto;right:5px;bottom:3px}.etile .ecd svg{width:12px;height:12px}
+.enemy.boss .etile{border-color:var(--bad)}
+.enemy.twin .etile{border-color:var(--p)}
+.enemy.kill .etile{border-style:solid;border-color:var(--ok)}
+.enemy.dead .etile{background:var(--panel2);border-color:var(--line);opacity:.6}.enemy.dead .etile b,.enemy.dead .etile i,.enemy.dead .atk{color:var(--muted)}
+.enemy.hit .etile{animation:lunge .4s}
+.pill{position:relative;height:22px;border-radius:11px;background:var(--panel2);border:2px solid var(--line)}
+.pill u{position:absolute;left:0;top:0;bottom:0;border-radius:9px;background:var(--pshort);text-decoration:none;transition:width .3s}
+.pill span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted)}
+.enemy.has .pill span{color:var(--ink)}
+.enemy.kill .pill{border-color:var(--ok)}.enemy.kill .pill u{background:var(--pok)}
+.chk{position:absolute;top:-8px;right:-7px;width:19px;height:19px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;border:2px solid var(--bg);z-index:5}
+.chk svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+#fight.narrow .etile i{font-size:7px;letter-spacing:.03em}#fight.narrow .etile b{font-size:21px}#fight.narrow .etile b.n3{font-size:16px}
+#fight.narrow .pill span,#fight.narrow .hpbar span{font-size:11px}#fight.narrow .etile .atk{font-size:9px}
+/* board */
+#fen,#fboard{gap:var(--gp,8px)}
+#fboard{gap:var(--gp,8px)}
+.cell.tgt,.cell.occ.tgt{border:2px solid var(--gold);background:color-mix(in srgb,var(--gold) 34%,var(--cellbg))}
+.cell.occ.tgt{background:color-mix(in srgb,var(--gold) 30%,transparent)}
+.cell .pv{font-size:12px}
+.clamp{position:absolute;z-index:6;pointer-events:none;background:var(--gold);box-shadow:0 0 0 1.5px var(--accedge);border-radius:4px}
+.slot{flex:none;border-radius:12px;border:2px dashed var(--line);background:var(--cellbg)}
+/* tiles */
+.tile{--u:46px;--tg:6px;--gc:calc(var(--u) * .097);--tf:var(--tc);--ti:#fff;--gl:#fff;--edgec:color-mix(in srgb,var(--tc) 72%,#000);--bbg:rgba(255,255,255,.27);--bink:#fff;position:relative;flex:none;touch-action:none;cursor:grab;overflow:visible}
+.tile.k-p,.tile.k-x{--ti:var(--tt);--gl:var(--tc);--edgec:var(--shadow);--bbg:color-mix(in srgb,var(--tc) 16%,transparent);--bink:var(--tt)}
+.tile>svg.tb{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.tile.bd{position:absolute;pointer-events:none}
+.tile.bd svg.tb *{pointer-events:visiblePainted}
+.tile .ring{fill:none;stroke:transparent;stroke-width:0}
+.tile .edge{fill:var(--edgec)}
+.tile .fillb{fill:var(--tc)}
+.tile .fillb2{fill:var(--tc2)}
+.tile .inner{fill:var(--panel)}
+.tile .dash{fill:none;stroke:var(--panel);stroke-width:5;stroke-dasharray:14 10}
+.tile.rar-1 .ring{stroke:#35c3e6;stroke-width:12}
+.tile.rar-2 .ring{stroke:#e056d8;stroke-width:12;filter:drop-shadow(0 0 4px #e056d8)}
+.tile.added .ring{stroke:var(--gold);stroke-width:14;stroke-dasharray:4 14;stroke-linecap:round}
+.tile.sel .ring{stroke:var(--ink);stroke-width:24;stroke-dasharray:none}
+.tile.offer .ring{stroke:var(--gold);stroke-width:26;stroke-dasharray:none}
+.tile.sel{transform:translateY(-3px)}
+.tile.dragging{opacity:.35}
+.tile.rested{opacity:.3;filter:grayscale(.7)}
+.tile.fade{opacity:.4}
+.tile.herot .ring{stroke:var(--p);stroke-width:26}
+.tile.tgtable .ring{stroke:var(--gold);stroke-width:18;stroke-dasharray:8 8}
+.tf{position:absolute;inset:0;pointer-events:none;color:var(--ti)}
+.tile .fb{position:absolute;display:flex;align-items:center;justify-content:center}
+.tile .glyph{position:absolute;color:var(--gl);overflow:visible}
+.glyph rect.f{opacity:.25}
+.tile .num{font-size:calc(var(--u) * .43);font-weight:800;line-height:1;margin-top:calc(var(--u) * -.06);font-variant-numeric:tabular-nums;position:relative}
+.tile .num.n3{font-size:calc(var(--u) * .32);margin-top:calc(var(--u) * -.02)}
+.tile.k-p .num,.tile.k-x .num{font-size:calc(var(--u) * .37);margin-top:calc(var(--u) * .03)}
+.tile.k-p .num.n3,.tile.k-x .num.n3{font-size:calc(var(--u) * .3)}
+.tile.two .num,.tile.two .nm{text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.tile .base{position:absolute;right:calc(var(--u) * .075);top:calc(var(--u) * .075);min-width:max(12px,calc(var(--u) * .22));height:max(12px,calc(var(--u) * .22));padding:0 max(3px,calc(var(--u) * .055));border-radius:8px;background:var(--bbg);color:var(--bink);font-size:max(8.5px,calc(var(--u) * .15));font-weight:800;line-height:max(12px,calc(var(--u) * .22));text-align:center;font-variant-numeric:tabular-nums;font-style:normal}
+.tile .nm{position:absolute;left:0;right:0;bottom:calc(var(--u) * .07);text-align:center;font-style:normal;font-size:max(6.5px,calc(var(--u) * .13));font-weight:800;letter-spacing:.05em;white-space:nowrap;line-height:1.1}
+.tile .nm.st{font-size:max(9px,calc(var(--u) * .18));letter-spacing:0;color:#ffd04a}
+.tile.k-p .nm.st,.tile.k-x .nm.st{color:var(--gold)}
+.tile .chip{position:absolute;left:50%;bottom:calc(var(--u) * .06);transform:translateX(-50%);background:var(--chipbg);color:var(--chipink);border:1.5px solid var(--gold);border-radius:9px;padding:0 max(4px,calc(var(--u) * .09));height:max(13px,calc(var(--u) * .235));line-height:max(10px,calc(var(--u) * .18));font-size:max(9.5px,calc(var(--u) * .165));font-weight:800;font-style:normal;white-space:nowrap}
+.tile .upm{position:absolute;right:calc(var(--u) * .07);bottom:calc(var(--u) * .06);font-style:normal;font-size:max(7px,calc(var(--u) * .13));color:#ffd04a;line-height:1}
+.tile.k-p .upm,.tile.k-x .upm{color:var(--gold)}
+.tile .capm{position:absolute;left:50%;top:-8px;transform:translateX(-50%);background:var(--chipbg);color:var(--chipink);border-radius:8px;padding:0 5px;height:14px;line-height:14px;font-size:9.5px;font-weight:800;font-style:normal}
+.ups{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}.arrow{font-size:22px;font-weight:800;color:var(--ink)}
+/* hero row */
+#fhero{display:flex;align-items:center;gap:8px;margin-top:8px;flex:none}
+#fhero:empty{display:none}
+#fhero .heart{flex:none;width:20px;height:20px;fill:var(--r)}
+.abil{flex:none;height:36px;padding:0 12px;border-radius:12px;font-size:14px;display:flex;align-items:center;gap:6px;background:var(--panel);border:2px solid var(--line);color:var(--ink);box-shadow:0 2px 0 var(--shadow)}
+.abil b{font-weight:800}.abil small{font-size:10.5px;color:var(--muted);font-weight:700}
+.abil.target{border-color:var(--gold)}.abil.on{border-color:var(--ok)}
+.abil.used,.abil:disabled{opacity:.55}
+.mini{border-radius:12px}
+.hbtn{box-shadow:0 2px 0 var(--shadow)}span.hbtn{box-shadow:none;background:none;border:0}
+@media (max-height:760px){.etile{height:56px}}
+@media (max-height:700px){.etile{height:52px}.etile b{font-size:20px}.etile b.n3{font-size:17px;margin-top:2px}.pill{height:19px}.pill span{font-size:11.5px}.hpbar{height:20px}.abil{height:32px}#fhero{margin-top:4px}}
 </style>
 </head>
 <body>
@@ -1070,89 +1083,95 @@ function addInv(e) {
 function invTile(e) { return { c: 'x', u: 'x', k: e.k, d: e.d, n: e.n + (e.st || 0), sh: e.sh || 'o', st: e.st || 0, rar: e.rar || 0 }; }
 function invSorted() { return store.inv.slice().sort(function (a, b) { return (b.rar || 0) - (a.rar || 0) || (a.k < b.k ? -1 : a.k > b.k ? 1 : 0) || b.n - a.n; }); }
 
-/* ---------- tile faces: everything a tile does is drawn on its edges ---------- */
-var CU = 100, GU = 9, uidc = 0;
+/* ---------- tile faces: solid rounded tile, big number, small name, reach glyph top-left ---------- */
+var CU = 100, uidc = 0;
 var SYM = { r: '<circle cx="5" cy="5" r="4"/>', b: '<path d="M5 .8 L9.4 9 L.6 9Z"/>', g: '<rect x="1.2" y="1.2" width="7.6" height="7.6" rx="1"/>', y: '<path d="M5 .5 L9.5 5 L5 9.5 L.5 5Z"/>', p: '<path d="M2.6 1 H7.4 L9.6 5 L7.4 9 H2.6 L.4 5Z"/>', x: '<circle cx="5" cy="5" r="3.3" fill="none" stroke="currentColor" stroke-width="1.6"/>' };
-function symG(c, x, y, s, cls) { return '<g class="' + (cls || 'symg') + '" transform="translate(' + x + ' ' + y + ') scale(' + s + ')">' + SYM[c] + '</g>'; }
-function arrow(cx, cy, rot) { return '<polygon class="arw" points="0,-13 15,11 -15,11" transform="translate(' + cx + ' ' + cy + ') rotate(' + rot + ')"/>'; }
-function pip(cx, cy, kind) {
-  var g = kind === '+' ? 'M-6 0H6M0 -6V6' : kind === 'x' ? 'M-5 -5L5 5M5 -5L-5 5' : 'M-6 -3H6M-6 3H6';
-  return '<g transform="translate(' + cx + ' ' + cy + ')"><circle class="pip' + (kind === 'x' ? ' pipx' : kind === '=' ? ' pipe' : '') + '" r="13"/><path class="pg' + (kind === 'x' ? ' pgx' : kind === '=' ? ' pge' : '') + '" d="' + g + '"/></g>';
+var NAME_A = { '^': 'STRIKE', '<>': 'FORK', '<^>': 'TRIDENT', '<': 'L JAB', '>': 'R JAB', '<^': 'L STRIKE', '^>': 'R STRIKE' };
+function isRectShape(t) { var d = shapeDims(t); return cellsOf(t).length === d[0] * d[1]; }
+/* short name shown at the bottom of rectangular tiles */
+function shortName(t) {
+  var n = cellsOf(t).length, d = t.d, line = d === 'R' ? 'ROW' : d === 'C' ? 'COL' : d === 'B' ? 'CROSS' : '';
+  if (t.k === 'a') return n === 1 ? (NAME_A[d] || 'STRIKE') : n === 2 ? 'BAR' : t.sh === 'sq' ? 'BLOCK' : 'LINE';
+  if (t.k === 'p') return line || (d === 'udlr' ? 'PLUS' : 'BOOST');
+  if (t.k === 'x') return line || (t.n === 2 ? 'DOUBLE' : t.n === 3 ? 'TRIPLE' : 'MULTI');
+  return 'ECHO';
 }
-function marksSvg(t, VW, VH) {
-  var cells = cellsOf(t), set = {}, out = '';
-  cells.forEach(function (p) { set[p[0] + ',' + p[1]] = 1; });
-  var X = function (c) { return c * (CU + GU); }, Y = function (r) { return r * (CU + GU); };
+/* reach glyph: (w+2) x (h+2) cells, the tile's own cells outlined, reached cells lit, the rest faint; a copy shows the copied cell as a ring */
+function glyphSVG(t, style) {
+  var cells = cellsOf(t), dm = shapeDims(t), H = dm[0] + 2, W = dm[1] + 2, own = {}, lit = {}, ring = {};
+  cells.forEach(function (p) { own[(p[0] + 1) + ',' + (p[1] + 1)] = 1; });
+  var L = function (r, c, to) { if (r >= 0 && r < H && c >= 0 && c < W && !own[r + ',' + c]) to[r + ',' + c] = 1; };
+  var dr = { u: [-1, 0], d: [1, 0], l: [0, -1], r: [0, 1] };
   if (t.k === 'a' || t.k === 'e') {
     var lanes = t.k === 'e' ? [0] : laneOffsets(t.d);
-    cells.forEach(function (p) {
-      if (set[(p[0] - 1) + ',' + p[1]]) return;
-      var x = X(p[1]), y = Y(p[0]);
-      lanes.forEach(function (o) { out += o === 0 ? arrow(x + 50, y + 15, 0) : o < 0 ? arrow(x + 17, y + 20, -42) : arrow(x + 83, y + 20, 42); });
-    });
+    cells.forEach(function (p) { var r = p[0] + 1, c = p[1] + 1; if (own[(r - 1) + ',' + c]) return; lanes.forEach(function (o) { L(r - 1, c + o, lit); }); });
   }
   if (t.k === 'p' || t.k === 'x') {
-    var sym = t.k === 'p' ? '+' : 'x', cl = t.k === 'p' ? 'bar' : 'bar barx';
-    if (/[RCB]/.test(t.d)) {
-      var rows = {}, cs = {}; cells.forEach(function (p) { rows[p[0]] = 1; cs[p[1]] = 1; });
-      if (t.d === 'R' || t.d === 'B') Object.keys(rows).forEach(function (r) { var y = Y(+r) + 50; out += '<line class="' + cl + '" x1="14" y1="' + y + '" x2="' + (VW - 14) + '" y2="' + y + '"/>' + pip(14, y, sym) + pip(VW - 14, y, sym); });
-      if (t.d === 'C' || t.d === 'B') Object.keys(cs).forEach(function (c) { var x = X(+c) + 50; out += '<line class="' + cl + '" x1="' + x + '" y1="14" x2="' + x + '" y2="' + (VH - 14) + '"/>' + pip(x, 14, sym) + pip(x, VH - 14, sym); });
-    } else cells.forEach(function (p) {
-      t.d.split('').forEach(function (dc) {
-        var nr = p[0] + (dc === 'u' ? -1 : dc === 'd' ? 1 : 0), nc = p[1] + (dc === 'l' ? -1 : dc === 'r' ? 1 : 0);
-        if (set[nr + ',' + nc]) return;
-        var x = X(p[1]), y = Y(p[0]);
-        out += dc === 'u' ? pip(x + 50, y + 14, sym) : dc === 'd' ? pip(x + 50, y + 86, sym) : dc === 'l' ? pip(x + 14, y + 50, sym) : pip(x + 86, y + 50, sym);
-      });
+    cells.forEach(function (p) {
+      var r = p[0] + 1, c = p[1] + 1, i;
+      if (/[RCB]/.test(t.d)) { if (t.d !== 'C') for (i = 0; i < W; i++) L(r, i, lit); if (t.d !== 'R') for (i = 0; i < H; i++) L(i, c, lit); }
+      else t.d.split('').forEach(function (dc) { L(r + dr[dc][0], c + dr[dc][1], lit); });
     });
   }
-  if (t.k === 'e') {
-    var x0 = X(cells[0][1]), y0 = Y(cells[0][0]);
-    out += t.d === 'u' ? pip(x0 + 50, y0 + 14, '=') : t.d === 'd' ? pip(x0 + 50, y0 + 86, '=') : t.d === 'l' ? pip(x0 + 14, y0 + 50, '=') : pip(x0 + 86, y0 + 50, '=');
+  if (t.k === 'e') cells.forEach(function (p) { L(p[0] + 1 + dr[t.d][0], p[1] + 1 + dr[t.d][1], ring); });
+  var h = '<svg class="glyph" viewBox="0 0 ' + W * 4 + ' ' + H * 4 + '" style="' + style + ';width:calc(var(--gc) * ' + W + ');height:calc(var(--gc) * ' + H + ')" aria-hidden="true">';
+  for (var r = 0; r < H; r++) for (var c = 0; c < W; c++) {
+    var key = r + ',' + c;
+    if (own[key]) h += '<rect class="o" x="' + (c * 4 + .9) + '" y="' + (r * 4 + .9) + '" width="2.2" height="2.2" rx=".7" fill="none" stroke="currentColor" stroke-width="1"/>';
+    else if (ring[key]) h += '<circle cx="' + (c * 4 + 2) + '" cy="' + (r * 4 + 2) + '" r="1.35" fill="none" stroke="currentColor" stroke-width=".9"/>';
+    else h += '<rect class="' + (lit[key] ? 'l' : 'f') + '" x="' + (c * 4 + .4) + '" y="' + (r * 4 + .4) + '" width="3.2" height="3.2" rx=".8" fill="currentColor"/>';
   }
-  return out;
+  return h + '</svg>';
+}
+/* the union of the tile's cells (and the links between them) as rounded rects, inset by ins */
+function shapeRects(cells, set, ins, gu) {
+  var s = '', P = CU + gu, w = CU - 2 * ins, rx = Math.max(6, 17 - ins);
+  var has = function (r, c) { return !!set[r + ',' + c]; };
+  cells.forEach(function (p) {
+    var x = p[1] * P, y = p[0] * P, rt = has(p[0], p[1] + 1), dn = has(p[0] + 1, p[1]);
+    s += '<rect x="' + (x + ins) + '" y="' + (y + ins) + '" width="' + w + '" height="' + w + '" rx="' + rx + '"/>';
+    if (rt) s += '<rect x="' + (x + 80) + '" y="' + (y + ins) + '" width="' + (40 + gu) + '" height="' + w + '"/>';
+    if (dn) s += '<rect x="' + (x + ins) + '" y="' + (y + 80) + '" width="' + w + '" height="' + (40 + gu) + '"/>';
+    if (rt && dn && has(p[0] + 1, p[1] + 1)) s += '<rect x="' + (x + 80) + '" y="' + (y + 80) + '" width="' + (40 + gu) + '" height="' + (40 + gu) + '"/>';
+  });
+  return s;
 }
 function tileName2(t) { return COLORS[t.c] + ' ' + tileName(t) + ' ' + tileLabel(t); }
-/* o: board (true = real size on the board, ts = cell px, gp = gap px), shown (live value), br (brackets), sx (x2 / x4 chip), cls, attrs */
+/* o: board (true = real size on the board, ts = cell px, gp = gap px), shown (live value), sx (sandwich chip), cap (max mark), cls, attrs */
 function tileHTML(t, o) {
   o = o || {};
-  var cells = cellsOf(t), dims = shapeDims(t), h = dims[0], w = dims[1];
-  var VW = w * CU + (w - 1) * GU, VH = h * CU + (h - 1) * GU, uid = ++uidc, k = t.k;
+  var cells = cellsOf(t), dims = shapeDims(t), h = dims[0], w = dims[1], k = t.k, uid = ++uidc, multi = cells.length > 1, board = !!o.board;
+  var u = o.ts || 46, cellPx = u;
+  if (!board && multi) { var nmx = Math.max(w, h); cellPx = Math.min(u, Math.floor((300 - (nmx - 1) * 6) / nmx)); }
+  var gp = board ? (o.gp || 8) : Math.max(3, Math.round(cellPx * .11)), gu = gp / cellPx * 100;
+  var VW = w * CU + (w - 1) * gu, VH = h * CU + (h - 1) * gu, PX = w * cellPx + (w - 1) * gp, PY = h * cellPx + (h - 1) * gp;
   var set = {}; cells.forEach(function (p) { set[p[0] + ',' + p[1]] = 1; });
-  var rects = '', conn = '';
-  cells.forEach(function (p) {
-    var x = p[1] * (CU + GU), y = p[0] * (CU + GU);
-    rects += '<rect x="' + x + '" y="' + y + '" width="100" height="100" rx="17"/>';
-    if (set[p[0] + ',' + (p[1] + 1)]) { rects += '<rect x="' + (x + 80) + '" y="' + y + '" width="' + (GU + 40) + '" height="100"/>'; conn += '<rect class="cn" x="' + (x + 92) + '" y="' + (y + 5) + '" width="25" height="90"/><rect class="bridge" x="' + (x + 95) + '" y="' + (y - 4.5) + '" width="19" height="9"/><rect class="bridge" x="' + (x + 95) + '" y="' + (y + 95.5) + '" width="19" height="9"/>'; }
-    if (set[(p[0] + 1) + ',' + p[1]]) { rects += '<rect x="' + x + '" y="' + (y + 80) + '" width="100" height="' + (GU + 40) + '"/>'; conn += '<rect class="cn" x="' + (x + 5) + '" y="' + (y + 92) + '" width="90" height="25"/><rect class="bridge" x="' + (x - 4.5) + '" y="' + (y + 95) + '" width="9" height="19"/><rect class="bridge" x="' + (x + 95.5) + '" y="' + (y + 95) + '" width="9" height="19"/>'; }
-  });
-  var body = '<defs><g id="s' + uid + '">' + rects + '</g>' + (t.c2 ? '<clipPath id="c' + uid + '"><polygon points="' + VW + ',-5 ' + VW + ',' + VH + ' -5,' + VH + '"/></clipPath>' : '') + '</defs>' +
-    '<use href="#s' + uid + '" class="ring"/><use href="#s' + uid + '" class="fillb"/>' + (t.c2 ? '<g clip-path="url(#c' + uid + ')"><use href="#s' + uid + '" class="fillb2"/></g>' : '') + (conn ? '<g class="conng">' + conn + '</g>' : '') + marksSvg(t, VW, VH);
-  if (o.br) o.br.forEach(function (b) {
-    body += b === 'R' ? '<path class="brk" d="M' + (VW - 16) + ' 12 H' + (VW - 6) + ' V' + (VH - 12) + ' H' + (VW - 16) + '"/>' : b === 'L' ? '<path class="brk" d="M16 12 H6 V' + (VH - 12) + ' H16"/>' : b === 'T' ? '<path class="brk" d="M12 16 V6 H' + (VW - 12) + ' V16"/>' : '<path class="brk" d="M12 ' + (VH - 16) + ' V' + (VH - 6) + ' H' + (VW - 12) + ' V' + (VH - 16) + '"/>';
-  });
-  /* face layer (number, colour symbols, badges) */
-  var multi = cells.length > 1, trueShape = o.board || multi, cellPx = o.ts || 46;
-  if (!o.board && multi) { var nmx = Math.max(w, h); cellPx = Math.min(cellPx, Math.floor((200 - (nmx - 1) * 8) / nmx)); }
-  var FW = trueShape ? VW : 100, FH = trueShape ? VH : 100, nx = FW / 2, ny = 68;
-  if (trueShape) { var cr = 0, cc = 0; cells.forEach(function (p) { cr += p[0]; cc += p[1]; }); cr /= cells.length; cc /= cells.length; var bd = 1e9; cells.forEach(function (p) { var dd = (p[0] - cr) * (p[0] - cr) + (p[1] - cc) * (p[1] - cc); if (dd < bd) { bd = dd; nx = p[1] * (CU + GU) + 50; ny = p[0] * (CU + GU) + 68; } }); }
-  var num = tileLabel(t, o.shown), fs = num.length > 2 ? 36 : num.length > 1 ? 44 : 50;
-  var face = '<text class="num" x="' + nx + '" y="' + ny + '" text-anchor="middle" font-size="' + fs + '">' + num + '</text>';
-  var sx = FW - 22, sy = FH - 22;
-  face += symG(t.c, sx - 5, sy - 5, 1.6) + (t.c2 ? symG(t.c2, sx - 30, sy - 5, 1.6) : '');
-  var base = t.n; if (o.shown !== undefined && o.shown !== base && !(t.k === 'e' && base === 0)) face += '<g class="badge"><rect x="4" y="' + (FH - 31) + '" width="' + (String(base).length > 1 ? 40 : 30) + '" height="27" rx="8"/><text x="' + (String(base).length > 1 ? 24 : 19) + '" y="' + (FH - 11) + '" text-anchor="middle" font-size="22">' + base + '</text></g>';
-  if (t.rar) face += '<path class="gem g' + t.rar + '" transform="translate(' + (o.board ? 10 : 6) + ' ' + (o.board ? 34 : 32) + ')" d="M10 0 L20 9 L10 22 L0 9Z"/>';
-  if (t.st) face += '<text class="stars" x="' + (FW / 2) + '" y="' + (FH - 3) + '" text-anchor="middle" font-size="19">' + new Array(t.st + 1).join('★') + '</text>';
-  if (t.up) face += '<text class="upm" x="' + (FW - 8) + '" y="38" text-anchor="end" font-size="20">▲</text>';
-  if (o.cap) face += '<g class="chip"><rect x="4" y="-12" width="46" height="24" rx="11"/><text x="27" y="6" text-anchor="middle" font-size="19">max</text></g>';
-  if (o.sx) face += '<g class="chip"><rect x="' + (FW / 2 - 24) + '" y="-12" width="48" height="26" rx="12"/><text x="' + (FW / 2) + '" y="7" text-anchor="middle" font-size="22">×' + o.sx + '</text></g>';
-  var cls = 'tile k-' + k + ' c-' + t.c + (t.c2 ? ' two d-' + t.c2 : '') + (t.rar ? ' rar-' + t.rar : '') + (t.added ? ' added' : '') + (t.rest && !o.noRest ? ' rested' : '') + (o.sx ? ' sandw' : '') + (o.cls ? ' ' + o.cls : '') + (o.board ? ' bd' : ' cp');
-  var style = '';
-  if (o.board) { var gp = o.gp || 6; style = '--ts:' + o.ts + 'px;width:' + (w * o.ts + (w - 1) * gp) + 'px;height:' + (h * o.ts + (h - 1) * gp) + 'px;left:' + (o.left || 0) + 'px;top:' + (o.top || 0) + 'px;'; }
-  else if (multi) style = 'width:' + Math.round(VW * cellPx / 100) + 'px;height:' + Math.round(VH * cellPx / 100) + 'px;';
-  else style = o.ts ? '--ts:' + o.ts + 'px;' : '';
+  var outline = k === 'p' || k === 'x', sid = '#s' + uid;
+  var defs = '<g id="s' + uid + '">' + shapeRects(cells, set, 0, gu) + '</g>' + (outline ? '<g id="b' + uid + '">' + shapeRects(cells, set, 5, gu) + '</g>' : '') + (k === 'x' ? '<g id="d' + uid + '">' + shapeRects(cells, set, 2.5, gu) + '</g>' : '') +
+    (t.c2 ? '<clipPath id="c' + uid + '"><polygon points="' + VW + ',-5 ' + VW + ',' + VH + ' -5,' + VH + '"/></clipPath>' : '');
+  var body = '<defs>' + defs + '</defs><use href="' + sid + '" class="ring"/><use href="' + sid + '" class="edge" y="3.5"/><use href="' + sid + '" class="fillb"/>' +
+    (t.c2 ? '<g clip-path="url(#c' + uid + ')"><use href="' + sid + '" class="fillb2"/></g>' : '') +
+    (outline ? '<use href="#b' + uid + '" class="inner"/>' : '') + (k === 'x' ? '<use href="#d' + uid + '" class="dash"/>' : '');
+  /* face box: the whole bounding box of a rectangular tile, otherwise the cell nearest the centre */
+  var rect = isRectShape(t), fx = 0, fy = 0, fw = w, fh = h;
+  if (!rect) {
+    var cr = 0, cc = 0; cells.forEach(function (p) { cr += p[0]; cc += p[1]; }); cr /= cells.length; cc /= cells.length;
+    var bd = 1e9; cells.forEach(function (p) { var dd = (p[0] - cr) * (p[0] - cr) + (p[1] - cc) * (p[1] - cc); if (dd < bd) { bd = dd; fy = p[0]; fx = p[1]; } }); fw = fh = 1;
+  }
+  var box = 'left:calc((var(--u) + var(--tg)) * ' + fx + ');top:calc((var(--u) + var(--tg)) * ' + fy + ');width:calc(var(--u) * ' + fw + ' + var(--tg) * ' + (fw - 1) + ');height:calc(var(--u) * ' + fh + ' + var(--tg) * ' + (fh - 1) + ')';
+  var num = tileLabel(t, o.shown), face = '<b class="num' + (num.length > 2 ? ' n3' : '') + '">' + num + '</b>';
+  var base = t.n;
+  if (o.shown !== undefined && o.shown !== base && !(k === 'e' && base === 0)) face += '<em class="base">' + (k === 'p' ? '+' : '') + base + '</em>';
+  if (o.sx) face += '<em class="chip">×' + o.sx + '</em>';
+  else if (t.st) face += '<i class="nm st">' + new Array(t.st + 1).join('★') + '</i>';
+  else if (rect && cellPx >= 48) face += '<i class="nm">' + shortName(t) + '</i>';
+  if (t.up) face += '<em class="upm">▲</em>';
+  if (o.cap) face += '<em class="capm">max</em>';
+  var c0 = cells[0], gstyle = 'left:calc((var(--u) + var(--tg)) * ' + c0[1] + ' + var(--u) * .075);top:calc((var(--u) + var(--tg)) * ' + c0[0] + ' + var(--u) * .075)';
+  var cls = 'tile k-' + k + ' c-' + t.c + (t.c2 ? ' two d-' + t.c2 : '') + (t.rar ? ' rar-' + t.rar : '') + (t.added ? ' added' : '') + (t.rest && !o.noRest ? ' rested' : '') + (o.sx ? ' sandw' : '') + (o.cls ? ' ' + o.cls : '') + (board ? ' bd' : ' cp');
+  var style = '--u:' + cellPx + 'px;--tg:' + gp + 'px;width:' + PX + 'px;height:' + PY + 'px;' + (board ? 'left:' + (o.left || 0) + 'px;top:' + (o.top || 0) + 'px;' : '');
   return '<div class="' + cls + '" style="' + style + '" ' + (o.attrs || '') + ' aria-label="' + tileName2(t) + '">' +
-    '<svg class="tb" viewBox="0 0 ' + VW + ' ' + VH + '" preserveAspectRatio="' + (trueShape ? 'none' : 'xMidYMid meet') + '">' + body + '</svg><svg class="tf" viewBox="0 0 ' + FW + ' ' + FH + '" preserveAspectRatio="none">' + face + '</svg></div>';
+    '<svg class="tb" viewBox="0 0 ' + VW + ' ' + VH + '">' + body + '</svg><div class="tf">' + glyphSVG(t, gstyle) + '<div class="fb" style="' + box + '">' + face + '</div></div></div>';
 }
 function HSZ() { return (window.innerHeight || 844) < 700 ? 46 : 54; }
 function dotHTML(c) { return '<span class="dot c-' + c + '"><svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">' + SYM[c] + '</svg></span>'; }
@@ -1169,14 +1188,16 @@ var NODEICON = {
 /* ---------- hero, relics, puzzles (UI helpers) ---------- */
 function heroTargeting() { var h = S.fs && S.fs.hero; return !!(h && h.armed && HERO_BY_ID[h.id].target && !h.target); }
 function eo(extra) { return Object.assign(extra || {}, heroOpts(S.fs)); }
+var HEART = '<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/></svg>';
 function heroHTML(fs) {
   var hs = fs.hero; if (S.puz || !hs || !hs.id) return '';
-  var H = HERO_BY_ID[hs.id], ready = hs.uses < hs.max, cls = 'herobtn', txt;
-  if (hs.armed) { if (H.target && !hs.target) { cls += ' target'; txt = '<b>' + H.ab + '</b> Tap a placed tile. <u>Cancel</u>'; } else { cls += ' on'; txt = '<b>' + H.ab + '</b> is on' + (hs.target ? ' for the marked tile' : '') + '. <u>Undo</u>'; } }
-  else if (ready) txt = '<b>' + H.ab + '</b> ' + H.line + ' <i>Ready' + (hs.max > 1 ? ' (' + (hs.max - hs.uses) + ' left)' : '') + '</i>';
-  else { cls += ' used'; txt = '<b>' + H.ab + '</b> used this fight'; }
-  return '<button class="' + cls + '" data-act="herobtn" data-card="hr:' + hs.id + '"' + (!ready && !hs.armed ? ' disabled' : '') + '>' + txt + '</button>';
+  var H = HERO_BY_ID[hs.id], ready = hs.uses < hs.max, cls = 'abil', sm;
+  if (hs.armed) { if (H.target && !hs.target) { cls += ' target'; sm = 'tap a tile · cancel'; } else { cls += ' on'; sm = (hs.target ? 'aimed' : 'on') + ' · undo'; } }
+  else if (ready) sm = (hs.max - hs.uses) + '×';
+  else { cls += ' used'; sm = 'used'; }
+  return '<button class="' + cls + '" data-act="herobtn" data-card="hr:' + hs.id + '" title="' + H.line + '"' + (!ready && !hs.armed ? ' disabled' : '') + '><b>' + H.ab + '</b><small>' + sm + '</small></button>';
 }
+function heroRowHTML(run, fs) { return HEART + hpBar(run.hp, run.maxHp) + heroHTML(fs); }
 function heroPanelHTML() {
   var h = '<h2>Hero</h2><div class="panel"><div class="ctext" style="margin-bottom:4px">One hero per run. Its ability is a button on the fight screen, once per fight.</div>';
   HEROES.forEach(function (H) {
@@ -1254,7 +1275,7 @@ function renderHome() {
   h += '<h2>Team</h2><div class="panel"><div class="chips">';
   COLOR_IDS.forEach(function (c) { var u = UNIT_BY_ID[store.team[c]]; h += '<span class="uchip">' + dotHTML(c) + u.name + ' L' + store.units[u.id].l + '</span>'; });
   h += '</div><div class="linkrow"><button class="btn sm" data-act="team">Edit team and levels</button></div></div>';
-  h += '<h2>Colourless inventory</h2><div class="panel"><div class="ctext" style="margin-bottom:6px">Tap to put up to ' + CONFIG.maxColourless + ' in your bag. A gem marks Rare and Epic. Hold a tile for details.</div>' + invHTML() + '</div>';
+  h += '<h2>Colourless inventory</h2><div class="panel"><div class="ctext" style="margin-bottom:6px">Tap to put up to ' + CONFIG.maxColourless + ' in your bag. A cyan edge marks Rare, a magenta one Epic. Hold a tile for details.</div>' + invHTML() + '</div>';
   h += '<div class="linkrow"><button class="btn" data-act="help">How to play</button><button class="btn" data-act="settings">Settings and test</button></div>';
   $('#home').innerHTML = h;
 }
@@ -1374,30 +1395,58 @@ function startFightUI(i) {
 }
 function firstTab() { var ids = COLOR_IDS.concat(['x']); for (var i = 0; i < ids.length; i++) if (handOf(ids[i]).length) return ids[i]; return 'r'; }
 function handOf(c, rested) { return S.run.bag.filter(function (t) { return t.c === c && !!t.rest === !!rested && S.board.indexOf(t.id) < 0; }); }
+var GAP = 8;
 function cellSize(cols, rows) {
   var W = Math.min(document.documentElement.clientWidth || 390, 440) - 24, H = window.innerHeight || 844;
-  var byW = Math.floor((W - 6 * (cols - 1)) / cols), byH = Math.floor((H - 330 - 6 * (rows - 1)) / rows);
+  var byW = Math.floor((W - GAP * (cols - 1)) / cols), byH = Math.floor((H - 330 - GAP * (rows - 1)) / rows);
   return Math.max(40, Math.min(76, byW, byH));
 }
+/* sandwich clamps: one slim gold capsule centred in the gap on each side of the sandwiched tile, on the bracketed line */
+function clampsHTML(res, cols, cs, gp) {
+  var out = '', seen = {}, byA = {}, P = cs + gp, th = Math.max(4, gp - 2), len = Math.round(cs * .42);
+  res.G.forEach(function (g) { byA[g.a] = g; });
+  var anchor = function (q) { var gi = res.cellG[q]; return gi === undefined ? -1 : res.G[gi].a; };
+  var add = function (cx, cy, vert) {
+    var key = (vert ? 'v' : 'h') + Math.round(cx) + ',' + Math.round(cy); if (seen[key]) return; seen[key] = 1;
+    var w = vert ? th : len, h = vert ? len : th;
+    out += '<span class="clamp ' + (vert ? 'cv' : 'ch') + '" style="left:' + (cx - w / 2) + 'px;top:' + (cy - h / 2) + 'px;width:' + w + 'px;height:' + h + 'px"></span>';
+  };
+  res.marks.forEach(function (m) {
+    var g = byA[m.mid]; if (!g) return;
+    if (m.h) {
+      for (var i = 0; i < g.rows.length; i++) {
+        var r = g.rows[i], qs = g.cells.filter(function (q) { return ((q / cols) | 0) === r; }).map(function (q) { return q % cols; }), mn = Math.min.apply(null, qs), mx = Math.max.apply(null, qs);
+        if (mn > 0 && mx < cols - 1 && anchor(r * cols + mn - 1) === m.a && anchor(r * cols + mx + 1) === m.b) { var cy = r * P + cs / 2; add(mn * P - gp / 2, cy, true); add((mx + 1) * P - gp / 2, cy, true); break; }
+      }
+    } else {
+      for (var j = 0; j < g.colsU.length; j++) {
+        var c = g.colsU[j], rs = g.cells.filter(function (q) { return q % cols === c; }).map(function (q) { return (q / cols) | 0; }), rn = Math.min.apply(null, rs), rx = Math.max.apply(null, rs);
+        if (rn > 0 && rx < S.fs.F.rows - 1 && anchor((rn - 1) * cols + c) === m.a && anchor((rx + 1) * cols + c) === m.b) { var cx = c * P + cs / 2; add(cx, rn * P - gp / 2, false); add(cx, (rx + 1) * P - gp / 2, false); break; }
+      }
+    }
+  });
+  return out;
+}
+function setPill(el, n, hp, max) { var u = $('.pill u', el), sp = $('.pill span', el); if (u) u.style.width = Math.min(100, n / Math.max(1, hp) * 100) + '%'; if (sp) sp.textContent = n + ' / ' + hp; }
 function renderFight() {
   var run = S.run, fs = S.fs, F = fs.F, cols = F.cols, R = F.rows, i;
   var f = $('#fight'), cs = cellSize(cols, R); f.style.setProperty('--cs', cs + 'px'); f.style.setProperty('--n', cols); f.classList.toggle('narrow', cs < 60);
   var bt = boardTiles(), res = evaluate(F, bt, eo({ detail: true })), placed = res.G.length;
-  var br = {}, sxm = {};
-  res.marks.forEach(function (m) { (br[m.a] = br[m.a] || []).push(m.h ? 'R' : 'B'); (br[m.b] = br[m.b] || []).push(m.h ? 'L' : 'T'); });
-  res.G.forEach(function (g) { if (g.sand > 1) sxm[g.a] = g.sand; });
-  $('#fhead').innerHTML = (S.puz ? '<span class="stat" style="flex:1;white-space:normal"><b>' + S.puz.def.name + '</b>: one attack</span>' : '<span class="stat">Hero</span>' + hpBar(run.hp, run.maxHp) + '<span class="stat">Attack ' + (fs.turn + 1) + '</span>') + (fs.mom > 0 ? '<span class="mombadge" data-card="mom">Momentum +' + fs.mom + '</span>' : '') + '<button class="hbtn" data-act="fmenu" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>';
+  var ttl = S.puz ? S.puz.def.name : stageCfg(run).name, sub = S.puz ? 'one attack' : (fs.kind === 'boss' ? 'Boss' : fs.kind === 'elite' ? 'Elite' : 'Fight ' + (run.fights + 1)) + ' · attack ' + (fs.turn + 1);
+  $('#fhead').innerHTML = '<button class="hbtn" data-act="fmenu" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="ttl">' + ttl + '<small>' + sub + '</small></div>' + (fs.mom > 0 ? '<span class="mombadge" data-card="mom">Momentum +' + fs.mom + '</span>' : '<button class="hbtn" data-act="help" aria-label="How to play"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4.500 2.600c-1 .6-1.500 1.200-1.500 2.400M12 18v.5"/></svg></button>');
   var h = '';
   F.enemies.forEach(function (e, ek) {
-    var r = res.en[ek], pct = Math.max(0, e.hp / e.max * 100), dpct = Math.min(e.hp, r.dmg) / e.max * 100;
-    var pill = e.gone ? 'left' : e.dead ? 'down' : r.guardBlocked ? r.needText : r.dmg > 0 ? (r.kill ? 'KO  -' + r.dmg : '-' + r.dmg) : '0';
-    var lab = e.gone ? 'LEFT' : e.kind === 'r' ? 'RUNNER' : e.boss ? (e.twin ? 'TWIN' : e.need > 1 ? 'AEGIS' : e.cols2 ? '2 COLOURS' : 'BOSS') : e.need > 1 ? 'GUARD' : e.w > 1 ? 'WIDE' : 'HP';
-    h += '<div class="enemy' + (e.need > 1 || e.cols2 ? ' guard' : '') + (e.boss ? ' boss' : '') + (e.kind === 'r' ? ' runner' : '') + (e.twin ? ' twin' : '') + (e.dead ? ' dead' : '') + (e.gone ? ' gone' : '') + (r.kill ? ' kill' : '') + (r.dmg > 0 ? ' has' : '') + '" style="grid-column:' + (e.c + 1) + ' / span ' + e.w + '" data-en="' + ek + '" data-c="' + e.c + '" data-w="' + e.w + '" data-card="e:' + ek + '">' +
-      '<div class="etile">' + (e.twin ? '<span class="ecd">' + LINK + '</span>' : e.kind === 'r' ? '<span class="ecd">' + RUN + '</span>' : '') + (e.kind === 'r' ? '' : '<span class="atk">' + SPIKE + e.atk + '</span>') + '<b class="hpn">' + (e.dead ? 0 : e.hp) + '</b><i>' + lab + '</i></div>' +
-      '<div class="ebar"><i style="width:' + pct + '%"></i><u style="left:' + Math.max(0, pct - dpct) + '%;width:' + dpct + '%"></u></div><div class="pill">' + pill + '</div></div>';
+    var r = res.en[ek], gone = e.gone, hpn = e.dead ? 0 : e.hp, pct = (e.dead || gone) ? 0 : Math.min(100, r.dmg / Math.max(1, e.hp) * 100), txt = r.dmg + ' / ' + e.hp;
+    if (gone) txt = 'left'; else if (e.dead) txt = 'down'; else if (r.guardBlocked) txt = r.needText;
+    else if (e.w > 1 && e.w <= 3 && r.dmg > 0) { var ps = []; for (var pc = e.c; pc < e.c + e.w; pc++) ps.push(res.tot[pc]); if (ps.filter(function (x) { return x > 0; }).length > 1) txt = ps.join(' + ') + ' / ' + e.hp; }
+    var wide = e.w > 1 ? ' · WIDE' : '', cnt = Math.min(r.src, r.need) + '/' + r.need;
+    var lab = gone ? 'LEFT' : e.kind === 'r' ? 'RUNNER' : e.boss ? (e.twin ? 'TWIN' : e.need > 1 ? 'AEGIS ' + cnt : e.cols2 ? '2 COLOURS' : 'BOSS') : e.need > 1 ? 'GUARD ' + cnt : e.cols2 ? '2 COLOURS' : 'HP' + wide;
+    h += '<div class="enemy' + (e.need > 1 || e.cols2 ? ' guard' : '') + (e.boss ? ' boss' : '') + (e.kind === 'r' ? ' runner' : '') + (e.twin ? ' twin' : '') + (e.dead ? ' dead' : '') + (e.gone ? ' gone' : '') + (r.kill ? ' kill' : '') + (r.dmg > 0 ? ' has' : '') + '" style="grid-column:' + (e.c + 1) + ' / span ' + e.w + '" data-en="' + ek + '" data-c="' + e.c + '" data-w="' + e.w + '" data-card="e:' + ek + '">' + (r.kill ? CHK : '') +
+      '<div class="etile">' + (e.twin ? '<span class="ecd">' + LINK + '</span>' : e.kind === 'r' ? '<span class="ecd">' + RUN + '</span>' : '') + (e.kind === 'r' || !e.atk ? '' : '<span class="atk">' + SPIKE + e.atk + '</span>') + '<i>' + lab + '</i><b class="hpn' + (String(hpn).length > 2 ? ' n3' : '') + '">' + hpn + '</b></div>' +
+      '<div class="pill"><u style="width:' + pct + '%"></u><span>' + txt + '</span></div></div>';
   });
   $('#fen').innerHTML = h;
-  var gp = 6, bw = cols * cs + (cols - 1) * gp;
+  var gp = GAP, bw = cols * cs + (cols - 1) * gp;
   $('#bgrid').style.width = bw + 'px'; $('#fboard').style.gridTemplateColumns = 'repeat(' + cols + ',' + cs + 'px)';
   h = '';
   for (i = 0; i < cols * R; i++) {
@@ -1417,9 +1466,9 @@ function renderFight() {
   res.G.forEach(function (g) {
     var t = g.t, minr = 99, minc = 99; g.cells.forEach(function (q) { minr = Math.min(minr, (q / cols) | 0); minc = Math.min(minc, q % cols); });
     var shown = t.k === 'p' ? res.power[g.a] : t.k === 'x' ? undefined : res.val[g.a];
-    th += tileHTML(t, { board: true, ts: cs, gp: gp, left: minc * (cs + gp), top: minr * (cs + gp), shown: shown, sx: g.sand > 1 ? g.sand : 0, cap: g.capped, br: br[g.a], attrs: 'data-cell="' + g.a + '" data-card="t:' + t.id + '"', cls: (cs < 58 ? 'small' : '') + (fs.hero && fs.hero.target === t.id ? ' herot' : '') + (heroTargeting() ? ' tgtable' : ''), noRest: true });
+    th += tileHTML(t, { board: true, ts: cs, gp: gp, left: minc * (cs + gp), top: minr * (cs + gp), shown: shown, sx: g.sand > 1 ? g.sand : 0, cap: g.capped, attrs: 'data-cell="' + g.a + '" data-card="t:' + t.id + '"', cls: (fs.hero && fs.hero.target === t.id ? ' herot' : '') + (heroTargeting() ? ' tgtable' : ''), noRest: true });
   });
-  $('#ftiles').innerHTML = th;
+  $('#ftiles').innerHTML = th + clampsHTML(res, cols, cs, gp);
   var strip = '<div class="strip" data-card="mode"><span class="t"><b>Sandwich:</b> ' + SANDWICH + '</span></div>';
   if (S.puz) strip += '<div class="strip"><span class="t"><b>Idea:</b> ' + S.puz.def.teach + '</span></div>'; else (run.relics || []).forEach(function (id) { strip += '<div class="strip relic" data-card="rl:' + id + '"><span class="t"><b>Relic:</b> ' + RELIC_BY_ID[id].name + ': ' + RELIC_BY_ID[id].line + '</span></div>'; });
   F.tricks.forEach(function (tr) { strip += '<div class="strip trickstrip" data-card="tr:' + tr + '"><span class="t"><b>Boss:</b> ' + TRICKS[tr] + '</span></div>'; });
@@ -1437,12 +1486,18 @@ function renderFight() {
   $('#ftabs').innerHTML = tabs;
   var order = function (a, b) { return (a.k + a.d + a.sh) < (b.k + b.d + b.sh) ? -1 : (a.k + a.d + a.sh) > (b.k + b.d + b.sh) ? 1 : a.n - b.n; };
   var hand = handOf(S.tab).sort(order), restT = handOf(S.tab, true).sort(order);
-  $('#fhand').innerHTML = hand.map(function (t) { return tileHTML(t, { ts: HSZ(), attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: (S.sel === t.id ? 'sel' : '') }); }).join('') +
+  var placedT = run.bag.filter(function (t) { return t.c === S.tab && !t.rest && S.board.indexOf(t.id) >= 0; });
+  var hh = hand.concat(placedT).sort(order).map(function (t) {
+    if (S.board.indexOf(t.id) >= 0) { var sd = shapeDims(t), hs = HSZ(), mx = Math.max(sd[0], sd[1]), cp = sd[0] * sd[1] > 1 ? Math.min(hs, Math.floor((300 - (mx - 1) * 6) / mx)) : hs, sg = Math.max(3, Math.round(cp * .11)); return '<div class="slot" style="width:' + (sd[1] * cp + (sd[1] - 1) * sg) + 'px;height:' + (sd[0] * cp + (sd[0] - 1) * sg) + 'px"></div>'; }
+    return tileHTML(t, { ts: HSZ(), attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: (S.sel === t.id ? 'sel' : '') });
+  }).join('');
+  $('#fhand').innerHTML = hh +
     restT.map(function (t) { return tileHTML(t, { ts: HSZ(), attrs: 'data-card="t:' + t.id + '"' }); }).join('') +
-    (!hand.length && !restT.length ? '<div class="ctext" style="width:100%;text-align:center;padding:10px">No tiles of this colour.</div>' : '');
-  $('#fhero').innerHTML = heroHTML(fs);
+    (!hand.length && !restT.length && !placedT.length ? '<div class="ctext" style="width:100%;text-align:center;padding:10px">No tiles of this colour.</div>' : '');
+  $('#fhero').innerHTML = S.puz ? '' : heroRowHTML(run, fs);
   $('#fatk').disabled = !placed || S.phase !== 'edit' || heroTargeting(); $('#fclear').disabled = !placed || S.phase !== 'edit';
-  $('#fatk').textContent = placed ? 'Attack with ' + placed + ' tile' + (placed > 1 ? 's' : '') : 'Attack';
+  var totDmg = 0; res.en.forEach(function (r, k) { if (!F.enemies[k].dead) totDmg += r.dmg; });
+  $('#fatk').innerHTML = placed ? 'Attack<small>' + totDmg + '</small>' : 'Attack';
   var info = '';
   if (S.sel >= 0) { var st = tileById(S.sel); info = 'Tap a cell for the ' + tileName(st) + '. Glowing cells would finish an enemy.'; }
   else if (!placed) info = fs.turn === 0 ? 'Tap a tile, then a cell (or drag it). Hold anything for details.' : 'Enemies hit back. Place tiles again' + (CONFIG.tileReturn === 'fight' ? ' (used tiles rest until this fight ends).' : '.');
@@ -1534,13 +1589,13 @@ async function attack() {
     });
     await sleep(520);
     for (var step = 1; step <= 6; step++) {
-      info.before.forEach(function (b, k) { var d = res.en[k].dmg; if (d > 0 && enEl(k)) $('.pill', enEl(k)).textContent = '-' + Math.round(d * step / 6); });
+      info.before.forEach(function (b, k) { var d = res.en[k].dmg; if (d > 0 && enEl(k)) setPill(enEl(k), Math.round(d * step / 6), b.hp, b.max); });
       await sleep(55);
     }
     if (!info.phase) F.enemies.forEach(function (e, k) {
       var el = enEl(k), b = info.before[k]; if (!el || !b) return;
       var rev = info.revived.indexOf(k) >= 0, left = e.dead ? 0 : e.hp;
-      $('.ebar i', el).style.width = (left / e.max * 100) + '%'; var u = $('.ebar u', el); if (u) u.style.width = '0';
+      var pu = $('.pill u', el); if (pu) pu.style.width = '0'; var psp = $('.pill span', el); if (psp) psp.textContent = e.dead ? 'down' : '0 / ' + left;
       $('.hpn', el).textContent = left;
       if (e.dead && !b.dead) el.classList.add('dead');
       if (info.left.indexOf(k) >= 0) { el.classList.add('gone'); fly('runs away', centerOf(el), { x: centerOf(el).x, y: centerOf(el).y - 30 }); }
@@ -1549,9 +1604,9 @@ async function attack() {
     await sleep(650);
     var hits = info.hit.filter(function (k) { return F.enemies[k].atk > 0; });
     if (hits.length) {
-      hits.forEach(function (k) { var el = enEl(k); if (el) { el.classList.add('hit'); fly('-' + F.enemies[k].atk, centerOf(el), centerOf($('#fhead .hpbar')), 'bad'); } });
+      hits.forEach(function (k) { var el = enEl(k); if (el) { el.classList.add('hit'); fly('-' + F.enemies[k].atk, centerOf(el), centerOf($('#fhero .hpbar') || $('#fhead')), 'bad'); } });
       await sleep(260);
-      $('#fhead .hpbar').outerHTML = hpBar(run.hp, run.maxHp);
+      var hbar = $('#fhero .hpbar'); if (hbar) hbar.outerHTML = hpBar(run.hp, run.maxHp);
       $('#fight').classList.add('shake'); await sleep(380); $('#fight').classList.remove('shake');
     } else await sleep(150);
   } catch (e) { /* animation must never block the game */ }
@@ -1655,7 +1710,7 @@ function bankRun() {
   show('result');
 }
 function bagHTML() {
-  var run = S.run, h = '<h3>Bag: ' + run.bag.length + ' tiles</h3><div class="ctext">Gold dotted ring: added this run. Arrow: upgraded. Split colour: two colours. Faded: resting until the fight ends.</div>';
+  var run = S.run, h = '<h3>Bag: ' + run.bag.length + ' tiles</h3><div class="ctext">Gold dotted ring: added this run. ▲: upgraded. Split colour: two colours. Cyan edge: Rare, magenta edge: Epic. Faded: resting until the fight ends.</div>';
   COLOR_IDS.concat(['x']).forEach(function (c) {
     var ts = run.bag.filter(function (t) { return t.c === c; }); if (!ts.length) return;
     h += '<div class="bagrow">' + dotHTML(c) + '<div class="inv">' + ts.map(function (t) { return tileHTML(t, { ts: 46, attrs: 'data-card="t:' + t.id + '"' }); }).join('') + '</div></div>';
@@ -1702,7 +1757,7 @@ function cardFor(key) {
   if (p[0] === 'hr') { var hh = HERO_BY_ID[p[1]]; return '<h3>Hero: ' + hh.name + ' (' + hh.ab + ')</h3><p>' + hh.line + '</p><p class="muted">Once per fight. ' + (hh.target ? 'Tap the button, then a placed tile; the button turns into Cancel.' : 'Tap the button to switch it on; tap again to undo before attacking.') + '</p>'; }
   if (p[0] === 'tr') return '<h3>Boss trick</h3><p>' + (TRICKS[p[1]] || '') + '</p>';
   if (p[0] === 'bc') return '<h3>Bonus cell ' + bcText(p[1]) + '</h3><p>' + (p[1] === 'x2' ? 'A tile placed here is doubled.' : 'A tile placed here gets ' + bcText(p[1]) + '.') + '</p><p class="muted">Counts every bonus cell under a multi-cell tile. Applies before multipliers.</p>';
-  if (p[0] === 'mode') return '<h3>Sandwich</h3><p>' + SANDWICH + '</p><p class="muted">Both rows and columns count: a tile sandwiched in its row and in its column is multiplied by 4. Gold brackets mark the two outer tiles; the sandwiched tile shows a x2 or x4 chip. A multi-cell tile is sandwiched along an axis if any one line through it has matching outer tiles at both ends of its span (each axis counts once). A two-colour tile counts as both colours; a colourless tile is never a colour. Multipliers are not sandwiched. It is included in the live totals.</p>';
+  if (p[0] === 'mode') return '<h3>Sandwich</h3><p>' + SANDWICH + '</p><p class="muted">Both rows and columns count: a tile sandwiched in its row and in its column is multiplied by 4. Gold clamps sit in the gaps between the sandwiched tile and its two outer tiles; the sandwiched tile shows a x2 or x4 chip. A multi-cell tile is sandwiched along an axis if any one line through it has matching outer tiles at both ends of its span (each axis counts once). A two-colour tile counts as both colours; a colourless tile is never a colour. Multipliers are not sandwiched. It is included in the live totals.</p>';
   if (p[0] === 'mom') return '<h3>Momentum</h3><p>You cleared the last fight in one attack. Every tile gets +' + CONFIG.momentum.bonus + ' on the first attack of the next fight.</p>';
   return '';
 }
@@ -1745,8 +1800,8 @@ document.addEventListener('pointermove', function (e) {
   var dx = e.clientX - P.x, dy = e.clientY - P.y;
   if (!P.moved && dx * dx + dy * dy > 100 && (P.tg.kind === 'hand' || P.tg.kind === 'board')) {
     P.moved = true; clearTimeout(P.timer);
-    ghost = P.tg.el.cloneNode(true); ghost.classList.add('ghost'); ghost.classList.remove('bd', 'sel'); ghost.classList.add('cp'); ghost.removeAttribute('data-h'); ghost.removeAttribute('data-cell'); ghost.removeAttribute('data-card');
-    var gd = shapeDims(tileById(P.tg.id)), gts = P.tg.kind === 'board' ? 46 : 54; ghost.style.cssText = '--ts:' + gts + 'px;';
+    var gw = document.createElement('div'); gw.innerHTML = tileHTML(tileById(P.tg.id), { ts: P.tg.kind === 'board' ? 46 : 54, noRest: true });
+    ghost = gw.firstChild; ghost.classList.add('ghost');
     document.body.appendChild(ghost);
     if (P.tg.kind === 'board') $$('#ftiles .tile[data-cell="' + P.tg.cell + '"]').forEach(function (n) { n.classList.add('dragging'); });
     S.sel = -1; $$('#fhand .tile.sel').forEach(function (n) { n.classList.remove('sel'); });
@@ -1792,8 +1847,8 @@ function helpHTML() {
   return '<h3>How to play</h3><ol>' +
     '<li>Enemies sit above the columns with <b>HP</b> and an <b>attack</b>. Place tiles, press <b>Attack</b>. Each enemy takes the total of its column(s). HP stays between attacks; survivors hit your hero. Only hero HP ends a run.</li>' +
     '<li>Tap a tile, then a cell, or drag it. Tap a placed tile to take it back. Hold anything for a card. Glowing cells would finish an enemy.</li>' +
-    '<li>Each tile shows what it does on its edges. <b>White arrows</b> on the top edge are the columns it attacks (up-left, up, up-right). <b>+ dots</b> on an edge: it adds its number to the attacking tiles touching that edge; a bar with + at both ends means a whole row or column. <b>x dots</b> (dashed) multiply instead. An <b>= dot</b> copies the tile on that edge. Big tiles cover several cells and are one piece. While you hold a tile the board shows what it would reach.</li>' +
-    '<li><b>Sandwich:</b> a tile between two tiles of one other colour is doubled, once for its row and once for its column (x4 at most). Two-colour tiles count as both colours.</li>' +
+    '<li>A tile\'s big number is its <b>current value</b>; a small chip in its top right corner shows the base number when it differs. The little <b>map in the top left</b> is its reach: its own cells are outlined, the cells it reaches are lit. <b>Solid</b> tiles attack the lit cells in front of them (the columns they hit). <b>White tiles with a solid edge</b> (+N) add their number to the attacking tiles on the lit cells; a lit row or column means the whole line. <b>Dashed white tiles</b> (×N) multiply instead. A <b>copy</b> tile (ECHO) shows its own attack lane lit and the cell it copies as a ring. Big tiles cover several cells and are one piece. While you hold a tile the board shows what it would reach.</li>' +
+    '<li><b>Sandwich:</b> a tile between two tiles of one other colour is doubled, once for its row and once for its column (x4 at most). Gold <b>clamps</b> sit in the gaps on both sides, and a <b>×2 / ×4</b> chip appears on the tile. Two-colour tiles (split in two colours) count as both.</li>' +
     '<li>Your whole bag is ready for every fight. Tiles you attack with rest until that fight ends (switch in Settings).</li>' +
     '<li>After each win choose one of three: a new tile, an upgrade (+2 or a second colour) or a heal. Forges, rests and treasures sit on the path. Every stage has a boss with one visible trick.</li>' +
     '<li>Runners leave after your first attack: kill them for a bonus tile. Guards need 2 different tiles to hit them.</li>' +

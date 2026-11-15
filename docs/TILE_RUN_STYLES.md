@@ -89,3 +89,7 @@ A short web pass (and general knowledge) gave these principles, each sibling app
 3. **Band:** pale tinted face with an 8 px colour band on top, dot glyph, dot-lattice board, sharper 9 px corners, ink bracket clamps, no names. Applies similarity, hierarchy (number first), "as little design as possible".
 4. **Disc:** discs for single cells, capsules for wide pieces, a bent capsule for the L, round wells, lilac neutral, one teal accent. Applies closure and continuity, restraint, one accent at about 10 percent.
 5. **Grid:** tinted face with a 2 px outline, sharp 6 px corners, mono numbers always bottom-left, glyph top-left, base top-right, chip bottom-right, line-grid board, enemy as an outlined card with the pill inside, orange stitched clamps. Applies alignment on a fixed anchor grid, a type scale, common region.
+
+## Implemented
+
+Tab "0 . Chosen" is implemented in `prototype/samples/tile-run.html` (visual change only; rules block, CONFIG, puzzles and save key untouched). Differences from the mockup: tiles are drawn for any polyomino (SVG body, HTML face); the sandwich clamps are no longer children of the squeezing tiles but a separate layer computed from the board geometry, with an 8 px board gap, which fixes the overlaps (clamps hidden under later tiles, offsets thrown off by borders, one clamp stacked on another when two neighbours are sandwiched). Enemy slabs are 58 px high with the attack value in a row under the number so the number never collides with it on 6-column boards. Colour symbols remain only on the small colour dots of tabs and chips.

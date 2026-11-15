@@ -22,7 +22,7 @@ File: `prototype/samples/tile-run.html` (one file, inline CSS/JS, no network, no
 
 "A tile between two tiles of one other colour is doubled, once for its row and once for its column."
 
-- A row sandwich and a column sandwich on the same tile multiply: x4 (chip shows x2 or x4; gold brackets on the outer tiles).
+- A row sandwich and a column sandwich on the same tile multiply: x4 (chip shows x2 or x4; gold clamps in the gaps).
 - A tile is sandwiched along an axis if the two outer tiles share a colour X and the tile has at least one colour that is not X. A two-colour tile counts as both colours (a blue/green tile between two greens is doubled). A colourless tile is never a colour.
 - Multi-cell tiles: for each axis it is enough that ONE line through the tile on that axis has matching outer tiles at both ends of the tile's span in that line (so a wide tile can be sandwiched from above and below through either of its columns, as well as from its left and right ends). Each axis counts at most once: max x4.
 - Applies to attack, copy and boost tiles; multipliers are not sandwiched.
@@ -46,19 +46,19 @@ Token notation used in `UNITS` (kit strings): `a^4` attack own-lane 4; `a<>3` fo
 
 Rare, Epic loot and run picks draw from the whole combination space allowed in the stage, with the number set by a budget so wider reach is weaker: attack = base[rarity] (4, 6, 8) x lanePen (1 lane 1.0, 2 lanes 0.72, 3 lanes 0.55) x cellBonus (1, 2, 3, 4 cells: 1.0, 1.35, 1.7, 2.1) x 0.85..1.15; boost = boostBase (1, 2, 3) x dirPen (1 direction 1.0, 2 0.85, 3 0.72, 4 0.62, row/column 0.75, both 0.55); multipliers are x2 (x3 only for a single-direction Epic); copy own number 0 to 2. Multi-cell shapes appear on Rare (45 percent) and Epic (70 percent) loot and on 25 percent of run picks, only once the stage has them.
 
-## Tile face: edge marks (legend)
+## Tile face (legend)
 
-What a tile does is drawn on its edges, pointing where it acts, so the face is the diagram. Colour symbol bottom right (two symbols for a two-colour tile, split body); big number in the middle.
+Chosen look ("Round five", see TILE_RUN_STYLES.md). The old edge marks (arrowheads, "+"/"x"/"=" pips, bars, brackets, colour symbols in the corner, struck-through value badges) were replaced.
 
-- **Attack lanes:** bold white arrowheads on the top edge, one per lane it hits: up-left, up, up-right. Multi-cell tiles show them on each top cell.
-- **Boost (+N):** solid coloured outline body with "+" dots on each edge facing a tile it boosts; a bar across the tile with "+" dots at both ends means the whole row, a vertical bar the whole column, both bars both.
-- **Multiplier (xN):** dashed outline body with "x" dots (dashed circles), bars dashed.
-- **Copy (=):** filled body, an "=" dot on the edge of the tile it copies from, plus the up arrow (it attacks its own column).
-- **Multi-cell tiles** are drawn as one piece in their true shape.
-- Badges: small boxed number = the tile's base number when the live value differs (big number is the current value); x2 / x4 chip = sandwich; gold brackets on the outer tiles; gem = Rare (cyan) or Epic (magenta, glowing); stars; triangle = upgraded this run; gold dotted ring = added this run.
-- **While a tile is selected, held or dragged**, the board also shows the footprint (dark outline), the cells it would boost, multiply or copy (green), and the enemy columns it would hit (gold frame), in addition to the damage preview and glowing finish cells.
-
-Alternatives considered: (1) the old corner 3x3 mini-grid (rejected by the owner: its lit squares read as size and attack at once and do not scale to polyominoes); (2) text labels such as "STRIKE" or "FORK" (they need memorising, take space at 34 px, and do not describe 7 lane x 4 direction x 11 shape combinations); (3) edge arrows (chosen: the mark sits exactly where the effect goes, it scales with the tile, works for any shape and reads at 34 px for single-cell tiles; the compact hand and kit tiles draw big pieces scaled into one slot); (4) a reach overlay only on hold (kept as a complement, not a replacement: it shows the exact cells but only while holding, and a placed or resting tile would be unreadable).
+- **Body:** solid rounded tile in the unit colour (five colours plus slate for colourless) with a soft darker bottom edge. Big white number = the CURRENT value; small uppercase name at the bottom (STRIKE, FORK, TRIDENT, BAR, LINE, BLOCK, PLUS, ROW, COL, CROSS, DOUBLE, ECHO; omitted on non-rectangular shapes and under 48 px). Two-colour tile: diagonal split, lower right in the second colour.
+- **Boost (+N):** white face, solid colour outline, coloured "+N". **Multiplier (xN):** white face, dashed colour outline, coloured "xN". **Copy:** solid slate (or unit colour), name ECHO.
+- **Reach glyph (top left of every tile):** a mini grid of (w+2) x (h+2) cells, the tile's bounding box plus one margin cell all round. Own cells outlined, reached cells lit, the rest faint. Attack: cells in front of the tile's top cells for each lane (forward, left, right). Boost/multiplier: neighbours on the acting sides; row/column/cross variants light the whole row/column edge to edge. Copy: its own attack lane lit plus the copied cell as a ring.
+- **Base chip (top right):** a small quiet chip with the base number ("+2" for boosts) shown only when the current value differs. Nothing when unchanged.
+- **Sandwich:** gold clamps drawn in the gaps between the sandwiched tile and each squeezing neighbour (left+right for a row, top+bottom for a column, four for x4), plus a navy chip with gold "x2"/"x4" where the name was. Clamps are slim capsules (gap minus 2 px thick, 42 % of a cell long) with a thin navy outline, centred on the shared edge of the bracketed row/column, drawn in a layer above the tiles from board geometry (so no tile can paint over them), de-duplicated when two sandwiched tiles share a gap. The board gap is 8 px.
+- Other marks: cyan edge = Rare, magenta glowing edge = Epic; stars (gold) replace the name on merged tiles; small triangle = upgraded this run; gold dotted ring = added this run; "max" chip = multiplier cap reached.
+- **Enemies:** navy rounded slab with a small uppercase label (HP, HP . WIDE, GUARD n/need, AEGIS, TWIN, RUNNER, BOSS, 2 COLOURS), big white number (current HP) and the attack value under it. Below it a bar-pill: the fill shows the predicted damage against HP, text "19 / 25" (wide: "8 + 17 / 25"; guard not met: "needs 2"), one text colour. Kill = green pill, green slab outline, check badge; zero damage = empty grey pill.
+- **Hero row:** heart, HP bar-pill ("18 / 24"), ability button. The Attack button shows the predicted total. The hand keeps dashed slots where tiles were placed.
+- **While a tile is selected, held or dragged**, the board still shows the footprint, the cells it would boost, the columns it hits and the glowing cells that would finish an enemy.
 
 ## Stages as built
 
