@@ -55,3 +55,37 @@ Highlight options (x2 vs x4 told apart in each):
 - **S5 Gold number:** number turns gold with a navy outline and a small ×2 / ×4, soft inner glow, strong glow and frame for x4. No extra objects.
 - **S6 Pinch arrows:** gold navy-outlined triangles pointing inward from the squeezed sides (two for x2, a cross of four for x4), the only one that shows the direction.
 Gold on the yellow unit colour is handled with navy outlines, navy chips and by putting the marks in the gap (clamps, rings).
+
+## Round five: chosen design and five siblings
+
+File: `prototype/samples/tile-run-styles5.html` (one file, about 40 KB, no network, light and dark, tabs 0 to 5, same arrangement in all).
+
+### Chosen design (tab 0), for implementation in `tile-run.html`
+
+Base is round four's A2 look; sandwich = S2 clamps plus S1 chip without the ring.
+
+- **Tile:** solid unit colour fill (red #d2473f, blue #2e6bd3, green #23874f, yellow #b9800f, purple #7a55c2, colourless #566377), white number, 12 px radius, 2 px soft bottom edge. No colour shape. Number 29 px / weight 800, centred, 4 px above middle; name 9 px at the bottom. Boost: white face, 3 px solid coloured outline, coloured number; multiplier: same with a dashed outline.
+- **Reach glyph (top-left, 5 px inset):** grid is the tile bounding box plus one cell on every side, (w+2) x (h+2) cells, 6.6 px per cell (3x3 = 20 px). Own cells outlined, reached cells solid, the rest 25 percent. Attack: the cell above each top cell (forward) and above-left / above-right for side lanes. Boost / multiplier: the neighbour cells on each acting side along its full length. Copy: its own lane lit (cell above) and the copied cell as a ring.
+- **Base number:** only when it differs from the current value: small chip (15 px high, 10 px bold, white 26 percent on solid tiles, tinted on outlined ones) top-right; "+2" style for boosts.
+- **Sandwich:** gold clamps (#e0a100, f0b429 in dark) 8 px thick, 64 percent of the edge long, centred in the 6 px gap on the facing edges of the two squeezing tiles, with a 1.5 px navy outline (they overlap the tiles by 1 px); x2 has one pair (row or column), x4 two pairs. A multi-cell tile is clamped by the neighbour at the end of the bracketed line only (the clamp covers that cell's share of the edge). The squeezed tile gets a navy chip (#151a24, gold 1.5 px outline and gold text, 16 px high, 11 px bold) saying "x2" or "x4" bottom-centre, replacing its name.
+- **Enemy:** navy slab (#33405a, 3 px border, 12 px radius, 48 px high) with a label line (8.5 px caps) and the HP number (25 px). Below it a bar-pill: 22 px high, 11 px radius, 2 px line border, a pale track, the predicted damage as a tinted fill (grey-blue for "not enough", green for a kill), text always one colour (ink) on the tint so no digit is cut: "19 / 25", "8 + 17 / 25" for a wide enemy (one shared pill, one number per column). Kill = slab and pill borders turn green plus a green check badge on the slab corner. Guard label "GUARD 2/2".
+- **Hero:** heart, a bar-pill of the same construction (red tint), "18 / 24" inside, one ability button (white, 2 px border).
+- **Board:** dashed 2 px cells, blocked cells with diagonal stripes, 6 px gaps; hand 5 x 2 slots, multi-cell pieces shown at real size across slots. Buttons: Clear (white, small) and Attack (dark, big, damage total in small text).
+- Dark palette: bg #151a24, panel #212838, ink #eef2f8, colours #e0584f #4f86e6 #2f9d5f #d19a22 #9a78e0 #7a879c, gold #f0b429.
+
+### Research used for the five siblings
+
+A short web pass (and general knowledge) gave these principles, each sibling applies a stated subset:
+- Dieter Rams, ten principles ("as little design as possible", understandable, unobtrusive, thorough to the last detail): https://www.vitsoe.com/gb/about/good-design , https://principles.design/examples/ten-principles-of-good-design
+- Gestalt (proximity, similarity, common region, closure, continuity): https://www.nngroup.com/articles/gestalt-proximity/ , https://www.toptal.com/designers/ux/gestalt-principles-of-design
+- 60-30-10 colour proportion and a single accent; WCAG contrast 4.5:1 text, 3:1 large text and UI parts; never colour alone: https://www.uxpin.com/studio/blog/choose-color-pallete/ , https://visionaustralia.org/business-consulting/digital-access/Creating-accessible-digital-colour-palettes-60-30-10-design-rule
+- Minimalist puzzle games (flat colour, clean shapes, minimal UI, one mechanic, e.g. Monument Valley): https://www.killscreen.com/box-art-review-how-monument-valley-taps-existential-wondering/
+- Apple HIG 44 pt and Material 48 dp touch targets, 8 pt spacing rhythm (from knowledge, not fetched).
+
+### Siblings
+
+1. **Frame:** white face inside a 4 px colour frame (boost dashed, multiplier dotted), warm paper white, ink accent with round ink pins in the gaps, ink slabs. Applies common region, similarity, 60-30-10 (warm white / ink / ink accent) and WCAG on white faces.
+2. **Night:** deep navy, luminous flat tiles with dark navy numbers, soft wells for cells, warm-white accent for clamps, chip and Attack, slab and bar-pill fused into one card. Applies strict 60-30-10, contrast and common region. Dark in both schemes.
+3. **Band:** pale tinted face with an 8 px colour band on top, dot glyph, dot-lattice board, sharper 9 px corners, ink bracket clamps, no names. Applies similarity, hierarchy (number first), "as little design as possible".
+4. **Disc:** discs for single cells, capsules for wide pieces, a bent capsule for the L, round wells, lilac neutral, one teal accent. Applies closure and continuity, restraint, one accent at about 10 percent.
+5. **Grid:** tinted face with a 2 px outline, sharp 6 px corners, mono numbers always bottom-left, glyph top-left, base top-right, chip bottom-right, line-grid board, enemy as an outlined card with the pill inside, orange stitched clamps. Applies alignment on a fixed anchor grid, a type scale, common region.

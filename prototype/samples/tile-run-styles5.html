@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Tile Run: chosen design and five siblings</title>
+<style>
+:root{--cbg:#e6eaf0;--cink:#1c2635;--cmut:#566377;--cline:#c9d1dc;--cpanel:#fff;--cbtn:#1c2635;--cbtnink:#fff}
+@media (prefers-color-scheme:dark){:root{--cbg:#0f131b;--cink:#eef2f8;--cmut:#a6b1c4;--cline:#3a4560;--cpanel:#212838;--cbtn:#eef2f8;--cbtnink:#151a24}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--cbg);color:var(--cink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+#tabs{position:sticky;top:0;z-index:30;display:flex;gap:4px;padding:8px 10px;background:var(--cbg);border-bottom:1px solid var(--cline);max-width:430px;margin:0 auto}
+#tabs button{flex:1;min-width:0;height:40px;border-radius:12px;border:2px solid var(--cline);background:var(--cpanel);font-weight:800;font-size:12.5px;padding:0}
+#tabs button[aria-selected=true]{background:var(--cbtn);color:var(--cbtnink);border-color:var(--cbtn)}
+.wrap{max-width:430px;margin:0 auto}
+.panel[hidden]{display:none}
+.ptitle{padding:10px 14px 8px;font-size:13px;color:var(--cmut)}
+.ptitle b{color:var(--cink);font-size:15px}
+.notes{padding:12px 16px 28px;font-size:13px;line-height:1.45;color:var(--cmut)}
+.notes p{margin:0 0 6px}
+.notes b{color:var(--cink)}
+
+/* ================= shared structure (all tokens come from the theme) ================= */
+.m{--gap:6px;--rad:12px;--erad:12px;--cols:5;--cw:8px;--tbw:0px;--numsz:29px;--numw:800;
+ --cs:calc((min(100vw,430px) - 24px - 4 * var(--gap)) / 5);
+ padding:2px 12px 14px;background:var(--bg);color:var(--ink);position:relative}
+.m *{box-sizing:border-box}
+.m .c-r{--tc:var(--r)}.m .c-b{--tc:var(--b)}.m .c-g{--tc:var(--g)}.m .c-y{--tc:var(--y)}.m .c-p{--tc:var(--p)}.m .c-n{--tc:var(--n)}
+.m .hd{display:flex;align-items:center;gap:8px;height:44px}
+.m .hb{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--hbr,12px);background:var(--panel);border:var(--hbd,2px solid var(--line));padding:0}
+.m .hb svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.m .ttl{flex:1;text-align:center;font-weight:800;font-size:17px}
+.m .ttl small{display:block;font-weight:600;font-size:11px;color:var(--muted);margin-top:1px}
+.m .hint{min-height:30px;font-size:13px;line-height:1.3;color:var(--muted);text-align:center;padding:0 4px 4px}
+.m .enemies,.m .board,.m .hand{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:var(--gap)}
+.m .board{grid-template-rows:repeat(3,var(--cs))}
+.m .hand{grid-template-rows:repeat(2,var(--cs));margin-top:10px}
+.m .enemies{align-items:start}
+.m .boardwrap{margin-top:8px}
+/* enemy */
+.m .enemy{position:relative;display:flex;flex-direction:column;gap:3px;min-width:0}
+.m .etile{position:relative;height:48px;border-radius:var(--erad);background:var(--enemy);color:var(--enemyink);border:var(--ebd,3px solid var(--enemy));display:flex;flex-direction:column;align-items:center;justify-content:center}
+.m .etile b{font-size:25px;line-height:.95;font-weight:800;font-variant-numeric:tabular-nums}
+.m .etile i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;opacity:.85;white-space:nowrap}
+.m .etile i.gl{font-size:8px;letter-spacing:.01em}
+.m .enemy.ok .etile{border-color:var(--ok)}
+.m .pbar{position:relative;height:22px;border-radius:var(--prad,11px);background:var(--ptrack,var(--panel2));border:var(--pbd,2px solid var(--line));overflow:hidden}
+.m .pbar u{position:absolute;left:0;top:0;bottom:0;background:var(--pshort)}
+.m .pbar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--pink,var(--ink))}
+.m .enemy.ok .pbar{border-color:var(--ok)}
+.m .enemy.ok .pbar u{background:var(--pok)}
+.m .enemy.tgt .etile{outline:3px solid var(--acc);outline-offset:1px}
+.m .chk{position:absolute;top:-8px;right:-7px;width:19px;height:19px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;border:2px solid var(--bg);z-index:5}
+.m .chk svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+/* cells */
+.m .cell{position:relative;border-radius:var(--crad,var(--rad));background:var(--cellbg);border:var(--cbd,2px dashed var(--line));aspect-ratio:1/1}
+.m .cell.slot{aspect-ratio:auto}
+.m .cell.x{border:var(--xbd,2px solid var(--line));background:repeating-linear-gradient(45deg,var(--panel2) 0 6px,var(--cellbg) 6px 12px)}
+.m .cell.aff{background:color-mix(in srgb,var(--acc) 38%,var(--cellbg));border-color:var(--acc);border-style:solid}
+/* tiles */
+.m .tile{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-width:0;align-self:stretch;cursor:pointer;-webkit-user-select:none;user-select:none;border-radius:var(--rad);background:var(--tf);color:var(--ti);border:var(--tbd,0);box-shadow:var(--tsh,none)}
+.m .tile .num{font-size:var(--numsz);font-weight:var(--numw);line-height:1;margin-top:var(--numdy,-4px);font-variant-numeric:tabular-nums;position:relative;z-index:1}
+.m .tile.k-boost .num,.m .tile.k-mult .num{font-size:calc(var(--numsz) - 4px);margin-top:3px}
+.m .tile .glyph{position:absolute;left:var(--gx,5px);top:var(--gy,5px);color:var(--gl,currentColor);overflow:visible}
+.m .glyph rect.f{opacity:.25}
+.m .tile .base{position:absolute;right:var(--bx,5px);top:var(--by,5px);min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:var(--bbg,rgba(255,255,255,.26));color:var(--bink,#fff);font-size:10px;font-weight:800;line-height:15px;text-align:center;font-variant-numeric:tabular-nums;font-style:normal}
+.m .tile .nm{position:absolute;left:0;right:0;bottom:4px;text-align:center;font-style:normal;font-size:9px;font-weight:800;letter-spacing:.05em;white-space:nowrap}
+.m .tile .chip{display:none;position:absolute;left:50%;bottom:var(--chipb,4px);transform:translateX(-50%);background:var(--chipbg);color:var(--chipink);border:1.5px solid var(--chipedge,transparent);border-radius:var(--chiprad,9px);padding:0 6px;height:16px;line-height:13px;font-size:11px;font-weight:800;font-style:normal;white-space:nowrap}
+.m .tile.sw .chip{display:block}
+.m .tile.sw .nm{display:none}
+.m .tile.sw4 .chip{font-size:12px;height:17px;line-height:14px}
+.m .tile.sel{outline:3px solid var(--ink);outline-offset:2px;z-index:2}
+.m .tile.aff{outline:3px solid var(--acc);outline-offset:1px}
+/* poly (L) */
+.m .poly{background:none!important;box-shadow:none!important;border:0!important}
+.m .poly>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.m .poly>svg.ring{display:none}
+.m .poly>svg.body{fill:var(--tf);stroke:var(--tf);stroke-width:24;stroke-linejoin:round;stroke-linecap:round}
+.m .poly .num{position:absolute;left:52%;top:2%;width:48%;height:48%;display:flex;align-items:center;justify-content:center;margin:0;font-size:calc(var(--numsz) + 1px)}
+.m .poly .nm{display:none}
+/* clamps: sit in the gap between the squeezing tile and the squeezed one */
+.m .clamp{position:absolute;z-index:4;display:block;background:var(--acc);box-shadow:0 0 0 1.5px var(--accedge);border-radius:3px}
+.m .clamp.l,.m .clamp.r{width:var(--cw);top:calc(var(--p) - var(--len) / 2);height:var(--len)}
+.m .clamp.t,.m .clamp.b{height:var(--cw);left:calc(var(--p) - var(--len) / 2);width:var(--len)}
+.m .clamp.r{right:calc((var(--gap) + var(--cw)) / -2 - var(--tbw))}
+.m .clamp.l{left:calc((var(--gap) + var(--cw)) / -2 - var(--tbw))}
+.m .clamp.b{bottom:calc((var(--gap) + var(--cw)) / -2 - var(--tbw))}
+.m .clamp.t{top:calc((var(--gap) + var(--cw)) / -2 - var(--tbw))}
+/* hero, buttons */
+.m .hero{display:flex;align-items:center;gap:8px;margin-top:10px}
+.m .hero>svg{flex:none;width:20px;height:20px;fill:var(--r)}
+.m .hpbar{flex:1;height:22px;border-radius:var(--prad,11px);position:relative;overflow:hidden;background:var(--ptrack,var(--panel2));border:var(--pbd,2px solid var(--line))}
+.m .hpbar u{position:absolute;left:0;top:0;bottom:0;width:75%;background:var(--hpc)}
+.m .hpbar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12.5px;color:var(--pink,var(--ink));font-variant-numeric:tabular-nums}
+.m .abil{flex:none;height:36px;padding:0 12px;border-radius:var(--hbr,12px);font-weight:800;font-size:14px;display:flex;align-items:center;gap:6px;background:var(--panel);border:var(--hbd,2px solid var(--line));color:var(--ink)}
+.m .abil svg{width:14px;height:14px;fill:none;stroke:var(--ok);stroke-width:3;stroke-linecap:round}
+.m .abil small{font-size:10px;color:var(--muted);font-weight:700}
+.m .bar{display:flex;gap:10px;margin-top:12px}
+.m .bar button{height:50px;border-radius:var(--brad,14px);font-weight:800;font-size:17px;padding:0;border:var(--hbd,2px solid var(--line));background:var(--panel);color:var(--ink)}
+.m .bar .clear{flex:1;font-size:15px}
+.m .bar .go{flex:2.4;background:var(--btn);color:var(--btnink);border-color:var(--btn)}
+.m .bar .go small{font-weight:600;opacity:.8;font-size:12px;margin-left:4px}
+
+/* ================= 0 CHOSEN: A2 + S2 clamps + S1 chip ================= */
+.t0{--bg:#eef1f5;--panel:#fff;--panel2:#e4e9f0;--ink:#1c2635;--muted:#566377;--line:#c9d1dc;--cellbg:#f8fafc;--ok:#1b8a4a;
+ --acc:#e0a100;--accedge:#151a24;--chipbg:#151a24;--chipink:#ffd04a;--chipedge:#e0a100;--enemy:#33405a;--enemyink:#fff;--btn:#1c2635;--btnink:#fff;--shadowc:rgba(20,30,50,.18);
+ --r:#d2473f;--b:#2e6bd3;--g:#23874f;--y:#b9800f;--p:#7a55c2;--n:#566377;
+ --pshort:color-mix(in srgb,var(--muted) 36%,var(--panel));--pok:color-mix(in srgb,var(--ok) 40%,var(--panel));--hpc:color-mix(in srgb,var(--r) 48%,var(--panel));--cw:8px}
+.t0 .tile{--tf:var(--tc);--ti:#fff;--gl:#fff;--tsh:0 2px 0 var(--shadowc)}
+.t0 .tile.k-boost,.t0 .tile.k-mult{--tf:var(--panel);--ti:var(--tc);--gl:var(--tc);--tbd:3px solid var(--tc);--tbw:3px;--bbg:color-mix(in srgb,var(--tc) 16%,transparent);--bink:var(--tc)}
+.t0 .tile.k-mult{--tbd:3px dashed var(--tc)}
+.t0 .tile .nm{color:inherit}
+@media (prefers-color-scheme:dark){.t0{--bg:#151a24;--panel:#212838;--panel2:#2b3448;--ink:#eef2f8;--muted:#a6b1c4;--line:#3a4560;--cellbg:#1b2130;--ok:#4cc27c;
+ --acc:#f0b429;--accedge:#0d1118;--chipbg:#0d1118;--chipink:#ffd04a;--chipedge:#f0b429;--enemy:#3b4a69;--btn:#eef2f8;--btnink:#151a24;--shadowc:rgba(0,0,0,.5);
+ --r:#e0584f;--b:#4f86e6;--g:#2f9d5f;--y:#d19a22;--p:#9a78e0;--n:#7a879c;--pshort:color-mix(in srgb,var(--muted) 42%,var(--panel));--pok:color-mix(in srgb,var(--ok) 48%,var(--panel));--hpc:color-mix(in srgb,var(--r) 55%,var(--panel))}}
+
+/* ================= 1 FRAME: white faces, thick colour frame, warm paper-white, ink pins ================= */
+.t1{--rad:16px;--erad:10px;--numsz:31px;--numw:900;--tbw:4px;--cw:11px;--ebd:0;--cbd:0;--xbd:0;--prad:8px;--hbr:14px;--brad:16px;--hbd:2px solid var(--line);
+ --bg:#f6f3ee;--panel:#fff;--panel2:#ece6dc;--ink:#2a2622;--muted:#7b7266;--line:#ddd5c9;--cellbg:#ece6dc;--ok:#2e8a55;--tmix:#2a2622;
+ --acc:#2a2622;--accedge:#fff;--chipbg:#2a2622;--chipink:#fff;--enemy:#2a2622;--enemyink:#fff;--btn:#2a2622;--btnink:#fff;--shadowc:rgba(60,45,30,.14);
+ --r:#d6483a;--b:#3b6fd4;--g:#2f8c58;--y:#dc9d12;--p:#7f59c8;--n:#7b8494;
+ --pshort:color-mix(in srgb,var(--muted) 34%,var(--panel));--pok:color-mix(in srgb,var(--ok) 38%,var(--panel));--hpc:color-mix(in srgb,var(--r) 45%,var(--panel))}
+.t1 .tile{--tf:var(--panel);--ti:color-mix(in srgb,var(--tc) 72%,var(--tmix));--gl:var(--tc);--tbd:4px solid var(--tc);--tsh:0 2px 0 var(--shadowc);--bbg:color-mix(in srgb,var(--tc) 20%,var(--panel));--bink:var(--ti);--bx:4px;--by:4px;--gx:4px;--gy:4px}
+.t1 .tile.k-boost{--tf:color-mix(in srgb,var(--tc) 12%,var(--panel));--tbd:4px dashed var(--tc);--ti:color-mix(in srgb,var(--tc) 72%,var(--tmix))}
+.t1 .tile.k-mult{--tf:color-mix(in srgb,var(--tc) 12%,var(--panel));--tbd:4px dotted var(--tc)}
+.t1 .tile .nm{color:var(--ti)}
+.t1 .poly>svg.ring{display:block;fill:var(--tc);stroke:var(--tc);stroke-width:24;stroke-linejoin:round}
+.t1 .poly>svg.body{fill:var(--panel);stroke:var(--panel);stroke-width:18}
+.t1 .clamp{border-radius:50%;box-shadow:0 0 0 2px var(--accedge)}
+.t1 .clamp.l,.t1 .clamp.r{height:var(--cw);top:calc(var(--p) - var(--cw) / 2)}
+.t1 .clamp.t,.t1 .clamp.b{width:var(--cw);left:calc(var(--p) - var(--cw) / 2)}
+.t1 .etile{padding-top:1px}
+.t1 .hb,.t1 .abil{box-shadow:0 2px 0 var(--shadowc)}
+@media (prefers-color-scheme:dark){.t1{--bg:#1c1916;--panel:#2a2622;--panel2:#36312a;--ink:#f3eee7;--muted:#a99f92;--line:#4a443c;--cellbg:#26221e;--ok:#4fc27f;--tmix:#ffffff;
+ --acc:#f3eee7;--accedge:#1c1916;--chipbg:#f3eee7;--chipink:#2a2622;--enemy:#3a342d;--btn:#f3eee7;--btnink:#1c1916;--shadowc:rgba(0,0,0,.45);
+ --r:#ee6a5c;--b:#6b95ec;--g:#4dbb7c;--y:#f0b93a;--p:#a083ec;--n:#9aa3b2}}
+
+/* ================= 2 NIGHT: deep navy, luminous flat tiles, wells, glued enemy cards ================= */
+.t2{--rad:14px;--erad:14px;--numsz:30px;--cbd:0;--xbd:0;--ebd:0;--prad:0;--pbd:0;--hbr:14px;--brad:14px;--hbd:2px solid var(--line);--cw:8px;--gap:6px;
+ --bg:#18223d;--panel:#222d4c;--panel2:#2d3a5e;--ink:#e9eef8;--muted:#93a0bd;--line:#36446c;--cellbg:#121b33;--ok:#46c98a;
+ --acc:#fff3d6;--accedge:#0b1020;--chipbg:#fff3d6;--chipink:#101830;--enemy:#26325a;--enemyink:#fff;--btn:#fff3d6;--btnink:#101830;--shadowc:transparent;
+ --r:#f0685f;--b:#5d90f5;--g:#3fbf80;--y:#eab43c;--p:#a082f5;--n:#8593b0;
+ --ptrack:#1b2646;--pshort:color-mix(in srgb,#5d90f5 52%,#1b2646);--pok:color-mix(in srgb,var(--ok) 52%,#1b2646);--pedge:#8fb0ff;--hpc:color-mix(in srgb,var(--r) 58%,#1b2646)}
+.t2 .tile{--tf:var(--tc);--ti:#0e1530;--gl:rgba(14,21,48,.85);--bbg:rgba(14,21,48,.2);--bink:#0e1530}
+.t2 .tile.k-boost,.t2 .tile.k-mult{--tf:var(--panel);--ti:var(--tc);--gl:var(--tc);--tbd:2.5px solid var(--tc);--tbw:2.5px;--bbg:color-mix(in srgb,var(--tc) 22%,transparent);--bink:var(--tc)}
+.t2 .tile.k-mult{--tbd:2.5px dashed var(--tc)}
+.t2 .tile .nm{display:none}
+.t2 .enemy{gap:0}
+.t2 .etile{border-radius:14px 14px 0 0;height:50px;background:var(--enemy)}
+.t2 .enemy.ok .etile{border:0;box-shadow:inset 0 0 0 2px var(--ok);border-bottom:0}
+.t2 .pbar{border-radius:0 0 14px 14px;height:24px}
+.t2 .enemy.ok .pbar{box-shadow:inset 0 0 0 2px var(--ok);border:0}
+.t2 .hpbar{border-radius:12px;height:24px}
+.t2 .hb,.t2 .abil,.t2 .bar button{background:var(--panel)}
+.t2 .chk{border-color:var(--bg)}
+@media (prefers-color-scheme:dark){.t2{--bg:#0b1020;--panel:#151d35;--panel2:#1f2947;--ink:#e6ecf8;--muted:#8794b2;--line:#27325a;--cellbg:#070b18;
+ --enemy:#1a2442;--ptrack:#111933;--pshort:color-mix(in srgb,#5d90f5 50%,#111933);--pok:color-mix(in srgb,var(--ok) 50%,#111933);--hpc:color-mix(in srgb,var(--r) 55%,#111933)}}
+
+/* ================= 3 BAND: pale tint, thick top band, sharper corners, dot-lattice board, ink brackets ================= */
+.t3{--rad:9px;--erad:9px;--numsz:32px;--cbd:0;--cw:4px;--pbd:0;--prad:9px;--hbr:10px;--brad:10px;--tbw:0px;--numdy:4px;--gx:6px;--gy:13px;--bx:6px;--by:12px;
+ --bg:#f2f5f9;--panel:#fff;--panel2:#e4e9f1;--ink:#172033;--muted:#5c687c;--line:#d4dbe6;--cellbg:transparent;--ok:#1c9a5b;--tmix:#172033;
+ --acc:#172033;--accedge:transparent;--chipbg:#172033;--chipink:#fff;--enemy:#fff;--enemyink:#172033;--btn:#172033;--btnink:#fff;--shadowc:rgba(23,32,51,.12);
+ --r:#e0463f;--b:#2f6fe3;--g:#1f9d5d;--y:#e3a712;--p:#7d50e6;--n:#6c7689;
+ --pshort:color-mix(in srgb,var(--muted) 34%,var(--panel));--pok:color-mix(in srgb,var(--ok) 38%,var(--panel));--hpc:color-mix(in srgb,var(--r) 45%,var(--panel))}
+.t3 .tile{--tf:color-mix(in srgb,var(--tc) 13%,#fff);--ti:color-mix(in srgb,var(--tc) 48%,var(--tmix));--gl:var(--ti);--tsh:inset 0 0 0 1.5px color-mix(in srgb,var(--tc) 38%,#fff);--bbg:color-mix(in srgb,var(--tc) 24%,#fff);--bink:var(--ti);overflow:hidden}
+.t3 .tile::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:var(--tc)}
+.t3 .tile.poly::before{display:none}
+.t3 .tile.poly{overflow:visible}
+.t3 .tile.k-boost,.t3 .tile.k-mult{--tf:#fff;--ti:var(--tc);--gl:var(--tc);--tbd:2.5px solid var(--tc);--tbw:2.5px;--tsh:none;--bbg:color-mix(in srgb,var(--tc) 18%,#fff);--bink:var(--tc);--gy:7px;--by:6px}
+.t3 .tile.k-mult{--tbd:2.5px dashed var(--tc)}
+.t3 .tile.k-boost::before,.t3 .tile.k-mult::before{display:none}
+.t3 .tile.k-boost .num,.t3 .tile.k-mult .num{margin-top:0}
+.t3 .tile .nm{display:none}
+.t3 .tile{overflow:visible}
+.t3 .tile::before{border-radius:var(--rad) var(--rad) 0 0}
+.t3 .glyph rect{rx:1.6px}
+.t3 .glyph rect.o{rx:.9px}
+.t3 .poly>svg.ring{display:block;fill:var(--tc);stroke:var(--tc);stroke-width:24;stroke-linejoin:round}
+.t3 .poly>svg.body{fill:color-mix(in srgb,var(--tc) 13%,#fff);stroke:color-mix(in srgb,var(--tc) 13%,#fff);stroke-width:21}
+.t3 .cell:not(.x){background:none}
+.t3 .cell:not(.x)::after{content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px;border-radius:50%;background:var(--line)}
+.t3 .cell.slot.empty::after{display:none}
+.t3 .cell.slot.empty{border:2px dashed var(--line)}
+.t3 .clamp{box-shadow:none;border-radius:2px;background:var(--acc)}
+.t3 .clamp::before,.t3 .clamp::after{content:"";position:absolute;background:var(--acc);border-radius:2px}
+.t3 .clamp.r::before,.t3 .clamp.r::after{left:0;width:9px;height:3.5px}
+.t3 .clamp.l::before,.t3 .clamp.l::after{right:0;width:9px;height:3.5px}
+.t3 .clamp.r::before,.t3 .clamp.l::before{top:0}.t3 .clamp.r::after,.t3 .clamp.l::after{bottom:0}
+.t3 .clamp.t::before,.t3 .clamp.t::after{top:0;height:9px;width:3.5px}
+.t3 .clamp.b::before,.t3 .clamp.b::after{bottom:0;height:9px;width:3.5px}
+.t3 .clamp.t::before,.t3 .clamp.b::before{left:0}.t3 .clamp.t::after,.t3 .clamp.b::after{right:0}
+.t3 .etile{height:50px;border:2px solid var(--line);overflow:hidden;padding-top:5px}
+.t3 .etile::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--ink)}
+.t3 .enemy.ok .etile::before{background:var(--ok)}
+.t3 .pbar{height:18px}
+.t3 .pbar span,.t3 .hpbar span{font-size:11.5px}
+.t3 .hpbar{height:18px;border:0}
+.t3 .hb,.t3 .abil{box-shadow:0 2px 0 var(--shadowc)}
+@media (prefers-color-scheme:dark){.t3{--bg:#12161f;--panel:#1c2230;--panel2:#262e40;--ink:#eef2fa;--muted:#9aa6bd;--line:#323c52;--ok:#44c283;--tmix:#ffffff;
+ --acc:#eef2fa;--chipbg:#eef2fa;--chipink:#121620;--enemy:#1c2230;--enemyink:#eef2fa;--btn:#eef2fa;--btnink:#121620;--shadowc:rgba(0,0,0,.4);
+ --r:#f0615a;--b:#5a8cf0;--g:#3dbb7d;--y:#efbb2b;--p:#9b78f0;--n:#8793ab}
+ .t3 .tile{--tf:color-mix(in srgb,var(--tc) 20%,var(--panel));--ti:color-mix(in srgb,var(--tc) 62%,#fff);--tsh:inset 0 0 0 1.5px color-mix(in srgb,var(--tc) 40%,var(--panel));--bbg:color-mix(in srgb,var(--tc) 30%,var(--panel))}
+ .t3 .tile.k-boost,.t3 .tile.k-mult{--tf:var(--panel);--ti:var(--tc);--bbg:color-mix(in srgb,var(--tc) 22%,var(--panel))}
+ .t3 .poly>svg.body{fill:color-mix(in srgb,var(--tc) 20%,var(--panel));stroke:color-mix(in srgb,var(--tc) 20%,var(--panel))}}
+
+/* ================= 4 DISC: circles and capsules, soft round wells, lilac neutral, teal accent ================= */
+.t4{--rad:999px;--erad:22px;--crad:50%;--numsz:28px;--numdy:5px;--cbd:0;--xbd:0;--ebd:0;--cw:9px;--hbr:50%;--brad:26px;--tbw:0px;--hbd:2px solid var(--line);
+ --bg:#edebf4;--panel:#fff;--panel2:#dedbea;--ink:#231f3a;--muted:#6b6685;--line:#d3cfe2;--cellbg:#e0ddec;--ok:#1fa37a;
+ --acc:#0e9f94;--accedge:#fff;--chipbg:#0b7f77;--chipink:#fff;--chipedge:#fff;--enemy:#2e2a52;--enemyink:#fff;--btn:#2e2a52;--btnink:#fff;--shadowc:rgba(46,42,82,.14);
+ --r:#f4776d;--b:#5f8bf5;--g:#3cbc87;--y:#f6c042;--p:#9a7af5;--n:#98a0b8;
+ --pshort:color-mix(in srgb,var(--muted) 34%,var(--panel));--pok:color-mix(in srgb,var(--ok) 38%,var(--panel));--hpc:color-mix(in srgb,var(--r) 50%,var(--panel))}
+.t4 .tile{--tf:var(--tc);--ti:#231f3a;--gl:rgba(35,31,58,.85);--tsh:0 3px 0 rgba(46,42,82,.16);--bbg:rgba(35,31,58,.16);--bink:#231f3a;--bx:3px;--by:9px;overflow:visible}
+.t4 .tile.k-boost,.t4 .tile.k-mult{--tf:var(--panel);--ti:color-mix(in srgb,var(--tc) 62%,var(--ink));--gl:var(--tc);--tbd:3px solid var(--tc);--tbw:3px;--bbg:color-mix(in srgb,var(--tc) 24%,#fff);--bink:var(--ti);--bx:2px;--by:8px}
+.t4 .tile.k-mult{--tbd:3px dashed var(--tc)}
+.t4 .tile .nm{display:none}
+.t4 .tile .glyph{left:12px;top:12px;transform:scale(.82);transform-origin:0 0}
+.t4 .tile.w2 .glyph,.t4 .tile.w3 .glyph{left:24px;transform:none;top:9px}
+.t4 .tile.sw:not(.w2) .num{margin-top:-6px}
+.t4 .tile.k-boost .base,.t4 .tile.k-mult .base{right:10px;top:12px}
+.t4 .tile:not(.w2):not(.w3):not(.poly) .base{right:11px;top:12px}
+.t4 .tile.w2 .base,.t4 .tile.w3 .base{right:22px;top:9px}
+.t4 .tile.poly .glyph{left:13px;transform:none;top:10px}
+.t4 .tile.k-boost .num,.t4 .tile.k-mult .num{margin-top:0;font-size:19px;transform:translateX(-3px)}
+.t4 .tile.k-boost .glyph,.t4 .tile.k-mult .glyph{transform:scale(.72)}
+.t4 .tile.k-boost .base,.t4 .tile.k-mult .base{padding:0 3px;min-width:0;right:3px!important;top:27px!important}
+.t4 .tile.k-boost:not(.sw) .num,.t4 .tile.k-mult .num{margin-top:3px}
+.t4 .tile.poly .base{right:5px;top:6px}
+.t4 .tile .chip{bottom:7px}
+.t4 .glyph rect{rx:1.6px}.t4 .glyph rect.o{rx:1.1px}
+.t4 .cell.x{background:repeating-linear-gradient(45deg,var(--panel2) 0 6px,var(--cellbg) 6px 12px)}
+.t4 .cell.slot.empty{background:var(--cellbg)}
+.t4 .clamp{border-radius:5px}
+.t4 .clamp.l,.t4 .clamp.r{height:calc(var(--len) * .46);top:calc(var(--p) - var(--len) * .23)}
+.t4 .clamp.t,.t4 .clamp.b{width:calc(var(--len) * .46);left:calc(var(--p) - var(--len) * .23)}
+.t4 .etile{height:50px}
+.t4 .enemy.ok .etile{border:3px solid var(--ok)}
+.t4 .hb,.t4 .abil{box-shadow:0 2px 0 var(--shadowc)}
+@media (prefers-color-scheme:dark){.t4{--bg:#15131f;--panel:#201d30;--panel2:#2b2840;--ink:#f0eefc;--muted:#a39fc0;--line:#3a3654;--cellbg:#1a1829;--ok:#3ecb9a;
+ --acc:#2cc9bb;--accedge:#15131f;--chipbg:#2cc9bb;--chipink:#0b2b28;--chipedge:#15131f;--enemy:#36315e;--btn:#f0eefc;--btnink:#15131f;--shadowc:rgba(0,0,0,.45);
+ --r:#ee6f66;--b:#6f97f6;--g:#47c58f;--y:#f0b93a;--p:#a98cf6;--n:#8f98b2}
+ .t4 .tile{--ti:#15131f;--gl:rgba(21,19,31,.85);--tsh:0 3px 0 rgba(0,0,0,.35)}
+ .t4 .tile.k-boost,.t4 .tile.k-mult{--ti:color-mix(in srgb,var(--tc) 70%,#fff);--bbg:color-mix(in srgb,var(--tc) 26%,var(--panel))}}
+
+/* ================= 5 GRID: tinted faces with fine outline, mono numbers bottom-left, line grid, orange stitches ================= */
+.t5{--rad:6px;--erad:7px;--numsz:30px;--cw:6px;--cbd:1.5px solid var(--line);--xbd:1.5px solid var(--line);--crad:6px;--pbd:0;--prad:4px;--hbr:8px;--brad:8px;--hbd:2px solid var(--line);--tbw:2px;--gx:5px;--gy:5px;--bx:5px;--by:5px;
+ --bg:#e9edf2;--panel:#fff;--panel2:#dde3ea;--ink:#0f1f2e;--muted:#55677a;--line:#c3ccd6;--cellbg:#f7f9fb;--ok:#14925a;--tmix:#0f1f2e;
+ --acc:#ff7a1a;--accedge:transparent;--chipbg:#0f1f2e;--chipink:#fff;--enemy:#fff;--enemyink:#0f1f2e;--btn:#0f1f2e;--btnink:#fff;--shadowc:rgba(15,31,46,.12);
+ --r:#e5483f;--b:#2f78e8;--g:#1f9f62;--y:#e4aa14;--p:#7f55e8;--n:#647488;
+ --pshort:color-mix(in srgb,var(--muted) 34%,var(--panel));--pok:color-mix(in srgb,var(--ok) 38%,var(--panel));--hpc:color-mix(in srgb,var(--r) 45%,var(--panel))}
+.t5 .tile{--tf:color-mix(in srgb,var(--tc) 20%,#fff);--ti:color-mix(in srgb,var(--tc) 42%,var(--tmix));--gl:var(--ti);--tbd:2px solid var(--tc);--bbg:var(--tc);--bink:#fff;--tsh:none}
+.t5 .tile.k-boost,.t5 .tile.k-mult{--tf:#fff;--ti:color-mix(in srgb,var(--tc) 70%,var(--tmix));--gl:var(--tc);--bbg:color-mix(in srgb,var(--tc) 22%,#fff);--bink:var(--ti)}
+.t5 .tile.k-mult{--tbd:2px dashed var(--tc)}
+.t5 .tile .nm{display:none}
+.t5 .tile .num{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:700}
+.t5 .tile:not(.poly) .num{position:absolute;left:7px;bottom:3px;margin:0;font-size:30px;letter-spacing:-.04em}
+.t5 .tile.k-boost:not(.poly) .num,.t5 .tile.k-mult:not(.poly) .num{font-size:20px}
+.t5 .tile .chip{left:auto;right:4px;transform:none;bottom:5px}
+.t5 .glyph rect{rx:0}.t5 .glyph rect.o{rx:0}
+.t5 .glyph rect.f{fill:none;stroke:currentColor;stroke-width:.5;opacity:.55}
+.t5 .poly>svg.ring{display:block;fill:var(--tc);stroke:var(--tc);stroke-width:24;stroke-linejoin:round}
+.t5 .poly>svg.body{fill:color-mix(in srgb,var(--tc) 20%,#fff);stroke:color-mix(in srgb,var(--tc) 20%,#fff);stroke-width:21}
+.t5 .clamp{box-shadow:none;border-radius:0;background:var(--acc)}
+.t5 .clamp.l,.t5 .clamp.r{width:5px;background:repeating-linear-gradient(180deg,var(--acc) 0 5px,transparent 5px 8px)}
+.t5 .clamp.t,.t5 .clamp.b{height:5px;background:repeating-linear-gradient(90deg,var(--acc) 0 5px,transparent 5px 8px)}
+.t5 .enemy{display:block;height:76px;background:var(--panel);border:2px solid var(--ink);border-radius:7px}
+.t5 .etile{height:50px;background:none;border:0!important;color:var(--ink);align-items:flex-start;padding:5px 6px 0;border-radius:0}
+.t5 .etile i{opacity:.65}
+.t5 .etile b{font-size:28px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:-.04em}
+.t5 .pbar{position:absolute;left:4px;right:4px;bottom:4px;height:18px;font-size:11.5px}
+.t5 .pbar span,.t5 .hpbar span{font-size:11.5px}
+.t5 .enemy.ok{border-color:var(--ok)}
+.t5 .hpbar{height:18px;border:0}
+.t5 .cell.slot.empty{border:1.5px dashed var(--line)}
+@media (prefers-color-scheme:dark){.t5{--bg:#0f1720;--panel:#18222e;--panel2:#212d3c;--ink:#e8eff7;--muted:#8fa2b6;--line:#2f3d4f;--cellbg:#131c26;--ok:#34c68a;--tmix:#ffffff;
+ --acc:#ff8a33;--chipbg:#e8eff7;--chipink:#0f1720;--enemy:#18222e;--enemyink:#e8eff7;--btn:#e8eff7;--btnink:#0f1720;--shadowc:rgba(0,0,0,.4);
+ --r:#f2625a;--b:#5a97f2;--g:#3bbf84;--y:#f0bd32;--p:#9a78f2;--n:#8497ae}
+ .t5 .tile{--tf:color-mix(in srgb,var(--tc) 24%,var(--panel));--ti:color-mix(in srgb,var(--tc) 55%,#fff);--bbg:var(--tc);--bink:#0f1720}
+ .t5 .tile.k-boost,.t5 .tile.k-mult{--tf:var(--panel);--ti:color-mix(in srgb,var(--tc) 70%,#fff);--bbg:color-mix(in srgb,var(--tc) 24%,var(--panel))}
+ .t5 .poly>svg.body{fill:color-mix(in srgb,var(--tc) 24%,var(--panel));stroke:color-mix(in srgb,var(--tc) 24%,var(--panel))}}
+</style>
+<body>
+<nav id="tabs" role="tablist" aria-label="Designs"></nav>
+<div class="wrap" id="panels"></div>
+
+<script>
+/* ===== content shared by every tab ===== */
+var BOARD = [
+ {id:'cpy', k:'copy',  c:'n', n:4, base:1, r:0, c0:0, reach:'d',  name:'ECHO', lane:true},
+ {id:'rt',  k:'a', c:'r', n:3, r:0, c0:1, reach:'f',  name:'STRIKE', brk:[['b']]},
+ {id:'fork',k:'a', c:'b', n:4, r:0, c0:2, reach:'lr', name:'FORK'},
+ {id:'yel', k:'a', c:'y', n:7, base:3, r:0, c0:3, reach:'f', name:'STRIKE', brk:[['b']]},
+ {id:'bl',  k:'a', c:'b', n:3, r:1, c0:0, reach:'f',  name:'STRIKE', brk:[['r']]},
+ {id:'gre', k:'a', c:'g', n:8, base:2, r:1, c0:1, reach:'f', name:'STRIKE', sand:4},
+ {id:'br',  k:'a', c:'b', n:2, r:1, c0:2, reach:'f',  name:'STRIKE', brk:[['l']]},
+ {id:'bst', k:'boost', c:'p', n:4, base:2, r:1, c0:3, reach:'u', name:'PLUS', sand:2},
+ {id:'mul', k:'mult',  c:'p', n:2, r:2, c0:0, reach:'r',  name:'DOUBLE'},
+ {id:'red2',k:'a', c:'r', n:4, base:2, r:2, c0:1, reach:'f', name:'STRIKE', brk:[['t'],['r']]},
+ {id:'wid', k:'a', c:'y', n:6, base:3, r:2, c0:2, w:2, reach:'f', name:'BAR', sand:2, brk:[['t',.5,1]]},
+ {id:'red3',k:'a', c:'r', n:2, r:2, c0:4, reach:'f', name:'STRIKE', brk:[['l']]}
+];
+var BLOCKED = [[0,4]];
+var HAND = [
+ {k:'a', c:'g', n:3, r:0, c0:0, w:2, h:2, poly:'L', reach:'f'},
+ {k:'a', c:'b', n:2, r:0, c0:2, w:3, reach:'f', name:'LINE'},
+ {k:'a', c:'r', n:4, r:1, c0:2, w:2, reach:'f', name:'BAR'},
+ {k:'boost', c:'p', n:1, r:1, c0:4, reach:'udlr', name:'PLUS'}
+];
+var HAND_EMPTY = [[1,0]];
+var ENEMIES = [
+ {c:0, w:1, hp:5,  label:'GUARD 2/2', dmg:[7], guard:true},
+ {c:1, w:1, hp:25, label:'HP',        dmg:[19]},
+ {c:2, w:2, hp:25, label:'HP · WIDE', dmg:[8,17]},
+ {c:4, w:1, hp:6,  label:'HP',        dmg:[2]}
+];
+var VARS = [
+ {key:'t0', tab:'Chosen', title:'Chosen', sub:'A2 enemies, S2 clamps, S1 chip', cap:false,
+  notes:['<b>Idea:</b> the tile-puzzle look kept as is. Sandwich = sturdy gold clamps (8 px, navy outline) in the gap on the two squeezing sides plus a navy chip with gold "×2/×4" that replaces the name. Bar-pill uses one text colour on a tinted fill, so no digit is ever cut. Principles: proximity (clamps sit in the gap), "as little design as possible", one accent.',
+   '<b>Fixes:</b> copy glyph now shows its lane (lit) and the copied cell (ring); the pill text is always dark on a pale fill; the ring of S1 is gone.']},
+ {key:'t1', tab:'Frame', title:'Frame', sub:'White faces in thick colour frames', cap:false,
+  notes:['<b>Idea:</b> common region and similarity: every tile is a white face inside a 4 px frame, so colour is a border not a flood; boosts have a dashed frame, multipliers a dotted one. Warm paper white, one ink accent (60-30-10: warm white, ink text, ink clamps). Ink pins instead of bars.',
+   '<b>Differs:</b> rounder 16 px tiles, heavier 900 numbers in dark-tinted colour (WCAG 4.5:1 on white), ink accent instead of gold, round pins, soft wells instead of dashed cells.']},
+ {key:'t2', tab:'Night', title:'Night', sub:'Deep navy, luminous flat tiles', cap:false,
+  notes:['<b>Idea:</b> strict 60-30-10: navy ground (60), slightly lighter surfaces and wells (30), warm-white accent (10) used only for the sandwich, Attack and chips. Dark navy numbers on bright fills for contrast; glued enemy card (slab + bar-pill as one object, common region); no names (hierarchy: the number).',
+   '<b>Differs:</b> dark in both schemes (a little lighter in light mode), no tile edge, 14 px radius, warm-white clamps and chip, enemy and bar fused into one card.']},
+ {key:'t3', tab:'Band', title:'Band', sub:'Pale tint, thick colour band on top', cap:false,
+  notes:['<b>Idea:</b> similarity and hierarchy: every attack tile has the same 8 px colour band, so colour reads from across the board while the number (32 px, dark) leads; boosts lose the band and get an outline. Dot lattice for empty cells so tiles are the only strong shapes. Sharper 9 px corners, brackets in ink.',
+   '<b>Differs:</b> tinted face with a band instead of a solid fill, number lower and bigger, glyph made of dots, no names, dot-lattice board, bracket-shaped clamps without outline.']},
+ {key:'t4', tab:'Disc', title:'Disc', sub:'Circles and capsules on round wells', cap:true,
+  notes:['<b>Idea:</b> closure and continuity: single cells are discs, wide pieces are capsules, the L is a bent capsule, so multi-cell tiles read as one object; round wells under them. One teal accent (10%) for clamps and chips; pastel-saturated fills with dark ink numbers (contrast). Touch size unchanged (about 68 px).',
+   '<b>Differs:</b> fully round shapes, glyph scaled into the upper left of the disc, base chip upper right, short teal pill clamps, capsule enemy slabs, lilac neutral.']},
+ {key:'t5', tab:'Grid', title:'Grid', sub:'Swiss grid: left-aligned mono numbers, fine outline', cap:false,
+  notes:['<b>Idea:</b> alignment and a type scale: the number is always bottom-left in a heavy monospace, the glyph top-left, base top-right, chip bottom-right, so every tile has the same four anchor points (8 px rhythm). Line grid board, thin 2 px outlines, enemy as an outlined card with the bar-pill inside; one orange accent as "stitches" across the gap.',
+   '<b>Differs:</b> sharp 6 px corners, tinted face with a fine border, left-aligned mono numbers instead of centred, outlined enemy cards, stitched dashes instead of bars, faint cells in the glyph drawn as outlines.']}
+];
+var CUR = null;
+
+/* ===== helpers ===== */
+function cellsOf(t){
+  if (t.poly==='L') return [[0,0],[0,1],[1,1]];
+  var w = t.w||1, a=[]; for (var j=0;j<w;j++) a.push([0,j]); return a;
+}
+function glyph(t){
+  var fp = cellsOf(t), W=0, H=0;
+  fp.forEach(function(p){ W=Math.max(W,p[1]+1); H=Math.max(H,p[0]+1); });
+  W += 2; H += 2;
+  fp = fp.map(function(p){return [p[0]+1,p[1]+1];});
+  var has = function(r,c){ return fp.some(function(p){return p[0]===r&&p[1]===c;}); };
+  var on = [], src = [];
+  var cols = {}; fp.forEach(function(p){ if (cols[p[1]]==null || p[0]<cols[p[1]]) cols[p[1]]=p[0]; });
+  var cs = Object.keys(cols).map(Number), mn=Math.min.apply(null,cs), mx=Math.max.apply(null,cs);
+  if (t.k==='a'){
+    if (t.reach.indexOf('f')>=0) cs.forEach(function(c){ on.push([cols[c]-1,c]); });
+    if (t.reach.indexOf('l')>=0) on.push([cols[mn]-1,mn-1]);
+    if (t.reach.indexOf('r')>=0) on.push([cols[mx]-1,mx+1]);
+  } else if (t.k==='copy') {
+    cs.forEach(function(c){ on.push([cols[c]-1,c]); });            /* its own attack lane */
+    fp.forEach(function(p){                                         /* the cell it copies */
+      var r=p[0], c=p[1];
+      if (t.reach==='u') src.push([r-1,c]); if (t.reach==='d') src.push([r+1,c]);
+      if (t.reach==='l') src.push([r,c-1]); if (t.reach==='r') src.push([r,c+1]);
+    });
+  } else {
+    fp.forEach(function(p){
+      var r=p[0], c=p[1];
+      if (t.reach.indexOf('u')>=0 && !has(r-1,c)) on.push([r-1,c]);
+      if (t.reach.indexOf('d')>=0 && !has(r+1,c)) on.push([r+1,c]);
+      if (t.reach.indexOf('l')>=0 && !has(r,c-1)) on.push([r,c-1]);
+      if (t.reach.indexOf('r')>=0 && !has(r,c+1)) on.push([r,c+1]);
+    });
+  }
+  var h = '<svg class="glyph" viewBox="0 0 '+W*4+' '+H*4+'" style="width:'+(W*6.6)+'px;height:'+(H*6.6)+'px" aria-hidden="true">';
+  for (var r=0;r<H;r++) for (var c=0;c<W;c++){
+    if (has(r,c)) { h += '<rect class="o" x="'+(c*4+.9)+'" y="'+(r*4+.9)+'" width="2.2" height="2.2" rx=".7" fill="none" stroke="currentColor" stroke-width="1"/>'; continue; }
+    if (src.some(function(p){return p[0]===r&&p[1]===c;})) { h += '<circle class="s" cx="'+(c*4+2)+'" cy="'+(r*4+2)+'" r="1.35" fill="none" stroke="currentColor" stroke-width=".9"/>'; continue; }
+    var lit = on.some(function(p){return p[0]===r&&p[1]===c;});
+    h += '<rect class="'+(lit?'l':'f')+'" x="'+(c*4+.4)+'" y="'+(r*4+.4)+'" width="3.2" height="3.2" rx=".8" fill="currentColor"/>';
+  }
+  return h+'</svg>';
+}
+function numTxt(t){ return t.k==='boost' ? '+'+t.n : t.k==='mult' ? '×'+t.n : t.n; }
+function baseTxt(t){ return t.k==='boost' ? '+'+t.base : t.base; }
+function tileHTML(t){
+  var w=t.w||1, h=t.h||1;
+  var cls = 'tile c-'+t.c+' k-'+t.k+(w>1?' w'+w:'')+(t.poly?' poly':'')+(t.sand?' sw sw'+t.sand:'');
+  var body = '';
+  if (t.poly) {
+    var pts = '<polygon points="12,12 88,12 88,88 64,88 64,36 12,36"/>';
+    body = '<svg class="ring" viewBox="0 0 100 100" aria-hidden="true">'+pts+'</svg><svg class="body" viewBox="0 0 100 100" aria-hidden="true">'+(CUR.cap?'<path d="M24 24H76V76" fill="none" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>':pts)+'</svg>';
+  }
+  var clamps = (t.brk||[]).map(function(b){
+    var e=b[0], f=b[1]==null?0:b[1], to=b[2]==null?1:b[2];
+    return '<span class="clamp '+e+'" style="--p:'+((f+to)/2*100)+'%;--len:'+((to-f)*64)+'%"></span>';
+  }).join('');
+  return '<div class="'+cls+'" data-id="'+(t.id||'')+'" style="grid-column:'+(t.c0+1)+' / span '+w+';grid-row:'+(t.r+1)+' / span '+h+'">'
+   + body + glyph(t) + (t.base!=null?'<em class="base">'+baseTxt(t)+'</em>':'')
+   + '<b class="num">'+numTxt(t)+'</b>' + (t.name?'<i class="nm">'+t.name+'</i>':'')
+   + (t.sand?'<em class="chip">×'+t.sand+'</em>':'') + clamps + '</div>';
+}
+var CHK = '<span class="chk"><svg viewBox="0 0 12 12"><path d="M2 6.5l3 3 5-7"/></svg></span>';
+function enemyHTML(e){
+  var tot = e.dmg.reduce(function(x,y){return x+y;},0), ok = tot>=e.hp, pct = Math.min(100,tot/e.hp*100);
+  var txt = e.dmg.length>1 ? e.dmg.join(' + ')+' / '+e.hp : tot+' / '+e.hp;
+  return '<div class="enemy'+(ok?' ok':'')+'" data-c="'+e.c+'" data-w="'+e.w+'" style="grid-column:'+(e.c+1)+' / span '+e.w+'">'
+   + (ok?CHK:'') + '<div class="etile"><i'+(e.guard?' class="gl"':'')+'>'+e.label+'</i><b>'+e.hp+'</b></div>'
+   + '<div class="pbar"><u style="width:'+pct+'%"></u><span>'+txt+'</span></div></div>';
+}
+var IC = {
+ back:'<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>',
+ menu:'<svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"/></svg>',
+ heart:'<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/></svg>',
+ plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>'
+};
+function mockup(v){
+  CUR = v;
+  var h = '<div class="m '+v.key+'">';
+  h += '<div class="hd"><button class="hb" aria-label="Back">'+IC.back+'</button><div class="ttl">Mesa<small>Fight 3 of 5</small></div><button class="hb" aria-label="Menu">'+IC.menu+'</button></div>';
+  h += '<div class="hint">Tap a tile to see what it reaches.</div>';
+  h += '<div class="enemies">'+ENEMIES.map(enemyHTML).join('')+'</div>';
+  h += '<div class="boardwrap"><div class="board">';
+  var occ = {};
+  BOARD.forEach(function(t){ var w=t.w||1; for (var j=0;j<w;j++) occ[t.r+','+(t.c0+j)]=1; });
+  for (var r=0;r<3;r++) for (var c=0;c<5;c++){
+    var blocked = BLOCKED.some(function(b){return b[0]===r&&b[1]===c;});
+    if (occ[r+','+c]) continue;
+    h += '<div class="cell'+(blocked?' x':'')+'" data-r="'+r+'" data-c="'+c+'" style="grid-row:'+(r+1)+';grid-column:'+(c+1)+'"></div>';
+  }
+  BOARD.forEach(function(t){ h += tileHTML(t); });
+  h += '</div></div>';
+  h += '<div class="hero">'+IC.heart+'<div class="hpbar"><u></u><span>18 / 24</span></div><button class="abil">'+IC.plus+'Mend<small>1×</small></button></div>';
+  h += '<div class="hand">';
+  HAND_EMPTY.forEach(function(p){ h += '<div class="cell slot empty" style="grid-row:'+(p[0]+1)+';grid-column:'+(p[1]+1)+'"></div>'; });
+  HAND.forEach(function(t){ h += tileHTML(t); });
+  h += '</div>';
+  h += '<div class="bar"><button class="clear">Clear</button><button class="go">Attack<small>53</small></button></div>';
+  return h+'</div>';
+}
+/* ===== build page ===== */
+var tabs = document.getElementById('tabs'), panels = document.getElementById('panels');
+VARS.forEach(function(v,i){
+  var b = document.createElement('button'); b.textContent = v.tab; b.setAttribute('role','tab'); b.setAttribute('aria-selected', i===0); b.dataset.k = v.key;
+  b.onclick = function(){ show(v.key); }; tabs.appendChild(b);
+  var p = document.createElement('section'); p.className='panel'; p.id='p-'+v.key; p.hidden = i!==0;
+  p.innerHTML = '<div class="ptitle"><b>'+i+' · '+v.title+'</b> — '+v.sub+'</div>' + mockup(v) + '<div class="notes">'+v.notes.map(function(n){return '<p>'+n+'</p>';}).join('')+'</div>';
+  panels.appendChild(p);
+});
+function show(k){
+  [].forEach.call(tabs.children, function(b){ b.setAttribute('aria-selected', b.dataset.k===k); });
+  [].forEach.call(panels.children, function(p){ p.hidden = p.id!=='p-'+k; });
+  history.replaceState(null,'','#'+k);
+}
+if (/^#t[0-5]$/.test(location.hash)) show(location.hash.slice(1));
+/* tap a board tile to highlight what it reaches */
+panels.addEventListener('click', function(e){
+  var t = e.target.closest('.tile'); var m = e.target.closest('.m'); if (!m) return;
+  var was = t && t.classList.contains('sel');
+  [].forEach.call(m.querySelectorAll('.sel,.aff,.tgt'), function(x){ x.classList.remove('sel','aff','tgt'); });
+  if (!t || was || !t.dataset.id) return;
+  var d = BOARD.filter(function(b){return b.id===t.dataset.id;})[0]; if (!d) return;
+  t.classList.add('sel');
+  var w = d.w||1;
+  var cellAt = function(r,c){ return m.querySelector('.board .cell[data-r="'+r+'"][data-c="'+c+'"]') || [].filter.call(m.querySelectorAll('.board .tile[data-id]'), function(x){ var b=BOARD.filter(function(q){return q.id===x.dataset.id;})[0]; return b.r===r && c>=b.c0 && c<b.c0+(b.w||1); })[0]; };
+  if (d.k==='a' || d.lane){
+    var cs=[]; if (d.lane || d.reach.indexOf('f')>=0) for (var j=0;j<w;j++) cs.push(d.c0+j);
+    if (d.k==='a' && d.reach.indexOf('l')>=0) cs.push(d.c0-1);
+    if (d.k==='a' && d.reach.indexOf('r')>=0) cs.push(d.c0+w);
+    [].forEach.call(m.querySelectorAll('.enemy'), function(en){ var c0=+en.dataset.c, ew=+en.dataset.w; if (cs.some(function(c){return c>=c0&&c<c0+ew;})) en.classList.add('tgt'); });
+  }
+  if (d.k!=='a'){
+    var r=d.reach, tg=[];
+    if (r.indexOf('u')>=0) for (var j2=0;j2<w;j2++) tg.push([d.r-1,d.c0+j2]);
+    if (r.indexOf('d')>=0) for (var j3=0;j3<w;j3++) tg.push([d.r+1,d.c0+j3]);
+    if (r.indexOf('l')>=0) tg.push([d.r,d.c0-1]);
+    if (r.indexOf('r')>=0) tg.push([d.r,d.c0+w]);
+    tg.forEach(function(p){ var el = cellAt(p[0],p[1]); if (el) el.classList.add('aff'); });
+  }
+});
+</script>
+</body>
+</html>
