@@ -293,3 +293,107 @@ Prototype: `prototype/samples/tile-run.html`, details in `docs/TILE_RUN_PROTOTYP
 - **Relics:** twelve run-only perks, at most three per run, one sentence each, always listed under the board and on the run map. Offered one of three after each elite and, in Endless, after each boss; in the campaign the boss ends the stage so relics come only after the stage's elite. Perks that were order dependent or hard to show (first tile doubled, boosts boosting boosts, free colour choice) were dropped.
 - **Puzzle shrines:** a "Puzzles" list on Home with 15 hand-made one-attack puzzles that use the game's rules, unlocked with the stages, each teaching one idea; first solve pays, replays are free, retry is instant. A brute-force solver script that shares the rules code verified every puzzle (2 to 64 layouts each; at most 1.1 percent of random fills win) and stored solutions are used for testing. A daily puzzle is generated from the date with a hidden solution built first, one small reward per day.
 - **Left for later (12.8):** beasts and monsters as faces, the map as stage select, camp and item marks. The puzzle shrines are a list on Home for now.
+
+## 14. Progression brainstorm: collectable coloured tiles, units, rainbow, map (not built)
+
+Status: brainstorm only. Nothing here is implemented. Home screen choice so far: layout C "Focus" (one big Continue tile, pips, small row).
+
+### 14.1 The user's proposal
+
+1. Coloured tiles become collectable. After beating a boss the player may keep one coloured tile gained in that run.
+2. Only tiles that were new in the run can be kept. Upgrades made during a run are reset when the run ends.
+3. Kept tiles can merge and gain stars like colourless tiles.
+4. Each unit has only 3 base tiles. Unit level-ups upgrade those 3 tiles and nothing else.
+5. Units also have extra slots, gained by level or bought, which hold collected tiles.
+6. Units come from gacha. Higher rarity units have better base tiles.
+7. Stages get progressively longer; higher stages give a higher chance of better tiles.
+8. New tile kind: Rainbow. A universal colour that can sandwich with every colour. Animated five-colour border.
+9. Colourless tiles cannot sandwich, so their base values must be strong to compensate (a coloured tile can reach x4 or more).
+10. Open question from the user: should tiles be gacha too?
+11. The stage select is a field of stage tiles that expands in all directions from an origin; the further from the origin, the harder. Each stage tile carries art built from the earlier tile-defense tilesets (a 3x3 or 5x5 picture), so progress gradually opens the map.
+
+### 14.2 Review
+
+What works well
+- It answers the old complaint "the unit types don't change until endgame": the unit is a small fixed identity (3 tiles) and the slots are where the player's own collection shows.
+- A run now ends with a lasting, chosen reward (one tile), which gives a reason to replay stages without raising stakes or adding rules.
+- "Upgrades reset, only new tiles are kept" is one sentence and keeps permanent power under control.
+- Three tile families with one-line identities:
+  - Coloured: normal value, can be sandwiched and can be bread.
+  - Colourless: high value, never part of a sandwich.
+  - Rainbow: low value, counts as every colour.
+- The map as a growing field of tiles uses the game's own picture (a board that fills up) for the meta game.
+
+Risks and how to handle them
+- Too many power axes (unit rarity, unit level, slots, tile rarity, stars). Suggestion: let each axis do one job.
+  - Unit rarity = more interesting base tiles (shapes, lanes, a boost or multiplier in the kit), not simply bigger numbers. A common unit should stay usable.
+  - Unit level = numbers on the 3 base tiles (+1 steps), with the existing level 5 branch A/B kept as the one big choice.
+  - Slots = how much of the collection a unit can carry (start 1, up to 3 or 4).
+  - Tile stars = numbers on collected tiles.
+- Bag size and hand clutter. With 5 units x (3 base + up to 4 slots) + 3 colourless the bag could reach 38 tiles. Suggest a cap near 25: 3 base + 2 slots per unit by default, a third slot late.
+- Kept tiles should be bound to a colour, not to a unit, so changing the red unit does not strand the red collection.
+- Rainbow rule must stay one sentence: "A rainbow tile counts as every colour." Under the existing sandwich rule this gives:
+  - As bread: a rainbow and any coloured tile (or two rainbows) bracket a tile.
+  - As filling between two tiles of one colour: doubled, since it also has other colours.
+  - As filling between two rainbows: not doubled (it has no colour the bread lacks). Slightly odd but follows from the rule; alternatively state "rainbow bread always works" as the single exception. To decide when prototyping.
+  - Rainbow is strong as bread, so keep it rare and low in base value, and limit how many fit in a bag (e.g. 2).
+- Where rainbow tiles live: simplest is "a rainbow tile fits any unit's slot". The existing in-run upgrade "second colour" could have rainbow as its top step (one colour, two colours, rainbow), but since upgrades reset that would be run-only; permanent rainbows would be rare boss drops.
+- Colourless value: with every bracketed line now counting (x2, x4, x8 for wide tiles) a colourless tile needs roughly 2x to 3x the number of a coloured tile of the same shape to be a real choice. To tune later; flag only.
+- Longer stages versus "short and casual". Suggest length grows by ring, with a ceiling: ring 1 = 3 fights + boss, ring 2 = 4, ring 3 = 5, ring 4+ = 6 with a mid-boss. Runs already save and resume. One keep per boss (so a mid-boss gives a second keep on long stages).
+- Losing a run: options (to decide)
+  a. Keep nothing but coins (clear, but harsh).
+  b. Keep is only offered on a boss win (same thing, phrased as a reward).
+  c. On defeat keep one random new tile at Common quality.
+  Recommendation: b. No penalty wording, the boss is simply where tiles are earned.
+
+Should tiles be gacha too?
+- Recommendation: no. Units from gacha, tiles from play. Reasons: two gachas split the currency and the excitement; tiles earned from stages give every stage a purpose (its drop table); it keeps "reward creativity" (you earn the tile by using it in a run you won).
+- Softer alternatives if more sources are wanted: a small daily tile shop for coins (3 offers), a forge that merges three unwanted tiles into one random tile of the same rarity, the daily puzzle paying one tile.
+
+### 14.3 More ideas in the same direction
+
+Units and gacha
+- Rarity tiers Common / Rare / Epic (same words and edge colours as tiles).
+- Duplicate units convert to level shards for that unit, so a pull is never wasted.
+- A visible pity counter; pulls paid with coins earned in play (prototype has no real money).
+- Each unit's 3 base tiles follow a pattern the player can read at a glance: 2 attack tiles + 1 signature tile (the boost, multiplier, copy or big shape that defines the unit).
+- Starter team is five Commons, one per colour.
+
+Collected tiles
+- Every stage shows its drop table on the map: which colours, which tile kinds, best rarity. Higher rings add rarity chance and bigger shapes.
+- Signature drops: one special tile per boss that only that boss gives (a chase, and a reason to revisit).
+- In-run picks stay as they are (new tile / upgrade / heal). The new tiles picked during the run are the candidates for the keep.
+- The keep screen shows the candidates at base value with the note "upgrades are not kept".
+- Duplicates merge into stars (as colourless do now). A codex screen lists every tile seen and owned.
+- Loadout: per unit, drag owned tiles of its colour into its slots; presets later.
+
+Map
+- Origin tile in the centre; neighbours are revealed (dashed) when an adjacent stage is cleared; ring distance = difficulty and run length.
+- Each direction is a region with its own tileset art and its own colour bias for drops (for example north = snow = blue tiles), so the player chooses a direction to get what the team lacks.
+- Stage art: each stage tile is a 3x3 (ring 1 to 2) or 5x5 (later rings) picture made of the old tile-defense tileset tiles. Battle screens stay abstract; art appears only on the map.
+- Special cells among the stages: puzzle shrines (the current 15 puzzles placed on the map), the Endless gate (ring 3), a hero shrine, a shop.
+- The core rule on the map: a stage lying between two cleared stages of the same region is "sandwiched" and gives a bonus (double coins or a better drop chance). One rule, reused, and it rewards choosing a route.
+- Home (layout C) keeps the big Continue tile; its face becomes the art of the next stage and the pips become a tiny map; tapping it opens the full map.
+- Stars or a tick per stage for one-attack clears, as a quiet optional goal (not a mission row in battle).
+
+Rainbow look
+- Options are being drawn in `prototype/samples/tile-run-rainbow.html`: animated or static five-colour borders in the game's muted colours, calm and distinct from two-colour tiles, gold clamps and rarity edges.
+
+### 14.4 Open questions for the user
+
+1. Losing a run: nothing kept except coins (option b above), or a small consolation?
+2. Slots: how many per unit at most (2, 3 or 4), and bought with coins, earned by level, or both?
+3. Rainbow between two rainbows: follow the plain rule (not doubled) or allow it?
+4. Rainbow source: boss-only drops, gacha units' base tiles, or both?
+5. Does unit rarity change numbers at all, or only the kind of base tiles?
+6. Map shape: square grid like the board (4 neighbours) or free in 8 directions; and roughly how many stages (25 = 5x5, 49 = 7x7)?
+7. Do the current 10 campaign stages become the first cells of the map, with the list removed?
+
+### 14.5 Suggested build order (when coding starts)
+
+1. Home screen layout C.
+2. Unit rework: 3 base tiles + slots, level-ups upgrade base tiles; coloured tile inventory; keep-one after a boss; upgrades reset.
+3. Rainbow tile kind and its sandwich rule.
+4. Map as stage select (abstract cells first, art after).
+5. Unit gacha with coins.
+6. Balance pass (colourless values, slot counts, drop tables).
