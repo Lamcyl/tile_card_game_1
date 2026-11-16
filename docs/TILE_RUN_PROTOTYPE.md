@@ -8,11 +8,11 @@ File: `prototype/samples/tile-run.html` (one file, inline CSS/JS, no network, no
 
 # Fifth iteration: progression rework (collectable tiles, units, rainbow, gacha, map)
 
-Implements `TILE_PUZZLE_DESIGN.md` section 14. Save key `tileRunPrototype.v4` (old saves are not migrated: a fresh save has the five Commons, 60 coins and the origin cell available). New CONFIG keys are listed at the end of this section.
+Implements `TILE_PUZZLE_DESIGN.md` section 14. Save key `tileRunPrototype.v5` (sixth round; old saves are not migrated: a fresh save has the five starter Commons, 60 coins, 0 shards and the origin cell available). New CONFIG keys are listed at the end of this section.
 
-## Units (15): rarity, base tiles, effect, slots
+## Units (30): rarity, base tiles, effect, slots
 
-One unit per colour is in the team (the colours in play grow with the tier). Each unit has exactly **3 base tiles** (two attackers and a signature tile: boost, multiplier, copy or a big shape), **one passive effect** (one sentence, scoped to the unit's colour, also to a rainbow tile sitting in its slot) and **slots** for collected tiles. Rarity changes the kind of base tiles and the strength of the effect, not just the numbers. Unit level 1 to 5 only raises the numbers of the 3 base tiles (attacks +1 per level, boosts and copies +1 at levels 3 and 5, multipliers +1 at level 5). The old level 5 branches A/B were **dropped** (kept simple). The old stage level cap and the 40 coin unlock were dropped.
+Six units per colour (3 Common, 2 Rare, 1 Epic). One unit per colour is in the team (the colours in play grow with the tier). Each unit has exactly **3 base tiles** (two attackers and a signature tile: boost, multiplier, copy or a big shape), **one passive effect** (one sentence, scoped to the unit's colour, also to a rainbow tile sitting in its slot) and **slots** for collected tiles. Rarity changes the kind of base tiles and the strength of the effect, not just the numbers. Unit level 1 to 5 only raises the numbers of the 3 base tiles (attacks +1 per level, boosts and copies +1 at levels 3 and 5, multipliers +1 at level 5). The old level 5 branches A/B were **dropped** (kept simple). The old stage level cap and the 40 coin unlock were dropped.
 
 | Colour | Unit | Rarity | Base tiles at level 1 (level 5) | Effect | Max slots |
 |---|---|---|---|---|---|
@@ -31,11 +31,31 @@ One unit per colour is in the team (the colours in play grow with the tier). Eac
 | Purple | Dusk | Common | `a<>3 a^4 a<^>2` (`a<>7 a^8 a<^>6`) | Attack tiles of this colour that hit 2 or more columns get +1. | 1 |
 | Purple | Hex | Rare | `a^4 a<>3 eu1` (`a^8 a<>7 eu3`) | Attack tiles of this colour get +3 while they are sandwiched. | 2 |
 | Purple | Wisp | Epic | `a^6 a<^>3#h2 pR2` (`a^10 a<^>7#h2 pR4`) | Back-row attack tiles of this colour deal double. | 3 |
-Slots start closed and are bought with coins, rising price (`CONFIG.slotCost` 40, 90, 160; maximum Common 1, Rare 2, Epic 3). Tiles in slots join the bag at run start with the 3 base tiles (bag at most 5 x (3 + 3), plus 3 colourless). Effects are implemented in `evaluate` through `F.fx = { colour: effect id }` (set from the team at fight start), the same way relics use `F.relics`; they show in the live totals and in the card breakdown ("relics and effects"). The effect is shown on the unit card, on the effect line under the fight board for the active colour tab, and in a hold-card on the colour tab. Unit tiles are not gated by the tier any more (the player owns them); only generated loot and picks are.
+Sixth round: 15 units added (rows marked new). Starter team (`CONFIG.starters`): Ember, Tide, Moss, Glint, Dusk. The gacha pool grew with the units (15 Common, 10 Rare, 5 Epic; odds unchanged).
+
+| Colour | Unit (new) | Rarity | Base tiles at level 1 | Effect | Max slots |
+|---|---|---|---|---|---|
+| Red | Flare | Common | `a^4 a>3 pl2` | Attack tiles in the left or right edge column get +2. | 1 |
+| Red | Scorch | Common | `a^3 a^3 pr1` | Attack tiles with a number of 3 or less get +2. | 1 |
+| Red | Pyre | Rare | `a^4 a<>3 pR2` | Row, column and cross boost tiles are doubled. | 2 |
+| Blue | Ripple | Common | `a^4 a^3 plr1` | Attack tiles get +1 for each tile of this colour touching them. | 1 |
+| Blue | Brine | Common | `a<>3 a^4 pd1` | Attack tiles get +2 while no tile of another colour touches them. | 1 |
+| Blue | Fjord | Rare | `a^4 a<>3 el2` | Copy tiles get +2. | 2 |
+| Green | Fern | Common | `a^4 a<3 pr2` | Attack tiles get +1 for each other tile in their row. | 1 |
+| Green | Bramble | Common | `a^4 a^3 pd2` | Attack tiles get +1 for each sandwiched tile on the board. | 1 |
+| Green | Willow | Rare | `a^4 a<>3 xd2` | Attack tiles that are multiplied (multiplier tile or x2 cell) get +2 first. | 2 |
+| Yellow | Gleam | Common | `a>4 a<3 pu1` | Attack tiles in a corner of the board get +3. | 1 |
+| Yellow | Amber | Common | `a^3 a^3 a<>2` | Attack tiles get +1 for every enemy still standing. | 1 |
+| Yellow | Sunbeam | Rare | `a^4 a<>3 pC2` | Rare and Epic attack tiles get +3. | 2 |
+| Purple | Shade | Common | `a^5 a^2 pd2` | Attack tiles that receive a boost get +2. | 1 |
+| Purple | Veil | Common | `a^4 a^3 pr1` | Attack tiles upgraded in the run (number or second colour) get +2 more. | 1 |
+| Purple | Gloom | Rare | `a^3 a<^>3 a^5#v2` | Attack tiles get +1 for each other tile in their column. | 2 |
+
+All effects are scoped to the unit's colour (a slotted rainbow tile takes the host colour). Slots start closed and are bought with **shards** (`CONFIG.slotCost` 8, 16, 30; maximum Common 1, Rare 2, Epic 3). Tiles in slots join the bag at run start with the 3 base tiles (bag at most 5 x (3 + 3), plus 3 colourless). Effects are implemented in `evaluate` through `F.fx = { colour: effect id }` (set from the team at fight start), the same way relics use `F.relics`; they show in the live totals and in the card breakdown ("relics and effects"). The effect is shown on the unit card, on the effect line under the fight board for the active colour tab, and in a hold-card on the colour tab. Unit tiles are not gated by the tier any more (the player owns them); only generated loot and picks are.
 
 ## Recruiting (gacha), shards, levels
 
-Single pull, `CONFIG.gacha.cost` 30 coins (a new save has 60). Odds: Common 70 %, Rare 24 %, Epic 6 %, each pool shared evenly by its 5 units (shown in Team). Pity: an Epic at the latest on every 20th pull since the last Epic (counter shown). A duplicate gives 3 shards for that unit (all rarities); shards level the unit (2: 3, 3: 6, 4: 9, 5: 15). **Levels cannot be bought with coins** (shards only). Unowned units cannot be picked. Starter team: Ember, Tide, Moss, Glint, Dusk (the Commons).
+Single pull, `CONFIG.gacha.cost` 30 coins (a new save has 60). Odds: Common 70 %, Rare 24 %, Epic 6 %, each pool shared evenly by its units (shown in Team). Pity: an Epic at the latest on every 20th pull since the last Epic (counter shown). **Shards are one shared pool** (`store.shards`, shown next to coins on Team). A duplicate pull gives shards by rarity (`CONFIG.gacha.shards` 3 / 6 / 12). Shards pay unit levels (any unit; 2: 3, 3: 6, 4: 9, 5: 15) and unit slots (8, 16, 30). **Coins are not used on units** except recruit pulls. Unowned units cannot be picked. Starter team: Ember, Tide, Moss, Glint, Dusk (the Commons).
 
 ## Tile families
 
@@ -47,11 +67,19 @@ Single pull, `CONFIG.gacha.cost` 30 coins (a new save has 60). Odds: Common 70 %
 
 ## Collecting: keep one after a boss
 
-In-run picks are unchanged (new tile, upgrade, heal) but the new tiles now come from the cell's **drop table** (colour weights, rarity odds, shape odds). After beating a boss (the final boss and the mid-boss of long runs; not Endless) the player may keep **one** coloured tile that was new in this run (or the boss's rainbow drop). Upgrades made in the run are not kept: candidates are shown at base value and the screen says so. Defeat or leaving keeps no tile (coins as before; an earlier mid-boss keep stays). Kept tiles go to a coloured-tile inventory bound to the colour (rainbow: any unit); duplicates merge into stars (+1 each, cap 3) like colourless ones. Team, "Loadout" per unit puts owned tiles into open slots (tap to put in or take out; a tile sits in one slot only).
+In-run picks are unchanged (new tile, upgrade, heal) but the new tiles now come from the cell's **drop table** (colour weights, rarity odds, shape odds). After beating a boss (the final boss and the mid-boss of long runs; not Endless) the player may keep **one** coloured tile that was new in this run (or the boss's rainbow drop). Upgrades made in the run are not kept: candidates are shown at base value and the screen says so. Defeat or leaving keeps no tile (coins as before; an earlier mid-boss keep stays). Kept tiles go to a coloured-tile inventory bound to the colour (rainbow: any unit); **three identical tiles merge into one tile of the next star level** (see Stars), like colourless ones. The keep screen shows identical candidates once with a count (x2). Team, "Loadout" per unit puts owned tiles into open slots (tap to put in or take out; a tile sits in one slot only).
+
+## Stars (sixth round)
+
+For both inventories (colourless `store.inv`, collected `store.ct`): `CONFIG.stars = { on, cap: 5, need: 3, bonus: 1 }`. Three identical tiles of one star level merge into one tile of the next (3 copies = 1 star, 9 = 2, 27 = 3, 81 = 4, 243 = 5; 244 = one 5-star plus a spare). Identical = same colour, kind, directions, shape, base number and rarity. So up to 2 spare copies per star level exist; identical entries show as one stack with a "x2" count (inventory, loadout, keep screen, loot lists). Each star adds `bonus` to the number. A copy in a slot or in the colourless bag still counts; the merged tile takes the slot (or bag place) of a consumed slotted copy, a second slotted copy frees its slot. The tile card says "2 of 3 for ★". Rules code: `mergeStars`, `starN`, `starKey`, `starCount`, `groupCands`. In the loadout, tapping a stack slots one copy per tap (taking one out when all copies are already in the unit); in the colourless bag a tap cycles 0 to all copies.
+
+## Heroes (sixth round)
+
+Heroes are not bought. `CONFIG.heroUnlock`: Sora 2, Lumi 5, Brak 9, Tove 14 map cells cleared (Kiri is free). Checked when a stage is cleared for the first time; the cleared screen shows "New hero: Sora (Second Wind)" and locked heroes in the hero panel show "Clear 5 stages (3 / 5)". `heroCost` was removed.
 
 ## The map (home screen)
 
-The home screen is a square map around the origin (0,0), 7x7 (`CONFIG.map.radius` 3), x east, y south. Cleared cells are filled, cells adjacent to a cleared one (and the origin at the start) are revealed (dashed until cleared), everything else is blank. The grid shown grows with the revealed area; it scrolls inside its box (centred on the selected cell, no pinch). The selected cell is the raised navy tile; below it a card (name, region, distance, board, colours, steps, boss trick, drop table) and a big Play / Replay / Continue button; a quiet row has Puzzles (daily inside), Endless, Hero, Team (units, recruiting, loadouts, collected tiles) and More (settings, help, test helpers). Coins top right.
+The home screen is a square map around the origin (0,0), 7x7 (`CONFIG.map.radius` 3), x east, y south. Cleared cells are filled, cells adjacent to a cleared one (and the origin at the start) are revealed (dashed until cleared), everything else is blank. The grid shown grows with the revealed area; it scrolls inside its box (centred on the selected cell, no pinch). Cells show **only their art** (no number): cleared = full art with the tick, available = dimmed art with a dashed border, selected = raised; the gold origin marker and the gold current-run outline stay. Difficulty and area appear only on the selected cell's card below the map (name, region, "Difficulty N", distance, board, colours, steps, boss trick, drop table) and a big Play / Replay / Continue button; a quiet row has Puzzles (daily inside), Endless, Hero, Team (units, recruiting, loadouts, collected tiles) and More (settings, help, test helpers). Coins top right.
 
 * **Tier by distance** d = |x| + |y|: d0 tier 1, d1 tier 2, d2 tier 3, d3 tier 4 or 5, d4 tier 6 or 7, d5 tier 8 or 9, d6 tier 10 (the two options at a distance are picked per cell by a position hash). The ten old stage definitions (board, enemy numbers, boss trick, introduced tile kinds) are the ten tiers.
 * **Run length** (path choices before the final boss) by distance, with a mid-boss (a weaker boss with a trick from an earlier tier) on runs of 6 or more; each boss gives a keep. Elites at step 2 and, on runs of 6 or more, at length - 2.
@@ -72,24 +100,35 @@ The home screen is a square map around the origin (0,0), 7x7 (`CONFIG.map.radius
 
 ## CONFIG additions
 
-`startCoins` (60), `colourlessFactor` (2), `gacha` (`cost`, `odds`, `pity`, `shards`, `levelShards`), `slotCost`, `slotMax`, `rainbow` (`tier`, `chance`, `maxTeam`), `midBoss` (hp, atk, coin factors), `drop` (`rare`, `epic`, `rainbow`, `shape` arrays by distance), `map` (`radius`, `tiersByDist`, `lenByDist`, `midFrom`, `endlessDist`), `regions` (name, colour bias, name words). Removed: `levelCost`, `unlockCost`, stage `cap`. `CONFIG.stages` are now the tiers. Rules code additions: `EFFECTS`, `UNITS` (`base`, `rar`, `fx`), `unitBase`, `dropFor`, `genRainbow`, `keepCands` / `applyKeep`, `gachaRoll`, `mapCells` / `cellInfo` / `availableCells`.
+`stars` (`on`, `cap`, `need`, `bonus`), `heroUnlock`, `starters`, `startCoins` (60), `colourlessFactor` (2), `gacha` (`cost`, `odds`, `pity`, `shards` by rarity, `levelShards`), `slotCost` (shards), `slotMax`, `rainbow` (`tier`, `chance`, `maxTeam`), `midBoss` (hp, atk, coin factors), `drop` (`rare`, `epic`, `rainbow`, `shape` arrays by distance), `map` (`radius`, `tiersByDist`, `lenByDist`, `midFrom`, `endlessDist`), `regions` (name, colour bias, name words). Removed: `levelCost`, `unlockCost`, stage `cap`, `heroCost`. `CONFIG.stages` are now the tiers. Rules code additions: `EFFECTS`, `UNITS` (`base`, `rar`, `fx`), `unitBase`, `dropFor`, `genRainbow`, `keepCands` / `applyKeep`, `gachaRoll`, `mapCells` / `cellInfo` / `availableCells`.
 
 ## Test helpers (Settings, More)
 
-+100 coins, own all units, +10 shards, open all slots, +4 coloured tiles, +1 rainbow tile, unlock heroes, reveal the whole map, colourless helpers, per-unit level selectors (0 = not owned), abandon run, reset. `window.TR` adds `keep`, `pull`, `buySlot`, `toggleSlot`, `levelUp`, `addCT`, `cellInfo`, `playCell`, `clearCell`, `revealed`.
++100 coins, own all units, +10 shards (shared pool), open all slots, Duplicate a tile (one more copy of the newest colourless and collected tile), +4 coloured tiles, +1 rainbow tile, unlock heroes, reveal the whole map, colourless helpers, per-unit level selectors (0 = not owned), abandon run, reset. `window.TR` adds `keep`, `pull`, `buySlot`, `toggleSlot`, `levelUp`, `addCT`, `cellInfo`, `playCell`, `clearCell`, `revealed`.
 
 ## Verification (fifth iteration)
 
 Node checks of the rules block (`evaluate`): 162 checks pass, covering the plain sandwich, a rainbow as bread with each of the five colours (and not doubling a same-colour filling), rainbow filling between same-colour tiles, between rainbow and red, between two rainbows (not doubled), two-colour fillings, rainbow row plus column (x4), a two-wide tile with rainbow row bread and red column bread (x8), colourless never bread or filling, each of the 15 unit effects (with positive and negative cases, host colour for a rainbow in a slot, no effect on colourless), unit levels changing only numbers, 3 tiles per unit, C/R/E per colour, 15 distinct effects. All 15 puzzles and 80 generated daily puzzles still win with their stored solutions. Bot (greedy layout search on the real rules, 20 seeds): starter Commons at level 1 clear the origin cell 19 of 20 times (6.5 attacks per run); a boosted Epic team (level 5 plus slotted tiles) finishes tier 10 (8 steps with a mid-boss) 4 of 6 and tier 7 6 of 6; Rares at level 3 clear tier 5 6 of 6; Commons at level 1 do not clear tier 5 or tier 10 (0 of 6), Commons at level 3 clear tier 3 5 of 6. Playwright at 390x844 and 360x740, light and dark: no console or page errors, no horizontal overflow on map, team, fight, results, puzzles, endless; full touch flow map, select cell, run, picks, mid-boss and boss keep, back on the map with the neighbours revealed, Team, buy slot, loadout, pull (new and duplicate), run showing the slotted tile in the hand; puzzle 1 and the daily solve; Endless starts.
 
+## Sixth round verification
+
+Node (`evaluate` and rules): 4673 checks pass: star merging for 1, 2, 3, 8, 9, 26, 27, 81, 243, 244, 486, 729 copies (cap 5, copy conservation 1 to 243, at most 2 spares per level, identity fields, slotted copy keeps its slot), 30 units (6 per colour, 3/2/1 rarity, 3 base tiles, 30 distinct effects, names and base sets, level-ups change only numbers, starters), every new effect with a positive and a negative case, Long Arm reach lanes, hero unlock table, rainbow cases, all 15 puzzles and 80 dailies. Bot: starters clear the origin 19 of 20; each of the 30 units swapped in still plays. Playwright 390x844 and 360x740 light (home, run with killable enemies and hold previews, keep with grouped candidates, cleared screen with hero line, hero panel, Team with shards, level, slot and pulls incl. a duplicate, loadout with stacks, Long Arm fight) and dark (home, Team): no console or page errors, no horizontal overflow.
+
+## Sixth round rough spots
+
+- New effect numbers are first guesses (Amber's per-enemy bonus and Scorch's +2 on small numbers are probably strong early). Shard prices and amounts are placeholders.
+- Heroes unlock only through first clears; the test helper `clearCell` also syncs them.
+- The Team screen is long with 30 unit cards (sorted by rarity inside each colour); it is not collapsed.
+- Five stars on a small tile are drawn small.
+
 ## Fifth iteration rough spots
 
 - Not balanced: unit effects, shard and coin prices, drop rates, run lengths and colourless doubling are first guesses. Commons without levels cannot clear tier 5 or later (by design, to be tuned).
 - Level 5 branches and the coin route to levels were removed; slot prices and shard values are flat.
-- Effects that add a lane (Long Arm) are not drawn in the tile's reach glyph, only in numbers and the card; the held-tile "hits this enemy" highlight ignores it.
+- (fixed in the sixth round) Long Arm now shows in the reach glyph and the board highlight during fights.
 - Rainbow tiles are single cell attack or boost only, and only come from boss drops (and the test helper); no Endless keeps.
 - Map art is a flat terrain mosaic (no props); the map scrolls inside its box on small phones (no pinch).
-- The keep screen lists duplicates of the same new tile separately.
+- (fixed in the sixth round) identical keep candidates are grouped.
 
 ---
 
