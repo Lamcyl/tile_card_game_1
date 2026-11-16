@@ -119,3 +119,27 @@ Feedback on round one: C (Focus) and D (Ladder) were liked, A, B, E, F were not.
 - **6 Sheet:** almost empty; stage name and a big Continue at thumb height, a handle that pulls up a sheet with the other six destinations.
 
 Not built from the brief: carousel and the reach-glyph menu (the Cross covers the same spatial idea). Recommendation: **2 Number** if calm is the goal, **1 Path** for a compact progress-first screen; **6 Sheet** is the choice when the screen should hold nothing but Continue.
+
+## Map layouts (areas of stages)
+
+Mockup: `prototype/samples/tile-run-map.html`. The world is a set of areas (3 or 4 stages each, same difficulty, harder with distance from the start). A stage is a mosaic of terrain tiles from the Greenvale and Ashkara sets (meadow, oak wood, marsh in the mockup; desert, salt, lava ready) shaped like a polyomino, so stages come in odd sizes. No difficulty is drawn on the map: the card under it shows stage name, area, difficulty pips, length, trick and drops for the selected stage. Cleared = full colour with a tick, available = dimmed with a dashed outline, hidden = blank cells. All five show the same mid-progress state (first area cleared, wood part-cleared, marsh just revealed).
+
+- **1 Jigsaw:** the whole continent is one board of interlocking pieces; area borders are slightly wider gaps. Richest and closest to a world, but dense and it needs panning.
+- **2 Path:** closest to tile defence. One area per screen: terrain, trees and rocks, stages as landmark tiles joined by a short road, arrows move between areas. Best atmosphere, weakest overview.
+- **3 Islands:** each area is a floating plate; bridges appear when the area is cleared. Clearest progress story, but takes the most scroll height.
+- **4 Strip:** one band per area, pieces pack the band exactly, newest at the top like a tower. Tidy and compact, shapes limited by the rectangle.
+- **5 Board:** a 5-column board like the battle board, stages are the game's own piece shapes, undiscovered cells dashed. Teaches the grid, least landscape.
+
+Recommendation: **1 Jigsaw** as the world map, borrowing the landmark props and road feel of 2 on the selected area; **4 Strip** if the map must stay cheap to build and scroll.
+
+## Units page layouts
+
+Mockup: `prototype/samples/tile-run-units.html` (add `#n=8` to the URL for the 8-units-per-colour stress test). Recruit, Collected tiles and the Colourless bag are entry points only (segmented tabs, or foot buttons in design 4). Every design shows all of the selected colour's units with their 3 base tiles, slots (closed, open, holding a tile), rarity, level and owned or in-team state in one screen at 360x740 (checked by measurement for 6 and 8 units, touch targets at least 44 px), with the effect sentence and Pick, Level up, Loadout and Buy slot for the selected unit.
+
+- **1 Rows:** colour tabs, one row per unit (name, rarity and level, tiles, slot pips), detail strip at the foot. Calmest and scales to 8, tiles stay small.
+- **2 Cards:** 2x3 grid of unit cards with a rarity edge, fixed bottom panel. More visual, goes to 4 rows at 8 units.
+- **3 Hand:** a hand of small cards with the chosen one raised, then a big card with large tiles and real slot sockets. Best for the chosen unit, the small cards are only glanceable (two rows at 8).
+- **4 Matrix:** five colour columns, the tapped colour zooms to a full list while the others collapse to slivers; tap the colour again for the 30-unit overview. Densest, Units tabs move to the foot.
+- **5 Split:** unit rail on the left, chosen unit large on the right with slot sockets, a tiny tile row for the others. Roomy loadout view, others need a tap to read.
+
+Recommendation: **1 Rows** as the base (cheapest and safest at 8 units), using the big socket slot view of 3 or 5 inside Loadout; **4 Matrix** is the pick if players want to compare colours.
