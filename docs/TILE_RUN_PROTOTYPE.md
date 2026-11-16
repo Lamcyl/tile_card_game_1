@@ -1,10 +1,62 @@
-# Tile Run prototype, fifth version (rules as built)
+# Tile Run prototype, seventh version (rules as built)
 
 > **Fifth iteration (progression rework) comes first below; it replaces the sections on units, unit levels, the stage list and the home screen further down.** Everything else (board, tile model, sandwich, evaluate order, tile face, heroes, relics, puzzles, touch fixes) is as described in the older sections.
 
 > **Not balanced yet.** The fifth iteration is implemented and works end to end (bots clear the origin, a boosted team finishes far cells), but every number in it is a placeholder. The fourth iteration (fixes, hero button, relics, puzzle shrines) was implemented and made to work, but stage numbers, hero and relic strengths, costs and rewards are placeholders. The balance tables below were measured on the third version.
 
 File: `prototype/samples/tile-run.html` (one file, inline CSS/JS, no network, no images, no build step). It replaces the second version (fixed shape list, never-ending runs). All tunables are in the `CONFIG` object at the top of the script. The rules code (CONFIG, tile model, units, `evaluate`, fight and run generation) sits between `/*RULES-START*/` and `/*RULES-END*/` with no DOM access, so the node balance and unit-test scripts load it directly.
+
+# Seventh iteration: Mosaic map and Split team screen
+
+> This section replaces "The map (home screen)" and the Team screen layout of the fifth iteration. The rules (fights, tiles, units, numbers) are untouched; the save key is now `tileRunPrototype.v6` (old saves are not migrated).
+
+## Map: areas and stages
+
+The world is one tiling, 6 units wide and 35 tall, drawn as an SVG on a navy slab (no terrain art any more; the art data was removed). It is cut into **20 areas** (plates). Each area holds **3 or 4 stages**, drawn as pieces of the plate (an L, a bar, a 2x2 block and so on; the piece shapes are the `rows` letter maps in `CONFIG.map.areas`, A = stage 1). 67 stages in all. **Every stage of an area has the same difficulty tier and run length**; the mid-boss rule is as before (runs of 6 or more). The boss trick of each stage is picked from the area's tier with the same seeded rule as the old cells. Regions keep their colour bias (`CONFIG.regions`, each now has a `col` for its piece colour).
+
+The start area (Sunny Meadow) is a wide plate at the bottom. It opens two lanes: Frostreach (blue) on the left, Goldmarch (ochre) on the right, then Duskmoor (purple, left) and Emberfall (red, right) higher up, and the Gloaming Crown (difficulty 10) across the top. Two cross links: both tier 6 areas open from either tier 5 area.
+
+| Area | Region | Tier | Run | Stages |
+|---|---|---|---|---|
+| Sunny Meadow (start) | Greenvale | 1 | 3 | 3 |
+| Brookside | Greenvale | 2 | 4 | 3 |
+| Old Mill | Greenvale | 2 | 4 | 4 |
+| Rimegate, Silent Pass | Frostreach | 3 | 4 | 4, 3 |
+| Saltwell | Goldmarch | 3 | 4 | 3 |
+| Glass Ridge | Frostreach | 4 | 5 | 3 |
+| Windy Dunes, Amber Mesa | Goldmarch | 4 | 5 | 3, 3 |
+| Frozen Spire | Frostreach | 5 | 5 | 3 |
+| Lone Terrace | Goldmarch | 5 | 5 | 4 |
+| Misty Moor | Duskmoor | 6 | 6 | 4 |
+| Cinder Gate | Emberfall | 6 | 6 | 3 |
+| Drowned Mere | Duskmoor | 7 | 6 | 3 |
+| Ashen Vents | Emberfall | 7 | 6 | 4 |
+| Violet Barrow | Duskmoor | 8 | 7 | 4 |
+| Molten Crater | Emberfall | 8 | 7 | 3 |
+| Grey Fen | Duskmoor | 9 | 7 | 3 |
+| Black Forge | Emberfall | 9 | 7 | 3 |
+| Gloaming Crown | Duskmoor | 10 | 8 | 4 |
+
+**Unlock rule** (`CONFIG.map`: `openNeed` 3, `endlessAreas` 2): an area is *done* when 3 of its stages are cleared (all of them in a 3-stage area). An area opens when any area in its `from` list is done (both of them for the Crown, `all: true`). Inside an open area the stages go in order: stage n is playable once stage n-1 is cleared (the 4th stage of a 4-stage area is an optional extra for the next areas). Areas next to an open area show as dim plates with a lock (tap one to read what opens it); areas beyond those show only as a faint dotted outline, so the slab grows as the world opens.
+
+Other things that used the old cells, now on stages: starting a run (the run remembers the area and stage), the first-clear reward and marking cleared, tile and rarity odds by tier (`dropFor` with `tierDist(tier)`), the rainbow drop from tier 7, hero unlocks (`heroUnlock` is now 3, 7, 12, 19 stages of 67, the old 2, 5, 9, 14 of 49 rescaled), Endless (opens when 2 areas are done; board choice up to the highest tier cleared, as before). The test helper "Reveal whole map" opens every area and every stage. `window.TR` has `stageInfo`, `mapData`, `stageState`, `shownAreas`, `doneAreaCount`, `clearCell(key)` and `clearArea(id)` (keys are `areaId.index`, for example `l2.0`).
+
+**Home screen:** the slab fills the space between the header and the stage card and scrolls vertically, opening centred on the selected stage. Stage pieces are 46 px or more on a 360 px wide screen. States: cleared (region colour with a tick), playable (region colour outline), selected (white inside, play arrow; plate outlined), locked (dim with a lock), the stage being played (gold ring). No difficulty number is on the pieces. The card shows region and area, "Stage n of m", difficulty (word, pips and number), fights, mid-boss/boss with its trick name (hold the chip's tooltip on desktop for the full text), the first-clear reward, and a big Play button (Replay for cleared, Continue while a run is saved, with Bank and leave). The dock is unchanged.
+
+## Team screen: Split with the "A Badge" marker
+
+Header (back, coins, shards), tabs Units / Recruit / Collected / Colourless, then for Units the five colour tabs (owned of 6) and the split: a left rail with the six units of the colour (name, rarity and level, slot dots, mini tiles; a cyan ring for Rare, magenta for Epic; unowned units are dashed, dim and locked) and one big card for the viewed unit (tinted, with a pointer from the rail). The unit in the team carries a solid TEAM badge in the rail and IN TEAM on the card (no star glyphs). The card shows the unit's 3 base tiles (the game's own tile faces), slot sockets (filled with the equipped collected tile, empty, or locked), the effect text and four buttons: Pick for the team, Level up, Loadout and Buy slot. Level up and Buy slot cost **shards** (`gacha.levelShards`, `slotCost`). Tapping a socket or Loadout opens the existing loadout picker (collected tiles of that colour and rainbow tiles, stacks, stars, the rainbow limit). The Units tab fits 360x740 without page scrolling; Recruit, Collected and Colourless are plain panels with the old content and may scroll.
+
+## CONFIG changes
+
+`CONFIG.map` is now `{ w, h, openNeed, endlessAreas, midFrom, areas: [...] }` (each area: `id, name, region, tier, len, x, y, w, h, from, all?, rows`); `radius`, `tiersByDist`, `lenByDist`, `endlessDist` are gone; `regions` lost their name lists and gained `col`; `heroUnlock` rescaled. `CONFIG.endlessUnlock` was already unused.
+
+## Seventh iteration rough spots
+
+- Numbers are not rebalanced: a stage's difficulty and run length are the old values for its tier; 57 stages must be cleared to open the whole world (3 per area), more than before, so progress feels slower than the 49-cell map.
+- Area names and region placement are placeholders; the two lanes are mostly independent (two cross links).
+- A stage piece is not labelled with its area name; the area name shows on the card after tapping.
+- The Units tab card leaves some empty space in the middle on tall phones.
 
 # Fifth iteration: progression rework (collectable tiles, units, rainbow, gacha, map)
 
