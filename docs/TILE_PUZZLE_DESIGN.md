@@ -410,3 +410,82 @@ Built in `prototype/samples/tile-run.html`; rules and numbers are in `TILE_RUN_P
 6. Map: square grid, 4 neighbours, 7x7 (49 cells), Manhattan distance 0..6 mapped to the ten tiers (tiers at distance 3 to 5 have two options chosen by position).
 7. The old 10 stages are the ten tiers; the list is gone, the map is the home screen. Run length 3 steps at the origin up to 8 at the far edge, a mid-boss from 6.
 - Also decided: levels come only from duplicate shards (no coin route); single pull 30 coins, Epic pity every 20 pulls; tiles are not gacha; colourless numbers doubled (`colourlessFactor`); no "sandwich on the map" bonus (rejected by the user); Endless after clearing a cell at distance 2; stage art is a 3x3 terrain-tile mosaic per cell (5 regions x 4 tiles, about 43 KB).
+
+## 15. Brainstorm: recruiting, coins and a second progression (not built)
+
+Status: brainstorm only. User feedback after the fifth prototype: the unit gacha "doesn't excite like normal gacha"; unlocking heroes with coins "seems bad"; one currency (shards) is enough for upgrading units; 3 units per colour is far too few; asked what coins should be for and whether there should be another progression system.
+
+Already decided and being implemented (see TILE_RUN_PROTOTYPE.md): stars need 3 identical tiles per step up to 5 stars; 30 units (6 per colour); shards are the only unit currency (levels and slots); heroes unlock through map progress, not coins; no difficulty numbers on map cells.
+
+### 15.1 Why the current recruit pull is flat
+
+- One pull, one line of text: no anticipation, no reveal, no near miss.
+- The pool is small, so most pulls are duplicates.
+- Nothing to choose, so no feeling of having made a good call.
+- Coins come slowly and have no other use, so a pull is also the only decision about coins.
+- No featured unit, so there is nothing to hope for in particular.
+
+### 15.2 Ways to make recruiting exciting
+
+A. Flip board (reveal in the game's own language). A pull deals face-down tiles onto a 3x3 board. The edge colour of a face-down tile hints at rarity (plain, cyan, magenta) before it is flipped; the player flips them one by one. A ten-pull fills the board and guarantees one Rare or better. Anticipation comes from the edge glow and the flip.
+
+B. Pick one of three. Each pull shows three units; keep one, the other two become shards. Gives a choice, cuts the pain of duplicates, and suits "reward creativity" (pick what fits your team).
+
+C. Featured unit. One Epic is featured per period (or per newly opened area) with a higher rate, and a visible bar fills with every pull; when full, take the featured unit outright. Gives a target and a guaranteed end.
+
+D. Recruits on the map. Each area holds one unit that joins on the area's first full clear (a fixed, earned reward), and the pull only covers the rest. Ties units to places and makes areas memorable.
+
+E. Trial puzzle. A pulled or found unit must be "won" in a short one-attack puzzle that uses its three base tiles. Winning recruits it; it also teaches what the unit does. Failing costs nothing; retry freely.
+
+F. Tickets instead of coins. Bosses and area clears drop recruit tickets; pulls cost tickets. Coins are then free for other uses, and a pull always follows an achievement.
+
+G. Wish list. The player marks up to three units; marked units are twice as likely within their rarity.
+
+Recommendation: A + B + C together, paid with F.
+- A pull flips three tiles on the board, the player keeps one (B inside A), the others give shards.
+- One featured Epic with a fill bar (C).
+- Tickets come from bosses, area clears and the daily puzzle (F).
+- D for the very first units of each colour beyond the starters, so early progress is not left to chance.
+E is the most original and fits the game best, but it is the most work; a good second step.
+
+### 15.3 What coins are for
+
+With unit levels and slots on shards and recruiting on tickets, coins need their own job. Candidates:
+
+1. Run supplies, bought before a run and used up by it: +5 hero HP, one free reroll of a pick, start with one relic, one extra rest stop. Small, optional, makes coins feel useful every run.
+2. Tile shop on the home screen: three coloured or colourless tiles for sale, refreshed daily or after each area clear. A direct way to chase a missing copy for a star.
+3. Forge: pay coins to merge three unwanted tiles of one rarity into one random tile of that rarity, or to move a tile to another colour.
+4. Workshop (the second progression, see 15.4).
+5. Looks: board themes and tile skins. The earlier rejected style explorations (wood pieces, night, neon) could return here as optional skins without touching the default look.
+6. Map: paying to reveal a hidden side stage or a shortcut.
+
+Recommendation: 1 + 2 + 4. Supplies give a small spend every run, the shop gives a medium spend with a clear purpose, the workshop gives long-term goals.
+
+### 15.4 A second progression system
+
+Option 1: Workshop. A short list of permanent account upgrades bought with coins, each with 3 to 5 steps: hero HP, a fourth colourless bag slot, one pick reroll per run, a third pick always being a tile, better odds for Rare tiles, one extra relic slot. Simple, readable, no new rules in battle.
+
+Option 2: Area mastery. Every stage has three quiet marks (cleared; boss beaten in one attack; no damage taken at the boss). Marks add up per area; an area chest opens at set totals with tickets, shards, a hero or a skin. Gives a reason to replay stages well, and it rewards clever layouts.
+
+Option 3: Codex. Seeing and owning tiles, units and relics fills a book; milestones pay out. Cheap to build, low excitement.
+
+Option 4: Camp board. A small permanent board on which the player places building tiles bought with coins; each gives a passive bonus. Uses the game's own placing, but it is a second game to design; keep for later.
+
+Recommendation: Option 1 as the coin sink and Option 2 as the skill track. Heroes move to Option 2 (area chests) once areas exist; until then they unlock by number of stages cleared.
+
+### 15.5 Heroes without coins
+
+- Now: unlock by stages cleared (implemented as a table).
+- With areas: one hero per area boss, or per area mastery chest.
+- Alternative: deeds that match the ability, for example "win 10 fights in one attack" for the Rally hero. More flavour, but hidden goals are easy to miss; show them as a list.
+
+### 15.6 More units
+
+30 units (6 per colour: 3 Common, 2 Rare, 1 Epic) is the next step. To grow further without inventing 60 separate effects: families. A family is one effect idea in three strengths (Common, Rare, Epic versions with different base tiles), which also gives the player an upgrade path they can understand ("the Epic version of my front-row unit").
+
+### 15.7 Open questions for the user
+
+1. Recruiting: go with flip board + pick one of three + featured bar, paid with tickets?
+2. Coins: supplies, tile shop and workshop?
+3. Second track: area mastery marks with area chests?
+4. Should each area also give one fixed unit on its first full clear?
