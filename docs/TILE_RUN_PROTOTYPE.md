@@ -2,7 +2,9 @@
 
 > **Fifth iteration (progression rework) comes first below; it replaces the sections on units, unit levels, the stage list and the home screen further down.** Everything else (board, tile model, sandwich, evaluate order, tile face, heroes, relics, puzzles, touch fixes) is as described in the older sections.
 
-> **Not balanced yet.** The fifth iteration is implemented and works end to end (bots clear the origin, a boosted team finishes far cells), but every number in it is a placeholder. The fourth iteration (fixes, hero button, relics, puzzle shrines) was implemented and made to work, but stage numbers, hero and relic strengths, costs and rewards are placeholders. The balance tables below were measured on the third version.
+> **Balanced in the eighth pass: see `TILE_RUN_BALANCE.md`.** It holds the tile power metric, the score tables, the difficulty curve, the economy and the simulator (`prototype/tools/tile-run-balance/`). Every number in the tables below (unit tile numbers, effect sizes, level bonuses, enemy HP, coins, first-clear rewards, hero numbers and unlocks) is superseded by that document and by `CONFIG` in the page; the rules and the layout described here are unchanged. Save key is now `tileRunPrototype.v7`.
+>
+> *Older note, kept for history:* The fifth iteration is implemented and works end to end (bots clear the origin, a boosted team finishes far cells), but every number in it was a placeholder. The fourth iteration (fixes, hero button, relics, puzzle shrines) was implemented and made to work, but stage numbers, hero and relic strengths, costs and rewards are placeholders. The balance tables below were measured on the third version.
 
 File: `prototype/samples/tile-run.html` (one file, inline CSS/JS, no network, no images, no build step). It replaces the second version (fixed shape list, never-ending runs). All tunables are in the `CONFIG` object at the top of the script. The rules code (CONFIG, tile model, units, `evaluate`, fight and run generation) sits between `/*RULES-START*/` and `/*RULES-END*/` with no DOM access, so the node balance and unit-test scripts load it directly.
 
@@ -114,7 +116,7 @@ Single pull, `CONFIG.gacha.cost` 30 coins (a new save has 60). Odds: Common 70 %
 | Family | Rule |
 |---|---|
 | Coloured | Normal value; can be bread and filling. Collectable. |
-| Colourless | Never part of a sandwich (neither bread nor filling). Numbers are `CONFIG.colourlessFactor` (2) times a coloured tile's (multipliers +1). Max 3 in the bag, as before. |
+| Colourless | Never part of a sandwich (neither bread nor filling). Numbers are `CONFIG.colourlessFactor` (2) times a coloured tile's (multipliers are not changed since the eighth pass). Max 3 in the bag, as before. |
 | Rainbow | "A rainbow tile counts as every colour." Applied literally to the sandwich rule: as bread it matches any colour; as filling between two tiles sharing a colour it is doubled; between two rainbows it is **not** doubled (explicit exception in `sandX`); a two-colour tile between two rainbows is doubled. It also satisfies "2 colours" boss rules. Low numbers, single cell, attack or boost only. It fits any unit's slot (it takes the unit's colour for the colour tab and the unit effect), at most 2 in a team. Source: a rare **boss drop** on far cells (tier 7 or more, 10 to 30 % by distance); it appears as an extra candidate on the keep screen. Look: five hard colour arcs around a navy face, white number, one transform-only sheen (static with `prefers-reduced-motion`). |
 
 ## Collecting: keep one after a boss

@@ -498,7 +498,7 @@ var CONFIG = {
   normal: { hp: 1, atk: 1, coin: 1, tile: 0.2 },
   elite:  { hp: 1.5, atk: 1.3, coin: 2, tile: 0.6 },
   boss:   { hp: 2, atk: 1.4, coin: 4, tile: 1, heal: 0.4 },
-  coinBase: 5, coinDepth: 0.12,
+  coinBase: 2, coinDepth: 0.12,
   growHeal: 0.35, restHeal: 0.4,
   deathKeep: 0.5,                   /* fraction of coins and loot kept when an attempt ends in defeat */
   momentum: { on: true, bonus: 1, values: [1, 2, 3] },
@@ -548,7 +548,7 @@ var CONFIG = {
   longPressMs: 450,
   stars: { on: true, cap: 5, need: 3, bonus: 1 },   /* `need` identical tiles of one star level merge into one tile of the next level (3 = 1 star, 9 = 2, 27 = 3, 81 = 4, 243 = 5); each star adds `bonus` to the number */
   relicMax: 3,                      /* relics per run */
-  heroUnlock: { wind: 3, prism: 7, overcharge: 12, guard: 19 },   /* heroes unlock by map progress: the number of map stages cleared, of 67 (the old 2, 5, 9, 14 of 49 cells, rescaled; Kiri is free) */
+  heroUnlock: { prism: 6, overcharge: 18, wind: 30, guard: 42 },   /* heroes unlock by map progress: the number of map stages cleared, of 67 (the old 2, 5, 9, 14 of 49 cells, rescaled; Kiri is free) */
   puzzleCoins: 10, dailyCoins: 15,  /* placeholders */      
   /* rarity odds [common, rare, epic] by source; depthShift is added to rare per depth/won fight */
   rarity: { normal: [0.92, 0.075, 0.005], elite: [0.5, 0.4, 0.1], boss: [0, 0.75, 0.25], treasure: [0.5, 0.38, 0.12], runner: [0.6, 0.34, 0.06], depthShift: 0.03, rareStage: 5, epicStage: 8 },
@@ -556,24 +556,30 @@ var CONFIG = {
   budget: {
     attackBase: [4, 6, 8], lanePen: { 1: 1, 2: 0.72, 3: 0.55 }, cellBonus: { 1: 1, 2: 1.35, 3: 1.7, 4: 2.1 },
     boostBase: [1, 2, 3], dirPen: { 1: 1, 2: 0.85, 3: 0.72, 4: 0.62, R: 0.75, C: 0.75, B: 0.55 },
-    multBase: [2, 2, 3], copyBase: [0, 1, 2], multiShapeChance: [0, 0.45, 0.7], pickShapeChance: 0.25
+    multBase: [2, 2, 3], copyBase: [0, 1, 2], multiShapeChance: [0, 0.3, 0.5], pickShapeChance: 0.25
   },
   pick: { up2: 0.55 },
   /* the ten difficulty tiers (the old stages). hp = per enemy column at step 0, atk = enemy attack, colours = team colours in play (r b g y p in order) */
   stages: [
-    { name: 'Dawn Gate',  cols: 3, rows: 2, colours: 3, hp: 8, atk: 3, heroHp: 20, coin: 1, boss: 'plain',    intro: 'Forward attacks and Sandwich' },
-    { name: 'Meadow',     cols: 3, rows: 3, colours: 3, hp: 10, atk: 3, heroHp: 24, coin: 1, boss: 'twin',     intro: 'Side-lane attacks and bonus cells' },
-    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 16, atk: 4, heroHp: 28, coin: 2, boss: 'block',    intro: 'Adjacent boosts and Guard enemies' },
-    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 18, atk: 4, heroHp: 30, coin: 2, boss: 'aegis',    intro: 'Multi-lane attacks, Runners and the Forge' },
-    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 25, atk: 6, heroHp: 32, coin: 3, boss: 'plate',    intro: 'Row and column boosts, Rare tiles' },
-    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 22, atk: 5, heroHp: 34, coin: 3, boss: 'sealed',   intro: 'Multipliers' },
-    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 68, atk: 7, heroHp: 36, coin: 4, boss: 'shield',   intro: 'Two-cell tiles' },
-    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 90, atk: 8, heroHp: 38, coin: 4, boss: 'deadrow',  intro: 'Copy tiles, three-cell tiles, Epic tiles' },
-    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 110, atk: 9, heroHp: 40, coin: 5, boss: 'colours2', intro: 'Line multipliers, four-cell tiles, level 5 branches' },
-    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 62, atk: 7, heroHp: 44, coin: 6, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
+    { name: 'Dawn Gate',  cols: 3, rows: 2, colours: 3, hp: 11, atk: 3, heroHp: 20, coin: 1, boss: 'plain',    intro: 'Forward attacks and Sandwich' },
+    { name: 'Meadow',     cols: 3, rows: 3, colours: 3, hp: 17, atk: 3, heroHp: 24, coin: 1, boss: 'twin',     intro: 'Side-lane attacks and bonus cells' },
+    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 25, atk: 4, heroHp: 28, coin: 1.2, boss: 'block',    intro: 'Adjacent boosts and Guard enemies' },
+    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 34, atk: 4, heroHp: 30, coin: 1.2, boss: 'aegis',    intro: 'Multi-lane attacks, Runners and the Forge' },
+    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 45, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Row and column boosts, Rare tiles' },
+    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 54, atk: 5, heroHp: 34, coin: 1.4, boss: 'sealed',   intro: 'Multipliers' },
+    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 110, atk: 7, heroHp: 36, coin: 1.6, boss: 'shield',   intro: 'Two-cell tiles' },
+    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 134, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Copy tiles, three-cell tiles, Epic tiles' },
+    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 138, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Line multipliers, four-cell tiles, level 5 branches' },
+    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 90, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
   ],
-  firstClear: { coins: [20, 25, 30, 40, 50, 60, 75, 90, 110, 150] }
+  firstClear: { coins: [5, 6, 7, 8, 9, 10, 11, 12, 14, 20] },
+  /* the size of every unit effect (the rule of each effect is in EFFECTS; only these numbers are tunable) */
+  /* level bonus by level 1..5 (index 0..4): attacks by the columns reached (1, 2, 3, 4 or more), local boosts, line boosts, multipliers, copies */
+  lvl: { a: [[0, 1, 2, 3, 4], [0, 1, 1, 2, 2], [0, 0, 1, 1, 1], [0, 0, 0, 1, 1]], pl: [0, 0, 0, 1, 1], pr: [0, 0, 0, 0, 1], x: [0, 0, 0, 0, 0], e: [0, 0, 1, 1, 2] },
+  hero: { rally: 2, over: 3 },   /* Rally: momentum added to every tile; Overcharge: the factor on the tapped tile */
+  fx: { front1: 5, back2: 8, single1: 5, boostp1: 1, wide1: 3, neigh1: 1, palette1: 1, mult1: 1, sand3: 6, cell2: 2, same1: 1, backx2: 2, edge2: 8, touch1: 6, loyal2: 14, boosted2: 10, foes1: 1, small2: 6, small2max: 7, up2: 12, rowmates1: 2, corner3: 12, bread1: 1, linepow: 2, echo2: 10, mulled2: 4, rare2: 8, colmates1: 1, triple: 3 }
 };
+var FN = CONFIG.fx;
 var COLOR_IDS = ['r', 'b', 'g', 'y', 'p'];
 var COLORS = { r: 'Red', b: 'Blue', g: 'Green', y: 'Yellow', p: 'Purple', x: 'Colourless', w: 'Rainbow' };
 var RARITY = ['Common', 'Rare', 'Epic'];
@@ -675,74 +681,82 @@ function tileDesc(t) {
   if (t.k === 'x') return 'Multiplier: multiplies the tiles ' + (/[RCB]/.test(t.d) ? 'on ' : 'touching it ') + dirsText(t.d) + ' by its number. Multipliers do not multiply other multipliers.' + sh;
   return 'Copy: takes the shown number of the tile ' + DIRNAME[t.d] + ' (never another copy), adds its own number, and hits its own column. Resolves after everything else.';
 }
-/* unit level 1-5 only raises the numbers of the 3 base tiles: attacks +1 per level, boosts and copies +1 at levels 3 and 5, multipliers +1 at level 5 */
-function lvlBonus(k, lvl) { var L = (lvl || 1) - 1; return k.k === 'a' ? L : k.k === 'x' ? (lvl >= 5 ? 1 : 0) : (L / 2) | 0; }
+/* unit level 1-5 only raises the numbers of the 3 base tiles, by the table CONFIG.lvl (attacks: less the more columns they reach; line boosts and multipliers least) */
+/* the number of columns an attack tile reaches (lanes x shape width), for the level bonus */
+function hitsOf(k) { var o = laneOffsets(k.d || '^'), w = shapeDims(k)[1], set = {}, c; for (c = 0; c < w; c++) o.forEach(function (x) { set[c + x] = 1; }); return Object.keys(set).length; }
+function lvlBonus(k, lvl) {
+  var L = Math.max(1, Math.min(5, lvl || 1)) - 1, T = CONFIG.lvl;
+  if (k.k === 'a') return T.a[Math.min(3, hitsOf(k) - 1)][L];
+  if (k.k === 'x') return T.x[L];
+  if (k.k === 'p') return (/[RCB]/.test(k.d) ? T.pr : T.pl)[L];
+  return T.e[L];
+}
 function unitBase(u, lvl) { return u.base.trim().split(/\s+/).map(function (tok) { var s = parseTok(tok); s.base = s.n; s.n += lvlBonus(s, lvl); return s; }); }
 /* one passive per unit, scoped to the unit's colour (the host colour for a rainbow tile in a slot). Evaluated in evaluate() through F.fx = { colour: effect id } like relics */
 var EFFECTS = {
-  front1:   { name: 'Front Rank',   line: "Front-row attack tiles of this colour get +1." },
-  back2:    { name: 'Back Rank',    line: "Back-row attack tiles of this colour get +2." },
-  single1:  { name: 'Lone Wolf',    line: "Single-cell attack tiles of this colour get +1." },
-  boostp1:  { name: 'Good Fuel',    line: "Boost tiles of this colour are +1 stronger." },
-  wide1:    { name: 'Wide Reach',   line: "Attack tiles of this colour that hit 2 or more columns get +1." },
+  front1:   { name: 'Front Rank',   line: "Front-row attack tiles of this colour get +" + FN.front1 + "." },
+  back2:    { name: 'Back Rank',    line: "Back-row attack tiles of this colour get +" + FN.back2 + "." },
+  single1:  { name: 'Lone Wolf',    line: "Single-cell attack tiles of this colour get +" + FN.single1 + "." },
+  boostp1:  { name: 'Good Fuel',    line: "Boost tiles of this colour are +" + FN.boostp1 + " stronger." },
+  wide1:    { name: 'Wide Reach',   line: "Attack tiles of this colour that hit 2 or more columns get +" + FN.wide1 + "." },
   extraline:{ name: 'Extra Line',   line: "Sandwiches on this colour's tiles count one extra line." },
-  neigh1:   { name: 'Mixed Company',line: "Attack tiles of this colour get +1 for each differently coloured tile next to them." },
-  palette1: { name: 'Palette',      line: "Attack tiles of this colour get +1 for every colour on the board." },
-  mult1:    { name: 'Overdrive',    line: "Multiplier tiles of this colour are +1 stronger (x2 becomes x3)." },
-  sand3:    { name: 'Pressure',     line: "Attack tiles of this colour get +3 while they are sandwiched." },
-  cell2:    { name: 'Heavy Frame',  line: "Multi-cell tiles of this colour get +2 per cell." },
+  neigh1:   { name: 'Mixed Company',line: "Attack tiles of this colour get +" + FN.neigh1 + " for each differently coloured tile next to them." },
+  palette1: { name: 'Palette',      line: "Attack tiles of this colour get +" + FN.palette1 + " for every colour on the board." },
+  mult1:    { name: 'Overdrive',    line: "Multiplier tiles of this colour are +" + FN.mult1 + " stronger (x2 becomes x" + (2 + FN.mult1) + ")." },
+  sand3:    { name: 'Pressure',     line: "Attack tiles of this colour get +" + FN.sand3 + " while they are sandwiched." },
+  cell2:    { name: 'Heavy Frame',  line: "Multi-cell tiles of this colour get +" + FN.cell2 + " per cell." },
   lane:     { name: 'Long Arm',     line: "Attack tiles of this colour also hit the column to their right." },
-  same1:    { name: 'Flock',        line: "Attack tiles of this colour get +1 for each other tile of this colour on the board." },
-  triple:   { name: 'Triple Bread', line: "Sandwiches between this colour's tiles triple instead of double." },
-  backx2:   { name: 'Rear Guard',   line: "Back-row attack tiles of this colour deal double." },
-  edge2:    { name: 'Edge Guard',   line: "Attack tiles of this colour in the left or right edge column get +2." },
-  touch1:   { name: 'Huddle',       line: "Attack tiles of this colour get +1 for each tile of this colour touching them." },
-  loyal2:   { name: 'True Colours', line: "Attack tiles of this colour get +2 while no tile of another colour touches them." },
-  boosted2: { name: 'Charged',      line: "Attack tiles of this colour that receive a boost get +2." },
-  foes1:    { name: 'Pack Hunter',  line: "Attack tiles of this colour get +1 for every enemy still standing." },
-  small2:   { name: 'Underdog',     line: "Attack tiles of this colour with a number of 3 or less get +2." },
-  up2:      { name: 'Tempered',     line: "Attack tiles of this colour that were upgraded in the run get +2 more." },
-  rowmates1:{ name: 'Crowded Row',  line: "Attack tiles of this colour get +1 for each other tile in their row." },
-  corner3:  { name: 'Cornerstone',  line: "Attack tiles of this colour in a corner of the board get +3." },
-  bread1:   { name: 'Squeeze Play', line: "Attack tiles of this colour get +1 for each sandwiched tile on the board." },
-  linepow:  { name: 'Line Drive',   line: "Row, column and cross boost tiles of this colour are doubled." },
-  echo2:    { name: 'Loud Echo',    line: "Copy tiles of this colour get +2." },
-  mulled2:  { name: 'Primed',       line: "Attack tiles of this colour that are multiplied (by a multiplier tile or a x2 cell) get +2 first." },
-  rare2:    { name: 'Fine Steel',   line: "Rare and Epic attack tiles of this colour get +3." },
-  colmates1:{ name: 'Column Strength', line: "Attack tiles of this colour get +1 for each other tile in their column." }
+  same1:    { name: 'Flock',        line: "Attack tiles of this colour get +" + FN.same1 + " for each other tile of this colour on the board." },
+  triple:   { name: 'Triple Bread', line: "Sandwiches between this colour's tiles count x" + FN.triple + " per line instead of x2." },
+  backx2:   { name: 'Rear Guard',   line: "Back-row attack tiles of this colour deal " + (FN.backx2 === 2 ? "double" : "x" + FN.backx2) + "." },
+  edge2:    { name: 'Edge Guard',   line: "Attack tiles of this colour in the left or right edge column get +" + FN.edge2 + "." },
+  touch1:   { name: 'Huddle',       line: "Attack tiles of this colour get +" + FN.touch1 + " for each tile of this colour touching them." },
+  loyal2:   { name: 'True Colours', line: "Attack tiles of this colour get +" + FN.loyal2 + " while no tile of another colour touches them." },
+  boosted2: { name: 'Charged',      line: "Attack tiles of this colour that receive a boost get +" + FN.boosted2 + "." },
+  foes1:    { name: 'Pack Hunter',  line: "Attack tiles of this colour get +" + FN.foes1 + " for every enemy still standing." },
+  small2:   { name: 'Underdog',     line: "Attack tiles of this colour with a number of " + FN.small2max + " or less get +" + FN.small2 + "." },
+  up2:      { name: 'Tempered',     line: "Attack tiles of this colour that were upgraded in the run get +" + FN.up2 + " more." },
+  rowmates1:{ name: 'Crowded Row',  line: "Attack tiles of this colour get +" + FN.rowmates1 + " for each other tile in their row." },
+  corner3:  { name: 'Cornerstone',  line: "Attack tiles of this colour in a corner of the board get +" + FN.corner3 + "." },
+  bread1:   { name: 'Squeeze Play', line: "Attack tiles of this colour get +" + FN.bread1 + " for each sandwiched tile on the board." },
+  linepow:  { name: 'Line Drive',   line: "Row, column and cross boost tiles of this colour are x" + FN.linepow + "." },
+  echo2:    { name: 'Loud Echo',    line: "Copy tiles of this colour get +" + FN.echo2 + "." },
+  mulled2:  { name: 'Primed',       line: "Attack tiles of this colour that are multiplied (by a multiplier tile or a x2 cell) get +" + FN.mulled2 + " first." },
+  rare2:    { name: 'Fine Steel',   line: "Rare and Epic attack tiles of this colour get +" + FN.rare2 + "." },
+  colmates1:{ name: 'Column Strength', line: "Attack tiles of this colour get +" + FN.colmates1 + " for each other tile in their column." }
 };
 /* units: 30, 6 per colour (3 Common, 2 Rare, 1 Epic).  base = exactly 3 tiles at level 1 (two attackers and one signature tile). Rarity changes the kind of tiles (shapes, lanes, signature), the effect gets stronger */
 var UNITS = [
   { id: 'ember',  name: 'Ember',  c: 'r', rar: 0, style: 'Forks',            base: 'a^4 a^3 a<>2',         fx: 'front1' },
-  { id: 'brand',  name: 'Brand',  c: 'r', rar: 1, style: 'Big block',        base: 'a^4 a<>3 a^6#h2',      fx: 'extraline' },
-  { id: 'cinder', name: 'Cinder', c: 'r', rar: 2, style: 'Giants',           base: 'a^7#v2 a<^>4#h2 pudlr2', fx: 'cell2' },
-  { id: 'tide',   name: 'Tide',   c: 'b', rar: 0, style: 'Plus boost',       base: 'a^3 a^3 pudlr1',       fx: 'back2' },
+  { id: 'brand',  name: 'Brand',  c: 'r', rar: 1, style: 'Big block',        base: 'a^4 a<>3 a^5#h2',      fx: 'cell2' },
+  { id: 'cinder', name: 'Cinder', c: 'r', rar: 2, style: 'Giants',           base: 'a^5#v2 a<^>2#h2 pudlr2', fx: 'extraline' },
+  { id: 'tide',   name: 'Tide',   c: 'b', rar: 0, style: 'Plus boost',       base: 'a^4 a^3 pudlr1',       fx: 'back2' },
   { id: 'mist',   name: 'Mist',   c: 'b', rar: 1, style: 'Multiplier',       base: 'a^3 a<>3 xu2',         fx: 'neigh1' },
-  { id: 'drift',  name: 'Drift',  c: 'b', rar: 2, style: 'Copy and reach',   base: 'a^6 a<>4#h2 eu2',      fx: 'lane' },
+  { id: 'drift',  name: 'Drift',  c: 'b', rar: 2, style: 'Copy and reach',   base: 'a^5 a<>2#h2 eu2',      fx: 'lane' },
   { id: 'moss',   name: 'Moss',   c: 'g', rar: 0, style: 'Front boost',      base: 'a^4 a^3 pu2',          fx: 'single1' },
   { id: 'thorn',  name: 'Thorn',  c: 'g', rar: 1, style: 'Tall block',       base: 'a^4 a<>3 a^7#v2',      fx: 'palette1' },
-  { id: 'vale',   name: 'Vale',   c: 'g', rar: 2, style: 'Neighbours',       base: 'a^5 a<^>3 xudlr2',     fx: 'same1' },
-  { id: 'glint',  name: 'Glint',  c: 'y', rar: 0, style: 'Row boost',        base: 'a^4 a^3 pR1',          fx: 'boostp1' },
-  { id: 'spark',  name: 'Spark',  c: 'y', rar: 1, style: 'Side multiplier',  base: 'a^4 a<>3 xlr2',        fx: 'mult1' },
-  { id: 'dune',   name: 'Dune',   c: 'y', rar: 2, style: 'Cross boost',      base: 'a^5 a<^>4#h2 pB1',     fx: 'triple' },
-  { id: 'dusk',   name: 'Dusk',   c: 'p', rar: 0, style: 'Trident',          base: 'a<>3 a^4 a<^>2',       fx: 'wide1' },
+  { id: 'vale',   name: 'Vale',   c: 'g', rar: 2, style: 'Neighbours',       base: 'a^5 a<^>2 xudlr2',     fx: 'same1' },
+  { id: 'glint',  name: 'Glint',  c: 'y', rar: 0, style: 'Front-back boost', base: 'a^4 a^3 pud1',         fx: 'boostp1' },
+  { id: 'spark',  name: 'Spark',  c: 'y', rar: 1, style: 'Side multiplier',  base: 'a^4 a<>3 xr2',         fx: 'mult1' },
+  { id: 'dune',   name: 'Dune',   c: 'y', rar: 2, style: 'Front boost',      base: 'a^5 a<^>2#h2 pu1',     fx: 'triple' },
+  { id: 'dusk',   name: 'Dusk',   c: 'p', rar: 0, style: 'Trident',          base: 'a<>2 a^4 a<^>2',       fx: 'wide1' },
   { id: 'hex',    name: 'Hex',    c: 'p', rar: 1, style: 'Copy',             base: 'a^4 a<>3 eu1',         fx: 'sand3' },
-  { id: 'wisp',   name: 'Wisp',   c: 'p', rar: 2, style: 'Block and row',    base: 'a^6 a<^>3#h2 pR2',     fx: 'backx2' },
+  { id: 'wisp',   name: 'Wisp',   c: 'p', rar: 2, style: 'Block and row',    base: 'a^4 a<^>2#h2 pud1',    fx: 'backx2' },
   { id: 'flare',  name: 'Flare',  c: 'r', rar: 0, style: 'Side boost',       base: 'a^4 a>3 pl2',          fx: 'edge2' },
   { id: 'scorch', name: 'Scorch', c: 'r', rar: 0, style: 'Small strikes',    base: 'a^3 a^3 pr1',          fx: 'small2' },
-  { id: 'pyre',   name: 'Pyre',   c: 'r', rar: 1, style: 'Row boost',        base: 'a^4 a<>3 pR2',         fx: 'linepow' },
+  { id: 'pyre',   name: 'Pyre',   c: 'r', rar: 1, style: 'Column boost',     base: 'a^4 a<>3 pC1',         fx: 'linepow' },
   { id: 'ripple', name: 'Ripple', c: 'b', rar: 0, style: 'Close ranks',      base: 'a^4 a^3 plr1',         fx: 'touch1' },
-  { id: 'brine',  name: 'Brine',  c: 'b', rar: 0, style: 'Loners',           base: 'a<>3 a^4 pd1',         fx: 'loyal2' },
+  { id: 'brine',  name: 'Brine',  c: 'b', rar: 0, style: 'Loners',           base: 'a<>3 a^5 pd1',         fx: 'loyal2' },
   { id: 'fjord',  name: 'Fjord',  c: 'b', rar: 1, style: 'Copy',             base: 'a^4 a<>3 el2',         fx: 'echo2' },
   { id: 'fern',   name: 'Fern',   c: 'g', rar: 0, style: 'Row fillers',      base: 'a^4 a<3 pr2',          fx: 'rowmates1' },
   { id: 'bramble',name: 'Bramble',c: 'g', rar: 0, style: 'Squeezers',        base: 'a^4 a^3 pd2',          fx: 'bread1' },
   { id: 'willow', name: 'Willow', c: 'g', rar: 1, style: 'Multiplier',       base: 'a^4 a<>3 xd2',         fx: 'mulled2' },
   { id: 'gleam',  name: 'Gleam',  c: 'y', rar: 0, style: 'Corner jabs',      base: 'a>4 a<3 pu1',          fx: 'corner3' },
-  { id: 'amber',  name: 'Amber',  c: 'y', rar: 0, style: 'Steady forks',     base: 'a^3 a^3 a<>2',         fx: 'foes1' },
-  { id: 'sunbeam',name: 'Sunbeam',c: 'y', rar: 1, style: 'Column boost',     base: 'a^4 a<>3 pC2',         fx: 'rare2' },
+  { id: 'amber',  name: 'Amber',  c: 'y', rar: 0, style: 'Steady forks',     base: 'a^3 a^3 a<>1',         fx: 'foes1' },
+  { id: 'sunbeam',name: 'Sunbeam',c: 'y', rar: 1, style: 'Spine boost',      base: 'a^4 a<>3 pud2',        fx: 'rare2' },
   { id: 'shade',  name: 'Shade',  c: 'p', rar: 0, style: 'Boost taker',      base: 'a^5 a^2 pd2',          fx: 'boosted2' },
-  { id: 'veil',   name: 'Veil',   c: 'p', rar: 0, style: 'Forge friend',     base: 'a^4 a^3 pr1',          fx: 'up2' },
-  { id: 'gloom',  name: 'Gloom',  c: 'p', rar: 1, style: 'Tall block',       base: 'a^3 a<^>3 a^5#v2',     fx: 'colmates1' }
+  { id: 'veil',   name: 'Veil',   c: 'p', rar: 0, style: 'Forge friend',     base: 'a^5 a^4 pr2',          fx: 'up2' },
+  { id: 'gloom',  name: 'Gloom',  c: 'p', rar: 1, style: 'Tall block',       base: 'a^3 a<^>2 a^5#v2',     fx: 'colmates1' }
 ];
 var UNIT_BY_ID = {};
 UNITS.forEach(function (u) { UNIT_BY_ID[u.id] = u; });
@@ -798,7 +812,7 @@ function evaluate(F, board, opts) {
   var relic = {}; (F.relics || []).forEach(function (r) { relic[r] = 1; });
   var fx = F.fx || {}, fxOf = function (t) { return t.c ? fx[t.c] : undefined; }, fxAny = function (id) { for (var k9 in fx) if (fx[k9] === id) return true; return false; };
   var prismId = opts.prism || 0, overId = opts.over || 0;
-  var nOf = function (t) { return t.id === overId ? t.n * 2 : t.n; };
+  var nOf = function (t) { return t.id === overId ? t.n * CONFIG.hero.over : t.n; };
   var colsOf = function (t) { return t.id === prismId ? COLOR_IDS.slice() : tileColours(t); };
   /* the colours X that make m sandwiched between a and b: both outer tiles have X and m has a colour that is not X. A rainbow filling between two rainbows is never doubled */
   var sandX = function (m, a, b) {
@@ -842,10 +856,10 @@ function evaluate(F, board, opts) {
   /* multipliers */
   G.forEach(function (g) {
     if (g.t.k !== 'x') return;
-    var mn0 = g.t.n + (fxOf(g.t) === 'mult1' ? 1 : 0); targetsOf(g).forEach(function (gi) { if (G[gi].t.k !== 'x') { G[gi].mul *= mn0; g.targets++; } });
+    var mn0 = g.t.n + (fxOf(g.t) === 'mult1' ? FN.mult1 : 0); targetsOf(g).forEach(function (gi) { if (G[gi].t.k !== 'x') { G[gi].mul *= mn0; g.targets++; } });
   });
   var SF = relic.triple ? 3 : 2;
-  var lineF = function (xs) { var f = 0; xs.forEach(function (x) { var v = fx[x] === 'triple' ? Math.max(3, SF) : SF; if (v > f) f = v; }); return f; };
+  var lineF = function (xs) { var f = 0; xs.forEach(function (x) { var v = fx[x] === 'triple' ? Math.max(FN.triple, SF) : SF; if (v > f) f = v; }); return f; };
   /* sandwich: every row line and every column line through the tile counts once, if both ends of the tile's span on that line have matching outer tiles; each line multiplies by 2 (3 with Triple Bread) */
   G.forEach(function (g) {
     var t = g.t; if (t.k === 'x' || !colsOf(t).length) return;
@@ -883,39 +897,39 @@ function evaluate(F, board, opts) {
     if (relic.big3 && g.cells.length > 1) ra += 3;
     if (relic.copy2 && k0 === 'e') ra += 2;
     if (e0) {   /* unit effects, scoped to the tile's colour */
-      if (e0 === 'front1' && g.rows.indexOf(0) >= 0) ra += 1;
-      else if (e0 === 'back2' && g.rows.indexOf(F.rows - 1) >= 0) ra += 2;
-      else if (e0 === 'single1' && g.cells.length === 1) ra += 1;
-      else if (e0 === 'wide1' && hitColsOf(g).length >= 2) ra += 1;
-      else if (e0 === 'neigh1') ra += touching(g, function (o) { return tileColours(o).some(function (c9) { return c9 !== g.t.c; }); });
-      else if (e0 === 'loyal2' && touching(g, function (o) { return tileColours(o).some(function (c9) { return c9 !== g.t.c; }); }) === 0) ra += 2;
-      else if (e0 === 'touch1') ra += touching(g, function (o) { return tileColours(o).indexOf(g.t.c) >= 0; });
-      else if (e0 === 'edge2' && g.cells.some(function (q) { var c9 = q % cols; return c9 === 0 || c9 === cols - 1; })) ra += 2;
-      else if (e0 === 'corner3' && g.cells.some(function (q) { var r9 = (q / cols) | 0, c9 = q % cols; return (r9 === 0 || r9 === F.rows - 1) && (c9 === 0 || c9 === cols - 1); })) ra += 3;
-      else if (e0 === 'foes1') ra += F.enemies.filter(function (en) { return !en.dead; }).length;
-      else if (e0 === 'small2' && nOf(g.t) <= 3) ra += 2;
-      else if (e0 === 'up2' && (g.t.up || g.t.c2)) ra += 2;
-      else if (e0 === 'rowmates1') ra += sharing(g, g.rows, function (r9) { return r9 * cols; }, 1, cols);
-      else if (e0 === 'colmates1') ra += sharing(g, g.colsU, function (c9) { return c9; }, cols, F.rows);
-      else if (e0 === 'bread1') { var nb1 = 0; G.forEach(function (o) { if (o.sand > 1) nb1++; }); ra += nb1; }
-      else if (e0 === 'echo2' && k0 === 'e') ra += 2;
-      else if (e0 === 'mulled2' && g.mul > 1) ra += 2;
-      else if (e0 === 'rare2' && (g.t.rar || 0) >= 1) ra += 3;
-      else if (e0 === 'palette1') ra += ncolN;
-      else if (e0 === 'sand3' && g.sand > 1) ra += 3;
-      else if (e0 === 'cell2' && g.cells.length > 1) ra += 2 * g.cells.length;
-      else if (e0 === 'same1') { var nsame = 0; G.forEach(function (o) { if (o !== g && o.t.c === g.t.c) nsame++; }); ra += nsame; }
-      else if (e0 === 'backx2' && g.rows.indexOf(F.rows - 1) >= 0) g.mul *= 2;
+      if (e0 === 'front1' && g.rows.indexOf(0) >= 0) ra += FN.front1;
+      else if (e0 === 'back2' && g.rows.indexOf(F.rows - 1) >= 0) ra += FN.back2;
+      else if (e0 === 'single1' && g.cells.length === 1) ra += FN.single1;
+      else if (e0 === 'wide1' && hitColsOf(g).length >= 2) ra += FN.wide1;
+      else if (e0 === 'neigh1') ra += FN.neigh1 * touching(g, function (o) { return tileColours(o).some(function (c9) { return c9 !== g.t.c; }); });
+      else if (e0 === 'loyal2' && touching(g, function (o) { return tileColours(o).some(function (c9) { return c9 !== g.t.c; }); }) === 0) ra += FN.loyal2;
+      else if (e0 === 'touch1') ra += FN.touch1 * touching(g, function (o) { return tileColours(o).indexOf(g.t.c) >= 0; });
+      else if (e0 === 'edge2' && g.cells.some(function (q) { var c9 = q % cols; return c9 === 0 || c9 === cols - 1; })) ra += FN.edge2;
+      else if (e0 === 'corner3' && g.cells.some(function (q) { var r9 = (q / cols) | 0, c9 = q % cols; return (r9 === 0 || r9 === F.rows - 1) && (c9 === 0 || c9 === cols - 1); })) ra += FN.corner3;
+      else if (e0 === 'foes1') ra += FN.foes1 * F.enemies.filter(function (en) { return !en.dead; }).length;
+      else if (e0 === 'small2' && nOf(g.t) <= FN.small2max) ra += FN.small2;
+      else if (e0 === 'up2' && (g.t.up || g.t.c2)) ra += FN.up2;
+      else if (e0 === 'rowmates1') ra += FN.rowmates1 * sharing(g, g.rows, function (r9) { return r9 * cols; }, 1, cols);
+      else if (e0 === 'colmates1') ra += FN.colmates1 * sharing(g, g.colsU, function (c9) { return c9; }, cols, F.rows);
+      else if (e0 === 'bread1') { var nb1 = 0; G.forEach(function (o) { if (o.sand > 1) nb1++; }); ra += FN.bread1 * nb1; }
+      else if (e0 === 'echo2' && k0 === 'e') ra += FN.echo2;
+      else if (e0 === 'mulled2' && g.mul > 1) ra += FN.mulled2;
+      else if (e0 === 'rare2' && (g.t.rar || 0) >= 1) ra += FN.rare2;
+      else if (e0 === 'palette1') ra += FN.palette1 * ncolN;
+      else if (e0 === 'sand3' && g.sand > 1) ra += FN.sand3;
+      else if (e0 === 'cell2' && g.cells.length > 1) ra += FN.cell2 * g.cells.length;
+      else if (e0 === 'same1') { var nsame = 0; G.forEach(function (o) { if (o !== g && o.t.c === g.t.c) nsame++; }); ra += FN.same1 * nsame; }
+      else if (e0 === 'backx2' && g.rows.indexOf(F.rows - 1) >= 0) g.mul *= FN.backx2;
     }
     g.radd = ra;
   });
   /* boosters */
   G.forEach(function (g) {
     var t = g.t; if (t.k !== 'p') return;
-    g.pw = (nOf(t) + g.add + mom + (relic.boost1 ? 1 : 0) + (fxOf(t) === 'boostp1' ? 1 : 0)) * g.mul * g.sand * (fxOf(t) === 'linepow' && /[RCB]/.test(t.d) ? 2 : 1);
+    g.pw = (nOf(t) + g.add + mom + (relic.boost1 ? 1 : 0) + (fxOf(t) === 'boostp1' ? FN.boostp1 : 0)) * g.mul * g.sand * (fxOf(t) === 'linepow' && /[RCB]/.test(t.d) ? FN.linepow : 1);
     targetsOf(g).forEach(function (gi) { var k2 = G[gi].t.k; if (k2 === 'a' || k2 === 'e') { G[gi].boost += g.pw; g.targets++; } });
   });
-  G.forEach(function (g) { if ((g.t.k === 'a' || g.t.k === 'e') && g.boost > 0 && fxOf(g.t) === 'boosted2') g.radd += 2; });
+  G.forEach(function (g) { if ((g.t.k === 'a' || g.t.k === 'e') && g.boost > 0 && fxOf(g.t) === 'boosted2') g.radd += FN.boosted2; });
   G.forEach(function (g) { if (g.t.k === 'a') g.v = (nOf(g.t) + g.add + g.radd + mom + g.boost) * g.mul * g.sand; });
   G.forEach(function (g) {
     if (g.t.k !== 'e') return;
@@ -982,7 +996,7 @@ function shapesFor(stage, F, rnd, maxSize) {
 /* a random tile type allowed in this stage, with a number from the budget; rar 0 common, 1 rare, 2 epic */
 function genSpec(rar, stage, rnd, opts) {
   opts = opts || {}; var B = CONFIG.budget, S = CONFIG.stages[stage - 1], k, d, sh = 'o', r = rnd();
-  var kinds = [['a', 0.55]]; if (stage >= 3) kinds.push(['p', 0.25]); if (stage >= 6) kinds.push(['x', 0.12]); if (stage >= 8) kinds.push(['e', 0.08]);
+  var kinds = [['a', 0.55]]; if (stage >= 3) kinds.push(['p', 0.2]); if (stage >= 6) kinds.push(['x', 0.08]); if (stage >= 8) kinds.push(['e', 0.08]);
   var sum = kinds.reduce(function (s, x) { return s + x[1]; }, 0), acc = 0; r *= sum;
   for (var i = 0; i < kinds.length; i++) { acc += kinds[i][1]; if (r < acc) { k = kinds[i][0]; break; } }
   k = k || 'a';
@@ -995,7 +1009,7 @@ function genSpec(rar, stage, rnd, opts) {
     d = pick(lanes, rnd); n = Math.max(1, Math.round(B.attackBase[rar] * B.lanePen[laneOffsets(d).length] * B.cellBonus[cells] * jit));
   } else if (k === 'p' || k === 'x') {
     var lines = []; if (k === 'p') { if (stage >= 5) lines.push('R', 'C'); if (stage >= 9) lines.push('B'); } else if (stage >= 9 && rar === 2) lines.push('R', 'C', 'B');
-    if (lines.length && rnd() < (k === 'p' ? 0.3 : 0.5)) d = pick(lines, rnd);
+    if (lines.length && rnd() < (k === 'p' ? 0.2 : 0.4)) d = pick(lines, rnd);
     else { d = ''; var all = ['u', 'd', 'l', 'r'], cnt = 1 + ((rnd() * (rnd() < 0.5 ? 4 : 2)) | 0); all.sort(function () { return rnd() - 0.5; }); d = all.slice(0, cnt).sort(function (a, b) { return 'udlr'.indexOf(a) - 'udlr'.indexOf(b); }).join(''); }
     var key = /[RCB]/.test(d) ? d : d.length;
     if (k === 'p') n = Math.max(1, Math.round(B.boostBase[rar] * B.dirPen[key] * (cells > 1 ? 1.2 : 1) * jit));
@@ -1004,7 +1018,7 @@ function genSpec(rar, stage, rnd, opts) {
   return { k: k, d: d, n: n, sh: sh };
 }
 /* colourless tiles can never be part of a sandwich, so their numbers are CONFIG.colourlessFactor times higher (multipliers get +1) */
-function colourlessNum(k, n) { var f = CONFIG.colourlessFactor || 1; return k === 'x' ? n + (f > 1 ? 1 : 0) : Math.round(n * f); }
+function colourlessNum(k, n) { var f = CONFIG.colourlessFactor || 1; return k === 'x' ? n : Math.round(n * f); }
 function genColourless(rar, stage, rnd) { var s = genSpec(rar, stage, rnd); s.n = colourlessNum(s.k, s.n); s.rar = rar; s.st = 0; return s; }
 function lootTile(source, depth, stage, rnd, min) { return genColourless(rollRarity(CONFIG.rarity[source], depth, stage, rnd, min), stage, rnd); }
 function stageCfg(run) { return CONFIG.stages[run.stage - 1]; }
@@ -1086,7 +1100,7 @@ function genRunTile(run, rnd) {
 /* a rainbow tile: low numbers, single cell, attack or boost; counts as every colour */
 function genRainbow(stage, rnd) {
   if (rnd() < 0.7) { var ds = stage >= 4 ? ['^', '^', '<>', '<^>'] : stage >= 2 ? ['^', '^', '<>'] : ['^']; var d = pick(ds, rnd); return { k: 'a', d: d, n: d === '^' ? 3 : 2, sh: 'o', rar: 0, rb: true }; }
-  return { k: 'p', d: pick(['udlr', 'ud', 'lr', 'u'], rnd), n: 1, sh: 'o', rar: 0, rb: true };
+  return { k: 'p', d: pick(['ud', 'lr', 'u', 'u'], rnd), n: 1, sh: 'o', rar: 0, rb: true };
 }
 /* an upgrade for one bag tile: +2 (+1 for boosters and multipliers) or a second colour */
 function genUpgrade(run, rnd, avoid) {
@@ -1279,7 +1293,7 @@ function resolveAttack(run, fs, board, rnd) {
 }
 function heroOpts(fs) {
   var h = fs.hero, o = { momentum: fs.mom };
-  if (h && h.armed) { if (h.id === 'rally') o.momentum += 1; if (h.id === 'prism' && h.target) o.prism = h.target; if (h.id === 'overcharge' && h.target) o.over = h.target; }
+  if (h && h.armed) { if (h.id === 'rally') o.momentum += CONFIG.hero.rally; if (h.id === 'prism' && h.target) o.prism = h.target; if (h.id === 'overcharge' && h.target) o.over = h.target; }
   return o;
 }
 /* arm / disarm the hero ability (Second Wind applies now and is undone by disarming; the two tap-to-target abilities wait for a target) */
@@ -1451,13 +1465,13 @@ var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Match the numbers to t
 'use strict';
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-var LS_KEY = 'tileRunPrototype.v6';
+var LS_KEY = 'tileRunPrototype.v7';
 var store = null, SPEED = 1;
 function defaultStore() {
   var units = {}, team = {};
   UNITS.forEach(function (u) { var st = CONFIG.starters.indexOf(u.id) >= 0; if (st) team[u.c] = u.id; units[u.id] = { u: st, l: 1 }; });
   var cf = CONFIG.colourlessFactor;
-  return { v: 6, coins: CONFIG.startCoins, shards: 0, units: units, team: team, slots: {}, ct: [], pity: 0, pulls: 0, nid: 3, bag: [1, 2, 3], run: null, cleared: {}, sel: null, maxTier: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, dailyDone: '',
+  return { v: 7, coins: CONFIG.startCoins, shards: 0, units: units, team: team, slots: {}, ct: [], pity: 0, pulls: 0, nid: 3, bag: [1, 2, 3], run: null, cleared: {}, sel: null, maxTier: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, dailyDone: '',
     inv: [{ id: 1, k: 'a', d: '^', n: colourlessNum('a', 3), sh: 'o', rar: 0, st: 0 }, { id: 2, k: 'a', d: '^', n: colourlessNum('a', 3), sh: 'o', rar: 0, st: 0 }, { id: 3, k: 'p', d: 'udlr', n: colourlessNum('p', 1), sh: 'o', rar: 0, st: 0 }],
     set: { momentum: true, value: 1, ret: 'fight', stars: true, tlog: false } };
 }
@@ -1465,7 +1479,7 @@ function load() {
   var s = defaultStore();
   try {
     var j = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
-    if (j && j.v === 6 && j.units && j.team && j.inv) {
+    if (j && j.v === 7 && j.units && j.team && j.inv) {
       var d = defaultStore(); s = j;
       for (var k in d) if (s[k] === undefined) s[k] = d[k];
       for (k in d.set) if (s.set[k] === undefined) s.set[k] = d.set[k];
