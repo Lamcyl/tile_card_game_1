@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Tile Run - rainbow tile designs</title>
+<style>
+:root{
+ --bg:#eef1f5;--panel:#ffffff;--panel2:#e4e9f0;--ink:#1c2635;--muted:#566377;--line:#c9d1dc;--cellbg:#f8fafc;
+ --r:#d2473f;--b:#2e6bd3;--g:#23874f;--y:#b9800f;--p:#7a55c2;--x:#566377;
+ --shadow:rgba(20,30,50,.18);--gold:#e0a100;--accedge:#151a24;--chipbg:#151a24;--chipink:#ffd04a;
+ --rbmid:#3b4a66;--rbnavy:#18233a;--rare:#35c3e6;--epic:#e056d8;
+}
+@media (prefers-color-scheme:dark){:root{
+ --bg:#151a24;--panel:#212838;--panel2:#2b3448;--ink:#eef2f8;--muted:#a6b1c4;--line:#3a4560;--cellbg:#1b2130;
+ --r:#e0584f;--b:#4f86e6;--g:#2f9d5f;--y:#d19a22;--p:#9a78e0;--x:#7a879c;
+ --shadow:rgba(0,0,0,.5);--gold:#f0b429;--accedge:#0d1118;--chipbg:#0d1118;
+ --rbmid:#34415c;--rbnavy:#0b0f17;
+}}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden}
+main{max-width:1100px;margin:0 auto;padding:14px 12px 28px}
+h1{font-size:19px;margin:4px 0 4px}
+.lede{font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.4}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
+.card h2{font-size:15px;margin:0 0 2px}
+.card .one{font-size:12px;color:var(--muted);margin:0 0 10px;line-height:1.35}
+.row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 12px;margin-bottom:12px}
+figure{margin:0;display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+figcaption{font-size:10px;color:var(--muted)}
+.strips{display:flex;flex-wrap:wrap;gap:8px 18px;padding:10px 10px 8px;background:var(--cellbg);border-radius:10px;border:1px solid var(--line)}
+.strip{position:relative;display:flex;gap:10px}
+.clamp{position:absolute;top:50%;width:6px;height:calc(var(--u)*.5);margin-top:calc(var(--u)*-.25);background:var(--gold);box-shadow:0 0 0 1.5px var(--accedge);border-radius:4px;z-index:6}
+.ref{margin-bottom:12px}
+.rec{margin-top:14px;padding:12px;border-radius:14px;background:var(--panel);border:1px solid var(--line);font-size:13px;line-height:1.45}
+
+/* ---------- tiles (mirrors tile-run.html look) ---------- */
+.t{--u:46px;--rad:calc(var(--u)*.18);--tc:var(--x);--ti:#fff;--gl:#fff;
+ position:relative;flex:none;width:var(--u);height:var(--u);border-radius:var(--rad);color:var(--ti);
+ box-shadow:0 calc(var(--u)*.06) 0 color-mix(in srgb,var(--tc) 72%,#000)}
+.t.w2{width:calc(var(--u)*2 + 6px)}
+.k-r{--tc:var(--r)}.k-b{--tc:var(--b)}.k-g{--tc:var(--g)}.k-y{--tc:var(--y)}.k-p{--tc:var(--p)}.k-x{--tc:var(--x)}
+.fc{position:absolute;inset:var(--it,var(--bw,0px)) var(--is,var(--bw,0px)) var(--ib,var(--bw,0px));border-radius:var(--frad,calc(var(--rad) - var(--bw,0px)));background:var(--tc);display:flex;align-items:center;justify-content:center;z-index:1;color:inherit}
+.num{font-size:calc(var(--u)*.43);font-weight:800;line-height:1;margin-top:calc(var(--u)*-.06);font-variant-numeric:tabular-nums;position:relative;z-index:2}
+.nm{position:absolute;left:0;right:0;bottom:calc(var(--u)*.07);text-align:center;font-style:normal;font-size:max(6.5px,calc(var(--u)*.13));font-weight:800;letter-spacing:.05em;white-space:nowrap;line-height:1.1;z-index:2}
+.gl{position:absolute;left:calc(var(--u)*.08);top:calc(var(--u)*.08);width:calc(var(--u)*.24);height:calc(var(--u)*.24);color:var(--gl);z-index:2}
+.gl rect{fill:currentColor;opacity:.3}.gl rect.on{opacity:1}
+.chip{position:absolute;left:50%;bottom:calc(var(--u)*.06);transform:translateX(-50%);background:var(--chipbg);color:var(--chipink);border:1.5px solid var(--gold);border-radius:9px;padding:0 max(4px,calc(var(--u)*.09));height:max(13px,calc(var(--u)*.235));line-height:max(10px,calc(var(--u)*.18));font-size:max(9.5px,calc(var(--u)*.165));font-weight:800;font-style:normal;white-space:nowrap;z-index:3}
+/* existing special kinds */
+.t.boost:not(.rb){--ti:var(--tc);--gl:var(--tc);box-shadow:0 calc(var(--u)*.06) 0 var(--shadow)}
+.t.boost:not(.rb) .fc{background:var(--panel);box-shadow:inset 0 0 0 calc(var(--u)*.08) var(--tc)}
+.t.mult .fc{background:var(--panel);box-shadow:inset 0 0 0 calc(var(--u)*.065) var(--tc)}
+.t.mult{--ti:var(--tc);--gl:var(--tc);box-shadow:0 calc(var(--u)*.06) 0 var(--shadow);outline:calc(var(--u)*.05) dashed var(--panel);outline-offset:calc(var(--u)*-.14)}
+.t.split .fc{background:linear-gradient(135deg,var(--r) 50%,var(--b) 50%)}
+.t.ring1{outline:3px solid var(--rare);outline-offset:1px}
+.t.ring2{outline:3px solid var(--epic);outline-offset:1px;filter:drop-shadow(0 0 4px var(--epic))}
+
+/* ---------- rainbow base ---------- */
+.rb{--c1:var(--r);--c2:var(--y);--c3:var(--g);--c4:var(--b);--c5:var(--p);
+ --smooth:var(--c1),var(--c2),var(--c3),var(--c4),var(--c5),var(--c1);
+ --hard:var(--c1) 0 72deg,var(--c2) 72deg 144deg,var(--c3) 144deg 216deg,var(--c4) 216deg 288deg,var(--c5) 288deg 360deg;
+ --tc:var(--rbmid);box-shadow:0 calc(var(--u)*.06) 0 rgba(10,16,30,.4)}
+.rl{position:absolute;inset:0;border-radius:var(--rad);overflow:hidden;z-index:0}
+.rl::before{content:"";position:absolute}
+.dots{display:none}
+.rb .num,.rb .nm{text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.rb.boost{--ti:var(--ink);--gl:var(--muted)}
+.rb.boost .num,.rb.boost .nm{text-shadow:none}
+.card .rb.boost .fc{background:var(--panel)}
+.card .rb.boost{--bw:calc(var(--u)*.09)}
+.d1 .rl::before,.d7 .rl::before{left:50%;top:50%;width:calc(var(--w,var(--u))*1.7);aspect-ratio:1;transform:translate(-50%,-50%) rotate(0);animation:rot 10s linear infinite;will-change:transform}
+@keyframes rot{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes ang{to{--a:360deg}}
+
+/* 1 Orbit: smooth conic ring rotates (transform) around slate face */
+.d1 .rb{--bw:calc(var(--u)*.09);--rbf:var(--x)}
+.d1 .rb .fc{background:var(--x)}
+.d1 .rl::before{background:conic-gradient(var(--smooth))}
+
+/* 2 Segments: five hard arcs + travelling sheen */
+.d2 .rb{--bw:calc(var(--u)*.085)}
+.d2 .rb .fc{background:var(--rbmid)}
+.d2 .rl{--a:0deg;background:conic-gradient(from var(--a),transparent 0 310deg,rgba(255,255,255,.8) 345deg,transparent 360deg),conic-gradient(var(--hard));animation:ang 9s linear infinite}
+
+/* 3 Stripes: five stripes replace the dark bottom edge, drifting sideways */
+.d3 .rb{--it:0px;--is:0px;--ib:calc(var(--u)*.15);--frad:var(--rad) var(--rad) 0 0}
+.d3 .rb .fc{background:var(--rbnavy);box-shadow:inset 0 0 0 1px rgba(255,255,255,.13)}
+.d3 .rb.boost .fc{box-shadow:none}
+.d3 .rb.boost{--it:calc(var(--u)*.07);--is:calc(var(--u)*.07);--frad:calc(var(--rad) - 3px) calc(var(--rad) - 3px) 0 0}
+.d3 .rl::before{left:0;bottom:0;height:calc(var(--u)*.15);width:200%;background:linear-gradient(90deg,var(--c1) 0 10%,var(--c2) 10% 20%,var(--c3) 20% 30%,var(--c4) 30% 40%,var(--c5) 40% 50%,var(--c1) 50% 60%,var(--c2) 60% 70%,var(--c3) 70% 80%,var(--c4) 80% 90%,var(--c5) 90% 100%);animation:slide 8s linear infinite;will-change:transform}
+.d3 .rb{box-shadow:0 calc(var(--u)*.025) 0 rgba(10,16,30,.35)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* 4 Bands: five soft vertical bands under a white number, drifting */
+.d4 .rb{--bw:0px}
+.d4 .rb .fc{background:transparent}
+.d4 .rl::before{inset:0 auto 0 0;width:200%;background:linear-gradient(90deg,var(--c1) 0 6%,var(--c2) 20% 26%,var(--c3) 40% 46%,var(--c4) 60% 66%,var(--c5) 80% 86%,var(--c1) 100%) 0 0/50% 100% repeat-x;animation:slide 12s linear infinite;will-change:transform}
+.d4 .rb .gl{filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
+.d4 .rb::after,.d6 .rb::after{content:"";position:absolute;inset:0;border-radius:var(--rad);background:linear-gradient(rgba(0,0,0,.10),rgba(0,0,0,.18));z-index:1;pointer-events:none}
+.d4 .rb.boost::after,.d6 .rb.boost::after,.d7 .rb.boost::after{display:none}
+
+/* 5 Dots: white face with slate rim, row of five dots that pulse in turn */
+.d5 .rb{--bw:calc(var(--u)*.05);--ti:var(--ink);--gl:var(--muted)}
+.d5 .rb .fc{background:var(--panel)}
+.d5 .rl{background:var(--x)}
+.d5 .rb .num,.d5 .rb .nm{text-shadow:none}
+.d5 .rb .num{margin-top:calc(var(--u)*-.14)}
+.d5 .rb .nm{display:none}
+.d5 .rb .dots{display:flex;position:absolute;left:0;right:0;bottom:calc(var(--u)*.1);justify-content:center;gap:calc(var(--u)*.045);z-index:2}
+.d5 .rb .dots i{width:calc(var(--u)*.115);height:calc(var(--u)*.115);border-radius:50%;animation:pulse 8s ease-in-out infinite}
+.d5 .rb .dots i:nth-child(1){background:var(--c1)}.d5 .rb .dots i:nth-child(2){background:var(--c2);animation-delay:.3s}.d5 .rb .dots i:nth-child(3){background:var(--c3);animation-delay:.6s}.d5 .rb .dots i:nth-child(4){background:var(--c4);animation-delay:.9s}.d5 .rb .dots i:nth-child(5){background:var(--c5);animation-delay:1.2s}
+.d5 .rb .chip{bottom:calc(var(--u)*.04)}
+.d5 .rb.chipped .dots{display:none}
+@keyframes pulse{0%,16%,100%{transform:scale(1)}8%{transform:scale(1.45)}}
+
+/* 6 Drift: diagonal five-colour gradient slides across the whole face */
+.d6 .rb{--bw:0px}
+.d6 .rb .fc{background:transparent}
+.d6 .rl::before{--P:calc(var(--u)*2.4);inset:calc(var(--P)*-1);background:repeating-linear-gradient(120deg,var(--c1) 0,var(--c2) calc(var(--P)*.2),var(--c3) calc(var(--P)*.4),var(--c4) calc(var(--P)*.6),var(--c5) calc(var(--P)*.8),var(--c1) var(--P));animation:drift 12s linear infinite;will-change:transform}
+@keyframes drift{to{transform:translate(calc(var(--u)*-2.4*.866),calc(var(--u)*-2.4*.5))}}
+.d6 .rb .gl{filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
+
+/* 7 Pinwheel: five wedges turn slowly; number sits on a navy disc */
+.d7 .rb{--bw:0px}
+.d7 .rb .fc{background:transparent}
+.d7 .rl::before{background:conic-gradient(var(--hard));animation-duration:12s}
+.d7 .rb:not(.boost) .fc::before{content:"";position:absolute;left:50%;top:48%;width:calc(var(--u)*.64);aspect-ratio:1;border-radius:50%;background:var(--rbnavy);transform:translate(-50%,-50%);box-shadow:0 0 0 calc(var(--u)*.025) rgba(255,255,255,.85)}
+.d7 .rb .nm{display:none}
+.d7 .rb .num{margin-top:calc(var(--u)*-.02);font-size:calc(var(--u)*.36)}
+.d7 .rb .gl{filter:drop-shadow(0 1px 1px rgba(0,0,0,.5))}
+
+.d7 .rb.boost{--bw:calc(var(--u)*.11)}
+.d7 .rb .chip{bottom:calc(var(--u)*.03)}
+
+/* 8 Hairline: near-black navy face, 2 px five-colour hairline that travels */
+.d8 .rb{--bw:max(2px,calc(var(--u)*.045))}
+.d8 .rb .fc{background:var(--rbnavy)}
+.d8 .rl{--a:0deg;background:conic-gradient(from var(--a),var(--smooth));animation:ang 10s linear infinite}
+.d8 .rb.boost{--bw:max(3px,calc(var(--u)*.07))}
+
+.noprop .d2 .rl,.noprop .d8 .rl{animation:none}
+@media (prefers-reduced-motion:reduce){
+ .rb *,.rb *::before,.rb{animation:none!important}
+ .rl{animation:none!important}
+ .d2 .rl{background:conic-gradient(var(--hard))!important}
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Rainbow tile - eight looks</h1>
+<p class="lede">A universal colour for sandwiches. Only the five game colours (red, ochre, green, blue, purple in the game's muted tones). Motion is slow (8-12 s), CSS only and stops under reduced-motion, where each design still reads as rainbow. Every card shows: single tile at 64 and 46 px, boost (+N outline class), a rainbow with Rare / Epic rings, a two-wide tile, and two 3x1 board strips with gold clamps (rainbow as bread, then as filling).</p>
+<section class="card ref"><h2>Reference: current tiles</h2><p class="one">Red, blue, green, ochre, purple, slate, split (two colours), boost +N, multiplier x2 (dashed), Rare and Epic rings, gold clamp.</p><div class="row" id="ref"></div></section>
+<div class="grid" id="grid"></div>
+<section class="rec" id="rec"></section>
+</main>
+<script>
+if(!(window.CSS&&CSS.registerProperty))document.documentElement.classList.add('noprop');
+function G(p){var s='<svg class="gl" viewBox="0 0 12 12" aria-hidden="true">';for(var i=0;i<9;i++)s+='<rect x="'+((i%3)*4.2-0.2+0.2)+'" y="'+(Math.floor(i/3)*4.2)+'" width="3.4" height="3.4" rx=".7" class="'+(p[i]==='1'?'on':'')+'"/>';return s+'</svg>'}
+function T(o){var u=o.u||46,k=o.k||'rb',rb=k==='rb',c=['t'];
+ if(rb)c.push('rb');else c.push('k-'+k);
+ if(o.w2)c.push('w2');if(o.boost)c.push('boost');if(o.mult)c.push('mult');if(o.split)c.push('split');if(o.ring)c.push('ring'+o.ring);if(o.chip)c.push('chipped');
+ var w=o.w2?u*2+6:u,h='<div class="'+c.join(' ')+'" style="--u:'+u+'px;--w:'+w+'px">';
+ if(rb)h+='<i class="rl"></i>';
+ h+='<div class="fc">'+G(o.g||'010111010')+'<b class="num">'+(o.boost?'+':'')+(o.n===undefined?4:o.n)+'</b>'+(o.chip?'':'<em class="nm">'+(o.nm||(rb?'RAINBOW':'ATTACK'))+'</em>');
+ if(rb)h+='<s class="dots"><i></i><i></i><i></i><i></i><i></i></s>';
+ if(o.chip)h+='<em class="chip">×'+o.chip+'</em>';
+ return h+'</div></div>'}
+function F(h,l){return '<figure>'+h+'<figcaption>'+l+'</figcaption></figure>'}
+function S(items,u){var h='<div class="strip" style="--u:'+u+'px">';items.forEach(function(it,i){it.u=u;h+=T(it);if(i<items.length-1)h+='<i class="clamp" style="left:'+((i+1)*u+i*10+2)+'px"></i>'});return h+'</div>'}
+document.getElementById('ref').innerHTML=[
+ F(T({k:'r',n:5}),'red'),F(T({k:'b',n:5}),'blue'),F(T({k:'g',n:5}),'green'),F(T({k:'y',n:5}),'ochre'),F(T({k:'p',n:5}),'purple'),F(T({k:'x',n:5,nm:'ANY'}),'slate'),
+ F(T({k:'r',split:1,n:5,nm:'SPLIT'}),'two-colour'),F(T({k:'b',boost:1,n:3,nm:'BOOST'}),'boost'),F(T({k:'g',mult:1,n:2,nm:'MULT'}).replace('>2<','>×2<'),'multiplier'),
+ F(T({k:'r',n:5,ring:1}),'Rare'),F(T({k:'r',n:5,ring:2}),'Epic'),
+ F('<div class="strip" style="--u:46px"><i class="clamp" style="position:static;margin:0;display:block;height:22px"></i></div>','clamp')
+].join('');
+var D=[
+ ['Orbit','Smooth five-colour ring slowly circles a slate face. Clean and calm; the ring is the same width as boost outlines so it can look busy on big hands.'],
+ ['Segments','Five hard arcs on a mid-navy face, with a soft white sheen travelling round. Most "five colours" legible; sheen needs @property (static arcs if missing).'],
+ ['Stripes','Five thin colour stripes replace the dark bottom edge of a navy tile and drift sideways. Least intrusive; tiny at 46 px and the face is darker than neighbours.'],
+ ['Bands','Face is five soft vertical bands under a white number, drifting. Reads instantly as rainbow; number contrast on ochre/green is the weakest of all (shadow helps).'],
+ ['Dots','White face, slate rim, five dots that pulse in turn. Quiet and elegant; closest to a boost tile, so it leans on the dots and absence of a coloured outline.'],
+ ['Drift','Diagonal five-colour gradient slides across the entire face. Most "rainbow" and glossy; blends colours so purity of the five is lost, and number contrast varies.'],
+ ['Pinwheel','Five hard wedges turn slowly; number on a navy disc for guaranteed contrast. Strong and distinct but the loudest; disc hides the name label.'],
+ ['Hairline','Near-black navy face with a 2 px five-colour hairline that travels round. Most refined and highest number contrast; thin line is subtle at 46 px.']
+];
+var grid=document.getElementById('grid');
+D.forEach(function(d,i){var n=i+1,h='<section class="card d'+n+'"><h2>'+n+' · '+d[0]+'</h2><p class="one">'+d[1]+'</p>';
+ h+='<div class="row">'+F(T({u:64,n:7}),'64 px')+F(T({u:46,n:7}),'46 px')+F(T({u:46,n:3,boost:1,nm:'BOOST'}),'boost +3')+F(T({u:64,n:3,boost:1,nm:'BOOST'}),'boost 64')+'</div>';
+ h+='<div class="row">'+F(T({u:46,w2:1,n:12,g:'000111000'}),'two-wide')+F(T({u:46,n:7,ring:1}),'+ Rare')+F(T({u:46,n:7,ring:2}),'+ Epic')+'</div>';
+ h+='<div class="strips">'+F(S([{k:'rb',n:5},{k:'r',n:6,chip:2},{k:'b',n:4}],46),'bread: rainbow, red x2, blue')+F(S([{k:'g',n:4},{k:'rb',n:6,chip:2},{k:'g',n:4}],46),'filling: green, rainbow x2, green')+'</div></section>';
+ grid.insertAdjacentHTML('beforeend',h)});
+document.getElementById('rec').innerHTML='<b>Recommendation</b><br>Hairline (8) as the default: highest number contrast, calmest next to solid tiles, and it cannot be mistaken for a boost, a split tile, a clamp or a rarity ring. Fall back to Orbit (1) if the hairline proves too thin on small phones.<br>Pinwheel (7) is the pick if the tile should shout its power; Bands (4) and Drift (6) are the most vivid but give up number contrast.';
+</script>
+</body>
+</html>
