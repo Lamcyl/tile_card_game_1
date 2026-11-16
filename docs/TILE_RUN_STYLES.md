@@ -143,3 +143,21 @@ Mockup: `prototype/samples/tile-run-units.html` (add `#n=8` to the URL for the 8
 - **5 Split:** unit rail on the left, chosen unit large on the right with slot sockets, a tiny tile row for the others. Roomy loadout view, others need a tap to read.
 
 Recommendation: **1 Rows** as the base (cheapest and safest at 8 units), using the big socket slot view of 3 or 5 inside Loadout; **4 Matrix** is the pick if players want to compare colours.
+
+## Map layouts, round two (no art)
+
+Mockup: `prototype/samples/tile-run-map2.html`. Replaces the art-based maps (all rejected). Pure shape, colour, line and type; stages are tile-like pieces, no difficulty number on the map. Area name, difficulty, fights, boss and reward appear only in the card for the selected stage, which also holds the Play button; a dock (Puzzles, Endless, Hero, Team, More) sits below. Same state in all five: first area cleared, second part-cleared with a stage selected, two areas revealed, the rest quiet dashed outlines. Cleared = solid colour with tick, available = coloured outline with tint, selected = navy tile with play mark and halo, locked = grey with lock, hidden = dotted.
+
+- **1 Rings:** difficulty is the ring, direction is the region; stages are arc segments around a hub, branches leave left and right. Weak: inner stages small, outer rings run off screen.
+- **2 Lines:** transit diagram, coloured region lines, stages as tile stops of odd sizes, the fork an interchange. Weak: hand-laid coordinates, long branches crowd.
+- **3 Focus:** one area at a time as a big tile puzzle, a small overview graph on top to move between areas. Weak: no whole-world view.
+- **4 Index:** typographic contents page, regions as headings, areas as small tile clusters, a thin branching spine. Weak: least spatial.
+- **5 Mosaic:** whole world as one tiling on a navy slab, areas are plates of polyomino stages. Weak: small cells, rigid grid.
+
+## Units page: Split, team marker options
+
+Mockup: `prototype/samples/tile-run-units2.html` (tabs A/B/C). Split layout from the units mockup as a standalone page: wider rail (name, rarity and level, slot dots, mini tiles per unit), big card with tiles, sockets, effect and buttons. Six units per colour, Rare cyan ring, Epic magenta ring, slots bought with shards (level up costs coins). No stars anywhere; the viewed unit gets a tinted fill, colour outline and a pointer to the card, unowned units are dashed and dimmed with a lock.
+
+- **A Badge:** the team unit carries a solid colour TEAM badge, repeated as IN TEAM on the big card.
+- **B Filled:** the team unit's rail entry is filled solid in its colour, big card gets a colour band.
+- **C Seat:** every owned unit has a radio ring, filled with a tick for the team pick; the big card repeats it with a label.
