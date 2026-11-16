@@ -294,9 +294,9 @@ Prototype: `prototype/samples/tile-run.html`, details in `docs/TILE_RUN_PROTOTYP
 - **Puzzle shrines:** a "Puzzles" list on Home with 15 hand-made one-attack puzzles that use the game's rules, unlocked with the stages, each teaching one idea; first solve pays, replays are free, retry is instant. A brute-force solver script that shares the rules code verified every puzzle (2 to 64 layouts each; at most 1.1 percent of random fills win) and stored solutions are used for testing. A daily puzzle is generated from the date with a hidden solution built first, one small reward per day.
 - **Left for later (12.8):** beasts and monsters as faces, the map as stage select, camp and item marks. The puzzle shrines are a list on Home for now.
 
-## 14. Progression brainstorm: collectable coloured tiles, units, rainbow, map (not built)
+## 14. Progression brainstorm: collectable coloured tiles, units, rainbow, map (now built, see Implemented below)
 
-Status: brainstorm only. Nothing here is implemented. Home screen choice so far: layout C "Focus" (one big Continue tile, pips, small row).
+Status: brainstorm; implemented in the fifth prototype version, see "Implemented" at the end of this section. Home screen choice so far: layout C "Focus" (one big Continue tile, pips, small row).
 
 ### 14.1 The user's proposal
 
@@ -397,3 +397,16 @@ Rainbow look
 4. Map as stage select (abstract cells first, art after).
 5. Unit gacha with coins.
 6. Balance pass (colourless values, slot counts, drop tables).
+
+### 14.6 Implemented (fifth prototype version)
+
+Built in `prototype/samples/tile-run.html`; rules and numbers are in `TILE_RUN_PROTOTYPE.md` (fifth iteration). Defaults chosen for the open questions in 14.4:
+
+1. Losing a run: only coins are kept (option b); a keep is earned at a boss, so an earlier mid-boss keep stays. Endless gives no keeps.
+2. Slots: Common 1, Rare 2, Epic 3, bought with coins at rising prices (40, 90, 160), not by level.
+3. Rainbow between two rainbows: not doubled (the plain rule plus an explicit exception); every other case follows the rule literally.
+4. Rainbow source: boss drops on far cells only (tier 7 or more), offered on the keep screen; not part of any unit's base tiles. Max 2 in a team.
+5. Unit rarity changes the kind of base tiles (shapes, lanes, signature) and the strength of its one effect; level 1-5 only raises numbers. The level 5 branches were dropped.
+6. Map: square grid, 4 neighbours, 7x7 (49 cells), Manhattan distance 0..6 mapped to the ten tiers (tiers at distance 3 to 5 have two options chosen by position).
+7. The old 10 stages are the ten tiers; the list is gone, the map is the home screen. Run length 3 steps at the origin up to 8 at the far edge, a mid-boss from 6.
+- Also decided: levels come only from duplicate shards (no coin route); single pull 30 coins, Epic pity every 20 pulls; tiles are not gacha; colourless numbers doubled (`colourlessFactor`); no "sandwich on the map" bonus (rejected by the user); Endless after clearing a cell at distance 2; stage art is a 3x3 terrain-tile mosaic per cell (5 regions x 4 tiles, about 43 KB).
