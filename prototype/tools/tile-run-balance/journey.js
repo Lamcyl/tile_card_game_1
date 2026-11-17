@@ -24,7 +24,7 @@ function newStore() {
 }
 function addInv(S, t) { S.nid++; S.inv.push({ id: S.nid, k: t.k, d: t.d, n: t.n, sh: t.sh || 'o', rar: t.rar || 0, st: 0 }); R.mergeStars(S.inv, null, null); }
 function addCT(S, t) { S.nid++; S.ct.push({ id: S.nid, c: t.c, k: t.k, d: t.d, n: t.n, sh: t.sh || 'o', rar: t.rar || 0, st: 0 }); R.mergeStars(S.ct, null, null); }
-function slotCount(S, id) { return (S.slots[id] || 0); }
+function slotCount(S, id) { return (S.slots[id] || 1); }
 function pull(S, rnd) {
   S.coins -= C.gacha.cost; const st = { pity: S.pity }, owned = {}; R.UNITS.forEach(u => { if (S.units[u.id].u) owned[u.id] = 1; });
   const r = R.gachaRoll(st, owned, rnd); S.pity = st.pity; S.pulls++;
@@ -42,7 +42,7 @@ function spendShards(S) {
     let best = null;
     R.COLOR_IDS.forEach(c => {
       const u = R.UNIT_BY_ID[S.team[c]], st = S.units[u.id];
-      if (st.l < 5) { const cost = C.gacha.levelShards[st.l + 1]; if (cost <= S.shards) { const v = 3.2 / cost + (st.l < 3 ? 0.15 : 0); if (!best || v > best.v) best = { v, f: () => { S.shards -= cost; st.l++; } }; } }
+      if (st.l < C.lvlMax) { const cost = C.levelCoins[st.l + 1]; if (cost <= S.shards) { const v = 3.2 / cost + (st.l < 3 ? 0.15 : 0); if (!best || v > best.v) best = { v, f: () => { S.shards -= cost; st.l++; } }; } }
       const ns = slotCount(S, u.id);
       if (ns < C.slotMax[u.rar]) { const cost = C.slotCost[ns]; if (cost <= S.shards) { const v = 6 / cost; if (!best || v > best.v) best = { v, f: () => { S.shards -= cost; S.slots[u.id] = ns + 1; } }; } }
     });

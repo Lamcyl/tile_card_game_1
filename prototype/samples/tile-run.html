@@ -504,8 +504,9 @@ var CONFIG = {
   momentum: { on: true, bonus: 1, values: [1, 2, 3] },
   startCoins: 60,                   /* two pulls */
   colourlessFactor: 2,              /* colourless tiles have no sandwich, so their numbers are this many times a coloured tile's */
-  gacha: { cost: 30, odds: [0.70, 0.24, 0.06], pity: 20, shards: [3, 6, 12], levelShards: { 2: 3, 3: 6, 4: 9, 5: 15 } },   /* odds [common, rare, epic]; an Epic at the latest every `pity` pulls; shards (the one shared upgrade currency) per duplicate pull by rarity; levelShards = shards for a unit to reach that level */
-  slotCost: [8, 16, 30], slotMax: [1, 2, 3],        /* SHARDS for the 1st, 2nd, 3rd slot of a unit; maximum slots by unit rarity */
+  gacha: { cost: 30, odds: [0.70, 0.24, 0.06], pity: 20, shards: [3, 6, 12] },   /* odds [common, rare, epic]; an Epic at the latest every `pity` pulls; shards (the shared upgrade currency for unit slots) per duplicate pull by rarity */
+  slotCost: [0, 8, 16, 30], slotMax: [2, 3, 4],     /* every unit starts with 1 open slot; SHARDS to open its 2nd, 3rd, 4th slot (slotCost[n] opens slot n+1); maximum slots by unit rarity */
+  lvlMax: 8, levelCoins: { 2: 10, 3: 16, 4: 25, 5: 38, 6: 55, 7: 80, 8: 115 },   /* unit levels cost COINS: levelCoins[n] = coins to reach level n (placeholders) */
   starters: ['ember', 'tide', 'moss', 'glint', 'dusk'],   /* the units owned (and in the team) in a fresh save: one Common per colour */
   rainbow: { tier: 7, chance: 0.25, maxTeam: 2 },   /* a boss from this tier on may drop a rainbow tile (chance grows with distance) */
   /* the world map: one tiling, 6 units wide and 35 tall (y counts from the top). It is cut into AREA plates; each plate holds 3 or 4 STAGES drawn as pieces of the plate (rows: a letter per unit, A = stage 1, B = stage 2, ...). All stages of an area share its difficulty tier (1..10) and its run length (path choices before the final boss; a mid-boss on runs of midFrom or more).
@@ -574,13 +575,12 @@ var CONFIG = {
   ],
   /* lessons: puzzles that must be solved before the first stage of each difficulty (each teaches the tiles that start to appear there) */
   lessons: { 1: ['p01', 'p02'], 2: ['p03', 'p05', 'p06'], 3: ['p04', 'p07'], 4: ['p08'], 5: ['p16', 'p10'], 6: ['p11', 'p12'], 7: ['p13', 'p15', 'p09'], 8: ['p14'] },
-  fxTier: 5,   /* unit skills work from this difficulty on (taught by lesson p16) */
   firstClear: { coins: [5, 6, 7, 8, 9, 10, 11, 12, 14, 20] },
   /* the size of every unit effect (the rule of each effect is in EFFECTS; only these numbers are tunable) */
-  /* level bonus by level 1..5 (index 0..4): attacks by the columns reached (1, 2, 3, 4 or more), local boosts, line boosts, multipliers, copies */
-  lvl: { a: [[0, 1, 2, 3, 4], [0, 1, 1, 2, 2], [0, 0, 1, 1, 1], [0, 0, 0, 1, 1]], pl: [0, 0, 0, 1, 1], pr: [0, 0, 0, 0, 1], x: [0, 0, 0, 0, 0], e: [0, 0, 1, 1, 2] },
+  /* level bonus by level 1..8 (index 0..7): attacks by the columns reached (1, 2, 3, 4 or more), local boosts, line boosts, multipliers, copies */
+  lvl: { a: [[0, 1, 2, 3, 4, 5, 6, 7], [0, 1, 1, 2, 2, 3, 3, 4], [0, 0, 1, 1, 1, 2, 2, 3], [0, 0, 0, 1, 1, 1, 2, 2]], pl: [0, 0, 0, 1, 1, 2, 2, 3], pr: [0, 0, 0, 0, 1, 1, 2, 2], x: [0, 0, 0, 0, 0, 0, 0, 0], e: [0, 0, 1, 1, 2, 2, 3, 3] },
   hero: { rally: 2, over: 3 },   /* Rally: momentum added to every tile; Overcharge: the factor on the tapped tile */
-  fx: { front1: 1, back2: 2, single1: 1, boostp1: 1, wide1: 1, neigh1: 1, palette1: 1, mult1: 1, sand3: 2, cell2: 1, same1: 1, backx2: 2, edge2: 2, touch1: 1, loyal2: 2, boosted2: 2, foes1: 1, small2: 2, small2max: 4, up2: 2, rowmates1: 1, corner3: 3, bread1: 1, linepow: 2, echo2: 2, mulled2: 1, rare2: 2, colmates1: 1, triple: 3 }
+  fx: { front1: 1, back2: 2, single1: 1, boostp1: 1, wide1: 1, neigh1: 1, palette1: 1, mult1: 1, sand3: 2, cell2: 1, same1: 1, backx2: 2, edge2: 2, touch1: 1, loyal2: 2, boosted2: 2, foes1: 1, small2: 2, small2max: 4, up2: 2, rowmates1: 1, corner3: 3, bread1: 1, linepow: 2, echo2: 2, mulled2: 1, rare2: 2, colmates1: 1, triple: 3, atk1: 1, atk2: 2, atk3: 3 }
 };
 var FN = CONFIG.fx;
 var COLOR_IDS = ['r', 'b', 'g', 'y', 'p'];
@@ -695,18 +695,18 @@ function tileDesc(t) {
   if (t.k === 'x') return 'Multiplier: multiplies the tiles ' + (/[RCB]/.test(t.d) ? 'on ' : 'touching it ') + dirsText(t.d) + ' by its number. Multipliers do not multiply other multipliers.' + sh;
   return 'Copy: takes the shown number of the tile ' + DIRNAME[t.d] + ' (never another copy), adds its own number, and hits its own column. Resolves after everything else.';
 }
-/* unit level 1-5 only raises the numbers of the 3 base tiles, by the table CONFIG.lvl (attacks: less the more columns they reach; line boosts and multipliers least) */
+/* unit level 1-8 only raises the numbers of the 3 base tiles, by the table CONFIG.lvl (attacks: less the more columns they reach; line boosts and multipliers least) */
 /* the number of columns an attack tile reaches (lanes x shape width), for the level bonus */
 function hitsOf(k) { var o = laneOffsets(k.d || '^'), w = shapeDims(k)[1], set = {}, c; for (c = 0; c < w; c++) o.forEach(function (x) { set[c + x] = 1; }); return Object.keys(set).length; }
 function lvlBonus(k, lvl) {
-  var L = Math.max(1, Math.min(5, lvl || 1)) - 1, T = CONFIG.lvl;
+  var L = Math.max(1, Math.min(CONFIG.lvlMax, lvl || 1)) - 1, T = CONFIG.lvl;
   if (k.k === 'a') return T.a[Math.min(3, hitsOf(k) - 1)][L];
   if (k.k === 'x') return T.x[L];
   if (k.k === 'p') return (/[RCB]/.test(k.d) ? T.pr : T.pl)[L];
   return T.e[L];
 }
 function unitBase(u, lvl) { return u.base.trim().split(/\s+/).map(function (tok) { var s = parseTok(tok); s.base = s.n; s.n += lvlBonus(s, lvl); return s; }); }
-/* one passive per unit, scoped to the unit's colour (the host colour for a rainbow tile in a slot). Evaluated in evaluate() through F.fx = { colour: effect id } like relics */
+/* unit skills (3 or 4 per unit, unlocked by unit level), scoped to the unit's colour (the host colour for a rainbow tile in a slot). Evaluated in evaluate() through F.fx = { colour: [effect ids] } like relics */
 var EFFECTS = {
   front1:   { name: 'Front Rank',   line: "Front-row attack tiles of this colour get +" + FN.front1 + "." },
   back2:    { name: 'Back Rank',    line: "Back-row attack tiles of this colour get +" + FN.back2 + "." },
@@ -737,40 +737,48 @@ var EFFECTS = {
   echo2:    { name: 'Loud Echo',    line: "Copy tiles of this colour get +" + FN.echo2 + "." },
   mulled2:  { name: 'Primed',       line: "Attack tiles of this colour that are multiplied (by a multiplier tile or a x2 cell) get +" + FN.mulled2 + " first." },
   rare2:    { name: 'Fine Steel',   line: "Rare and Epic attack tiles of this colour get +" + FN.rare2 + "." },
-  colmates1:{ name: 'Column Strength', line: "Attack tiles of this colour get +" + FN.colmates1 + " for each other tile in their column." }
+  colmates1:{ name: 'Column Strength', line: "Attack tiles of this colour get +" + FN.colmates1 + " for each other tile in their column." },
+  atk1:     { name: 'Sharpened',    line: "Attack tiles of this colour get +" + FN.atk1 + "." },
+  atk2:     { name: 'Honed',        line: "Attack tiles of this colour get +" + FN.atk2 + "." },
+  atk3:     { name: 'Masterwork',   line: "Attack tiles of this colour get +" + FN.atk3 + "." }
 };
+/* a colour's unit skills are a list of effect ids in F.fx = { colour: [ids] } (a single id string is still read as a one-item list); every active skill of the colour stacks */
+function fxIds(fx, c) { var a = fx && c ? fx[c] : null; return !a ? [] : typeof a === 'string' ? [a] : a; }
+function fxHas(fx, c, id) { return fxIds(fx, c).indexOf(id) >= 0; }
+/* the skill ids of unit u that are unlocked at unit level lvl (u.skills = [[effect id, unlock level], ...]) */
+function skillsAt(u, lvl) { return (u.skills || []).filter(function (s) { return s[1] <= lvl; }).map(function (s) { return s[0]; }); }
 /* units: 30, 6 per colour (3 Common, 2 Rare, 1 Epic).  base = exactly 3 tiles at level 1 (two attackers and one signature tile). Rarity changes the kind of tiles (shapes, lanes, signature), the effect gets stronger */
 var UNITS = [
-  { id: 'ember',  name: 'Ember',  c: 'r', rar: 0, style: 'Forks',            base: 'a^4 a^3 a<>2',         fx: 'front1' },
-  { id: 'brand',  name: 'Brand',  c: 'r', rar: 1, style: 'Big block',        base: 'a^4 a<>3 a^5#h2',      fx: 'cell2' },
-  { id: 'cinder', name: 'Cinder', c: 'r', rar: 2, style: 'Giants',           base: 'a^5#v2 a<^>2#h2 pudlr2', fx: 'extraline' },
-  { id: 'tide',   name: 'Tide',   c: 'b', rar: 0, style: 'Plus boost',       base: 'a^4 a^3 pudlr1',       fx: 'back2' },
-  { id: 'mist',   name: 'Mist',   c: 'b', rar: 1, style: 'Multiplier',       base: 'a^3 a<>3 xu2',         fx: 'neigh1' },
-  { id: 'drift',  name: 'Drift',  c: 'b', rar: 2, style: 'Copy and reach',   base: 'a^5 a<>2#h2 eu2',      fx: 'lane' },
-  { id: 'moss',   name: 'Moss',   c: 'g', rar: 0, style: 'Front boost',      base: 'a^4 a^3 pu2',          fx: 'single1' },
-  { id: 'thorn',  name: 'Thorn',  c: 'g', rar: 1, style: 'Tall block',       base: 'a^4 a<>3 a^7#v2',      fx: 'palette1' },
-  { id: 'vale',   name: 'Vale',   c: 'g', rar: 2, style: 'Neighbours',       base: 'a^5 a<^>2 xudlr2',     fx: 'same1' },
-  { id: 'glint',  name: 'Glint',  c: 'y', rar: 0, style: 'Front-back boost', base: 'a^4 a^3 pud1',         fx: 'boostp1' },
-  { id: 'spark',  name: 'Spark',  c: 'y', rar: 1, style: 'Side multiplier',  base: 'a^4 a<>3 xr2',         fx: 'mult1' },
-  { id: 'dune',   name: 'Dune',   c: 'y', rar: 2, style: 'Front boost',      base: 'a^5 a<^>2#h2 pu1',     fx: 'triple' },
-  { id: 'dusk',   name: 'Dusk',   c: 'p', rar: 0, style: 'Trident',          base: 'a<>2 a^4 a<^>2',       fx: 'wide1' },
-  { id: 'hex',    name: 'Hex',    c: 'p', rar: 1, style: 'Copy',             base: 'a^4 a<>3 eu1',         fx: 'sand3' },
-  { id: 'wisp',   name: 'Wisp',   c: 'p', rar: 2, style: 'Block and row',    base: 'a^4 a<^>2#h2 pud1',    fx: 'backx2' },
-  { id: 'flare',  name: 'Flare',  c: 'r', rar: 0, style: 'Side boost',       base: 'a^4 a>3 pl2',          fx: 'edge2' },
-  { id: 'scorch', name: 'Scorch', c: 'r', rar: 0, style: 'Small strikes',    base: 'a^3 a^3 pr1',          fx: 'small2' },
-  { id: 'pyre',   name: 'Pyre',   c: 'r', rar: 1, style: 'Column boost',     base: 'a^4 a<>3 pC1',         fx: 'linepow' },
-  { id: 'ripple', name: 'Ripple', c: 'b', rar: 0, style: 'Close ranks',      base: 'a^4 a^3 plr1',         fx: 'touch1' },
-  { id: 'brine',  name: 'Brine',  c: 'b', rar: 0, style: 'Loners',           base: 'a<>3 a^5 pd1',         fx: 'loyal2' },
-  { id: 'fjord',  name: 'Fjord',  c: 'b', rar: 1, style: 'Copy',             base: 'a^4 a<>3 el2',         fx: 'echo2' },
-  { id: 'fern',   name: 'Fern',   c: 'g', rar: 0, style: 'Row fillers',      base: 'a^4 a<3 pr2',          fx: 'rowmates1' },
-  { id: 'bramble',name: 'Bramble',c: 'g', rar: 0, style: 'Squeezers',        base: 'a^4 a^3 pd2',          fx: 'bread1' },
-  { id: 'willow', name: 'Willow', c: 'g', rar: 1, style: 'Multiplier',       base: 'a^4 a<>3 xd2',         fx: 'mulled2' },
-  { id: 'gleam',  name: 'Gleam',  c: 'y', rar: 0, style: 'Corner jabs',      base: 'a>4 a<3 pu1',          fx: 'corner3' },
-  { id: 'amber',  name: 'Amber',  c: 'y', rar: 0, style: 'Steady forks',     base: 'a^3 a^3 a<>1',         fx: 'foes1' },
-  { id: 'sunbeam',name: 'Sunbeam',c: 'y', rar: 1, style: 'Spine boost',      base: 'a^4 a<>3 pud2',        fx: 'rare2' },
-  { id: 'shade',  name: 'Shade',  c: 'p', rar: 0, style: 'Boost taker',      base: 'a^5 a^2 pd2',          fx: 'boosted2' },
-  { id: 'veil',   name: 'Veil',   c: 'p', rar: 0, style: 'Forge friend',     base: 'a^5 a^4 pr2',          fx: 'up2' },
-  { id: 'gloom',  name: 'Gloom',  c: 'p', rar: 1, style: 'Tall block',       base: 'a^3 a<^>2 a^5#v2',     fx: 'colmates1' }
+  { id: 'ember',  name: 'Ember',  c: 'r', rar: 0, style: 'Forks',            base: 'a^4 a^3 a<>2',         skills: [['front1', 2], ['foes1', 4], ['atk1', 6]] },
+  { id: 'brand',  name: 'Brand',  c: 'r', rar: 1, style: 'Big block',        base: 'a^4 a<>3 a^5#h2',      skills: [['cell2', 2], ['wide1', 4], ['atk2', 6]] },
+  { id: 'cinder', name: 'Cinder', c: 'r', rar: 2, style: 'Giants',           base: 'a^5#v2 a<^>2#h2 pudlr2', skills: [['cell2', 2], ['extraline', 4], ['rowmates1', 6], ['atk3', 8]] },
+  { id: 'tide',   name: 'Tide',   c: 'b', rar: 0, style: 'Plus boost',       base: 'a^4 a^3 pudlr1',       skills: [['back2', 2], ['touch1', 4], ['atk1', 6]] },
+  { id: 'mist',   name: 'Mist',   c: 'b', rar: 1, style: 'Multiplier',       base: 'a^3 a<>3 xu2',         skills: [['neigh1', 2], ['mult1', 4], ['atk2', 6]] },
+  { id: 'drift',  name: 'Drift',  c: 'b', rar: 2, style: 'Copy and reach',   base: 'a^5 a<>2#h2 eu2',      skills: [['wide1', 2], ['lane', 4], ['echo2', 6], ['atk3', 8]] },
+  { id: 'moss',   name: 'Moss',   c: 'g', rar: 0, style: 'Front boost',      base: 'a^4 a^3 pu2',          skills: [['single1', 2], ['same1', 4], ['atk1', 6]] },
+  { id: 'thorn',  name: 'Thorn',  c: 'g', rar: 1, style: 'Tall block',       base: 'a^4 a<>3 a^7#v2',      skills: [['palette1', 2], ['cell2', 4], ['atk2', 6]] },
+  { id: 'vale',   name: 'Vale',   c: 'g', rar: 2, style: 'Neighbours',       base: 'a^5 a<^>2 xudlr2',     skills: [['neigh1', 2], ['same1', 4], ['touch1', 6], ['atk3', 8]] },
+  { id: 'glint',  name: 'Glint',  c: 'y', rar: 0, style: 'Front-back boost', base: 'a^4 a^3 pud1',         skills: [['boostp1', 2], ['front1', 4], ['atk1', 6]] },
+  { id: 'spark',  name: 'Spark',  c: 'y', rar: 1, style: 'Side multiplier',  base: 'a^4 a<>3 xr2',         skills: [['mult1', 2], ['edge2', 4], ['atk2', 6]] },
+  { id: 'dune',   name: 'Dune',   c: 'y', rar: 2, style: 'Front boost',      base: 'a^5 a<^>2#h2 pu1',     skills: [['front1', 2], ['triple', 4], ['boostp1', 6], ['atk3', 8]] },
+  { id: 'dusk',   name: 'Dusk',   c: 'p', rar: 0, style: 'Trident',          base: 'a<>2 a^4 a<^>2',       skills: [['wide1', 2], ['palette1', 4], ['atk1', 6]] },
+  { id: 'hex',    name: 'Hex',    c: 'p', rar: 1, style: 'Copy',             base: 'a^4 a<>3 eu1',         skills: [['sand3', 2], ['bread1', 4], ['atk2', 6]] },
+  { id: 'wisp',   name: 'Wisp',   c: 'p', rar: 2, style: 'Block and row',    base: 'a^4 a<^>2#h2 pud1',    skills: [['back2', 2], ['backx2', 4], ['sand3', 6], ['atk3', 8]] },
+  { id: 'flare',  name: 'Flare',  c: 'r', rar: 0, style: 'Side boost',       base: 'a^4 a>3 pl2',          skills: [['edge2', 2], ['small2', 4], ['atk1', 6]] },
+  { id: 'scorch', name: 'Scorch', c: 'r', rar: 0, style: 'Small strikes',    base: 'a^3 a^3 pr1',          skills: [['small2', 2], ['front1', 4], ['atk1', 6]] },
+  { id: 'pyre',   name: 'Pyre',   c: 'r', rar: 1, style: 'Column boost',     base: 'a^4 a<>3 pC1',         skills: [['linepow', 2], ['boostp1', 4], ['atk2', 6]] },
+  { id: 'ripple', name: 'Ripple', c: 'b', rar: 0, style: 'Close ranks',      base: 'a^4 a^3 plr1',         skills: [['touch1', 2], ['rowmates1', 4], ['atk1', 6]] },
+  { id: 'brine',  name: 'Brine',  c: 'b', rar: 0, style: 'Loners',           base: 'a<>3 a^5 pd1',         skills: [['loyal2', 2], ['back2', 4], ['atk1', 6]] },
+  { id: 'fjord',  name: 'Fjord',  c: 'b', rar: 1, style: 'Copy',             base: 'a^4 a<>3 el2',         skills: [['echo2', 2], ['back2', 4], ['atk2', 6]] },
+  { id: 'fern',   name: 'Fern',   c: 'g', rar: 0, style: 'Row fillers',      base: 'a^4 a<3 pr2',          skills: [['rowmates1', 2], ['colmates1', 4], ['atk1', 6]] },
+  { id: 'bramble',name: 'Bramble',c: 'g', rar: 0, style: 'Squeezers',        base: 'a^4 a^3 pd2',          skills: [['bread1', 2], ['sand3', 4], ['atk1', 6]] },
+  { id: 'willow', name: 'Willow', c: 'g', rar: 1, style: 'Multiplier',       base: 'a^4 a<>3 xd2',         skills: [['mulled2', 2], ['mult1', 4], ['atk2', 6]] },
+  { id: 'gleam',  name: 'Gleam',  c: 'y', rar: 0, style: 'Corner jabs',      base: 'a>4 a<3 pu1',          skills: [['corner3', 2], ['edge2', 4], ['atk1', 6]] },
+  { id: 'amber',  name: 'Amber',  c: 'y', rar: 0, style: 'Steady forks',     base: 'a^3 a^3 a<>1',         skills: [['foes1', 2], ['single1', 4], ['atk1', 6]] },
+  { id: 'sunbeam',name: 'Sunbeam',c: 'y', rar: 1, style: 'Spine boost',      base: 'a^4 a<>3 pud2',        skills: [['rare2', 2], ['boostp1', 4], ['atk2', 6]] },
+  { id: 'shade',  name: 'Shade',  c: 'p', rar: 0, style: 'Boost taker',      base: 'a^5 a^2 pd2',          skills: [['boosted2', 2], ['boostp1', 4], ['atk1', 6]] },
+  { id: 'veil',   name: 'Veil',   c: 'p', rar: 0, style: 'Forge friend',     base: 'a^5 a^4 pr2',          skills: [['up2', 2], ['mulled2', 4], ['atk1', 6]] },
+  { id: 'gloom',  name: 'Gloom',  c: 'p', rar: 1, style: 'Tall block',       base: 'a^3 a<^>2 a^5#v2',     skills: [['colmates1', 2], ['cell2', 4], ['atk2', 6]] }
 ];
 var UNIT_BY_ID = {};
 UNITS.forEach(function (u) { UNIT_BY_ID[u.id] = u; });
@@ -785,10 +793,10 @@ function mkTile(run, c, u, spec, extra, rb) {
 }
 function tileColours(t) { if (t && t.rb) return COLOR_IDS.slice(); var o = []; if (t && t.c && t.c !== 'x') o.push(t.c); if (t && t.c2) o.push(t.c2); return o; }   /* a rainbow tile (rb) counts as every colour */
 /* geometry of a placement, for hints: footprint, cells it would boost/multiply/copy, columns it would hit */
-/* the lanes (column offsets) an attack tile hits, with the unit effect Long Arm (fx = { colour: effect id }) when the fight knows the unit effects */
+/* the lanes (column offsets) an attack tile hits, with the unit effect Long Arm (fx = { colour: [effect ids] }) when the fight knows the unit effects */
 function reachLanes(t, fx) {
   var l = t.k === 'e' ? [0] : laneOffsets(t.d);
-  if (fx && t.c && fx[t.c] === 'lane' && l.indexOf(1) < 0) l = l.concat([1]);
+  if (t.c && fxHas(fx, t.c, 'lane') && l.indexOf(1) < 0) l = l.concat([1]);
   return l;
 }
 function tileReach(t, a, cols, R, fx) {
@@ -824,7 +832,7 @@ function evaluate(F, board, opts) {
   var ea = [];
   F.enemies.forEach(function (e, ek) { for (var cc = e.c; cc < e.c + e.w; cc++) ea[cc] = ek; });
   var relic = {}; (F.relics || []).forEach(function (r) { relic[r] = 1; });
-  var fx = F.fx || {}, fxOf = function (t) { return t.c ? fx[t.c] : undefined; }, fxAny = function (id) { for (var k9 in fx) if (fx[k9] === id) return true; return false; };
+  var fx = F.fx || {}, fxOf = function (t) { return fxIds(fx, t.c); }, fxIs = function (t, id) { return fxIds(fx, t.c).indexOf(id) >= 0; }, fxAny = function (id) { for (var k9 in fx) if (fxHas(fx, k9, id)) return true; return false; };
   var prismId = opts.prism || 0, overId = opts.over || 0;
   var nOf = function (t) { return t.id === overId ? t.n * CONFIG.hero.over : t.n; };
   var colsOf = function (t) { return t.id === prismId ? COLOR_IDS.slice() : tileColours(t); };
@@ -870,10 +878,10 @@ function evaluate(F, board, opts) {
   /* multipliers */
   G.forEach(function (g) {
     if (g.t.k !== 'x') return;
-    var mn0 = g.t.n + (fxOf(g.t) === 'mult1' ? FN.mult1 : 0); targetsOf(g).forEach(function (gi) { if (G[gi].t.k !== 'x') { G[gi].mul *= mn0; g.targets++; } });
+    var mn0 = g.t.n + (fxIs(g.t, 'mult1') ? FN.mult1 : 0); targetsOf(g).forEach(function (gi) { if (G[gi].t.k !== 'x') { G[gi].mul *= mn0; g.targets++; } });
   });
   var SF = relic.triple ? 3 : 2;
-  var lineF = function (xs) { var f = 0; xs.forEach(function (x) { var v = fx[x] === 'triple' ? Math.max(FN.triple, SF) : SF; if (v > f) f = v; }); return f; };
+  var lineF = function (xs) { var f = 0; xs.forEach(function (x) { var v = fxHas(fx, x, 'triple') ? Math.max(FN.triple, SF) : SF; if (v > f) f = v; }); return f; };
   /* sandwich: every row line and every column line through the tile counts once, if both ends of the tile's span on that line have matching outer tiles; each line multiplies by 2 (3 with Triple Bread) */
   G.forEach(function (g) {
     var t = g.t; if (t.k === 'x' || !colsOf(t).length) return;
@@ -888,13 +896,13 @@ function evaluate(F, board, opts) {
       var mn = Math.min.apply(null, qs), mx = Math.max.apply(null, qs);
       if (mn > 0 && mx < F.rows - 1) { var x = board[(mn - 1) * cols + cc], y = board[(mx + 1) * cols + cc], xs = x && y ? sandX(t, x, y) : []; if (xs.length) { marks.push({ mid: g.a, a: G[cellG[(mn - 1) * cols + cc]].a, b: G[cellG[(mx + 1) * cols + cc]].a, h: false, line: cc, from: mn, to: mx }); g.vv = true; nl++; prod *= lineF(xs); } }
     });
-    if (nl > 0 && fxOf(t) === 'extraline') prod *= SF;
+    if (nl > 0 && fxIs(t, 'extraline')) prod *= SF;
     g.sand = prod; g.nl = nl;
   });
   /* the lanes an attack tile hits (relic Full Fork, unit effect Long Arm) and the columns that gives */
   var lanesOf = function (g) {
     var t = g.t, lanes = t.k === 'e' ? [0] : (relic.forkown && t.d === '<>') ? [-1, 0, 1] : laneOffsets(t.d);
-    if (fxOf(t) === 'lane' && lanes.indexOf(1) < 0) lanes = lanes.concat([1]);
+    if (fxIs(t, 'lane') && lanes.indexOf(1) < 0) lanes = lanes.concat([1]);
     return lanes;
   };
   var hitColsOf = function (g) { var lanes = lanesOf(g), h = {}; g.top.forEach(function (q) { lanes.forEach(function (o) { var cc = (q % cols) + o; if (cc >= 0 && cc < cols) h[cc] = 1; }); }); return Object.keys(h).map(Number); };
@@ -904,14 +912,15 @@ function evaluate(F, board, opts) {
   var sharing = function (g, lines, start, step, count) { var seen = {}; lines.forEach(function (ln) { for (var z = 0; z < count; z++) { var gi = cellG[start(ln) + z * step]; if (gi !== undefined && G[gi] !== g) seen[gi] = 1; } }); return Object.keys(seen).length; };
   var ncolN = 0; if (relic.colourful || fxAny('palette1')) { var seenC = {}; G.forEach(function (g) { tileColours(g.t).forEach(function (x) { seenC[x] = 1; }); }); ncolN = Object.keys(seenC).length; }
   G.forEach(function (g) {
-    var k0 = g.t.k; if (k0 !== 'a' && k0 !== 'e') return; var ra = 0, e0 = fxOf(g.t);
+    var k0 = g.t.k; if (k0 !== 'a' && k0 !== 'e') return; var ra = 0;
     if (relic.front && g.rows.indexOf(0) >= 0) ra += 1;
     if (relic.back2 && g.rows.indexOf(F.rows - 1) >= 0) ra += 2;
     if (relic.colourful) ra += ncolN;
     if (relic.big3 && g.cells.length > 1) ra += 3;
     if (relic.copy2 && k0 === 'e') ra += 2;
-    if (e0) {   /* unit effects, scoped to the tile's colour */
-      if (e0 === 'front1' && g.rows.indexOf(0) >= 0) ra += FN.front1;
+    fxOf(g.t).forEach(function (e0) {   /* unit skills, scoped to the tile's colour; every active skill stacks */
+      if (e0 === 'atk1' || e0 === 'atk2' || e0 === 'atk3') ra += FN[e0];
+      else if (e0 === 'front1' && g.rows.indexOf(0) >= 0) ra += FN.front1;
       else if (e0 === 'back2' && g.rows.indexOf(F.rows - 1) >= 0) ra += FN.back2;
       else if (e0 === 'single1' && g.cells.length === 1) ra += FN.single1;
       else if (e0 === 'wide1' && hitColsOf(g).length >= 2) ra += FN.wide1;
@@ -934,16 +943,16 @@ function evaluate(F, board, opts) {
       else if (e0 === 'cell2' && g.cells.length > 1) ra += FN.cell2 * g.cells.length;
       else if (e0 === 'same1') { var nsame = 0; G.forEach(function (o) { if (o !== g && o.t.c === g.t.c) nsame++; }); ra += FN.same1 * nsame; }
       else if (e0 === 'backx2' && g.rows.indexOf(F.rows - 1) >= 0) g.mul *= FN.backx2;
-    }
+    });
     g.radd = ra;
   });
   /* boosters */
   G.forEach(function (g) {
     var t = g.t; if (t.k !== 'p') return;
-    g.pw = (nOf(t) + g.add + mom + (relic.boost1 ? 1 : 0) + (fxOf(t) === 'boostp1' ? FN.boostp1 : 0)) * g.mul * g.sand * (fxOf(t) === 'linepow' && /[RCB]/.test(t.d) ? FN.linepow : 1);
+    g.pw = (nOf(t) + g.add + mom + (relic.boost1 ? 1 : 0) + (fxIs(t, 'boostp1') ? FN.boostp1 : 0)) * g.mul * g.sand * (fxIs(t, 'linepow') && /[RCB]/.test(t.d) ? FN.linepow : 1);
     targetsOf(g).forEach(function (gi) { var k2 = G[gi].t.k; if (k2 === 'a' || k2 === 'e') { G[gi].boost += g.pw; g.targets++; } });
   });
-  G.forEach(function (g) { if ((g.t.k === 'a' || g.t.k === 'e') && g.boost > 0 && fxOf(g.t) === 'boosted2') g.radd += FN.boosted2; });
+  G.forEach(function (g) { if ((g.t.k === 'a' || g.t.k === 'e') && g.boost > 0 && fxIs(g.t, 'boosted2')) g.radd += FN.boosted2; });
   G.forEach(function (g) { if (g.t.k === 'a') g.v = (nOf(g.t) + g.add + g.radd + mom + g.boost) * g.mul * g.sand; });
   G.forEach(function (g) {
     if (g.t.k !== 'e') return;
@@ -1247,9 +1256,9 @@ function newRun(mode, stage, team, units, colourless, rnd, hero, opt) {
     len: opt.len || CONFIG.stageSteps, mid: opt.mid === undefined ? -1 : opt.mid, cell: opt.cell || null, drop: opt.drop || dropFor(stage, tierDist(stage)), fx: {}, bossTrick: opt.trick || null };
   var rbLeft = CONFIG.rainbow.maxTeam;
   COLOR_IDS.slice(0, S.colours).forEach(function (c) {
-    var u = UNIT_BY_ID[team[c]], st = units[u.id] || { l: 1 }, lvl = Math.max(1, Math.min(5, st.l || 1));
+    var u = UNIT_BY_ID[team[c]], st = units[u.id] || { l: 1 }, lvl = Math.max(1, Math.min(CONFIG.lvlMax, st.l || 1));
     unitBase(u, lvl).forEach(function (k) { run.bag.push(mkTile(run, c, u.id, simpleSpec(k, stage))); });
-    if (u.fx && stage >= CONFIG.fxTier) run.fx[c] = u.fx;
+    run.fx[c] = skillsAt(u, lvl);
     ((opt.slots && opt.slots[u.id]) || []).forEach(function (sp) {
       if (sp.rb) { if (rbLeft <= 0) return; rbLeft--; }
       run.bag.push(mkTile(run, c, u.id, sp, { rar: sp.rar || 0, st: sp.st || 0, slot: true }, sp.rb));
