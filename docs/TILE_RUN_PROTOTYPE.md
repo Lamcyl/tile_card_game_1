@@ -75,46 +75,46 @@ Header (back, coins, shards), tabs Units / Recruit / Collected / Colourless, the
 
 | Unit | Skills (unit level) |
 |---|---|
-| Ember | Front Rank (2), Pack Hunter (4), Sharpened (6) |
-| Tide | Back Rank (2), Huddle (4), Sharpened (6) |
-| Moss | Lone Wolf (2), Flock (4), Sharpened (6) |
-| Glint | Good Fuel (2), Front Rank (4), Sharpened (6) |
-| Dusk | Wide Reach (2), Palette (4), Sharpened (6) |
-| Flare | Edge Guard (2), Underdog (4), Sharpened (6) |
-| Scorch | Underdog (2), Front Rank (4), Sharpened (6) |
-| Ripple | Huddle (2), Crowded Row (4), Sharpened (6) |
-| Brine | True Colours (2), Back Rank (4), Sharpened (6) |
-| Fern | Crowded Row (2), Column Strength (4), Sharpened (6) |
-| Bramble | Squeeze Play (2), Pressure (4), Sharpened (6) |
-| Gleam | Cornerstone (2), Edge Guard (4), Sharpened (6) |
-| Amber | Pack Hunter (2), Lone Wolf (4), Sharpened (6) |
-| Shade | Charged (2), Good Fuel (4), Sharpened (6) |
-| Veil | Tempered (2), Primed (4), Sharpened (6) |
+| Ember | Front Rank (3), Pack Hunter (5), Sharpened (7) |
+| Tide | Back Rank (3), Huddle (5), Sharpened (7) |
+| Moss | Lone Wolf (3), Flock (5), Sharpened (7) |
+| Glint | Good Fuel (3), Front Rank (5), Sharpened (7) |
+| Dusk | Wide Reach (3), Palette (5), Sharpened (7) |
+| Flare | Edge Guard (3), Underdog (5), Sharpened (7) |
+| Scorch | Underdog (3), Front Rank (5), Sharpened (7) |
+| Ripple | Huddle (3), Crowded Row (5), Sharpened (7) |
+| Brine | True Colours (3), Back Rank (5), Sharpened (7) |
+| Fern | Crowded Row (3), Column Strength (5), Sharpened (7) |
+| Bramble | Squeeze Play (3), Pressure (5), Sharpened (7) |
+| Gleam | Cornerstone (3), Edge Guard (5), Sharpened (7) |
+| Amber | Pack Hunter (3), Lone Wolf (5), Sharpened (7) |
+| Shade | Charged (3), Good Fuel (5), Sharpened (7) |
+| Veil | Tempered (3), Primed (5), Sharpened (7) |
 
 **Rare** (max 3 slots)
 
 | Unit | Skills (unit level) |
 |---|---|
-| Brand | Heavy Frame (2), Wide Reach (4), Honed (6) |
-| Mist | Mixed Company (2), Overdrive (4), Honed (6) |
-| Thorn | Palette (2), Heavy Frame (4), Honed (6) |
-| Spark | Overdrive (2), Edge Guard (4), Honed (6) |
-| Hex | Pressure (2), Squeeze Play (4), Honed (6) |
-| Pyre | Line Drive (2), Good Fuel (4), Honed (6) |
-| Fjord | Loud Echo (2), Back Rank (4), Honed (6) |
-| Willow | Primed (2), Overdrive (4), Honed (6) |
-| Sunbeam | Fine Steel (2), Good Fuel (4), Honed (6) |
-| Gloom | Column Strength (2), Heavy Frame (4), Honed (6) |
+| Brand | Heavy Frame (3), Wide Reach (5), Honed (7) |
+| Mist | Mixed Company (3), Overdrive (5), Honed (7) |
+| Thorn | Palette (3), Heavy Frame (5), Honed (7) |
+| Spark | Overdrive (3), Edge Guard (5), Honed (7) |
+| Hex | Pressure (3), Squeeze Play (5), Honed (7) |
+| Pyre | Line Drive (3), Good Fuel (5), Honed (7) |
+| Fjord | Loud Echo (3), Back Rank (5), Honed (7) |
+| Willow | Primed (3), Overdrive (5), Honed (7) |
+| Sunbeam | Fine Steel (3), Good Fuel (5), Honed (7) |
+| Gloom | Column Strength (3), Heavy Frame (5), Honed (7) |
 
 **Epic** (max 4 slots)
 
 | Unit | Skills (unit level) |
 |---|---|
-| Cinder | Heavy Frame (2), Extra Line (4), Crowded Row (6), Masterwork (8) |
-| Drift | Wide Reach (2), Long Arm (4), Loud Echo (6), Masterwork (8) |
-| Vale | Mixed Company (2), Flock (4), Huddle (6), Masterwork (8) |
-| Dune | Front Rank (2), Triple Bread (4), Good Fuel (6), Masterwork (8) |
-| Wisp | Back Rank (2), Rear Guard (4), Pressure (6), Masterwork (8) |
+| Cinder | Heavy Frame (3), Extra Line (5), Crowded Row (7), Masterwork (8) |
+| Drift | Wide Reach (3), Long Arm (5), Loud Echo (7), Masterwork (8) |
+| Vale | Mixed Company (3), Flock (5), Huddle (7), Masterwork (8) |
+| Dune | Front Rank (3), Triple Bread (5), Good Fuel (7), Masterwork (8) |
+| Wisp | Back Rank (3), Rear Guard (5), Pressure (7), Masterwork (8) |
 
 ### Eighth iteration rough spots
 
@@ -507,3 +507,12 @@ Diagnostic: Settings, "Touch log" (off by default, kept in the save) shows the l
 - **Hint dots** (red): dock Team (kept tile fits an open slot, level up affordable, slot unlock affordable), Hero (newly unlocked hero not yet viewed), Puzzles (newly unlocked puzzle not yet opened). In Team the same dots show on colour tabs, rail entries, the empty slot, the locked slot and the Level up button. Dots clear when acted on (`store.ack`: level and slot dots when their dialog is opened, hero dots when the Hero panel opens, puzzle dots when it is started; the equip dot when the slot is filled). Old saves get every currently unlocked hero and puzzle pre-acknowledged.
 - **Transitions:** screens fade and slide in (~180 ms), result screens pop in, modals and cards scale-and-fade in and out (a non-interactive fading copy is left behind on close, so nothing waits). All CSS or Web Animations; reduced motion switches them off.
 - Rough: the Team dot is lit from the very start (60 starting coins can level a unit); tutorial scenes are stylised, not real rule evaluations; no tutorials yet for runners, boss tricks, shards and recruiting.
+
+## Eleventh iteration (fixes)
+- **Skill unlock levels** are now 3, 5, 7 (the Epic's fourth skill stays at 8): `UNITS[].skills`, the Team skill row, the level-up dialog and the table above follow the data.
+- **Bag between fights** shows every tile normally; resting (faded) only shows while a fight is on.
+- **KO bar**: the enemy bar no longer steps up from zero after the preview; it drops once, smoothly, to its end state.
+- **Enemy-type tutorials** fire on the path-choice screen when a type first appears in an offer (`tutOffers` / `enemyTypes`, at most 2 per visit, elite first): `elite`, `boss`, `runner`, `twin`, `aegis`, `boardtrick` (block, shield, plate, sealed, dead row), `colours2`, `guard`, `wideen`. The save keeps `store.seenEn[type] = 1` (seen in an offer); `store.tut[id]` says whether the tutorial was shown. New lesson tutorials: `sandwich2` (p03), `twocol` (p09), `lines` (p10), `multstack` (p12); every lesson in `CONFIG.lessons` now has one (p15 `widesand` already existed).
+- **Tutorial scenes** lay out multi-cell tiles correctly (covered cells are hidden under the piece, the piece sits above the grid, the number shows).
+- **p09 Two Colours** is redesigned (3x3): a blue/green tile is blue bread in one row sandwich and green bread in a column sandwich. Brute force over all placements: solvable, and not solvable if that tile is replaced by a plain blue or a plain green one.
+- **Copy tiles** show an "=" before their number (`=4`), everywhere tiles are drawn.
