@@ -504,7 +504,7 @@ Status key: **built** = in the game; **in progress** = an agent is building it n
 - Higher difficulties let the player keep more coloured tiles (placeholder: 1 at difficulty 1–3, 2 at 4–7, 3 at 8–10). **In progress.**
 
 ### Tutorials
-A tutorial popup with a short animation per mechanic (for example a hand moves the last tile into a sandwich, then "×2" pops up). Shown at the right moment (the first coloured tile kept → how to equip it in a slot; the start of a lesson puzzle → that mechanic), and replayable from a Help / Tutorial entry in the options. **Queued.** Mechanics to cover:
+A tutorial popup with a short animation per mechanic (for example a hand moves the last tile into a sandwich, then "×2" pops up). Shown at the right moment (the first coloured tile kept → how to equip it in a slot; the start of a lesson puzzle → that mechanic), and replayable from a Help / Tutorial entry in the options. **Built (tenth iteration):** all topics below except runners, boss tricks, shards and recruiting. Mechanics to cover:
 - sandwich (row, column, double ×4, once per line);
 - colourless tiles are never sandwiched;
 - side attackers, three-lane attackers;
@@ -524,8 +524,8 @@ A tutorial popup with a short animation per mechanic (for example a hand moves t
 - Rainbow tiles use the same numbers as normal coloured tiles. **In progress.**
 
 ### Ideas for feel and guidance
-- A red dot or exclamation mark on Team (and other dock buttons) when something is ready: a new tile to equip, a level up affordable, a slot to unlock, a hero to choose. **Queued.**
-- Animations for a smoother feel: screen changes, dialog windows popping up and closing, results. **Queued.**
+- A red dot or exclamation mark on Team (and other dock buttons) when something is ready: a new tile to equip, a level up affordable, a slot to unlock, a hero to choose. **Built (tenth iteration):** Team, Hero and Puzzles dock dots plus dots inside Team.
+- Animations for a smoother feel: screen changes, dialog windows popping up and closing, results. **Built (tenth iteration).**
 
 ### Bugs and improvements
 - Remove the sandwich tip strip in battles. **In progress.**
