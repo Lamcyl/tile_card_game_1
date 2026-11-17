@@ -60,6 +60,68 @@ Header (back, coins, shards), tabs Units / Recruit / Collected / Colourless, the
 - A stage piece is not labelled with its area name; the area name shows on the card after tapping.
 - The Units tab card leaves some empty space in the middle on tall phones.
 
+## Eighth iteration: slots, skills, level costs, colourless slots, drag
+
+- **Slots.** Max slots Common 2, Rare 3, Epic 4; every unit starts with 1 open slot. Opening the next slot costs shards (`CONFIG.slotCost` = [0, 8, 16, 30], indexed by the slot being opened). The Loadout and Buy slot buttons are gone: on the big card tap a locked slot (lock + cost) for a confirmation dialog (cost and what you get), tap an open slot to open the slot popup: the unit's slots on top, your collected tiles of that colour plus rainbow below (rainbow limit, stacks and stars unchanged). Drag a tile into a slot, drag a slotted tile back onto the list to take it out; tapping still works as a fallback. Changing the team unit of a colour moves the equipped tiles over in order into the new unit's open slots (the rest return to the collection; the new unit's previous tiles are unequipped when tiles are carried).
+- **Skills replace the single effect.** `UNITS[i].skills = [[effectId, unlockLevel], ...]`: 3 for Common and Rare, 4 for Epic. `F.fx` / `run.fx` is now `{ colour: [effect ids] }` (a lone id string is still read as a one-item list, so puzzles keep working) and all active skills of a colour stack in `evaluate`. `CONFIG.fxTier` and the "Works from difficulty 5" text are removed: unlock is by unit level only. Three simple colour-scoped damage skills were added (Sharpened +1, Honed +2, Masterwork +3 on attack tiles); Common units end on Sharpened (level 6), Rare on Honed (level 6), Epic on Masterwork (level 8). Rarer units get the stronger existing effects (Pressure, Heavy Frame, Triple Bread, Rear Guard, Rare-tile and multiplier effects). Each skill has a small inline SVG icon (`skillIcon`, a 3x3 mini board with marks); the big card shows them below the slots (unlocked in colour, locked dim with "Lv N"); tapping one shows its name and text. The fight's unit strip shows the active skills of the selected colour tab. Numbers are placeholders (`CONFIG.fx`), not balanced.
+- **Levels** now go to 8 (`CONFIG.lvlMax`, `CONFIG.lvl` tables extended) and cost **coins** (`CONFIG.levelCoins` = 2:10, 3:16, 4:25, 5:38, 6:55, 7:80, 8:115; placeholders). Level up opens a dialog: each base tile before, an arrow, after (real tile faces), any skill unlocked at the new level, the cost and a confirm button. Slots stay on shards.
+- **Colourless tiles.** Three slots above the list of owned colourless tiles: drag a tile in to choose it, drag it out to remove it (`CONFIG.maxColourless`); tapping a stack still works. `store.bag` is now an array of up to 3 ids with 0 for an empty slot.
+- **Drag animation** (fight board, slot popup, colourless): a lifted copy (scale, shadow) follows the finger offset above it, the target cell or slot highlights under the copy, on drop the copy glides into place and fades, on cancel it glides back. The drop target is still the cell under the drawn copy.
+- **Save** key bumped to `tileRunPrototype.v8` (version 8, no migration).
+
+### Skills per unit (unlock level in brackets)
+
+**Common** (max 2 slots)
+
+| Unit | Skills (unit level) |
+|---|---|
+| Ember | Front Rank (2), Pack Hunter (4), Sharpened (6) |
+| Tide | Back Rank (2), Huddle (4), Sharpened (6) |
+| Moss | Lone Wolf (2), Flock (4), Sharpened (6) |
+| Glint | Good Fuel (2), Front Rank (4), Sharpened (6) |
+| Dusk | Wide Reach (2), Palette (4), Sharpened (6) |
+| Flare | Edge Guard (2), Underdog (4), Sharpened (6) |
+| Scorch | Underdog (2), Front Rank (4), Sharpened (6) |
+| Ripple | Huddle (2), Crowded Row (4), Sharpened (6) |
+| Brine | True Colours (2), Back Rank (4), Sharpened (6) |
+| Fern | Crowded Row (2), Column Strength (4), Sharpened (6) |
+| Bramble | Squeeze Play (2), Pressure (4), Sharpened (6) |
+| Gleam | Cornerstone (2), Edge Guard (4), Sharpened (6) |
+| Amber | Pack Hunter (2), Lone Wolf (4), Sharpened (6) |
+| Shade | Charged (2), Good Fuel (4), Sharpened (6) |
+| Veil | Tempered (2), Primed (4), Sharpened (6) |
+
+**Rare** (max 3 slots)
+
+| Unit | Skills (unit level) |
+|---|---|
+| Brand | Heavy Frame (2), Wide Reach (4), Honed (6) |
+| Mist | Mixed Company (2), Overdrive (4), Honed (6) |
+| Thorn | Palette (2), Heavy Frame (4), Honed (6) |
+| Spark | Overdrive (2), Edge Guard (4), Honed (6) |
+| Hex | Pressure (2), Squeeze Play (4), Honed (6) |
+| Pyre | Line Drive (2), Good Fuel (4), Honed (6) |
+| Fjord | Loud Echo (2), Back Rank (4), Honed (6) |
+| Willow | Primed (2), Overdrive (4), Honed (6) |
+| Sunbeam | Fine Steel (2), Good Fuel (4), Honed (6) |
+| Gloom | Column Strength (2), Heavy Frame (4), Honed (6) |
+
+**Epic** (max 4 slots)
+
+| Unit | Skills (unit level) |
+|---|---|
+| Cinder | Heavy Frame (2), Extra Line (4), Crowded Row (6), Masterwork (8) |
+| Drift | Wide Reach (2), Long Arm (4), Loud Echo (6), Masterwork (8) |
+| Vale | Mixed Company (2), Flock (4), Huddle (6), Masterwork (8) |
+| Dune | Front Rank (2), Triple Bread (4), Good Fuel (6), Masterwork (8) |
+| Wisp | Back Rank (2), Rear Guard (4), Pressure (6), Masterwork (8) |
+
+### Eighth iteration rough spots
+
+- Skills and level costs are not balanced; the node tools (`tile-run-balance`) still work but their recipes assume the old level 5 cap and slot counts (journey.js was patched to read coins and 1 starting slot).
+- Dragging in lists uses `touch-action:none` on tiles, so a long list scrolls only by touching the gaps between tiles.
+- Skill icons are simple placeholders.
+
 # Fifth iteration: progression rework (collectable tiles, units, rainbow, gacha, map)
 
 Implements `TILE_PUZZLE_DESIGN.md` section 14. Save key `tileRunPrototype.v5` (sixth round; old saves are not migrated: a fresh save has the five starter Commons, 60 coins, 0 shards and the origin cell available). New CONFIG keys are listed at the end of this section.

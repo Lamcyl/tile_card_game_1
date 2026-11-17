@@ -186,7 +186,9 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .herorow{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid var(--line)}.herorow.on{background:color-mix(in srgb,var(--p) 12%,transparent)}
 .herorow .hi{flex:1;display:flex;flex-direction:column}.herorow .hi b{font-size:14px;color:var(--ink)}.herorow .hi small{font-size:11.5px;color:var(--muted)}
 .strip.relic{min-height:0;padding:1px 6px;font-size:10.5px;border-color:var(--gold)}.strip.relic .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ghost{touch-action:none;position:fixed;z-index:80;pointer-events:none;transform:translate(-50%,-60%) scale(1.12);opacity:.92}
+.ghost{touch-action:none;position:fixed;z-index:80;pointer-events:none;transform:translate(-50%,-90%) scale(1);opacity:.97;filter:drop-shadow(0 10px 10px rgba(20,30,60,.38));transition:left .05s linear,top .05s linear,transform .14s cubic-bezier(.2,.8,.3,1),opacity .16s}
+.ghost.lift{transform:translate(-50%,-90%) scale(1.14)}.ghost.pick{transition:left .14s ease-out,top .14s ease-out,transform .14s cubic-bezier(.2,.8,.3,1)}
+.ghost.settle{transition:left .17s cubic-bezier(.2,.8,.3,1),top .17s cubic-bezier(.2,.8,.3,1),transform .17s ease-out,opacity .17s ease-in .05s;transform:translate(-50%,-50%) scale(1);opacity:0}.ghost.back{opacity:.2}
 #fhand{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;justify-content:flex-start}
 .kit{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
 .kt{position:relative;display:inline-block}
@@ -323,7 +325,10 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 @media (max-height:760px){.etile{height:56px}}
 @media (max-height:700px){.etile{height:52px}.etile b{font-size:20px}.etile b.n3{font-size:17px;margin-top:2px}.pill{height:19px}.pill span{font-size:11.5px}.hpbar{height:20px}.abil{height:32px}#fhero{margin-top:4px}}
 #tlog{font:10.5px/1.3 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);padding:4px 2px;word-break:break-word;flex:none}
-.tile.ghost{position:fixed;z-index:80;pointer-events:none;touch-action:none;transform:translate(-50%,-60%) scale(1.12);opacity:.92;cursor:grabbing}
+.tile.ghost{position:fixed;z-index:80;pointer-events:none;touch-action:none;cursor:grabbing}
+[data-dd]{touch-action:none;-webkit-user-select:none;user-select:none}
+.dzhot{outline:3px solid var(--tc,var(--ink));outline-offset:2px;background:color-mix(in srgb,var(--tc,var(--ink)) 18%,transparent)!important}
+.pp-list.dzhot{outline-offset:-2px;border-radius:12px}
 
 /* ===== progression: rainbow tiles, units, slots, recruit ===== */
 .tile.rbw{--tc:var(--rbmid);--ti:#fff;--gl:#fff;--edgec:rgba(10,16,30,.45);--bbg:rgba(255,255,255,.27);--bink:#fff}
@@ -453,6 +458,18 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .tm-ab.pri{background:var(--btn);color:var(--btnink);border-color:var(--btn)}.tm-ab.pri small{color:inherit;opacity:.75}
 .tm-ab:disabled{opacity:.4;box-shadow:none;cursor:default}
 .tm-ab.wide{grid-column:1/-1}
+.tm-pp.cl{flex-direction:column;gap:0;padding-top:2px}.tm-pp.cl svg.i{width:16px;height:16px}.tm-pp .lc{font-size:11px;font-weight:800;color:var(--ink);line-height:1}.tm-pp .lc::after{content:"";display:inline-block;width:7px;height:7px;margin-left:3px;border-radius:1.5px;background:var(--b);transform:rotate(45deg)}
+.tm-sks{display:flex;gap:6px}
+.sk-b{width:44px;height:46px;border-radius:12px;border:2px solid var(--tc);background:color-mix(in srgb,var(--tc) 10%,var(--panel));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:0;color:var(--tc)}
+.sk-b small{font-size:9px;font-weight:800;line-height:1;color:var(--muted)}
+.sk-b.slk{border:2px dashed var(--line);background:transparent;color:var(--muted)}.sk-b.slk svg.sk{opacity:.4;filter:grayscale(1)}
+svg.sk{width:26px;height:26px;display:block;flex:none}svg.sk .f{fill:currentColor}svg.sk .g{fill:currentColor;opacity:.38}svg.sk .e{fill:none;stroke:currentColor;stroke-opacity:.35;stroke-width:1}
+svg.sk .mk{fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}svg.sk text{fill:#fff;font:800 6.5px sans-serif;text-anchor:middle}
+.fxi{display:inline-flex;align-items:center;gap:2px;margin-right:6px;vertical-align:middle}.fxi svg.sk{width:15px;height:15px;color:var(--tc)}
+.cf-sk{display:flex;gap:8px;align-items:center;margin:6px 0;padding:6px 8px;border-radius:10px;border:2px solid var(--tc);background:color-mix(in srgb,var(--tc) 10%,var(--panel));font-size:13px;line-height:1.3;color:var(--ink)}
+.cf-cols{display:flex;justify-content:center;gap:10px;margin:6px 0}.cf-col{display:flex;flex-direction:column;align-items:center;gap:2px}.cf-col .arrow{font-size:18px;line-height:1}
+.pp-sock .tm-pp{width:56px;height:56px}.pp-sock .tm-pp .tile{pointer-events:auto}.pp-list{min-height:60px;padding:4px;border-radius:12px}
+.cl-sock{display:flex;gap:8px;margin:6px 0 10px}.cl-sock .tm-pp{width:60px;height:60px}.cl-sock .tm-pp .tile{pointer-events:auto}
 .tm-msg{font-size:11px;color:var(--warn);font-weight:700;min-height:0}
 </style>
 </head>
@@ -747,7 +764,7 @@ function fxIds(fx, c) { var a = fx && c ? fx[c] : null; return !a ? [] : typeof 
 function fxHas(fx, c, id) { return fxIds(fx, c).indexOf(id) >= 0; }
 /* the skill ids of unit u that are unlocked at unit level lvl (u.skills = [[effect id, unlock level], ...]) */
 function skillsAt(u, lvl) { return (u.skills || []).filter(function (s) { return s[1] <= lvl; }).map(function (s) { return s[0]; }); }
-/* units: 30, 6 per colour (3 Common, 2 Rare, 1 Epic).  base = exactly 3 tiles at level 1 (two attackers and one signature tile). Rarity changes the kind of tiles (shapes, lanes, signature), the effect gets stronger */
+/* units: 30, 6 per colour (3 Common, 2 Rare, 1 Epic).  base = exactly 3 tiles at level 1 (two attackers and one signature tile). Rarity changes the kind of tiles (shapes, lanes, signature), the skills get stronger */
 var UNITS = [
   { id: 'ember',  name: 'Ember',  c: 'r', rar: 0, style: 'Forks',            base: 'a^4 a^3 a<>2',         skills: [['front1', 2], ['foes1', 4], ['atk1', 6]] },
   { id: 'brand',  name: 'Brand',  c: 'r', rar: 1, style: 'Big block',        base: 'a^4 a<>3 a^5#h2',      skills: [['cell2', 2], ['wide1', 4], ['atk2', 6]] },
@@ -1499,13 +1516,13 @@ var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Match the numbers to t
 'use strict';
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-var LS_KEY = 'tileRunPrototype.v7';
+var LS_KEY = 'tileRunPrototype.v8';
 var store = null, SPEED = 1;
 function defaultStore() {
   var units = {}, team = {};
   UNITS.forEach(function (u) { var st = CONFIG.starters.indexOf(u.id) >= 0; if (st) team[u.c] = u.id; units[u.id] = { u: st, l: 1 }; });
   var cf = CONFIG.colourlessFactor;
-  return { v: 7, coins: CONFIG.startCoins, shards: 0, units: units, team: team, slots: {}, ct: [], pity: 0, pulls: 0, nid: 3, bag: [1, 2, 3], run: null, cleared: {}, sel: null, maxTier: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, dailyDone: '',
+  return { v: 8, coins: CONFIG.startCoins, shards: 0, units: units, team: team, slots: {}, ct: [], pity: 0, pulls: 0, nid: 3, bag: [1, 2, 3], run: null, cleared: {}, sel: null, maxTier: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, dailyDone: '',
     inv: [{ id: 1, k: 'a', d: '^', n: colourlessNum('a', 3), sh: 'o', rar: 0, st: 0 }, { id: 2, k: 'a', d: '^', n: colourlessNum('a', 3), sh: 'o', rar: 0, st: 0 }, { id: 3, k: 'p', d: 'udlr', n: colourlessNum('p', 1), sh: 'o', rar: 0, st: 0 }],
     set: { momentum: true, value: 1, ret: 'fight', stars: true, tlog: false } };
 }
@@ -1513,7 +1530,7 @@ function load() {
   var s = defaultStore();
   try {
     var j = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
-    if (j && j.v === 7 && j.units && j.team && j.inv) {
+    if (j && j.v === 8 && j.units && j.team && j.inv) {
       var d = defaultStore(); s = j;
       for (var k in d) if (s[k] === undefined) s[k] = d[k];
       for (k in d.set) if (s.set[k] === undefined) s.set[k] = d.set[k];
@@ -1584,7 +1601,7 @@ function mergeCT() {
 function ctById(id) { return store.ct.filter(function (x) { return x.id === id; })[0]; }
 function ctTile(e) { var rb = e.c === 'w'; return { c: rb ? 'x' : e.c, u: 'x', k: e.k, d: e.d, n: starN(e.n, e.st), sh: e.sh || 'o', st: e.st || 0, rar: e.rar || 0, rb: rb || undefined }; }
 function ctSorted() { return store.ct.slice().sort(function (a, b) { return (a.c === 'w' ? -1 : COLOR_IDS.indexOf(a.c)) - (b.c === 'w' ? -1 : COLOR_IDS.indexOf(b.c)) || (b.rar || 0) - (a.rar || 0) || (a.k < b.k ? -1 : a.k > b.k ? 1 : 0) || b.n - a.n || (a.d < b.d ? -1 : a.d > b.d ? 1 : 0) || (b.st || 0) - (a.st || 0) || a.id - b.id; }); }
-function slotsOf(id) { var s2 = store.slots[id]; if (!s2) s2 = store.slots[id] = { n: 0, t: [] }; return s2; }
+function slotsOf(id) { var s2 = store.slots[id]; if (!s2) s2 = store.slots[id] = { n: 1, t: [0] }; return s2; }   /* every unit starts with 1 open slot */
 function slotOwnerOf(tid) { for (var uid in store.slots) { var i = store.slots[uid].t.indexOf(tid); if (i >= 0) return { u: uid, i: i }; } return null; }
 function rainbowSlotted() { var n = 0; for (var uid in store.slots) store.slots[uid].t.forEach(function (tid) { var e = tid && ctById(tid); if (e && e.c === 'w') n++; }); return n; }
 function buySlot(uid) {
@@ -1602,7 +1619,7 @@ function toggleSlot(uid, tid) {
   var u = UNIT_BY_ID[uid], sl = slotsOf(uid), e = ctById(tid); if (!e) return '';
   if (e.c !== u.c && e.c !== 'w') return 'Wrong colour.';
   var at = sl.t.indexOf(tid); if (at >= 0) { sl.t[at] = 0; save(); return ''; }
-  var free = sl.t.indexOf(0); if (free < 0) return sl.n ? 'All slots are full: tap a slotted tile to take it out.' : 'No open slot: buy one first.';
+  var free = sl.t.indexOf(0); if (free < 0) return sl.n ? 'All slots are full: drag a slotted tile out first.' : 'No open slot: tap a locked slot on the unit to unlock one.';
   var o = slotOwnerOf(tid);
   if (e.c === 'w' && !o && rainbowSlotted() >= CONFIG.rainbow.maxTeam) return 'At most ' + CONFIG.rainbow.maxTeam + ' rainbow tiles in a team.';
   if (o) store.slots[o.u].t[o.i] = 0;
@@ -1626,7 +1643,32 @@ function doPull() {
   if (r.dup) store.shards = (store.shards || 0) + r.shards; else us.u = true;
   S.pull = r; save(); return r;
 }
-function levelUp(uid) { var st = store.units[uid], need = CONFIG.gacha.levelShards[st.l + 1]; if (!st.u || st.l >= 5 || (store.shards || 0) < need) return false; store.shards -= need; st.l++; save(); return true; }
+/* unit levels cost COINS (CONFIG.levelCoins) */
+function levelUp(uid) { var st = store.units[uid], need = CONFIG.levelCoins[st.l + 1]; if (!st.u || st.l >= CONFIG.lvlMax || store.coins < need) return false; store.coins -= need; st.l++; save(); return true; }
+/* put collected tile tid into open slot i of unit uid; a tile already slotted (here or in another unit) moves, the slot's previous tile goes back to the collection (or swaps places when both are in this unit). Returns '' or a short message */
+function putSlot(uid, i, tid) {
+  var u = UNIT_BY_ID[uid], sl = slotsOf(uid), e = ctById(tid); if (!e || i >= sl.n) return '';
+  if (e.c !== u.c && e.c !== 'w') return 'Wrong colour.';
+  var o = slotOwnerOf(tid);
+  if (e.c === 'w' && !o && rainbowSlotted() >= CONFIG.rainbow.maxTeam) return 'At most ' + CONFIG.rainbow.maxTeam + ' rainbow tiles in a team.';
+  var prev = sl.t[i]; if (o) store.slots[o.u].t[o.i] = (o.u === uid && prev && prev !== tid) ? prev : 0;
+  sl.t[i] = tid; save(); return '';
+}
+/* the copy of a stack of identical collected tiles to slot: one that is not in this unit yet, preferably one that is not slotted anywhere */
+function unslot(uid, i) { slotsOf(uid).t[i] = 0; save(); }
+function stackCopy(uid, ids) { var sl = slotsOf(uid), cand = ids.filter(function (id) { return sl.t.indexOf(id) < 0; }); return cand.filter(function (id) { return !slotOwnerOf(id); })[0] || cand[0] || 0; }
+/* make uid the team unit of its colour; the equipped tiles of the unit it replaces move over, in order, into the open slots of the new unit (the rest return to the collection) */
+function setTeamUnit(uid) {
+  var u = UNIT_BY_ID[uid], old = store.team[u.c];
+  if (old && old !== uid) {
+    var os = slotsOf(old), moved = os.t.filter(function (id) { return id && ctById(id); });
+    if (moved.length) { var ns = slotsOf(uid); os.t = os.t.map(function () { return 0; }); ns.t = ns.t.map(function (x, i) { return moved[i] || 0; }); }
+  }
+  store.team[u.c] = uid; save();
+}
+/* the colourless bag as 3 slots: ids or 0 */
+function bagSlots() { var a = []; for (var i = 0; i < CONFIG.maxColourless; i++) { var id = store.bag[i]; a.push(id && store.inv.some(function (x) { return x.id === id; }) ? id : 0); } return a; }
+function bagCopy(ids) { var b = bagSlots(); return ids.filter(function (id) { return b.indexOf(id) < 0; })[0] || 0; }
 
 /* ---------- tile faces: solid rounded tile, big number, small name, reach glyph top-left ---------- */
 var CU = 100, uidc = 0;
@@ -1812,11 +1854,19 @@ function newHeroes(n) { return HEROES.filter(function (H) { return !store.heroes
 function syncHeroes() { var nh = newHeroes(clearedCount()); nh.forEach(function (H) { store.heroes[H.id] = true; }); return nh; }
 function chosenColourless() { return store.bag.map(function (id) { return store.inv.filter(function (x) { return x.id === id; })[0]; }).filter(Boolean).slice(0, CONFIG.maxColourless); }
 function unitKit(u) { return unitBase(u, store.units[u.id].l); }
+function clSockHTML() {
+  var b = bagSlots(), h = '<div class="cl-sock c-x" id="clsock">';
+  b.forEach(function (id, i) {
+    var e = id && store.inv.filter(function (x) { return x.id === id; })[0];
+    h += '<div class="tm-pp ' + (e ? 'fl' : 'op') + '" data-dz="cl:' + i + '" aria-label="Colourless slot ' + (i + 1) + '">' + (e ? tileHTML(invTile(e), { ts: 44, noRest: true, attrs: 'data-dd="inv" data-inv="' + e.id + '" data-slot="' + i + '" data-card="it:' + e.id + '"' }) : TM_PLUS) + '</div>';
+  });
+  return h + '</div>';
+}
 function invHTML() {
   if (!store.inv.length) return '<div class="ctext">No colourless tiles yet. Earn them as loot.</div>';
-  return '<div class="inv">' + stackList(invSorted()).map(function (sk) {
+  return '<div class="inv" data-dz="cllist" id="cllist" style="min-height:56px;padding:4px;border-radius:12px">' + stackList(invSorted()).map(function (sk) {
     var inb = sk.ids.filter(function (id) { return store.bag.indexOf(id) >= 0; }).length;
-    return tileHTML(invTile(sk.e), { ts: 46, cls: inb ? 'sel' : '', cnt: sk.n, badge: sk.n > 1 && inb ? inb + ' in bag' : '', attrs: 'data-inv="' + sk.ids.join(',') + '" data-card="it:' + sk.e.id + '"' });
+    return tileHTML(invTile(sk.e), { ts: 46, cls: inb === sk.n ? 'fade' : inb ? 'sel' : '', cnt: sk.n, badge: sk.n > 1 && inb ? inb + ' in bag' : '', attrs: 'data-dd="inv" data-inv="' + sk.ids.join(',') + '" data-card="it:' + sk.e.id + '"' });
   }).join('') + '</div>';
 }
 var ICON = {
@@ -1968,7 +2018,7 @@ function kitTileHTML(u, k, fade, ts) {
 function pullResultHTML() {
   var r = S.pull; if (!r) return '';
   var u = r.unit, ks = unitBase(u, store.units[u.id].l);
-  return '<div class="pullres r' + r.rar + '"><b>' + (r.dup ? 'Duplicate ' + u.name + ' (' + RARITY[r.rar] + '): +' + r.shards + ' shards' : 'New unit: ' + u.name + ' (' + RARITY[r.rar] + ')') + '</b><div class="kit" style="justify-content:center">' + ks.map(function (k) { return kitTileHTML(u, k, false); }).join('') + '</div><div class="rline" style="text-align:center"><i>' + EFFECTS[u.fx].name + ':</i> ' + EFFECTS[u.fx].line + '</div></div>';
+  return '<div class="pullres r' + r.rar + '"><b>' + (r.dup ? 'Duplicate ' + u.name + ' (' + RARITY[r.rar] + '): +' + r.shards + ' shards' : 'New unit: ' + u.name + ' (' + RARITY[r.rar] + ')') + '</b><div class="kit" style="justify-content:center">' + ks.map(function (k) { return kitTileHTML(u, k, false); }).join('') + '</div><div class="rline" style="text-align:center"><span class="fxi c-' + u.c + '" style="margin:0">' + u.skills.map(function (sk) { return skillIcon(sk[0]); }).join('') + '</span> ' + u.skills.length + ' skills</div></div>';
 }
 function recruitHTML() {
   var G = CONFIG.gacha, left = G.pity - (store.pity || 0);
@@ -2005,32 +2055,93 @@ function tmRailHTML(u, sel) {
     '<span class="tm-sub"><span><b>' + RARITY[u.rar] + '</b>' + (own ? ' &middot; L' + st.l : ' &middot; locked') + '</span>' + (own ? '<span class="tm-dots">' + dots + '</span>' : '') + '</span>' +
     '<span class="tm-mt">' + tmTiles(u, own ? st.l : 1, { ts: 18, maxW: 87, maxH: 22, gap: 3 }) + '</span></button>';
 }
+/* skill icons: a 3x3 mini board; f = lit cells, g = half-lit cells, m = marks drawn on a cell (^ v < > arrows, + plus, x cross, o ring, * star, digits) */
+var SKI = {
+  front1: { f: [0, 1, 2], m: { 1: '^' } }, back2: { f: [6, 7, 8], m: { 7: 'v' } }, single1: { f: [4], m: { 4: 'o' } }, boostp1: { f: [1, 3, 4, 5, 7], m: { 4: '+' } },
+  wide1: { f: [3, 4, 5], m: { 3: '<', 5: '>' } }, extraline: { f: [1, 3, 4, 5, 7], m: { 4: '2' } }, neigh1: { f: [4], g: [1, 3, 5, 7], m: { 4: '+' } }, palette1: { f: [0, 2, 4, 6, 8], m: { 4: '*' } },
+  mult1: { f: [3, 4], m: { 3: 'x', 4: '2' } }, sand3: { f: [3, 4, 5], m: { 4: '+' } }, cell2: { f: [0, 1, 3, 4], m: { 4: '+' } }, lane: { f: [3, 4], g: [5], m: { 4: '>' } },
+  same1: { f: [0, 4, 8], g: [2, 6], m: { 4: '+' } }, triple: { f: [3, 4, 5], m: { 4: '3' } }, backx2: { f: [6, 7, 8], g: [0, 1, 2], m: { 7: '2' } }, edge2: { f: [0, 3, 6, 2, 5, 8], m: { 3: '+', 5: '+' } },
+  touch1: { f: [3, 4], g: [5], m: { 3: '+', 4: '+' } }, loyal2: { f: [0, 8], m: { 0: 'o', 8: 'o' } }, boosted2: { f: [1, 4], m: { 1: '+', 4: '2' } }, foes1: { f: [0, 1, 2, 7], m: { 0: 'x', 1: 'x', 2: 'x', 7: '^' } },
+  small2: { f: [7], g: [4], m: { 7: '+' } }, up2: { f: [4], m: { 4: '^' } }, rowmates1: { f: [4], g: [3, 5], m: { 4: '+' } }, corner3: { f: [0], g: [2, 6, 8], m: { 0: '3' } },
+  bread1: { f: [3, 5], g: [4], m: { 3: '>', 5: '<' } }, linepow: { f: [3, 4, 5], g: [0, 1, 2, 6, 7, 8], m: { 4: '2' } }, echo2: { f: [1, 4], m: { 1: '^', 4: 'o' } }, mulled2: { f: [4], g: [3, 5], m: { 4: 'x' } },
+  rare2: { f: [4], m: { 4: '*' } }, colmates1: { f: [4], g: [1, 7], m: { 4: '+' } }, atk1: { f: [4], g: [1, 3, 5, 7], m: { 4: '1' } }, atk2: { f: [4], g: [1, 3, 5, 7], m: { 4: '2' } }, atk3: { f: [4], g: [1, 3, 5, 7], m: { 4: '3' } }
+};
+function skillIcon(id) {
+  var d = SKI[id] || { f: [4], m: {} }, h = '<svg class="sk" viewBox="0 0 24 24" aria-hidden="true">', i, x, y, cx, cy, m;
+  for (i = 0; i < 9; i++) {
+    x = .75 + 7.5 * (i % 3); y = .75 + 7.5 * ((i / 3) | 0);
+    h += '<rect class="' + (d.f.indexOf(i) >= 0 ? 'f' : (d.g || []).indexOf(i) >= 0 ? 'g' : 'e') + '" x="' + x + '" y="' + y + '" width="6.5" height="6.5" rx="1.5"/>';
+  }
+  for (i in d.m) {
+    m = d.m[i]; cx = 4 + 7.5 * (i % 3); cy = 4 + 7.5 * ((i / 3) | 0);
+    if (m === '^') h += '<path class="mk" d="M' + (cx - 1.8) + ' ' + (cy + 1) + 'L' + cx + ' ' + (cy - 1.6) + 'L' + (cx + 1.8) + ' ' + (cy + 1) + '"/>';
+    else if (m === 'v') h += '<path class="mk" d="M' + (cx - 1.8) + ' ' + (cy - 1) + 'L' + cx + ' ' + (cy + 1.6) + 'L' + (cx + 1.8) + ' ' + (cy - 1) + '"/>';
+    else if (m === '<') h += '<path class="mk" d="M' + (cx + 1) + ' ' + (cy - 1.8) + 'L' + (cx - 1.6) + ' ' + cy + 'L' + (cx + 1) + ' ' + (cy + 1.8) + '"/>';
+    else if (m === '>') h += '<path class="mk" d="M' + (cx - 1) + ' ' + (cy - 1.8) + 'L' + (cx + 1.6) + ' ' + cy + 'L' + (cx - 1) + ' ' + (cy + 1.8) + '"/>';
+    else if (m === '+') h += '<path class="mk" d="M' + (cx - 1.9) + ' ' + cy + 'h3.8M' + cx + ' ' + (cy - 1.9) + 'v3.8"/>';
+    else if (m === 'x') h += '<path class="mk" d="M' + (cx - 1.7) + ' ' + (cy - 1.7) + 'l3.4 3.4M' + (cx + 1.7) + ' ' + (cy - 1.7) + 'l-3.4 3.4"/>';
+    else if (m === 'o') h += '<circle class="mk" cx="' + cx + '" cy="' + cy + '" r="1.7"/>';
+    else if (m === '*') h += '<path class="mk" d="M' + cx + ' ' + (cy - 2.2) + 'L' + (cx + 1.6) + ' ' + cy + 'L' + cx + ' ' + (cy + 2.2) + 'L' + (cx - 1.6) + ' ' + cy + 'Z"/>';
+    else h += '<text x="' + cx + '" y="' + (cy + 2.3) + '">' + m + '</text>';
+  }
+  return h + '</svg>';
+}
+/* the unit's skill row: unlocked skills in colour, locked ones dim with their unit level; tap one for its name and text */
+function skillRowHTML(u, lvl, own) {
+  return '<div class="tm-sks">' + u.skills.map(function (sk, i) {
+    var on = own && lvl >= sk[1];
+    return '<button class="sk-b' + (on ? '' : ' slk') + '" data-act="skill" data-u="' + u.id + '" data-i="' + i + '" aria-label="' + EFFECTS[sk[0]].name + (on ? '' : ', unlocks at unit level ' + sk[1]) + '">' + skillIcon(sk[0]) + '<small>Lv ' + sk[1] + '</small></button>';
+  }).join('') + '</div>';
+}
+function skillCardHTML(u, i) {
+  var sk = u.skills[i], E = EFFECTS[sk[0]], on = store.units[u.id].u && store.units[u.id].l >= sk[1];
+  return '<div class="c-' + u.c + '"><h3 style="display:flex;align-items:center;gap:8px"><span class="fxi" style="margin:0">' + skillIcon(sk[0]).replace('class="sk"', 'class="sk" style="width:30px;height:30px"') + '</span>' + E.name + '</h3><p>' + E.line + '</p><p class="muted">' + u.name + ' skill: ' + (on ? 'active' : 'unlocks at unit level ' + sk[1]) + '. It applies to every ' + COLORS[u.c].toLowerCase() + ' tile in the fight (also a rainbow tile in this unit\'s slot) and is included in the live totals.</p></div>';
+}
 function tmBigHTML(u) {
-  var st = store.units[u.id], own = st.u, c = u.c, team = store.team[c] === u.id, sl = slotsOf(u.id), mx = CONFIG.slotMax[u.rar], E = EFFECTS[u.fx], i;
+  var st = store.units[u.id], own = st.u, c = u.c, team = store.team[c] === u.id, sl = slotsOf(u.id), mx = CONFIG.slotMax[u.rar], i;
   var W = Math.min(document.documentElement.clientWidth || 360, 440) - 24, inner = W - 106 - 9 - 28 - 4;
   var lv = '', sock = '';
-  for (i = 1; i <= 5; i++) lv += '<i' + (i <= (own ? st.l : 0) ? ' class="on"' : '') + '></i>';
+  for (i = 1; i <= CONFIG.lvlMax; i++) lv += '<i' + (i <= (own ? st.l : 0) ? ' class="on"' : '') + '></i>';
   for (i = 0; i < mx; i++) {
-    if (!own || i >= sl.n) sock += '<span class="tm-pp cl" aria-label="Locked slot">' + TM_LOCKI + '</span>';
+    if (!own || i >= sl.n) sock += '<button class="tm-pp cl" data-act="slotbuy" data-u="' + u.id + '"' + (own ? '' : ' disabled') + ' aria-label="Locked slot ' + (i + 1) + ', ' + CONFIG.slotCost[i] + ' shards">' + TM_LOCKI + '<span class="lc">' + CONFIG.slotCost[i] + '</span></button>';
     else {
       var e = sl.t[i] && ctById(sl.t[i]);
-      if (e) { var t = ctTile(e), d = shapeDims(t), q = Math.max(10, Math.floor((38 - (Math.max(d[0], d[1]) - 1) * 3) / Math.max(d[0], d[1]))); sock += '<button class="tm-pp fl" data-act="loadout" data-u="' + u.id + '" aria-label="Slot ' + (i + 1) + ', holds ' + tileName2(t) + '">' + tileHTML(t, { ts: q }) + '</button>'; }
-      else sock += '<button class="tm-pp op" data-act="loadout" data-u="' + u.id + '" aria-label="Empty slot ' + (i + 1) + '">' + TM_PLUS + '</button>';
+      if (e) { var t = ctTile(e), d = shapeDims(t), q = Math.max(10, Math.floor((38 - (Math.max(d[0], d[1]) - 1) * 3) / Math.max(d[0], d[1]))); sock += '<button class="tm-pp fl" data-act="slotpop" data-u="' + u.id + '" aria-label="Slot ' + (i + 1) + ', holds ' + tileName2(t) + '">' + tileHTML(t, { ts: q }) + '</button>'; }
+      else sock += '<button class="tm-pp op" data-act="slotpop" data-u="' + u.id + '" aria-label="Empty slot ' + (i + 1) + '">' + TM_PLUS + '</button>';
     }
   }
-  var need = st.l < 5 ? CONFIG.gacha.levelShards[st.l + 1] : 0, shards = store.shards || 0, full = sl.n >= mx, cost = full ? 0 : CONFIG.slotCost[sl.n], acts;
+  var need = st.l < CONFIG.lvlMax ? CONFIG.levelCoins[st.l + 1] : 0, acts;
   if (own) acts = '<div class="tm-acts">' +
     '<button class="tm-ab' + (team ? '' : ' pri') + '" data-act="pick" data-u="' + u.id + '"' + (team ? ' disabled' : '') + '>' + (team ? 'In team' : 'Pick') + '<small>' + (team ? 'one per colour' : 'for the team') + '</small></button>' +
-    '<button class="tm-ab" data-act="level" data-u="' + u.id + '"' + (st.l >= 5 || shards < need ? ' disabled' : '') + '>' + (st.l >= 5 ? 'Max level' : 'Level up') + '<small>' + (st.l >= 5 ? 'Lv 5' : need + ' shards') + '</small></button>' +
-    '<button class="tm-ab" data-act="loadout" data-u="' + u.id + '">Loadout<small>' + sl.n + ' of ' + mx + ' slots</small></button>' +
-    '<button class="tm-ab" data-act="tmslot" data-u="' + u.id + '"' + (full || shards < cost ? ' disabled' : '') + '>Buy slot<small>' + (full ? 'all open' : cost + ' shards') + '</small></button></div>';
+    '<button class="tm-ab" data-act="level" data-u="' + u.id + '"' + (st.l >= CONFIG.lvlMax ? ' disabled' : '') + '>' + (st.l >= CONFIG.lvlMax ? 'Max level' : 'Level up') + '<small>' + (st.l >= CONFIG.lvlMax ? 'Lv ' + CONFIG.lvlMax : need + ' coins') + '</small></button></div>';
   else acts = '<div class="tm-acts"><button class="tm-ab pri wide" data-act="tmtab" data-t="recruit">Find in Recruit</button></div>';
   return '<div class="tm-big c-' + c + ' r' + u.rar + (own ? '' : ' no') + '">' +
     '<div class="tm-bh"><span class="n">' + u.name + '</span><span class="tm-rp">' + RARITY[u.rar] + '</span>' + (own ? '<span class="tm-lv"><span class="tm-lvb">' + lv + '</span>Lv ' + st.l + '</span>' : '<span class="tm-lv">not owned</span>') + '</div>' +
     '<div class="tm-r2">' + (team ? '<span class="tm-badge lg">IN TEAM</span>' : '') + '<span>Style: ' + u.style + '</span></div>' +
     '<div class="tm-bt">' + tmTiles(u, own ? st.l : 1, { ts: 56, maxW: inner, maxH: 90, gap: 6, kit: true }) + '</div>' +
-    '<div><div class="tm-sl">Slots &middot; ' + (own ? sl.n : 0) + ' of ' + mx + ' open</div><div class="tm-sock">' + sock + '</div></div>' +
-    '<div class="tm-fx" data-card="ue:' + u.id + '"><b>' + E.name + '</b> &middot; ' + E.line + ' <i>Works from difficulty ' + CONFIG.fxTier + '.</i></div>' + acts + '</div>';
+    '<div><div class="tm-sl">Slots &middot; ' + (own ? sl.n : 0) + ' of ' + mx + ' open (tap one)</div><div class="tm-sock">' + sock + '</div></div>' +
+    '<div><div class="tm-sl">Skills &middot; unlock with unit level</div>' + skillRowHTML(u, st.l, own) + '</div>' + acts + '</div>';
+}
+/* confirmation dialogs: unlock a slot (shards), level up (coins) */
+function slotBuyHTML(uid) {
+  var u = UNIT_BY_ID[uid], sl = slotsOf(uid), have = store.shards || 0;
+  if (sl.n >= CONFIG.slotMax[u.rar]) return '<h3>' + u.name + ': all slots open</h3><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
+  var cost = CONFIG.slotCost[sl.n];
+  return '<div class="c-' + u.c + '"><h3>Unlock slot ' + (sl.n + 1) + ' of ' + CONFIG.slotMax[u.rar] + '?</h3><div class="ctext" style="margin-bottom:6px">' + u.name + ' gets one more slot for a collected ' + COLORS[u.c].toLowerCase() + ' (or rainbow) tile. The tile in it joins your bag with the 3 base tiles at the start of every run while ' + u.name + ' is in your team.</div>' +
+    '<div class="cf-sk"><b>' + cost + ' shards</b><span>you have ' + have + '</span></div><div class="btnrow"><button class="btn main" data-act="slotgo" data-u="' + uid + '"' + (have >= cost ? '' : ' disabled') + '>' + (have >= cost ? 'Unlock for ' + cost + ' shards' : 'Not enough shards') + '</button><button class="btn" data-act="close">Cancel</button></div></div>';
+}
+function levelHTML(uid) {
+  var u = UNIT_BY_ID[uid], st = store.units[uid], N = st.l + 1;
+  if (N > CONFIG.lvlMax) return '<h3>' + u.name + ' is at the top level</h3><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
+  var cost = CONFIG.levelCoins[N], have = store.coins, a = unitBase(u, st.l), b = unitBase(u, N), cols = '', unl = u.skills.filter(function (sk) { return sk[1] === N; }), mw = Math.floor(296 / 3) - 8;
+  a.forEach(function (k, i) {
+    var d = shapeDims(k), ts = Math.max(18, Math.min(40, Math.floor((mw - (d[1] - 1) * 3) / d[1])));
+    var f = function (x) { return tileHTML({ c: u.c, u: u.id, k: x.k, d: x.d, n: x.n, sh: x.sh }, { ts: ts, noRest: true }); };
+    cols += '<div class="cf-col">' + f(k) + '<span class="arrow" aria-label="becomes">&darr;</span>' + f(b[i]) + '</div>';
+  });
+  return '<div class="c-' + u.c + '"><h3>' + u.name + ': level ' + st.l + ' &rarr; ' + N + '</h3><div class="cf-cols">' + cols + '</div>' +
+    unl.map(function (sk) { return '<div class="cf-sk">' + skillIcon(sk[0]) + '<span><b>New skill: ' + EFFECTS[sk[0]].name + '.</b> ' + EFFECTS[sk[0]].line + '</span></div>'; }).join('') +
+    '<div class="cf-sk"><b>' + cost + ' coins</b><span>you have ' + have + '</span></div><div class="btnrow"><button class="btn main" data-act="lvlgo" data-u="' + uid + '"' + (have >= cost ? '' : ' disabled') + '>' + (have >= cost ? 'Level up for ' + cost + ' coins' : 'Not enough coins') + '</button><button class="btn" data-act="close">Cancel</button></div></div>';
 }
 function renderTeam() {
   var tab = S.tmTab || 'units', col = S.tmCol || 'r', G = CONFIG.gacha, u0, h;
@@ -2042,11 +2153,11 @@ function renderTeam() {
     u0 = tmSelUnit(col);
     h += '<div class="tm-split"><div class="tm-rail">' + tmUnits(col).map(function (u) { return tmRailHTML(u, u.id === u0.id); }).join('') + '</div><div class="tm-main">' + tmBigHTML(u0) + '</div></div>';
   } else if (tab === 'recruit') {
-    h += '<p class="sub" style="margin-top:8px">One unit per colour goes on the run. Recruit new units with coins; a duplicate gives shards, the one upgrade currency (unit levels and unit slots).</p>' + recruitHTML();
+    h += '<p class="sub" style="margin-top:8px">One unit per colour goes on the run. Recruit new units with coins; a duplicate gives shards, which open unit slots. Unit levels cost coins.</p>' + recruitHTML();
   } else if (tab === 'collected') {
-    h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">Coloured tiles you kept after bosses, bound to their colour; a rainbow tile fits any unit. Put them into a unit\'s slots with Loadout. Three identical tiles merge into one tile with a star (+' + CONFIG.stars.bonus + ' to its number), up to ' + CONFIG.stars.cap + ' stars; spare copies show as a stack.</div>' + ctHTML() + '</div>';
+    h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">Coloured tiles you kept after bosses, bound to their colour; a rainbow tile fits any unit. Put them into a unit\'s slots from the Units tab (tap one of its open slots). Three identical tiles merge into one tile with a star (+' + CONFIG.stars.bonus + ' to its number), up to ' + CONFIG.stars.cap + ' stars; spare copies show as a stack.</div>' + ctHTML() + '</div>';
   } else {
-    h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">Choose up to ' + CONFIG.maxColourless + ' colourless tiles for the bag (' + chosenColourless().length + ' chosen). Identical tiles stack (x2); tap a stack once for each copy to bring, and again to take them all out. Three identical tiles merge into one star.</div>' + invHTML() + '</div>';
+    h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">Drag a colourless tile into one of the ' + CONFIG.maxColourless + ' slots to bring it on the run; drag it out to remove it (tapping works too). Identical tiles stack (x2). Three identical tiles merge into one star.</div>' + clSockHTML() + invHTML() + '</div>';
   }
   var T = $('#team'); T.className = 'screen' + (tab === 'units' ? ' fit' : ''); T.innerHTML = h;
 }
@@ -2059,21 +2170,23 @@ function ctStacksHTML(stacks, uid) {
   return stacks.map(function (sk) {
     var here = sk.ids.filter(function (id) { var o = slotOwnerOf(id); return o && o.u === uid; }).length, away = sk.ids.filter(function (id) { var o = slotOwnerOf(id); return o && (!uid || o.u !== uid); }).length;
     var cls = uid ? (here ? 'sel' : away === sk.n ? 'fade' : '') : (away === sk.n ? 'fade' : '');
-    return tileHTML(ctTile(sk.e), { ts: 46, cls: cls, cnt: sk.n, badge: sk.n > 1 && here ? here + ' slotted' : '', attrs: 'data-card="ct:' + sk.e.id + '"' + (uid ? ' data-ct="' + sk.ids.join(',') + '"' : '') });
+    return tileHTML(ctTile(sk.e), { ts: 46, cls: cls, cnt: sk.n, badge: sk.n > 1 && here ? here + ' slotted' : '', attrs: 'data-card="ct:' + sk.e.id + '"' + (uid ? ' data-dd="ct" data-ct="' + sk.ids.join(',') + '"' : '') });
   }).join('');
 }
-function loadoutHTML(uid, msg) {
-  var u = UNIT_BY_ID[uid], sl = slotsOf(uid), mx = CONFIG.slotMax[u.rar], h = '<h3>' + u.name + ': loadout</h3><div class="ctext" style="margin-bottom:6px">Tiles in slots join the bag with the 3 base tiles at the start of a run. Tap a tile below to put it in the next open slot; tap a slotted tile to take it out. A stack (x2) holds identical copies; tap it once for each copy you want to slot. Slots cost shards (you have ' + (store.shards || 0) + ').</div><div class="inv" style="margin-bottom:8px">';
+function slotPopHTML(uid, msg) {
+  var u = UNIT_BY_ID[uid], sl = slotsOf(uid), mx = CONFIG.slotMax[u.rar], h = '<div class="c-' + u.c + '"><h3>' + u.name + ': slots</h3><div class="ctext" style="margin-bottom:6px">Drag a tile from the list into a slot; drag a slotted tile back to the list to take it out (tapping works too). Tiles in slots join the bag with the 3 base tiles at the start of a run.</div><div class="tm-sock pp-sock">';
   for (var i = 0; i < mx; i++) {
-    if (i < sl.n) { var e = sl.t[i] && ctById(sl.t[i]); h += e ? tileHTML(ctTile(e), { ts: 50, cls: 'sel', attrs: 'data-ct="' + e.id + '" data-card="ct:' + e.id + '"' }) : '<div class="slotbox open">open</div>'; }
-    else h += '<button class="slotbox shut" data-act="buyslot" data-u="' + uid + '"' + (i === sl.n && (store.shards || 0) >= CONFIG.slotCost[i] ? '' : ' disabled') + '><b>' + CONFIG.slotCost[i] + '</b><small>shards</small></button>';
+    if (i < sl.n) {
+      var e = sl.t[i] && ctById(sl.t[i]), t = e && ctTile(e), d = e && shapeDims(t), q = e ? Math.max(12, Math.floor((46 - (Math.max(d[0], d[1]) - 1) * 3) / Math.max(d[0], d[1]))) : 0;
+      h += '<div class="tm-pp ' + (e ? 'fl' : 'op') + '" data-dz="slot:' + i + '" aria-label="Slot ' + (i + 1) + '">' + (e ? tileHTML(t, { ts: q, attrs: 'data-dd="ct" data-ct="' + e.id + '" data-slot="' + i + '" data-card="ct:' + e.id + '"' }) : TM_PLUS) + '</div>';
+    } else h += '<button class="tm-pp cl" data-act="slotbuy" data-u="' + uid + '" aria-label="Locked slot">' + TM_LOCKI + '<span class="lc">' + CONFIG.slotCost[i] + '</span></button>';
   }
   h += '</div>';
-  if (msg) h += '<div class="trick" style="margin:0 0 6px">' + msg + '</div>';
+  if (msg) h += '<div class="trick" style="margin:6px 0 0">' + msg + '</div>';
   var fit = ctSorted().filter(function (e) { return e.c === u.c || e.c === 'w'; });
-  h += '<div class="ctext">Your ' + COLORS[u.c].toLowerCase() + ' and rainbow tiles (' + rainbowSlotted() + ' of ' + CONFIG.rainbow.maxTeam + ' rainbow slotted)</div>';
-  h += fit.length ? '<div class="inv" style="margin:6px 0 10px">' + ctStacksHTML(stackList(fit), uid) + '</div>' : '<div class="ctext" style="margin:6px 0">None yet.</div>';
-  return h + '<div class="btnrow"><button class="btn main" data-act="close">Done</button></div>';
+  h += '<div class="ctext" style="margin-top:8px">Your ' + COLORS[u.c].toLowerCase() + ' and rainbow tiles (' + rainbowSlotted() + ' of ' + CONFIG.rainbow.maxTeam + ' rainbow slotted)</div>';
+  h += '<div class="inv pp-list" data-dz="list" style="margin:4px 0 8px">' + (fit.length ? ctStacksHTML(stackList(fit), uid) : '<div class="ctext" style="margin:6px">None yet. Keep a tile after a boss.</div>') + '</div>';
+  return h + '<div class="btnrow"><button class="btn main" data-act="close">Done</button></div></div>';
 }
 
 /* ---------- run map ---------- */
@@ -2230,7 +2343,7 @@ function renderFight() {
   if (F.colMul[2] !== undefined) strip += '<div class="strip trickstrip" data-card="tr:plate"><span class="t"><b>Boss:</b> ' + TRICKS.plate + '</span></div>';
   if (F.bossTrick === 'sealed') strip += '<div class="strip trickstrip" data-card="tr:sealed"><span class="t"><b>Boss:</b> ' + TRICKS.sealed + '</span></div>';
   if (F.bossTrick === 'plain') strip += '<div class="strip trickstrip"><span class="t"><b>Boss:</b> ' + TRICKS.plain + '</span></div>';
-  if (!S.puz && S.tab !== 'x' && run.team[S.tab] && run.fx && run.fx[S.tab]) { var tu = UNIT_BY_ID[run.team[S.tab]]; strip += '<div class="strip relic fxs c-' + S.tab + '" data-card="un:' + S.tab + '"><span class="t"><b>' + tu.name + ':</b> ' + EFFECTS[tu.fx].line + '</span></div>'; }
+  if (!S.puz && S.tab !== 'x' && run.team[S.tab] && fxIds(run.fx, S.tab).length) { var tu = UNIT_BY_ID[run.team[S.tab]]; strip += '<div class="strip relic fxs c-' + S.tab + '" data-card="un:' + S.tab + '"><span class="t"><b>' + tu.name + ':</b> ' + fxIds(run.fx, S.tab).map(function (id) { return '<span class="fxi">' + skillIcon(id) + EFFECTS[id].name + '</span>'; }).join('') + '</span></div>'; }
   $('#rbar').innerHTML = strip;
   var ids = COLOR_IDS.concat(['x']), tabs = '';
   if (!handOf(S.tab).length) { var ft = firstTab(); if (handOf(ft).length) S.tab = ft; }
@@ -2520,10 +2633,13 @@ function cardFor(key) {
     var t = run && tileById(+p[1]); if (!t) return '';
     var cell = S.board.indexOf(t.id), parts = null;
     if (cell >= 0 && S.screen === 'fight') { var r = evalNow(true), gi = r.cellG[cell]; if (gi !== undefined) parts = r.parts[r.G[gi].a]; }
-    return tileCardHTML(t, parts, isAttackT(t) && S.run.fx && S.run.fx[t.c] === 'lane' ? '<p class="muted"><b>Long Arm:</b> this unit effect makes it also hit the column to its right.</p>' : '');
+    return tileCardHTML(t, parts, isAttackT(t) && S.run.fx && fxHas(S.run.fx, t.c, 'lane') ? '<p class="muted"><b>Long Arm:</b> this unit effect makes it also hit the column to its right.</p>' : '');
   }
   if (p[0] === 'kt') { var u = UNIT_BY_ID[p[1]]; return tileCardHTML({ c: u.c, u: u.id, k: p[2], d: p[3], n: +p[4], sh: p[5] }, null, '<p class="muted">A base tile of ' + u.name + '. Unit levels raise the numbers of its 3 base tiles.</p>'); }
-  if (p[0] === 'un' || p[0] === 'ue') { var uu = UNIT_BY_ID[p[0] === 'un' ? (run && run.team[p[1]]) : p[1]]; if (!uu) return ''; return '<h3>' + uu.name + ' (' + RARITY[uu.rar] + ', ' + COLORS[uu.c] + ')</h3><p><b>' + EFFECTS[uu.fx].name + ':</b> ' + EFFECTS[uu.fx].line + '</p><p class="muted">The unit effect applies to every ' + COLORS[uu.c].toLowerCase() + ' tile in the fight, including a rainbow tile sitting in this unit\'s slot. It is included in the live totals.</p>'; }
+  if (p[0] === 'un' || p[0] === 'ue') {
+    var uu = UNIT_BY_ID[p[0] === 'un' ? (run && run.team[p[1]]) : p[1]]; if (!uu) return '';
+    var act = p[0] === 'un' ? fxIds(run.fx, p[1]) : skillsAt(uu, store.units[uu.id].l);
+    return '<div class="c-' + uu.c + '"><h3>' + uu.name + ' (' + RARITY[uu.rar] + ', ' + COLORS[uu.c] + ')</h3>' + (act.length ? act.map(function (id) { return '<p style="display:flex;gap:8px;align-items:center"><span class="fxi" style="margin:0">' + skillIcon(id) + '</span><span><b>' + EFFECTS[id].name + ':</b> ' + EFFECTS[id].line + '</span></p>'; }).join('') : '<p>No skills unlocked yet.</p>') + '<p class="muted">Unit skills apply to every ' + COLORS[uu.c].toLowerCase() + ' tile in the fight, including a rainbow tile sitting in this unit\'s slot, and stack. They are included in the live totals.</p></div>'; }
   if (p[0] === 'ct') { var ce = ctById(+p[1]); return ce ? tileCardHTML(ctTile(ce), null, '<p class="muted">Collected tile' + (ce.c === 'w' ? ' (fits any unit)' : ' (' + COLORS[ce.c].toLowerCase() + ' units)') + '.</p>' + starLine(store.ct, ce)) : ''; }
   if (p[0] === 'it') { var it = store.inv.filter(function (x) { return x.id === +p[1]; })[0]; return it ? tileCardHTML(invTile(it), null, starLine(store.inv, it)) : ''; }
   if (p[0] === 'ot') { var ot = run.offers[+p[1]].reward.tile; return tileCardHTML(invTile(ot), null, '<p class="muted">Reward: goes into your colourless inventory when the run ends.</p>'); }
@@ -2621,8 +2737,9 @@ document.addEventListener('pointermove', guarded('pointermove', function (e) {
     P.moved = true; clearTimeout(P.timer);
     var t = tileById(P.tg.id);
     var gw = document.createElement('div'); gw.innerHTML = tileHTML(t, { ts: P.tg.kind === 'board' ? 46 : 54, noRest: true });
-    ghost = gw.firstChild; ghost.classList.add('ghost');
-    document.body.appendChild(ghost);
+    ghost = gw.firstChild; ghost.classList.add('ghost', 'pick');
+    var sr = P.tg.el && P.tg.el.getBoundingClientRect(); ghost.style.left = (sr ? sr.left + sr.width / 2 : e.clientX) + 'px'; ghost.style.top = (sr ? sr.top + sr.height * .9 : e.clientY) + 'px';
+    document.body.appendChild(ghost); void ghost.offsetWidth; ghost.classList.add('lift'); var gh0 = ghost; setTimeout(function () { gh0.classList.remove('pick'); }, 170);
     try { document.body.setPointerCapture(e.pointerId); } catch (er) {}
     rectCache = cellRects(); P.bt = boardTiles().map(function (x) { return x && x.id === t.id ? null : x; });
     if (P.tg.kind === 'board') $$('#ftiles .tile[data-cell="' + P.tg.cell + '"]').forEach(function (n) { n.classList.add('dragging'); });
@@ -2638,18 +2755,34 @@ function endPointer(e, cancel) {
   if (!P) { if (cancel) tlog('cancel: ' + e.type + ' (no gesture)'); return; }
   var p = P; P = null; clearTimeout(p.timer); if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
   if (p.dead) return;
-  var tg = p.tg, anchor = (p.moved && ghost) ? ghostAnchor(tileById(tg.id)) : null;
-  if (ghost) { ghost.remove(); ghost = null; }
+  var tg = p.tg, gh = ghost, anchor = null, home = p.tg.el && p.tg.el.getBoundingClientRect();
+  ghost = null;
+  if (p.moved && gh) {   /* measure where the lifted tile is drawn at the final finger position, without the follow transition */
+    gh.style.transition = 'none'; gh.style.left = e.clientX + 'px'; gh.style.top = e.clientY + 'px'; ghost = gh; void gh.offsetWidth;
+    anchor = ghostAnchor(tileById(tg.id)); ghost = null;
+  }
+  if (gh && !(p.moved && !cancel)) gh.remove();
   rectCache = null;
   $$('#ftiles .tile.dragging').forEach(function (n) { n.classList.remove('dragging'); });
   if (cancel) { tlog('cancel: ' + e.type + (p.moved ? ' during drag t' + tg.id : '')); if (p.moved) { clearHold(); renderFight(); } return; }
+  var settle = function (box, ok) {   /* the lifted copy glides to where the tile landed, or back to where it came from, and fades out */
+    if (!gh) return; var r = box || home;
+    if (!r) { gh.remove(); return; }
+    gh.style.transition = ''; gh.classList.remove('pick', 'lift'); void gh.offsetWidth; gh.classList.add('settle'); if (!ok) gh.classList.add('back');
+    gh.style.left = (r.left + r.width / 2) + 'px'; gh.style.top = (r.top + r.height / 2) + 'px';
+    setTimeout(function () { gh.remove(); }, 260);
+  };
   if (p.long) { lpAt = Date.now(); return; }
   if (p.moved) {
     clearHold();
     var c = anchor ? cellAtPoint(anchor.x, anchor.y, true) : null, under = document.elementFromPoint(e.clientX, e.clientY);
-    if (c) { var ok = place(tg.id, c.i); tlog('drag t' + tg.id + ' → cell ' + c.i + (ok ? ' placed' : ' does not fit')); if (!ok) renderFight(); }
-    else if (tg.kind === 'board' && under && under.closest && under.closest('#fhand,#ftabs')) { unplace(tg.cell); tlog('drag t' + tg.id + ' → back to hand'); }
-    else { tlog('drag t' + tg.id + ' → no cell (' + Math.round(e.clientX) + ',' + Math.round(e.clientY) + ')'); renderFight(); }
+    if (c) {
+      var t9 = tileById(tg.id), a9 = dropOrigin(t9, c.i, p.bt), box9 = null;
+      if (a9 >= 0) { var cl9 = placeCells(t9, a9, S.fs.F.cols, S.fs.F.rows) || [], l9 = 1e9, tp9 = 1e9, r9 = -1e9, b9 = -1e9; cl9.forEach(function (q) { var ce = $('#fboard .cell[data-cell="' + q + '"]'); if (!ce) return; var rr = ce.getBoundingClientRect(); l9 = Math.min(l9, rr.left); tp9 = Math.min(tp9, rr.top); r9 = Math.max(r9, rr.right); b9 = Math.max(b9, rr.bottom); }); if (r9 > l9) box9 = { left: l9, top: tp9, width: r9 - l9, height: b9 - tp9 }; }
+      var ok = place(tg.id, c.i); tlog('drag t' + tg.id + ' → cell ' + c.i + (ok ? ' placed' : ' does not fit')); if (!ok) renderFight(); settle(ok ? box9 : null, ok);
+    }
+    else if (tg.kind === 'board' && under && under.closest && under.closest('#fhand,#ftabs')) { unplace(tg.cell); tlog('drag t' + tg.id + ' → back to hand'); settle(under.closest('#fhand,#ftabs').getBoundingClientRect(), true); }
+    else { tlog('drag t' + tg.id + ' → no cell (' + Math.round(e.clientX) + ',' + Math.round(e.clientY) + ')'); renderFight(); settle(null, false); }
     return;
   }
   if (S.screen !== 'fight' || S.phase !== 'edit') return;
@@ -2661,6 +2794,63 @@ function endPointer(e, cancel) {
 document.addEventListener('pointerup', guarded('pointerup', function (e) { endPointer(e, false); }));
 document.addEventListener('pointercancel', guarded('pointercancel', function (e) { endPointer(e, true); }));
 document.addEventListener('lostpointercapture', function (e) { if (P && P.moved && e.target === document.body) tlog('lost pointer capture'); });
+
+/* ---------- drag and drop outside the fight (slot popup, colourless slots): a lifted copy follows the finger, the zone under it lights up, it settles into the zone or glides back ---------- */
+var DD = null;
+function ddIds(el) { return (el.dataset.ct || el.dataset.inv || '').split(',').map(Number); }
+function ddTile(el) {
+  var id = ddIds(el)[0], e = el.dataset.dd === 'ct' ? ctById(id) : store.inv.filter(function (x) { return x.id === id; })[0];
+  return e ? (el.dataset.dd === 'ct' ? ctTile(e) : invTile(e)) : null;
+}
+function ddZone(x, y) { var els = document.elementsFromPoint(x, y); for (var i = 0; i < els.length; i++) { var z = els[i].closest && els[i].closest('[data-dz]'); if (z) return z; } return null; }
+function ddHot(z) { $$('.dzhot').forEach(function (n) { if (n !== z) n.classList.remove('dzhot'); }); if (z) z.classList.add('dzhot'); }
+document.addEventListener('pointerdown', function (e) {
+  if (DD || S.screen === 'fight' || !e.target.closest) return;
+  var el = e.target.closest('[data-dd]'); if (!el) return;
+  DD = { el: el, x: e.clientX, y: e.clientY, moved: false, gh: null };
+});
+document.addEventListener('pointermove', function (e) {
+  if (!DD) return;
+  if (!DD.moved) {
+    var dx = e.clientX - DD.x, dy = e.clientY - DD.y; if (dx * dx + dy * dy < 64) return;
+    var t = ddTile(DD.el); if (!t) { DD = null; return; }
+    DD.moved = true; if (P) { clearTimeout(P.timer); P = null; }
+    var w = document.createElement('div'); w.innerHTML = tileHTML(t, { ts: 52, noRest: true }); var g = w.firstChild; g.classList.add('ghost', 'pick');
+    var r0 = DD.el.getBoundingClientRect(); g.style.left = (r0.left + r0.width / 2) + 'px'; g.style.top = (r0.top + r0.height * .9) + 'px';
+    document.body.appendChild(g); void g.offsetWidth; g.classList.add('lift'); setTimeout(function () { g.classList.remove('pick'); }, 170);
+    DD.gh = g; DD.el.classList.add('dragging');
+    try { document.body.setPointerCapture(e.pointerId); } catch (er) {}
+  }
+  DD.gh.style.left = e.clientX + 'px'; DD.gh.style.top = e.clientY + 'px';
+  var gr = DD.gh.getBoundingClientRect(); ddHot(ddZone(gr.left + gr.width / 2, gr.top + gr.height / 2));
+});
+function ddEnd(e, cancel) {
+  var d = DD; if (!d) return; DD = null;
+  if (!d.moved) return;
+  var g = d.gh, home = d.el.getBoundingClientRect();
+  g.style.transition = 'none'; g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; void g.offsetWidth;
+  var gr = g.getBoundingClientRect(), z = cancel ? null : ddZone(gr.left + gr.width / 2, gr.top + gr.height / 2), zr = z && z.getBoundingClientRect(), kind = d.el.dataset.dd, from = d.el.dataset.slot, ids = ddIds(d.el), ok = false, msg = '', zk = z && z.dataset.dz.split(':');
+  ddHot(null); lpAt = Date.now();
+  if (z && kind === 'ct') {
+    var uid = S.loadUid;
+    if (zk[0] === 'slot') { var tid = from !== undefined ? ids[0] : stackCopy(uid, ids); if (tid) { msg = putSlot(uid, +zk[1], tid); ok = !msg; } else msg = 'Every copy is already in this unit.'; }
+    else if (zk[0] === 'list' && from !== undefined) { unslot(uid, +from); ok = true; }
+    $('#modal').innerHTML = slotPopHTML(uid, msg); if (S.screen === 'team') renderTeam();
+    if (ok && zk[0] === 'slot') { var ne = $('#modal [data-dz="slot:' + zk[1] + '"]'); zr = ne ? ne.getBoundingClientRect() : zr; }
+    else if (ok) { var nl = $('#modal [data-dz="list"]'); zr = nl ? nl.getBoundingClientRect() : zr; }
+  } else if (z && kind === 'inv') {
+    var bs = bagSlots();
+    if (zk[0] === 'cl') { var cp = from !== undefined ? ids[0] : bagCopy(ids); if (cp) { var oi = bs.indexOf(cp); if (oi >= 0) bs[oi] = bs[+zk[1]]; bs[+zk[1]] = cp; store.bag = bs; save(); ok = true; } }
+    else if (zk[0] === 'cllist' && from !== undefined) { bs[+from] = 0; store.bag = bs; save(); ok = true; }
+    if (ok) { renderTeam(); var ns = $('#clsock [data-dz="cl:' + zk[1] + '"]'); if (zk[0] === 'cl' && ns) zr = ns.getBoundingClientRect(); }
+  }
+  if (!ok && d.el.isConnected) d.el.classList.remove('dragging');
+  g.style.transition = ''; g.classList.remove('pick', 'lift'); void g.offsetWidth; g.classList.add('settle'); if (!ok) g.classList.add('back');
+  var tr = ok && zr ? zr : home; g.style.left = (tr.left + tr.width / 2) + 'px'; g.style.top = (tr.top + tr.height / 2) + 'px';
+  setTimeout(function () { g.remove(); }, 260);
+}
+document.addEventListener('pointerup', function (e) { ddEnd(e, false); });
+document.addEventListener('pointercancel', function (e) { ddEnd(e, true); });
 document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 
 /* ---------- modals ---------- */
@@ -2676,8 +2866,8 @@ function helpHTML() {
     '<li>After each win choose one of three: a new tile, an upgrade (+2 or a second colour) or a heal. Forges, rests and treasures sit on the path. Every stage has a boss with one visible trick.</li>' +
     '<li>Runners leave after your first attack: kill them for a bonus tile. Guards need 2 different tiles to hit them.</li>' +
     '<li><b>The map is your home screen.</b> The world is one tiling cut into <b>areas</b> (plates). Each area has 3 or 4 <b>stages</b> (the pieces) and every stage of an area has the same difficulty and run length. Play the stages of an area in order. Clear ' + CONFIG.map.openNeed + ' stages of an area (all of them in a 3-stage area) and the areas next to it open. The further from the start, the harder the difficulty, the longer the run (' + CONFIG.map.areas[0].len + ' steps up to ' + CONFIG.map.areas[CONFIG.map.areas.length - 1].len + ', with a mid-boss from ' + CONFIG.map.midFrom + ') and the better the tiles. Each region favours one colour. Tap a piece for its card, then Play. Defeat keeps half the loot. Endless opens after you finish ' + CONFIG.map.endlessAreas + ' areas.</li>' +
-    '<li><b>Units:</b> each colour has a unit with 3 base tiles, one effect (shown on its card and when you hold a colour tab in a fight) and slots. Recruit new units with coins in Team (an Epic is guaranteed every ' + CONFIG.gacha.pity + ' pulls). A duplicate pull gives shards, the one upgrade currency: spend them on unit levels (higher numbers on its 3 base tiles) and on unit slots.</li>' +
-    '<li><b>Keep one:</b> after every boss (and mid-boss) you may keep one coloured tile that was new in this run. Upgrades are not kept. Kept tiles go to Team, Collected tiles; put them into a unit\'s slots (buy slots with shards) and they join your bag at the start of every run. Three identical tiles merge into one tile with a star (+1 to the number), up to 5 stars.</li>' +
+    '<li><b>Units:</b> each colour has a unit with 3 base tiles, 3 or 4 skills (shown as little icons on its card and when you hold a colour tab in a fight) and slots. Recruit new units with coins in Team (an Epic is guaranteed every ' + CONFIG.gacha.pity + ' pulls). Unit levels (up to ' + CONFIG.lvlMax + ') cost coins: they raise the numbers of the 3 base tiles and unlock skills. A duplicate pull gives shards, which unlock unit slots (every unit starts with one).</li>' +
+    '<li><b>Keep one:</b> after every boss (and mid-boss) you may keep one coloured tile that was new in this run. Upgrades are not kept. Kept tiles go to Team, Collected tiles; put them into a unit\'s slots (tap an open slot on its card, then drag; unlock more slots with shards) and they join your bag at the start of every run. Three identical tiles merge into one tile with a star (+1 to the number), up to 5 stars.</li>' +
     '<li><b>Rainbow tile:</b> a rainbow tile counts as every colour (as bread it matches any colour; it is doubled between two tiles that share a colour, but not between two rainbow tiles). Rare boss drop on far stages; at most ' + CONFIG.rainbow.maxTeam + ' in a team.</li>' +
     '<li><b>Colourless tiles</b> can never be part of a sandwich, so their numbers are higher.</li>' +
     '<li><b>Hero:</b> new heroes unlock as you clear map stages. Pick one hero before a run. Its ability is one button on the fight screen, once per fight. Tap-to-aim abilities show a Cancel; everything shows in the live totals before you attack.</li>' +
@@ -2697,7 +2887,7 @@ function settingsHTML() {
   h += '<div class="muted" style="font-size:12px">Coins: ' + store.coins + ', shards: ' + (store.shards || 0) + '. Map stages cleared: ' + Object.keys(store.cleared).length + ' of ' + mapData().total + '. Unit level (0 = not owned):</div>';
   UNITS.forEach(function (u) {
     var st = store.units[u.id];
-    h += '<div class="set">' + dotHTML(u.c) + '<label>' + u.name + ' <span class="muted">' + RARITY[u.rar] + '</span></label><select data-ulv="' + u.id + '">' + [0, 1, 2, 3, 4, 5].map(function (l) { return '<option value="' + l + '"' + ((st.u ? st.l : 0) === l ? ' selected' : '') + '>' + (l ? 'Level ' + l : 'Not owned') + '</option>'; }).join('') + '</select></div>';
+    h += '<div class="set">' + dotHTML(u.c) + '<label>' + u.name + ' <span class="muted">' + RARITY[u.rar] + '</span></label><select data-ulv="' + u.id + '">' + [0, 1, 2, 3, 4, 5, 6, 7, 8].map(function (l) { return '<option value="' + l + '"' + ((st.u ? st.l : 0) === l ? ' selected' : '') + '>' + (l ? 'Level ' + l : 'Not owned') + '</option>'; }).join('') + '</select></div>';
   });
   h += '<div class="btnrow"><button class="btn sm" data-act="reset">Reset save</button><button class="btn main sm" data-act="close">Close</button></div>';
   return h;
@@ -2731,12 +2921,12 @@ document.addEventListener('click', function (e) {
   if ((el = t.closest && t.closest('[data-tab]'))) { S.tab = el.dataset.tab; S.sel = -1; clearHold(); renderFight(); return; }
   if ((el = t.closest && t.closest('[data-rtab]'))) { S.rtab = el.dataset.rtab; S.rtabSet = true; renderResult(); return; }
   if ((el = t.closest && t.closest('[data-inv]'))) {
-    var ids = el.dataset.inv.split(',').map(Number), out = ids.filter(function (id) { return store.bag.indexOf(id) < 0; });
-    if (out.length) { store.bag.push(out[0]); if (store.bag.length > CONFIG.maxColourless) store.bag.shift(); }
-    else ids.forEach(function (id) { var at = store.bag.indexOf(id); if (at >= 0) store.bag.splice(at, 1); });
-    save(); show(S.screen); return;
+    var ids = el.dataset.inv.split(',').map(Number), bs = bagSlots(), cp = bagCopy(ids);
+    if (cp) { var fr = bs.indexOf(0); bs[fr < 0 ? 0 : fr] = cp; }
+    else bs = bs.map(function (id) { return ids.indexOf(id) >= 0 ? 0 : id; });
+    store.bag = bs; save(); show(S.screen); return;
   }
-  if ((el = t.closest && t.closest('[data-ct]'))) { var msg = toggleStack(S.loadUid, el.dataset.ct.split(',').map(Number)); $('#modal').innerHTML = loadoutHTML(S.loadUid, msg); if (S.screen === 'team') renderTeam(); return; }
+  if ((el = t.closest && t.closest('[data-ct]'))) { var msg = toggleStack(S.loadUid, el.dataset.ct.split(',').map(Number)); $('#modal').innerHTML = slotPopHTML(S.loadUid, msg); if (S.screen === 'team') renderTeam(); return; }
   if ((el = t.closest && t.closest('[data-keep]'))) { doKeep(+el.dataset.keep); return; }
   if ((el = t.closest && t.closest('[data-relic]'))) { var rp = S.run.pending; S.run.relics.push(rp.relicPicks[+el.dataset.relic]); rp.relicDone = true; renderResult(); return; }
   if ((el = t.closest && t.closest('[data-pick]'))) { S.rtabSet = false; takePick(+el.dataset.pick); return; }
@@ -2752,10 +2942,12 @@ document.addEventListener('click', function (e) {
     case 'tmtab': S.tmTab = el.dataset.t; renderTeam(); window.scrollTo(0, 0); break;
     case 'tmcol': S.tmCol = el.dataset.c; renderTeam(); break;
     case 'tmunit': S.tmSel = S.tmSel || {}; S.tmSel[UNIT_BY_ID[el.dataset.u].c] = el.dataset.u; renderTeam(); break;
-    case 'tmslot': buySlot(el.dataset.u); renderTeam(); break;
-    case 'level': levelUp(el.dataset.u); renderTeam(); break;
-    case 'loadout': S.loadUid = el.dataset.u; openModal(loadoutHTML(S.loadUid)); break;
-    case 'buyslot': buySlot(el.dataset.u); $('#modal').innerHTML = loadoutHTML(S.loadUid); if (S.screen === 'team') renderTeam(); break;
+    case 'slotbuy': openModal(slotBuyHTML(el.dataset.u)); break;
+    case 'slotgo': buySlot(el.dataset.u); closeModal(); break;
+    case 'slotpop': S.loadUid = el.dataset.u; openModal(slotPopHTML(S.loadUid)); break;
+    case 'level': openModal(levelHTML(el.dataset.u)); break;
+    case 'lvlgo': levelUp(el.dataset.u); closeModal(); break;
+    case 'skill': showCard(skillCardHTML(UNIT_BY_ID[el.dataset.u], +el.dataset.i)); break;
     case 'keepskip': doKeep(-1); break;
     case 'shards': store.shards = (store.shards || 0) + 10; save(); $('#modal').innerHTML = settingsHTML(); break;
     case 'slotsall': UNITS.forEach(function (u) { var sl = slotsOf(u.id); while (sl.n < CONFIG.slotMax[u.rar]) { sl.n++; sl.t.push(0); } }); save(); $('#modal').innerHTML = settingsHTML(); break;
@@ -2777,7 +2969,7 @@ document.addEventListener('click', function (e) {
     case 'settings': openModal(settingsHTML()); break;
     case 'bag': openModal(bagHTML()); break;
     case 'close': closeModal(); break;
-    case 'pick': if (store.units[el.dataset.u].u) { store.team[UNIT_BY_ID[el.dataset.u].c] = el.dataset.u; save(); renderTeam(); } break;
+    case 'pick': if (store.units[el.dataset.u].u) { setTeamUnit(el.dataset.u); renderTeam(); } break;
     case 'cont': takePick(-1); break;
     case 'bank': closeModal(); bankRun(); break;
     case 'leave': openModal('<h3>Leave the run?</h3><p style="font-size:14px;color:var(--ink)">You bank everything you collected so far (no stage clear).</p><div class="btnrow"><button class="btn main" data-act="bank">Bank and leave</button><button class="btn" data-act="close">Keep playing</button></div>'); break;
