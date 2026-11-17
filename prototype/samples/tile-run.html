@@ -607,7 +607,7 @@ var CONFIG = {
   slotCost: [0, 8, 16, 30], slotMax: [2, 3, 4],     /* every unit starts with 1 open slot; SHARDS to open its 2nd, 3rd, 4th slot (slotCost[n] opens slot n+1); maximum slots by unit rarity */
   lvlMax: 8, levelCoins: { 2: 10, 3: 16, 4: 25, 5: 38, 6: 55, 7: 80, 8: 115 },   /* unit levels cost COINS: levelCoins[n] = coins to reach level n (placeholders) */
   starters: ['ember', 'tide', 'moss', 'glint', 'dusk'],   /* the units owned (and in the team) in a fresh save: one Common per colour */
-  rainbow: { tier: 7, chance: 0.25, maxTeam: 2 },   /* a boss from this tier on may drop a rainbow tile (chance grows with distance) */
+  rainbow: { tier: 5, chance: 0.25, maxTeam: 2 },   /* a boss from this tier on may drop a rainbow tile (chance grows with distance) */
   /* the world map: one tiling, 6 units wide and 35 tall (y counts from the top). It is cut into AREA plates; each plate holds 3 or 4 STAGES drawn as pieces of the plate (rows: a letter per unit, A = stage 1, B = stage 2, ...). All stages of an area share its difficulty tier (1..10) and its run length (path choices before the final boss; a mid-boss on runs of midFrom or more).
      Opening rule: an area opens when ANY area listed in `from` is done (all of them when `all`); an area is done when openNeed of its stages are cleared (all of them in a 3-stage area, 3 of 4 otherwise). The first area has no `from`. Inside an open area the stages go in order: stage n is playable once stage n-1 is cleared. Areas next to an open area show as dim plates. Endless opens when endlessAreas areas are done. */
   map: {
@@ -674,7 +674,7 @@ var CONFIG = {
     { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 66, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
   ],
   /* lessons: puzzles that must be solved before the first stage of each difficulty (each teaches the tiles that start to appear there) */
-  lessons: { 1: ['p01', 'p02'], 2: ['p03', 'p05', 'p06'], 3: ['p04', 'p07', 'h1'], 4: ['p08'], 5: ['p16', 'p10'], 6: ['p11', 'p12'], 7: ['p13', 'p15', 'p09'], 8: ['p14'] },
+  lessons: { 1: ['p01', 'p02'], 2: ['p03', 'p06', 'p04', 'p05'], 3: ['p08', 'p07', 'p16', 'h1'], 4: ['p11', 'p13', 'p10'], 5: ['p12', 'p15', 'p14', 'p09'] },
   firstClear: { coins: [5, 6, 7, 8, 9, 10, 11, 12, 14, 20] },
   /* the size of every unit effect (the rule of each effect is in EFFECTS; only these numbers are tunable) */
   /* level bonus by level 1..8 (index 0..7): attacks by the columns reached (1, 2, 3, 4 or more), local boosts, line boosts, multipliers, copies */
@@ -755,11 +755,11 @@ function isAttackT(t) { return t.k === 'a' || t.k === 'e'; }
 /* the stage in which a tile type is introduced */
 function specStage(t) {
   var s = 1;
-  if (t.k === 'a') s = t.d === '^' ? 1 : (t.d === '<' || t.d === '>' || t.d === '<>') ? 3 : 4;
-  else if (t.k === 'p') s = /[RC]/.test(t.d) ? 5 : t.d === 'B' ? 9 : 2;
-  else if (t.k === 'x') s = /[RCB]/.test(t.d) ? 9 : 6;
-  else if (t.k === 'e') s = 8;
-  var n = cellsOf(t).length; if (n === 2) s = Math.max(s, 7); else if (n === 3) s = Math.max(s, 8); else if (n === 4) s = Math.max(s, 9);
+  if (t.k === 'a') s = t.d === '^' ? 1 : (t.d === '<' || t.d === '>' || t.d === '<>') ? 2 : 3;
+  else if (t.k === 'p') s = /[RC]/.test(t.d) ? 4 : t.d === 'B' ? 6 : 2;
+  else if (t.k === 'x') s = /[RCB]/.test(t.d) ? 7 : 4;
+  else if (t.k === 'e') s = 5;
+  var n = cellsOf(t).length; if (n === 2) s = Math.max(s, 4); else if (n === 3) s = Math.max(s, 5); else if (n === 4) s = Math.max(s, 7);
   return s;
 }
 /* a unit's base tile before its lesson becomes a plain tile (big tiles shrink, side lanes become a straight Strike, boosts/multipliers/copies become a Strike 3) */
@@ -1110,7 +1110,7 @@ function rollRarity(odds, depth, stage, rnd, min) {
   return Math.min(maxRarity(stage), Math.max(r, min || 0));
 }
 function shapesFor(stage, F, rnd, maxSize) {
-  var sizes = []; if (stage >= 7) sizes.push(2); if (stage >= 8) sizes.push(3); if (stage >= 9) sizes.push(4);
+  var sizes = []; if (stage >= 4) sizes.push(2); if (stage >= 5) sizes.push(3); if (stage >= 7) sizes.push(4);
   sizes = sizes.filter(function (s) { return !maxSize || s <= maxSize; });
   if (!sizes.length) return 'o';
   var sz = pick(sizes, rnd), cand = SHAPES_BY_SIZE[sz].filter(function (id) { var d = shapeDims({ sh: id }); return d[1] <= F.cols && d[0] <= F.rows; });
@@ -1119,7 +1119,7 @@ function shapesFor(stage, F, rnd, maxSize) {
 /* a random tile type allowed in this stage, with a number from the budget; rar 0 common, 1 rare, 2 epic */
 function genSpec(rar, stage, rnd, opts) {
   opts = opts || {}; var B = CONFIG.budget, S = CONFIG.stages[stage - 1], k, d, sh = 'o', r = rnd();
-  var kinds = [['a', 0.55]]; if (stage >= 2) kinds.push(['p', 0.2]); if (stage >= 6) kinds.push(['x', 0.08]); if (stage >= 8) kinds.push(['e', 0.08]);
+  var kinds = [['a', 0.55]]; if (stage >= 2) kinds.push(['p', 0.2]); if (stage >= 4) kinds.push(['x', 0.08]); if (stage >= 5) kinds.push(['e', 0.08]);
   var sum = kinds.reduce(function (s, x) { return s + x[1]; }, 0), acc = 0; r *= sum;
   for (var i = 0; i < kinds.length; i++) { acc += kinds[i][1]; if (r < acc) { k = kinds[i][0]; break; } }
   k = k || 'a';
@@ -1127,11 +1127,11 @@ function genSpec(rar, stage, rnd, opts) {
   if (k !== 'e' && rnd() < multiP) sh = shapesFor(stage, S, rnd);
   var cells = SHAPE_CELLS[sh].length, jit = 0.85 + 0.3 * rnd(), n;
   if (k === 'a') {
-    var lanes = ['^']; if (stage >= 3) lanes = lanes.concat(['<', '>', '<>']); if (stage >= 4) lanes = lanes.concat(['<^', '^>', '<^>', '<^>']);
-    if (rar >= 1 && stage >= 4) lanes = lanes.concat(['<^>', '<^', '^>']);
+    var lanes = ['^']; if (stage >= 2) lanes = lanes.concat(['<', '>', '<>']); if (stage >= 3) lanes = lanes.concat(['<^', '^>', '<^>', '<^>']);
+    if (rar >= 1 && stage >= 3) lanes = lanes.concat(['<^>', '<^', '^>']);
     d = pick(lanes, rnd); n = Math.max(1, Math.round(B.attackBase[rar] * B.lanePen[laneOffsets(d).length] * B.cellBonus[cells] * jit));
   } else if (k === 'p' || k === 'x') {
-    var lines = []; if (k === 'p') { if (stage >= 5) lines.push('R', 'C'); if (stage >= 9) lines.push('B'); } else if (stage >= 9 && rar === 2) lines.push('R', 'C', 'B');
+    var lines = []; if (k === 'p') { if (stage >= 4) lines.push('R', 'C'); if (stage >= 6) lines.push('B'); } else if (stage >= 7 && rar === 2) lines.push('R', 'C', 'B');
     if (lines.length && rnd() < (k === 'p' ? 0.2 : 0.4)) d = pick(lines, rnd);
     else { d = ''; var all = ['u', 'd', 'l', 'r'], cnt = 1 + ((rnd() * (rnd() < 0.5 ? 4 : 2)) | 0); all.sort(function () { return rnd() - 0.5; }); d = all.slice(0, cnt).sort(function (a, b) { return 'udlr'.indexOf(a) - 'udlr'.indexOf(b); }).join(''); }
     var key = /[RCB]/.test(d) ? d : d.length;
