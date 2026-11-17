@@ -323,3 +323,5 @@ Check (3 bot players each, 200-run cap; difficulty 5 health was eased from 32 to
 | Casual win % | 100 | 79 | 75 | 61 | 25 | 49 | 35 | 37 | 34 | 17 |
 
 The skilled bot finishes in about 73 runs (about 11 h). The casual bot rarely finishes; real players learn, so treat it as a floor. The tile score table above was measured before this change; skill scores are now much lower.
+
+**Update: lessons live on the map.** The lessons are no longer a pop-up gate. The first stage of the first area of each difficulty on each path (Sunny Meadow, Brookside and Old Mill, Rimegate and Saltwell, and so on up to difficulty 8) is a lesson stage, marked "?" on the map. Its card shows "Lesson 1 of 2: name" and the Lesson button opens the next unsolved puzzle; once all puzzles of that difficulty are solved, every lesson stage of that difficulty counts as cleared, and the area's next stages open in the usual order. Lessons already solved on one path also clear the matching lesson stage on the other path.

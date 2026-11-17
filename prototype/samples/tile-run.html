@@ -1057,7 +1057,8 @@ function mapData() {
     var A = { id: a.id, name: a.name, region: a.region, regionName: RG.name, col: RG.col, tier: a.tier, len: a.len, mid: mid, x: a.x, y: a.y, w: a.w, h: a.h, from: a.from, all: !!a.all, n: letters.length, ai: ai, stage: S0, drop: dropFor(a.tier, tierDist(a.tier), RG.bias), keys: [], cells: set, letters: letters };
     letters.forEach(function (L, i) {
       var key = a.id + '.' + i, trick = a.tier === 10 ? 'final' : hash2(ai, i, 2) < 0.5 ? S0.boss : pool[Math.floor(hash2(ai, i, 3) * pool.length)];
-      stages[key] = { key: key, area: a.id, idx: i, n: letters.length, tier: a.tier, len: a.len, mid: mid, region: a.region, regionName: RG.name, col: RG.col, name: a.name, trick: trick, drop: A.drop, stage: S0, ai: ai };
+      var les = i === 0 && CONFIG.lessons[a.tier] && a.from.every(function (f) { return M.areas.filter(function (b) { return b.id === f; })[0].tier < a.tier; }) ? a.tier : 0;
+      stages[key] = { lesson: les, key: key, area: a.id, idx: i, n: letters.length, tier: a.tier, len: a.len, mid: mid, region: a.region, regionName: RG.name, col: RG.col, name: a.name, trick: trick, drop: A.drop, stage: S0, ai: ai };
       A.keys.push(key);
     });
     areas[a.id] = A; order.push(a.id);
@@ -1764,7 +1765,8 @@ function puzzleWon() {
   if (first) {
     store.coins += r.coins || 0; var tl = null;
     if (r.tile) { var tp = parseTok(r.tile); tl = { k: tp.k, d: tp.d, n: tp.n, sh: tp.sh, rar: 0 }; addInv(tl); }
-    if (S.puz.daily) store.dailyDone = todayInfo().key; else store.puzDone[d.id] = true; save();
+    if (S.puz.daily) store.dailyDone = todayInfo().key; else store.puzDone[d.id] = true;
+    var M2 = mapData(); Object.keys(M2.stages).forEach(function (k) { var L = M2.stages[k].lesson; if (L && CONFIG.lessons[L].every(function (id) { return store.puzDone[id]; })) store.cleared[k] = 1; }); save();
     h += '<p class="gold">+' + (r.coins || 0) + ' coins' + (tl ? ' and a colourless tile' : '') + '</p>' + (tl ? '<div class="inv">' + tileHTML(invTile(tl), { ts: 52 }) + '</div>' : '');
   } else h += '<p class="ctext">Already solved: replays give no reward.</p>';
   h += '<div class="btns"><button class="btn" data-act="puzretry">Play again</button><button class="btn main" data-act="home">Back to the map</button></div></div>';
@@ -1842,7 +1844,9 @@ function stagePiece(key, cells, u, x0, y0, state, col, sel, cur, label) {
   else s += pathG(R(ins, rx), 'fill:' + P.ll) + pathG(R(ins + 1.5, Math.max(rx - 1, 2)), 'fill:' + P.lf);
   if (cur) s += pathG(R(ins - 3.2, rx + 3), 'fill:none;stroke:var(--gold);stroke-width:2.4');
   var cx = x0 + (best[1] + .5) * u, cy = y0 + (best[0] + .5) * u, sc = Math.min(1.7, Math.max(.75, u / 30));
-  if (sel) s += mapGlyph(state === 'c' ? 'tick' : state === 'l' ? 'lock' : 'play', cx, cy, sc, P.sg);
+  var lz = (stageInfo(key) || {}).lesson && state !== 'c' && state !== 'l', q = function (f) { return '<text x="' + cx + '" y="' + cy + '" text-anchor="middle" dominant-baseline="central" style="font:800 ' + Math.round(16 * sc) + 'px system-ui,sans-serif;fill:' + f + '">?</text>'; };
+  if (lz) s += q(sel ? P.sg : cv);
+  else if (sel) s += mapGlyph(state === 'c' ? 'tick' : state === 'l' ? 'lock' : 'play', cx, cy, sc, P.sg);
   else if (state === 'c') s += mapGlyph('tick', cx, cy, sc, '#fff');
   else if (state === 'l') s += mapGlyph('lock', cx, cy, sc, P.lk);
   return s + '</g>';
@@ -1885,8 +1889,8 @@ function stageCardHTML(c, st) {
     '<span class="hm-chip gold">' + (st === 'c' ? 'Replay: loot only' : 'First clear: ' + fc + ' coins + tile') + '</span></div>' +
     (need ? '<div class="hm-need">' + need + '</div>' : '') +
     (run ? '<button class="btn sm hm-bank" data-act="bank">Bank and leave the run</button>' : '') + '</div>';
-  var due = lessonsDue(c.tier), les = due.length && !run && (st === 'a' || st === 'c') ? PUZ_BY_ID[due[0]] : null, lt = les ? CONFIG.lessons[lessonTier(due[0])] : null;
-  if (les) h = h.slice(0, h.length - 6) + '<div class="hm-need"><b>Lesson first (' + (lt.indexOf(due[0]) + 1) + ' of ' + lt.length + '): ' + les.name + '.</b> ' + les.teach + '</div></div>';
+  var lt = c.lesson ? CONFIG.lessons[c.lesson] : null, nx = lt ? nextLesson(c.lesson) : null, les = nx && !run && st !== 'h' ? PUZ_BY_ID[nx] : null;
+  if (les) h = h.replace(/<div class="hm-chips">[\s\S]*?<\/span><\/div>/, '<div class="hm-need"><b>Lesson ' + (lt.indexOf(nx) + 1) + ' of ' + lt.length + ': ' + les.name + '.</b> ' + les.teach + '</div>');
   var lab = run ? 'Continue' : les ? 'Lesson' : st === 'c' ? 'Replay' : st === 'a' ? 'Play' : 'Locked';
   return h + '<button class="hm-play" data-act="' + (run ? 'resume' : 'play') + '"' + (!run && (st === 'h' || st === 'l') ? ' disabled' : '') + '>' + PLAYI + lab + '</button></div>';
 }
@@ -1915,11 +1919,12 @@ function renderHome() {
 var PUZ_BY_ID = {}; PUZZLES.forEach(function (p) { PUZ_BY_ID[p.id] = p; });
 function lessonTier(id) { for (var t in CONFIG.lessons) if (CONFIG.lessons[t].indexOf(id) >= 0) return t; return 0; }
 /* the unsolved lessons a stage of this difficulty waits for (all lessons of this and lower difficulties) */
+function nextLesson(tier) { var l = (CONFIG.lessons[tier] || []).filter(function (id) { return PUZ_BY_ID[id]; }); return l.filter(function (id) { return !store.puzDone[id]; })[0] || l[0]; }
 function lessonsDue(tier) { var o = []; for (var t = 1; t <= tier; t++) (CONFIG.lessons[t] || []).forEach(function (id) { if (!store.puzDone[id] && PUZ_BY_ID[id]) o.push(id); }); return o; }
 function playCell(key) {
   var c = stageInfo(key); if (!c || store.run) return;
   var stt = stageState(key, store.cleared, store.allStages); if (stt === 'h' || stt === 'l') return;
-  var due = lessonsDue(c.tier); if (due.length) { startPuzzleUI(PUZ_BY_ID[due[0]], false); return; }
+  if (c.lesson) { startPuzzleUI(PUZ_BY_ID[nextLesson(c.lesson)], false); return; }
   startRunUI('stage', c.tier, { len: c.len, mid: c.mid, drop: c.drop, trick: c.trick, cell: { key: key, name: c.name, region: c.regionName, area: c.area, idx: c.idx, n: c.n } });
 }
 function kitTileHTML(u, k, fade, ts) {
