@@ -1058,7 +1058,8 @@ function mapData() {
     letters.forEach(function (L, i) {
       var key = a.id + '.' + i, trick = a.tier === 10 ? 'final' : hash2(ai, i, 2) < 0.5 ? S0.boss : pool[Math.floor(hash2(ai, i, 3) * pool.length)];
       var les = i === 0 && CONFIG.lessons[a.tier] && a.from.every(function (f) { return M.areas.filter(function (b) { return b.id === f; })[0].tier < a.tier; }) ? a.tier : 0;
-      stages[key] = { lesson: les, key: key, area: a.id, idx: i, n: letters.length, tier: a.tier, len: a.len, mid: mid, region: a.region, regionName: RG.name, col: RG.col, name: a.name, trick: trick, drop: A.drop, stage: S0, ai: ai };
+      if (les) A.lesson = les;
+      stages[key] = { lesson: 0, key: key, area: a.id, idx: i, n: letters.length, tier: a.tier, len: a.len, mid: mid, region: a.region, regionName: RG.name, col: RG.col, name: a.name, trick: trick, drop: A.drop, stage: S0, ai: ai };
       A.keys.push(key);
     });
     areas[a.id] = A; order.push(a.id);
@@ -1066,7 +1067,14 @@ function mapData() {
   MAPS = { areas: areas, stages: stages, order: order, total: Object.keys(stages).length };
   return MAPS;
 }
-function stageInfo(key) { return mapData().stages[key] || null; }
+function stageInfo(key) {
+  var M = mapData();
+  if (key && key.slice(0, 2) === 'L.') { var A = M.areas[key.slice(2)]; return A && A.lesson ? { key: key, node: 1, lesson: A.lesson, area: A.id, idx: -1, n: A.n, tier: A.tier, ai: A.ai, region: A.region, regionName: A.regionName, col: A.col, name: A.name } : null; }
+  return M.stages[key] || null;
+}
+/* lessons solved (always true in the simulator, which has no store) */
+var SOLVED = null;   /* set by the page to the solved-puzzle record; null in the simulator */
+function lessonsDone(t) { var D = SOLVED ? SOLVED() : null; return !D || (CONFIG.lessons[t] || []).every(function (id) { return D[id]; }); }
 function areaInfo(id) { return mapData().areas[id] || null; }
 function clearedIn(a, cleared) { var n = 0; a.keys.forEach(function (k) { if (cleared[k]) n++; }); return n; }
 function areaDone(a, cleared) { return clearedIn(a, cleared) >= Math.min(CONFIG.map.openNeed, a.n); }
@@ -1079,6 +1087,8 @@ function areaOpen(a, cleared, all) {
 function stageState(key, cleared, all) {
   var st = stageInfo(key), A = areaInfo(st.area);
   if (!areaOpen(A, cleared, all)) return 'h';
+  if (st.node) return lessonsDone(st.lesson) ? 'c' : 'a';
+  if (st.idx === 0 && A.lesson && !all && !lessonsDone(A.lesson)) return 'l';
   if (cleared[key]) return 'c';
   return all || st.idx === 0 || cleared[A.id + '.' + (st.idx - 1)] ? 'a' : 'l';
 }
@@ -1508,7 +1518,7 @@ function applySettings() {
   CONFIG.momentum.on = !!store.set.momentum; CONFIG.momentum.bonus = store.set.value || 1;
   CONFIG.tileReturn = store.set.ret === 'turn' ? 'turn' : 'fight'; CONFIG.stars.on = !!store.set.stars;
 }
-store = load(); applySettings();
+store = load(); applySettings(); SOLVED = function () { return store.puzDone; };
 function sleep(ms) { return new Promise(function (r) { setTimeout(r, S.skip ? 6 : ms * SPEED); }); }
 var S = { run: null, fs: null, board: [], sel: -1, tab: 'r', rtab: 'r', phase: 'edit', skip: false, hold: null, screen: 'home', reach: null };
 function unlockedStage() { return store.allStages ? 10 : Math.min(10, (store.maxTier || 0) + 1); }
@@ -1519,6 +1529,7 @@ function frontier(after) {
   var M = mapData(), rv = revealed(), best = null;
   if (after && stageInfo(after)) { var st = stageInfo(after), nk = st.area + '.' + (st.idx + 1); if (rv[nk] && !store.cleared[nk]) return nk; }
   Object.keys(rv).forEach(function (k) { if (store.cleared[k]) return; var c = stageInfo(k); if (stageState(k, store.cleared, store.allStages) !== 'a') return; if (!best || c.tier < best.tier || (c.tier === best.tier && (c.ai < best.ai || (c.ai === best.ai && c.idx < best.idx)))) best = c; });
+  M.order.forEach(function (id) { var A = M.areas[id]; if (!A.lesson || !rv[A.keys[0]]) return; var k = 'L.' + id; if (stageState(k, store.cleared, store.allStages) !== 'a') return; if (!best || A.tier <= best.tier) best = stageInfo(k); });
   return best ? best.key : M.areas[M.order[0]].keys[0];
 }
 function selKey() {
@@ -1766,7 +1777,7 @@ function puzzleWon() {
     store.coins += r.coins || 0; var tl = null;
     if (r.tile) { var tp = parseTok(r.tile); tl = { k: tp.k, d: tp.d, n: tp.n, sh: tp.sh, rar: 0 }; addInv(tl); }
     if (S.puz.daily) store.dailyDone = todayInfo().key; else store.puzDone[d.id] = true;
-    var M2 = mapData(); Object.keys(M2.stages).forEach(function (k) { var L = M2.stages[k].lesson; if (L && CONFIG.lessons[L].every(function (id) { return store.puzDone[id]; })) store.cleared[k] = 1; }); save();
+    save();
     h += '<p class="gold">+' + (r.coins || 0) + ' coins' + (tl ? ' and a colourless tile' : '') + '</p>' + (tl ? '<div class="inv">' + tileHTML(invTile(tl), { ts: 52 }) + '</div>' : '');
   } else h += '<p class="ctext">Already solved: replays give no reward.</p>';
   h += '<div class="btns"><button class="btn" data-act="puzretry">Play again</button><button class="btn main" data-act="home">Back to the map</button></div></div>';
@@ -1844,7 +1855,7 @@ function stagePiece(key, cells, u, x0, y0, state, col, sel, cur, label) {
   else s += pathG(R(ins, rx), 'fill:' + P.ll) + pathG(R(ins + 1.5, Math.max(rx - 1, 2)), 'fill:' + P.lf);
   if (cur) s += pathG(R(ins - 3.2, rx + 3), 'fill:none;stroke:var(--gold);stroke-width:2.4');
   var cx = x0 + (best[1] + .5) * u, cy = y0 + (best[0] + .5) * u, sc = Math.min(1.7, Math.max(.75, u / 30));
-  var lz = (stageInfo(key) || {}).lesson && state !== 'c' && state !== 'l', q = function (f) { return '<text x="' + cx + '" y="' + cy + '" text-anchor="middle" dominant-baseline="central" style="font:800 ' + Math.round(16 * sc) + 'px system-ui,sans-serif;fill:' + f + '">?</text>'; };
+  var lz = false, q = function (f) { return '<text x="' + cx + '" y="' + cy + '" text-anchor="middle" dominant-baseline="central" style="font:800 ' + Math.round(16 * sc) + 'px system-ui,sans-serif;fill:' + f + '">?</text>'; };
   if (lz) s += q(sel ? P.sg : cv);
   else if (sel) s += mapGlyph(state === 'c' ? 'tick' : state === 'l' ? 'lock' : 'play', cx, cy, sc, P.sg);
   else if (state === 'c') s += mapGlyph('tick', cx, cy, sc, '#fff');
@@ -1856,9 +1867,17 @@ function mapSVG(u, sel) {
   var far = {};   /* the areas beyond the dim ones: only a faint outline, so the slab does not end in a void */
   M.order.forEach(function (id) { if (!sh[id] && M.areas[id].from.some(function (f) { return sh[f] === 'dim'; })) far[id] = 1; });
   M.order.forEach(function (id) { if (sh[id] || far[id]) minY = Math.min(minY, M.areas[id].y); });
-  var s = '<svg width="' + W + '" height="' + (CONFIG.map.h - minY) * u + '" aria-label="Map">';
+  var nodes = '', s = '<svg width="' + W + '" height="' + ((CONFIG.map.h - minY) * u + Math.round(u * .4)) + '" aria-label="Map">';
   M.order.forEach(function (id) {
     var A = M.areas[id]; if (!sh[id] && !far[id]) return;
+    if (sh[id] && A.lesson) {   /* a lesson: a small diamond on the seam below its area, between the islands */
+      var lk = 'L.' + id, ls = stageState(lk, store.cleared, all), lsel = lk === sel, NS = u * .6, cx0 = (A.x + A.w / 2) * u, cy0 = (A.y + A.h - minY) * u, lc = 'var(--' + A.col + ')';
+      var fill = ls === 'c' ? lc : lsel ? '#fff' : ls === 'a' ? 'var(--slab2)' : 'rgba(255,255,255,.08)', stroke = ls === 'h' ? 'rgba(255,255,255,.25)' : lc;
+      nodes += '<g class="st" data-act="mapsel" data-key="' + lk + '" role="button" aria-label="Lesson">' + (lsel ? '<rect x="' + (cx0 - NS * .72) + '" y="' + (cy0 - NS * .72) + '" width="' + NS * 1.44 + '" height="' + NS * 1.44 + '" rx="' + NS * .3 + '" transform="rotate(45 ' + cx0 + ' ' + cy0 + ')" style="fill:' + lc + ';opacity:.35"/>' : '') +
+        '<rect x="' + (cx0 - NS / 2) + '" y="' + (cy0 - NS / 2) + '" width="' + NS + '" height="' + NS + '" rx="' + NS * .22 + '" transform="rotate(45 ' + cx0 + ' ' + cy0 + ')" style="fill:' + fill + ';stroke:' + stroke + ';stroke-width:2.5"/>' +
+        '<text x="' + cx0 + '" y="' + cy0 + '" text-anchor="middle" dominant-baseline="central" style="font:800 ' + Math.round(NS * .55) + 'px system-ui,sans-serif;fill:' + (ls === 'c' ? '#fff' : ls === 'h' ? 'rgba(255,255,255,.4)' : lsel ? lc : '#fff') + '">' + (ls === 'c' ? '&#10003;' : '?') + '</text>' +
+        '<rect class="hit" x="' + (cx0 - NS * .8) + '" y="' + (cy0 - NS * .8) + '" width="' + NS * 1.6 + '" height="' + NS * 1.6 + '"/></g>';
+    }
     var col = A.col, X = A.x * u + 2, Y = (A.y - minY) * u + 2, PW = A.w * u - 4, PH = A.h * u - 4, here = st && st.area === id;
     if (far[id]) { s += '<rect x="' + (X + 1) + '" y="' + (Y + 1) + '" width="' + (PW - 2) + '" height="' + (PH - 2) + '" rx="12" style="fill:var(--' + col + ');fill-opacity:.035;stroke:rgba(255,255,255,.1);stroke-width:1.4;stroke-dasharray:2 6;stroke-linecap:round"/>'; return; }
     if (sh[id] === 'dim') {
@@ -1871,10 +1890,16 @@ function mapSVG(u, sel) {
     var cs = Math.min((PW - 10) / A.w, (PH - 10) / A.h), ox = X + (PW - cs * A.w) / 2, oy = Y + (PH - cs * A.h) / 2;
     A.keys.forEach(function (k, i) { s += stagePiece(k, A.cells[A.letters[i]], cs, ox, oy, stageState(k, store.cleared, all), col, k === sel, k === cur, A.name + ' stage ' + (i + 1) + ' of ' + A.n); });
   });
-  return s + '</svg>';
+  return s + nodes + '</svg>';
 }
 var PLAYI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5l13 7.5-13 7.5z"/></svg>';
 function stageCardHTML(c, st) {
+  if (c.node) {
+    var lt = CONFIG.lessons[c.lesson], nx = nextLesson(c.lesson), PZ = PUZ_BY_ID[nx], pl = st === 'c' ? ['c', 'Learned'] : st === 'a' ? ['a', 'Lesson ' + (lt.indexOf(nx) + 1) + ' of ' + lt.length] : ['', 'Locked'];
+    return '<div class="hm-card c-' + c.col + '"><div class="hm-ci"><div class="hm-ov"><i></i>Lesson &middot; ' + c.name + '</div>' +
+      '<div class="hm-ct"><b>' + PZ.name + '</b><span class="hm-pill ' + pl[0] + '">' + pl[1] + '</span></div><div class="hm-need">' + PZ.teach + '</div></div>' +
+      '<button class="hm-play" data-act="play"' + (st === 'h' || store.run ? ' disabled' : '') + '>' + PLAYI + (st === 'c' ? 'Replay' : st === 'h' ? 'Locked' : 'Learn') + '</button></div>';
+  }
   var A = areaInfo(c.area), M = mapData(), run = store.run, i, bars = '', rg = CONFIG.regions[c.region], fc = CONFIG.firstClear.coins[c.tier - 1];
   for (i = 1; i <= 10; i++) bars += '<i' + (i <= c.tier ? ' class="on"' : '') + '></i>';
   var pill = st === 'c' ? ['c', 'Cleared'] : st === 'a' ? ['a', 'Ready'] : ['', 'Locked'], need = '';
@@ -2092,6 +2117,7 @@ function renderMap() {
 function runUnits() { var l = {}; for (var k in store.units) l[k] = { l: store.units[k].l }; return l; }
 function startRunUI(mode, stage, cell) {
   if (store.run) return;
+  S.puz = null;
   var opt = cell || {}; opt.slots = slotSpecs();
   S.run = newRun(mode, stage, store.team, runUnits(), chosenColourless(), null, store.hero, opt); S.fs = null; S.board = [];
   show('map');
@@ -2735,7 +2761,7 @@ document.addEventListener('click', function (e) {
     case 'endgo': var es = +$('#endstage').value; closeModal(); startRunUI('endless', es); break;
     case 'resume': resume(); break;
     case 'team': show('team'); break;
-    case 'home': show('home'); break;
+    case 'home': closeModal(); if (S.puz) { S.puz = null; S.run = null; } show('home'); break;
     case 'finish': finishStage(); break;
     case 'help': openModal(helpHTML()); break;
     case 'settings': openModal(settingsHTML()); break;
@@ -2745,7 +2771,7 @@ document.addEventListener('click', function (e) {
     case 'cont': takePick(-1); break;
     case 'bank': closeModal(); bankRun(); break;
     case 'leave': openModal('<h3>Leave the run?</h3><p style="font-size:14px;color:var(--ink)">You bank everything you collected so far (no stage clear).</p><div class="btnrow"><button class="btn main" data-act="bank">Bank and leave</button><button class="btn" data-act="close">Keep playing</button></div>'); break;
-    case 'fmenu': if (S.puz) { openModal('<h3>Puzzle</h3><div class="btnrow"><button class="btn" data-act="puzretry">Retry</button><button class="btn main" data-act="close">Back to puzzle</button></div>'); break; }
+    case 'fmenu': if (S.puz) { openModal('<h3>Puzzle</h3><div class="btnrow"><button class="btn" data-act="puzretry">Retry</button><button class="btn" data-act="home">Leave puzzle</button><button class="btn main" data-act="close">Back to puzzle</button></div>'); break; }
       openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="bag">Bag</button><button class="btn" data-act="help">How to play</button><button class="btn" data-act="bank">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
     case 'fatk': attack(); break;
     case 'fclear': clearBoard(); break;
