@@ -1945,7 +1945,7 @@ function mapSVG(u, sel) {
       var lk = 'L.' + id, ls = stageState(lk, store.cleared, all), lsel = lk === sel, NS = u * .44, cx0 = (A.x + A.w / 2) * u, cy0 = (A.y + A.h - minY) * u, lc = 'var(--' + A.col + ')';
       var fill = ls === 'c' ? lc : lsel ? '#fff' : ls === 'a' ? 'var(--slab2)' : 'rgba(255,255,255,.08)', stroke = ls === 'h' ? 'rgba(255,255,255,.25)' : lc;
       var T = u - 14, tx = cx0 - T / 2, ty = cy0 + (u - T) / 2, stub = 'fill:' + (ls === 'h' ? 'rgba(255,255,255,.12)' : lc) + ';opacity:' + (ls === 'c' ? .7 : .45);
-      nodes += '<rect x="' + (cx0 - 3) + '" y="' + (cy0 - 2) + '" width="6" height="' + (ty - cy0 + 4) + '" rx="3" style="' + stub + '"/><rect x="' + (cx0 - 3) + '" y="' + (ty + T - 2) + '" width="6" height="' + (cy0 + u - ty - T + 4) + '" rx="3" style="' + stub + '"/>' +
+      nodes += '<rect x="' + (cx0 - 3) + '" y="' + (cy0 - 2) + '" width="6" height="' + (ty - cy0 + 4) + '" rx="3" style="' + stub + '"/>' + (A.from.length ? '<rect x="' + (cx0 - 3) + '" y="' + (ty + T - 2) + '" width="6" height="' + (cy0 + u - ty - T + 4) + '" rx="3" style="' + stub + '"/>' : '') +
         stagePiece(lk, [[0, 0]], T, tx, ty, ls, A.col, lsel, false, 'Lesson');
     }
     var col = A.col, X = A.x * u + 6, Y = (A.y - minY) * u + 6, PW = A.w * u - 12, PH = A.h * u - 12, here = st && st.area === id;
