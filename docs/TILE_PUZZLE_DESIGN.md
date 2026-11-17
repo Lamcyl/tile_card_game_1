@@ -489,3 +489,48 @@ Recommendation: Option 1 as the coin sink and Option 2 as the skill track. Heroe
 2. Coins: supplies, tile shop and workshop?
 3. Second track: area mastery marks with area chests?
 4. Should each area also give one fixed unit on its first full clear?
+
+## 16. Owner feedback and ideas, round of 17 November 2026
+
+Status key: **built** = in the game; **in progress** = an agent is building it now; **queued** = next pass; **idea** = not scheduled.
+
+### Map and lessons
+- Lessons between areas must be proper level tiles of their own, in their own row, not overlapping the areas, and must look like a level. **Built** (a 1×1 stage tile with a short path to the area above and below).
+- After the lessons before an area are done, the game should move on to the main stage by itself. **Built** (win screen offers "Next lesson", then "Play <area>, stage 1", which starts the stage).
+
+### End of run and end of game
+- Beating the final boss of the world shows a different victory screen, so the player knows they have reached the end. **In progress.**
+- Choosing a coloured tile to keep at the end of a run needs a confirmation screen. **In progress.**
+- Higher difficulties let the player keep more coloured tiles (placeholder: 1 at difficulty 1–3, 2 at 4–7, 3 at 8–10). **In progress.**
+
+### Tutorials
+A tutorial popup with a short animation per mechanic (for example a hand moves the last tile into a sandwich, then "×2" pops up). Shown at the right moment (the first coloured tile kept → how to equip it in a slot; the start of a lesson puzzle → that mechanic), and replayable from a Help / Tutorial entry in the options. **Queued.** Mechanics to cover:
+- sandwich (row, column, double ×4, once per line);
+- colourless tiles are never sandwiched;
+- side attackers, three-lane attackers;
+- wide tiles and sandwiching a wide tile;
+- rainbow tiles;
+- hero active skills;
+- losing HP when enemies survive an attack;
+- unit slots for extra tiles;
+- elite fights and relics;
+- merging three identical tiles into a star;
+- hold any tile, enemy or icon to see details;
+- end of run: all colourless tiles are kept, and one (or more) chosen coloured tile;
+- more to add: boosts and multipliers, copy tiles, bonus cells, guards, runners, boss tricks, unit skills unlocking with levels, levelling with coins, slots with shards, recruiting, Endless.
+
+### Balance rules (implement now, tune later)
+- Boosts and multipliers that reach fewer sides gain more per star when starred up (placeholder per star: 1 side +3, 2 sides +2, 3–4 sides +1). **In progress.**
+- Rainbow tiles use the same numbers as normal coloured tiles. **In progress.**
+
+### Ideas for feel and guidance
+- A red dot or exclamation mark on Team (and other dock buttons) when something is ready: a new tile to equip, a level up affordable, a slot to unlock, a hero to choose. **Queued.**
+- Animations for a smoother feel: screen changes, dialog windows popping up and closing, results. **Queued.**
+
+### Bugs and improvements
+- Remove the sandwich tip strip in battles. **In progress.**
+- Icons for the unit skills (relic-like) in battle and for each hero's active skill. **In progress.**
+- A better marker for tiles that only last for the current run (the yellow outline is ugly). **In progress.**
+- When Prism targets a tile, show it with the rainbow tile animation. **In progress.**
+- Shorter, more pictorial details when holding a tile or enemy: size as "1×2" with a small footprint, attack lanes as a small board showing which enemies lose HP, boosts as a small board with the affected neighbours, enemy traits as icons. **In progress.**
+- The level-up dialog stays open after a level up, so the player can level up several times in a row. **In progress.**
