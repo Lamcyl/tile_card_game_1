@@ -138,7 +138,14 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 #modal .btnrow .btn{flex:1;min-width:110px}
 .big{font-size:22px;font-weight:800;color:var(--ink)}
 .resbox{margin-top:12px;background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:14px;text-align:center}
-.resbox.win{border-color:var(--ok)}.resbox.lose{border-color:var(--bad)}
+.resbox.win{border-color:var(--ok)}
+.resbox.final{border:3px solid #e2b02f;background:linear-gradient(180deg,rgba(243,193,58,.22),var(--panel) 55%);box-shadow:0 0 0 4px rgba(243,193,58,.25),0 0 28px rgba(243,193,58,.35)}
+.resbox.final h2{font-size:30px;color:#c8921a;letter-spacing:-.02em;text-shadow:0 1px 0 rgba(0,0,0,.15)}
+.resbox.final .crown svg{width:88px;height:62px;filter:drop-shadow(0 3px 6px rgba(200,146,26,.55))}
+.resbox.final .fsub{font-size:15px;font-weight:700}
+.resbox.final .fstats{display:flex;gap:8px;justify-content:center;margin:10px 0}
+.resbox.final .fstats div{flex:1;background:var(--panel2);border:2px solid #e2b02f;border-radius:12px;padding:6px 4px}
+.resbox.final .fstats b{display:block;font-size:22px;color:#c8921a}.resbox.final .fstats b small{font-size:12px;color:var(--muted)}.resbox.final .fstats span{font-size:11px;color:var(--muted);font-weight:700}.resbox.lose{border-color:var(--bad)}
 .resbox h2{font-size:24px;margin:0 0 6px}
 .resbox p{font-size:14px;margin:4px 0;color:var(--ink)}
 .resbox .inv{justify-content:center;margin:8px 0}
@@ -223,6 +230,12 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .rtabs{display:flex;gap:5px;justify-content:center;margin:4px 0;flex-wrap:wrap}
 .rtabs .tab{position:relative}.hdot{position:absolute;right:3px;top:3px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
 .bagview{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:6px;border:1px solid var(--line);border-radius:12px;min-height:60px}
+#card .csz{display:flex;align-items:center;gap:6px;margin:2px 0;font-size:13px;clear:left}#card .fp rect{fill:var(--ink);opacity:.7}
+#card .cdiag{display:flex;justify-content:center;margin:6px 0;clear:both}#card .mb .e{fill:var(--panel2);stroke:var(--line);stroke-width:1}#card .mb .t{fill:var(--tc,var(--ink))}#card .mb .trb{fill:var(--rbmid)}#card .mb .h{fill:var(--gold);fill-opacity:.55;stroke:var(--gold);stroke-width:1.2}#card .mb .ln{fill:var(--bad);fill-opacity:.18;stroke:var(--bad);stroke-opacity:.5;stroke-dasharray:2 2}#card .mb .en{fill:var(--panel2);stroke:var(--line)}#card .mb .en.hit{fill:var(--bad);fill-opacity:.8;stroke:var(--bad)}
+#card .mb text{text-anchor:middle;font:800 9px sans-serif}#card .mb .tt{fill:#fff}#card .mb .ht{fill:var(--ink)}#card .mb .et{fill:#fff;font-size:8px}
+#card p.c1{font-weight:700;margin:2px 0}#card .ctags{font-size:12px}#card .tmpt svg{width:10px;height:10px;fill:none;stroke:var(--gold);stroke-width:1.6;vertical-align:-1px}
+#card .ehp{position:relative;height:18px;border-radius:9px;background:var(--panel2);border:1.5px solid var(--line);overflow:hidden;margin:4px 0 6px}#card .ehp i{position:absolute;left:0;top:0;bottom:0;background:var(--bad)}#card .ehp span{position:relative;display:block;text-align:center;font-size:12px;font-weight:800;line-height:15px;color:var(--ink)}
+#card p.tr{display:flex;gap:8px;align-items:center;margin:4px 0;font-size:13px}#card p.tr svg{width:20px;height:20px;flex:none;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 #card .cardtile{float:left;margin:0 12px 6px 0}#card .cardtile .tile{--ts:56px}
 @media (max-height:700px){
  :root{--hs:46px}
@@ -285,7 +298,8 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .tile .dash{fill:none;stroke:var(--panel);stroke-width:5;stroke-dasharray:14 10}
 .tile.rar-1 .ring{stroke:#35c3e6;stroke-width:12}
 .tile.rar-2 .ring{stroke:#e056d8;stroke-width:12;filter:drop-shadow(0 0 4px #e056d8)}
-.tile.added .ring{stroke:var(--gold);stroke-width:14;stroke-dasharray:4 14;stroke-linecap:round}
+.pickc.chosen{outline:3px solid var(--gold);outline-offset:-3px}
+.tile .tmp{position:absolute;left:-5px;top:-6px;z-index:6;width:15px;height:15px;border-radius:50%;background:var(--panel);border:1.5px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;pointer-events:none}.tile .tmp svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .tile.sel .ring{stroke:var(--ink);stroke-width:24;stroke-dasharray:none}
 .tile.offer .ring{stroke:var(--gold);stroke-width:26;stroke-dasharray:none}
 .tile.sel{transform:translateY(-3px)}
@@ -318,6 +332,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 #fhero .heart{flex:none;width:20px;height:20px;fill:var(--r)}
 .abil{flex:none;height:36px;padding:0 12px;border-radius:12px;font-size:14px;display:flex;align-items:center;gap:6px;background:var(--panel);border:2px solid var(--line);color:var(--ink);box-shadow:0 2px 0 var(--shadow)}
 .abil b{font-weight:800}.abil small{font-size:10.5px;color:var(--muted);font-weight:700}
+.abil .hico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .abil.target{border-color:var(--gold)}.abil.on{border-color:var(--ok)}
 .abil.used,.abil:disabled{opacity:.55}
 .mini{border-radius:12px}
@@ -465,7 +480,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .sk-b.slk{border:2px dashed var(--line);background:transparent;color:var(--muted)}.sk-b.slk svg.sk{opacity:.4;filter:grayscale(1)}
 svg.sk{width:26px;height:26px;display:block;flex:none}svg.sk .f{fill:currentColor}svg.sk .g{fill:currentColor;opacity:.38}svg.sk .e{fill:none;stroke:currentColor;stroke-opacity:.35;stroke-width:1}
 svg.sk .mk{fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}svg.sk text{fill:#fff;font:800 6.5px sans-serif;text-anchor:middle}
-.fxi{display:inline-flex;align-items:center;gap:2px;margin-right:6px;vertical-align:middle}.fxi svg.sk{width:15px;height:15px;color:var(--tc)}
+.fxi{display:inline-flex;align-items:center;gap:2px;margin-right:6px;vertical-align:middle}.fxi svg.sk{width:17px;height:17px;color:var(--tc)}
 .cf-sk{display:flex;gap:8px;align-items:center;margin:6px 0;padding:6px 8px;border-radius:10px;border:2px solid var(--tc);background:color-mix(in srgb,var(--tc) 10%,var(--panel));font-size:13px;line-height:1.3;color:var(--ink)}
 .cf-cols{display:flex;justify-content:center;gap:10px;margin:6px 0}.cf-col{display:flex;flex-direction:column;align-items:center;gap:2px}.cf-col .arrow{font-size:18px;line-height:1}
 .pp-sock .tm-pp{width:56px;height:56px}.pp-sock .tm-pp .tile{pointer-events:auto}.pp-list{min-height:60px;padding:4px;border-radius:12px}
@@ -564,7 +579,8 @@ var CONFIG = {
   midBoss: { hp: 0.7, atk: 0.85, coin: 0.6 },
   drop: { rare: [0, 0, 0, 0.06, 0.12, 0.2, 0.3], epic: [0, 0, 0, 0, 0.03, 0.07, 0.12], rainbow: [0, 0, 0, 0, 0.1, 0.2, 0.3], shape: [0.2, 0.22, 0.25, 0.3, 0.35, 0.4, 0.45] },   /* by distance from the origin: picks are Rare / Epic with these chances; a boss may drop a rainbow tile */
   longPressMs: 450,
-  stars: { on: true, cap: 5, need: 3, bonus: 1 },   /* `need` identical tiles of one star level merge into one tile of the next level (3 = 1 star, 9 = 2, 27 = 3, 81 = 4, 243 = 5); each star adds `bonus` to the number */
+  stars: { on: true, cap: 5, need: 3, bonus: 1, sideBonus: { 1: 3, 2: 2, 3: 1, 4: 1 } },   /* boosts and multipliers gain sideBonus[marked sides] per star instead (row/column/cross lines count as 1 side; placeholder) */
+  keepCount: [1, 1, 1, 2, 2, 2, 2, 3, 3, 3],   /* coloured tiles you may keep per boss, by difficulty (placeholder) */
   relicMax: 3,                      /* relics per run */
   heroUnlock: { prism: 'puzzle', overcharge: 18, wind: 30, guard: 42 },   /* heroes unlock by map progress: the number of map stages cleared, of 67 (the old 2, 5, 9, 14 of 49 cells, rescaled; Kiri is free) */
   puzzleCoins: 10, dailyCoins: 15,  /* placeholders */      
@@ -1155,10 +1171,12 @@ function genRunTile(run, rnd) {
   var sp = genSpec(rar, run.stage, rnd, rar ? undefined : { multiChance: dr.shape });
   return { c: c, u: run.team[c], k: sp.k, d: sp.d, n: sp.n, sh: sp.sh, rar: rar };
 }
-/* a rainbow tile: low numbers, single cell, attack or boost; counts as every colour */
+/* a rainbow tile: single cell, attack or boost; counts as every colour */
 function genRainbow(stage, rnd) {
-  if (rnd() < 0.7) { var ds = stage >= 4 ? ['^', '^', '<>', '<^>'] : stage >= 2 ? ['^', '^', '<>'] : ['^']; var d = pick(ds, rnd); return { k: 'a', d: d, n: d === '^' ? 3 : 2, sh: 'o', rar: 0, rb: true }; }
-  return { k: 'p', d: pick(['ud', 'lr', 'u', 'u'], rnd), n: 1, sh: 'o', rar: 0, rb: true };
+  /* same numbers as a normal common coloured tile: a single-cell attack or boost from genSpec */
+  var sp, i = 0; do { sp = genSpec(0, stage, rnd, { multiChance: 0 }); i++; } while (sp.k !== 'a' && sp.k !== 'p' && i < 30);
+  if (sp.k !== 'a' && sp.k !== 'p') sp = { k: 'a', d: '^', n: CONFIG.budget.attackBase[0], sh: 'o' };
+  return { k: sp.k, d: sp.d, n: sp.n, sh: 'o', rar: 0, rb: true };
 }
 /* an upgrade for one bag tile: +2 (+1 for boosters and multipliers) or a second colour */
 function genUpgrade(run, rnd, avoid) {
@@ -1288,7 +1306,7 @@ function newRun(mode, stage, team, units, colourless, rnd, hero, opt) {
       run.bag.push(mkTile(run, c, u.id, sp, { rar: sp.rar || 0, st: sp.st || 0, slot: true }, sp.rb));
     });
   });
-  colourless.slice(0, CONFIG.maxColourless).forEach(function (k) { run.bag.push(mkTile(run, 'x', 'x', { k: k.k, d: k.d, n: starN(k.n, k.st), sh: k.sh }, { rar: k.rar || 0, st: k.st || 0 })); });
+  colourless.slice(0, CONFIG.maxColourless).forEach(function (k) { run.bag.push(mkTile(run, 'x', 'x', { k: k.k, d: k.d, n: starN(k.n, k.st, k.k, k.d), sh: k.sh }, { rar: k.rar || 0, st: k.st || 0 })); });
   run.maxHp = run.hp = S.heroHp;
   run.offers = genOffers(run, rnd);
   return run;
@@ -1398,13 +1416,14 @@ function keepCands(run, fs) {
   if (fs && fs.reward && fs.reward.rainbow) { var r = fs.reward.rainbow; out.push({ c: 'w', rb: true, drop: true, k: r.k, d: r.d, n: r.n, sh: r.sh, rar: 0 }); }
   return out;
 }
-function attachKeep(run, fs) { var c = keepCands(run, fs); run.pending.keep = { cands: c, done: !c.length, result: null }; }
-function applyKeep(run, i) {
+function attachKeep(run, fs) { var c = keepCands(run, fs); run.pending.keep = { cands: c, done: !c.length, result: null, results: [], sel: [], max: CONFIG.keepCount[Math.max(0, Math.min(9, (run.stage || 1) - 1))] || 1 }; }
+function applyKeep(run, idx) {
   var p = run.pending, k = p && p.keep; if (!k || k.done) return null;
-  var c = i >= 0 ? k.cands[i] : null; k.done = true;
-  if (c && c.tid) run.bag.forEach(function (t) { if (t.id === c.tid) t.kept = true; });
-  k.result = c; if (c) run.keeps = (run.keeps || []).concat([c]);
-  return c;
+  var seen = {}, list = (idx instanceof Array ? idx : [idx]).filter(function (i) { if (!(i >= 0) || !k.cands[i] || seen[i]) return false; seen[i] = 1; return true; }).slice(0, k.max || 1);
+  k.done = true; k.results = list.map(function (i) { return k.cands[i]; });
+  k.results.forEach(function (c) { if (c.tid) run.bag.forEach(function (t) { if (t.id === c.tid) t.kept = true; }); });
+  k.result = k.results[0] || null; run.keeps = (run.keeps || []).concat(k.results);
+  return k.result;
 }
 /* ---- unit gacha: one pull; odds by rarity, an Epic at the latest every CONFIG.gacha.pity pulls; a duplicate becomes shards for that unit ---- */
 function gachaRoll(state, owned, rnd) {
@@ -1484,7 +1503,12 @@ function genDaily(seed, stage) {
 /* ---- stars: CONFIG.stars.need identical tiles of one star level merge into one tile of the next level (cap CONFIG.stars.cap); each star adds CONFIG.stars.bonus to the number.
    Identical = same colour (c, none for colourless), kind, directions, shape, base number and rarity. list = store.inv or store.ct entries { id, k, d, n, sh, rar, st[, c] }.
    isRef(id) says whether an entry sits in a slot / the colourless bag: such an entry survives the merge (the merged tile takes its place); onGone(goneId, keptId) is called for every consumed entry. Returns the number of merges ---- */
-function starN(n, st) { return n + (st || 0) * CONFIG.stars.bonus; }
+function starBonus(k, d) {
+  if (k !== 'p' && k !== 'x') return CONFIG.stars.bonus;
+  var sd = /[RCB]/.test(d || '') ? 1 : Math.max(1, Math.min(4, (d || '').length));
+  return CONFIG.stars.sideBonus[sd];
+}
+function starN(n, st, k, d) { return n + (st || 0) * starBonus(k, d); }
 function starKey(e) { return [e.c || 'x', e.k, e.d, e.sh || 'o', e.n, e.rar || 0].join('|'); }
 function mergeStars(list, isRef, onGone) {
   if (!CONFIG.stars.on) return 0;
@@ -1579,14 +1603,14 @@ function addInv(e) {
 }
 /* identical colourless tiles merge by threes; a copy in the bag keeps its place */
 function mergeInv() { return mergeStars(store.inv, function (id) { return store.bag.indexOf(id) >= 0; }, function (gone) { var at = store.bag.indexOf(gone); if (at >= 0) store.bag.splice(at, 1); }); }
-function invTile(e) { return { c: 'x', u: 'x', k: e.k, d: e.d, n: starN(e.n, e.st), sh: e.sh || 'o', st: e.st || 0, rar: e.rar || 0 }; }
+function invTile(e) { return { c: 'x', u: 'x', k: e.k, d: e.d, n: starN(e.n, e.st, e.k, e.d), sh: e.sh || 'o', st: e.st || 0, rar: e.rar || 0 }; }
 function stars(n) { return new Array((n || 0) + 1).join('\u2605'); }
 /* "2 of 3 for the next star" line for a collected / colourless tile */
 function starLine(list, e) {
   if (!CONFIG.stars.on) return '';
   var st = e.st || 0, N = CONFIG.stars.need, same = list.filter(function (x) { return starKey(x) === starKey(e) && (x.st || 0) === st; }).length;
   if (st >= CONFIG.stars.cap) return '<p class="muted"><b>Maximum stars (' + stars(st) + ')</b>' + (same > 1 ? ', ' + same + ' copies' : '') + '.</p>';
-  return '<p class="muted"><b>' + same + ' of ' + N + ' for ' + stars(st + 1) + '</b>. ' + N + ' identical tiles of one star level merge into one tile of the next star level; each star adds +' + CONFIG.stars.bonus + ' to the number.</p>';
+  return '<p class="muted"><b>' + same + ' of ' + N + ' for ' + stars(st + 1) + '</b>. ' + N + ' identical tiles of one star level merge into one tile of the next star level; each star adds +' + starBonus(e.k, e.d) + ' to the number' + ((e.k === 'p' || e.k === 'x') ? ' (boosts and multipliers: fewer marked sides, bigger bonus)' : '') + '.</p>';
 }
 /* identical entries (same tile, same star level) shown as one stack: [{ e: first entry, ids: [...], n: count }] */
 function stackList(sorted) {
@@ -1606,7 +1630,7 @@ function mergeCT() {
   return mergeStars(store.ct, function (id) { return !!slotOwnerOf(id); }, function (gone, kept) { var o = slotOwnerOf(gone); if (o) store.slots[o.u].t[o.i] = slotOwnerOf(kept) ? 0 : kept; });
 }
 function ctById(id) { return store.ct.filter(function (x) { return x.id === id; })[0]; }
-function ctTile(e) { var rb = e.c === 'w'; return { c: rb ? 'x' : e.c, u: 'x', k: e.k, d: e.d, n: starN(e.n, e.st), sh: e.sh || 'o', st: e.st || 0, rar: e.rar || 0, rb: rb || undefined }; }
+function ctTile(e) { var rb = e.c === 'w'; return { c: rb ? 'x' : e.c, u: 'x', k: e.k, d: e.d, n: starN(e.n, e.st, e.k, e.d), sh: e.sh || 'o', st: e.st || 0, rar: e.rar || 0, rb: rb || undefined }; }
 function ctSorted() { return store.ct.slice().sort(function (a, b) { return (a.c === 'w' ? -1 : COLOR_IDS.indexOf(a.c)) - (b.c === 'w' ? -1 : COLOR_IDS.indexOf(b.c)) || (b.rar || 0) - (a.rar || 0) || (a.k < b.k ? -1 : a.k > b.k ? 1 : 0) || b.n - a.n || (a.d < b.d ? -1 : a.d > b.d ? 1 : 0) || (b.st || 0) - (a.st || 0) || a.id - b.id; }); }
 function slotsOf(id) { var s2 = store.slots[id]; if (!s2) s2 = store.slots[id] = { n: 1, t: [0] }; return s2; }   /* every unit starts with 1 open slot */
 function slotOwnerOf(tid) { for (var uid in store.slots) { var i = store.slots[uid].t.indexOf(tid); if (i >= 0) return { u: uid, i: i }; } return null; }
@@ -1636,7 +1660,7 @@ function slotSpecs() {
   var o = {};
   COLOR_IDS.forEach(function (c) {
     var uid = store.team[c], sl = store.slots[uid]; if (!sl) return; o[uid] = [];
-    sl.t.forEach(function (tid) { var e = tid && ctById(tid); if (e) o[uid].push({ k: e.k, d: e.d, n: starN(e.n, e.st), sh: e.sh, rar: e.rar || 0, st: e.st || 0, rb: e.c === 'w' }); });
+    sl.t.forEach(function (tid) { var e = tid && ctById(tid); if (e) o[uid].push({ k: e.k, d: e.d, n: starN(e.n, e.st, e.k, e.d), sh: e.sh, rar: e.rar || 0, st: e.st || 0, rb: e.c === 'w' }); });
   });
   return o;
 }
@@ -1771,13 +1795,14 @@ function tileHTML(t, o) {
   var cls = 'tile k-' + k + ' c-' + t.c + (t.rb ? ' rbw' : '') + (t.c2 ? ' two d-' + t.c2 : '') + (t.rar ? ' rar-' + t.rar : '') + (t.added ? ' added' : '') + (t.rest && !o.noRest ? ' rested' : '') + (o.sx ? ' sandw' : '') + (o.cls ? ' ' + o.cls : '') + (board ? ' bd' : ' cp');
   var style = '--u:' + cellPx + 'px;--tg:' + gp + 'px;width:' + PX + 'px;height:' + PY + 'px;' + (board ? 'left:' + (o.left || 0) + 'px;top:' + (o.top || 0) + 'px;' : '');
   return '<div class="' + cls + '" style="' + style + '" ' + (o.attrs || '') + ' aria-label="' + tileName2(t) + '">' +
-    '<svg class="tb" viewBox="0 0 ' + VW + ' ' + VH + '">' + body + '</svg><div class="tf">' + glyphSVG(t, gstyle, fightFx()) + '<div class="fb" style="' + box + '">' + face + '</div></div>' + (o.cnt > 1 ? '<i class="cnt">\u00d7' + o.cnt + '</i>' : '') + (o.badge ? '<i class="inb">' + o.badge + '</i>' : '') + '</div>';
+    '<svg class="tb" viewBox="0 0 ' + VW + ' ' + VH + '">' + body + '</svg><div class="tf">' + glyphSVG(t, gstyle, fightFx()) + '<div class="fb" style="' + box + '">' + face + '</div></div>' + (t.added && !o.noTmp ? '<i class="tmp" title="Only for this run">' + HOURGLASS + '</i>' : '') + (o.cnt > 1 ? '<i class="cnt">\u00d7' + o.cnt + '</i>' : '') + (o.badge ? '<i class="inb">' + o.badge + '</i>' : '') + '</div>';
 }
 /* the unit effects of the fight on screen (null elsewhere), so tiles can show effects that change their reach */
 function fightFx() { return S.screen === 'fight' && S.fs && S.fs.F && !S.puz ? S.fs.F.fx : null; }
 function HSZ() { return (window.innerHeight || 844) < 700 ? 46 : 54; }
 function dotHTML(c) { return '<span class="dot c-' + c + '"><svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">' + SYM[c] + '</svg></span>'; }
 function hpBar(hp, max) { return '<div class="hpbar"><i style="width:' + Math.max(0, hp / max * 100) + '%"></i><span>' + hp + ' / ' + max + '</span></div>'; }
+var HOURGLASS = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1h6M2 9h6M2.600 1c0 3 2.400 3 2.400 4S2.600 6 2.600 9M7.400 1c0 3-2.400 3-2.400 4s2.400 1 2.400 4"/></svg>';
 var SPIKE = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6.4 3.6 L10 5 L6.4 6.4 L5 10 L3.6 6.4 L0 5 L3.6 3.6Z"/></svg>';
 var LINK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M5 7 L7 5 M3.8 8.2 a2 2 0 0 1 0-2.800 L5 4.200 M8.200 3.800 a2 2 0 0 1 0 2.800 L7 7.800" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round"/></svg>';
 var RUN = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h7M6 2.500L9.500 6 6 9.500" fill="none" stroke="currentColor" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -1792,13 +1817,21 @@ var NODEICON = {
 function heroTargeting() { var h = S.fs && S.fs.hero; return !!(h && h.armed && HERO_BY_ID[h.id].target && !h.target); }
 function eo(extra) { return Object.assign(extra || {}, heroOpts(S.fs)); }
 var HEART = '<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/></svg>';
+var HEROICO = {
+  rally: '<path d="M5 11l7-6 7 6M5 18l7-6 7 6"/>',
+  wind: '<path d="M12 12a2 2 0 1 1 2 2 4 4 0 1 1-4-4 6 6 0 1 1 6 6 8 8 0 1 1-8-8"/>',
+  prism: '<path d="M3 18a9 9 0 0 1 18 0M6.500 18a5.500 5.500 0 0 1 11 0M10 18a2 2 0 0 1 4 0"/>',
+  overcharge: '<path d="M13 3L5 13h6l-1 8 8-10h-6z"/>',
+  guard: '<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/>'
+};
+function heroIcon(id) { return '<svg class="hico" viewBox="0 0 24 24" aria-hidden="true">' + (HEROICO[id] || '') + '</svg>'; }
 function heroHTML(fs) {
   var hs = fs.hero; if ((S.puz && !S.puz.def.hero) || !hs || !hs.id) return '';
   var H = HERO_BY_ID[hs.id], ready = hs.uses < hs.max, cls = 'abil', sm;
   if (hs.armed) { if (H.target && !hs.target) { cls += ' target'; sm = 'tap a tile · cancel'; } else { cls += ' on'; sm = (hs.target ? 'aimed' : 'on') + ' · undo'; } }
   else if (ready) sm = (hs.max - hs.uses) + '×';
   else { cls += ' used'; sm = 'used'; }
-  return '<button class="' + cls + '" data-act="herobtn" data-card="hr:' + hs.id + '" title="' + H.line + '"' + (!ready && !hs.armed ? ' disabled' : '') + '><b>' + H.ab + '</b><small>' + sm + '</small></button>';
+  return '<button class="' + cls + '" data-act="herobtn" data-card="hr:' + hs.id + '" title="' + H.line + '"' + (!ready && !hs.armed ? ' disabled' : '') + '>' + heroIcon(hs.id) + '<b>' + H.ab + '</b><small>' + sm + '</small></button>';
 }
 function heroRowHTML(run, fs) { return HEART + hpBar(run.hp, run.maxHp) + heroHTML(fs); }
 function heroPanelHTML() {
@@ -2140,18 +2173,18 @@ function slotBuyHTML(uid) {
   return '<div class="c-' + u.c + '"><h3>Unlock slot ' + (sl.n + 1) + ' of ' + CONFIG.slotMax[u.rar] + '?</h3><div class="ctext" style="margin-bottom:6px">' + u.name + ' gets one more slot for a collected ' + COLORS[u.c].toLowerCase() + ' (or rainbow) tile. The tile in it joins your bag with the 3 base tiles at the start of every run while ' + u.name + ' is in your team.</div>' +
     '<div class="cf-sk"><b>' + cost + ' shards</b><span>you have ' + have + '</span></div><div class="btnrow"><button class="btn main" data-act="slotgo" data-u="' + uid + '"' + (have >= cost ? '' : ' disabled') + '>' + (have >= cost ? 'Unlock for ' + cost + ' shards' : 'Not enough shards') + '</button><button class="btn" data-act="close">Cancel</button></div></div>';
 }
-function levelHTML(uid) {
+function levelHTML(uid, done) {
   var u = UNIT_BY_ID[uid], st = store.units[uid], N = st.l + 1;
-  if (N > CONFIG.lvlMax) return '<h3>' + u.name + ' is at the top level</h3><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
+  if (N > CONFIG.lvlMax) return '<h3>' + u.name + ' is at the top level</h3>' + (done ? '<p class="ctext">Level ' + st.l + ' reached.</p>' : '') + '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
   var cost = CONFIG.levelCoins[N], have = store.coins, a = unitBase(u, st.l), b = unitBase(u, N), cols = '', unl = u.skills.filter(function (sk) { return sk[1] === N; }), mw = Math.floor(296 / 3) - 8;
   a.forEach(function (k, i) {
     var d = shapeDims(k), ts = Math.max(18, Math.min(40, Math.floor((mw - (d[1] - 1) * 3) / d[1])));
     var f = function (x) { return tileHTML({ c: u.c, u: u.id, k: x.k, d: x.d, n: x.n, sh: x.sh }, { ts: ts, noRest: true }); };
     cols += '<div class="cf-col">' + f(k) + '<span class="arrow" aria-label="becomes">&darr;</span>' + f(b[i]) + '</div>';
   });
-  return '<div class="c-' + u.c + '"><h3>' + u.name + ': level ' + st.l + ' &rarr; ' + N + '</h3><div class="cf-cols">' + cols + '</div>' +
+  return '<div class="c-' + u.c + '">' + (done ? '<div class="ctext" style="color:var(--ok);font-weight:800">Level ' + st.l + ' reached. Next level:</div>' : '') + '<h3>' + u.name + ': level ' + st.l + ' &rarr; ' + N + '</h3><div class="cf-cols">' + cols + '</div>' +
     unl.map(function (sk) { return '<div class="cf-sk">' + skillIcon(sk[0]) + '<span><b>New skill: ' + EFFECTS[sk[0]].name + '.</b> ' + EFFECTS[sk[0]].line + '</span></div>'; }).join('') +
-    '<div class="cf-sk"><b>' + cost + ' coins</b><span>you have ' + have + '</span></div><div class="btnrow"><button class="btn main" data-act="lvlgo" data-u="' + uid + '"' + (have >= cost ? '' : ' disabled') + '>' + (have >= cost ? 'Level up for ' + cost + ' coins' : 'Not enough coins') + '</button><button class="btn" data-act="close">Cancel</button></div></div>';
+    '<div class="cf-sk"><b>' + cost + ' coins</b><span>you have ' + have + '</span></div><div class="btnrow"><button class="btn main" data-act="lvlgo" data-u="' + uid + '"' + (have >= cost ? '' : ' disabled') + '>' + (have >= cost ? 'Level up for ' + cost + ' coins' : 'Not enough coins') + '</button><button class="btn" data-act="close">Close</button></div></div>';
 }
 function renderTeam() {
   var tab = S.tmTab || 'units', col = S.tmCol || 'r', G = CONFIG.gacha, u0, h;
@@ -2165,7 +2198,7 @@ function renderTeam() {
   } else if (tab === 'recruit') {
     h += '<p class="sub" style="margin-top:8px">One unit per colour goes on the run. Recruit new units with coins; a duplicate gives shards, which open unit slots. Unit levels cost coins.</p>' + recruitHTML();
   } else if (tab === 'collected') {
-    h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">Coloured tiles you kept after bosses, bound to their colour; a rainbow tile fits any unit. Put them into a unit\'s slots from the Units tab (tap one of its open slots). Three identical tiles merge into one tile with a star (+' + CONFIG.stars.bonus + ' to its number), up to ' + CONFIG.stars.cap + ' stars; spare copies show as a stack.</div>' + ctHTML() + '</div>';
+    h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">Coloured tiles you kept after bosses, bound to their colour; a rainbow tile fits any unit. Put them into a unit\'s slots from the Units tab (tap one of its open slots). Three identical tiles merge into one tile with a star (+' + CONFIG.stars.bonus + ' to an attack\'s number; boosts and multipliers gain more the fewer sides they mark), up to ' + CONFIG.stars.cap + ' stars; spare copies show as a stack.</div>' + ctHTML() + '</div>';
   } else {
     h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">Drag a colourless tile into one of the ' + CONFIG.maxColourless + ' slots to bring it on the run; drag it out to remove it (tapping works too). Identical tiles stack (x2). Three identical tiles merge into one star.</div>' + clSockHTML() + invHTML() + '</div>';
   }
@@ -2343,10 +2376,10 @@ function renderFight() {
   res.G.forEach(function (g) {
     var t = g.t, minr = 99, minc = 99; g.cells.forEach(function (q) { minr = Math.min(minr, (q / cols) | 0); minc = Math.min(minc, q % cols); });
     var shown = t.k === 'p' ? res.power[g.a] : t.k === 'x' ? undefined : res.val[g.a];
-    th += tileHTML(t, { board: true, ts: cs, gp: gp, left: minc * (cs + gp), top: minr * (cs + gp), shown: shown, sx: g.sand > 1 ? g.sand : 0, attrs: 'data-cell="' + g.a + '" data-card="t:' + t.id + '"', cls: (fs.hero && fs.hero.target === t.id ? ' herot' : '') + (heroTargeting() ? ' tgtable' : ''), noRest: true });
+    th += tileHTML(fs.hero && fs.hero.armed && fs.hero.id === 'prism' && fs.hero.target === t.id ? Object.assign({}, t, { rb: true }) : t, { board: true, ts: cs, gp: gp, left: minc * (cs + gp), top: minr * (cs + gp), shown: shown, sx: g.sand > 1 ? g.sand : 0, attrs: 'data-cell="' + g.a + '" data-card="t:' + t.id + '"', cls: (fs.hero && fs.hero.target === t.id ? ' herot' : '') + (heroTargeting() ? ' tgtable' : ''), noRest: true });
   });
   $('#ftiles').innerHTML = th + clampsHTML(res, cols, cs, gp);
-  var strip = '<div class="strip" data-card="mode"><span class="t"><b>Sandwich:</b> ' + SANDWICH + '</span></div>';
+  var strip = '';
   if (S.puz) strip += '<div class="strip"><span class="t"><b>Idea:</b> ' + S.puz.def.teach + '</span></div>'; else (run.relics || []).forEach(function (id) { strip += '<div class="strip relic" data-card="rl:' + id + '"><span class="t"><b>Relic:</b> ' + RELIC_BY_ID[id].name + ': ' + RELIC_BY_ID[id].line + '</span></div>'; });
   F.tricks.forEach(function (tr) { strip += '<div class="strip trickstrip" data-card="tr:' + tr + '"><span class="t"><b>Boss:</b> ' + TRICKS[tr] + '</span></div>'; });
   if (F.deadRow >= 0) strip += '<div class="strip trickstrip" data-card="tr:deadrow"><span class="t"><b>Boss:</b> ' + TRICKS.deadrow + '</span></div>';
@@ -2545,9 +2578,10 @@ function renderResult() {
   if (!p) { show('map'); return; }
   var hi = (p.picks || []).filter(function (o) { return o.type === 'up'; }).map(function (o) { return o.tid; });
   if (p.keep && !p.keep.done) {
-    h = '<div class="resbox win"><h2>' + (p.type === 'cleared' ? 'Stage cleared' : p.out.mid ? 'Mid-boss defeated' : 'Boss defeated') + '</h2><p>Keep one tile for good. Choose one of the coloured tiles that were new in this run' + (p.keep.cands.some(function (c) { return c.drop; }) ? ' or the rainbow tile the boss dropped' : '') + '. <b>Upgrades made in the run are not kept</b>, so they are shown at their base value.</p><div class="picks">';
-    groupCands(p.keep.cands).forEach(function (g) { var c = g.c, t = ctTile(c); h += '<button class="pickc" data-keep="' + g.i + '"><div class="pk">' + (c.drop ? 'Boss drop: rainbow tile' : (c.rar ? RARITY[c.rar] + ' ' : '') + COLORS[c.c] + ' tile') + '</div>' + tileHTML(t, { ts: 58, noRest: true, cnt: g.n }) + '<div class="ctext">' + tileName2(t) + (c.drop ? ': counts as every colour' : '') + (g.n > 1 ? ' (found ' + g.n + ' times; keeping one)' : '') + '</div></button>'; });
-    h += '</div><div class="btns"><button class="btn" data-act="keepskip">Keep nothing</button></div></div>';
+    var kp = p.keep, mx = kp.max || 1, many = mx > 1;
+    h = '<div class="resbox win"><h2>' + (p.type === 'cleared' ? 'Stage cleared' : p.out.mid ? 'Mid-boss defeated' : 'Boss defeated') + '</h2><p>' + (many ? 'Keep up to ' + mx + ' tiles for good (' + kp.sel.length + ' chosen). ' : 'Keep one tile for good. ') + 'Choose from the coloured tiles that were new in this run' + (kp.cands.some(function (c) { return c.drop; }) ? ' or the rainbow tile the boss dropped' : '') + '. <b>Upgrades made in the run are not kept</b>, so they are shown at their base value.</p><div class="picks">';
+    groupCands(kp.cands).forEach(function (g) { var c = g.c, t = ctTile(c); h += '<button class="pickc' + (kp.sel.indexOf(g.i) >= 0 ? ' chosen' : '') + '" data-keep="' + g.i + '"><div class="pk">' + (c.drop ? 'Boss drop: rainbow tile' : (c.rar ? RARITY[c.rar] + ' ' : '') + COLORS[c.c] + ' tile') + '</div>' + tileHTML(t, { ts: 58, noRest: true, cnt: g.n }) + '<div class="ctext">' + tileName2(t) + (c.drop ? ': counts as every colour' : '') + (g.n > 1 ? ' (found ' + g.n + ' times; keeping one)' : '') + '</div></button>'; });
+    h += '</div><div class="btns">' + (many ? '<button class="btn main" data-act="keepgo"' + (kp.sel.length ? '' : ' disabled') + '>Keep ' + kp.sel.length + ' of ' + mx + '</button>' : '') + '<button class="btn" data-act="keepskip">Keep nothing</button></div></div>';
     $('#result').innerHTML = h; persist(); return;
   }
   if (p.type === 'win' && p.relicPicks && !p.relicDone) {
@@ -2571,6 +2605,13 @@ function renderResult() {
   } else if (p.type === 'cleared') {
     var o2 = p.out, key = run.cell && run.cell.key, first = run.mode === 'stage' && key && !store.cleared[key], fr = first ? (p.first = p.first || firstClearReward(run.stage)) : null;
     var t2 = (o2.tile ? [o2.tile] : []).concat(o2.extra || []);
+    var fin = isFinalCell(run.cell);
+    if (fin) {
+      var M2 = mapData(), nst = Object.keys(M2.stages).length, ncl = clearedCount() + (first ? 1 : 0), nun = Object.keys(store.units).filter(function (q) { return store.units[q].u; }).length;
+      h = '<div class="resbox win final"><div class="crown">' + CROWN + '</div><h2>The world is yours</h2><p class="fsub">The Gloaming Crown falls. Every area is behind you.</p>' +
+        '<div class="fstats"><div><b>' + ncl + '<small> / ' + nst + '</small></b><span>stages cleared</span></div><div><b>' + nun + '</b><span>units</span></div><div><b>' + ((store.runs || 0) + 1) + '</b><span>runs</span></div></div>' +
+        '<p>Boss down' + (o2.attacks === 1 ? ' in one attack' : ' in ' + o2.attacks + ' attacks') + '. ' + run.fights + ' fights won.</p><p class="gold">Loot +' + run.coins + ' coins</p>' + keptLine(p);
+    } else
     h = '<div class="resbox win"><h2>Stage cleared</h2><p>' + (run.cell ? run.cell.name : stageCfg(run).name) + ': boss down' + (o2.attacks === 1 ? ' in one attack' : ' in ' + o2.attacks + ' attacks') + '. ' + run.fights + ' fights won.</p><p class="gold">Loot +' + run.coins + ' coins</p>' + keptLine(p);
     if (t2.length || run.loot.length) h += '<div class="inv">' + groupCands(run.loot).map(function (g) { return tileHTML(invTile(g.c), { ts: 44, cnt: g.n }); }).join('') + '</div>';
     if (fr) {
@@ -2584,8 +2625,12 @@ function renderResult() {
   }
   $('#result').innerHTML = h; persist();
 }
+/* the last stage of the last area (the Gloaming Crown): its victory is special */
+function isFinalCell(c) { return !!(c && c.area === 'top' && c.idx === c.n - 1); }
+var CROWN = '<svg viewBox="0 0 64 44" aria-hidden="true"><path d="M5 38L2 12l15 12L32 4l15 20L62 12l-3 26z" fill="#f3c13a" stroke="#b8860b" stroke-width="2.500" stroke-linejoin="round"/><rect x="5" y="38" width="54" height="5" rx="2" fill="#d9a521" stroke="#b8860b" stroke-width="2"/><circle cx="32" cy="4" r="3" fill="#fff3c0"/><circle cx="2" cy="12" r="2.600" fill="#fff3c0"/><circle cx="62" cy="12" r="2.600" fill="#fff3c0"/><circle cx="32" cy="30" r="3.500" fill="#c235b8"/><circle cx="18" cy="32" r="2.400" fill="#1596b8"/><circle cx="46" cy="32" r="2.400" fill="#1596b8"/></svg>';
 function keptLine(p) {
   var k = p.keep && p.keep.result; if (!k) return '';
+  if (p.keep.info && p.keep.info.length > 1) return '<p>Kept ' + p.keep.info.length + ' tiles <span class="ctext">now in Team, Collected tiles</span></p><div class="inv">' + p.keep.info.map(function (x) { return tileHTML(ctTile(x.c), { ts: 46 }); }).join('') + '</div>';
   return '<p>Kept: <b>' + (k.rb ? 'Rainbow' : COLORS[k.c]) + ' ' + tileName(k) + '</b>' + (p.keep.merged ? ' (three identical tiles merged into a star)' : p.keep.progress ? ' (' + p.keep.progress + ')' : '') + ' <span class="ctext">now in Team, Collected tiles</span></p><div class="inv">' + tileHTML(ctTile(k), { ts: 46 }) + '</div>';
 }
 function takePick(i) { applyPick(S.run, i); S.fs = null; show('map'); }
@@ -2598,6 +2643,7 @@ function commitRun(how, cleared) {
     else if (key) { store.sel = key; }
   }
   if (run.mode === 'endless' && run.depth > store.endBest) store.endBest = run.depth;
+  store.runs = (store.runs || 0) + 1;
   run.over = how; store.run = null; save(); k.merged = merged; return k;
 }
 function finishStage() { var key = S.run.cell && S.run.cell.key; commitRun('bank', true); S.phase = 'over'; if (key && !S.keepSel) { store.sel = frontier(key); save(); } S.mapCenter = true; show('home'); }
@@ -2613,7 +2659,7 @@ function bankRun() {
   show('result');
 }
 function bagHTML() {
-  var run = S.run, h = '<h3>Bag: ' + run.bag.length + ' tiles</h3><div class="ctext">Gold dotted ring: added this run. ▲: upgraded. Split colour: two colours. Cyan edge: Rare, magenta edge: Epic. Faded: resting until the fight ends.</div>';
+  var run = S.run, h = '<h3>Bag: ' + run.bag.length + ' tiles</h3><div class="ctext">Hourglass corner badge: only for this run. ▲: upgraded. Split colour: two colours. Cyan edge: Rare, magenta edge: Epic. Faded: resting until the fight ends.</div>';
   COLOR_IDS.concat(['x']).forEach(function (c) {
     var ts = run.bag.filter(function (t) { return t.c === c; }); if (!ts.length) return;
     h += '<div class="bagrow">' + dotHTML(c) + '<div class="inv">' + ts.map(function (t) { return tileHTML(t, { ts: 46, attrs: 'data-card="t:' + t.id + '"' }); }).join('') + '</div></div>';
@@ -2624,16 +2670,45 @@ function bagHTML() {
 /* ---------- cards ---------- */
 function hideCard() { var c = $('#card'); c.hidden = true; if ($('#modal').hidden) $('#dim').hidden = true; }
 function showCard(html) { $('#card').innerHTML = html; $('#card').hidden = false; $('#dim').hidden = false; }
+/* tiny footprint drawing of a tile's cells */
+function footprintSVG(t) {
+  var cells = cellsOf(t), d = shapeDims(t), u = 7, g = 1.5, W = d[1] * u + (d[1] - 1) * g, H = d[0] * u + (d[0] - 1) * g;
+  return '<svg class="fp" viewBox="0 0 ' + W + ' ' + H + '" width="' + Math.round(W * 1.6) + '" height="' + Math.round(H * 1.6) + '" aria-hidden="true">' + cells.map(function (p) { return '<rect x="' + (p[1] * (u + g)) + '" y="' + (p[0] * (u + g)) + '" width="' + u + '" height="' + u + '" rx="1.5"/>'; }).join('') + '</svg>';
+}
+function sizeText(t) { var d = shapeDims(t), n = cellsOf(t).length; return d[0] * d[1] === n ? d[0] + '×' + d[1] : n + ' cells'; }
+/* a mini board: the tile in the middle of a small empty board with the cells it affects marked (+N / ×N / copy), or, for attacks, the enemy row above with the columns that lose HP */
+function miniBoardHTML(t) {
+  var d = shapeDims(t), atk = isAttackT(t), cols = d[1] + 2, R = atk ? d[0] + 1 : d[0] + 2, a = atk ? cols * 1 + 1 : cols + 1, rc = tileReach(t, a, cols, R, fightFx()), cs = 17, g = 2, top = atk ? cs + 6 : 0;
+  var W = cols * (cs + g) - g, H = R * (cs + g) - g + top, own = {}, tg = {}, hc = {}, out = '', i, r, c, lab = t.k === 'p' ? '+' + t.n : t.k === 'x' ? '×' + t.n : '';
+  if (!rc) return '';
+  rc.cells.forEach(function (q) { own[q] = 1; }); rc.targets.forEach(function (q) { tg[q] = 1; }); rc.cols.forEach(function (q) { hc[q] = 1; });
+  var tcls = t.rb ? 't trb' : 't';
+  for (i = 0; i < cols * R; i++) {
+    r = (i / cols) | 0; c = i % cols;
+    var x = c * (cs + g), y = r * (cs + g) + top, k = own[i] ? tcls : tg[i] ? 'h' : (atk && hc[c]) ? 'ln' : 'e';
+    out += '<rect class="' + k + '" x="' + x + '" y="' + y + '" width="' + cs + '" height="' + cs + '" rx="3"/>';
+    if (own[i] && i === rc.cells[0]) out += '<text class="tt" x="' + (x + cs / 2) + '" y="' + (y + cs / 2 + 3.5) + '">' + (t.k === 'p' ? '+' + t.n : t.k === 'x' ? '×' + t.n : t.n) + '</text>';
+    else if (tg[i] && lab) out += '<text class="ht" x="' + (x + cs / 2) + '" y="' + (y + cs / 2 + 3.5) + '">' + lab + '</text>';
+    else if (tg[i] && t.k === 'e') out += '<text class="ht" x="' + (x + cs / 2) + '" y="' + (y + cs / 2 + 3.5) + '">n</text>';
+  }
+  if (atk) for (c = 0; c < cols; c++) {
+    var x2 = c * (cs + g), hit = !!hc[c];
+    out += '<rect class="' + (hit ? 'en hit' : 'en') + '" x="' + x2 + '" y="0" width="' + cs + '" height="' + (cs - 4) + '" rx="3"/>' + (hit ? '<text class="et" x="' + (x2 + cs / 2) + '" y="' + (cs - 7) + '">-' + t.n + '</text>' : '');
+  }
+  return '<svg class="mb" viewBox="0 0 ' + W + ' ' + H + '" width="' + Math.min(W * 1.5, 150) + '" height="' + Math.min(W * 1.5, 150) * H / W + '" aria-hidden="true">' + out + '</svg>';
+}
+function oneLine(t) {
+  if (t.k === 'a') return 'Hits the marked column' + (miniCols(t) > 1 ? 's' : '') + ' for ' + t.n + ' each.';
+  if (t.k === 'p') return 'Adds +' + t.n + ' to attacking tiles in the marked cells.';
+  if (t.k === 'x') return 'Multiplies tiles in the marked cells by ' + t.n + '.';
+  return 'Copies the marked tile\'s number, adds ' + t.n + '.';
+}
+function miniCols(t) { var d = shapeDims(t), rc = tileReach(t, d[1] + 3, d[1] + 2, d[0] + 1, fightFx()); return rc ? rc.cols.length : 1; }
 function tileCardHTML(t, parts, extra) {
-  var h = '<div class="cardtile">' + tileHTML(t, { ts: 56, noRest: true }) + '</div><h3>' + (t.rar ? RARITY[t.rar] + ' ' : '') + colName(t) + ' ' + tileName(t) + ' ' + tileLabel(t) + '</h3><p>' + tileDesc(t) + '</p>';
-  if (t.c === 'x' && !t.rb) h += '<p class="muted">Colourless: never counts as a colour for Sandwich.</p>';
-  if (t.rb) h += '<p class="muted"><b>A rainbow tile counts as every colour.</b> As bread it matches any colour; between two tiles that share a colour it is doubled; between two rainbow tiles it is not. It fits any unit\'s slot.</p>';
-  if (t.c2) h += '<p class="muted">Two colours: counts as both for Sandwich.</p>';
-  if (t.st) h += '<p class="muted">' + stars(t.st) + ' stars: +' + t.st * CONFIG.stars.bonus + ' to its number (three identical tiles make one star).</p>';
-  if (t.up) h += '<p class="muted">Upgraded this run: +' + t.up + '.</p>';
-  if (t.added) h += '<p class="muted">Added to your bag for this run.</p>';
-  if (t.rest) h += '<p class="muted">Resting until this fight ends.</p>';
-  if (specStage(t) > 1) h += '<p class="muted">Introduced in stage ' + specStage(t) + '.</p>';
+  var tags = []; if (t.rb) tags.push('counts as every colour'); if (t.c === 'x' && !t.rb) tags.push('colourless'); if (t.c2) tags.push('two colours'); if (t.st) tags.push(stars(t.st) + ' +' + t.st * starBonus(t.k, t.d)); if (t.up) tags.push('upgraded +' + t.up); if (t.added) tags.push('<span class="tmpt">' + HOURGLASS + '</span> this run only'); if (t.rest) tags.push('resting');
+  var h = '<div class="cardtile">' + tileHTML(t, { ts: 56, noRest: true, noTmp: true }) + '</div><h3>' + (t.rar ? RARITY[t.rar] + ' ' : '') + colName(t) + ' ' + tileName(t) + ' ' + tileLabel(t) + '</h3>' +
+    '<div class="csz">' + footprintSVG(t) + '<b>' + sizeText(t) + '</b></div><div class="cdiag c-' + t.c + '">' + miniBoardHTML(t) + '</div><p class="c1">' + oneLine(t) + '</p>';
+  if (tags.length) h += '<p class="muted ctags">' + tags.join(' · ') + '</p>';
   if (parts) { var rows = parts.filter(function (p) { return p[1] && !(p[0].indexOf('×') >= 0 && p[1] === 1); }); if (rows.length) h += '<table>' + rows.map(function (p) { return '<tr><td>' + p[0] + '</td><td>' + (p[0].indexOf('×') >= 0 ? '×' : '+') + p[1] + '</td></tr>'; }).join('') + '</table>'; }
   return h + (extra || '');
 }
@@ -2655,12 +2730,17 @@ function cardFor(key) {
   if (p[0] === 'ot') { var ot = run.offers[+p[1]].reward.tile; return tileCardHTML(invTile(ot), null, '<p class="muted">Reward: goes into your colourless inventory when the run ends.</p>'); }
   if (p[0] === 'e' || p[0] === 'oe') {
     var e = p[0] === 'e' ? S.fs.F.enemies[+p[1]] : run.offers[+p[1]].F.enemies[+p[2]];
-    h = '<h3>' + (e.kind === 'r' ? 'Runner' : e.boss ? 'Boss body' : e.need > 1 ? 'Guard' : e.w > 1 ? 'Wide enemy' : 'Enemy') + '</h3><p>HP <b>' + (e.dead ? 0 : e.hp) + '</b>.' + (e.kind === 'r' ? ' It leaves after your first attack if it is still alive; it does not hit. Kill it for a bonus colourless tile.' : ' Attack <b>' + e.atk + '</b>: if it survives your attack it hits your hero for that much.') + '</p>';
-    if (e.need > 1) h += '<p>Takes damage only if at least ' + e.need + ' different tiles hit it in one attack.</p>';
-    if (e.cols2) h += '<p>' + TRICKS.colours2 + '</p>';
-    if (e.w > 1) h += '<p>Wide: covers ' + e.w + ' columns with one shared HP pool.</p>';
-    if (e.twin) h += '<p>' + TRICKS.twin + '</p>';
-    return h + '<p class="muted">HP stays between attacks.</p>';
+    var ico = function (d, txt) { return '<p class="tr"><svg viewBox="0 0 24 24" aria-hidden="true">' + d + '</svg><span>' + txt + '</span></p>'; };
+    var hpv = e.dead ? 0 : e.hp;
+    h = '<h3>' + (e.kind === 'r' ? 'Runner' : e.boss ? 'Boss' : e.need > 1 ? 'Guard' : e.w > 1 ? 'Wide enemy' : 'Enemy') + '</h3><div class="ehp"><i style="width:' + Math.max(0, Math.min(100, hpv / (e.max || e.hp || 1) * 100)) + '%"></i><span>HP ' + hpv + ' / ' + (e.max || e.hp) + '</span></div>';
+    h += ico('<path d="M13 3L5 13h6l-1 8 8-10h-6z"/>', e.kind === 'r' ? 'No attack: it flees.' : 'Attack ' + e.atk + ' if it survives.');
+    if (e.need > 1) h += ico('<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/>', 'Guard: needs ' + e.need + ' different tiles in one attack.');
+    if (e.kind === 'r') h += ico('<path d="M3 12h13M12 6l6 6-6 6"/>', 'Runner: gone after your first attack. Kill it for a bonus tile.');
+    if (e.w > 1) h += ico('<path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/>', 'Wide: ' + e.w + ' columns, one shared HP.');
+    if (e.cols2) h += ico('<circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/>', 'Needs 2 colours.');
+    if (e.twin) h += ico('<path d="M6 4v16M18 4v16"/>', TRICKS.twin);
+    if (e.boss && S.fs && S.fs.F && S.fs.F.bossTrick && TRICKS[S.fs.F.bossTrick]) h += ico('<path d="M3 19l-1-12 6 5 4-8 4 8 6-5-1 12z"/>', TRICKS[S.fs.F.bossTrick]);
+    return h;
   }
   if (p[0] === 'rl') { var rl = RELIC_BY_ID[p[1]]; return '<h3>Relic: ' + rl.name + '</h3><p>' + rl.line + '</p><p class="muted">Lasts for this run. At most ' + CONFIG.relicMax + ' per run. It is included in the live totals.</p>'; }
   if (p[0] === 'hr') { var hh = HERO_BY_ID[p[1]]; return '<h3>Hero: ' + hh.name + ' (' + hh.ab + ')</h3><p>' + hh.line + '</p><p class="muted">Once per fight. ' + (hh.target ? 'Tap the button, then a placed tile; the button turns into Cancel.' : 'Tap the button to switch it on; tap again to undo before attacking.') + '</p>'; }
@@ -2912,12 +2992,24 @@ function endlessHTML() {
 function doKeep(i) {
   var run = S.run, p = run.pending, c = applyKeep(run, i);
   if (c) {
-    var spec = { c: c.c, k: c.k, d: c.d, n: c.n, sh: c.sh, rar: c.rar || 0 };
-    p.keep.merged = addCT(spec) === 'merged';
-    var top = store.ct.filter(function (x) { return starKey(x) === starKey(spec); }).sort(function (a, b) { return (b.st || 0) - (a.st || 0); })[0];
-    if (top && !p.keep.merged && CONFIG.stars.on && (top.st || 0) < CONFIG.stars.cap) p.keep.progress = starCount(store.ct, top) + ' of ' + CONFIG.stars.need + ' for ' + stars((top.st || 0) + 1);
+    p.keep.info = p.keep.results.map(function (c) {
+      var spec = { c: c.c, k: c.k, d: c.d, n: c.n, sh: c.sh, rar: c.rar || 0 }, inf = { c: c, merged: addCT(spec) === 'merged', progress: '' };
+      var top = store.ct.filter(function (x) { return starKey(x) === starKey(spec); }).sort(function (a, b) { return (b.st || 0) - (a.st || 0); })[0];
+      if (top && !inf.merged && CONFIG.stars.on && (top.st || 0) < CONFIG.stars.cap) inf.progress = starCount(store.ct, top) + ' of ' + CONFIG.stars.need + ' for ' + stars((top.st || 0) + 1);
+      return inf;
+    });
+    p.keep.merged = p.keep.info[0].merged; p.keep.progress = p.keep.info[0].progress;
   }
-  save(); persist(); renderResult();
+  closeModal(); save(); persist(); renderResult();
+}
+/* ask before keeping: the chosen tiles are shown for real, Confirm keeps them, Back returns to the list */
+function keepConfirm() {
+  var k = S.run && S.run.pending && S.run.pending.keep; if (!k || k.done || !k.sel.length) return;
+  var h = '<h3>Keep ' + (k.sel.length > 1 ? 'these ' + k.sel.length + ' tiles' : 'this tile') + '?</h3><div class="inv" style="justify-content:center;gap:14px;margin:6px 0">' +
+    k.sel.map(function (i) { var c = k.cands[i], t = ctTile(c); return '<div style="text-align:center">' + tileHTML(t, { ts: 58, noRest: true }) + '<div class="ctext">' + tileName2(t) + '</div></div>'; }).join('') + '</div>' +
+    '<p style="font-size:14px;color:var(--ink)">' + (k.sel.length > 1 ? 'They are' : 'It is') + ' kept in your collection (base value, run upgrades are not kept). Colourless tiles are all kept anyway.</p>' +
+    '<div class="btnrow"><button class="btn main" data-act="keepok">Confirm</button><button class="btn" data-act="keepback">Back</button></div>';
+  openModal(h);
 }
 function testCT(n) {
   for (var i = 0; i < n; i++) { var c = COLOR_IDS[(Math.random() * 5) | 0], rar = i === 3 ? 2 : i % 2, sp = genSpec(rar, 10, Math.random); addCT({ c: c, k: sp.k, d: sp.d, n: sp.n, sh: sp.sh, rar: rar }); }
@@ -2937,7 +3029,12 @@ document.addEventListener('click', function (e) {
     store.bag = bs; save(); show(S.screen); return;
   }
   if ((el = t.closest && t.closest('[data-ct]'))) { var msg = toggleStack(S.loadUid, el.dataset.ct.split(',').map(Number)); $('#modal').innerHTML = slotPopHTML(S.loadUid, msg); if (S.screen === 'team') renderTeam(); return; }
-  if ((el = t.closest && t.closest('[data-keep]'))) { doKeep(+el.dataset.keep); return; }
+  if ((el = t.closest && t.closest('[data-keep]'))) {
+    var kk = S.run.pending.keep, ki = +el.dataset.keep, at = kk.sel.indexOf(ki);
+    if ((kk.max || 1) < 2) { kk.sel = [ki]; keepConfirm(); return; }
+    if (at >= 0) kk.sel.splice(at, 1); else if (kk.sel.length < kk.max) kk.sel.push(ki); else { kk.sel.shift(); kk.sel.push(ki); }
+    renderResult(); return;
+  }
   if ((el = t.closest && t.closest('[data-relic]'))) { var rp = S.run.pending; S.run.relics.push(rp.relicPicks[+el.dataset.relic]); rp.relicDone = true; renderResult(); return; }
   if ((el = t.closest && t.closest('[data-pick]'))) { S.rtabSet = false; takePick(+el.dataset.pick); return; }
   if ((el = t.closest && t.closest('[data-offer]'))) { chooseOfferUI(+el.dataset.offer); return; }
@@ -2956,9 +3053,12 @@ document.addEventListener('click', function (e) {
     case 'slotgo': buySlot(el.dataset.u); closeModal(); break;
     case 'slotpop': S.loadUid = el.dataset.u; openModal(slotPopHTML(S.loadUid)); break;
     case 'level': openModal(levelHTML(el.dataset.u)); break;
-    case 'lvlgo': levelUp(el.dataset.u); closeModal(); break;
+    case 'lvlgo': var lu = el.dataset.u, lok = levelUp(lu); $('#modal').innerHTML = levelHTML(lu, lok); if (S.screen === 'team') renderTeam(); break;
     case 'skill': showCard(skillCardHTML(UNIT_BY_ID[el.dataset.u], +el.dataset.i)); break;
     case 'keepskip': doKeep(-1); break;
+    case 'keepgo': keepConfirm(); break;
+    case 'keepok': doKeep(S.run.pending.keep.sel.slice()); break;
+    case 'keepback': closeModal(); break;
     case 'shards': store.shards = (store.shards || 0) + 10; save(); $('#modal').innerHTML = settingsHTML(); break;
     case 'slotsall': UNITS.forEach(function (u) { var sl = slotsOf(u.id); while (sl.n < CONFIG.slotMax[u.rar]) { sl.n++; sl.t.push(0); } }); save(); $('#modal').innerHTML = settingsHTML(); break;
     case 'cttiles': testCT(4); $('#modal').innerHTML = settingsHTML(); break;
