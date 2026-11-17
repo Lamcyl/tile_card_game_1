@@ -561,23 +561,26 @@ var CONFIG = {
   pick: { up2: 0.55 },
   /* the ten difficulty tiers (the old stages). hp = per enemy column at step 0, atk = enemy attack, colours = team colours in play (r b g y p in order) */
   stages: [
-    { name: 'Dawn Gate',  cols: 3, rows: 2, colours: 3, hp: 11, atk: 3, heroHp: 20, coin: 1, boss: 'plain',    intro: 'Forward attacks and Sandwich' },
-    { name: 'Meadow',     cols: 3, rows: 3, colours: 3, hp: 17, atk: 3, heroHp: 24, coin: 1, boss: 'twin',     intro: 'Side-lane attacks and bonus cells' },
-    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 25, atk: 4, heroHp: 28, coin: 1.2, boss: 'block',    intro: 'Adjacent boosts and Guard enemies' },
-    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 34, atk: 4, heroHp: 30, coin: 1.2, boss: 'aegis',    intro: 'Multi-lane attacks, Runners and the Forge' },
-    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 45, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Row and column boosts, Rare tiles' },
-    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 54, atk: 5, heroHp: 34, coin: 1.4, boss: 'sealed',   intro: 'Multipliers' },
-    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 110, atk: 7, heroHp: 36, coin: 1.6, boss: 'shield',   intro: 'Two-cell tiles' },
-    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 134, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Copy tiles, three-cell tiles, Epic tiles' },
-    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 138, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Line multipliers, four-cell tiles, level 5 branches' },
-    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 90, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
+    { name: 'Dawn Gate',  cols: 3, rows: 2, colours: 3, hp: 8, atk: 3, heroHp: 20, coin: 1, boss: 'plain',    intro: 'Forward attacks and Sandwich' },
+    { name: 'Meadow',     cols: 3, rows: 3, colours: 3, hp: 11, atk: 3, heroHp: 24, coin: 1, boss: 'twin',     intro: 'Boosts, double sandwiches and bonus cells' },
+    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 16, atk: 4, heroHp: 28, coin: 1.2, boss: 'block',    intro: 'Side-lane attacks and Guard enemies' },
+    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 21, atk: 4, heroHp: 30, coin: 1.2, boss: 'aegis',    intro: 'Three-lane attacks, Runners and the Forge' },
+    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 28, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Unit skills, row and column boosts, Rare tiles' },
+    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 39, atk: 5, heroHp: 34, coin: 1.4, boss: 'sealed',   intro: 'Multipliers' },
+    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 85, atk: 7, heroHp: 36, coin: 1.6, boss: 'shield',   intro: 'Two-cell tiles and rainbow tiles' },
+    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 100, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Copy tiles, three-cell tiles, Epic tiles' },
+    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 105, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Line multipliers, four-cell tiles, level 5 branches' },
+    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 66, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
   ],
+  /* lessons: puzzles that must be solved before the first stage of each difficulty (each teaches the tiles that start to appear there) */
+  lessons: { 1: ['p01', 'p02'], 2: ['p03', 'p05', 'p06'], 3: ['p04', 'p07'], 4: ['p08'], 5: ['p16', 'p10'], 6: ['p11', 'p12'], 7: ['p13', 'p15', 'p09'], 8: ['p14'] },
+  fxTier: 5,   /* unit skills work from this difficulty on (taught by lesson p16) */
   firstClear: { coins: [5, 6, 7, 8, 9, 10, 11, 12, 14, 20] },
   /* the size of every unit effect (the rule of each effect is in EFFECTS; only these numbers are tunable) */
   /* level bonus by level 1..5 (index 0..4): attacks by the columns reached (1, 2, 3, 4 or more), local boosts, line boosts, multipliers, copies */
   lvl: { a: [[0, 1, 2, 3, 4], [0, 1, 1, 2, 2], [0, 0, 1, 1, 1], [0, 0, 0, 1, 1]], pl: [0, 0, 0, 1, 1], pr: [0, 0, 0, 0, 1], x: [0, 0, 0, 0, 0], e: [0, 0, 1, 1, 2] },
   hero: { rally: 2, over: 3 },   /* Rally: momentum added to every tile; Overcharge: the factor on the tapped tile */
-  fx: { front1: 5, back2: 8, single1: 5, boostp1: 1, wide1: 3, neigh1: 1, palette1: 1, mult1: 1, sand3: 6, cell2: 2, same1: 1, backx2: 2, edge2: 8, touch1: 6, loyal2: 14, boosted2: 10, foes1: 1, small2: 6, small2max: 7, up2: 12, rowmates1: 2, corner3: 12, bread1: 1, linepow: 2, echo2: 10, mulled2: 4, rare2: 8, colmates1: 1, triple: 3 }
+  fx: { front1: 1, back2: 2, single1: 1, boostp1: 1, wide1: 1, neigh1: 1, palette1: 1, mult1: 1, sand3: 2, cell2: 1, same1: 1, backx2: 2, edge2: 2, touch1: 1, loyal2: 2, boosted2: 2, foes1: 1, small2: 2, small2max: 4, up2: 2, rowmates1: 1, corner3: 3, bread1: 1, linepow: 2, echo2: 2, mulled2: 1, rare2: 2, colmates1: 1, triple: 3 }
 };
 var FN = CONFIG.fx;
 var COLOR_IDS = ['r', 'b', 'g', 'y', 'p'];
@@ -652,11 +655,22 @@ function isAttackT(t) { return t.k === 'a' || t.k === 'e'; }
 /* the stage in which a tile type is introduced */
 function specStage(t) {
   var s = 1;
-  if (t.k === 'a') s = t.d === '^' ? 1 : (t.d === '<' || t.d === '>' || t.d === '<>') ? 2 : 4;
-  else if (t.k === 'p') s = /[RC]/.test(t.d) ? 5 : t.d === 'B' ? 9 : 3;
+  if (t.k === 'a') s = t.d === '^' ? 1 : (t.d === '<' || t.d === '>' || t.d === '<>') ? 3 : 4;
+  else if (t.k === 'p') s = /[RC]/.test(t.d) ? 5 : t.d === 'B' ? 9 : 2;
   else if (t.k === 'x') s = /[RCB]/.test(t.d) ? 9 : 6;
   else if (t.k === 'e') s = 8;
   var n = cellsOf(t).length; if (n === 2) s = Math.max(s, 7); else if (n === 3) s = Math.max(s, 8); else if (n === 4) s = Math.max(s, 9);
+  return s;
+}
+/* a unit's base tile before its lesson becomes a plain tile (big tiles shrink, side lanes become a straight Strike, boosts/multipliers/copies become a Strike 3) */
+function simpleSpec(k, tier) {
+  var s = { k: k.k, d: k.d, n: k.n, sh: k.sh, base: k.base }, g = 0;
+  while (specStage(s) > tier && g++ < 4) {
+    if (s.sh !== 'o' && cellsOf(s).length > 1) { s.n = Math.max(2, Math.round(s.n * 0.6)); s.sh = 'o'; }
+    else if (s.k !== 'a') { s.k = 'a'; s.d = '^'; s.n = 3; }
+    else { s.d = '^'; s.n += 1; }
+  }
+  if (s.n !== k.n || s.k !== k.k || s.d !== k.d || s.sh !== k.sh) s.base = s.n;
   return s;
 }
 var DIRNAME = { u: 'in front', d: 'behind', l: 'to the left', r: 'to the right' };
@@ -996,7 +1010,7 @@ function shapesFor(stage, F, rnd, maxSize) {
 /* a random tile type allowed in this stage, with a number from the budget; rar 0 common, 1 rare, 2 epic */
 function genSpec(rar, stage, rnd, opts) {
   opts = opts || {}; var B = CONFIG.budget, S = CONFIG.stages[stage - 1], k, d, sh = 'o', r = rnd();
-  var kinds = [['a', 0.55]]; if (stage >= 3) kinds.push(['p', 0.2]); if (stage >= 6) kinds.push(['x', 0.08]); if (stage >= 8) kinds.push(['e', 0.08]);
+  var kinds = [['a', 0.55]]; if (stage >= 2) kinds.push(['p', 0.2]); if (stage >= 6) kinds.push(['x', 0.08]); if (stage >= 8) kinds.push(['e', 0.08]);
   var sum = kinds.reduce(function (s, x) { return s + x[1]; }, 0), acc = 0; r *= sum;
   for (var i = 0; i < kinds.length; i++) { acc += kinds[i][1]; if (r < acc) { k = kinds[i][0]; break; } }
   k = k || 'a';
@@ -1004,7 +1018,7 @@ function genSpec(rar, stage, rnd, opts) {
   if (k !== 'e' && rnd() < multiP) sh = shapesFor(stage, S, rnd);
   var cells = SHAPE_CELLS[sh].length, jit = 0.85 + 0.3 * rnd(), n;
   if (k === 'a') {
-    var lanes = ['^']; if (stage >= 2) lanes = lanes.concat(['<', '>', '<>']); if (stage >= 4) lanes = lanes.concat(['<^', '^>', '<^>', '<^>']);
+    var lanes = ['^']; if (stage >= 3) lanes = lanes.concat(['<', '>', '<>']); if (stage >= 4) lanes = lanes.concat(['<^', '^>', '<^>', '<^>']);
     if (rar >= 1 && stage >= 4) lanes = lanes.concat(['<^>', '<^', '^>']);
     d = pick(lanes, rnd); n = Math.max(1, Math.round(B.attackBase[rar] * B.lanePen[laneOffsets(d).length] * B.cellBonus[cells] * jit));
   } else if (k === 'p' || k === 'x') {
@@ -1223,8 +1237,8 @@ function newRun(mode, stage, team, units, colourless, rnd, hero, opt) {
   var rbLeft = CONFIG.rainbow.maxTeam;
   COLOR_IDS.slice(0, S.colours).forEach(function (c) {
     var u = UNIT_BY_ID[team[c]], st = units[u.id] || { l: 1 }, lvl = Math.max(1, Math.min(5, st.l || 1));
-    unitBase(u, lvl).forEach(function (k) { run.bag.push(mkTile(run, c, u.id, k)); });
-    if (u.fx) run.fx[c] = u.fx;
+    unitBase(u, lvl).forEach(function (k) { run.bag.push(mkTile(run, c, u.id, simpleSpec(k, stage))); });
+    if (u.fx && stage >= CONFIG.fxTier) run.fx[c] = u.fx;
     ((opt.slots && opt.slots[u.id]) || []).forEach(function (sp) {
       if (sp.rb) { if (rbLeft <= 0) return; rbLeft--; }
       run.bag.push(mkTile(run, c, u.id, sp, { rar: sp.rar || 0, st: sp.st || 0, slot: true }, sp.rb));
@@ -1394,7 +1408,7 @@ function firstClearReward(stage, rnd) {
 /* ---- puzzle shrines: one attack, fixed board, enemies and hand ---- */
 function puzzleFight(def) {
   var enemies = def.enemies.map(function (e) { return { c: e[0], w: e[1], hp: e[2], max: e[2], atk: 0, kind: 'p', need: e[3] || 1, boss: false, twin: 0, cols2: false, dead: false, gone: false }; });
-  var F = { cols: def.cols, rows: def.rows, enemies: enemies, blocked: def.blocked.slice(), bonus: JSON.parse(JSON.stringify(def.bonus || {})), tricks: [], colMul: {}, deadRow: -1, phases: null, tb: -1, tn: -1, sc: -1, sn: -1, relics: [] };
+  var F = { cols: def.cols, rows: def.rows, enemies: enemies, blocked: def.blocked.slice(), bonus: JSON.parse(JSON.stringify(def.bonus || {})), tricks: [], colMul: {}, deadRow: -1, phases: null, tb: -1, tn: -1, sc: -1, sn: -1, relics: [], fx: def.fx || {} };
   var tiles = def.hand.map(function (h, i) { var p = parseTok(h.t), t = { id: i + 1, c: h.c, u: 'x', k: p.k, d: p.d, n: p.n, sh: p.sh, rest: false }; if (h.c2) t.c2 = h.c2; return t; });
   return { F: F, tiles: tiles };
 }
@@ -1457,7 +1471,7 @@ function groupCands(cands) {
   return out;
 }
 /*PUZ-START*/
-var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Match the numbers to the enemies. Each Strike hits the column above it.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^5"},{"c":"g","t":"a^2"}],"enemies":[[0,1,7],[1,1,10],[2,1,4]],"sol":[[2,3],[1,0],[0,2],[4,5],[3,1]],"reward":{"coins":10}},{"id":"p02","name":"Sandwich","teach":"A tile between two tiles of one other colour is doubled.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,5],[1,1,8],[2,1,3]],"sol":[[2,1],[1,5],[4,0],[0,3],[3,4]],"reward":{"coins":10}},{"id":"p03","name":"Both Ways","teach":"Sandwich in the row and in the column: x4.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^1"}],"enemies":[[0,1,2],[1,1,8],[2,1,5]],"sol":[[5,4],[1,1],[0,5],[3,7],[4,8],[2,3]],"reward":{"coins":15}},{"id":"p04","name":"Reach Sideways","teach":"Side lanes hit the neighbouring columns.","stage":2,"cols":3,"rows":3,"blocked":[4],"bonus":{},"hand":[{"c":"r","t":"a<>4"},{"c":"b","t":"a<>3"},{"c":"g","t":"a<2"},{"c":"g","t":"a>2"},{"c":"r","t":"a^3"}],"enemies":[[0,1,10],[1,1,4],[2,1,7]],"sol":[[3,3],[2,2],[1,7],[0,1],[4,6]],"reward":{"coins":15}},{"id":"p05","name":"Lucky Cells","teach":"Bonus cells boost the tile placed on them.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{"0":"x2","4":"p2","8":"p1"},"hand":[{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"r","t":"a^5"},{"c":"b","t":"a^2"}],"enemies":[[0,1,4],[1,1,5],[2,1,12]],"sol":[[0,5],[3,8],[4,0],[2,2],[1,4]],"reward":{"coins":15,"tile":"a^3"}},{"id":"p06","name":"Neighbours","teach":"A boost adds to the attackers touching its marked edges.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"pudlr2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"r","t":"a^2"},{"c":"y","t":"pu1"}],"enemies":[[0,1,4],[2,1,9],[3,1,6]],"sol":[[5,11],[1,2],[4,10],[2,7],[3,4],[0,6]],"reward":{"coins":20}},{"id":"p07","name":"Guard Duty","teach":"A guard only takes damage from 2 different tiles.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^4"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"},{"c":"y","t":"a<>3"},{"c":"r","t":"a^2"}],"enemies":[[0,1,7],[2,1,7],[3,1,5]],"sol":[[3,5],[4,11],[2,7],[1,4],[0,10]],"reward":{"coins":20}},{"id":"p08","name":"Three Lanes","teach":"A trident hits the column on each side and its own.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a<^>3"},{"c":"b","t":"a<^3"},{"c":"g","t":"a^>2"},{"c":"y","t":"a^4"},{"c":"r","t":"a<>2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,8],[1,1,19],[2,1,9],[3,1,2]],"sol":[[0,9],[2,10],[1,4],[3,5],[5,6],[4,1]],"reward":{"coins":25,"tile":"a<>3"}},{"id":"p09","name":"Two Colours","teach":"A two-colour tile counts as both colours for Sandwich.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","c2":"g","t":"a^4"},{"c":"b","t":"a^2"},{"c":"g","t":"a^2"}],"enemies":[[1,1,7],[2,1,8],[3,1,3]],"sol":[[4,5],[1,9],[2,10],[3,1],[0,11]],"reward":{"coins":25}},{"id":"p10","name":"Whole Lines","teach":"A row or column boost reaches every tile on its line.","stage":5,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"pR1"},{"c":"b","t":"pC1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^3"},{"c":"p","t":"a^4"}],"enemies":[[2,1,10],[3,1,4]],"sol":[[3,3],[2,12],[1,7],[4,2],[0,1]],"reward":{"coins":30,"tile":"pudlr1"}},{"id":"p11","name":"Multiply","teach":"A multiplier multiplies the attackers on its marked edges.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xu2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"y","t":"a^2"},{"c":"p","t":"a^3"}],"enemies":[[1,1,10],[2,1,3],[3,1,3]],"sol":[[0,6],[2,1],[3,11],[4,3],[1,12]],"reward":{"coins":30}},{"id":"p12","name":"Stacked Multipliers","teach":"Multipliers stack without a limit: two doublers make x4.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xudlr2"},{"c":"g","t":"xudlr2"},{"c":"b","t":"xu2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^3"}],"enemies":[[1,1,12],[2,1,16]],"sol":[[0,1],[4,6],[1,7],[2,11],[3,2]],"reward":{"coins":30,"tile":"xu2"}},{"id":"p13","name":"Two Cells","teach":"A two-cell tile is one piece and hits every column it covers.","stage":7,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^6#h2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^5"}],"enemies":[[1,1,4],[2,1,9],[3,1,13]],"sol":[[4,18],[3,6],[2,8],[1,7],[0,12]],"reward":{"coins":35}},{"id":"p14","name":"Copy That","teach":"A copy tile takes the number of the tile it points at.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^5"},{"c":"b","t":"eu1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"p","t":"a^2"}],"enemies":[[1,1,14],[2,1,4],[3,1,2]],"sol":[[3,7],[2,16],[4,3],[1,6],[0,1]],"reward":{"coins":40,"tile":"a^4"}},{"id":"p15","name":"Short Side","teach":"A big tile is sandwiched across its short side too.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4#h2"},{"c":"g","t":"a^2"},{"c":"y","t":"a^3"}],"enemies":[[1,1,3],[2,1,8],[3,1,16]],"sol":[[3,3],[2,12],[0,8],[1,18],[4,1]],"reward":{"coins":40}}];
+var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Match the numbers to the enemies. Each Strike hits the column above it.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^5"},{"c":"g","t":"a^2"}],"enemies":[[0,1,7],[1,1,10],[2,1,4]],"sol":[[2,3],[1,0],[0,2],[4,5],[3,1]],"reward":{"coins":10}},{"id":"p02","name":"Sandwich","teach":"A tile between two tiles of one other colour is doubled.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,5],[1,1,8],[2,1,3]],"sol":[[2,1],[1,5],[4,0],[0,3],[3,4]],"reward":{"coins":10}},{"id":"p03","name":"Both Ways","teach":"Sandwich in the row and in the column: x4.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^1"}],"enemies":[[0,1,2],[1,1,8],[2,1,5]],"sol":[[5,4],[1,1],[0,5],[3,7],[4,8],[2,3]],"reward":{"coins":15}},{"id":"p04","name":"Reach Sideways","teach":"Side lanes hit the neighbouring columns.","stage":2,"cols":3,"rows":3,"blocked":[4],"bonus":{},"hand":[{"c":"r","t":"a<>4"},{"c":"b","t":"a<>3"},{"c":"g","t":"a<2"},{"c":"g","t":"a>2"},{"c":"r","t":"a^3"}],"enemies":[[0,1,10],[1,1,4],[2,1,7]],"sol":[[3,3],[2,2],[1,7],[0,1],[4,6]],"reward":{"coins":15}},{"id":"p05","name":"Lucky Cells","teach":"Bonus cells boost the tile placed on them.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{"0":"x2","4":"p2","8":"p1"},"hand":[{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"r","t":"a^5"},{"c":"b","t":"a^2"}],"enemies":[[0,1,4],[1,1,5],[2,1,12]],"sol":[[0,5],[3,8],[4,0],[2,2],[1,4]],"reward":{"coins":15,"tile":"a^3"}},{"id":"p06","name":"Neighbours","teach":"A boost adds to the attackers touching its marked edges.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"pudlr2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"r","t":"a^2"},{"c":"y","t":"pu1"}],"enemies":[[0,1,4],[2,1,9],[3,1,6]],"sol":[[5,11],[1,2],[4,10],[2,7],[3,4],[0,6]],"reward":{"coins":20}},{"id":"p07","name":"Guard Duty","teach":"A guard only takes damage from 2 different tiles.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^4"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"},{"c":"y","t":"a<>3"},{"c":"r","t":"a^2"}],"enemies":[[0,1,7],[2,1,7],[3,1,5]],"sol":[[3,5],[4,11],[2,7],[1,4],[0,10]],"reward":{"coins":20}},{"id":"p08","name":"Three Lanes","teach":"A trident hits the column on each side and its own.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a<^>3"},{"c":"b","t":"a<^3"},{"c":"g","t":"a^>2"},{"c":"y","t":"a^4"},{"c":"r","t":"a<>2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,8],[1,1,19],[2,1,9],[3,1,2]],"sol":[[0,9],[2,10],[1,4],[3,5],[5,6],[4,1]],"reward":{"coins":25,"tile":"a<>3"}},{"id":"p09","name":"Two Colours","teach":"A two-colour tile counts as both colours for Sandwich.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","c2":"g","t":"a^4"},{"c":"b","t":"a^2"},{"c":"g","t":"a^2"}],"enemies":[[1,1,7],[2,1,8],[3,1,3]],"sol":[[4,5],[1,9],[2,10],[3,1],[0,11]],"reward":{"coins":25}},{"id":"p10","name":"Whole Lines","teach":"A row or column boost reaches every tile on its line.","stage":5,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"pR1"},{"c":"b","t":"pC1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^3"},{"c":"p","t":"a^4"}],"enemies":[[2,1,10],[3,1,4]],"sol":[[3,3],[2,12],[1,7],[4,2],[0,1]],"reward":{"coins":30,"tile":"pudlr1"}},{"id":"p11","name":"Multiply","teach":"A multiplier multiplies the attackers on its marked edges.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xu2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"y","t":"a^2"},{"c":"p","t":"a^3"}],"enemies":[[1,1,10],[2,1,3],[3,1,3]],"sol":[[0,6],[2,1],[3,11],[4,3],[1,12]],"reward":{"coins":30}},{"id":"p12","name":"Stacked Multipliers","teach":"Multipliers stack without a limit: two doublers make x4.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xudlr2"},{"c":"g","t":"xudlr2"},{"c":"b","t":"xu2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^3"}],"enemies":[[1,1,12],[2,1,16]],"sol":[[0,1],[4,6],[1,7],[2,11],[3,2]],"reward":{"coins":30,"tile":"xu2"}},{"id":"p13","name":"Two Cells","teach":"A two-cell tile is one piece and hits every column it covers.","stage":7,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^6#h2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^5"}],"enemies":[[1,1,4],[2,1,9],[3,1,13]],"sol":[[4,18],[3,6],[2,8],[1,7],[0,12]],"reward":{"coins":35}},{"id":"p14","name":"Copy That","teach":"A copy tile takes the number of the tile it points at.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^5"},{"c":"b","t":"eu1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"p","t":"a^2"}],"enemies":[[1,1,14],[2,1,4],[3,1,2]],"sol":[[3,7],[2,16],[4,3],[1,6],[0,1]],"reward":{"coins":40,"tile":"a^4"}},{"id":"p15","name":"Short Side","teach":"A big tile is sandwiched across its short side too.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4#h2"},{"c":"g","t":"a^2"},{"c":"y","t":"a^3"}],"enemies":[[1,1,3],[2,1,8],[3,1,16]],"sol":[[3,3],[2,12],[0,8],[1,18],[4,1]],"reward":{"coins":40}},{"id":"p16","name":"Unit Skills","teach":"Every unit has a skill for its colour. Here the red unit has Front Rank: red attack tiles in the front row get +1.","stage":5,"cols":3,"rows":2,"blocked":[],"bonus":{},"fx":{"r":"front1"},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"b","t":"a^2"}],"enemies":[[0,1,6],[1,1,6],[2,1,6]],"sol":[[0,0],[3,1],[1,2],[2,3],[4,5]],"reward":{"coins":20}}];
 /*PUZ-END*/
 /*RULES-END*/
 
@@ -1871,7 +1885,9 @@ function stageCardHTML(c, st) {
     '<span class="hm-chip gold">' + (st === 'c' ? 'Replay: loot only' : 'First clear: ' + fc + ' coins + tile') + '</span></div>' +
     (need ? '<div class="hm-need">' + need + '</div>' : '') +
     (run ? '<button class="btn sm hm-bank" data-act="bank">Bank and leave the run</button>' : '') + '</div>';
-  var lab = run ? 'Continue' : st === 'c' ? 'Replay' : st === 'a' ? 'Play' : 'Locked';
+  var due = lessonsDue(c.tier), les = due.length && !run && (st === 'a' || st === 'c') ? PUZ_BY_ID[due[0]] : null, lt = les ? CONFIG.lessons[lessonTier(due[0])] : null;
+  if (les) h = h.slice(0, h.length - 6) + '<div class="hm-need"><b>Lesson first (' + (lt.indexOf(due[0]) + 1) + ' of ' + lt.length + '): ' + les.name + '.</b> ' + les.teach + '</div></div>';
+  var lab = run ? 'Continue' : les ? 'Lesson' : st === 'c' ? 'Replay' : st === 'a' ? 'Play' : 'Locked';
   return h + '<button class="hm-play" data-act="' + (run ? 'resume' : 'play') + '"' + (!run && (st === 'h' || st === 'l') ? ' disabled' : '') + '>' + PLAYI + lab + '</button></div>';
 }
 function renderHome() {
@@ -1896,9 +1912,14 @@ function renderHome() {
     S.mapCenter = false;
   }
 }
+var PUZ_BY_ID = {}; PUZZLES.forEach(function (p) { PUZ_BY_ID[p.id] = p; });
+function lessonTier(id) { for (var t in CONFIG.lessons) if (CONFIG.lessons[t].indexOf(id) >= 0) return t; return 0; }
+/* the unsolved lessons a stage of this difficulty waits for (all lessons of this and lower difficulties) */
+function lessonsDue(tier) { var o = []; for (var t = 1; t <= tier; t++) (CONFIG.lessons[t] || []).forEach(function (id) { if (!store.puzDone[id] && PUZ_BY_ID[id]) o.push(id); }); return o; }
 function playCell(key) {
   var c = stageInfo(key); if (!c || store.run) return;
   var stt = stageState(key, store.cleared, store.allStages); if (stt === 'h' || stt === 'l') return;
+  var due = lessonsDue(c.tier); if (due.length) { startPuzzleUI(PUZ_BY_ID[due[0]], false); return; }
   startRunUI('stage', c.tier, { len: c.len, mid: c.mid, drop: c.drop, trick: c.trick, cell: { key: key, name: c.name, region: c.regionName, area: c.area, idx: c.idx, n: c.n } });
 }
 function kitTileHTML(u, k, fade, ts) {
@@ -1969,7 +1990,7 @@ function tmBigHTML(u) {
     '<div class="tm-r2">' + (team ? '<span class="tm-badge lg">IN TEAM</span>' : '') + '<span>Style: ' + u.style + '</span></div>' +
     '<div class="tm-bt">' + tmTiles(u, own ? st.l : 1, { ts: 56, maxW: inner, maxH: 90, gap: 6, kit: true }) + '</div>' +
     '<div><div class="tm-sl">Slots &middot; ' + (own ? sl.n : 0) + ' of ' + mx + ' open</div><div class="tm-sock">' + sock + '</div></div>' +
-    '<div class="tm-fx" data-card="ue:' + u.id + '"><b>' + E.name + '</b> &middot; ' + E.line + '</div>' + acts + '</div>';
+    '<div class="tm-fx" data-card="ue:' + u.id + '"><b>' + E.name + '</b> &middot; ' + E.line + ' <i>Works from difficulty ' + CONFIG.fxTier + '.</i></div>' + acts + '</div>';
 }
 function renderTeam() {
   var tab = S.tmTab || 'units', col = S.tmCol || 'r', G = CONFIG.gacha, u0, h;
@@ -2168,7 +2189,7 @@ function renderFight() {
   if (F.colMul[2] !== undefined) strip += '<div class="strip trickstrip" data-card="tr:plate"><span class="t"><b>Boss:</b> ' + TRICKS.plate + '</span></div>';
   if (F.bossTrick === 'sealed') strip += '<div class="strip trickstrip" data-card="tr:sealed"><span class="t"><b>Boss:</b> ' + TRICKS.sealed + '</span></div>';
   if (F.bossTrick === 'plain') strip += '<div class="strip trickstrip"><span class="t"><b>Boss:</b> ' + TRICKS.plain + '</span></div>';
-  if (!S.puz && S.tab !== 'x' && run.team[S.tab]) { var tu = UNIT_BY_ID[run.team[S.tab]]; strip += '<div class="strip relic fxs c-' + S.tab + '" data-card="un:' + S.tab + '"><span class="t"><b>' + tu.name + ':</b> ' + EFFECTS[tu.fx].line + '</span></div>'; }
+  if (!S.puz && S.tab !== 'x' && run.team[S.tab] && run.fx && run.fx[S.tab]) { var tu = UNIT_BY_ID[run.team[S.tab]]; strip += '<div class="strip relic fxs c-' + S.tab + '" data-card="un:' + S.tab + '"><span class="t"><b>' + tu.name + ':</b> ' + EFFECTS[tu.fx].line + '</span></div>'; }
   $('#rbar').innerHTML = strip;
   var ids = COLOR_IDS.concat(['x']), tabs = '';
   if (!handOf(S.tab).length) { var ft = firstTab(); if (handOf(ft).length) S.tab = ft; }

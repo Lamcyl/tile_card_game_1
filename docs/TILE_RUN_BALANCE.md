@@ -304,3 +304,22 @@ Enemies (HP per column, before > after; atk, hero HP, run length, boss tricks un
 - The journey bots always spend coins on pulls at once, level the cheapest upgrade first, slot the best collected tile and never grind more than one replay after two losses. Players who hoard, skip areas or replay more will differ.
 - Relics, puzzles and the daily puzzle are outside this pass.
 - The page was checked with Playwright (no console or page errors, a real fight with kills and sandwiches at low and high difficulty, recruit and level up); it was not play-tested by a human.
+
+## Quick rebalance: lessons first (after owner feedback)
+
+Feedback: the first stages taught unit skills instead of sandwiches; skill bonuses such as "+5 to the front row" made tile numbers meaningless, so every stage had the same layout (red front, blue back, green everywhere); side attackers appeared too early.
+
+Changes:
+- **Lessons gate each new difficulty.** `CONFIG.lessons` lists the puzzles that must be solved before the first stage of each difficulty. The stage card says "Lesson first (1 of 2): name. teach text" and the Play button becomes **Lesson**, which opens the puzzle. Order: 1 First Strike, Sandwich · 2 Both Ways, Lucky Cells, Neighbours (boosts) · 3 Reach Sideways, Guard Duty · 4 Three Lanes · 5 Unit Skills (new puzzle p16), Whole Lines · 6 Multiply, Stacked Multipliers · 7 Two Cells, Short Side, Two Colours · 8 Copy That.
+- **Tiles appear only after their lesson.** Boosts from difficulty 2, side lanes from 3, three-lane attacks from 4, row/column boosts 5, multipliers 6, two-cell tiles 7, copies 8 (`specStage`, `genSpec`). A unit's base tile that is not taught yet plays as a plain tile (`simpleSpec`): side lanes become a Strike +1, boosts/multipliers/copies a Strike 3, big tiles shrink. So difficulty 1 is plain Strikes and sandwiches only.
+- **Unit skills work from difficulty 5** (`CONFIG.fxTier`), after the Unit Skills lesson. The Team screen says "Works from difficulty 5". Skill sizes cut to small nudges (mostly +1 or +2: Front Rank +1, Back Rank +2, Lone Wolf +1, Edge Guard +2, True Colours +2, Charged +2, Underdog +2 up to 4, Tempered +2, Cornerstone +3, Loud Echo +2, Fine Steel +2).
+- **Enemy health per column** retuned for the smaller skills: 8, 11, 16, 21, 28, 39, 85, 100, 105, 66 (was 11, 17, 25, 34, 45, 54, 110, 134, 138, 90).
+
+Check (3 bot players each, 200-run cap; difficulty 5 health was eased from 32 to 28 after this run):
+
+| Difficulty | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Skilled win % | 100 | 100 | 97 | 100 | 89 | 74 | 81 | 88 | 67 | 90 |
+| Casual win % | 100 | 79 | 75 | 61 | 25 | 49 | 35 | 37 | 34 | 17 |
+
+The skilled bot finishes in about 73 runs (about 11 h). The casual bot rarely finishes; real players learn, so treat it as a floor. The tile score table above was measured before this change; skill scores are now much lower.
