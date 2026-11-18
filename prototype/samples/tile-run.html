@@ -110,11 +110,17 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .cell.glow .pv{color:var(--ok)}
 .fly{position:fixed;z-index:70;font-weight:900;font-size:19px;color:var(--ink);pointer-events:none;transform:translate(-50%,-50%);text-shadow:0 0 4px var(--bg),0 0 4px var(--bg),0 0 8px var(--bg);animation:fly .75s ease-in forwards}
 .fly.bad{color:var(--bad)}
-#rbar{margin-top:6px;display:flex;flex-direction:column;gap:2px}
+#rbar{margin-top:6px;display:flex;flex-direction:column;gap:2px;min-height:34px;flex:none}
+#rbar.icons{flex-direction:row;align-items:center;gap:6px;height:34px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+.ri{flex:none;position:relative;width:32px;height:32px;border-radius:10px;background:var(--panel);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink);padding:0}
+.ri svg{width:22px;height:22px;display:block}.ri svg.sk{width:22px;height:22px;color:var(--tc)}
+.ri.relic{border-color:var(--gold)}.ri.relic svg,.ri.hero svg,.ri.trick svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ri.hero{border-color:var(--tt)}.ri.hero.used{opacity:.45}.ri.trick{border-color:var(--bad);color:var(--bad)}.ri.skill{border-color:var(--tc)}
+.ri small{position:absolute;right:-3px;bottom:-3px;font-size:9px;font-weight:800;background:var(--ink);color:var(--bg);border-radius:6px;padding:0 3px;line-height:12px}
 .rrow{display:flex;align-items:center;gap:6px;font-size:11.5px;line-height:1.2;color:var(--ink);padding:2px 4px;border-radius:8px;background:var(--panel)}
 .rrow b{color:var(--tt);white-space:nowrap}
 .rrow span.t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-#finfo{min-height:32px;font-size:12.5px;line-height:1.3;text-align:center;color:var(--ink);padding:5px 4px 2px;flex:none}
+#finfo{height:20px;font-size:12px;line-height:18px;text-align:center;color:var(--ink);padding:2px 4px 0;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #ftabs{display:flex;gap:5px;justify-content:center;margin-top:2px;flex:none}
 .tab{min-width:48px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:4px;font-weight:800;font-size:13px;padding:0 6px;background:var(--panel);color:var(--ink);border:2px solid var(--line)}
 .tab.on{border-color:var(--tt);background:var(--panel2)}
@@ -280,7 +286,7 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 @media (max-height:700px){
  :root{--hs:46px}
  #fhead{height:38px}
- #finfo{min-height:0;font-size:11px;padding:2px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #finfo{height:18px;font-size:11px;line-height:16px;padding:2px 4px 0}
  .strip{min-height:0;padding:2px 6px;font-size:10.5px}.trickstrip{padding:1px 6px}
  #fbar{padding-top:4px}#fbar .btn{height:42px}.tab{height:28px}#ftabs{margin-top:0}#fhand{margin-top:3px}
  #bwrap{margin-top:3px}#rbar{margin-top:3px}
@@ -295,12 +301,12 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 #fatk{flex:2.4}#fclear{flex:1;font-size:15px}
 /* enemies */
 .enemy{display:flex;flex-direction:column;gap:4px;min-width:0;position:relative}
-.etile{position:relative;height:58px;border-radius:12px;background:var(--enemy);color:var(--enemyink);border:3px solid var(--enemy);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:4px}
+.etile{position:relative;height:50px;border-radius:12px;background:var(--enemy);color:var(--enemyink);border:3px solid var(--enemy);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:4px}
 .etile i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;color:var(--enemyink);opacity:.85;white-space:nowrap;line-height:1.15}
 .etile b{font-size:25px;line-height:1;font-weight:800;margin-top:1px;color:var(--enemyink);font-variant-numeric:tabular-nums}
 .etile b.n3{font-size:20px;margin-top:4px}
-.etile .atk{position:absolute;left:0;right:0;justify-content:center;bottom:3px;font-size:10px;font-weight:800;color:var(--enemyink);opacity:.85;display:flex;align-items:center;gap:1px;line-height:1}
-.etile .atk svg{width:8px;height:8px;fill:var(--enemyink)}
+.etile .atk{display:inline-flex;align-items:center;gap:1px;margin-left:5px;font-size:10px;font-weight:800;letter-spacing:0;color:var(--enemyink);line-height:1;vertical-align:-1px}
+.etile .atk svg{width:9px;height:9px;fill:var(--enemyink)}
 .etile .ecd{left:auto;top:auto;right:5px;bottom:3px}.etile .ecd svg{width:12px;height:12px}
 .enemy.boss .etile{border-color:var(--bad)}
 .enemy.twin .etile{border-color:var(--p)}
@@ -315,7 +321,7 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .chk{position:absolute;top:-8px;right:-7px;width:19px;height:19px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;border:2px solid var(--bg);z-index:5}
 .chk svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
 #fight.narrow .etile i{font-size:7px;letter-spacing:.03em}#fight.narrow .etile b{font-size:21px}#fight.narrow .etile b.n3{font-size:16px}
-#fight.narrow .pill span,#fight.narrow .hpbar span{font-size:11px}#fight.narrow .etile .atk{font-size:9px}
+#fight.narrow .pill span,#fight.narrow .hpbar span{font-size:11px}#fight.narrow .etile .atk{font-size:8.5px;margin-left:3px}
 /* board */
 #fen,#fboard{gap:var(--gp,8px)}
 #fboard{gap:var(--gp,8px)}
@@ -381,8 +387,8 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .abil.used,.abil:disabled{opacity:.55}
 .mini{border-radius:12px}
 .hbtn{box-shadow:0 2px 0 var(--shadow)}span.hbtn{box-shadow:none;background:none;border:0}
-@media (max-height:760px){.etile{height:56px}}
-@media (max-height:700px){.etile{height:52px}.etile b{font-size:20px}.etile b.n3{font-size:17px;margin-top:2px}.pill{height:19px}.pill span{font-size:11.5px}.hpbar{height:20px}.abil{height:32px}#fhero{margin-top:4px}}
+@media (max-height:760px){.etile{height:48px}}
+@media (max-height:700px){.etile{height:46px}.etile b{font-size:20px}.etile b.n3{font-size:17px;margin-top:2px}.pill{height:19px}.pill span{font-size:11.5px}.hpbar{height:20px}.abil{height:32px}#fhero{margin-top:4px}}
 #tlog{font:10.5px/1.3 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);padding:4px 2px;word-break:break-word;flex:none}
 .tile.ghost{position:fixed;z-index:80;pointer-events:none;touch-action:none;cursor:grabbing}
 [data-dd]{touch-action:none;-webkit-user-select:none;user-select:none}
@@ -601,6 +607,33 @@ svg.sk .mk{fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-li
 .tutlist{display:flex;flex-direction:column;gap:5px;max-height:52vh;overflow:auto}
 .tutrow{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:12px;background:var(--panel2);text-align:left;font-size:14px}.tutrow small{color:var(--muted);font-weight:700}.tutrow.unseen{opacity:.55}
 @media (prefers-reduced-motion:reduce){.screen.enter,#result.resin .resbox,#modal.pop,#card.pop,#dim.pop,.tutcard.pop,.ghostout{animation:none!important}.tsc *{transition:none!important}.tsc-late{transition:none}}
+/* ===== compact path-choice and result screens (fit 360x740 without scrolling) ===== */
+#map .path{margin:2px 0 4px}#map .path .node{width:22px;height:22px;font-size:11px}
+#map h2{font-size:17px;margin:2px 0 5px}
+#map .offer{padding:6px 9px;margin-bottom:6px;border-radius:14px}
+#map .ohead{margin-bottom:3px}#map .ohead b{font-size:14px}#map .rew{font-size:12px}
+#map .mini{padding:2px}#map .mini b{font-size:16px;line-height:1.05}#map .mini small{font-size:9.5px}
+#map .trick{margin-top:3px;font-size:10.5px;line-height:1.2;padding:2px 6px}
+#map .ofoot{margin-top:3px;font-size:10.5px;gap:4px}
+#map .offer.nodec .ohead{margin-bottom:0}#map .offer.nodec .ctext{font-size:11px}
+#map .row{margin-bottom:4px!important}#map .stat{font-size:11px}
+#map .chips{gap:4px;margin-bottom:4px!important}
+.resbox{margin-top:6px;padding:8px 10px}
+.resbox h2{font-size:19px;margin:2px 0 3px}
+.resbox p{font-size:12.5px;margin:2px 0;line-height:1.25}
+.resbox .inv{margin:3px 0;gap:4px}
+.resbox .btns{margin-top:8px;gap:6px}
+.resbox .picks{gap:6px;margin-top:4px}
+.resbox .pickc{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"v t" "v c";column-gap:10px;row-gap:1px;align-items:center;text-align:left;padding:6px 10px}
+.resbox .pickc .pvis{grid-area:v;display:flex;align-items:center;justify-content:center;min-width:76px}
+.resbox .pickc .pk{grid-area:t;font-size:13px;text-align:left}
+.resbox .pickc .ctext{grid-area:c;text-align:left;font-size:11px;line-height:1.25}
+.resbox .pickc .pvis .tile{margin:0}.resbox .pickc .bigheal{font-size:24px}
+.resbox .rtabs{margin:2px 0}.resbox .bagview{min-height:0;padding:4px;gap:4px}
+.resbox .bagview .tile{--tg:4px}
+.resbox .rtabs .tab{height:28px;min-width:44px}
+.resbox.final h2{font-size:24px}.resbox.final .crown svg{width:64px;height:44px}.resbox.final .fstats{margin:6px 0}
+.resbox .inv.frw{align-items:center;gap:8px}
 </style>
 </head>
 <body>
@@ -756,6 +789,13 @@ var RELICS = [
   { id: 'boost1', name: 'Bright Boost', line: 'Boost tiles are +1 stronger.' },
   { id: 'copy2', name: 'Echo Chamber', line: 'Copy tiles get +2.' }
 ];
+var RELIC_ICON = {
+  triple: '<path d="M4 7h16M4 12h16M4 17h16"/>', front: '<path d="M12 20V7M6 12l6-6 6 6M5 3h14"/>', back2: '<path d="M12 4v13M6 12l6 6 6-6M5 21h14"/>',
+  heal4: '<path d="M12 21s-8-5.200-8-11a4.600 4.600 0 0 1 8-3 4.600 4.600 0 0 1 8 3c0 5.800-8 11-8 11z"/>', forkown: '<path d="M12 21v-9M12 12L6 5M12 12l6-7"/>',
+  colourful: '<circle cx="8" cy="9" r="4"/><circle cx="16" cy="9" r="4"/><circle cx="12" cy="15" r="4"/>', big3: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 4v16M4 12h16"/>',
+  bonus2: '<path d="M12 3l2.500 6 6.500.5-5 4.300 1.600 6.500L12 17l-5.600 3.300L8 13.800l-5-4.300 6.500-.5z"/>', twice: '<path d="M20 12a8 8 0 1 1-3-6.200M20 4v5h-5"/>',
+  mom: '<path d="M5 6l6 6-6 6M12 6l6 6-6 6"/>', boost1: '<circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/>', copy2: '<rect x="4" y="4" width="11" height="11" rx="2"/><rect x="9" y="9" width="11" height="11" rx="2"/>'
+};
 var RELIC_BY_ID = {}; RELICS.forEach(function (r) { RELIC_BY_ID[r.id] = r; });
 var TRICKS = {
   plain: 'A big plain body. No trick.',
@@ -1870,31 +1910,35 @@ function shortName(t) {
   if (t.k === 'x') return line || (t.n === 2 ? 'DOUBLE' : t.n === 3 ? 'TRIPLE' : 'MULTI');
   return 'ECHO';
 }
-/* reach glyph: (w+2) x (h+2) cells, the tile's own cells outlined, reached cells lit, the rest faint; a copy shows the copied cell as a ring */
+/* reach glyph: (w+2) x (h+2) cells, the tile's own cells outlined. Attacks: the lanes (tileReach columns) are lit as an upward ray from every cell with nothing of the tile above it;
+   side boosts / multipliers: the touched neighbour cells; row / column / cross (R / C / B): a full line through the square (across the row, down the column, both for the cross), clearly not single cells; a copy shows the copied cell as a ring */
 function glyphSVG(t, style, fx) {
-  var cells = cellsOf(t), dm = shapeDims(t), H = dm[0] + 2, W = dm[1] + 2, own = {}, lit = {}, ring = {};
+  var cells = cellsOf(t), dm = shapeDims(t), H = dm[0] + 2, W = dm[1] + 2, own = {}, lit = {}, ring = {}, rows = {}, colsL = {};
   cells.forEach(function (p) { own[(p[0] + 1) + ',' + (p[1] + 1)] = 1; });
   var L = function (r, c, to) { if (r >= 0 && r < H && c >= 0 && c < W && !own[r + ',' + c]) to[r + ',' + c] = 1; };
   var dr = { u: [-1, 0], d: [1, 0], l: [0, -1], r: [0, 1] };
   if (t.k === 'a' || t.k === 'e') {
-    var lanes = reachLanes(t, fx);   /* includes Long Arm when the fight knows the unit effects */
-    cells.forEach(function (p) { var r = p[0] + 1, c = p[1] + 1; if (own[(r - 1) + ',' + c]) return; lanes.forEach(function (o) { L(r - 1, c + o, lit); }); });
-  }
-  if (t.k === 'p' || t.k === 'x') {
+    var lanes = reachLanes(t, fx), reach = tileReach(t, W + 1, W, H, fx), hitc = {};   /* the rules' own columns, on a virtual board the size of the glyph */
+    if (reach) reach.cols.forEach(function (c) { hitc[c] = 1; });
     cells.forEach(function (p) {
-      var r = p[0] + 1, c = p[1] + 1, i;
-      if (/[RCB]/.test(t.d)) { if (t.d !== 'C') for (i = 0; i < W; i++) L(r, i, lit); if (t.d !== 'R') for (i = 0; i < H; i++) L(i, c, lit); }
-      else t.d.split('').forEach(function (dc) { L(r + dr[dc][0], c + dr[dc][1], lit); });
+      var r = p[0] + 1, c = p[1] + 1; if (own[(r - 1) + ',' + c]) return;
+      lanes.forEach(function (o) { if (!hitc[c + o]) return; for (var rr = 0; rr < r; rr++) L(rr, c + o, lit); });
     });
   }
+  var line = /[RCB]/.test(t.d || '') && (t.k === 'p' || t.k === 'x');
+  if ((t.k === 'p' || t.k === 'x') && !line) cells.forEach(function (p) { t.d.split('').forEach(function (dc) { L(p[0] + 1 + dr[dc][0], p[1] + 1 + dr[dc][1], lit); }); });
+  if (line) cells.forEach(function (p) { if (t.d !== 'C') rows[p[0] + 1] = 1; if (t.d !== 'R') colsL[p[1] + 1] = 1; });
   if (t.k === 'e') cells.forEach(function (p) { L(p[0] + 1 + dr[t.d][0], p[1] + 1 + dr[t.d][1], ring); });
   var h = '<svg class="glyph" viewBox="0 0 ' + W * 4 + ' ' + H * 4 + '" style="' + style + ';width:calc(var(--gc) * ' + W + ');height:calc(var(--gc) * ' + H + ')" aria-hidden="true">';
   for (var r = 0; r < H; r++) for (var c = 0; c < W; c++) {
     var key = r + ',' + c;
-    if (own[key]) h += '<rect class="o" x="' + (c * 4 + .9) + '" y="' + (r * 4 + .9) + '" width="2.2" height="2.2" rx=".7" fill="none" stroke="currentColor" stroke-width="1"/>';
-    else if (ring[key]) h += '<circle cx="' + (c * 4 + 2) + '" cy="' + (r * 4 + 2) + '" r="1.35" fill="none" stroke="currentColor" stroke-width=".9"/>';
+    if (own[key]) continue;
+    if (ring[key]) h += '<circle cx="' + (c * 4 + 2) + '" cy="' + (r * 4 + 2) + '" r="1.35" fill="none" stroke="currentColor" stroke-width=".9"/>';
     else h += '<rect class="' + (lit[key] ? 'l' : 'f') + '" x="' + (c * 4 + .4) + '" y="' + (r * 4 + .4) + '" width="3.2" height="3.2" rx=".8" fill="currentColor"/>';
   }
+  for (var rk in rows) h += '<rect class="ln" x="-.6" y="' + (rk * 4 + .7) + '" width="' + (W * 4 + 1.2) + '" height="2.6" rx="1.3" fill="currentColor"/>';
+  for (var ck in colsL) h += '<rect class="ln" x="' + (ck * 4 + .7) + '" y="-.6" width="2.6" height="' + (H * 4 + 1.2) + '" rx="1.3" fill="currentColor"/>';
+  for (var o in own) { var q = o.split(','); h += '<rect class="o" x="' + (q[1] * 4 + .9) + '" y="' + (q[0] * 4 + .9) + '" width="2.2" height="2.2" rx=".7" fill="' + (line ? 'var(--tc)' : 'none') + '" stroke="currentColor" stroke-width="1"/>'; }
   return h + '</svg>';
 }
 /* the union of the tile's cells (and the links between them) as rounded rects, inset by ins */
@@ -1963,7 +2007,8 @@ function HSZ() { return (window.innerHeight || 844) < 700 ? 46 : 54; }
 function dotHTML(c) { return '<span class="dot c-' + c + '"><svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">' + SYM[c] + '</svg></span>'; }
 function hpBar(hp, max) { return '<div class="hpbar"><i style="width:' + Math.max(0, hp / max * 100) + '%"></i><span>' + hp + ' / ' + max + '</span></div>'; }
 var HOURGLASS = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1h6M2 9h6M2.600 1c0 3 2.400 3 2.400 4S2.600 6 2.600 9M7.400 1c0 3-2.400 3-2.400 4s2.400 1 2.400 4"/></svg>';
-var SPIKE = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6.4 3.6 L10 5 L6.4 6.4 L5 10 L3.6 6.4 L0 5 L3.6 3.6Z"/></svg>';
+var TRICK_ICON = '<svg viewBox="0 0 24 24"><path d="M3 19l-1-12 6 5 4-8 4 8 6-5-1 12z"/></svg>';
+var SWORD = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0 L6.4 1.6 V6.2 H3.6 V1.6Z M1.6 6.4 H8.4 V7.8 H1.6Z M4.3 8 H5.7 V9.8 H4.3Z"/></svg>';
 var LINK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M5 7 L7 5 M3.8 8.2 a2 2 0 0 1 0-2.800 L5 4.200 M8.200 3.800 a2 2 0 0 1 0 2.800 L7 7.800" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round"/></svg>';
 var RUN = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h7M6 2.500L9.500 6 6 9.500" fill="none" stroke="currentColor" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 var CHK = '<span class="chk"><svg viewBox="0 0 12 12"><path d="M2 6.5l3 3 5-7"/></svg></span>';
@@ -2443,7 +2488,7 @@ function offerHTML(o, i) {
   }
   var F = o.F, label = o.kind === 'boss' ? (o.mid ? 'MID-BOSS' : 'BOSS') : o.kind === 'elite' ? 'ELITE' : 'FIGHT', hpSum = 0;
   F.enemies.forEach(function (e) { hpSum += e.hp; });
-  var h = '<div class="offer ' + o.kind + '" data-offer="' + i + '"><div class="ohead"><span class="tag">' + label + '</span><b>' + hpSum + ' HP</b><span class="rew"><span>' + o.reward.coins + ' coins</span>' + (o.reward.tile ? tileHTML(invTile(o.reward.tile), { ts: 30, attrs: 'data-card="ot:' + i + '"' }) : '') + '</span></div>';
+  var h = '<div class="offer ' + o.kind + '" data-offer="' + i + '"><div class="ohead"><span class="tag">' + label + '</span><b>' + hpSum + ' HP</b><span class="rew"><span>' + o.reward.coins + ' coins</span>' + (o.reward.tile ? tileHTML(invTile(o.reward.tile), { ts: 24, attrs: 'data-card="ot:' + i + '"' }) : '') + '</span></div>';
   h += '<div class="oen" style="grid-template-columns:repeat(' + F.cols + ',1fr)">';
   F.enemies.forEach(function (e, k) {
     h += '<div class="mini' + (e.need > 1 || e.cols2 ? ' g' : '') + (e.kind === 'r' ? ' run' : '') + (e.twin ? ' twin' : '') + '" style="grid-column:span ' + e.w + '" data-card="oe:' + i + ':' + k + '"><b>' + e.hp + '</b><small>' + (e.kind === 'r' ? 'runner' : 'atk ' + e.atk) + (e.need > 1 ? ' needs ' + e.need : '') + (e.cols2 ? ' 2 colours' : '') + (e.twin ? ' linked' : '') + '</small></div>';
@@ -2469,7 +2514,7 @@ function renderMap() {
   var h = '<header class="top"><button class="hbtn" data-act="leave" aria-label="Leave run"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="ttl">' + runTitle(run) + '</div><button class="hbtn" data-act="help" aria-label="How to play"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4.500 2.600c-1 .6-1.500 1.200-1.500 2.400M12 18v.5"/></svg></button></header>';
   h += '<div class="row" style="margin-bottom:6px"><span class="stat">Hero</span>' + hpBar(run.hp, run.maxHp) + '<button class="btn sm" data-act="bag">Bag ' + run.bag.length + '</button></div>';
   h += '<div class="row stat" style="margin-bottom:4px;justify-content:space-between"><span>' + SC.cols + 'x' + SC.rows + ' board</span>' + (run.mode === 'endless' ? '<span>Depth ' + run.depth + '</span>' : '') + '<span>Loot ' + run.coins + ' coins' + (run.loot.length ? ', ' + run.loot.length + ' tile' + (run.loot.length > 1 ? 's' : '') : '') + '</span></div>';
-  h += '<div class="chips" style="margin-bottom:6px">' + (run.hero ? '<span class="uchip" data-card="hr:' + run.hero + '">Hero: ' + HERO_BY_ID[run.hero].name + ' (' + HERO_BY_ID[run.hero].ab + ')</span>' : '') + (run.relics || []).map(function (id) { return '<span class="uchip" data-card="rl:' + id + '">Relic: ' + RELIC_BY_ID[id].name + '</span>'; }).join('') + '</div>';
+  if (run.hero || (run.relics || []).length) h += '<div class="chips" style="margin-bottom:6px">' + (run.hero ? '<button class="ri hero" data-card="hr:' + run.hero + '" aria-label="Hero: ' + HERO_BY_ID[run.hero].name + '">' + heroIcon(run.hero) + '</button>' : '') + (run.relics || []).map(function (id) { return '<button class="ri relic" data-card="rl:' + id + '" aria-label="Relic: ' + RELIC_BY_ID[id].name + '"><svg viewBox="0 0 24 24">' + (RELIC_ICON[id] || '') + '</svg></button>'; }).join('') + '</div>';
   if (run.mom > 0) h += '<div style="margin-bottom:4px"><span class="mombadge" data-card="mom">Momentum +' + run.mom + ' on your first attack</span></div>';
   h += '<div class="path">';
   for (var i = 0; i <= total; i++) {
@@ -2555,7 +2600,7 @@ function renderFight() {
     var wide = e.w > 1 ? ' · WIDE' : '', cnt = Math.min(r.src, r.need) + '/' + r.need;
     var lab = gone ? 'LEFT' : e.kind === 'r' ? 'RUNNER' : e.boss ? (e.twin ? 'TWIN' : e.need > 1 ? 'AEGIS ' + cnt : e.cols2 ? '2 COLOURS' : 'BOSS') : e.need > 1 ? 'GUARD ' + cnt : e.cols2 ? '2 COLOURS' : 'HP' + wide;
     h += '<div class="enemy' + (e.need > 1 || e.cols2 ? ' guard' : '') + (e.boss ? ' boss' : '') + (e.kind === 'r' ? ' runner' : '') + (e.twin ? ' twin' : '') + (e.dead ? ' dead' : '') + (e.gone ? ' gone' : '') + (r.kill ? ' kill' : '') + (r.dmg > 0 ? ' has' : '') + '" style="grid-column:' + (e.c + 1) + ' / span ' + e.w + '" data-en="' + ek + '" data-c="' + e.c + '" data-w="' + e.w + '" data-card="e:' + ek + '">' + (r.kill ? CHK : '') +
-      '<div class="etile">' + (e.twin ? '<span class="ecd">' + LINK + '</span>' : e.kind === 'r' ? '<span class="ecd">' + RUN + '</span>' : '') + (e.kind === 'r' || !e.atk ? '' : '<span class="atk">' + SPIKE + e.atk + '</span>') + '<i>' + lab + '</i><b class="hpn' + (String(hpn).length > 2 ? ' n3' : '') + '">' + hpn + '</b></div>' +
+      '<div class="etile">' + (e.twin ? '<span class="ecd">' + LINK + '</span>' : e.kind === 'r' ? '<span class="ecd">' + RUN + '</span>' : '') + (e.kind === 'r' || !e.atk ? '' : '') + '<i>' + lab + (e.kind === 'r' || !e.atk || e.dead || e.gone ? '' : '<span class="atk">' + SWORD + e.atk + '</span>') + '</i><b class="hpn' + (String(hpn).length > 2 ? ' n3' : '') + '">' + hpn + '</b></div>' +
       '<div class="pill"><u style="width:' + pct + '%"></u><span>' + txt + '</span></div></div>';
   });
   $('#fen').innerHTML = h;
@@ -2582,14 +2627,20 @@ function renderFight() {
     th += tileHTML(fs.hero && fs.hero.armed && fs.hero.id === 'prism' && fs.hero.target === t.id ? Object.assign({}, t, { rb: true }) : t, { board: true, ts: cs, gp: gp, left: minc * (cs + gp), top: minr * (cs + gp), shown: shown, sx: g.sand > 1 ? g.sand : 0, attrs: 'data-cell="' + g.a + '" data-card="t:' + t.id + '"', cls: (fs.hero && fs.hero.target === t.id ? ' herot' : '') + (heroTargeting() ? ' tgtable' : ''), noRest: true });
   });
   $('#ftiles').innerHTML = th + clampsHTML(res, cols, cs, gp);
-  var strip = '';
-  if (S.puz) strip += '<div class="strip"><span class="t"><b>Idea:</b> ' + S.puz.def.teach + '</span></div>'; else (run.relics || []).forEach(function (id) { strip += '<div class="strip relic" data-card="rl:' + id + '"><span class="t"><b>Relic:</b> ' + RELIC_BY_ID[id].name + ': ' + RELIC_BY_ID[id].line + '</span></div>'; });
-  F.tricks.forEach(function (tr) { strip += '<div class="strip trickstrip" data-card="tr:' + tr + '"><span class="t"><b>Boss:</b> ' + TRICKS[tr] + '</span></div>'; });
-  if (F.deadRow >= 0) strip += '<div class="strip trickstrip" data-card="tr:deadrow"><span class="t"><b>Boss:</b> ' + TRICKS.deadrow + '</span></div>';
-  if (F.colMul[2] !== undefined) strip += '<div class="strip trickstrip" data-card="tr:plate"><span class="t"><b>Boss:</b> ' + TRICKS.plate + '</span></div>';
-  if (F.bossTrick === 'sealed') strip += '<div class="strip trickstrip" data-card="tr:sealed"><span class="t"><b>Boss:</b> ' + TRICKS.sealed + '</span></div>';
-  if (F.bossTrick === 'plain') strip += '<div class="strip trickstrip"><span class="t"><b>Boss:</b> ' + TRICKS.plain + '</span></div>';
-  if (!S.puz && S.tab !== 'x' && run.team[S.tab] && fxIds(run.fx, S.tab).length) { var tu = UNIT_BY_ID[run.team[S.tab]]; strip += '<div class="strip relic fxs c-' + S.tab + '" data-card="un:' + S.tab + '"><span class="t"><b>' + tu.name + ':</b> ' + fxIds(run.fx, S.tab).map(function (id) { return '<span class="fxi">' + skillIcon(id) + EFFECTS[id].name + '</span>'; }).join('') + '</span></div>'; }
+  /* battle status: one fixed-height row of small icons (relics, unit skills, hero ability, boss tricks); tap or hold one for its card. Puzzles show their Idea strip here instead */
+  var strip = '', ico = function (cls, card, svg, extra) { return '<button class="ri ' + cls + '" data-card="' + card + '" aria-label="' + (extra || '') + '">' + svg + '</button>'; };
+  if (S.puz) strip += '<div class="strip"><span class="t"><b>Idea:</b> ' + S.puz.def.teach + '</span></div>';
+  else {
+    (run.relics || []).forEach(function (id) { strip += ico('relic', 'rl:' + id, '<svg viewBox="0 0 24 24">' + (RELIC_ICON[id] || '') + '</svg>', 'Relic: ' + RELIC_BY_ID[id].name); });
+    if (fs.hero && fs.hero.id) strip += ico('hero' + (fs.hero.uses >= fs.hero.max && !fs.hero.armed ? ' used' : ''), 'hr:' + fs.hero.id, heroIcon(fs.hero.id), 'Hero: ' + HERO_BY_ID[fs.hero.id].ab);
+    COLOR_IDS.forEach(function (c) { var ids = run.team[c] ? fxIds(run.fx, c) : []; ids.forEach(function (id) { strip += '<button class="ri skill c-' + c + '" data-card="sk:' + c + ':' + id + '" aria-label="' + EFFECTS[id].name + '">' + skillIcon(id) + '</button>'; }); });
+    F.tricks.forEach(function (tr) { strip += ico('trick', 'tr:' + tr, TRICK_ICON, 'Boss trick'); });
+    if (F.deadRow >= 0) strip += ico('trick', 'tr:deadrow', TRICK_ICON, 'Boss trick');
+    if (F.colMul[2] !== undefined) strip += ico('trick', 'tr:plate', TRICK_ICON, 'Boss trick');
+    if (F.bossTrick === 'sealed') strip += ico('trick', 'tr:sealed', TRICK_ICON, 'Boss trick');
+    if (F.bossTrick === 'plain') strip += ico('trick', 'tr:plain', TRICK_ICON, 'Boss trick');
+  }
+  $('#rbar').classList.toggle('icons', !S.puz);
   $('#rbar').innerHTML = strip;
   var ids = COLOR_IDS.concat(['x']), tabs = '';
   if (!handOf(S.tab).length) { var ft = firstTab(); if (handOf(ft).length) S.tab = ft; }
@@ -2613,8 +2664,8 @@ function renderFight() {
   var totDmg = 0; res.en.forEach(function (r, k) { if (!F.enemies[k].dead) totDmg += r.dmg; });
   $('#fatk').innerHTML = placed ? 'Attack<small>' + totDmg + '</small>' : 'Attack';
   var info = '';
-  if (S.sel >= 0) { var st = tileById(S.sel); info = 'Tap a cell for the ' + tileName(st) + '. Glowing cells would finish an enemy.'; }
-  else if (!placed) info = fs.turn === 0 ? 'Tap a tile, then a cell (or drag it). Hold anything for details.' : 'Enemies hit back. Place tiles again' + (CONFIG.tileReturn === 'fight' ? ' (used tiles rest until this fight ends).' : '.');
+  if (S.sel >= 0) { var st = tileById(S.sel); info = 'Tap a cell for the ' + tileName(st) + '. Glowing cells finish an enemy.'; }
+  else if (!placed) info = fs.turn === 0 ? (S.puz ? 'Tap a tile, then a cell (or drag it). Hold anything for details.' : '') : 'Enemies hit back. Place tiles again' + (CONFIG.tileReturn === 'fight' ? ' (used tiles rest until this fight ends).' : '.');
   else info = 'Tap a placed tile to take it back.';
   if (heroTargeting()) info = 'Tap one of your placed tiles to aim ' + HERO_BY_ID[fs.hero.id].ab + ', or cancel it.';
   if (fs.mom > 0) info = 'Momentum +' + fs.mom + ' on this attack. ' + info;
@@ -2749,14 +2800,14 @@ function pickHTML(o, i) {
   var run = S.run, h = '<button class="pickc" data-pick="' + i + '">';
   if (o.type === 'tile') {
     var t = { c: o.tile.c, u: o.tile.u, k: o.tile.k, d: o.tile.d, n: o.tile.n, sh: o.tile.sh, rar: o.tile.rar || 0, added: true };
-    h += '<div class="pk">New tile for this run</div>' + tileHTML(t, { ts: 58 }) + '<div class="ctext">' + (t.rar ? RARITY[t.rar] + ' ' : '') + tileName2(t) + '. You can keep it after a boss.</div>';
+    h += '<div class="pk">New tile for this run</div>' + '<div class="pvis">' + tileHTML(t, { ts: 44 }) + '</div><div class="ctext">' + (t.rar ? RARITY[t.rar] + ' ' : '') + tileName2(t) + '. You can keep it after a boss.</div>';
   } else if (o.type === 'up') {
     var tt = run.bag.filter(function (x) { return x.id === o.tid; })[0];
     if (tt) {
       var after = applyUpgrade(JSON.parse(JSON.stringify(tt)), o);
-      h += '<div class="pk">Upgrade a tile</div><div class="ups">' + tileHTML(tt, { ts: 40, noRest: true }) + '<span class="arrow">→</span>' + tileHTML(after, { ts: 40, noRest: true }) + '</div><div class="ctext">' + (o.kind === 'n2' ? '+' + o.amt + ' to its number' : 'second colour: ' + COLORS[o.col] + ' (counts as both for Sandwich)') + '</div>';
+      h += '<div class="pk">Upgrade a tile</div><div class="pvis"><div class="ups">' + tileHTML(tt, { ts: 34, noRest: true }) + '<span class="arrow">→</span>' + tileHTML(after, { ts: 34, noRest: true }) + '</div></div><div class="ctext">' + (o.kind === 'n2' ? '+' + o.amt + ' to its number' : 'second colour: ' + COLORS[o.col] + ' (counts as both for Sandwich)') + '</div>';
     }
-  } else h += '<div class="pk">Heal</div><div class="bigheal">+' + o.amt + ' HP</div><div class="ctext">Hero ' + run.hp + ' / ' + run.maxHp + '</div>';
+  } else h += '<div class="pk">Heal</div><div class="pvis"><div class="bigheal">+' + o.amt + ' HP</div></div><div class="ctext">Hero ' + run.hp + ' / ' + run.maxHp + '</div>';
   return h + '</button>';
 }
 /* the whole bag laid out like the hand, with the tiles on offer highlighted */
@@ -2770,7 +2821,7 @@ function bagPanel(hi) {
     var n = run.bag.filter(function (t) { return t.c === c; }).length, mk = run.bag.some(function (t) { return t.c === c && hi.indexOf(t.id) >= 0; });
     return '<button class="tab c-' + c + (S.rtab === c ? ' on' : '') + '" data-rtab="' + c + '">' + dotHTML(c) + n + (mk ? '<i class="hdot"></i>' : '') + '</button>';
   }).join('') + '</div><div class="bagview">';
-  run.bag.filter(function (t) { return t.c === S.rtab; }).forEach(function (t) { h += tileHTML(t, { ts: 46, noRest: true, cls: hi.indexOf(t.id) >= 0 ? 'offer' : '', attrs: 'data-card="t:' + t.id + '"' }); });
+  run.bag.filter(function (t) { return t.c === S.rtab; }).forEach(function (t) { h += tileHTML(t, { ts: 38, noRest: true, cls: hi.indexOf(t.id) >= 0 ? 'offer' : '', attrs: 'data-card="t:' + t.id + '"' }); });
   return h + '</div><div class="ctext">Highlighted tiles are the ones on offer.</div>';
 }
 function renderResult() {
@@ -2794,7 +2845,7 @@ function renderResult() {
     h = '<div class="resbox win"><h2>' + (out.mid ? 'Mid-boss defeated' : out.boss ? 'Boss defeated' : 'Victory') + '</h2><p>' + (out.attacks === 1 ? 'Won in one attack' : 'Won in ' + out.attacks + ' attacks') + (out.hpLost > 0 ? ', lost ' + out.hpLost + ' HP' : ', no damage taken') + '. Hero ' + run.hp + ' / ' + run.maxHp + (out.heal ? ' (healed ' + out.heal + ')' : '') + '.</p>';
     h += '<p class="gold">+' + out.coins + ' coins</p>' + keptLine(p);
     var tiles = (out.tile ? [out.tile] : []).concat(out.extra || []);
-    if (tiles.length) h += '<p>Loot: colourless tile' + (tiles.length > 1 ? 's' : '') + (out.extra && out.extra.length ? ' (runner bonus included)' : '') + '</p><div class="inv">' + groupCands(tiles).map(function (g) { return tileHTML(invTile(g.c), { ts: 50, cnt: g.n }); }).join('') + '</div>';
+    if (tiles.length) h += '<p>Loot: colourless tile' + (tiles.length > 1 ? 's' : '') + (out.extra && out.extra.length ? ' (runner bonus included)' : '') + '</p><div class="inv">' + groupCands(tiles).map(function (g) { return tileHTML(invTile(g.c), { ts: 38, cnt: g.n }); }).join('') + '</div>';
     if (out.mom) h += '<p><span class="mombadge" data-card="mom">Momentum +' + out.mom + '</span><br><span class="ctext">Cleared in one attack: your next fight\'s first attack gets +' + out.mom + ' on every tile.</span></p>';
     h += '<h2>Choose one</h2><div class="picks">' + p.picks.map(pickHTML).join('') + '</div>' + (hi.length ? bagPanel(hi) : '') + '</div>';
   } else if (p.type === 'forge') {
@@ -2814,10 +2865,10 @@ function renderResult() {
         '<p>Boss down' + (o2.attacks === 1 ? ' in one attack' : ' in ' + o2.attacks + ' attacks') + '. ' + run.fights + ' fights won.</p><p class="gold">Loot +' + run.coins + ' coins</p>' + keptLine(p);
     } else
     h = '<div class="resbox win"><h2>Stage cleared</h2><p>' + (run.cell ? run.cell.name : stageCfg(run).name) + ': boss down' + (o2.attacks === 1 ? ' in one attack' : ' in ' + o2.attacks + ' attacks') + '. ' + run.fights + ' fights won.</p><p class="gold">Loot +' + run.coins + ' coins</p>' + keptLine(p);
-    if (t2.length || run.loot.length) h += '<div class="inv">' + groupCands(run.loot).map(function (g) { return tileHTML(invTile(g.c), { ts: 44, cnt: g.n }); }).join('') + '</div>';
+    if (t2.length || run.loot.length) h += '<div class="inv">' + groupCands(run.loot).map(function (g) { return tileHTML(invTile(g.c), { ts: 36, cnt: g.n }); }).join('') + '</div>';
     if (fr) {
       var fresh = opensWith(store.cleared, key), c3 = {}, kk; for (kk in store.cleared) c3[kk] = 1; c3[key] = 1;
-      h += '<h2>First clear reward</h2><p class="gold">+' + fr.coins + ' coins and a colourless tile</p><div class="inv">' + tileHTML(invTile(fr.tile), { ts: 52 }) + '</div>';
+      h += '<h2>First clear reward</h2><div class="inv frw">' + tileHTML(invTile(fr.tile), { ts: 36 }) + '<p class="gold">+' + fr.coins + ' coins and a colourless tile</p></div>';
       h += '<p>' + (fresh.length ? 'New on the map: <b>' + fresh.map(function (q) { return q.name; }).join(', ') + '</b>.' : '') + (!endlessOn() && doneAreaCount(c3) >= CONFIG.map.endlessAreas ? ' Endless mode is open.' : '') + '</p>';
     } else h += '<p class="ctext">Replay reward only; stages can be replayed for coins and tiles.</p>';
     var nh = fr ? newHeroes(Object.keys(store.cleared).length + 1) : [];
@@ -2923,6 +2974,7 @@ function cardFor(key) {
     return tileCardHTML(t, parts, isAttackT(t) && S.run.fx && fxHas(S.run.fx, t.c, 'lane') ? '<p class="muted"><b>Long Arm:</b> this unit effect makes it also hit the column to its right.</p>' : '');
   }
   if (p[0] === 'kt') { var u = UNIT_BY_ID[p[1]]; return tileCardHTML({ c: u.c, u: u.id, k: p[2], d: p[3], n: +p[4], sh: p[5] }, null, '<p class="muted">A base tile of ' + u.name + '. Unit levels raise the numbers of its 3 base tiles.</p>'); }
+  if (p[0] === 'sk') { var su = UNIT_BY_ID[run && run.team[p[1]]], sf = EFFECTS[p[2]]; if (!su || !sf) return ''; return '<div class="c-' + p[1] + '"><h3>' + sf.name + '</h3><p style="display:flex;gap:8px;align-items:center"><span class="fxi" style="margin:0">' + skillIcon(p[2]) + '</span><span>' + sf.line + '</span></p><p class="muted">Unit skill of ' + su.name + ': applies to every ' + COLORS[p[1]].toLowerCase() + ' tile in the fight.</p></div>'; }
   if (p[0] === 'un' || p[0] === 'ue') {
     var uu = UNIT_BY_ID[p[0] === 'un' ? (run && run.team[p[1]]) : p[1]]; if (!uu) return '';
     var act = p[0] === 'un' ? fxIds(run.fx, p[1]) : skillsAt(uu, store.units[uu.id].l);
@@ -3088,6 +3140,7 @@ function endPointer(e, cancel) {
     else { tlog('drag t' + tg.id + ' → no cell (' + Math.round(e.clientX) + ',' + Math.round(e.clientY) + ')'); renderFight(); settle(null, false); }
     return;
   }
+  if (tg.kind === 'card' && tg.el.classList.contains('ri') && !p.scroll && !p.moveSeen) { var chtml = cardFor(tg.card); if (chtml) showCard(chtml); return; }   /* tap a status icon: its card */
   if (S.screen !== 'fight' || S.phase !== 'edit') return;
   if (p.scroll || p.moveSeen) { tlog('swipe, not a tap'); return; }
   if (heroTargeting()) { if (tg.kind === 'board') { heroTarget(S.fs, tg.id); renderFight(); } else tlog('hero ability is aiming: tap a placed tile'); return; }

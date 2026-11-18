@@ -537,3 +537,10 @@ Diagnostic: Settings, "Touch log" (off by default, kept in the save) shows the l
 - **Collection = owned types.** The collection holds one tile per colour + token (`addCT` ignores a type you own). The run gets the owned keys (`run.owned`); the end-of-run keep screen marks each candidate Owned or New and only New ones can be selected (`applyKeep` enforces it).
 - **Unowned first.** The first post-fight tile pick of a run (`genPicks`, first option) is a tile type the player does not own, within the cap (random sampling, then a random unowned encyclopedia tile if sampling fails). Not applied when `run.owned` is absent (balance tools).
 - **Filters.** Team > Collected and the slot popup have compact chips: colour (Collected only), kind (Attacks / Boosts / Multipliers / Copies), cells 1-4, rarity 1-5 stars, New (tiles from the last keep) / Equipped (in a slot), plus sort (rarity, name, default). State in `CTF`.
+
+## Battle screen cleanup
+
+- Reach glyph (`glyphSVG`): attack lanes are taken from `reachLanes`/`tileReach` (run on a virtual board the size of the glyph) and lit as an upward ray from every cell with no tile cell above it, so jabs (`a<`, `a>`, `a<^`, `a^>`) are right on 2-4 cell shapes. Row / column / cross boosts and multipliers draw a full line through the square (across the row, down the column, both for the cross) instead of single side cells.
+- Battle status is one fixed-height row of small icons under the board (relics with their own icons, hero ability, unit skills, boss tricks). Tap or hold an icon for its card (name and text). The puzzle "Idea" strip stays in puzzles only. The row height is always reserved, so the hero HP bar, colour tabs, hand and buttons never move.
+- Enemy slabs: the attack (sword icon) sits on the label line (`HP · sword 4`); slabs are shorter. The "Tap a tile, then a cell" hint is gone from stage fights (puzzles keep it).
+- Path-choice and result screens are compacted (offer cards, victory loot / picks as rows, bag panel) to fit 360x740 without scrolling.
