@@ -9,7 +9,10 @@ function loadRules(file) {
   const h = fs.readFileSync(file || HTML, 'utf8');
   const a = h.indexOf('/*RULES-START*/'), b = h.indexOf('/*RULES-END*/');
   const ctx = { Math: Object.create(Math), JSON, Object, Array, console };
-  vm.createContext(ctx); vm.runInContext(h.slice(a, b), ctx, { filename: 'tile-run-rules' });
+  vm.createContext(ctx);
+  const ea = h.indexOf('/*ENC-START*/'), eb = h.indexOf('/*ENC-END*/');   /* the encyclopedia (tile rarity stars); the rules default to 1 star without it */
+  if (ea >= 0 && eb > ea) vm.runInContext(h.slice(ea, eb), ctx, { filename: 'tile-run-enc' });
+  vm.runInContext(h.slice(a, b), ctx, { filename: 'tile-run-rules' });
   return ctx;
 }
 function rng(seed) { let a = seed | 0; return function () { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
