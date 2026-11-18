@@ -14,7 +14,7 @@
  --ron:#fff;--bon:#fff;--gon:#fff;--yon:#fff;--pon:#fff;--xon:#fff;
  --ok:#1b8a4a;--bad:#c23a3a;--warn:#b86a00;--enemy:#33405a;--enemyink:#ffffff;
  --btn:#1c2635;--btnink:#ffffff;--shadow:rgba(20,30,50,.18);--okbg:#dff3e6;--badbg:#fbe3e3;--gold:#e0a100;--hp:#c23a3a;--hpbg:#e9d3d3;--accedge:#151a24;--chipbg:#151a24;--chipink:#ffd04a;
- --slab:#26344f;--slab2:#31415f;--rare:#1596b8;--epic:#c235b8;--shard:#2f9fd0;--goldbg:#fbefc8;--goldink:#6b4a00;
+ --slab:#e1e8f1;--slab2:#ffffff;--mdot:rgba(28,38,53,.075);--mdim:rgba(28,38,53,.26);--mlk:#8a96a9;--rare:#1596b8;--epic:#c235b8;--shard:#2f9fd0;--goldbg:#fbefc8;--goldink:#6b4a00;
  --pshort:color-mix(in srgb,var(--muted) 36%,var(--panel));--pok:color-mix(in srgb,var(--ok) 40%,var(--panel));--hpc:color-mix(in srgb,var(--r) 48%,var(--panel))}
 @media (prefers-color-scheme: dark){:root{
  --bg:#151a24;--panel:#212838;--panel2:#2b3448;--ink:#eef2f8;--muted:#a6b1c4;--line:#3a4560;--cellbg:#1b2130;
@@ -23,7 +23,7 @@
  --ron:#fff;--bon:#fff;--gon:#fff;--yon:#fff;--pon:#fff;--xon:#fff;
  --ok:#4cc27c;--bad:#ef6a6a;--warn:#e2a03a;--enemy:#3b4a69;--enemyink:#ffffff;
  --btn:#eef2f8;--btnink:#151a24;--shadow:rgba(0,0,0,.5);--okbg:#1f3a2c;--badbg:#412428;--gold:#f0b429;--hp:#ef6a6a;--hpbg:#4a2c31;--accedge:#0d1118;--chipbg:#0d1118;--chipink:#ffd04a;
- --slab:#0f1521;--slab2:#1b2438;--rare:#35c3e6;--epic:#e056d8;--shard:#5bc0ee;--goldbg:#4a3b12;--goldink:#ffd983;
+ --slab:#0f1521;--slab2:#1b2438;--mdot:rgba(255,255,255,.075);--mdim:rgba(255,255,255,.26);--mlk:rgba(255,255,255,.62);--rare:#35c3e6;--epic:#e056d8;--shard:#5bc0ee;--goldbg:#4a3b12;--goldink:#ffd983;
  --pshort:color-mix(in srgb,var(--muted) 42%,var(--panel));--pok:color-mix(in srgb,var(--ok) 48%,var(--panel));--hpc:color-mix(in srgb,var(--r) 55%,var(--panel))}}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden}
@@ -394,7 +394,11 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .rar{font-size:10.5px;font-weight:800;border-radius:8px;padding:1px 6px;background:var(--panel2);color:var(--muted)}
 .rar.r1{background:#35c3e6;color:#06222b}.rar.r2{background:#e056d8;color:#2a0626}
 .coinp{display:flex;align-items:center;justify-content:center;gap:5px;min-width:40px;height:34px;padding:0 12px;border-radius:17px;background:var(--panel);box-shadow:0 2px 0 var(--shadow);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;color:var(--ink)}
-.coinp::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--gold);flex:none}
+.coinp{border:0;font-family:inherit;cursor:pointer;position:relative}
+.coinp::before{content:"";width:20px;height:20px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%23b87a00'/%3E%3Ccircle cx='12' cy='12' r='9.4' fill='%23f5b82e'/%3E%3Ccircle cx='12' cy='12' r='7' fill='none' stroke='%23c98a0a' stroke-width='1.3'/%3E%3Cpath d='M12 6.6l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z' fill='%23fff3c4'/%3E%3Cpath d='M5.2 8.5A8 8 0 0 1 10 4.3' fill='none' stroke='%23fff' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.shp{border:0;font-family:inherit;cursor:pointer}
+.tip{position:fixed;z-index:60;max-width:230px;padding:9px 12px;border-radius:12px;background:var(--btn);color:var(--btnink);font-size:13px;line-height:1.35;font-weight:600;box-shadow:0 6px 18px var(--shadow)}
+.tip::before{content:"";position:absolute;top:-6px;left:var(--ax,24px);width:12px;height:12px;background:var(--btn);transform:rotate(45deg);border-radius:2px}
 .shp{display:flex;align-items:center;justify-content:center;gap:6px;min-width:40px;height:34px;padding:0 12px;border-radius:17px;background:var(--panel);box-shadow:0 2px 0 var(--shadow);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;color:var(--ink)}
 .shp::before{content:"";width:10px;height:10px;border-radius:2px;background:var(--b);transform:rotate(45deg);flex:none}
 .tile .cnt{position:absolute;right:-6px;top:-7px;z-index:6;min-width:20px;height:18px;padding:0 5px;border-radius:9px;background:var(--btn);color:var(--btnink);font-style:normal;font-weight:800;font-size:11px;line-height:18px;text-align:center;pointer-events:none;box-shadow:0 1px 0 var(--shadow)}
@@ -419,8 +423,8 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .hd h1{margin:0;font-size:22px;letter-spacing:-.02em;flex:1}
 .ib{width:44px;height:44px;border-radius:14px;background:var(--panel);box-shadow:0 2px 0 var(--shadow);display:flex;align-items:center;justify-content:center;flex:none}
 .ib svg,.dk .m svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-/* ===== home map: the Mosaic (one tiling of area plates on a navy slab; stages are pieces) ===== */
-.mapv{flex:1 1 0;min-height:170px;position:relative;overflow-x:hidden;overflow-y:auto;border-radius:20px;background-color:var(--slab);background-image:radial-gradient(rgba(255,255,255,.075) 1.3px,transparent 1.8px);background-attachment:local;box-shadow:0 3px 0 var(--shadow);touch-action:pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;display:flex;flex-direction:column}
+/* ===== home map: the Mosaic (one tiling of area plates on a light slab; stages are pieces) ===== */
+.mapv{flex:1 1 0;min-height:170px;position:relative;overflow-x:hidden;overflow-y:auto;border-radius:20px;background-color:var(--slab);background-image:radial-gradient(var(--mdot) 1.3px,transparent 1.8px);background-attachment:local;box-shadow:inset 0 1px 3px rgba(20,30,50,.10),0 2px 0 var(--shadow);touch-action:pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;display:flex;flex-direction:column}
 .mapv::-webkit-scrollbar{display:none}
 .mslab{margin-top:auto;padding:8px;flex:none;position:relative}
 .mslab svg{display:block;overflow:visible}
@@ -649,31 +653,27 @@ var CONFIG = {
   lvlMax: 8, levelCoins: { 2: 10, 3: 16, 4: 25, 5: 38, 6: 55, 7: 80, 8: 115 },   /* unit levels cost COINS: levelCoins[n] = coins to reach level n (placeholders) */
   starters: ['ember', 'tide', 'moss', 'glint', 'dusk'],   /* the units owned (and in the team) in a fresh save: one Common per colour */
   rainbow: { tier: 5, chance: 0.25, maxTeam: 2 },   /* a boss from this tier on may drop a rainbow tile (chance grows with distance) */
-  /* the world map: one tiling, 6 units wide and 35 tall (y counts from the top). It is cut into AREA plates; each plate holds 3 or 4 STAGES drawn as pieces of the plate (rows: a letter per unit, A = stage 1, B = stage 2, ...). All stages of an area share its difficulty tier (1..10) and its run length (path choices before the final boss; a mid-boss on runs of midFrom or more).
+  /* the world map: one tiling, 6 units wide and 26 tall (before lesson rows) (y counts from the top). It is cut into AREA plates; each plate holds 3 or 4 STAGES drawn as pieces of the plate (rows: a letter per unit, A = stage 1, B = stage 2, ...). All stages of an area share its difficulty tier (1..10) and its run length (path choices before the final boss; a mid-boss on runs of midFrom or more).
      Opening rule: an area opens when ANY area listed in `from` is done (all of them when `all`); an area is done when openNeed of its stages are cleared (all of them in a 3-stage area, 3 of 4 otherwise). The first area has no `from`. Inside an open area the stages go in order: stage n is playable once stage n-1 is cleared. Areas next to an open area show as dim plates. Endless opens when endlessAreas areas are done. */
   map: {
-    w: 6, h: 35, openNeed: 3, endlessAreas: 2, midFrom: 6,
+    w: 6, h: 26, openNeed: 3, endlessAreas: 2, midFrom: 6,
     areas: [
-      { id: 's0', name: 'Sunny Meadow', region: 'heart', tier: 1, len: 2, x: 0, y: 33, w: 6, h: 2, from: [], rows: ['AAAABB','AAAABB'] },
-      { id: 'l1', name: 'Brookside', region: 'heart', tier: 2, len: 3, x: 0, y: 30, w: 3, h: 3, from: ['s0'], rows: ['AAB','AAB','AAB'] },
-      { id: 'l2', name: 'Rimegate', region: 'n', tier: 3, len: 3, x: 0, y: 26, w: 3, h: 4, from: ['l1'], rows: ['AAB','ABB','AAB','ABB'] },
-      { id: 'l3', name: 'Silent Pass', region: 'n', tier: 3, len: 3, x: 0, y: 23, w: 3, h: 3, from: ['l2'], rows: ['BAA','BAA','BAA'] },
-      { id: 'l4', name: 'Glass Ridge', region: 'n', tier: 4, len: 5, x: 0, y: 19, w: 3, h: 4, from: ['l3'], rows: ['AAB','ABB','ABC','CCC'] },
-      { id: 'l5', name: 'Frozen Spire', region: 'n', tier: 5, len: 5, x: 0, y: 16, w: 3, h: 3, from: ['l4'], rows: ['ABB','ACB','CCB'] },
-      { id: 'l6', name: 'Misty Moor', region: 'w', tier: 6, len: 6, x: 0, y: 12, w: 3, h: 4, from: ['l5','r5'], rows: ['AAB','CAB','CDB','CDD'] },
-      { id: 'l7', name: 'Drowned Mere', region: 'w', tier: 7, len: 6, x: 0, y: 9, w: 3, h: 3, from: ['l6'], rows: ['AAA','BCC','BBC'] },
-      { id: 'l8', name: 'Violet Barrow', region: 'w', tier: 8, len: 7, x: 0, y: 5, w: 3, h: 4, from: ['l7'], rows: ['BAA','BBA','DCC','DDC'] },
-      { id: 'l9', name: 'Grey Fen', region: 'w', tier: 9, len: 7, x: 0, y: 2, w: 3, h: 3, from: ['l8'], rows: ['BAA','BCA','BCC'] },
-      { id: 'r1', name: 'Old Mill', region: 'heart', tier: 2, len: 3, x: 3, y: 29, w: 3, h: 4, from: ['s0'], rows: ['BAA','BAA','BBA','BBA'] },
-      { id: 'r2', name: 'Saltwell', region: 'e', tier: 3, len: 3, x: 3, y: 26, w: 3, h: 3, from: ['r1'], rows: ['BBA','BAA','BAA'] },
-      { id: 'r3', name: 'Windy Dunes', region: 'e', tier: 4, len: 5, x: 3, y: 22, w: 3, h: 4, from: ['r2'], rows: ['BAA','BBA','CBA','CCC'] },
-      { id: 'r4', name: 'Amber Mesa', region: 'e', tier: 4, len: 5, x: 3, y: 19, w: 3, h: 3, from: ['r3'], rows: ['AAA','CCB','CBB'] },
-      { id: 'r5', name: 'Lone Terrace', region: 'e', tier: 5, len: 5, x: 3, y: 15, w: 3, h: 4, from: ['r4'], rows: ['CDD','CCD','ABB','AAB'] },
-      { id: 'r6', name: 'Cinder Gate', region: 's', tier: 6, len: 6, x: 3, y: 12, w: 3, h: 3, from: ['r5','l5'], rows: ['AAB','AAB','CCB'] },
-      { id: 'r7', name: 'Ashen Vents', region: 's', tier: 7, len: 6, x: 3, y: 8, w: 3, h: 4, from: ['r6'], rows: ['AAB','CAB','CDB','CDD'] },
-      { id: 'r8', name: 'Molten Crater', region: 's', tier: 8, len: 7, x: 3, y: 5, w: 3, h: 3, from: ['r7'], rows: ['CCB','ACB','AAB'] },
-      { id: 'r9', name: 'Black Forge', region: 's', tier: 9, len: 7, x: 3, y: 2, w: 3, h: 3, from: ['r8'], rows: ['AAA','BCC','BBC'] },
-      { id: 'top', name: 'Gloaming Crown', region: 'w', tier: 10, len: 8, x: 0, y: 0, w: 6, h: 2, from: ['l9','r9'], all: true, rows: ['AAABBB','CCADDB'] }
+      { id: 's0', name: 'Sunny Meadow', region: 'heart', tier: 1, len: 2, x: 0, y: 24, w: 6, h: 2, from: [], rows: ['AAAABB', 'AAAABB'] },
+      { id: 'r1', name: 'Old Mill', region: 'heart', tier: 2, len: 3, x: 3, y: 22, w: 3, h: 2, from: ['s0'], rows: ['AAB', 'AAB'] },
+      { id: 'l1', name: 'Brookside', region: 'heart', tier: 2, len: 3, x: 0, y: 22, w: 3, h: 2, from: ['s0'], rows: ['ABB', 'AAB'] },
+      { id: 'r2', name: 'Saltwell', region: 'e', tier: 3, len: 3, x: 3, y: 20, w: 3, h: 2, from: ['r1'], rows: ['ABB', 'AAB'] },
+      { id: 'l2', name: 'Rimegate', region: 'n', tier: 3, len: 3, x: 0, y: 20, w: 3, h: 2, from: ['l1'], rows: ['AAB', 'AAB'] },
+      { id: 'j1', name: 'Fairmeet', region: 'heart', tier: 4, len: 5, x: 0, y: 18, w: 6, h: 2, from: ['l2', 'r2'], all: true, rows: ['AAABBB', 'CCCDDD'] },
+      { id: 'r3', name: 'Windy Dunes', region: 'e', tier: 5, len: 5, x: 3, y: 15, w: 3, h: 3, from: ['j1'], rows: ['ABB', 'ABC', 'DDC'] },
+      { id: 'l3', name: 'Silent Pass', region: 'n', tier: 5, len: 5, x: 0, y: 15, w: 3, h: 3, from: ['j1'], rows: ['AAB', 'CAB', 'CDD'] },
+      { id: 'r4', name: 'Amber Mesa', region: 'e', tier: 6, len: 6, x: 3, y: 12, w: 3, h: 3, from: ['r3'], rows: ['AAB', 'CAB', 'CDD'] },
+      { id: 'l4', name: 'Glass Ridge', region: 'n', tier: 6, len: 6, x: 0, y: 12, w: 3, h: 3, from: ['l3'], rows: ['ABB', 'ABC', 'DDC'] },
+      { id: 'j2', name: 'Misty Moor', region: 'w', tier: 7, len: 6, x: 0, y: 9, w: 6, h: 3, from: ['l4', 'r4'], all: true, rows: ['AAABBB', 'CCABDD', 'CCEEDD'] },
+      { id: 'r5', name: 'Cinder Gate', region: 's', tier: 8, len: 7, x: 3, y: 6, w: 3, h: 3, from: ['j2'], rows: ['ABB', 'ABC', 'DDC'] },
+      { id: 'l5', name: 'Drowned Mere', region: 'w', tier: 8, len: 7, x: 0, y: 6, w: 3, h: 3, from: ['j2'], rows: ['AAB', 'CAB', 'CDD'] },
+      { id: 'r6', name: 'Molten Crater', region: 's', tier: 9, len: 7, x: 3, y: 3, w: 3, h: 3, from: ['r5'], rows: ['AAB', 'CAB', 'CDD'] },
+      { id: 'l6', name: 'Violet Barrow', region: 'w', tier: 9, len: 7, x: 0, y: 3, w: 3, h: 3, from: ['l5'], rows: ['ABB', 'ABC', 'DDC'] },
+      { id: 'top', name: 'Gloaming Crown', region: 'w', tier: 10, len: 8, x: 0, y: 0, w: 6, h: 3, from: ['l6', 'r6'], all: true, rows: ['AAABBB', 'CCADDB', 'CEEFFB'] }
     ]
   },
   /* regions: bias is added to the base colour weight 1 in the drop table; col = the colour of its stages on the map */
@@ -690,7 +690,7 @@ var CONFIG = {
   stars: { on: true, cap: 5, need: 3, bonus: 1, sideBonus: { 1: 3, 2: 2, 3: 1, 4: 1 } },   /* boosts and multipliers gain sideBonus[marked sides] per star instead (row/column/cross lines count as 1 side; placeholder) */
   keepCount: [1, 1, 1, 2, 2, 2, 2, 3, 3, 3],   /* coloured tiles you may keep per boss, by difficulty (placeholder) */
   relicMax: 3,                      /* relics per run */
-  heroUnlock: { prism: 'puzzle', overcharge: 18, wind: 30, guard: 42 },   /* heroes unlock by map progress: the number of map stages cleared, of 67 (the old 2, 5, 9, 14 of 49 cells, rescaled; Kiri is free) */
+  heroUnlock: { prism: 'puzzle', overcharge: 15, wind: 25, guard: 36 },   /* heroes unlock by map progress: the number of map stages cleared, of 57 (the old 18, 30, 42 of 67, rescaled; Kiri is free) */
   puzzleCoins: 10, dailyCoins: 15,  /* placeholders */      
   /* rarity odds [common, rare, epic] by source; depthShift is added to rare per depth/won fight */
   rarity: { normal: [0.92, 0.075, 0.005], elite: [0.5, 0.4, 0.1], boss: [0, 0.75, 0.25], treasure: [0.5, 0.38, 0.12], runner: [0.6, 0.34, 0.06], depthShift: 0.03, rareStage: 5, epicStage: 8 },
@@ -2036,10 +2036,10 @@ var ICON = {
   hero: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.500 5.500L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.500-.5z"/></svg>',
   team: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.500"/><path d="M3 20c0-4 3-6 6-6s6 2 6 6M15 15c3 0 6 1 6 5"/></svg>'
 };
-/* ---------- home map: the Mosaic. One tiling of area plates on a navy slab; every stage is a piece of its plate ---------- */
+/* ---------- home map: the Mosaic. One tiling of area plates on a light slab; every stage is a piece of its plate ---------- */
 var DIFFW = ['Gentle', 'Easy', 'Steady', 'Tricky', 'Hard', 'Fierce', 'Brutal', 'Savage', 'Deadly', 'Final'];
 var BOSSNAME = { plain: 'Plain body', twin: 'Twins', block: 'Blocker', aegis: 'Armoured', plate: 'Plated', sealed: 'Sealed row', shield: 'Shielded', deadrow: 'Dead row', colours2: 'Two colours', final: 'Two phases' };
-var PSL = { sf: '#fff', sg: '#26344f', lf: 'color-mix(in srgb,#fff 7%,var(--slab2))', ll: 'color-mix(in srgb,#fff 22%,var(--slab2))', lk: 'rgba(255,255,255,.62)', af: function (c) { return 'color-mix(in srgb,' + c + ' 42%,var(--slab2))'; } };
+var PSL = { sf: '#fff', sg: '#26344f', lf: 'color-mix(in srgb,var(--mlk) 10%,var(--slab2))', ll: 'color-mix(in srgb,var(--mlk) 38%,var(--slab2))', lk: 'var(--mlk)', af: function (c) { return 'color-mix(in srgb,' + c + ' 42%,var(--slab2))'; } };
 /* the outline paths of a set of unit cells [[row, col], ...] (neighbouring cells join; outer corners are rounded) */
 function cellPaths(cells, u, x0, y0, ins, rx) {
   var set = {}, o = [], f = function (v) { return v.toFixed(1); };
@@ -2061,7 +2061,7 @@ function mapGlyph(kind, cx, cy, s, ink) {
   return '<g ' + t + ' style="fill:none;stroke:' + ink + ';stroke-width:2;stroke-linecap:round"><path d="M-3 -1V-2.5a3 3 0 0 1 6 0V-1"/><rect x="-4.5" y="-1" width="9" height="6.5" rx="1.8" style="fill:' + ink + ';stroke:none"/></g>';
 }
 /* one stage piece. state: c cleared, a playable, l locked, h (area not open: a quiet dim piece) */
-function stagePiece(key, cells, u, x0, y0, state, col, sel, cur, label) {
+function stagePiece(key, cells, u, x0, y0, state, col, sel, cur, label, info) {
   var ins = 1.6, rx = Math.min(10, u * .27), rx2 = Math.max(rx - 2, 2), cv = 'var(--' + col + ')', P = PSL, s = '', mx = 0, my = 0, best, bd = 1e9, R = function (i, r) { return cellPaths(cells, u, x0, y0, i, r); };
   cells.forEach(function (p) { mx += p[0]; my += p[1]; }); mx /= cells.length; my /= cells.length;
   cells.forEach(function (p) { var d = Math.pow(p[0] - mx, 2) + Math.pow(p[1] - my, 2); if (d < bd) { bd = d; best = p; } });
@@ -2079,6 +2079,14 @@ function stagePiece(key, cells, u, x0, y0, state, col, sel, cur, label) {
   else if (sel) s += mapGlyph(state === 'c' ? 'tick' : state === 'l' ? 'lock' : 'play', cx, cy, sc, P.sg);
   else if (state === 'c') s += mapGlyph('tick', cx, cy, sc, '#fff');
   else if (state === 'l') s += mapGlyph('lock', cx, cy, sc, P.lk);
+  if (info) {   /* the stage number (top left of the main cell) and small icons for what it holds: mid-boss, boss, first-clear reward */
+    var ink = state === 'c' && !sel ? '#fff' : state === 'l' && !sel ? P.lk : cv, ax = x0 + best[1] * u, ay = y0 + best[0] * u, ic = [];
+    s += '<text x="' + (ax + 7) + '" y="' + (ay + 11) + '" style="font:800 ' + Math.max(9, Math.round(u * .22)) + 'px system-ui,sans-serif;fill:' + ink + ';opacity:.95" dominant-baseline="central">' + info.n + '</text>';
+    if (info.mid) ic.push(['M0-4.6L4 -3V.6C4 2.9 2 4.1 0 5C-2 4.1-4 2.9-4 .6V-3Z', ink, 'Mid-boss']);
+    ic.push(['M-4.5 3.5V-2.5L-2.2 0L0-3.6L2.2 0L4.5-2.5V3.5Z', ink, 'Boss']);
+    if (info.rew) ic.push(['M-4-1.5L-2-4H2L4-1.5L0 4.5Z', 'var(--gold)', 'Reward']);
+    ic.forEach(function (q, i) { s += '<path transform="translate(' + (ax + u / 2 + (i - (ic.length - 1) / 2) * 12) + ' ' + (ay + u - 9) + ')" d="' + q[0] + '" style="fill:' + q[1] + ';stroke:' + (q[1] === 'var(--gold)' ? 'rgba(0,0,0,.25)' : 'none') + ';stroke-width:.7"><title>' + q[2] + '</title></path>'; });
+  }
   return s + '</g>';
 }
 function mapSVG(u, sel) {
@@ -2091,22 +2099,22 @@ function mapSVG(u, sel) {
     var A = M.areas[id]; if (!sh[id] && !far[id]) return;
     if (sh[id] && A.lesson) {   /* a lesson: a small tile on the seam below its area, between the islands */
       var lk = 'L.' + id, ls = stageState(lk, store.cleared, all), lsel = lk === sel, NS = u * .44, cx0 = (A.x + A.w / 2) * u, cy0 = (A.y + A.h - minY) * u, lc = 'var(--' + A.col + ')';
-      var fill = ls === 'c' ? lc : lsel ? '#fff' : ls === 'a' ? 'var(--slab2)' : 'rgba(255,255,255,.08)', stroke = ls === 'h' ? 'rgba(255,255,255,.25)' : lc;
-      var T = u - 14, tx = cx0 - T / 2, ty = cy0 + (u - T) / 2, stub = 'fill:' + (ls === 'h' ? 'rgba(255,255,255,.12)' : lc) + ';opacity:' + (ls === 'c' ? .7 : .45);
+      var fill = ls === 'c' ? lc : lsel ? '#fff' : ls === 'a' ? 'var(--slab2)' : 'var(--mdot)', stroke = ls === 'h' ? 'var(--mdim)' : lc;
+      var T = u - 14, tx = cx0 - T / 2, ty = cy0 + (u - T) / 2, stub = 'fill:' + (ls === 'h' ? 'var(--mdim)' : lc) + ';opacity:' + (ls === 'c' ? .7 : .45);
       nodes += '<rect x="' + (cx0 - 3) + '" y="' + (cy0 - 2) + '" width="6" height="' + (ty - cy0 + 4) + '" rx="3" style="' + stub + '"/>' + (A.from.length ? '<rect x="' + (cx0 - 3) + '" y="' + (ty + T - 2) + '" width="6" height="' + (cy0 + u - ty - T + 4) + '" rx="3" style="' + stub + '"/>' : '') +
         stagePiece(lk, [[0, 0]], T, tx, ty, ls, A.col, lsel, false, 'Lesson');
     }
     var col = A.col, X = A.x * u + 6, Y = (A.y - minY) * u + 6, PW = A.w * u - 12, PH = A.h * u - 12, here = st && st.area === id;
-    if (far[id]) { s += '<rect x="' + (X + 1) + '" y="' + (Y + 1) + '" width="' + (PW - 2) + '" height="' + (PH - 2) + '" rx="12" style="fill:var(--' + col + ');fill-opacity:.035;stroke:rgba(255,255,255,.1);stroke-width:1.4;stroke-dasharray:2 6;stroke-linecap:round"/>'; return; }
+    if (far[id]) { s += '<rect x="' + (X + 1) + '" y="' + (Y + 1) + '" width="' + (PW - 2) + '" height="' + (PH - 2) + '" rx="12" style="fill:var(--' + col + ');fill-opacity:.035;stroke:var(--mdim);stroke-opacity:.5;stroke-width:1.4;stroke-dasharray:2 6;stroke-linecap:round"/>'; return; }
     if (sh[id] === 'dim') {
-      s += '<g class="st" data-act="mapsel" data-key="' + A.keys[0] + '" role="button" aria-label="Locked area"><rect x="' + (X + 1) + '" y="' + (Y + 1) + '" width="' + (PW - 2) + '" height="' + (PH - 2) + '" rx="12" style="fill:var(--' + col + ');fill-opacity:.07;stroke:rgba(255,255,255,' + (here ? '.5' : '.22') + ');stroke-width:1.6;stroke-dasharray:2 5;stroke-linecap:round"/>';
+      s += '<g class="st" data-act="mapsel" data-key="' + A.keys[0] + '" role="button" aria-label="Locked area"><rect x="' + (X + 1) + '" y="' + (Y + 1) + '" width="' + (PW - 2) + '" height="' + (PH - 2) + '" rx="12" style="fill:var(--' + col + ');fill-opacity:.07;stroke:' + (here ? 'var(--' + col + ')' : 'var(--mdim)') + ';stroke-width:1.6;stroke-dasharray:2 5;stroke-linecap:round"/>';
       A.keys.forEach(function (k) { var cs = Math.min((PW - 10) / A.w, (PH - 10) / A.h); s += stagePiece(k, A.cells[A.letters[+k.split('.')[1]]], cs, X + (PW - cs * A.w) / 2, Y + (PH - cs * A.h) / 2, 'h', col, false, false, 'Locked'); });
-      s += mapGlyph('lock', X + PW / 2, Y + PH / 2, 1.5, 'rgba(255,255,255,.5)') + '<rect class="hit" x="' + X + '" y="' + Y + '" width="' + PW + '" height="' + PH + '"/></g>';
+      s += mapGlyph('lock', X + PW / 2, Y + PH / 2, 1.5, 'var(--mlk)') + '<rect class="hit" x="' + X + '" y="' + Y + '" width="' + PW + '" height="' + PH + '"/></g>';
       return;
     }
-    s += '<rect x="' + X + '" y="' + Y + '" width="' + PW + '" height="' + PH + '" rx="12" style="fill:color-mix(in srgb,var(--' + col + ') 14%,var(--slab2));' + (here ? 'stroke:var(--' + col + ');stroke-opacity:.55;stroke-width:2' : '') + '"/>';
+    s += '<rect x="' + X + '" y="' + Y + '" width="' + PW + '" height="' + PH + '" rx="12" style="filter:drop-shadow(0 2px 3px rgba(20,30,50,.14));fill:color-mix(in srgb,var(--' + col + ') 12%,var(--slab2));' + (here ? 'stroke:var(--' + col + ');stroke-opacity:.55;stroke-width:2' : '') + '"/>';
     var cs = Math.min((PW - 10) / A.w, (PH - 10) / A.h), ox = X + (PW - cs * A.w) / 2, oy = Y + (PH - cs * A.h) / 2;
-    A.keys.forEach(function (k, i) { s += stagePiece(k, A.cells[A.letters[i]], cs, ox, oy, stageState(k, store.cleared, all), col, k === sel, k === cur, A.name + ' stage ' + (i + 1) + ' of ' + A.n); });
+    A.keys.forEach(function (k, i) { s += stagePiece(k, A.cells[A.letters[i]], cs, ox, oy, stageState(k, store.cleared, all), col, k === sel, k === cur, A.name + ' stage ' + (i + 1) + ' of ' + A.n, { n: i + 1, mid: A.mid >= 0, rew: !store.cleared[k] }); });
   });
   return s + nodes + '</svg>';
 }
@@ -2140,7 +2148,7 @@ function stageCardHTML(c, st) {
 function renderHome() {
   var all = store.allStages, sel = selKey(), c = stageInfo(sel), run = store.run, M = mapData();
   var old = $('#mapv'), pos = old && !S.mapCenter ? old.scrollTop : null;
-  var h = '<div class="hd"><h1>Tile Run</h1><span class="coinp">' + store.coins + '</span><button class="ib" data-act="settings" aria-label="Settings and help">' + ICON.gear + '</button></div>';
+  var h = '<div class="hd"><h1>Tile Run</h1><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + store.coins + '</button><button class="ib" data-act="settings" aria-label="Settings and help">' + ICON.gear + '</button></div>';
   h += '<div id="mapv" class="mapv"></div>' + stageCardHTML(c, stageState(sel, store.cleared, all));
   var PZ = PUZZLES.filter(function (q) { return q.need; }), solved = PZ.filter(function (q) { return store.puzDone[q.id]; }).length, hv = HERO_BY_ID[store.hero];
   h += '<div class="dock5">' +
@@ -2303,7 +2311,7 @@ function levelHTML(uid, done) {
 }
 function renderTeam() {
   var tab = S.tmTab || 'units', col = S.tmCol || 'r', G = CONFIG.gacha, u0, h;
-  h = '<header class="top"><button class="hbtn" data-act="home" aria-label="Back">' + TM_BACK + '</button><div class="ttl" style="text-align:left;font-size:21px;letter-spacing:-.02em">Team</div><span class="coinp" aria-label="Coins">' + store.coins + '</span><span class="shp" aria-label="Shards">' + (store.shards || 0) + '</span></header>';
+  h = '<header class="top"><button class="hbtn" data-act="home" aria-label="Back">' + TM_BACK + '</button><div class="ttl" style="text-align:left;font-size:21px;letter-spacing:-.02em">Team</div><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + store.coins + '</button><button class="shp" data-act="tip" data-tip="shards" aria-label="Shards">' + (store.shards || 0) + '</button></header>';
   var tabs = [['units', 'Units', ''], ['recruit', 'Recruit', 'Pull ' + G.cost], ['collected', 'Collected', store.ct.length + ' tiles'], ['colourless', 'Colourless', chosenColourless().length + ' of ' + CONFIG.maxColourless]];
   h += '<div class="tm-seg" role="tablist" aria-label="Team sections">' + tabs.map(function (t) { return '<button role="tab" aria-selected="' + (t[0] === tab) + '" class="' + (t[0] === tab ? 'on' : '') + '" data-act="tmtab" data-t="' + t[0] + '">' + t[1] + (t[2] ? '<small>' + t[2] + '</small>' : '') + '</button>'; }).join('') + '</div>';
   if (tab === 'units') {
@@ -3237,7 +3245,15 @@ function testCT(n) {
   save();
 }
 /* ---------- clicks ---------- */
+var TIPS = { coins: 'Coins: earned from stages; spend them to level up units and recruit.', shards: 'Shards: from duplicate recruits; spend them to open unit slots.' };
+function hideTip() { var o = $('#tip'); if (o) o.remove(); }
+function showTip(el, k) {
+  var had = $('#tip') && $('#tip').dataset.k === k; hideTip(); if (had) return;
+  var b = document.createElement('div'), r = el.getBoundingClientRect(), W = window.innerWidth; b.id = 'tip'; b.className = 'tip'; b.dataset.k = k; b.setAttribute('role', 'tooltip'); b.textContent = TIPS[k];
+  document.body.appendChild(b); var w = b.offsetWidth, left = Math.max(8, Math.min(W - w - 8, r.left + r.width / 2 - w / 2)); b.style.left = left + 'px'; b.style.top = (r.bottom + 10) + 'px'; b.style.setProperty('--ax', (r.left + r.width / 2 - left - 6) + 'px');
+}
 document.addEventListener('click', function (e) {
+  if (!(e.target.closest && e.target.closest('[data-act="tip"]'))) hideTip();
   if (Date.now() - lpAt < 350) { e.stopPropagation(); e.preventDefault(); return; }
   var t = e.target, el;
   if (!$('#card').hidden) return;
@@ -3262,6 +3278,7 @@ document.addEventListener('click', function (e) {
   el = t.closest && t.closest('[data-act],#fatk,#fclear'); if (!el) return;
   var act = el.dataset.act || el.id;
   switch (act) {
+    case 'tip': showTip(el, el.dataset.tip); break;
     case 'mapsel': store.sel = el.dataset.key; save(); renderHome(); break;
     case 'play': playCell(selKey()); break;
     case 'tutlist': openModal(tutListHTML()); break;
