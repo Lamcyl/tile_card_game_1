@@ -196,7 +196,11 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .ghost{touch-action:none;position:fixed;z-index:80;pointer-events:none;transform:translate(-50%,-90%) scale(1);opacity:.97;filter:drop-shadow(0 10px 10px rgba(20,30,60,.38));transition:left .05s linear,top .05s linear,transform .14s cubic-bezier(.2,.8,.3,1),opacity .16s}
 .ghost.lift{transform:translate(-50%,-90%) scale(1.14)}.ghost.pick{transition:left .14s ease-out,top .14s ease-out,transform .14s cubic-bezier(.2,.8,.3,1)}
 .ghost.settle{transition:left .17s cubic-bezier(.2,.8,.3,1),top .17s cubic-bezier(.2,.8,.3,1),transform .17s ease-out,opacity .17s ease-in .05s;transform:translate(-50%,-50%) scale(1);opacity:0}.ghost.back{opacity:.2}
-#fhand{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;justify-content:flex-start}
+/* the hand is a fixed-height strip: tiles stack in columns and the strip scrolls sideways; the page itself never scrolls in a fight */
+#fhand{display:flex;flex-flow:column wrap;gap:6px;align-content:flex-start;justify-content:flex-start;flex:none;height:var(--hh,104px);min-height:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#fhand::-webkit-scrollbar{display:none}#fhand .tile,#fhand .slot{touch-action:pan-x}
+body.fightmode,body.fightmode #app{height:100vh;height:100dvh;overflow:hidden;overscroll-behavior:none}body.fightmode #app{min-height:0}
+body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .kit{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
 .kt{position:relative;display:inline-block}
 .lk{position:absolute;left:-4px;right:-4px;bottom:-9px;text-align:center;font-style:normal;font-size:8.5px;font-weight:800;color:var(--muted);white-space:nowrap}
@@ -1837,6 +1841,7 @@ function tileHTML(t, o) {
   var cells = cellsOf(t), dims = shapeDims(t), h = dims[0], w = dims[1], k = t.k, uid = ++uidc, multi = cells.length > 1, board = !!o.board;
   var u = o.ts || 46, cellPx = u;
   if (!board && multi) { var nmx = Math.max(w, h); cellPx = Math.min(u, Math.floor((300 - (nmx - 1) * 6) / nmx)); }
+  if (!board && o.maxH) cellPx = Math.max(14, Math.min(cellPx, Math.floor(o.maxH / (h + (h - 1) * .11))));
   var gp = board ? (o.gp || 8) : Math.max(3, Math.round(cellPx * .11)), gu = gp / cellPx * 100;
   var VW = w * CU + (w - 1) * gu, VH = h * CU + (h - 1) * gu, PX = w * cellPx + (w - 1) * gp, PY = h * cellPx + (h - 1) * gp;
   var set = {}; cells.forEach(function (p) { set[p[0] + ',' + p[1]] = 1; });
@@ -1868,6 +1873,7 @@ function tileHTML(t, o) {
 }
 /* the unit effects of the fight on screen (null elsewhere), so tiles can show effects that change their reach */
 function fightFx() { return S.screen === 'fight' && S.fs && S.fs.F && !S.puz ? S.fs.F.fx : null; }
+function HH() { return Math.round(Math.max(78, Math.min(110, (window.innerHeight || 844) * .135))); }
 function HSZ() { return (window.innerHeight || 844) < 700 ? 46 : 54; }
 function dotHTML(c) { return '<span class="dot c-' + c + '"><svg viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">' + SYM[c] + '</svg></span>'; }
 function hpBar(hp, max) { return '<div class="hpbar"><i style="width:' + Math.max(0, hp / max * 100) + '%"></i><span>' + hp + ' / ' + max + '</span></div>'; }
@@ -1959,7 +1965,7 @@ function puzzleFail(info) {
 function show(name) {
   var prevScr = S.screen; S.screen = name;
   ['home', 'team', 'map', 'fight', 'result'].forEach(function (n) { $('#' + n).hidden = n !== name; });
-  window.scrollTo(0, 0);
+  document.body.classList.toggle('fightmode', name === 'fight'); window.scrollTo(0, 0);
   if (prevScr !== name) retrig($('#' + name), name === 'result' ? 'enter resin' : 'enter', 380);
   if (name === 'team') tutTeam();
   if (name === 'home') renderHome(); else if (name === 'team') renderTeam(); else if (name === 'map') renderMap(); else if (name === 'result') renderResult();
@@ -2392,7 +2398,7 @@ function handOf(c, rested) { return S.run.bag.filter(function (t) { return t.c =
 var GAP = 8;
 function cellSize(cols, rows) {
   var W = Math.min(document.documentElement.clientWidth || 390, 440) - 24, H = window.innerHeight || 844;
-  var byW = Math.floor((W - GAP * (cols - 1)) / cols), byH = Math.floor((H - 330 - GAP * (rows - 1)) / rows);
+  var byW = Math.floor((W - GAP * (cols - 1)) / cols), byH = Math.floor((H - 330 + 60 - HH() - GAP * (rows - 1)) / rows);
   return Math.max(40, Math.min(76, byW, byH));
 }
 /* sandwich clamps: one slim gold capsule centred in the gap on each side of the sandwiched tile, on the bracketed line */
@@ -2414,7 +2420,7 @@ function clampsHTML(res, cols, cs, gp) {
 function setPill(el, n, hp, max) { var u = $('.pill u', el), sp = $('.pill span', el); if (u) u.style.width = Math.min(100, n / Math.max(1, hp) * 100) + '%'; if (sp) sp.textContent = n + ' / ' + hp; }
 function renderFight() {
   var run = S.run, fs = S.fs, F = fs.F, cols = F.cols, R = F.rows, i;
-  var f = $('#fight'), cs = cellSize(cols, R); f.style.setProperty('--cs', cs + 'px'); f.style.setProperty('--n', cols); f.classList.toggle('narrow', cs < 60);
+  var f = $('#fight'), cs = cellSize(cols, R); f.style.setProperty('--hh', HH() + 'px'); f.style.setProperty('--cs', cs + 'px'); f.style.setProperty('--n', cols); f.classList.toggle('narrow', cs < 60);
   var bt = boardTiles(), res = evaluate(F, bt, eo({ detail: true })), placed = res.G.length;
   var ttl = S.puz ? S.puz.def.name : runTitle(run), sub = S.puz ? 'one attack' : (fs.kind === 'boss' ? (fs.mid ? 'Mid-boss' : 'Boss') : fs.kind === 'elite' ? 'Elite' : 'Fight ' + (run.fights + 1)) + ' · attack ' + (fs.turn + 1);
   $('#fhead').innerHTML = '<button class="hbtn" data-act="fmenu" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="ttl">' + ttl + '<small>' + sub + '</small></div>' + (fs.mom > 0 ? '<span class="mombadge" data-card="mom">Momentum +' + fs.mom + '</span>' : '<button class="hbtn" data-act="help" aria-label="How to play"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4.500 2.600c-1 .6-1.500 1.200-1.500 2.400M12 18v.5"/></svg></button>');
@@ -2472,11 +2478,11 @@ function renderFight() {
   var hand = handOf(S.tab).sort(order), restT = handOf(S.tab, true).sort(order);
   var placedT = run.bag.filter(function (t) { return t.c === S.tab && !t.rest && S.board.indexOf(t.id) >= 0; });
   var hh = hand.concat(placedT).sort(order).map(function (t) {
-    if (S.board.indexOf(t.id) >= 0) { var sd = shapeDims(t), hs = HSZ(), mx = Math.max(sd[0], sd[1]), cp = sd[0] * sd[1] > 1 ? Math.min(hs, Math.floor((300 - (mx - 1) * 6) / mx)) : hs, sg = Math.max(3, Math.round(cp * .11)); return '<div class="slot" style="width:' + (sd[1] * cp + (sd[1] - 1) * sg) + 'px;height:' + (sd[0] * cp + (sd[0] - 1) * sg) + 'px"></div>'; }
-    return tileHTML(t, { ts: HSZ(), attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: (S.sel === t.id ? 'sel' : '') });
+    if (S.board.indexOf(t.id) >= 0) { var sd = shapeDims(t), hs = HSZ(), mx = Math.max(sd[0], sd[1]), cp = sd[0] * sd[1] > 1 ? Math.min(hs, Math.floor((300 - (mx - 1) * 6) / mx), Math.floor((HH() - 6) / (sd[0] + (sd[0] - 1) * .11))) : hs, sg = Math.max(3, Math.round(cp * .11)); return '<div class="slot" style="width:' + (sd[1] * cp + (sd[1] - 1) * sg) + 'px;height:' + (sd[0] * cp + (sd[0] - 1) * sg) + 'px"></div>'; }
+    return tileHTML(t, { ts: HSZ(), maxH: HH() - 6, attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: (S.sel === t.id ? 'sel' : '') });
   }).join('');
   $('#fhand').innerHTML = hh +
-    restT.map(function (t) { return tileHTML(t, { ts: HSZ(), attrs: 'data-card="t:' + t.id + '"' }); }).join('') +
+    restT.map(function (t) { return tileHTML(t, { ts: HSZ(), maxH: HH() - 6, attrs: 'data-card="t:' + t.id + '"' }); }).join('') +
     (!hand.length && !restT.length && !placedT.length ? '<div class="ctext" style="width:100%;text-align:center;padding:10px">No tiles of this colour.</div>' : '');
   $('#fhero').innerHTML = S.puz && !S.puz.def.hero ? '' : heroRowHTML(run, fs);
   $('#fatk').disabled = !placed || S.phase !== 'edit' || heroTargeting(); $('#fclear').disabled = !placed || S.phase !== 'edit';
@@ -2825,6 +2831,12 @@ function cardFor(key) {
 
 /* ---------- pointer handling ---------- */
 var P = null, ghost = null, lpAt = 0, rectCache = null, rafId = 0, TLOG = [];
+/* lifted copies: at most one live ghost (P/DD) plus gliding ones; every path drops its copy, and strays are swept */
+function killGhosts(keep) { Array.prototype.slice.call(document.querySelectorAll('body > .ghost')).forEach(function (g) { if (g !== keep) g.parentNode.removeChild(g); }); }
+function ghostDone(g) { var done = function () { if (g.parentNode) g.parentNode.removeChild(g); }; g.addEventListener('transitionend', function (ev) { if (ev.target === g && ev.propertyName === 'opacity') done(); }); setTimeout(done, 320); }
+function abortDrags() { var had = !!(P && P.moved) || !!(DD && DD.moved); if (P) clearTimeout(P.timer); if (rafId) { cancelAnimationFrame(rafId); rafId = 0; } P = null; ghost = null; rectCache = null; if (DD) { if (DD.el && DD.el.classList) DD.el.classList.remove('dragging'); DD = null; ddHot(null); } killGhosts(); $$('#ftiles .tile.dragging,.dragging[data-dd]').forEach(function (n) { n.classList.remove('dragging'); }); return had; }
+document.addEventListener('visibilitychange', function () { if (document.hidden && abortDrags() && S.screen === 'fight') { clearHold(); renderFight(); } });
+window.addEventListener('pagehide', abortDrags); window.addEventListener('blur', function () { if (abortDrags() && S.screen === 'fight') { clearHold(); renderFight(); } });
 /* touch log: the last few input events (Settings, Touch log) */
 function tlog(msg) { TLOG.push(msg); if (TLOG.length > 6) TLOG.shift(); tlogShow(); }
 function tlogShow() { var el = $('#tlog'); if (!el) return; var on = !!(store && store.set && store.set.tlog); el.hidden = !on; if (on) el.textContent = TLOG.length ? TLOG.join(' | ') : 'touch log on'; }
@@ -2832,7 +2844,7 @@ function guarded(name, fn) {
   return function (e) {
     try { fn(e); } catch (err) {
       tlog('error in ' + name + ': ' + (err && err.message));
-      try { P = null; if (ghost) { ghost.remove(); ghost = null; } rectCache = null; clearHold(); $$('#ftiles .tile.dragging').forEach(function (n) { n.classList.remove('dragging'); }); if (S.screen === 'fight') renderFight(); } catch (e2) { tlog('error recovering: ' + (e2 && e2.message)); }
+      try { P = null; ghost = null; killGhosts(); rectCache = null; clearHold(); $$('#ftiles .tile.dragging').forEach(function (n) { n.classList.remove('dragging'); }); if (S.screen === 'fight') renderFight(); } catch (e2) { tlog('error recovering: ' + (e2 && e2.message)); }
     }
   };
 }
@@ -2870,8 +2882,10 @@ function cellUnder(x, y) {
 }
 /* where the dragged piece's first (anchor) cell is, as drawn: the drop target is what the user sees */
 function ghostAnchor(t) {
-  var gr = ghost.getBoundingClientRect(), dm = shapeDims(t), u = parseFloat(ghost.style.getPropertyValue('--u')), g = parseFloat(ghost.style.getPropertyValue('--tg')), k = gr.width / (dm[1] * u + (dm[1] - 1) * g), c0 = cellsOf(t)[0];
-  return { x: gr.left + k * (c0[1] * (u + g) + u / 2), y: gr.top + k * (c0[0] * (u + g) + u / 2) };
+  /* analytic: from the finger point the copy is pinned to (left/top), not the animated box, so the preview and the drop agree */
+  var dm = shapeDims(t), u = parseFloat(ghost.style.getPropertyValue('--u')), g = parseFloat(ghost.style.getPropertyValue('--tg')), k = 1.14, c0 = cellsOf(t)[0];
+  var w = k * (dm[1] * u + (dm[1] - 1) * g), h = k * (dm[0] * u + (dm[0] - 1) * g), fx = parseFloat(ghost.style.left), fy = parseFloat(ghost.style.top);
+  return { x: fx - w / 2 + k * (c0[1] * (u + g) + u / 2), y: fy - .9 * h + k * (c0[0] * (u + g) + u / 2) };
 }
 function dragUpdate() {
   rafId = 0; if (!P || !P.moved || !ghost) return;
@@ -2880,6 +2894,7 @@ function dragUpdate() {
   showReach(t, key >= 0 ? dropOrigin(t, key, P.bt) : -1);
 }
 document.addEventListener('pointerdown', guarded('pointerdown', function (e) {
+  if (P && P.moved) { abortDrags(); clearHold(); if (S.screen === 'fight') renderFight(); } else if (!ghost) killGhosts();
   if (!$('#card').hidden) { hideCard(); P = { dead: true }; lpAt = Date.now(); return; }
   if (S.phase === 'anim' && S.screen === 'fight') { S.skip = true; return; }
   if (!$('#modal').hidden && !$('#modal').contains(e.target)) return;
@@ -2895,11 +2910,13 @@ document.addEventListener('pointermove', guarded('pointermove', function (e) {
   if (!P || P.dead || P.long) return;
   var dx = e.clientX - P.x, dy = e.clientY - P.y;
   if (!P.moved && dx * dx + dy * dy > 36) P.moveSeen = true;
+  if (!P.moved && P.tg.kind === 'hand' && e.pointerType !== 'mouse' && dx * dx + dy * dy > 64 && Math.abs(dx) > Math.abs(dy) * 1.2 && $('#fhand').scrollWidth > $('#fhand').clientWidth + 2) P.scroll = true;   /* sideways swipe on the hand row: the row scrolls, no drag */
+  if (P.scroll) return;
   if (!P.moved && dx * dx + dy * dy > 100 && (P.tg.kind === 'hand' || P.tg.kind === 'board')) {
     P.moved = true; clearTimeout(P.timer);
     var t = tileById(P.tg.id);
     var gw = document.createElement('div'); gw.innerHTML = tileHTML(t, { ts: P.tg.kind === 'board' ? 46 : 54, noRest: true });
-    ghost = gw.firstChild; ghost.classList.add('ghost', 'pick');
+    killGhosts(); ghost = gw.firstChild; ghost.classList.add('ghost', 'pick');
     var sr = P.tg.el && P.tg.el.getBoundingClientRect(); ghost.style.left = (sr ? sr.left + sr.width / 2 : e.clientX) + 'px'; ghost.style.top = (sr ? sr.top + sr.height * .9 : e.clientY) + 'px';
     document.body.appendChild(ghost); void ghost.offsetWidth; ghost.classList.add('lift'); var gh0 = ghost; setTimeout(function () { gh0.classList.remove('pick'); }, 170);
     try { document.body.setPointerCapture(e.pointerId); } catch (er) {}
@@ -2916,23 +2933,23 @@ document.addEventListener('pointermove', guarded('pointermove', function (e) {
 function endPointer(e, cancel) {
   if (!P) { if (cancel) tlog('cancel: ' + e.type + ' (no gesture)'); return; }
   var p = P; P = null; clearTimeout(p.timer); if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
-  if (p.dead) return;
+  if (p.dead) { killGhosts(); ghost = null; return; }
   var tg = p.tg, gh = ghost, anchor = null, home = p.tg.el && p.tg.el.getBoundingClientRect();
   ghost = null;
   if (p.moved && gh) {   /* measure where the lifted tile is drawn at the final finger position, without the follow transition */
     gh.style.transition = 'none'; gh.style.left = e.clientX + 'px'; gh.style.top = e.clientY + 'px'; ghost = gh; void gh.offsetWidth;
     anchor = ghostAnchor(tileById(tg.id)); ghost = null;
   }
-  if (gh && !(p.moved && !cancel)) gh.remove();
+  if (gh && !(p.moved && !cancel)) killGhosts();
   rectCache = null;
   $$('#ftiles .tile.dragging').forEach(function (n) { n.classList.remove('dragging'); });
   if (cancel) { tlog('cancel: ' + e.type + (p.moved ? ' during drag t' + tg.id : '')); if (p.moved) { clearHold(); renderFight(); } return; }
   var settle = function (box, ok) {   /* the lifted copy glides to where the tile landed, or back to where it came from, and fades out */
     if (!gh) return; var r = box || home;
-    if (!r) { gh.remove(); return; }
+    if (!r) { killGhosts(); return; }
     gh.style.transition = ''; gh.classList.remove('pick', 'lift'); void gh.offsetWidth; gh.classList.add('settle'); if (!ok) gh.classList.add('back');
     gh.style.left = (r.left + r.width / 2) + 'px'; gh.style.top = (r.top + r.height / 2) + 'px';
-    setTimeout(function () { gh.remove(); }, 260);
+    ghostDone(gh);
   };
   if (p.long) { lpAt = Date.now(); return; }
   if (p.moved) {
@@ -2948,6 +2965,7 @@ function endPointer(e, cancel) {
     return;
   }
   if (S.screen !== 'fight' || S.phase !== 'edit') return;
+  if (p.scroll || p.moveSeen) { tlog('swipe, not a tap'); return; }
   if (heroTargeting()) { if (tg.kind === 'board') { heroTarget(S.fs, tg.id); renderFight(); } else tlog('hero ability is aiming: tap a placed tile'); return; }
   if (tg.kind === 'hand') { S.sel = S.sel === tg.id ? -1 : tg.id; clearHold(); renderFight(); tlog('tap t' + tg.id + (S.sel >= 0 ? ' selected' : ' deselected')); }
   else if (tg.kind === 'cell') { if (S.sel >= 0) { var ok2 = place(S.sel, tg.cell); tlog('tap cell ' + tg.cell + (ok2 ? ' placed' : ' does not fit')); } else shakeCell(tg.cell); }
@@ -2955,7 +2973,7 @@ function endPointer(e, cancel) {
 }
 document.addEventListener('pointerup', guarded('pointerup', function (e) { endPointer(e, false); }));
 document.addEventListener('pointercancel', guarded('pointercancel', function (e) { endPointer(e, true); }));
-document.addEventListener('lostpointercapture', function (e) { if (P && P.moved && e.target === document.body) tlog('lost pointer capture'); });
+document.addEventListener('lostpointercapture', function (e) { if (e.target !== document.body) return; if (P && P.moved) tlog('lost pointer capture'); setTimeout(function () { if (!P && !DD) Array.prototype.slice.call(document.querySelectorAll('body > .ghost:not(.settle)')).forEach(function (g) { g.parentNode.removeChild(g); }); }, 400); });
 
 /* ---------- drag and drop outside the fight (slot popup, colourless slots): a lifted copy follows the finger, the zone under it lights up, it settles into the zone or glides back ---------- */
 var DD = null;
@@ -2977,21 +2995,21 @@ document.addEventListener('pointermove', function (e) {
     var dx = e.clientX - DD.x, dy = e.clientY - DD.y; if (dx * dx + dy * dy < 64) return;
     var t = ddTile(DD.el); if (!t) { DD = null; return; }
     DD.moved = true; if (P) { clearTimeout(P.timer); P = null; }
-    var w = document.createElement('div'); w.innerHTML = tileHTML(t, { ts: 52, noRest: true }); var g = w.firstChild; g.classList.add('ghost', 'pick');
+    killGhosts(); var w = document.createElement('div'); w.innerHTML = tileHTML(t, { ts: 52, noRest: true }); var g = w.firstChild; g.classList.add('ghost', 'pick');
     var r0 = DD.el.getBoundingClientRect(); g.style.left = (r0.left + r0.width / 2) + 'px'; g.style.top = (r0.top + r0.height * .9) + 'px';
     document.body.appendChild(g); void g.offsetWidth; g.classList.add('lift'); setTimeout(function () { g.classList.remove('pick'); }, 170);
     DD.gh = g; DD.el.classList.add('dragging');
     try { document.body.setPointerCapture(e.pointerId); } catch (er) {}
   }
   DD.gh.style.left = e.clientX + 'px'; DD.gh.style.top = e.clientY + 'px';
-  var gr = DD.gh.getBoundingClientRect(); ddHot(ddZone(gr.left + gr.width / 2, gr.top + gr.height / 2));
+  ddHot(ddZone(e.clientX, e.clientY));
 });
 function ddEnd(e, cancel) {
   var d = DD; if (!d) return; DD = null;
   if (!d.moved) return;
   var g = d.gh, home = d.el.getBoundingClientRect();
   g.style.transition = 'none'; g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; void g.offsetWidth;
-  var gr = g.getBoundingClientRect(), z = cancel ? null : ddZone(gr.left + gr.width / 2, gr.top + gr.height / 2), zr = z && z.getBoundingClientRect(), kind = d.el.dataset.dd, from = d.el.dataset.slot, ids = ddIds(d.el), ok = false, msg = '', zk = z && z.dataset.dz.split(':');
+  var z = cancel ? null : ddZone(e.clientX, e.clientY), zr = z && z.getBoundingClientRect(), kind = d.el.dataset.dd, from = d.el.dataset.slot, ids = ddIds(d.el), ok = false, msg = '', zk = z && z.dataset.dz.split(':');
   ddHot(null); lpAt = Date.now();
   if (z && kind === 'ct') {
     var uid = S.loadUid;
@@ -3009,7 +3027,7 @@ function ddEnd(e, cancel) {
   if (!ok && d.el.isConnected) d.el.classList.remove('dragging');
   g.style.transition = ''; g.classList.remove('pick', 'lift'); void g.offsetWidth; g.classList.add('settle'); if (!ok) g.classList.add('back');
   var tr = ok && zr ? zr : home; g.style.left = (tr.left + tr.width / 2) + 'px'; g.style.top = (tr.top + tr.height / 2) + 'px';
-  setTimeout(function () { g.remove(); }, 260);
+  ghostDone(g);
 }
 document.addEventListener('pointerup', function (e) { ddEnd(e, false); });
 document.addEventListener('pointercancel', function (e) { ddEnd(e, true); });

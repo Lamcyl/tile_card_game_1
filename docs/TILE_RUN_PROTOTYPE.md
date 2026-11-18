@@ -516,3 +516,9 @@ Diagnostic: Settings, "Touch log" (off by default, kept in the save) shows the l
 - **Tutorial scenes** lay out multi-cell tiles correctly (covered cells are hidden under the piece, the piece sits above the grid, the number shows).
 - **p09 Two Colours** is redesigned (3x3): a blue/green tile is blue bread in one row sandwich and green bread in a column sandwich. Brute force over all placements: solvable, and not solvable if that tile is replaced by a plain blue or a plain green one.
 - **Copy tiles** show an "=" before their number (`=4`), everywhere tiles are drawn.
+
+## Twelfth iteration (phone fixes and test kit)
+- **Ghost tiles**: one tracked lifted copy; every drag path (up, cancel, lost capture, new pointerdown, tab hidden / blur, errors, re-render) removes strays, and the glide-back uses `transitionend` with a 320 ms timeout. A 20-drag fast-touch repro left 20 ghosts before and 0 after.
+- **Fight fits one screen**: the page does not scroll in a fight (`body.fightmode`). The hand is a fixed-height strip (`--hh`, 78-110 px) that scrolls sideways; tall tiles shrink to fit its height and the board sizes from what is left. A sideways swipe on the hand scrolls the row, an upward or downward move starts a drag; a swipe that moved is never a tap.
+- **Slots**: drops outside the fight use the element under the finger, not the tile centre. On the board the anchor cell is now computed from the finger point, so the preview and the drop agree.
+- **Test kit**: `prototype/tools/tr-test.js` (see `prototype/tools/README.md`); `node prototype/tools/tr-test.js smoke` is the quick regression pass.
