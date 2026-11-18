@@ -325,3 +325,12 @@ Check (3 bot players each, 200-run cap; difficulty 5 health was eased from 32 to
 The skilled bot finishes in about 73 runs (about 11 h). The casual bot rarely finishes; real players learn, so treat it as a floor. The tile score table above was measured before this change; skill scores are now much lower.
 
 **Update: lessons live on the map.** Each lesson is a small diamond ("?") on the seam below the first area of each new difficulty on each path, between the islands, not inside them. Tapping it shows the lesson card; Learn opens the next unsolved puzzle of that difficulty. The first stage of that area stays locked until all of its lessons are solved; then the diamond shows a tick. The puzzle menu now has "Leave puzzle" to go back to the map.
+
+## Quick pass, 18 November 2026
+
+- Early areas (difficulty 1–3) have 2 stages each, runs of 2 / 3 / 3 fights; the world has 59 stages.
+- Enemy HP per column: 8, 11, 18, 24, 31, 42, 68, 80, 84, 62 (smooths the old jump from 39 to 85 at difficulty 7).
+- Tile changes from the scores: three-lane tiles weaker (Cinder, Wisp, Dune wide tridents and Dusk, Gloom tridents at 1; generated three-lane penalty 0.55 → 0.4, two-lane 0.72 → 0.65); boosts stronger (unit boost tiles +1 or +2, generated boost budget 1/2/3 → 2/3/4).
+- Scores (same metric as above, level 5 units, tier-10 reference fights; `results/v12u*.json` before, `v13u*.json` after). Mean of a unit's three tiles: Common 9 → 10, Rare 21 → 20, Epic 41 → 42.
+- Still dominant: a wide (2-cell) trident scores 100 even with number 1, because it hits 4 columns and is sandwiched on several lines at once; its strength comes from its shape, not its number. Multipliers (Spark, Willow, Mist, Vale) score 50–58. Weakest: boost-heavy Commons (Gleam, Scorch, Flare, Glint, Veil 3–5).
+- Bots (3 players each, 200-run cap): skilled finishes in about 61 runs (9 h), wins 100% up to difficulty 7, then 81 / 82 / 69%; casual finishes in about 158 runs, 48% at difficulty 4, 14% at 10.
