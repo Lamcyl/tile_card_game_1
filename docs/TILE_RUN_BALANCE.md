@@ -372,3 +372,12 @@ Bottom 10:
 | Quad-cell Boost (`pd5#v4`, 1×4) | 11.5 | 42 | 54 | in game |
 
 **Score update.** The first score (100 = could deal 40% of the toughest fight alone) put 691 of 940 tiles at 100, so it could not tell them apart. The encyclopedia now uses score = 100 × Total max / (Total max + median Total max): 50 is a typical tile, the strongest approach 100 and nothing is capped. Top: four-cell forks, jabs and tridents (about 89–91). Bottom: tall 1×4 boosts and multipliers and the plain single Strike (6–9), since a vertical four-cell boost or multiplier touches few other tiles. The tables above show the old score; Column max and Total max are unchanged. Rerun `node prototype/tools/tile-run-balance/encyclopedia.js` after any rebalance.
+
+## Additive rules pass, 19 November 2026
+
+- Rules: multipliers add (x2 and x2 = x3); sandwich lines add (+1 per bracketed line); both share one pool, so an attack deals (number + boosts) x (1 + sandwich lines + multiplier bonuses).
+- Tiles: multipliers x3 / x3 / x4 by rarity, +1 per two extra cells; boosts +3 / +5 / +7, +25% per extra cell; copies +0 / +0 / +1; unit multipliers x3.
+- Encyclopedia stress test (up to four x2 multipliers and two boosts as helpers): median damage added, single / multi-cell: attacks 266 / 876, boosts 192 / 654, multipliers 222 / 541, copies 628 / -. Strongest in-game tile about 3,000, weakest about 45 (before the additive rules: 110,000 vs 150).
+- Rarity star cut-offs on the encyclopedia score: 45 / 51 / 56 / 64 (298 / 190 / 118 / 161 / 96 tiles from 1 to 5 stars).
+- Enemy HP per column: 8, 14, 22, 32, 47, 75, 170, 205, 235, 170 (between tuner rounds 2 and 3).
+- Bots: the skilled bot still wins every tier in about one attack per fight (it finds strong boards); the casual bot needs about 20-30 h and wins 30-70% from difficulty 6. The gap between the bots is large, so real playtesting decides where a typical player sits.
