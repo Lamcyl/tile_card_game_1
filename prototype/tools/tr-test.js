@@ -24,7 +24,7 @@ async function open(o = {}) {
   page.on('console', m => { if (m.type() === 'error') errs.push('console: ' + m.text()); });
   page.on('pageerror', e => errs.push('pageerror: ' + e.message));
   cdp = await ctx.newCDPSession(page);
-  if (save) await ctx.addInitScript(s => { try { localStorage.setItem(s.k, s.v); } catch (e) {} }, { k: 'tileRunPrototype.v8', v: typeof save === 'string' ? save : JSON.stringify(save) });
+  if (save) await ctx.addInitScript(s => { try { localStorage.setItem(s.k, s.v); } catch (e) {} }, { k: 'tileRunPrototype.v9', v: typeof save === 'string' ? save : JSON.stringify(save) });
   await page.goto(URL + (tut ? '' : '?tut=0')); await sleep(400);
   await page.evaluate(() => TR.setSpeed(0.05));
   return page;
@@ -92,12 +92,22 @@ async function smoke(out) {
   });
   await step('team screen', async () => { await openTeam('r'); await shot('04-team'); return ev(() => TR.S.screen === 'team'); });
   await step('slot popup drag', async () => {
-    await ev(() => { const s = TR.store(); s.coins = 999; s.shards = 99; const u = s.team.r; TR.buySlot(u); if (!TR.store().ct || !TR.store().ct.length) TR.addCT({ c: 'r', k: 'a', d: '^', n: 3, sh: 'o', rar: 1 }); TR.show('team'); });
+    await ev(() => { const s = TR.store(); s.coins = 999; const u = s.team.r; TR.buySlot(u); if (!TR.store().ct || !TR.store().ct.length) TR.addCT({ c: 'r', k: 'a', d: '^', n: 3, sh: 'o', rar: 1 }); TR.show('team'); });
     await sleep(150); await ev(() => { const b = document.querySelector('[data-act="slotpop"]'); if (b) b.click(); }); await sleep(150);
     const has = await ev(() => !!document.querySelector('#modal [data-dd="ct"]') && !!document.querySelector('#modal [data-dz^="slot"]'));
     if (!has) return 'no draggable tile or slot (skipped)';
-    await touchDrag('#modal [data-dd="ct"]', '#modal [data-dz^="slot"]', { steps: 6, ms: 15, hold: 260 }); await sleep(400);
-    await shot('05-slotpop'); return (await ghosts()) === 0;
+    await touchDrag('#modal [data-dd="ct"]', '#modal [data-dz^="slot"]', { steps: 6, ms: 15 }); await sleep(400);   /* no hold: the popup drags at once */
+    await shot('05-slotpop'); const eq = await ev(() => { const s = TR.store(), u = s.team.r; return (s.slots[u] ? s.slots[u].t : []).some(Boolean); });
+    return (await ghosts()) === 0 && eq ? { equipped: eq } : false;
+  });
+  await step('shard unlock', async () => {
+    const id = await ev(() => { const s = TR.store(), u = Object.keys(s.units).filter(k => !s.units[k].u && TR.UNITS_BY_ID[k].c === 'r')[0]; TR.addShards(u, TR.shardNeed(TR.UNITS_BY_ID[u]) - 1); TR.show('team'); return u; });
+    await sleep(150); await ev(u => { const b = document.querySelector('[data-act="tmunit"][data-u="' + u + '"]'); if (b) b.click(); }, id); await sleep(100);
+    const before = await ev(u => !!document.querySelector('[data-act="unlock"][data-u="' + u + '"]:not([disabled])'), id);
+    await ev(u => TR.addShards(u, 1), id); await ev(() => TR.show('team')); await sleep(100);
+    await ev(u => { const b = document.querySelector('[data-act="unlock"][data-u="' + u + '"]'); if (b) b.click(); }, id); await sleep(150);
+    const owned = await ev(u => TR.store().units[u].u, id);
+    return !before && owned ? { unlocked: id } : false;
   });
   await step('level-up dialog', async () => {
     await ev(() => { TR.store().coins = 999; TR.show('team'); }); await sleep(150);

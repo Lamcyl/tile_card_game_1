@@ -544,3 +544,64 @@ Diagnostic: Settings, "Touch log" (off by default, kept in the save) shows the l
 - Battle status is one fixed-height row of small icons under the board (relics with their own icons, hero ability, unit skills, boss tricks). Tap or hold an icon for its card (name and text). The puzzle "Idea" strip stays in puzzles only. The row height is always reserved, so the hero HP bar, colour tabs, hand and buttons never move.
 - Enemy slabs: the attack (sword icon) sits on the label line (`HP · sword 4`); slabs are shorter. The "Tap a tile, then a cell" hint is gone from stage fights (puzzles keep it).
 - Path-choice and result screens are compacted (offer cards, victory loot / picks as rows, bag panel) to fit 360x740 without scrolling.
+
+## Units from shards, economy and walls (thirteenth iteration)
+
+Save key `tileRunPrototype.v9` (v8 saves are dropped).
+
+**Lessons.** p01 "First Strike" is now one colour only (five red Strikes, a 3x2 board, enemies 5 / 4 / 3 HP = the sums per column), so no sandwich is possible. Teach text: bring every enemy's health to 0; a Strike hits the enemy above its column; tiles in the same column add up. `sol` = [[0,0],[1,3],[2,1],[3,2],[4,5]] (checked with `puzzleFight` / `placeCells` / `puzzleWin`). Sunny Meadow (tier 1) already only generates Strikes (`simpleSpec`, `genSpec`) and sandwiches; two-column "wide" enemies now start at tier 2.
+
+**Fight clipping.** `#fhand` and `#rbar.icons` have inner padding (8/7/4 and 3/6 px) and the hand tiles are 8 px shorter, so the first icon, the selected tile's outline and the hourglass badge are no longer cut. The run-only hourglass is a 13 px badge in the top-right corner inside the tile (the reach glyph keeps the top-left).
+
+**Slot popup drag.** `#modal` tiles have `touch-action:none` and the `pointerdown` handler arms a drag at once there (no 180 ms hold). Lists elsewhere (Team, Collected / Colourless) keep the hold-to-drag and pan scrolling. In the popup a swipe that starts on a tile drags it; scroll the popup by swiping on its empty parts.
+
+**Economy.** `CONFIG.startCoins` 0; the default store has no colourless tiles (they come from runs and puzzles). `levelCoins` about 4x: 2:40, 3:64, 4:100, 5:152, 6:220, 7:320, 8:460. The shared "shards" currency is gone: slots cost coins (`slotCost` [0, 80, 160, 300]). A run pays about 14 to 36 coins, so a level takes 3 to 15 runs.
+
+**Gacha removed** (Recruit tab, pulls, pity, duplicates). Units unlock with their own **unit shards**: `CONFIG.shards.need` = Common 10, Rare 25, Epic 50. The five starters stay owned. The Team rail shows a progress bar ("6 / 10 shards") on locked units; the card shows the bar, where the shards come from, and an Unlock button (enabled when complete; the Team dot lights when a unit is ready). Shards are stored in `store.ushards`.
+
+Implemented sources:
+- **Featured units per area** (`CONFIG.map.areas[].feat`, 1 or 2 units of the region's colour). First clear of a stage: 3 shards of its featured unit (stage `idx % feat.length`); a replay: 1 shard of a random featured unit.
+- **Elite fights** (stage runs): 1 to 2 shards of a locked unit of a colour in the team (`eliteShards`); kept in full on a banked run, halved (rounded down) after a defeat, like coins.
+- **Puzzles page**: each of q01 to q10 gives 5 to 6 shards of a named unit on the first solve (`reward.shards`).
+
+Ideas, not implemented: a daily puzzle shard (rotating through locked units); Endless milestone shards (every 3rd boss depth); a coin "shard exchange" for units of a colour already in the team at a high price (for example 40 coins per Common shard, 100 per Rare, limited per day); guaranteed Rare or Epic shards from each region's final boss; first reaching a hero count; duplicate-free "wanted unit" pick (the player marks one locked unit and elites favour it).
+
+**Relic choice** (after an elite): three cards, each with the relic's battle icon, its name and one line, and a "Take" button; fits 360x740.
+
+**Walls.** `CONFIG.map.areas[].bossHp` multiplies the HP of the boss of every stage of an area: Fairmeet (difficulty 4 join) 1.15, Misty Moor (difficulty 7 join) 1.5, Gloaming Crown (final) 1.6. The mid-boss is not scaled. **Replays** pay the normal run loot plus a bonus (`CONFIG.replay`): 40 % of the stage's first-clear coins, a colourless tile (runner rarity odds) and a unit shard. Rules functions: `clearShards`, `replayReward`, `eliteShards`; `settle` returns `ushards`.
+
+**Journey bots** (`journey.js`) now follow the new economy: no pulls; shards unlock units; coins buy levels and slots by value per coin; first clear and replay rewards as above; after two frontier losses in a row the bot farms 3 replays of cleared stages (nearest tier below), then tries the frontier again. `journeys.js` prints frontier and replay runs/win% per tier. Results, 3 players, 300 runs max, seeds 1 to 3:
+
+skilled (3 of 3 finished, median 146 runs, 26 h):
+
+| tier | frontier runs | frontier win % | replay runs | replay win % |
+|---|---|---|---|---|
+| 1 | 2 | 100 | 0 | - |
+| 2 | 4 | 100 | 0 | - |
+| 3 | 4 | 100 | 0 | - |
+| 4 (wall x1.15) | 4 | 100 | 0 | - |
+| 5 | 8 | 100 | 7 | 100 |
+| 6 | 13.3 | 60 | 3 | 78 |
+| 7 (wall x1.5) | 8 | 63 | 0 | - |
+| 8 | 9 | 89 | 0 | - |
+| 9 | 9 | 89 | 45 | 62 |
+| 10 (wall x1.6) | 34 | 9 | 0 | - |
+
+casual (1 of 3 finished within 300 runs, 54 h median):
+
+| tier | frontier runs | frontier win % | replay runs | replay win % |
+|---|---|---|---|---|
+| 1 | 2 | 100 | 0 | - |
+| 2 | 4.3 | 92 | 7 | 100 |
+| 3 | 10.7 | 38 | 9 | 81 |
+| 4 (wall x1.15) | 10.3 | 39 | 11 | 79 |
+| 5 | 16.3 | 49 | 6 | 100 |
+| 6 | 13.3 | 60 | 16 | 81 |
+| 7 (wall x1.5) | 17.7 | 28 | 25 | 37 |
+| 8 | 27 | 30 | 14.7 | 36 |
+| 9 | 17 | 33 | 27.7 | 28 |
+| 10 (wall x1.6) | 19.7 | 5 | 0 | - |
+
+Reading: the x1.6 final wall is clear for both bots (skilled 9 %, casual 5 %); the skilled bot gets through only after about 45 replay runs on tier 9 (levels, slots and tiles bought with replay coins). The x1.5 wall at tier 7 shows as a drop for casual (28 %) and a mild one for skilled (63 %). The x1.15 wall at tier 4 is not visible (skilled 100 %); raise it if a wall is wanted there. The casual bot is weak from tier 3 on with the 4x level prices. Replay win rates are lower than frontier ones only in the late tiers.
+
+**Test kit.** `tr-test.js smoke` now checks that a no-hold touch drag in the slot popup equips the tile and that a locked unit unlocks from shards. Fight screenshots (run-only tile selected, relic screen, Team rail with shard bars): `scratchpad/v18/`.

@@ -16,10 +16,10 @@ fs.mkdirSync(out, { recursive: true });
   const shot = async n => { await p.waitForTimeout(150); await p.screenshot({ path: path.join(out, n + '.png') }); };
   await p.evaluate(() => TR.setSpeed(0.05));
   await shot('01-home');
-  /* team screen, recruit, level up */
+  /* team screen, unit unlock by shards, level up */
   await p.evaluate(() => TR.show('team')); await shot('02-team');
-  const rec = await p.evaluate(() => { const s = TR.store(); s.coins = 300; s.shards = 60; const r = TR.pull(), r2 = TR.pull(); const u = Object.keys(s.units).filter(k => s.units[k].u)[0]; const lv = TR.levelUp(u); const bs = TR.buySlot(u); TR.show('team'); return { pulled: [r && r.unit.name, r2 && r2.unit.name], lv, bs, coins: s.coins, shards: s.shards }; });
-  console.log('recruit/level:', JSON.stringify(rec)); await shot('03-team-after');
+  const rec = await p.evaluate(() => { const s = TR.store(); s.coins = 300; const t = Object.keys(s.units).filter(k => !s.units[k].u)[0]; TR.addShards(t, TR.shardNeed(TR.UNITS_BY_ID[t])); const un = TR.unlockUnit(t); const u = Object.keys(s.units).filter(k => s.units[k].u)[0]; const lv = TR.levelUp(u); const bs = TR.buySlot(u); TR.show('team'); return { unlocked: un && t, lv, bs, coins: s.coins }; });
+  console.log('unlock/level:', JSON.stringify(rec)); await shot('03-team-after');
   /* real fights: low and high difficulty */
   const fight = async (areaIdx, label, boost) => {
     const res = await p.evaluate(async ({ areaIdx, boost }) => {
@@ -28,7 +28,7 @@ fs.mkdirSync(out, { recursive: true });
       if (boost) {
         TR.UNITS.forEach(u => { s.units[u.id].u = true; s.units[u.id].l = 5; });
         ['r', 'b', 'g', 'y', 'p'].forEach(c => { const uid = s.team[c], u = TR.UNITS_BY_ID[uid]; for (let i = 0; i < 3; i++) TR.buySlotFree && 0; });
-        s.shards = 400; ['r', 'b', 'g', 'y', 'p'].forEach(c => { const uid = s.team[c]; for (let i = 0; i < TR.CONFIG.slotMax[TR.UNITS_BY_ID[uid].rar]; i++) { TR.buySlot(uid); TR.addCT({ c: c, k: 'a', d: i % 2 ? '<>' : '^', n: i % 2 ? 5 : 7, sh: 'o', rar: 1 }); const e = s.ct[s.ct.length - 1]; TR.toggleSlot(uid, e.id); } });
+        s.coins = 4000; ['r', 'b', 'g', 'y', 'p'].forEach(c => { const uid = s.team[c]; for (let i = 0; i < TR.CONFIG.slotMax[TR.UNITS_BY_ID[uid].rar]; i++) { TR.buySlot(uid); TR.addCT({ c: c, k: 'a', d: i % 2 ? '<>' : '^', n: i % 2 ? 5 : 7, sh: 'o', rar: 1 }); const e = s.ct[s.ct.length - 1]; TR.toggleSlot(uid, e.id); } });
       }
       TR.startRun('stage', st.tier, { len: st.len, mid: st.mid, drop: st.drop, trick: st.trick, cell: { key: key, name: st.name, region: st.regionName, area: st.area, idx: st.idx, n: st.n } });
       const log = { tier: st.tier, fights: 0, attacks: 0, kills: 0, sand: 0, win: null };

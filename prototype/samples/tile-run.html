@@ -111,7 +111,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .fly{position:fixed;z-index:70;font-weight:900;font-size:19px;color:var(--ink);pointer-events:none;transform:translate(-50%,-50%);text-shadow:0 0 4px var(--bg),0 0 4px var(--bg),0 0 8px var(--bg);animation:fly .75s ease-in forwards}
 .fly.bad{color:var(--bad)}
 #rbar{margin-top:6px;display:flex;flex-direction:column;gap:2px;min-height:34px;flex:none}
-#rbar.icons{flex-direction:row;align-items:center;justify-content:flex-start;gap:6px;height:36px;padding:0 2px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-x}#rbar.icons::-webkit-scrollbar{display:none}
+#rbar.icons{flex-direction:row;align-items:center;justify-content:flex-start;gap:6px;height:40px;padding:3px 6px;box-sizing:border-box;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-x}#rbar.icons::-webkit-scrollbar{display:none}
 .ri{flex:none;position:relative;width:32px;height:32px;border-radius:10px;background:var(--panel);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink);padding:0}
 .ri svg{width:22px;height:22px;display:block}.ri svg.sk{width:22px;height:22px;color:var(--tc)}
 .ri.relic{border-color:var(--gold)}.ri.relic svg,.ri.hero svg,.ri.trick svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -239,7 +239,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .ghost.lift{transform:translate(-50%,-90%) scale(1.14)}.ghost.pick{transition:left .14s ease-out,top .14s ease-out,transform .14s cubic-bezier(.2,.8,.3,1)}
 .ghost.settle{transition:left .17s cubic-bezier(.2,.8,.3,1),top .17s cubic-bezier(.2,.8,.3,1),transform .17s ease-out,opacity .17s ease-in .05s;transform:translate(-50%,-50%) scale(1);opacity:0}.ghost.back{opacity:.2}
 /* the hand is a fixed-height strip: tiles stack in columns and the strip scrolls sideways; the page itself never scrolls in a fight */
-#fhand{display:flex;flex-flow:column wrap;gap:6px;align-content:flex-start;justify-content:flex-start;flex:none;height:var(--hh,104px);min-height:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#fhand{display:flex;flex-flow:column wrap;gap:6px;align-content:flex-start;justify-content:flex-start;flex:none;box-sizing:border-box;height:var(--hh,104px);padding:8px 7px 4px;min-height:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 #fhand::-webkit-scrollbar{display:none}#fhand .tile,#fhand .slot{touch-action:pan-x}
 body.fightmode,body.fightmode #app{height:100vh;height:100dvh;overflow:hidden;overscroll-behavior:none}body.fightmode #app{min-height:0}
 body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
@@ -344,8 +344,14 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .tile .dash{fill:none;stroke:var(--panel);stroke-width:5;stroke-dasharray:14 10}
 .tile.rar-1 .ring{stroke:#35c3e6;stroke-width:12}
 .tile.rar-2 .ring{stroke:#e056d8;stroke-width:12;filter:drop-shadow(0 0 4px #e056d8)}
+.rlbox .rlsub{margin:0 0 8px;font-size:12.5px;color:var(--muted);text-align:center}
+.rlist{display:flex;flex-direction:column;gap:8px}
+.rlc{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 10px;border-radius:14px;background:var(--panel);border:2px solid var(--gold);box-shadow:0 2px 0 var(--shadow)}
+.rlc .rli{width:44px;height:44px;border-radius:12px;flex:none}.rlc .rli svg{width:28px;height:28px}
+.rlc .rlt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;text-align:left}.rlc .rlt b{font-size:14.5px;color:var(--ink)}.rlc .rlt span{font-size:12px;line-height:1.3;color:var(--muted)}
+.rlc .btn{flex:none;min-width:64px;height:40px;padding:0 12px}
 .pickc.chosen{outline:3px solid var(--gold);outline-offset:-3px}
-.tile .tmp{position:absolute;left:-5px;top:-6px;z-index:6;width:15px;height:15px;border-radius:50%;background:var(--panel);border:1.5px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;pointer-events:none}.tile .tmp svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.tile .tmp{position:absolute;right:2px;top:2px;left:auto;z-index:6;width:13px;height:13px;border-radius:50%;background:var(--panel);border:1.5px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;pointer-events:none}.tile .tmp svg{width:8px;height:8px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .tile.sel .ring{stroke:var(--ink);stroke-width:24;stroke-dasharray:none}
 .tile.offer .ring{stroke:var(--gold);stroke-width:26;stroke-dasharray:none}
 .tile.sel{transform:translateY(-3px)}
@@ -393,8 +399,10 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .tile.ghost{position:fixed;z-index:80;pointer-events:none;touch-action:none;cursor:grabbing}
 [data-dd].armed{transform:scale(1.06);transition:transform .12s}
 /* outside a fight tiles never block scrolling (drags in lists start with a short hold) */
-.screen:not(#fight) .tile,#modal .tile{touch-action:pan-x pan-y}
+.screen:not(#fight) .tile{touch-action:pan-x pan-y}
 [data-dd]{touch-action:pan-x pan-y;-webkit-user-select:none;user-select:none}
+/* the slot popup: tiles drag at once, no hold */
+#modal .tile,#modal [data-dd]{touch-action:none}
 .dzhot{outline:3px solid var(--tc,var(--ink));outline-offset:2px;background:color-mix(in srgb,var(--tc,var(--ink)) 18%,transparent)!important}
 .pp-list.dzhot{outline-offset:-2px;border-radius:12px}
 
@@ -409,20 +417,14 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .coinp{display:flex;align-items:center;justify-content:center;gap:5px;min-width:40px;height:34px;padding:0 12px;border-radius:17px;background:var(--panel);box-shadow:0 2px 0 var(--shadow);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;color:var(--ink)}
 .coinp{border:0;font-family:inherit;cursor:pointer;position:relative}
 .coinp::before{content:"";width:20px;height:20px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%23b87a00'/%3E%3Ccircle cx='12' cy='12' r='9.4' fill='%23f5b82e'/%3E%3Ccircle cx='12' cy='12' r='7' fill='none' stroke='%23c98a0a' stroke-width='1.3'/%3E%3Cpath d='M12 6.6l1.7 3.5 3.8.5-2.8 2.6.7 3.8-3.4-1.9-3.4 1.9.7-3.8-2.8-2.6 3.8-.5z' fill='%23fff3c4'/%3E%3Cpath d='M5.2 8.5A8 8 0 0 1 10 4.3' fill='none' stroke='%23fff' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
-.shp{border:0;font-family:inherit;cursor:pointer}
 .tip{position:fixed;z-index:60;max-width:230px;padding:9px 12px;border-radius:12px;background:var(--btn);color:var(--btnink);font-size:13px;line-height:1.35;font-weight:600;box-shadow:0 6px 18px var(--shadow)}
 .tip::before{content:"";position:absolute;top:-6px;left:var(--ax,24px);width:12px;height:12px;background:var(--btn);transform:rotate(45deg);border-radius:2px}
-.shp{display:flex;align-items:center;justify-content:center;gap:6px;min-width:40px;height:34px;padding:0 12px;border-radius:17px;background:var(--panel);box-shadow:0 2px 0 var(--shadow);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;color:var(--ink)}
-.shp::before{content:"";width:10px;height:10px;border-radius:2px;background:var(--b);transform:rotate(45deg);flex:none}
 .tile .cnt{position:absolute;right:-6px;top:-7px;z-index:6;min-width:20px;height:18px;padding:0 5px;border-radius:9px;background:var(--btn);color:var(--btnink);font-style:normal;font-weight:800;font-size:11px;line-height:18px;text-align:center;pointer-events:none;box-shadow:0 1px 0 var(--shadow)}
 .tile .inb{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);z-index:6;padding:0 6px;height:15px;border-radius:8px;background:var(--panel);border:1.5px solid var(--ink);color:var(--ink);font-style:normal;font-weight:800;font-size:9.5px;line-height:12px;white-space:nowrap;pointer-events:none}
 .herorow.lock .hi b{color:var(--muted)}.herorow .req{color:var(--ink);font-weight:700}
 .slds{display:inline-flex;gap:4px}.sld{width:14px;height:14px;border-radius:4px;border:2px dashed var(--line)}
 .sld.open{border-style:solid;border-color:var(--ink)}.sld.full{border-style:solid;border-color:var(--ink);background:var(--ink)}
 .rline{cursor:default}
-.pullres{margin-top:8px;padding:8px;border-radius:12px;border:2px solid var(--line);text-align:center;background:var(--panel2)}
-.pullres.r1{border-color:#35c3e6}.pullres.r2{border-color:#e056d8}
-.pullres b{font-size:14px;color:var(--ink)}
 .slotbox{width:50px;height:50px;border-radius:12px;border:2px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--muted);background:var(--cellbg)}
 .slotbox small{font-size:9px;font-weight:700}.slotbox.shut b{color:var(--ink);font-size:14px}
 .slotbox:disabled{opacity:.45}
@@ -493,6 +495,10 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .tm-u.sel::after{content:"";position:absolute;right:-12px;top:50%;margin-top:-7px;border:7px solid transparent;border-left:8px solid var(--tc);border-right:0}
 .tm-nm{font-weight:800;font-size:13px;letter-spacing:-.01em;display:flex;align-items:center;gap:5px;justify-content:space-between;white-space:nowrap;color:var(--ink)}
 .tm-nm .t{display:inline-flex;align-items:center;gap:4px;min-width:0}
+.shb{position:relative;display:block;height:15px;border-radius:8px;background:var(--panel2);border:1.5px solid var(--line);overflow:hidden;font-size:10px;font-weight:800;color:var(--ink);text-align:center;line-height:12px}
+.shb i{position:absolute;left:0;top:0;bottom:0;background:color-mix(in srgb,var(--tc,var(--ok)) 40%,transparent)}
+.shb>span{position:relative;white-space:nowrap}.shb.done i{background:color-mix(in srgb,var(--ok) 55%,transparent)}
+.shb.mini{height:14px;line-height:11px;font-size:9.5px}.tm-shw{display:flex;flex-direction:column;gap:5px;margin:2px 0 4px}.tm-shw .shb{height:20px;line-height:17px;font-size:12px}
 .tm-sub{font-size:10px;color:var(--muted);font-weight:700;white-space:nowrap;display:flex;justify-content:space-between;align-items:center;gap:4px}
 .tm-sub b{color:var(--rc);font-weight:800}.tm-u.r0 .tm-sub b{color:var(--muted)}
 .tm-mt{display:flex;align-items:center;gap:3px;height:22px;pointer-events:none}
@@ -530,7 +536,7 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .tm-ab.pri{background:var(--btn);color:var(--btnink);border-color:var(--btn)}.tm-ab.pri small{color:inherit;opacity:.75}
 .tm-ab:disabled{opacity:.4;box-shadow:none;cursor:default}
 .tm-ab.wide{grid-column:1/-1}
-.tm-pp.cl{flex-direction:column;gap:0;padding-top:2px}.tm-pp.cl svg.i{width:16px;height:16px}.tm-pp .lc{font-size:11px;font-weight:800;color:var(--ink);line-height:1}.tm-pp .lc::after{content:"";display:inline-block;width:7px;height:7px;margin-left:3px;border-radius:1.5px;background:var(--b);transform:rotate(45deg)}
+.tm-pp.cl{flex-direction:column;gap:0;padding-top:2px}.tm-pp.cl svg.i{width:16px;height:16px}.tm-pp .lc{font-size:11px;font-weight:800;color:var(--ink);line-height:1}.tm-pp .lc::after{content:"";display:inline-block;width:8px;height:8px;margin-left:3px;border-radius:50%;background:#f5b82e;box-shadow:inset 0 0 0 1.5px #b87a00;vertical-align:-1px}
 .tm-sks{display:flex;gap:6px}
 .sk-b{width:44px;height:46px;border-radius:12px;border:2px solid var(--tc);background:color-mix(in srgb,var(--tc) 10%,var(--panel));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:0;color:var(--tc)}
 .sk-b small{font-size:9px;font-weight:800;line-height:1;color:var(--muted)}
@@ -686,34 +692,39 @@ var CONFIG = {
   growHeal: 0.35, restHeal: 0.4,
   deathKeep: 0.5,                   /* fraction of coins and loot kept when an attempt ends in defeat */
   momentum: { on: true, bonus: 1, values: [1, 2, 3] },
-  startCoins: 60,                   /* two pulls */
+  startCoins: 0,                    /* a fresh save starts with no coins and no colourless tiles */
   colourlessFactor: 2,              /* colourless tiles have no sandwich, so their numbers are this many times a coloured tile's */
-  gacha: { cost: 30, odds: [0.70, 0.24, 0.06], pity: 20, shards: [3, 6, 12] },   /* odds [common, rare, epic]; an Epic at the latest every `pity` pulls; shards (the shared upgrade currency for unit slots) per duplicate pull by rarity */
-  slotCost: [0, 8, 16, 30], slotMax: [2, 3, 4],     /* every unit starts with 1 open slot; SHARDS to open its 2nd, 3rd, 4th slot (slotCost[n] opens slot n+1); maximum slots by unit rarity */
-  lvlMax: 8, levelCoins: { 2: 10, 3: 16, 4: 25, 5: 38, 6: 55, 7: 80, 8: 115 },   /* unit levels cost COINS: levelCoins[n] = coins to reach level n (placeholders) */
+  /* units are unlocked with UNIT SHARDS (no gacha): a locked unit needs need[rarity] of its own shards. Sources: the first clear of a stage gives `first` shards of one of its area's featured units, a replay `replay`;
+     an elite fight drops elite[0]..elite[1] shards of a locked unit whose colour is in the team (placeholders) */
+  shards: { need: [10, 25, 50], first: 3, replay: 1, elite: [1, 2] },
+  /* a replay of a cleared stage pays the usual loot plus this bonus: coinFrac of the stage's first-clear coins, one colourless tile of this source's rarity odds and a unit shard */
+  replay: { coinFrac: 0.4, tileSource: 'runner' },
+  slotCost: [0, 80, 160, 300], slotMax: [2, 3, 4],     /* every unit starts with 1 open slot; COINS to open its 2nd, 3rd, 4th slot (slotCost[n] opens slot n+1); maximum slots by unit rarity (placeholders) */
+  lvlMax: 8, levelCoins: { 2: 40, 3: 64, 4: 100, 5: 152, 6: 220, 7: 320, 8: 460 },   /* unit levels cost COINS: levelCoins[n] = coins to reach level n (placeholders, about 4x the first prototype) */
   starters: ['ember', 'tide', 'moss', 'glint', 'dusk'],   /* the units owned (and in the team) in a fresh save: one Common per colour */
   rainbow: { tier: 5, chance: 0.25, maxTeam: 2 },   /* a boss from this tier on may drop a rainbow tile (chance grows with distance) */
   /* the world map: one tiling, 6 units wide and 26 tall (before lesson rows) (y counts from the top). It is cut into AREA plates; each plate holds 3 or 4 STAGES drawn as pieces of the plate (rows: a letter per unit, A = stage 1, B = stage 2, ...). All stages of an area share its difficulty tier (1..10) and its run length (path choices before the final boss; a mid-boss on runs of midFrom or more).
      Opening rule: an area opens when ANY area listed in `from` is done (all of them when `all`); an area is done when openNeed of its stages are cleared (all of them in a 3-stage area, 3 of 4 otherwise). The first area has no `from`. Inside an open area the stages go in order: stage n is playable once stage n-1 is cleared. Areas next to an open area show as dim plates. Endless opens when endlessAreas areas are done. */
+  /* per area: feat = 1 or 2 units of the region's colour whose shards its stages give; bossHp = a multiplier on the HP of the boss of every stage of the area (the walls: join areas and the final area) */
   map: {
     w: 6, h: 26, openNeed: 3, endlessAreas: 2, midFrom: 6,
     areas: [
-      { id: 's0', name: 'Sunny Meadow', region: 'heart', tier: 1, len: 2, x: 0, y: 24, w: 6, h: 2, from: [], rows: ['AAAABB', 'AAAABB'] },
-      { id: 'r1', name: 'Old Mill', region: 'heart', tier: 2, len: 3, x: 3, y: 22, w: 3, h: 2, from: ['s0'], rows: ['AAB', 'AAB'] },
-      { id: 'l1', name: 'Brookside', region: 'heart', tier: 2, len: 3, x: 0, y: 22, w: 3, h: 2, from: ['s0'], rows: ['ABB', 'AAB'] },
-      { id: 'r2', name: 'Saltwell', region: 'e', tier: 3, len: 3, x: 3, y: 20, w: 3, h: 2, from: ['r1'], rows: ['ABB', 'AAB'] },
-      { id: 'l2', name: 'Rimegate', region: 'n', tier: 3, len: 3, x: 0, y: 20, w: 3, h: 2, from: ['l1'], rows: ['AAB', 'AAB'] },
-      { id: 'j1', name: 'Fairmeet', region: 'heart', tier: 4, len: 5, x: 0, y: 18, w: 6, h: 2, from: ['l2', 'r2'], all: true, rows: ['AAABBB', 'CCCDDD'] },
-      { id: 'r3', name: 'Windy Dunes', region: 'e', tier: 5, len: 5, x: 3, y: 15, w: 3, h: 3, from: ['j1'], rows: ['ABB', 'ABC', 'DDC'] },
-      { id: 'l3', name: 'Silent Pass', region: 'n', tier: 5, len: 5, x: 0, y: 15, w: 3, h: 3, from: ['j1'], rows: ['AAB', 'CAB', 'CDD'] },
-      { id: 'r4', name: 'Amber Mesa', region: 'e', tier: 6, len: 6, x: 3, y: 12, w: 3, h: 3, from: ['r3'], rows: ['AAB', 'CAB', 'CDD'] },
-      { id: 'l4', name: 'Glass Ridge', region: 'n', tier: 6, len: 6, x: 0, y: 12, w: 3, h: 3, from: ['l3'], rows: ['ABB', 'ABC', 'DDC'] },
-      { id: 'j2', name: 'Misty Moor', region: 'w', tier: 7, len: 6, x: 0, y: 9, w: 6, h: 3, from: ['l4', 'r4'], all: true, rows: ['AAABBB', 'CCABDD', 'CCEEDD'] },
-      { id: 'r5', name: 'Cinder Gate', region: 's', tier: 8, len: 7, x: 3, y: 6, w: 3, h: 3, from: ['j2'], rows: ['ABB', 'ABC', 'DDC'] },
-      { id: 'l5', name: 'Drowned Mere', region: 'w', tier: 8, len: 7, x: 0, y: 6, w: 3, h: 3, from: ['j2'], rows: ['AAB', 'CAB', 'CDD'] },
-      { id: 'r6', name: 'Molten Crater', region: 's', tier: 9, len: 7, x: 3, y: 3, w: 3, h: 3, from: ['r5'], rows: ['AAB', 'CAB', 'CDD'] },
-      { id: 'l6', name: 'Violet Barrow', region: 'w', tier: 9, len: 7, x: 0, y: 3, w: 3, h: 3, from: ['l5'], rows: ['ABB', 'ABC', 'DDC'] },
-      { id: 'top', name: 'Gloaming Crown', region: 'w', tier: 10, len: 8, x: 0, y: 0, w: 6, h: 3, from: ['l6', 'r6'], all: true, rows: ['AAABBB', 'CCADDB', 'CEEFFB'] }
+      { id: 's0', name: 'Sunny Meadow', region: 'heart', tier: 1, len: 2, x: 0, y: 24, w: 6, h: 2, feat: ['fern', 'bramble'], from: [], rows: ['AAAABB', 'AAAABB'] },
+      { id: 'r1', name: 'Old Mill', region: 'heart', tier: 2, len: 3, x: 3, y: 22, w: 3, h: 2, feat: ['thorn'], from: ['s0'], rows: ['AAB', 'AAB'] },
+      { id: 'l1', name: 'Brookside', region: 'heart', tier: 2, len: 3, x: 0, y: 22, w: 3, h: 2, feat: ['willow'], from: ['s0'], rows: ['ABB', 'AAB'] },
+      { id: 'r2', name: 'Saltwell', region: 'e', tier: 3, len: 3, x: 3, y: 20, w: 3, h: 2, feat: ['gleam', 'amber'], from: ['r1'], rows: ['ABB', 'AAB'] },
+      { id: 'l2', name: 'Rimegate', region: 'n', tier: 3, len: 3, x: 0, y: 20, w: 3, h: 2, feat: ['ripple', 'brine'], from: ['l1'], rows: ['AAB', 'AAB'] },
+      { id: 'j1', name: 'Fairmeet', region: 'heart', tier: 4, len: 5, x: 0, y: 18, w: 6, h: 2, feat: ['vale'], bossHp: 1.35, from: ['l2', 'r2'], all: true, rows: ['AAABBB', 'CCCDDD'] },
+      { id: 'r3', name: 'Windy Dunes', region: 'e', tier: 5, len: 5, x: 3, y: 15, w: 3, h: 3, feat: ['sunbeam'], from: ['j1'], rows: ['ABB', 'ABC', 'DDC'] },
+      { id: 'l3', name: 'Silent Pass', region: 'n', tier: 5, len: 5, x: 0, y: 15, w: 3, h: 3, feat: ['fjord'], from: ['j1'], rows: ['AAB', 'CAB', 'CDD'] },
+      { id: 'r4', name: 'Amber Mesa', region: 'e', tier: 6, len: 6, x: 3, y: 12, w: 3, h: 3, feat: ['spark', 'dune'], from: ['r3'], rows: ['AAB', 'CAB', 'CDD'] },
+      { id: 'l4', name: 'Glass Ridge', region: 'n', tier: 6, len: 6, x: 0, y: 12, w: 3, h: 3, feat: ['mist', 'drift'], from: ['l3'], rows: ['ABB', 'ABC', 'DDC'] },
+      { id: 'j2', name: 'Misty Moor', region: 'w', tier: 7, len: 6, x: 0, y: 9, w: 6, h: 3, feat: ['shade', 'veil'], bossHp: 1.5, from: ['l4', 'r4'], all: true, rows: ['AAABBB', 'CCABDD', 'CCEEDD'] },
+      { id: 'r5', name: 'Cinder Gate', region: 's', tier: 8, len: 7, x: 3, y: 6, w: 3, h: 3, feat: ['flare', 'brand'], from: ['j2'], rows: ['ABB', 'ABC', 'DDC'] },
+      { id: 'l5', name: 'Drowned Mere', region: 'w', tier: 8, len: 7, x: 0, y: 6, w: 3, h: 3, feat: ['hex'], from: ['j2'], rows: ['AAB', 'CAB', 'CDD'] },
+      { id: 'r6', name: 'Molten Crater', region: 's', tier: 9, len: 7, x: 3, y: 3, w: 3, h: 3, feat: ['pyre', 'cinder'], from: ['r5'], rows: ['AAB', 'CAB', 'CDD'] },
+      { id: 'l6', name: 'Violet Barrow', region: 'w', tier: 9, len: 7, x: 0, y: 3, w: 3, h: 3, feat: ['gloom'], from: ['l5'], rows: ['ABB', 'ABC', 'DDC'] },
+      { id: 'top', name: 'Gloaming Crown', region: 'w', tier: 10, len: 8, x: 0, y: 0, w: 6, h: 3, feat: ['wisp'], bossHp: 1.6, from: ['l6', 'r6'], all: true, rows: ['AAABBB', 'CCADDB', 'CEEFFB'] }
     ]
   },
   /* regions: bias is added to the base colour weight 1 in the drop table; col = the colour of its stages on the map */
@@ -747,13 +758,13 @@ var CONFIG = {
   stages: [
     { name: 'Dawn Gate',  cols: 3, rows: 2, colours: 3, hp: 8, atk: 3, heroHp: 20, coin: 1, boss: 'plain',    intro: 'Forward attacks and Sandwich' },
     { name: 'Meadow',     cols: 3, rows: 3, colours: 3, hp: 14, atk: 3, heroHp: 24, coin: 1, boss: 'twin',     intro: 'Boosts, side attacks, double sandwiches and bonus cells' },
-    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 22, atk: 4, heroHp: 28, coin: 1.2, boss: 'block',    intro: 'Three-lane attacks, Guards, unit skills and heroes' },
-    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 32, atk: 4, heroHp: 30, coin: 1.2, boss: 'aegis',    intro: 'Multipliers, two-cell tiles, row and column boosts, Runners' },
-    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 47, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Copy tiles, three-cell tiles, rainbow tiles, Rare tiles' },
+    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 19, atk: 4, heroHp: 28, coin: 1.2, boss: 'block',    intro: 'Three-lane attacks, Guards, unit skills and heroes' },
+    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 28, atk: 4, heroHp: 30, coin: 1.2, boss: 'aegis',    intro: 'Multipliers, two-cell tiles, row and column boosts, Runners' },
+    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 42, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Copy tiles, three-cell tiles, rainbow tiles, Rare tiles' },
     { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 75, atk: 5, heroHp: 34, coin: 1.4, boss: 'sealed',   intro: 'Cross boosts' },
     { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 170, atk: 7, heroHp: 36, coin: 1.6, boss: 'shield',   intro: 'Line multipliers and four-cell tiles' },
-    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 205, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Epic tiles' },
-    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 235, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Bigger boards' },
+    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 180, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Epic tiles' },
+    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 210, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Bigger boards' },
     { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 170, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
   ],
   /* lessons: puzzles that must be solved before the first stage of each difficulty (each teaches the tiles that start to appear there) */
@@ -1253,12 +1264,12 @@ function mapData() {
     a.rows.forEach(function (r, i) { for (var j = 0; j < r.length; j++) { var ch = r.charAt(j); (set[ch] = set[ch] || []).push([i, j]); } });
     var letters = Object.keys(set).sort(), mid = a.len >= M.midFrom ? Math.floor(a.len / 2) : -1, S0 = CONFIG.stages[a.tier - 1];
     var pool = []; for (var q = Math.max(1, a.tier - 3); q <= a.tier; q++) { var bt = CONFIG.stages[q - 1].boss; if (bt !== 'final' && pool.indexOf(bt) < 0) pool.push(bt); }
-    var A = { id: a.id, name: a.name, region: a.region, regionName: RG.name, col: RG.col, tier: a.tier, len: a.len, mid: mid, x: a.x, y: a.y, w: a.w, h: a.h, from: a.from, all: !!a.all, n: letters.length, ai: ai, stage: S0, drop: dropFor(a.tier, tierDist(a.tier), RG.bias), keys: [], cells: set, letters: letters };
+    var A = { feat: a.feat || [], bossHp: a.bossHp || 1, id: a.id, name: a.name, region: a.region, regionName: RG.name, col: RG.col, tier: a.tier, len: a.len, mid: mid, x: a.x, y: a.y, w: a.w, h: a.h, from: a.from, all: !!a.all, n: letters.length, ai: ai, stage: S0, drop: dropFor(a.tier, tierDist(a.tier), RG.bias), keys: [], cells: set, letters: letters };
     letters.forEach(function (L, i) {
       var key = a.id + '.' + i, trick = a.tier === 10 ? 'final' : hash2(ai, i, 2) < 0.5 ? S0.boss : pool[Math.floor(hash2(ai, i, 3) * pool.length)];
       var les = i === 0 && CONFIG.lessons[a.tier] && a.from.every(function (f) { return M.areas.filter(function (b) { return b.id === f; })[0].tier < a.tier; }) ? a.tier : 0;
       if (les) A.lesson = les;
-      stages[key] = { lesson: 0, key: key, area: a.id, idx: i, n: letters.length, tier: a.tier, len: a.len, mid: mid, region: a.region, regionName: RG.name, col: RG.col, name: a.name, trick: trick, drop: A.drop, stage: S0, ai: ai };
+      stages[key] = { lesson: 0, bossHp: a.bossHp || 1, feat: a.feat || [], key: key, area: a.id, idx: i, n: letters.length, tier: a.tier, len: a.len, mid: mid, region: a.region, regionName: RG.name, col: RG.col, name: a.name, trick: trick, drop: A.drop, stage: S0, ai: ai };
       A.keys.push(key);
     });
     areas[a.id] = A; order.push(a.id);
@@ -1400,7 +1411,8 @@ function genFight(run, kind, rnd, o) {
   var atkOf = function (w, f) { return Math.max(1, Math.round(S.atk * Math.pow(1 + 0.5 * CONFIG.growth, run.won) * K.atk * (w > 1 ? 1.3 : 1) * (f || 1))); };
   var hpOf = function (w, f) { return Math.max(3, Math.round(S.hp * scale * w * K.hp * jit() * (f || 1))); };
   var small = function (c) { return mkEnemy(c, 1, hpOf(1, 0.6), atkOf(1, 0.5), 'p'); };
-  var bossBody = function (c, w, f) { var e = mkEnemy(c, w, hpOf(w, f || 1), atkOf(w), 'p'); e.boss = true; return e; };
+  var wall = 1; if (kind === 'boss' && !o.mid && run.cell && run.cell.key) { var si = stageInfo(run.cell.key); wall = (si && si.bossHp) || 1; }
+  var bossBody = function (c, w, f) { var e = mkEnemy(c, w, hpOf(w, (f || 1) * wall), atkOf(w), 'p'); e.boss = true; return e; };
   var around = function (pos, bw) { var out = []; for (var q = 0; q < cols;) { if (q === pos) { out.push(null); q += bw; } else { out.push(small(q)); q++; } } return out; };
   var colMul = {}, deadRow = -1, phases = null, blocked = [];
   if (kind === 'boss') {
@@ -1428,7 +1440,7 @@ function genFight(run, kind, rnd, o) {
     if (trick === 'deadrow') deadRow = R - 1;
   } else {
     var widths = [], left = cols;
-    while (left > 0) { var w = (left >= 2 && rnd() < CONFIG.wideChance) ? 2 : 1; widths.push(w); left -= w; }
+    while (left > 0) { var w = (left >= 2 && run.stage >= 2 && rnd() < CONFIG.wideChance) ? 2 : 1; widths.push(w); left -= w; }
     var c0 = 0, runnerAt = -1;
     if (kind === 'normal' && run.stage >= 4 && rnd() < CONFIG.runnerChance) { var singles = []; widths.forEach(function (w2, k) { if (w2 === 1) singles.push(k); }); if (singles.length) runnerAt = pick(singles, rnd); }
     widths.forEach(function (w2, k) {
@@ -1487,7 +1499,7 @@ function genOffers(run, rnd) {
 function newRun(mode, stage, team, units, colourless, rnd, hero, opt) {
   rnd = rnd || Math.random; opt = opt || {};
   var S = CONFIG.stages[stage - 1], run = { mode: mode, stage: stage, hero: hero || null, relics: [], nid: 0, bag: [], team: team, step: 0, depth: 0, won: 0, fights: 0, coins: 0, loot: [], mom: 0, over: null, pending: null, fs: null, board: null,
-    len: opt.len || CONFIG.stageSteps, mid: opt.mid === undefined ? -1 : opt.mid, cell: opt.cell || null, drop: opt.drop || dropFor(stage, tierDist(stage)), fx: {}, bossTrick: opt.trick || null, owned: null, firstPick: false };
+    len: opt.len || CONFIG.stageSteps, mid: opt.mid === undefined ? -1 : opt.mid, cell: opt.cell || null, locked: opt.locked || null, ushards: {}, drop: opt.drop || dropFor(stage, tierDist(stage)), fx: {}, bossTrick: opt.trick || null, owned: null, firstPick: false };
   if (opt.owned) { run.owned = {}; opt.owned.forEach(function (k) { run.owned[k] = 1; }); }   /* owned tile types (colour|token) of the collection; null = not tracked (balance tools) */
   var rbLeft = CONFIG.rainbow.maxTeam;
   COLOR_IDS.slice(0, S.colours).forEach(function (c) {
@@ -1592,6 +1604,7 @@ function finishFight(run, fs, rnd) {
   if (out.tile) run.loot.push(out.tile);
   out.extra.forEach(function (t) { run.loot.push(t); });
   out.heal = Math.min(boss ? Math.ceil(run.maxHp * CONFIG.boss.heal) : 0, run.maxHp - run.hp); run.hp += out.heal;
+  if (fs.kind === 'elite' && run.mode === 'stage') { var us = eliteShards(run, rnd); if (us) { out.shards = us; run.ushards[us.u] = (run.ushards[us.u] || 0) + us.n; } }
   run.won++; run.fights++;
   if (CONFIG.momentum.on && fs.turn === 1) { run.mom = CONFIG.momentum.bonus; out.mom = run.mom; }
   run.fs = null; run.board = null;
@@ -1618,15 +1631,6 @@ function applyKeep(run, idx) {
   k.results.forEach(function (c) { if (run.owned) run.owned[ownKey(c.c, c)] = 1; });
   k.result = k.results[0] || null; run.keeps = (run.keeps || []).concat(k.results);
   return k.result;
-}
-/* ---- unit gacha: one pull; odds by rarity, an Epic at the latest every CONFIG.gacha.pity pulls; a duplicate becomes shards for that unit ---- */
-function gachaRoll(state, owned, rnd) {
-  rnd = rnd || Math.random; var G = CONFIG.gacha, x = rnd(), rar = x < G.odds[2] ? 2 : x < G.odds[2] + G.odds[1] ? 1 : 0;
-  state.pity = (state.pity || 0) + 1;
-  if (rar < 2 && state.pity >= G.pity) rar = 2;
-  if (rar === 2) state.pity = 0;
-  var u = pick(UNITS.filter(function (q) { return q.rar === rar; }), rnd), dup = !!owned[u.id];
-  return { unit: u, rar: rar, dup: dup, shards: dup ? G.shards[rar] : 0 };
 }
 /* nodes: forge / rest / treasure.  Sets run.pending. */
 function chooseNode(run, kind, rnd) {
@@ -1655,12 +1659,32 @@ function applyPick(run, i, rnd) {
 }
 function settle(run, how) {   /* how: 'bank' or 'dead' -> what the player keeps */
   var keep = how === 'bank' ? 1 : CONFIG.deathKeep;
-  var sorted = run.loot.slice().sort(function (a, b) { return b.rar - a.rar; });
-  return { coins: Math.floor(run.coins * keep), tiles: sorted.slice(0, Math.floor(sorted.length * keep)) };
+  var sorted = run.loot.slice().sort(function (a, b) { return b.rar - a.rar; }), ush = {};
+  for (var id in (run.ushards || {})) { var n = Math.floor(run.ushards[id] * keep); if (n > 0) ush[id] = n; }
+  return { coins: Math.floor(run.coins * keep), tiles: sorted.slice(0, Math.floor(sorted.length * keep)), ushards: ush };
 }
 function firstClearReward(stage, rnd) {
   var min = stage >= CONFIG.rarity.epicStage ? 1 : stage >= CONFIG.rarity.rareStage ? 1 : 0;
   return { coins: CONFIG.firstClear.coins[stage - 1], tile: lootTile('treasure', 0, stage, rnd || Math.random, min) };
+}
+/* unit shards: a stage clear gives shards of one unit featured by its area (first clear: the stage's own featured unit; replay: a random one) */
+function clearShards(key, first, rnd) {
+  var si = key && stageInfo(key), f = si && si.feat; if (!f || !f.length) return null;
+  var u = first ? f[si.idx % f.length] : f[Math.floor((rnd || Math.random)() * f.length)];
+  return { u: u, n: first ? CONFIG.shards.first : CONFIG.shards.replay };
+}
+/* the bonus of replaying a cleared stage: a share of the first-clear coins, a colourless tile and a unit shard */
+function replayReward(stage, key, rnd) {
+  rnd = rnd || Math.random;
+  return { coins: Math.round(CONFIG.replay.coinFrac * CONFIG.firstClear.coins[stage - 1]), tile: lootTile(CONFIG.replay.tileSource, 0, stage, rnd), shards: clearShards(key, false, rnd) };
+}
+/* an elite drops shards of a locked unit whose colour is in the team (run.locked = the locked unit ids, null = every non-starter) */
+function eliteShards(run, rnd) {
+  var S = stageCfg(run), cols = COLOR_IDS.slice(0, S.colours);
+  var pool = UNITS.filter(function (u) { return cols.indexOf(u.c) >= 0 && (run.locked ? run.locked.indexOf(u.id) >= 0 : CONFIG.starters.indexOf(u.id) < 0); });
+  if (!pool.length) return null;
+  var u = pool[Math.floor(rnd() * pool.length)], E = CONFIG.shards.elite;
+  return { u: u.id, n: E[0] + Math.floor(rnd() * (E[1] - E[0] + 1)) };
 }
 /* ---- puzzle shrines: one attack, fixed board, enemies and hand ---- */
 function puzzleFight(def) {
@@ -1733,7 +1757,7 @@ function groupCands(cands) {
   return out;
 }
 /*PUZ-START*/
-var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Match the numbers to the enemies. Each Strike hits the column above it.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^5"},{"c":"g","t":"a^2"}],"enemies":[[0,1,7],[1,1,10],[2,1,4]],"sol":[[2,3],[1,0],[0,2],[4,5],[3,1]],"reward":{"coins":10}},{"id":"p02","name":"Sandwich","teach":"A tile between two tiles of one other colour is doubled.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,5],[1,1,8],[2,1,3]],"sol":[[2,1],[1,5],[4,0],[0,3],[3,4]],"reward":{"coins":10}},{"id":"p03","name":"Both Ways","teach":"Sandwich in the row and in the column: x3.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^1"}],"enemies":[[0,1,2],[1,1,7],[2,1,5]],"sol":[[5,4],[1,1],[0,5],[3,7],[4,8],[2,3]],"reward":{"coins":15}},{"id":"p04","name":"Reach Sideways","teach":"Side lanes hit the neighbouring columns.","stage":2,"cols":3,"rows":3,"blocked":[4],"bonus":{},"hand":[{"c":"r","t":"a<>4"},{"c":"b","t":"a<>3"},{"c":"g","t":"a<2"},{"c":"g","t":"a>2"},{"c":"r","t":"a^3"}],"enemies":[[0,1,10],[1,1,4],[2,1,7]],"sol":[[3,3],[2,2],[1,7],[0,1],[4,6]],"reward":{"coins":15}},{"id":"p05","name":"Lucky Cells","teach":"Bonus cells boost the tile placed on them.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{"0":"x2","4":"p2","8":"p1"},"hand":[{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"r","t":"a^5"},{"c":"b","t":"a^2"}],"enemies":[[0,1,4],[1,1,5],[2,1,12]],"sol":[[0,5],[3,8],[4,0],[2,2],[1,4]],"reward":{"coins":15,"tile":"a^3"}},{"id":"p06","name":"Neighbours","teach":"A boost adds to the attackers touching its marked edges.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"pudlr2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"r","t":"a^2"},{"c":"y","t":"pu1"}],"enemies":[[0,1,4],[2,1,9],[3,1,6]],"sol":[[5,11],[1,2],[4,10],[2,7],[3,4],[0,6]],"reward":{"coins":20}},{"id":"p07","name":"Guard Duty","teach":"A guard only takes damage from 2 different tiles.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^4"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"},{"c":"y","t":"a<>3"},{"c":"r","t":"a^2"}],"enemies":[[0,1,7,2],[2,1,7,2],[3,1,5]],"sol":[[3,5],[4,11],[2,7],[1,4],[0,10]],"reward":{"coins":20}},{"id":"p08","name":"Three Lanes","teach":"A trident hits the column on each side and its own.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a<^>3"},{"c":"b","t":"a<^3"},{"c":"g","t":"a^>2"},{"c":"y","t":"a^4"},{"c":"r","t":"a<>2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,8],[1,1,15],[2,1,9],[3,1,2]],"sol":[[0,9],[2,10],[1,4],[3,5],[5,6],[4,1]],"reward":{"coins":25,"tile":"a<>3"}},{"id":"p09","name":"Two Colours","teach":"A two-colour tile counts as both colours: it can be the bread of two different sandwiches at once.","stage":4,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"b","t":"a^2"},{"c":"r","t":"a^3"},{"c":"b","c2":"g","t":"a^2"},{"c":"g","t":"a^2"},{"c":"y","t":"a^3"}],"enemies":[[0,1,2],[1,1,6],[2,1,10]],"sol":[[0,6],[1,7],[2,8],[3,2],[4,5]],"reward":{"coins":25}},{"id":"p10","name":"Whole Lines","teach":"A row or column boost reaches every tile on its line.","stage":5,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"pR1"},{"c":"b","t":"pC1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^3"},{"c":"p","t":"a^4"}],"enemies":[[2,1,10],[3,1,4]],"sol":[[3,3],[2,12],[1,7],[4,2],[0,1]],"reward":{"coins":30,"tile":"pudlr1"}},{"id":"p11","name":"Multiply","teach":"A multiplier multiplies the attackers on its marked edges.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xu2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"y","t":"a^2"},{"c":"p","t":"a^3"}],"enemies":[[1,1,10],[2,1,3],[3,1,3]],"sol":[[0,6],[2,1],[3,11],[4,3],[1,12]],"reward":{"coins":30}},{"id":"p12","name":"Stacked Multipliers","teach":"Multipliers add up: two doublers on one tile make x3.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xudlr2"},{"c":"g","t":"xudlr2"},{"c":"b","t":"xu2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^3"}],"enemies":[[1,1,12],[2,1,12]],"sol":[[0,1],[4,6],[1,7],[2,11],[3,2]],"reward":{"coins":30,"tile":"xu2"}},{"id":"p13","name":"Two Cells","teach":"A two-cell tile is one piece and hits every column it covers.","stage":7,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^6#h2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^5"}],"enemies":[[1,1,4],[2,1,9],[3,1,13]],"sol":[[4,18],[3,6],[2,8],[1,7],[0,12]],"reward":{"coins":35}},{"id":"p14","name":"Copy That","teach":"A copy tile takes the number of the tile it points at.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^5"},{"c":"b","t":"eu1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"p","t":"a^2"}],"enemies":[[1,1,14],[2,1,4],[3,1,2]],"sol":[[3,7],[2,16],[4,3],[1,6],[0,1]],"reward":{"coins":40,"tile":"a^4"}},{"id":"p15","name":"Short Side","teach":"A big tile is sandwiched across its short side too.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4#h2"},{"c":"g","t":"a^2"},{"c":"y","t":"a^3"}],"enemies":[[1,1,3],[2,1,8],[3,1,16]],"sol":[[3,3],[2,12],[0,8],[1,18],[4,1]],"reward":{"coins":40}},{"id":"p16","name":"Unit Skills","teach":"Every unit has a skill for its colour. Here the red unit has Front Rank: red attack tiles in the front row get +1.","stage":5,"cols":3,"rows":2,"blocked":[],"bonus":{},"fx":{"r":"front1"},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"b","t":"a^2"}],"enemies":[[0,1,6],[1,1,6],[2,1,6]],"sol":[[0,0],[3,1],[1,2],[2,3],[4,5]],"reward":{"coins":20}},{"id":"q01","name":"Crossfire","teach":"Two sandwiches through one tile: x3.","need":"p03","stage":1,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"a^5"},{"c":"r","t":"a^5"},{"c":"b","t":"a^2"},{"c":"b","t":"a^3"},{"c":"b","t":"a^4"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"}],"enemies":[[0,1,4],[1,1,20],[2,1,16]],"sol":[[0,2],[1,4],[2,1],[3,7],[4,5],[5,3],[6,8]],"reward":{"coins":25}},{"id":"q02","name":"Tight Squeeze","teach":"Every enemy needs a sandwich.","need":"p03","stage":1,"cols":4,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"a^2"},{"c":"g","t":"a^4"},{"c":"g","t":"a^2"},{"c":"b","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"},{"c":"g","t":"a^3"}],"enemies":[[0,1,3],[1,1,7],[2,1,14],[3,1,4]],"sol":[[0,7],[1,5],[2,3],[3,6],[4,2],[5,4],[6,1]],"reward":{"coins":25}},{"id":"q03","name":"Fuel Line","teach":"Boosts and sandwiches together.","need":"p06","stage":1,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"pudlr1"},{"c":"g","t":"pudlr1"},{"c":"b","t":"a^3"},{"c":"r","t":"a^2"},{"c":"r","t":"pu1"},{"c":"g","t":"a^3"}],"enemies":[[0,1,8],[1,1,4],[2,1,3]],"sol":[[0,0],[1,6],[2,1],[3,3],[4,2],[5,8]],"reward":{"coins":25}},{"id":"q04","name":"Bonus Round","teach":"Where does the boost help most?","need":"p06","stage":1,"cols":4,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"b","t":"pu2"},{"c":"g","t":"pud1"},{"c":"g","t":"a^2"},{"c":"b","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^3"},{"c":"r","t":"a^4"}],"enemies":[[0,1,3],[1,1,8],[2,1,4],[3,1,5]],"sol":[[0,10],[1,7],[2,6],[3,9],[4,5],[5,4],[6,3]],"reward":{"coins":25}},{"id":"q05","name":"Side Step","teach":"Side lanes reach the next column.","need":"p04","stage":1,"cols":4,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"a<>3"},{"c":"b","t":"a<>3"},{"c":"r","t":"a<>3"},{"c":"g","t":"a^4"},{"c":"b","t":"a>2"},{"c":"b","t":"a^4"}],"enemies":[[0,1,6],[1,1,3],[2,1,17],[3,1,6]],"sol":[[0,0],[1,1],[2,7],[3,2],[4,6],[5,3]],"reward":{"coins":25}},{"id":"q06","name":"Fork in the Road","teach":"Forks and sandwiches.","need":"p04","stage":1,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"a<>2"},{"c":"g","t":"a<3"},{"c":"b","t":"a<3"},{"c":"r","t":"a<>2"},{"c":"b","t":"a<3"},{"c":"r","t":"a<3"},{"c":"g","t":"a>3"}],"enemies":[[0,1,11],[1,1,8],[2,1,5]],"sol":[[0,7],[1,8],[2,3],[3,0],[4,5],[5,4],[6,1]],"reward":{"coins":25}},{"id":"q07","name":"Trident","teach":"Three lanes from one tile.","need":"p08","stage":1,"cols":4,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a<^>2"},{"c":"g","t":"a^3"},{"c":"r","t":"a^3"},{"c":"g","t":"a^3"},{"c":"g","t":"a<^2"},{"c":"b","t":"a<^>2"},{"c":"g","t":"a^3"}],"enemies":[[0,1,9],[1,1,9],[2,1,12],[3,1,5]],"sol":[[0,9],[1,1],[2,11],[3,10],[4,0],[5,2],[6,8]],"reward":{"coins":25}},{"id":"q08","name":"Double Time","teach":"Put the multiplier where it counts.","need":"p11","stage":1,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"xu2"},{"c":"b","t":"a^4"},{"c":"b","t":"a^5"},{"c":"g","t":"a^5"},{"c":"r","t":"a^4"},{"c":"b","t":"a^3"}],"enemies":[[0,1,10],[1,1,12],[2,1,8]],"sol":[[0,3],[1,7],[2,0],[3,5],[4,4],[5,8]],"reward":{"coins":25}},{"id":"q09","name":"Stack It","teach":"Multipliers add up; a sandwich doubles on top.","need":"p12","stage":1,"cols":4,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"b","t":"xu2"},{"c":"r","t":"xlr2"},{"c":"r","t":"xu2"},{"c":"b","t":"a^4"},{"c":"r","t":"a^3"},{"c":"g","t":"a^2"},{"c":"b","t":"a^3"}],"enemies":[[0,1,3],[1,1,4],[2,1,3],[3,1,12]],"sol":[[0,7],[1,2],[2,11],[3,3],[4,8],[5,1],[6,6]],"reward":{"coins":25}},{"id":"q10","name":"Echo","teach":"Copy the strongest tile.","need":"p14","stage":1,"cols":4,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"eu1"},{"c":"b","t":"a^4"},{"c":"g","t":"a^4"},{"c":"g","t":"a^5"},{"c":"g","t":"a^3"},{"c":"g","t":"a^3"},{"c":"r","t":"a^4"}],"enemies":[[0,1,8],[1,1,5],[2,1,3],[3,1,11]],"sol":[[0,7],[1,11],[2,0],[3,1],[4,2],[5,3],[6,4]],"reward":{"coins":25}},{"id":"h1","name":"Meet Lumi","hero":"prism","stage":1,"teach":"Heroes have one active skill per fight. Lumi joins you for this one: tap Prism, then tap a placed tile: it counts as every colour on this attack. Use it to make a sandwich.","cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^4"},{"c":"g","t":"a^3"},{"c":"g","t":"a^2"},{"c":"g","t":"a^2"},{"c":"r","t":"a^4"}],"enemies":[[0,1,4],[1,1,10],[2,1,5]],"sol":[[0,3],[1,5],[2,2],[3,1],[4,4]],"reward":{"coins":20}}];
+var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Bring every enemy's health to 0. A Strike hits the enemy above its column, and tiles in the same column add up.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^3"},{"c":"r","t":"a^4"},{"c":"r","t":"a^1"},{"c":"r","t":"a^2"}],"enemies":[[0,1,5],[1,1,4],[2,1,3]],"sol":[[0,0],[1,3],[2,1],[3,2],[4,5]],"reward":{"coins":10}},{"id":"p02","name":"Sandwich","teach":"A tile between two tiles of one other colour is doubled.","stage":1,"cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,5],[1,1,8],[2,1,3]],"sol":[[2,1],[1,5],[4,0],[0,3],[3,4]],"reward":{"coins":10}},{"id":"p03","name":"Both Ways","teach":"Sandwich in the row and in the column: x3.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^1"}],"enemies":[[0,1,2],[1,1,7],[2,1,5]],"sol":[[5,4],[1,1],[0,5],[3,7],[4,8],[2,3]],"reward":{"coins":15}},{"id":"p04","name":"Reach Sideways","teach":"Side lanes hit the neighbouring columns.","stage":2,"cols":3,"rows":3,"blocked":[4],"bonus":{},"hand":[{"c":"r","t":"a<>4"},{"c":"b","t":"a<>3"},{"c":"g","t":"a<2"},{"c":"g","t":"a>2"},{"c":"r","t":"a^3"}],"enemies":[[0,1,10],[1,1,4],[2,1,7]],"sol":[[3,3],[2,2],[1,7],[0,1],[4,6]],"reward":{"coins":15}},{"id":"p05","name":"Lucky Cells","teach":"Bonus cells boost the tile placed on them.","stage":2,"cols":3,"rows":3,"blocked":[],"bonus":{"0":"x2","4":"p2","8":"p1"},"hand":[{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"r","t":"a^5"},{"c":"b","t":"a^2"}],"enemies":[[0,1,4],[1,1,5],[2,1,12]],"sol":[[0,5],[3,8],[4,0],[2,2],[1,4]],"reward":{"coins":15,"tile":"a^3"}},{"id":"p06","name":"Neighbours","teach":"A boost adds to the attackers touching its marked edges.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"pudlr2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"r","t":"a^2"},{"c":"y","t":"pu1"}],"enemies":[[0,1,4],[2,1,9],[3,1,6]],"sol":[[5,11],[1,2],[4,10],[2,7],[3,4],[0,6]],"reward":{"coins":20}},{"id":"p07","name":"Guard Duty","teach":"A guard only takes damage from 2 different tiles.","stage":3,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a^4"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"},{"c":"y","t":"a<>3"},{"c":"r","t":"a^2"}],"enemies":[[0,1,7,2],[2,1,7,2],[3,1,5]],"sol":[[3,5],[4,11],[2,7],[1,4],[0,10]],"reward":{"coins":20}},{"id":"p08","name":"Three Lanes","teach":"A trident hits the column on each side and its own.","stage":4,"cols":4,"rows":3,"blocked":[0,3,8],"bonus":{},"hand":[{"c":"r","t":"a<^>3"},{"c":"b","t":"a<^3"},{"c":"g","t":"a^>2"},{"c":"y","t":"a^4"},{"c":"r","t":"a<>2"},{"c":"b","t":"a^2"}],"enemies":[[0,1,8],[1,1,15],[2,1,9],[3,1,2]],"sol":[[0,9],[2,10],[1,4],[3,5],[5,6],[4,1]],"reward":{"coins":25,"tile":"a<>3"}},{"id":"p09","name":"Two Colours","teach":"A two-colour tile counts as both colours: it can be the bread of two different sandwiches at once.","stage":4,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"b","t":"a^2"},{"c":"r","t":"a^3"},{"c":"b","c2":"g","t":"a^2"},{"c":"g","t":"a^2"},{"c":"y","t":"a^3"}],"enemies":[[0,1,2],[1,1,6],[2,1,10]],"sol":[[0,6],[1,7],[2,8],[3,2],[4,5]],"reward":{"coins":25}},{"id":"p10","name":"Whole Lines","teach":"A row or column boost reaches every tile on its line.","stage":5,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"pR1"},{"c":"b","t":"pC1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^3"},{"c":"p","t":"a^4"}],"enemies":[[2,1,10],[3,1,4]],"sol":[[3,3],[2,12],[1,7],[4,2],[0,1]],"reward":{"coins":30,"tile":"pudlr1"}},{"id":"p11","name":"Multiply","teach":"A multiplier multiplies the attackers on its marked edges.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xu2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^4"},{"c":"y","t":"a^2"},{"c":"p","t":"a^3"}],"enemies":[[1,1,10],[2,1,3],[3,1,3]],"sol":[[0,6],[2,1],[3,11],[4,3],[1,12]],"reward":{"coins":30}},{"id":"p12","name":"Stacked Multipliers","teach":"Multipliers add up: two doublers on one tile make x3.","stage":6,"cols":5,"rows":3,"blocked":[0,4,5,9,10,14],"bonus":{},"hand":[{"c":"r","t":"xudlr2"},{"c":"g","t":"xudlr2"},{"c":"b","t":"xu2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^3"}],"enemies":[[1,1,12],[2,1,12]],"sol":[[0,1],[4,6],[1,7],[2,11],[3,2]],"reward":{"coins":30,"tile":"xu2"}},{"id":"p13","name":"Two Cells","teach":"A two-cell tile is one piece and hits every column it covers.","stage":7,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^6#h2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^2"},{"c":"y","t":"a^4"},{"c":"p","t":"a^5"}],"enemies":[[1,1,4],[2,1,9],[3,1,13]],"sol":[[4,18],[3,6],[2,8],[1,7],[0,12]],"reward":{"coins":35}},{"id":"p14","name":"Copy That","teach":"A copy tile takes the number of the tile it points at.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^5"},{"c":"b","t":"eu1"},{"c":"g","t":"a^3"},{"c":"y","t":"a^4"},{"c":"p","t":"a^2"}],"enemies":[[1,1,14],[2,1,4],[3,1,2]],"sol":[[3,7],[2,16],[4,3],[1,6],[0,1]],"reward":{"coins":40,"tile":"a^4"}},{"id":"p15","name":"Short Side","teach":"A big tile is sandwiched across its short side too.","stage":8,"cols":5,"rows":4,"blocked":[0,4,5,9,10,14,15,19,2,17],"bonus":{},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"b","t":"a^4#h2"},{"c":"g","t":"a^2"},{"c":"y","t":"a^3"}],"enemies":[[1,1,3],[2,1,8],[3,1,16]],"sol":[[3,3],[2,12],[0,8],[1,18],[4,1]],"reward":{"coins":40}},{"id":"p16","name":"Unit Skills","teach":"Every unit has a skill for its colour. Here the red unit has Front Rank: red attack tiles in the front row get +1.","stage":5,"cols":3,"rows":2,"blocked":[],"bonus":{},"fx":{"r":"front1"},"hand":[{"c":"r","t":"a^3"},{"c":"r","t":"a^3"},{"c":"r","t":"a^2"},{"c":"b","t":"a^3"},{"c":"b","t":"a^2"}],"enemies":[[0,1,6],[1,1,6],[2,1,6]],"sol":[[0,0],[3,1],[1,2],[2,3],[4,5]],"reward":{"coins":20}},{"id":"q01","name":"Crossfire","teach":"Two sandwiches through one tile: x3.","need":"p03","stage":1,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"a^5"},{"c":"r","t":"a^5"},{"c":"b","t":"a^2"},{"c":"b","t":"a^3"},{"c":"b","t":"a^4"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"}],"enemies":[[0,1,4],[1,1,20],[2,1,16]],"sol":[[0,2],[1,4],[2,1],[3,7],[4,5],[5,3],[6,8]],"reward":{"coins":25,"shards":{"u":"scorch","n":5}}},{"id":"q02","name":"Tight Squeeze","teach":"Every enemy needs a sandwich.","need":"p03","stage":1,"cols":4,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"a^2"},{"c":"g","t":"a^4"},{"c":"g","t":"a^2"},{"c":"b","t":"a^3"},{"c":"b","t":"a^4"},{"c":"g","t":"a^3"},{"c":"g","t":"a^3"}],"enemies":[[0,1,3],[1,1,7],[2,1,14],[3,1,4]],"sol":[[0,7],[1,5],[2,3],[3,6],[4,2],[5,4],[6,1]],"reward":{"coins":25,"shards":{"u":"brine","n":5}}},{"id":"q03","name":"Fuel Line","teach":"Boosts and sandwiches together.","need":"p06","stage":1,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"pudlr1"},{"c":"g","t":"pudlr1"},{"c":"b","t":"a^3"},{"c":"r","t":"a^2"},{"c":"r","t":"pu1"},{"c":"g","t":"a^3"}],"enemies":[[0,1,8],[1,1,4],[2,1,3]],"sol":[[0,0],[1,6],[2,1],[3,3],[4,2],[5,8]],"reward":{"coins":25,"shards":{"u":"bramble","n":5}}},{"id":"q04","name":"Bonus Round","teach":"Where does the boost help most?","need":"p06","stage":1,"cols":4,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"b","t":"pu2"},{"c":"g","t":"pud1"},{"c":"g","t":"a^2"},{"c":"b","t":"a^2"},{"c":"b","t":"a^3"},{"c":"g","t":"a^3"},{"c":"r","t":"a^4"}],"enemies":[[0,1,3],[1,1,8],[2,1,4],[3,1,5]],"sol":[[0,10],[1,7],[2,6],[3,9],[4,5],[5,4],[6,3]],"reward":{"coins":25,"shards":{"u":"amber","n":5}}},{"id":"q05","name":"Side Step","teach":"Side lanes reach the next column.","need":"p04","stage":1,"cols":4,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"a<>3"},{"c":"b","t":"a<>3"},{"c":"r","t":"a<>3"},{"c":"g","t":"a^4"},{"c":"b","t":"a>2"},{"c":"b","t":"a^4"}],"enemies":[[0,1,6],[1,1,3],[2,1,17],[3,1,6]],"sol":[[0,0],[1,1],[2,7],[3,2],[4,6],[5,3]],"reward":{"coins":25,"shards":{"u":"veil","n":5}}},{"id":"q06","name":"Fork in the Road","teach":"Forks and sandwiches.","need":"p04","stage":1,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"a<>2"},{"c":"g","t":"a<3"},{"c":"b","t":"a<3"},{"c":"r","t":"a<>2"},{"c":"b","t":"a<3"},{"c":"r","t":"a<3"},{"c":"g","t":"a>3"}],"enemies":[[0,1,11],[1,1,8],[2,1,5]],"sol":[[0,7],[1,8],[2,3],[3,0],[4,5],[5,4],[6,1]],"reward":{"coins":25,"shards":{"u":"pyre","n":6}}},{"id":"q07","name":"Trident","teach":"Three lanes from one tile.","need":"p08","stage":1,"cols":4,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a<^>2"},{"c":"g","t":"a^3"},{"c":"r","t":"a^3"},{"c":"g","t":"a^3"},{"c":"g","t":"a<^2"},{"c":"b","t":"a<^>2"},{"c":"g","t":"a^3"}],"enemies":[[0,1,9],[1,1,9],[2,1,12],[3,1,5]],"sol":[[0,9],[1,1],[2,11],[3,10],[4,0],[5,2],[6,8]],"reward":{"coins":25,"shards":{"u":"willow","n":6}}},{"id":"q08","name":"Double Time","teach":"Put the multiplier where it counts.","need":"p11","stage":1,"cols":3,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"xu2"},{"c":"b","t":"a^4"},{"c":"b","t":"a^5"},{"c":"g","t":"a^5"},{"c":"r","t":"a^4"},{"c":"b","t":"a^3"}],"enemies":[[0,1,10],[1,1,12],[2,1,8]],"sol":[[0,3],[1,7],[2,0],[3,5],[4,4],[5,8]],"reward":{"coins":25,"shards":{"u":"sunbeam","n":6}}},{"id":"q09","name":"Stack It","teach":"Multipliers add up; a sandwich doubles on top.","need":"p12","stage":1,"cols":4,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"b","t":"xu2"},{"c":"r","t":"xlr2"},{"c":"r","t":"xu2"},{"c":"b","t":"a^4"},{"c":"r","t":"a^3"},{"c":"g","t":"a^2"},{"c":"b","t":"a^3"}],"enemies":[[0,1,3],[1,1,4],[2,1,3],[3,1,12]],"sol":[[0,7],[1,2],[2,11],[3,3],[4,8],[5,1],[6,6]],"reward":{"coins":25,"shards":{"u":"hex","n":6}}},{"id":"q10","name":"Echo","teach":"Copy the strongest tile.","need":"p14","stage":1,"cols":4,"rows":3,"blocked":[],"bonus":{},"hand":[{"c":"g","t":"eu1"},{"c":"b","t":"a^4"},{"c":"g","t":"a^4"},{"c":"g","t":"a^5"},{"c":"g","t":"a^3"},{"c":"g","t":"a^3"},{"c":"r","t":"a^4"}],"enemies":[[0,1,8],[1,1,5],[2,1,3],[3,1,11]],"sol":[[0,7],[1,11],[2,0],[3,1],[4,2],[5,3],[6,4]],"reward":{"coins":25,"shards":{"u":"fjord","n":6}}},{"id":"h1","name":"Meet Lumi","hero":"prism","stage":1,"teach":"Heroes have one active skill per fight. Lumi joins you for this one: tap Prism, then tap a placed tile: it counts as every colour on this attack. Use it to make a sandwich.","cols":3,"rows":2,"blocked":[],"bonus":{},"hand":[{"c":"r","t":"a^4"},{"c":"g","t":"a^3"},{"c":"g","t":"a^2"},{"c":"g","t":"a^2"},{"c":"r","t":"a^4"}],"enemies":[[0,1,4],[1,1,10],[2,1,5]],"sol":[[0,3],[1,5],[2,2],[3,1],[4,4]],"reward":{"coins":20}}];
 /*PUZ-END*/
 /*RULES-END*/
 
@@ -1741,14 +1765,14 @@ var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Match the numbers to t
 'use strict';
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-var LS_KEY = 'tileRunPrototype.v8';
+var LS_KEY = 'tileRunPrototype.v9';
 var store = null, SPEED = 1;
 function defaultStore() {
   var units = {}, team = {};
   UNITS.forEach(function (u) { var st = CONFIG.starters.indexOf(u.id) >= 0; if (st) team[u.c] = u.id; units[u.id] = { u: st, l: 1 }; });
   var cf = CONFIG.colourlessFactor;
-  var r0 = { v: 8, coins: CONFIG.startCoins, shards: 0, units: units, team: team, slots: {}, ct: [], pity: 0, pulls: 0, nid: 3, bag: [1, 2, 3], run: null, cleared: {}, sel: null, maxTier: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, tut: {}, seenEn: {}, ack: {}, dailyDone: '',
-    inv: [{ id: 1, k: 'a', d: '^', n: colourlessNum('a', 3), sh: 'o', rar: 0, st: 0 }, { id: 2, k: 'a', d: '^', n: colourlessNum('a', 3), sh: 'o', rar: 0, st: 0 }, { id: 3, k: 'p', d: 'udlr', n: colourlessNum('p', 1), sh: 'o', rar: 0, st: 0 }],
+  var r0 = { v: 9, coins: CONFIG.startCoins, ushards: {}, units: units, team: team, slots: {}, ct: [], nid: 0, bag: [0, 0, 0], run: null, cleared: {}, sel: null, maxTier: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, tut: {}, seenEn: {}, ack: {}, dailyDone: '',
+    inv: [],
     set: { momentum: true, value: 1, ret: 'fight', stars: true, tlog: false, tut: true } };
   ackAllHints(r0); return r0;
 }
@@ -1756,7 +1780,7 @@ function load() {
   var s = defaultStore();
   try {
     var j = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
-    if (j && j.v === 8 && j.units && j.team && j.inv) {
+    if (j && j.v === 9 && j.units && j.team && j.inv) {
       var d = defaultStore(), freshAck = !j.ack; s = j;
       for (var k in d) if (s[k] === undefined) s[k] = d[k];
       for (k in d.set) if (s.set[k] === undefined) s.set[k] = d.set[k];
@@ -1818,7 +1842,7 @@ function stackList(sorted) {
 }
 function invSorted() { return store.inv.slice().sort(function (a, b) { return (b.rar || 0) - (a.rar || 0) || (a.k < b.k ? -1 : a.k > b.k ? 1 : 0) || b.n - a.n || (a.d < b.d ? -1 : a.d > b.d ? 1 : 0) || (b.st || 0) - (a.st || 0) || a.id - b.id; }); }
 
-/* ---------- coloured tile inventory (bound to a colour; 'w' = rainbow), unit slots, gacha ---------- */
+/* ---------- coloured tile inventory (bound to a colour; 'w' = rainbow), unit slots ---------- */
 function ctOwns(c, e) { var k = ownKey(c, e); return store.ct.some(function (x) { return ownKey(x.c, x) === k; }); }
 function ctOwnedKeys() { return store.ct.map(function (x) { return ownKey(x.c, x); }); }
 function addCT(e) {
@@ -1836,8 +1860,8 @@ function slotOwnerOf(tid) { for (var uid in store.slots) { var i = store.slots[u
 function rainbowSlotted() { var n = 0; for (var uid in store.slots) store.slots[uid].t.forEach(function (tid) { var e = tid && ctById(tid); if (e && e.c === 'w') n++; }); return n; }
 function buySlot(uid) {
   var u = UNIT_BY_ID[uid], sl = slotsOf(uid);
-  if (!store.units[uid].u || sl.n >= CONFIG.slotMax[u.rar] || store.shards < CONFIG.slotCost[sl.n]) return false;
-  store.shards -= CONFIG.slotCost[sl.n]; sl.n++; sl.t.push(0); save(); return true;
+  if (!store.units[uid].u || sl.n >= CONFIG.slotMax[u.rar] || store.coins < CONFIG.slotCost[sl.n]) return false;
+  store.coins -= CONFIG.slotCost[sl.n]; sl.n++; sl.t.push(0); save(); return true;
 }
 /* tap a stack of identical collected tiles (ids): put a free copy into the next open slot of this unit (a copy slotted elsewhere moves), or, when every copy is already in this unit, take one out */
 function toggleStack(uid, ids) {
@@ -1863,15 +1887,14 @@ function slotSpecs() {
   });
   return o;
 }
-function doPull() {
-  if (store.coins < CONFIG.gacha.cost) return null;
-  store.coins -= CONFIG.gacha.cost;
-  var owned = {}; UNITS.forEach(function (u) { if (store.units[u.id].u) owned[u.id] = true; });
-  var st = { pity: store.pity || 0 }, r = gachaRoll(st, owned);
-  store.pity = st.pity; store.pulls = (store.pulls || 0) + 1;
-  var us = store.units[r.unit.id];
-  if (r.dup) store.shards = (store.shards || 0) + r.shards; else us.u = true;
-  S.pull = r; save(); return r;
+/* unit shards: have / need of a locked unit; unlock when complete */
+function shardsOf(uid) { return (store.ushards && store.ushards[uid]) || 0; }
+function shardNeed(u) { return CONFIG.shards.need[u.rar]; }
+function addShards(uid, n) { if (!uid || !n || !UNIT_BY_ID[uid]) return; store.ushards = store.ushards || {}; store.ushards[uid] = (store.ushards[uid] || 0) + n; }
+function shardLine(uid, n) { var u = UNIT_BY_ID[uid]; return '+' + n + ' ' + u.name + ' shard' + (n > 1 ? 's' : '') + ' <span class="ctext">(' + (store.units[uid].u ? 'unit owned' : Math.min(shardNeed(u), shardsOf(uid) + n) + ' / ' + shardNeed(u) + ' for ' + RARITY[u.rar] + ' ' + u.name) + ')</span>'; }
+function unlockUnit(uid) {
+  var u = UNIT_BY_ID[uid], st = store.units[uid]; if (!u || st.u || shardsOf(uid) < shardNeed(u)) return false;
+  store.ushards[uid] -= shardNeed(u); st.u = true; st.l = 1; save(); return true;
 }
 /* unit levels cost COINS (CONFIG.levelCoins) */
 function levelUp(uid) { var st = store.units[uid], need = CONFIG.levelCoins[st.l + 1]; if (!st.u || st.l >= CONFIG.lvlMax || store.coins < need) return false; store.coins -= need; st.l++; save(); return true; }
@@ -2078,10 +2101,11 @@ function puzzleWon() {
   if (first) {
     store.coins += r.coins || 0; var tl = null;
     if (r.tile) { var tp = parseTok(r.tile); tl = { k: tp.k, d: tp.d, n: tp.n, sh: tp.sh, rar: 0 }; addInv(tl); }
+    if (r.shards) addShards(r.shards.u, r.shards.n);
     if (S.puz.daily) store.dailyDone = todayInfo().key; else store.puzDone[d.id] = true;
     if (d.hero && !store.heroes[d.hero]) { store.heroes[d.hero] = true; h += '<p class="gold">' + HERO_BY_ID[d.hero].name + ' joins you: choose heroes on the Hero screen.</p>'; }
     save();
-    h += '<p class="gold">+' + (r.coins || 0) + ' coins' + (tl ? ' and a colourless tile' : '') + '</p>' + (tl ? '<div class="inv">' + tileHTML(invTile(tl), { ts: 52 }) + '</div>' : '');
+    h += '<p class="gold">+' + (r.coins || 0) + ' coins' + (tl ? ' and a colourless tile' : '') + '</p>' + (r.shards ? '<p class="gold">' + shardLine(r.shards.u, r.shards.n) + '</p>' : '') + (tl ? '<div class="inv">' + tileHTML(invTile(tl), { ts: 52 }) + '</div>' : '');
   } else h += '<p class="ctext">Already solved: replays give no reward.</p>';
   var lt = !S.puz.daily && lessonTier(d.id), nxt = '';
   if (lt) nxt = !lessonsDone(+lt) ? '<button class="btn main" data-act="nextlesson" data-t="' + lt + '">Next lesson</button>' : (store.sel && store.sel.slice(0, 2) === 'L.' ? '<button class="btn main" data-act="lessonplay" data-key="' + store.sel.slice(2) + '.0">Play ' + areaInfo(store.sel.slice(2)).name + ', stage 1</button>' : '');
@@ -2277,16 +2301,6 @@ function playCell(key) {
 function kitTileHTML(u, k, fade, ts) {
   return '<span class="kt">' + tileHTML({ c: u.c, u: u.id, k: k.k, d: k.d, n: k.n, sh: k.sh }, { ts: ts || 36, cls: fade ? 'fade' : '', attrs: 'data-card="kt:' + u.id + ':' + k.k + ':' + k.d + ':' + k.n + ':' + k.sh + '"' }) + '</span>';
 }
-function pullResultHTML() {
-  var r = S.pull; if (!r) return '';
-  var u = r.unit, ks = unitBase(u, store.units[u.id].l);
-  return '<div class="pullres r' + r.rar + '"><b>' + (r.dup ? 'Duplicate ' + u.name + ' (' + RARITY[r.rar] + '): +' + r.shards + ' shards' : 'New unit: ' + u.name + ' (' + RARITY[r.rar] + ')') + '</b><div class="kit" style="justify-content:center">' + ks.map(function (k) { return kitTileHTML(u, k, false); }).join('') + '</div><div class="rline" style="text-align:center"><span class="fxi c-' + u.c + '" style="margin:0">' + u.skills.map(function (sk) { return skillIcon(sk[0]); }).join('') + '</span> ' + u.skills.length + ' skills</div></div>';
-}
-function recruitHTML() {
-  var G = CONFIG.gacha, left = G.pity - (store.pity || 0);
-  return '<div class="panel"><div class="row"><b class="grow">Recruit a unit</b><button class="btn main" data-act="pull"' + (store.coins < G.cost ? ' disabled' : '') + '>Pull ' + G.cost + '</button></div>' +
-    '<div class="ctext" style="margin-top:4px">Odds: Common ' + Math.round(G.odds[0] * 100) + '%, Rare ' + Math.round(G.odds[1] * 100) + '%, Epic ' + Math.round(G.odds[2] * 100) + '%; each pool is shared evenly among its units (' + [0, 1, 2].map(function (r) { return UNITS.filter(function (u) { return u.rar === r; }).length; }).join(' / ') + ' Common / Rare / Epic units). An Epic is guaranteed within ' + left + ' more pull' + (left === 1 ? '' : 's') + '. A duplicate gives shards (Common ' + G.shards[0] + ', Rare ' + G.shards[1] + ', Epic ' + G.shards[2] + '); shards level up any unit and open unit slots.</div>' + pullResultHTML() + '</div>';
-}
 /* ---------- team: Split layout (a rail of the six units of a colour, one big card, A Badge marker for the unit in the team) ---------- */
 var TM_LOCK = '<svg class="tm-lk" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z"/></svg>';
 var TM_LOCKI = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z"/></svg>';
@@ -2309,12 +2323,21 @@ function tmTiles(u, lvl, o) {
     return tileHTML({ c: u.c, u: u.id, k: k.k, d: k.d, n: k.n, sh: k.sh }, { ts: t2, attrs: o.kit ? 'data-card="kt:' + u.id + ':' + k.k + ':' + k.d + ':' + k.n + ':' + k.sh + '"' : '' });
   }).join('');
 }
+function shardBarHTML(u, mini) {
+  var have = Math.min(shardsOf(u.id), shardNeed(u)), need = shardNeed(u), done = have >= need;
+  return '<span class="shb' + (mini ? ' mini' : '') + (done ? ' done' : '') + '"><i style="width:' + Math.round(100 * have / need) + '%"></i><span>' + (done ? 'Ready: unlock' : have + ' / ' + need + ' shards') + '</span></span>';
+}
+/* where a unit's shards come from: the areas that feature it */
+function shardSources(u) {
+  var M = mapData(), a = M.order.map(function (id) { return M.areas[id]; }).filter(function (A) { return A.feat.indexOf(u.id) >= 0; });
+  return a.length ? 'Shards: clear ' + a.map(function (A) { return A.name; }).join(' or ') + ' (' + CONFIG.shards.first + ' on a first clear, ' + CONFIG.shards.replay + ' on replays)' + (u.rar === 0 ? '' : '') + ', elite fights, puzzles.' : 'Shards: elite fights and puzzles.';
+}
 function tmRailHTML(u, sel) {
   var st = store.units[u.id], own = st.u, team = store.team[u.c] === u.id, sl = slotsOf(u.id), dots = '', i;
   for (i = 0; i < CONFIG.slotMax[u.rar]; i++) dots += '<i class="' + (i < sl.n ? (sl.t[i] && ctById(sl.t[i]) ? 'f' : 'o') : '') + '"></i>';
   var hu = hintUnit(u); return '<button class="tm-u c-' + u.c + ' r' + u.rar + (own ? '' : ' no') + (sel ? ' sel' : '') + hd(hu) + '" data-act="tmunit" data-u="' + u.id + '" aria-label="' + u.name + ', ' + RARITY[u.rar] + (own ? ', level ' + st.l : ', not owned') + (team ? ', in team' : '') + (sel ? ', viewing' : '') + '">' +
     '<span class="tm-nm"><span class="t">' + u.name + (own ? '' : TM_LOCK) + '</span>' + (team ? '<span class="tm-badge">TEAM</span>' : '') + '</span>' +
-    '<span class="tm-sub"><span><b>' + RARITY[u.rar] + '</b>' + (own ? ' &middot; L' + st.l : ' &middot; locked') + '</span>' + (own ? '<span class="tm-dots">' + dots + '</span>' : '') + '</span>' +
+    (own ? '<span class="tm-sub"><span><b>' + RARITY[u.rar] + '</b> &middot; L' + st.l + '</span><span class="tm-dots">' + dots + '</span></span>' : shardBarHTML(u, true)) +
     '<span class="tm-mt">' + tmTiles(u, own ? st.l : 1, { ts: 18, maxW: 87, maxH: 22, gap: 3 }) + '</span>' + rdot(hu) + '</button>';
 }
 /* skill icons: a 3x3 mini board; f = lit cells, g = half-lit cells, m = marks drawn on a cell (^ v < > arrows, + plus, x cross, o ring, * star, digits) */
@@ -2365,7 +2388,7 @@ function tmBigHTML(u) {
   var lv = '', sock = '';
   for (i = 1; i <= CONFIG.lvlMax; i++) lv += '<i' + (i <= (own ? st.l : 0) ? ' class="on"' : '') + '></i>';
   for (i = 0; i < mx; i++) {
-    if (!own || i >= sl.n) { var hs = own && i === sl.n && hintSlot(u); sock += '<button class="tm-pp cl' + hd(hs) + '" data-act="slotbuy" data-u="' + u.id + '"' + (own ? '' : ' disabled') + ' aria-label="Locked slot ' + (i + 1) + ', ' + CONFIG.slotCost[i] + ' shards">' + TM_LOCKI + '<span class="lc">' + CONFIG.slotCost[i] + '</span>' + rdot(hs) + '</button>'; }
+    if (!own || i >= sl.n) { var hs = own && i === sl.n && hintSlot(u); sock += '<button class="tm-pp cl' + hd(hs) + '" data-act="slotbuy" data-u="' + u.id + '"' + (own ? '' : ' disabled') + ' aria-label="Locked slot ' + (i + 1) + ', ' + CONFIG.slotCost[i] + ' coins">' + TM_LOCKI + '<span class="lc">' + CONFIG.slotCost[i] + '</span>' + rdot(hs) + '</button>'; }
     else {
       var e = sl.t[i] && ctById(sl.t[i]);
       if (e) { var t = ctTile(e), d = shapeDims(t), q = Math.max(10, Math.floor((38 - (Math.max(d[0], d[1]) - 1) * 3) / Math.max(d[0], d[1]))); sock += '<button class="tm-pp fl" data-act="slotpop" data-u="' + u.id + '" aria-label="Slot ' + (i + 1) + ', holds ' + tileName2(t) + '">' + tileHTML(t, { ts: q }) + '</button>'; }
@@ -2376,21 +2399,21 @@ function tmBigHTML(u) {
   if (own) acts = '<div class="tm-acts">' +
     '<button class="tm-ab' + (team ? '' : ' pri') + '" data-act="pick" data-u="' + u.id + '"' + (team ? ' disabled' : '') + '>' + (team ? 'In team' : 'Pick') + '<small>' + (team ? 'one per colour' : 'for the team') + '</small></button>' +
     '<button class="tm-ab' + hd(hintLevel(u)) + '" data-act="level" data-u="' + u.id + '"' + (st.l >= CONFIG.lvlMax ? ' disabled' : '') + '>' + (st.l >= CONFIG.lvlMax ? 'Max level' : 'Level up') + '<small>' + (st.l >= CONFIG.lvlMax ? 'Lv ' + CONFIG.lvlMax : need + ' coins') + '</small>' + rdot(hintLevel(u)) + '</button></div>';
-  else acts = '<div class="tm-acts"><button class="tm-ab pri wide" data-act="tmtab" data-t="recruit">Find in Recruit</button></div>';
+  else { var rdy = shardsOf(u.id) >= shardNeed(u); acts = '<div class="tm-shw">' + shardBarHTML(u) + '<div class="ctext">' + shardSources(u) + '</div></div><div class="tm-acts"><button class="tm-ab pri wide' + hd(rdy) + '" data-act="unlock" data-u="' + u.id + '"' + (rdy ? '' : ' disabled') + '>' + (rdy ? 'Unlock ' + u.name : 'Unlock') + '<small>' + Math.min(shardsOf(u.id), shardNeed(u)) + ' / ' + shardNeed(u) + ' shards</small></button></div>'; }
   return '<div class="tm-big c-' + c + ' r' + u.rar + (own ? '' : ' no') + '">' +
-    '<div class="tm-bh"><span class="n">' + u.name + '</span><span class="tm-rp">' + RARITY[u.rar] + '</span>' + (own ? '<span class="tm-lv"><span class="tm-lvb">' + lv + '</span>Lv ' + st.l + '</span>' : '<span class="tm-lv">not owned</span>') + '</div>' +
+    '<div class="tm-bh"><span class="n">' + u.name + '</span><span class="tm-rp">' + RARITY[u.rar] + '</span>' + (own ? '<span class="tm-lv"><span class="tm-lvb">' + lv + '</span>Lv ' + st.l + '</span>' : '<span class="tm-lv">locked</span>') + '</div>' +
     '<div class="tm-r2">' + (team ? '<span class="tm-badge lg">IN TEAM</span>' : '') + '<span>Style: ' + u.style + '</span></div>' +
     '<div class="tm-bt">' + tmTiles(u, own ? st.l : 1, { ts: 56, maxW: inner, maxH: 90, gap: 6, kit: true }) + '</div>' +
-    '<div><div class="tm-sl">Slots &middot; ' + (own ? sl.n : 0) + ' of ' + mx + ' open (tap one)</div><div class="tm-sock">' + sock + '</div></div>' +
+    '<div><div class="tm-sl">Slots &middot; ' + (own ? sl.n : 0) + ' of ' + mx + ' open' + (own ? ' (tap one)' : '') + '</div><div class="tm-sock">' + sock + '</div></div>' +
     '<div><div class="tm-sl">Skills &middot; unlock with unit level</div>' + skillRowHTML(u, st.l, own) + '</div>' + acts + '</div>';
 }
-/* confirmation dialogs: unlock a slot (shards), level up (coins) */
+/* confirmation dialogs: unlock a slot (coins), level up (coins) */
 function slotBuyHTML(uid) {
-  var u = UNIT_BY_ID[uid], sl = slotsOf(uid), have = store.shards || 0;
+  var u = UNIT_BY_ID[uid], sl = slotsOf(uid), have = store.coins;
   if (sl.n >= CONFIG.slotMax[u.rar]) return '<h3>' + u.name + ': all slots open</h3><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
   var cost = CONFIG.slotCost[sl.n];
   return '<div class="c-' + u.c + '"><h3>Unlock slot ' + (sl.n + 1) + ' of ' + CONFIG.slotMax[u.rar] + '?</h3><div class="ctext" style="margin-bottom:6px">' + u.name + ' gets one more slot for a collected ' + COLORS[u.c].toLowerCase() + ' (or rainbow) tile. The tile in it joins your bag with the 3 base tiles at the start of every run while ' + u.name + ' is in your team.</div>' +
-    '<div class="cf-sk"><b>' + cost + ' shards</b><span>you have ' + have + '</span></div><div class="btnrow"><button class="btn main" data-act="slotgo" data-u="' + uid + '"' + (have >= cost ? '' : ' disabled') + '>' + (have >= cost ? 'Unlock for ' + cost + ' shards' : 'Not enough shards') + '</button><button class="btn" data-act="close">Cancel</button></div></div>';
+    '<div class="cf-sk"><b>' + cost + ' coins</b><span>you have ' + have + '</span></div><div class="btnrow"><button class="btn main" data-act="slotgo" data-u="' + uid + '"' + (have >= cost ? '' : ' disabled') + '>' + (have >= cost ? 'Unlock for ' + cost + ' coins' : 'Not enough coins') + '</button><button class="btn" data-act="close">Cancel</button></div></div>';
 }
 function levelHTML(uid, done) {
   var u = UNIT_BY_ID[uid], st = store.units[uid], N = st.l + 1;
@@ -2406,16 +2429,14 @@ function levelHTML(uid, done) {
     '<div class="cf-sk"><b>' + cost + ' coins</b><span>you have ' + have + '</span></div><div class="btnrow"><button class="btn main" data-act="lvlgo" data-u="' + uid + '"' + (have >= cost ? '' : ' disabled') + '>' + (have >= cost ? 'Level up for ' + cost + ' coins' : 'Not enough coins') + '</button><button class="btn" data-act="close">Close</button></div></div>';
 }
 function renderTeam() {
-  var tab = S.tmTab || 'units', col = S.tmCol || 'r', G = CONFIG.gacha, u0, h;
-  h = '<header class="top"><button class="hbtn" data-act="home" aria-label="Back">' + TM_BACK + '</button><div class="ttl" style="text-align:left;font-size:21px;letter-spacing:-.02em">Team</div><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + store.coins + '</button><button class="shp" data-act="tip" data-tip="shards" aria-label="Shards">' + (store.shards || 0) + '</button></header>';
-  var tabs = [['units', 'Units', ''], ['recruit', 'Recruit', 'Pull ' + G.cost], ['collected', 'Collected', store.ct.length + ' tiles'], ['colourless', 'Colourless', chosenColourless().length + ' of ' + CONFIG.maxColourless]];
+  var tab = S.tmTab || 'units', col = S.tmCol || 'r', u0, h;
+  h = '<header class="top"><button class="hbtn" data-act="home" aria-label="Back">' + TM_BACK + '</button><div class="ttl" style="text-align:left;font-size:21px;letter-spacing:-.02em">Team</div><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + store.coins + '</button></header>';
+  var tabs = [['units', 'Units', ''], ['collected', 'Collected', store.ct.length + ' tiles'], ['colourless', 'Colourless', chosenColourless().length + ' of ' + CONFIG.maxColourless]];
   h += '<div class="tm-seg" role="tablist" aria-label="Team sections">' + tabs.map(function (t) { return '<button role="tab" aria-selected="' + (t[0] === tab) + '" class="' + (t[0] === tab ? 'on' : '') + '" data-act="tmtab" data-t="' + t[0] + '">' + t[1] + (t[2] ? '<small>' + t[2] + '</small>' : '') + '</button>'; }).join('') + '</div>';
   if (tab === 'units') {
     h += '<div class="tm-ct">' + COLOR_IDS.map(function (c) { var o = tmUnits(c).filter(function (u) { return store.units[u.id].u; }).length; var hc = tmUnits(c).some(hintUnit); return '<button class="c-' + c + (c === col ? ' on' : '') + hd(hc) + '" data-act="tmcol" data-c="' + c + '" aria-label="' + COLORS[c] + ' units, ' + o + ' of 6 owned">' + dotHTML(c) + '<small>' + o + '/6</small>' + rdot(hc) + '</button>'; }).join('') + '</div>';
     u0 = tmSelUnit(col);
     h += '<div class="tm-split"><div class="tm-rail">' + tmUnits(col).map(function (u) { return tmRailHTML(u, u.id === u0.id); }).join('') + '</div><div class="tm-main">' + tmBigHTML(u0) + '</div></div>';
-  } else if (tab === 'recruit') {
-    h += '<p class="sub" style="margin-top:8px">One unit per colour goes on the run. Recruit new units with coins; a duplicate gives shards, which open unit slots. Unit levels cost coins.</p>' + recruitHTML();
   } else if (tab === 'collected') {
     h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">One tile of each type you kept after bosses, bound to its colour (a rainbow tile fits any unit). Slot them from the Units tab. Stars on a tile are its rarity (1 to 5).</div>' + ctFilterHTML(true) + ctHTML() + '</div>';
   } else {
@@ -2534,7 +2555,7 @@ function startRunUI(mode, stage, cell) {
   if (store.run) return;
   S.puz = null;
   var opt = cell || {}; opt.slots = slotSpecs();
-  opt.owned = ctOwnedKeys();
+  opt.owned = ctOwnedKeys(); opt.locked = UNITS.filter(function (u) { return !store.units[u.id].u; }).map(function (u) { return u.id; });
   S.run = newRun(mode, stage, store.team, runUnits(), chosenColourless(), null, store.hero, opt); S.fs = null; S.board = [];
   show('map');
 }
@@ -2656,11 +2677,11 @@ function renderFight() {
   var hand = handOf(S.tab).sort(order), restT = handOf(S.tab, true).sort(order);
   var placedT = run.bag.filter(function (t) { return t.c === S.tab && !t.rest && S.board.indexOf(t.id) >= 0; });
   var hh = hand.concat(placedT).sort(order).map(function (t) {
-    if (S.board.indexOf(t.id) >= 0) { var sd = shapeDims(t), hs = HSZ(), mx = Math.max(sd[0], sd[1]), cp = sd[0] * sd[1] > 1 ? Math.min(hs, Math.floor((300 - (mx - 1) * 6) / mx), Math.floor((HH() - 6) / (sd[0] + (sd[0] - 1) * .11))) : hs, sg = Math.max(3, Math.round(cp * .11)); return '<div class="slot" style="width:' + (sd[1] * cp + (sd[1] - 1) * sg) + 'px;height:' + (sd[0] * cp + (sd[0] - 1) * sg) + 'px"></div>'; }
-    return tileHTML(t, { ts: HSZ(), maxH: HH() - 6, attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: (S.sel === t.id ? 'sel' : '') });
+    if (S.board.indexOf(t.id) >= 0) { var sd = shapeDims(t), hs = HSZ(), mx = Math.max(sd[0], sd[1]), cp = sd[0] * sd[1] > 1 ? Math.min(hs, Math.floor((300 - (mx - 1) * 6) / mx), Math.floor((HH() - 14) / (sd[0] + (sd[0] - 1) * .11))) : hs, sg = Math.max(3, Math.round(cp * .11)); return '<div class="slot" style="width:' + (sd[1] * cp + (sd[1] - 1) * sg) + 'px;height:' + (sd[0] * cp + (sd[0] - 1) * sg) + 'px"></div>'; }
+    return tileHTML(t, { ts: HSZ(), maxH: HH() - 14, attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: (S.sel === t.id ? 'sel' : '') });
   }).join('');
   $('#fhand').innerHTML = hh +
-    restT.map(function (t) { return tileHTML(t, { ts: HSZ(), maxH: HH() - 6, attrs: 'data-card="t:' + t.id + '"' }); }).join('') +
+    restT.map(function (t) { return tileHTML(t, { ts: HSZ(), maxH: HH() - 14, attrs: 'data-card="t:' + t.id + '"' }); }).join('') +
     (!hand.length && !restT.length && !placedT.length ? '<div class="ctext" style="width:100%;text-align:center;padding:10px">No tiles of this colour.</div>' : '');
   $('#fhero').innerHTML = S.puz && !S.puz.def.hero ? '' : heroRowHTML(run, fs);
   $('#fatk').disabled = !placed || S.phase !== 'edit' || heroTargeting(); $('#fclear').disabled = !placed || S.phase !== 'edit';
@@ -2840,13 +2861,13 @@ function renderResult() {
     $('#result').innerHTML = h; persist(); tut('keep'); return;
   }
   if (p.type === 'win' && p.relicPicks && !p.relicDone) {
-    h = '<div class="resbox win"><h2>Choose a relic</h2><p>' + (p.out.boss ? 'The boss' : 'The elite') + ' dropped relics. A relic lasts for this run (at most ' + CONFIG.relicMax + '), and is listed under the board.</p><div class="picks">' + p.relicPicks.map(function (id, i) { return '<button class="pickc" data-relic="' + i + '"><div class="pk">' + RELIC_BY_ID[id].name + '</div><div class="ctext" style="font-size:13px;color:var(--ink)">' + RELIC_BY_ID[id].line + '</div></button>'; }).join('') + '</div></div>';
+    h = '<div class="resbox win rlbox"><h2>Choose a relic</h2><p class="rlsub">' + (p.out.boss ? 'The boss' : 'The elite') + ' left a relic behind. It lasts for this run (' + (run.relics || []).length + ' of ' + CONFIG.relicMax + ' held).</p><div class="rlist">' + p.relicPicks.map(function (id, i) { var R0 = RELIC_BY_ID[id]; return '<div class="rlc"><span class="ri relic rli" aria-hidden="true"><svg viewBox="0 0 24 24">' + (RELIC_ICON[id] || '') + '</svg></span><span class="rlt"><b>' + R0.name + '</b><span>' + R0.line + '</span></span><button class="btn main" data-relic="' + i + '" aria-label="Take ' + R0.name + '">Take</button></div>'; }).join('') + '</div></div>';
     $('#result').innerHTML = h; persist(); return;
   }
   if (p.type === 'win') {
     var out = p.out;
     h = '<div class="resbox win"><h2>' + (out.mid ? 'Mid-boss defeated' : out.boss ? 'Boss defeated' : 'Victory') + '</h2><p>' + (out.attacks === 1 ? 'Won in one attack' : 'Won in ' + out.attacks + ' attacks') + (out.hpLost > 0 ? ', lost ' + out.hpLost + ' HP' : ', no damage taken') + '. Hero ' + run.hp + ' / ' + run.maxHp + (out.heal ? ' (healed ' + out.heal + ')' : '') + '.</p>';
-    h += '<p class="gold">+' + out.coins + ' coins</p>' + keptLine(p);
+    h += '<p class="gold">+' + out.coins + ' coins</p>' + (out.shards ? '<p class="gold">' + shardLine(out.shards.u, out.shards.n) + '</p>' : '') + keptLine(p);
     var tiles = (out.tile ? [out.tile] : []).concat(out.extra || []);
     if (tiles.length) h += '<p>Loot: colourless tile' + (tiles.length > 1 ? 's' : '') + (out.extra && out.extra.length ? ' (runner bonus included)' : '') + '</p><div class="inv">' + groupCands(tiles).map(function (g) { return tileHTML(invTile(g.c), { ts: 38, cnt: g.n }); }).join('') + '</div>';
     if (out.mom) h += '<p><span class="mombadge" data-card="mom">Momentum +' + out.mom + '</span><br><span class="ctext">Cleared in one attack: your next fight\'s first attack gets +' + out.mom + ' on every tile.</span></p>';
@@ -2858,7 +2879,8 @@ function renderResult() {
   } else if (p.type === 'treasure') {
     h = '<div class="resbox win"><h2>Treasure</h2><p>A ' + RARITY[p.tile.rar || 0].toLowerCase() + ' colourless tile, kept in your inventory when the run ends.</p><div class="inv">' + tileHTML(invTile(p.tile), { ts: 56 }) + '</div><div class="btns"><button class="btn main" data-act="cont">Continue</button></div></div>';
   } else if (p.type === 'cleared') {
-    var o2 = p.out, key = run.cell && run.cell.key, first = run.mode === 'stage' && key && !store.cleared[key], fr = first ? (p.first = p.first || firstClearReward(run.stage)) : null;
+    var o2 = p.out, key = run.cell && run.cell.key, first = run.mode === 'stage' && key && !store.cleared[key], fr = first ? (p.first = p.first || firstClearReward(run.stage)) : null, rp = !first && key && run.mode === 'stage' ? (p.replay = p.replay || replayReward(run.stage, key)) : null;
+    if (fr && !fr.shards) fr.shards = clearShards(key, true);
     var t2 = (o2.tile ? [o2.tile] : []).concat(o2.extra || []);
     var fin = isFinalCell(run.cell);
     if (fin) {
@@ -2871,9 +2893,10 @@ function renderResult() {
     if (t2.length || run.loot.length) h += '<div class="inv">' + groupCands(run.loot).map(function (g) { return tileHTML(invTile(g.c), { ts: 36, cnt: g.n }); }).join('') + '</div>';
     if (fr) {
       var fresh = opensWith(store.cleared, key), c3 = {}, kk; for (kk in store.cleared) c3[kk] = 1; c3[key] = 1;
-      h += '<h2>First clear reward</h2><div class="inv frw">' + tileHTML(invTile(fr.tile), { ts: 36 }) + '<p class="gold">+' + fr.coins + ' coins and a colourless tile</p></div>';
+      h += '<h2>First clear reward</h2><div class="inv frw">' + tileHTML(invTile(fr.tile), { ts: 36 }) + '<p class="gold">+' + fr.coins + ' coins and a colourless tile</p></div>' + (fr.shards ? '<p class="gold">' + shardLine(fr.shards.u, fr.shards.n) + '</p>' : '');
       h += '<p>' + (fresh.length ? 'New on the map: <b>' + fresh.map(function (q) { return q.name; }).join(', ') + '</b>.' : '') + (!endlessOn() && doneAreaCount(c3) >= CONFIG.map.endlessAreas ? ' Endless mode is open.' : '') + '</p>';
-    } else h += '<p class="ctext">Replay reward only; stages can be replayed for coins and tiles.</p>';
+    } else if (rp) h += '<h2>Replay bonus</h2><div class="inv frw">' + tileHTML(invTile(rp.tile), { ts: 36 }) + '<p class="gold">+' + rp.coins + ' coins and a colourless tile</p></div>' + (rp.shards ? '<p class="gold">' + shardLine(rp.shards.u, rp.shards.n) + '</p>' : '');
+    else h += '<p class="ctext">Replay reward only; stages can be replayed for coins and tiles.</p>';
     var nh = fr ? newHeroes(Object.keys(store.cleared).length + 1) : [];
     if (nh.length) h += '<p class="gold herolineup">' + nh.map(function (H) { return 'New hero: <b>' + H.name + '</b> (' + H.ab + ')'; }).join('<br>') + '</p>';
     h += '<div class="btns"><button class="btn main" data-act="finish">Back to the map</button></div></div>';
@@ -2892,10 +2915,11 @@ function takePick(i) { applyPick(S.run, i); S.fs = null; show('map'); }
 function commitRun(how, cleared) {
   var run = S.run, k = settle(run, how), merged = 0;
   store.coins += k.coins; k.tiles.forEach(function (t) { if (addInv(t) === 'merged') merged++; });
+  for (var sid in (k.ushards || {})) addShards(sid, k.ushards[sid]);
   if (cleared) {
     var p = run.pending, key = run.cell && run.cell.key, first = key && !store.cleared[key];
-    if (first) { var fr = p.first || firstClearReward(run.stage); store.coins += fr.coins; addInv(fr.tile); store.cleared[key] = 1; store.maxTier = Math.max(store.maxTier || 0, run.stage); store.sel = frontier(key); S.mapCenter = true; k.heroes = syncHeroes(); }
-    else if (key) { store.sel = key; }
+    if (first) { var fr = p.first || firstClearReward(run.stage); store.coins += fr.coins; addInv(fr.tile); if (!fr.shards) fr.shards = clearShards(key, true); if (fr.shards) addShards(fr.shards.u, fr.shards.n); store.cleared[key] = 1; store.maxTier = Math.max(store.maxTier || 0, run.stage); store.sel = frontier(key); S.mapCenter = true; k.heroes = syncHeroes(); }
+    else if (key) { var rp = p.replay || replayReward(run.stage, key); store.coins += rp.coins; addInv(rp.tile); if (rp.shards) addShards(rp.shards.u, rp.shards.n); store.sel = key; }
   }
   if (run.mode === 'endless' && run.depth > store.endBest) store.endBest = run.depth;
   store.runs = (store.runs || 0) + 1;
@@ -3167,8 +3191,8 @@ function ddHot(z) { $$('.dzhot').forEach(function (n) { if (n !== z) n.classList
 document.addEventListener('pointerdown', function (e) {
   if (DD || S.screen === 'fight' || !e.target.closest) return;
   var el = e.target.closest('[data-dd]'); if (!el) return;
-  /* in lists a swipe scrolls; a drag starts only after holding the tile still for a moment (mouse: at once) */
-  DD = { el: el, x: e.clientX, y: e.clientY, moved: false, gh: null, armed: e.pointerType === 'mouse' };
+  /* in lists a swipe scrolls; a drag starts only after holding the tile still for a moment (mouse and the slot popup: at once) */
+  DD = { el: el, x: e.clientX, y: e.clientY, moved: false, gh: null, armed: e.pointerType === 'mouse' || !!el.closest('#modal') };
   if (!DD.armed) { var d0 = DD; d0.tm = setTimeout(function () { if (DD === d0 && !d0.moved) { d0.armed = true; d0.el.classList.add('armed'); } }, 180); }
 });
 document.addEventListener('touchmove', function (e) { if (DD && DD.armed) e.preventDefault(); }, { passive: false });
@@ -3230,8 +3254,8 @@ function helpHTML() {
     '<li>After each win choose one of three: a new tile, an upgrade (+2 or a second colour) or a heal. Forges, rests and treasures sit on the path. Every stage has a boss with one visible trick.</li>' +
     '<li>Runners leave after your first attack: kill them for a bonus tile. Guards need 2 different tiles to hit them.</li>' +
     '<li><b>The map is your home screen.</b> The world is one tiling cut into <b>areas</b> (plates). Each area has 3 or 4 <b>stages</b> (the pieces) and every stage of an area has the same difficulty and run length. Play the stages of an area in order. Clear ' + CONFIG.map.openNeed + ' stages of an area (all of them in a 3-stage area) and the areas next to it open. The further from the start, the harder the difficulty, the longer the run (' + CONFIG.map.areas[0].len + ' steps up to ' + CONFIG.map.areas[CONFIG.map.areas.length - 1].len + ', with a mid-boss from ' + CONFIG.map.midFrom + ') and the better the tiles. Each region favours one colour. Tap a piece for its card, then Play. Defeat keeps half the loot. Endless opens after you finish ' + CONFIG.map.endlessAreas + ' areas.</li>' +
-    '<li><b>Units:</b> each colour has a unit with 3 base tiles, 3 or 4 skills (shown as little icons on its card and when you hold a colour tab in a fight) and slots. Recruit new units with coins in Team (an Epic is guaranteed every ' + CONFIG.gacha.pity + ' pulls). Unit levels (up to ' + CONFIG.lvlMax + ') cost coins: they raise the numbers of the 3 base tiles and unlock skills. A duplicate pull gives shards, which unlock unit slots (every unit starts with one).</li>' +
-    '<li><b>Keep one:</b> after every boss (and mid-boss) you may keep one coloured tile that was new in this run. Upgrades are not kept. Kept tiles go to Team, Collected tiles; put them into a unit\'s slots (tap an open slot on its card, then drag; unlock more slots with shards) and they join your bag at the start of every run. Only tile types you do not own yet can be kept (the collection holds one of each). Every coloured tile has a rarity of 1 to 5 stars (from its encyclopedia score), and each difficulty only drops tiles up to a star cap. Colourless tiles level up instead: three identical ones merge into one of the next level (Lv2, Lv3, ...).</li>' +
+    '<li><b>Units:</b> each colour has a unit with 3 base tiles, 3 or 4 skills (shown as little icons on its card and when you hold a colour tab in a fight) and slots. Locked units unlock with their own unit shards (Common ' + CONFIG.shards.need[0] + ', Rare ' + CONFIG.shards.need[1] + ', Epic ' + CONFIG.shards.need[2] + '): clearing a stage for the first time gives ' + CONFIG.shards.first + ' shards of a unit featured in its area (replays ' + CONFIG.shards.replay + '), elite fights drop some, and puzzles reward them. Unit levels (up to ' + CONFIG.lvlMax + ') cost coins: they raise the numbers of the 3 base tiles and unlock skills. Coins also open unit slots (every unit starts with one).</li>' +
+    '<li><b>Keep one:</b> after every boss (and mid-boss) you may keep one coloured tile that was new in this run. Upgrades are not kept. Kept tiles go to Team, Collected tiles; put them into a unit\'s slots (tap an open slot on its card, then drag; unlock more slots with coins) and they join your bag at the start of every run. Only tile types you do not own yet can be kept (the collection holds one of each). Every coloured tile has a rarity of 1 to 5 stars (from its encyclopedia score), and each difficulty only drops tiles up to a star cap. Colourless tiles level up instead: three identical ones merge into one of the next level (Lv2, Lv3, ...).</li>' +
     '<li><b>Rainbow tile:</b> a rainbow tile counts as every colour (as bread it matches any colour; it is doubled between two tiles that share a colour, but not between two rainbow tiles). Rare boss drop on far stages; at most ' + CONFIG.rainbow.maxTeam + ' in a team.</li>' +
     '<li><b>Colourless tiles</b> can never be part of a sandwich, so their numbers are higher.</li>' +
     '<li><b>Hero:</b> new heroes unlock as you clear map stages. Pick one hero before a run. Its ability is one button on the fight screen, once per fight. Tap-to-aim abilities show a Cancel; everything shows in the live totals before you attack.</li>' +
@@ -3339,10 +3363,10 @@ function settingsHTML() {
   h += '<div class="set"><label>Show tutorial popups</label><input type="checkbox" id="settut"' + (store.set.tut !== false ? ' checked' : '') + '></div>';
   h += '<div class="set"><label>Touch log (shows the last inputs under the fight screen)</label><input type="checkbox" id="settlog"' + (store.set.tlog ? ' checked' : '') + '></div>';
   h += '<div class="btnrow"><button class="btn sm" data-act="help">How to play</button><button class="btn sm" data-act="tutlist">Tutorials</button><button class="btn sm" data-act="enc">Encyclopedia</button></div><div class="muted" style="font-size:12px">Test helpers</div><div class="btnrow">' +
-    '<button class="btn sm" data-act="coins">+100 coins</button><button class="btn sm" data-act="unlockall">Own all units</button><button class="btn sm" data-act="shards">+10 shards</button><button class="btn sm" data-act="slotsall">Open all slots</button>' +
+    '<button class="btn sm" data-act="coins">+100 coins</button><button class="btn sm" data-act="unlockall">Own all units</button><button class="btn sm" data-act="shards">+5 shards each</button><button class="btn sm" data-act="slotsall">Open all slots</button>' +
     '<button class="btn sm" data-act="cttiles">+4 coloured tiles</button><button class="btn sm" data-act="rbtile">+1 rainbow tile</button><button class="btn sm" data-act="allheroes">Unlock all heroes</button><button class="btn sm" data-act="allstages">' + (store.allStages ? 'Map: all revealed' : 'Reveal whole map') + '</button>' +
     '<button class="btn sm" data-act="tiles">+3 colourless tiles</button><button class="btn sm" data-act="epic">+1 epic colourless</button><button class="btn sm" data-act="dupe">Duplicate a tile</button><button class="btn sm" data-act="clearrun">Abandon run</button></div>';
-  h += '<div class="muted" style="font-size:12px">Coins: ' + store.coins + ', shards: ' + (store.shards || 0) + '. Map stages cleared: ' + Object.keys(store.cleared).length + ' of ' + mapData().total + '. Unit level (0 = not owned):</div>';
+  h += '<div class="muted" style="font-size:12px">Coins: ' + store.coins + '. Map stages cleared: ' + Object.keys(store.cleared).length + ' of ' + mapData().total + '. Unit level (0 = not owned):</div>';
   UNITS.forEach(function (u) {
     var st = store.units[u.id];
     h += '<div class="set">' + dotHTML(u.c) + '<label>' + u.name + ' <span class="muted">' + RARITY[u.rar] + '</span></label><select data-ulv="' + u.id + '">' + [0, 1, 2, 3, 4, 5, 6, 7, 8].map(function (l) { return '<option value="' + l + '"' + ((st.u ? st.l : 0) === l ? ' selected' : '') + '>' + (l ? 'Level ' + l : 'Not owned') + '</option>'; }).join('') + '</select></div>';
@@ -3383,7 +3407,7 @@ function testCT(n) {
 }
 document.addEventListener('change', function (e) { var t = e.target; if (t && t.matches && t.matches('[data-cfsort]')) { CTF.sort = t.value; ctFilterRefresh(t); } });
 /* ---------- clicks ---------- */
-var TIPS = { coins: 'Coins: earned from stages; spend them to level up units and recruit.', shards: 'Shards: from duplicate recruits; spend them to open unit slots.' };
+var TIPS = { coins: 'Coins: earned from stages and replays; spend them to level up units and open unit slots.' };
 function hideTip() { var o = $('#tip'); if (o) o.remove(); }
 function showTip(el, k) {
   var had = $('#tip') && $('#tip').dataset.k === k; hideTip(); if (had) return;
@@ -3424,7 +3448,7 @@ document.addEventListener('click', function (e) {
     case 'enc': closeModal(); openEnc(); break;
     case 'puzzles': openModal(puzzleListHTML() + '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>'); break;
     case 'heroes': var hph = heroPanelHTML(); HEROES.forEach(function (H) { if (store.heroes[H.id]) store.ack['H' + H.id] = 1; }); save(); openModal(hph + '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>'); break;
-    case 'pull': doPull(); renderTeam(); break;
+    case 'unlock': { var ul = el.dataset.u; if (unlockUnit(ul)) { S.tmSel = S.tmSel || {}; S.tmSel[UNIT_BY_ID[ul].c] = ul; S.tmCol = UNIT_BY_ID[ul].c; } renderTeam(); break; }
     case 'tmtab': S.tmTab = el.dataset.t; renderTeam(); window.scrollTo(0, 0); break;
     case 'tmcol': S.tmCol = el.dataset.c; renderTeam(); break;
     case 'tmunit': S.tmSel = S.tmSel || {}; S.tmSel[UNIT_BY_ID[el.dataset.u].c] = el.dataset.u; renderTeam(); break;
@@ -3438,7 +3462,7 @@ document.addEventListener('click', function (e) {
     case 'keepgo': keepConfirm(); break;
     case 'keepok': doKeep(S.run.pending.keep.sel.slice()); break;
     case 'keepback': closeModal(); break;
-    case 'shards': store.shards = (store.shards || 0) + 10; save(); $('#modal').innerHTML = settingsHTML(); break;
+    case 'shards': UNITS.forEach(function (u) { if (!store.units[u.id].u) addShards(u.id, 5); }); save(); $('#modal').innerHTML = settingsHTML(); break;
     case 'slotsall': UNITS.forEach(function (u) { var sl = slotsOf(u.id); while (sl.n < CONFIG.slotMax[u.rar]) { sl.n++; sl.t.push(0); } }); save(); $('#modal').innerHTML = settingsHTML(); break;
     case 'cttiles': testCT(4); $('#modal').innerHTML = settingsHTML(); break;
     case 'rbtile': var rbt = genRainbow(10, Math.random); addCT({ c: 'w', k: rbt.k, d: rbt.d, n: rbt.n, sh: 'o', rar: 0 }); save(); $('#modal').innerHTML = settingsHTML(); break;
@@ -3522,8 +3546,9 @@ function hintEquip(u) {
   return open && store.ct.some(function (e) { return (e.c === u.c || e.c === 'w') && !slotOwnerOf(e.id); });
 }
 function hintLevel(u) { var st = store.units[u.id]; return !!(st.u && st.l < CONFIG.lvlMax && store.coins >= CONFIG.levelCoins[st.l + 1] && !store.ack['L' + u.id + '.' + (st.l + 1)]); }
-function hintSlot(u) { var st = store.units[u.id]; if (!st.u) return false; var n = slotsOf(u.id).n; return n < CONFIG.slotMax[u.rar] && (store.shards || 0) >= CONFIG.slotCost[n] && !store.ack['S' + u.id + '.' + n]; }
-function hintUnit(u) { return !!(hintEquip(u) || hintLevel(u) || hintSlot(u)); }
+function hintSlot(u) { var st = store.units[u.id]; if (!st.u) return false; var n = slotsOf(u.id).n; return n < CONFIG.slotMax[u.rar] && store.coins >= CONFIG.slotCost[n] && !store.ack['S' + u.id + '.' + n]; }
+function hintUnlock(u) { return !store.units[u.id].u && shardsOf(u.id) >= shardNeed(u); }
+function hintUnit(u) { return !!(hintUnlock(u) || hintEquip(u) || hintLevel(u) || hintSlot(u)); }
 function hintTeam() { return UNITS.some(hintUnit); }
 function hintHeroes() { return HEROES.some(function (H) { return store.heroes[H.id] && !store.ack['H' + H.id]; }); }
 function puzNew(p) { return !!(p.need && store.puzDone[p.need] && !store.puzDone[p.id] && !store.ack['P' + p.id]); }
@@ -3806,7 +3831,7 @@ function tutTeam() {
 
 window.TR = { tut: tut, tutOpen: tutOpen, tutOffers: tutOffers, enemyTypes: enemyTypes, tutClose: tutClose, TUTS: TUTS, hints: function () { return { team: hintTeam(), heroes: hintHeroes(), puzzles: hintPuzzles() }; }, startPuzzle: startPuzzleUI, genDaily: genDaily, PUZZLES: PUZZLES, tileHTML: tileHTML, genFight: genFight, chooseNode: chooseNode, S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: chooseOfferUI, place: place, attack: attack, render: renderFight, show: show, save: save, persist: persist, takePick: takePick, UNITS: UNITS, resume: resume, evalNow: evalNow, lootTile: lootTile, addInv: addInv, genOffers: function () { S.run.offers = genOffers(S.run); },
   newTile: function (c, spec, extra) { var p = typeof spec === 'string' ? parseTok(spec) : spec; var t = mkTile(S.run, c, S.run.team[c] || 'x', p, extra); S.run.bag.push(t); return t; }, finishStage: finishStage, rules: { evaluate: evaluate, parseTok: parseTok, placeCells: placeCells, tileStars: tileStars, tokenStars: tokenStars, starCap: starCap, ownKey: ownKey, applyKeep: applyKeep },
-  cellInfo: stageInfo, stageInfo: stageInfo, mapData: mapData, stageState: stageState, shownAreas: function () { return shownAreas(store.cleared, store.allStages); }, doneAreaCount: function () { return doneAreaCount(store.cleared); }, playCell: playCell, revealed: revealed, clearCell: function (k) { var c = stageInfo(k); store.cleared[k] = 1; store.maxTier = Math.max(store.maxTier || 0, c.tier); syncHeroes(); save(); }, clearArea: function (id) { areaInfo(id).keys.forEach(function (k) { TR.clearCell(k); }); }, keep: doKeep, pull: doPull, buySlot: buySlot, toggleSlot: toggleSlot, levelUp: levelUp, addCT: addCT, testCT: testCT, slotSpecs: slotSpecs, genRainbow: genRainbow, UNITS_BY_ID: UNIT_BY_ID, toggleStack: toggleStack, mergeInv: mergeInv, mergeCT: mergeCT, syncHeroes: syncHeroes, newHeroes: newHeroes, starLine: starLine, stackList: stackList };
+  cellInfo: stageInfo, stageInfo: stageInfo, mapData: mapData, stageState: stageState, shownAreas: function () { return shownAreas(store.cleared, store.allStages); }, doneAreaCount: function () { return doneAreaCount(store.cleared); }, playCell: playCell, revealed: revealed, clearCell: function (k) { var c = stageInfo(k); store.cleared[k] = 1; store.maxTier = Math.max(store.maxTier || 0, c.tier); syncHeroes(); save(); }, clearArea: function (id) { areaInfo(id).keys.forEach(function (k) { TR.clearCell(k); }); }, keep: doKeep, unlockUnit: unlockUnit, addShards: addShards, shardsOf: shardsOf, shardNeed: shardNeed, clearShards: clearShards, replayReward: replayReward, buySlot: buySlot, toggleSlot: toggleSlot, levelUp: levelUp, addCT: addCT, testCT: testCT, slotSpecs: slotSpecs, genRainbow: genRainbow, UNITS_BY_ID: UNIT_BY_ID, toggleStack: toggleStack, mergeInv: mergeInv, mergeCT: mergeCT, syncHeroes: syncHeroes, newHeroes: newHeroes, starLine: starLine, stackList: stackList };
 })();
 </script>
 </body>

@@ -15,15 +15,16 @@ function runAll(level, n, seed0, maxRuns, workers) {
 }
 function summary(level, res) {
   const T = {}, areaHours = {};
-  res.forEach(r => r.log.forEach(x => { const b = T[x.tier] = T[x.tier] || { runs: 0, win: 0, att: 0, fights: 0, mins: 0 }; b.runs++; if (x.win) b.win++; b.att += x.attacks; b.fights += x.fights; b.mins += x.mins; }));
+  res.forEach(r => r.log.forEach(x => { const b = T[x.tier] = T[x.tier] || { runs: 0, win: 0, att: 0, fights: 0, mins: 0, fr: 0, frw: 0, rp: 0, rpw: 0 }; b.runs++; if (x.win) b.win++; if (x.grind) { b.rp++; if (x.win) b.rpw++; } else { b.fr++; if (x.win) b.frw++; } b.att += x.attacks; b.fights += x.fights; b.mins += x.mins; }));
   const q = (a, p) => { a = a.slice().sort((x, y) => x - y); return a[Math.min(a.length - 1, Math.floor(p * a.length))]; };
   const hrs = res.map(r => r.minutes / 60), runs = res.map(r => r.runs);
   const lines = [];
   lines.push(`${level}: ${res.length} players, finished ${res.filter(r => r.finished).length}; runs median ${q(runs, .5)} (${q(runs, .1)}..${q(runs, .9)}); hours median ${q(hrs, .5).toFixed(1)} (${q(hrs, .1).toFixed(1)}..${q(hrs, .9).toFixed(1)}); losses ${(res.reduce((s, r) => s + r.losses, 0) / res.length).toFixed(1)}; pulls ${(res.reduce((s, r) => s + r.pulls, 0) / res.length).toFixed(0)}; units owned ${(res.reduce((s, r) => s + r.units.length, 0) / res.length).toFixed(1)}`);
   const ed = [].concat.apply([], res.map(r => (r.endless || []).map(e => e.depth))).sort((a, b) => a - b);
   if (ed.length) lines.push(`endless depth (bosses beaten) with the final team: median ${ed[Math.floor(ed.length / 2)]}, range ${ed[0]}..${ed[ed.length - 1]}`);
-  lines.push('tier  runs  win%  att/fight  min/run');
-  Object.keys(T).sort((a, b) => a - b).forEach(t => { const b = T[t]; lines.push(String(t).padStart(4) + String(Math.round(b.runs / res.length * 10) / 10).padStart(6) + String(Math.round(100 * b.win / b.runs)).padStart(6) + (b.att / b.fights).toFixed(2).padStart(10) + (b.mins / b.runs).toFixed(1).padStart(9)); });
+  lines.push('tier  runs  win%  frontier-runs frontier-win%  replay-runs replay-win%  att/fight  min/run');
+  const pc = (w, n) => n ? String(Math.round(100 * w / n)) : '-', per = x => String(Math.round(x / res.length * 10) / 10);
+  Object.keys(T).sort((a, b) => a - b).forEach(t => { const b = T[t]; lines.push(String(t).padStart(4) + per(b.runs).padStart(6) + pc(b.win, b.runs).padStart(6) + per(b.fr).padStart(14) + pc(b.frw, b.fr).padStart(15) + per(b.rp).padStart(13) + pc(b.rpw, b.rp).padStart(12) + (b.att / b.fights).toFixed(2).padStart(11) + (b.mins / b.runs).toFixed(1).padStart(9)); });
   /* team level at each tier's last run (median) */
   return { text: lines.join('\n'), T, hrs, runs };
 }
