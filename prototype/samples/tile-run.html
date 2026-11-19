@@ -392,7 +392,10 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 @media (max-height:700px){.etile{height:46px}.etile b{font-size:20px}.etile b.n3{font-size:17px;margin-top:2px}.pill{height:19px}.pill span{font-size:11.5px}.hpbar{height:20px}.abil{height:32px}#fhero{margin-top:4px}}
 #tlog{font:10.5px/1.3 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);padding:4px 2px;word-break:break-word;flex:none}
 .tile.ghost{position:fixed;z-index:80;pointer-events:none;touch-action:none;cursor:grabbing}
-[data-dd]{touch-action:none;-webkit-user-select:none;user-select:none}
+[data-dd].armed{transform:scale(1.06);transition:transform .12s}
+/* outside a fight tiles never block scrolling (drags in lists start with a short hold) */
+.screen:not(#fight) .tile,#modal .tile{touch-action:pan-x pan-y}
+[data-dd]{touch-action:pan-x pan-y;-webkit-user-select:none;user-select:none}
 .dzhot{outline:3px solid var(--tc,var(--ink));outline-offset:2px;background:color-mix(in srgb,var(--tc,var(--ink)) 18%,transparent)!important}
 .pp-list.dzhot{outline-offset:-2px;border-radius:12px}
 
@@ -3165,12 +3168,16 @@ function ddHot(z) { $$('.dzhot').forEach(function (n) { if (n !== z) n.classList
 document.addEventListener('pointerdown', function (e) {
   if (DD || S.screen === 'fight' || !e.target.closest) return;
   var el = e.target.closest('[data-dd]'); if (!el) return;
-  DD = { el: el, x: e.clientX, y: e.clientY, moved: false, gh: null };
+  /* in lists a swipe scrolls; a drag starts only after holding the tile still for a moment (mouse: at once) */
+  DD = { el: el, x: e.clientX, y: e.clientY, moved: false, gh: null, armed: e.pointerType === 'mouse' };
+  if (!DD.armed) { var d0 = DD; d0.tm = setTimeout(function () { if (DD === d0 && !d0.moved) { d0.armed = true; d0.el.classList.add('armed'); } }, 180); }
 });
+document.addEventListener('touchmove', function (e) { if (DD && DD.armed) e.preventDefault(); }, { passive: false });
 document.addEventListener('pointermove', function (e) {
   if (!DD) return;
   if (!DD.moved) {
     var dx = e.clientX - DD.x, dy = e.clientY - DD.y; if (dx * dx + dy * dy < 64) return;
+    if (!DD.armed) { clearTimeout(DD.tm); DD = null; return; }   /* moved before the hold: it is a scroll */
     var t = ddTile(DD.el); if (!t) { DD = null; return; }
     DD.moved = true; if (P) { clearTimeout(P.timer); P = null; }
     killGhosts(); var w = document.createElement('div'); w.innerHTML = tileHTML(t, { ts: 52, noRest: true }); var g = w.firstChild; g.classList.add('ghost', 'pick');
@@ -3183,7 +3190,7 @@ document.addEventListener('pointermove', function (e) {
   ddHot(ddZone(e.clientX, e.clientY));
 });
 function ddEnd(e, cancel) {
-  var d = DD; if (!d) return; DD = null;
+  var d = DD; if (!d) return; DD = null; clearTimeout(d.tm); d.el.classList.remove('armed');
   if (!d.moved) return;
   var g = d.gh, home = d.el.getBoundingClientRect();
   g.style.transition = 'none'; g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; void g.offsetWidth;

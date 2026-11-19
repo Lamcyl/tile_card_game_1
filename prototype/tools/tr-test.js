@@ -96,7 +96,7 @@ async function smoke(out) {
     await sleep(150); await ev(() => { const b = document.querySelector('[data-act="slotpop"]'); if (b) b.click(); }); await sleep(150);
     const has = await ev(() => !!document.querySelector('#modal [data-dd="ct"]') && !!document.querySelector('#modal [data-dz^="slot"]'));
     if (!has) return 'no draggable tile or slot (skipped)';
-    await touchDrag('#modal [data-dd="ct"]', '#modal [data-dz^="slot"]', { steps: 6, ms: 15 }); await sleep(400);
+    await touchDrag('#modal [data-dd="ct"]', '#modal [data-dz^="slot"]', { steps: 6, ms: 15, hold: 260 }); await sleep(400);
     await shot('05-slotpop'); return (await ghosts()) === 0;
   });
   await step('level-up dialog', async () => {
