@@ -23,8 +23,8 @@ function subsets(s) { const o = []; for (let m = 1; m < 16; m++) { let d = ''; f
 function epicN(k, d, sh) {
   const B = C.budget, cells = R.SHAPE_CELLS[sh].length;
   if (k === 'a') return Math.max(1, Math.round(B.attackBase[2] * B.lanePen[R.laneOffsets(d).length] * B.cellBonus[cells]));
-  if (k === 'p') return Math.max(1, Math.round(B.boostBase[2] * B.dirPen[/[RCB]/.test(d) ? d : d.length] * (cells > 1 ? 1.2 : 1)));
-  if (k === 'x') return B.multBase[2];
+  if (k === 'p') return Math.max(1, Math.round(B.boostBase[2] * B.dirPen[/[RCB]/.test(d) ? d : d.length] * (1 + 0.25 * (cells - 1))));
+  if (k === 'x') return B.multBase[2] + Math.round((cells - 1) / 2);
   return B.copyBase[2];
 }
 const tokOf = (k, d, n, sh) => k + d + n + (sh === 'o' ? '' : '#' + sh);
