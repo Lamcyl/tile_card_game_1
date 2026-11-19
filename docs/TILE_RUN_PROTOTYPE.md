@@ -605,3 +605,10 @@ casual (1 of 3 finished within 300 runs, 54 h median):
 Reading: the x1.6 final wall is clear for both bots (skilled 9 %, casual 5 %); the skilled bot gets through only after about 45 replay runs on tier 9 (levels, slots and tiles bought with replay coins). The x1.5 wall at tier 7 shows as a drop for casual (28 %) and a mild one for skilled (63 %). The x1.15 wall at tier 4 is not visible (skilled 100 %); raise it if a wall is wanted there. The casual bot is weak from tier 3 on with the 4x level prices. Replay win rates are lower than frontier ones only in the late tiers.
 
 **Test kit.** `tr-test.js smoke` now checks that a no-hold touch drag in the slot popup equips the tile and that a locked unit unlocks from shards. Fight screenshots (run-only tile selected, relic screen, Team rail with shard bars): `scratchpad/v18/`.
+
+### More shard sources and fixes (19 November)
+- Daily puzzle: first solve of the day gives `CONFIG.dailyShards` (2) shards of the locked unit nearest to its unlock.
+- Endless: every `CONFIG.endlessMilestone.every` (3) depths beyond your best ever gives `shards` (4) shards of a locked unit, Rare and Epic first; shown on the run's result screen.
+- Drop colours: region colour lean is now gentle (home region green +0.5, other regions +1 for their colour, +0.3 for the neighbour colour), so early drops are spread over the team's colours instead of mostly green.
+- Hand strip: 22 px left inset so the first tile is away from the screen edge (the phone's back gesture lives there).
+- Enemy HP per column: 8, 14, 22, 32, 47, 80, 180, 190, 220, 175 (a little harder from difficulty 3).

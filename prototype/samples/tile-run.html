@@ -239,7 +239,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .ghost.lift{transform:translate(-50%,-90%) scale(1.14)}.ghost.pick{transition:left .14s ease-out,top .14s ease-out,transform .14s cubic-bezier(.2,.8,.3,1)}
 .ghost.settle{transition:left .17s cubic-bezier(.2,.8,.3,1),top .17s cubic-bezier(.2,.8,.3,1),transform .17s ease-out,opacity .17s ease-in .05s;transform:translate(-50%,-50%) scale(1);opacity:0}.ghost.back{opacity:.2}
 /* the hand is a fixed-height strip: tiles stack in columns and the strip scrolls sideways; the page itself never scrolls in a fight */
-#fhand{display:flex;flex-flow:column wrap;gap:6px;align-content:flex-start;justify-content:flex-start;flex:none;box-sizing:border-box;height:var(--hh,104px);padding:8px 7px 4px;min-height:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#fhand{display:flex;flex-flow:column wrap;gap:6px;align-content:flex-start;justify-content:flex-start;flex:none;box-sizing:border-box;height:var(--hh,104px);padding:8px 7px 4px 22px;scroll-padding-left:22px;min-height:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 #fhand::-webkit-scrollbar{display:none}#fhand .tile,#fhand .slot{touch-action:pan-x}
 body.fightmode,body.fightmode #app{height:100vh;height:100dvh;overflow:hidden;overscroll-behavior:none}body.fightmode #app{min-height:0}
 body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
@@ -729,11 +729,11 @@ var CONFIG = {
   },
   /* regions: bias is added to the base colour weight 1 in the drop table; col = the colour of its stages on the map */
   regions: {
-    heart: { name: 'Greenvale', col: 'g', bias: { g: 2 } },
-    n: { name: 'Frostreach', col: 'b', bias: { b: 3, g: 1 } },
-    e: { name: 'Goldmarch', col: 'y', bias: { y: 3, r: 1 } },
-    s: { name: 'Emberfall', col: 'r', bias: { r: 3, p: 1 } },
-    w: { name: 'Duskmoor', col: 'p', bias: { p: 3, b: 1 } }
+    heart: { name: 'Greenvale', col: 'g', bias: { g: 0.5 } },
+    n: { name: 'Frostreach', col: 'b', bias: { b: 1, g: 0.3 } },
+    e: { name: 'Goldmarch', col: 'y', bias: { y: 1, r: 0.3 } },
+    s: { name: 'Emberfall', col: 'r', bias: { r: 1, p: 0.3 } },
+    w: { name: 'Duskmoor', col: 'p', bias: { p: 1, b: 0.3 } }
   },
   midBoss: { hp: 0.7, atk: 0.85, coin: 0.6 },
   drop: { rare: [0, 0, 0, 0.06, 0.12, 0.2, 0.3], epic: [0, 0, 0, 0, 0.03, 0.07, 0.12], rainbow: [0, 0, 0, 0, 0.1, 0.2, 0.3], shape: [0.2, 0.22, 0.25, 0.3, 0.35, 0.4, 0.45] },   /* by distance from the origin: picks are Rare / Epic with these chances; a boss may drop a rainbow tile */
@@ -744,7 +744,8 @@ var CONFIG = {
   keepCount: [1, 1, 1, 2, 2, 2, 2, 3, 3, 3],   /* coloured tiles you may keep per boss, by difficulty (placeholder) */
   relicMax: 3,                      /* relics per run */
   heroUnlock: { prism: 'puzzle', overcharge: 15, wind: 25, guard: 36 },   /* heroes unlock by map progress: the number of map stages cleared, of 57 (the old 18, 30, 42 of 67, rescaled; Kiri is free) */
-  puzzleCoins: 10, dailyCoins: 15,  /* placeholders */      
+  puzzleCoins: 10, dailyCoins: 15, dailyShards: 2, endlessMilestone: { every: 3, shards: 4 },   /* daily puzzle: shards of the locked unit nearest to unlock; Endless: every 3rd new best depth gives Rare/Epic shards */
+   /* placeholders */      
   /* rarity odds [common, rare, epic] by source; depthShift is added to rare per depth/won fight */
   rarity: { normal: [0.92, 0.075, 0.005], elite: [0.5, 0.4, 0.1], boss: [0, 0.75, 0.25], treasure: [0.5, 0.38, 0.12], runner: [0.6, 0.34, 0.06], depthShift: 0.03, rareStage: 5, epicStage: 8 },
   /* number budget: wider reach means a lower number. n = base[rarity] x lanePen[lanes] x cellBonus[cells] x jitter */
@@ -758,14 +759,14 @@ var CONFIG = {
   stages: [
     { name: 'Dawn Gate',  cols: 3, rows: 2, colours: 3, hp: 8, atk: 3, heroHp: 20, coin: 1, boss: 'plain',    intro: 'Forward attacks and Sandwich' },
     { name: 'Meadow',     cols: 3, rows: 3, colours: 3, hp: 14, atk: 3, heroHp: 24, coin: 1, boss: 'twin',     intro: 'Boosts, side attacks, double sandwiches and bonus cells' },
-    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 19, atk: 4, heroHp: 28, coin: 1.2, boss: 'block',    intro: 'Three-lane attacks, Guards, unit skills and heroes' },
-    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 28, atk: 4, heroHp: 30, coin: 1.2, boss: 'aegis',    intro: 'Multipliers, two-cell tiles, row and column boosts, Runners' },
-    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 42, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Copy tiles, three-cell tiles, rainbow tiles, Rare tiles' },
-    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 75, atk: 5, heroHp: 34, coin: 1.4, boss: 'sealed',   intro: 'Cross boosts' },
-    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 170, atk: 7, heroHp: 36, coin: 1.6, boss: 'shield',   intro: 'Line multipliers and four-cell tiles' },
-    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 180, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Epic tiles' },
-    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 210, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Bigger boards' },
-    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 170, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
+    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 22, atk: 4, heroHp: 28, coin: 1.2, boss: 'block',    intro: 'Three-lane attacks, Guards, unit skills and heroes' },
+    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 32, atk: 4, heroHp: 30, coin: 1.2, boss: 'aegis',    intro: 'Multipliers, two-cell tiles, row and column boosts, Runners' },
+    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 47, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Copy tiles, three-cell tiles, rainbow tiles, Rare tiles' },
+    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 80, atk: 5, heroHp: 34, coin: 1.4, boss: 'sealed',   intro: 'Cross boosts' },
+    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 180, atk: 7, heroHp: 36, coin: 1.6, boss: 'shield',   intro: 'Line multipliers and four-cell tiles' },
+    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 190, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Epic tiles' },
+    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 220, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Bigger boards' },
+    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 175, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
   ],
   /* lessons: puzzles that must be solved before the first stage of each difficulty (each teaches the tiles that start to appear there) */
   lessons: { 1: ['p01', 'p02'], 2: ['p03', 'p06', 'p04', 'p05'], 3: ['p08', 'p07', 'p16', 'h1'], 4: ['p11', 'p13', 'p10'], 5: ['p12', 'p15', 'p14', 'p09'] },
@@ -1891,6 +1892,12 @@ function slotSpecs() {
 function shardsOf(uid) { return (store.ushards && store.ushards[uid]) || 0; }
 function shardNeed(u) { return CONFIG.shards.need[u.rar]; }
 function addShards(uid, n) { if (!uid || !n || !UNIT_BY_ID[uid]) return; store.ushards = store.ushards || {}; store.ushards[uid] = (store.ushards[uid] || 0) + n; }
+/* the locked unit nearest to its unlock (rareFirst: prefer Rare and Epic units) */
+function nearUnit(rareFirst) {
+  var c = UNITS.filter(function (u) { return !store.units[u.id].u; }); if (!c.length) return null;
+  c.sort(function (a, b) { return (rareFirst ? b.rar - a.rar : 0) || (shardsOf(b.id) / shardNeed(b) - shardsOf(a.id) / shardNeed(a)); });
+  return c[0].id;
+}
 function shardLine(uid, n) { var u = UNIT_BY_ID[uid]; return '+' + n + ' ' + u.name + ' shard' + (n > 1 ? 's' : '') + ' <span class="ctext">(' + (store.units[uid].u ? 'unit owned' : Math.min(shardNeed(u), shardsOf(uid) + n) + ' / ' + shardNeed(u) + ' for ' + RARITY[u.rar] + ' ' + u.name) + ')</span>'; }
 function unlockUnit(uid) {
   var u = UNIT_BY_ID[uid], st = store.units[uid]; if (!u || st.u || shardsOf(uid) < shardNeed(u)) return false;
@@ -2102,6 +2109,7 @@ function puzzleWon() {
     store.coins += r.coins || 0; var tl = null;
     if (r.tile) { var tp = parseTok(r.tile); tl = { k: tp.k, d: tp.d, n: tp.n, sh: tp.sh, rar: 0 }; addInv(tl); }
     if (r.shards) addShards(r.shards.u, r.shards.n);
+    if (S.puz.daily && !r.shards) { var du = nearUnit(false); if (du) { r = Object.assign({}, r, { shards: { u: du, n: CONFIG.dailyShards } }); addShards(du, CONFIG.dailyShards); } }
     if (S.puz.daily) store.dailyDone = todayInfo().key; else store.puzDone[d.id] = true;
     if (d.hero && !store.heroes[d.hero]) { store.heroes[d.hero] = true; h += '<p class="gold">' + HERO_BY_ID[d.hero].name + ' joins you: choose heroes on the Hero screen.</p>'; }
     save();
@@ -2921,20 +2929,24 @@ function commitRun(how, cleared) {
     if (first) { var fr = p.first || firstClearReward(run.stage); store.coins += fr.coins; addInv(fr.tile); if (!fr.shards) fr.shards = clearShards(key, true); if (fr.shards) addShards(fr.shards.u, fr.shards.n); store.cleared[key] = 1; store.maxTier = Math.max(store.maxTier || 0, run.stage); store.sel = frontier(key); S.mapCenter = true; k.heroes = syncHeroes(); }
     else if (key) { var rp = p.replay || replayReward(run.stage, key); store.coins += rp.coins; addInv(rp.tile); if (rp.shards) addShards(rp.shards.u, rp.shards.n); store.sel = key; }
   }
-  if (run.mode === 'endless' && run.depth > store.endBest) store.endBest = run.depth;
+  if (run.mode === 'endless' && run.depth > store.endBest) {
+    var ms = 0; for (var dd = store.endBest + 1; dd <= run.depth; dd++) if (dd % CONFIG.endlessMilestone.every === 0) ms++;
+    if (ms) { var eu = nearUnit(true); if (eu) { addShards(eu, ms * CONFIG.endlessMilestone.shards); run.endMsg = 'New best depth: ' + shardLine(eu, ms * CONFIG.endlessMilestone.shards); } }
+    store.endBest = run.depth;
+  }
   store.runs = (store.runs || 0) + 1;
   run.over = how; store.run = null; save(); k.merged = merged; return k;
 }
 function finishStage() { var key = S.run.cell && S.run.cell.key; commitRun('bank', true); S.phase = 'over'; if (key && !S.keepSel) { store.sel = frontier(key); save(); } S.mapCenter = true; show('home'); }
 function endRun() {
   var run = S.run, k = commitRun('dead'); S.phase = 'over';
-  $('#result').innerHTML = '<div class="resbox lose"><h2>Defeated</h2><p>Your hero ran out of HP. Fights won: <b>' + run.fights + '</b>' + (run.mode === 'endless' ? ', depth <b>' + run.depth + '</b>' : '') + '.</p><p class="gold">Kept ' + k.coins + ' of ' + run.coins + ' coins' + (run.loot.length ? ' and ' + k.tiles.length + ' of ' + run.loot.length + ' loot tiles' : '') + '.</p><div class="btns"><button class="btn main" data-act="home">Back to the map</button></div></div>';
+  $('#result').innerHTML = '<div class="resbox lose"><h2>Defeated</h2><p>Your hero ran out of HP. Fights won: <b>' + run.fights + '</b>' + (run.mode === 'endless' ? ', depth <b>' + run.depth + '</b>' : '') + '.</p>' + (run.endMsg ? '<p class="gold">' + run.endMsg + '</p>' : '') + '<p class="gold">Kept ' + k.coins + ' of ' + run.coins + ' coins' + (run.loot.length ? ' and ' + k.tiles.length + ' of ' + run.loot.length + ' loot tiles' : '') + '.</p><div class="btns"><button class="btn main" data-act="home">Back to the map</button></div></div>';
   show('result');
 }
 function bankRun() {
   if (!S.run && store.run) S.run = store.run;
   var run = S.run, k = commitRun('bank'); S.phase = 'over';
-  $('#result').innerHTML = '<div class="resbox win"><h2>Banked</h2><p>Fights won: <b>' + run.fights + '</b>' + (run.mode === 'endless' ? ', depth <b>' + run.depth + '</b>' : '') + '.</p><p class="gold">+' + k.coins + ' coins' + (k.tiles.length ? ' and ' + k.tiles.length + ' colourless tile' + (k.tiles.length > 1 ? 's' : '') + (k.merged ? ' (' + k.merged + ' merged up a level)' : '') : '') + ' saved.</p><div class="btns"><button class="btn main" data-act="home">Back to the map</button></div></div>';
+  $('#result').innerHTML = '<div class="resbox win"><h2>Banked</h2><p>Fights won: <b>' + run.fights + '</b>' + (run.mode === 'endless' ? ', depth <b>' + run.depth + '</b>' : '') + '.</p>' + (run.endMsg ? '<p class="gold">' + run.endMsg + '</p>' : '') + '<p class="gold">+' + k.coins + ' coins' + (k.tiles.length ? ' and ' + k.tiles.length + ' colourless tile' + (k.tiles.length > 1 ? 's' : '') + (k.merged ? ' (' + k.merged + ' merged up a level)' : '') : '') + ' saved.</p><div class="btns"><button class="btn main" data-act="home">Back to the map</button></div></div>';
   show('result');
 }
 function bagHTML() {
