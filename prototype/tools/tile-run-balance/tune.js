@@ -3,8 +3,8 @@
    Usage: node tune.js <override.json> <iterations> [players per skill]   (the override file is read and rewritten each round; it holds the starting stage hp)
    Targets (average of skilled and casual): see TARGET. */
 const fs = require('fs'), J = require('./journeys.js');
-const TARGET = [0.96, 0.92, 0.86, 0.80, 0.74, 0.68, 0.62, 0.57, 0.52, 0.46];   /* mixed win rate */
-const WC = [0.8, 0.8, 0.7, 0.6, 0.5, 0.4, 0.35, 0.3, 0.3, 0.3];             /* weight of the casual bot in the mix (new players matter early, skilled play late) */
+const TARGET = [0.97, 0.93, 0.88, 0.84, 0.80, 0.76, 0.72, 0.68, 0.64, 0.60];   /* mixed win rate */   /* mixed win rate */
+const WC = [0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.15, 0.1, 0.1, 0.1];   /* casual weight: early game for new players, late game judged on skilled play */             /* weight of the casual bot in the mix (new players matter early, skilled play late) */
 (async () => {
   const file = process.argv[2], iters = +(process.argv[3] || 3), n = +(process.argv[4] || 6);
   for (let it = 0; it < iters; it++) {

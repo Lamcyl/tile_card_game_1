@@ -7,7 +7,7 @@
      multiplier multBase[2]     copy  copyBase[2]
    status: "in game" if genSpec produced it in a heavy seeded sample (tiers 1-10, rarities 0-2) or it is a unit base tile, else "variant (not in game)".
    colMax / totMax: tier-10 board, 6 columns x 4 rows, no blocked cells, one enemy per column with 1e9 HP.  The tile (any colour of r b g, any anchor) plus a helper pool
-     (strikes of number 6 in r b g, one Epic boost (4 / 3 per budget, direction searched) and one x2 multiplier (direction searched)) fill the board; a seeded
+     (strikes of number 6 in r b g, up to two Epic boosts (direction searched) and up to FOUR x2 multipliers that double all four neighbours: a stress test of each tile's limit) fill the board; a seeded
      random-restart hill climb (moves: cell colour, swap, helper colour / direction, tile colour, tile anchor) maximises the marginal contribution
      damage(board) - damage(board without the tile): colMax = best on a single column, totMax = best summed over all columns (searched separately).
    score = 100 x totMax / (totMax + median totMax of all tiles): 50 = a typical tile, near 100 = the strongest (no cap, so tiles stay apart). refHP = mean total HP of the first-attack enemies of seeded tier-10 final-boss fights from genFight (won = 7).
@@ -44,8 +44,9 @@ function searchTile(spec, objective, seed, seedState) {
   const sObj = (q, c) => (strike[q + c] = strike[q + c] || mk(c, 'a', '^', 6));
   const bObj = {}, mObj = {};
   const bo = (q, c, d) => (bObj[q + c + d] = bObj[q + c + d] || mk(c, 'p', d, boostN(d)));
-  const mo = (q, c, d) => (mObj[q + c + d] = mObj[q + c + d] || mk(c, 'x', d, 2));
+  const mo = (q, c, d) => (mObj[q + c] = mObj[q + c] || mk(c, 'x', 'udlr', 2));   /* stress test: every helper multiplier doubles all four neighbours */
   /* state: a anchor, tc tile colour, h[q] 0 empty 1..3 strike colour 4 boost 5 mult, -1 under the tile; bc, mc helper colours, bdi, mdi directions */
+  const MAXB = 2, MAXM = 4;   /* helpers: up to 2 boosts and 4 multipliers (x2 on all four sides) */
   const tc = a => R.placeCells({ sh: spec.sh }, a, COLS, ROWS);
   function fresh() {
     const s = { a: anchors[pi(anchors.length)], tc: pi(3), h: new Array(N).fill(1), bc: pi(3), mc: pi(3), bdi: pi(bd.length), mdi: pi(md.length) };
@@ -60,7 +61,7 @@ function searchTile(spec, objective, seed, seedState) {
     for (let q = 0; q < N; q++) {
       if (inT[q]) { s.h[q] = -1; continue; }
       if (s.h[q] === -1) s.h[q] = 1 + pi(3);
-      if (s.h[q] === 4) { if (nb++) s.h[q] = 1 + pi(3); } else if (s.h[q] === 5) { if (nm++) s.h[q] = 1 + pi(3); }
+      if (s.h[q] === 4) { if (++nb > MAXB) s.h[q] = 1 + pi(3); } else if (s.h[q] === 5) { if (++nm > MAXM) s.h[q] = 1 + pi(3); }
     }
     const free = () => { for (let g = 0; g < 200; g++) { const q = pi(N); if (!inT[q] && s.h[q] >= 0 && s.h[q] <= 3) return q; } for (let q = 0; q < N; q++) if (!inT[q] && s.h[q] >= 0 && s.h[q] <= 3) return q; return -1; };
     if (!nb) { const q = free(); if (q >= 0) s.h[q] = 4; }
@@ -80,7 +81,7 @@ function searchTile(spec, objective, seed, seedState) {
     for (let it = 0; it < per; it++) {
       const T = 0.12 * Math.max(10, lv) * (1 - it / per);
       const t = { a: s.a, tc: s.tc, h: s.h.slice(), bc: s.bc, mc: s.mc, bdi: s.bdi, mdi: s.mdi }, m = rnd();
-      if (m < 0.25) { const q = pi(N); if (isS(t.h[q]) || t.h[q] === 0) t.h[q] = rnd() < 0.1 ? 0 : 1 + pi(3); else continue; }
+      if (m < 0.25) { const q = pi(N); if (isS(t.h[q]) || t.h[q] === 0) { const r2 = rnd(); t.h[q] = r2 < 0.08 ? 0 : r2 < 0.24 ? 5 : r2 < 0.3 ? 4 : 1 + pi(3); fixup(t); } else continue; }
       else if (m < 0.45) { const p = pi(N), q = pi(N); if (t.h[p] < 0 || t.h[q] < 0) continue; const x = t.h[p]; t.h[p] = t.h[q]; t.h[q] = x; }
       else if (m < 0.65) {   /* sandwich stamp: x y x along a row or a column */
         const x = 1 + pi(3), y = 1 + ((x + pi(2)) % 3), horiz = rnd() < 0.5, r = pi(ROWS), c = pi(COLS), st = horiz ? 1 : COLS;
