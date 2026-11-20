@@ -115,7 +115,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .rrow{display:flex;align-items:center;gap:6px;font-size:11.5px;line-height:1.2;color:var(--ink);padding:2px 4px;border-radius:8px;background:var(--panel)}
 .rrow b{color:var(--tt);white-space:nowrap}
 .rrow span.t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-#finfo{height:20px;font-size:12px;line-height:18px;text-align:center;color:var(--ink);padding:2px 4px 0;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#finfo{min-height:20px;max-height:36px;font-size:12px;line-height:16px;text-align:center;color:var(--ink);padding:2px 4px 0;flex:none;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 #ftabs{display:flex;gap:5px;justify-content:center;margin-top:6px;flex:none}
 .tab{min-width:48px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:4px;font-weight:800;font-size:13px;padding:0 6px;background:var(--panel);color:var(--ink);border:2px solid var(--line)}
 .tab.on{border-color:var(--tt);background:var(--panel2)}
@@ -548,6 +548,7 @@ svg.sk .mk{fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-li
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes resIn{from{opacity:0;scale:.95;translate:0 10px}to{opacity:1;scale:1;translate:0 0}}
 .screen.enter{animation:scrIn .18s ease-out both}
+#result:not([hidden]){margin-top:auto;margin-bottom:auto}
 #result.resin .resbox{animation:resIn .3s .04s cubic-bezier(.2,.8,.3,1) both}
 #modal.pop,#card.pop,.tutcard.pop{animation:popIn .18s ease-out both}
 #dim.pop{animation:fadeIn .18s ease-out both}
@@ -1758,7 +1759,8 @@ function defaultStore() {
 function load() {
   var s = defaultStore();
   try {
-    var j = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
+    var raw = localStorage.getItem(LS_KEY); if (raw) { try { localStorage.setItem(LS_KEY + '.bak', raw); } catch (e0) {} }   /* one backup copy per page load, before anything is overwritten */
+    var j = JSON.parse(raw || 'null');
     if (j && j.v === 9 && j.units && j.team && j.inv) {
       var d = defaultStore(), freshAck = !j.ack; s = j;
       for (var k in d) if (s[k] === undefined) s[k] = d[k];
@@ -1775,7 +1777,7 @@ function load() {
 function sanitizeStore(s, d) {
   var isO = function (x) { return !!x && typeof x === 'object' && !Array.isArray(x); }, isN = function (x) { return typeof x === 'number' && isFinite(x); };
   ['units', 'team', 'slots', 'ushards', 'cleared', 'puzDone', 'tut', 'seenEn', 'ack', 'heroes', 'set'].forEach(function (k) { if (!isO(s[k])) s[k] = d[k]; });
-  ['coins', 'nid', 'maxTier', 'endBest', 'runs'].forEach(function (k) { if (!isN(s[k]) || s[k] < 0) s[k] = d[k] || 0; });
+  ['coins', 'nid', 'maxTier', 'endBest', 'runs', 'dailyLast'].forEach(function (k) { if (!isN(s[k]) || s[k] < 0) s[k] = d[k] || 0; });
   if (typeof s.dailyDone !== 'string') s.dailyDone = ''; if (typeof s.sel !== 'string') s.sel = null; s.allStages = !!s.allStages;
   var okTile = function (e) { return isO(e) && isN(e.id) && typeof e.k === 'string' && isN(e.n); };
   s.ct = Array.isArray(s.ct) ? s.ct.filter(function (e) { return okTile(e) && (COLOR_IDS.indexOf(e.c) >= 0 || e.c === 'w'); }) : [];
@@ -1799,7 +1801,19 @@ function sanitizeStore(s, d) {
   } else s.run = null;
   return s;
 }
-function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(store)); } catch (e) {} }
+function fmtN(n) { return n >= 1e6 ? (Math.floor(n / 1e5) / 10) + 'M' : n >= 1e4 ? (Math.floor(n / 100) / 10) + 'k' : String(n); }
+var SAVE_WARNED = false, STALE = false;
+function noteBox(id, html) { var b = document.getElementById(id); if (!b) { b = document.createElement('div'); b.id = id; b.setAttribute('role', 'status'); b.style.cssText = 'position:fixed;left:50%;bottom:76px;transform:translateX(-50%);z-index:120;max-width:340px;padding:10px 14px;border-radius:14px;background:var(--panel);color:var(--ink);border:2px solid var(--line);box-shadow:0 3px 0 var(--shadow);font-size:13px;font-weight:700;text-align:center'; document.body.appendChild(b); } b.innerHTML = html; return b; }
+function save() {
+  if (STALE) return;   /* another tab owns the save now */
+  try { localStorage.setItem(LS_KEY, JSON.stringify(store)); }
+  catch (e) { if (!SAVE_WARNED) { SAVE_WARNED = true; var b = noteBox('savewarn', 'Couldn\'t save your progress (storage is full or blocked).'); setTimeout(function () { b.remove(); }, 6000); } }
+}
+window.addEventListener('storage', function (e) {
+  if (e.key !== LS_KEY || STALE) return; STALE = true;
+  noteBox('stalewarn', 'Tilewhist changed in another tab. <button class="btn sm" id="stalereload" style="margin-left:6px">Reload</button>');
+  document.getElementById('stalereload').onclick = function () { location.reload(); };
+});
 function applySettings() {
   CONFIG.momentum.on = !!store.set.momentum; CONFIG.momentum.bonus = store.set.value || 1;
   CONFIG.tileReturn = store.set.ret === 'turn' ? 'turn' : 'fight'; CONFIG.stars.on = !!store.set.stars;
@@ -2102,7 +2116,7 @@ function puzLock(p) {
 function puzzleListHTML() {
   var d = todayInfo();
   var h = '<h2>Puzzles</h2><div class="panel"><div class="ctext" style="margin-bottom:6px">One attack, a fixed board and hand: beat every enemy. No ' + HWl + ', relics or bag. Solved once = reward; replays are free.</div><div class="stages">';
-  h += '<button class="stage st-cur" data-act="daily"><span class="sn">D</span><span class="si"><b>Daily puzzle</b><small>' + d.label + (store.dailyDone === d.key ? ' (solved today)' : ', reward ' + CONFIG.dailyCoins + ' coins') + '</small></span></button>';
+  h += '<button class="stage st-cur" data-act="daily"><span class="sn">D</span><span class="si"><b>Daily puzzle</b><small>' + d.label + (Object.keys(store.cleared).length < 3 ? ' (clear 3 map stages to unlock)' : store.dailyDone === d.key ? ' (solved today)' : ', reward ' + CONFIG.dailyCoins + ' coins') + '</small></span></button>';
   PUZZLES.forEach(function (p) {
     if (!p.need) return;   /* lessons live on the map */
     var why = puzLock(p), lock = !!why, done = store.puzDone[p.id];
@@ -2121,13 +2135,13 @@ function startPuzzleUI(def, daily) {
   tut('hold'); if (TUT_LESSON[def.id]) tut(TUT_LESSON[def.id]);
 }
 function puzzleWon() {
-  var d = S.puz.def, r = d.reward || {}, first = S.puz.daily ? store.dailyDone !== todayInfo().key : !store.puzDone[d.id], h = '<div class="resbox win"><h2>Solved</h2>';
+  var d = S.puz.def, r = d.reward || {}, first = S.puz.daily ? store.dailyDone !== todayInfo().key && todayInfo().seed > (store.dailyLast || 0) : !store.puzDone[d.id], h = '<div class="resbox win"><h2>Solved</h2>';
   if (first) {
     store.coins += r.coins || 0; var tl = null;
     if (r.tile) { var tp = parseTok(r.tile); tl = { k: tp.k, d: tp.d, n: tp.n, sh: tp.sh, rar: 0 }; addInv(tl); }
     if (r.shards) addShards(r.shards.u, r.shards.n);
     if (S.puz.daily && !r.shards) { var du = nearUnit(false); if (du) { r = Object.assign({}, r, { shards: { u: du, n: CONFIG.dailyShards } }); addShards(du, CONFIG.dailyShards); } }
-    if (S.puz.daily) store.dailyDone = todayInfo().key; else store.puzDone[d.id] = true;
+    if (S.puz.daily) { store.dailyDone = todayInfo().key; store.dailyLast = todayInfo().seed; } else store.puzDone[d.id] = true;
     if (d.hero && !store.heroes[d.hero]) { store.heroes[d.hero] = true; h += '<p class="gold">New ' + HWl + ' unlocked: ' + HERO_BY_ID[d.hero].ab + '. Choose it on the ' + HWS + ' screen.</p>'; }
     save();
     h += '<p class="gold">+' + (r.coins || 0) + ' coins' + (tl ? ' and a colourless tile' : '') + '</p>' + (r.shards ? '<p class="gold">' + shardLine(r.shards.u, r.shards.n) + '</p>' : '') + (tl ? '<div class="inv">' + tileHTML(invTile(tl), { ts: 52 }) + '</div>' : '');
@@ -2289,7 +2303,7 @@ function stageCardHTML(c, st) {
 function renderHome() {
   var all = store.allStages, sel = selKey(), c = stageInfo(sel), run = store.run, M = mapData();
   var old = $('#mapv'), pos = old && !S.mapCenter ? old.scrollTop : null;
-  var h = '<div class="hd"><h1>Tilewhist</h1><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + store.coins + '</button>' + (DEV ? '<button class="ib" data-act="settings" aria-label="Settings and test">' + ICON.gear + '</button>' : '') + '</div>';
+  var h = '<div class="hd"><h1>Tilewhist</h1><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + fmtN(store.coins) + '</button>' + (DEV ? '<button class="ib" data-act="settings" aria-label="Settings and test">' + ICON.gear + '</button>' : '') + '</div>';
   h += '<div id="mapv" class="mapv"></div>' + stageCardHTML(c, stageState(sel, store.cleared, all));
   var PZ = PUZZLES.filter(function (q) { return q.need; }), solved = PZ.filter(function (q) { return store.puzDone[q.id]; }).length, hv = HERO_BY_ID[store.hero];
   h += '<div class="dock5">' +
@@ -2447,7 +2461,7 @@ function levelHTML(uid, done) {
 }
 function renderTeam() {
   var tab = S.tmTab || 'units', col = S.tmCol || 'r', u0, h;
-  h = '<header class="top"><button class="hbtn" data-act="home" aria-label="Back">' + TM_BACK + '</button><div class="ttl" style="text-align:left;font-size:21px;letter-spacing:-.02em">Tiles</div><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + store.coins + '</button></header>';
+  h = '<header class="top"><button class="hbtn" data-act="home" aria-label="Back">' + TM_BACK + '</button><div class="ttl" style="text-align:left;font-size:21px;letter-spacing:-.02em">Tiles</div><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + fmtN(store.coins) + '</button></header>';
   var tabs = [['units', 'Units', ''], ['collected', 'Collected', store.ct.length + ' tiles'], ['colourless', 'Colourless', chosenColourless().length + ' of ' + CONFIG.maxColourless]];
   h += '<div class="tm-seg" role="tablist" aria-label="Tiles sections">' + tabs.map(function (t) { return '<button role="tab" aria-selected="' + (t[0] === tab) + '" class="' + (t[0] === tab ? 'on' : '') + '" data-act="tmtab" data-t="' + t[0] + '">' + t[1] + (t[2] ? '<small>' + t[2] + '</small>' : '') + '</button>'; }).join('') + '</div>';
   if (tab === 'units') {
@@ -2885,9 +2899,12 @@ function pickHTML(o, i) {
     var tt = run.bag.filter(function (x) { return x.id === o.tid; })[0];
     if (tt) {
       var after = applyUpgrade(JSON.parse(JSON.stringify(tt)), o);
-      h += '<div class="pk">Upgrade a tile</div><div class="pvis"><div class="ups">' + tileHTML(tt, { ts: 34, noRest: true }) + '<span class="arrow">→</span>' + tileHTML(after, { ts: 34, noRest: true }) + '</div></div><div class="ctext">' + (o.kind === 'n2' ? '+' + o.amt + ' to its number' : 'second colour: ' + COLORS[o.col] + ' (counts as both for Sandwich)') + '</div>';
+      h += '<div class="pk">Upgrade a tile</div><div class="pvis"><div class="ups">' + tileHTML(tt, { ts: 34, noRest: true }) + '<span class="arrow">→</span>' + tileHTML(after, { ts: 34, noRest: true }) + '</div></div><div class="ctext">' + (o.kind === 'n2' ? '+' + o.amt + ' to its number' : 'adds a second colour: ' + COLORS[o.col] + ' (counts as ' + COLORS[tt.c] + ' and ' + COLORS[o.col] + ' for Sandwich)') + '</div>';
     }
-  } else h += '<div class="pk">Heal</div><div class="pvis"><div class="bigheal">+' + o.amt + ' HP</div></div><div class="ctext">HP ' + run.hp + ' / ' + run.maxHp + '</div>';
+  } else {
+    h += '<div class="pk">Heal</div><div class="pvis"><div class="bigheal">+' + o.amt + ' HP</div></div><div class="ctext">' + (run.hp >= run.maxHp ? 'You\'re at full health' : 'HP ' + run.hp + ' / ' + run.maxHp) + '</div>';
+    if (run.hp >= run.maxHp && run.pending && (run.pending.picks || []).some(function (q) { return q.type !== 'heal'; })) h = h.replace('<button class="pickc"', '<button class="pickc owned" disabled aria-disabled="true"');
+  }
   return h + '</button>';
 }
 /* the whole bag laid out like the hand, with the tiles on offer highlighted */
@@ -2968,7 +2985,11 @@ function keptLine(p) {
   return '<p>Kept: <b>' + (k.rb ? 'Rainbow' : COLORS[k.c]) + ' ' + tileName(k) + '</b>' + '' + ' <span class="ctext">now in Tiles, Collected</span></p><div class="inv">' + tileHTML(ctTile(k), { ts: 46 }) + '</div>';
 }
 function takePick(i) { applyPick(S.run, i); S.fs = null; show('map'); }
-function commitRun(how, cleared) {
+function commitRun(how, cleared) {   /* a run pays out once: a second call returns the first result */
+  var run0 = S.run; if (run0 && run0.committed) return run0.committed;
+  var k = commitRun0(how, cleared); if (run0) run0.committed = k; return k;
+}
+function commitRun0(how, cleared) {
   var run = S.run, k = settle(run, how), merged = 0;
   store.coins += k.coins; k.tiles.forEach(function (t) { if (addInv(t) === 'merged') merged++; });
   for (var sid in (k.ushards || {})) addShards(sid, k.ushards[sid]);
@@ -3038,7 +3059,7 @@ function miniBoardHTML(t) {
   return '<svg class="mb" viewBox="0 0 ' + W + ' ' + H + '" width="' + Math.min(W * 1.5, 150) + '" height="' + Math.min(W * 1.5, 150) * H / W + '" aria-hidden="true">' + out + '</svg>';
 }
 function oneLine(t) {
-  if (t.k === 'a') return 'Hits the marked column' + (miniCols(t) > 1 ? 's' : '') + ' for ' + t.n + ' each.';
+  if (t.k === 'a') return 'Hits the marked column' + (miniCols(t) > 1 ? 's' : '') + ' for ' + t.n + (miniCols(t) > 1 ? ' each.' : '.');
   if (t.k === 'p') return 'Adds +' + t.n + ' to attacking tiles in the marked cells.';
   if (t.k === 'x') return 'Tiles in the marked cells get ×' + t.n + ' (adds up with sandwiches).';
   return 'Copies the tile in the marked cell (not a copy), adds ' + t.n + '.';
@@ -3582,7 +3603,7 @@ document.addEventListener('click', function (e) {
     case 'allheroes': HEROES.forEach(function (H) { store.heroes[H.id] = true; }); save(); $('#modal').innerHTML = settingsHTML(); break;
     case 'herobtn': if (S.fs && S.fs.hero && heroToggle(S.run, S.fs)) { S.board = S.board.map(function (id) { return id >= 0 && tileById(id).rest ? -1 : id; }); S.run.board = S.board; S.sel = -1; clearHold(); renderFight(); } break;
     case 'puzzle': var pd = PUZZLES.filter(function (x) { return x.id === el.dataset.id; })[0]; if (pd && !(pd.need && puzLock(pd))) { ackSet('P' + pd.id); closeModal(); startPuzzleUI(pd, false); } break;
-    case 'daily': var dd = genDaily(todayInfo().seed, unlockedStage()); if (dd) { closeModal(); startPuzzleUI(dd, true); } break;
+    case 'daily': if (Object.keys(store.cleared).length < 3) break; var dd = genDaily(todayInfo().seed, unlockedStage()); if (dd) { closeModal(); startPuzzleUI(dd, true); } break;
     case 'puzretry': closeModal(); if (S.puz) startPuzzleUI(S.puz.def, S.puz.daily); break;
     case 'endless': openModal(endlessHTML()); if (endlessOn()) tut('endless'); break;
     case 'endgo': var es = +$('#endstage').value; closeModal(); startRunUI('endless', es); break;
@@ -3616,7 +3637,8 @@ document.addEventListener('click', function (e) {
       if (store.ct.length) { var d2 = store.ct[store.ct.length - 1]; addCT({ c: d2.c, k: d2.k, d: d2.d, n: d2.n, sh: d2.sh, rar: d2.rar }); }
       save(); $('#modal').innerHTML = settingsHTML(); break;
     case 'clearrun': store.run = null; S.run = null; save(); closeModal(); show('home'); break;
-    case 'reset': if (el.dataset.sure) { try { localStorage.removeItem(LS_KEY); } catch (er) {} store = defaultStore(); applySettings(); S.run = null; save(); closeModal(); show('home'); } else { el.dataset.sure = 1; el.textContent = 'Tap again to confirm'; } break;
+    case 'reset': openModal('<h3>Reset save?</h3><p style="font-size:14px;color:var(--ink)">All progress, units, tiles and coins are deleted. This cannot be undone.</p><div class="btnrow"><button class="btn" data-act="resetgo">Reset everything</button><button class="btn main" data-act="close">Keep my save</button></div>'); break;
+    case 'resetgo': try { localStorage.removeItem(LS_KEY); } catch (er) {} store = defaultStore(); applySettings(); S.run = null; save(); closeModal(); show('home'); break;
   }
 });
 document.addEventListener('change', function (e) {
@@ -3633,6 +3655,11 @@ document.addEventListener('change', function (e) {
     if (!st.u && store.team[u.c] === u.id) store.team[u.c] = UNITS.filter(function (x) { return x.c === u.c && store.units[x.id].u; }).map(function (x) { return x.id; })[0] || u.id;
     save();
   }
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Escape') return;
+  var pe = document.querySelector('#pen:not([hidden]) [data-pexit], #enc:not([hidden]) [data-pexit]');
+  if (!$('#card').hidden) hideCard(); else if (!$('#modal').hidden) closeModal(); else if (pe) pe.click();
 });
 $('#dim').addEventListener('click', function () { if (!$('#card').hidden) return; closeModal(); });
 window.addEventListener('resize', function () { if (S.screen === 'fight' && S.phase === 'edit') { if (P || ghost) { setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 300); return; } renderFight(); } });
@@ -3802,7 +3829,7 @@ var TUTS = [
   { id: 'hold', title: 'Hold for details', steps: [{ lines: 'Press and hold any tile, enemy or icon for a moment to read what it does.', sp: { cols: 3, rows: 1, en: [{ c: 0, hp: 7 }, { c: 1, hp: 10 }, { c: 2, hp: 4 }], tiles: [{ q: 1, t: 'a^3', c: 'b' }], late: { card: '<b>Blue Strike 3</b><small>Hits the column above it for 3.</small>' }, steps: [{ press: { q: 1 } }, { wait: 350 }, { reveal: 'card' }] } }] },
   { id: 'sandwich', title: 'Sandwich', steps: [
     { lines: 'A tile between two tiles of one other colour counts double. Golden clamps show it.', sp: { cols: 3, rows: 1, en: [{ c: 0, hp: 3, hit: 3 }, { c: 1, hp: 8, hit: 8 }, { c: 2, hp: 3, hit: 3 }], tiles: [{ q: 0, t: 'a^3', c: 'r' }, { q: 2, t: 'a^3', c: 'r' }], hand: [{ t: 'a^4', c: 'b', to: 1, n0: 4, show: { n: 8, sx: 2 } }], steps: [{ drag: 0 }, { clamp: [{ q: 1, dir: 'h' }] }, { pulse: 1 }, { hit: 'all' }] } },
-    { lines: 'Squeezed along a row and a column it counts x3: each extra line adds one more.', sp: { cols: 3, rows: 3, en: [{ c: 1, hp: 6, hit: 6 }], tiles: [{ q: 1, t: 'a^2', c: 'r' }, { q: 7, t: 'a^2', c: 'r' }, { q: 3, t: 'a^2', c: 'r' }, { q: 5, t: 'a^2', c: 'r' }], hand: [{ t: 'a^2', c: 'b', to: 4, n0: 2, show: { n: 6, sx: 3 } }], steps: [{ drag: 0 }, { clamp: [{ q: 4, dir: 'h' }, { q: 4, dir: 'v' }] }, { pulse: 4 }, { hit: 'all' }] } }] },
+    { lines: 'Two tiles of the same colour on both sides in a row, and two more in a column: it counts x3. Each extra line adds one more.', sp: { cols: 3, rows: 3, en: [{ c: 1, hp: 6, hit: 6 }], tiles: [{ q: 1, t: 'a^2', c: 'r' }, { q: 7, t: 'a^2', c: 'r' }, { q: 3, t: 'a^2', c: 'r' }, { q: 5, t: 'a^2', c: 'r' }], hand: [{ t: 'a^2', c: 'b', to: 4, n0: 2, show: { n: 6, sx: 3 } }], steps: [{ drag: 0 }, { clamp: [{ q: 4, dir: 'h' }, { q: 4, dir: 'v' }] }, { pulse: 4 }, { hit: 'all' }] } }] },
   { id: 'colourless', title: 'Colourless tiles', steps: [{ lines: 'Grey colourless tiles are never sandwiched, and they never sandwich others. Their numbers are bigger to make up for it.', sp: { cols: 3, rows: 1, en: [{ c: 1, hp: 8, hit: 6 }], tiles: [{ q: 0, t: 'a^3', c: 'r' }, { q: 2, t: 'a^3', c: 'r' }], hand: [{ t: 'a^6', c: 'x', to: 1 }], steps: [{ drag: 0 }, { fly: { q: 1, text: 'no sandwich', cls: 'mute' } }, { hit: 'all' }] } }] },
   { id: 'side', title: 'Side attackers', steps: [{ lines: 'Side arrows hit the neighbouring columns instead of their own.', sp: { cols: 3, rows: 1, en: [{ c: 0, hp: 3, hit: 3 }, { c: 1, hp: 6 }, { c: 2, hp: 3, hit: 3 }], hand: [{ t: 'a<>3', c: 'g', to: 1 }], steps: [{ drag: 0 }, { hit: [0, 2] }] } }] },
   { id: 'lanes', title: 'Three lanes', steps: [{ lines: 'A trident hits the column on each side and its own.', sp: { cols: 3, rows: 1, en: [{ c: 0, hp: 2, hit: 2 }, { c: 1, hp: 2, hit: 2 }, { c: 2, hp: 2, hit: 2 }], hand: [{ t: 'a<^>2', c: 'r', to: 1 }], steps: [{ drag: 0 }, { hit: 'all' }] } }] },

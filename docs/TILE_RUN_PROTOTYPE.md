@@ -628,3 +628,11 @@ Reading: the x1.6 final wall is clear for both bots (skilled 9 %, casual 5 %); t
 - "Bank and leave" asks first (`bankask` dialog; the map button has extra top margin and is smaller).
 - Rally: the skill text uses `CONFIG.hero.rally`; the tile breakdown has separate "momentum" and "Rally" rows (`opts.rally`).
 - Dev: `DEV` is exactly `dev=1`; all dev `data-act`s (`DEV_ACTS`) and the test setting inputs are ignored without it.
+
+## Beta 1 second batch: new player, polish, robustness (20 November)
+- Text: single-column attack cards say "Hits the marked column for N."; second-colour upgrades read "adds a second colour: Purple (counts as Red and Purple for Sandwich)"; the "Both ways" tip describes the row and column.
+- Heal pick is greyed out with "You're at full health" when HP is full and another pick exists. The Daily puzzle stays locked until 3 map stages are cleared.
+- Fight hint line may use two lines. Result screens are centred vertically. Escape closes the card, popup or encyclopedia.
+- Reset save has its own confirm dialog (`reset` then `resetgo`).
+- Robustness: a failed save shows a one-time "Couldn't save" note; a `storage` event from another tab shows "changed in another tab" with a Reload button and stops this tab saving; the raw save is copied to `tileRunPrototype.v9.bak` on every page load; `commitRun` pays a run once (`run.committed`); the Daily puzzle pays only for a date newer than `store.dailyLast`; the coin pill shows 12.3k / 4.5M.
+- Not done in this batch: after-tutorial "Next" home card, first-run tip strip and soft first fight, hourglass/shard tips, solved-board backdrop, map card cap on 360x640, slot-popup filter row, tablet scaling, old-save migration, Endless stage-count text.
