@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tilewhist UI concepts</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#d9d5cc;color:#222;font:15px/1.45 Georgia,'Times New Roman',serif;padding:28px 18px 60px}
+.intro{max-width:880px;margin:0 auto 26px}
+.intro h1{font-size:34px;letter-spacing:-.02em;font-weight:400}
+.intro p{max-width:62ch;margin-top:8px}
+.intro ul{margin:10px 0 0 18px;max-width:70ch;font-size:14px}
+.wall{display:flex;flex-wrap:wrap;gap:34px 26px;justify-content:center}
+.col{width:316px}
+.col h2{font-size:21px;font-weight:400;margin:0 0 2px}
+.col .tag{font:12px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.04em;color:#555;margin-bottom:10px;min-height:34px}
+.col .notes{font-size:13px;margin-top:10px;line-height:1.5}
+.ph{width:316px;height:640px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.ph .top{display:flex;align-items:flex-end;gap:10px}
+.ph .en{display:grid;grid-template-columns:repeat(3,1fr)}
+.ph .bd{display:grid;grid-template-columns:repeat(3,1fr)}
+.ph .hand{display:flex}
+.ph .t,.ph .c{aspect-ratio:1;position:relative;display:flex}
+.ph .act{display:flex}
+.ph .gl{position:absolute}
+.sw{display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:3px}
+
+/* ============ 1 LEDGER ============ */
+.v1{background:#efe7d4;color:#1b1a17;font-family:Georgia,'Times New Roman',serif;padding:18px 16px 14px}
+.v1 .top{border-bottom:1.5px solid #1b1a17;padding-bottom:8px}
+.v1 .top b{font-size:58px;line-height:.8;font-weight:400;letter-spacing:-.04em}
+.v1 .top span{font-size:12px;line-height:1.3;font-style:italic}
+.v1 .top i{margin-left:auto;font:11px ui-monospace,Menlo,monospace;letter-spacing:.08em}
+.v1 .en{gap:0;margin:12px 0 4px;border-top:1px solid #1b1a17;border-bottom:1px solid #1b1a17}
+.v1 .e{padding:6px 7px 7px;border-right:1px solid #1b1a17}.v1 .e:last-child{border-right:0}
+.v1 .e .k{font:10px ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase}
+.v1 .e .h{font-size:30px;line-height:1;letter-spacing:-.03em}
+.v1 .e .h s{font-size:13px;text-decoration:none;color:#8a3324}
+.v1 .e.boss{background:#1b1a17;color:#efe7d4}
+.v1 .e .bar{height:3px;background:#cfc4ab;margin-top:5px}.v1 .e .bar u{display:block;height:3px;background:#8a3324;text-decoration:none}
+.v1 .e.boss .bar{background:#4a463e}.v1 .e.boss .bar u{background:#e7c76a}
+.v1 .bd{gap:7px;margin:14px 0}
+.v1 .c{border:1px dashed #a59a80}
+.v1 .c.x{border:0;background:repeating-linear-gradient(45deg,#d8cdb3 0 2px,transparent 2px 7px)}
+.v1 .t{background:#fbf7ec;border:1.5px solid #1b1a17;box-shadow:3px 3px 0 var(--k);align-items:flex-end;justify-content:flex-start;padding:5px 7px}
+.v1 .t .n{font-size:38px;line-height:.9;color:var(--k);letter-spacing:-.04em}
+.v1 .t .d{position:absolute;top:5px;right:6px;font:10px ui-monospace,Menlo,monospace;color:#1b1a17}
+.v1 .r{--k:#8a3324}.v1 .b{--k:#24426e}.v1 .g{--k:#3e5b2e}.v1 .y{--k:#9a6c12}
+.v1 .sand{position:absolute;top:50%;width:9px;height:2px;background:#1b1a17}
+.v1 .hand{gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid #1b1a17}
+.v1 .hand .t{width:58px}
+.v1 .act{margin-top:12px;gap:10px;align-items:stretch}
+.v1 .act a{flex:1;background:#1b1a17;color:#efe7d4;padding:11px 14px;font-size:18px;display:flex;justify-content:space-between}
+.v1 .act a i{font:13px ui-monospace,Menlo,monospace;align-self:center}
+.v1 .act em{font-style:italic;border-bottom:1px solid;align-self:center;font-size:14px}
+
+/* ============ 2 KILN ============ */
+.v2{background:#2a211c;color:#ecdcc8;font-family:'Trebuchet MS','Segoe UI',sans-serif;padding:16px 14px}
+.v2 .top{justify-content:space-between}
+.v2 .top b{font:600 13px/1 'Trebuchet MS',sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#d9a46a}
+.v2 .top span{font-size:22px;letter-spacing:-.01em}
+.v2 .top i{font-style:normal;font-size:12px;color:#a8917a}
+.v2 .en{gap:6px;margin:16px 0 0}
+.v2 .e{clip-path:polygon(0 0,100% 0,100% 72%,86% 100%,0 100%);background:#3a2e27;padding:8px 9px 10px}
+.v2 .e .k{font-size:10px;letter-spacing:.2em;color:#a8917a;text-transform:uppercase}
+.v2 .e .h{font-size:27px;font-weight:700;letter-spacing:-.02em}.v2 .e .h s{text-decoration:none;font-size:12px;color:#e07a52;font-weight:400;margin-left:4px}
+.v2 .e.boss{background:#5a2f1f}
+.v2 .e .bar{height:5px;background:#241b17;margin-top:6px}.v2 .e .bar u{display:block;height:5px;background:#d9a46a}
+.v2 .bd{gap:3px;margin:18px auto;padding:3px;background:#5c4b3f;width:100%}
+.v2 .c{background:#3a2e27}
+.v2 .c.x{background:#211a16}
+.v2 .t{background:radial-gradient(120% 90% at 30% 20%,color-mix(in srgb,var(--k) 70%,#fff),var(--k) 60%);clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);align-items:center;justify-content:center}
+.v2 .t .n{font-size:34px;font-weight:700;color:#fff8ef;text-shadow:0 1px 0 rgba(0,0,0,.25)}
+.v2 .t .d{position:absolute;left:7px;bottom:5px;font-size:10px;letter-spacing:.1em;color:rgba(255,248,239,.75)}
+.v2 .r{--k:#b4452b}.v2 .b{--k:#2f5f8f}.v2 .g{--k:#6f8f6a}.v2 .y{--k:#c08a2f}
+.v2 .sand{position:absolute;top:calc(50% - 6px);width:4px;height:12px;background:#ecdcc8}
+.v2 .hand{gap:6px;margin-top:auto;justify-content:center}
+.v2 .hand .t{width:62px}
+.v2 .act{margin-top:14px;gap:8px}
+.v2 .act a{flex:3;background:#d9a46a;color:#2a211c;font-weight:700;letter-spacing:.24em;text-transform:uppercase;font-size:13px;padding:14px;text-align:center;clip-path:polygon(0 0,100% 0,100% 70%,94% 100%,0 100%)}
+.v2 .act a i{font-style:normal;letter-spacing:0;font-size:16px;margin-left:8px}
+.v2 .act em{flex:1;font-style:normal;border:1px solid #5c4b3f;color:#a8917a;text-align:center;padding:14px 0;font-size:13px}
+
+/* ============ 3 RISO ============ */
+.v3{background:#f6f2ea;color:#1d2b53;font-family:Impact,'Arial Narrow','Helvetica Neue',sans-serif;padding:14px 14px}
+.v3 .top{flex-direction:column;align-items:flex-start;gap:0}
+.v3 .top b{font-size:46px;line-height:.85;text-transform:uppercase;letter-spacing:.01em;color:#ff4f79;mix-blend-mode:multiply}
+.v3 .top span{font:11px/1.2 ui-monospace,Menlo,monospace;letter-spacing:.06em;margin-top:2px}
+.v3 .top i{font:700 11px ui-monospace,Menlo,monospace;color:#ff4f79;letter-spacing:.06em}
+.v3 .en{gap:8px;margin:12px 0 0}
+.v3 .e{position:relative;padding:4px 0 0}
+.v3 .e .k{font:10px ui-monospace,Menlo,monospace;letter-spacing:.08em}
+.v3 .e .h{font-size:36px;line-height:1;color:#1d2b53}.v3 .e .h s{text-decoration:none;font:10px ui-monospace,Menlo,monospace;color:#ff4f79;vertical-align:top}
+.v3 .e.boss .h{color:#ff4f79}
+.v3 .e .bar{height:7px;background:repeating-linear-gradient(90deg,#1d2b53 0 2px,transparent 2px 4px);opacity:.25;margin-top:2px;position:relative}.v3 .e .bar u{position:absolute;left:0;top:0;height:7px;background:#ff4f79;opacity:3}
+.v3 .bd{gap:6px;margin:16px 0 0;transform:rotate(-1.2deg)}
+.v3 .c{background:radial-gradient(#1d2b5333 1px,transparent 1.4px) 0 0/6px 6px}
+.v3 .c.x{background:#1d2b53;opacity:.12}
+.v3 .t{background:var(--k);mix-blend-mode:multiply;border-radius:0 18px 0 0;align-items:flex-start;justify-content:flex-start;padding:2px 6px}
+.v3 .t::after{content:'';position:absolute;inset:3px -3px -3px 3px;border:1.5px solid #1d2b53;border-radius:0 18px 0 0;mix-blend-mode:multiply}
+.v3 .t .n{font-size:44px;line-height:1;color:#f6f2ea}
+.v3 .t .d{position:absolute;right:6px;bottom:3px;font:10px ui-monospace,Menlo,monospace;color:#1d2b53}
+.v3 .r{--k:#ff4f79}.v3 .b{--k:#3a7bd5}.v3 .g{--k:#00a77d}.v3 .y{--k:#ffb000}
+.v3 .sand{position:absolute;top:30%;width:6px;height:40%;background:#1d2b53}
+.v3 .hand{gap:10px;margin-top:auto}
+.v3 .hand .t{width:56px}.v3 .hand .t .n{font-size:32px}
+.v3 .act{margin-top:12px;align-items:center;gap:12px}
+.v3 .act a{flex:1;background:#1d2b53;color:#f6f2ea;font-size:30px;text-transform:uppercase;padding:6px 14px;letter-spacing:.02em;transform:rotate(-1deg)}
+.v3 .act a i{font-style:normal;color:#ff4f79;font-size:30px;float:right}
+.v3 .act em{font:12px ui-monospace,Menlo,monospace;font-style:normal;text-decoration:underline}
+
+/* ============ 4 TIDEPOOL ============ */
+.v4{background:#103b3a;color:#e8efe6;font-family:'Palatino Linotype',Palatino,'Book Antiqua',serif;padding:18px 16px 14px}
+.v4 .top{gap:12px}
+.v4 .top b{width:44px;height:44px;border-radius:50% 50% 50% 4px;background:#e8efe6;color:#103b3a;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:400}
+.v4 .top span{font-size:20px;font-style:italic;line-height:1.1}
+.v4 .top span small{display:block;font:11px 'Trebuchet MS',sans-serif;font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:#8fb8ac}
+.v4 .top i{margin-left:auto;font-style:normal;font-size:13px;color:#8fb8ac}
+.v4 .en{gap:10px;margin:18px 0 0;align-items:end}
+.v4 .e{border-left:1px solid #5d8f86;padding:0 0 0 8px}
+.v4 .e.boss{border-left:3px solid #f2c48d}
+.v4 .e .k{font:10px 'Trebuchet MS',sans-serif;letter-spacing:.16em;color:#8fb8ac;text-transform:uppercase}
+.v4 .e .h{font-size:31px;line-height:1.05}.v4 .e .h s{text-decoration:none;font-size:13px;color:#f2c48d;font-style:italic}
+.v4 .e .bar{height:2px;background:#1f5553;margin-top:4px}.v4 .e .bar u{display:block;height:2px;background:#f2c48d}
+.v4 .bd{gap:2px;margin:20px 0 0;background:#d9e4d6;padding:2px}
+.v4 .c{background:#164b49}
+.v4 .c.x{background:#0b2b2a}
+.v4 .t{background:var(--k);border-radius:3px 3px 16px 3px;align-items:flex-end;justify-content:flex-start;padding:4px 7px}
+.v4 .t .n{font-size:36px;line-height:1;color:#fffdf6}
+.v4 .t .d{position:absolute;right:7px;top:5px;font:10px 'Trebuchet MS',sans-serif;letter-spacing:.06em;color:rgba(255,253,246,.8)}
+.v4 .r{--k:#c8553d}.v4 .b{--k:#3d6fa8}.v4 .g{--k:#5f9e6e}.v4 .y{--k:#d89b3a}
+.v4 .sand{position:absolute;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:#f2c48d;box-shadow:0 0 0 2px #103b3a}
+.v4 .hand{gap:7px;margin-top:auto;padding:10px 0 0}
+.v4 .hand .t{width:60px}
+.v4 .act{margin-top:14px;gap:16px;align-items:center}
+.v4 .act a{flex:1;background:#f2c48d;color:#103b3a;border-radius:3px 3px 22px 3px;padding:12px 16px;font-size:19px;font-style:italic}
+.v4 .act a i{font-style:normal;float:right}
+.v4 .act em{font-size:14px;color:#8fb8ac}
+
+/* ============ 5 SWISS RAIL ============ */
+.v5{background:#fafaf7;color:#111;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;padding:0;display:grid;grid-template-columns:30px 1fr;grid-template-rows:auto}
+.v5 .side{grid-row:1/99;background:#e63312;color:#fafaf7;writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;padding:14px 0;display:flex;justify-content:space-between;align-items:center}
+.v5 .main{padding:14px 14px 14px 12px;display:flex;flex-direction:column;height:640px}
+.v5 .top b{font-size:64px;line-height:.78;font-weight:700;letter-spacing:-.06em}
+.v5 .top span{font-size:11px;line-height:1.25;font-weight:400;max-width:12ch}
+.v5 .en{gap:0;margin:14px 0 0}
+.v5 .e{padding:4px 6px 6px 0;border-top:6px solid #111}
+.v5 .e.boss{border-top-color:#e63312}
+.v5 .e .k{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.v5 .e .h{font-size:30px;font-weight:300;letter-spacing:-.04em;line-height:1}.v5 .e .h s{text-decoration:none;font-size:11px;font-weight:700;margin-left:2px}
+.v5 .e .bar{display:none}
+.v5 .bd{gap:1px;margin:16px 0 0;background:#111;border:1px solid #111}
+.v5 .c{background:#fafaf7}
+.v5 .c.x{background:#fafaf7 linear-gradient(to top right,transparent calc(50% - .5px),#111 50%,transparent calc(50% + .5px))}
+.v5 .t{background:var(--k);align-items:flex-start;justify-content:flex-end;padding:3px 5px}
+.v5 .t .n{font-size:44px;font-weight:700;letter-spacing:-.06em;line-height:.9;color:#fafaf7}
+.v5 .t .d{position:absolute;left:5px;bottom:4px;font-size:9px;font-weight:700;letter-spacing:.12em;color:#fafaf7}
+.v5 .r{--k:#e63312}.v5 .b{--k:#1a3fa0}.v5 .g{--k:#007a4d}.v5 .y{--k:#f2b705}
+.v5 .sand{position:absolute;top:0;bottom:0;width:4px;background:#f2b705}
+.v5 .hand{gap:1px;margin-top:auto;background:#111;border:1px solid #111;width:max-content}
+.v5 .hand .t{width:62px}
+.v5 .act{margin-top:12px;border-top:6px solid #111;padding-top:8px;justify-content:space-between;align-items:baseline}
+.v5 .act a{font-size:30px;font-weight:700;letter-spacing:-.04em}
+.v5 .act a i{font-style:normal;color:#e63312;margin-left:8px}
+.v5 .act em{font-style:normal;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+
+/* ============ 6 LACQUER ============ */
+.v6{background:#151213;color:#e9dcc0;font-family:Didot,'Bodoni 72','Bodoni MT',Georgia,serif;padding:20px 18px 16px}
+.v6 .top{flex-direction:column;align-items:center;gap:2px;text-align:center}
+.v6 .top b{font-size:12px;font-weight:400;letter-spacing:.5em;text-transform:uppercase;color:#b8954f}
+.v6 .top span{font-size:26px;font-style:italic}
+.v6 .top i{font-style:normal;font-size:11px;letter-spacing:.2em;color:#7d6c55}
+.v6 .en{gap:14px;margin:16px 0 0;text-align:center}
+.v6 .e .k{font-size:10px;letter-spacing:.3em;color:#7d6c55;text-transform:uppercase}
+.v6 .e .h{font-size:30px;line-height:1.1}.v6 .e .h s{display:block;text-decoration:none;font-size:11px;letter-spacing:.2em;color:#c4553f}
+.v6 .e.boss .h{color:#d8b56a}
+.v6 .e .bar{height:1px;background:#3a3230;margin-top:6px}.v6 .e .bar u{display:block;height:1px;background:#d8b56a}
+.v6 .bd{gap:9px;margin:20px 6px 0}
+.v6 .c{outline:1px solid #3a3230;outline-offset:-1px}
+.v6 .c.x{outline:0;background:radial-gradient(circle,#3a3230 1.2px,transparent 1.6px) center/100% 100% no-repeat}
+.v6 .t{background:#1f1a1a;outline:1px solid var(--k);outline-offset:-4px;box-shadow:inset 0 0 0 1px #2b2424;align-items:center;justify-content:center;border-radius:1px}
+.v6 .t::before{content:'';position:absolute;left:50%;top:-4px;width:8px;height:8px;background:var(--k);transform:translateX(-50%) rotate(45deg)}
+.v6 .t .n{font-size:34px;color:var(--k)}
+.v6 .t .d{position:absolute;bottom:7px;font-size:9px;letter-spacing:.24em;color:#7d6c55}
+.v6 .r{--k:#d0654f}.v6 .b{--k:#7e9fce}.v6 .g{--k:#8fb07c}.v6 .y{--k:#d8b56a}
+.v6 .sand{position:absolute;top:50%;width:9px;height:1px;background:#d8b56a}
+.v6 .hand{gap:9px;margin-top:auto;justify-content:center}
+.v6 .hand .t{width:56px}
+.v6 .act{margin-top:16px;flex-direction:column;align-items:center;gap:6px}
+.v6 .act a{border-top:1px solid #b8954f;border-bottom:1px solid #b8954f;padding:8px 40px;font-size:15px;letter-spacing:.4em;text-transform:uppercase;color:#d8b56a}
+.v6 .act a i{font-style:italic;letter-spacing:0;font-size:20px;margin-left:6px;text-transform:none}
+.v6 .act em{font-size:11px;letter-spacing:.2em;color:#7d6c55;font-style:normal}
+</style></head><body>
+<div class="intro">
+<h1>Tilewhist — six directions for the interface</h1>
+<p>The same fight is drawn six ways: three enemies (the middle one is the boss), a 3×3 board with one blocked cell and a red sandwich, three tiles in hand, and Attack. These are look-and-feel studies only; the real screen would keep every feature it has today.</p>
+<p>The research flagged these AI-default habits, so every concept avoids them:</p>
+<ul>
+<li>the Inter font everywhere, and font sizes taken from the default scale;</li>
+<li>the same 16–24px rounded corner on everything, with cards nested in cards;</li>
+<li>purple-to-blue gradients, with the brand colour on every element;</li>
+<li>everything centred, or three equal cards in a row;</li>
+<li>shadow, border and tint used on the same card;</li>
+<li>a stock icon inside a coloured circle;</li>
+<li>dark mode made by inverting the light colours.</li>
+</ul>
+</div>
+<div class="wall" id="wall"></div>
+<script>
+var V=[
+ ['v1','1 · Ledger','paper #efe7d4 · ink · Georgia numerals · 0px corners, 3px offset shadow','An accounts-book look. Enemies sit in a ruled table; the boss is the inked column. Tiles are cream cards with a hard offset shadow in their colour, and the number sits low-left like a handwritten entry. Calm and bookish, with numbers that are very easy to read.'],
+ ['v2','2 · Kiln','charcoal clay · glazed tiles · chamfered corners (clip-path) · tracked caps','Fired ceramic. Tiles are glazed with a soft highlight and have cut corners instead of rounding. The board sits in a grout tray. Warm earth palette: cobalt, ochre, celadon and terracotta. It feels tactile and close to a real tile game.'],
+ ['v3','3 · Riso','two-ink print · multiply overprint · one rounded corner · condensed caps','Risograph zine. Inks overprint (multiply), and each tile has a slightly off-register outline. Only the top-right corner is rounded. The board is tilted a little, and the stage title is a big condensed headline. Loud and playful, but still disciplined.'],
+ ['v4','4 · Tidepool','deep sea green · grout lines · asymmetric 3/16px corners · Palatino italic','Mosaic tiles set in light grout on deep sea green. Every tile and button has one heavy corner (bottom-right) and three crisp ones. The stage badge is a pebble shape. Sandwiches are small amber pearls. Elegant and quiet.'],
+ ['v5','5 · Swiss rail','white · one red · 1px grid rules · no corners · vertical side rail','A Swiss poster. A red rail runs down the left with the stage and HP turned sideways. Thick black rules mark enemies, and the board is a hairline grid. Numbers are huge and bold, labels tiny and tracked. Strict and striking.'],
+ ['v6','6 · Lacquer','black lacquer · gold hairlines · Didot · inset outlines, diamond pip','Black lacquer box with gold hairline details. Tiles are dark with a coloured inner line and a small diamond on top; numbers are in their colour in a high-contrast serif. Centred and symmetrical on purpose, like a jewellery case. The dark mode is designed for itself, not an inverted light theme.']
+];
+function tile(c,n,d,extra){return '<div class="t '+c+'"'+(extra||'')+'><span class="n">'+n+'</span><span class="d">'+d+'</span></div>'}
+function phone(v){
+ var side=v[0]==='v5';
+ var top='<div class="top">'+(v[0]==='v4'?'<b>3</b><span><small>Saltwell</small>Windy Dunes</span><i>♥ 32</i>':
+   v[0]==='v6'?'<b>Windy Dunes</b><span>Stage three</span><i>HEART 32 / 32</i>':
+   v[0]==='v5'?'<b>3/4</b><span>Windy Dunes. Boss in one stage.</span>':
+   v[0]==='v3'?'<b>Windy Dunes</b><span>STAGE 3 / 4 · HP 32</span><i>RALLY READY</i>':
+   v[0]==='v2'?'<b>Stage 3</b><span>Windy Dunes</span><i>♥ 32</i>':
+   '<b>3</b><span>Windy Dunes<br>stage of four</span><i>HP 32/32</i>')+'</div>';
+ var en='<div class="en">'+[['Foe',97,5,72],['Boss',519,14,40],['Foe',89,5,90]].map(function(e,i){return '<div class="e'+(i===1?' boss':'')+'"><div class="k">'+e[0]+'</div><div class="h">'+e[1]+'<s>⚔'+e[2]+'</s></div><div class="bar"><u style="width:'+e[3]+'%"></u></div></div>'}).join('')+'</div>';
+ var bd='<div class="bd">'+tile('r',4,'↑')+'<div class="c"></div>'+tile('b','×2','col')
+   +tile('r',6,'↑',' style="position:relative"')+tile('g',5,'↑')+tile('r',3,'↑')
+   +'<div class="c x"></div>'+tile('y','+2','row')+'<div class="c"></div></div>';
+ var hand='<div class="hand">'+tile('b',7,'↑')+tile('g','=',"copy")+tile('r',2,'↔')+'</div>';
+ var act='<div class="act"><a>Attack <i>142</i></a><em>Clear</em></div>';
+ var inner=top+en+bd+hand+act;
+ if(side) return '<div class="ph v5"><div class="side"><span>Windy Dunes</span><span>HP 32</span></div><div class="main">'+inner+'</div></div>';
+ return '<div class="ph '+v[0]+'">'+inner+'</div>';
+}
+document.getElementById('wall').innerHTML=V.map(function(v){return '<div class="col"><h2>'+v[1]+'</h2><div class="tag">'+v[2]+'</div>'+phone(v)+'<div class="notes">'+v[3]+'</div></div>'}).join('');
+/* sandwich markers between the middle-row reds (cells 3,5 around green? no: show between tile 3 and 5 in row 2 -> mark on cell 4 edges) */
+document.querySelectorAll('.ph').forEach(function(p){var row=p.querySelectorAll('.bd > *');var mid=row[4];if(!mid)return;['left','right'].forEach(function(s){var m=document.createElement('i');m.className='sand';m.style[s]='-'+(p.classList.contains('v5')?2:p.classList.contains('v4')?7:8)+'px';mid.appendChild(m)});});
+</script>
+</body></html>
