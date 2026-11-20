@@ -80,7 +80,6 @@ Four beta-tester agents tested the game: UI and touch, balance and progression, 
   - The result, reward and stage-cleared cards sit at the top of a mostly blank page.
   - The puzzle "Solved" screen hides the solved board.
   - Selecting a map stage at 360x640 makes the info card grow, which clips the bottom of the map.
-- **How to play** is very long, and its only Close button is at the bottom; it does not stay on screen.
 - **Slot popup at 360x640.** The filter chips take half of it, so only one row of tiles is visible. A vertical swipe may also reorder the list (unconfirmed).
 - **Small glitches.**
   - The Reset save confirm label wraps onto two lines.

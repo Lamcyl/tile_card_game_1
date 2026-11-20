@@ -2054,7 +2054,7 @@ function heroPanelHTML() {
   var h = '<h2>' + HWS + '</h2><div class="panel"><div class="ctext" style="margin-bottom:4px">One ' + HWl + ' per run. Its ability is a button on the fight screen, once per fight. ' + HWS + ' unlock as you clear map stages.</div>', n = clearedCount();
   HEROES.forEach(function (H) {
     var own = !!store.heroes[H.id], sel = store.hero === H.id, need = CONFIG.heroUnlock[H.id];
-    h += '<div class="herorow' + (sel ? ' on' : '') + (own ? '' : ' lock') + hd(own && !store.ack['H' + H.id]) + '">' + rdot(own && !store.ack['H' + H.id]) + '<div class="hi"><b>' + H.ab + '</b><small>' + H.line + '</small>' + (own ? '' : '<small class="req">' + (need === 'puzzle' ? 'Joins you in the ' + HWl + ' lesson on the map' : 'Clear ' + need + ' stage' + (need === 1 ? '' : 's') + ' (' + Math.min(n, need) + ' / ' + need + ')') + '</small>') + '</div>' +
+    h += '<div class="herorow' + (sel ? ' on' : '') + (own ? '' : ' lock') + hd(own && !store.ack['H' + H.id]) + '">' + rdot(own && !store.ack['H' + H.id]) + '<div class="hi"><b>' + H.ab + '</b><small>' + H.line + '</small>' + (own ? '' : '<small class="req">' + (need === 'puzzle' ? 'Joins you in the ' + HWl + ' tutorial on the map' : 'Clear ' + need + ' stage' + (need === 1 ? '' : 's') + ' (' + Math.min(n, need) + ' / ' + need + ')') + '</small>') + '</div>' +
       (own ? (sel ? '<span class="lvl" style="color:var(--ok)">Chosen</span>' : '<button class="btn sm" data-act="hero" data-h="' + H.id + '">Choose</button>') : '<span class="lvl">Locked</span>') + '</div>';
   });
   return h + '</div>';
@@ -2062,7 +2062,7 @@ function heroPanelHTML() {
 function todayInfo() { var d = new Date(), y = d.getFullYear(), m = d.getMonth() + 1, dd = d.getDate(); return { key: y + '-' + m + '-' + dd, seed: y * 10000 + m * 100 + dd, label: y + '-' + ('0' + m).slice(-2) + '-' + ('0' + dd).slice(-2) }; }
 /* a puzzle-page puzzle opens once its lesson is solved AND the puzzle before it in the list is solved; returns the reason it is locked, or '' */
 function puzLock(p) {
-  if (!store.puzDone[p.need]) return 'Learn ' + PUZ_BY_ID[p.need].name + ' on the map first';
+  if (!store.puzDone[p.need]) return 'Play the ' + PUZ_BY_ID[p.need].name + ' tutorial on the map first';
   var list = PUZZLES.filter(function (q) { return q.need; }), i = list.indexOf(p);
   if (i > 0 && !store.puzDone[list[i - 1].id]) return 'Solve ' + list[i - 1].name + ' first';
   return '';
@@ -2101,7 +2101,7 @@ function puzzleWon() {
     h += '<p class="gold">+' + (r.coins || 0) + ' coins' + (tl ? ' and a colourless tile' : '') + '</p>' + (r.shards ? '<p class="gold">' + shardLine(r.shards.u, r.shards.n) + '</p>' : '') + (tl ? '<div class="inv">' + tileHTML(invTile(tl), { ts: 52 }) + '</div>' : '');
   } else h += '<p class="ctext">Already solved: replays give no reward.</p>';
   var lt = !S.puz.daily && lessonTier(d.id), nxt = '';
-  if (lt) nxt = !lessonsDone(+lt) ? '<button class="btn main" data-act="nextlesson" data-t="' + lt + '">Next lesson</button>' : (store.sel && store.sel.slice(0, 2) === 'L.' ? '<button class="btn main" data-act="lessonplay" data-key="' + store.sel.slice(2) + '.0">Play ' + areaInfo(store.sel.slice(2)).name + ', stage 1</button>' : '');
+  if (lt) nxt = !lessonsDone(+lt) ? '<button class="btn main" data-act="nextlesson" data-t="' + lt + '">Next tutorial</button>' : (store.sel && store.sel.slice(0, 2) === 'L.' ? '<button class="btn main" data-act="lessonplay" data-key="' + store.sel.slice(2) + '.0">Play ' + areaInfo(store.sel.slice(2)).name + ', stage 1</button>' : '');
   h += '<div class="btns"><button class="btn" data-act="puzretry">Play again</button>' + (nxt ? '<button class="btn" data-act="home">Map</button>' + nxt : '<button class="btn main" data-act="home">Back to the map</button>') + '</div></div>';
   S.run.over = 'puzzle'; S.phase = 'over'; $('#result').innerHTML = h; show('result');
 }
@@ -2211,7 +2211,7 @@ function mapSVG(u, sel) {
       var lk = 'L.' + id, ls = stageState(lk, store.cleared, all), lsel = lk === sel, cx0 = (A.x + A.w / 2) * u, cy0 = (A.y + A.h - minY) * u, lc = 'var(--' + A.col + ')';
       var T = u - 14, tx = cx0 - T / 2, ty = cy0 + (u - T) / 2, stub = 'fill:' + (ls === 'h' ? 'var(--mdim)' : lc) + ';opacity:' + (ls === 'c' ? .7 : .45);
       nodes += '<rect x="' + (cx0 - 3) + '" y="' + (cy0 - 2) + '" width="6" height="' + (ty - cy0 + 4) + '" rx="3" style="' + stub + '"/>' + (A.from.length ? '<rect x="' + (cx0 - 3) + '" y="' + (ty + T - 2) + '" width="6" height="' + (cy0 + u - ty - T + 4) + '" rx="3" style="' + stub + '"/>' : '') +
-        stagePiece(lk, [[0, 0]], T, tx, ty, ls, A.col, lsel, false, 'Lesson');
+        stagePiece(lk, [[0, 0]], T, tx, ty, ls, A.col, lsel, false, 'Tutorial');
     }
     var col = A.col, X = A.x * u + 6, Y = (A.y - minY) * u + 6, PW = A.w * u - 12, PH = A.h * u - 12, here = st && st.area === id;
     if (far[id]) { s += '<rect x="' + (X + 1) + '" y="' + (Y + 1) + '" width="' + (PW - 2) + '" height="' + (PH - 2) + '" rx="12" style="fill:var(--' + col + ');fill-opacity:.035;stroke:var(--mdim);stroke-opacity:.5;stroke-width:1.4;stroke-dasharray:2 6;stroke-linecap:round"/>'; return; }
@@ -2230,10 +2230,10 @@ function mapSVG(u, sel) {
 var PLAYI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5l13 7.5-13 7.5z"/></svg>';
 function stageCardHTML(c, st) {
   if (c.node) {
-    var lt = CONFIG.lessons[c.lesson], nx = nextLesson(c.lesson), PZ = PUZ_BY_ID[nx], pl = st === 'c' ? ['c', 'Learned'] : st === 'a' ? ['a', 'Lesson ' + (lt.indexOf(nx) + 1) + ' of ' + lt.length] : ['', 'Locked'];
-    return '<div class="hm-card c-' + c.col + '"><div class="hm-ci"><div class="hm-ov"><i></i>Lesson &middot; ' + c.name + '</div>' +
+    var lt = CONFIG.lessons[c.lesson], nx = nextLesson(c.lesson), PZ = PUZ_BY_ID[nx], pl = st === 'c' ? ['c', 'Played'] : st === 'a' ? ['a', 'Tutorial ' + (lt.indexOf(nx) + 1) + ' of ' + lt.length] : ['', 'Locked'];
+    return '<div class="hm-card c-' + c.col + '"><div class="hm-ci"><div class="hm-ov"><i></i>Tutorial &middot; ' + c.name + '</div>' +
       '<div class="hm-ct"><b>' + PZ.name + '</b><span class="hm-pill ' + pl[0] + '">' + pl[1] + '</span></div><div class="hm-need">' + PZ.teach + '</div></div>' +
-      '<button class="hm-play" data-act="play"' + (st === 'h' || store.run ? ' disabled' : '') + '>' + PLAYI + (st === 'c' ? 'Replay' : st === 'h' ? 'Locked' : 'Learn') + '</button></div>';
+      '<button class="hm-play" data-act="play"' + (st === 'h' || store.run ? ' disabled' : '') + '>' + PLAYI + (st === 'c' ? 'Replay' : st === 'h' ? 'Locked' : 'Play') + '</button></div>';
   }
   var A = areaInfo(c.area), M = mapData(), run = store.run, i, bars = '', fc = CONFIG.firstClear.coins[c.tier - 1];
   for (i = 1; i <= 10; i++) bars += '<i' + (i <= c.tier ? ' class="on"' : '') + '></i>';
@@ -2250,8 +2250,8 @@ function stageCardHTML(c, st) {
     (need ? '<div class="hm-need">' + need + '</div>' : '') +
     (run ? '<button class="btn sm hm-bank" data-act="bank">Bank and leave the run</button>' : '') + '</div>';
   var lt = c.lesson ? CONFIG.lessons[c.lesson] : null, nx = lt ? nextLesson(c.lesson) : null, les = nx && !run && st !== 'h' ? PUZ_BY_ID[nx] : null;
-  if (les) h = h.replace(/<div class="hm-chips">[\s\S]*?<\/span><\/div>/, '<div class="hm-need"><b>Lesson ' + (lt.indexOf(nx) + 1) + ' of ' + lt.length + ': ' + les.name + '.</b> ' + les.teach + '</div>');
-  var lab = run ? 'Continue' : les ? 'Lesson' : st === 'c' ? 'Replay' : st === 'a' ? 'Play' : 'Locked';
+  if (les) h = h.replace(/<div class="hm-chips">[\s\S]*?<\/span><\/div>/, '<div class="hm-need"><b>Tutorial ' + (lt.indexOf(nx) + 1) + ' of ' + lt.length + ': ' + les.name + '.</b> ' + les.teach + '</div>');
+  var lab = run ? 'Continue' : les ? 'Play' : st === 'c' ? 'Replay' : st === 'a' ? 'Play' : 'Locked';
   return h + '<button class="hm-play" data-act="' + (run ? 'resume' : 'play') + '"' + (!run && (st === 'h' || st === 'l') ? ' disabled' : '') + '>' + PLAYI + lab + '</button></div>';
 }
 function renderHome() {
@@ -2554,7 +2554,7 @@ function offerHTML(o, i) {
 function runTitle(run) { var SC = stageCfg(run); return run.mode === 'stage' ? (run.cell ? run.cell.name + ' · stage ' + (run.cell.idx + 1) + ' of ' + run.cell.n : 'Stage ' + run.stage + ': ' + SC.name) : 'Endless: ' + SC.name; }
 function renderMap() {
   var run = S.run, SC = stageCfg(run), total = run.mode === 'stage' ? run.len : CONFIG.endlessEvery;
-  var h = '<header class="top"><button class="hbtn" data-act="leave" aria-label="Leave run"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="ttl">' + runTitle(run) + '</div><button class="hbtn" data-act="help" aria-label="How to play"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4.500 2.600c-1 .6-1.500 1.200-1.500 2.400M12 18v.5"/></svg></button></header>';
+  var h = '<header class="top"><button class="hbtn" data-act="leave" aria-label="Leave run"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="ttl">' + runTitle(run) + '</div></header>';
   h += '<div class="row" style="margin-bottom:6px"><span class="stat">You</span>' + hpBar(run.hp, run.maxHp) + '<button class="btn sm" data-act="bag">Bag ' + run.bag.length + '</button></div>';
   h += '<div class="row stat" style="margin-bottom:4px;justify-content:space-between"><span>' + SC.cols + 'x' + SC.rows + ' board</span>' + (run.mode === 'endless' ? '<span>Depth ' + run.depth + '</span>' : '') + '<span>Loot ' + run.coins + ' coins' + (run.loot.length ? ', ' + run.loot.length + ' tile' + (run.loot.length > 1 ? 's' : '') : '') + '</span></div>';
   if (run.hero || (run.relics || []).length) h += '<div class="chips" style="margin-bottom:6px">' + (run.hero ? '<button class="ri hero" data-card="hr:' + run.hero + '" aria-label="' + HW + ': ' + HERO_BY_ID[run.hero].ab + '">' + heroIcon(run.hero) + '</button>' : '') + (run.relics || []).map(function (id) { return '<button class="ri relic" data-card="rl:' + id + '" aria-label="Relic: ' + RELIC_BY_ID[id].name + '"><svg viewBox="0 0 24 24">' + (RELIC_ICON[id] || '') + '</svg></button>'; }).join('') + '</div>';
@@ -2633,7 +2633,7 @@ function renderFight() {
   var f = $('#fight'), cs = cellSize(cols, R); f.style.setProperty('--hh', HH() + 'px'); f.style.setProperty('--cs', cs + 'px'); f.style.setProperty('--n', cols); f.classList.toggle('narrow', cs < 60);
   var bt = boardTiles(), res = evaluate(F, bt, eo({ detail: true })), placed = res.G.length;
   var ttl = S.puz ? S.puz.def.name : runTitle(run), sub = S.puz ? 'one attack' : (fs.kind === 'boss' ? (fs.mid ? 'Mid-boss' : 'Boss') : fs.kind === 'elite' ? 'Elite' : 'Fight ' + (run.fights + 1)) + ' · attack ' + (fs.turn + 1);
-  $('#fhead').innerHTML = '<button class="hbtn" data-act="fmenu" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="ttl">' + ttl + '<small>' + sub + '</small></div>' + (fs.mom > 0 ? '<span class="mombadge" data-card="mom">Momentum +' + fs.mom + '</span>' : '<button class="hbtn" data-act="help" aria-label="How to play"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4.500 2.600c-1 .6-1.500 1.200-1.500 2.400M12 18v.5"/></svg></button>');
+  $('#fhead').innerHTML = '<button class="hbtn" data-act="fmenu" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="ttl">' + ttl + '<small>' + sub + '</small></div>' + (fs.mom > 0 ? '<span class="mombadge" data-card="mom">Momentum +' + fs.mom + '</span>' : '');
   var h = '';
   F.enemies.forEach(function (e, ek) {
     var r = res.en[ek], gone = e.gone, hpn = e.dead ? 0 : e.hp, pct = (e.dead || gone) ? 0 : Math.min(100, r.dmg / Math.max(1, e.hp) * 100), txt = r.dmg + ' / ' + e.hp;
@@ -3265,25 +3265,6 @@ document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 /* ---------- modals ---------- */
 function openModal(html) { var was = $('#modal').hidden; $('#modal').innerHTML = html; $('#modal').hidden = false; if ($('#dim').hidden) retrig($('#dim'), 'pop', 260); $('#dim').hidden = false; if (was) retrig($('#modal'), 'pop', 260); }
 function closeModal() { ghostOut($('#modal')); $('#modal').hidden = true; if ($('#card').hidden) $('#dim').hidden = true; if (S.screen === 'home') renderHome(); else if (S.screen === 'team') renderTeam(); }
-function helpHTML() {
-  return '<h3>How to play</h3><ol>' +
-    '<li>Enemies sit above the columns with <b>HP</b> and an <b>attack</b>. Place tiles, press <b>Attack</b>. Each enemy takes the total of its column(s). HP stays between attacks; survivors hit your hero. Only hero HP ends a run.</li>' +
-    '<li>Tap a tile, then a cell, or drag it. Tap a placed tile to take it back. Hold anything for a card. Glowing cells would finish an enemy.</li>' +
-    '<li>A tile\'s big number is its <b>current value</b>; a small chip in its top right corner shows the base number when it differs. The little <b>map in the top left</b> is its reach: its own cells are outlined, the cells it reaches are lit. <b>Solid</b> tiles attack the lit cells in front of them (the columns they hit). <b>White tiles with a solid edge</b> (+N) add their number to the attacking tiles on the lit cells; a lit row or column means the whole line. <b>Dashed white tiles</b> (×N) multiply instead. A <b>copy</b> tile (ECHO) shows its own attack lane lit and the cell it copies as a ring. Big tiles cover several cells and are one piece. While you hold a tile the board shows what it would reach.</li>' +
-    '<li><b>Sandwich:</b> a tile between two tiles of one other colour is doubled, and each further row or column line it is squeezed on adds x1 more (a single cell tile: x3 at most; a wide tile can reach x4 or more); multipliers add to the same total. Gold <b>clamps</b> sit in the gaps at both ends of each squeezed line, and a <b>×2 / ×3 / ×4</b> chip shows the total on the tile. Two-colour tiles (split in two colours) count as both.</li>' +
-    '<li>Your whole bag is ready for every fight. Tiles you attack with rest until that fight ends.</li>' +
-    '<li>After each win choose one of three: a new tile, an upgrade (+2 or a second colour) or a heal. Forges, rests and treasures sit on the path. Every stage has a boss with one visible trick.</li>' +
-    '<li>Runners leave after your first attack: kill them for a bonus tile. Guards need 2 different tiles to hit them.</li>' +
-    '<li><b>The map is your home screen.</b> The world is one tiling cut into <b>areas</b> (plates). Each area has 3 or 4 <b>stages</b> (the pieces) and every stage of an area has the same difficulty and run length. Play the stages of an area in order. Clear ' + CONFIG.map.openNeed + ' stages of an area (all of them in a 3-stage area) and the areas next to it open. The further from the start, the harder the difficulty, the longer the run (' + CONFIG.map.areas[0].len + ' steps up to ' + CONFIG.map.areas[CONFIG.map.areas.length - 1].len + ', with a mid-boss from ' + CONFIG.map.midFrom + ') and the better the tiles. Each region favours one colour. Tap a piece for its card, then Play. Defeat keeps half the loot. Endless opens after you finish ' + CONFIG.map.endlessAreas + ' areas.</li>' +
-    '<li><b>Units:</b> each colour has a unit with 3 base tiles, 3 or 4 skills (shown as little icons on its card and when you hold a colour tab in a fight) and slots. Locked units unlock with their own unit shards (Common ' + CONFIG.shards.need[0] + ', Rare ' + CONFIG.shards.need[1] + ', Epic ' + CONFIG.shards.need[2] + '): clearing a stage for the first time gives ' + CONFIG.shards.first + ' shards of a unit featured in its area (replays ' + CONFIG.shards.replay + '), elite fights drop some, and puzzles reward them. Unit levels (up to ' + CONFIG.lvlMax + ') cost coins: they raise the numbers of the 3 base tiles and unlock skills. Coins also open unit slots (every unit starts with one).</li>' +
-    '<li><b>Keep one:</b> after every boss (and mid-boss) you may keep one coloured tile that was new in this run. Upgrades are not kept. Kept tiles go to Tiles, Collected; put them into a unit\'s slots (tap an open slot on its card, then drag; unlock more slots with coins) and they join your bag at the start of every run. Only tile types you do not own yet can be kept (the collection holds one of each). Every coloured tile has a rarity of 1 to 5 stars (from its encyclopedia score), and each difficulty only drops tiles up to a star cap. Colourless tiles level up instead: three identical ones merge into one of the next level (Lv2, Lv3, ...).</li>' +
-    '<li><b>Rainbow tile:</b> a rainbow tile counts as every colour (as bread it matches any colour; it is doubled between two tiles that share a colour, but not between two rainbow tiles). Rare boss drop on far stages; at most ' + CONFIG.rainbow.maxTeam + ' in a team.</li>' +
-    '<li><b>Colourless tiles</b> can never be part of a sandwich, so their numbers are higher.</li>' +
-    '<li><b>' + HW + ':</b> new ' + HWSl + ' unlock as you clear map stages. Pick one ' + HWl + ' before a run. Its ability is one button on the fight screen, once per fight. Tap-to-aim abilities show a Cancel; everything shows in the live totals before you attack.</li>' +
-    '<li><b>Relics:</b> after an elite you choose one of three relics (after bosses too in Endless). At most 3 per run, listed under the board.</li>' +
-    '<li><b>Multipliers:</b> multiplier tiles and x2 bonus cells multiply without a limit; Sandwich multiplies on top.</li>' +
-    '<li><b>Puzzles:</b> hand-made one-attack boards on the Home list, plus a daily one.</li></ol><div class="btnrow"><button class="btn main" data-act="close">Got it</button></div>';
-}
 /* ---------- encyclopedia: every tile the rules can express (data ENCYC from tools/tile-run-balance/encyclopedia.js) ---------- */
 var ENCS = { kind: 'all', stat: '', cells: 0, sort: 'score', n: 40, sel: -1, lay: 'tot' };
 var ENC_KIND = { all: ['All', null], a: ['Attacks', 'a'], p: ['Boosts', 'p'], x: ['Multipliers', 'x'], e: ['Copies', 'e'] };
@@ -3442,7 +3423,7 @@ function openPen() {
   el.hidden = false; document.body.style.overflow = 'hidden'; penRender();
 }
 function optionsHTML() {
-  return '<h3>Guide</h3><button class="btn main" style="width:100%;margin-bottom:8px" data-act="pen">Encyclopedia · ' + penCount().n + ' of ' + penCount().m + ' collected</button><div class="btnrow"><button class="btn sm" data-act="help">How to play</button><button class="btn sm" data-act="tutlist">Tutorials</button></div>' +
+  return '<h3>Guide</h3><button class="btn main" style="width:100%;margin-bottom:8px" data-act="pen">Encyclopedia · ' + penCount().n + ' of ' + penCount().m + ' collected</button><div class="btnrow"><button class="btn sm" data-act="tutlist">Tips</button></div>' +
     '<div class="set"><label>Show tutorial popups</label><input type="checkbox" id="settut"' + (store.set.tut !== false ? ' checked' : '') + '></div>' +
     '<div class="btnrow"><button class="btn sm" data-act="reset">Reset save</button><button class="btn main sm" data-act="close">Close</button></div>';
 }
@@ -3452,7 +3433,7 @@ function settingsHTML() {
   h += '<div class="set"><label>Colourless levels (three identical tiles merge)</label><input type="checkbox" id="setstars"' + (store.set.stars ? ' checked' : '') + '></div>';
   h += '<div class="set"><label>Show tutorial popups</label><input type="checkbox" id="settut"' + (store.set.tut !== false ? ' checked' : '') + '></div>';
   h += '<div class="set"><label>Touch log (shows the last inputs under the fight screen)</label><input type="checkbox" id="settlog"' + (store.set.tlog ? ' checked' : '') + '></div>';
-  h += '<div class="btnrow"><button class="btn sm" data-act="help">How to play</button><button class="btn sm" data-act="tutlist">Tutorials</button><button class="btn sm" data-act="enc">Encyclopedia (advanced)</button></div><div class="muted" style="font-size:12px">Test helpers</div><div class="btnrow">' +
+  h += '<div class="btnrow"><button class="btn sm" data-act="tutlist">Tips</button><button class="btn sm" data-act="enc">Encyclopedia (advanced)</button></div><div class="muted" style="font-size:12px">Test helpers</div><div class="btnrow">' +
     '<button class="btn sm" data-act="coins">+100 coins</button><button class="btn sm" data-act="unlockall">Own all units</button><button class="btn sm" data-act="shards">+5 shards each</button><button class="btn sm" data-act="slotsall">Open all slots</button>' +
     '<button class="btn sm" data-act="cttiles">+4 coloured tiles</button><button class="btn sm" data-act="rbtile">+1 rainbow tile</button><button class="btn sm" data-act="allheroes">Unlock all ' + HWSl + '</button><button class="btn sm" data-act="allstages">' + (store.allStages ? 'Map: all revealed' : 'Reveal whole map') + '</button>' +
     '<button class="btn sm" data-act="tiles">+3 colourless tiles</button><button class="btn sm" data-act="epic">+1 epic colourless</button><button class="btn sm" data-act="dupe">Duplicate a tile</button><button class="btn sm" data-act="clearrun">Abandon run</button></div>';
@@ -3571,7 +3552,6 @@ document.addEventListener('click', function (e) {
     case 'lessonplay': closeModal(); S.puz = null; S.run = null; store.sel = el.dataset.key; save(); show('home'); playCell(el.dataset.key); break;
     case 'home': closeModal(); if (S.puz) { S.puz = null; S.run = null; } show('home'); break;
     case 'finish': finishStage(); break;
-    case 'help': openModal(helpHTML()); break;
     case 'settings': if (DEV) openModal(settingsHTML()); break;
     case 'options': openModal(optionsHTML()); break;
     case 'bag': openModal(bagHTML()); break;
@@ -3582,7 +3562,7 @@ document.addEventListener('click', function (e) {
     case 'leave': openModal('<h3>Leave the run?</h3><p style="font-size:14px;color:var(--ink)">You bank everything you collected so far (no stage clear).</p><div class="btnrow"><button class="btn main" data-act="bank">Bank and leave</button><button class="btn" data-act="close">Keep playing</button></div>'); break;
     case 'fmenu': if (S.phase === 'anim') break;   /* never bank or leave while the attack animation is still resolving */
       if (S.puz) { openModal('<h3>Puzzle</h3><div class="btnrow"><button class="btn" data-act="puzretry">Retry</button><button class="btn" data-act="home">Leave puzzle</button><button class="btn main" data-act="close">Back to puzzle</button></div>'); break; }
-      openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="bag">Bag</button><button class="btn" data-act="help">How to play</button><button class="btn" data-act="bank">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
+      openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="bag">Bag</button><button class="btn" data-act="bank">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
     case 'fatk': attack(); break;
     case 'fclear': clearBoard(); break;
     case 'unlockall': UNITS.forEach(function (u) { store.units[u.id].u = true; }); save(); $('#modal').innerHTML = settingsHTML(); break;
@@ -3882,7 +3862,7 @@ document.addEventListener('click', function (e) {
   if (o) { e.stopPropagation(); tutOpen(o.dataset.tutopen); }
 }, true);
 function tutListHTML() {
-  return '<h3>Tutorials</h3><div class="ctext" style="margin-bottom:6px">Tap a topic to see it again. Topics you have not met yet are dimmed.</div><div class="tutlist">' + TUTS.map(function (t) {
+  return '<h3>Tips</h3><div class="ctext" style="margin-bottom:6px">Tap a topic to see it again. Topics you have not met yet are dimmed.</div><div class="tutlist">' + TUTS.map(function (t) {
     return '<button class="tutrow' + (store.tut[t.id] ? '' : ' unseen') + '" data-tutopen="' + t.id + '"><b>' + t.title + '</b><small>' + (store.tut[t.id] ? 'seen' : 'new') + '</small></button>';
   }).join('') + '</div><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
 }
