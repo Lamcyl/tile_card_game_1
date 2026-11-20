@@ -112,3 +112,75 @@ Four beta-tester agents tested the game: UI and touch, balance and progression, 
 - **Early pacing.** Tiers 1–4 pace well for skilled play.
 
 Full tester reports, screenshots and scripts are in the session scratchpad under `beta/ui`, `beta/bal`, `beta/new` and `beta/qa`.
+
+## Fix ideas for everything else (proposals, not implemented)
+
+### Balance
+- **Tier 7 HP cliff.**
+  - Re-curve the per-column HP to a steady ×1.5–1.6 per tier: 56, 90, 140, 200, 250, 290 for tiers 5–10.
+  - Keep the region-boss walls (Fairmeet, Misty Moor, Gloaming Crown) as boss-only multipliers.
+  - Then run `tune.js` once so skilled win rates fall smoothly, about 90 → 60%, instead of the saw.
+- **Coins.**
+  - Scale coins per fight with tier, about ×1.25 per tier, so tier 7+ runs pay 60–90 coins.
+  - Make replays of cleared stages pay 50% more than now. That makes farming at the walls worth it.
+  - Lower the level 4–7 costs by about 30%.
+- **Unit shards.**
+  - Lower the shard needs to 10/20/35 for common, rare and epic.
+  - Let the player pick a "wishlist" unit. Daily, elite and Endless shards go to it.
+  - Turn spare shards into coins after a unit is owned, so they are never wasted.
+- **Relics.**
+  - Make the +N relics scale with tier (+N × tier), or turn them into "+25% to …".
+  - Cap Triple Bread at once per attack, or lower its bonus.
+  - Re-measure with `rel.js 7 30`.
+- **Tile supply.**
+  - Allow rares from tier 3 and epics from tier 6 (bosses guaranteed one rarity above normal).
+  - Weight drops so the type you own least is more likely. That nudges players towards a spread of types.
+- **Puzzles.**
+  - Re-check the 11 puzzles the bot failed, and fix or regenerate any that need guessing.
+  - Add a "Hint" button that shows where one tile goes (free once per puzzle).
+  - Order the Puzzles page by measured difficulty.
+  - Raise the reward to 20–40 coins plus 1 shard of the wishlist unit.
+- **Endless.**
+  - Unlock it after the first wall (Fairmeet).
+  - Make enemies actually grow, about +6% HP per depth.
+  - Lower the first milestone to depth 2.
+  - Trim the bag: keep only the best N tiles, or let the player discard tiles.
+- **Stale scores.** Re-run `encyclopedia.js` and `score.js` after the HP and economy changes, then re-assign rarity stars.
+- **Skills.** Move the skill unlocks to 8/18/30 stages so they arrive before the walls.
+
+### New-player experience
+- **After the tutorials,** the home card changes to "Next: Greenvale · Stage 1" with a big Play button, and the map node pulses once.
+- **First run.**
+  - Add a one-time 3-step tip strip: "Your Bag", "Loot after each fight", "Bank to keep loot".
+  - Make fight 1 of stage 1 a soft fight: enemy attack 1 and a tutorial popup *before* the first attack about losing HP.
+- **Colourless tiles.** Show the "no sandwich" tip the first time a colourless tile is in the hand. Draw colourless tiles without the clamp bars, so nothing looks sandwiched.
+- **Unlock order.**
+  - Lock the Daily puzzle until stage 3 of Greenvale ("Play more to unlock").
+  - Introduce shards with a tip on the first result screen that shows them.
+  - Explain the hourglass with a tip the first time a run-only tile appears.
+- **Text fixes.**
+  - "Adds a second colour: Purple (counts as red and purple)" instead of "4 → 4".
+  - "Hits the marked column for 3".
+  - Tutorial 2: "Two tiles of the same colour on both sides in a row".
+  - The fight hint gets two lines, not "…".
+  - The Endless text uses the real stage count.
+- **Heal at full HP:** grey it out with "You're at full health", or swap it for a coin reward.
+
+### UI polish
+- **Result screens:** centre the card vertically. Show the solved board, shrunk, behind the "Solved" card.
+- **Map card on 360×640:** cap its height and let its text scroll, or shrink the map to fit.
+- **Slot popup:** collapse the filters into one chip row that scrolls sideways, and a "Filter" button that expands it.
+- **Small glitches.**
+  - Reset save: a separate confirm dialog instead of the two-tap label.
+  - Fix the colour and numbers in the "Hold for details" demo.
+  - Escape closes popups.
+- **Tablets:** scale `--u` (tile size) up to fill up to 600px width, and keep the Attack bar at the bottom.
+- **Unconfirmed items:** re-test the "undefined Red Strike" title and the red notch with real loot tiles. Make the slot-popup sort stable, using the id as a tie-break.
+
+### Robustness
+- **Storage failures:** try/catch around saving. Show a small "Couldn't save" toast once.
+- **Two tabs:** listen to the `storage` event. When another tab saves, reload the store or show "Open in another tab".
+- **Old saves:** keep a backup copy (`…v9.bak`) before overwriting. Migrate older versions where easy.
+- **Daily puzzle:** store the date the puzzle was opened, and pay that date's reward. Ignore a clock that has been set back (never pay for a date ≤ the last paid date).
+- **Run commit:** add a `committed` flag so it can never pay twice.
+- **Big numbers:** a short format (12.3k, 4.5M) for coins and large tile or HP numbers.
