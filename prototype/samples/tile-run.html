@@ -379,6 +379,9 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .pickc.owned{opacity:.5;filter:grayscale(.5);cursor:default}.pickc .ownb{display:inline-block;margin-left:4px;padding:0 6px;border-radius:8px;font-size:10.5px;font-weight:800;background:var(--ink);color:var(--bg);vertical-align:1px}.pickc .ownb.new{background:var(--ok);color:#fff}
 .ers{margin-left:6px;font-size:12px;font-weight:800;color:#c98a00;white-space:nowrap}
 .tile .chip{position:absolute;left:50%;bottom:calc(var(--u) * .06);transform:translateX(-50%);background:var(--chipbg);color:var(--chipink);border:1.5px solid var(--gold);border-radius:9px;padding:0 max(4px,calc(var(--u) * .09));height:max(13px,calc(var(--u) * .235));line-height:max(10px,calc(var(--u) * .18));font-size:max(9.5px,calc(var(--u) * .165));font-weight:800;font-style:normal;white-space:nowrap}
+.tile .cpa{position:absolute;width:0;height:0;border:calc(var(--u) * .16) solid transparent;pointer-events:none;z-index:3;font-style:normal}
+.tile .cpa.d-u{left:50%;top:1px;transform:translate(-50%,-100%);border-bottom-color:var(--tf)}.tile .cpa.d-d{left:50%;bottom:1px;transform:translate(-50%,100%);border-top-color:var(--tf)}
+.tile .cpa.d-l{top:50%;left:1px;transform:translate(-100%,-50%);border-right-color:var(--tf)}.tile .cpa.d-r{top:50%;right:1px;transform:translate(100%,-50%);border-left-color:var(--tf)}
 .tile .upm{position:absolute;right:calc(var(--u) * .07);bottom:calc(var(--u) * .06);font-style:normal;font-size:max(7px,calc(var(--u) * .13));color:#ffd04a;line-height:1}
 .tile.k-p .upm,.tile.k-x .upm{color:var(--gold)}
 .ups{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}.arrow{font-size:22px;font-weight:800;color:var(--ink)}
@@ -2037,6 +2040,7 @@ function tileHTML(t, o) {
   var rs = o.sx || t.st ? 0 : o.rs !== undefined ? o.rs : ((t.c !== 'x' || t.rb) && !S.puz && cellPx >= 26 ? tileStars(t) : 0);   /* rarity stars of a coloured tile type: a row of stars at the bottom, in place of the name */
   if (rs) face += '<i class="rs">' + new Array(rs + 1).join('\u2605') + '</i>';
   else if (!o.sx && !t.st && rect && cellPx >= 48) face += '<i class="nm">' + shortName(t) + '</i>';
+  if (k === 'e' && /^[udlr]$/.test(t.d || '')) face += '<em class="cpa d-' + t.d + '"></em>';   /* copy: a small tab on the edge it copies from */
   if (t.up) face += '<em class="upm">▲</em>';
   var c0 = cells[0], gstyle = 'left:calc((var(--u) + var(--tg)) * ' + c0[1] + ' + var(--u) * .075);top:calc((var(--u) + var(--tg)) * ' + c0[0] + ' + var(--u) * .075)';
   var cls = 'tile k-' + k + ' c-' + t.c + (t.rb ? ' rbw' : '') + (t.c2 ? ' two d-' + t.c2 : '') + (t.rar ? ' rar-' + t.rar : '') + (t.added ? ' added' : '') + (t.rest && !o.noRest ? ' rested' : '') + (o.sx ? ' sandw' : '') + (o.cls ? ' ' + o.cls : '') + (board ? ' bd' : ' cp');
