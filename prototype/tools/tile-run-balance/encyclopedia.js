@@ -162,7 +162,7 @@ if (!isMainThread) {
   const by = {}; res.forEach(r => by[r.token] = r);
   tiles.forEach(t => {
   const MED = (function () { const v = tiles.map(t => by[t.token].totMax).sort((x, y) => x - y); return v[Math.floor(v.length / 2)]; })();
-    const r = by[t.token]; t.colMax = r.colMax; t.totMax = r.totMax; t.score = 100 * r.totMax / (r.totMax + MED); t.best = r.best;
+    const r = by[t.token]; t.colMax = r.colMax; t.totMax = r.totMax; t.score = 100 * r.totMax / (r.totMax + MED); t.best = JSON.stringify(r.best.col) === JSON.stringify(r.best.tot) ? { col: r.best.col } : r.best;   /* tot is left out when it equals col (the page falls back to col) */
     t.score = Math.round(t.score * 10) / 10;
   });
   const data = tiles.map(t => { const o = { token: t.token, kind: t.k, name: t.name, size: t.size, cells: t.cells, intro: t.intro, status: t.status, units: t.units, n: t.n, colMax: t.colMax, totMax: t.totMax, score: t.score }; if (t.teamScore !== undefined) o.teamScore = t.teamScore; o.best = t.best; return o; });
