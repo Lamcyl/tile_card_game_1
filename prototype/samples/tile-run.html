@@ -2163,10 +2163,7 @@ function clSockHTML() {
 }
 function invHTML() {
   if (!store.inv.length) return '<div class="ctext">No colourless tiles yet. Earn them as loot.</div>';
-  return '<div class="inv" data-dz="cllist" id="cllist" style="min-height:56px;padding:4px;border-radius:12px">' + stackList(invSorted()).map(function (sk) {
-    var inb = sk.ids.filter(function (id) { return store.bag.indexOf(id) >= 0; }).length;
-    return tileHTML(invTile(sk.e), { ts: 46, cls: inb === sk.n ? 'fade' : inb ? 'sel' : '', cnt: sk.n, badge: sk.n > 1 && inb ? inb + ' in bag' : '', attrs: 'data-dd="inv" data-inv="' + sk.ids.join(',') + '" data-card="it:' + sk.e.id + '"' });
-  }).join('') + '</div>';
+  return '<div data-dz="cllist" id="cllist" style="min-height:56px;padding:4px;border-radius:12px"><div class="pack" id="clpack"></div></div>';
 }
 var ICON = {
   book: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11"/></svg>',
@@ -2464,6 +2461,7 @@ function renderTeam() {
   }
   var T = $('#team'); T.className = 'screen' + (tab === 'units' ? ' fit' : ''); T.innerHTML = h;
   if (tab === 'collected') packCT();
+  if (tab === 'colourless') packCL();
 }
 /* ---- collected-tile filters (Tiles > Collected and the slot popup): colour, kind, size, rarity, new / equipped, sort ---- */
 var CTF = { c: '', kind: '', cells: 0, rar: 0, flag: '', sort: 'rar' };
@@ -2502,18 +2500,32 @@ function ctHTML(uid) {
 /* Collected tab: greedy packer. Each tile's real cells go into the first free spot of a cell grid (concave gaps of L / T shapes get back-filled by later tiles) */
 function packCT() {
   var host = $('#ctpack'); if (!host) return;
-  var stacks = stackList(ctFiltered(ctSorted(), true)), W = host.clientWidth || 330, cols = 7, g = 5, ts, i;
+  packTiles(host, stackList(ctFiltered(ctSorted(), true)).map(function (sk) {
+    var away = sk.ids.filter(function (id) { return slotOwnerOf(id); }).length;
+    return { t: ctTile(sk.e), o: { cls: away === sk.n ? 'fade' : '', cnt: sk.n, attrs: 'data-card="ct:' + sk.e.id + '"' } };
+  }));
+}
+/* colourless tiles packed the same way (they keep their drag handles) */
+function packCL() {
+  var host = $('#clpack'); if (!host) return;
+  packTiles(host, stackList(invSorted()).map(function (sk) {
+    var inb = sk.ids.filter(function (id) { return store.bag.indexOf(id) >= 0; }).length;
+    return { t: invTile(sk.e), o: { cls: inb === sk.n ? 'fade' : inb ? 'sel' : '', cnt: sk.n, badge: sk.n > 1 && inb ? inb + ' in bag' : '', attrs: 'data-dd="inv" data-inv="' + sk.ids.join(',') + '" data-card="it:' + sk.e.id + '"' } };
+  }));
+}
+/* pack tiles of any shape tightly: each tile's real cells go into the first free spot of a 7-column cell grid */
+function packTiles(host, items) {
+  var W = host.clientWidth || 330, cols = 7, g = 5, ts, i;
   for (i = 0; i < 2; i++) { ts = Math.floor((W - (cols - 1) * g) / cols); g = Math.max(3, Math.round(ts * .11)); }
   ts = Math.floor((W - (cols - 1) * g) / cols);
   var P = ts + g, occ = [], html = '';
-  stacks.forEach(function (sk) {
-    var t = ctTile(sk.e), cells = cellsOf(t), d = shapeDims(t), w = d[1], r, c, k, pos = null;
+  items.forEach(function (it) {
+    var t = it.t, cells = cellsOf(t), d = shapeDims(t), w = d[1], r, c, k, pos = null;
     for (r = 0; !pos; r++) for (c = 0; c + w <= cols && !pos; c++) {
       if (cells.every(function (p) { return !(occ[r + p[0]] && occ[r + p[0]][c + p[1]]); })) pos = [r, c];
     }
     cells.forEach(function (p) { (occ[pos[0] + p[0]] = occ[pos[0] + p[0]] || [])[pos[1] + p[1]] = 1; });
-    var away = sk.ids.filter(function (id) { return slotOwnerOf(id); }).length;
-    html += '<div class="pk" style="left:' + pos[1] * P + 'px;top:' + pos[0] * P + 'px">' + tileHTML(t, { ts: ts, cls: away === sk.n ? 'fade' : '', cnt: sk.n, attrs: 'data-card="ct:' + sk.e.id + '"' }) + '</div>';
+    html += '<div class="pk" style="left:' + pos[1] * P + 'px;top:' + pos[0] * P + 'px">' + tileHTML(t, Object.assign({ ts: ts }, it.o)) + '</div>';
   });
   host.style.height = Math.max(0, occ.length * P - g) + 'px'; host.innerHTML = html;
 }
