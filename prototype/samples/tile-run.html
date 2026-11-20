@@ -777,7 +777,7 @@ var RARITY = ['Common', 'Rare', 'Epic'];
 var SANDWICH = 'A tile between two tiles of one other colour is doubled, and every further row or column line it is squeezed on adds one more (x2, x3, x4…). Sandwiches and multipliers add together.';
 var HW = CONFIG.heroWord, HWS = CONFIG.heroWords, HWl = HW.toLowerCase(), HWSl = HWS.toLowerCase();
 var HEROES = [
-  { id: 'rally', name: 'Kiri', ab: 'Rally', line: 'Every tile gets +1 on this attack.', target: false },
+  { id: 'rally', name: 'Kiri', ab: 'Rally', line: 'Every tile gets +' + CONFIG.hero.rally + ' on this attack.', target: false },
   { id: 'wind', name: 'Sora', ab: 'Second Wind', line: 'All resting tiles come back now.', target: false },
   { id: 'prism', name: 'Lumi', ab: 'Prism', line: 'Tap one placed tile: it counts as every colour on this attack.', target: true },
   { id: 'overcharge', name: 'Brak', ab: 'Overcharge', line: 'Tap one placed tile: its number is doubled on this attack.', target: true },
@@ -1009,7 +1009,7 @@ function tileReach(t, a, cols, R, fx) {
    order: multipliers and sandwich fixed, booster power, boosts added, attack values, then copies (which never copy copies) */
 function evaluate(F, board, opts) {
   opts = opts || {};
-  var cols = F.cols, R = F.rows, N = cols * R, mom = opts.momentum || 0, det = !!opts.detail, i, j, k, c;
+  var cols = F.cols, R = F.rows, N = cols * R, momOnly = opts.momentum || 0, rallyV = opts.rally || 0, mom = momOnly + rallyV, det = !!opts.detail, i, j, k, c;
   var ea = [];
   F.enemies.forEach(function (e, ek) { for (var cc = e.c; cc < e.c + e.w; cc++) ea[cc] = ek; });
   var relic = {}; (F.relics || []).forEach(function (r) { relic[r] = 1; });
@@ -1175,8 +1175,8 @@ function evaluate(F, board, opts) {
   var val = [], power = [], sandA = [], parts = det ? [] : null;
   G.forEach(function (g) {
     val[g.a] = g.v; power[g.a] = g.pw; sandA[g.a] = g.sand;
-    if (det) parts[g.a] = g.t.k === 'p' ? [['base', nOf(g.t)], ['cell +', g.add], ['momentum', mom], ['multipliers and bonus cell ×', g.mul], ['sandwich ×', g.sand]] :
-      [['base', nOf(g.t)], ['copied number', g.copy], ['cell +', g.add], ['relics and effects +', g.radd], ['momentum', g.t.k === 'e' ? 0 : mom], ['boosts', g.boost], ['multipliers and bonus cell ×', g.mul], ['sandwich ×', g.sand]];
+    if (det) parts[g.a] = g.t.k === 'p' ? [['base', nOf(g.t)], ['cell +', g.add], ['momentum', momOnly], ['Rally', rallyV], ['multipliers and bonus cell ×', g.mul], ['sandwich ×', g.sand]] :
+      [['base', nOf(g.t)], ['copied number', g.copy], ['cell +', g.add], ['relics and effects +', g.radd], ['momentum', g.t.k === 'e' ? 0 : momOnly], ['Rally', g.t.k === 'e' ? 0 : rallyV], ['boosts', g.boost], ['multipliers and bonus cell ×', g.mul], ['sandwich ×', g.sand]];
   });
   return { tot: tot, val: val, power: power, sand: sandA, en: en, enemyAt: ea, parts: parts, marks: marks, G: G, cellG: cellG,
            stats: { sandExtra: sandExtra, advDealt: advDealt, dealt: allDealt, boostAdd: boostAdd, x4: x4, both: both } };
@@ -1554,7 +1554,7 @@ function resolveAttack(run, fs, board, rnd) {
 }
 function heroOpts(fs) {
   var h = fs.hero, o = { momentum: fs.mom };
-  if (h && h.armed) { if (h.id === 'rally') o.momentum += CONFIG.hero.rally; if (h.id === 'prism' && h.target) o.prism = h.target; if (h.id === 'overcharge' && h.target) o.over = h.target; }
+  if (h && h.armed) { if (h.id === 'rally') o.rally = CONFIG.hero.rally; if (h.id === 'prism' && h.target) o.prism = h.target; if (h.id === 'overcharge' && h.target) o.over = h.target; }
   return o;
 }
 /* arm / disarm the hero ability (Second Wind applies now and is undone by disarming; the two tap-to-target abilities wait for a target) */
@@ -1744,6 +1744,7 @@ var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Bring every enemy's he
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 var LS_KEY = 'tileRunPrototype.v9';
+var DEV_ACTS = ['coins', 'unlockall', 'shards', 'slotsall', 'cttiles', 'rbtile', 'allheroes', 'allstages', 'tiles', 'epic', 'dupe', 'clearrun', 'settings', 'enc'];
 var DEV = /[?&]dev=1(?:[&#]|$)/.test(location.search);   /* test helpers, the advanced encyclopedia and the settings gear exist only with ?dev=1 */
 var store = null, SPEED = 1;
 function defaultStore() {
@@ -2076,7 +2077,7 @@ function heroHTML(fs) {
   var hs = fs.hero; if ((S.puz && !S.puz.def.hero) || !hs || !hs.id) return '';
   var H = HERO_BY_ID[hs.id], ready = hs.uses < hs.max, cls = 'abil', sm;
   if (hs.armed) { if (H.target && !hs.target) { cls += ' target'; sm = 'tap a tile · cancel'; } else { cls += ' on'; sm = (hs.target ? 'aimed' : 'on') + ' · undo'; } }
-  else if (ready) sm = (hs.max - hs.uses) + '×';
+  else if (ready) sm = hs.max === 1 ? 'ready' : (hs.max - hs.uses) + ' left';
   else { cls += ' used'; sm = 'used'; }
   return '<button class="' + cls + '" data-act="herobtn" data-card="hr:' + hs.id + '" title="' + H.line + '"' + (!ready && !hs.armed ? ' disabled' : '') + '>' + heroIcon(hs.id) + '<b>' + H.ab + '</b><small>' + sm + '</small></button>';
 }
@@ -2279,7 +2280,7 @@ function stageCardHTML(c, st) {
     '<span class="hm-chip" title="' + TRICKS[c.trick] + '">' + (c.mid >= 0 ? 'Mid-boss + boss' : 'Boss') + ' &middot; ' + BOSSNAME[c.trick] + '</span>' +
     '<span class="hm-chip gold">' + (st === 'c' ? 'Replay: loot only' : 'First clear: ' + fc + ' coins + tile') + '</span></div>' +
     (need ? '<div class="hm-need">' + need + '</div>' : '') +
-    (run ? '<button class="btn sm hm-bank" data-act="bank">Bank and leave the run</button>' : '') + '</div>';
+    (run ? '<button class="btn sm hm-bank" data-act="bankask">Bank and leave the run</button>' : '') + '</div>';
   var lt = c.lesson ? CONFIG.lessons[c.lesson] : null, nx = lt ? nextLesson(c.lesson) : null, les = nx && !run && st !== 'h' ? PUZ_BY_ID[nx] : null;
   if (les) h = h.replace(/<div class="hm-chips">[\s\S]*?<\/span><\/div>/, '<div class="hm-need"><b>Tutorial ' + (lt.indexOf(nx) + 1) + ' of ' + lt.length + ': ' + les.name + '.</b> ' + les.teach + '</div>');
   var lab = run ? 'Continue' : les ? 'Play' : st === 'c' ? 'Replay' : st === 'a' ? 'Play' : 'Locked';
@@ -2597,7 +2598,7 @@ function renderMap() {
   }
   h += '</div><h2>' + (run.step >= total ? 'Boss ahead' : run.mode === 'stage' && run.mid === run.step ? 'Mid-boss ahead' : 'Choose your path') + '</h2>';
   run.offers.forEach(function (o, i) { h += offerHTML(o, i); });
-  h += '<button class="btn" data-act="bank" style="width:100%">Bank and leave (keep everything)</button>';
+  h += '<button class="btn sm" data-act="bankask" style="width:100%;margin-top:28px;opacity:.85">Bank and leave the run</button>';
   $('#map').innerHTML = h; persist(); tutOffers(run);
 }
 function runUnits() { var l = {}; for (var k in store.units) l[k] = { l: store.units[k].l }; return l; }
@@ -2744,6 +2745,7 @@ function renderFight() {
   else info = 'Tap a placed tile to take it back.';
   if (heroTargeting()) info = 'Tap one of your placed tiles to aim ' + HERO_BY_ID[fs.hero.id].ab + ', or cancel it.';
   if (fs.mom > 0) info = 'Momentum +' + fs.mom + ' on this attack. ' + info;
+  if (fs.hero && fs.hero.armed && fs.hero.id === 'rally') info = 'Rally +' + CONFIG.hero.rally + ' on this attack. ' + info;
   $('#finfo').textContent = info;
   if (S.sel >= 0) showHold(tileById(S.sel), -1);
   tlogShow();
@@ -3548,6 +3550,7 @@ document.addEventListener('click', function (e) {
   if ((el = t.closest && t.closest('[data-offer]'))) { chooseOfferUI(+el.dataset.offer); return; }
   el = t.closest && t.closest('[data-act],#fatk,#fclear'); if (!el) return;
   var act = el.dataset.act || el.id;
+  if (!DEV && DEV_ACTS.indexOf(act) >= 0) return;   /* test helpers exist only with ?dev=1 */
   switch (act) {
     case 'tip': showTip(el, el.dataset.tip); break;
     case 'mapsel': store.sel = el.dataset.key; save(); renderHome(); break;
@@ -3596,10 +3599,11 @@ document.addEventListener('click', function (e) {
     case 'pick': if (store.units[el.dataset.u].u) { setTeamUnit(el.dataset.u); renderTeam(); } break;
     case 'cont': takePick(-1); break;
     case 'bank': closeModal(); bankRun(); break;
+    case 'bankask': openModal('<h3>Bank and leave?</h3><p style="font-size:14px;color:var(--ink)">The run ends here. You keep the coins and loot you collected so far, but this stage is not cleared.</p><div class="btnrow"><button class="btn" data-act="bank">Bank and leave</button><button class="btn main" data-act="close">Keep playing</button></div>'); break;
     case 'leave': openModal('<h3>Leave the run?</h3><p style="font-size:14px;color:var(--ink)">You bank everything you collected so far (no stage clear).</p><div class="btnrow"><button class="btn main" data-act="bank">Bank and leave</button><button class="btn" data-act="close">Keep playing</button></div>'); break;
     case 'fmenu': if (S.phase === 'anim') break;   /* never bank or leave while the attack animation is still resolving */
       if (S.puz) { openModal('<h3>Puzzle</h3><div class="btnrow"><button class="btn" data-act="puzretry">Retry</button><button class="btn" data-act="home">Leave puzzle</button><button class="btn main" data-act="close">Back to puzzle</button></div>'); break; }
-      openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="bag">Bag</button><button class="btn" data-act="bank">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
+      openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="bag">Bag</button><button class="btn" data-act="bankask">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
     case 'fatk': attack(); break;
     case 'fclear': clearBoard(); break;
     case 'unlockall': UNITS.forEach(function (u) { store.units[u.id].u = true; }); save(); $('#modal').innerHTML = settingsHTML(); break;
@@ -3617,6 +3621,7 @@ document.addEventListener('click', function (e) {
 });
 document.addEventListener('change', function (e) {
   var t = e.target;
+  if (!DEV && t.id !== 'settut') return;   /* the other inputs are test settings */
   if (t.id === 'setmom') { store.set.momentum = t.checked; applySettings(); save(); }
   else if (t.id === 'setmomv') { store.set.value = +t.value; applySettings(); save(); }
   else if (t.id === 'setret') { store.set.ret = t.value; applySettings(); save(); }
