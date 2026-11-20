@@ -2014,6 +2014,11 @@ function rainbowArcs(uid, VW, VH) {
   return out + '<g clip-path="url(#rc' + uid + ')"><rect class="rbsh" x="-40" y="-20" width="22" height="' + (VH + 40) + '" fill="rgba(255,255,255,.5)"/></g>';
 }
 /* o: board (true = real size on the board, ts = cell px, gp = gap px), shown (live value), sx (sandwich chip), cls, attrs */
+/* the run-only badge sits in the top-right corner of the tile's top-right cell (not of its bounding box) */
+function tmpPos(cells) {
+  var r0 = Math.min.apply(null, cells.map(function (p) { return p[0]; })), c0 = Math.max.apply(null, cells.filter(function (p) { return p[0] === r0; }).map(function (p) { return p[1]; }));
+  return 'right:auto;left:calc((var(--u) + var(--tg)) * ' + c0 + ' + var(--u) - 15px);top:calc((var(--u) + var(--tg)) * ' + r0 + ' + 2px)';
+}
 function tileHTML(t, o) {
   o = o || {};
   var cells = cellsOf(t), dims = shapeDims(t), h = dims[0], w = dims[1], k = t.k, uid = ++uidc, multi = cells.length > 1, board = !!o.board;
@@ -2050,7 +2055,7 @@ function tileHTML(t, o) {
   var cls = 'tile k-' + k + ' c-' + t.c + (t.rb ? ' rbw' : '') + (t.c2 ? ' two d-' + t.c2 : '') + (t.rar ? ' rar-' + t.rar : '') + (t.added ? ' added' : '') + (t.rest && !o.noRest ? ' rested' : '') + (o.sx ? ' sandw' : '') + (o.cls ? ' ' + o.cls : '') + (board ? ' bd' : ' cp');
   var style = '--u:' + cellPx + 'px;--tg:' + gp + 'px;width:' + PX + 'px;height:' + PY + 'px;' + (board ? 'left:' + (o.left || 0) + 'px;top:' + (o.top || 0) + 'px;' : '');
   return '<div class="' + cls + '" style="' + style + '" ' + (o.attrs || '') + ' aria-label="' + tileName2(t) + '">' +
-    '<svg class="tb" viewBox="0 0 ' + VW + ' ' + VH + '">' + body + '</svg><div class="tf">' + glyphSVG(t, gstyle, fightFx()) + '<div class="fb" style="' + box + '">' + face + '</div></div>' + (t.added && !o.noTmp ? '<i class="tmp" title="Only for this run">' + HOURGLASS + '</i>' : '') + (o.cnt > 1 ? '<i class="cnt">\u00d7' + o.cnt + '</i>' : '') + (o.badge ? '<i class="inb">' + o.badge + '</i>' : '') + '</div>';
+    '<svg class="tb" viewBox="0 0 ' + VW + ' ' + VH + '">' + body + '</svg><div class="tf">' + glyphSVG(t, gstyle, fightFx()) + '<div class="fb" style="' + box + '">' + face + '</div></div>' + (t.added && !o.noTmp ? '<i class="tmp" title="Only for this run" style="' + tmpPos(cells) + '">' + HOURGLASS + '</i>' : '') + (o.cnt > 1 ? '<i class="cnt">\u00d7' + o.cnt + '</i>' : '') + (o.badge ? '<i class="inb">' + o.badge + '</i>' : '') + '</div>';
 }
 /* the unit effects of the fight on screen (null elsewhere), so tiles can show effects that change their reach */
 function fightFx() { return S.screen === 'fight' && S.fs && S.fs.F && !S.puz ? S.fs.F.fx : null; }
