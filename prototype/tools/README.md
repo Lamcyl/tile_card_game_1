@@ -3,7 +3,7 @@
 Playwright is expected under `/opt/node-tools/node_modules` (or any `NODE_PATH`). Each script has a usage line in its header.
 
 - `tr-test.js` - reusable page test kit (phone viewport, CDP touch drags, store/stage/puzzle helpers, screenshots, console errors). Start here for any UI check.
-  - `node prototype/tools/tr-test.js smoke [outDir]` - load, home, lesson puzzle via `sol`, stage fight, Team, slot-popup drag (touch, no hold, must equip), shard unlock of a locked unit, level-up dialog; exits 1 on a failure or any console error.
+  - `node prototype/tools/tr-test.js smoke [outDir]` - load, home, lesson puzzle via `sol`, stage fight, Tiles screen, slot-popup drag (touch, no hold, must equip), shard unlock of a locked unit, level-up dialog; exits 1 on a failure or any console error.
   - As a library: `const T = require('./tr-test.js'); await T.open({w:360,h:740}); await T.startStage(0); await T.chooseFirstOffer(); await T.autoPlace(); await T.touchDrag('#fhand .tile', '#fboard .cell'); await T.shot('x'); await T.close();`
   - `T.ghosts()` counts leftover `.ghost` drag copies (must be 0 after any drag).
 - `tile-run-balance/` (balance tools, all load the `RULES` block of the page via `lib.js`):

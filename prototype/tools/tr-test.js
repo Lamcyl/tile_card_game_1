@@ -90,7 +90,7 @@ async function smoke(out) {
     const sh = await ev(() => [document.scrollingElement.scrollHeight, innerHeight]); await attack();
     return f && n > 0 && sh[0] <= sh[1] ? { tier: st.tier, placed: n, scroll: sh.join('/') } : false;
   });
-  await step('team screen', async () => { await openTeam('r'); await shot('04-team'); return ev(() => TR.S.screen === 'team'); });
+  await step('tiles screen', async () => { await openTeam('r'); await shot('04-team'); return ev(() => TR.S.screen === 'team'); });
   await step('slot popup drag', async () => {
     await ev(() => { const s = TR.store(); s.coins = 999; const u = s.team.r; TR.buySlot(u); if (!TR.store().ct || !TR.store().ct.length) TR.addCT({ c: 'r', k: 'a', d: '^', n: 3, sh: 'o', rar: 1 }); TR.show('team'); });
     await sleep(150); await ev(() => { const b = document.querySelector('[data-act="slotpop"]'); if (b) b.click(); }); await sleep(150);
