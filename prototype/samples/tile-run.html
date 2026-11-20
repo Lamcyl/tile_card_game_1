@@ -229,8 +229,10 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 /* the hand is a fixed-height strip: tiles stack in columns and the strip scrolls sideways; the page itself never scrolls in a fight */
 #fhand{display:flex;flex-flow:column wrap;gap:6px;align-content:flex-start;justify-content:flex-start;flex:none;box-sizing:border-box;height:var(--hh,104px);padding:8px 7px 4px 22px;scroll-padding-left:22px;min-height:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 #fhand::-webkit-scrollbar{display:none}#fhand .tile,#fhand .slot{touch-action:pan-x}
-body.fightmode,body.fightmode #app{height:100vh;height:100dvh;overflow:hidden;overscroll-behavior:none}body.fightmode #app{min-height:0}
-body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
+body.fightmode,body.fightmode #app{height:100vh;height:100dvh;overflow:hidden;overscroll-behavior:none}body.fightmode #app{min-height:0;overflow-x:hidden;overflow-y:auto}
+/* on a short screen the fight page scrolls (the board keeps touch-action:none, the rest pans); Attack and Clear stay stuck to the bottom */
+body.fightmode #fight{flex:1 0 auto;min-height:0;display:flex;flex-direction:column}
+body.fightmode #fbar{position:sticky;bottom:0;z-index:6;background:var(--bg);padding-bottom:6px;margin-top:auto}
 .kit{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
 .kt{position:relative;display:inline-block}
 .lk{position:absolute;left:-4px;right:-4px;bottom:-9px;text-align:center;font-style:normal;font-size:8.5px;font-weight:800;color:var(--muted);white-space:nowrap}
@@ -1742,7 +1744,7 @@ var PUZZLES = [{"id":"p01","name":"First Strike","teach":"Bring every enemy's he
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 var LS_KEY = 'tileRunPrototype.v9';
-var DEV = /[?&]dev=1/.test(location.search);   /* test helpers, the advanced encyclopedia and the settings gear exist only with ?dev=1 */
+var DEV = /[?&]dev=1(?:[&#]|$)/.test(location.search);   /* test helpers, the advanced encyclopedia and the settings gear exist only with ?dev=1 */
 var store = null, SPEED = 1;
 function defaultStore() {
   var units = {}, team = {};
@@ -1763,8 +1765,37 @@ function load() {
       UNITS.forEach(function (u) { if (!s.units[u.id]) s.units[u.id] = d.units[u.id]; });
       (s.ct || []).forEach(function (e) { e.st = 0; });   /* coloured tiles no longer have star-ups */
       if (freshAck) ackAllHints(s);
+      s = sanitizeStore(s, d);
     }
-  } catch (e) {}
+  } catch (e) { s = defaultStore(); }
+  return s;
+}
+/* a save from an older build or a damaged one: every field is checked and refilled from the defaults, and a run that cannot be resumed is dropped */
+function sanitizeStore(s, d) {
+  var isO = function (x) { return !!x && typeof x === 'object' && !Array.isArray(x); }, isN = function (x) { return typeof x === 'number' && isFinite(x); };
+  ['units', 'team', 'slots', 'ushards', 'cleared', 'puzDone', 'tut', 'seenEn', 'ack', 'heroes', 'set'].forEach(function (k) { if (!isO(s[k])) s[k] = d[k]; });
+  ['coins', 'nid', 'maxTier', 'endBest', 'runs'].forEach(function (k) { if (!isN(s[k]) || s[k] < 0) s[k] = d[k] || 0; });
+  if (typeof s.dailyDone !== 'string') s.dailyDone = ''; if (typeof s.sel !== 'string') s.sel = null; s.allStages = !!s.allStages;
+  var okTile = function (e) { return isO(e) && isN(e.id) && typeof e.k === 'string' && isN(e.n); };
+  s.ct = Array.isArray(s.ct) ? s.ct.filter(function (e) { return okTile(e) && (COLOR_IDS.indexOf(e.c) >= 0 || e.c === 'w'); }) : [];
+  s.inv = Array.isArray(s.inv) ? s.inv.filter(okTile) : [];
+  s.bag = Array.isArray(s.bag) ? s.bag.filter(isN) : [0, 0, 0];
+  s.ct.concat(s.inv).forEach(function (e) { if (e.id > s.nid) s.nid = e.id; });
+  UNITS.forEach(function (u) { var e = s.units[u.id]; if (!isO(e) || !isN(e.l)) s.units[u.id] = d.units[u.id]; else e.u = !!e.u; });
+  COLOR_IDS.forEach(function (c) { var u = UNIT_BY_ID[s.team[c]]; if (!u || u.c !== c) s.team[c] = d.team[c]; });
+  for (var uid in s.slots) { var sl = s.slots[uid]; if (!UNIT_BY_ID[uid] || !isO(sl) || !Array.isArray(sl.t) || !isN(sl.n)) delete s.slots[uid]; else sl.t = sl.t.map(function (x) { return isN(x) ? x : 0; }); }
+  for (var k in s.heroes) if (!HERO_BY_ID[k]) delete s.heroes[k];
+  s.heroes.rally = true; if (!HERO_BY_ID[s.hero] || !s.heroes[s.hero]) s.hero = 'rally';
+  var r = s.run;
+  if (r) {
+    var ok = isO(r) && isN(r.stage) && CONFIG.stages[r.stage - 1] && Array.isArray(r.bag) && r.bag.every(function (t) { return isO(t) && isN(t.id); }) && isO(r.team) && isN(r.hp) && isN(r.maxHp) && isO(r.fx) && Array.isArray(r.relics) && Array.isArray(r.loot) && !r.over;
+    if (ok && r.cell) ok = isO(r.cell) && !!stageInfo(r.cell.key);
+    if (ok && r.pending) ok = isO(r.pending) && typeof r.pending.type === 'string';
+    else if (ok) ok = Array.isArray(r.offers) || (r.fs && true);
+    if (ok && r.fs) ok = isO(r.fs) && isO(r.fs.F) && Array.isArray(r.fs.F.enemies) && isN(r.fs.F.cols) && isN(r.fs.F.rows) && Array.isArray(r.board);
+    if (ok && r.hero && !HERO_BY_ID[r.hero]) r.hero = null;
+    if (!ok) s.run = null;
+  } else s.run = null;
   return s;
 }
 function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(store)); } catch (e) {} }
@@ -2581,6 +2612,9 @@ function startRunUI(mode, stage, cell) {
 function resume() {
   var r = store.run; if (!r) return false;
   S.run = r; S.fs = r.fs || null; S.board = r.board || [];
+  if (r.atk) { var ak = r.atk; r.atk = 0;   /* reloaded while an attack was animating: finish what the attack did */
+    if (ak === 'lose') { endRun(); return true; }
+    if (ak === 'win' && r.fs) { finishFight(r, r.fs); S.fs = null; S.board = []; show('result'); return true; } }
   if (r.pending) show('result');
   else if (r.fs) { S.phase = 'edit'; S.sel = -1; S.hold = null; S.tab = firstTab(); show('fight'); renderFight(); }
   else show('map');
@@ -2611,7 +2645,7 @@ var GAP = 8;
 function cellSize(cols, rows) {
   var W = Math.min(document.documentElement.clientWidth || 390, 440) - 24, H = window.innerHeight || 844;
   var byW = Math.floor((W - GAP * (cols - 1)) / cols), byH = Math.floor((H - 330 + 60 - HH() - GAP * (rows - 1)) / rows);
-  return Math.max(40, Math.min(76, byW, byH));
+  return Math.max(30, Math.min(76, byW, Math.max(34, byH)));
 }
 /* sandwich clamps: one slim gold capsule centred in the gap on each side of the sandwiched tile, on the bracketed line */
 function clampsHTML(res, cols, cs, gp) {
@@ -2799,6 +2833,8 @@ async function attack() {
   $('#fatk').disabled = true; $('#fclear').disabled = true;
   var info = resolveAttack(run, fs, bt), res = info.res, F = fs.F;
   setBoard(S.board.map(function () { return -1; }));
+  /* the attack is committed: save the post-attack state now (a lethal or winning attack is remembered as run.atk), so a reload during the animation cannot undo it */
+  if (!S.puz) { run.atk = info.lose ? 'lose' : info.win ? 'win' : 0; persist(); }
   try {
     var enEl = function (k) { return $('.enemy[data-en="' + k + '"]'); };
     res.G.forEach(function (g) {
@@ -2827,6 +2863,7 @@ async function attack() {
     } else await sleep(150);
   } catch (e) { /* animation must never block the game */ }
   if (S.puz) { if (info.win) puzzleWon(); else puzzleFail(info); return; }
+  run.atk = 0;
   if (info.lose) { endRun(info.lose); return; }
   if (info.win) { finishFight(run, fs); S.fs = null; S.board = []; show('result'); return; }
   S.phase = 'edit'; renderFight();
@@ -3594,7 +3631,6 @@ document.addEventListener('change', function (e) {
 });
 $('#dim').addEventListener('click', function () { if (!$('#card').hidden) return; closeModal(); });
 window.addEventListener('resize', function () { if (S.screen === 'fight' && S.phase === 'edit') { if (P || ghost) { setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 300); return; } renderFight(); } });
-if (!resume()) show('home');
 /* ---------- tenth iteration: tutorials, hint dots and transitions ---------- */
 var REDUCED = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
 function retrig(el, cls, ms) {
@@ -3905,6 +3941,9 @@ function tutTeam() {
 if (DEV) window.TR = { tut: tut, tutOpen: tutOpen, tutOffers: tutOffers, enemyTypes: enemyTypes, tutClose: tutClose, TUTS: TUTS, hints: function () { return { team: hintTeam(), heroes: hintHeroes(), puzzles: hintPuzzles() }; }, startPuzzle: startPuzzleUI, genDaily: genDaily, PUZZLES: PUZZLES, tileHTML: tileHTML, genFight: genFight, chooseNode: chooseNode, S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: chooseOfferUI, place: place, attack: attack, render: renderFight, show: show, save: save, persist: persist, takePick: takePick, UNITS: UNITS, resume: resume, evalNow: evalNow, lootTile: lootTile, addInv: addInv, genOffers: function () { S.run.offers = genOffers(S.run); },
   newTile: function (c, spec, extra) { var p = typeof spec === 'string' ? parseTok(spec) : spec; var t = mkTile(S.run, c, S.run.team[c] || 'x', p, extra); S.run.bag.push(t); return t; }, finishStage: finishStage, rules: { evaluate: evaluate, parseTok: parseTok, placeCells: placeCells, tileStars: tileStars, tokenStars: tokenStars, starCap: starCap, ownKey: ownKey, applyKeep: applyKeep },
   cellInfo: stageInfo, stageInfo: stageInfo, mapData: mapData, stageState: stageState, shownAreas: function () { return shownAreas(store.cleared, store.allStages); }, doneAreaCount: function () { return doneAreaCount(store.cleared); }, playCell: playCell, revealed: revealed, clearCell: function (k) { var c = stageInfo(k); store.cleared[k] = 1; store.maxTier = Math.max(store.maxTier || 0, c.tier); syncHeroes(); save(); }, clearArea: function (id) { areaInfo(id).keys.forEach(function (k) { TR.clearCell(k); }); }, keep: doKeep, unlockUnit: unlockUnit, addShards: addShards, shardsOf: shardsOf, shardNeed: shardNeed, clearShards: clearShards, replayReward: replayReward, buySlot: buySlot, toggleSlot: toggleSlot, levelUp: levelUp, addCT: addCT, testCT: testCT, slotSpecs: slotSpecs, genRainbow: genRainbow, UNITS_BY_ID: UNIT_BY_ID, toggleStack: toggleStack, mergeInv: mergeInv, syncHeroes: syncHeroes, newHeroes: newHeroes, starLine: starLine, stackList: stackList };
+/* boot last, so everything above (tutorial queue, hints) exists when the resumed screen renders; a run that cannot be shown is dropped instead of bricking the page */
+try { if (!resume()) show('home'); }
+catch (e) { try { store.run = null; S.run = null; S.fs = null; S.board = []; save(); show('home'); } catch (e2) { } }
 })();
 </script>
 </body>
