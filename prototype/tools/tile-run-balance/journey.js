@@ -19,6 +19,7 @@ function power(u, lvl) {
   let s = 0; R.unitBase(u, lvl).forEach(k => { s += vtile(k); });
   return s + [4, 7, 11][u.rar] + 3 * u.rar * lvl;
 }
+function ownK(S) { const o = {}; S.inv.concat(S.ct).forEach(e => { o[e.k] = (o[e.k] || 0) + 1; }); return o; }
 function newStore() {
   const units = {}, team = {}; R.UNITS.forEach(u => { const st = C.starters.indexOf(u.id) >= 0; if (st) team[u.c] = u.id; units[u.id] = { u: st, l: 1 }; });
   return { coins: C.startCoins, ush: {}, units, team, ct: [], inv: [], nid: 0, cleared: {}, hero: 'rally', slots: {}, pulls: 0, dupShards: 0 };
@@ -26,8 +27,10 @@ function newStore() {
 function addInv(S, t) { S.nid++; S.inv.push({ id: S.nid, k: t.k, d: t.d, n: t.n, sh: t.sh || 'o', rar: t.rar || 0, st: 0 }); R.mergeStars(S.inv, null, null); }
 function addCT(S, t) { S.nid++; S.ct.push({ id: S.nid, c: t.c, k: t.k, d: t.d, n: t.n, sh: t.sh || 'o', rar: t.rar || 0, st: 0 }); R.mergeStars(S.ct, null, null); }
 function slotCount(S, id) { return (S.slots[id] || 1); }
-function addShards(S, sh) { if (sh) S.ush[sh.u] = (S.ush[sh.u] || 0) + sh.n; }
-function unlockUnits(S) { R.UNITS.forEach(u => { const st = S.units[u.id]; if (!st.u && (S.ush[u.id] || 0) >= C.shards.need[u.rar]) { S.ush[u.id] -= C.shards.need[u.rar]; st.u = true; S.pulls++; } }); }
+function addShards(S, sh) { if (!sh) return; if (S.units[sh.u] && S.units[sh.u].u) { S.coins += R.shardCoins(sh.u, sh.n); return; } S.ush[sh.u] = (S.ush[sh.u] || 0) + sh.n; }
+/* the wishlist: the locked unit the player wants most (highest rarity, then most shards); daily, elite and Endless shards go to it */
+function pickWish(S) { let best = null; R.UNITS.forEach(u => { if (S.units[u.id].u) return; const v = u.rar * 1000 + (S.ush[u.id] || 0); if (!best || v > best.v) best = { v, id: u.id }; }); return best && best.id; }
+function unlockUnits(S) { R.UNITS.forEach(u => { const st = S.units[u.id]; if (!st.u && (S.ush[u.id] || 0) >= C.shards.need[u.rar]) { const left = S.ush[u.id] - C.shards.need[u.rar]; S.ush[u.id] = 0; st.u = true; S.pulls++; if (left > 0) S.coins += R.shardCoins(u.id, left); } }); }
 function bestTeam(S) {
   const t = {}; R.COLOR_IDS.forEach(c => {
     let best = null, bv = -1; R.UNITS.forEach(u => { if (u.c !== c || !S.units[u.id].u) return; const p = power(u, S.units[u.id].l) + 4 * u.rar; if (p > bv) { bv = p; best = u.id; } });
@@ -74,7 +77,7 @@ function journey(level, seed, o) {
   const doneAreas = () => R.doneAreaCount(S.cleared), topDone = () => M.areas.top.keys.filter(k => S.cleared[k]).length >= 3;
   const heroPref = o.heroPref || ['overcharge', 'prism', 'wind', 'guard', 'rally'];
   while (runsN < (o.maxRuns || 400) && !topDone()) {
-    unlockUnits(S); S.team = bestTeam(S); spendShards(S);
+    unlockUnits(S); S.team = bestTeam(S); spendShards(S); S.wish = pickWish(S);
     let key = pickStage(S, rnd), isGrind = false;
     if (streak >= 2 && farmLeft <= 0) { farmLeft = o.farm === undefined ? 3 : o.farm; streak = 0; }
     if (farmLeft > 0) { const g = grindStage(S, M.stages[key].tier - 1); if (g) { key = g; isGrind = true; grind++; } farmLeft--; }
@@ -82,7 +85,7 @@ function journey(level, seed, o) {
     const heroes = R.heroesUnlockedBy(Object.keys(S.cleared).length); const hero = heroPref.filter(h => heroes.indexOf(h) >= 0)[0] || 'rally';
     const T = { team: S.team, units: Object.fromEntries(Object.keys(S.units).map(id => [id, { l: S.units[id].l }])), slots: setupX.slots, colourless: setupX.colourless, hero };
     const rnd2 = L.rng(seed * 100003 + runsN * 31 + 5);
-    const run = R.newRun('stage', st.tier, T.team, T.units, T.colourless.map(c => Object.assign({}, c)), rnd2, hero, { len: st.len, mid: st.mid, drop: st.drop, trick: st.trick, cell: { key }, slots: T.slots, locked: R.UNITS.filter(u => !S.units[u.id].u).map(u => u.id) });
+    const run = R.newRun('stage', st.tier, T.team, T.units, T.colourless.map(c => Object.assign({}, c)), rnd2, hero, { len: st.len, mid: st.mid, drop: st.drop, trick: st.trick, cell: { key }, slots: T.slots, locked: R.UNITS.filter(u => !S.units[u.id].u).map(u => u.id), wish: S.wish, ownK: ownK(S) });
     const stats = { attacks: 0, hero: 0, dmg: 0, b: L.rng(seed * 31 + runsN * 17 + 1), keepPolicy: true };
     const res = L.playRun(run, level, rnd2, stats);
     runsN++;

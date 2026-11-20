@@ -54,6 +54,9 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .sbg .sen,.sbg .sboard{display:grid;grid-template-columns:repeat(var(--n),var(--cs));gap:6px;justify-content:center}.sbg .sen{margin-bottom:6px}
 .sbg .sgrid{position:relative;margin:0 auto}.sbg .stiles{position:absolute;left:0;top:0;width:100%;height:100%}
 #result.hasbg .resbox{position:relative;z-index:1}
+.cell.hintc{border:2px solid var(--gold)!important;background:color-mix(in srgb,var(--gold) 28%,var(--cellbg));animation:glow 1s ease-in-out infinite}
+.hintb{flex:none}
+.wishb{margin:6px 0 2px}.wishb.on{background:var(--goldbg);border-color:var(--gold);color:var(--goldink)}
 .tipstrip{display:flex;align-items:center;gap:8px;margin:0 0 8px;padding:6px 8px;border-radius:12px;background:var(--goldbg);color:var(--goldink);border:1.5px solid var(--gold);font-size:12px;line-height:1.3}
 .tipstrip i{font-style:normal;font-weight:800;flex:none;font-size:11px;opacity:.8}.tipstrip span{flex:1;min-width:0}.tipstrip .btn{flex:none}
 .npulse{animation:npulse .7s ease-in-out 3}
@@ -702,18 +705,18 @@ var CONFIG = {
   colourlessFactor: 2,              /* colourless tiles have no sandwich, so their numbers are this many times a coloured tile's */
   /* units are unlocked with UNIT SHARDS (no gacha): a locked unit needs need[rarity] of its own shards. Sources: the first clear of a stage gives `first` shards of one of its area's featured units, a replay `replay`;
      an elite fight drops elite[0]..elite[1] shards of a locked unit whose colour is in the team (placeholders) */
-  shards: { need: [10, 25, 50], first: 3, replay: 1, elite: [1, 2] },
+  shards: { need: [10, 20, 35], first: 3, replay: 1, elite: [1, 2], coin: [3, 5, 8] },   /* coin: what a spare shard of an owned unit is worth, by rarity */
   /* a replay of a cleared stage pays the usual loot plus this bonus: coinFrac of the stage's first-clear coins, one colourless tile of this source's rarity odds and a unit shard */
-  replay: { coinFrac: 0.4, tileSource: 'runner' },
+  replay: { coinFrac: 0.6, tileSource: 'runner' },
   slotCost: [0, 80, 160, 300], slotMax: [2, 3, 4],     /* every unit starts with 1 open slot; COINS to open its 2nd, 3rd, 4th slot (slotCost[n] opens slot n+1); maximum slots by unit rarity (placeholders) */
-  lvlMax: 8, levelCoins: { 2: 40, 3: 64, 4: 100, 5: 152, 6: 220, 7: 320, 8: 460 },   /* unit levels cost COINS: levelCoins[n] = coins to reach level n (placeholders, about 4x the first prototype) */
+  lvlMax: 8, levelCoins: { 2: 40, 3: 64, 4: 70, 5: 106, 6: 154, 7: 224, 8: 460 },   /* unit levels cost COINS: levelCoins[n] = coins to reach level n (placeholders, about 4x the first prototype) */
   starters: ['ember', 'tide', 'moss', 'glint', 'dusk'],   /* the units owned (and in the team) in a fresh save: one Common per colour */
   rainbow: { tier: 5, chance: 0.25, maxTeam: 2 },   /* a boss from this tier on may drop a rainbow tile (chance grows with distance) */
   /* the world map: one tiling, 6 units wide and 26 tall (before lesson rows) (y counts from the top). It is cut into AREA plates; each plate holds 3 or 4 STAGES drawn as pieces of the plate (rows: a letter per unit, A = stage 1, B = stage 2, ...). All stages of an area share its difficulty tier (1..10) and its run length (path choices before the final boss; a mid-boss on runs of midFrom or more).
      Opening rule: an area opens when ANY area listed in `from` is done (all of them when `all`); an area is done when openNeed of its stages are cleared (all of them in a 3-stage area, 3 of 4 otherwise). The first area has no `from`. Inside an open area the stages go in order: stage n is playable once stage n-1 is cleared. Areas next to an open area show as dim plates. Endless opens when endlessAreas areas are done. */
   /* per area: feat = 1 or 2 units of the region's colour whose shards its stages give; bossHp = a multiplier on the HP of the boss of every stage of the area (the walls: join areas and the final area) */
   map: {
-    w: 6, h: 26, openNeed: 3, endlessAreas: 2, midFrom: 6,
+    w: 6, h: 26, openNeed: 3, endlessArea: 'j1', midFrom: 6,
     areas: [
       { id: 's0', name: 'Sunny Meadow', region: 'heart', tier: 1, len: 2, x: 0, y: 24, w: 6, h: 2, feat: ['fern', 'bramble'], from: [], rows: ['AAAABB', 'AAAABB'] },
       { id: 'r1', name: 'Old Mill', region: 'heart', tier: 2, len: 3, x: 3, y: 22, w: 3, h: 2, feat: ['thorn'], from: ['s0'], rows: ['AAB', 'AAB'] },
@@ -742,18 +745,18 @@ var CONFIG = {
     w: { name: 'Duskmoor', col: 'p', bias: { p: 1, b: 0.3 } }
   },
   midBoss: { hp: 0.7, atk: 0.85, coin: 0.6 },
-  drop: { rare: [0, 0, 0, 0.06, 0.12, 0.2, 0.3], epic: [0, 0, 0, 0, 0.03, 0.07, 0.12], rainbow: [0, 0, 0, 0, 0.1, 0.2, 0.3], shape: [0.2, 0.22, 0.25, 0.3, 0.35, 0.4, 0.45] },   /* by distance from the origin: picks are Rare / Epic with these chances; a boss may drop a rainbow tile */
+  drop: { rare: [0, 0, 0.05, 0.1, 0.16, 0.24, 0.32], epic: [0, 0, 0, 0, 0.04, 0.08, 0.12], rainbow: [0, 0, 0, 0, 0.1, 0.2, 0.3], shape: [0.2, 0.22, 0.25, 0.3, 0.35, 0.4, 0.45] },   /* by distance from the origin: picks are Rare / Epic with these chances; a boss may drop a rainbow tile */
   longPressMs: 450,
   stars: { on: true, cap: 5, need: 3, bonus: 1, sideBonus: { 1: 3, 2: 2, 3: 1, 4: 1 } },   /* boosts and multipliers gain sideBonus[marked sides] per star instead (row/column/cross lines count as 1 side; placeholder) */
   tileStars: [45, 51, 56, 64],   /* encyclopedia score cut-offs of 2, 3, 4, 5 stars of tile rarity (below the first = 1 star) */
   dropStarCap: [1, 2, 2, 3, 3, 4, 4, 5, 5, 5],   /* highest tile rarity (stars) that can drop / be offered / be kept, by difficulty (placeholder) */
   keepCount: [1, 1, 1, 2, 2, 2, 2, 3, 3, 3],   /* coloured tiles you may keep per boss, by difficulty (placeholder) */
   relicMax: 3,                      /* relics per run */
-  heroUnlock: { prism: 'puzzle', overcharge: 15, wind: 25, guard: 36 },   /* heroes unlock by map progress: the number of map stages cleared, of 57 (the old 18, 30, 42 of 67, rescaled; Kiri is free) */
-  puzzleCoins: 10, dailyCoins: 15, dailyShards: 2, endlessMilestone: { every: 3, shards: 4 },   /* daily puzzle: shards of the locked unit nearest to unlock; Endless: every 3rd new best depth gives Rare/Epic shards */
+  heroUnlock: { prism: 'puzzle', overcharge: 8, wind: 18, guard: 30 },   /* heroes unlock by map progress: the number of map stages cleared, of 57 (the old 18, 30, 42 of 67, rescaled; Kiri is free) */
+  puzzleCoins: 20, puzzleShards: 1, dailyCoins: 20, dailyShards: 2, endlessMilestone: { every: 2, shards: 3 }, endlessGrowth: 0.06, endlessBagAdded: 8, relicTier: 0.5, supply: { lean: 0.12 },   /* daily puzzle: shards of the locked unit nearest to unlock; Endless: every 3rd new best depth gives Rare/Epic shards */
    /* placeholders */      
   /* rarity odds [common, rare, epic] by source; depthShift is added to rare per depth/won fight */
-  rarity: { normal: [0.92, 0.075, 0.005], elite: [0.5, 0.4, 0.1], boss: [0, 0.75, 0.25], treasure: [0.5, 0.38, 0.12], runner: [0.6, 0.34, 0.06], depthShift: 0.03, rareStage: 5, epicStage: 8 },
+  rarity: { normal: [0.9, 0.09, 0.01], elite: [0.5, 0.4, 0.1], boss: [0.5, 0.4, 0.1], bossUp: 1, treasure: [0.5, 0.38, 0.12], runner: [0.6, 0.34, 0.06], depthShift: 0.03, rareStage: 3, epicStage: 6 },   /* bossUp: a boss's tile is one rarity above the roll (capped by the tier) */
   /* number budget: wider reach means a lower number. n = base[rarity] x lanePen[lanes] x cellBonus[cells] x jitter */
   budget: {
     attackBase: [4, 6, 8], lanePen: { 1: 1, 2: 0.65, 3: 0.4 }, cellBonus: { 1: 1, 2: 1.2, 3: 1.35, 4: 1.5 },
@@ -764,19 +767,19 @@ var CONFIG = {
   /* the ten difficulty tiers (the old stages). hp = per enemy column at step 0, atk = enemy attack, colours = team colours in play (r b g y p in order) */
   stages: [
     { name: 'Dawn Gate',  cols: 3, rows: 2, colours: 3, hp: 8, atk: 3, heroHp: 20, coin: 1, boss: 'plain',    intro: 'Forward attacks and Sandwich' },
-    { name: 'Meadow',     cols: 3, rows: 3, colours: 3, hp: 14, atk: 3, heroHp: 24, coin: 1, boss: 'twin',     intro: 'Boosts, side attacks, double sandwiches and bonus cells' },
-    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 22, atk: 4, heroHp: 28, coin: 1.2, boss: 'block',    intro: 'Three-lane attacks, Guards and unit skills' },
-    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 32, atk: 4, heroHp: 30, coin: 1.2, boss: 'aegis',    intro: 'Multipliers, two-cell tiles, row and column boosts, Runners' },
-    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 56, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Copy tiles, three-cell tiles, rainbow tiles, Rare tiles' },
-    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 96, atk: 5, heroHp: 34, coin: 1.4, boss: 'sealed',   intro: 'Cross boosts' },
-    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 215, atk: 7, heroHp: 36, coin: 1.6, boss: 'shield',   intro: 'Line multipliers and four-cell tiles' },
-    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 228, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Epic tiles' },
-    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 265, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Bigger boards' },
-    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 210, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
+    { name: 'Meadow',     cols: 3, rows: 3, colours: 3, hp: 14, atk: 3, heroHp: 24, coin: 1.3, boss: 'twin',     intro: 'Boosts, side attacks, double sandwiches and bonus cells' },
+    { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 22, atk: 4, heroHp: 28, coin: 1.6, boss: 'block',    intro: 'Three-lane attacks, Guards, unit skills and Rare tiles' },
+    { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 32, atk: 4, heroHp: 30, coin: 2, boss: 'aegis',    intro: 'Multipliers, two-cell tiles, row and column boosts, Runners' },
+    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 56, atk: 6, heroHp: 32, coin: 2.4, boss: 'plate',    intro: 'Copy tiles, three-cell tiles and rainbow tiles' },
+    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 90, atk: 5, heroHp: 34, coin: 3, boss: 'sealed',   intro: 'Cross boosts and Epic tiles' },
+    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 140, atk: 7, heroHp: 36, coin: 3.8, boss: 'shield',   intro: 'Line multipliers and four-cell tiles' },
+    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 200, atk: 8, heroHp: 38, coin: 4.8, boss: 'deadrow',  intro: 'Dead rows and bigger numbers' },
+    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 250, atk: 9, heroHp: 40, coin: 6, boss: 'colours2', intro: 'Bigger boards' },
+    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 290, atk: 7, heroHp: 44, coin: 7.5, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
   ],
   /* lessons: puzzles that must be solved before the first stage of each difficulty (each teaches the tiles that start to appear there) */
   lessons: { 1: ['p01', 'p02'], 2: ['p03', 'p06', 'p04', 'p05'], 3: ['p08', 'p07', 'p16', 'h1'], 4: ['p11', 'p13', 'p10'], 5: ['p12', 'p15', 'p14', 'p09'] },
-  firstClear: { coins: [5, 6, 7, 8, 9, 10, 11, 12, 14, 20] },
+  firstClear: { coins: [5, 7, 9, 11, 14, 17, 21, 26, 32, 40] },
   /* the size of every unit effect (the rule of each effect is in EFFECTS; only these numbers are tunable) */
   /* level bonus by level 1..8 (index 0..7): attacks by the columns reached (1, 2, 3, 4 or more), local boosts, line boosts, multipliers, copies */
   lvl: { a: [[0, 1, 2, 3, 4, 5, 6, 7], [0, 1, 1, 2, 2, 3, 3, 4], [0, 0, 1, 1, 1, 2, 2, 3], [0, 0, 0, 1, 1, 1, 2, 2]], pl: [0, 0, 0, 1, 1, 2, 2, 3], pr: [0, 0, 0, 0, 1, 1, 2, 2], x: [0, 0, 0, 0, 0, 0, 0, 0], e: [0, 0, 1, 1, 2, 2, 3, 3] },
@@ -798,18 +801,18 @@ var HEROES = [
 ];
 var HERO_BY_ID = {}; HEROES.forEach(function (h) { HERO_BY_ID[h.id] = h; });
 var RELICS = [
-  { id: 'triple', name: 'Triple Bread', line: 'Sandwiches triple instead of double.' },
-  { id: 'front', name: 'Front Line', line: 'Attack tiles in the front row get +1.' },
-  { id: 'back2', name: 'Back Line', line: 'Attack tiles in the back row get +2.' },
+  { id: 'triple', name: 'Golden Crust', line: 'Your most sandwiched tile counts one more.' },
+  { id: 'front', name: 'Front Line', line: 'Attack tiles in the front row get +1 (more on harder boards).' },
+  { id: 'back2', name: 'Back Line', line: 'Attack tiles in the back row get +2 (more on harder boards).' },
   { id: 'heal4', name: 'Hearty', line: 'A tile sandwiched in both row and column heals you 2 HP.' },
   { id: 'forkown', name: 'Full Fork', line: 'Forks (left and right attacks) also hit their own column.' },
-  { id: 'colourful', name: 'Palette', line: 'Every attack tile gets +1 per different colour on the board.' },
-  { id: 'big3', name: 'Heavy Hand', line: 'Tiles covering 2 or more cells get +3.' },
+  { id: 'colourful', name: 'Palette', line: 'Every attack tile gets +1 per different colour on the board (more on harder boards).' },
+  { id: 'big3', name: 'Heavy Hand', line: 'Tiles covering 2 or more cells get +3 (more on harder boards).' },
   { id: 'bonus2', name: 'Lucky Cells', line: 'Bonus cells count twice.' },
   { id: 'twice', name: 'Second Chance', line: 'Your ' + HWl + ' ability can be used twice per fight.' },
   { id: 'mom', name: 'Head Start', line: 'The first attack of each fight has momentum +1.' },
-  { id: 'boost1', name: 'Bright Boost', line: 'Boost tiles are +1 stronger.' },
-  { id: 'copy2', name: 'Echo Chamber', line: 'Copy tiles get +2.' }
+  { id: 'boost1', name: 'Bright Boost', line: 'Boost tiles are +1 stronger (more on harder boards).' },
+  { id: 'copy2', name: 'Echo Chamber', line: 'Copy tiles get +2 (more on harder boards).' }
 ];
 var RELIC_ICON = {
   triple: '<path d="M4 7h16M4 12h16M4 17h16"/>', front: '<path d="M12 20V7M6 12l6-6 6 6M5 3h14"/>', back2: '<path d="M12 4v13M6 12l6 6 6-6M5 21h14"/>',
@@ -1026,6 +1029,7 @@ function evaluate(F, board, opts) {
   var ea = [];
   F.enemies.forEach(function (e, ek) { for (var cc = e.c; cc < e.c + e.w; cc++) ea[cc] = ek; });
   var relic = {}; (F.relics || []).forEach(function (r) { relic[r] = 1; });
+  var rl = function (n) { return Math.max(1, Math.round(n * (1 + (CONFIG.relicTier || 0) * ((F.tier || 1) - 1)))); };   /* flat relic bonuses grow with the difficulty tier */
   var fx = F.fx || {}, fxOf = function (t) { return fxIds(fx, t.c); }, fxIs = function (t, id) { return fxIds(fx, t.c).indexOf(id) >= 0; }, fxAny = function (id) { for (var k9 in fx) if (fxHas(fx, k9, id)) return true; return false; };
   var prismId = opts.prism || 0, overId = opts.over || 0;
   var nOf = function (t) { return t.id === overId ? t.n * CONFIG.hero.over : t.n; };
@@ -1074,7 +1078,7 @@ function evaluate(F, board, opts) {
     if (g.t.k !== 'x') return;
     var mn0 = g.t.n + (fxIs(g.t, 'mult1') ? FN.mult1 : 0); targetsOf(g).forEach(function (gi) { if (G[gi].t.k !== 'x') { G[gi].mul += mn0 - 1; g.targets++;   /* multipliers add: x2 and x2 make x3 */ } });
   });
-  var SF = relic.triple ? 3 : 2;
+  var SF = 2;
   var lineF = function (xs) { var f = 0; xs.forEach(function (x) { var v = fxHas(fx, x, 'triple') ? Math.max(FN.triple, SF) : SF; if (v > f) f = v; }); return f; };
   /* sandwich: every row line and every column line through the tile counts once, if both ends of the tile's span on that line have matching outer tiles; each line multiplies by 2 (3 with Triple Bread) */
   G.forEach(function (g) {
@@ -1093,6 +1097,7 @@ function evaluate(F, board, opts) {
     if (nl > 0 && fxIs(t, 'extraline')) prod += SF - 1;   /* sandwiches add: one line x2, two lines x3, three lines x4 */
     g.sand = prod; g.nl = nl;
   });
+  if (relic.triple) { var bg = null; G.forEach(function (g) { if (g.sand > 1 && (!bg || g.sand > bg.sand || (g.sand === bg.sand && nOf(g.t) > nOf(bg.t)))) bg = g; }); if (bg) bg.sand += 1; }   /* Golden Crust: the most sandwiched tile counts one more */
   /* the lanes an attack tile hits (relic Full Fork, unit effect Long Arm) and the columns that gives */
   var lanesOf = function (g) {
     var t = g.t, lanes = t.k === 'e' ? [0] : (relic.forkown && t.d === '<>') ? [-1, 0, 1] : laneOffsets(t.d);
@@ -1107,11 +1112,11 @@ function evaluate(F, board, opts) {
   var ncolN = 0; if (relic.colourful || fxAny('palette1')) { var seenC = {}; G.forEach(function (g) { tileColours(g.t).forEach(function (x) { seenC[x] = 1; }); }); ncolN = Object.keys(seenC).length; }
   G.forEach(function (g) {
     var k0 = g.t.k; if (k0 !== 'a' && k0 !== 'e') return; var ra = 0;
-    if (relic.front && g.rows.indexOf(0) >= 0) ra += 1;
-    if (relic.back2 && g.rows.indexOf(F.rows - 1) >= 0) ra += 2;
-    if (relic.colourful) ra += ncolN;
-    if (relic.big3 && g.cells.length > 1) ra += 3;
-    if (relic.copy2 && k0 === 'e') ra += 2;
+    if (relic.front && g.rows.indexOf(0) >= 0) ra += rl(1);
+    if (relic.back2 && g.rows.indexOf(F.rows - 1) >= 0) ra += rl(2);
+    if (relic.colourful) ra += ncolN * rl(1);
+    if (relic.big3 && g.cells.length > 1) ra += rl(3);
+    if (relic.copy2 && k0 === 'e') ra += rl(2);
     fxOf(g.t).forEach(function (e0) {   /* unit skills, scoped to the tile's colour; every active skill stacks */
       if (e0 === 'atk1' || e0 === 'atk2' || e0 === 'atk3') ra += FN[e0];
       else if (e0 === 'front1' && g.rows.indexOf(0) >= 0) ra += FN.front1;
@@ -1143,7 +1148,7 @@ function evaluate(F, board, opts) {
   /* boosters */
   G.forEach(function (g) {
     var t = g.t; if (t.k !== 'p') return;
-    g.pw = (nOf(t) + g.add + mom + (relic.boost1 ? 1 : 0) + (fxIs(t, 'boostp1') ? FN.boostp1 : 0)) * (g.mul + g.sand - 1) * (fxIs(t, 'linepow') && /[RCB]/.test(t.d) ? FN.linepow : 1);
+    g.pw = (nOf(t) + g.add + mom + (relic.boost1 ? rl(1) : 0) + (fxIs(t, 'boostp1') ? FN.boostp1 : 0)) * (g.mul + g.sand - 1) * (fxIs(t, 'linepow') && /[RCB]/.test(t.d) ? FN.linepow : 1);
     targetsOf(g).forEach(function (gi) { var k2 = G[gi].t.k; if (k2 === 'a' || k2 === 'e') { G[gi].boost += g.pw; g.targets++; } });
   });
   G.forEach(function (g) { if ((g.t.k === 'a' || g.t.k === 'e') && g.boost > 0 && fxIs(g.t, 'boosted2')) g.radd += FN.boosted2; });
@@ -1198,10 +1203,15 @@ function evaluate(F, board, opts) {
 /* ---- loot and tile generation ---- */
 function pick(a, rnd) { return a[(rnd() * a.length) | 0]; }
 function maxRarity(stage) { return stage >= CONFIG.rarity.epicStage ? 2 : stage >= CONFIG.rarity.rareStage ? 1 : 0; }
-function rollRarity(odds, depth, stage, rnd, min) {
+function rollRarity(odds, depth, stage, rnd, min, up) {
   var d = CONFIG.rarity.depthShift * depth, rare = odds[1] + d, epic = odds[2] + d / 3, x = rnd();
   var r = x < epic ? 2 : x < epic + rare ? 1 : 0;
-  return Math.min(maxRarity(stage), Math.max(r, min || 0));
+  return Math.min(maxRarity(stage), Math.max(r + (up || 0), min || 0));
+}
+/* the player's tile collection by kind (a / p / x / e): drops lean towards the kind owned least. Counted from the colourless inventory, the collected tiles and the loot of this run */
+function runOwn(run) {
+  var o = run.ownK; if (!o) return null;
+  var c = Object.assign({}, o); (run.loot || []).forEach(function (t) { c[t.k] = (c[t.k] || 0) + 1; }); return c;
 }
 function shapesFor(stage, F, rnd, maxSize) {
   var sizes = []; if (stage >= 4) sizes.push(2); if (stage >= 5) sizes.push(3); if (stage >= 7) sizes.push(4);
@@ -1214,6 +1224,7 @@ function shapesFor(stage, F, rnd, maxSize) {
 function genSpec(rar, stage, rnd, opts) {
   opts = opts || {}; var B = CONFIG.budget, S = CONFIG.stages[stage - 1], k, d, sh = 'o', r = rnd();
   var kinds = [['a', 0.55]]; if (stage >= 2) kinds.push(['p', 0.2]); if (stage >= 4) kinds.push(['x', 0.08]); if (stage >= 5) kinds.push(['e', 0.08]);
+  if (opts.own && CONFIG.supply && CONFIG.supply.lean) kinds = kinds.map(function (x) { return [x[0], x[1] / (1 + CONFIG.supply.lean * (opts.own[x[0]] || 0))]; });   /* lean towards the kind the player owns least */
   var sum = kinds.reduce(function (s, x) { return s + x[1]; }, 0), acc = 0; r *= sum;
   for (var i = 0; i < kinds.length; i++) { acc += kinds[i][1]; if (r < acc) { k = kinds[i][0]; break; } }
   k = k || 'a';
@@ -1236,8 +1247,8 @@ function genSpec(rar, stage, rnd, opts) {
 }
 /* colourless tiles can never be part of a sandwich, so their numbers are CONFIG.colourlessFactor times higher (multipliers get +1) */
 function colourlessNum(k, n) { var f = CONFIG.colourlessFactor || 1; return k === 'x' ? n : Math.round(n * f); }
-function genColourless(rar, stage, rnd) { var s = genSpec(rar, stage, rnd); s.n = colourlessNum(s.k, s.n); s.rar = rar; s.st = 0; return s; }
-function lootTile(source, depth, stage, rnd, min) { return genColourless(rollRarity(CONFIG.rarity[source], depth, stage, rnd, min), stage, rnd); }
+function genColourless(rar, stage, rnd, own) { var s = genSpec(rar, stage, rnd, own ? { own: own } : undefined); s.n = colourlessNum(s.k, s.n); s.rar = rar; s.st = 0; return s; }
+function lootTile(source, depth, stage, rnd, min, own) { return genColourless(rollRarity(CONFIG.rarity[source], depth, stage, rnd, min, source === 'boss' ? CONFIG.rarity.bossUp : 0), stage, rnd, own); }
 function stageCfg(run) { return CONFIG.stages[run.stage - 1]; }
 /* the drop table of a stage cell: colour weights (only colours in play), pick rarity and shape odds and a rainbow chance, by distance d from the origin (0..6) and the region's colour bias */
 function dropFor(tier, d, bias) {
@@ -1318,6 +1329,8 @@ function shownAreas(cleared, all) {
   });
   return out;
 }
+/* Endless opens when the area CONFIG.map.endlessArea is done (Fairmeet, the first wall) */
+function endlessUnlocked(cleared) { var A = areaInfo(CONFIG.map.endlessArea); return !A || areaDone(A, cleared); }
 function doneAreaCount(cleared) { var M = mapData(); return M.order.filter(function (id) { return areaDone(M.areas[id], cleared); }).length; }
 /* the areas that open when `key` is cleared (and were closed before) */
 function opensWith(cleared, key) {
@@ -1351,7 +1364,7 @@ function genRunTile(run, rnd, wantNew) {
   for (i = 0; i < 60; i++) {
     var c = wpick(dr.colours, rnd), x = rnd();
     var rar = Math.min(maxRarity(run.stage), x < dr.epic ? 2 : x < dr.epic + dr.rare ? 1 : 0);
-    var sp = genSpec(rar, run.stage, rnd, rar ? undefined : { multiChance: dr.shape });
+    var sp = genSpec(rar, run.stage, rnd, rar ? { own: runOwn(run) } : { multiChance: dr.shape, own: runOwn(run) });
     t = { c: c, u: run.team[c], k: sp.k, d: sp.d, n: sp.n, sh: sp.sh, rar: rar };
     var st = tileStars(t);
     if (!low || st < tileStars(low)) low = t;
@@ -1398,7 +1411,8 @@ function genPicks(run, rnd) {
 function mkEnemy(c, w, hp, atk, kind) { return { c: c, w: w, hp: hp, max: hp, atk: atk, kind: kind || 'p', need: 1, boss: false, twin: 0, cols2: false, dead: false, gone: false }; }
 function genFight(run, kind, rnd, o) {
   rnd = rnd || Math.random; o = o || {};
-  var S = stageCfg(run), cols = S.cols, R = S.rows, scale = Math.pow(1 + CONFIG.growth, run.won), K = CONFIG[kind], i, enemies = [], tricks = [], F;
+  var S = stageCfg(run), cols = S.cols, R = S.rows, K = CONFIG[kind], i, enemies = [], tricks = [], F;
+  var scale = run.mode === 'endless' ? Math.pow(1 + CONFIG.endlessGrowth, run.depth) * Math.pow(1 + CONFIG.growth, run.step) : Math.pow(1 + CONFIG.growth, run.won);   /* a campaign run grows per fight won; Endless per depth (and a little within a depth) */
   if (o.mid) { var MB = CONFIG.midBoss; K = Object.assign({}, K, { hp: K.hp * MB.hp, atk: K.atk * MB.atk, coin: K.coin * MB.coin }); }
   var jit = function () { return 1 - CONFIG.jitter / 2 + CONFIG.jitter * rnd(); };
   var atkOf = function (w, f) { return Math.max(1, Math.round(S.atk * Math.pow(1 + 0.5 * CONFIG.growth, run.won) * K.atk * (w > 1 ? 1.3 : 1) * (f || 1))); };
@@ -1460,9 +1474,9 @@ function genFight(run, kind, rnd, o) {
   }
   var coins = Math.round(CONFIG.coinBase * S.coin * K.coin * (1 + CONFIG.coinDepth * run.depth));
   var tile = null;
-  if (kind === 'boss') tile = lootTile('boss', run.depth, run.stage, rnd, Math.min(1, maxRarity(run.stage)));
-  else if (rnd() < K.tile) tile = lootTile(kind === 'elite' ? 'elite' : 'normal', run.depth, run.stage, rnd);
-  F = { cols: cols, rows: R, enemies: enemies, blocked: blocked, bonus: bonus, tricks: tricks, colMul: colMul, deadRow: deadRow, phases: phases, tb: -1, tn: -1, sc: -1, sn: -1 };
+  if (kind === 'boss') tile = lootTile('boss', run.depth, run.stage, rnd, Math.min(1, maxRarity(run.stage)), runOwn(run));
+  else if (rnd() < K.tile) tile = lootTile(kind === 'elite' ? 'elite' : 'normal', run.depth, run.stage, rnd, 0, runOwn(run));
+  F = { cols: cols, rows: R, enemies: enemies, blocked: blocked, bonus: bonus, tricks: tricks, colMul: colMul, deadRow: deadRow, phases: phases, tb: -1, tn: -1, sc: -1, sn: -1, tier: run.stage };
   if (kind === 'boss') F.bossTrick = o.trick || run.bossTrick || S.boss;
   var reward = { coins: coins, tile: tile };
   if (kind === 'boss' && run.mode === 'stage' && run.drop && run.drop.rainbow > 0 && rnd() < run.drop.rainbow) reward.rainbow = genRainbow(run.stage, rnd);
@@ -1494,6 +1508,7 @@ function newRun(mode, stage, team, units, colourless, rnd, hero, opt) {
   rnd = rnd || Math.random; opt = opt || {};
   var S = CONFIG.stages[stage - 1], run = { mode: mode, stage: stage, hero: hero || null, relics: [], nid: 0, bag: [], team: team, step: 0, depth: 0, won: 0, fights: 0, coins: 0, loot: [], mom: 0, over: null, pending: null, fs: null, board: null,
     len: opt.len || CONFIG.stageSteps, mid: opt.mid === undefined ? -1 : opt.mid, cell: opt.cell || null, locked: opt.locked || null, ushards: {}, drop: opt.drop || dropFor(stage, tierDist(stage)), fx: {}, bossTrick: opt.trick || null, owned: null, firstPick: false };
+  run.ownK = opt.ownK || null; run.wish = opt.wish || null;
   if (opt.owned) { run.owned = {}; opt.owned.forEach(function (k) { run.owned[k] = 1; }); }   /* owned tile types (colour|token) of the collection; null = not tracked (balance tools) */
   var rbLeft = CONFIG.rainbow.maxTeam;
   COLOR_IDS.slice(0, S.colours).forEach(function (c) {
@@ -1518,7 +1533,7 @@ function initTricks(F, rnd) {
 }
 function startFight(run, offer, rnd) {
   rnd = rnd || Math.random;
-  var F = JSON.parse(JSON.stringify(offer.F)); initTricks(F, rnd); F.relics = (run.relics || []).slice(); F.fx = JSON.parse(JSON.stringify(run.fx || {}));
+  var F = JSON.parse(JSON.stringify(offer.F)); F.tier = F.tier || run.stage; initTricks(F, rnd); F.relics = (run.relics || []).slice(); F.fx = JSON.parse(JSON.stringify(run.fx || {}));
   var fs = { kind: offer.kind, mid: !!offer.mid, F: F, reward: offer.reward, turn: 0, mom: run.mom + (F.relics.indexOf('mom') >= 0 ? 1 : 0), used: 0, extra: [], hpStart: run.hp,
     hero: { id: run.hero || null, uses: 0, max: F.relics.indexOf('twice') >= 0 ? 2 : 1, armed: false, target: 0, windIds: [] } };
   run.mom = 0; run.bag.forEach(function (t) { t.rest = false; });
@@ -1539,7 +1554,7 @@ function resolveAttack(run, fs, board, rnd) {
     e.hp -= res.en[k].dmg;
     if (e.hp <= 0) {
       e.hp = 0; e.dead = true; info.kills.push(k);
-      if (e.kind === 'r') { var lt = lootTile('runner', run.depth, run.stage, rnd); fs.extra.push(lt); info.runnerLoot.push(lt); }
+      if (e.kind === 'r') { var lt = lootTile('runner', run.depth, run.stage, rnd, 0, runOwn(run)); fs.extra.push(lt); info.runnerLoot.push(lt); }
     }
   });
   fs.mom = 0; fs.turn++; fs.used += info.used;
@@ -1637,7 +1652,7 @@ function chooseNode(run, kind, rnd) {
     var h = Math.min(run.maxHp - run.hp, Math.ceil(run.maxHp * CONFIG.restHeal)); run.hp += h;
     run.pending = { type: 'rest', heal: h, picks: null };
   } else {
-    var t = lootTile('treasure', run.depth, run.stage, rnd); run.loot.push(t);
+    var t = lootTile('treasure', run.depth, run.stage, rnd, 0, runOwn(run)); run.loot.push(t);
     run.pending = { type: 'treasure', tile: t, picks: null };
   }
   run.step++;
@@ -1645,11 +1660,21 @@ function chooseNode(run, kind, rnd) {
 function applyPick(run, i, rnd) {
   var p = run.pending, o = p && p.picks && p.picks[i];
   if (o) {
-    if (o.type === 'tile') run.bag.push(mkTile(run, o.tile.c, o.tile.u, o.tile, { added: true, rar: o.tile.rar || 0 }));
+    if (o.type === 'tile') { run.bag.push(mkTile(run, o.tile.c, o.tile.u, o.tile, { added: true, rar: o.tile.rar || 0 })); if (run.mode === 'endless') trimBag(run); }
     else if (o.type === 'up') { var t = run.bag.filter(function (x) { return x.id === o.tid; })[0]; if (t) applyUpgrade(t, o); }
     else if (o.type === 'heal') run.hp = Math.min(run.maxHp, run.hp + o.amt);
   }
   run.pending = null; run.offers = genOffers(run, rnd);
+}
+/* Endless: the bag keeps only the best CONFIG.endlessBagAdded tiles picked in the run (the weakest is dropped) */
+function pickValue(t) { var cells = cellsOf(t).length, n = (t.n || 0); return t.k === 'a' ? n * Math.pow(laneOffsets(t.d).length, 0.8) * Math.pow(cells, 0.7) : t.k === 'e' ? n + 4 : n * 2.5 * Math.pow(cells, 0.5); }
+function trimBag(run) {
+  var cap = CONFIG.endlessBagAdded; if (!cap) return;
+  for (;;) {
+    var added = run.bag.filter(function (t) { return t.added; }); if (added.length <= cap) return;
+    var worst = added[0]; added.forEach(function (t) { if (pickValue(t) < pickValue(worst)) worst = t; });
+    run.bag.splice(run.bag.indexOf(worst), 1); run.trimmed = (run.trimmed || 0) + 1;
+  }
 }
 function settle(run, how) {   /* how: 'bank' or 'dead' -> what the player keeps */
   var keep = how === 'bank' ? 1 : CONFIG.deathKeep;
@@ -1676,10 +1701,13 @@ function replayReward(stage, key, rnd) {
 function eliteShards(run, rnd) {
   var S = stageCfg(run), cols = COLOR_IDS.slice(0, S.colours);
   var pool = UNITS.filter(function (u) { return cols.indexOf(u.c) >= 0 && (run.locked ? run.locked.indexOf(u.id) >= 0 : CONFIG.starters.indexOf(u.id) < 0); });
-  if (!pool.length) return null;
+  if (!pool.length && !(run.wish && UNIT_BY_ID[run.wish])) return null; if (!pool.length) pool = [UNIT_BY_ID[run.wish]];
   var u = pool[Math.floor(rnd() * pool.length)], E = CONFIG.shards.elite;
+  if (run.wish && UNIT_BY_ID[run.wish] && (run.locked ? run.locked.indexOf(run.wish) >= 0 : true)) u = UNIT_BY_ID[run.wish];   /* the wishlist unit gets the shards, whatever its colour */
   return { u: u.id, n: E[0] + Math.floor(rnd() * (E[1] - E[0] + 1)) };
 }
+/* a spare shard of an owned unit is worth coins (by rarity) */
+function shardCoins(uid, n) { var u = UNIT_BY_ID[uid]; return u ? n * CONFIG.shards.coin[u.rar] : 0; }
 /* ---- puzzle shrines: one attack, fixed board, enemies and hand ---- */
 function puzzleFight(def) {
   var enemies = def.enemies.map(function (e) { return { c: e[0], w: e[1], hp: e[2], max: e[2], atk: 0, kind: 'p', need: e[3] || 1, boss: false, twin: 0, cols2: false, dead: false, gone: false }; });
@@ -1764,7 +1792,7 @@ var store = null, SPEED = 1;
 function defaultStore() {
   var units = {}, team = {};
   UNITS.forEach(function (u) { var st = CONFIG.starters.indexOf(u.id) >= 0; if (st) team[u.c] = u.id; units[u.id] = { u: st, l: 1 }; });
-  var r0 = { v: 9, strip: 0, coins: CONFIG.startCoins, ushards: {}, units: units, team: team, slots: {}, ct: [], nid: 0, bag: [0, 0, 0], run: null, cleared: {}, sel: null, maxTier: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, tut: {}, seenEn: {}, ack: {}, dailyDone: '',
+  var r0 = { v: 9, strip: 0, wish: null, hinted: {}, coins: CONFIG.startCoins, ushards: {}, units: units, team: team, slots: {}, ct: [], nid: 0, bag: [0, 0, 0], run: null, cleared: {}, sel: null, maxTier: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, tut: {}, seenEn: {}, ack: {}, dailyDone: '',
     inv: [],
     set: { momentum: true, value: 1, ret: 'fight', stars: true, tlog: false, tut: true } };
   ackAllHints(r0); return r0;
@@ -1790,8 +1818,9 @@ function load() {
 /* a save from an older build or a damaged one: every field is checked and refilled from the defaults, and a run that cannot be resumed is dropped */
 function sanitizeStore(s, d) {
   var isO = function (x) { return !!x && typeof x === 'object' && !Array.isArray(x); }, isN = function (x) { return typeof x === 'number' && isFinite(x); };
-  ['units', 'team', 'slots', 'ushards', 'cleared', 'puzDone', 'tut', 'seenEn', 'ack', 'heroes', 'set'].forEach(function (k) { if (!isO(s[k])) s[k] = d[k]; });
+  ['units', 'team', 'slots', 'ushards', 'cleared', 'puzDone', 'tut', 'seenEn', 'ack', 'heroes', 'set', 'hinted'].forEach(function (k) { if (!isO(s[k])) s[k] = d[k]; });
   ['coins', 'nid', 'maxTier', 'endBest', 'runs', 'dailyLast'].forEach(function (k) { if (!isN(s[k]) || s[k] < 0) s[k] = d[k] || 0; });
+  if (typeof s.wish !== 'string' || !UNIT_BY_ID[s.wish]) s.wish = null; if (typeof s.strip !== 'number') s.strip = 0;
   if (typeof s.dailyDone !== 'string') s.dailyDone = ''; if (typeof s.sel !== 'string') s.sel = null; s.allStages = !!s.allStages;
   var okTile = function (e) { return isO(e) && isN(e.id) && typeof e.k === 'string' && isN(e.n); };
   s.ct = Array.isArray(s.ct) ? s.ct.filter(function (e) { return okTile(e) && (COLOR_IDS.indexOf(e.c) >= 0 || e.c === 'w'); }) : [];
@@ -1837,7 +1866,7 @@ function sleep(ms) { return new Promise(function (r) { setTimeout(r, S.skip ? 6 
 var S = { run: null, fs: null, board: [], sel: -1, tab: 'r', rtab: 'r', phase: 'edit', skip: false, hold: null, screen: 'home', reach: null };
 function unlockedStage() { return store.allStages ? 10 : Math.min(10, (store.maxTier || 0) + 1); }
 function revealed() { return availableStages(store.cleared, store.allStages); }
-function endlessOn() { return store.allStages || doneAreaCount(store.cleared) >= CONFIG.map.endlessAreas; }
+function endlessOn() { return store.allStages || endlessUnlocked(store.cleared); }
 /* the playable, not yet cleared stage to suggest: the next stage of the area just played when there is one, else the easiest open one (earliest on the map) */
 function frontier(after) {
   var M = mapData(), rv = revealed(), best = null;
@@ -1923,9 +1952,16 @@ function slotSpecs() {
 /* unit shards: have / need of a locked unit; unlock when complete */
 function shardsOf(uid) { return (store.ushards && store.ushards[uid]) || 0; }
 function shardNeed(u) { return CONFIG.shards.need[u.rar]; }
-function addShards(uid, n) { if (!uid || !n || !UNIT_BY_ID[uid]) return; store.ushards = store.ushards || {}; store.ushards[uid] = (store.ushards[uid] || 0) + n; }
+/* a shard of a unit you already own is worth coins; wishlist = the locked unit the player chose (daily, elite and Endless shards go to it) */
+function addShards(uid, n) {
+  if (!uid || !n || !UNIT_BY_ID[uid]) return;
+  if (store.units[uid] && store.units[uid].u) { store.coins += shardCoins(uid, n); return; }
+  store.ushards = store.ushards || {}; store.ushards[uid] = (store.ushards[uid] || 0) + n;
+}
+function wishUnit() { var w = store.wish; return w && UNIT_BY_ID[w] && store.units[w] && !store.units[w].u ? w : null; }
 /* the locked unit nearest to its unlock (rareFirst: prefer Rare and Epic units) */
 function nearUnit(rareFirst) {
+  var w = wishUnit(); if (w) return w;
   var c = UNITS.filter(function (u) { return !store.units[u.id].u; }); if (!c.length) return null;
   c.sort(function (a, b) { return (rareFirst ? b.rar - a.rar : 0) || (shardsOf(b.id) / shardNeed(b) - shardsOf(a.id) / shardNeed(a)); });
   return c[0].id;
@@ -1933,7 +1969,9 @@ function nearUnit(rareFirst) {
 function shardLine(uid, n) { tut('shards'); var u = UNIT_BY_ID[uid]; return '+' + n + ' ' + u.name + ' shard' + (n > 1 ? 's' : '') + ' <span class="ctext">(' + (store.units[uid].u ? 'unit owned' : Math.min(shardNeed(u), shardsOf(uid) + n) + ' / ' + shardNeed(u) + ' for ' + RARITY[u.rar] + ' ' + u.name) + ')</span>'; }
 function unlockUnit(uid) {
   var u = UNIT_BY_ID[uid], st = store.units[uid]; if (!u || st.u || shardsOf(uid) < shardNeed(u)) return false;
-  store.ushards[uid] -= shardNeed(u); st.u = true; st.l = 1; save(); return true;
+  var left = store.ushards[uid] - shardNeed(u); store.ushards[uid] = 0; st.u = true; st.l = 1; if (store.wish === uid) store.wish = null;
+  if (left > 0) store.coins += shardCoins(uid, left);   /* spare shards become coins */
+  save(); return true;
 }
 /* unit levels cost COINS (CONFIG.levelCoins) */
 function levelUp(uid) { var st = store.units[uid], need = CONFIG.levelCoins[st.l + 1]; if (!st.u || st.l >= CONFIG.lvlMax || store.coins < need) return false; store.coins -= need; st.l++; save(); return true; }
@@ -2148,12 +2186,28 @@ function startPuzzleUI(def, daily) {
   show('fight'); renderFight();
   tut('hold'); if (TUT_LESSON[def.id]) tut(TUT_LESSON[def.id]);
 }
+/* a once-per-puzzle hint: select the next tile of the hidden solution that is not in place and mark its cell */
+function hintKey() { return S.puz.daily ? 'd' + todayInfo().key : S.puz.def.id; }
+function puzHint() {
+  if (!S.puz || S.phase !== 'edit') return;
+  var def = S.puz.def, key = hintKey(), sol = def.sol || [], pick = null, i;
+  if (store.hinted[key]) return;
+  for (i = 0; i < sol.length && !pick; i++) if (S.board[sol[i][1]] !== S.run.bag[sol[i][0]].id) pick = sol[i];
+  if (!pick) return;
+  store.hinted[key] = 1; save();
+  var t = S.run.bag[pick[0]], cs = placeCells(t, pick[1], def.cols, def.rows) || [pick[1]];
+  if (S.board.indexOf(t.id) >= 0) unplace(S.board.indexOf(t.id));
+  S.tab = t.c; S.sel = t.id; renderFight();
+  cs.forEach(function (q) { var el = $('#fboard .cell[data-cell="' + q + '"]'); if (el) el.classList.add('hintc'); });
+  $('#finfo').textContent = 'Hint: this tile goes on the marked cell' + (cs.length > 1 ? 's' : '') + '.';
+}
 function puzzleWon() {
   var d = S.puz.def, r = d.reward || {}, first = S.puz.daily ? store.dailyDone !== todayInfo().key && todayInfo().seed > (store.dailyLast || 0) : !store.puzDone[d.id], h = '<div class="resbox win"><h2>Solved</h2>';
   if (first) {
     store.coins += r.coins || 0; var tl = null;
     if (r.tile) { var tp = parseTok(r.tile); tl = { k: tp.k, d: tp.d, n: tp.n, sh: tp.sh, rar: 0 }; addInv(tl); }
     if (r.shards) addShards(r.shards.u, r.shards.n);
+    else if (!S.puz.daily && d.need) { var pw = nearUnit(false); if (pw) { r = Object.assign({}, r, { shards: { u: pw, n: CONFIG.puzzleShards } }); addShards(pw, CONFIG.puzzleShards); } }   /* a quest puzzle: 1 shard of the wishlist unit */
     if (S.puz.daily && !r.shards) { var du = nearUnit(false); if (du) { r = Object.assign({}, r, { shards: { u: du, n: CONFIG.dailyShards } }); addShards(du, CONFIG.dailyShards); } }
     if (S.puz.daily) { store.dailyDone = todayInfo().key; store.dailyLast = todayInfo().seed; } else store.puzDone[d.id] = true;
     if (d.hero && !store.heroes[d.hero]) { store.heroes[d.hero] = true; h += '<p class="gold">New ' + HWl + ' unlocked: ' + HERO_BY_ID[d.hero].ab + '. Choose it on the ' + HWS + ' screen.</p>'; }
@@ -2332,7 +2386,7 @@ function renderHome() {
   var PZ = PUZZLES.filter(function (q) { return q.need; }), solved = PZ.filter(function (q) { return store.puzDone[q.id]; }).length, hv = HERO_BY_ID[store.hero];
   h += '<div class="dock5">' +
     '<button class="dk' + hd(hintPuzzles()) + '" data-act="puzzles"><span class="m" style="--c:var(--g)">' + ICON.puz + '</span>Puzzles<em>' + solved + ' of ' + PZ.length + '</em>' + rdot(hintPuzzles()) + '</button>' +
-    (endlessOn() ? '<button class="dk" data-act="endless"' + (run ? ' disabled' : '') + '><span class="m" style="--c:var(--x)">' + ICON.inf + '</span>Endless<em>best ' + store.endBest + '</em></button>' : '<button class="dk dash" data-act="endless"><span class="m">' + ICON.inf + '</span>Endless<em>' + doneAreaCount(store.cleared) + ' of ' + CONFIG.map.endlessAreas + ' areas</em></button>') +
+    (endlessOn() ? '<button class="dk" data-act="endless"' + (run ? ' disabled' : '') + '><span class="m" style="--c:var(--x)">' + ICON.inf + '</span>Endless<em>best ' + store.endBest + '</em></button>' : '<button class="dk dash" data-act="endless"><span class="m">' + ICON.inf + '</span>Endless<em>after ' + areaInfo(CONFIG.map.endlessArea).name + '</em></button>') +
     '<button class="dk' + hd(hintHeroes()) + '" data-act="heroes"><span class="m" style="--c:var(--p)">' + ICON.hero + '</span>' + HWS + '<em>' + hv.ab + '</em>' + rdot(hintHeroes()) + '</button>' +
     '<button class="dk' + hd(hintTeam()) + '" data-act="team"><span class="m" style="--c:var(--b)">' + ICON.team + '</span>Tiles<em>' + UNITS.filter(function (u) { return store.units[u.id].u; }).length + ' units</em>' + rdot(hintTeam()) + '</button>' +
     '<button class="dk" data-act="options" style="font-size:10px"><span class="m" style="--c:var(--x)">' + ICON.book + '</span>Guide<em>' + penCount().n + ' of ' + penCount().m + '</em></button></div>';
@@ -2392,7 +2446,7 @@ function tmRailHTML(u, sel) {
   var st = store.units[u.id], own = st.u, team = store.team[u.c] === u.id, sl = slotsOf(u.id), dots = '', i;
   for (i = 0; i < CONFIG.slotMax[u.rar]; i++) dots += '<i class="' + (i < sl.n ? (sl.t[i] && ctById(sl.t[i]) ? 'f' : 'o') : '') + '"></i>';
   var hu = hintUnit(u); return '<button class="tm-u c-' + u.c + ' r' + u.rar + (own ? '' : ' no') + (sel ? ' sel' : '') + hd(hu) + '" data-act="tmunit" data-u="' + u.id + '" aria-label="' + u.name + ', ' + RARITY[u.rar] + (own ? ', level ' + st.l : ', not owned') + (team ? ', in team' : '') + (sel ? ', viewing' : '') + '">' +
-    '<span class="tm-nm"><span class="t">' + u.name + (own ? '' : TM_LOCK) + '</span>' + (team ? '<span class="tm-badge">TEAM</span>' : '') + '</span>' +
+    '<span class="tm-nm"><span class="t">' + u.name + (own ? '' : TM_LOCK) + (store.wish === u.id && !own ? ' ★' : '') + '</span>' + (team ? '<span class="tm-badge">TEAM</span>' : '') + '</span>' +
     (own ? '<span class="tm-sub"><span><b>' + RARITY[u.rar] + '</b> &middot; L' + st.l + '</span><span class="tm-dots">' + dots + '</span></span>' : shardBarHTML(u, true)) +
     '<span class="tm-mt">' + tmTiles(u, own ? st.l : 1, { ts: 18, maxW: 87, maxH: 22, gap: 3 }) + '</span>' + rdot(hu) + '</button>';
 }
@@ -2455,7 +2509,7 @@ function tmBigHTML(u) {
   if (own) acts = '<div class="tm-acts">' +
     '<button class="tm-ab' + (team ? '' : ' pri') + '" data-act="pick" data-u="' + u.id + '"' + (team ? ' disabled' : '') + '>' + (team ? 'In team' : 'Pick') + '<small>' + (team ? 'one per colour' : 'for the team') + '</small></button>' +
     '<button class="tm-ab' + hd(hintLevel(u)) + '" data-act="level" data-u="' + u.id + '"' + (st.l >= CONFIG.lvlMax ? ' disabled' : '') + '>' + (st.l >= CONFIG.lvlMax ? 'Max level' : 'Level up') + '<small>' + (st.l >= CONFIG.lvlMax ? 'Lv ' + CONFIG.lvlMax : need + ' coins') + '</small>' + rdot(hintLevel(u)) + '</button></div>';
-  else { var rdy = shardsOf(u.id) >= shardNeed(u); acts = '<div class="tm-shw">' + shardBarHTML(u) + '<div class="ctext">' + shardSources(u) + '</div></div><div class="tm-acts"><button class="tm-ab pri wide' + hd(rdy) + '" data-act="unlock" data-u="' + u.id + '"' + (rdy ? '' : ' disabled') + '>' + (rdy ? 'Unlock ' + u.name : 'Unlock') + '<small>' + Math.min(shardsOf(u.id), shardNeed(u)) + ' / ' + shardNeed(u) + ' shards</small></button></div>'; }
+  else { var rdy = shardsOf(u.id) >= shardNeed(u), wl = store.wish === u.id; acts = '<div class="tm-shw">' + shardBarHTML(u) + '<button class="btn sm wishb' + (wl ? ' on' : '') + '" data-act="wish" data-u="' + u.id + '" aria-pressed="' + wl + '">' + (wl ? '★ On your wishlist' : '☆ Add to wishlist') + '</button><div class="ctext">' + (wl ? 'Daily, elite and Endless shards go to this unit.' : 'Put a unit on your wishlist and daily, elite and Endless shards go to it.') + ' ' + shardSources(u) + '</div></div><div class="tm-acts"><button class="tm-ab pri wide' + hd(rdy) + '" data-act="unlock" data-u="' + u.id + '"' + (rdy ? '' : ' disabled') + '>' + (rdy ? 'Unlock ' + u.name : 'Unlock') + '<small>' + Math.min(shardsOf(u.id), shardNeed(u)) + ' / ' + shardNeed(u) + ' shards</small></button></div>'; }
   return '<div class="tm-big c-' + c + ' r' + u.rar + (own ? '' : ' no') + '">' +
     '<div class="tm-bh"><span class="n">' + u.name + '</span><span class="tm-rp">' + RARITY[u.rar] + '</span>' + (own ? '<span class="tm-lv"><span class="tm-lvb">' + lv + '</span>Lv ' + st.l + '</span>' : '<span class="tm-lv">locked</span>') + '</div>' +
     '<div class="tm-r2">' + (team ? '<span class="tm-badge lg">IN TEAM</span>' : '') + '<span>Style: ' + u.style + '</span></div>' +
@@ -2652,6 +2706,7 @@ function startRunUI(mode, stage, cell) {
   if (store.run) return;
   S.puz = null;
   var opt = cell || {}; opt.slots = slotSpecs();
+  opt.ownK = {}; store.inv.concat(store.ct).forEach(function (e) { opt.ownK[e.k] = (opt.ownK[e.k] || 0) + 1; }); opt.wish = wishUnit();
   opt.owned = ctOwnedKeys(); opt.locked = UNITS.filter(function (u) { return !store.units[u.id].u; }).map(function (u) { return u.id; });
   S.run = newRun(mode, stage, store.team, runUnits(), chosenColourless(), null, store.hero, opt); S.fs = null; S.board = [];
   show('map');
@@ -2751,7 +2806,7 @@ function renderFight() {
   $('#ftiles').innerHTML = th + clampsHTML(res, cols, cs, gp);
   /* battle status: one fixed-height row of small icons (relics, unit skills, hero ability, boss tricks); tap or hold one for its card. Puzzles show their Idea strip here instead */
   var strip = '', ico = function (cls, card, svg, extra) { return '<button class="ri ' + cls + '" data-card="' + card + '" aria-label="' + (extra || '') + '">' + svg + '</button>'; };
-  if (S.puz) strip += '<div class="strip"><span class="t"><b>Idea:</b> ' + S.puz.def.teach + '</span></div>';
+  if (S.puz) strip += '<div class="strip"><span class="t"><b>Idea:</b> ' + S.puz.def.teach + '</span>' + (S.puz.def.sol && !store.hinted[hintKey()] ? '<button class="btn sm hintb" data-act="hint">Hint</button>' : '') + '</div>';
   else {
     F.tricks.forEach(function (tr) { strip += ico('trick', 'tr:' + tr, TRICK_ICON, 'Boss trick'); });
     if (F.deadRow >= 0) strip += ico('trick', 'tr:deadrow', TRICK_ICON, 'Boss trick');
@@ -2999,7 +3054,7 @@ function renderResult() {
     if (fr) {
       var fresh = opensWith(store.cleared, key), c3 = {}, kk; for (kk in store.cleared) c3[kk] = 1; c3[key] = 1;
       h += '<h2>First clear reward</h2><div class="inv frw">' + tileHTML(invTile(fr.tile), { ts: 36 }) + '<p class="gold">+' + fr.coins + ' coins and a colourless tile</p></div>' + (fr.shards ? '<p class="gold">' + shardLine(fr.shards.u, fr.shards.n) + '</p>' : '');
-      h += '<p>' + (fresh.length ? 'New on the map: <b>' + fresh.map(function (q) { return q.name; }).join(', ') + '</b>.' : '') + (!endlessOn() && doneAreaCount(c3) >= CONFIG.map.endlessAreas ? ' Endless mode is open.' : '') + '</p>';
+      h += '<p>' + (fresh.length ? 'New on the map: <b>' + fresh.map(function (q) { return q.name; }).join(', ') + '</b>.' : '') + (!endlessOn() && endlessUnlocked(c3) ? ' Endless mode is open.' : '') + '</p>';
     } else if (rp) h += '<h2>Replay bonus</h2><div class="inv frw">' + tileHTML(invTile(rp.tile), { ts: 36 }) + '<p class="gold">+' + rp.coins + ' coins and a colourless tile</p></div>' + (rp.shards ? '<p class="gold">' + shardLine(rp.shards.u, rp.shards.n) + '</p>' : '');
     else h += '<p class="ctext">Replay reward only; stages can be replayed for coins and tiles.</p>';
     var nh = fr ? newHeroes(Object.keys(store.cleared).length + 1) : [];
@@ -3539,8 +3594,8 @@ function settingsHTML() {
 }
 function endlessHTML() {
   var opts = ''; for (var t = 1; t <= (store.allStages ? 10 : store.maxTier || 1); t++) opts += '<option value="' + t + '"' + (t === Math.min(10, store.maxTier || 1) ? ' selected' : '') + '>Difficulty ' + t + ': ' + CONFIG.stages[t - 1].name + ' (' + CONFIG.stages[t - 1].cols + 'x' + CONFIG.stages[t - 1].rows + ')</option>';
-  if (!endlessOn()) return '<h3>Endless</h3><p style="font-size:14px;color:var(--ink)">Unlocks after you finish ' + CONFIG.map.endlessAreas + ' map areas (' + doneAreaCount(store.cleared) + ' so far). An area is finished when ' + CONFIG.map.openNeed + ' of its stages are cleared, or all of them when it has fewer.</p><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
-  return '<h3>Endless</h3><p style="font-size:14px;color:var(--ink)">Choose a board. Tile types and colours follow that difficulty. A boss every ' + CONFIG.endlessEvery + ' steps; the enemies keep growing; no tiles are kept here. Best depth ' + store.endBest + '.</p><div class="set"><label>Board</label><select id="endstage">' + opts + '</select></div><div class="btnrow"><button class="btn main" data-act="endgo">Play</button><button class="btn" data-act="close">Cancel</button></div>';
+  if (!endlessOn()) { var EA = areaInfo(CONFIG.map.endlessArea), en = Math.min(CONFIG.map.openNeed, EA.n); return '<h3>Endless</h3><p style="font-size:14px;color:var(--ink)">Unlocks when you finish ' + EA.name + ': clear ' + en + ' of its ' + EA.n + ' stages (' + clearedIn(EA, store.cleared) + ' so far).</p><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>'; }
+  return '<h3>Endless</h3><p style="font-size:14px;color:var(--ink)">Choose a board. Tile types and colours follow that difficulty. A boss every ' + CONFIG.endlessEvery + ' steps; the enemies grow about ' + Math.round(CONFIG.endlessGrowth * 100) + '% tougher with every depth; no tiles are kept here, and your bag keeps your best ' + CONFIG.endlessBagAdded + ' picked tiles. Best depth ' + store.endBest + '.</p><div class="set"><label>Board</label><select id="endstage">' + opts + '</select></div><div class="btnrow"><button class="btn main" data-act="endgo">Play</button><button class="btn" data-act="close">Cancel</button></div>';
 }
 
 /* keep one tile after a boss: i = candidate index, -1 = keep nothing */
@@ -3613,6 +3668,7 @@ document.addEventListener('click', function (e) {
     case 'pen': closeModal(); openPen(); break;
     case 'puzzles': openModal(puzzleListHTML() + '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>'); break;
     case 'heroes': var hph = heroPanelHTML(); HEROES.forEach(function (H) { if (store.heroes[H.id]) store.ack['H' + H.id] = 1; }); save(); openModal(hph + '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>'); break;
+    case 'wish': store.wish = store.wish === el.dataset.u ? null : el.dataset.u; save(); renderTeam(); break;
     case 'unlock': { var ul = el.dataset.u; if (unlockUnit(ul)) { S.tmSel = S.tmSel || {}; S.tmSel[UNIT_BY_ID[ul].c] = ul; S.tmCol = UNIT_BY_ID[ul].c; } renderTeam(); break; }
     case 'tmtab': S.tmTab = el.dataset.t; renderTeam(); window.scrollTo(0, 0); break;
     case 'tmcol': S.tmCol = el.dataset.c; renderTeam(); break;
@@ -3647,6 +3703,7 @@ document.addEventListener('click', function (e) {
     case 'finish': finishStage(); break;
     case 'settings': if (DEV) openModal(settingsHTML()); break;
     case 'options': openModal(optionsHTML()); break;
+    case 'hint': puzHint(); break;
     case 'stripnext': store.strip = Math.min(3, (store.strip || 0) + 1); save(); if (S.run && S.screen === 'map') renderMap(); break;
     case 'bag': openModal(bagHTML()); break;
     case 'close': closeModal(); break;
