@@ -13,4 +13,5 @@ Playwright is expected under `/opt/node-tools/node_modules` (or any `NODE_PATH`)
   - `validate.js` - checks the placement bot solves every puzzle and daily.
   - `verify-page.js` - older Playwright check of the real page with bot fights.
   - `puzgen.js` - puzzle generator (hidden-solution puzzles for the lesson / quest / daily sets).
+  - `puzfix.js` + `apply-puz.js` - regenerate the bot-failed puzzles (exhaustive checks) and write/order them in the page; `rel.js <tier> <n> [ids]` - relic A/B.
   - `encyclopedia.js` - enumerates every expressible tile, searches best boards for Column max / Total max, writes `ENCYC` into the page (Options > Encyclopedia); `node encyclopedia.js` (~90 s).

@@ -643,3 +643,6 @@ Reading: the x1.6 final wall is clear for both bots (skilled 9 %, casual 5 %); t
 - Puzzle "Solved" shows the solved board shrunk (`.sbg`) behind the card. The home info card is capped (126 px) on screens under 680 px tall, its text scrolls. The slot popup filters are one sideways-scrolling chip row (`ctFilterHTML(false, true)`). Collected sort uses the id as the final tie-break. The tile card title guards against an unknown rarity (the "undefined Red Strike" title could only come from `RARITY[t.rar]` with an out-of-range `rar`).
 - Tablet (width 600+): `#app` max 640 px, cells up to 110 px, the Attack bar stays at the bottom (checked at 820x1180).
 - Save: `.bak` is now only replaced by a save with progress; a save of another version `v` is copied to `.old` before the fresh default replaces it. No migration (older keys are separate).
+
+## Balance pass (20 November)
+See `docs/TILE_RUN_BALANCE.md`: new HP curve (8, 14, 22, 32, 80, 160, 380, 640, 880, 360), coins x1.25 per tier, shard needs 10/20/35 with a wishlist unit and spare shards to coins, scaled +N relics and Golden Crust, rares from tier 3 and epics from 6, Endless after Fairmeet (+7% HP per depth, bag capped at 8 picked tiles), skills at 8/18/30 stages, regenerated puzzles, Hint button, puzzle order by difficulty, rarity cut-offs 45/52/60/66.
