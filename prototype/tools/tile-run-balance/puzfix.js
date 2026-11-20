@@ -82,7 +82,7 @@ function questCandidate(old, spec, seed) {
     if (hp.some(x => x < 3)) continue;
     def.enemies = hp.map((x, c) => [c, 1, x]); if (!wins(def, sol)) continue;
     if (botRate(def, 6, 30) < 0.66) continue;
-    const w = countWins(def, 400000); if (w < 4) continue;
+    const w = countWins(def, 400000); if (w !== -1 && w < 4) continue;
     let rw = 0; const N = 3000, r2 = L.rng(seed * 7 + tries); for (let k = 0; k < N; k++) { const rp = randomPlace(def, r2); if (rp && wins(def, rp)) rw++; }
     if (rw / N > spec.maxWin) continue;
     def.sol = sol.map((c, i) => [i, c]); return Object.assign({}, old, def, { hardness: w });
@@ -97,6 +97,6 @@ R.PUZZLES.forEach(old => {
   else if (QS[old.id]) for (let s = 1; s <= 12 && !p; s++) p = questCandidate(old, QS[old.id], 900 + Number(old.id.slice(1)) * 17 + s);
   else return;
   if (!p) { console.error('FAILED', old.id); return; }
-  console.error(old.id, 'exhaustive wins', p.hardness, 'bot', botRate(p, 10, 30)); delete p.hardness; out[old.id] = p;
+  console.error(old.id, 'exhaustive wins', p.hardness, 'bot', botRate(p, 10, 30)); delete p.hardness; out[old.id] = p; console.log('@@' + JSON.stringify(p));
 });
 console.log(JSON.stringify(out));
