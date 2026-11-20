@@ -25,12 +25,12 @@ async function open(o = {}) {
   page.on('pageerror', e => errs.push('pageerror: ' + e.message));
   cdp = await ctx.newCDPSession(page);
   if (save) await ctx.addInitScript(s => { try { localStorage.setItem(s.k, s.v); } catch (e) {} }, { k: 'tileRunPrototype.v9', v: typeof save === 'string' ? save : JSON.stringify(save) });
-  await page.goto(URL + (tut ? '' : '?tut=0')); await sleep(400);
+  await page.goto(URL + (tut ? '?dev=1' : '?dev=1&tut=0')); await sleep(400);
   await page.evaluate(() => TR.setSpeed(0.05));
   return page;
 }
 const ev = (fn, arg) => page.evaluate(fn, arg);
-async function freshSave() { await ev(() => { localStorage.clear(); }); await page.goto(URL + '?tut=0'); await sleep(300); await ev(() => TR.setSpeed(0.05)); }
+async function freshSave() { await ev(() => { localStorage.clear(); }); await page.goto(URL + '?dev=1&tut=0'); await sleep(300); await ev(() => TR.setSpeed(0.05)); }
 async function setStore(fn) { return page.evaluate(`(${fn.toString()})(TR.store())`).then(async r => { await ev(() => TR.save()); return r; }); }
 async function startStage(idx = 0) {
   return ev(i => {

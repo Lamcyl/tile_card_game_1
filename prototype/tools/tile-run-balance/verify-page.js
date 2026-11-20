@@ -12,7 +12,7 @@ fs.mkdirSync(out, { recursive: true });
   const p = await ctx.newPage(); const errs = [];
   p.on('console', m => { if (m.type() === 'error') errs.push('console: ' + m.text()); });
   p.on('pageerror', e => errs.push('pageerror: ' + e.message));
-  await p.goto(URL); await p.waitForTimeout(400);
+  await p.goto(URL + '?dev=1'); await p.waitForTimeout(400);
   const shot = async n => { await p.waitForTimeout(150); await p.screenshot({ path: path.join(out, n + '.png') }); };
   await p.evaluate(() => TR.setSpeed(0.05));
   await shot('01-home');
