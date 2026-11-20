@@ -448,7 +448,7 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .hm-play:disabled{opacity:.35;box-shadow:none;cursor:default}
 .hm-bank{align-self:flex-start;margin-top:2px}
 .dock5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;flex:none}
-.helprow{flex:none;text-align:center;margin-top:-2px}.linkbtn{background:none;border:0;color:var(--muted);font:inherit;font-size:12px;padding:4px 10px;text-decoration:underline;cursor:pointer}
+.linkbtn{background:none;border:0;color:var(--muted);font:inherit;font-size:12px;padding:4px 10px;text-decoration:underline;cursor:pointer}
 .dk{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:70px;border-radius:14px;background:var(--panel);box-shadow:0 3px 0 var(--shadow);font-size:11px;font-weight:800;color:var(--ink);border:0;padding:4px 0}
 .dk .m{width:28px;height:28px;border-radius:9px;background:var(--c,var(--x));color:#fff;display:flex;align-items:center;justify-content:center}
 .dk .m svg{width:17px;height:17px}
@@ -2265,8 +2265,7 @@ function renderHome() {
     (endlessOn() ? '<button class="dk" data-act="endless"' + (run ? ' disabled' : '') + '><span class="m" style="--c:var(--x)">' + ICON.inf + '</span>Endless<em>best ' + store.endBest + '</em></button>' : '<button class="dk dash" data-act="endless"><span class="m">' + ICON.inf + '</span>Endless<em>' + doneAreaCount(store.cleared) + ' of ' + CONFIG.map.endlessAreas + ' areas</em></button>') +
     '<button class="dk' + hd(hintHeroes()) + '" data-act="heroes"><span class="m" style="--c:var(--p)">' + ICON.hero + '</span>' + HWS + '<em>' + hv.ab + '</em>' + rdot(hintHeroes()) + '</button>' +
     '<button class="dk' + hd(hintTeam()) + '" data-act="team"><span class="m" style="--c:var(--b)">' + ICON.team + '</span>Tiles<em>' + UNITS.filter(function (u) { return store.units[u.id].u; }).length + ' units</em>' + rdot(hintTeam()) + '</button>' +
-    '<button class="dk" data-act="pen" style="font-size:10px"><span class="m" style="--c:var(--x)">' + ICON.book + '</span>Encyclopedia<em>' + penCount().n + ' of ' + penCount().m + '</em></button></div>' +
-    '<div class="helprow"><button class="linkbtn" data-act="options">Help and options</button></div>';
+    '<button class="dk" data-act="options" style="font-size:10px"><span class="m" style="--c:var(--x)">' + ICON.book + '</span>Guide<em>' + penCount().n + ' of ' + penCount().m + '</em></button></div>';
   $('#home').innerHTML = h;
   var mv = $('#mapv'), u = Math.floor(((mv.clientWidth || 336) - 16) / CONFIG.map.w);
   mv.innerHTML = '<div class="mslab">' + mapSVG(u, sel) + '</div>'; mv.style.backgroundSize = u + 'px ' + u + 'px';
@@ -3443,7 +3442,7 @@ function openPen() {
   el.hidden = false; document.body.style.overflow = 'hidden'; penRender();
 }
 function optionsHTML() {
-  return '<h3>Help and options</h3><div class="btnrow"><button class="btn sm" data-act="help">How to play</button><button class="btn sm" data-act="tutlist">Tutorials</button></div>' +
+  return '<h3>Guide</h3><button class="btn main" style="width:100%;margin-bottom:8px" data-act="pen">Encyclopedia · ' + penCount().n + ' of ' + penCount().m + ' collected</button><div class="btnrow"><button class="btn sm" data-act="help">How to play</button><button class="btn sm" data-act="tutlist">Tutorials</button></div>' +
     '<div class="set"><label>Show tutorial popups</label><input type="checkbox" id="settut"' + (store.set.tut !== false ? ' checked' : '') + '></div>' +
     '<div class="btnrow"><button class="btn sm" data-act="reset">Reset save</button><button class="btn main sm" data-act="close">Close</button></div>';
 }
@@ -3537,7 +3536,7 @@ document.addEventListener('click', function (e) {
     case 'play': playCell(selKey()); break;
     case 'tutlist': openModal(tutListHTML()); break;
     case 'enc': if (DEV) { closeModal(); openEnc(); } break;
-    case 'pen': openPen(); break;
+    case 'pen': closeModal(); openPen(); break;
     case 'puzzles': openModal(puzzleListHTML() + '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>'); break;
     case 'heroes': var hph = heroPanelHTML(); HEROES.forEach(function (H) { if (store.heroes[H.id]) store.ack['H' + H.id] = 1; }); save(); openModal(hph + '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>'); break;
     case 'unlock': { var ul = el.dataset.u; if (unlockUnit(ul)) { S.tmSel = S.tmSel || {}; S.tmSel[UNIT_BY_ID[ul].c] = ul; S.tmCol = UNIT_BY_ID[ul].c; } renderTeam(); break; }
