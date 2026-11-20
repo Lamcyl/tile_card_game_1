@@ -67,7 +67,7 @@ const S = [
   { id: 'q09', name: 'Stack It', need: 'p12', teach: 'Multipliers and sandwiches stack.', cols: 4, rows: 3, n: 7, pool: ['a^2', 'a^3', 'a^4', 'xu2', 'xlr2'], must: ['xu2', 'xlr2'], maxWin: 0.003 },
   { id: 'q10', name: 'Echo', need: 'p14', teach: 'Copy the strongest tile.', cols: 4, rows: 3, n: 7, pool: ['a^3', 'a^4', 'a^5', 'eu1', 'pu1'], must: ['eu1'], maxWin: 0.003 },
   /* q11..q20: harder, bigger boards and combined mechanics */
-  { id: 'q11', name: 'Line Dance', need: 'p10', teach: 'Row and column boosts reach every tile on their line.', cols: 5, rows: 3, n: 7, pool: ['a^2', 'a^3', 'a^4', 'pR1', 'pC1'], must: ['pR1', 'pC1'], blocked: [7, 12], maxWin: 0.003 },
+  { id: 'q11', name: 'Line Dance', need: 'p10', teach: 'Row and column boosts reach every tile on their line.', cols: 5, rows: 3, n: 10, pool: ['a^2', 'a^3', 'a^4', 'a^3', 'pR1', 'pC1'], must: ['pR1', 'pC1'], blocked: [0, 14], maxWin: 0.003 },
   { id: 'q12', name: 'Wide Load', need: 'p13', teach: 'A two-cell tile hits two columns at once.', cols: 5, rows: 3, n: 7, pool: ['a^3', 'a^2', 'a^4#h2', 'a^5#h2', 'a^3#h2'], must: ['a^4#h2', 'a^5#h2'], maxWin: 0.003 },
   { id: 'q13', name: 'Boosted Echo', need: 'p14', teach: 'Boost first, then copy the boosted tile.', cols: 4, rows: 3, n: 7, pool: ['a^3', 'a^4', 'a^5', 'eu1', 'pu1', 'pu2'], must: ['eu1', 'pu2'], maxWin: 0.003 },
   { id: 'q14', name: 'Multiplier Sandwich', need: 'p12', teach: 'A multiplier and a sandwich add into one pool.', cols: 5, rows: 3, n: 8, pool: ['a^2', 'a^3', 'a^4', 'xu2', 'xlr2'], must: ['xu2', 'xlr2'], blocked: [0, 14], maxWin: 0.003 },
