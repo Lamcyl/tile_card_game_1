@@ -2740,7 +2740,7 @@ function renderFight() {
   var order = function (a, b) { return (a.k + a.d + a.sh) < (b.k + b.d + b.sh) ? -1 : (a.k + a.d + a.sh) > (b.k + b.d + b.sh) ? 1 : a.n - b.n; };
   var hand = handOf(S.tab).sort(order), restT = handOf(S.tab, true).sort(order);
   var placedT = run.bag.filter(function (t) { return t.c === S.tab && !t.rest && S.board.indexOf(t.id) >= 0; });
-  var hh = hand.concat(placedT).sort(order).map(function (t) {
+  var hh = hand.sort(order).map(function (t) {   /* tiles on the board leave no outline in the hand */
     if (S.board.indexOf(t.id) >= 0) { var sd = shapeDims(t), hs = HSZ(), mx = Math.max(sd[0], sd[1]), cp = sd[0] * sd[1] > 1 ? Math.min(hs, Math.floor((300 - (mx - 1) * 6) / mx), Math.floor((HH() - 14) / (sd[0] + (sd[0] - 1) * .11))) : hs, sg = Math.max(3, Math.round(cp * .11)); return '<div class="slot" style="width:' + (sd[1] * cp + (sd[1] - 1) * sg) + 'px;height:' + (sd[0] * cp + (sd[0] - 1) * sg) + 'px"></div>'; }
     return tileHTML(t, { ts: HSZ(), maxH: HH() - 14, attrs: 'data-h="' + t.id + '" data-card="t:' + t.id + '"', cls: (S.sel === t.id ? 'sel' : '') });
   }).join('');
