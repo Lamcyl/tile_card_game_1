@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Tile Run Prototype</title>
+<title>Tilewhist</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <style>
@@ -379,7 +379,7 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .pickc.owned{opacity:.5;filter:grayscale(.5);cursor:default}.pickc .ownb{display:inline-block;margin-left:4px;padding:0 6px;border-radius:8px;font-size:10.5px;font-weight:800;background:var(--ink);color:var(--bg);vertical-align:1px}.pickc .ownb.new{background:var(--ok);color:#fff}
 .ers{margin-left:6px;font-size:12px;font-weight:800;color:#c98a00;white-space:nowrap}
 .tile .chip{position:absolute;left:50%;bottom:calc(var(--u) * .06);transform:translateX(-50%);background:var(--chipbg);color:var(--chipink);border:1.5px solid var(--gold);border-radius:9px;padding:0 max(4px,calc(var(--u) * .09));height:max(13px,calc(var(--u) * .235));line-height:max(10px,calc(var(--u) * .18));font-size:max(9.5px,calc(var(--u) * .165));font-weight:800;font-style:normal;white-space:nowrap}
-.tile .cpa{position:absolute;width:0;height:0;border:calc(var(--u) * .16) solid transparent;pointer-events:none;z-index:3;font-style:normal}
+.tile .cpa{position:absolute;width:0;height:0;border:calc(var(--u) * .16) solid transparent;pointer-events:none;z-index:7;font-style:normal}
 .tile .cpa.d-u{left:50%;top:1px;transform:translate(-50%,-100%);border-bottom-color:var(--tf)}.tile .cpa.d-d{left:50%;bottom:1px;transform:translate(-50%,100%);border-top-color:var(--tf)}
 .tile .cpa.d-l{top:50%;left:1px;transform:translate(-100%,-50%);border-right-color:var(--tf)}.tile .cpa.d-r{top:50%;right:1px;transform:translate(100%,-50%);border-left-color:var(--tf)}
 .tile .upm{position:absolute;right:calc(var(--u) * .07);bottom:calc(var(--u) * .06);font-style:normal;font-size:max(7px,calc(var(--u) * .13));color:#ffd04a;line-height:1}
@@ -774,12 +774,12 @@ var CONFIG = {
     { name: 'Meadow',     cols: 3, rows: 3, colours: 3, hp: 14, atk: 3, heroHp: 24, coin: 1, boss: 'twin',     intro: 'Boosts, side attacks, double sandwiches and bonus cells' },
     { name: 'Grove',      cols: 4, rows: 3, colours: 4, hp: 22, atk: 4, heroHp: 28, coin: 1.2, boss: 'block',    intro: 'Three-lane attacks, Guards and unit skills' },
     { name: 'Marsh',      cols: 4, rows: 3, colours: 4, hp: 32, atk: 4, heroHp: 30, coin: 1.2, boss: 'aegis',    intro: 'Multipliers, two-cell tiles, row and column boosts, Runners' },
-    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 47, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Copy tiles, three-cell tiles, rainbow tiles, Rare tiles' },
-    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 80, atk: 5, heroHp: 34, coin: 1.4, boss: 'sealed',   intro: 'Cross boosts' },
-    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 180, atk: 7, heroHp: 36, coin: 1.6, boss: 'shield',   intro: 'Line multipliers and four-cell tiles' },
-    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 190, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Epic tiles' },
-    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 220, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Bigger boards' },
-    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 175, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
+    { name: 'Ridge',      cols: 5, rows: 3, colours: 5, hp: 56, atk: 6, heroHp: 32, coin: 1.4, boss: 'plate',    intro: 'Copy tiles, three-cell tiles, rainbow tiles, Rare tiles' },
+    { name: 'Mesa',       cols: 5, rows: 3, colours: 5, hp: 96, atk: 5, heroHp: 34, coin: 1.4, boss: 'sealed',   intro: 'Cross boosts' },
+    { name: 'Cavern',     cols: 5, rows: 4, colours: 5, hp: 215, atk: 7, heroHp: 36, coin: 1.6, boss: 'shield',   intro: 'Line multipliers and four-cell tiles' },
+    { name: 'Spire',      cols: 5, rows: 4, colours: 5, hp: 228, atk: 8, heroHp: 38, coin: 1.6, boss: 'deadrow',  intro: 'Epic tiles' },
+    { name: 'Vault',      cols: 6, rows: 4, colours: 5, hp: 265, atk: 9, heroHp: 40, coin: 1.8, boss: 'colours2', intro: 'Bigger boards' },
+    { name: 'Crown',      cols: 6, rows: 4, colours: 5, hp: 210, atk: 7, heroHp: 44, coin: 2.0, boss: 'final',    intro: 'Everything, and a two-phase final boss' }
   ],
   /* lessons: puzzles that must be solved before the first stage of each difficulty (each teaches the tiles that start to appear there) */
   lessons: { 1: ['p01', 'p02'], 2: ['p03', 'p06', 'p04', 'p05'], 3: ['p08', 'p07', 'p16', 'h1'], 4: ['p11', 'p13', 'p10'], 5: ['p12', 'p15', 'p14', 'p09'] },
@@ -2298,7 +2298,7 @@ function stageCardHTML(c, st) {
 function renderHome() {
   var all = store.allStages, sel = selKey(), c = stageInfo(sel), run = store.run, M = mapData();
   var old = $('#mapv'), pos = old && !S.mapCenter ? old.scrollTop : null;
-  var h = '<div class="hd"><h1>Tile Run</h1><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + store.coins + '</button><button class="ib" data-act="settings" aria-label="Settings and help">' + ICON.gear + '</button></div>';
+  var h = '<div class="hd"><h1>Tilewhist</h1><button class="coinp" data-act="tip" data-tip="coins" aria-label="Coins">' + store.coins + '</button><button class="ib" data-act="settings" aria-label="Settings and help">' + ICON.gear + '</button></div>';
   h += '<div id="mapv" class="mapv"></div>' + stageCardHTML(c, stageState(sel, store.cleared, all));
   var PZ = PUZZLES.filter(function (q) { return q.need; }), solved = PZ.filter(function (q) { return store.puzDone[q.id]; }).length, hv = HERO_BY_ID[store.hero];
   h += '<div class="dock5">' +

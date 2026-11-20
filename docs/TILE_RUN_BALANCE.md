@@ -381,3 +381,8 @@ Bottom 10:
 - Rarity star cut-offs on the encyclopedia score: 45 / 51 / 56 / 64 (298 / 190 / 118 / 161 / 96 tiles from 1 to 5 stars).
 - Enemy HP per column: 8, 14, 22, 32, 47, 75, 170, 205, 235, 170 (between tuner rounds 2 and 3).
 - Bots: the skilled bot still wins every tier in about one attack per fight (it finds strong boards); the casual bot needs about 20-30 h and wins 30-70% from difficulty 6. The gap between the bots is large, so real playtesting decides where a typical player sits.
+
+## 20 November: tier 5+ difficulty and new name
+- Game renamed Tilewhist (title and header).
+- Enemy HP per column raised about 20% from tier 5 (Silent Pass, Windy Dunes) on: 56, 96, 215, 228, 265, 210 (was 47, 80, 180, 190, 220, 175). Tiers 1–4 unchanged.
+- Copy-direction arrow drawn above the sandwich clamp.
