@@ -61,16 +61,11 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .area b{font-size:17px;color:var(--ink)}.area small{display:block;font-size:12px;color:var(--muted)}
 .area .go{margin-left:auto;font-weight:800;color:var(--btnink);background:var(--btn);border-radius:10px;padding:6px 12px;font-size:14px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.uchip{display:flex;align-items:center;gap:5px;background:var(--panel2);border-radius:10px;padding:4px 8px;font-size:12px;font-weight:700;color:var(--ink)}
 .dot{display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--tc);color:var(--on);align-items:center;justify-content:center;flex:none}
 .dot svg{width:11px;height:11px}
 .inv{display:flex;flex-wrap:wrap;gap:6px}
-.linkrow{display:flex;gap:8px;margin-top:4px}
-.linkrow .btn{flex:1}
 /* team */
 .lvl{font-size:11px;font-weight:800;color:var(--muted);background:var(--panel2);border-radius:8px;padding:1px 6px}
-.rline{font-size:12.5px;color:var(--ink);margin:4px 0}
-.rline i{font-style:normal;font-weight:800;color:var(--tt)}
 .ctext{font-size:12px;color:var(--muted)}
 /* map */
 .path{display:flex;align-items:center;gap:6px;margin:4px 0 10px}
@@ -95,7 +90,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .bcb{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:18px;border-radius:6px;font-size:11px;font-weight:800;padding:0 4px;background:var(--gold);color:#1c1500}
 /* fight */
 #fight{padding-top:0}
-#fhead{display:flex;align-items:center;gap:8px;height:46px;flex:none;overflow:hidden}#fhead .hbtn,#fhead .hbtn2{width:38px;height:38px;flex:none}#fhead .ttl{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#fhead{display:flex;align-items:center;gap:8px;height:46px;flex:none;overflow:hidden}#fhead .hbtn{width:38px;height:38px;flex:none}#fhead .ttl{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .stat{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
 .mombadge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;background:var(--gold);color:#1c1500;border-radius:9px;padding:2px 8px;animation:glow 1.4s infinite}
 #fen,#fboard{display:grid;grid-template-columns:repeat(var(--n),var(--cs));gap:6px;justify-content:center}
@@ -195,19 +190,16 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .gold{color:var(--warn);font-weight:800}
 .strip{display:flex;align-items:center;gap:8px;font-size:11.5px;line-height:1.25;color:var(--ink);padding:4px 8px;border-radius:10px;background:var(--panel);border:1px solid var(--line);min-height:32px}
 .strip .t{flex:1;min-width:0}.strip b{color:var(--ink)}
-.wheelsvg{width:38px;height:38px;flex:none}
 .ecd{position:absolute;left:3px;top:2px}.ecd .dot{width:14px;height:14px}
 .mini{position:relative}.mini .ecd{left:2px;top:2px}
 
 
-.cell.spanh{width:auto}.cell.spanv{height:auto}
 .cell .bb{left:50%;transform:translateX(-50%);bottom:3px;white-space:nowrap}
 .cell.bonus .bb{left:3px;transform:none}
 .enemy.gone{opacity:.35}
 .enemy.twin .etile{border-color:var(--p)}
 .ecd{position:absolute;left:3px;top:2px;color:var(--enemyink);z-index:2}.ecd svg{width:13px;height:13px;display:block}
 .trick{margin-top:6px;font-size:11.5px;line-height:1.3;color:var(--ink);background:var(--badbg);border-radius:8px;padding:4px 8px}
-.trickstrip{margin-top:3px;background:var(--badbg);border-color:var(--bad)}
 .offer.nodec{display:block}
 .nicon{width:26px;height:26px;display:inline-flex;color:var(--ink)}.nicon svg{width:24px;height:24px}
 .offer.forge{border-color:var(--warn)}.offer.rest{border-color:var(--ok)}.offer.treasure{border-color:#35c3e6}
@@ -218,10 +210,6 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .pickc .pk{font-weight:800;font-size:14px;color:var(--ink)}
 .pickc .ctext{text-align:center}
 .bigheal{font-size:30px;font-weight:800;color:var(--ok)}
-.brrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:2px 0;padding:3px 4px;border-radius:10px;border:1px dashed var(--line)}
-.brrow.on{border:2px solid var(--tt)}
-.brrow .kit.inl{margin:0;display:inline-flex}
-.brrow .btn{margin-left:auto}
 .bagrow{display:flex;align-items:flex-start;gap:6px;margin:6px 0}
 .resbox .picks .pickc{text-align:center}
 .strip{margin-top:0}
@@ -285,9 +273,9 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 :is(#card,#pen .edc) .cardtile{float:left;margin:0 12px 6px 0}:is(#card,#pen .edc) .cardtile .tile{--ts:56px}
 @media (max-height:700px){
  :root{--hs:46px}
- #fhead{height:40px}#fhead .hbtn,#fhead .hbtn2{width:34px;height:34px;border-radius:11px}
+ #fhead{height:40px}#fhead .hbtn{width:34px;height:34px;border-radius:11px}
  #finfo{height:18px;font-size:11px;line-height:16px;padding:2px 4px 0}
- .strip{min-height:0;padding:2px 6px;font-size:10.5px}.trickstrip{padding:1px 6px}
+ .strip{min-height:0;padding:2px 6px;font-size:10.5px}
  #fbar{padding-top:4px}#fbar .btn{height:42px}.tab{height:28px}#ftabs{margin-top:0}#fhand{margin-top:3px}
  #bwrap{margin-top:3px}#rbar{margin-top:3px}
 }
@@ -425,14 +413,6 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .tile .cnt{position:absolute;right:-6px;top:-7px;z-index:6;min-width:20px;height:18px;padding:0 5px;border-radius:9px;background:var(--btn);color:var(--btnink);font-style:normal;font-weight:800;font-size:11px;line-height:18px;text-align:center;pointer-events:none;box-shadow:0 1px 0 var(--shadow)}
 .tile .inb{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);z-index:6;padding:0 6px;height:15px;border-radius:8px;background:var(--panel);border:1.5px solid var(--ink);color:var(--ink);font-style:normal;font-weight:800;font-size:9.5px;line-height:12px;white-space:nowrap;pointer-events:none}
 .herorow.lock .hi b{color:var(--muted)}.herorow .req{color:var(--ink);font-weight:700}
-.slds{display:inline-flex;gap:4px}.sld{width:14px;height:14px;border-radius:4px;border:2px dashed var(--line)}
-.sld.open{border-style:solid;border-color:var(--ink)}.sld.full{border-style:solid;border-color:var(--ink);background:var(--ink)}
-.rline{cursor:default}
-.slotbox{width:50px;height:50px;border-radius:12px;border:2px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--muted);background:var(--cellbg)}
-.slotbox small{font-size:9px;font-weight:700}.slotbox.shut b{color:var(--ink);font-size:14px}
-.slotbox:disabled{opacity:.45}
-.strip.fxs{border-color:var(--tc)}
-.strip.fxs b{color:var(--tt)}
 .pickc .tile{margin:2px 0}
 
 /* ===== home = the map ===== */
@@ -461,7 +441,6 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .hm-chip{display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:11px;background:var(--panel2);font-size:11px;font-weight:700;white-space:nowrap;color:var(--ink)}
 .hm-chip.gold{background:var(--goldbg);color:var(--goldink)}
 .hm-bars{display:inline-flex;gap:1.5px}.hm-bars i{width:3.5px;height:9px;border-radius:1.5px;background:var(--line)}.hm-bars i.on{background:var(--tc)}
-.hm-dbar{display:inline-flex;gap:1.5px;width:30px;height:7px;border-radius:3px;overflow:hidden}.hm-dbar i{background:var(--tc);min-width:3px}
 .hm-need{font-size:11.5px;line-height:1.3;color:var(--muted)}
 .hm-play{flex:none;width:84px;background:var(--btn);color:var(--btnink);border:0;border-radius:16px;font-weight:800;font-size:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 3px 0 var(--shadow);transition:transform .08s}
 .hm-play svg{width:26px;height:26px;fill:currentColor}
@@ -542,7 +521,6 @@ body.fightmode #fight{flex:1;min-height:0;display:flex;flex-direction:column}
 .tm-pp.fl{border:2px solid transparent}
 .tm-pp svg.i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .tm-pp .tile{pointer-events:none}
-.tm-fx{font-size:12px;line-height:1.28;color:var(--muted)}.tm-fx b{color:var(--ink);font-size:13px}
 .tm-acts{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:auto}
 .tm-ab{height:44px;border-radius:12px;font-size:12px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;box-shadow:0 2px 0 var(--shadow);padding:0 2px}
 .tm-ab small{font-size:10px;font-weight:700;color:var(--muted)}
@@ -561,7 +539,6 @@ svg.sk .mk{fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-li
 .cf-cols{display:flex;justify-content:center;gap:10px;margin:6px 0}.cf-col{display:flex;flex-direction:column;align-items:center;gap:2px}.cf-col .arrow{font-size:18px;line-height:1}
 .pp-sock .tm-pp{width:56px;height:56px}.pp-sock .tm-pp .tile{pointer-events:auto}.pp-list{min-height:60px;padding:4px;border-radius:12px}
 .cl-sock{display:flex;gap:8px;margin:6px 0 10px}.cl-sock .tm-pp{width:60px;height:60px}.cl-sock .tm-pp .tile{pointer-events:auto}
-.tm-msg{font-size:11px;color:var(--warn);font-weight:700;min-height:0}
 /* tenth iteration: transitions, hint dots, tutorial popups */
 @keyframes scrIn{from{opacity:0;translate:0 7px}to{opacity:1;translate:0 0}}
 @keyframes popIn{from{opacity:0;scale:.93}to{opacity:1;scale:1}}
@@ -890,31 +867,12 @@ function simpleSpec(k, tier) {
   if (s.n !== k.n || s.k !== k.k || s.d !== k.d || s.sh !== k.sh) s.base = s.n;
   return s;
 }
-var DIRNAME = { u: 'above', d: 'below', l: 'to the left', r: 'to the right' };   /* above = towards the enemies */
 function tileName(t) {
   var n = cellsOf(t).length, big = n === 1 ? '' : n === 2 ? 'Double-cell ' : n === 3 ? 'Triple-cell ' : 'Quad-cell ';
   if (t.k === 'a') { var base = { '^': 'Strike', '<>': 'Fork', '<^>': 'Trident', '<': 'Left jab', '>': 'Right jab', '<^': 'Left strike', '^>': 'Right strike' }[t.d]; return big + base; }
   if (t.k === 'p') return big + (t.d === 'R' ? 'Row boost' : t.d === 'C' ? 'Column boost' : t.d === 'B' ? 'Cross boost' : t.d === 'udlr' ? 'Plus boost' : 'Boost');
   if (t.k === 'x') return big + (t.d === 'R' ? 'Row multiplier' : t.d === 'C' ? 'Column multiplier' : t.d === 'B' ? 'Cross multiplier' : 'Multiplier');
   return big + 'Copy';
-}
-function andList(a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
-var SIDENAME = { u: 'top', d: 'bottom', l: 'left', r: 'right' }, COPYFROM = { u: 'directly above it', d: 'directly below it', l: 'directly to its left', r: 'directly to its right' };
-/* which tiles a boost or multiplier reaches */
-function dirsText(d) {
-  if (d === 'R') return 'in its row'; if (d === 'C') return 'in its column'; if (d === 'B') return 'in its row and column';
-  if (d === 'udlr') return 'touching any side of it';
-  var s = d.split('').map(function (x) { return SIDENAME[x]; }); return 'touching its ' + andList(s) + ' side' + (s.length > 1 ? 's' : '');
-}
-function tileDesc(t) {
-  var n = cellsOf(t).length, w = shapeDims(t)[1], sh = n > 1 ? ' It is one piece covering ' + n + ' cells.' : '';
-  if (t.k === 'a') {
-    var L = laneOffsets(t.d).map(function (o) { return o < 0 ? 'the column to its left' : o > 0 ? 'the column to its right' : w > 1 ? 'every column it covers' : 'its own column'; });
-    return 'Attack: hits ' + andList(L) + ' for its full number' + (L.length > 1 || w > 1 ? ' (each column once)' : '') + '.' + sh;
-  }
-  if (t.k === 'p') return 'Boost: adds +' + t.n + ' to every attack and copy tile ' + dirsText(t.d) + ', before their multipliers. Each tile gets it once.' + sh;
-  if (t.k === 'x') return 'Multiplier: every tile ' + dirsText(t.d) + ' gets ×' + t.n + '. Multipliers and sandwiches add up (×2 and ×2 make ×3); multipliers never affect other multipliers.' + sh;
-  return 'Copy: takes the number of the tile ' + (COPYFROM[t.d] || 'it points at') + ' (an attack\'s damage, a boost\'s +number or a multiplier\'s number), adds its own number and hits its own column. It never copies another copy.' + sh;
 }
 /* unit level 1-8 only raises the numbers of the 3 base tiles, by the table CONFIG.lvl (attacks: less the more columns they reach; line boosts and multipliers least) */
 /* the number of columns an attack tile reaches (lanes x shape width), for the level bonus */
@@ -1766,8 +1724,6 @@ function mergeStars(list, isRef, onGone) {
   }
   return merges;
 }
-/* how many identical copies of e sit at its star level (for "2 of 3 for the next star") */
-function starCount(list, e) { var k = starKey(e), st = e.st || 0; return list.filter(function (x) { return starKey(x) === k && (x.st || 0) === st; }).length; }
 /* heroes unlock by map progress: the number of map cells cleared */
 function heroesUnlockedBy(n) { return HEROES.filter(function (h) { var u = CONFIG.heroUnlock[h.id]; return u === undefined || (typeof u === 'number' && u <= n); }).map(function (h) { return h.id; }); }
 /* keep-screen candidates: identical ones are shown once with a count; i = index of the first of the group */
@@ -1791,7 +1747,6 @@ var store = null, SPEED = 1;
 function defaultStore() {
   var units = {}, team = {};
   UNITS.forEach(function (u) { var st = CONFIG.starters.indexOf(u.id) >= 0; if (st) team[u.c] = u.id; units[u.id] = { u: st, l: 1 }; });
-  var cf = CONFIG.colourlessFactor;
   var r0 = { v: 9, coins: CONFIG.startCoins, ushards: {}, units: units, team: team, slots: {}, ct: [], nid: 0, bag: [0, 0, 0], run: null, cleared: {}, sel: null, maxTier: 0, allStages: false, endBest: 0, hero: 'rally', heroes: { rally: true }, puzDone: {}, tut: {}, seenEn: {}, ack: {}, dailyDone: '',
     inv: [],
     set: { momentum: true, value: 1, ret: 'fight', stars: true, tlog: false, tut: true } };
@@ -1846,7 +1801,6 @@ function addInv(e) {
 /* identical colourless tiles merge by threes; a copy in the bag keeps its place */
 function mergeInv() { return mergeStars(store.inv, function (id) { return store.bag.indexOf(id) >= 0; }, function (gone) { var at = store.bag.indexOf(gone); if (at >= 0) store.bag.splice(at, 1); }); }
 function invTile(e) { return { c: 'x', u: 'x', k: e.k, d: e.d, n: starN(e.n, e.st, e.k, e.d), sh: e.sh || 'o', st: e.st || 0, rar: e.rar || 0 }; }
-function stars(n) { return new Array((n || 0) + 1).join('\u2605'); }
 function lvl(st) { return 'Lv' + ((st || 0) + 1); }   /* colourless level: st 0 = Lv1 */
 /* "2 of 3 for Lv3" line for a colourless tile (levels, not rarity stars) */
 function starLine(list, e) {
@@ -1871,8 +1825,6 @@ function addCT(e) {
   store.nid++; store.ct.push({ id: store.nid, c: e.c, k: e.k, d: e.d, n: e.n, sh: e.sh || 'o', rar: e.rar || 0, st: 0 });
   return 'new';
 }
-/* collected (coloured) tiles no longer merge: the collection tracks owned types */
-function mergeCT() { return 0; }
 function ctById(id) { return store.ct.filter(function (x) { return x.id === id; })[0]; }
 function ctTile(e) { var rb = e.c === 'w'; return { c: rb ? 'x' : e.c, u: 'x', k: e.k, d: e.d, n: e.n, sh: e.sh || 'o', rar: e.rar || 0, rb: rb || undefined }; }
 function ctSorted() { return store.ct.slice().sort(function (a, b) { return (a.c === 'w' ? -1 : COLOR_IDS.indexOf(a.c)) - (b.c === 'w' ? -1 : COLOR_IDS.indexOf(b.c)) || (b.rar || 0) - (a.rar || 0) || (a.k < b.k ? -1 : a.k > b.k ? 1 : 0) || b.n - a.n || (a.d < b.d ? -1 : a.d > b.d ? 1 : 0) || (b.st || 0) - (a.st || 0) || a.id - b.id; }); }
@@ -2116,7 +2068,7 @@ function puzLock(p) {
   return '';
 }
 function puzzleListHTML() {
-  var un = unlockedStage(), d = todayInfo();
+  var d = todayInfo();
   var h = '<h2>Puzzles</h2><div class="panel"><div class="ctext" style="margin-bottom:6px">One attack, a fixed board and hand: beat every enemy. No ' + HWl + ', relics or bag. Solved once = reward; replays are free.</div><div class="stages">';
   h += '<button class="stage st-cur" data-act="daily"><span class="sn">D</span><span class="si"><b>Daily puzzle</b><small>' + d.label + (store.dailyDone === d.key ? ' (solved today)' : ', reward ' + CONFIG.dailyCoins + ' coins') + '</small></span></button>';
   PUZZLES.forEach(function (p) {
@@ -2174,7 +2126,6 @@ function clearedCount() { return Object.keys(store.cleared).length; }
 function newHeroes(n) { return HEROES.filter(function (H) { return !store.heroes[H.id] && heroesUnlockedBy(n).indexOf(H.id) >= 0; }); }
 function syncHeroes() { var nh = newHeroes(clearedCount()); nh.forEach(function (H) { store.heroes[H.id] = true; }); return nh; }
 function chosenColourless() { return store.bag.map(function (id) { return store.inv.filter(function (x) { return x.id === id; })[0]; }).filter(Boolean).slice(0, CONFIG.maxColourless); }
-function unitKit(u) { return unitBase(u, store.units[u.id].l); }
 function clSockHTML() {
   var b = bagSlots(), h = '<div class="cl-sock c-x" id="clsock">';
   b.forEach(function (id, i) {
@@ -2257,8 +2208,7 @@ function mapSVG(u, sel) {
   M.order.forEach(function (id) {
     var A = M.areas[id]; if (!sh[id] && !far[id]) return;
     if (sh[id] && A.lesson) {   /* a lesson: a small tile on the seam below its area, between the islands */
-      var lk = 'L.' + id, ls = stageState(lk, store.cleared, all), lsel = lk === sel, NS = u * .44, cx0 = (A.x + A.w / 2) * u, cy0 = (A.y + A.h - minY) * u, lc = 'var(--' + A.col + ')';
-      var fill = ls === 'c' ? lc : lsel ? '#fff' : ls === 'a' ? 'var(--slab2)' : 'var(--mdot)', stroke = ls === 'h' ? 'var(--mdim)' : lc;
+      var lk = 'L.' + id, ls = stageState(lk, store.cleared, all), lsel = lk === sel, cx0 = (A.x + A.w / 2) * u, cy0 = (A.y + A.h - minY) * u, lc = 'var(--' + A.col + ')';
       var T = u - 14, tx = cx0 - T / 2, ty = cy0 + (u - T) / 2, stub = 'fill:' + (ls === 'h' ? 'var(--mdim)' : lc) + ';opacity:' + (ls === 'c' ? .7 : .45);
       nodes += '<rect x="' + (cx0 - 3) + '" y="' + (cy0 - 2) + '" width="6" height="' + (ty - cy0 + 4) + '" rx="3" style="' + stub + '"/>' + (A.from.length ? '<rect x="' + (cx0 - 3) + '" y="' + (ty + T - 2) + '" width="6" height="' + (cy0 + u - ty - T + 4) + '" rx="3" style="' + stub + '"/>' : '') +
         stagePiece(lk, [[0, 0]], T, tx, ty, ls, A.col, lsel, false, 'Lesson');
@@ -2285,7 +2235,7 @@ function stageCardHTML(c, st) {
       '<div class="hm-ct"><b>' + PZ.name + '</b><span class="hm-pill ' + pl[0] + '">' + pl[1] + '</span></div><div class="hm-need">' + PZ.teach + '</div></div>' +
       '<button class="hm-play" data-act="play"' + (st === 'h' || store.run ? ' disabled' : '') + '>' + PLAYI + (st === 'c' ? 'Replay' : st === 'h' ? 'Locked' : 'Learn') + '</button></div>';
   }
-  var A = areaInfo(c.area), M = mapData(), run = store.run, i, bars = '', rg = CONFIG.regions[c.region], fc = CONFIG.firstClear.coins[c.tier - 1];
+  var A = areaInfo(c.area), M = mapData(), run = store.run, i, bars = '', fc = CONFIG.firstClear.coins[c.tier - 1];
   for (i = 1; i <= 10; i++) bars += '<i' + (i <= c.tier ? ' class="on"' : '') + '></i>';
   var pill = st === 'c' ? ['c', 'Cleared'] : st === 'a' ? ['a', 'Ready'] : ['', 'Locked'], need = '';
   if (st === 'h') {
@@ -2331,15 +2281,11 @@ var PUZ_BY_ID = {}; PUZZLES.forEach(function (p) { PUZ_BY_ID[p.id] = p; });
 function lessonTier(id) { for (var t in CONFIG.lessons) if (CONFIG.lessons[t].indexOf(id) >= 0) return t; return 0; }
 /* the unsolved lessons a stage of this difficulty waits for (all lessons of this and lower difficulties) */
 function nextLesson(tier) { var l = (CONFIG.lessons[tier] || []).filter(function (id) { return PUZ_BY_ID[id]; }); return l.filter(function (id) { return !store.puzDone[id]; })[0] || l[0]; }
-function lessonsDue(tier) { var o = []; for (var t = 1; t <= tier; t++) (CONFIG.lessons[t] || []).forEach(function (id) { if (!store.puzDone[id] && PUZ_BY_ID[id]) o.push(id); }); return o; }
 function playCell(key) {
   var c = stageInfo(key); if (!c || store.run) return;
   var stt = stageState(key, store.cleared, store.allStages); if (stt === 'h' || stt === 'l') return;
   if (c.lesson) { startPuzzleUI(PUZ_BY_ID[nextLesson(c.lesson)], false); return; }
   startRunUI('stage', c.tier, { len: c.len, mid: c.mid, drop: c.drop, trick: c.trick, cell: { key: key, name: c.name, region: c.regionName, area: c.area, idx: c.idx, n: c.n } });
-}
-function kitTileHTML(u, k, fade, ts) {
-  return '<span class="kt">' + tileHTML({ c: u.c, u: u.id, k: k.k, d: k.d, n: k.n, sh: k.sh }, { ts: ts || 36, cls: fade ? 'fade' : '', attrs: 'data-card="kt:' + u.id + ':' + k.k + ':' + k.d + ':' + k.n + ':' + k.sh + '"' }) + '</span>';
 }
 /* ---------- team: Split layout (a rail of the six units of a colour, one big card, A Badge marker for the unit in the team) ---------- */
 var TM_LOCK = '<svg class="tm-lk" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z"/></svg>';
@@ -2654,7 +2600,7 @@ function evalNow(detail) { return evaluate(S.fs.F, boardTiles(), eo({ detail: de
 function usable(F, q) { return F.blocked.indexOf(q) < 0 && F.tb !== q; }
 function startFightUI(i) {
   var run = S.run, o = run.offers[i];
-  var fs0 = S.fs = startFight(run, o); run.fs = S.fs;
+  S.fs = startFight(run, o); run.fs = S.fs;
   S.board = []; for (var q = 0; q < o.F.cols * o.F.rows; q++) S.board.push(-1);
   S.sel = -1; S.phase = 'edit'; S.skip = false; S.hold = null; S.tab = firstTab();
   show('fight'); renderFight();
@@ -2672,7 +2618,6 @@ function cellSize(cols, rows) {
 function clampsHTML(res, cols, cs, gp) {
   var out = '', seen = {}, byA = {}, P = cs + gp, th = Math.max(4, gp - 2), len = Math.round(cs * .42);
   res.G.forEach(function (g) { byA[g.a] = g; });
-  var anchor = function (q) { var gi = res.cellG[q]; return gi === undefined ? -1 : res.G[gi].a; };
   var add = function (cx, cy, vert) {
     var key = (vert ? 'v' : 'h') + Math.round(cx) + ',' + Math.round(cy); if (seen[key]) return; seen[key] = 1;
     var w = vert ? th : len, h = vert ? len : th;
@@ -2684,7 +2629,6 @@ function clampsHTML(res, cols, cs, gp) {
   });
   return out;
 }
-function setPill(el, n, hp, max) { var u = $('.pill u', el), sp = $('.pill span', el); if (u) u.style.width = Math.min(100, n / Math.max(1, hp) * 100) + '%'; if (sp) sp.textContent = n + ' / ' + hp; }
 function renderFight() {
   var run = S.run, fs = S.fs, F = fs.F, cols = F.cols, R = F.rows, i;
   var f = $('#fight'), cs = cellSize(cols, R); f.style.setProperty('--hh', HH() + 'px'); f.style.setProperty('--cs', cs + 'px'); f.style.setProperty('--n', cols); f.classList.toggle('narrow', cs < 60);
@@ -3637,7 +3581,8 @@ document.addEventListener('click', function (e) {
     case 'cont': takePick(-1); break;
     case 'bank': closeModal(); bankRun(); break;
     case 'leave': openModal('<h3>Leave the run?</h3><p style="font-size:14px;color:var(--ink)">You bank everything you collected so far (no stage clear).</p><div class="btnrow"><button class="btn main" data-act="bank">Bank and leave</button><button class="btn" data-act="close">Keep playing</button></div>'); break;
-    case 'fmenu': if (S.puz) { openModal('<h3>Puzzle</h3><div class="btnrow"><button class="btn" data-act="puzretry">Retry</button><button class="btn" data-act="home">Leave puzzle</button><button class="btn main" data-act="close">Back to puzzle</button></div>'); break; }
+    case 'fmenu': if (S.phase === 'anim') break;   /* never bank or leave while the attack animation is still resolving */
+      if (S.puz) { openModal('<h3>Puzzle</h3><div class="btnrow"><button class="btn" data-act="puzretry">Retry</button><button class="btn" data-act="home">Leave puzzle</button><button class="btn main" data-act="close">Back to puzzle</button></div>'); break; }
       openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="bag">Bag</button><button class="btn" data-act="help">How to play</button><button class="btn" data-act="bank">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
     case 'fatk': attack(); break;
     case 'fclear': clearBoard(); break;
@@ -3659,7 +3604,7 @@ document.addEventListener('change', function (e) {
   if (t.id === 'setmom') { store.set.momentum = t.checked; applySettings(); save(); }
   else if (t.id === 'setmomv') { store.set.value = +t.value; applySettings(); save(); }
   else if (t.id === 'setret') { store.set.ret = t.value; applySettings(); save(); }
-  else if (t.id === 'setstars') { store.set.stars = t.checked; applySettings(); mergeInv(); mergeCT(); save(); }
+  else if (t.id === 'setstars') { store.set.stars = t.checked; applySettings(); mergeInv(); save(); }
   else if (t.id === 'settut') { store.set.tut = t.checked; save(); }
   else if (t.id === 'settlog') { store.set.tlog = t.checked; save(); tlogShow(); }
   else if (t.dataset && t.dataset.ulv) {
@@ -3978,9 +3923,9 @@ function tutTeam() {
   if (UNITS.some(hintEquip)) tut('slots'); else if (UNITS.some(hintLevel)) tut('levelling');
 }
 
-window.TR = { tut: tut, tutOpen: tutOpen, tutOffers: tutOffers, enemyTypes: enemyTypes, tutClose: tutClose, TUTS: TUTS, hints: function () { return { team: hintTeam(), heroes: hintHeroes(), puzzles: hintPuzzles() }; }, startPuzzle: startPuzzleUI, genDaily: genDaily, PUZZLES: PUZZLES, tileHTML: tileHTML, genFight: genFight, chooseNode: chooseNode, S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: chooseOfferUI, place: place, attack: attack, render: renderFight, show: show, save: save, persist: persist, takePick: takePick, UNITS: UNITS, resume: resume, evalNow: evalNow, lootTile: lootTile, addInv: addInv, genOffers: function () { S.run.offers = genOffers(S.run); },
+if (DEV) window.TR = { tut: tut, tutOpen: tutOpen, tutOffers: tutOffers, enemyTypes: enemyTypes, tutClose: tutClose, TUTS: TUTS, hints: function () { return { team: hintTeam(), heroes: hintHeroes(), puzzles: hintPuzzles() }; }, startPuzzle: startPuzzleUI, genDaily: genDaily, PUZZLES: PUZZLES, tileHTML: tileHTML, genFight: genFight, chooseNode: chooseNode, S: S, CONFIG: CONFIG, store: function () { return store; }, setSpeed: function (v) { SPEED = v; }, startRun: startRunUI, chooseOffer: chooseOfferUI, place: place, attack: attack, render: renderFight, show: show, save: save, persist: persist, takePick: takePick, UNITS: UNITS, resume: resume, evalNow: evalNow, lootTile: lootTile, addInv: addInv, genOffers: function () { S.run.offers = genOffers(S.run); },
   newTile: function (c, spec, extra) { var p = typeof spec === 'string' ? parseTok(spec) : spec; var t = mkTile(S.run, c, S.run.team[c] || 'x', p, extra); S.run.bag.push(t); return t; }, finishStage: finishStage, rules: { evaluate: evaluate, parseTok: parseTok, placeCells: placeCells, tileStars: tileStars, tokenStars: tokenStars, starCap: starCap, ownKey: ownKey, applyKeep: applyKeep },
-  cellInfo: stageInfo, stageInfo: stageInfo, mapData: mapData, stageState: stageState, shownAreas: function () { return shownAreas(store.cleared, store.allStages); }, doneAreaCount: function () { return doneAreaCount(store.cleared); }, playCell: playCell, revealed: revealed, clearCell: function (k) { var c = stageInfo(k); store.cleared[k] = 1; store.maxTier = Math.max(store.maxTier || 0, c.tier); syncHeroes(); save(); }, clearArea: function (id) { areaInfo(id).keys.forEach(function (k) { TR.clearCell(k); }); }, keep: doKeep, unlockUnit: unlockUnit, addShards: addShards, shardsOf: shardsOf, shardNeed: shardNeed, clearShards: clearShards, replayReward: replayReward, buySlot: buySlot, toggleSlot: toggleSlot, levelUp: levelUp, addCT: addCT, testCT: testCT, slotSpecs: slotSpecs, genRainbow: genRainbow, UNITS_BY_ID: UNIT_BY_ID, toggleStack: toggleStack, mergeInv: mergeInv, mergeCT: mergeCT, syncHeroes: syncHeroes, newHeroes: newHeroes, starLine: starLine, stackList: stackList };
+  cellInfo: stageInfo, stageInfo: stageInfo, mapData: mapData, stageState: stageState, shownAreas: function () { return shownAreas(store.cleared, store.allStages); }, doneAreaCount: function () { return doneAreaCount(store.cleared); }, playCell: playCell, revealed: revealed, clearCell: function (k) { var c = stageInfo(k); store.cleared[k] = 1; store.maxTier = Math.max(store.maxTier || 0, c.tier); syncHeroes(); save(); }, clearArea: function (id) { areaInfo(id).keys.forEach(function (k) { TR.clearCell(k); }); }, keep: doKeep, unlockUnit: unlockUnit, addShards: addShards, shardsOf: shardsOf, shardNeed: shardNeed, clearShards: clearShards, replayReward: replayReward, buySlot: buySlot, toggleSlot: toggleSlot, levelUp: levelUp, addCT: addCT, testCT: testCT, slotSpecs: slotSpecs, genRainbow: genRainbow, UNITS_BY_ID: UNIT_BY_ID, toggleStack: toggleStack, mergeInv: mergeInv, syncHeroes: syncHeroes, newHeroes: newHeroes, starLine: starLine, stackList: stackList };
 })();
 </script>
 </body>
