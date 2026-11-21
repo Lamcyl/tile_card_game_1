@@ -844,6 +844,67 @@ body.th-mosaic .resbox h2{font-size:21px;margin:16px 0 6px}
 body.th-mosaic .resbox h2:first-child{margin-top:0}
 body.th-mosaic .inv.frw{align-items:center;flex-wrap:nowrap}
 @media (max-height:680px){body.th-mosaic .hm-card{max-height:168px}body.th-mosaic .hm-chips{flex-wrap:wrap!important;overflow:visible}}
+/* ===== Theme: Classic+ (body.th-classicplus). Classic colours and cards, but one card per piece (nothing boxed inside a card), and the persistent bottom menu ===== */
+body.th-classicplus{--navh:calc(68px + env(safe-area-inset-bottom,0px))}
+body.th-classicplus .dock5{display:none}
+body.th-classicplus #team .top .hbtn{display:none}
+body.th-classicplus #modal.mpage{inset:0 0 var(--navh) 0;left:0;top:0;transform:none;width:auto;max-height:none;border:0;border-radius:0;background:var(--bg);box-shadow:none;padding:12px;z-index:56;animation:none}
+body.th-classicplus #modal.mpage>*{max-width:440px;margin-left:auto;margin-right:auto}
+body.th-classicplus #modal.mpage .mpcoin{position:absolute;top:14px;right:max(16px,calc(50% - 204px));margin:0}
+body.th-classicplus #modal.mpage :is(h2,h3){font-size:24px;margin:2px auto 12px;padding-right:90px;letter-spacing:-.02em}
+body.th-classicplus #modal.mpage .panel :is(h2,h3){margin:2px 0 10px;padding-right:0}
+body.th-classicplus #modal.mpage .panel{margin-bottom:0}
+@media (min-width:600px){body.th-classicplus #modal.mpage>*{max-width:640px}body.th-classicplus #modal.mpage .mpcoin{right:max(16px,calc(50% - 304px))}}
+body.th-classicplus #modal.mpage [data-act="close"]{display:none}
+body.th-classicplus #modal.mpage .btnrow:not(:has(:not([data-act="close"]))){display:none}
+body.th-classicplus.mpage-on #dim{background:transparent;bottom:var(--navh)}
+body.th-classicplus :is(#enc,#pen){bottom:var(--navh);height:auto}
+body.th-classicplus #pen .eh .btn{display:none}
+/* the bar: a Classic panel strip with coloured icon chips like the old dock */
+body.th-classicplus #mnav{background:var(--panel);border-top:2px solid var(--line);padding:6px 6px env(safe-area-inset-bottom,0px);box-shadow:0 -2px 0 var(--shadow)}
+body.th-classicplus #mnav .mn-row{gap:2px}
+body.th-classicplus #mnav .mn{height:56px;border-radius:12px;font-size:11px;font-weight:800;gap:3px;color:var(--ink)}
+body.th-classicplus #mnav .mn:nth-child(1){--c:var(--y)}body.th-classicplus #mnav .mn:nth-child(2){--c:var(--g)}body.th-classicplus #mnav .mn:nth-child(3){--c:var(--x)}body.th-classicplus #mnav .mn:nth-child(4){--c:var(--p)}body.th-classicplus #mnav .mn:nth-child(5){--c:var(--b)}body.th-classicplus #mnav .mn:nth-child(6){--c:var(--x)}
+body.th-classicplus #mnav .mn .ic{width:26px;height:26px;padding:3px;box-sizing:border-box;width:30px;height:30px;border-radius:9px;background:var(--c);color:#fff;--a:var(--c)}
+body.th-classicplus #mnav .ic .a{fill:var(--c);stroke:none}body.th-classicplus #mnav .ic .sa{stroke:var(--c)}
+body.th-classicplus #mnav .mn.on{background:color-mix(in srgb,var(--c) 14%,var(--panel));color:var(--ink);box-shadow:inset 0 0 0 2px var(--c)}
+body.th-classicplus #mnav .mn.on .ic{color:#fff;--a:var(--c)}
+body.th-classicplus #mnav .mn.on .ic .sa{stroke:var(--c)}
+body.th-classicplus #mnav .mn-step{display:none}
+body.th-classicplus #mnav .nd{background:#e5484d;border-radius:50%;transform:none;top:3px;left:calc(50% + 10px);box-shadow:0 0 0 2px var(--panel)}
+/* one card per piece, nothing boxed inside */
+body.th-classicplus :is(.hm-pill,.hm-chip,.hm-chip.gold,.tag,.lvl,.rar,.ebad,.tm-rp,.tm-badge,.trick,.rrow,.strip,.cf-sk,.shb,.tutrow,.ownb){background:none;border:0;border-radius:0;box-shadow:none;padding-left:0;padding-right:0}
+body.th-classicplus .hm-chips{gap:2px 14px}
+body.th-classicplus .hm-pill.c{color:var(--ok)}body.th-classicplus .hm-pill.a{color:var(--ink);font-weight:800}
+body.th-classicplus .tag,body.th-classicplus .offer.elite .tag,body.th-classicplus .offer.boss .tag{background:none;font-size:12px}
+body.th-classicplus .offer.elite .tag{color:var(--warn)}body.th-classicplus .offer.boss .tag{color:var(--bad)}
+body.th-classicplus .mini{background:none;color:var(--ink);outline:0!important;text-align:left;border-radius:0;padding:2px 0}
+body.th-classicplus .mini b,body.th-classicplus .mini small,body.th-classicplus .mini .ecd{color:var(--ink)}body.th-classicplus .mini small{color:var(--muted)}
+body.th-classicplus .mini.g b::after,body.th-classicplus .mini.run b::after,body.th-classicplus .mini.twin b::after{content:"";display:inline-block;width:7px;height:7px;margin-left:6px;border-radius:50%;background:var(--gold);vertical-align:3px}
+body.th-classicplus .trick{color:var(--bad)}
+body.th-classicplus .tm-seg{background:none;padding:0;gap:6px}
+body.th-classicplus .tm-seg button{background:var(--panel);border:2px solid var(--line);border-radius:12px;color:var(--muted)}
+body.th-classicplus .tm-seg button.on{border-color:var(--ink);color:var(--ink);box-shadow:none}
+body.th-classicplus .shb{height:auto;font-size:10px}body.th-classicplus .shb i{display:none}
+body.th-classicplus .stage,body.th-classicplus .herorow,body.th-classicplus .pickc,body.th-classicplus .rlc,body.th-classicplus .area{background:none;border:0;box-shadow:none;border-radius:0}
+body.th-classicplus .stage{padding:10px 0}body.th-classicplus .herorow{padding:10px 0}
+body.th-classicplus .stage.st-cur .sn{background:var(--ink);color:var(--bg)}
+body.th-classicplus .herorow.on{background:none}body.th-classicplus .herorow.on .hi b{text-decoration:underline}
+body.th-classicplus .pickc{padding:10px 0}
+body.th-classicplus .pickc.chosen{outline:3px solid var(--gold);outline-offset:2px;border-radius:12px}
+body.th-classicplus .resbox .picks{gap:6px}
+body.th-classicplus .resbox.final .fstats div{background:none;border:0}
+body.th-classicplus .bagview{border:0}
+body.th-classicplus :is(#card,#modal,.tutcard,#pen .edc) :is(.ehp,.tsc,.tsc-unit,.tsc-list,.tsc-hbtn){background:none;border-color:transparent}
+body.th-classicplus .tsc{border:0}
+body.th-classicplus .tsc-unit{border:0}
+body.th-classicplus .tsc-late[data-late="card"],body.th-classicplus .tsc-late[data-late="relic"]{border:0;background:none}
+body.th-classicplus .sk-b{background:none}
+body.th-classicplus .tm-big .tm-r2{background:none}
+body.th-classicplus .tipstrip{border:0;border-left:4px solid var(--gold);border-radius:0;background:none;padding-left:8px}
+body.th-classicplus .tm-u.sel::after{display:none}
+#modal .thm .tm-seg button{height:38px;flex-direction:row;white-space:nowrap;font-size:12.5px;padding:0 4px}
+#modal .thm .tm-seg button.on{outline:2px solid var(--ink);outline-offset:-2px}
 </style>
 </head>
 <body>
@@ -2054,7 +2115,7 @@ window.addEventListener('storage', function (e) {
 function applySettings() {
   CONFIG.momentum.on = !!store.set.momentum; CONFIG.momentum.bonus = store.set.value || 1;
   CONFIG.tileReturn = store.set.ret === 'turn' ? 'turn' : 'fight'; CONFIG.stars.on = !!store.set.stars;
-  document.body.classList.toggle('th-mosaic', store.set.theme === 'mosaic');   /* the theme: 'classic' (default) or 'mosaic' */
+  document.body.classList.toggle('th-mosaic', store.set.theme === 'mosaic'); document.body.classList.toggle('th-classicplus', store.set.theme === 'classicplus');   /* the theme: 'classic' (default) or 'mosaic' */
 }
 store = load(); applySettings(); SOLVED = function () { return store.puzDone; };
 function sleep(ms) { return new Promise(function (r) { setTimeout(r, S.skip ? 6 : ms * SPEED); }); }
@@ -3608,15 +3669,18 @@ document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 
 /* ---------- themes: Classic (default) and Mosaic. Mosaic is a body class (th-mosaic) with CSS overrides, a persistent bottom menu (#mnav) and its own home map ---------- */
 function isMosaic() { return !!(store && store.set && store.set.theme === 'mosaic'); }
-function pgHd() { return isMosaic() ? '<button class="coinp mpcoin" data-act="tip" data-tip="coins" aria-label="Coins">' + fmtN(store.coins) + '</button>' : ''; }
+function isPlus() { return !!(store && store.set && store.set.theme === 'classicplus'); }
+function hasNav() { return isMosaic() || isPlus(); }   /* both Mosaic and Classic+ have the persistent bottom menu and menu pages */
+function pgHd() { return hasNav() ? '<button class="coinp mpcoin" data-act="tip" data-tip="coins" aria-label="Coins">' + fmtN(store.coins) + '</button>' : ''; }
 /* the menu sections that are pages in Mosaic (a modal that fills the screen above the menu bar) and plain popups in Classic */
 function openSection(n) {
-  var pg = isMosaic() ? n : '', C = '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
+  var pg = hasNav() ? n : '', C = '<div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
   if (n === 'puzzles') openModal(pgHd() + puzzleListHTML() + C, pg);
   else if (n === 'heroes') { var hph = heroPanelHTML(); HEROES.forEach(function (H) { if (store.heroes[H.id]) store.ack['H' + H.id] = 1; }); save(); openModal(pgHd() + hph + C, pg); }
-  else if (n === 'endless') { openModal(pgHd() + endlessHTML(), pg); if (endlessOn()) tut('endless'); }
-  else if (n === 'options') openModal(pgHd() + optionsHTML(), pg);
+  else if (n === 'endless') { openModal(pgHd() + pgBox(endlessHTML()), pg); if (endlessOn()) tut('endless'); }
+  else if (n === 'options') openModal(pgHd() + pgBox(optionsHTML()), pg);
 }
+function pgBox(h) { return isPlus() ? '<div class="panel">' + h + '</div>' : h; }
 function pageFlags() { var on = !!S.mpage && !$('#modal').hidden; $('#modal').classList.toggle('mpage', on); document.body.classList.toggle('mpage-on', on); navSync(); }
 var NAVI = {
   home: '<rect class="f" x="3" y="19" width="9" height="9" rx="2.600"/><rect class="a" x="20" y="4" width="9" height="9" rx="2.600"/><path class="s" d="M12 24c11 0 1-12 8-15"/>',
@@ -3629,7 +3693,7 @@ var NAVI = {
 function navSync() {
   var nav = $('#mnav'); if (!nav) return;
   var cur = '', pen = $('#pen');
-  if (isMosaic() && S) {
+  if (hasNav() && S) {
     if (pen && !pen.hidden) cur = 'options';
     else if (!$('#modal').hidden && S.mpage) cur = S.mpage;
     else if (S.screen === 'home' || S.screen === 'team') cur = S.screen;
@@ -3863,7 +3927,7 @@ function openPen() {
       else if ((b = t.closest('[data-pr]'))) PENS.rar = PENS.rar === +b.dataset.pr ? 0 : +b.dataset.pr;
       else if ((b = t.closest('[data-po]'))) PENS.own = PENS.own === b.dataset.po ? '' : b.dataset.po;
       else if ((b = t.closest('[data-pi]'))) { penDetail(+b.dataset.pi); return; }
-      else if (t.closest('[data-pexit]')) { el.hidden = true; document.body.style.overflow = ''; if (S.screen === 'home') renderHome(); if (isMosaic()) openSection('options'); else navSync(); return; }
+      else if (t.closest('[data-pexit]')) { el.hidden = true; document.body.style.overflow = ''; if (S.screen === 'home') renderHome(); if (hasNav()) openSection('options'); else navSync(); return; }
       else return;
       $('.ef', el).innerHTML = penChips(); penRender();
     });
@@ -3875,7 +3939,7 @@ function openPen() {
 }
 function optionsHTML() {
   return '<h3>Guide</h3><button class="btn main" style="width:100%;margin-bottom:8px" data-act="pen">Encyclopedia · ' + penCount().n + ' of ' + penCount().m + ' collected</button><div class="btnrow"><button class="btn sm" data-act="tutlist">Tips</button></div>' +
-    '<div class="set thm"><label>Theme</label><div class="tm-seg" role="group" aria-label="Theme"><button data-act="theme" data-th="classic" class="' + (isMosaic() ? '' : 'on') + '">Classic</button><button data-act="theme" data-th="mosaic" class="' + (isMosaic() ? 'on' : '') + '">Mosaic</button></div></div>' +
+    '<div class="set thm"><label>Theme</label><div class="tm-seg" role="group" aria-label="Theme">' + [['classic', 'Classic'], ['classicplus', 'Classic+'], ['mosaic', 'Mosaic']].map(function (t) { var on = (store.set.theme || 'classic') === t[0]; return '<button data-act="theme" data-th="' + t[0] + '" aria-pressed="' + on + '" class="' + (on ? 'on' : '') + '">' + (on ? '\u2713 ' : '') + t[1] + '</button>'; }).join('') + '</div></div>' +
     '<div class="set"><label>Show tutorial popups</label><input type="checkbox" id="settut"' + (store.set.tut !== false ? ' checked' : '') + '></div>' +
     '<div class="btnrow"><button class="btn sm" data-act="reset">Reset save</button><button class="btn main sm" data-act="close">Close</button></div>';
 }
@@ -4009,7 +4073,7 @@ document.addEventListener('click', function (e) {
     case 'settings': if (DEV) openModal(settingsHTML()); break;
     case 'options': openSection('options'); break;
     case 'mnav': navGo(el.dataset.n); break;
-    case 'theme': store.set.theme = el.dataset.th === 'mosaic' ? 'mosaic' : 'classic'; save(); applySettings(); openSection('options'); S.mapCenter = true; if (S.screen === 'home') renderHome(); break;
+    case 'theme': store.set.theme = { mosaic: 'mosaic', classicplus: 'classicplus' }[el.dataset.th] || 'classic'; save(); applySettings(); openSection('options'); S.mapCenter = true; if (S.screen === 'home') renderHome(); break;
     case 'hint': puzHint(); break;
     case 'stripnext': store.strip = Math.min(3, (store.strip || 0) + 1); save(); if (S.run && S.screen === 'map') renderMap(); break;
     case 'bag': openModal(bagHTML()); break;
