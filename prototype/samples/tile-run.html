@@ -553,8 +553,8 @@ svg.sk .mk{fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-li
 .fxi{display:inline-flex;align-items:center;gap:2px;margin-right:6px;vertical-align:middle}.fxi svg.sk{width:17px;height:17px;color:var(--tc)}
 .cf-sk{display:flex;gap:8px;align-items:center;margin:6px 0;padding:6px 8px;border-radius:10px;border:2px solid var(--tc);background:color-mix(in srgb,var(--tc) 10%,var(--panel));font-size:13px;line-height:1.3;color:var(--ink)}
 .cf-cols{display:flex;justify-content:center;gap:10px;margin:6px 0}.cf-col{display:flex;flex-direction:column;align-items:center;gap:2px}.cf-col .arrow{font-size:18px;line-height:1}
-.pp-sock .tm-pp{width:56px;height:56px}.pp-sock .tm-pp .tile{pointer-events:auto}.pp-list{min-height:60px;padding:4px;border-radius:12px}
-.cl-sock{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;margin:6px 0 10px}.cl-sock .tm-pp{width:60px;height:60px}.cl-sock .tm-pp.fl{width:auto;height:auto;min-width:60px;min-height:60px;padding:6px}.tile.irr{pointer-events:none}.tile.irr svg.tb *{pointer-events:visiblePainted}.cl-sock .tm-pp .tile{pointer-events:auto}
+.pp-sock{flex-wrap:wrap;align-items:flex-start}.pp-sock .tm-pp{width:56px;height:56px}.pp-sock .tm-pp.fl{width:auto;height:auto;min-width:56px;min-height:56px;padding:6px}.pp-sock .tm-pp .tile{pointer-events:auto}.pp-list{min-height:60px;padding:4px;border-radius:12px}
+.cl-sock{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;margin:6px 0 10px}.cl-sock .tm-pp{width:60px;height:60px}.cl-sock .tm-pp.fl{width:auto;height:auto;min-width:60px;min-height:60px;padding:6px}.tile.irr{pointer-events:none}.tile.irr svg.tb *{pointer-events:all}.cl-sock .tm-pp .tile{pointer-events:auto}
 /* tenth iteration: transitions, hint dots, tutorial popups */
 @keyframes scrIn{from{opacity:0;translate:0 7px}to{opacity:1;translate:0 0}}
 @keyframes popIn{from{opacity:0;scale:.93}to{opacity:1;scale:1}}
@@ -2613,7 +2613,7 @@ function ctFilterHTML(withColour, compact) {
   return h;
 }
 function ctFilterRefresh(el) {
-  if (el.closest('#modal') && S.loadUid) $('#modal').innerHTML = slotPopHTML(S.loadUid); else if (S.screen === 'team') renderTeam();
+  if (el.closest('#modal') && S.loadUid) setPP(S.loadUid); else if (S.screen === 'team') renderTeam();
 }
 function ctHTML(uid) {
   var list = ctFiltered(ctSorted(), true); if (!store.ct.length) return '<div class="ctext">None yet. Beat a boss and keep one of the tiles you found in the run.</div>'; if (!list.length) return '<div class="ctext">No tiles match these filters.</div>';
@@ -2652,6 +2652,16 @@ function packTiles(host, items) {
   });
   host.style.height = Math.max(0, occ.length * P - g) + 'px'; host.innerHTML = html;
 }
+function setPP(uid, msg) { $('#modal').innerHTML = slotPopHTML(uid, msg); packPP(); }
+/* the slot popup's list is packed like the Collected tab, with drag handles */
+function packPP() {
+  var host = $('#pppack'), uid = S.loadUid, u = uid && UNIT_BY_ID[uid]; if (!host || !u) return;
+  var fit = ctFiltered(ctSorted().filter(function (e) { return e.c === u.c || e.c === 'w'; }), false);
+  packTiles(host, stackList(fit).map(function (sk) {
+    var here = sk.ids.filter(function (id) { var o = slotOwnerOf(id); return o && o.u === uid; }).length, away = sk.ids.filter(function (id) { var o = slotOwnerOf(id); return o && o.u !== uid; }).length;
+    return { t: ctTile(sk.e), o: { cls: here ? 'sel' : away === sk.n ? 'fade' : '', cnt: sk.n, badge: sk.n > 1 && here ? here + ' slotted' : '', attrs: 'data-card="ct:' + sk.e.id + '" data-dd="ct" data-ct="' + sk.ids.join(',') + '"' } };
+  }));
+}
 /* stacks of identical collected tiles; in a loadout (uid) a stack is tappable and shows how many copies sit in this unit's slots */
 function ctStacksHTML(stacks, uid) {
   return stacks.map(function (sk) {
@@ -2664,7 +2674,7 @@ function slotPopHTML(uid, msg) {
   var u = UNIT_BY_ID[uid], sl = slotsOf(uid), mx = CONFIG.slotMax[u.rar], h = '<div class="c-' + u.c + '"><h3>' + u.name + '</h3><div class="tm-sock pp-sock">';
   for (var i = 0; i < mx; i++) {
     if (i < sl.n) {
-      var e = sl.t[i] && ctById(sl.t[i]), t = e && ctTile(e), d = e && shapeDims(t), q = e ? Math.max(12, Math.floor((46 - (Math.max(d[0], d[1]) - 1) * 3) / Math.max(d[0], d[1]))) : 0;
+      var e = sl.t[i] && ctById(sl.t[i]), t = e && ctTile(e), d = e && shapeDims(t), q = 40;
       h += '<div class="tm-pp ' + (e ? 'fl' : 'op') + '" data-dz="slot:' + i + '" aria-label="Slot ' + (i + 1) + '">' + (e ? tileHTML(t, { ts: q, attrs: 'data-dd="ct" data-ct="' + e.id + '" data-slot="' + i + '" data-card="ct:' + e.id + '"' }) : TM_PLUS) + '</div>';
     } else h += '<button class="tm-pp cl" data-act="slotbuy" data-u="' + uid + '" aria-label="Locked slot">' + TM_LOCKI + '<span class="lc">' + CONFIG.slotCost[i] + '</span></button>';
   }
@@ -2672,7 +2682,7 @@ function slotPopHTML(uid, msg) {
   if (msg) h += '<div class="trick" style="margin:6px 0 0">' + msg + '</div>';
   var fit = ctSorted().filter(function (e) { return e.c === u.c || e.c === 'w'; }), nfit = fit.length; fit = ctFiltered(fit, false);
   h += '<div class="ctext" style="margin-top:8px">\u2605 ' + rainbowSlotted() + ' / ' + CONFIG.rainbow.maxTeam + '</div>';
-  h += (nfit ? ctFilterHTML(false, true) : '') + '<div class="inv pp-list" data-dz="list" style="margin:4px 0 8px">' + (fit.length ? ctStacksHTML(stackList(fit), uid) : '<div class="ctext" style="margin:6px">' + (nfit ? 'No tiles match these filters.' : 'None yet') + '</div>') + '</div>';
+  h += (nfit ? ctFilterHTML(false, true) : '') + '<div class="inv pp-list" data-dz="list" style="margin:4px 0 8px">' + (fit.length ? '<div class="pack" id="pppack"></div>' : '<div class="ctext" style="margin:6px">' + (nfit ? 'No tiles match these filters.' : 'None yet') + '</div>') + '</div>';
   return h + '<div class="btnrow"><button class="btn main" data-act="close">Done</button></div></div>';
 }
 
@@ -3417,7 +3427,7 @@ function ddEnd(e, cancel) {
     var uid = S.loadUid;
     if (zk[0] === 'slot') { var tid = from !== undefined ? ids[0] : stackCopy(uid, ids); if (tid) { msg = putSlot(uid, +zk[1], tid); ok = !msg; } else msg = 'Every copy is already in this unit.'; }
     else if (zk[0] === 'list' && from !== undefined) { unslot(uid, +from); ok = true; }
-    $('#modal').innerHTML = slotPopHTML(uid, msg); if (S.screen === 'team') renderTeam();
+    setPP(uid, msg); if (S.screen === 'team') renderTeam();
     if (ok && zk[0] === 'slot') { var ne = $('#modal [data-dz="slot:' + zk[1] + '"]'); zr = ne ? ne.getBoundingClientRect() : zr; }
     else if (ok) { var nl = $('#modal [data-dz="list"]'); zr = nl ? nl.getBoundingClientRect() : zr; }
   } else if (z && kind === 'inv') {
@@ -3670,7 +3680,7 @@ document.addEventListener('click', function (e) {
     else bs = bs.map(function (id) { return ids.indexOf(id) >= 0 ? 0 : id; });
     store.bag = bs; save(); show(S.screen); return;
   }
-  if ((el = t.closest && t.closest('[data-ct]'))) { var msg = toggleStack(S.loadUid, el.dataset.ct.split(',').map(Number)); $('#modal').innerHTML = slotPopHTML(S.loadUid, msg); if (S.screen === 'team') renderTeam(); return; }
+  if ((el = t.closest && t.closest('[data-ct]'))) { var msg = toggleStack(S.loadUid, el.dataset.ct.split(',').map(Number)); setPP(S.loadUid, msg); if (S.screen === 'team') renderTeam(); return; }
   if ((el = t.closest && t.closest('[data-cf]'))) { var cp = el.dataset.cf.split(':'), cv = /^\d+$/.test(cp[1]) ? +cp[1] : cp[1]; CTF[cp[0]] = CTF[cp[0]] === cv ? (typeof cv === 'number' ? 0 : '') : cv; ctFilterRefresh(el); return; }
   if ((el = t.closest && t.closest('[data-keep]')) && !el.disabled) {
     var kk = S.run.pending.keep, ki = +el.dataset.keep, at = kk.sel.indexOf(ki);
@@ -3700,7 +3710,7 @@ document.addEventListener('click', function (e) {
     case 'tmunit': S.tmSel = S.tmSel || {}; S.tmSel[UNIT_BY_ID[el.dataset.u].c] = el.dataset.u; renderTeam(); break;
     case 'slotbuy': ackSet('S' + el.dataset.u + '.' + slotsOf(el.dataset.u).n); openModal(slotBuyHTML(el.dataset.u)); break;
     case 'slotgo': buySlot(el.dataset.u); closeModal(); break;
-    case 'slotpop': S.loadUid = el.dataset.u; openModal(slotPopHTML(S.loadUid)); break;
+    case 'slotpop': S.loadUid = el.dataset.u; openModal(slotPopHTML(S.loadUid)); packPP(); break;
     case 'level': ackSet('L' + el.dataset.u + '.' + (store.units[el.dataset.u].l + 1)); openModal(levelHTML(el.dataset.u)); break;
     case 'lvlgo': var lu = el.dataset.u, lok = levelUp(lu); $('#modal').innerHTML = levelHTML(lu, lok); if (S.screen === 'team') renderTeam(); break;
     case 'skill': showCard(skillCardHTML(UNIT_BY_ID[el.dataset.u], +el.dataset.i)); break;
