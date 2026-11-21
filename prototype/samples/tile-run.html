@@ -218,6 +218,7 @@ header.top{display:flex;align-items:center;gap:8px;height:46px;flex:none}
 .mini.run{background:var(--panel2);color:var(--ink);outline:2px dotted var(--warn);outline-offset:-3px}.mini.run b,.mini.run small{color:var(--ink)}
 .mini.twin{outline:2px solid var(--p);outline-offset:-3px}
 .picks{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.pickts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:16px 0 18px}.pickt{position:relative;background:none;border:0;padding:6px;border-radius:16px;cursor:pointer}.pickt.chosen{outline:3px solid var(--gold);outline-offset:-1px;background:color-mix(in srgb,var(--gold) 12%,transparent)}.pickt.owned{opacity:.35;cursor:default}.pickt .nwd{position:absolute;top:2px;right:2px;width:11px;height:11px;border-radius:50%;background:#3f9a5b;box-shadow:0 0 0 2px var(--panel)}
 .pickc{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:10px;border-radius:14px;background:var(--panel);border:2px solid var(--line);box-shadow:0 2px 0 var(--shadow);color:var(--ink)}
 .pickc .pk{font-weight:800;font-size:14px;color:var(--ink)}
 .pickc .ctext{text-align:center}
@@ -3034,8 +3035,8 @@ function renderResult() {
   var hi = (p.picks || []).filter(function (o) { return o.type === 'up'; }).map(function (o) { return o.tid; });
   if (p.keep && !p.keep.done) {
     var kp = p.keep, mx = kp.max || 1, many = mx > 1;
-    h = '<div class="resbox win"><h2>' + (p.type === 'cleared' ? 'Stage cleared' : p.out.mid ? 'Mid-boss defeated' : 'Boss defeated') + '</h2><div class="lbl">Keep ' + (many ? 'up to ' + mx : 'one') + (many ? ' (' + kp.sel.length + ')' : '') + '</div><div class="picks">';
-    groupCands(kp.cands).forEach(function (g) { var c = g.c, t = ctTile(c); h += '<button class="pickc' + (c.own ? ' owned' : '') + (kp.sel.indexOf(g.i) >= 0 && !c.own ? ' chosen' : '') + '"' + (c.own ? ' disabled aria-disabled="true"' : '') + ' data-keep="' + g.i + '"><div class="pk">' + (c.drop ? 'Boss drop: rainbow tile' : (c.rar ? RARITY[c.rar] + ' ' : '') + COLORS[c.c] + ' tile') + '<span class="ownb' + (c.own ? '' : ' new') + '">' + (c.own ? 'Owned' : 'New') + '</span></div>' + tileHTML(t, { ts: 58, noRest: true, cnt: g.n }) + '<div class="ctext">' + tileName2(t) + '</div></button>'; });
+    h = '<div class="resbox win"><h2>' + (p.type === 'cleared' ? 'Stage cleared' : p.out.mid ? 'Mid-boss defeated' : 'Boss defeated') + '</h2><div class="lbl">Keep ' + (many ? kp.sel.length + ' / ' + mx : 'one') + '</div><div class="pickts">';
+    groupCands(kp.cands).forEach(function (g) { var c = g.c, t = ctTile(c); h += '<button class="pickt' + (c.own ? ' owned' : '') + (kp.sel.indexOf(g.i) >= 0 && !c.own ? ' chosen' : '') + '"' + (c.own ? ' disabled aria-disabled="true"' : '') + ' data-keep="' + g.i + '" aria-label="' + tileName2(t) + '">' + tileHTML(t, { ts: 72, noRest: true, cnt: g.n }) + (c.own ? '' : '<i class="nwd"></i>') + '</button>'; });
     h += '</div><div class="btns">' + (many ? '<button class="btn main" data-act="keepgo"' + (kp.sel.length ? '' : ' disabled') + '>Keep ' + kp.sel.length + ' of ' + mx + '</button>' : '') + '<button class="btn" data-act="keepskip">Keep nothing</button></div></div>';
     $('#result').innerHTML = h; persist(); tut('keep'); return;
   }
@@ -3637,9 +3638,8 @@ function doKeep(i) {
 /* ask before keeping: the chosen tiles are shown for real, Confirm keeps them, Back returns to the list */
 function keepConfirm() {
   var k = S.run && S.run.pending && S.run.pending.keep; if (!k || k.done || !k.sel.length) return;
-  var h = '<h3>Keep ' + (k.sel.length > 1 ? 'these ' + k.sel.length + ' tiles' : 'this tile') + '?</h3><div class="inv" style="justify-content:center;gap:14px;margin:6px 0">' +
-    k.sel.map(function (i) { var c = k.cands[i], t = ctTile(c); return '<div style="text-align:center">' + tileHTML(t, { ts: 58, noRest: true }) + '<div class="ctext">' + tileName2(t) + '</div></div>'; }).join('') + '</div>' +
-    '<p style="font-size:14px;color:var(--ink)">' + (k.sel.length > 1 ? 'They are' : 'It is') + ' kept in your collection (base value, run upgrades are not kept). Colourless tiles are all kept anyway.</p>' +
+  var h = '<h3 style="text-align:center">Keep?</h3><div class="inv" style="justify-content:center;gap:14px;margin:10px 0 16px">' +
+    k.sel.map(function (i) { return tileHTML(ctTile(k.cands[i]), { ts: 64, noRest: true }); }).join('') + '</div>' +
     '<div class="btnrow"><button class="btn main" data-act="keepok">Confirm</button><button class="btn" data-act="keepback">Back</button></div>';
   openModal(h);
 }
