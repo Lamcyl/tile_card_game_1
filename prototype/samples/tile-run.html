@@ -657,9 +657,11 @@ svg.sk .mk{fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-li
 .resbox .lbl{text-align:center}
 #modal .panel{background:none;border:0;padding:0;margin-bottom:6px}
 .stage{background:none;border:0;padding:8px 2px}.stage.st-cur{border:0}.stage.st-cur .sn{background:var(--ink);color:var(--bg)}
-.herorow{padding:9px 2px}
+.herorow{padding:9px 2px;border-bottom:0}.herorow.on{background:none}.herorow.on .hi b{text-decoration:underline}
 .puzlk{margin-left:auto;width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .ptag{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;color:var(--muted)}
+.rwi.sm{font-size:13px;font-weight:800;gap:4px}.rwi.sm .ci{width:16px;height:16px}
+.trk{font-size:11.5px;font-weight:800;color:var(--bad)}
 </style>
 </head>
 <body>
@@ -2160,10 +2162,10 @@ function heroHTML(fs) {
 }
 function heroRowHTML(run, fs) { return HEART + hpBar(run.hp, run.maxHp) + heroHTML(fs); }
 function heroPanelHTML() {
-  var h = '<h2>' + HWS + '</h2><div class="panel"><div class="ctext" style="margin-bottom:4px">One ' + HWl + ' per run. Its ability is a button on the fight screen, once per fight. ' + HWS + ' unlock as you clear map stages.</div>', n = clearedCount();
+  var h = '<h2>' + HWS + '</h2><div class="panel">', n = clearedCount();
   HEROES.forEach(function (H) {
     var own = !!store.heroes[H.id], sel = store.hero === H.id, need = CONFIG.heroUnlock[H.id];
-    h += '<div class="herorow' + (sel ? ' on' : '') + (own ? '' : ' lock') + hd(own && !store.ack['H' + H.id]) + '">' + rdot(own && !store.ack['H' + H.id]) + '<div class="hi"><b>' + H.ab + '</b><small>' + H.line + '</small>' + (own ? '' : '<small class="req">' + (need === 'puzzle' ? 'Joins you in the ' + HWl + ' tutorial on the map' : 'Clear ' + need + ' stage' + (need === 1 ? '' : 's') + ' (' + Math.min(n, need) + ' / ' + need + ')') + '</small>') + '</div>' +
+    h += '<div class="herorow' + (sel ? ' on' : '') + (own ? '' : ' lock') + hd(own && !store.ack['H' + H.id]) + '">' + rdot(own && !store.ack['H' + H.id]) + '<div class="hi"><b>' + H.ab + '</b><small>' + H.line + '</small>' + (own ? '' : '<small class="req">' + (need === 'puzzle' ? 'Tutorial' : Math.min(n, need) + ' / ' + need + ' stages') + '</small>') + '</div>' +
       (own ? (sel ? '<span class="lvl" style="color:var(--ok)">Chosen</span>' : '<button class="btn sm" data-act="hero" data-h="' + H.id + '">Choose</button>') : '<span class="lvl">Locked</span>') + '</div>';
   });
   return h + '</div>';
@@ -2178,12 +2180,12 @@ function puzLock(p) {
 }
 function puzzleListHTML() {
   var d = todayInfo();
-  var h = '<h2>Puzzles</h2><div class="panel"><div class="ctext" style="margin-bottom:6px">One attack, a fixed board and hand: beat every enemy. No ' + HWl + ', relics or bag. Solved once = reward; replays are free.</div><div class="stages">';
-  h += '<button class="stage st-cur" data-act="daily"><span class="sn">D</span><span class="si"><b>Daily puzzle</b><small>' + d.label + (Object.keys(store.cleared).length < 3 ? ' (clear 3 map stages to unlock)' : store.dailyDone === d.key ? ' (solved today)' : ', reward ' + CONFIG.dailyCoins + ' coins') + '</small></span></button>';
+  var h = '<h2>Puzzles</h2><div class="panel"><div class="stages">';
+  h += '<button class="stage st-cur" data-act="daily"><span class="sn">D</span><span class="si"><b>Daily puzzle</b><small>' + d.label + (Object.keys(store.cleared).length < 3 ? ' \u00b7 ' + Object.keys(store.cleared).length + ' / 3' : store.dailyDone === d.key ? ' \u2713' : '') + '</small></span></button>';
   PUZZLES.forEach(function (p) {
     if (!p.need) return;   /* lessons live on the map */
     var why = puzLock(p), lock = !!why, done = store.puzDone[p.id];
-    h += '<button class="stage ' + (done ? 'st-clear' : lock ? 'st-lock' : 'st-cur') + hd(puzNew(p)) + '" data-act="puzzle" data-id="' + p.id + '"' + (lock ? ' disabled' : '') + '><span class="sn">' + (done ? '\u2713' : lock ? '\u25cf' : '?') + '</span><span class="si"><b>' + p.name + '</b><small>' + (lock ? why : p.teach) + '</small></span>' + rdot(puzNew(p)) + '</button>';
+    h += '<button class="stage ' + (done ? 'st-clear' : lock ? 'st-lock' : 'st-cur') + hd(puzNew(p)) + '" data-act="puzzle" data-id="' + p.id + '"' + (lock ? ' disabled' : '') + '><span class="sn">' + (done ? '\u2713' : lock ? '\u25cf' : '?') + '</span><span class="si"><b>' + p.name + '</b></span>' + (lock ? '<svg class="puzlk" viewBox="0 0 24 24" aria-label="Locked"><path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z"/></svg>' : '') + rdot(puzNew(p)) + '</button>';
   });
   return h + '</div></div>';
 }
@@ -2210,7 +2212,7 @@ function puzHint() {
   if (S.board.indexOf(t.id) >= 0) unplace(S.board.indexOf(t.id));
   S.tab = t.c; S.sel = t.id; renderFight();
   cs.forEach(function (q) { var el = $('#fboard .cell[data-cell="' + q + '"]'); if (el) el.classList.add('hintc'); });
-  $('#finfo').textContent = 'Hint: this tile goes on the marked cell' + (cs.length > 1 ? 's' : '') + '.';
+  $('#finfo').textContent = 'Hint';
 }
 function puzzleWon() {
   var d = S.puz.def, r = d.reward || {}, first = S.puz.daily ? store.dailyDone !== todayInfo().key && todayInfo().seed > (store.dailyLast || 0) : !store.puzDone[d.id], h = '<div class="resbox win"><h2>Solved</h2>';
@@ -2530,13 +2532,13 @@ function tmBigHTML(u) {
   if (own) acts = '<div class="tm-acts">' +
     '<button class="tm-ab' + (team ? '' : ' pri') + '" data-act="pick" data-u="' + u.id + '"' + (team ? ' disabled' : '') + '>' + (team ? 'In team' : 'Pick') + '<small>' + (team ? 'one per colour' : 'for the team') + '</small></button>' +
     '<button class="tm-ab' + hd(hintLevel(u)) + '" data-act="level" data-u="' + u.id + '"' + (st.l >= CONFIG.lvlMax ? ' disabled' : '') + '>' + (st.l >= CONFIG.lvlMax ? 'Max level' : 'Level up') + '<small>' + (st.l >= CONFIG.lvlMax ? 'Lv ' + CONFIG.lvlMax : need + ' coins') + '</small>' + rdot(hintLevel(u)) + '</button></div>';
-  else { var rdy = shardsOf(u.id) >= shardNeed(u), wl = store.wish === u.id; acts = '<div class="tm-shw">' + shardBarHTML(u) + '<button class="btn sm wishb' + (wl ? ' on' : '') + '" data-act="wish" data-u="' + u.id + '" aria-pressed="' + wl + '">' + (wl ? '★ On your wishlist' : '☆ Add to wishlist') + '</button><div class="ctext">' + (wl ? 'Daily, elite and Endless shards go to this unit.' : 'Put a unit on your wishlist and daily, elite and Endless shards go to it.') + ' ' + shardSources(u) + '</div></div><div class="tm-acts"><button class="tm-ab pri wide' + hd(rdy) + '" data-act="unlock" data-u="' + u.id + '"' + (rdy ? '' : ' disabled') + '>' + (rdy ? 'Unlock ' + u.name : 'Unlock') + '<small>' + Math.min(shardsOf(u.id), shardNeed(u)) + ' / ' + shardNeed(u) + ' shards</small></button></div>'; }
+  else { var rdy = shardsOf(u.id) >= shardNeed(u), wl = store.wish === u.id; acts = '<div class="tm-shw">' + shardBarHTML(u) + '<button class="btn sm wishb' + (wl ? ' on' : '') + '" data-act="wish" data-u="' + u.id + '" aria-pressed="' + wl + '">' + (wl ? '★ Wishlist' : '☆ Wishlist') + '</button><div class="ctext">' + (wl ? 'Shards go to this unit' : '') + ' ' + '</div></div><div class="tm-acts"><button class="tm-ab pri wide' + hd(rdy) + '" data-act="unlock" data-u="' + u.id + '"' + (rdy ? '' : ' disabled') + '>' + (rdy ? 'Unlock ' + u.name : 'Unlock') + '<small>' + Math.min(shardsOf(u.id), shardNeed(u)) + ' / ' + shardNeed(u) + ' shards</small></button></div>'; }
   return '<div class="tm-big c-' + c + ' r' + u.rar + (own ? '' : ' no') + '">' +
     '<div class="tm-bh"><span class="n">' + u.name + '</span><span class="tm-rp">' + RARITY[u.rar] + '</span>' + (own ? '<span class="tm-lv"><span class="tm-lvb">' + lv + '</span>Lv ' + st.l + '</span>' : '<span class="tm-lv">locked</span>') + '</div>' +
     '<div class="tm-r2">' + (team ? '<span class="tm-badge lg">IN TEAM</span>' : '') + '<span>Style: ' + u.style + '</span></div>' +
     '<div class="tm-bt">' + tmTiles(u, own ? st.l : 1, { ts: 56, maxW: inner, maxH: 90, gap: 6, kit: true }) + '</div>' +
-    '<div><div class="tm-sl">Slots &middot; ' + (own ? sl.n : 0) + ' of ' + mx + ' open' + (own ? ' (tap one)' : '') + '</div><div class="tm-sock">' + sock + '</div></div>' +
-    '<div><div class="tm-sl">Skills &middot; unlock with unit level</div>' + skillRowHTML(u, st.l, own) + '</div>' + acts + '</div>';
+    '<div><div class="tm-sl">Slots ' + (own ? sl.n : 0) + ' / ' + mx + '</div><div class="tm-sock">' + sock + '</div></div>' +
+    '<div><div class="tm-sl">Skills</div>' + skillRowHTML(u, st.l, own) + '</div>' + acts + '</div>';
 }
 /* confirmation dialogs: unlock a slot (coins), level up (coins) */
 function slotBuyHTML(uid) {
@@ -2569,9 +2571,9 @@ function renderTeam() {
     u0 = tmSelUnit(col);
     h += '<div class="tm-split"><div class="tm-rail">' + tmUnits(col).map(function (u) { return tmRailHTML(u, u.id === u0.id); }).join('') + '</div><div class="tm-main">' + tmBigHTML(u0) + '</div></div>';
   } else if (tab === 'collected') {
-    h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">One tile of each type you kept after bosses, bound to its colour (a rainbow tile fits any unit). Slot them from the Units tab. Stars on a tile are its rarity (1 to 5).</div>' + ctFilterHTML(true) + ctHTML() + '</div>';
+    h += '<div class="panel" style="margin-top:8px">' + ctFilterHTML(true) + ctHTML() + '</div>';
   } else {
-    h += '<div class="panel" style="margin-top:8px"><div class="ctext" style="margin-bottom:6px">Drag a colourless tile into one of the ' + CONFIG.maxColourless + ' slots to bring it on the run; drag it out to remove it (tapping works too). Identical tiles stack (x2). Three identical tiles merge into one a level higher (Lv2); a level adds to the number.</div>' + clSockHTML() + invHTML() + '</div>';
+    h += '<div class="panel" style="margin-top:8px">' + clSockHTML() + invHTML() + '</div>';
   }
   var T = $('#team'); T.className = 'screen' + (tab === 'units' ? ' fit' : ''); T.innerHTML = h;
   if (tab === 'collected') packCT();
@@ -2657,7 +2659,7 @@ function ctStacksHTML(stacks, uid) {
   }).join('');
 }
 function slotPopHTML(uid, msg) {
-  var u = UNIT_BY_ID[uid], sl = slotsOf(uid), mx = CONFIG.slotMax[u.rar], h = '<div class="c-' + u.c + '"><h3>' + u.name + ': slots</h3><div class="ctext" style="margin-bottom:6px">Drag a tile from the list into a slot; drag a slotted tile back to the list to take it out (tapping works too). Tiles in slots join the bag with the 3 base tiles at the start of a run.</div><div class="tm-sock pp-sock">';
+  var u = UNIT_BY_ID[uid], sl = slotsOf(uid), mx = CONFIG.slotMax[u.rar], h = '<div class="c-' + u.c + '"><h3>' + u.name + '</h3><div class="tm-sock pp-sock">';
   for (var i = 0; i < mx; i++) {
     if (i < sl.n) {
       var e = sl.t[i] && ctById(sl.t[i]), t = e && ctTile(e), d = e && shapeDims(t), q = e ? Math.max(12, Math.floor((46 - (Math.max(d[0], d[1]) - 1) * 3) / Math.max(d[0], d[1]))) : 0;
@@ -2667,8 +2669,8 @@ function slotPopHTML(uid, msg) {
   h += '</div>';
   if (msg) h += '<div class="trick" style="margin:6px 0 0">' + msg + '</div>';
   var fit = ctSorted().filter(function (e) { return e.c === u.c || e.c === 'w'; }), nfit = fit.length; fit = ctFiltered(fit, false);
-  h += '<div class="ctext" style="margin-top:8px">Your ' + COLORS[u.c].toLowerCase() + ' and rainbow tiles (' + rainbowSlotted() + ' of ' + CONFIG.rainbow.maxTeam + ' rainbow slotted)</div>';
-  h += (nfit ? ctFilterHTML(false, true) : '') + '<div class="inv pp-list" data-dz="list" style="margin:4px 0 8px">' + (fit.length ? ctStacksHTML(stackList(fit), uid) : '<div class="ctext" style="margin:6px">' + (nfit ? 'No tiles match these filters.' : 'None yet. Keep a tile after a boss.') + '</div>') + '</div>';
+  h += '<div class="ctext" style="margin-top:8px">\u2605 ' + rainbowSlotted() + ' / ' + CONFIG.rainbow.maxTeam + '</div>';
+  h += (nfit ? ctFilterHTML(false, true) : '') + '<div class="inv pp-list" data-dz="list" style="margin:4px 0 8px">' + (fit.length ? ctStacksHTML(stackList(fit), uid) : '<div class="ctext" style="margin:6px">' + (nfit ? 'No tiles match these filters.' : 'None yet') + '</div>') + '</div>';
   return h + '<div class="btnrow"><button class="btn main" data-act="close">Done</button></div></div>';
 }
 
@@ -2685,7 +2687,7 @@ function offerHTML(o, i) {
   var h = '<div class="offer ' + o.kind + '" data-offer="' + i + '"><div class="ohead"><span class="tag">' + label + '</span><b>' + hpSum + ' HP</b><span class="rew"><span>' + o.reward.coins + ' coins</span>' + (o.reward.tile ? tileHTML(invTile(o.reward.tile), { ts: 24, attrs: 'data-card="ot:' + i + '"' }) : '') + '</span></div>';
   h += '<div class="oen" style="grid-template-columns:repeat(' + F.cols + ',1fr)">';
   F.enemies.forEach(function (e, k) {
-    h += '<div class="mini' + (e.need > 1 || e.cols2 ? ' g' : '') + (e.kind === 'r' ? ' run' : '') + (e.twin ? ' twin' : '') + '" style="grid-column:span ' + e.w + '" data-card="oe:' + i + ':' + k + '"><b>' + e.hp + '</b><small>' + (e.kind === 'r' ? 'runner' : 'atk ' + e.atk) + (e.need > 1 ? ' needs ' + e.need : '') + (e.cols2 ? ' 2 colours' : '') + (e.twin ? ' linked' : '') + '</small></div>';
+    h += '<div class="mini' + (e.need > 1 || e.cols2 ? ' g' : '') + (e.kind === 'r' ? ' run' : '') + (e.twin ? ' twin' : '') + '" style="grid-column:span ' + e.w + '" data-card="oe:' + i + ':' + k + '"><b>' + e.hp + '</b><small>' + (e.kind === 'r' ? 'runner' : 'atk ' + e.atk) + (e.need > 1 ? ' \u2265' + e.need : '') + (e.cols2 ? ' 2\u25cf' : '') + '</small></div>';
   });
   h += '</div>';
   var tk = [];
@@ -2854,18 +2856,16 @@ function renderFight() {
   }).join('');
   $('#fhand').innerHTML = hh +
     restT.map(function (t) { return tileHTML(t, { ts: HSZ(), maxH: HH() - 14, attrs: 'data-card="t:' + t.id + '"' }); }).join('') +
-    (!hand.length && !restT.length && !placedT.length ? '<div class="ctext" style="width:100%;text-align:center;padding:10px">No tiles of this colour.</div>' : '');
+    (!hand.length && !restT.length && !placedT.length ? '' : '');
   $('#fhero').innerHTML = S.puz && !S.puz.def.hero ? '' : heroRowHTML(run, fs);
   $('#fatk').disabled = !placed || S.phase !== 'edit' || heroTargeting(); $('#fclear').disabled = !placed || S.phase !== 'edit';
   var totDmg = 0; res.en.forEach(function (r, k) { if (!F.enemies[k].dead) totDmg += r.dmg; });
   $('#fatk').innerHTML = placed ? 'Attack<small>' + totDmg + '</small>' : 'Attack';
   var info = '';
-  if (S.sel >= 0) { var st = tileById(S.sel); info = 'Tap a cell for the ' + tileName(st) + '. Glowing cells finish an enemy.'; }
-  else if (!placed) info = fs.turn === 0 ? (S.puz ? 'Tap a tile, then a cell (or drag it). Hold anything for details.' : '') : 'Enemies hit back. Place tiles again' + (CONFIG.tileReturn === 'fight' ? ' (used tiles rest until this fight ends).' : '.');
-  else info = 'Tap a placed tile to take it back.';
-  if (heroTargeting()) info = 'Tap one of your placed tiles to aim ' + HERO_BY_ID[fs.hero.id].ab + ', or cancel it.';
-  if (fs.mom > 0) info = 'Momentum +' + fs.mom + ' on this attack. ' + info;
-  if (fs.hero && fs.hero.armed && fs.hero.id === 'rally') info = 'Rally +' + CONFIG.hero.rally + ' on this attack. ' + info;
+  if (S.sel >= 0) { var st = tileById(S.sel); info = tileName(st); }
+  if (heroTargeting()) info = HERO_BY_ID[fs.hero.id].ab + '?';
+  if (fs.mom > 0) info = 'Momentum +' + fs.mom + ' ' + info;
+  if (fs.hero && fs.hero.armed && fs.hero.id === 'rally') info = 'Rally +' + CONFIG.hero.rally + ' ' + info;
   $('#finfo').textContent = info;
   if (S.sel >= 0) showHold(tileById(S.sel), -1);
   tlogShow();
@@ -2989,9 +2989,9 @@ async function attack() {
   if (info.lose) { endRun(info.lose); return; }
   if (info.win) { finishFight(run, fs); S.fs = null; S.board = []; show('result'); return; }
   S.phase = 'edit'; renderFight();
-  var msg = info.phase ? 'Phase two! A new boss body appears.' : info.regroup ? 'All your tiles are back for the next attack.' : info.moved ? 'The boss moves its trick. Check the board.' : '';
-  if (info.guarded) msg = 'Guard: the enemies dealt no damage. ' + msg;
-  if (info.healed) msg = 'Relic: healed ' + info.healed + ' HP. ' + msg;
+  var msg = info.phase ? 'Phase two' : info.regroup ? 'Tiles back' : info.moved ? 'The trick moved' : '';
+  if (info.guarded) msg = 'Guard: no damage. ' + msg;
+  if (info.healed) msg = 'Relic +' + info.healed + ' HP. ' + msg;
   if (msg) $('#finfo').textContent = msg;
 }
 
@@ -3005,7 +3005,7 @@ function pickHTML(o, i) {
     var tt = run.bag.filter(function (x) { return x.id === o.tid; })[0];
     if (tt) {
       var after = applyUpgrade(JSON.parse(JSON.stringify(tt)), o);
-      h += '<div class="pk">Upgrade a tile</div><div class="pvis"><div class="ups">' + tileHTML(tt, { ts: 34, noRest: true }) + '<span class="arrow">→</span>' + tileHTML(after, { ts: 34, noRest: true }) + '</div></div><div class="ctext">' + (o.kind === 'n2' ? '+' + o.amt + ' to its number' : 'adds a second colour: ' + COLORS[o.col] + ' (counts as ' + COLORS[tt.c] + ' and ' + COLORS[o.col] + ' for Sandwich)') + '</div>';
+      h += '<div class="pk">Upgrade a tile</div><div class="pvis"><div class="ups">' + tileHTML(tt, { ts: 34, noRest: true }) + '<span class="arrow">→</span>' + tileHTML(after, { ts: 34, noRest: true }) + '</div></div><div class="ctext">' + (o.kind === 'n2' ? '+' + o.amt : '+ ' + COLORS[o.col]) + '</div>';
     }
   } else {
     h += '<div class="pk">Heal</div><div class="pvis"><div class="bigheal">+' + o.amt + ' HP</div></div>';
@@ -3130,7 +3130,7 @@ function bankRun() {
   show('result');
 }
 function bagHTML() {
-  var run = S.run, h = '<h3>Bag: ' + run.bag.length + ' tiles</h3><div class="ctext">Hourglass corner badge: only for this run. ▲: upgraded. Split colour: two colours. Cyan edge: Rare, magenta edge: Epic. Faded: resting until the fight ends (only inside a fight).</div>';
+  var run = S.run, h = '<h3>Bag ' + run.bag.length + '</h3>';
   var inFight = !!(S.run.fs && S.fs && S.fs.kind !== 'puzzle');
   COLOR_IDS.concat(['x']).forEach(function (c) {
     var ts = run.bag.filter(function (t) { return t.c === c; }); if (!ts.length) return;
@@ -3594,7 +3594,7 @@ function openPen() {
   el.hidden = false; document.body.style.overflow = 'hidden'; penRender();
 }
 function optionsHTML() {
-  return '<h3>Guide</h3><button class="btn main" style="width:100%;margin-bottom:8px" data-act="pen">Encyclopedia · ' + penCount().n + ' of ' + penCount().m + ' collected</button><div class="btnrow"><button class="btn sm" data-act="tutlist">Tips</button></div>' +
+  return '<h3>Guide</h3><button class="btn main" style="width:100%;margin-bottom:8px" data-act="pen">Encyclopedia ' + penCount().n + ' / ' + penCount().m + '</button><div class="btnrow"><button class="btn sm" data-act="tutlist">Tips</button></div>' +
     '<div class="set"><label>Show tutorial popups</label><input type="checkbox" id="settut"' + (store.set.tut !== false ? ' checked' : '') + '></div>' +
     '<div class="btnrow"><button class="btn sm" data-act="reset">Reset save</button><button class="btn main sm" data-act="close">Close</button></div>';
 }
@@ -3617,9 +3617,9 @@ function settingsHTML() {
   return h;
 }
 function endlessHTML() {
-  var opts = ''; for (var t = 1; t <= (store.allStages ? 10 : store.maxTier || 1); t++) opts += '<option value="' + t + '"' + (t === Math.min(10, store.maxTier || 1) ? ' selected' : '') + '>Difficulty ' + t + ': ' + CONFIG.stages[t - 1].name + ' (' + CONFIG.stages[t - 1].cols + 'x' + CONFIG.stages[t - 1].rows + ')</option>';
-  if (!endlessOn()) { var EA = areaInfo(CONFIG.map.endlessArea), en = Math.min(CONFIG.map.openNeed, EA.n); return '<h3>Endless</h3><p style="font-size:14px;color:var(--ink)">Unlocks when you finish ' + EA.name + ': clear ' + en + ' of its ' + EA.n + ' stages (' + clearedIn(EA, store.cleared) + ' so far).</p><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>'; }
-  return '<h3>Endless</h3><p style="font-size:14px;color:var(--ink)">Choose a board. Tile types and colours follow that difficulty. A boss every ' + CONFIG.endlessEvery + ' steps; the enemies grow about ' + Math.round(CONFIG.endlessGrowth * 100) + '% tougher with every depth; no tiles are kept here, and your bag keeps your best ' + CONFIG.endlessBagAdded + ' picked tiles. Best depth ' + store.endBest + '.</p><div class="set"><label>Board</label><select id="endstage">' + opts + '</select></div><div class="btnrow"><button class="btn main" data-act="endgo">Play</button><button class="btn" data-act="close">Cancel</button></div>';
+  var opts = ''; for (var t = 1; t <= (store.allStages ? 10 : store.maxTier || 1); t++) opts += '<option value="' + t + '"' + (t === Math.min(10, store.maxTier || 1) ? ' selected' : '') + '>' + t + ': ' + CONFIG.stages[t - 1].name + ' (' + CONFIG.stages[t - 1].cols + 'x' + CONFIG.stages[t - 1].rows + ')</option>';
+  if (!endlessOn()) { var EA = areaInfo(CONFIG.map.endlessArea), en = Math.min(CONFIG.map.openNeed, EA.n); return '<h3>Endless</h3><p style="font-size:15px;color:var(--ink)">' + EA.name + ': ' + clearedIn(EA, store.cleared) + ' / ' + en + '</p><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>'; }
+  return '<h3>Endless</h3><p style="font-size:15px;color:var(--ink)">Best depth <b>' + store.endBest + '</b></p><div class="set"><label>Board</label><select id="endstage">' + opts + '</select></div><div class="btnrow"><button class="btn main" data-act="endgo">Play</button><button class="btn" data-act="close">Cancel</button></div>';
 }
 
 /* keep one tile after a boss: i = candidate index, -1 = keep nothing */
@@ -4046,7 +4046,7 @@ document.addEventListener('click', function (e) {
   if (o) { e.stopPropagation(); tutOpen(o.dataset.tutopen); }
 }, true);
 function tutListHTML() {
-  return '<h3>Tips</h3><div class="ctext" style="margin-bottom:6px">Tap a topic to see it again. Topics you have not met yet are dimmed.</div><div class="tutlist">' + TUTS.map(function (t) {
+  return '<h3>Tips</h3><div class="tutlist">' + TUTS.map(function (t) {
     return '<button class="tutrow' + (store.tut[t.id] ? '' : ' unseen') + '" data-tutopen="' + t.id + '"><b>' + t.title + '</b><small>' + (store.tut[t.id] ? 'seen' : 'new') + '</small></button>';
   }).join('') + '</div><div class="btnrow"><button class="btn main" data-act="close">Close</button></div>';
 }

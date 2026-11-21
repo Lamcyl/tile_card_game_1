@@ -649,3 +649,9 @@ See `docs/TILE_RUN_BALANCE.md`: new HP curve (8, 14, 22, 32, 80, 160, 380, 640, 
 
 ## Themes tried and removed (21 November)
 A Mosaic theme and a Classic+ theme (one card per piece, persistent bottom menu) were built and tested, then removed: Classic looked better. `store.set.theme` is ignored and dropped on load.
+
+## Declutter pass on Classic (21 November)
+- Home map: concave corners of L/T/U stage shapes are rounded to the outer radius (`cellPaths`). Stage card: name, stage number and Play only (lock hint when closed).
+- Result screens (victory, stage cleared, keep, banked, defeated, puzzle): a heading, coin and shard icons with numbers (`rwCoins`, `rwShards`), "Loot" / "Kept" with tiles, no sentences. Run map: no tip strip or path heading, offers show numbers and short trick names, node cards show a title only, Bag has no legend.
+- Rare and epic outlines on tiles and unit cards are gone; stars alone show rarity.
+- Puzzles and Skills pages: one card, plain rows. Intro sentences removed in Puzzles, Skills, Endless, Tiles tabs, slot popup, Tips, fight info line. Tutorials and long-press cards are unchanged.
