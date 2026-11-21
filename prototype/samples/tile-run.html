@@ -1800,6 +1800,7 @@ var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 var LS_KEY = 'tileRunPrototype.v9';
 var DEV_ACTS = ['coins', 'unlockall', 'shards', 'slotsall', 'cttiles', 'rbtile', 'allheroes', 'allstages', 'tiles', 'epic', 'dupe', 'clearrun', 'settings', 'enc'];
+var VERSION = '1.0';
 var DEV = /[?&]dev=1(?:[&#]|$)/.test(location.search);   /* test helpers, the advanced encyclopedia and the settings gear exist only with ?dev=1 */
 var store = null, SPEED = 1;
 function defaultStore() {
@@ -3608,7 +3609,7 @@ function openPen() {
 function optionsHTML() {
   return '<h3>Guide</h3><button class="btn main" style="width:100%;margin-bottom:8px" data-act="pen">Encyclopedia ' + penCount().n + ' / ' + penCount().m + '</button><div class="btnrow"><button class="btn sm" data-act="tutlist">Tips</button></div>' +
     '<div class="set"><label>Show tutorial popups</label><input type="checkbox" id="settut"' + (store.set.tut !== false ? ' checked' : '') + '></div>' +
-    '<div class="btnrow"><button class="btn sm" data-act="reset">Reset save</button><button class="btn main sm" data-act="close">Close</button></div>';
+    '<div class="btnrow"><button class="btn sm" data-act="reset">Reset save</button><button class="btn main sm" data-act="close">Close</button></div><div class="ctext" style="text-align:center;margin-top:8px;opacity:.6">v' + VERSION + '</div>';
 }
 function settingsHTML() {
   var h = '<h3>Settings and test</h3><div class="set"><label>Momentum</label><input type="checkbox" id="setmom"' + (store.set.momentum ? ' checked' : '') + '> <select id="setmomv">' + CONFIG.momentum.values.map(function (v) { return '<option' + (v === store.set.value ? ' selected' : '') + '>' + v + '</option>'; }).join('') + '</select></div>';
@@ -3749,7 +3750,7 @@ document.addEventListener('click', function (e) {
     case 'leave': openModal('<h3>Leave the run?</h3><p style="font-size:14px;color:var(--ink)">You bank everything you collected so far (no stage clear).</p><div class="btnrow"><button class="btn main" data-act="bank">Bank and leave</button><button class="btn" data-act="close">Keep playing</button></div>'); break;
     case 'fmenu': if (S.phase === 'anim') break;   /* never bank or leave while the attack animation is still resolving */
       if (S.puz) { openModal('<h3>Puzzle</h3><div class="btnrow"><button class="btn" data-act="puzretry">Retry</button><button class="btn" data-act="home">Leave puzzle</button><button class="btn main" data-act="close">Back to puzzle</button></div>'); break; }
-      openModal('<h3>Run menu</h3><p style="font-size:14px;color:var(--ink)">Leaving banks your coins and loot so far. The current fight is abandoned.</p><div class="btnrow"><button class="btn" data-act="bag">Bag</button><button class="btn" data-act="bankask">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
+      openModal('<h3>Run menu</h3><div class="btnrow"><button class="btn" data-act="bag">Bag</button><button class="btn" data-act="bankask">Bank and leave</button><button class="btn main" data-act="close">Back to fight</button></div>'); break;
     case 'fatk': attack(); break;
     case 'fclear': clearBoard(); break;
     case 'unlockall': UNITS.forEach(function (u) { store.units[u.id].u = true; }); save(); $('#modal').innerHTML = settingsHTML(); break;
