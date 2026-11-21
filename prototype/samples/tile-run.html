@@ -3035,9 +3035,9 @@ function renderResult() {
   var hi = (p.picks || []).filter(function (o) { return o.type === 'up'; }).map(function (o) { return o.tid; });
   if (p.keep && !p.keep.done) {
     var kp = p.keep, mx = kp.max || 1, many = mx > 1;
-    h = '<div class="resbox win"><h2>' + (p.type === 'cleared' ? 'Stage cleared' : p.out.mid ? 'Mid-boss defeated' : 'Boss defeated') + '</h2><div class="lbl">Keep ' + (many ? kp.sel.length + ' / ' + mx : 'one') + '</div><div class="pickts">';
+    h = '<div class="resbox win"><h2>' + (p.type === 'cleared' ? 'Stage cleared' : p.out.mid ? 'Mid-boss defeated' : 'Boss defeated') + '</h2><div class="lbl">Keep ' + (many ? mx : 'one') + '</div><div class="pickts">';
     groupCands(kp.cands).forEach(function (g) { var c = g.c, t = ctTile(c); h += '<button class="pickt' + (c.own ? ' owned' : '') + (kp.sel.indexOf(g.i) >= 0 && !c.own ? ' chosen' : '') + '"' + (c.own ? ' disabled aria-disabled="true"' : '') + ' data-keep="' + g.i + '" aria-label="' + tileName2(t) + '">' + tileHTML(t, { ts: 72, noRest: true, cnt: g.n }) + (c.own ? '' : '<i class="nwd"></i>') + '</button>'; });
-    h += '</div><div class="btns">' + (many ? '<button class="btn main" data-act="keepgo"' + (kp.sel.length ? '' : ' disabled') + '>Keep ' + kp.sel.length + ' of ' + mx + '</button>' : '') + '<button class="btn" data-act="keepskip">Keep nothing</button></div></div>';
+    h += '</div><div class="btns">' + (many ? '<button class="btn main" data-act="keepgo"' + (kp.sel.length ? '' : ' disabled') + '>Keep' + (kp.sel.length ? ' ' + kp.sel.length : '') + '</button>' : '') + '<button class="btn" data-act="keepskip">Keep nothing</button></div></div>';
     $('#result').innerHTML = h; persist(); tut('keep'); return;
   }
   if (p.type === 'win' && p.relicPicks && !p.relicDone) {
